@@ -1,0 +1,161 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: linear-gradient(-225deg, #FFE29F 0%, #FFA99F 48%, #FF719A 100%);
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* 设置滚动条 */
+::-webkit-scrollbar {
+    width: 1px;
+    height: 1px;
+}
+
+.images img {
+    border: #fff solid 10px;
+    max-width: 45vh;
+    max-height: 50vh;
+    transition: .5s;
+}
+
+.images:hover img {
+    box-shadow: 0 10px 30px #86c4f7;
+    transform: scale(1.05);
+}
+
+/* 创建一个水平滚动的包裹容器，用于展示内容 */
+.shell {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vh;
+    /*旋转90度，向上平移一个视口高度的距离 */
+    transform: rotate(-90deg) translate3d(0, -100vh, 0);
+    /* 设置变换的原点为右上角 */
+    transform-origin: right top;
+    overflow-x: hidden;
+    height: 100vw;
+    /* 设置3D透视效果 */
+    perspective: 1px;
+    transform-style: preserve-3d;
+}
+
+/* 创建一个图片容器，用于展示图片 */
+.images {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* 设置最小高度为视口高度的40% */
+    min-height: 40vh;
+    /* 设置变换的原点为中心点 */
+    transform-origin: 50% 50%;
+    /* 旋转90度，向前平移0.1px，放大1.1倍，向右平移0px，向下平移2vh */
+    transform: rotate(90deg) translateZ(.1px) scale(1.1) translateX(0px) translateY(2vh);
+    transition: 1s;
+}
+
+.slower {
+    transform: rotate(90deg) translateZ(-.12px) scale(1.3) translateX(0%) translateY(-8vh);
+}
+
+.slower1 {
+    transform: rotate(90deg) translateZ(-.25px) scale(1.35) translateX(0%) translateY(2vh);
+}
+
+.slower-down {
+    transform: rotate(90deg) translateZ(-.1px) scale(1) translateX(0%) translateY(16vh);
+}
+
+.faster {
+    transform: rotate(90deg) translateZ(-.05px) scale(1.1) translateX(0%) translateY(15vh);
+}
+
+.faster1 {
+    transform: rotate(90deg) translateZ(.05px) scale(1.4) translateX(0%) translateY(10vh);
+}
+
+.fastest {
+    transform: rotate(90deg) translateZ(.22px) scale(0.7) translateX(-10vh) translateY(-15vh);
+}
+
+.vertical {
+    transform: rotate(90deg) translateZ(-.1px) scale(1.6) translateX(0%) translateY(-3vh);
+}
+
+
+/*导航栏*/
+
+.shellnav {
+    position: absolute;
+    z-index: 1000;
+    width: 100px;
+    height: 700px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    transition: .3s;
+    overflow: hidden;
+}
+
+.box {
+    display: block;
+    height: 15%;
+    width: 85%;
+    margin: 9px;
+    border-radius: 5px;
+    position: relative;
+    transition: .3s;
+    color: rgb(0, 0, 0);
+}
+
+.box i {
+    font-size: 60px;
+    position: absolute;
+    margin: 7px 0 0 13px;
+}
+
+.box:nth-child(1)::before,
+.box:nth-child(5)::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: rgb(55, 65, 81);
+    position: absolute;
+    bottom: -10px;
+}
+
+.box span {
+    position: relative;
+    top: 22px;
+    left: 80px;
+    font: 500 20px '';
+    opacity: 0;
+    transition: .1s;
+}
+
+.shellnav:hover {
+    width: 270px;
+}
+
+.box:hover {
+    background-color: rgb(255, 255, 255);
+}
+
+.shellnav:hover span {
+    opacity: 1;
+}
+
+.box:hover {
+    color: rgb(241, 159, 159);
+}
