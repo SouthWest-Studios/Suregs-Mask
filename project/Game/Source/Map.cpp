@@ -64,32 +64,32 @@ bool Map::Update(float dt)
     // L06: DONE 5: Prepare the loop to draw all tiles in a layer + DrawTexture()
 
     // iterates the layers in the map
-    while (mapLayer != NULL) {
-        //Check if the property Draw exist get the value, if it's true draw the lawyer
-        if (mapLayer->data->properties.GetProperty("Draw") != NULL && mapLayer->data->properties.GetProperty("Draw")->value) {
-            //iterate all tiles in a layer
-            for (int i = 0; i < mapData.width; i++) {
-                for (int j = 0; j < mapData.height; j++) {
-                    //Get the gid from tile
-                    int gid = mapLayer->data->Get(i, j);
+    //while (mapLayer != NULL) {
+    //    //Check if the property Draw exist get the value, if it's true draw the lawyer
+    //    if (mapLayer->data->properties.GetProperty("Draw") != NULL && mapLayer->data->properties.GetProperty("Draw")->value) {
+    //        //iterate all tiles in a layer
+    //        for (int i = 0; i < mapData.width; i++) {
+    //            for (int j = 0; j < mapData.height; j++) {
+    //                //Get the gid from tile
+    //                int gid = mapLayer->data->Get(i, j);
 
-                    //L08: DONE 3: Obtain the tile set using GetTilesetFromTileId
-                    //Get the Rect from the tileSetTexture;
-                    TileSet* tileSet = GetTilesetFromTileId(gid);
-                    SDL_Rect tileRect = tileSet->GetRect(gid);
-                    //SDL_Rect tileRect = mapData.tilesets.start->data->GetRect(gid); // (!!) we are using always the first tileset in the list
+    //                //L08: DONE 3: Obtain the tile set using GetTilesetFromTileId
+    //                //Get the Rect from the tileSetTexture;
+    //                TileSet* tileSet = GetTilesetFromTileId(gid);
+    //                SDL_Rect tileRect = tileSet->GetRect(gid);
+    //                //SDL_Rect tileRect = mapData.tilesets.start->data->GetRect(gid); // (!!) we are using always the first tileset in the list
 
-                    //Get the screen coordinates from the tile coordinates
-                    iPoint mapCoord = MapToWorld(i, j);
+    //                //Get the screen coordinates from the tile coordinates
+    //                iPoint mapCoord = MapToWorld(i, j);
 
-                    // L06: DONE 9: Complete the draw function
-                    app->render->DrawTexture(tileSet->texture, mapCoord.x, mapCoord.y, &tileRect);
+    //                // L06: DONE 9: Complete the draw function
+    //                app->render->DrawTexture(tileSet->texture, mapCoord.x, mapCoord.y, &tileRect);
 
-                }
-            }
-        }
-        mapLayer = mapLayer->next;
-    }
+    //            }
+    //        }
+    //    }
+    //    mapLayer = mapLayer->next;
+    //}
 
     return ret;
 }
@@ -233,10 +233,8 @@ bool Map::Load(SString mapFileName)
             mapData.layers.Add(mapLayer);
         }
 
+        LoadCollisions("Collisions");
 
-        // L07 DONE 3: Create colliders      
-        // L07 DONE 7: Assign collider type
-        // Later you can create a function here to load and create the colliders from the map
         
         // CALL TO CREATE COLLIDERS FROM MAP
 
@@ -373,6 +371,88 @@ int Map::GetTileWidth() {
 
 int Map::GetTileHeight() {
     return mapData.tileheight;
+}
+
+bool Map::LoadCollisions(std::string layerName)
+{
+    ListItem<MapLayer*>* mapLayerItem;
+    mapLayerItem = mapData.layers.start;
+    bool ret = false;
+
+    while (mapLayerItem != NULL) {
+
+        if (mapLayerItem->data->name.GetString() == layerName) {
+
+
+            for (int x = 0; x < mapLayerItem->data->width; x++)
+            {
+
+                for (int y = 0; y < mapLayerItem->data->height; y++)
+                {
+                    int gid = mapLayerItem->data->Get(x, y);
+                    TileSet* tileset = GetTilesetFromTileId(gid);
+                    //SDL_Rect r = tileset->GetTileRect(gid);
+                    iPoint pos = MapToWorld(x, y);
+
+
+
+                    /*No borrar, original sistema de colisiones*/
+                    PhysBody* c1;
+                    if (gid == tileset->firstgid + 0) {
+                        c1 = app->physics->CreateRectangle(pos.x + 16, pos.y + 16, 32, 32, STATIC);
+                        c1->ctype = ColliderType::PLATFORM;
+                        collisionsList.Add(c1);
+                        ret = true;
+                    }
+
+
+                    //if (gid == tileset->firstgid + 1) {
+                    //    c1 = app->physics->CreateRectangle(pos.x + 16, pos.y + 2, 32, 4, STATIC);
+                    //    c1->ctype = ColliderType::PLATFORM_TRASPASS;
+                    //    traspasedPlatformList.Add(c1);
+                    //    collisionsList.Add(c1);
+                    //    ret = true;
+                    //}
+                    //if (gid == tileset->firstgid + 6) {
+                    //    c1 = app->physics->CreateRectangleSensor(pos.x + 16, pos.y + 16, 32, 32, STATIC);
+                    //    c1->ctype = ColliderType::SPYKES;
+                    //    collisionsList.Add(c1);
+                    //    ret = true;
+                    //}
+
+                    ////Detectar entrado boss
+                    //if (gid == tileset->firstgid + 7) {
+                    //    c1 = app->physics->CreateRectangleSensor(pos.x + 16, pos.y + 16, 32, 32, STATIC);
+                    //    c1->ctype = ColliderType::ZONA_BOSS;
+                    //    collisionsList.Add(c1);
+                    //    ret = true;
+                    //}
+
+
+                    ////sONIDO DE VICTORIA AL FINAL
+                    //if (gid == tileset->firstgid + 10) {
+                    //    c1 = app->physics->CreateRectangleSensor(pos.x + 16, pos.y + 16, 32, 32, STATIC);
+                    //    c1->ctype = ColliderType::VICTORY_COLLISION;
+                    //    collisionsList.Add(c1);
+                    //    ret = true;
+                    //}
+
+
+                    ////Fuera del mapa
+                    //if (gid == tileset->firstgid + 15) {
+                    //    c1 = app->physics->CreateRectangleSensor(pos.x + 16, pos.y + 16, 32, 32, STATIC);
+                    //    c1->ctype = ColliderType::DIE_HOLE;
+                    //    collisionsList.Add(c1);
+                    //    ret = true;
+                    //}
+                }
+            }
+        }
+        mapLayerItem = mapLayerItem->next;
+
+    }
+
+    return ret;
 }
 
 // L13: Create navigationMap map for pathfinding

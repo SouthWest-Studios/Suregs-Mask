@@ -153,6 +153,8 @@ public:
     int GetTileWidth();
     int GetTileHeight();
 
+    bool LoadCollisions(std::string layerName);
+
 
 public: 
     SString name;
@@ -165,6 +167,8 @@ private:
     bool mapLoaded;
     MapLayer* navigationLayer;
     int blockedGid = 49; //!!!! make sure that you assign blockedGid according to your map
+
+    List<PhysBody*> collisionsList;
  };
 
 #endif // __MAP_H__

@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="8">
+ <tileset firstgid="1" name="Testing" tilewidth="32" tileheight="32" tilecount="13250" columns="125">
+  <image source="../../Textures/Mapas/Testing/background.png" width="4015" height="3423"/>
+ </tileset>
+ <tileset firstgid="13251" name="Colisiones" tilewidth="32" tileheight="32" tilecount="16" columns="4">
+  <image source="../../Textures/Mapas/Metadatos/Collisions_32x32.png" width="128" height="128"/>
+ </tileset>
+ <layer id="1" name="Map" width="10" height="10">
+  <properties>
+   <property name="Draw" type="bool" value="false"/>
+  </properties>
+  <data>
+   <tile gid="1"/>
+   <tile gid="2"/>
+   <tile gid="3"/>
+   <tile gid="4"/>
+   <tile gid="5"/>
+   <tile gid="6"/>
+   <tile gid="7"/>
+   <tile gid="8"/>
+   <tile gid="9"/>
+   <tile gid="10"/>
+   <tile gid="126"/>
+   <tile gid="127"/>
+   <tile gid="128"/>
+   <tile gid="129"/>
+   <tile gid="130"/>
+   <tile gid="131"/>
+   <tile gid="132"/>
+   <tile gid="133"/>
+   <tile gid="134"/>
+   <tile gid="135"/>
+   <tile gid="251"/>
+   <tile gid="252"/>
+   <tile gid="253"/>
+   <tile gid="254"/>
+   <tile gid="255"/>
+   <tile gid="256"/>
+   <tile gid="257"/>
+   <tile gid="258"/>
+   <tile gid="259"/>
+   <tile gid="260"/>
+   <tile gid="376"/>
+   <tile gid="377"/>
+   <tile gid="378"/>
+   <tile gid="379"/>
+   <tile gid="380"/>
+   <tile gid="381"/>
+   <tile gid="382"/>
+   <tile gid="383"/>
+   <tile gid="384"/>
+   <tile gid="385"/>
+   <tile gid="501"/>
+   <tile gid="502"/>
+   <tile gid="503"/>
+   <tile gid="504"/>
+   <tile gid="505"/>
+   <tile gid="506"/>
+   <tile gid="507"/>
+   <tile gid="508"/>
+   <tile gid="509"/>
+   <tile gid="510"/>
+   <tile gid="626"/>
+   <tile gid="627"/>
+   <tile gid="628"/>
+   <tile gid="629"/>
+   <tile gid="630"/>
+   <tile gid="631"/>
+   <tile gid="632"/>
+   <tile gid="633"/>
+   <tile gid="634"/>
+   <tile gid="635"/>
+   <tile gid="751"/>
+   <tile gid="752"/>
+   <tile gid="753"/>
+   <tile gid="754"/>
+   <tile gid="755"/>
+   <tile gid="756"/>
+   <tile gid="757"/>
+   <tile gid="758"/>
+   <tile gid="759"/>
+   <tile gid="760"/>
+   <tile gid="876"/>
+   <tile gid="877"/>
+   <tile gid="878"/>
+   <tile gid="879"/>
+   <tile gid="880"/>
+   <tile gid="881"/>
+   <tile gid="882"/>
+   <tile gid="883"/>
+   <tile gid="884"/>
+   <tile gid="885"/>
+   <tile gid="1001"/>
+   <tile gid="1002"/>
+   <tile gid="1003"/>
+   <tile gid="1004"/>
+   <tile gid="1005"/>
+   <tile gid="1006"/>
+   <tile gid="1007"/>
+   <tile gid="1008"/>
+   <tile gid="1009"/>
+   <tile gid="1010"/>
+   <tile gid="1126"/>
+   <tile gid="1127"/>
+   <tile gid="1128"/>
+   <tile gid="1129"/>
+   <tile gid="1130"/>
+   <tile gid="1131"/>
+   <tile gid="1132"/>
+   <tile gid="1133"/>
+   <tile gid="1134"/>
+   <tile gid="1135"/>
+  </data>
+ </layer>
+ <layer id="5" name="Collisions" width="10" height="10">
+  <properties>
+   <property name="Draw" type="bool" value="false"/>
+  </properties>
+  <data>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="13251"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="13251"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="13251"/>
+   <tile gid="13251"/>
+   <tile gid="13251"/>
+   <tile gid="13251"/>
+   <tile gid="13251"/>
+   <tile gid="13251"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="13251"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="13251"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+  </data>
+ </layer>
+ <layer id="7" name="Navigation" width="10" height="10">
+  <properties>
+   <property name="Draw" type="bool" value="false"/>
+   <property name="Navigation" type="bool" value="true"/>
+  </properties>
+  <data>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+  </data>
+ </layer>
+</map>

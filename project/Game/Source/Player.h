@@ -4,6 +4,7 @@
 #include "Entity.h"
 #include "Point.h"
 #include "SDL/include/SDL.h"
+#include "Animation.h"
 
 struct SDL_Texture;
 
@@ -26,6 +27,10 @@ public:
 	// L07 DONE 6: Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
+
+private:
+	void CameraMovement(float dt);
+
 public:
 
 	//L02: DONE 2: Declare player parameters
@@ -36,6 +41,17 @@ public:
 
 	//Audio fx
 	int pickCoinFxId;
+
+
+	Animation* currentAnimation = nullptr;
+
+private:
+	Animation idleAnim;
+	Animation runAnim;
+
+	bool isFacingLeft = false;
+
+	
 
 };
 

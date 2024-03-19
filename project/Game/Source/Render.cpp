@@ -56,7 +56,7 @@ bool Render::Awake(pugi::xml_node config)
 	TTF_Init();
 
 	//load a font into memory
-	font = TTF_OpenFont("Assets/Fonts/arial/arial.ttf", 25);
+	font = TTF_OpenFont("Assets/Fuentes/arial.ttf", 25);
 
 	return ret;
 }
@@ -113,16 +113,23 @@ void Render::ResetViewPort()
 }
 
 // Blit to screen
-bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, int pivotX, int pivotY) const
+
+
+bool Render::DrawTexture(SDL_Texture* texture, int x, int y, SDL_RendererFlip flip, const SDL_Rect* section, float speed, double angle, int pivotX, int pivotY, float scale)
 {
 	bool ret = true;
-	uint scale = app->win->GetScale();
+	if (scale == 0) {
+		scale = app->win->GetScale();
+	}
+	
+	
+
 
 	SDL_Rect rect;
-	rect.x = (int)(camera.x * speed) + x * scale;
-	rect.y = (int)(camera.y * speed) + y * scale;
+	rect.x = (int)(camera.x * speed) + x * app->win->GetScale();
+	rect.y = (int)(camera.y * speed) + y * app->win->GetScale();
 
-	if(section != NULL)
+	if (section != NULL)
 	{
 		rect.w = section->w;
 		rect.h = section->h;
@@ -138,14 +145,16 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* sec
 	SDL_Point* p = NULL;
 	SDL_Point pivot;
 
-	if(pivotX != INT_MAX && pivotY != INT_MAX)
+	if (pivotX != INT_MAX && pivotY != INT_MAX)
 	{
 		pivot.x = pivotX;
 		pivot.y = pivotY;
 		p = &pivot;
 	}
 
-	if(SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, SDL_FLIP_NONE) != 0)
+
+
+	if (SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, flip) != 0)
 	{
 		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
 		ret = false;
@@ -153,6 +162,8 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* sec
 
 	return ret;
 }
+
+
 
 bool Render::DrawRectangle(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool filled, bool use_camera) const
 {

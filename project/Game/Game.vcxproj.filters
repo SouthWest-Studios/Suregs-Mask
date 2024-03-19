@@ -153,6 +153,9 @@
     <ClInclude Include="Source\Timer.h">
       <Filter>Misc</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Animation.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

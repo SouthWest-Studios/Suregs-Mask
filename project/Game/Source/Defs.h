@@ -65,4 +65,8 @@ inline const char* const PATH(const char* folder, const char* file)
 #define PERF_START(timer) timer.Start()
 #define PERF_PEEK(timer) LOG("%s took %f ms", __FUNCTION__, timer.ReadMs())
 
+inline double lerp(double A, double B, double t) {
+	return A + (B - A) * t;
+}
+
 #endif	// __DEFS_H__

@@ -55,7 +55,7 @@ bool Scene::Start()
 {
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	img = app->tex->Load("Assets/Textures/test.png");
-	
+	mapaFondo = app->tex->Load("Assets/Textures/Mapas/Testing/background.png");
 	//Music is commented so that you can add your own music
 	//app->audio->PlayMusic("Assets/Audio/Music/music_spy.ogg");
 
@@ -88,33 +88,50 @@ bool Scene::PreUpdate()
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
+
 	OPTICK_EVENT();
+
+	//Dibujar mapa
+	app->render->DrawTexture(mapaFondo, 0, 0);
+
+
+
 	//L02 DONE 3: Make the camera movement independent of framerate
 	float camSpeed = 1; 
 
-	if(app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		app->render->camera.y -= (int)ceil(camSpeed * dt);
 
-	if(app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		app->render->camera.y += (int)ceil(camSpeed * dt);
+	//if(app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+	//	app->render->camera.y -= (int)ceil(camSpeed * dt);
 
-	if(app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		app->render->camera.x -= (int)ceil(camSpeed * dt);
+	//if(app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+	//	app->render->camera.y += (int)ceil(camSpeed * dt);
 
-	if(app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		app->render->camera.x += (int)ceil(camSpeed * dt);
+	//if(app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	//	app->render->camera.x -= (int)ceil(camSpeed * dt);
+
+	//if(app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+	//	app->render->camera.x += (int)ceil(camSpeed * dt);
+
+	
+
+
+
+
+
+
+
 
 	// L09 DONE 6: Implement a method that repositions the player in the map with a mouse click
-	iPoint origin = iPoint(2, 21);
-	app->map->pathfinding->CreatePath(origin, app->map->WorldToMap(player->position.x,player->position.y));
+	//iPoint origin = iPoint(2, 21);
+	//app->map->pathfinding->CreatePath(origin, app->map->WorldToMap(player->position.x,player->position.y));
 
-	// L13: Get the latest calculated path and draw
-	const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
-	for (uint i = 0; i < path->Count(); ++i)
-	{
-		iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-		app->render->DrawTexture(mouseTileTex, pos.x, pos.y);
-	}
+	//// L13: Get the latest calculated path and draw
+	//const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
+	//for (uint i = 0; i < path->Count(); ++i)
+	//{
+	//	iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+	//	app->render->DrawTexture(mouseTileTex, pos.x, pos.y);
+	//}
 	
 	// L14: DONE 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
