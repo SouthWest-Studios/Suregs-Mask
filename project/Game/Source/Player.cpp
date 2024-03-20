@@ -56,11 +56,11 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
-	//L03: DONE 4: render the player texture and modify the position of the player using WSAD keys and render the texture
+	
 
 	printf("\nX:%d", SpriteX);
 
-	b2Vec2 velocity = b2Vec2(0, 0);
+	
 
 	currentAnimation = &idleAnim;
 
@@ -73,79 +73,41 @@ bool Player::Update(float dt)
 
 	if (godmode == true)
 	{
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
-			position.y -= 8;
-
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-			position.x -= 8;
-
-		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-			position.y += 8;
-
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
-			position.x += 8;
 		
+		GodMode(dt);
 
 	}
 
 	else
 	{
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-			velocity.y += -0.2 * dt;
-			currentAnimation = &runAnim;
-			isFacingLeft = false;
-		}
-
-		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-			velocity.y += 0.2 * dt;
-			currentAnimation = &runAnim;
-			isFacingLeft = true;
-		}
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-			velocity.x = -0.2 * dt;
-			currentAnimation = &runAnim;
-			isFacingLeft = true;
-		}
-
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-			velocity.x = 0.2 * dt;
-			currentAnimation = &runAnim;
-			isFacingLeft = false;
-		}
-		pbody->body->SetLinearVelocity(velocity);
-		b2Transform pbodyPos = pbody->body->GetTransform();
-		position.x = METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2;
-		position.y = METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2;
+		PlayerMovement(dt);
 	}
-
-	
-
-
-	
 
 
 	CameraMovement(dt);
 
-
-
-		
+	
 	currentAnimation->Update();
+	return true;
+}
+
+
+bool Player::PostUpdate() {
 
 	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
 
-	
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x-50, position.y-200 , SDL_FLIP_HORIZONTAL, &rect, 1, 0, INT_MAX, INT_MAX, 0.1);
+		app->render->DrawTexture(texture, position.x - 50, position.y - 200, SDL_FLIP_HORIZONTAL, &rect, 1, 0, INT_MAX, INT_MAX, 0.1);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x-50, position.y -200, SDL_FLIP_NONE, &rect, 1, 0, INT_MAX, INT_MAX, 0.1);
+		app->render->DrawTexture(texture, position.x - 50, position.y - 200, SDL_FLIP_NONE, &rect, 1, 0, INT_MAX, INT_MAX, 0.1);
 	}
-	
 
 	return true;
 }
+
 
 bool Player::CleanUp()
 {
@@ -207,4 +169,52 @@ void Player::CameraMovement(float dt)
 
 	
 	
+}
+
+void Player::GodMode(float dt)
+{
+	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+		position.y -= 0.2 * dt;
+
+	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+		position.x -= 0.2 * dt;
+
+	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+		position.y += 0.2 * dt;
+
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+		position.x += 0.2 * dt;
+
+	pbody->body->SetLinearVelocity(b2Vec2(0, 0));
+}
+
+void Player::PlayerMovement(float dt)
+{
+	b2Vec2 velocity = b2Vec2(0, 0);
+	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+		velocity.y += -0.2 * dt;
+		currentAnimation = &runAnim;
+		isFacingLeft = false;
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+		velocity.y += 0.2 * dt;
+		currentAnimation = &runAnim;
+		isFacingLeft = true;
+	}
+	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+		velocity.x = -0.2 * dt;
+		currentAnimation = &runAnim;
+		isFacingLeft = true;
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+		velocity.x = 0.2 * dt;
+		currentAnimation = &runAnim;
+		isFacingLeft = false;
+	}
+	pbody->body->SetLinearVelocity(velocity);
+	b2Transform pbodyPos = pbody->body->GetTransform();
+	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2;
+	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2;
 }

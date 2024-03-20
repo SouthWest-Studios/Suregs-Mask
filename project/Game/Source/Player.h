@@ -22,6 +22,8 @@ public:
 
 	bool Update(float dt);
 
+	bool PostUpdate();
+
 	bool CleanUp();
 
 	// L07 DONE 6: Define OnCollision function for the player. 
@@ -30,6 +32,8 @@ public:
 
 private:
 	void CameraMovement(float dt);
+	void GodMode(float dt);
+	void PlayerMovement(float dt);
 
 public:
 
