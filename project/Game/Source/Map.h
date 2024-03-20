@@ -128,6 +128,7 @@ public:
 
     // Called each loop iteration
     bool Update(float dt);
+    bool PostUpdate();
 
     // Called before quitting
     bool CleanUp();
@@ -159,6 +160,7 @@ public:
 public: 
     SString name;
     SString path;
+    SString pathTextures;
     PathFinding* pathfinding;
 
 private:

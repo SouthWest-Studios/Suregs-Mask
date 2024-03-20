@@ -308,6 +308,10 @@ bool Physics::PostUpdate()
 	return ret;
 }
 
+bool Physics::PostLateUpdate() {
+	return true;
+}
+
 // Called before quitting
 bool Physics::CleanUp()
 {

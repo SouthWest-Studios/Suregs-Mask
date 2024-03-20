@@ -161,6 +161,9 @@ bool App::Update()
 	if(ret == true)
 		ret = PostUpdate();
 
+	if (ret == true)
+		ret = PostLateUpdate();
+
 	FinishUpdate();
 	return ret;
 }
@@ -330,6 +333,28 @@ bool App::PostUpdate()
 	}
 
 	return ret;
+}
+
+bool App::PostLateUpdate()
+{
+	bool ret = true;
+	ListItem<Module*>* item;
+	Module* pModule = NULL;
+
+	for (item = modules.start; item != NULL && ret == true; item = item->next)
+	{
+		pModule = item->data;
+
+		if (!pModule->active) {
+			continue;
+		}
+
+		ret = item->data->PostLateUpdate();
+	}
+
+
+
+	return true;
 }
 
 // Called before quitting

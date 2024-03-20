@@ -65,6 +65,7 @@ public:
 	bool Start();
 	bool PreUpdate();
 	bool PostUpdate();
+	bool PostLateUpdate();
 	bool CleanUp();
 
 	// Create basic physics objects

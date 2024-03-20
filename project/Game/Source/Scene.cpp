@@ -38,6 +38,7 @@ bool Scene::Awake(pugi::xml_node config)
 	//Get the map name from the config file and assigns the value in the module
 	app->map->name = config.child("map").attribute("name").as_string();
 	app->map->path = config.child("map").attribute("path").as_string();
+	app->map->pathTextures = config.child("map").attribute("pathTextures").as_string();
 
 	// iterate all items in the scene
 	// Check https://pugixml.org/docs/quickstart.html#access
@@ -69,7 +70,7 @@ bool Scene::Start()
 	textPosY = (float)windowH / 2 - (float)texH / 2;
 
 	// Texture to highligh mouse position 
-	mouseTileTex = app->tex->Load("Assets/Maps/tileSelection.png");
+	mouseTileTex = app->tex->Load("Assets/Mapas/tileSelection.png");
 
 	// L15: DONE 2: Instantiate a new GuiControlButton in the Scene
 
@@ -92,7 +93,7 @@ bool Scene::Update(float dt)
 	OPTICK_EVENT();
 
 	//Dibujar mapa
-	app->render->DrawTexture(mapaFondo, 0, 0);
+	//app->render->DrawTexture(mapaFondo, 0, 0);
 
 
 
@@ -169,4 +170,9 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 	LOG("Press Gui Control: %d", control->id);
 
 	return true;
+}
+
+Player* Scene::GetPlayer()
+{
+	return player;
 }

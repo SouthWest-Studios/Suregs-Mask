@@ -82,6 +82,7 @@ private:
 
 	// Call modules after each loop iteration
 	bool PostUpdate();
+	bool PostLateUpdate();
 
 	// Reads XML file and loads the data
 	bool LoadFromFile();

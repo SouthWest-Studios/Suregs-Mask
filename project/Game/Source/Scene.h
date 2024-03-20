@@ -41,6 +41,8 @@ public:
 	// Handles multiple Gui Event methods
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
+	Player* GetPlayer();
+
 private:
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;
