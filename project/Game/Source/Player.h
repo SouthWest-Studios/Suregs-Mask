@@ -51,6 +51,8 @@ private:
 
 	bool isFacingLeft = false;
 
+	bool godmode = false;
+
 	
 
 };

@@ -56,36 +56,64 @@ bool Player::Update(float dt)
 
 	currentAnimation = &idleAnim;
 
+	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+	{
+		godmode = !godmode;
+	}
+
+
+
+	if (godmode == true)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+			position.y -= 8;
+
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+			position.x -= 8;
+
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+			position.y += 8;
+
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+			position.x += 8;
+		
+
+	}
+
+	else
+	{
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+			velocity.y += -0.2 * dt;
+			currentAnimation = &runAnim;
+			isFacingLeft = false;
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+			velocity.y += 0.2 * dt;
+			currentAnimation = &runAnim;
+			isFacingLeft = true;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+			velocity.x = -0.2 * dt;
+			currentAnimation = &runAnim;
+			isFacingLeft = true;
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+			velocity.x = 0.2 * dt;
+			currentAnimation = &runAnim;
+			isFacingLeft = false;
+		}
+		pbody->body->SetLinearVelocity(velocity);
+		b2Transform pbodyPos = pbody->body->GetTransform();
+		position.x = METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2;
+		position.y = METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2;
+	}
+
 	
 
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-		velocity.y += -0.2 * dt;
-		currentAnimation = &runAnim;
-		isFacingLeft = false;
-	}
 
-	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-		velocity.y += 0.2 * dt;
-		currentAnimation = &runAnim;
-		isFacingLeft = true;
-	}
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-		velocity.x = -0.2 * dt;
-		currentAnimation = &runAnim;
-		isFacingLeft = true;
-	}
-
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-		velocity.x = 0.2 * dt;
-		currentAnimation = &runAnim;
-		isFacingLeft = false;
-	}
-
-
-	pbody->body->SetLinearVelocity(velocity);
-	b2Transform pbodyPos = pbody->body->GetTransform();
-	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2;
-	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2;
+	
 
 
 	CameraMovement(dt);
