@@ -165,7 +165,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 void Player::CameraMovement(float dt)
 {
-
 	uint windowH;
 	uint windowW;
 	app->win->GetWindowSize(windowW, windowH);
@@ -173,7 +172,31 @@ void Player::CameraMovement(float dt)
 	int targetPosX = (-position.x * app->win->GetScale() + (windowW / 2) - 10);
 	int targetPosY = (-position.y * app->win->GetScale() + (windowH / 2) - 10) + 100;
 
-	app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
-	app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.005f);
+	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
+	{
+		camaralibre = !camaralibre; // Esto alternará el valor de camaralibre cada vez que se presione la tecla C en modo debug
+	}
+	if (camaralibre == true)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+			app->render->camera.y += (int)ceil(1 * dt);
+
+		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+			app->render->camera.y -= (int)ceil(1 * dt);
+
+		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+			app->render->camera.x += (int)ceil(1 * dt);
+
+		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+			app->render->camera.x -= (int)ceil(1 * dt);
+	}
+	else
+	{
+		app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
+		app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.005f);
+	}
+	
+
+	
 	
 }
