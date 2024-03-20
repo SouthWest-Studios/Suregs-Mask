@@ -62,7 +62,7 @@ private:
 
 	bool godmode = false;
 
-	
+	bool camaralibre = false;
 
 };
 
