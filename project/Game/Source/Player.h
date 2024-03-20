@@ -45,6 +45,15 @@ public:
 
 	Animation* currentAnimation = nullptr;
 
+
+	Animation SPosition;
+	SDL_Rect* spritePositions;
+
+	int TSprite;
+	int SpriteX;
+	int SpriteY;
+	int PhotoWeight;
+
 private:
 	Animation idleAnim;
 	Animation runAnim;

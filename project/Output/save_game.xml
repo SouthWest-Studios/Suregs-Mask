@@ -8,7 +8,8 @@
 	<:anonymous />
 	<scene />
 	<entitymanager />
+	<guiManager />
 	<renderer>
-		<camera x="977" y="0" />
+		<camera x="-2162" y="237" />
 	</renderer>
 </game_state>

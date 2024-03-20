@@ -14,11 +14,8 @@ Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("player");
 
-
 	idleAnim.LoadAnimation(name.GetString(), "idleAnim");
 	runAnim.LoadAnimation(name.GetString(), "runAnim");
-
-
 }
 
 Player::~Player() {
@@ -30,6 +27,15 @@ bool Player::Awake() {
 	//L03: DONE 2: Initialize Player parameters
 	position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
 
+
+	
+
+	/*TSprite = config.attribute("Tsprite").as_int();
+	SpriteX = config.attribute("sprite_x").as_int();
+	SpriteY = config.attribute("sprite_y").as_int();
+	PhotoWeight = config.attribute("Pweight").as_int();
+	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, PhotoWeight);
+	runAnim.LoadAnim("player", "runAnim", spritePositions);*/
 	return true;
 }
 
@@ -51,6 +57,8 @@ bool Player::Start() {
 bool Player::Update(float dt)
 {
 	//L03: DONE 4: render the player texture and modify the position of the player using WSAD keys and render the texture
+
+	printf("\nX:%d", SpriteX);
 
 	b2Vec2 velocity = b2Vec2(0, 0);
 
