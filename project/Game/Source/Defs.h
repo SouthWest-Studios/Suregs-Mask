@@ -69,6 +69,6 @@ inline double lerp(double A, double B, double t) {
 	return A + (B - A) * t;
 }
 
-#define TILES_TO_LOAD 17
+#define TILES_TO_LOAD 22
 
 #endif	// __DEFS_H__

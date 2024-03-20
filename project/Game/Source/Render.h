@@ -28,6 +28,8 @@ public:
 	bool Update(float dt);
 	bool PostUpdate();
 
+	bool PostLateUpdate();
+
 	// Called before quitting
 	bool CleanUp();
 
