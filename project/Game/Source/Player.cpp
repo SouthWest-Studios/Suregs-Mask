@@ -67,21 +67,12 @@ bool Player::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
 		godmode = !godmode;
+		pbody->body->GetFixtureList()[0].SetSensor(godmode);
 	}
 
-
-
-	if (godmode == true)
-	{
-		
-		GodMode(dt);
-
-	}
-
-	else
-	{
-		PlayerMovement(dt);
-	}
+	if (godmode){GodMode(dt);}
+	else PlayerMovement(dt);
+	
 
 
 	CameraMovement(dt);
@@ -173,19 +164,50 @@ void Player::CameraMovement(float dt)
 
 void Player::GodMode(float dt)
 {
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
-		position.y -= 0.2 * dt;
 
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-		position.x -= 0.2 * dt;
 
-	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-		position.y += 0.2 * dt;
 
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
-		position.x += 0.2 * dt;
+	
+	float speedFast;
+	if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
+		speedFast = speed * 2;
+	}
+	else {
+		speedFast = speed;
+	}
 
-	pbody->body->SetLinearVelocity(b2Vec2(0, 0));
+
+	b2Vec2 velocity = b2Vec2(0, 0);
+	pbody->body->SetLinearVelocity(velocity);
+	
+	//Moverse a la izquierda
+	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+		velocity.y += -speedFast * dt;
+		currentAnimation = &runAnim;
+		isFacingLeft = false;
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+		velocity.y += speedFast * dt;
+		currentAnimation = &runAnim;
+		isFacingLeft = true;
+	}
+	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+		velocity.x = -speedFast * dt;
+		currentAnimation = &runAnim;
+		isFacingLeft = true;
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+		velocity.x = speedFast * dt;
+		currentAnimation = &runAnim;
+		isFacingLeft = false;
+	}
+	pbody->body->SetLinearVelocity(velocity);
+	b2Transform pbodyPos = pbody->body->GetTransform();
+	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2;
+	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2;
+
 }
 
 void Player::PlayerMovement(float dt)
