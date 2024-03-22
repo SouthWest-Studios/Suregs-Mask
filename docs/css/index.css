@@ -19,7 +19,7 @@ body .shell-top .word {
   top: 50%;
   transform: translate(-50%, -50%);
   width: 700px;
-  height: 220px;
+  height: 300px;
   border: solid 10px rgba(255, 255, 255, 0.199);
   display: flex;
   justify-content: center;
@@ -31,6 +31,7 @@ body .shell-top .word h2 {
   font: 100 70px 'font';
   color: #fff;
   letter-spacing: 10px;
+  text-align: center;
 }
 
 body .shell-main {
@@ -588,13 +589,15 @@ body .shell-main-image {
   align-items: center;
 }
 
-body .shell-main-image h2 {
-  font-size: 30px;
+body .shell-main-image-Titul h2 {
+  font-size: 60px;
   color: turquoise;
+  margin-top: 100px;
+  margin-left: -1150px;
 }
 
-body .shell-main-image span {
-  font-size: 20px;
+body .shell-main-image-Titul span {
+  font-size: 80px;
 }
 
 body .shell-main-image p {
