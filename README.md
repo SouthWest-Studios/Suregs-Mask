@@ -5,14 +5,17 @@
 The Curse of the Mask is a project team of the subject “Project II” in CITM University: Videogames Design & Developments degree and Design, animation and digital art. *[Website](https://southwest-studios.github.io/Suregs-Mask/)
 
 <br>
-<img src="https://github.com/SouthWest-Studios/Suregs-Mask/assets/71668554/50560936-a985-40c1-a499-22cae846566a" width="300px">
 
-<br>
+## Our Game
+
+It is an RPG game in 2.5d, where you must go into the dungeon down floors to find the mysterious force that calls you, know the hidden history in the footsteps of your dead father and get resources to use them in the village to improve your equipment and skills.
+<hr>
 
 
 ## Team members
-
-
+<br>
+<img src="https://github.com/SouthWest-Studios/Suregs-Mask/assets/71668554/50560936-a985-40c1-a499-22cae846566a" width="300px">
+<br>
 - Frances Xavier Romeu.
 - Arnau Vilet. Artstation: [@arnauvilet](https://www.artstation.com/arnauvilet)
 - Núria Puente.
@@ -33,14 +36,7 @@ The Curse of the Mask is a project team of the subject “Project II” in CITM 
 - Eduard García. Github: [@Eduuuuuuuuuuuu](https://github.com/Eduuuuuuuuuuuu). Rol: Level Designer
 - Alejandro Ibáñez. Github: [@AlejandroIR](https://github.com/AlejandroIR). Rol: Programmer
 
-## Our Game
 
-<!--![Cover of videogame SHINOBI](https://i.blogs.es/7fdeb2/110409_shinobi/1366_2000.jpg)-->
-
-
-
-It is an RPG game in 2.5d, where you must go into the dungeon down floors to find the mysterious force that calls you, know the hidden history in the footsteps of your dead father and get resources to use them in the village to improve your equipment and skills.
-<hr>
 
 
                
