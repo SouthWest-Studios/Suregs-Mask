@@ -13,9 +13,13 @@ It is an RPG game in 2.5d, where you must go into the dungeon down floors to fin
 
 
 ## Team members
+
 <br>
+
 <img src="https://github.com/SouthWest-Studios/Suregs-Mask/assets/71668554/50560936-a985-40c1-a499-22cae846566a" width="300px">
+
 <br>
+
 - Frances Xavier Romeu.
 - Arnau Vilet. Artstation: [@arnauvilet](https://www.artstation.com/arnauvilet)
 - Núria Puente.
