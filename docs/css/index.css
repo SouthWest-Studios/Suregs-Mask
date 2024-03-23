@@ -593,8 +593,11 @@ body .shell-main-image {
 body .shell-main-image-Titul h2 {
   font-size: 60px;
   color: turquoise;
-  margin-top: 100px;
-  margin-left: -1150px;
+  margin-top: 200px;
+  /*margin-left: -1150px;*/
+  text-align: left;
+
+
 }
 
 body .shell-main-image-Titul span {
