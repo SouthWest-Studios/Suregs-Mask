@@ -40,7 +40,7 @@ It is an RPG game in 2.5d, where you must go into the dungeon down floors to fin
 - Frances Xavier Romeu.
 - Arnau Vilet. Artstation: [@arnauvilet](https://www.artstation.com/arnauvilet)
 - Núria Puente.
-- Ana Sánchez.
+- Ana Sánchez. Instagram: [@_kalmiakid_](https://www.instagram.com/_kalmiakid_?igsh=bm9tcXY4ejJmNnVn&utm_source=qr)
 - Ivan Mejías.
 - Jan Urrutia.
 - Agustí Del Río.
