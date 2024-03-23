@@ -61,6 +61,9 @@
     <ClCompile Include="Source\Timer.cpp">
       <Filter>Misc</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ModuleFadeToBlack.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -155,6 +158,9 @@
     </ClInclude>
     <ClInclude Include="Source\Animation.h">
       <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ModuleFadeToBlack.h">
+      <Filter>Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

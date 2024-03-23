@@ -12,7 +12,7 @@ class Render : public Module
 {
 public:
 
-	Render();
+	Render(App* app, bool start_enabled = true);
 
 	// Destructor
 	virtual ~Render();

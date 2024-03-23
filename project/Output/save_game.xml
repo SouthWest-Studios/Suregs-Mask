@@ -10,6 +10,6 @@
 	<entitymanager />
 	<guiManager />
 	<renderer>
-		<camera x="-2162" y="237" />
+		<camera x="-1720" y="-1753" />
 	</renderer>
 </game_state>

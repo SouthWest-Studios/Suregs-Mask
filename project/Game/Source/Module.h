@@ -12,8 +12,28 @@ class Module
 {
 public:
 
-	Module() : active(false)
+	App* app;
+
+	Module(App* parent, bool start_enabled = true) : app(parent), active(start_enabled)
 	{}
+
+	void Enable()
+	{
+		if (active == false)
+		{
+			active = true;
+			Start();
+		}
+	}
+
+	void Disable()
+	{
+		if (active == true)
+		{
+			active = false;
+			CleanUp();
+		}
+	}
 
 	void Init()
 	{
@@ -84,6 +104,7 @@ public:
 public:
 
 	SString name;
+	bool sceneReload = false;
 	bool active;
 
 };
