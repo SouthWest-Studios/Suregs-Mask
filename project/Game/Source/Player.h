@@ -8,8 +8,17 @@
 
 struct SDL_Texture;
 
+
+struct Branch {
+	enum EntityState const next_state;
+	//Branch() : next_state(EntityState::STATE_COUNT) {}
+
+};
+
 class Player : public Entity
 {
+
+
 public:
 
 	Player();
@@ -26,6 +35,11 @@ public:
 
 	bool CleanUp();
 
+	void DoNothing(float dt);
+	void Run(float dt);
+	void Attack(float dt);
+
+	//Branch transitionTable[static_cast<int>(EntityState::STATE_COUNT)][static_cast<int>(EntityState::STATE_COUNT)];
 	// L07 DONE 6: Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
@@ -69,6 +83,24 @@ private:
 
 	bool camaralibre = false;
 
+	
+
+public:
+
+	Branch transitionTable[static_cast<int>(EntityState::STATE_COUNT)][static_cast<int>(EntityState::STATE_COUNT)] = {
+		// isMoving               isAttacking            else
+		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::IDLE}}, // IDLE
+		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::IDLE}}, // RUNNING
+		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::IDLE}} // RUNNING
+	};
+
+	EntityState currentState = state;
+
+
+	EntityState nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(currentState)].next_state;
+
 };
+
+
 
 #endif // __PLAYER_H__
