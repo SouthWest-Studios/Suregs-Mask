@@ -361,7 +361,8 @@ body .shell-main-header-right {
   width: 40%;
   height: 95%;
   background-size: cover;
-  background-image: url("../image/top.png");
+  background-position: center;
+  background-image: url("../material/top.png");
   border: 5px solid #000;
 }
 
@@ -810,3 +811,30 @@ body .shell-main-image-img img:nth-child(3) {
     margin: 0;
   }
 }
+
+
+
+/*NEW*/
+.tabla_roles {
+    width: -webkit-fill-available;
+    margin: 50px;
+}
+.tabla_roles td {
+    padding-top: 20px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    width: 33%;
+}
+    .tabla_roles td > span.rol {
+        font-weight: 200;
+        font-size: 16px;
+    }
+.button-left, .button-right {
+display: none;
+}
+.shell-main-lbt {
+    display: none !important;
+}
+
