@@ -11,7 +11,7 @@ class GuiManager : public Module
 public:
 
 	// Constructor
-	GuiManager();
+	GuiManager(App* app, bool start_enabled = true);
 
 	// Destructor
 	virtual ~GuiManager();

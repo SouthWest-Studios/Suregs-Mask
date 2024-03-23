@@ -7,6 +7,7 @@
 #include "PQueue.h"
 #include "DynArray.h"
 #include "Pathfinding.h"
+#include "Physics.h"
 
 #include "PugiXml\src\pugixml.hpp"
 
@@ -115,7 +116,7 @@ class Map : public Module
 {
 public:
 
-    Map();
+    Map(App* app, bool start_enabled = true);
 
     // Destructor
     virtual ~Map();

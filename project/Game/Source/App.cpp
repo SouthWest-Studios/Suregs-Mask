@@ -8,6 +8,7 @@
 #include "Map.h"
 #include "Physics.h"
 #include "GuiManager.h"
+#include "ModuleFadeToBlack.h"
 #include "Optick/include/optick.h"
 
 #include "Defs.h"
@@ -29,17 +30,18 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 
 	// L3: DONE 1: Add the EntityManager Module to App
 
-	win = new Window();
-	input = new Input();
-	render = new Render();
-	tex = new Textures();
-	audio = new Audio();
+	win = new Window(this);
+	input = new Input(this);
+	render = new Render(this);
+	tex = new Textures(this);
+	audio = new Audio(this);
 	//L07 DONE 2: Add Physics module
-	physics = new Physics();
-	scene = new Scene();
-	map = new Map();
-	entityManager = new EntityManager();
-	guiManager = new GuiManager();
+	physics = new Physics(this);
+	fadeToBlack = new ModuleFadeToBlack(this);
+	scene = new Scene(this);
+	map = new Map(this);
+	entityManager = new EntityManager(this);
+	guiManager = new GuiManager(this);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp

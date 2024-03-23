@@ -9,6 +9,7 @@
 #include "Point.h"
 #include "Physics.h"
 #include "Window.h"
+#include "ModuleFadeToBlack.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
