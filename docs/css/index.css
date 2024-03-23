@@ -486,6 +486,7 @@ body .shell-main-bottom h2 {
 body .shell-main-bottom h2 span {
   font-size: 80px;
   color: turquoise;
+  font-weight: bold;
 }
 
 body .shell-main-bottom-bottom {
