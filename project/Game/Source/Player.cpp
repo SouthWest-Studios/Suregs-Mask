@@ -135,7 +135,7 @@ void Player::CameraMovement(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
 	{
-		camaralibre = !camaralibre; // Esto alternará el valor de camaralibre cada vez que se presione la tecla C en modo debug
+		camaralibre = !camaralibre; // Esto alternar?el valor de camaralibre cada vez que se presione la tecla C en modo debug
 	}
 	if (camaralibre == true)
 	{
