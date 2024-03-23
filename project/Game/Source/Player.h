@@ -48,6 +48,7 @@ public:
 
 
 	Animation* currentAnimation = nullptr;
+	EntityState state;
 
 
 	Animation SPosition;

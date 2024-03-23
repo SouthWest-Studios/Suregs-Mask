@@ -15,6 +15,27 @@ enum class EntityType
 
 class PhysBody;
 
+
+
+enum class EntityState {
+	IDLE,
+	RUNNING,
+	ATTACKING,
+	SECONDARY_ATTACK,
+	STOP_ATTACKING,
+	JUMPING,
+	FALLING,
+	TRACK,
+	WALKAROUND,
+	DYING,
+	DMG,
+	TPIN,
+	TPOUT,
+	SECONDARY_ATTACK_START,
+	SECONDARY_ATTACK_STOP
+
+};
+
 class Entity
 {
 public:

@@ -27,15 +27,12 @@ bool Player::Awake() {
 	//L03: DONE 2: Initialize Player parameters
 	position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
 
-
-	
-
-	/*TSprite = config.attribute("Tsprite").as_int();
+	TSprite = config.attribute("Tsprite").as_int();
 	SpriteX = config.attribute("sprite_x").as_int();
 	SpriteY = config.attribute("sprite_y").as_int();
 	PhotoWeight = config.attribute("Pweight").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, PhotoWeight);
-	runAnim.LoadAnim("player", "runAnim", spritePositions);*/
+	idleAnim.LoadAnim("player", "runAnim", spritePositions);
 	return true;
 }
 
@@ -58,11 +55,9 @@ bool Player::Update(float dt)
 {
 	
 
-	printf("\nX:%d", SpriteX);
-
 	
 
-	currentAnimation = &idleAnim;
+	state = EntityState::IDLE;
 
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
@@ -78,6 +73,31 @@ bool Player::Update(float dt)
 	CameraMovement(dt);
 
 	
+	switch (state)
+	{
+	case EntityState::IDLE:
+		currentAnimation = &idleAnim;
+		break;
+	case EntityState::RUNNING:
+		currentAnimation = &runAnim;
+		break;
+	case EntityState::ATTACKING:
+		//currentAnimation = &attackAnim;
+		break;
+	case EntityState::JUMPING:
+		//currentAnimation = &jumpUpAnim;
+		break;
+	case EntityState::FALLING:
+		//currentAnimation = &jumpDownAnim;
+		break;
+	case EntityState::DYING:
+		//currentAnimation = &dieAnim;
+		break;
+	default:
+		//currentAnimation = &idleAnim;
+		break;
+	}
+
 	currentAnimation->Update();
 	return true;
 }
