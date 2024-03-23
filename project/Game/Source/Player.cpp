@@ -11,12 +11,13 @@
 #include "Window.h"
 #include "ModuleFadeToBlack.h"
 
+
+
+
 Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("player");
 
-	idleAnim.LoadAnimation(name.GetString(), "idleAnim");
-	runAnim.LoadAnimation(name.GetString(), "runAnim");
 }
 
 Player::~Player() {
@@ -33,7 +34,14 @@ bool Player::Awake() {
 	SpriteY = config.attribute("sprite_y").as_int();
 	PhotoWeight = config.attribute("Pweight").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, PhotoWeight);
-	idleAnim.LoadAnim("player", "runAnim", spritePositions);
+
+	idleAnim.LoadAnim("player", "idleAnim", spritePositions);
+	runAnim.LoadAnim("player", "runAnim", spritePositions);
+
+	// 在Player类中定义transitionTable时，初始化Branch结构体实例
+	
+
+
 	return true;
 }
 
@@ -54,11 +62,7 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
-	
-
-	
-
-	state = EntityState::IDLE;
+	nextState = EntityState::IDLE;
 
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
@@ -68,36 +72,37 @@ bool Player::Update(float dt)
 
 	if (godmode){GodMode(dt);}
 	else PlayerMovement(dt);
-	
-
 
 	CameraMovement(dt);
 
-	
-	switch (state)
-	{
-	case EntityState::IDLE:
-		currentAnimation = &idleAnim;
-		break;
+	switch (nextState) {
 	case EntityState::RUNNING:
-		currentAnimation = &runAnim;
+		Run(dt);
 		break;
 	case EntityState::ATTACKING:
-		//currentAnimation = &attackAnim;
+		Attack(dt);
 		break;
-	case EntityState::JUMPING:
-		//currentAnimation = &jumpUpAnim;
-		break;
-	case EntityState::FALLING:
-		//currentAnimation = &jumpDownAnim;
-		break;
-	case EntityState::DYING:
-		//currentAnimation = &dieAnim;
+	case EntityState::IDLE:
+		DoNothing(dt);
 		break;
 	default:
-		//currentAnimation = &idleAnim;
 		break;
 	}
+	//switch (state)
+	//{
+	//case EntityState::IDLE:
+	//	currentAnimation = &idleAnim;
+	//	break;
+	//case EntityState::RUNNING:
+	//	currentAnimation = &runAnim;
+	//	break;
+	//case EntityState::ATTACKING:
+	//	//currentAnimation = &attackAnim;
+	//	break;
+	//default:
+	//	//currentAnimation = &idleAnim;
+	//	break;
+	//}
 
 	currentAnimation->Update();
 	return true;
@@ -124,6 +129,23 @@ bool Player::PostUpdate() {
 bool Player::CleanUp()
 {
 	return true;
+}
+
+void Player::DoNothing(float dt)
+{
+	currentAnimation = &idleAnim;
+	printf("idle");
+}
+
+void Player::Run(float dt)
+{
+	printf("runn");
+	
+	currentAnimation = &runAnim;
+}
+
+void Player::Attack(float dt)
+{
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 
@@ -185,10 +207,6 @@ void Player::CameraMovement(float dt)
 
 void Player::GodMode(float dt)
 {
-
-
-
-	
 	float speedFast;
 	if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
 		speedFast = speed * 2;
@@ -204,24 +222,24 @@ void Player::GodMode(float dt)
 	//Moverse a la izquierda
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 		velocity.y += -speedFast * dt;
-		currentAnimation = &runAnim;
+		nextState = EntityState::RUNNING;
 		isFacingLeft = false;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
 		velocity.y += speedFast * dt;
-		currentAnimation = &runAnim;
+		nextState = EntityState::RUNNING;
 		isFacingLeft = true;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 		velocity.x = -speedFast * dt;
-		currentAnimation = &runAnim;
+		nextState = EntityState::RUNNING;
 		isFacingLeft = true;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 		velocity.x = speedFast * dt;
-		currentAnimation = &runAnim;
+		nextState = EntityState::RUNNING;
 		isFacingLeft = false;
 	}
 	pbody->body->SetLinearVelocity(velocity);
@@ -236,24 +254,24 @@ void Player::PlayerMovement(float dt)
 	b2Vec2 velocity = b2Vec2(0, 0);
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 		velocity.y += -0.2 * dt;
-		currentAnimation = &runAnim;
+		nextState = EntityState::RUNNING;
 		isFacingLeft = false;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
 		velocity.y += 0.2 * dt;
-		currentAnimation = &runAnim;
+		nextState = EntityState::RUNNING;
 		isFacingLeft = true;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 		velocity.x = -0.2 * dt;
-		currentAnimation = &runAnim;
+		nextState = EntityState::RUNNING;
 		isFacingLeft = true;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 		velocity.x = 0.2 * dt;
-		currentAnimation = &runAnim;
+		nextState = EntityState::RUNNING;
 		isFacingLeft = false;
 	}
 	pbody->body->SetLinearVelocity(velocity);
@@ -261,3 +279,4 @@ void Player::PlayerMovement(float dt)
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2;
 }
+
