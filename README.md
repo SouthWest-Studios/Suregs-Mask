@@ -5,7 +5,8 @@
 The Curse of the Mask is a project team of the subject “Project II” in CITM University: Videogames Design & Developments degree and Design, animation and digital art. *[Website](https://msabate00.github.io/NoFurry-Games/)
 
 <br>
-<img src="https://user-images.githubusercontent.com/71668554/222898635-b7081866-73b9-4812-b494-af6adea35345.png" width="300px">
+<img src="https://github.com/SouthWest-Studios/Suregs-Mask/assets/71668554/50560936-a985-40c1-a499-22cae846566a" width="300px">
+
 <br>
 
 
@@ -13,42 +14,30 @@ The Curse of the Mask is a project team of the subject “Project II” in CITM 
 
 
 - Frances Xavier Romeu.
-- Arnau Vilet
-- Núria Puente
-- Ana Sánchez
-- Ivan Mejías
-- Jan Urrutia
-- Agustí Del Río
-- Cecilia Mansilla
-- Cristina Parra
-- Martí Sabaté. Github: [@msabate00](https://github.com/msabate00). Responsibility: Lead Programmer
-- Raül Sánchez
-- Guillem Montes
-- Jiajie Lin
-- Aleix Botella
-- Núria Casé
-- Albert Cifuentes
-- Eduardo Bergillos
-- Eduard García
-- Alejandro Ibáñez
+- Arnau Vilet.
+- Núria Puente.
+- Ana Sánchez.
+- Ivan Mejías.
+- Jan Urrutia.
+- Agustí Del Río.
+- Cecilia Mansilla.
+- Cristina Parra.
+- Martí Sabaté. Github: [@msabate00](https://github.com/msabate00). Rol: Lead Programmer
+- Raül Sánchez. Github: [@Galycon]([https://github.com/msabate00](https://github.com/Galycon)). Rol: Game Designer
+- Guillem Montes. Github: [@Guillem257](https://github.com/Guillem257). Rol: Game Designer
+- Jiajie Lin. Github: [@Linjiajie2002](https://github.com/Linjiajie2002). Rol: Programmer
+- Aleix Botella. Github: [@Aleix3](https://github.com/Aleix3). Rol: Programmer
+- Núria Casé. Github: [@CaseChips](https://github.com/CaseChips). Rol: Technical Artist
+- Albert Cifuentes. Github: [@Cifu2004](https://github.com/Cifu2004). Rol: Programmer
+- Eduardo Bergillos. Github: [@eduardobr33](https://github.com/eduardobr33). Rol: Audio
+- Eduard García. Github: [@Eduuuuuuuuuuuu](https://github.com/Eduuuuuuuuuuuu). Rol: Level Designer
+- Alejandro Ibáñez. Github: [@AlejandroIR](https://github.com/AlejandroIR). Rol: Programmer
 
-- Martí Sabaté. Github: [@msabate00](https://github.com/msabate00). Responsibility: Code leader
-- Guillem Montes. Github: [@Guillem257](https://github.com/Guillem257). Responsibility: General Analysis
-- Jiajie Lin. Github: [@Linjiajie2002](https://github.com/Linjiajie2002). Responsibility: UI
-- Eduard Garcia. Github: [@Eduuuuuuuuuuuu](https://github.com/Eduuuuuuuuuuuu). Responsibility: Audio
-- Rafael Fernández. Github: [@ReifeyCode](https://github.com/ReifeyCode). Responsibility: Design
+## Our Game
 
-<img src="https://imagesw.pizap.com/a/621800458pizapw1677415303.jpg" width= "400px">
+<!--![Cover of videogame SHINOBI](https://i.blogs.es/7fdeb2/110409_shinobi/1366_2000.jpg)-->
 
-
-
-# SHINOBI
-
-![Cover of videogame SHINOBI](https://i.blogs.es/7fdeb2/110409_shinobi/1366_2000.jpg)
-
-Shinobi is basically a horizontal scrolling action game, in which the player moves to the right while taking down the enemies in his path, using his shuriken, a ninjato, and special ninja magic. Also an important objective is to rescue the kidnapped ninja children
-
-Was a game that required above average skill as it did not have the same versatility of actions as others of its time, such as Ninja Spirit. Each phase had to be studied, especially from the moment when enemy ninjas could appear out of nowhere from a foot away. Trial and error to throw more coins in the arcade... And sharpening the aim with the shurikens to the maximum, also knowing in which parts it was appropriate to use the powerful magic.
+It is an RPG game in 2.5d, where you must go into the dungeon down floors to find the mysterious force that calls you, know the hidden history in the footsteps of your dead father and get resources to use them in the village to improve your equipment and skills.
 <hr>
 
 # References:
