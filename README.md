@@ -14,7 +14,7 @@ The Curse of the Mask is a project team of the subject “Project II” in CITM 
 
 
 - Frances Xavier Romeu.
-- Arnau Vilet.
+- Arnau Vilet. Artstation: [@arnauvilet](https://www.artstation.com/arnauvilet)
 - Núria Puente.
 - Ana Sánchez.
 - Ivan Mejías.
