@@ -133,12 +133,12 @@ bool Player::CleanUp()
 void Player::DoNothing(float dt)
 {
 	currentAnimation = &idleAnim;
-	printf("idle");
+	//printf("idle");
 }
 
 void Player::Run(float dt)
 {
-	printf("runn");
+	//printf("runn");
 	
 	currentAnimation = &runAnim;
 }
