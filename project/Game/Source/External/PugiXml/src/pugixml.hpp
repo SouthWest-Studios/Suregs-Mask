@@ -360,7 +360,7 @@ namespace pugi
 	};
 	#endif
 
-	// A light-weight handle for manipulating attributes in DOM tree
+	// A light-width handle for manipulating attributes in DOM tree
 	class PUGIXML_CLASS xml_attribute
 	{
 		friend class xml_attribute_iterator;
@@ -469,7 +469,7 @@ namespace pugi
 	bool PUGIXML_FUNCTION operator||(const xml_attribute& lhs, bool rhs);
 #endif
 
-	// A light-weight handle for manipulating nodes in DOM tree
+	// A light-width handle for manipulating nodes in DOM tree
 	class PUGIXML_CLASS xml_node
 	{
 		friend class xml_attribute_iterator;

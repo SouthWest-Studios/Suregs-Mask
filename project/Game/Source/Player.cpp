@@ -32,8 +32,8 @@ bool Player::Awake() {
 	TSprite = config.attribute("Tsprite").as_int();
 	SpriteX = config.attribute("sprite_x").as_int();
 	SpriteY = config.attribute("sprite_y").as_int();
-	PhotoWeight = config.attribute("Pweight").as_int();
-	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, PhotoWeight);
+	Photowidth = config.attribute("Pwidth").as_int();
+	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
 	idleAnim.LoadAnim("player", "idleAnim", spritePositions);
 	runAnim.LoadAnim("player", "runAnim", spritePositions);

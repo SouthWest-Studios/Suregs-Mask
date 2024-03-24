@@ -89,7 +89,7 @@
 #	define PUGI__NO_INLINE
 #endif
 
-// Branch weight controls
+// Branch width controls
 #if defined(__GNUC__) && !defined(__c2__)
 #	define PUGI__UNLIKELY(cond) __builtin_expect(cond, 0)
 #else

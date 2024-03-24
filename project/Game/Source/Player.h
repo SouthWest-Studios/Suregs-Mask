@@ -71,7 +71,7 @@ public:
 	int TSprite;
 	int SpriteX;
 	int SpriteY;
-	int PhotoWeight;
+	int Photowidth;
 
 private:
 	Animation idleAnim;

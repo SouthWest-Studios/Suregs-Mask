@@ -92,7 +92,7 @@ public:
 	}
 
 
-	SDL_Rect* SpritesPos(int totalPos, int weight, int hight, int ancho)
+	SDL_Rect* SpritesPos(int totalPos, int width, int hight, int ancho)
 	{
 
 		SDL_Rect* anirec = new SDL_Rect[totalPos];
@@ -102,14 +102,14 @@ public:
 		{
 			anirec[i].x = x;
 			anirec[i].y = y;
-			anirec[i].w = weight;
+			anirec[i].w = width;
 			anirec[i].h = hight;
-			if (x == ancho - weight) {
+			if (x == ancho - width) {
 				x = 0;
 				y += hight;
 			}
 			else {
-				x += weight;
+				x += width;
 
 			}
 		}
