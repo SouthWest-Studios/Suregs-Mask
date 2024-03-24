@@ -11,6 +11,10 @@ The Curse of the Mask is a project team of the subject “Project II” in CITM 
 It is an RPG game in 2.5d, where you must go into the dungeon down floors to find the mysterious force that calls you, know the hidden history in the footsteps of your dead father and get resources to use them in the village to improve your equipment and skills.
 <hr>
 
+- [Game Design Document](https://southwest-studios.github.io/Suregs-Mask/files/GDD.pdf)
+- [Technical Design Document](https://southwest-studios.github.io/Suregs-Mask/files/TDD.pdf)
+- [Production Plan](https://southwest-studios.github.io/Suregs-Mask/files/PP.pdf)
+
 <table border="0">
  <tr border="0">
     <td border="0"><img src="https://github.com/SouthWest-Studios/Suregs-Mask/assets/71668554/c6f9b557-3c58-4d3f-84e9-92e9e5ed84d6" width="300px">
