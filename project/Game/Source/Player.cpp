@@ -38,7 +38,6 @@ bool Player::Awake() {
 	idleAnim.LoadAnim("player", "idleAnim", spritePositions);
 	runAnim.LoadAnim("player", "runAnim", spritePositions);
 
-	// 在Player类中定义transitionTable时，初始化Branch结构体实例
 	
 
 
