@@ -19,6 +19,7 @@ class Textures;
 class Audio;
 class ModuleFadeToBlack;
 class Scene_intro;
+class Scene_menu;
 class Scene;
 class EntityManager;
 class Map;
@@ -105,6 +106,7 @@ public:
 	Audio* audio;
 	ModuleFadeToBlack* fadeToBlack;
 	Scene_intro* scene_intro;
+	Scene_menu* scene_menu;
 	Scene* scene;
 	EntityManager* entityManager;
 	Map* map;

@@ -69,7 +69,12 @@ bool ModuleFadeToBlack::Update(float dt)
 
 			moduleToEnable->Enable();
 			moduleToEnable->Awake(config);
-			app->map->Enable();
+			if (moduleToEnable == (Module*)app->scene_intro || moduleToEnable == (Module*)app->scene_menu) {
+				
+			}
+			else {
+				app->map->Enable();
+			}
 			/*app->entityManager->Enable();*/
 
 			currentStep = Fade_Step::FROM_BLACK;
