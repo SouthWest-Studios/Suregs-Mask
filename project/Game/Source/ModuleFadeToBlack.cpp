@@ -66,10 +66,11 @@ bool ModuleFadeToBlack::Update(float dt)
 			config = configFile.child("config").child(moduleToEnable->name.GetString());
 
 			moduleToEnable->sceneReload = true;
-			moduleToEnable->Awake(config);
+
 			moduleToEnable->Enable();
+			moduleToEnable->Awake(config);
 			app->map->Enable();
-			app->entityManager->Enable();
+			/*app->entityManager->Enable();*/
 
 			currentStep = Fade_Step::FROM_BLACK;
 		}

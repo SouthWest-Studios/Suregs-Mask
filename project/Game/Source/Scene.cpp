@@ -29,10 +29,23 @@ bool Scene::Awake(pugi::xml_node config)
 {
 	LOG("Loading Scene");
 	bool ret = true;
+	if(!active){
+		return ret;
+	}
 
+	return ret;
+}
+
+// Called before the first frame
+bool Scene::Start()
+{
+	pugi::xml_document configFile;
+	pugi::xml_node config;
+	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
+	config = configFile.child("config").child("scene");
 	//L03: DONE 3b: Instantiate the player using the entity manager
 	//L04 DONE 7: Get player paremeters
-	player = (Player*) app->entityManager->CreateEntity(EntityType::PLAYER);
+	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	//Assigns the XML node to a member in player
 	player->config = config.child("player");
 
@@ -49,12 +62,6 @@ bool Scene::Awake(pugi::xml_node config)
 		item->parameters = itemNode;
 	}
 
-	return ret;
-}
-
-// Called before the first frame
-bool Scene::Start()
-{
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	img = app->tex->Load("Assets/Textures/test.png");
 	mapaFondo = app->tex->Load("Assets/Textures/Mapas/Testing/background.png");
@@ -78,6 +85,8 @@ bool Scene::Start()
 	SDL_Rect btPos = { windowW / 2 - 60,20, 120,20};
 	gcButtom = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);
 
+	app->entityManager->Enable();
+
 	return true;
 }
 
@@ -91,7 +100,7 @@ bool Scene::PreUpdate()
 bool Scene::Update(float dt)
 {
 
-	OPTICK_EVENT();
+   	OPTICK_EVENT();
 
 	//Dibujar mapa
 	//app->render->DrawTexture(mapaFondo, 0, 0);

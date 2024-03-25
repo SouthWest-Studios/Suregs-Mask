@@ -64,6 +64,9 @@
     <ClCompile Include="Source\ModuleFadeToBlack.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Scene_intro.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -161,6 +164,9 @@
     </ClInclude>
     <ClInclude Include="Source\ModuleFadeToBlack.h">
       <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene_intro.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

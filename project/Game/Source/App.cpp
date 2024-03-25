@@ -5,6 +5,7 @@
 #include "Textures.h"
 #include "Audio.h"
 #include "Scene.h"
+#include "Scene_intro.h"
 #include "Map.h"
 #include "Physics.h"
 #include "GuiManager.h"
@@ -38,8 +39,9 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	//L07 DONE 2: Add Physics module
 	physics = new Physics(this);
 	fadeToBlack = new ModuleFadeToBlack(this);
-	scene = new Scene(this);
-	map = new Map(this);
+	scene_intro = new Scene_intro(this, true);
+	scene = new Scene(this, false);
+	map = new Map(this, false);
 	entityManager = new EntityManager(this);
 	guiManager = new GuiManager(this);
 
@@ -53,9 +55,11 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(physics);
 
 	AddModule(map);
+	AddModule(scene_intro);
 	AddModule(scene);
 	AddModule(entityManager);
 	AddModule(guiManager);
+	AddModule(fadeToBlack);
 
 	// Render last to swap buffer
 	AddModule(render);
@@ -80,7 +84,7 @@ App::~App()
 
 void App::AddModule(Module* module)
 {
-	module->Init();
+	/*module->Init();*/
 	modules.Add(module);
 }
 
@@ -133,7 +137,9 @@ bool App::Start()
 
 	while(item != NULL && ret == true)
 	{
-		ret = item->data->Start();
+		if (item->data->active) {
+			ret = item->data->Start();	
+		}
 		item = item->next;
 	}
 
@@ -147,27 +153,33 @@ bool App::Update()
 {
 	//L16 TODO 2: Add the Optick macro to mark the beginning of the main loop
 	OPTICK_FRAME("Main Loop");
-
+	
 	bool ret = true;
 	PrepareUpdate();
 
-	if(input->GetWindowEvent(WE_QUIT) == true)
+	if (input->GetWindowEvent(WE_QUIT) == true)
 		ret = false;
 
-	if(ret == true)
+	if (ret == true)
 		ret = PreUpdate();
+	
 
-	if(ret == true)
+	if (ret == true)
 		ret = DoUpdate();
+	
 
-	if(ret == true)
+	if (ret == true)
 		ret = PostUpdate();
+
+	
 
 	if (ret == true)
 		ret = PostLateUpdate();
 
 	FinishUpdate();
 	return ret;
+	
+	
 }
 
 // Load config from XML file
@@ -273,17 +285,19 @@ bool App::PreUpdate()
 
 	ListItem<Module*>* item;
 	Module* pModule = NULL;
-
-	for(item = modules.start; item != NULL && ret == true; item = item->next)
+	item = modules.start;
+	
+	for (item = modules.start; item != NULL && ret == true; item = item->next)
 	{
 		pModule = item->data;
 
-		if(pModule->active == false) {
+		if (pModule->active == false) {
 			continue;
 		}
 
 		ret = item->data->PreUpdate();
 	}
+	
 
 	return ret;
 }
@@ -299,11 +313,12 @@ bool App::DoUpdate()
 	item = modules.start;
 	Module* pModule = NULL;
 
-	for(item = modules.start; item != NULL && ret == true; item = item->next)
+	
+	for (item = modules.start; item != NULL && ret == true; item = item->next)
 	{
 		pModule = item->data;
 
-		if(pModule->active == false) {
+		if (pModule->active == false) {
 			continue;
 		}
 
@@ -322,18 +337,19 @@ bool App::PostUpdate()
 	bool ret = true;
 	ListItem<Module*>* item;
 	Module* pModule = NULL;
-
-	for(item = modules.start; item != NULL && ret == true; item = item->next)
+	item = modules.start;
+	
+	for (item = modules.start; item != NULL && ret == true; item = item->next)
 	{
 		pModule = item->data;
 
-		if(pModule->active == false) {
+		if (pModule->active == false) {
 			continue;
 		}
 
 		ret = item->data->PostUpdate();
 	}
-
+	
 	return ret;
 }
 
@@ -342,7 +358,8 @@ bool App::PostLateUpdate()
 	bool ret = true;
 	ListItem<Module*>* item;
 	Module* pModule = NULL;
-
+	item = modules.start;
+	
 	for (item = modules.start; item != NULL && ret == true; item = item->next)
 	{
 		pModule = item->data;
@@ -353,6 +370,7 @@ bool App::PostLateUpdate()
 
 		ret = item->data->PostLateUpdate();
 	}
+	
 
 
 
@@ -369,11 +387,12 @@ bool App::CleanUp()
 	ListItem<Module*>* item;
 	item = modules.end;
 
-	while(item != NULL && ret == true)
+	while (item != NULL && ret == true)
 	{
 		ret = item->data->CleanUp();
 		item = item->prev;
 	}
+	
 
 	LOG("Timer App CleanUp(): %f", timer.ReadMSec());
 

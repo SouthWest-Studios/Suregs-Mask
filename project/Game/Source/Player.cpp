@@ -26,6 +26,16 @@ Player::~Player() {
 
 bool Player::Awake() {
 
+
+
+	
+
+
+	return true;
+}
+
+bool Player::Start() {
+
 	//L03: DONE 2: Initialize Player parameters
 	position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
 
@@ -37,14 +47,6 @@ bool Player::Awake() {
 
 	idleAnim.LoadAnim("player", "idleAnim", spritePositions);
 	runAnim.LoadAnim("player", "runAnim", spritePositions);
-
-	
-
-
-	return true;
-}
-
-bool Player::Start() {
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
