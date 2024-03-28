@@ -37,6 +37,7 @@ public:
 
 private:
 	SDL_Texture* placeholder;
+	int sus;
 };
 
 #endif // __SCENE_INTRO_H__

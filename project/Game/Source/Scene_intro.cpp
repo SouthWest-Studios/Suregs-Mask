@@ -37,7 +37,8 @@ bool Scene_intro::Start()
 {
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	placeholder = app->tex->Load("Assets/Textures/martiVSnosotros.jpg");
-
+	sus = app->audio->LoadAudioFx("sus");
+	app->audio->PlayFx(sus);
 
 	return true;
 }

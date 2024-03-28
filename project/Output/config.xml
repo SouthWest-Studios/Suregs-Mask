@@ -18,6 +18,21 @@
             <fullscreen_window value="false"/>
         </window>
 
+        <audio>
+            <music volume="10"/>
+            <fx volume="10"/>
+        </audio>
+
+        <sounds>
+            <music>
+                <amogus path="Assets/Audio/Music/among us tutututu.ogg"/>
+            </music>
+
+            <fx>
+                <sus path="Assets/Audio/Fx/sus-amongus-d.wav"/>
+            </fx>
+      </sounds>
+
         <scene>
            <!-- <player x="1450" y="2500" texturePath="Assets/Textures/Entidades/Jugador/salamanda.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg" Posx="150" Posy="570" Tsprite="23" Pwidth="1000" sprite_x="100" sprite_y="160"/>
             --><player texturePath="Assets/Textures/Entidades/Jugador/salamanda.png" Posx="150" Posy="570" Tsprite="23" Pwidth="1000" sprite_x="100" sprite_y="160"/>
