@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "Entity.h"
+#include "Player.h"
 #include "List.h"
 
 class EntityManager : public Module
@@ -35,9 +36,16 @@ public:
 
 	void AddEntity(Entity* entity);
 
+
+	void SetPlayer(Player* player);
+	Player* GetPlayer();
+
 public:
 
 	List<Entity*> entities;
+
+private:
+	Player* actualPlayer;
 
 };
 

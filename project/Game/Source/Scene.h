@@ -41,7 +41,7 @@ public:
 	// Handles multiple Gui Event methods
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
-	Player* GetPlayer();
+
 
 private:
 	SDL_Texture* img;
@@ -51,7 +51,7 @@ private:
 	SDL_Texture* mouseTileTex = nullptr;
 
 	//L03: DONE 3b: Declare a Player attribute
-	Player* player;
+	
 
 	// L15: TODO 2: Declare a GUI Control Button 
 	GuiControlButton* gcButtom;

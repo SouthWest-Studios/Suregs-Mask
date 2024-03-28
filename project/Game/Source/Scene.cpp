@@ -45,9 +45,9 @@ bool Scene::Start()
 	config = configFile.child("config").child("scene");
 	//L03: DONE 3b: Instantiate the player using the entity manager
 	//L04 DONE 7: Get player paremeters
-	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
-	//Assigns the XML node to a member in player
-	player->config = config.child("player");
+	//player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
+	////Assigns the XML node to a member in player
+	//player->config = config.child("player");
 
 	//Get the map name from the config file and assigns the value in the module
 	app->map->name = config.child("map").attribute("name").as_string();
@@ -56,11 +56,11 @@ bool Scene::Start()
 
 	// iterate all items in the scene
 	// Check https://pugixml.org/docs/quickstart.html#access
-	for (pugi::xml_node itemNode = config.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
+	/*for (pugi::xml_node itemNode = config.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
 	{
 		Item* item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
 		item->parameters = itemNode;
-	}
+	}*/
 
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	img = app->tex->Load("Assets/Textures/test.png");
@@ -173,9 +173,7 @@ bool Scene::CleanUp()
 	return true;
 }
 
-iPoint Scene::GetPLayerPosition() {
-	return player->position;
-}
+
 
 bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 {
@@ -185,7 +183,4 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 	return true;
 }
 
-Player* Scene::GetPlayer()
-{
-	return player;
-}
+

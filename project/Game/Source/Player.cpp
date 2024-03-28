@@ -36,8 +36,8 @@ bool Player::Awake() {
 
 bool Player::Start() {
 
-	//L03: DONE 2: Initialize Player parameters
-	position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
+	
+	//position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
 
 	TSprite = config.attribute("Tsprite").as_int();
 	SpriteX = config.attribute("sprite_x").as_int();
@@ -48,6 +48,7 @@ bool Player::Start() {
 	idleAnim.LoadAnim("player", "idleAnim", spritePositions);
 	runAnim.LoadAnim("player", "runAnim", spritePositions);
 
+	
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
 	pbody = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);

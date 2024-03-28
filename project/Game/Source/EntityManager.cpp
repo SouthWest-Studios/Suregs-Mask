@@ -4,6 +4,7 @@
 #include "App.h"
 #include "Textures.h"
 #include "Scene.h"
+#include "Player.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -94,6 +95,8 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	}
 
 	entities.Add(entity);
+	entity->Awake();
+
 
 	return entity;
 }
@@ -112,6 +115,19 @@ void EntityManager::AddEntity(Entity* entity)
 {
 	if ( entity != nullptr) entities.Add(entity);
 }
+
+
+void EntityManager::SetPlayer(Player* player)
+{
+	actualPlayer = player;
+}
+
+Player* EntityManager::GetPlayer()
+{
+	return actualPlayer;
+}
+
+
 
 bool EntityManager::Update(float dt)
 {

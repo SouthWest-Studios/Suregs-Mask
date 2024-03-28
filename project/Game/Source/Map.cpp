@@ -73,7 +73,7 @@ bool Map::PostUpdate()
 		//Check if the property Draw exist get the value, if it's true draw the lawyer
 		if (mapLayer->data->properties.GetProperty("Draw") != NULL && mapLayer->data->properties.GetProperty("Draw")->value) {
 
-			iPoint playerPos = app->scene->GetPlayer()->position;
+			iPoint playerPos = app->entityManager->GetPlayer()->position;
 			int xToTiledLeft = MAX((playerPos.x / 32) - TILES_TO_LOAD, 0);
 			int xToTiledRight = MIN((playerPos.x / 32) + TILES_TO_LOAD, mapLayer->data->width);
 
@@ -222,7 +222,7 @@ bool Map::Load(SString mapFileName)
 
 	LoadCollisionsObject();
 	LoadCollisions("Collisions");
-	//LoadEntities("Entities");
+	LoadEntities("Entities");
 
 
 
@@ -655,6 +655,18 @@ bool Map::LoadEntities(std::string layerName)
 					TileSet* tileset = GetTilesetFromTileId(gid);
 					SDL_Rect r = tileset->GetRect(gid);
 					iPoint pos = MapToWorld(x, y);
+
+					//PLAYER
+					if (gid == tileset->firstgid + 0) {
+
+						app->entityManager->SetPlayer((Player*)app->entityManager->CreateEntity(EntityType::PLAYER));
+						app->entityManager->GetPlayer()->config = configNode.child("scene").child("player");
+						app->entityManager->GetPlayer()->position = iPoint(pos.x + 16, pos.y + 16);
+						app->entityManager->GetPlayer()->Start();
+
+					}
+
+
 
 					////Monedas
 					//if (gid == tileset->firstgid) {
