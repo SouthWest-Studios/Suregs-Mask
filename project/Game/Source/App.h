@@ -26,6 +26,7 @@ class Map;
 //L07 DONE 2: Add Physics module
 class Physics;
 class GuiManager;
+class DebugConsole;
 
 class App
 {
@@ -113,6 +114,7 @@ public:
 	//L07 DONE 2: Add Physics module
 	Physics* physics;
 	GuiManager* guiManager;
+	DebugConsole* debugConsole;
 
 private:
 

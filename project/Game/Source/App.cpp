@@ -11,6 +11,7 @@
 #include "Physics.h"
 #include "GuiManager.h"
 #include "ModuleFadeToBlack.h"
+#include "DebugConsole.h"
 #include "Optick/include/optick.h"
 
 #include "Defs.h"
@@ -46,6 +47,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	map = new Map(this, false);
 	entityManager = new EntityManager(this);
 	guiManager = new GuiManager(this);
+	debugConsole = new DebugConsole(this);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -65,6 +67,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(fadeToBlack);
 
 	// Render last to swap buffer
+	AddModule(debugConsole);
 	AddModule(render);
 
 	LOG("Timer App Constructor: %f", timer.ReadMSec());
