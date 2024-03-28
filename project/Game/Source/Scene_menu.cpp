@@ -38,6 +38,7 @@ bool Scene_menu::Start()
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	placeholder = app->tex->Load("Assets/Textures/suscat.jpg");
 
+	app->audio->LoadAudioMusic("amogus", 1.0f);
 
 	return true;
 }

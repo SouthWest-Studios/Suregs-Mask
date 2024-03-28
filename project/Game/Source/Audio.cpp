@@ -55,6 +55,9 @@ bool Audio::Awake(pugi::xml_node config)
 		ret = true;
 	}
 
+	volumeMusic = config.child("music").attribute("volume").as_int();
+	volumeFx = config.child("fx").attribute("volume").as_int();
+
 	return ret;
 }
 
@@ -134,6 +137,8 @@ bool Audio::PlayMusic(const char* path, float fadeTime)
 		}
 	}
 
+	Mix_VolumeMusic(volumeMusic);
+
 	LOG("Successfully playing %s", path);
 	return ret;
 }
@@ -162,7 +167,7 @@ unsigned int Audio::LoadFx(const char* path)
 }
 
 // Play WAV
-bool Audio::PlayFx(unsigned int id, int repeat)
+bool Audio::PlayFx(unsigned int id, int channel, int repeat)
 {
 	bool ret = false;
 
@@ -171,8 +176,31 @@ bool Audio::PlayFx(unsigned int id, int repeat)
 
 	if(id > 0 && id <= fx.Count())
 	{
-		Mix_PlayChannel(-1, fx[id - 1], repeat);
+		Mix_PlayChannel(channel, fx[id - 1], repeat);
 	}
 
+	Mix_Volume(channel, volumeFx);
+
 	return ret;
+}
+
+bool Audio::LoadAudioMusic(const char* name, float fadeTime)
+{
+	pugi::xml_document config;
+	pugi::xml_parse_result parseResult = config.load_file("config.xml");
+	pugi::xml_node audioNode;
+	audioNode = config.child("config").child("sounds").child("music").child(name);
+
+	return PlayMusic(audioNode.attribute("path").as_string(), fadeTime);
+}
+
+unsigned int Audio::LoadAudioFx(const char* name)
+{
+	pugi::xml_document config;
+	pugi::xml_parse_result parseResult = config.load_file("config.xml");
+	pugi::xml_node audioNode;
+	audioNode = config.child("config").child("sounds").child("fx").child(name);
+
+
+	return LoadFx(audioNode.attribute("path").as_string());
 }

@@ -30,7 +30,18 @@ public:
 	unsigned int LoadFx(const char* path);
 
 	// Play a previously loaded WAV
-	bool PlayFx(unsigned int fx, int repeat = 0);
+	bool PlayFx(unsigned int fx, int channel = -1, int repeat = 0);
+
+	// Play a music from the config
+	bool LoadAudioMusic(const char* name, float fadeTime = DEFAULT_MUSIC_FADE_TIME);
+
+	// Play a WAV from the config
+	unsigned int LoadAudioFx(const char* name);
+
+public:
+
+	int volumeMusic;
+	int volumeFx;
 
 private:
 
