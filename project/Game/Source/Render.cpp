@@ -57,6 +57,7 @@ bool Render::Awake(pugi::xml_node config)
 
 	//load a font into memory
 	font = TTF_OpenFont("Assets/Fuentes/arial.ttf", 25);
+	consoleFont = TTF_OpenFont("Assets/Fuentes/UbuntuMono-R.ttf", 25);
 
 	return ret;
 }

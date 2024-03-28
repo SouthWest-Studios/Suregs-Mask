@@ -59,6 +59,7 @@ public:
 	SDL_Rect viewport;
 	SDL_Color background;
 	TTF_Font* font;
+	TTF_Font* consoleFont;
 };
 
 #endif // __RENDER_H__

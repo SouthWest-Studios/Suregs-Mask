@@ -71,7 +71,10 @@
       <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Source\DebugConsole.cpp">
-      <Filter>Modules</Filter>
+      <Filter>Modules\DebugConsole</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DebugCommandBase.cpp">
+      <Filter>Modules\DebugConsole</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -178,7 +181,13 @@
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Source\DebugConsole.h">
-      <Filter>Modules</Filter>
+      <Filter>Modules\DebugConsole</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DebugCommand.h">
+      <Filter>Modules\DebugConsole</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DebugCommandBase.h">
+      <Filter>Modules\DebugConsole</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -208,6 +217,9 @@
     </Filter>
     <Filter Include="Misc">
       <UniqueIdentifier>{0241fa05-e3f0-4875-aa87-88fd7ad7c539}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\DebugConsole">
+      <UniqueIdentifier>{bd5d50b1-1ea9-44d2-adc5-64a9763b8a5f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

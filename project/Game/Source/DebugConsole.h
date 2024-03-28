@@ -5,6 +5,8 @@
 #include "Player.h"
 #include "GuiControl.h"
 #include "GuiControlButton.h"
+#include "DebugCommand.h" 
+#include "DebugCommandBase.h" 
 
 struct SDL_Texture;
 
@@ -36,13 +38,18 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	// Return the player position
-	iPoint GetPLayerPosition();
-
 	// Handles multiple Gui Event methods
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
 
+private:
+
+	
+
+public:
+	DebugCommand KILL_ALL;
+
+	List<DebugCommand> commandList;
 
 private:
 

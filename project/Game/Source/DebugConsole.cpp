@@ -30,6 +30,21 @@ bool DebugConsole::Awake(pugi::xml_node config)
 {
 	LOG("Loading DebugConsole");
 	bool ret = true;
+
+	KILL_ALL = DebugCommand("kill_all", "Elimina todas las entidades de la pantalla", "kill_all", []() {
+		std::cout << "Comando KILLALL ejecutado" << std::endl;
+		});
+
+
+
+
+
+
+
+	commandList.Add(KILL_ALL);
+
+
+
 	if(!active){
 		return ret;
 	}
@@ -92,16 +107,14 @@ bool DebugConsole::PostLateUpdate()
 		app->render->DrawRectangle(SDL_Rect{0,0, (int)windowW, 40 }, 0,0,0, 100, true, false);
 
 		// Renderizar texto de la consola
-
-		if (strlen(currentCommand.c_str()) > 0) {
-			SDL_Color textColor = { 255, 255, 255, 255 }; // Color del texto blanco
-			SDL_Surface* surface = TTF_RenderText_Blended(app->render->font, currentCommand.c_str(), textColor);
-			SDL_Texture* texture = SDL_CreateTextureFromSurface(app->render->renderer, surface);
-			SDL_Rect textRect = { 10, 10, surface->w, surface->h }; // Posición del texto
-			SDL_RenderCopy(app->render->renderer, texture, NULL, &textRect);
-			SDL_FreeSurface(surface);
-			SDL_DestroyTexture(texture);
-		}
+		SDL_Color textColor = { 255, 255, 255, 255 }; // Color del texto blanco
+		SDL_Surface* surface = TTF_RenderText_Blended(app->render->consoleFont,("> " + currentCommand).c_str(), textColor);
+		SDL_Texture* texture = SDL_CreateTextureFromSurface(app->render->renderer, surface);
+		SDL_Rect textRect = { 10, 7, surface->w, surface->h }; // Posición del texto
+		SDL_RenderCopy(app->render->renderer, texture, NULL, &textRect);
+		SDL_FreeSurface(surface);
+		SDL_DestroyTexture(texture);
+		
 
 		
 	}
