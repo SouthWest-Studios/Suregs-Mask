@@ -97,6 +97,30 @@ struct MapLayer
     }
 };
 
+struct MapObject {
+
+    uint id;
+    uint x;
+    uint y;
+    uint width;
+    uint height;
+    List<uint> points;
+};
+
+struct MapObjects
+{
+    SString	name;
+    int id;
+    int x;
+    int y;
+    int width;
+    int height;
+    List<MapObject*> objects;
+
+    Properties properties;
+
+};
+
 struct MapData
 {
     int width;
@@ -110,6 +134,7 @@ struct MapData
 
     // L06: DONE 2: Add a list/array of layers to the map
     List<MapLayer*> layers;
+    List<MapObjects*> mapObjects;
 };
 
 class Map : public Module
@@ -118,44 +143,60 @@ public:
 
     Map(App* app, bool start_enabled = true);
 
-    // Destructor
+    
     virtual ~Map();
 
-    // Called before render is available
+    
     bool Awake(pugi::xml_node config);
 
-    // Called before the first frame
+    
     bool Start();
 
-    // Called each loop iteration
+    
     bool Update(float dt);
     bool PostUpdate();
 
-    // Called before quitting
+    bool UpdateFrontEntities();
+
+    
     bool CleanUp();
 
-    // Load new map
+   
     bool Load(SString mapFileName);
 
-    // L06: DONE 8: Create a method that translates x,y coordinates from map positions to world positions
+   
     iPoint MapToWorld(int x, int y) const;
-
-    // L09: DONE 5: Add method WorldToMap to obtain  map coordinates from screen coordinates 
     iPoint WorldToMap(int x, int y);
 
-    // L08: DONE 2: Implement function to the Tileset based on a tile id
-    TileSet* GetTilesetFromTileId(int gid) const;
+    
+  
 
-    // L06: DONE 6: Load a group of properties 
-    bool LoadProperties(pugi::xml_node& node, Properties& properties);
+    
+ 
 
-    // L13: Create navigation map for pathfinding
+    
     void CreateNavigationMap(int& width, int& height, uchar** buffer) const;
 
     int GetTileWidth();
     int GetTileHeight();
 
+
+private:
+
+
+    bool LoadMap(pugi::xml_node mapFile);
+    bool LoadTileSet(pugi::xml_node mapFile);
+    bool LoadLayer(pugi::xml_node& layerNode, MapLayer* mapLayer);
+    bool LoadAllLayers(pugi::xml_node mapNode);
+    bool LoadObject(pugi::xml_node& node, MapObjects* mapObjects);
+    bool LoadAllObjectGroups(pugi::xml_node mapNode);
+    TileSet* GetTilesetFromTileId(int gid) const;
+    bool LoadProperties(pugi::xml_node& node, Properties& properties);
+
+
     bool LoadCollisions(std::string layerName);
+    bool LoadCollisionsObject();
+    bool LoadEntities(std::string layerName);
 
 
 public: 
@@ -165,13 +206,16 @@ public:
     PathFinding* pathfinding;
 
 private:
-    // L05: DONE 1: Declare a variable data of the struct MapData
+    
     MapData mapData;
     bool mapLoaded;
     MapLayer* navigationLayer;
     int blockedGid = 49; //!!!! make sure that you assign blockedGid according to your map
 
     List<PhysBody*> collisionsList;
+
+    pugi::xml_document configFile;
+    pugi::xml_node configNode;
  };
 
 #endif // __MAP_H__
