@@ -6,6 +6,7 @@
 #include "Log.h"
 
 #include "SDL/include/SDL.h"
+#include <iostream>
 
 #define MAX_KEYS 300
 
@@ -43,7 +44,8 @@ bool Input::Awake(pugi::xml_node config)
 // Called before the first frame
 bool Input::Start()
 {
-	SDL_StopTextInput();
+	//SDL_StopTextInput();
+	SDL_StartTextInput();
 	return true;
 }
 
@@ -88,6 +90,18 @@ bool Input::PreUpdate()
 			case SDL_QUIT:
 				windowEvents[WE_QUIT] = true;
 			break;
+
+			case SDL_TEXTINPUT:
+				if (strlen(event.text.text) == 1) {
+					inputText += event.text.text;
+				}
+				break;
+
+			case SDL_KEYDOWN:
+				if (event.key.keysym.sym == SDLK_BACKSPACE && !inputText.empty()) {
+					inputText.pop_back();
+				}
+				break;
 
 			case SDL_WINDOWEVENT:
 				switch(event.window.event)
@@ -157,4 +171,14 @@ void Input::GetMouseMotion(int& x, int& y)
 {
 	x = mouseMotionX;
 	y = mouseMotionY;
+}
+
+std::string Input::GetInputText()
+{
+	return inputText;
+}
+
+void Input::ResetInputText()
+{
+	inputText = "";
 }

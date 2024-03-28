@@ -14,6 +14,7 @@
 #include "Log.h"
 #include "GuiControl.h"
 #include "GuiManager.h"
+#include <iostream>
 
 DebugConsole::DebugConsole(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -33,6 +34,8 @@ bool DebugConsole::Awake(pugi::xml_node config)
 		return ret;
 	}
 
+	
+
 	return ret;
 }
 
@@ -41,7 +44,8 @@ bool DebugConsole::Start()
 {
 
 	app->win->GetWindowSize(windowW, windowH);
-
+	currentCommand = "hola";
+	
 
 	return true;
 }
@@ -60,8 +64,10 @@ bool DebugConsole::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_GRAVE) == KEY_DOWN) { //SE MUESTRA CON LA TECLA: º
 		showConsole = !showConsole;
+		app->input->ResetInputText();
 	}
-	
+
+	currentCommand = app->input->GetInputText();
 
 	return true;
 }
@@ -80,7 +86,24 @@ bool DebugConsole::PostLateUpdate()
 	bool ret = true;
 
 	if (showConsole) {
+		
+
+		//Fondo
 		app->render->DrawRectangle(SDL_Rect{0,0, (int)windowW, 40 }, 0,0,0, 100, true, false);
+
+		// Renderizar texto de la consola
+
+		if (strlen(currentCommand.c_str()) > 0) {
+			SDL_Color textColor = { 255, 255, 255, 255 }; // Color del texto blanco
+			SDL_Surface* surface = TTF_RenderText_Blended(app->render->font, currentCommand.c_str(), textColor);
+			SDL_Texture* texture = SDL_CreateTextureFromSurface(app->render->renderer, surface);
+			SDL_Rect textRect = { 10, 10, surface->w, surface->h }; // Posición del texto
+			SDL_RenderCopy(app->render->renderer, texture, NULL, &textRect);
+			SDL_FreeSurface(surface);
+			SDL_DestroyTexture(texture);
+		}
+
+		
 	}
 
 	return ret;

@@ -53,6 +53,8 @@ private:
 	//float textPosX, textPosY = 0;
 	//uint texW, texH;
 	uint windowW, windowH;
+
+	std::string currentCommand;
 	//SDL_Texture* mouseTileTex = nullptr;
 
 	////L03: DONE 3b: Declare a Player attribute

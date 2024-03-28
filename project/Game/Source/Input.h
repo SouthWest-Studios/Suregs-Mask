@@ -65,6 +65,9 @@ public:
 	void GetMousePosition(int &x, int &y);
 	void GetMouseMotion(int& x, int& y);
 
+	std::string GetInputText();
+	void ResetInputText();
+
 private:
 	bool windowEvents[WE_COUNT];
 	KeyState*	keyboard;
@@ -73,6 +76,8 @@ private:
 	int mouseMotionY;
 	int mouseX;
 	int mouseY;
+
+	std::string inputText;
 };
 
 #endif // __INPUT_H__
