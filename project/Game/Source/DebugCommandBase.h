@@ -18,9 +18,14 @@ public:
 
     DebugCommandBase() {}
 
+    virtual ~DebugCommandBase() {}
+
     std::string GetCommandId() const { return _commandId; }
     std::string GetCommandDescription() const { return _commandDescription; }
     std::string GetCommandFormat() const { return _commandFormat; }
+
+    virtual void Invoke() = 0;
+
 };
 
 

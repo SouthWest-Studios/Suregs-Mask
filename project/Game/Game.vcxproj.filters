@@ -76,6 +76,7 @@
     <ClCompile Include="Source\DebugCommandBase.cpp">
       <Filter>Modules\DebugConsole</Filter>
     </ClCompile>
+    <ClCompile Include="Source\DebugCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">

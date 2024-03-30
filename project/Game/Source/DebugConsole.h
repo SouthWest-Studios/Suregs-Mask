@@ -44,12 +44,16 @@ public:
 
 private:
 
-	
+	void HandleInput();
+
+	std::vector<std::string> SplitString(const std::string& input, char delimiter);
 
 public:
-	DebugCommand KILL_ALL;
+	DebugCommand* KILL_ALL;
 
-	List<DebugCommand> commandList;
+	DebugCommandArg<int>* SET_GOLD;
+
+	List<DebugCommandBase*> commandList;
 
 private:
 

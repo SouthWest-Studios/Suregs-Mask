@@ -2,6 +2,7 @@
 #define __DEFS_H__
 
 #include <stdio.h>
+#include <vector>
 
 //  NULL just in case ----------------------
 
@@ -68,6 +69,12 @@ inline const char* const PATH(const char* folder, const char* file)
 inline double lerp(double A, double B, double t) {
 	return A + (B - A) * t;
 }
+
+
+
+
+
+
 
 #define TILES_TO_LOAD 22
 
