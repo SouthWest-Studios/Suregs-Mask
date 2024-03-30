@@ -50,15 +50,22 @@ private:
 
 public:
 	DebugCommand* KILL_ALL;
+	DebugCommand* HELP;
 
 	DebugCommandArg<int>* SET_GOLD;
 
 	List<DebugCommandBase*> commandList;
 
+
+	int scrollY = 0;
+	int scrollYSpeed = 20;
+
 private:
 
 	bool showConsole = false;
+	bool showHelp = false;
 
+	
 
 	//SDL_Texture* img;
 	//float textPosX, textPosY = 0;

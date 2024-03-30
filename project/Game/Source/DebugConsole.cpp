@@ -31,17 +31,28 @@ bool DebugConsole::Awake(pugi::xml_node config)
 	LOG("Loading DebugConsole");
 	bool ret = true;
 
-	KILL_ALL = new DebugCommand("kill_all", "Elimina todas las entidades de la pantalla", "kill_all", []() {
+	KILL_ALL = new DebugCommand("kill_all", "Elimina todas las entidades de la pantalla", "kill_all", [this]() {
 		std::cout << "Comando KILLALL ejecutado" << std::endl;
 		});
+	commandList.Add(KILL_ALL);
 
-	SET_GOLD = new DebugCommandArg<int>("set_gold", "Establece la cantidad de oro", "set_gold <amount>", [](int amount) {
+
+	HELP = new DebugCommand("help", "Muestra/Oculta la lista de comandos", "help", [this]() {
+		showHelp = !showHelp;
+		scrollY = 0;
+		});
+	commandList.Add(HELP);
+
+
+	SET_GOLD = new DebugCommandArg<int>("set_gold", "Establece la cantidad de oro", "set_gold <amount>", [this](int amount) {
 		std::cout << "Comando SET_GOLD ejecutado con " << amount << " de oro" << std::endl;
 		});
-
-
-	commandList.Add(KILL_ALL);
 	commandList.Add(SET_GOLD);
+
+
+	
+
+	
 
 
 
@@ -110,7 +121,13 @@ bool DebugConsole::PostLateUpdate()
 
 
 		//Fondo
-		app->render->DrawRectangle(SDL_Rect{ 0,0, (int)windowW, 40 }, 0, 0, 0, 100, true, false);
+		if (showHelp) {
+			app->render->DrawRectangle(SDL_Rect{ 0,0, (int)windowW, 40 }, 20, 0, 0, 200, true, false);
+		}
+		else {
+			app->render->DrawRectangle(SDL_Rect{ 0,0, (int)windowW, 40 }, 0, 0, 0, 100, true, false);
+		}
+		
 
 		// Renderizar texto de la consola
 		SDL_Color textColor = { 255, 255, 255, 255 }; // Color del texto blanco
@@ -120,6 +137,39 @@ bool DebugConsole::PostLateUpdate()
 		SDL_RenderCopy(app->render->renderer, texture, NULL, &textRect);
 		SDL_FreeSurface(surface);
 		SDL_DestroyTexture(texture);
+
+		if (showHelp) {
+			int y = 40;
+			int x = 0;
+			app->render->DrawRectangle(SDL_Rect{ 0, y, (int)windowW, (int)windowH }, 0, 0, 0, 220, true, false);
+			
+			for (int i = 0; i < commandList.Count(); i++)
+			{
+				DebugCommandBase* command = dynamic_cast<DebugCommandBase*>(commandList[i]);
+				std::string label = command->GetCommandFormat() + " - " + command->GetCommandDescription();
+
+				// Calcular posición de la etiqueta
+				int labelX = 5;
+				int labelY = y + i * 30;
+
+				// Renderizar la etiqueta
+				SDL_Surface* surface = TTF_RenderText_Blended(app->render->consoleFont, label.c_str(), textColor);
+				SDL_Texture* texture = SDL_CreateTextureFromSurface(app->render->renderer, surface);
+				int texW, texH;
+				SDL_QueryTexture(texture, nullptr, nullptr, &texW, &texH);
+
+				// Definir el rectángulo de destino
+				SDL_Rect dstRect = { labelX, labelY - scrollY, texW, texH };
+
+				// Renderizar la textura en la pantalla
+				SDL_RenderCopy(app->render->renderer, texture, nullptr, &dstRect);
+
+				// Liberar la textura y la superficie
+				SDL_DestroyTexture(texture);
+				SDL_FreeSurface(surface);
+
+			}
+		}
 
 
 
@@ -168,18 +218,20 @@ void DebugConsole::HandleInput()
 				command->Invoke();
 			}
 		}
+		else {
 
-		DebugCommandArg<int>* commandArg = dynamic_cast<DebugCommandArg<int>*>(commandBase);
-		if (commandArg != nullptr) {
-			// El puntero se ha convertido con éxito
-			std::string commandArgId = commandArg->GetCommandId();
-			if (currentCommand.find(commandArgId) != std::string::npos) {
-				// Ejecutar el comando con el argumento entero
+			DebugCommandArg<int>* commandArg = dynamic_cast<DebugCommandArg<int>*>(commandBase);
+			if (commandArg != nullptr) {
+				// El puntero se ha convertido con éxito
+				std::string commandArgId = commandArg->GetCommandId();
+				if (currentCommand.find(commandArgId) != std::string::npos) {
+					// Ejecutar el comando con el argumento entero
 
-				if (properties.size() > 1) {
+					if (properties.size() > 1) {
 
-					int argValue = std::stoi(properties[1]); // Convertir la cadena a entero
-					commandArg->Invoke(argValue);
+						int argValue = std::stoi(properties[1]); // Convertir la cadena a entero
+						commandArg->Invoke(argValue);
+					}
 				}
 			}
 		}

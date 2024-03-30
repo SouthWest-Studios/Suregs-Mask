@@ -1,6 +1,7 @@
 #include "App.h"
 #include "Input.h"
 #include "Window.h"
+#include "DebugConsole.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -100,6 +101,14 @@ bool Input::PreUpdate()
 			case SDL_KEYDOWN:
 				if (event.key.keysym.sym == SDLK_BACKSPACE && !inputText.empty()) {
 					inputText.pop_back();
+				}
+				break;
+
+			case SDL_MOUSEWHEEL:
+				// Verificar si el evento es de desplazamiento vertical
+				if (event.wheel.y != 0) {
+					// Ajustar el valor de scrollY según la dirección del desplazamiento
+					app->debugConsole->scrollY += event.wheel.y * app->debugConsole->scrollYSpeed;
 				}
 				break;
 
