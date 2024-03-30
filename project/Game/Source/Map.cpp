@@ -13,6 +13,11 @@
 #include <math.h>
 #include "SDL_image/include/SDL_image.h"
 
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <vector>
+
 Map::Map(App* app, bool start_enabled) : Module(app, start_enabled), mapLoaded(false)
 {
 	name.Create("map");
@@ -454,7 +459,7 @@ bool Map::LoadAllLayers(pugi::xml_node mapNode)
 	bool ret = true;
 	for (pugi::xml_node layerNode = mapNode.child("layer"); layerNode != NULL; layerNode = layerNode.next_sibling("layer")) {
 
-		
+
 		MapLayer* mapLayer = new MapLayer();
 		ret = LoadLayer(layerNode, mapLayer);
 
@@ -487,7 +492,25 @@ bool Map::LoadObject(pugi::xml_node& node, MapObjects* mapObjects)
 	int i = 0;
 	for (object = node.child("object"); object && ret; object = object.next_sibling("object"))
 	{
-		mapObjects->objects.Add(new MapObject{
+
+		MapObject* mapObject = new MapObject;
+		mapObject->id = object.attribute("id").as_uint();
+		mapObject->x = object.attribute("x").as_uint();
+		mapObject->y = object.attribute("y").as_uint();
+		mapObject->width = object.attribute("width").as_uint();
+		mapObject->height = object.attribute("height").as_uint();
+
+		if (object.first_child()) {
+
+			std::vector<int> points = GetObjectGroupPoints(object.first_child().attribute("points").as_string());
+			mapObject->points = points;
+			mapObject->type = POLIGONO;
+		}
+		else {
+			mapObject->type = RECTANGULO;
+		}
+
+		/*mapObjects->objects.Add(new MapObject{
 			object.attribute("id").as_uint(),
 			object.attribute("x").as_uint(),
 			object.attribute("y").as_uint(),
@@ -495,7 +518,8 @@ bool Map::LoadObject(pugi::xml_node& node, MapObjects* mapObjects)
 			object.attribute("height").as_uint(),
 			List<uint>()
 
-			});
+			});*/
+		mapObjects->objects.Add(mapObject);
 		i++;
 	}
 
@@ -613,7 +637,13 @@ bool Map::LoadCollisionsObject()
 
 			MapObject* object = mapObjectsItem->data->objects[i];
 			PhysBody* c1;
-			c1 = app->physics->CreateRectangle(object->x + object->width / 2, object->y + object->height / 2, object->width, object->height, STATIC);
+			if (object->type == RECTANGULO) {
+				c1 = app->physics->CreateRectangle(object->x + object->width / 2, object->y + object->height / 2, object->width, object->height, STATIC);
+			}
+			else {
+				c1 = app->physics->CreateChain(object->x, object->y, object->points.data(), object->points.size(), STATIC);
+			}
+
 			c1->ctype = ColliderType::PLATFORM;
 			collisionsList.Add(c1);
 			ret = true;
@@ -769,6 +799,29 @@ bool Map::LoadEntities(std::string layerName)
 
 
 	return false;
+}
+
+std::vector<int> Map::GetObjectGroupPoints(const std::string& points)
+{
+	std::vector<int> puntos;
+	std::istringstream iss(points);
+	std::string punto;
+
+	// Iterar sobre cada par de coordenadas (x, y)
+	while (std::getline(iss, punto, ' ')) {
+		// Separar las coordenadas x e y
+		std::istringstream issPunto(punto);
+		std::string coordenadaX, coordenadaY;
+		std::getline(issPunto, coordenadaX, ',');
+		std::getline(issPunto, coordenadaY, ',');
+
+		// Convertir las coordenadas de cadena a enteros y agregarlas a la lista de puntos
+
+		puntos.push_back(std::stoi(coordenadaX));
+		puntos.push_back(std::stoi(coordenadaY));
+	}
+
+	return puntos;
 }
 
 // L13: Create navigationMap map for pathfinding

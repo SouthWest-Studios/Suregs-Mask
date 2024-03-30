@@ -17,6 +17,10 @@ enum MapOrientation
     ORTOGRAPHIC = 0,
     ISOMETRIC
 };
+enum MapObjectType {
+    RECTANGULO = 0,
+    POLIGONO
+};
 
 // L05: DONE 2: Create a struct to hold information for a TileSet
 // Ignore Terrain Types and Tile Types for now, but we want the image!
@@ -104,7 +108,8 @@ struct MapObject {
     uint y;
     uint width;
     uint height;
-    List<uint> points;
+    std::vector<int> points;
+    MapObjectType type;
 };
 
 struct MapObjects
@@ -197,6 +202,8 @@ private:
     bool LoadCollisions(std::string layerName);
     bool LoadCollisionsObject();
     bool LoadEntities(std::string layerName);
+
+    std::vector<int> GetObjectGroupPoints(const std::string& puntos);
 
 
 public: 
