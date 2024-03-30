@@ -110,6 +110,7 @@ struct MapObject {
     uint height;
     std::vector<int> points;
     MapObjectType type;
+    Properties properties;
 };
 
 struct MapObjects

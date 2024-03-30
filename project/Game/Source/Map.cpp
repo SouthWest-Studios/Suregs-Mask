@@ -500,9 +500,14 @@ bool Map::LoadObject(pugi::xml_node& node, MapObjects* mapObjects)
 		mapObject->width = object.attribute("width").as_uint();
 		mapObject->height = object.attribute("height").as_uint();
 
-		if (object.first_child()) {
+		LoadProperties(object, mapObject->properties);
 
-			std::vector<int> points = GetObjectGroupPoints(object.first_child().attribute("points").as_string());
+		
+
+		if (object.child("polygon")) {
+
+
+			std::vector<int> points = GetObjectGroupPoints(object.child("polygon").attribute("points").as_string());
 			mapObject->points = points;
 			mapObject->type = POLIGONO;
 		}
@@ -637,14 +642,25 @@ bool Map::LoadCollisionsObject()
 
 			MapObject* object = mapObjectsItem->data->objects[i];
 			PhysBody* c1;
-			if (object->type == RECTANGULO) {
-				c1 = app->physics->CreateRectangle(object->x + object->width / 2, object->y + object->height / 2, object->width, object->height, STATIC);
+
+			if (object->properties.GetProperty("dialogID") != NULL) {
+				//Spawn dialogo con x id
+				c1 = app->physics->CreateRectangleSensor(object->x + object->width / 2, object->y + object->height / 2, object->width, object->height, STATIC);
+				c1->ctype = ColliderType::UNKNOWN;
 			}
 			else {
-				c1 = app->physics->CreateChain(object->x, object->y, object->points.data(), object->points.size(), STATIC);
+
+				if (object->type == RECTANGULO) {
+					c1 = app->physics->CreateRectangle(object->x + object->width / 2, object->y + object->height / 2, object->width, object->height, STATIC);
+				}
+				else {
+					c1 = app->physics->CreateChain(object->x, object->y, object->points.data(), object->points.size(), STATIC);
+				}
+
+				c1->ctype = ColliderType::PLATFORM;
 			}
 
-			c1->ctype = ColliderType::PLATFORM;
+			
 			collisionsList.Add(c1);
 			ret = true;
 		}

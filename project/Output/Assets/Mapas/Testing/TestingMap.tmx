@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="126" height="107" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="21">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="126" height="107" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="28">
  <tileset firstgid="1" name="Testing" tilewidth="32" tileheight="32" tilecount="13250" columns="125">
   <image source="../../Textures/Mapas/Testing/background.png" width="4015" height="3423"/>
  </tileset>
@@ -40486,6 +40486,14 @@
   <object id="18" x="1824" y="2432" width="32" height="128"/>
   <object id="19" x="1888" y="2496" width="32" height="64"/>
   <object id="20" x="1888" y="2432" width="32" height="32"/>
+  <object id="26" x="1248" y="2528" width="64" height="64"/>
+ </objectgroup>
+ <objectgroup color="#c8c8c8" id="12" name="Dialogos">
+  <object id="23" x="1344" y="2528" width="64" height="64">
+   <properties>
+    <property name="dialogID" type="int" value="1"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer id="7" name="Navigation" width="126" height="107">
   <properties>
