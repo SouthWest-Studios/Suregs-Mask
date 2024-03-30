@@ -53,6 +53,7 @@ public:
 	DebugCommand* HELP;
 
 	DebugCommandArg<int>* SET_GOLD;
+	DebugCommandArg<int>* GOTO;
 
 	List<DebugCommandBase*> commandList;
 

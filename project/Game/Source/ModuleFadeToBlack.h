@@ -49,6 +49,9 @@ private:
 	// The modules that should be switched after the first step
 	Module* moduleToEnable = nullptr;
 	Module* moduleToDisable = nullptr;
+
+public:
+	Module* activeScene = nullptr;
 };
 
 #endif //__MODULEFADETOBLACK_H__

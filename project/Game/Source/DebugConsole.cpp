@@ -8,6 +8,8 @@
 #include "Map.h"
 #include "Item.h"
 #include "ModuleFadeToBlack.h"
+#include "Scene_menu.h"
+#include "Scene.h"
 #include "Optick/include/optick.h"
 
 #include "Defs.h"
@@ -44,10 +46,28 @@ bool DebugConsole::Awake(pugi::xml_node config)
 	commandList.Add(HELP);
 
 
-	SET_GOLD = new DebugCommandArg<int>("set_gold", "Establece la cantidad de oro", "set_gold <amount>", [this](int amount) {
+	SET_GOLD = new DebugCommandArg<int>("set_gold", "Establece la cantidad de oro", "set_gold <cantidad>", [this](int amount) {
 		std::cout << "Comando SET_GOLD ejecutado con " << amount << " de oro" << std::endl;
 		});
 	commandList.Add(SET_GOLD);
+
+
+	GOTO = new DebugCommandArg<int>("goto", "Te cambia de escena por la elegida", "goto <int nivel>", [this](int nivel) {
+
+		switch (nivel)
+		{
+		case 0: app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu); break;
+		case 1: app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene); break;
+		/*case 2: app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu); break;
+		case 3: app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu); break;
+		case 4: app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu); break;*/
+		default:
+			break;
+		}
+
+		
+		});
+	commandList.Add(GOTO);
 
 
 	
