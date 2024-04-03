@@ -77,6 +77,12 @@ bool Player::Update(float dt)
 
 	CameraMovement(dt);
 
+
+	/*if (inRodar) {
+		Rodar(dt);
+
+	}*/
+
 	switch (nextState) {
 	case EntityState::RUNNING:
 		Run(dt);
@@ -253,9 +259,9 @@ void Player::GodMode(float dt)
 
 void Player::PlayerMovement(float dt)
 {
+
+
 	b2Vec2 velocity = b2Vec2(0, 0);
-
-
 
 	// Obtener teclado
 	bool pressingUp = app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT;
@@ -268,19 +274,33 @@ void Player::PlayerMovement(float dt)
 	int verticalMovement = pressingDown - pressingUp;
 
 	// Actualizar velocidad
-	velocity.x = horizontalMovement * 0.2 * dt;
-	velocity.y = verticalMovement * 0.2 * dt;
+	if (!inRodar) {
+		velocity.x = horizontalMovement * 0.2 * dt;
+		velocity.y = verticalMovement * 0.2 * dt;
 
-	// Si hay entrada de movimiento, actualizar estado y dirección.
-	if (horizontalMovement != 0 || verticalMovement != 0) {
-		nextState = EntityState::RUNNING;
-		isFacingLeft = (horizontalMovement < 0);
+		// Si hay entrada de movimiento, actualizar estado y dirección.
+
+		if (horizontalMovement != 0 || verticalMovement != 0) {
+			nextState = EntityState::RUNNING;
+			isFacingLeft = (horizontalMovement < 0);
+		}
 	}
+
 
 	// Si pulsado E
 	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN) {
-		// 输出当前移动方向
+
 		if (pressingUp && pressingRight) {
+
+
+			inRodar = true;
+			b2Transform pbodyPos = pbody->body->GetTransform();
+			rodar_PotisionX = METERS_TO_PIXELS(pbodyPos.p.x) + 100;
+			printf("\nrodar_PotisionX: %d", rodar_PotisionX);
+			currentPosX = METERS_TO_PIXELS(pbodyPos.p.x);
+			printf("\ncurrentPosX: %d", currentPosX);
+			getPlayerPosition = true;
+			//app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.005f);
 			printf("\nWD");
 		}
 		else if (pressingUp && pressingLeft) {
@@ -305,10 +325,26 @@ void Player::PlayerMovement(float dt)
 			printf("\nD");
 		}
 	}
-	
+
 	pbody->body->SetLinearVelocity(velocity);
 	b2Transform pbodyPos = pbody->body->GetTransform();
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2;
 }
+
+void Player::Rodar(float dt)
+{
+	b2Vec2 velocity = b2Vec2(0, 0);
+
+
+	rodar_PlayerPosition = lerp(currentPosX, rodar_PotisionX, 0.1f);
+	printf("\nlerp: %d", rodar_PlayerPosition);
+	velocity.x = rodar_PlayerPosition;
+
+	pbody->body->SetLinearVelocity(velocity);
+	b2Transform pbodyPos = pbody->body->GetTransform();
+	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2;
+	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2;
+}
+
 

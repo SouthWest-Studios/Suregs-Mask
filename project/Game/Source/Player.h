@@ -48,6 +48,7 @@ private:
 	void CameraMovement(float dt);
 	void GodMode(float dt);
 	void PlayerMovement(float dt);
+	void Rodar(float dt);
 
 public:
 
@@ -72,6 +73,14 @@ public:
 	int SpriteX;
 	int SpriteY;
 	int Photowidth;
+
+	//Rodar
+	bool inRodar = false;
+	bool getPlayerPosition = false;
+	int rodar_PlayerPosition;
+	int rodar_PotisionX;
+	int currentPosX;
+	
 
 private:
 	Animation idleAnim;
