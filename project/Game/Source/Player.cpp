@@ -28,7 +28,7 @@ bool Player::Awake() {
 
 
 
-	
+
 
 
 	return true;
@@ -36,7 +36,7 @@ bool Player::Awake() {
 
 bool Player::Start() {
 
-	
+
 	//position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
 
 	TSprite = config.attribute("Tsprite").as_int();
@@ -48,7 +48,7 @@ bool Player::Start() {
 	idleAnim.LoadAnim("player", "idleAnim", spritePositions);
 	runAnim.LoadAnim("player", "runAnim", spritePositions);
 
-	
+
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
 	pbody = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
@@ -72,7 +72,7 @@ bool Player::Update(float dt)
 		pbody->body->GetFixtureList()[0].SetSensor(godmode);
 	}
 
-	if (godmode){GodMode(dt);}
+	if (godmode) { GodMode(dt); }
 	else PlayerMovement(dt);
 
 	CameraMovement(dt);
@@ -142,7 +142,7 @@ void Player::DoNothing(float dt)
 void Player::Run(float dt)
 {
 	//printf("runn");
-	
+
 	currentAnimation = &runAnim;
 }
 
@@ -201,10 +201,10 @@ void Player::CameraMovement(float dt)
 		app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
 		app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.005f);
 	}
-	
 
-	
-	
+
+
+
 }
 
 void Player::GodMode(float dt)
@@ -220,7 +220,7 @@ void Player::GodMode(float dt)
 
 	b2Vec2 velocity = b2Vec2(0, 0);
 	pbody->body->SetLinearVelocity(velocity);
-	
+
 	//Moverse a la izquierda
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 		velocity.y += -speedFast * dt;
@@ -254,28 +254,58 @@ void Player::GodMode(float dt)
 void Player::PlayerMovement(float dt)
 {
 	b2Vec2 velocity = b2Vec2(0, 0);
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-		velocity.y += -0.2 * dt;
+
+
+
+	// Obtener teclado
+	bool pressingUp = app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT;
+	bool pressingDown = app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT;
+	bool pressingLeft = app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT;
+	bool pressingRight = app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT;
+
+	// Calcular la velocidad horizontal y vertical
+	int horizontalMovement = pressingRight - pressingLeft;
+	int verticalMovement = pressingDown - pressingUp;
+
+	// Actualizar velocidad
+	velocity.x = horizontalMovement * 0.2 * dt;
+	velocity.y = verticalMovement * 0.2 * dt;
+
+	// Si hay entrada de movimiento, actualizar estado y dirección.
+	if (horizontalMovement != 0 || verticalMovement != 0) {
 		nextState = EntityState::RUNNING;
-		isFacingLeft = false;
+		isFacingLeft = (horizontalMovement < 0);
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-		velocity.y += 0.2 * dt;
-		nextState = EntityState::RUNNING;
-		isFacingLeft = true;
+	// Si pulsado E
+	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN) {
+		// 输出当前移动方向
+		if (pressingUp && pressingRight) {
+			printf("\nWD");
+		}
+		else if (pressingUp && pressingLeft) {
+			printf("\nWA");
+		}
+		else if (pressingDown && pressingRight) {
+			printf("\nSD");
+		}
+		else if (pressingDown && pressingLeft) {
+			printf("\nSA");
+		}
+		else if (pressingUp) {
+			printf("\nW");
+		}
+		else if (pressingDown) {
+			printf("\nS");
+		}
+		else if (pressingLeft) {
+			printf("\nA");
+		}
+		else if (pressingRight) {
+			printf("\nD");
+		}
 	}
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-		velocity.x = -0.2 * dt;
-		nextState = EntityState::RUNNING;
-		isFacingLeft = true;
-	}
-
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-		velocity.x = 0.2 * dt;
-		nextState = EntityState::RUNNING;
-		isFacingLeft = false;
-	}
+	
 	pbody->body->SetLinearVelocity(velocity);
 	b2Transform pbodyPos = pbody->body->GetTransform();
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2;
