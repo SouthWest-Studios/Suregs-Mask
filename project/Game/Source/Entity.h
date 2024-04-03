@@ -10,6 +10,7 @@ enum class EntityType
 {
 	PLAYER,
 	ITEM,
+	OSIRIS,
 	UNKNOWN
 };
 
