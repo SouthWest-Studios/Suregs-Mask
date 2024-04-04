@@ -5,6 +5,7 @@
 #include "Point.h"
 #include "SDL/include/SDL.h"
 #include "Animation.h"
+#include "Timer.h"
 
 struct SDL_Texture;
 
@@ -81,6 +82,8 @@ public:
 	int rodar_PotisionX;
 	int currentPosX;
 	
+	float speedDash = 3;
+	Timer timerDash;
 
 private:
 	Animation idleAnim;
