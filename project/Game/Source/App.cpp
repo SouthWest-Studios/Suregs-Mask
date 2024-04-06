@@ -12,6 +12,7 @@
 #include "GuiManager.h"
 #include "ModuleFadeToBlack.h"
 #include "DebugConsole.h"
+#include "DialogManager.h"
 #include "Optick/include/optick.h"
 
 #include "Defs.h"
@@ -48,6 +49,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	entityManager = new EntityManager(this);
 	guiManager = new GuiManager(this);
 	debugConsole = new DebugConsole(this);
+	dialogManager = new DialogManager(this);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp

@@ -100,6 +100,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Source\DebugConsole.cpp" />
+    <ClCompile Include="Source\DialogManager.cpp" />
+    <ClCompile Include="Source\DialogTriggerEntity.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\GuiControlButton.cpp" />
     <ClCompile Include="Source\GuiManager.cpp" />
@@ -126,6 +128,9 @@
     <ClInclude Include="Source\DebugCommand.h" />
     <ClInclude Include="Source\DebugCommandBase.h" />
     <ClInclude Include="Source\DebugConsole.h" />
+    <ClInclude Include="Source\Dialog.h" />
+    <ClInclude Include="Source\DialogManager.h" />
+    <ClInclude Include="Source\DialogTriggerEntity.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\GuiControl.h" />

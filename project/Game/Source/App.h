@@ -27,6 +27,7 @@ class Map;
 class Physics;
 class GuiManager;
 class DebugConsole;
+class DialogManager;
 
 class App
 {
@@ -115,6 +116,7 @@ public:
 	Physics* physics;
 	GuiManager* guiManager;
 	DebugConsole* debugConsole;
+	DialogManager* dialogManager;
 
 private:
 

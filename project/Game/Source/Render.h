@@ -61,6 +61,8 @@ public:
 	SDL_Color background;
 	TTF_Font* font;
 	TTF_Font* consoleFont;
+	TTF_Font* primaryFont;
+	TTF_Font* secondaryFont;
 };
 
 #endif // __RENDER_H__

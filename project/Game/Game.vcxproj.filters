@@ -77,6 +77,13 @@
       <Filter>Modules\DebugConsole</Filter>
     </ClCompile>
     <ClCompile Include="Source\DebugCommand.cpp" />
+    <ClCompile Include="Source\Osiris.cpp" />
+    <ClCompile Include="Source\DialogManager.cpp">
+      <Filter>Modules\DialogManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DialogTriggerEntity.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -190,6 +197,16 @@
     <ClInclude Include="Source\DebugCommandBase.h">
       <Filter>Modules\DebugConsole</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Osiris.h" />
+    <ClInclude Include="Source\Dialog.h">
+      <Filter>Modules\DialogManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DialogManager.h">
+      <Filter>Modules\DialogManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DialogTriggerEntity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -221,6 +238,9 @@
     </Filter>
     <Filter Include="Modules\DebugConsole">
       <UniqueIdentifier>{bd5d50b1-1ea9-44d2-adc5-64a9763b8a5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\DialogManager">
+      <UniqueIdentifier>{a6230b6a-8a0c-4c0b-9fe4-d741e275cf31}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

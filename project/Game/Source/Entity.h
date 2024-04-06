@@ -11,6 +11,7 @@ enum class EntityType
 	PLAYER,
 	ITEM,
 	OSIRIS,
+	DIALOG_TRIGGER,
 	UNKNOWN
 };
 
