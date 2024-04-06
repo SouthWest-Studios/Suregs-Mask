@@ -76,24 +76,30 @@ public:
 	int Photowidth;
 
 	//Rodar
-	bool inRodar = false;
+	
 	bool getPlayerPosition = false;
 	int rodar_PlayerPosition;
 	int rodar_PotisionX;
 	int currentPosX;
 	
 	float speedDash = 3;
-	Timer timerDash;
+	
 
 private:
 	Animation idleAnim;
 	Animation runAnim;
 
 	bool isFacingLeft = false;
+	bool isDashing = false;
 
 	bool godmode = false;
 
 	bool camaralibre = false;
+
+	int cdTimerDashMS;
+
+	Timer timerDash;
+	Timer cdTimerDash;
 
 	
 

@@ -55,6 +55,8 @@ bool Player::Start() {
 	//initialize audio effect
 	pickCoinFxId = app->audio->LoadFx(config.attribute("coinfxpath").as_string());
 
+	cdTimerDashMS = 500;
+
 
 	return true;
 }
@@ -273,7 +275,7 @@ void Player::PlayerMovement(float dt)
 	int verticalMovement = pressingDown - pressingUp;
 
 	// Actualizar velocidad
-	if (!inRodar) {
+	if (!isDashing) {
 		velocity.x = horizontalMovement * 0.2 * dt;
 		velocity.y = verticalMovement * 0.2 * dt;
 
@@ -286,59 +288,22 @@ void Player::PlayerMovement(float dt)
 	}
 
 
-	// Si pulsado E
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+	//Si pulsas espacio
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && timerDash.ReadMSec() > cdTimerDashMS) {
 
-		if (pressingUp && pressingRight) {
-			printf("\nWD");
-		}
-		else if (pressingUp && pressingLeft) {
-			printf("\nWA");
-		}
-		else if (pressingDown && pressingRight) {
-			printf("\nSD");
-		}
-		else if (pressingDown && pressingLeft) {
-			printf("\nSA");
-		}
-		else if (pressingUp) {
-			printf("\nW");
-		}
-		else if (pressingDown) {
-			printf("\nS");
-		}
-		else if (pressingLeft) {
-			timerDash.Start();
-			inRodar = true;
-			printf("\nA");
-		}
-		else if (pressingRight) {
-			timerDash.Start();
-			inRodar = true;
-			printf("\nD");
-		}
-
-
-
+		isDashing = true;
+		timerDash.Start();
+		pbody->body->ApplyForce(b2Vec2(velocity.x * 100, velocity.y * 100), pbody->body->GetWorldCenter(), false);
 	}
 
-	if (timerDash.ReadMSec() < speed * 1000 && inRodar) {
-		if (isFacingLeft) {
-			velocity = b2Vec2(-speed * 10 * dt, 0);
-		}
-		else {
-			velocity = b2Vec2(speed * 10 * dt, 0);
-
-		}
-	}
-	else
-	{
-
-		inRodar = false;
+	if (!(timerDash.ReadMSec() < speed * 1000 && isDashing)) {
+		isDashing = false;
+		pbody->body->SetLinearVelocity(velocity);
 	}
 
 
-	pbody->body->SetLinearVelocity(velocity);
+
+	
 	b2Transform pbodyPos = pbody->body->GetTransform();
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2;
