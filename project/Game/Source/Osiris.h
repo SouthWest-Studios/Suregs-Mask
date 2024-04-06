@@ -7,7 +7,7 @@
 #include "Animation.h"
 
 struct SDL_Texture;
-
+ 
 
 struct Branch_Osiris {
 	enum EntityState const next_state;
