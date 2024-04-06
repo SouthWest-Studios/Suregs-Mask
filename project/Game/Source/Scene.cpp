@@ -55,7 +55,8 @@ bool Scene::Start()
 	app->map->pathTextures = config.child("map").attribute("pathTextures").as_string();
 
 	// iterate all items in the scene
-	// Check https://pugixml.org/docs/quickstart.html#access
+	// Checkhttps://pugixml.org/docs/quickstart.html#access
+
 	/*for (pugi::xml_node itemNode = config.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
 	{
 		Item* item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);

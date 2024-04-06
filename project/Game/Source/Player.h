@@ -56,7 +56,7 @@ public:
 	//L02: DONE 2: Declare player parameters
 	float speed = 0.2f;
 	SDL_Texture* texture = NULL;
-	pugi::xml_node config;
+	
 	uint texW, texH;
 
 	//Audio fx
@@ -66,10 +66,10 @@ public:
 	Animation* currentAnimation = nullptr;
 	EntityState state;
 
-
+	//Animation
 	Animation SPosition;
 	SDL_Rect* spritePositions;
-
+	pugi::xml_node config;
 	int TSprite;
 	int SpriteX;
 	int SpriteY;

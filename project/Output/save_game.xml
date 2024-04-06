@@ -6,10 +6,14 @@
 	<audio />
 	<:anonymous />
 	<:anonymous />
+	<Scene_intro />
+	<Scene_menu />
 	<scene />
 	<entitymanager />
 	<guiManager />
+	<:anonymous />
+	<debugConsole />
 	<renderer>
-		<camera x="-1720" y="-1753" />
+		<camera x="-709" y="-1850" />
 	</renderer>
 </game_state>

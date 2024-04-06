@@ -4,6 +4,7 @@
 #include "Entity.h"
 #include "Point.h"
 #include "SDL/include/SDL.h"
+#include "Animation.h"
 
 struct SDL_Texture;
 
@@ -20,16 +21,36 @@ public:
 
 	bool Update(float dt);
 
+	bool PostUpdate();
+
 	bool CleanUp();
 
 public:
 
 	bool isPicked = false;
 
-private:
 
+	//Animation Obligatorio
+	Animation* currentAnimation = nullptr;
+	Animation SPosition;
+	SDL_Rect* spritePositions;
+	SDL_Rect rect;
 	SDL_Texture* texture;
 	const char* texturePath;
+	int TSprite;
+	int SpriteX;
+	int SpriteY;
+	int Photowidth;
+
+	//Animation personalizar
+	Animation testNombre;
+
+
+private:
+
+	
+
+	
 	uint texW, texH;
 };
 

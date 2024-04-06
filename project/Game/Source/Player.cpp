@@ -28,9 +28,6 @@ bool Player::Awake() {
 
 
 
-
-
-
 	return true;
 }
 
@@ -77,14 +74,13 @@ bool Player::Update(float dt)
 
 	CameraMovement(dt);
 
-
 	/*if (inRodar) {
 		Rodar(dt);
 
 	}*/
 
 
-
+	//printf("\nposx:%d, posy: %d",position.x, position.y);
 
 	switch (nextState) {
 	case EntityState::RUNNING:

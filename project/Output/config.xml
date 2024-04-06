@@ -35,23 +35,25 @@
 
         <scene>
            <!-- <player x="1450" y="2500" texturePath="Assets/Textures/Entidades/Jugador/salamanda.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg" Posx="150" Posy="570" Tsprite="23" Pwidth="1000" sprite_x="100" sprite_y="160"/>
-            --><player texturePath="Assets/Textures/Entidades/Jugador/salamanda.png" Posx="150" Posy="570" Tsprite="23" Pwidth="1000" sprite_x="100" sprite_y="160"/>
+            -->
+			<player texturePath="Assets/Textures/Entidades/Jugador/salamanda.png" Posx="150" Posy="570" Tsprite="23" Pwidth="1000" sprite_x="100" sprite_y="160"/>
             <map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Testing/TestingMap.tmx"/>
-            <item x="256" y="515" texturepath="Assets/Textures/goldCoin.png"/>
-            <item x="416" y="512" texturepath="Assets/Textures/goldCoin.png"/>
-            <item x="384" y="352" texturepath="Assets/Textures/goldCoin.png"/>
-            <item x="200" y="672" texturepath="Assets/Textures/goldCoin.png"/>
-            <item x="500" y="672" texturepath="Assets/Textures/goldCoin.png"/>
+			
+            <item x="1200" y="2600" texturePath="Assets/Textures/Entidades/Jugador/salamanda1.png" Tsprite="23" Pwidth="1000" sprite_x="100" sprite_y="160"/>
         </scene>
 
+		<!--Animation-->
 		<animations>
 			<player>
 				<!-- chibi 100-->
 				<idleAnim start="0" end="9" speed="0.2f" loop="true"/>
 				<runAnim start="11" end="23" speed="0.2f" loop="true"/>
 			</player>
-
 			
+			<item>
+				<idleAnim start="0" end="23" speed="0.2f" loop="true"/>
+			</item>
+
 		</animations>
   
 </config>
