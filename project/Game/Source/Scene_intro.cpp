@@ -40,6 +40,9 @@ bool Scene_intro::Start()
 	sus = app->audio->LoadAudioFx("sus");
 	app->audio->PlayFx(sus);
 
+	app->render->camera.x = 0;
+	app->render->camera.y = 0;
+
 	return true;
 }
 

@@ -40,6 +40,9 @@ bool Scene_menu::Start()
 
 	app->audio->LoadAudioMusic("amogus", 1.0f);
 
+	app->render->camera.x = 0;
+	app->render->camera.y = 0;
+
 	return true;
 }
 

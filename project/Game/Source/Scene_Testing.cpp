@@ -17,7 +17,7 @@
 
 Scene_testing::Scene_testing(App* app, bool start_enabled) : Module(app, start_enabled)
 {
-	name.Create("Scene_testing");
+	name.Create("scene_testing");
 }
 
 // Destructor
@@ -42,7 +42,7 @@ bool Scene_testing::Start()
 	pugi::xml_document configFile;
 	pugi::xml_node config;
 	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
-	config = configFile.child("config").child("Scene_testing");
+	config = configFile.child("config").child("scene_testing");
 	//L03: DONE 3b: Instantiate the player using the entity manager
 	//L04 DONE 7: Get player paremeters
 	//player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
