@@ -181,6 +181,12 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision ITEM");
 		app->audio->PlayFx(pickCoinFxId);
 		break;
+	case ColliderType::ENEMY:
+		if (physA == attackSensor) {
+			LOG("Collision ENEMY");
+			//enemy->TakeDamage(attackDamage);
+		}
+	break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;
