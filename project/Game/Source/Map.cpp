@@ -741,7 +741,7 @@ bool Map::LoadEntities(std::string layerName)
 					//OSIRIS
 					if (gid == tileset->firstgid + 1) {
 
-						app->entityManager->SetOsiris((Osiris*)app->entityManager->CreateEntity(EntityType::ENEMY_OSIRIS));
+						app->entityManager->SetOsiris((Enemy_Osiris*)app->entityManager->CreateEntity(EntityType::ENEMY_OSIRIS));
 						app->entityManager->GetOsiris()->config = configNode.child("Scene_testing").child("osiris");
 						app->entityManager->GetOsiris()->position = iPoint(pos.x + 16, pos.y + 16);
 						app->entityManager->GetOsiris()->Start();
@@ -751,7 +751,7 @@ bool Map::LoadEntities(std::string layerName)
 					//OLS
 					if (gid == tileset->firstgid + 2) {
 
-						app->entityManager->SetOls((Ols*)app->entityManager->CreateEntity(EntityType::ENEMY_OLS));
+						app->entityManager->SetOls((Enemy_Ols*)app->entityManager->CreateEntity(EntityType::ENEMY_OLS));
 						app->entityManager->GetOls()->config = configNode.child("Scene_testing").child("ols");
 						app->entityManager->GetOls()->position = iPoint(pos.x + 16, pos.y + 16);
 						app->entityManager->GetOls()->Start();
@@ -761,7 +761,7 @@ bool Map::LoadEntities(std::string layerName)
 					//SHAR
 					if (gid == tileset->firstgid + 3) {
 
-						app->entityManager->SetShar((Shar*)app->entityManager->CreateEntity(EntityType::ENEMY_SHAR));
+						app->entityManager->SetShar((Enemy_Shar*)app->entityManager->CreateEntity(EntityType::ENEMY_SHAR));
 						app->entityManager->GetShar()->config = configNode.child("Scene_testing").child("shar");
 						app->entityManager->GetShar()->position = iPoint(pos.x + 16, pos.y + 16);
 						app->entityManager->GetShar()->Start();
