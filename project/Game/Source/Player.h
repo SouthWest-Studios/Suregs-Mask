@@ -109,7 +109,8 @@ private:
 	int cdTimerAttackMS = 250;
 	Timer timerAttack;
 
-	
+	fPoint lastMovementDirection;
+
 
 public:
 

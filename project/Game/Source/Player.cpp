@@ -155,17 +155,19 @@ void Player::Run(float dt)
 
 void Player::Attack(float dt)
 {
-	printf("attack");
-	int attackX = position.x + 50; // Ajusta estos valores
-	int attackY = position.y;
-	int attackWidth = 50; // Ajusta estos valores
-	int attackHeight = 50; // Ajusta estos valores
+ 	printf("attack");
 
-	// Añadir el sensor al sistema de física
-	// Asegúrate de tener una forma de eliminar este sensor después de que el ataque haya terminado
-	attackSensor = app->physics->CreateRectangleSensor(attackX, attackY, attackWidth, attackHeight,DYNAMIC);
-	attackSensor->ctype = ColliderType::PLAYER_ATTACK;
-	attackSensor->listener = this;
+    int attackWidth = 50; 
+    int attackHeight = 50; 
+
+    // Dirección del ataque
+    int attackX = position.x + lastMovementDirection.x * attackWidth;
+    int attackY = position.y + lastMovementDirection.y * attackHeight;
+
+    //Sensor
+    attackSensor = app->physics->CreateRectangleSensor(attackX, attackY, attackWidth, attackHeight, DYNAMIC);
+    attackSensor->ctype = ColliderType::PLAYER_ATTACK;
+    attackSensor->listener = this;
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 
@@ -293,6 +295,7 @@ void Player::PlayerMovement(float dt)
 		if (horizontalMovement != 0 || verticalMovement != 0) {
 			nextState = EntityState::RUNNING;
 			isFacingLeft = (horizontalMovement < 0);
+			lastMovementDirection = fPoint(horizontalMovement, verticalMovement);
 		}
 	}
 
