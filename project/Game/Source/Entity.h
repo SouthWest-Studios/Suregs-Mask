@@ -93,6 +93,10 @@ public:
 	virtual void OnCollision(PhysBody* physA, PhysBody* physB) {};
 	virtual void OnExitCollision(PhysBody* physA, PhysBody* physB) {};
 
+	virtual void TakeDamage(float damage) {
+		health -= damage;
+	}
+
 public:
 
 	SString name;
@@ -107,6 +111,10 @@ public:
 
 	PhysBody* pbody;
 
+	float speed;
+	float health;
+	float maxHealth;
+	float attackDamage;
 };
 
 #endif // __ENTITY_H__

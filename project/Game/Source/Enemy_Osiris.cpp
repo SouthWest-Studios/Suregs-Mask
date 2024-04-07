@@ -1,4 +1,4 @@
-#include "Osiris.h"
+#include "Enemy_Osiris.h"
 #include "Player.h"
 #include "App.h"
 #include "Textures.h"
@@ -17,22 +17,22 @@
 
 
 
-Osiris::Osiris() : Entity(EntityType::ENEMY_OSIRIS)
+Enemy_Osiris::Enemy_Osiris() : Entity(EntityType::ENEMY_OSIRIS)
 {
 	name.Create("osiris");
 
 }
 
-Osiris::~Osiris() {
+Enemy_Osiris::~Enemy_Osiris() {
 
 }
 
-bool Osiris::Awake() {
+bool Enemy_Osiris::Awake() {
 
 	return true;
 }
 
-bool Osiris::Start() {
+bool Enemy_Osiris::Start() {
 
 
 	//position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
@@ -51,6 +51,7 @@ bool Osiris::Start() {
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
 	pbody = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
+	pbody->entity = this;
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMY;
 
@@ -59,11 +60,12 @@ bool Osiris::Start() {
 	health = 100.0f;
 	maxHealth = 100.0f;
 	speed = 0.2f;
+	attackDamage = 50;
 
 	return true;
 }
 
-bool Osiris::Update(float dt)
+bool Enemy_Osiris::Update(float dt)
 {
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
 
@@ -73,14 +75,13 @@ bool Osiris::Update(float dt)
 	}
 	else(isFacingLeft = false);
 
-
 	if (state == EntityState::DEAD) {
 		float currentTime = dt / 1000.0f;
 		if (currentTime - deathTime >= reviveDelay) {
 			Revive(dt);
 		}
 	}
-
+		
 	if (health <= 0) {
 		nextState = EntityState::DEAD;
 	}
@@ -101,6 +102,9 @@ bool Osiris::Update(float dt)
 	case EntityState::ATTACKING:
 		Attack(dt);
 		break;
+	case EntityState::DEAD:
+		Die(dt);
+		break;
 	case EntityState::IDLE:
 		DoNothing(dt);
 		break;
@@ -113,7 +117,7 @@ bool Osiris::Update(float dt)
 }
 
 
-bool Osiris::PostUpdate() {
+bool Enemy_Osiris::PostUpdate() {
 
 	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
@@ -133,18 +137,20 @@ bool Osiris::PostUpdate() {
 }
 
 
-bool Osiris::CleanUp()
+bool Enemy_Osiris::CleanUp()
 {
+	app->physics->GetWorld()->DestroyBody(pbody->body);
+	SDL_DestroyTexture(texture);
 	return true;
 }
 
-void Osiris::DoNothing(float dt)
+void Enemy_Osiris::DoNothing(float dt)
 {
 	currentAnimation = &idleAnim;
 	//printf("Osiris idle");
 }
 
-void Osiris::Chase(float dt)
+void Enemy_Osiris::Chase(float dt)
 {
 	//printf("Osiris chasing");
 	currentAnimation = &runAnim;
@@ -152,19 +158,19 @@ void Osiris::Chase(float dt)
 	//path->CreatePath(position, playerPos);
 }
 
-void Osiris::Attack(float dt)
+void Enemy_Osiris::Attack(float dt)
 {
 	//printf("Osiris attacking");
 	currentAnimation = &attackAnim;		
 	//sonido ataque
 }
 
-void Osiris::Die(float dt) {
+void Enemy_Osiris::Die(float dt) {
 	state = EntityState::DEAD;
 	deathTime = dt / 1000.0f;
 }
 
-void Osiris::Revive(float dt)
+void Enemy_Osiris::Revive(float dt)
 {
 	//printf("Osiris reviving");
 	// Solo revivir si Osiris no ha revivido antes
@@ -176,7 +182,7 @@ void Osiris::Revive(float dt)
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 
-void Osiris::OnCollision(PhysBody* physA, PhysBody* physB) {
+void Enemy_Osiris::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 	case ColliderType::PLATFORM:
@@ -194,7 +200,7 @@ void Osiris::OnCollision(PhysBody* physA, PhysBody* physB) {
 	}
 }
 
-void Osiris::SetPlayer(Player* player)
+void Enemy_Osiris::SetPlayer(Player* player)
 {
 	this->player = player;
 }

@@ -1,4 +1,4 @@
-#include "Ols.h"
+#include "Enemy_Ols.h"
 #include "Player.h"
 #include "App.h"
 #include "Textures.h"
@@ -17,22 +17,22 @@
 
 
 
-Ols::Ols() : Entity(EntityType::ENEMY_OLS)
+Enemy_Ols::Enemy_Ols() : Entity(EntityType::ENEMY_OLS)
 {
 	name.Create("ols");
 
 }
 
-Ols::~Ols() {
+Enemy_Ols::~Enemy_Ols() {
 
 }
 
-bool Ols::Awake() {
+bool Enemy_Ols::Awake() {
 
 	return true;
 }
 
-bool Ols::Start() {
+bool Enemy_Ols::Start() {
 
 
 	//position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
@@ -51,6 +51,7 @@ bool Ols::Start() {
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
 	pbody = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
+	pbody->entity = this;
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMY;
 
@@ -59,11 +60,12 @@ bool Ols::Start() {
 	health = 100.0f;
 	maxHealth = 100.0f;
 	speed = 0.2f;
+	attackDamage = 50;
 
 	return true;
 }
 
-bool Ols::Update(float dt)
+bool Enemy_Ols::Update(float dt)
 {
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
 
@@ -93,6 +95,9 @@ bool Ols::Update(float dt)
 	case EntityState::ATTACKING:
 		Attack(dt);
 		break;
+	case EntityState::DEAD:
+		Die(dt);
+		break;
 	case EntityState::IDLE:
 		DoNothing(dt);
 		break;
@@ -106,7 +111,7 @@ bool Ols::Update(float dt)
 }
 
 
-bool Ols::PostUpdate() {
+bool Enemy_Ols::PostUpdate() {
 
 	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
@@ -127,18 +132,20 @@ bool Ols::PostUpdate() {
 }
 
 
-bool Ols::CleanUp()
+bool Enemy_Ols::CleanUp()
 {
+	app->physics->GetWorld()->DestroyBody(pbody->body);
+	SDL_DestroyTexture(texture);
 	return true;
 }
 
-void Ols::DoNothing(float dt)
+void Enemy_Ols::DoNothing(float dt)
 {
 	currentAnimation = &idleAnim;
 	//printf("Osiris idle");
 }
 
-void Ols::Chase(float dt)
+void Enemy_Ols::Chase(float dt)
 {
 	//printf("Osiris chasing");
 	currentAnimation = &runAnim;
@@ -146,19 +153,20 @@ void Ols::Chase(float dt)
 	//path->CreatePath(position, playerPos);
 }
 
-void Ols::Attack(float dt)
+void Enemy_Ols::Attack(float dt)
 {
 	//printf("Osiris attacking");
 	currentAnimation = &attackAnim;
 	//sonido ataque
 }
 
-void Ols::Die(float dt) {
+void Enemy_Ols::Die(float dt) {
+	printf("Ols die");
 	state = EntityState::DEAD;
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 
-void Ols::OnCollision(PhysBody* physA, PhysBody* physB) {
+void Enemy_Ols::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 	case ColliderType::PLATFORM:
@@ -176,7 +184,7 @@ void Ols::OnCollision(PhysBody* physA, PhysBody* physB) {
 	}
 }
 
-void Ols::SetPlayer(Player* player)
+void Enemy_Ols::SetPlayer(Player* player)
 {
 	this->player = player;
 }

@@ -4,7 +4,7 @@
 #include "Audio.h"
 #include "Input.h"
 #include "Render.h"
-#include "Scene_Testing.h"
+#include "Scene.h"
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
@@ -47,8 +47,11 @@ bool Player::Start() {
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
 	pbody = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
+	pbody->entity = this;
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
+
+	attackDamage = 50;
 
 	//initialize audio effect
 	pickCoinFxId = app->audio->LoadFx(config.attribute("coinfxpath").as_string());
@@ -184,7 +187,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::ENEMY:
 		if (physA == attackSensor) {
 			LOG("Collision ENEMY");
-			//enemy->TakeDamage(attackDamage);
+			if (physB->entity != nullptr) {
+				physB->entity->TakeDamage(attackDamage);
+			}
+
 		}
 	break;
 	case ColliderType::UNKNOWN:

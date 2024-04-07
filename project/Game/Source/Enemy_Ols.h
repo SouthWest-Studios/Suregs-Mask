@@ -1,5 +1,5 @@
-#ifndef __OLS_H__
-#define __OLS_H__
+#ifndef __ENEMY_OLS_H__
+#define __ENEMY_OLS_H__
 
 #include "Entity.h"
 #include "Point.h"
@@ -16,15 +16,15 @@ struct Branch_Ols {
 
 };
 
-class Ols : public Entity
+class Enemy_Ols : public Entity
 {
 
 
 public:
 
-	Ols();
+	Enemy_Ols();
 
-	virtual ~Ols();
+	virtual ~Enemy_Ols();
 
 	bool Awake();
 
@@ -56,6 +56,7 @@ public:
 	float speed;
 	float health;
 	float maxHealth;
+	float attackDamage;
 
 	Animation* currentAnimation = nullptr;
 	EntityState state;
@@ -101,4 +102,4 @@ public:
 
 
 
-#endif // __OLS_H__
+#endif // __ENEMY_OLS_H__

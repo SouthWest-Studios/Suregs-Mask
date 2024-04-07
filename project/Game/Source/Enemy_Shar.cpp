@@ -1,4 +1,4 @@
-#include "Shar.h"
+#include "Enemy_Shar.h"
 #include "Player.h"
 #include "App.h"
 #include "Textures.h"
@@ -17,22 +17,22 @@
 
 
 
-Shar::Shar() : Entity(EntityType::ENEMY_SHAR)
+Enemy_Shar::Enemy_Shar() : Entity(EntityType::ENEMY_SHAR)
 {
 	name.Create("shar");
 
 }
 
-Shar::~Shar() {
+Enemy_Shar::~Enemy_Shar() {
 
 }
 
-bool Shar::Awake() {
+bool Enemy_Shar::Awake() {
 
 	return true;
 }
 
-bool Shar::Start() {
+bool Enemy_Shar::Start() {
 
 
 	//position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
@@ -51,6 +51,7 @@ bool Shar::Start() {
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
 	pbody = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
+	pbody->entity = this;
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMY;
 
@@ -59,11 +60,12 @@ bool Shar::Start() {
 	health = 100.0f;
 	maxHealth = 100.0f;
 	speed = 0.2f;
+	attackDamage = 50;
 
 	return true;
 }
 
-bool Shar::Update(float dt)
+bool Enemy_Shar::Update(float dt)
 {
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
 
@@ -94,6 +96,9 @@ bool Shar::Update(float dt)
 	case EntityState::ATTACKING:
 		Attack(dt);
 		break;
+	case EntityState::DEAD:
+		Die(dt);
+		break;
 	case EntityState::IDLE:
 		DoNothing(dt);
 		break;
@@ -107,7 +112,7 @@ bool Shar::Update(float dt)
 }
 
 
-bool Shar::PostUpdate() {
+bool Enemy_Shar::PostUpdate() {
 
 	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
@@ -128,18 +133,20 @@ bool Shar::PostUpdate() {
 }
 
 
-bool Shar::CleanUp()
+bool Enemy_Shar::CleanUp()
 {
+	app->physics->GetWorld()->DestroyBody(pbody->body);
+	SDL_DestroyTexture(texture);
 	return true;
 }
 
-void Shar::DoNothing(float dt)
+void Enemy_Shar::DoNothing(float dt)
 {
 	currentAnimation = &idleAnim;
 	//printf("Osiris idle");
 }
 
-void Shar::Chase(float dt)
+void Enemy_Shar::Chase(float dt)
 {
 	//printf("Osiris chasing");
 	currentAnimation = &runAnim;
@@ -147,19 +154,20 @@ void Shar::Chase(float dt)
 	//path->CreatePath(position, playerPos);
 }
 
-void Shar::Attack(float dt)
+void Enemy_Shar::Attack(float dt)
 {
 	//printf("Osiris attacking");
 	currentAnimation = &attackAnim;
 	//sonido ataque
 }
 
-void Shar::Die(float dt) {
+void Enemy_Shar::Die(float dt) {
+	printf("Shar die");
 	state = EntityState::DEAD;
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 
-void Shar::OnCollision(PhysBody* physA, PhysBody* physB) {
+void Enemy_Shar::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 	case ColliderType::PLATFORM:
@@ -177,7 +185,7 @@ void Shar::OnCollision(PhysBody* physA, PhysBody* physB) {
 	}
 }
 
-void Shar::SetPlayer(Player* player)
+void Enemy_Shar::SetPlayer(Player* player)
 {
 	this->player = player;
 }

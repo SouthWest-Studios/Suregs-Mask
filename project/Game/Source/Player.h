@@ -86,7 +86,7 @@ public:
 	//Ataque
 	bool isAttacking = false;
 	PhysBody* attackSensor = nullptr;
-
+	float attackDamage = 50;
 	
 
 private:
