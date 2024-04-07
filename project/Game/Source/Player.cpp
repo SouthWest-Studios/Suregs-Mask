@@ -153,6 +153,19 @@ void Player::Run(float dt)
 
 void Player::Attack(float dt)
 {
+ 	printf("attack");
+
+    int attackWidth = 50; 
+    int attackHeight = 50; 
+
+    // DirecciÃ³n del ataque
+    int attackX = position.x + lastMovementDirection.x * attackWidth;
+    int attackY = position.y + lastMovementDirection.y * attackHeight;
+
+    //Sensor
+    attackSensor = app->physics->CreateRectangleSensor(attackX, attackY, attackWidth, attackHeight, DYNAMIC);
+    attackSensor->ctype = ColliderType::PLAYER_ATTACK;
+    attackSensor->listener = this;
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 
@@ -166,6 +179,12 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision ITEM");
 		app->audio->PlayFx(pickCoinFxId);
 		break;
+	case ColliderType::ENEMY:
+		if (physA == attackSensor) {
+			LOG("Collision ENEMY");
+			//enemy->TakeDamage(attackDamage);
+		}
+	break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;
@@ -206,8 +225,6 @@ void Player::CameraMovement(float dt)
 		app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
 		app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.005f);
 	}
-
-
 
 
 }
@@ -277,11 +294,12 @@ void Player::PlayerMovement(float dt)
 		velocity.x = horizontalMovement * 0.2 * dt;
 		velocity.y = verticalMovement * 0.2 * dt;
 
-		// Si hay entrada de movimiento, actualizar estado y direcci¨®n.
+		// Si hay entrada de movimiento, actualizar estado y direcciï¿½ï¿½n.
 
 		if (horizontalMovement != 0 || verticalMovement != 0) {
 			nextState = EntityState::RUNNING;
 			isFacingLeft = (horizontalMovement < 0);
+			lastMovementDirection = fPoint(horizontalMovement, verticalMovement);
 		}
 	}
 
@@ -297,6 +315,21 @@ void Player::PlayerMovement(float dt)
 	if (!(timerDash.ReadMSec() < speed * 1000 && isDashing)) {
 		isDashing = false;
 		pbody->body->SetLinearVelocity(velocity);
+	}
+
+	//Si pulsas J para atacar
+	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN && timerAttack.ReadMSec() > cdTimerAttackMS){
+		isAttacking = true;
+		timerAttack.Start();
+		nextState = EntityState::ATTACKING;
+	}
+
+	if (!(timerAttack.ReadMSec() < cdTimerAttackMS && isAttacking)) {
+		isAttacking = false;
+		if (attackSensor) {
+			app->physics->DestroyBody(attackSensor);
+			attackSensor = nullptr;
+		}
 	}
 
 

@@ -82,6 +82,11 @@ public:
 	int currentPosX;
 	
 	float speedDash = 3;
+
+	//Ataque
+	bool isAttacking = false;
+	PhysBody* attackSensor = nullptr;
+
 	
 
 private:
@@ -98,7 +103,12 @@ private:
 	int cdTimerDashMS;
 
 	Timer timerDash;
-	Timer cdTimerDash;
+	Timer cdTimerDash; 
+
+	int cdTimerAttackMS = 250;
+	Timer timerAttack;
+
+	fPoint lastMovementDirection;
 
 public:
 
