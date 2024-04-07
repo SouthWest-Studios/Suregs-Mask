@@ -135,6 +135,8 @@ bool Player::PostUpdate() {
 
 bool Player::CleanUp()
 {
+	app->physics->GetWorld()->DestroyBody(pbody->body);
+	SDL_DestroyTexture(texture);
 	return true;
 }
 

@@ -185,6 +185,32 @@ bool Map::CleanUp()
 	}
 	mapData.layers.Clear();
 
+
+
+	// Remove all groupobject
+	ListItem<MapObjects*>* objectsItem;
+	objectsItem = mapData.mapObjects.start;
+
+	while (objectsItem != NULL)
+	{
+		RELEASE(objectsItem->data);
+		objectsItem = objectsItem->next;
+	}
+	mapData.mapObjects.Clear();
+
+
+	// Remove all colisions
+	ListItem<PhysBody*>* collision;
+	collision = collisionsList.start;
+	while (collision != NULL) {
+		app->physics->GetWorld()->DestroyBody(collision->data->body);
+		collision = collision->next;
+	}
+	collisionsList.Clear();
+
+
+
+
 	return true;
 }
 

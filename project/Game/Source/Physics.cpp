@@ -81,6 +81,11 @@ void Physics::DestroyBody(PhysBody* body)
     }
 }
 
+b2World* Physics::GetWorld()
+{
+	return world;
+}
+
 PhysBody* Physics::CreateRectangle(int x, int y, int width, int height, bodyType type)
 {
 	b2BodyDef body;

@@ -83,6 +83,9 @@ public:
 	//Destroy body
 	void DestroyBody(PhysBody* body);
 
+
+	b2World* GetWorld();
+
 private:
 
 	// Debug mode
