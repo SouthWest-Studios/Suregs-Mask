@@ -28,6 +28,7 @@ class Physics;
 class GuiManager;
 class DebugConsole;
 class DialogManager;
+class Menu;
 
 class App
 {
@@ -117,6 +118,7 @@ public:
 	GuiManager* guiManager;
 	DebugConsole* debugConsole;
 	DialogManager* dialogManager;
+	Menu* menu;
 
 private:
 
