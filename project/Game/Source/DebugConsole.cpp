@@ -9,7 +9,7 @@
 #include "Item.h"
 #include "ModuleFadeToBlack.h"
 #include "Scene_menu.h"
-#include "Scene.h"
+#include "Scene_Testing.h"
 #include "Optick/include/optick.h"
 
 #include "Defs.h"
@@ -57,7 +57,7 @@ bool DebugConsole::Awake(pugi::xml_node config)
 		switch (nivel)
 		{
 		case 0: app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu); break;
-		case 1: app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene); break;
+		case 1: app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_testing); break;
 		/*case 2: app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu); break;
 		case 3: app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu); break;
 		case 4: app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu); break;*/

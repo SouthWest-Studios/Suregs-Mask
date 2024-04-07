@@ -4,7 +4,7 @@
 #include "Audio.h"
 #include "Render.h"
 #include "Window.h"
-#include "Scene.h"
+#include "Scene_Testing.h"
 #include "Map.h"
 #include "Item.h"
 #include "ModuleFadeToBlack.h"
@@ -15,19 +15,19 @@
 #include "GuiControl.h"
 #include "GuiManager.h"
 
-Scene::Scene(App* app, bool start_enabled) : Module(app, start_enabled)
+Scene_testing::Scene_testing(App* app, bool start_enabled) : Module(app, start_enabled)
 {
-	name.Create("scene");
+	name.Create("Scene_testing");
 }
 
 // Destructor
-Scene::~Scene()
+Scene_testing::~Scene_testing()
 {}
 
 // Called before render is available
-bool Scene::Awake(pugi::xml_node config)
+bool Scene_testing::Awake(pugi::xml_node config)
 {
-	LOG("Loading Scene");
+	LOG("Loading Scene_testing");
 	bool ret = true;
 	if(!active){
 		return ret;
@@ -37,12 +37,12 @@ bool Scene::Awake(pugi::xml_node config)
 }
 
 // Called before the first frame
-bool Scene::Start()
+bool Scene_testing::Start()
 {
 	pugi::xml_document configFile;
 	pugi::xml_node config;
 	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
-	config = configFile.child("config").child("scene");
+	config = configFile.child("config").child("Scene_testing");
 	//L03: DONE 3b: Instantiate the player using the entity manager
 	//L04 DONE 7: Get player paremeters
 	//player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
@@ -54,7 +54,7 @@ bool Scene::Start()
 	app->map->path = config.child("map").attribute("path").as_string();
 	app->map->pathTextures = config.child("map").attribute("pathTextures").as_string();
 
-	// iterate all items in the scene
+	// iterate all items in the Scene_testing
 	// Checkhttps://pugixml.org/docs/quickstart.html#access
 
 	/*for (pugi::xml_node itemNode = config.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
@@ -81,7 +81,7 @@ bool Scene::Start()
 	// Texture to highligh mouse position 
 	mouseTileTex = app->tex->Load("Assets/Mapas/tileSelection.png");
 
-	// L15: DONE 2: Instantiate a new GuiControlButton in the Scene
+	// L15: DONE 2: Instantiate a new GuiControlButton in the Scene_testing
 
 	SDL_Rect btPos = { windowW / 2 - 60,20, 120,20};
 	gcButtom = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);
@@ -92,13 +92,13 @@ bool Scene::Start()
 }
 
 // Called each loop iteration
-bool Scene::PreUpdate()
+bool Scene_testing::PreUpdate()
 {
 	return true;
 }
 
 // Called each loop iteration
-bool Scene::Update(float dt)
+bool Scene_testing::Update(float dt)
 {
 
    	OPTICK_EVENT();
@@ -147,7 +147,7 @@ bool Scene::Update(float dt)
 	
 	// L14: DONE 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
-		app->fadeToBlack->FadeToBlack(this, app->scene);
+		app->fadeToBlack->FadeToBlack(this, app->scene_testing);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
@@ -156,7 +156,7 @@ bool Scene::Update(float dt)
 }
 
 // Called each loop iteration
-bool Scene::PostUpdate()
+bool Scene_testing::PostUpdate()
 {
 	bool ret = true;
 
@@ -167,16 +167,16 @@ bool Scene::PostUpdate()
 }
 
 // Called before quitting
-bool Scene::CleanUp()
+bool Scene_testing::CleanUp()
 {
-	LOG("Freeing scene");
+	LOG("Freeing Scene_testing");
 
 	return true;
 }
 
 
 
-bool Scene::OnGuiMouseClickEvent(GuiControl* control)
+bool Scene_testing::OnGuiMouseClickEvent(GuiControl* control)
 {
 	// L15: DONE 5: Implement the OnGuiMouseClickEvent method
 	LOG("Press Gui Control: %d", control->id);

@@ -83,7 +83,13 @@
     <ClCompile Include="Source\DialogTriggerEntity.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Osiris.cpp">
+    <ClCompile Include="Source\Enemy_Osiris.cpp">
+      <Filter>Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Enemy_Shar.cpp">
+      <Filter>Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Enemy_Ols.cpp">
       <Filter>Entities\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Source\Menu.cpp">
@@ -211,7 +217,13 @@
     <ClInclude Include="Source\DialogTriggerEntity.h">
       <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Osiris.h">
+    <ClInclude Include="Source\Enemy_Osiris.h">
+      <Filter>Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy_Shar.h">
+      <Filter>Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy_Ols.h">
       <Filter>Entities\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Source\Menu.h">

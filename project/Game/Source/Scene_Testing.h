@@ -1,5 +1,5 @@
-#ifndef __SCENE_H__
-#define __SCENE_H__
+#ifndef __Scene_testing_H__
+#define __Scene_testing_H__
 
 #include "Module.h"
 #include "Player.h"
@@ -8,14 +8,14 @@
 
 struct SDL_Texture;
 
-class Scene : public Module
+class Scene_testing : public Module
 {
 public:
 
-	Scene(App* app, bool start_enabled = false);
+	Scene_testing(App* app, bool start_enabled = false);
 
 	// Destructor
-	virtual ~Scene();
+	virtual ~Scene_testing();
 
 	// Called before render is available
 	bool Awake(pugi::xml_node config);
@@ -59,4 +59,4 @@ private:
 	SDL_Texture* mapaFondo;
 };
 
-#endif // __SCENE_H__
+#endif // __Scene_testing_H__

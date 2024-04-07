@@ -33,22 +33,48 @@
             </fx>
       </sounds>
 
-        <scene>
+		<Scene_testing>
            <!-- <player x="1450" y="2500" texturePath="Assets/Textures/Entidades/Jugador/salamanda.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg" Posx="150" Posy="570" Tsprite="23" Pwidth="1000" sprite_x="100" sprite_y="160"/>
-            -->
-			<player texturePath="Assets/Textures/Entidades/Jugador/salamanda.png" Posx="150" Posy="570" Tsprite="23" Pwidth="1000" sprite_x="100" sprite_y="160"/>
+            --><player texturePath="Assets/Textures/Entidades/Jugador/salamanda.png" Posx="150" Posy="570" Tsprite="23" Pwidth="1000" sprite_x="100" sprite_y="160"/>
+
+	    <osiris texturePath="Assets/Textures/Entidades/Osiris/Viking/VikingNoEffect-Sheet.png" Tsprite="60" Pwidth="1380" sprite_x="115" sprite_y="84"/>
+	    <ols texturePath="Assets/Textures/Entidades/Ols/animations/spritesheets/Sprites.png" Tsprite="374" Pwidth="6336" sprite_x="288" sprite_y="128"/>
+	    <shar texturePath="Assets/Textures/Entidades/Shar/Sprites.png" Tsprite="45" Pwidth="2190" sprite_x="146" sprite_y="153"/>
+
+
             <map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Testing/TestingMap.tmx"/>
 			
             <item x="1200" y="2600" texturePath="Assets/Textures/Entidades/Jugador/salamanda1.png" Tsprite="23" Pwidth="1000" sprite_x="100" sprite_y="160"/>
-        </scene>
+        </Scene_testing>
 
 		<!--Animation-->
 		<animations>
 			<player>
-				<!-- chibi 100-->
+				<!-- chibi 100-->	
 				<idleAnim start="0" end="9" speed="0.2f" loop="true"/>
 				<runAnim start="11" end="23" speed="0.2f" loop="true"/>
 			</player>
+
+			<osiris>
+        			<idleAnim start="0" end="2" speed="0.05f" loop="true"/>
+        			<runAnim start="39" end="42" speed="0.2f" loop="true"/>
+				<attackAnim start="49" end="56" speed="0.2f" loop="false"/>
+				<dieAnim start="13" end="24" speed="0.2f" loop="false"/>
+    			</osiris>
+
+			<ols>
+        			<idleAnim start="0" end="2" speed="0.05f" loop="true"/>
+        			<runAnim start="23" end="33" speed="0.07f" loop="true"/>
+				<attackAnim start="49" end="56" speed="0.2f" loop="false"/>
+				<dieAnim start="13" end="24" speed="0.2f" loop="false"/>
+    			</ols>
+
+			<shar>
+        			<idleAnim start="16" end="21" speed="0.05f" loop="true"/>
+        			<runAnim start="16" end="30" speed="0.2f" loop="true"/>
+				<attackAnim start="220" end="234" speed="0.2f" loop="false"/>18
+				<dieAnim start="353" end="370" speed="0.2f" loop="false"/>
+    			</shar>
 			
 			<item>
 				<idleAnim start="0" end="23" speed="0.2f" loop="true"/>

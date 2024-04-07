@@ -10,7 +10,9 @@ enum class EntityType
 {
 	PLAYER,
 	ITEM,
-	OSIRIS,
+	ENEMY_OSIRIS,
+	ENEMY_OLS,
+	ENEMY_SHAR,
 	DIALOG_TRIGGER,
 	UNKNOWN
 };
@@ -19,10 +21,12 @@ class PhysBody;
 
 
 
-enum class EntityState {
+enum class EntityState
+{
 	IDLE,
 	RUNNING,
 	ATTACKING,
+	DEAD,
 	STATE_COUNT
 };
 
@@ -89,7 +93,9 @@ public:
 	virtual void OnCollision(PhysBody* physA, PhysBody* physB) {};
 	virtual void OnExitCollision(PhysBody* physA, PhysBody* physB) {};
 
-
+	virtual void TakeDamage(float damage) {
+		health -= damage;
+	}
 
 public:
 
@@ -105,6 +111,10 @@ public:
 
 	PhysBody* pbody;
 
+	float speed;
+	float health;
+	float maxHealth;
+	float attackDamage;
 };
 
 #endif // __ENTITY_H__

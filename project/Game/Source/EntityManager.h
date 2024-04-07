@@ -4,6 +4,9 @@
 #include "Module.h"
 #include "Entity.h"
 #include "Player.h"
+#include "Enemy_Osiris.h"
+#include "Enemy_Ols.h"
+#include "Enemy_Shar.h"
 #include "List.h"
 
 class EntityManager : public Module
@@ -40,12 +43,24 @@ public:
 	void SetPlayer(Player* player);
 	Player* GetPlayer();
 
+	void SetOsiris(Enemy_Osiris* osiris);
+	Enemy_Osiris* GetOsiris();
+
+	void SetOls(Enemy_Ols* ols);
+	Enemy_Ols* GetOls();
+
+	void SetShar(Enemy_Shar* shar);
+	Enemy_Shar* GetShar();
+
 public:
 
 	List<Entity*> entities;
 
 private:
 	Player* actualPlayer;
+	Enemy_Osiris* actualOsiris;
+	Enemy_Ols* actualOls;
+	Enemy_Shar* actualShar;
 
 };
 

@@ -113,15 +113,17 @@
     <ClCompile Include="Source\Map.cpp" />
     <ClCompile Include="Source\Menu.cpp" />
     <ClCompile Include="Source\ModuleFadeToBlack.cpp" />
-    <ClCompile Include="Source\Osiris.cpp" />
+    <ClCompile Include="Source\Enemy_Ols.cpp" />
+    <ClCompile Include="Source\Enemy_Osiris.cpp" />
     <ClCompile Include="Source\Pathfinding.cpp" />
     <ClCompile Include="Source\PerfTimer.cpp" />
     <ClCompile Include="Source\Physics.cpp" />
     <ClCompile Include="Source\Player.cpp" />
-    <ClCompile Include="Source\Scene.cpp" />
     <ClCompile Include="Source\Render.cpp" />
     <ClCompile Include="Source\Scene_intro.cpp" />
     <ClCompile Include="Source\Scene_menu.cpp" />
+    <ClCompile Include="Source\Enemy_Shar.cpp" />
+    <ClCompile Include="Source\Scene_Testing.cpp" />
     <ClCompile Include="Source\Textures.cpp" />
     <ClCompile Include="Source\Timer.cpp" />
     <ClCompile Include="Source\Window.cpp" />
@@ -141,14 +143,14 @@
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\Menu.h" />
     <ClInclude Include="Source\ModuleFadeToBlack.h" />
-    <ClInclude Include="Source\Osiris.h" />
+    <ClInclude Include="Source\Enemy_Ols.h" />
+    <ClInclude Include="Source\Enemy_Osiris.h" />
     <ClInclude Include="Source\Pathfinding.h" />
     <ClInclude Include="Source\PerfTimer.h" />
     <ClInclude Include="Source\Physics.h" />
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\PQueue.h" />
     <ClInclude Include="Source\Queue.h" />
-    <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\Audio.h" />
     <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\App.h" />
@@ -156,6 +158,8 @@
     <ClInclude Include="Source\Render.h" />
     <ClInclude Include="Source\Scene_intro.h" />
     <ClInclude Include="Source\Scene_menu.h" />
+    <ClInclude Include="Source\Enemy_Shar.h" />
+    <ClInclude Include="Source\Scene_Testing.h" />
     <ClInclude Include="Source\Textures.h" />
     <ClInclude Include="Source\Timer.h" />
     <ClInclude Include="Source\Window.h" />
@@ -169,6 +173,9 @@
     <ClInclude Include="Source\External\PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="Source\External\PugiXml\src\pugixml.hpp" />
     <ClCompile Include="Source\External\PugiXml\src\pugixml.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\Output\config.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

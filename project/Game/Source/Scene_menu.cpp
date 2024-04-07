@@ -5,7 +5,7 @@
 #include "Render.h"
 #include "Window.h"
 #include "Scene_menu.h"
-#include "Scene.h"
+#include "Scene_Testing.h"
 #include "ModuleFadeToBlack.h"
 #include "Optick/include/optick.h"
 
@@ -57,7 +57,7 @@ bool Scene_menu::Update(float dt)
 
 
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
-		app->fadeToBlack->FadeToBlack(this, app->scene, 90);
+		app->fadeToBlack->FadeToBlack(this, app->scene_testing, 90);
 	}
 	return true;
 }

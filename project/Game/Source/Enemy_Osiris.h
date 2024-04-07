@@ -1,29 +1,30 @@
-#ifndef __OSIRIS_H__
-#define __OSIRIS_H__
+#ifndef __ENEMY_OSIRIS_H__
+#define __ENEMY_OSIRIS_H__
 
 #include "Entity.h"
 #include "Point.h"
 #include "SDL/include/SDL.h"
 #include "Animation.h"
+#include "Pathfinding.h"
+#include "Player.h"
 
 struct SDL_Texture;
  
 
 struct Branch_Osiris {
 	enum EntityState const next_state;
-	//Branch() : next_state(EntityState::STATE_COUNT) {}
 
 };
 
-class Osiris : public Entity
+class Enemy_Osiris : public Entity
 {
 
 
 public:
 
-	Osiris();
+	Enemy_Osiris();
 
-	virtual ~Osiris();
+	virtual ~Enemy_Osiris();
 
 	bool Awake();
 
@@ -36,27 +37,27 @@ public:
 	bool CleanUp();
 
 	void DoNothing(float dt);
-	void Run(float dt);
+	void Chase(float dt);
 	void Attack(float dt);
+	void Die(float dt);
+	void Revive(float dt);
 
-	//Branch transitionTable[static_cast<int>(EntityState::STATE_COUNT)][static_cast<int>(EntityState::STATE_COUNT)];
 	// L07 DONE 6: Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
+	void SetPlayer(Player* player);
 
-private:
-	
 public:
 
 	//L02: DONE 2: Declare player parameters
-	float speed = 0.2f;
 	SDL_Texture* texture = NULL;
 	pugi::xml_node config;
 	uint texW, texH;
-
-	//Audio fx
-	int pickCoinFxId;
-
+	//Estadisticas
+	float speed;
+	float health;
+	float maxHealth;
+	float attackDamage;
 
 	Animation* currentAnimation = nullptr;
 	EntityState state;
@@ -70,33 +71,34 @@ public:
 	int SpriteY;
 	int Photowidth;
 
-	//Rodar
-	bool inRodar = false;
-	bool getPlayerPosition = false;
-	int rodar_PlayerPosition;
-	int rodar_PotisionX;
 	int currentPosX;
 
+
+	//Revivir
+	bool hasRevived = false;
+	float deathTime = 0.0f;
+	float reviveDelay = 2.0f;
+
+
+	PathFinding* path;
+	Player* player;
 
 private:
 	Animation idleAnim;
 	Animation runAnim;
+	Animation attackAnim;
+	Animation dieAnim;
 
 	bool isFacingLeft = false;
-
-	bool godmode = false;
-
-	bool camaralibre = false;
-
-
 
 public:
 
 	Branch_Osiris transitionTable[static_cast<int>(EntityState::STATE_COUNT)][static_cast<int>(EntityState::STATE_COUNT)] = {
-		// isMoving               isAttacking            else
-		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::IDLE}}, // IDLE
-		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::IDLE}}, // RUNNING
-		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::IDLE}} // RUNNING
+		// isMoving               isAttacking						 isDead                else
+		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::IDLE}}, // IDLE
+		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::IDLE}}, // RUNNING
+		{ {EntityState::IDLE},	  {EntityState::IDLE},		{EntityState::DEAD}, {EntityState::IDLE}}, // ATTACKING
+		{ {EntityState::DEAD},	  {EntityState::DEAD},		{EntityState::DEAD}, {EntityState::IDLE}}  // DEAD
 	};
 
 	EntityState currentState = state;
@@ -108,4 +110,4 @@ public:
 
 
 
-#endif // __OSIRIS_H__
+#endif // __ENEMY_OSIRIS_H__
