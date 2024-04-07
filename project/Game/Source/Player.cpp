@@ -155,6 +155,17 @@ void Player::Run(float dt)
 
 void Player::Attack(float dt)
 {
+	printf("attack");
+	int attackX = position.x + 50; // Ajusta estos valores
+	int attackY = position.y;
+	int attackWidth = 50; // Ajusta estos valores
+	int attackHeight = 50; // Ajusta estos valores
+
+	// Añadir el sensor al sistema de física
+	// Asegúrate de tener una forma de eliminar este sensor después de que el ataque haya terminado
+	attackSensor = app->physics->CreateRectangleSensor(attackX, attackY, attackWidth, attackHeight,DYNAMIC);
+	attackSensor->ctype = ColliderType::PLAYER_ATTACK;
+	attackSensor->listener = this;
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 
@@ -208,8 +219,6 @@ void Player::CameraMovement(float dt)
 		app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
 		app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.005f);
 	}
-
-
 
 
 }
@@ -279,7 +288,7 @@ void Player::PlayerMovement(float dt)
 		velocity.x = horizontalMovement * 0.2 * dt;
 		velocity.y = verticalMovement * 0.2 * dt;
 
-		// Si hay entrada de movimiento, actualizar estado y direcci��n.
+		// Si hay entrada de movimiento, actualizar estado y direcci��n.
 
 		if (horizontalMovement != 0 || verticalMovement != 0) {
 			nextState = EntityState::RUNNING;
@@ -299,6 +308,21 @@ void Player::PlayerMovement(float dt)
 	if (!(timerDash.ReadMSec() < speed * 1000 && isDashing)) {
 		isDashing = false;
 		pbody->body->SetLinearVelocity(velocity);
+	}
+
+	//Si pulsas J para atacar
+	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN && timerAttack.ReadMSec() > cdTimerAttackMS){
+		isAttacking = true;
+		timerAttack.Start();
+		nextState = EntityState::ATTACKING;
+	}
+
+	if (!(timerAttack.ReadMSec() < cdTimerAttackMS && isAttacking)) {
+		isAttacking = false;
+		if (attackSensor) {
+			app->physics->DestroyBody(attackSensor);
+			attackSensor = nullptr;
+		}
 	}
 
 

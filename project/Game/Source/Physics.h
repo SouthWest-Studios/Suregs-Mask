@@ -29,7 +29,8 @@ enum class ColliderType {
 	PLATFORM,
 	ENEMY,
 	DIALOG_TRIGGER,
-	UNKNOWN
+	UNKNOWN,
+	PLAYER_ATTACK
 	// ..
 };
 
@@ -78,6 +79,9 @@ public:
 	
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
+
+	//Destroy body
+	void DestroyBody(PhysBody* body);
 
 private:
 
