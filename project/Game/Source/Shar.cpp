@@ -1,4 +1,4 @@
-#include "Osiris.h"
+#include "Shar.h"
 #include "Player.h"
 #include "App.h"
 #include "Textures.h"
@@ -13,26 +13,26 @@
 #include "Pathfinding.h"
 #include "Map.h"
 #include "Physics.h"
- 
 
 
 
-Osiris::Osiris() : Entity(EntityType::ENEMY_OSIRIS)
+
+Shar::Shar() : Entity(EntityType::ENEMY_SHAR)
 {
-	name.Create("osiris");
+	name.Create("shar");
 
 }
 
-Osiris::~Osiris() {
+Shar::~Shar() {
 
 }
 
-bool Osiris::Awake() {
+bool Shar::Awake() {
 
 	return true;
 }
 
-bool Osiris::Start() {
+bool Shar::Start() {
 
 
 	//position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
@@ -63,23 +63,16 @@ bool Osiris::Start() {
 	return true;
 }
 
-bool Osiris::Update(float dt)
+bool Shar::Update(float dt)
 {
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
 
-	if (playerPos.x < position.x)
+	if (playerPos.x > position.x)
 	{
 		isFacingLeft = true;
 	}
 	else(isFacingLeft = false);
 
-
-	if (state == EntityState::DEAD) {
-		float currentTime = dt / 1000.0f;
-		if (currentTime - deathTime >= reviveDelay) {
-			Revive(dt);
-		}
-	}
 
 	if (health <= 0) {
 		nextState = EntityState::DEAD;
@@ -108,22 +101,24 @@ bool Osiris::Update(float dt)
 		break;
 	}
 
+
 	currentAnimation->Update();
 	return true;
 }
 
 
-bool Osiris::PostUpdate() {
+bool Shar::PostUpdate() {
 
 	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
 
+
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 50, position.y - 25, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x - 40, position.y - 100, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 50, position.y - 25, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 40, position.y - 100, SDL_FLIP_NONE, &rect);
 	}
 
 	b2Transform pbodyPos = pbody->body->GetTransform();
@@ -133,18 +128,18 @@ bool Osiris::PostUpdate() {
 }
 
 
-bool Osiris::CleanUp()
+bool Shar::CleanUp()
 {
 	return true;
 }
 
-void Osiris::DoNothing(float dt)
+void Shar::DoNothing(float dt)
 {
 	currentAnimation = &idleAnim;
 	//printf("Osiris idle");
 }
 
-void Osiris::Chase(float dt)
+void Shar::Chase(float dt)
 {
 	//printf("Osiris chasing");
 	currentAnimation = &runAnim;
@@ -152,31 +147,19 @@ void Osiris::Chase(float dt)
 	//path->CreatePath(position, playerPos);
 }
 
-void Osiris::Attack(float dt)
+void Shar::Attack(float dt)
 {
 	//printf("Osiris attacking");
-	currentAnimation = &attackAnim;		
+	currentAnimation = &attackAnim;
 	//sonido ataque
 }
 
-void Osiris::Die(float dt) {
+void Shar::Die(float dt) {
 	state = EntityState::DEAD;
-	deathTime = dt / 1000.0f;
-}
-
-void Osiris::Revive(float dt)
-{
-	//printf("Osiris reviving");
-	// Solo revivir si Osiris no ha revivido antes
-	if (!hasRevived) {
-		health = maxHealth;
-		state = EntityState::IDLE;
-		hasRevived = true;
-	}
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 
-void Osiris::OnCollision(PhysBody* physA, PhysBody* physB) {
+void Shar::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 	case ColliderType::PLATFORM:
@@ -194,7 +177,7 @@ void Osiris::OnCollision(PhysBody* physA, PhysBody* physB) {
 	}
 }
 
-void Osiris::SetPlayer(Player* player)
+void Shar::SetPlayer(Player* player)
 {
 	this->player = player;
 }

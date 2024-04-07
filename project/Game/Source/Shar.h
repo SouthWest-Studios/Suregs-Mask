@@ -1,5 +1,5 @@
-#ifndef __OSIRIS_H__
-#define __OSIRIS_H__
+#ifndef __SHAR_H__
+#define __SHAR_H__
 
 #include "Entity.h"
 #include "Point.h"
@@ -9,22 +9,22 @@
 #include "Player.h"
 
 struct SDL_Texture;
- 
 
-struct Branch_Osiris {
+
+struct Branch_Shar {
 	enum EntityState const next_state;
 
 };
 
-class Osiris : public Entity
+class Shar : public Entity
 {
 
 
 public:
 
-	Osiris();
+	Shar();
 
-	virtual ~Osiris();
+	virtual ~Shar();
 
 	bool Awake();
 
@@ -40,7 +40,6 @@ public:
 	void Chase(float dt);
 	void Attack(float dt);
 	void Die(float dt);
-	void Revive(float dt);
 
 	// L07 DONE 6: Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
@@ -72,13 +71,6 @@ public:
 
 	int currentPosX;
 
-
-	//Revivir
-	bool hasRevived = false;
-	float deathTime = 0.0f;
-	float reviveDelay = 2.0f;
-
-
 	PathFinding* path;
 	Player* player;
 
@@ -92,7 +84,7 @@ private:
 
 public:
 
-	Branch_Osiris transitionTable[static_cast<int>(EntityState::STATE_COUNT)][static_cast<int>(EntityState::STATE_COUNT)] = {
+	Branch_Shar transitionTable[static_cast<int>(EntityState::STATE_COUNT)][static_cast<int>(EntityState::STATE_COUNT)] = {
 		// isMoving               isAttacking						 isDead                else
 		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::IDLE}}, // IDLE
 		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::IDLE}}, // RUNNING
@@ -109,4 +101,4 @@ public:
 
 
 
-#endif // __OSIRIS_H__
+#endif // __SHAR_H__

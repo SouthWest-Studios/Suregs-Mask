@@ -10,7 +10,9 @@ enum class EntityType
 {
 	PLAYER,
 	ITEM,
-	OSIRIS,
+	ENEMY_OSIRIS,
+	ENEMY_OLS,
+	ENEMY_SHAR,
 	DIALOG_TRIGGER,
 	UNKNOWN
 };
@@ -19,10 +21,12 @@ class PhysBody;
 
 
 
-enum class EntityState {
+enum class EntityState
+{
 	IDLE,
 	RUNNING,
 	ATTACKING,
+	DEAD,
 	STATE_COUNT
 };
 
@@ -88,8 +92,6 @@ public:
 
 	virtual void OnCollision(PhysBody* physA, PhysBody* physB) {};
 	virtual void OnExitCollision(PhysBody* physA, PhysBody* physB) {};
-
-
 
 public:
 

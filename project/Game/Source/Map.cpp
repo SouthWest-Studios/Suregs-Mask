@@ -712,6 +712,36 @@ bool Map::LoadEntities(std::string layerName)
 
 					}
 
+					//OSIRIS
+					if (gid == tileset->firstgid + 1) {
+
+						app->entityManager->SetOsiris((Osiris*)app->entityManager->CreateEntity(EntityType::ENEMY_OSIRIS));
+						app->entityManager->GetOsiris()->config = configNode.child("scene").child("osiris");
+						app->entityManager->GetOsiris()->position = iPoint(pos.x + 16, pos.y + 16);
+						app->entityManager->GetOsiris()->Start();
+
+					}
+
+					//OLS
+					if (gid == tileset->firstgid + 2) {
+
+						app->entityManager->SetOls((Ols*)app->entityManager->CreateEntity(EntityType::ENEMY_OLS));
+						app->entityManager->GetOls()->config = configNode.child("scene").child("ols");
+						app->entityManager->GetOls()->position = iPoint(pos.x + 16, pos.y + 16);
+						app->entityManager->GetOls()->Start();
+
+					}
+
+					//SHAR
+					if (gid == tileset->firstgid + 3) {
+
+						app->entityManager->SetShar((Shar*)app->entityManager->CreateEntity(EntityType::ENEMY_SHAR));
+						app->entityManager->GetShar()->config = configNode.child("scene").child("shar");
+						app->entityManager->GetShar()->position = iPoint(pos.x + 16, pos.y + 16);
+						app->entityManager->GetShar()->Start();
+
+					}
+
 
 
 					////Monedas

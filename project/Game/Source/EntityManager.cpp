@@ -1,5 +1,6 @@
 #include "EntityManager.h"
 #include "Player.h"
+
 #include "Item.h"
 #include "App.h"
 #include "Textures.h"
@@ -87,6 +88,15 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::PLAYER:
 		entity = new Player();
 		break;
+	case EntityType::ENEMY_OSIRIS:
+		entity = new Osiris();
+		break;
+	case EntityType::ENEMY_OLS:
+		entity = new Ols();
+		break;
+	case EntityType::ENEMY_SHAR:
+		entity = new Shar();
+		break;
 	case EntityType::ITEM:
 		entity = new Item();
 		break;
@@ -127,6 +137,35 @@ Player* EntityManager::GetPlayer()
 	return actualPlayer;
 }
 
+void EntityManager::SetOsiris(Osiris* osiris)
+{
+	actualOsiris = osiris;
+}
+
+Osiris* EntityManager::GetOsiris()
+{
+	return actualOsiris;
+}
+
+void EntityManager::SetOls(Ols* ols)
+{
+	actualOls = ols;
+}
+
+Ols* EntityManager::GetOls()
+{
+	return actualOls;
+}
+
+void EntityManager::SetShar(Shar* shar)
+{
+	actualShar = shar;
+}
+
+Shar* EntityManager::GetShar()
+{
+	return actualShar;
+}
 
 
 bool EntityManager::Update(float dt)

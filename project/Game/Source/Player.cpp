@@ -12,8 +12,6 @@
 #include "ModuleFadeToBlack.h"
 
 
-
-
 Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("player");

@@ -44,7 +44,6 @@ public:
 	// L07 DONE 6: Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
-
 private:
 	void CameraMovement(float dt);
 	void GodMode(float dt);
@@ -101,15 +100,14 @@ private:
 	Timer timerDash;
 	Timer cdTimerDash;
 
-	
-
 public:
 
 	Branch transitionTable[static_cast<int>(EntityState::STATE_COUNT)][static_cast<int>(EntityState::STATE_COUNT)] = {
-		// isMoving               isAttacking            else
-		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::IDLE}}, // IDLE
-		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::IDLE}}, // RUNNING
-		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::IDLE}} // RUNNING
+		// isMoving               isAttacking						 isDead                else
+			{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::IDLE}}, // IDLE
+			{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::IDLE}}, // RUNNING
+			{ {EntityState::IDLE},	  {EntityState::IDLE},		{EntityState::DEAD}, {EntityState::IDLE}}, // ATTACKING
+			{ {EntityState::DEAD},	  {EntityState::DEAD},		{EntityState::DEAD}, {EntityState::IDLE}}  // DEAD
 	};
 
 	EntityState currentState = state;
