@@ -20,7 +20,7 @@ class Audio;
 class ModuleFadeToBlack;
 class Scene_intro;
 class Scene_menu;
-class Scene;
+class Scene_testing;
 class EntityManager;
 class Map;
 //L07 DONE 2: Add Physics module
@@ -109,7 +109,7 @@ public:
 	ModuleFadeToBlack* fadeToBlack;
 	Scene_intro* scene_intro;
 	Scene_menu* scene_menu;
-	Scene* scene;
+	Scene_testing* scene_testing;
 	EntityManager* entityManager;
 	Map* map;
 	//L07 DONE 2: Add Physics module

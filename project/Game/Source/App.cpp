@@ -4,7 +4,7 @@
 #include "Render.h"
 #include "Textures.h"
 #include "Audio.h"
-#include "Scene.h"
+#include "Scene_Testing.h"
 #include "Scene_intro.h"
 #include "Scene_menu.h"
 #include "Map.h"
@@ -44,7 +44,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	fadeToBlack = new ModuleFadeToBlack(this);
 	scene_intro = new Scene_intro(this, true);
 	scene_menu = new Scene_menu(this, false);
-	scene = new Scene(this, false);
+	scene_testing = new Scene_testing(this, false);
 	map = new Map(this, false);
 	entityManager = new EntityManager(this);
 	guiManager = new GuiManager(this);
@@ -63,7 +63,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(map);
 	AddModule(scene_intro);
 	AddModule(scene_menu);
-	AddModule(scene);
+	AddModule(scene_testing);
 	AddModule(entityManager);
 	AddModule(guiManager);
 	AddModule(fadeToBlack);

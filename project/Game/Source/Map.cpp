@@ -4,7 +4,7 @@
 #include "Textures.h"
 #include "Map.h"
 #include "Physics.h"
-#include "Scene.h"
+#include "Scene_Testing.h"
 #include "Optick/include/optick.h"
 
 #include "Defs.h"
@@ -732,7 +732,7 @@ bool Map::LoadEntities(std::string layerName)
 					if (gid == tileset->firstgid + 0) {
 
 						app->entityManager->SetPlayer((Player*)app->entityManager->CreateEntity(EntityType::PLAYER));
-						app->entityManager->GetPlayer()->config = configNode.child("scene").child("player");
+						app->entityManager->GetPlayer()->config = configNode.child("Scene_testing").child("player");
 						app->entityManager->GetPlayer()->position = iPoint(pos.x + 16, pos.y + 16);
 						app->entityManager->GetPlayer()->Start();
 
@@ -742,7 +742,7 @@ bool Map::LoadEntities(std::string layerName)
 					if (gid == tileset->firstgid + 1) {
 
 						app->entityManager->SetOsiris((Osiris*)app->entityManager->CreateEntity(EntityType::ENEMY_OSIRIS));
-						app->entityManager->GetOsiris()->config = configNode.child("scene").child("osiris");
+						app->entityManager->GetOsiris()->config = configNode.child("Scene_testing").child("osiris");
 						app->entityManager->GetOsiris()->position = iPoint(pos.x + 16, pos.y + 16);
 						app->entityManager->GetOsiris()->Start();
 
@@ -752,7 +752,7 @@ bool Map::LoadEntities(std::string layerName)
 					if (gid == tileset->firstgid + 2) {
 
 						app->entityManager->SetOls((Ols*)app->entityManager->CreateEntity(EntityType::ENEMY_OLS));
-						app->entityManager->GetOls()->config = configNode.child("scene").child("ols");
+						app->entityManager->GetOls()->config = configNode.child("Scene_testing").child("ols");
 						app->entityManager->GetOls()->position = iPoint(pos.x + 16, pos.y + 16);
 						app->entityManager->GetOls()->Start();
 
@@ -762,7 +762,7 @@ bool Map::LoadEntities(std::string layerName)
 					if (gid == tileset->firstgid + 3) {
 
 						app->entityManager->SetShar((Shar*)app->entityManager->CreateEntity(EntityType::ENEMY_SHAR));
-						app->entityManager->GetShar()->config = configNode.child("scene").child("shar");
+						app->entityManager->GetShar()->config = configNode.child("Scene_testing").child("shar");
 						app->entityManager->GetShar()->position = iPoint(pos.x + 16, pos.y + 16);
 						app->entityManager->GetShar()->Start();
 
