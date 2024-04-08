@@ -26,8 +26,8 @@ bool DialogTrigger::Start() {
 
 
 
-	position.x = parameters.attribute("x").as_int();
-	position.y = parameters.attribute("y").as_int();
+	//position.x = parameters.attribute("x").as_int(0);
+	//position.y = parameters.attribute("y").as_int(0);
 	texturePath = parameters.attribute("texturepath").as_string();
 	faceTexturePath = parameters.attribute("facetexturepath").as_string("");
 	repeatDialog = parameters.attribute("repeat").as_bool(false);

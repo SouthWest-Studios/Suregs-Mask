@@ -84,4 +84,10 @@
 
 	</animations>
 
+	<dialogmanager>
+		<textures>
+			<background_dialog texturepath="Assets/Textures/Interfaz/background_textbox.png"/>
+		</textures>
+	</dialogmanager>
+
 </config>

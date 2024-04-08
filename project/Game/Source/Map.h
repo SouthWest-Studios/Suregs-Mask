@@ -201,7 +201,7 @@ private:
 
 
     bool LoadCollisions(std::string layerName);
-    bool LoadCollisionsObject();
+    bool LoadObjects();
     bool LoadEntities(std::string layerName);
 
     std::vector<int> GetObjectGroupPoints(const std::string& puntos);
@@ -223,7 +223,9 @@ private:
     List<PhysBody*> collisionsList;
 
     pugi::xml_document configFile;
+    pugi::xml_document dialoguesFile;
     pugi::xml_node configNode;
+    pugi::xml_node dialoguesNode;
  };
 
 #endif // __MAP_H__

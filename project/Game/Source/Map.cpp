@@ -17,6 +17,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include "DialogTriggerEntity.h"
 
 Map::Map(App* app, bool start_enabled) : Module(app, start_enabled), mapLoaded(false)
 {
@@ -251,7 +252,7 @@ bool Map::Load(SString mapFileName)
 	}
 
 
-	LoadCollisionsObject();
+	LoadObjects();
 	LoadCollisions("Collisions");
 	LoadEntities("Entities");
 
@@ -656,11 +657,21 @@ bool Map::LoadCollisions(std::string layerName)
 	return ret;
 }
 
-bool Map::LoadCollisionsObject()
+bool Map::LoadObjects()
 {
 	ListItem<MapObjects*>* mapObjectsItem;
 	mapObjectsItem = mapData.mapObjects.start;
 	bool ret = false;
+
+	pugi::xml_parse_result parseResult = dialoguesFile.load_file("dialogs.xml");
+
+	if (parseResult) {
+		dialoguesNode = dialoguesFile.child("dialogues");
+	}
+	else {
+		LOG("Error in Map::LoadEntities(): %s", parseResult.description());
+		return false;
+	}
 
 
 	while (mapObjectsItem != NULL) {
@@ -670,9 +681,27 @@ bool Map::LoadCollisionsObject()
 			PhysBody* c1;
 
 			if (object->properties.GetProperty("dialogID") != NULL) {
+
+				pugi::xml_node dialogNode = dialoguesNode.find_child_by_attribute("dialog", "id", std::to_string(object->properties.GetProperty("dialogID")->value).c_str());
+
+				if (!dialogNode) {
+					std::cerr << "No se encontró ningún diálogo con el id=" << object->properties.GetProperty("dialogID")->value << std::endl;
+					return false;
+				}
 				//Spawn dialogo con x id
-				c1 = app->physics->CreateRectangleSensor(object->x + object->width / 2, object->y + object->height / 2, object->width, object->height, STATIC);
-				c1->ctype = ColliderType::UNKNOWN;
+				
+				DialogTrigger* dialogTrigger = (DialogTrigger*)app->entityManager->CreateEntity(EntityType::DIALOG_TRIGGER);
+				dialogTrigger->parameters = dialogNode;
+				dialogTrigger->position = iPoint(object->x + object->width / 2, object->y + object->height / 2);
+				//dialogTriger
+				dialogTrigger->Start();
+
+
+
+
+				
+				/*c1 = app->physics->CreateRectangleSensor(object->x + object->width / 2, object->y + object->height / 2, object->width, object->height, STATIC);
+				c1->ctype = ColliderType::UNKNOWN;*/
 			}
 			else {
 

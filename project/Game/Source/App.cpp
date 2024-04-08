@@ -69,6 +69,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(entityManager);
 	AddModule(menu);
 	AddModule(guiManager);
+	AddModule(dialogManager);
 	AddModule(fadeToBlack);
 
 	// Render last to swap buffer

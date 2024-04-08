@@ -272,5 +272,6 @@
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Output\config.xml" />
+    <Xml Include="..\Output\dialogs.xml" />
   </ItemGroup>
 </Project>

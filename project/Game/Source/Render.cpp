@@ -56,7 +56,7 @@ bool Render::Awake(pugi::xml_node config)
 	TTF_Init();
 
 	//load a font into memory
-	font = TTF_OpenFont("Assets/Fuentes/arial.ttf", 25);
+	primaryFont = TTF_OpenFont("Assets/Fuentes/arial.ttf", 25);
 	consoleFont = TTF_OpenFont("Assets/Fuentes/UbuntuMono-R.ttf", 25);
 
 	return ret;
@@ -298,7 +298,7 @@ bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uin
 bool Render::DrawText(const char* text, int posx, int posy, int w, int h) {
 
 	SDL_Color color = { 255, 255, 255 };
-	SDL_Surface* surface = TTF_RenderText_Solid(font, text, color);
+	SDL_Surface* surface = TTF_RenderText_Solid(primaryFont, text, color);
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
 
 	int texW = 0;

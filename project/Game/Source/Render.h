@@ -59,7 +59,6 @@ public:
 	SDL_Rect camera;
 	SDL_Rect viewport;
 	SDL_Color background;
-	TTF_Font* font;
 	TTF_Font* consoleFont;
 	TTF_Font* primaryFont;
 	TTF_Font* secondaryFont;

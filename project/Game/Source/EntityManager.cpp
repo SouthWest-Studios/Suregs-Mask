@@ -9,6 +9,7 @@
 #include "Textures.h"
 #include "Scene_Testing.h"
 #include "Player.h"
+#include "DialogTriggerEntity.h"
 
 
 #include "Defs.h"
@@ -104,6 +105,10 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::ITEM:
 		entity = new Item();
 		break;
+	case EntityType::DIALOG_TRIGGER:
+		entity = new DialogTrigger();
+		break;
+
 	default:
 		break;
 	}
