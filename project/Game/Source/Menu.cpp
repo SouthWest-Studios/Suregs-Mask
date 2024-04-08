@@ -33,7 +33,10 @@ bool Menu::Start()
 {
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 
-	fondo = app->tex->Load("Assets/Textures/menu.png");
+	fondoInventario = app->tex->Load("Assets/Textures/Interfaz/Inventario.png");
+	fondoEquipo = app->tex->Load("Assets/Textures/Interfaz/Equipo.png");
+	fondoDiario = app->tex->Load("Assets/Textures/Interfaz/Diario.png");
+	fondoAjustes = app->tex->Load("Assets/Textures/Interfaz/Ajustes.png");
 	
 
 	return true;
@@ -53,6 +56,33 @@ bool Menu::Update(float dt)
 
 		menuu = !menuu;
 	}
+	if (menuu)
+	{
+		if (ventana == 0)
+		{
+			ventana++;
+		}
+		
+		if (app->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN)
+		{
+			if (ventana == 4)
+			{
+				ventana = 1;
+			}
+			else
+			{
+				ventana++;
+			}
+
+		}
+	}
+	else {
+		ventana = 0;
+	}
+	
+	
+
+	
 
 	uint windowWidth, windowHeight;
 	app->win->GetWindowSize(windowWidth, windowHeight);
@@ -97,10 +127,24 @@ bool Menu::PostUpdate()
 {
 	uint windowWidth, windowHeight;
 	app->win->GetWindowSize(windowWidth, windowHeight);
-	if (menuu)
+	if (ventana == 1)
 	{
-		app->render->DrawTexture(fondo, windowWidth / 4, windowHeight / 4, SDL_FLIP_NONE, 0, 0);
+		app->render->DrawTexture(fondoInventario, windowWidth / 8, windowHeight / 8, SDL_FLIP_NONE, 0, 0);
 	}
+	if (ventana == 2)
+	{
+		app->render->DrawTexture(fondoEquipo, windowWidth / 8, windowHeight / 8, SDL_FLIP_NONE, 0, 0);
+	}
+	if (ventana == 3)
+	{
+		app->render->DrawTexture(fondoDiario, windowWidth / 8, windowHeight / 8, SDL_FLIP_NONE, 0, 0);
+	}
+	if (ventana == 4)
+	{
+		app->render->DrawTexture(fondoAjustes, windowWidth / 8, windowHeight / 8, SDL_FLIP_NONE, 0, 0);
+	}
+	
+	
 	bool ret = true;
 
 	return ret;

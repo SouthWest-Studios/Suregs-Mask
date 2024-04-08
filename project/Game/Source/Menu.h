@@ -49,7 +49,10 @@ public:
 	bool SaveState(pugi::xml_node node);
 
 private:
-	SDL_Texture* fondo;
+	SDL_Texture* fondoInventario;
+	SDL_Texture* fondoEquipo;
+	SDL_Texture* fondoDiario;
+	SDL_Texture* fondoAjustes;
 	
 	bool visible = true;
 
@@ -57,6 +60,7 @@ private:
 	int contadormenu = 0;
 	bool menuusettings = false;
 
+	int ventana = 1;
 
 	GuiControlButton* gcButtom;
 	GuiControlButton* exit;
