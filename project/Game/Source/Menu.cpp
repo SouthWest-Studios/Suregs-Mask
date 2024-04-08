@@ -34,7 +34,7 @@ bool Menu::Start()
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 
 	fondo = app->tex->Load("Assets/Textures/menu.png");
-
+	
 
 	return true;
 }
@@ -71,16 +71,16 @@ bool Menu::Update(float dt)
 		else
 		{
 			SDL_Rect btPos = { windowWidth / 2 - 100,windowHeight / 2 - 300, 230,30 };
-			gcButtom = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "RESUME", btPos, this, { 0,0,0,0 } );
+			gcButtom = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "CONTINUAR", btPos, this, { 0,0,0,0 } );
 
 			SDL_Rect ExitPos = { windowWidth / 2 - 100,windowHeight / 2 + 130, 230,30 };
-			exit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "EXIT", ExitPos, this, { 0,0,0,0 });
+			exit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "SALIR", ExitPos, this, { 0,0,0,0 });
 
 			SDL_Rect SettingsPos = { windowWidth / 2 - 100,windowHeight / 2 - 160, 230,30 };
-			settings = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "SETTINGS", SettingsPos, this, { 0,0,0,0 });
+			settings = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "AJUSTES", SettingsPos, this, { 0,0,0,0 });
 
 			SDL_Rect TitlePos = { windowWidth / 2 - 100,windowHeight / 2 - 20, 230,50 };
-			title = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "TITLE SCREEN", TitlePos, this, { 0,0,0,0 });
+			title = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "VOLVER AL MENÚ", TitlePos, this, { 0,0,0,0 });
 		}
 
 

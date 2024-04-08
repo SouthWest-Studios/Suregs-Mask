@@ -37,8 +37,22 @@ bool Scene_menu::Start()
 {
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	placeholder = app->tex->Load("Assets/Textures/suscat.jpg");
+	//AQUÍ CARGAR TODAS LAS TEXTURAS DEL MENÚ (cuando las tengamos xd)
+	//app->guiManager->Disable(); (si se hace la intro en el mismo doc(creo))
+
+	//Get window size
+	app->win->GetWindowSize(windowW, windowH);
+
+	//Añadir los controles a una lista 
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "NUEVA PARTIDA", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 - 30 - 30,	136,46 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "CONTINUAR", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 + 40 - 30,	136,46 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "AJUSTES", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 + 110 - 30,	136,46 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "CRÉDITOS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 + 180 - 30,	136,46 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "SALIR", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 + 250 - 30,	136,46 }, this));
+
 
 	app->audio->LoadAudioMusic("amogus", 1.0f);
+	//app->audio->PlayMusic("PATH DE MUSICA MENU AQUÍ")
 
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
@@ -57,7 +71,13 @@ bool Scene_menu::Update(float dt)
 {
 
 	OPTICK_EVENT();
+	app->render->DrawTexture(placeholder, 0, 0);
+	if (showSettings && !_showSettings) {
+		SettingsInterface();
+	}
+	/*if (showSettings) { app->render->DrawTexture(TEXTURA MENÚ SETTINGS, 0, 0); }*/
 
+	if (showCredits) { ShowCredits(); }
 
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
 		app->fadeToBlack->FadeToBlack(this, app->scene_testing, 90);
@@ -68,8 +88,10 @@ bool Scene_menu::Update(float dt)
 // Called each loop iteration
 bool Scene_menu::PostUpdate()
 {
-	app->render->DrawTexture(placeholder, 0, 0);
+	
 	bool ret = true;
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+		ret = false;
 
 	return ret;
 }
@@ -78,6 +100,46 @@ bool Scene_menu::PostUpdate()
 bool Scene_menu::CleanUp()
 {
 	LOG("Freeing Scene_menu");
+	
+	ListItem<GuiControl*>* control;
+	for (control = controlsScene.start; control != NULL; control = control->next) {
+		app->guiManager->DestroyGuiControl(control->data);
+	}
 
 	return true;
+}
+
+bool Scene_menu::OnGuiMouseClickEvent(GuiControl* control)
+{
+	return false;
+}
+
+void Scene_menu::SettingsInterface()
+{
+}
+
+void Scene_menu::ShowSettingsInterface()
+{
+}
+
+void Scene_menu::ShowCredits()
+{
+}
+
+void Scene_menu::DestroySettingsInterface()
+{
+}
+
+void Scene_menu::Fullscreen()
+{
+}
+
+bool Scene_menu::LoadState(pugi::xml_node node)
+{
+	return false;
+}
+
+bool Scene_menu::SaveState(pugi::xml_node node)
+{
+	return false;
 }

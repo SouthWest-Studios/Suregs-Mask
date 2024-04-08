@@ -57,6 +57,7 @@ private:
 	int contadormenu = 0;
 	bool menuusettings = false;
 
+
 	GuiControlButton* gcButtom;
 	GuiControlButton* exit;
 	GuiControlButton* settings;

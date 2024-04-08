@@ -35,8 +35,30 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	bool OnGuiMouseClickEvent(GuiControl* control);
+
+	void SettingsInterface();
+	void ShowSettingsInterface();
+	void ShowCredits();
+	void DestroySettingsInterface();
+
+	void Fullscreen();
+
+	bool LoadState(pugi::xml_node node);
+	bool SaveState(pugi::xml_node node);
+
 private:
+
 	SDL_Texture* placeholder;
+
+	uint windowW, windowH;
+	List<GuiControl*> controlsScene;
+
+	bool showSettings = false;
+	bool _showSettings = false;
+
+	bool showCredits = false;
+	bool _showCredits = false;
 };
 
 #endif // __SCENE_MENU_H__
