@@ -51,6 +51,7 @@ private:
 public:
 	DebugCommand* KILL_ALL;
 	DebugCommand* HELP;
+	DebugCommand* SPAWN_DIALOG;
 
 	DebugCommandArg<int>* SET_GOLD;
 	DebugCommandArg<int>* GOTO;

@@ -1,0 +1,8 @@
+<dialogues>
+	<dialog id="0" texturepath="Assets/Textures/player2.png" facetexturepath="Assets/Textures/player2_face.png" name="El gracioso">
+		<sentences>
+			<sentence text="Frase 1"/>
+			<sentence text="Frase 2"/>
+		</sentences>
+	</dialog>
+</dialogues>

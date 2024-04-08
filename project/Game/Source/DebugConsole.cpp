@@ -12,6 +12,8 @@
 #include "Scene_Testing.h"
 #include "Optick/include/optick.h"
 
+#include "DialogManager.h"
+
 #include "Defs.h"
 #include "Log.h"
 #include "GuiControl.h"
@@ -69,7 +71,13 @@ bool DebugConsole::Awake(pugi::xml_node config)
 		});
 	commandList.Add(GOTO);
 
-
+	SPAWN_DIALOG = new DebugCommand("spawn_dialog", "Spawnea un dialogo de prueba", "spawn_dialog", [this]() {
+		Dialog* d1 = new Dialog("Pene");
+		d1->name = "NPC 1";
+		d1->face_tex = app->tex->Load("Assets/Textures/suscat2.jpg");
+		app->dialogManager->AddDialog(d1);
+		});
+	commandList.Add(SPAWN_DIALOG);
 	
 
 	
