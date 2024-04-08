@@ -49,6 +49,7 @@ private:
 	void GodMode(float dt);
 	void PlayerMovement(float dt);
 	void Rodar(float dt);
+	void MaskAttack(float dt);
 
 public:
 
@@ -88,6 +89,9 @@ public:
 	PhysBody* attackSensor = nullptr;
 	float attackDamage = 50;
 	
+	//Mascara
+	bool isAttackingMask = true;
+
 
 private:
 	Animation idleAnim;
@@ -110,14 +114,18 @@ private:
 
 	fPoint lastMovementDirection;
 
+	int cdTimerMaskAttackMS = 1000;
+	Timer timerMaskAttack;
+
 public:
 
 	Branch transitionTable[static_cast<int>(EntityState::STATE_COUNT)][static_cast<int>(EntityState::STATE_COUNT)] = {
-		// isMoving               isAttacking						 isDead                else
-			{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::IDLE}}, // IDLE
-			{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::IDLE}}, // RUNNING
-			{ {EntityState::IDLE},	  {EntityState::IDLE},		{EntityState::DEAD}, {EntityState::IDLE}}, // ATTACKING
-			{ {EntityState::DEAD},	  {EntityState::DEAD},		{EntityState::DEAD}, {EntityState::IDLE}}  // DEAD
+		// isMoving               isAttacking						 isDead                else                MASK_ATTACK
+		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // IDLE
+		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // RUNNING
+		{ {EntityState::IDLE},	  {EntityState::IDLE},		{EntityState::DEAD}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // ATTACKING
+		{ {EntityState::DEAD},	  {EntityState::DEAD},		{EntityState::DEAD}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // DEAD
+		{ {EntityState::IDLE},	  {EntityState::IDLE},	    {EntityState::DEAD}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}} // MASK_ATTACK
 	};
 
 	EntityState currentState = state;

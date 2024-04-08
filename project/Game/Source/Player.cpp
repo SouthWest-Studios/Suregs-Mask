@@ -95,6 +95,9 @@ bool Player::Update(float dt)
 	case EntityState::IDLE:
 		DoNothing(dt);
 		break;
+	case EntityState::MASK_ATTACK:
+		MaskAttack(dt);
+		break;
 	default:
 		break;
 	}
@@ -158,7 +161,7 @@ void Player::Run(float dt)
 
 void Player::Attack(float dt)
 {
- 	printf("attack");
+ 	//printf("attack");
 
     int attackWidth = 50; 
     int attackHeight = 50; 
@@ -171,6 +174,12 @@ void Player::Attack(float dt)
     attackSensor = app->physics->CreateRectangleSensor(attackX, attackY, attackWidth, attackHeight, DYNAMIC);
     attackSensor->ctype = ColliderType::PLAYER_ATTACK;
     attackSensor->listener = this;
+}
+
+void Player::MaskAttack(float dt)
+{
+	printf("mask");
+	
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 
@@ -338,6 +347,18 @@ void Player::PlayerMovement(float dt)
 			app->physics->DestroyBody(attackSensor);
 			attackSensor = nullptr;
 		}
+	}
+
+	//Si pulsas K para mascara principal
+
+	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN && timerMaskAttack.ReadMSec() > cdTimerMaskAttackMS){
+		isAttackingMask = true;
+		timerMaskAttack.Start();
+		nextState = EntityState::MASK_ATTACK;
+	}
+
+	if (!(timerMaskAttack.ReadMSec() < cdTimerMaskAttackMS && isAttackingMask)) {
+		isAttackingMask = false;
 	}
 
 
