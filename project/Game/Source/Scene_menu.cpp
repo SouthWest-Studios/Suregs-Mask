@@ -37,6 +37,8 @@ bool Scene_menu::Start()
 {
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	placeholder = app->tex->Load("Assets/Textures/suscat.jpg");
+	placeholderSettings = app->tex->Load("Assets/Textures/suscat2.jpg");
+	placeholderCredits = app->tex->Load("Assets/Textures/suscat3.jpg");
 	//AQUÍ CARGAR TODAS LAS TEXTURAS DEL MENÚ (cuando las tengamos xd)
 	//app->guiManager->Disable(); (si se hace la intro en el mismo doc(creo))
 
@@ -75,7 +77,7 @@ bool Scene_menu::Update(float dt)
 	if (showSettings && !_showSettings) {
 		SettingsInterface();
 	}
-	/*if (showSettings) { app->render->DrawTexture(TEXTURA MENÚ SETTINGS, 0, 0); }*/
+	if (showSettings) { app->render->DrawTexture(placeholderSettings, 0, 0); }
 
 	if (showCredits) { ShowCredits(); }
 
@@ -111,11 +113,66 @@ bool Scene_menu::CleanUp()
 
 bool Scene_menu::OnGuiMouseClickEvent(GuiControl* control)
 {
-	return false;
+	LOG("Press Gui Control: %d", control->id);
+
+	switch (control->id)
+	{
+
+	case 1:
+		app->fadeToBlack->FadeToBlack(this, app->scene_testing, 90);
+		break;
+
+	case 2:
+		app->fadeToBlack->FadeToBlack(this, app->scene_testing, 90);
+		break;
+
+	case 3:
+		showSettings = true;
+		break;
+
+	case 4:
+		showCredits = true;
+		break;
+
+	case 5:
+		//app->closeApplication = true;  ESTO ESTÁ RARO
+		break;
+
+	case 105:
+		showSettings = false;
+		_showSettings = false;
+		DestroySettingsInterface();
+		break;
+
+	case 106:
+		showCredits = false;
+		_showCredits = false;
+		ListItem<GuiControl*>* controlA;
+		for (controlA = controlsScene.start; controlA != NULL; controlA = controlA->next)
+		{
+			controlA->data->state = GuiControlState::NORMAL;
+		}
+		app->guiManager->DestroyGuiControl(gcCloseCredits);
+		break;
+
+	default:
+		break;
+	}
+
+	return true;
 }
 
 void Scene_menu::SettingsInterface()
 {
+	app->render->DrawTexture(placeholderSettings, 0, 0);
+
+	ListItem<GuiControl*>* control;
+	for (control = controlsScene.start; control != NULL; control = control->next)
+	{
+		control->data->state = GuiControlState::DISABLED;
+	}
+	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 105, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 150,	136,46 }, this));
+	_showSettings = true;
 }
 
 void Scene_menu::ShowSettingsInterface()
@@ -124,10 +181,35 @@ void Scene_menu::ShowSettingsInterface()
 
 void Scene_menu::ShowCredits()
 {
+	if (showCredits && !_showCredits) {
+		ListItem<GuiControl*>* control;
+		for (control = controlsScene.start; control != NULL; control = control->next)
+		{
+			control->data->state = GuiControlState::DISABLED;
+		}
+
+		gcCloseCredits = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 106, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 150,	136,46 }, this);
+		_showCredits = true;
+	}
+
+	app->render->DrawTexture(placeholderCredits, 0, 0);
 }
 
 void Scene_menu::DestroySettingsInterface()
 {
+	ListItem<GuiControl*>* control;
+	for (control = controlsSettings.start; control != NULL; control = control->next)
+	{
+		app->guiManager->DestroyGuiControl(control->data);
+	}
+	controlsSettings.Clear();
+
+
+
+	for (control = controlsScene.start; control != NULL; control = control->next)
+	{
+		control->data->state = GuiControlState::NORMAL;
+	}
 }
 
 void Scene_menu::Fullscreen()

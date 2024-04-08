@@ -120,6 +120,8 @@ public:
 	DialogManager* dialogManager;
 	Menu* menu;
 
+	bool closeApplication = false;
+
 private:
 
 	int argc;

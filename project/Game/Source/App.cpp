@@ -188,6 +188,8 @@ bool App::Update()
 		ret = PostLateUpdate();
 
 	FinishUpdate();
+	if (!ret) return ret;
+	return !closeApplication;
 	return ret;
 	
 	

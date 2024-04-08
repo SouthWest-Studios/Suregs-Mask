@@ -50,9 +50,13 @@ public:
 private:
 
 	SDL_Texture* placeholder;
+	SDL_Texture* placeholderSettings;
+	SDL_Texture* placeholderCredits;
 
 	uint windowW, windowH;
 	List<GuiControl*> controlsScene;
+	List<GuiControl*> controlsSettings;
+	GuiControl* gcCloseCredits;
 
 	bool showSettings = false;
 	bool _showSettings = false;
