@@ -5,4 +5,10 @@
 			<sentence text="Frase 2"/>
 		</sentences>
 	</dialog>
+	<dialog id="1" texturepath="Assets/Textures/player2.png" facetexturepath="Assets/Textures/player2_face.png" name="El guillem">
+		<sentences>
+			<sentence text="mujeres mujeres mujeres mujeres"/>
+			<sentence text="Si esque para que conducen... - Guillem Montes, 12 Marzo 2024, Terrassa"/>
+		</sentences>
+	</dialog>
 </dialogues>
