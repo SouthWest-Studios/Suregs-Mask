@@ -99,7 +99,7 @@ bool Menu::PostUpdate()
 	app->win->GetWindowSize(windowWidth, windowHeight);
 	if (menuu)
 	{
-		app->render->DrawTexture(fondo, windowWidth / 4, windowHeight / 4);
+		app->render->DrawTexture(fondo, windowWidth / 4, windowHeight / 4, SDL_FLIP_NONE, 0, 0);
 	}
 	bool ret = true;
 

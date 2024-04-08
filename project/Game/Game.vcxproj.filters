@@ -46,9 +46,6 @@
     <ClCompile Include="Source\GuiControlButton.cpp">
       <Filter>GuiControls</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Scene.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Map.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
@@ -76,7 +73,6 @@
     <ClCompile Include="Source\DebugCommandBase.cpp">
       <Filter>Modules\DebugConsole</Filter>
     </ClCompile>
-    <ClCompile Include="Source\DebugCommand.cpp" />
     <ClCompile Include="Source\DialogManager.cpp">
       <Filter>Modules\DialogManager</Filter>
     </ClCompile>
@@ -94,6 +90,12 @@
     </ClCompile>
     <ClCompile Include="Source\Menu.cpp">
       <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene_Testing.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DebugCommand.cpp">
+      <Filter>Modules\DebugConsole</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -172,9 +174,6 @@
     <ClInclude Include="Source\GuiControlButton.h">
       <Filter>GuiControls</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Scene.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Map.h">
       <Filter>Modules</Filter>
     </ClInclude>
@@ -229,6 +228,9 @@
     <ClInclude Include="Source\Menu.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene_Testing.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -267,5 +269,8 @@
     <Filter Include="Entities\Enemies">
       <UniqueIdentifier>{767205a1-f550-4feb-8631-a7a22f02b007}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\Output\config.xml" />
   </ItemGroup>
 </Project>
