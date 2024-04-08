@@ -184,4 +184,8 @@ bool Scene_testing::OnGuiMouseClickEvent(GuiControl* control)
 	return true;
 }
 
+Player* Scene_testing::GetPLayer()
+{
+	return player;
+}
 

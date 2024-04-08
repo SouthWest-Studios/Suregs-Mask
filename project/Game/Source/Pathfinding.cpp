@@ -64,6 +64,18 @@ uchar PathFinding::GetTileAt(const iPoint& pos) const
 	return INVALID_WALK_CODE;
 }
 
+uint PathFinding::GetDistance(b2Vec2 playerPos, b2Vec2 enemyPos)
+{
+	uint ret = sqrt(pow(playerPos.x - enemyPos.x, 2) + pow(playerPos.y - enemyPos.y, 2));
+	return ret;
+}
+
+uint PathFinding::GetDistance(iPoint playerPos, iPoint enemyPos)
+{
+	uint ret = sqrt(pow(playerPos.x - enemyPos.x, 2) + pow(playerPos.y - enemyPos.y, 2));
+	return ret;
+}
+
 // To request all tiles involved in the last generated path
 const DynArray<iPoint>* PathFinding::GetLastPath() const
 {

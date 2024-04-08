@@ -6,6 +6,8 @@
 #include "Point.h"
 #include "DynArray.h"
 #include "List.h"
+#include "Physics.h"
+
 
 #define DEFAULT_PATH_LENGTH 50
 #define INVALID_WALK_CODE 255
@@ -48,6 +50,12 @@ public:
 
 	// Utility: return the walkability value of a tile
 	uchar GetTileAt(const iPoint& pos) const;
+
+	// Calculate distance
+	uint GetDistance(b2Vec2 playerPos, b2Vec2 enemyPos);
+	uint GetDistance(iPoint playerPos, iPoint enemyPos);
+
+	SDL_Texture* mouseTileTex;
 
 private:
 

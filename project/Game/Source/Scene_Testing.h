@@ -41,7 +41,7 @@ public:
 	// Handles multiple Gui Event methods
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
-
+	Player* GetPLayer();
 
 private:
 	SDL_Texture* img;
@@ -49,6 +49,7 @@ private:
 	uint texW, texH;
 	uint windowW, windowH;
 	SDL_Texture* mouseTileTex = nullptr;
+	Player* player;
 
 	//L03: DONE 3b: Declare a Player attribute
 	

@@ -110,6 +110,8 @@ public:
 	iPoint position;       
 	bool renderable = true;
 
+	bool isAttacking;
+
 	PhysBody* pbody;
 
 	float speed;
