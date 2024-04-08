@@ -7,6 +7,7 @@
 #include "Animation.h"
 #include "Pathfinding.h"
 #include "Player.h"
+#include "Physics.h"
 
 struct SDL_Texture;
  
@@ -41,6 +42,7 @@ public:
 	void Attack(float dt);
 	void Die(float dt);
 	void Revive(float dt);
+	bool Osirisfinding(float dt);
 
 	// L07 DONE 6: Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
@@ -55,6 +57,7 @@ public:
 	uint texW, texH;
 	//Estadisticas
 	float speed;
+	b2Vec2 vel;
 	float health;
 	float maxHealth;
 	float attackDamage;
@@ -82,6 +85,7 @@ public:
 
 	PathFinding* path;
 	Player* player;
+	DynArray<iPoint> lastPath;
 
 private:
 	Animation idleAnim;
