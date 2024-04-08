@@ -105,7 +105,7 @@ bool Enemy_Ols::Update(float dt)
 		break;
 	}
 
-	Olsfinding(dt);
+	//Olsfinding(dt);
 	currentAnimation->Update();
 
 	return true;
