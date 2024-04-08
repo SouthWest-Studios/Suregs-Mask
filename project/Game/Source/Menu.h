@@ -19,7 +19,7 @@ public:
 	virtual ~Menu();
 
 	// Called before render is available
-	bool Awake(pugi::xml_node config);
+	bool Awake(pugi::xml_node conf);
 
 	// Called before the first frame
 	bool Start();
@@ -27,7 +27,7 @@ public:
 	// Called before all Updates
 	bool PreUpdate();
 
-	// Called each loop iteration
+	// Called each loop iteration                   
 	bool Update(float dt);
 
 	// Called before all Updates
@@ -35,6 +35,18 @@ public:
 
 	// Called before quitting
 	bool CleanUp();
+
+	bool OnGuiMouseClickEvent(GuiControl* control);
+
+	void SettingsInterface();
+	void ShowSettingsInterface();
+	void ShowCredits();
+	void DestroySettingsInterface();
+
+	void Fullscreen();
+
+	bool LoadState(pugi::xml_node node);
+	bool SaveState(pugi::xml_node node);
 
 private:
 	SDL_Texture* fondo;

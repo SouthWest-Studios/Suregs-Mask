@@ -113,3 +113,38 @@ bool Menu::CleanUp()
 
 	return true;
 }
+
+bool Menu::OnGuiMouseClickEvent(GuiControl* control)
+{
+	return false;
+}
+
+void Menu::SettingsInterface()
+{
+}
+
+void Menu::ShowSettingsInterface()
+{
+}
+
+void Menu::ShowCredits()
+{
+}
+
+void Menu::DestroySettingsInterface()
+{
+}
+
+void Menu::Fullscreen()
+{
+}
+
+bool Menu::LoadState(pugi::xml_node node)
+{
+	return false;
+}
+
+bool Menu::SaveState(pugi::xml_node node)
+{
+	return false;
+}
