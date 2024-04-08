@@ -87,7 +87,7 @@ bool Menu::Update(float dt)
 	uint windowWidth, windowHeight;
 	app->win->GetWindowSize(windowWidth, windowHeight);
 
-	if (menuu && contadormenu == 0)
+	if (ventana == 4)
 	{
 		contadormenu++;
 		if (gcButtom != nullptr)
