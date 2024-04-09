@@ -335,7 +335,7 @@ void Player::PlayerMovement(float dt)
 	}
 
 	//Si pulsas J para atacar
-	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN && timerAttack.ReadMSec() > cdTimerAttackMS){
+	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN && timerAttack.ReadMSec() > cdTimerAttackMS + 100){
 		isAttacking = true;
 		timerAttack.Start();
 		nextState = EntityState::ATTACKING;
