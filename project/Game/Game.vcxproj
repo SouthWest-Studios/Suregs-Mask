@@ -105,6 +105,7 @@
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\GuiCheckBox.cpp" />
     <ClCompile Include="Source\GuiControlButton.cpp" />
+    <ClCompile Include="Source\GuiControlSlider.cpp" />
     <ClCompile Include="Source\GuiManager.cpp" />
     <ClCompile Include="Source\Item.cpp" />
     <ClCompile Include="Source\Main.cpp" />
@@ -140,6 +141,7 @@
     <ClInclude Include="Source\GuiCheckBox.h" />
     <ClInclude Include="Source\GuiControl.h" />
     <ClInclude Include="Source\GuiControlButton.h" />
+    <ClInclude Include="Source\GuiControlSlider.h" />
     <ClInclude Include="Source\GuiManager.h" />
     <ClInclude Include="Source\Item.h" />
     <ClInclude Include="Source\Map.h" />

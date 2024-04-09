@@ -3,6 +3,7 @@
 #include "Textures.h"
 #include "GuiCheckBox.h"
 #include "GuiControlButton.h"
+#include "GuiControlSlider.h"
 #include "Audio.h"
 
 GuiManager::GuiManager(App* app, bool start_enabled) : Module(app, start_enabled)
@@ -18,7 +19,7 @@ bool GuiManager::Start()
 }
 
 // L15: DONE1: Implement CreateGuiControl function that instantiates a new GUI control and add it to the list of controls
-GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds,  Module* observer, SDL_Rect sliderBounds, SDL_Rect bounds2)
+GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds,  Module* observer, SDL_Rect sliderBounds, SDL_Rect bounds2,int minValue , int maxValue)
 {
 	GuiControl* guiControl = nullptr;
 
@@ -30,6 +31,10 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 		break;
 	case GuiControlType::CHECKBOX:
 		guiControl = new GuiCheckBox(id, bounds, bounds2, text);
+
+		break;
+	case GuiControlType::SLIDER:
+		guiControl = new GuiControlSlider(id, bounds, minValue, maxValue, text);
 
 		break;
 	}

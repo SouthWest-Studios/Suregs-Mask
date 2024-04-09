@@ -6,6 +6,7 @@
 #include "GuiControl.h"
 #include "GuiControlButton.h"
 #include "GuiCheckBox.h"
+#include "GuiControlSlider.h"
 
 
 struct SDL_Texture;
@@ -73,6 +74,8 @@ private:
 	GuiCheckBox* vsync;
 	GuiControlButton* title;
 	GuiControlButton* cruz;
+	GuiControlSlider* music;
+	GuiControlSlider* sfx;
 };
 
 #endif // __MENU_H__

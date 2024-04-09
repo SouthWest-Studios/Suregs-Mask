@@ -59,6 +59,8 @@ bool Menu::Update(float dt)
 	}
 	if (menuu)
 	{
+		app->entityManager->active = false;
+		app->physics->active = false;
 		if (ventana == 0)
 		{
 			ventana++;
@@ -78,6 +80,8 @@ bool Menu::Update(float dt)
 		}
 	}
 	else {
+		app->entityManager->active = true;
+		app->physics->active = true;
 		ventana = 0;
 	}
 	
@@ -97,11 +101,19 @@ bool Menu::Update(float dt)
 			title->state = GuiControlState::NORMAL;
 			fullScreen->state = GuiControlState::NORMAL;
 			vsync->state = GuiControlState::NORMAL;
+			music->state = GuiControlState::NORMAL;
+			sfx->state = GuiControlState::NORMAL;
 		}
 
 
 		else
 		{
+
+			SDL_Rect MusicPos = { windowWidth / 2 - 400 ,windowHeight / 2 -100, 200, 50 };
+			music = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 1, "MUSIC", MusicPos, this, { 0, 0, 20, 20 }, { 0,0,0,0 },0 ,100);
+
+			SDL_Rect SfxPos = { windowWidth / 2 - 400 ,windowHeight / 2 - 50, 200, 50 };
+			sfx = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 1, "SFX", SfxPos, this, { 0, 0, 20, 20 }, { 0,0,0,0 }, 0, 100);
 	
 			SDL_Rect vSyncpos = { windowWidth / 2 -100 ,windowHeight / 2 + 200, 200, 50 };
 			vsync = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 1, "VSYNC", vSyncpos, this, { 0, 0, 20, 20 } );
@@ -131,6 +143,10 @@ bool Menu::Update(float dt)
 				fullScreen = nullptr;
 				vsync->state = GuiControlState::DISABLED;
 				vsync = nullptr;
+				music->state = GuiControlState::DISABLED;
+				music = nullptr;
+				sfx->state = GuiControlState::DISABLED;
+				sfx = nullptr;
 
 				contadormenu = 0;
 			}
@@ -139,7 +155,8 @@ bool Menu::Update(float dt)
 	}
 	if (ventana == 4)
 	{
-		
+		app->audio->volumeMusic = ((GuiControlSlider*)music)->value;
+
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
 		{
 			fullScreen->click = !fullScreen->click;
