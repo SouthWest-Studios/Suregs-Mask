@@ -67,7 +67,7 @@ bool Scene_testing::Start()
 	img = app->tex->Load("Assets/Textures/test.png");
 	mapaFondo = app->tex->Load("Assets/Textures/Mapas/Testing/background.png");
 	//Music is commented so that you can add your own music
-	//app->audio->PlayMusic("Assets/Audio/Music/music_spy.ogg");
+	app->audio->LoadAudioMusic("town", 2.0f);
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
