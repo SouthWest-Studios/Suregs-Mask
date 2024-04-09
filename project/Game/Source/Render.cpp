@@ -1,7 +1,7 @@
 #include "App.h"
 #include "Window.h"
 #include "Render.h"
-
+#include "Menu.h"
 #include "Defs.h"
 #include "Log.h"
 
@@ -29,7 +29,7 @@ bool Render::Awake(pugi::xml_node config)
 	Uint32 flags = SDL_RENDERER_ACCELERATED;
 
 	// L04: DONE 6: Load the VSYNC status from config.xml and adapt the code to set it on / off
-	if (config.child("vsync").attribute("value").as_bool()) {
+	if (app->menu->vsyncActive == true) {
 		flags |= SDL_RENDERER_PRESENTVSYNC;
 		LOG("Using vsync");
 	}

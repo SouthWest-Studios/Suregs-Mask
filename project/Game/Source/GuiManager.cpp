@@ -1,7 +1,7 @@
 #include "GuiManager.h"
 #include "App.h"
 #include "Textures.h"
-
+#include "GuiCheckBox.h"
 #include "GuiControlButton.h"
 #include "Audio.h"
 
@@ -18,7 +18,7 @@ bool GuiManager::Start()
 }
 
 // L15: DONE1: Implement CreateGuiControl function that instantiates a new GUI control and add it to the list of controls
-GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Module* observer, SDL_Rect sliderBounds)
+GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds,  Module* observer, SDL_Rect sliderBounds, SDL_Rect bounds2)
 {
 	GuiControl* guiControl = nullptr;
 
@@ -27,6 +27,10 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 	{
 	case GuiControlType::BUTTON:
 		guiControl = new GuiControlButton(id, bounds, text);
+		break;
+	case GuiControlType::CHECKBOX:
+		guiControl = new GuiCheckBox(id, bounds, bounds2, text);
+
 		break;
 	}
 
@@ -38,6 +42,9 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 
 	return guiControl;
 }
+
+	
+
 
 
 
@@ -55,6 +62,18 @@ bool GuiManager::Update(float dt)
 	return true;
 }
 
+bool GuiManager::PostUpdate()
+{
+	ListItem<GuiControl*>* control = guiControlsList.start;
+
+	while (control != nullptr)
+	{
+		control->data->PostUpdate();
+		control = control->next;
+	}
+	return true;
+}
+
 bool GuiManager::CleanUp()
 {
 	ListItem<GuiControl*>* control = guiControlsList.start;
@@ -64,7 +83,6 @@ bool GuiManager::CleanUp()
 		RELEASE(control);
 	}
 
-	return true;
 
 	return false;
 }

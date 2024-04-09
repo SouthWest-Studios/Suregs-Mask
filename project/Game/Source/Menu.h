@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "GuiControl.h"
 #include "GuiControlButton.h"
+#include "GuiCheckBox.h"
 
 
 struct SDL_Texture;
@@ -48,6 +49,8 @@ public:
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
 
+	bool vsyncActive = false;
+
 private:
 	SDL_Texture* fondoInventario;
 	SDL_Texture* fondoEquipo;
@@ -59,12 +62,15 @@ private:
 	bool menuu = false;
 	int contadormenu = 0;
 	bool menuusettings = false;
+	bool fullScreenActive = false;
+	
 
 	int ventana = 1;
 
 	GuiControlButton* gcButtom;
 	GuiControlButton* exit;
-	GuiControlButton* settings;
+	GuiCheckBox* fullScreen;
+	GuiCheckBox* vsync;
 	GuiControlButton* title;
 	GuiControlButton* cruz;
 };

@@ -7,6 +7,7 @@
 #include "Defs.h"
 #include "Log.h"
 #include "GuiControl.h"
+#include "GuiCheckBox.h"
 #include "GuiManager.h"
 #include "Menu.h"
 
@@ -90,26 +91,25 @@ bool Menu::Update(float dt)
 	if (ventana == 4)
 	{
 		contadormenu++;
-		if (gcButtom != nullptr)
+		if (title != nullptr)
 		{
-			gcButtom->state = GuiControlState::NORMAL;
-			exit->state = GuiControlState::NORMAL;
-			settings->state = GuiControlState::NORMAL;
+			
+			title->state = GuiControlState::NORMAL;
+			fullScreen->state = GuiControlState::NORMAL;
+			vsync->state = GuiControlState::NORMAL;
 		}
 
 
 		else
 		{
-			SDL_Rect btPos = { windowWidth / 2 - 100,windowHeight / 2 - 300, 230,30 };
-			gcButtom = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "CONTINUAR", btPos, this, { 0,0,0,0 } );
+	
+			SDL_Rect vSyncpos = { windowWidth / 2 -100 ,windowHeight / 2 + 200, 200, 50 };
+			vsync = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 1, "VSYNC", vSyncpos, this, { 0, 0, 20, 20 } );
 
-			SDL_Rect ExitPos = { windowWidth / 2 - 100,windowHeight / 2 + 130, 230,30 };
-			exit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "SALIR", ExitPos, this, { 0,0,0,0 });
+			SDL_Rect FullScreen = { windowWidth / 2 - 100 ,windowHeight / 2 + 50, 230,50 };
+			fullScreen = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 1, "FULLSCREEN", FullScreen, this, { 0,0,0,0 }, { -50,0,0,0 });
 
-			SDL_Rect SettingsPos = { windowWidth / 2 - 100,windowHeight / 2 - 160, 230,30 };
-			settings = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "AJUSTES", SettingsPos, this, { 0,0,0,0 });
-
-			SDL_Rect TitlePos = { windowWidth / 2 - 100,windowHeight / 2 - 20, 230,50 };
+			SDL_Rect TitlePos = { windowWidth / 2 + 100 ,windowHeight / 2 +  50, 230,50 };
 			title = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "VOLVER AL MENÚ", TitlePos, this, { 0,0,0,0 });
 		}
 
@@ -118,6 +118,61 @@ bool Menu::Update(float dt)
 
 
 	}
+	else
+	{
+		
+
+			if (title != nullptr)
+			{
+				
+				title->state = GuiControlState::DISABLED;
+				title = nullptr;
+				fullScreen->state = GuiControlState::DISABLED;
+				fullScreen = nullptr;
+				vsync->state = GuiControlState::DISABLED;
+				vsync = nullptr;
+
+				contadormenu = 0;
+			}
+
+		
+	}
+	if (ventana == 4)
+	{
+		
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+		{
+			fullScreen->click = !fullScreen->click;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		{
+			
+			vsync->click = !vsync->click;
+		}
+	}
+	
+	if (fullScreen != nullptr && fullScreen->click == true && fullScreenActive == false)
+	{
+		fullScreenActive = true;
+		app->win->ToggleFullscreen();
+	}
+
+	if (fullScreen != nullptr && fullScreen->click == false && fullScreenActive == true)
+	{
+		fullScreenActive = false;
+		app->win->ToggleFullscreen();
+	}
+
+	if (vsync != nullptr && vsync->click == true)
+	{
+		vsyncActive = true;
+	}
+
+	if (vsync != nullptr && vsync->click == false)
+	{
+		vsyncActive = false;
+	}
+
 
 	return true;
 }

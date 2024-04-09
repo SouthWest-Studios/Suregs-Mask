@@ -19,6 +19,14 @@ GuiControlButton::~GuiControlButton()
 
 bool GuiControlButton::Update(float dt)
 {
+	
+
+
+	return false;
+}
+
+bool GuiControlButton::PostUpdate()
+{
 	if (state != GuiControlState::DISABLED)
 	{
 		// L15: DONE 3: Update the state of the GUiButton according to the mouse position
@@ -26,13 +34,13 @@ bool GuiControlButton::Update(float dt)
 
 		//If the position of the mouse if inside the bounds of the button 
 		if (mouseX > bounds.x && mouseX < bounds.x + bounds.w && mouseY > bounds.y && mouseY < bounds.y + bounds.h) {
-		
+
 			state = GuiControlState::FOCUSED;
 
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT) {
 				state = GuiControlState::PRESSED;
 			}
-			
+
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP) {
 				NotifyObserver();
 			}
@@ -61,7 +69,6 @@ bool GuiControlButton::Update(float dt)
 		app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h);
 
 	}
-
 
 	return false;
 }

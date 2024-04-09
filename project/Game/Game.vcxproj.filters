@@ -97,6 +97,9 @@
     <ClCompile Include="Source\DebugCommand.cpp">
       <Filter>Modules\DebugConsole</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GuiCheckBox.cpp">
+      <Filter>GuiControls</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -230,6 +233,9 @@
     </ClInclude>
     <ClInclude Include="Source\Scene_Testing.h">
       <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiCheckBox.h">
+      <Filter>GuiControls</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

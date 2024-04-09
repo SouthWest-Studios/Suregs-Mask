@@ -56,6 +56,11 @@ public:
 	{
 		return true;
 	}
+	
+	virtual bool PostUpdate()
+	{
+		return true;
+	}
 
 	// 
 	void SetTexture(SDL_Texture* tex)
@@ -84,6 +89,7 @@ public:
 
 	SString text;           // Control text (if required)
 	SDL_Rect bounds;        // Position and size
+	SDL_Rect bounds2;
 	SDL_Color color;        // Tint color
 
 	SDL_Texture* texture;   // Texture atlas reference

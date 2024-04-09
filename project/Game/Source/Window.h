@@ -30,6 +30,8 @@ public:
 	// Retrieve window scale
 	uint GetScale() const;
 
+	void ToggleFullscreen();
+
 public:
 	// The window we'll be rendering to
 	SDL_Window* window;
@@ -42,6 +44,7 @@ private:
 	uint width;
 	uint height;
 	uint scale;
+	bool fullscreen = false;
 };
 
 #endif // __WINDOW_H__
