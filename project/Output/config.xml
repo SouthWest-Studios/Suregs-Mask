@@ -39,6 +39,7 @@
 		<osiris texturePath="Assets/Textures/Entidades/Osiris/Viking/VikingNoEffect-Sheet.png" Tsprite="60" Pwidth="1380" sprite_x="115" sprite_y="84"/>
 		<ols texturePath="Assets/Textures/Entidades/Ols/animations/spritesheets/Sprites.png" Tsprite="374" Pwidth="6336" sprite_x="288" sprite_y="128"/>
 		<shar texturePath="Assets/Textures/Entidades/Shar/Sprites.png" Tsprite="45" Pwidth="2190" sprite_x="146" sprite_y="153"/>
+		<resource_espada texturePath="Assets/Textures/Entidades/Items/espmad.png"/>
 
 
 		<item x="1200" y="2600" texturePath="Assets/Textures/Entidades/Jugador/salamanda1.png" Tsprite="23" Pwidth="1000" sprite_x="100" sprite_y="160"/>

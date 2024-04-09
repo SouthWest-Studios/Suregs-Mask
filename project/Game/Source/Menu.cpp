@@ -155,7 +155,11 @@ bool Menu::Update(float dt)
 	}
 	if (ventana == 4)
 	{
-		app->audio->volumeMusic = ((GuiControlSlider*)music)->value;
+		if (music != nullptr)
+		{
+			app->audio->volumeMusic = ((GuiControlSlider*)music)->value;
+		}
+		
 
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
 		{

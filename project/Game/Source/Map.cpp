@@ -18,6 +18,7 @@
 #include <string>
 #include <vector>
 #include "DialogTriggerEntity.h"
+#include "espada.h"
 
 Map::Map(App* app, bool start_enabled) : Module(app, start_enabled), mapLoaded(false)
 {
@@ -774,36 +775,47 @@ bool Map::LoadEntities(std::string layerName)
 					}
 
 					//OSIRIS
-					if (gid == tileset->firstgid + 1) {
+					if (gid == tileset->firstgid + 20) {
 
-						app->entityManager->SetOsiris((Enemy_Osiris*)app->entityManager->CreateEntity(EntityType::ENEMY_OSIRIS));
-						app->entityManager->GetOsiris()->config = configNode.child("entities_data").child("osiris");
-						app->entityManager->GetOsiris()->position = iPoint(pos.x + 16, pos.y + 16);
-						app->entityManager->GetOsiris()->Start();
+						
+						Enemy_Osiris* osiris = (Enemy_Osiris*)app->entityManager->CreateEntity(EntityType::ENEMY_OSIRIS);
+						osiris->config = configNode.child("entities_data").child("osiris");
+						osiris->position = iPoint(pos.x + 16, pos.y + 16);
+						osiris->Start();
 
 					}
 
 					//OLS
-					if (gid == tileset->firstgid + 2) {
+					if (gid == tileset->firstgid + 21) {
 
-						app->entityManager->SetOls((Enemy_Ols*)app->entityManager->CreateEntity(EntityType::ENEMY_OLS));
-						app->entityManager->GetOls()->config = configNode.child("entities_data").child("ols");
-						app->entityManager->GetOls()->position = iPoint(pos.x + 16, pos.y + 16);
-						app->entityManager->GetOls()->Start();
+						
+						Enemy_Ols* ols = (Enemy_Ols*)app->entityManager->CreateEntity(EntityType::ENEMY_OLS);
+						ols->config = configNode.child("entities_data").child("ols");
+						ols->position = iPoint(pos.x + 16, pos.y + 16);
+						ols->Start();
 
 					}
 
 					//SHAR
-					if (gid == tileset->firstgid + 3) {
+					if (gid == tileset->firstgid + 22) {
 
-						app->entityManager->SetShar((Enemy_Shar*)app->entityManager->CreateEntity(EntityType::ENEMY_SHAR));
-						app->entityManager->GetShar()->config = configNode.child("entities_data").child("shar");
-						app->entityManager->GetShar()->position = iPoint(pos.x + 16, pos.y + 16);
-						app->entityManager->GetShar()->Start();
+						
+						Enemy_Shar* shar = (Enemy_Shar*)app->entityManager->CreateEntity(EntityType::ENEMY_SHAR);
+						shar->config = configNode.child("entities_data").child("shar");
+						shar->position = iPoint(pos.x + 16, pos.y + 16);
+						shar->Start();
 
 					}
 
+					//ESPADA
+					if (gid == tileset->firstgid + 40) {
+						Espada* espada = (Espada*)app->entityManager->CreateEntity(EntityType::RESOURCE_ESPADA);
+						espada->config = configNode.child("entities_data").child("resource_espada");
+						espada->position = iPoint(pos.x + 16, pos.y + 16);
+						espada->Start();
+						
 
+					}
 
 					////Monedas
 					//if (gid == tileset->firstgid) {

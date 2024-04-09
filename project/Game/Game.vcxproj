@@ -103,10 +103,12 @@
     <ClCompile Include="Source\DialogManager.cpp" />
     <ClCompile Include="Source\DialogTriggerEntity.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
+    <ClCompile Include="Source\Espada.cpp" />
     <ClCompile Include="Source\GuiCheckBox.cpp" />
     <ClCompile Include="Source\GuiControlButton.cpp" />
     <ClCompile Include="Source\GuiControlSlider.cpp" />
     <ClCompile Include="Source\GuiManager.cpp" />
+    <ClCompile Include="Source\InventoryManager.cpp" />
     <ClCompile Include="Source\Item.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\App.cpp" />
@@ -130,6 +132,7 @@
     <ClCompile Include="Source\Timer.cpp" />
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="Source\Animation.h" />
+    <ClInclude Include="Source\ArmaduraInv.h" />
     <ClInclude Include="Source\DebugCommand.h" />
     <ClInclude Include="Source\DebugCommandBase.h" />
     <ClInclude Include="Source\DebugConsole.h" />
@@ -138,12 +141,16 @@
     <ClInclude Include="Source\DialogTriggerEntity.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />
+    <ClInclude Include="Source\espada.h" />
     <ClInclude Include="Source\GuiCheckBox.h" />
     <ClInclude Include="Source\GuiControl.h" />
     <ClInclude Include="Source\GuiControlButton.h" />
     <ClInclude Include="Source\GuiControlSlider.h" />
     <ClInclude Include="Source\GuiManager.h" />
+    <ClInclude Include="Source\inventity.h" />
+    <ClInclude Include="Source\InventoryManager.h" />
     <ClInclude Include="Source\Item.h" />
+    <ClInclude Include="Source\ItemInv.h" />
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\Menu.h" />
     <ClInclude Include="Source\ModuleFadeToBlack.h" />
@@ -164,6 +171,7 @@
     <ClInclude Include="Source\Scene_menu.h" />
     <ClInclude Include="Source\Enemy_Shar.h" />
     <ClInclude Include="Source\Scene_Testing.h" />
+    <ClInclude Include="Source\SwordInv.h" />
     <ClInclude Include="Source\Textures.h" />
     <ClInclude Include="Source\Timer.h" />
     <ClInclude Include="Source\Window.h" />

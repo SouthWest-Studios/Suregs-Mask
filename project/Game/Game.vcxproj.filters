@@ -103,6 +103,12 @@
     <ClCompile Include="Source\GuiControlSlider.cpp">
       <Filter>GuiControls</Filter>
     </ClCompile>
+    <ClCompile Include="Source\InventoryManager.cpp">
+      <Filter>Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Espada.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -243,6 +249,24 @@
     <ClInclude Include="Source\GuiControlSlider.h">
       <Filter>GuiControls</Filter>
     </ClInclude>
+    <ClInclude Include="Source\ArmaduraInv.h">
+      <Filter>Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\inventity.h">
+      <Filter>Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\InventoryManager.h">
+      <Filter>Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ItemInv.h">
+      <Filter>Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SwordInv.h">
+      <Filter>Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\espada.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -280,6 +304,9 @@
     </Filter>
     <Filter Include="Entities\Enemies">
       <UniqueIdentifier>{767205a1-f550-4feb-8631-a7a22f02b007}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inventory">
+      <UniqueIdentifier>{e25e82e0-d2c5-414e-ab44-ad5e3f6f1c77}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

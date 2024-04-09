@@ -3,7 +3,7 @@
 #include "Enemy_Ols.h"
 #include "Enemy_Osiris.h"
 #include "Enemy_Shar.h"
-
+#include "espada.h"
 #include "Item.h"
 #include "App.h"
 #include "Textures.h"
@@ -101,6 +101,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		break;
 	case EntityType::ENEMY_SHAR:
 		entity = new Enemy_Shar();
+		break;
+	case EntityType::RESOURCE_ESPADA:
+		entity = new Espada(type, 1, 100, 300, 5, 2);
 		break;
 	case EntityType::ITEM:
 		entity = new Item();
