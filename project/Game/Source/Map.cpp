@@ -204,7 +204,11 @@ bool Map::CleanUp()
 	ListItem<PhysBody*>* collision;
 	collision = collisionsList.start;
 	while (collision != NULL) {
+		collision->data->body->SetActive(false);
+		//collision->data->body->SetTransform(b2Vec2(-100000, -100000), 0);
 		app->physics->GetWorld()->DestroyBody(collision->data->body);
+		
+		
 		collision = collision->next;
 	}
 	collisionsList.Clear();
@@ -678,7 +682,7 @@ bool Map::LoadObjects()
 		for (int i = 0; i < mapObjectsItem->data->objects.Count(); i++) {
 
 			MapObject* object = mapObjectsItem->data->objects[i];
-			PhysBody* c1;
+			
 
 			if (object->properties.GetProperty("dialogID") != NULL) {
 
@@ -704,6 +708,7 @@ bool Map::LoadObjects()
 				c1->ctype = ColliderType::UNKNOWN;*/
 			}
 			else {
+				PhysBody* c1;
 
 				if (object->type == RECTANGULO) {
 					c1 = app->physics->CreateRectangle(object->x + object->width / 2, object->y + object->height / 2, object->width, object->height, STATIC);
@@ -713,10 +718,11 @@ bool Map::LoadObjects()
 				}
 
 				c1->ctype = ColliderType::PLATFORM;
+				collisionsList.Add(c1);
 			}
 
 			
-			collisionsList.Add(c1);
+			
 			ret = true;
 		}
 		mapObjectsItem = mapObjectsItem->next;

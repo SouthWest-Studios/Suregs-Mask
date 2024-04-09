@@ -60,14 +60,14 @@ bool DebugConsole::Awake(pugi::xml_node config)
 		{
 		case 0: app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu); break;
 		case 1: app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_testing); break;
-		/*case 2: app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu); break;
-		case 3: app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu); break;
-		case 4: app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu); break;*/
+			/*case 2: app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu); break;
+			case 3: app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu); break;
+			case 4: app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu); break;*/
 		default:
 			break;
 		}
 
-		
+
 		});
 	commandList.Add(GOTO);
 
@@ -78,9 +78,9 @@ bool DebugConsole::Awake(pugi::xml_node config)
 		app->dialogManager->AddDialog(d1);
 		});
 	commandList.Add(SPAWN_DIALOG);
-	
 
-	
+
+
 
 
 
@@ -155,7 +155,7 @@ bool DebugConsole::PostLateUpdate()
 		else {
 			app->render->DrawRectangle(SDL_Rect{ 0,0, (int)windowW, 40 }, 0, 0, 0, 100, true, false);
 		}
-		
+
 
 		// Renderizar texto de la consola
 		SDL_Color textColor = { 255, 255, 255, 255 }; // Color del texto blanco
@@ -170,7 +170,7 @@ bool DebugConsole::PostLateUpdate()
 			int y = 40;
 			int x = 0;
 			app->render->DrawRectangle(SDL_Rect{ 0, y, (int)windowW, (int)windowH }, 0, 0, 0, 220, true, false);
-			
+
 			for (int i = 0; i < commandList.Count(); i++)
 			{
 				DebugCommandBase* command = dynamic_cast<DebugCommandBase*>(commandList[i]);
@@ -256,9 +256,23 @@ void DebugConsole::HandleInput()
 					// Ejecutar el comando con el argumento entero
 
 					if (properties.size() > 1) {
+						try {
 
-						int argValue = std::stoi(properties[1]); // Convertir la cadena a entero
-						commandArg->Invoke(argValue);
+							int argValue = std::stoi(properties[1]); // Convertir la cadena a entero
+							commandArg->Invoke(argValue);
+						}
+						catch (const std::invalid_argument& e) {
+							std::cerr << "Error: Argumento no válido. " << e.what() << std::endl;
+						}
+						catch (const std::out_of_range& e) {
+							std::cerr << "Error: Valor fuera de rango. " << e.what() << std::endl;
+						}
+						catch (const std::exception& e) {
+							std::cerr << "Error: Ocurrió una excepción. " << e.what() << std::endl;
+						}
+						catch (...) {
+							std::cerr << "Error: Ocurrió una excepción desconocida." << std::endl;
+						}
 					}
 				}
 			}
