@@ -226,7 +226,7 @@ bool DebugConsole::OnGuiMouseClickEvent(GuiControl* control)
 
 void DebugConsole::HandleInput()
 {
-
+	std::transform(currentCommand.begin(), currentCommand.end(), currentCommand.begin(), ::tolower);
 	std::vector<std::string> properties = SplitString(currentCommand, ' ');
 
 
