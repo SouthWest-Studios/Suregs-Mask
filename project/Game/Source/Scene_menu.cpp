@@ -53,7 +53,7 @@ bool Scene_menu::Start()
 	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "SALIR", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 + 250 - 30,	136,46 }, this));
 
 
-	app->audio->LoadAudioMusic("amogus", 1.0f);
+	app->audio->LoadAudioMusic("intro", 1.0f);
 	//app->audio->PlayMusic("PATH DE MUSICA MENU AQUÍ")
 
 	app->render->camera.x = 0;

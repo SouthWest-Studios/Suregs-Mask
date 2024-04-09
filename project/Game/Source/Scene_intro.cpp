@@ -37,7 +37,7 @@ bool Scene_intro::Start()
 {
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	placeholder = app->tex->Load("Assets/Textures/intro_textura.png");
-	sus = app->audio->LoadAudioFx("sus");
+	//sus = app->audio->LoadAudioFx("sus");
 	app->audio->PlayFx(sus);
 
 	app->render->camera.x = 0;

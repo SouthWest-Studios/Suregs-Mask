@@ -19,17 +19,19 @@
 	</window>
 
 	<audio>
-		<music volume="10"/>
-		<fx volume="10"/>
+		<music volume="50"/>
+		<fx volume="50"/>
 	</audio>
 
 	<sounds>
 		<music>
-			<amogus path="Assets/Audio/Music/among us tutututu.ogg"/>
+			<intro path="Assets/Audio/Music/o-herbologista.ogg"/>
+      <town path="Assets/Audio/Music/Entre las Sombras.ogg"/>
 		</music>
 
 		<fx>
 			<sus path="Assets/Audio/Fx/sus-amongus-d.wav"/>
+      <click path="Assets/Audio/Fx/ui-click-43196.wav"/>
 		</fx>
 	</sounds>
 	<entities_data>
