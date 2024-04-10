@@ -80,24 +80,24 @@ bool Enemy_Shar::Update(float dt)
 		nextState = EntityState::DEAD;
 	}
 	else if (abs(playerPos.x - position.x) <= 30 && abs(playerPos.y - position.y) <= 30 /*cambiar si hace falta*/) {
-		nextState = EntityState::ATTACKING;
+		//nextState = EntityState::ATTACKING;
 	}
 	else if (abs(playerPos.x - position.x) <= 100 && abs(playerPos.y - position.y) <= 100/*cambiar si hace falta*/) {
-		nextState = EntityState::RUNNING;
+		//nextState = EntityState::RUNNING;
 	}
 	else {
 		nextState = EntityState::IDLE;
 	}
 
 	switch (nextState) {
+	case EntityState::DEAD:
+		Die(dt);
+		break;
 	case EntityState::RUNNING:
 		Chase(dt);
 		break;
 	case EntityState::ATTACKING:
 		Attack(dt);
-		break;
-	case EntityState::DEAD:
-		Die(dt);
 		break;
 	case EntityState::IDLE:
 		DoNothing(dt);
@@ -150,6 +150,7 @@ void Enemy_Shar::Chase(float dt)
 {
 	//printf("Osiris chasing");
 	currentAnimation = &runAnim;
+	//Sharfinding(dt);
 	//iPoint playerPos = app->entityManager->GetPlayer()->position;
 	//path->CreatePath(position, playerPos);
 }
@@ -162,8 +163,12 @@ void Enemy_Shar::Attack(float dt)
 }
 
 void Enemy_Shar::Die(float dt) {
-	printf("Shar die");
-	state = EntityState::DEAD;
+
+	app->entityManager->DestroyEntity(pbody->entity);
+	app->physics->DestroyBody(pbody);
+	SDL_DestroyTexture(texture);
+	nextState = EntityState::DEAD;
+
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 
@@ -177,6 +182,9 @@ void Enemy_Shar::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision PLAYER");
 		//restar vida al player
 		break;
+	case ColliderType::PLAYER_ATTACK:
+		LOG("Collision Player_Attack");
+		nextState = EntityState::DEAD;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;
