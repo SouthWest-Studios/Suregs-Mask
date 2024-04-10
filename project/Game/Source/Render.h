@@ -62,6 +62,8 @@ public:
 	TTF_Font* consoleFont;
 	TTF_Font* primaryFont;
 	TTF_Font* secondaryFont;
+
+	bool vsync = false;
 };
 
 #endif // __RENDER_H__

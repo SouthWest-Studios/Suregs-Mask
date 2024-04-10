@@ -6,7 +6,7 @@
 #include "Textures.h"
 #include "Scene_Testing.h"
 
-GuiCheckBox::GuiCheckBox(uint32 id, SDL_Rect bounds, SDL_Rect bounds2, const char* text) : GuiControl(GuiControlType::BUTTON, id)
+GuiCheckBox::GuiCheckBox(uint32 id, SDL_Rect bounds, SDL_Rect bounds2, const char* text) : GuiControl(GuiControlType::BUTTON, id), click(false)
 {
 	this->bounds = bounds;
 	this->bounds2 = bounds2;

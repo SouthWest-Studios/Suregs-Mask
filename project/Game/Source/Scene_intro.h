@@ -37,6 +37,7 @@ public:
 
 private:
 	SDL_Texture* placeholder;
+	Timer timerIntro;
 	int sus;
 };
 

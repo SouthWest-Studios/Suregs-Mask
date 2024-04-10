@@ -13,6 +13,8 @@
 #include "Log.h"
 #include "GuiControl.h"
 #include "GuiManager.h"
+#include "GuiControlSlider.h"
+#include "GuiCheckBox.h"
 
 Scene_menu::Scene_menu(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -36,9 +38,10 @@ bool Scene_menu::Awake(pugi::xml_node config)
 bool Scene_menu::Start()
 {
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
-	placeholder = app->tex->Load("Assets/Textures/suscat.jpg");
+	placeholderMenu = app->tex->Load("Assets/Textures/suscat.jpg");
 	placeholderSettings = app->tex->Load("Assets/Textures/suscat2.jpg");
 	placeholderCredits = app->tex->Load("Assets/Textures/suscat3.jpg");
+
 	//AQUÍ CARGAR TODAS LAS TEXTURAS DEL MENÚ (cuando las tengamos xd)
 	//app->guiManager->Disable(); (si se hace la intro en el mismo doc(creo))
 
@@ -73,7 +76,7 @@ bool Scene_menu::Update(float dt)
 {
 
 	OPTICK_EVENT();
-	app->render->DrawTexture(placeholder, 0, 0);
+	app->render->DrawTexture(placeholderMenu, 0, 0);
 	if (showSettings && !_showSettings) {
 		SettingsInterface();
 	}
@@ -92,8 +95,8 @@ bool Scene_menu::PostUpdate()
 {
 	
 	bool ret = true;
-	/*if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		ret = false;*/
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+		ret = false;
 
 	return ret;
 }
@@ -135,7 +138,7 @@ bool Scene_menu::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 
 	case 5:
-		//app->closeApplication = true;  ESTO ESTÁ RARO
+		app->closeApplication = true; 
 		break;
 
 	case 105:
@@ -155,6 +158,28 @@ bool Scene_menu::OnGuiMouseClickEvent(GuiControl* control)
 		app->guiManager->DestroyGuiControl(gcCloseCredits);
 		break;
 
+	case 1011:
+
+		/*app->audio->musicVolumne = ((GuiControlSlider*)control)->value;*/
+
+		break;
+
+	case 1021:
+		/*app->audio->sfvVolumne = ((GuiControlSlider*)control)->value;*/
+		break;
+
+	case 1031:
+		Fullscreen();
+		break;
+
+	case 1041:
+		/*if (app->render->vsync)
+		{
+
+			((GuiCheckBox*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->click = false;
+			
+		}*/
+
 	default:
 		break;
 	}
@@ -171,12 +196,38 @@ void Scene_menu::SettingsInterface()
 	{
 		control->data->state = GuiControlState::DISABLED;
 	}
-	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 105, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 150,	136,46 }, this));
-	_showSettings = true;
-}
 
-void Scene_menu::ShowSettingsInterface()
-{
+	//SETTINGS
+
+	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 1011, "", SDL_Rect{ (int)windowW / 2 + 60,	(int)windowH / 2 - 10,	120,20 }, this));
+	/*((GuiControlSlider*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->value = app->audio->musicVolumne;*/
+	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 1021, "", SDL_Rect{ (int)windowW / 2 + 60,	(int)windowH / 2 + 50,	120,20 }, this));
+	/*((GuiControlSlider*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->value = app->audio->sfvVolumne;*/
+	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 1031, "", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH / 2 + 180,	20,20 }, this));
+
+	if (app->fullscreen)
+	{
+		((GuiCheckBox*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->click = true;
+	}
+	else
+	{
+		((GuiCheckBox*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->click = false;
+	}
+
+	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 1041, "", SDL_Rect{ (int)windowW / 2 + 80,	(int)windowH / 2 + 180,	20,20 }, this));
+
+	if (app->render->vsync)
+	{
+		((GuiCheckBox*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->click = true;
+	}
+	else
+	{
+		((GuiCheckBox*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->click = false;
+	}
+
+	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 105, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 150,	136,46 }, this));
+
+	_showSettings = true;
 }
 
 void Scene_menu::ShowCredits()

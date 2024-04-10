@@ -121,6 +121,7 @@ public:
 	Menu* menu;
 
 	bool closeApplication = false;
+	bool fullscreen = false;
 
 private:
 

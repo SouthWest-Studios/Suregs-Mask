@@ -38,7 +38,6 @@ public:
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
 	void SettingsInterface();
-	void ShowSettingsInterface();
 	void ShowCredits();
 	void DestroySettingsInterface();
 
@@ -47,11 +46,11 @@ public:
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
 
-private:
-
-	SDL_Texture* placeholder;
+	SDL_Texture* placeholderMenu;
 	SDL_Texture* placeholderSettings;
 	SDL_Texture* placeholderCredits;
+
+private:
 
 	uint windowW, windowH;
 	List<GuiControl*> controlsScene;

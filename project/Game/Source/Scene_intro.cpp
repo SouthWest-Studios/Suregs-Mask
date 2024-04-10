@@ -37,6 +37,7 @@ bool Scene_intro::Start()
 {
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	placeholder = app->tex->Load("Assets/Textures/intro_textura.png");
+	timerIntro.Start();
 	//sus = app->audio->LoadAudioFx("sus");
 	app->audio->PlayFx(sus);
 
@@ -58,6 +59,12 @@ bool Scene_intro::Update(float dt)
 
 	OPTICK_EVENT();
 	
+	if (timerIntro.ReadSec() < 2) {
+		app->render->DrawTexture(placeholder, 0, 0);
+	}
+	else {
+		app->fadeToBlack->FadeToBlack(this, app->scene_menu, 90);
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
 		app->fadeToBlack->FadeToBlack(this, app->scene_menu, 90);
