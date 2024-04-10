@@ -40,6 +40,7 @@ public:
 	int minId;
 
 	int pointerId = 1;
+	int columnSize;
 
 	List<GuiControl*> guiControlsList;
 	SDL_Texture* texture;

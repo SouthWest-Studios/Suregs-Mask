@@ -141,21 +141,23 @@ bool Scene_menu::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 4:
 		showCredits = true;
-		app->guiManager->minId = 106;
-		app->guiManager->maxId = 106;
+		app->guiManager->minId = 12;
+		app->guiManager->maxId = 12;
 		break;
 
 	case 5:
 		app->closeApplication = true; 
 		break;
 
-	case 105:
+	case 11:
 		showSettings = false;
 		_showSettings = false;
 		DestroySettingsInterface();
+		app->guiManager->minId = 1;
+		app->guiManager->maxId = 5;
 		break;
 
-	case 106:
+	case 12:
 		showCredits = false;
 		_showCredits = false;
 		ListItem<GuiControl*>* controlA;
@@ -209,11 +211,11 @@ void Scene_menu::SettingsInterface()
 
 	//SETTINGS
 
-	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 1011, "", SDL_Rect{ (int)windowW / 2 + 60,	(int)windowH / 2 - 10,	120,20 }, this));
+	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 7, "", SDL_Rect{ (int)windowW / 2 + 60,	(int)windowH / 2 - 10,	120,20 }, this));
 	/*((GuiControlSlider*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->value = app->audio->musicVolumne;*/
-	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 1021, "", SDL_Rect{ (int)windowW / 2 + 60,	(int)windowH / 2 + 50,	120,20 }, this));
+	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 8, "", SDL_Rect{ (int)windowW / 2 + 60,	(int)windowH / 2 + 50,	120,20 }, this));
 	/*((GuiControlSlider*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->value = app->audio->sfvVolumne;*/
-	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 1031, "", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH / 2 + 180,	20,20 }, this));
+	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 9, "", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH / 2 + 180,	20,20 }, this));
 
 	if (app->fullscreen)
 	{
@@ -224,7 +226,7 @@ void Scene_menu::SettingsInterface()
 		((GuiCheckBox*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->click = false;
 	}
 
-	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 1041, "", SDL_Rect{ (int)windowW / 2 + 80,	(int)windowH / 2 + 180,	20,20 }, this));
+	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 10, "", SDL_Rect{ (int)windowW / 2 + 80,	(int)windowH / 2 + 180,	20,20 }, this));
 
 	if (app->render->vsync)
 	{
@@ -235,7 +237,7 @@ void Scene_menu::SettingsInterface()
 		((GuiCheckBox*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->click = false;
 	}
 
-	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 105, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 150,	136,46 }, this));
+	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 150,	136,46 }, this));
 
 	_showSettings = true;
 }
@@ -249,7 +251,7 @@ void Scene_menu::ShowCredits()
 			control->data->state = GuiControlState::DISABLED;
 		}
 
-		gcCloseCredits = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 106, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 150,	136,46 }, this);
+		gcCloseCredits = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 150,	136,46 }, this);
 		_showCredits = true;
 	}
 
