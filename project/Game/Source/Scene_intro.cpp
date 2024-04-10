@@ -59,7 +59,7 @@ bool Scene_intro::Update(float dt)
 
 	OPTICK_EVENT();
 	
-	if (timerIntro.ReadSec() < 2) {
+	if (timerIntro.ReadSec() < 10) {
 		app->render->DrawTexture(placeholder, 0, 0);
 	}
 	else {
