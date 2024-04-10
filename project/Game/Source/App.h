@@ -28,6 +28,7 @@ class Physics;
 class GuiManager;
 class DebugConsole;
 class DialogManager;
+class InventoryManager;
 class Menu;
 
 class App
@@ -118,6 +119,7 @@ public:
 	GuiManager* guiManager;
 	DebugConsole* debugConsole;
 	DialogManager* dialogManager;
+	InventoryManager* inventoryManager;
 	Menu* menu;
 
 	bool closeApplication = false;

@@ -1,14 +1,16 @@
 <dialogues>
-	<dialog id="0" texturepath="Assets/Textures/player2.png" facetexturepath="Assets/Textures/player2_face.png" name="El gracioso">
+	<dialog id="0" texturepath="Assets/Textures/group1.png" facetexturepath="Assets/Textures/group1.png" name="Dorothy, Hely y Pathy">
 		<sentences>
 			<sentence text="Frase 1"/>
 			<sentence text="Frase 2"/>
+			<sentence text="Frase 3"/>
 		</sentences>
 	</dialog>
-	<dialog id="1" texturepath="Assets/Textures/player2.png" facetexturepath="Assets/Textures/player2_face.png" name="El guillem">
+	<dialog id="1" texturepath="Assets/Textures/group1.png" facetexturepath="Assets/Textures/group1.png" name="Dorothy, Hely y Pathy">
 		<sentences>
-			<sentence text="mujeres mujeres mujeres mujeres"/>
-			<sentence text="Si esque para que conducen... - Guillem Montes, 12 Marzo 2024, Terrassa"/>
+			<sentence text="Hola Jakhov, ¡hay que ver como creces!"/>
+			<sentence text="¿Vas al entrenamiento? Creo que ya te están esperando."/>
+			<sentence text="No te molestamos más, ¡cuando salgas podemos seguir hablando!"/>
 		</sentences>
 	</dialog>
 </dialogues>

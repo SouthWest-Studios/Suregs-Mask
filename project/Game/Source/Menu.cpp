@@ -8,8 +8,12 @@
 #include "Log.h"
 #include "GuiControl.h"
 #include "GuiCheckBox.h"
+#include "GuiControlButton.h"
 #include "GuiManager.h"
 #include "Menu.h"
+#include "Scene_menu.h"
+#include "Scene_Testing.h"
+#include "ModuleFadeToBlack.h"
 
 Menu::Menu(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -167,8 +171,11 @@ bool Menu::Update(float dt)
 		}
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 		{
-			
 			vsync->click = !vsync->click;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
+		{
+			title->click = true;
 		}
 	}
 	
@@ -192,6 +199,15 @@ bool Menu::Update(float dt)
 	if (vsync != nullptr && vsync->click == false)
 	{
 		vsyncActive = false;
+	}
+	if (title != nullptr && title->click == true)
+	{
+		/*app->scene_menu->active = true;*/
+		menuu = false;
+		/*app->guiManager->active = false;*/
+		/*app->scene_testing->active = false;*/
+		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu);
+		title->click = false;
 	}
 
 

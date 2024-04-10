@@ -35,7 +35,8 @@ bool Espada::Start() {
 	// L07 DONE 4: Add a physics to an item - initialize the physics body
 	app->tex->GetSize(texture, texW, texH);
 	pbody = app->physics->CreateCircle(position.x, position.y, 11, bodyType::STATIC);
-	
+	pbody->ctype = ColliderType::RESOURCE_ESPADA;
+	pbody->listener = this;
 
 
 	return true;
@@ -62,6 +63,8 @@ bool Espada::PostUpdate()
 
 bool Espada::CleanUp()
 {
+	app->physics->GetWorld()->DestroyBody(pbody->body);
+	SDL_DestroyTexture(texture);
 	return true;
 }
 

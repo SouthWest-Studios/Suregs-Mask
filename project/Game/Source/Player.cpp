@@ -6,6 +6,7 @@
 #include "Render.h"
 #include "Scene_Testing.h"
 #include "Log.h"
+#include "InventoryManager.h"
 #include "Point.h"
 #include "Physics.h"
 #include "Window.h"
@@ -202,6 +203,16 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 		}
 	break;
+	case ColliderType::RESOURCE_ESPADA:
+		LOG("Collision ESPADA");
+		if (physB->listener->active) {
+			app->inventoryManager->CreateItem(physB->listener->type, 0, 0, 0, 0, 0, 0);
+			physB->listener->active = false;
+			app->entityManager->DestroyEntity(physB->listener);
+			physB->body->SetActive(false);
+		}
+
+		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;

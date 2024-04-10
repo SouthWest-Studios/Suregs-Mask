@@ -19,6 +19,8 @@ public:
 
 	bool PostUpdate();
 
+	bool click = false;
+
 	void NavigateUp(GuiControl* control);
 
 private:
@@ -26,9 +28,10 @@ private:
 	int pointerId = 1;
 	bool selected;
 	int mouseX, mouseY;
-	unsigned int click;
+	/*unsigned int click;*/
 
 	bool canClick = true;
+	
 	bool drawBasic = false;
 };
 
