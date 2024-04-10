@@ -10,6 +10,8 @@ GuiControlButton::GuiControlButton(uint32 id, SDL_Rect bounds, const char* text)
 
 	canClick = true;
 	drawBasic = false;
+
+	select_audio = app->audio->LoadAudioFx("select_fx");
 }
 
 GuiControlButton::~GuiControlButton()
@@ -44,6 +46,8 @@ bool GuiControlButton::PostUpdate()
 			if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) {
 				NotifyObserver();
 				click = true;
+
+				app->audio->PlayFx(select_audio);
 			}
 		}
 		else {

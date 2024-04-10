@@ -77,6 +77,9 @@ private:
 	GuiControlButton* cruz;
 	GuiControlSlider* music;
 	GuiControlSlider* sfx;
+
+	int inventory_audio;
+	int change_inventory_audio;
 };
 
 #endif // __MENU_H__

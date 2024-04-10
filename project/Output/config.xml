@@ -25,13 +25,17 @@
 
 	<sounds>
 		<music>
-			<intro path="Assets/Audio/Music/o-herbologista.ogg"/>
+			<menu path="Assets/Audio/Music/o-herbologista.ogg"/>
       <town path="Assets/Audio/Music/Entre las Sombras.ogg"/>
 		</music>
 
 		<fx>
-			<sus path="Assets/Audio/Fx/sus-amongus-d.wav"/>
-      <click path="Assets/Audio/Fx/ui-click-43196.wav"/>
+			<intro_fx path="Assets/Audio/Fx/.wav"/>
+      <menu_fx path="Assets/Audio/Fx/.wav"/>
+      <button_fx path="Assets/Audio/Fx/mixkit-fast-sword-whoosh-2792.wav"/>
+      <select_fx path="Assets/Audio/Fx/mixkit-arrow-shot-through-air-2771.wav"/>
+      <inventory_fx path="Assets/Audio/Fx/backpack-34942.wav"/>
+      <change_inventory_fx path="Assets/Audio/Fx/turnpage-99756.wav"/>
 		</fx>
 	</sounds>
 	<entities_data>

@@ -30,6 +30,8 @@ private:
 	bool canClick = true;
 	
 	bool drawBasic = false;
+
+	int select_audio;
 };
 
 #endif // __GUICONTROLBUTTON_H__

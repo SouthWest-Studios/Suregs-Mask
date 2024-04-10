@@ -44,6 +44,8 @@ public:
 	List<GuiControl*> guiControlsList;
 	SDL_Texture* texture;
 
+	int button_audio;
+
 };
 
 #endif // __GUIMANAGER_H__

@@ -17,6 +17,8 @@ GuiManager::~GuiManager() {}
 
 bool GuiManager::Start()
 {
+	button_audio = app->audio->LoadAudioFx("button_fx");
+
 	return true;
 }
 
@@ -69,9 +71,11 @@ bool GuiManager::Update(float dt)
 	if (app->scene_menu->active || app->menu->menuu) {
 		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
 			NavigateUp();
+			app->audio->PlayFx(button_audio);
 		}
 		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
 			NavigateDown();
+			app->audio->PlayFx(button_audio);
 		}
 	}
 

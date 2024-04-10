@@ -16,9 +16,6 @@
     <ClCompile Include="Source\Audio.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Source\EntityManager.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
     <ClCompile Include="Source\GuiManager.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
@@ -108,6 +105,9 @@
     </ClCompile>
     <ClCompile Include="Source\Espada.cpp">
       <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EntityManager.cpp">
+      <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

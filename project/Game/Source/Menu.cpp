@@ -42,6 +42,9 @@ bool Menu::Start()
 	fondoEquipo = app->tex->Load("Assets/Textures/Interfaz/Equipo.png");
 	fondoDiario = app->tex->Load("Assets/Textures/Interfaz/Diario.png");
 	fondoAjustes = app->tex->Load("Assets/Textures/Interfaz/Ajustes.png");
+
+	inventory_audio = app->audio->LoadAudioFx("inventory_fx");
+	change_inventory_audio = app->audio->LoadAudioFx("change_inventory_fx");
 	
 
 	return true;
@@ -60,6 +63,8 @@ bool Menu::Update(float dt)
 	{
 
 		menuu = !menuu;
+
+		app->audio->PlayFx(inventory_audio);
 	}
 	if (menuu)
 	{
@@ -81,6 +86,7 @@ bool Menu::Update(float dt)
 				ventana++;
 			}
 
+			app->audio->PlayFx(change_inventory_audio);
 		}
 	}
 	else {
