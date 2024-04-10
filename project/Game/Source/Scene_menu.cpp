@@ -62,6 +62,7 @@ bool Scene_menu::Start()
 
 	app->guiManager->minId = 1;
 	app->guiManager->maxId = 5;
+	app->guiManager->columnSize = 0;
 
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;

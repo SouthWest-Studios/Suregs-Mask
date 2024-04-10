@@ -77,6 +77,14 @@ bool GuiManager::Update(float dt)
 			NavigateDown();
 			app->audio->PlayFx(button_audio);
 		}
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN) {
+			NavigateRight();
+			app->audio->PlayFx(button_audio);
+		}
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) {
+			NavigateLeft();
+			app->audio->PlayFx(button_audio);
+		}
 	}
 
 	return true;
@@ -147,6 +155,44 @@ void GuiManager::NavigateDown()
 		control->selected = false;
 	}
 	pointerId++;
+	if (pointerId > maxId) {
+		pointerId = minId;
+	}
+	//Boton con id pointerId se selecciona
+	control = GetControlById(pointerId);
+	if (control != nullptr) {
+		control->selected = true;
+	}
+}
+
+void GuiManager::NavigateRight()
+{
+	GuiControl* control = nullptr;
+	//Boton con id pointerId se deselecciona
+	control = GetControlById(pointerId);
+	if (control != nullptr) {
+		control->selected = false;
+	}
+	pointerId+=columnSize;
+	if (pointerId > maxId) {
+		pointerId = minId;
+	}
+	//Boton con id pointerId se selecciona
+	control = GetControlById(pointerId);
+	if (control != nullptr) {
+		control->selected = true;
+	}
+}
+
+void GuiManager::NavigateLeft()
+{
+	GuiControl* control = nullptr;
+	//Boton con id pointerId se deselecciona
+	control = GetControlById(pointerId);
+	if (control != nullptr) {
+		control->selected = false;
+	}
+	pointerId -= columnSize;
 	if (pointerId > maxId) {
 		pointerId = minId;
 	}

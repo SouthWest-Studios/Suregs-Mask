@@ -33,6 +33,8 @@ public:
 	void DestroyGuiControl(GuiControl* controlToDestroy);
 	void NavigateUp();
 	void NavigateDown();
+	void NavigateRight();
+	void NavigateLeft();
 	GuiControl* GetControlById(int id);
 
 public:
@@ -40,7 +42,7 @@ public:
 	int minId;
 
 	int pointerId = 1;
-	int columnSize;
+	int columnSize = 0;
 
 	List<GuiControl*> guiControlsList;
 	SDL_Texture* texture;
