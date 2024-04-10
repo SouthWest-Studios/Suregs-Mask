@@ -192,6 +192,9 @@ void Enemy_Osiris::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision PLAYER");
 		//restar vida al player
 		break;
+	case ColliderType::PLAYER_ATTACK:
+		LOG("Collision Player_Attack");
+		nextState = EntityState::DEAD;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;
