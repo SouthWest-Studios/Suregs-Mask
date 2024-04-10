@@ -43,6 +43,7 @@ bool GuiControlButton::PostUpdate()
 
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP) {
 				NotifyObserver();
+				click = true;
 			}
 		}
 		else {
@@ -69,6 +70,7 @@ bool GuiControlButton::PostUpdate()
 		app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h);
 
 	}
+	
 
 	return false;
 }

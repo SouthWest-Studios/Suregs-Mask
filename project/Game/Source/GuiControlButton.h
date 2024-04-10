@@ -19,12 +19,15 @@ public:
 
 	bool PostUpdate();
 
+	bool click = false;
+
 private:
 
 	int mouseX, mouseY;
-	unsigned int click;
+	/*unsigned int click;*/
 
 	bool canClick = true;
+	
 	bool drawBasic = false;
 };
 
