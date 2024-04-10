@@ -83,6 +83,8 @@ public:
 
 public:
 
+	bool selected = false;
+
 	uint32 id;
 	GuiControlType type;
 	GuiControlState state;

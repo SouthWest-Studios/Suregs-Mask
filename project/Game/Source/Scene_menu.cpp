@@ -114,7 +114,7 @@ bool Scene_menu::CleanUp()
 	return true;
 }
 
-bool Scene_menu::OnGuiMouseClickEvent(GuiControl* control)
+bool Scene_menu::OnSelect(GuiControl* control)
 {
 	LOG("Press Gui Control: %d", control->id);
 

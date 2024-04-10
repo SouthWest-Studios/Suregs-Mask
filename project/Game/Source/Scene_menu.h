@@ -35,7 +35,7 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	bool OnGuiMouseClickEvent(GuiControl* control);
+	bool OnSelect(GuiControl* control);
 
 	void SettingsInterface();
 	void ShowCredits();
@@ -50,12 +50,14 @@ public:
 	SDL_Texture* placeholderSettings;
 	SDL_Texture* placeholderCredits;
 
-private:
-
-	uint windowW, windowH;
 	List<GuiControl*> controlsScene;
 	List<GuiControl*> controlsSettings;
 	GuiControl* gcCloseCredits;
+
+private:
+
+	uint windowW, windowH;
+	
 
 	bool showSettings = false;
 	bool _showSettings = false;
