@@ -50,6 +50,7 @@ bool Scene_menu::Start()
 
 	//Añadir los controles a una lista 
 	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "NUEVA PARTIDA", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 - 30 - 30,	136,46 }, this));
+	controlsScene.end->data->selected = true;
 	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "CONTINUAR", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 + 40 - 30,	136,46 }, this));
 	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "AJUSTES", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 + 110 - 30,	136,46 }, this));
 	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "CRÉDITOS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 + 180 - 30,	136,46 }, this));
@@ -58,6 +59,9 @@ bool Scene_menu::Start()
 
 	app->audio->LoadAudioMusic("intro", 1.0f);
 	//app->audio->PlayMusic("PATH DE MUSICA MENU AQUÍ")
+
+	app->guiManager->minId = 1;
+	app->guiManager->maxId = 5;
 
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
@@ -114,7 +118,7 @@ bool Scene_menu::CleanUp()
 	return true;
 }
 
-bool Scene_menu::OnSelect(GuiControl* control)
+bool Scene_menu::OnGuiMouseClickEvent(GuiControl* control)
 {
 	LOG("Press Gui Control: %d", control->id);
 
@@ -131,10 +135,14 @@ bool Scene_menu::OnSelect(GuiControl* control)
 
 	case 3:
 		showSettings = true;
+		app->guiManager->minId = 6;
+		app->guiManager->maxId = 11;
 		break;
 
 	case 4:
 		showCredits = true;
+		app->guiManager->minId = 106;
+		app->guiManager->maxId = 106;
 		break;
 
 	case 5:
@@ -156,6 +164,8 @@ bool Scene_menu::OnSelect(GuiControl* control)
 			controlA->data->state = GuiControlState::NORMAL;
 		}
 		app->guiManager->DestroyGuiControl(gcCloseCredits);
+		app->guiManager->minId = 1;
+		app->guiManager->maxId = 5;
 		break;
 
 	case 1011:

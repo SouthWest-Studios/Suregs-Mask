@@ -51,6 +51,8 @@ public:
 	bool SaveState(pugi::xml_node node);
 
 	bool vsyncActive = false;
+	bool visible = true;
+	bool menuu = false;
 
 private:
 	SDL_Texture* fondoInventario;
@@ -58,9 +60,8 @@ private:
 	SDL_Texture* fondoDiario;
 	SDL_Texture* fondoAjustes;
 	
-	bool visible = true;
 
-	bool menuu = false;
+	
 	int contadormenu = 0;
 	bool menuusettings = false;
 	bool fullScreenActive = false;

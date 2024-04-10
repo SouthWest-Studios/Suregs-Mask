@@ -35,7 +35,7 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	bool OnSelect(GuiControl* control);
+	bool OnGuiMouseClickEvent(GuiControl* control);
 
 	void SettingsInterface();
 	void ShowCredits();

@@ -31,8 +31,15 @@ public:
 	GuiControl* CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Module* observer, SDL_Rect sliderBounds = {0,0,0,0}, SDL_Rect bounds2 = { 0,0,0,0 }, int minValue = 0, int maxValue = 0 );
 
 	void DestroyGuiControl(GuiControl* controlToDestroy);
+	void NavigateUp();
+	void NavigateDown();
+	GuiControl* GetControlById(int id);
 
 public:
+	int maxId;
+	int minId;
+
+	int pointerId = 1;
 
 	List<GuiControl*> guiControlsList;
 	SDL_Texture* texture;

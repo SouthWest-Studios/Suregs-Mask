@@ -5,6 +5,8 @@
 #include "GuiControlButton.h"
 #include "GuiControlSlider.h"
 #include "Audio.h"
+#include "Scene_menu.h"
+#include "Menu.h"
 
 GuiManager::GuiManager(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -64,6 +66,15 @@ bool GuiManager::Update(float dt)
 		control = control->next;
 	}
 
+	if (app->scene_menu->active || app->menu->menuu) {
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
+			NavigateUp();
+		}
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
+			NavigateDown();
+		}
+	}
+
 	return true;
 }
 
@@ -103,6 +114,58 @@ void GuiManager::DestroyGuiControl(GuiControl* controlToDestroy)
 		}
 	}
 }
+
+void GuiManager::NavigateUp()
+{
+	GuiControl* control = nullptr;
+	//Boton con id pointerId se deselecciona
+	control = GetControlById(pointerId);
+	if (control != nullptr) {
+		control->selected = false;
+	}
+	pointerId--;
+	if (pointerId < minId) {
+		pointerId = maxId;
+	}
+	//Boton con id pointerId se selecciona
+	control = GetControlById(pointerId);
+	if (control != nullptr) {
+		control->selected = true;
+	}
+}
+
+void GuiManager::NavigateDown()
+{
+	GuiControl* control = nullptr;
+	//Boton con id pointerId se deselecciona
+	control = GetControlById(pointerId);
+	if (control != nullptr) {
+		control->selected = false;
+	}
+	pointerId++;
+	if (pointerId > maxId) {
+		pointerId = minId;
+	}
+	//Boton con id pointerId se selecciona
+	control = GetControlById(pointerId);
+	if (control != nullptr) {
+		control->selected = true;
+	}
+}
+
+GuiControl* GuiManager::GetControlById(int id)
+{
+	ListItem<GuiControl*>* control;
+	for (control = guiControlsList.start; control != NULL; control = control->next) {
+		if (id == control->data->id) {
+			return control->data;
+		}
+	}
+
+	return nullptr;
+}
+
+
 
 
 

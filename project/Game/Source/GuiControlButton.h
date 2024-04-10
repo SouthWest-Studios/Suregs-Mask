@@ -21,12 +21,9 @@ public:
 
 	bool click = false;
 
-	void NavigateUp(GuiControl* control);
-
 private:
 	
-	int pointerId = 1;
-	bool selected;
+	
 	int mouseX, mouseY;
 	/*unsigned int click;*/
 

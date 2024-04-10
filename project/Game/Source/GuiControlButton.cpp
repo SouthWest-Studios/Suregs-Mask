@@ -75,12 +75,5 @@ bool GuiControlButton::PostUpdate()
 	return false;
 }
 
-void GuiControlButton::NavigateUp(GuiControl* control)
-{
-	control->selected = false;
-	pointerId--;
-}
-
-
 
 
