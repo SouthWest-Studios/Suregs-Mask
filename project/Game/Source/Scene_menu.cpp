@@ -43,7 +43,7 @@ bool Scene_menu::Start()
 	placeholderCredits = app->tex->Load("Assets/Textures/suscat3.jpg");
 
 	//AQUÍ CARGAR TODAS LAS TEXTURAS DEL MENÚ (cuando las tengamos xd)
-	//app->guiManager->Disable(); (si se hace la intro en el mismo doc(creo))
+	
 
 	//Get window size
 	app->win->GetWindowSize(windowW, windowH);

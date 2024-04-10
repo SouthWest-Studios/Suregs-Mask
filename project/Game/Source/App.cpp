@@ -13,6 +13,7 @@
 #include "ModuleFadeToBlack.h"
 #include "DebugConsole.h"
 #include "DialogManager.h"
+#include "InventoryManager.h"
 #include "Menu.h"
 #include "Optick/include/optick.h"
 
@@ -48,9 +49,11 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	scene_testing = new Scene_testing(this, false);
 	map = new Map(this, false);
 	entityManager = new EntityManager(this);
+	inventoryManager = new InventoryManager(this);
 	guiManager = new GuiManager(this);
 	debugConsole = new DebugConsole(this);
 	dialogManager = new DialogManager(this);
+	
 	menu = new Menu(this);
 
 	// Ordered for awake / Start / Update
@@ -68,6 +71,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(scene_testing);
 	AddModule(entityManager);
 	AddModule(menu);
+	AddModule(inventoryManager);
 	AddModule(guiManager);
 	AddModule(dialogManager);
 	AddModule(fadeToBlack);
