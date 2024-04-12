@@ -43,9 +43,9 @@ bool NPCVendedor::Start() {
 
 	idleAnim.LoadAnim("npc_vendedor", "idleAnim", spritePositions);
 
+	std::string texturePath = config.attribute("texturePath").as_string();
 
-
-	texture = app->tex->Load(config.attribute("texturePath").as_string());
+	texture = app->tex->Load(texturePath.c_str());
 
 	//pbody = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
 	//pbody->entity = this;
