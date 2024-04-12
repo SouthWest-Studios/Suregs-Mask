@@ -61,7 +61,7 @@ bool NPCVendedor::Start() {
 
 bool NPCVendedor::Update(float dt)
 {
-	nextState = EntityState::IDLE;
+	//nextState = EntityState::IDLE;
 
 
 	currentAnimation->Update();

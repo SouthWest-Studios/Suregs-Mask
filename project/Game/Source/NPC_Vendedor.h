@@ -10,11 +10,11 @@
 struct SDL_Texture;
 
 
-struct Branch {
-	enum EntityState const next_state;
-	//Branch() : next_state(EntityState::STATE_COUNT) {}
-
-};
+//struct Branch {
+//	enum EntityState const next_state;
+//	//Branch() : next_state(EntityState::STATE_COUNT) {}
+//
+//};
 
 class NPCVendedor : public Entity
 {
@@ -70,19 +70,18 @@ private:
 
 public:
 
-	Branch transitionTable[static_cast<int>(EntityState::STATE_COUNT)][static_cast<int>(EntityState::STATE_COUNT)] = {
-		// isMoving               isAttacking						 isDead                else                MASK_ATTACK
-		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // IDLE
-		//{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // RUNNING
-		//{ {EntityState::IDLE},	  {EntityState::IDLE},		{EntityState::DEAD}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // ATTACKING
-		//{ {EntityState::DEAD},	  {EntityState::DEAD},		{EntityState::DEAD}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // DEAD
-		//{ {EntityState::IDLE},	  {EntityState::IDLE},	    {EntityState::DEAD}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}} // MASK_ATTACK
-	};
+	//Branch transitionTable[static_cast<int>(EntityState::STATE_COUNT)][static_cast<int>(EntityState::STATE_COUNT)] = {
+	//	{EntityState::RUNNING, EntityState::ATTACKING, EntityState::DEAD, EntityState::IDLE, EntityState::MASK_ATTACK}, // IDLE
+	//	{EntityState::RUNNING, EntityState::ATTACKING, EntityState::DEAD, EntityState::IDLE, EntityState::MASK_ATTACK}, // RUNNING
+	//	{EntityState::IDLE, EntityState::IDLE, EntityState::DEAD, EntityState::IDLE, EntityState::MASK_ATTACK}, // ATTACKING
+	//	{EntityState::DEAD, EntityState::DEAD, EntityState::DEAD, EntityState::IDLE, EntityState::MASK_ATTACK}, // DEAD
+	//	{EntityState::IDLE, EntityState::IDLE, EntityState::DEAD, EntityState::IDLE, EntityState::MASK_ATTACK} // MASK_ATTACK
+	//};
 
-	EntityState currentState = state;
+	//EntityState currentState = state;
 
 
-	EntityState nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(currentState)].next_state;
+	//EntityState nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(currentState)].next_state;
 
 };
 

@@ -119,6 +119,7 @@
     <ClCompile Include="Source\ModuleFadeToBlack.cpp" />
     <ClCompile Include="Source\Enemy_Ols.cpp" />
     <ClCompile Include="Source\Enemy_Osiris.cpp" />
+    <ClCompile Include="Source\NPC_Vendedor.cpp" />
     <ClCompile Include="Source\Pathfinding.cpp" />
     <ClCompile Include="Source\PerfTimer.cpp" />
     <ClCompile Include="Source\Physics.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="Source\ModuleFadeToBlack.h" />
     <ClInclude Include="Source\Enemy_Ols.h" />
     <ClInclude Include="Source\Enemy_Osiris.h" />
+    <ClInclude Include="Source\NPC_Vendedor.h" />
     <ClInclude Include="Source\Pathfinding.h" />
     <ClInclude Include="Source\PerfTimer.h" />
     <ClInclude Include="Source\Physics.h" />

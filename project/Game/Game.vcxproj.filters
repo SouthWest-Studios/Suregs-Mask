@@ -109,6 +109,9 @@
     <ClCompile Include="Source\Cuerno.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Source\NPC_Vendedor.cpp">
+      <Filter>Entities\NPC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -270,6 +273,9 @@
     <ClInclude Include="Source\CuernoInv.h">
       <Filter>Inventory</Filter>
     </ClInclude>
+    <ClInclude Include="Source\NPC_Vendedor.h">
+      <Filter>Entities\NPC</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -310,6 +316,9 @@
     </Filter>
     <Filter Include="Inventory">
       <UniqueIdentifier>{e25e82e0-d2c5-414e-ab44-ad5e3f6f1c77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\NPC">
+      <UniqueIdentifier>{2142dd33-81d1-45e5-9822-3a15956c346a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

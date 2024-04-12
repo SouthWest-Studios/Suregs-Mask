@@ -19,6 +19,7 @@
 #include <vector>
 #include "DialogTriggerEntity.h"
 #include "Cuerno.h"
+#include "NPC_Vendedor.h"
 
 Map::Map(App* app, bool start_enabled) : Module(app, start_enabled), mapLoaded(false)
 {
@@ -773,6 +774,19 @@ bool Map::LoadEntities(std::string layerName)
 						app->entityManager->GetPlayer()->Start();
 
 					}
+
+					//NPC_VENDEDOR
+					if (gid == tileset->firstgid + 1) {
+
+
+						NPCVendedor* npc = (NPCVendedor*)app->entityManager->CreateEntity(EntityType::NPC_VENDEDOR);
+						npc->config = configNode.child("entities_data").child("npc_vendedor");
+						npc->position = iPoint(pos.x + 16, pos.y + 16);
+						npc->Start();
+
+					}
+
+
 
 					//OSIRIS
 					if (gid == tileset->firstgid + 20) {
