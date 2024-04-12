@@ -11,6 +11,7 @@
 #include "Player.h"
 #include "DialogTriggerEntity.h"
 #include "NPC_Vendedor.h"
+#include "Item_diamante.h"
 
 
 #include "Defs.h"
@@ -105,6 +106,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		break;
 	case EntityType::RESOURCE_CUERNO:
 		entity = new Cuerno(type, 1, 100, 300, 5, 2);
+		break;
+	case EntityType::ITEM_DIAMANTE:
+		entity = new Item_Diamante(type, 100, 100, 300, 5, 2);
 		break;
 	case EntityType::ITEM:
 		entity = new Item();

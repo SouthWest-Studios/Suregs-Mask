@@ -5,19 +5,20 @@
 #include "Input.h"
 #include "Render.h"
 #include "Scene_testing.h"
+#include "Item_Diamante.h"
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
 
-Cuerno::Cuerno(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
-	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::RESOURCE_CUERNO)
+Item_Diamante::Item_Diamante(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
+	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_DIAMANTE)
 {
-	name.Create("espada");
+	name.Create("item_diamante");
 }
 
-Cuerno::~Cuerno() {}
+Item_Diamante::~Item_Diamante() {}
 
-bool Cuerno::Awake() {
+bool Item_Diamante::Awake() {
 
 	
 	 
@@ -25,7 +26,7 @@ bool Cuerno::Awake() {
 	return true;
 }
 
-bool Cuerno::Start() {
+bool Item_Diamante::Start() {
 
 	//initilize textures
 	/*position.x = parameters.attribute("x").as_int();
@@ -35,15 +36,14 @@ bool Cuerno::Start() {
 	// L07 DONE 4: Add a physics to an item - initialize the physics body
 	app->tex->GetSize(texture, texW, texH);
 	pbody = app->physics->CreateCircle(position.x, position.y, 11, bodyType::STATIC);
-	pbody->ctype = ColliderType::RESOURCE_ESPADA;
+	pbody->ctype = ColliderType::RESOURCE_DIAMANTE;
 	pbody->listener = this;
-	pbody->body->GetFixtureList()->SetSensor(true);
 
 
 	return true;
 }
 
-bool Cuerno::Update(float dt)
+bool Item_Diamante::Update(float dt)
 {
 	// L07 DONE 4: Add a physics to an item - update the position of the object from the physics.  
 
@@ -56,13 +56,13 @@ bool Cuerno::Update(float dt)
 	return true;
 }
 
-bool Cuerno::PostUpdate()
+bool Item_Diamante::PostUpdate()
 {
 	app->render->DrawTexture(texture, position.x, position.y);
 	return true;
 }
 
-bool Cuerno::CleanUp()
+bool Item_Diamante::CleanUp()
 {
 	app->physics->GetWorld()->DestroyBody(pbody->body);
 	SDL_DestroyTexture(texture);

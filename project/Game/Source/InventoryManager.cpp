@@ -10,6 +10,7 @@
 #include "SwordInv.h"
 #include "CuernoInv.h"
 #include "ArmaduraInv.h"
+#include "DiamanteInv.h"
 #include "ItemInv.h"
 #include "Defs.h"
 #include "Log.h"
@@ -161,7 +162,44 @@ Inventity* InventoryManager::CreateItem(EntityType type, int id, int ataque, int
 		entity = cuerno;
 		break;
 	}
+	case EntityType::ITEM_DIAMANTE:
+	{
+		int newId = 0;
+		for (ListItem<Inventity*>* item = inventities.start; item != nullptr; item = item->next)
+		{
 
+			item->data->id = newId;
+			newId++;
+		}
+		/*for (ListItem<Inventity*>* item = inventities.start; item != NULL; item = item->next)
+		{
+			if (item->data->id > highestId)
+			{
+				highestId = item->data->id;
+			}
+		}*/
+		if (inventities.Count() > 0)
+		{
+			highestId = inventities.end->data->id;
+		}
+		else
+		{
+			highestId = -1;
+		}
+
+
+		DiamanteInv* diamante = new DiamanteInv();
+		diamante->id = highestId + 1;
+		diamante->type = InventityType::DIAMANTE;
+		diamante->stackable = true;
+		/*sword->damage = ataque;
+		sword->durability = durabilidad;
+		sword->magic = magia;
+		sword->weight = peso;*/
+		diamante->icon = app->tex->Load("Assets/Textures/Interfaz/diamante_inv.png");
+		entity = diamante;
+		break;
+	}
 	case EntityType::RESOURCE_ARMADURA:
 	{
 		for (ListItem<Inventity*>* item = inventities.start; item != NULL; item = item->next)
@@ -476,38 +514,66 @@ bool InventoryManager::PostUpdate()
 			if((pEntity->stackable))
 			{
 				std::string quantityStr = std::to_string(pEntity->quantity);
-				for (ListItem<Inventity*>* itam = inventities.start; itam != NULL && ret == true; itam = itam->next)
-				{
+				
+					if (pEntity->type == InventityType::CUERNO)
+					{
 
-					
+						if (pEntity->quantity > 1)
+						{
 
-							if (pEntity->quantity > 1)
+
+							if (item->data->id < 5)
 							{
-								
-								
-								if (itam->data->id < 5)
-								{
-									app->render->DrawText(quantityStr.c_str(), 320 + itam->data->id * 75, 260, 20, 20);
-								}
-								else
-								{
-									app->render->DrawText(quantityStr.c_str(), 485 + (itam->data->id-5) * 75, 420, 20, 20);
-								}
+								app->render->DrawText(quantityStr.c_str(), 320 + item->data->id * 75, 260, 20, 20);
 							}
+							else
 							{
-								if (itam->data->id < 5)
-								{
-									app->render->DrawTexture(pEntity->icon, 290 + pEntity->id * 75, 230, SDL_FLIP_NONE,0,0);
-								}
-								else
-								{
-									app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 75), 380, SDL_FLIP_NONE, 0, 0);
-								}
-								
+								app->render->DrawText(quantityStr.c_str(), 485 + (item->data->id - 5) * 75, 420, 20, 20);
+							}
+						}
+						{
+							if (item->data->id < 5)
+							{
+								app->render->DrawTexture(pEntity->icon, 290 + pEntity->id * 75, 230, SDL_FLIP_NONE, 0, 0);
+							}
+							else
+							{
+								app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 75), 380, SDL_FLIP_NONE, 0, 0);
 							}
 
-					
-				}
+						}
+
+					}
+					else if (pEntity->type == InventityType::DIAMANTE)
+					{
+
+						if (pEntity->quantity > 1)
+						{
+
+
+							if (item->data->id < 5)
+							{
+								app->render->DrawText(quantityStr.c_str(), 320 + item->data->id * 75, 260, 20, 20);
+							}
+							else
+							{
+								app->render->DrawText(quantityStr.c_str(), 485 + (item->data->id - 5) * 75, 420, 20, 20);
+							}
+						}
+						{
+							if (item->data->id < 5)
+							{
+								app->render->DrawTexture(pEntity->icon, 290 + pEntity->id * 75, 230, SDL_FLIP_NONE, 0, 0);
+							}
+							else
+							{
+								app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 75), 380, SDL_FLIP_NONE, 0, 0);
+							}
+
+						}
+
+					}
+				
 			}
 			else
 			{

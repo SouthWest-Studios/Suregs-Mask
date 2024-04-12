@@ -10,6 +10,7 @@ enum class InventityType
 {
 	ITEM,
 	CUERNO,
+	DIAMANTE,
 	ESPADA2,
 	ARMADURA,
 	UNKNOWN

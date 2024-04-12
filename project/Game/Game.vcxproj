@@ -110,6 +110,7 @@
     <ClCompile Include="Source\GuiManager.cpp" />
     <ClCompile Include="Source\InventoryManager.cpp" />
     <ClCompile Include="Source\Item.cpp" />
+    <ClCompile Include="Source\Item_Diamante.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\App.cpp" />
     <ClCompile Include="Source\Audio.cpp" />
@@ -142,6 +143,7 @@
     <ClInclude Include="Source\Dialog.h" />
     <ClInclude Include="Source\DialogManager.h" />
     <ClInclude Include="Source\DialogTriggerEntity.h" />
+    <ClInclude Include="Source\DiamanteInv.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\GuiCheckBox.h" />
@@ -153,6 +155,7 @@
     <ClInclude Include="Source\InventoryManager.h" />
     <ClInclude Include="Source\Item.h" />
     <ClInclude Include="Source\ItemInv.h" />
+    <ClInclude Include="Source\Item_Diamante.h" />
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\Menu.h" />
     <ClInclude Include="Source\ModuleFadeToBlack.h" />

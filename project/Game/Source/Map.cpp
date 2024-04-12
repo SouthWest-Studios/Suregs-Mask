@@ -20,6 +20,7 @@
 #include "DialogTriggerEntity.h"
 #include "Cuerno.h"
 #include "NPC_Vendedor.h"
+#include "Item_Diamante.h"
 
 Map::Map(App* app, bool start_enabled) : Module(app, start_enabled), mapLoaded(false)
 {
@@ -824,13 +825,19 @@ bool Map::LoadEntities(std::string layerName)
 					//CUERNO
 					if (gid == tileset->firstgid + 40) {
 						Cuerno* cuerno = (Cuerno*)app->entityManager->CreateEntity(EntityType::RESOURCE_CUERNO);
-						cuerno->config = configNode.child("entities_data").child("resource_cuerno");
+						cuerno->config = configNode.child("entities_data").child("item_cuerno");
 						cuerno->position = iPoint(pos.x + 16, pos.y + 16);
 						cuerno->Start();
 						
 
 					}
-
+					//DIAMANTE
+					if (gid == tileset->firstgid + 41) {
+						Item_Diamante* diamante = (Item_Diamante*)app->entityManager->CreateEntity(EntityType::ITEM_DIAMANTE);
+						diamante->config = configNode.child("entities_data").child("item_diamante");
+						diamante->position = iPoint(pos.x + 16, pos.y + 16);
+						diamante->Start();
+					}
 					////Monedas
 					//if (gid == tileset->firstgid) {
 					//	Coin* coin = (Coin*)app->entityManager->CreateEntity(EntityType::COIN);
