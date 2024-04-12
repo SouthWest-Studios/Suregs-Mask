@@ -49,6 +49,10 @@
 
 
 		<item x="1200" y="2600" texturePath="Assets/Textures/Entidades/Jugador/salamanda1.png" Tsprite="23" Pwidth="1000" sprite_x="100" sprite_y="160"/>
+
+
+		<npc_vendedor texturePath="Assets/Textures/Entidades/NPCs/general.png" Tsprite="9" Pwidth="138" sprite_x="138" sprite_y="1836"/>
+	
 	</entities_data>
 
 
@@ -88,6 +92,10 @@
 		<item>
 			<idleAnim start="0" end="23" speed="0.2f" loop="true"/>
 		</item>
+		
+		<npc_vendedor>
+			<idleAnim start="0" end="0" speed="1.0f" loop="false"/>
+		</npc_vendedor>
 
 	</animations>
 

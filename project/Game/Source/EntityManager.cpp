@@ -10,6 +10,7 @@
 #include "Scene_Testing.h"
 #include "Player.h"
 #include "DialogTriggerEntity.h"
+#include "NPC_Vendedor.h"
 
 
 #include "Defs.h"
@@ -110,6 +111,10 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		break;
 	case EntityType::DIALOG_TRIGGER:
 		entity = new DialogTrigger();
+		break;
+
+	case EntityType::NPC_VENDEDOR:
+		entity = new NPCVendedor();
 		break;
 
 	default:
