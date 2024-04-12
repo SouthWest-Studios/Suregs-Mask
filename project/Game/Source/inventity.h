@@ -9,7 +9,7 @@
 enum class InventityType
 {
 	ITEM,
-	ESPADA,
+	CUERNO,
 	ESPADA2,
 	ARMADURA,
 	UNKNOWN

@@ -103,11 +103,11 @@
     <ClCompile Include="Source\InventoryManager.cpp">
       <Filter>Inventory</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Espada.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Source\EntityManager.cpp">
       <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Cuerno.cpp">
+      <Filter>Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -264,8 +264,11 @@
     <ClInclude Include="Source\SwordInv.h">
       <Filter>Inventory</Filter>
     </ClInclude>
-    <ClInclude Include="Source\espada.h">
+    <ClInclude Include="Source\Cuerno.h">
       <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CuernoInv.h">
+      <Filter>Inventory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

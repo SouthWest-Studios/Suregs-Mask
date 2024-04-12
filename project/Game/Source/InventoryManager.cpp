@@ -8,9 +8,9 @@
 #include "Scene_testing.h"
 #include "inventity.h"
 #include "SwordInv.h"
+#include "CuernoInv.h"
 #include "ArmaduraInv.h"
 #include "ItemInv.h"
-#include "espada.h"
 #include "Defs.h"
 #include "Log.h"
 #include "SString.h"
@@ -48,10 +48,9 @@ bool InventoryManager::Awake(pugi::xml_node config)
 
 bool InventoryManager::Start() {
 
-	InventoryBackground = app->tex->Load("Assets/Textures/inventario.png");
-	PointerItemText = app->tex->Load("Assets/Textures/select.png");
-	SelectedItemText = app->tex->Load("Assets/Textures/selected.png");
-	EquipedItemText = app->tex->Load("Assets/Textures/equiped.png");
+	PointerItemText = app->tex->Load("Assets/Textures/Interfaz/select.png");
+	SelectedItemText = app->tex->Load("Assets/Textures/Interfaz/selected.png");
+	EquipedItemText = app->tex->Load("Assets/Textures/Interfaz/equiped.png");
 
 	bool ret = true; 
 
@@ -124,7 +123,7 @@ Inventity* InventoryManager::CreateItem(EntityType type, int id, int ataque, int
 		break;
 	}
 
-	case EntityType::RESOURCE_ESPADA:
+	case EntityType::RESOURCE_CUERNO:
 	{
 		int newId = 0;
 		for (ListItem<Inventity*>* item = inventities.start; item != nullptr; item = item->next)
@@ -150,15 +149,16 @@ Inventity* InventoryManager::CreateItem(EntityType type, int id, int ataque, int
 		}
 		
 
-		Swordinv* sword = new Swordinv();
-		sword->id = highestId+1;
-		sword->type = InventityType::ESPADA;
-		sword->damage = ataque;
+		CuernoInv* cuerno = new CuernoInv();
+		cuerno->id = highestId+1;
+		cuerno->type = InventityType::CUERNO;
+		cuerno->stackable = true;
+		/*sword->damage = ataque;
 		sword->durability = durabilidad;
 		sword->magic = magia;
-		sword->weight = peso;
-		sword->icon = app->tex->Load("Assets/Textures/espmadIcon.png");
-		entity = sword;
+		sword->weight = peso;*/
+		cuerno->icon = app->tex->Load("Assets/Textures/Interfaz/cuernoInv.png");
+		entity = cuerno;
 		break;
 	}
 
@@ -274,25 +274,25 @@ void InventoryManager::UseItemSelected(int id)
 			item->data->active = true;
 			switch (item->data->type)
 			{
-			case InventityType::ESPADA:
-				{
-					//app->scene->GetPlayer()->espadaHierro = false; //ponemos la textura de la correspondiente
-					//app->scene->GetPlayer()->espadaMadera = true;
-					//app->scene->GetPlayer()->armaduraPoner = false;
-					//Swordinv* espada = dynamic_cast<Swordinv*>(item->data); // Convierte a Espada si es posible
+			//case InventityType::CU:
+			//	{
+			//		//app->scene->GetPlayer()->espadaHierro = false; //ponemos la textura de la correspondiente
+			//		//app->scene->GetPlayer()->espadaMadera = true;
+			//		//app->scene->GetPlayer()->armaduraPoner = false;
+			//		//Swordinv* espada = dynamic_cast<Swordinv*>(item->data); // Convierte a Espada si es posible
 
-					//	app->scene->GetPlayer()->espadaMadera = true;
-					//	app->scene->GetPlayer()->espadaHierro = false;
-					//	app->scene->GetPlayer()->ataque = espada->damage;
-					//	app->scene->GetPlayer()->durabilidadArma = espada->durability;
-					//	app->scene->GetPlayer()->magia = espada->magic;
-					//	app->scene->GetPlayer()->peso = espada->weight;
-					
-					
+			//		//	app->scene->GetPlayer()->espadaMadera = true;
+			//		//	app->scene->GetPlayer()->espadaHierro = false;
+			//		//	app->scene->GetPlayer()->ataque = espada->damage;
+			//		//	app->scene->GetPlayer()->durabilidadArma = espada->durability;
+			//		//	app->scene->GetPlayer()->magia = espada->magic;
+			//		//	app->scene->GetPlayer()->peso = espada->weight;
+			//		
+			//		
 
-					
-					break;
-				}
+			//		
+			//		break;
+			//	}
 			case InventityType::ESPADA2:
 				{
 				//app->scene->GetPlayer()->espadaHierro = true; //ponemos la textura de la correspondiente
@@ -366,9 +366,9 @@ void InventoryManager::AddItem(Inventity* entity)
 	bool encontrado = false;
 	if (entity != nullptr) {
 
-		if (entity->type == InventityType::ITEM) {
+		if (entity->stackable) {
 			for (int i = 0; i < inventities.Count(); i++) {
-				if (inventities.At(i)->data->type == InventityType::ITEM) {
+				if (entity->stackable) {
 					inventities.At(i)->data->quantity += entity->quantity;
 					encontrado = true;
 					break;
@@ -400,9 +400,7 @@ void InventoryManager::AddItem(Inventity* entity)
 
 bool InventoryManager::Update(float dt)
 {
-	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN) {
-		mostrar = !mostrar;
-	}
+	
 	bool ret = true;
 
 
@@ -465,7 +463,7 @@ bool InventoryManager::PostUpdate()
 	{
 		ListItem<Inventity*>* item;
 		Inventity* pEntity = NULL;
-		app->render->DrawTexture(InventoryBackground, texW / 8, texH / 8 - 200);
+		
 		
 		
 		
@@ -485,9 +483,7 @@ bool InventoryManager::PostUpdate()
 				for (ListItem<Inventity*>* itam = inventities.start; itam != NULL && ret == true; itam = itam->next)
 				{
 
-					if (itam->data->type == InventityType::ITEM)
-					{
-						Iteminv* moneda = dynamic_cast<Iteminv*>(itam->data);
+					
 
 							if (pEntity->quantity > 1)
 							{
@@ -505,7 +501,7 @@ bool InventoryManager::PostUpdate()
 							{
 								if (itam->data->id < 5)
 								{
-									app->render->DrawTexture(pEntity->icon, 435 + pEntity->id * 75, 300);
+									app->render->DrawTexture(pEntity->icon, 435 + pEntity->id * 75, 300, SDL_FLIP_NONE,0,0);
 								}
 								else
 								{
@@ -514,8 +510,7 @@ bool InventoryManager::PostUpdate()
 								
 							}
 
-						
-					}
+					
 				}
 			}
 			else

@@ -1,4 +1,4 @@
-#include "espada.h"
+#include "Cuerno.h"
 #include "App.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -9,15 +9,15 @@
 #include "Point.h"
 #include "Physics.h"
 
-Espada::Espada(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
-	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::RESOURCE_ESPADA)
+Cuerno::Cuerno(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
+	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::RESOURCE_CUERNO)
 {
 	name.Create("espada");
 }
 
-Espada::~Espada() {}
+Cuerno::~Cuerno() {}
 
-bool Espada::Awake() {
+bool Cuerno::Awake() {
 
 	
 	 
@@ -25,7 +25,7 @@ bool Espada::Awake() {
 	return true;
 }
 
-bool Espada::Start() {
+bool Cuerno::Start() {
 
 	//initilize textures
 	/*position.x = parameters.attribute("x").as_int();
@@ -42,7 +42,7 @@ bool Espada::Start() {
 	return true;
 }
 
-bool Espada::Update(float dt)
+bool Cuerno::Update(float dt)
 {
 	// L07 DONE 4: Add a physics to an item - update the position of the object from the physics.  
 
@@ -55,13 +55,13 @@ bool Espada::Update(float dt)
 	return true;
 }
 
-bool Espada::PostUpdate()
+bool Cuerno::PostUpdate()
 {
 	app->render->DrawTexture(texture, position.x, position.y);
 	return true;
 }
 
-bool Espada::CleanUp()
+bool Cuerno::CleanUp()
 {
 	app->physics->GetWorld()->DestroyBody(pbody->body);
 	SDL_DestroyTexture(texture);

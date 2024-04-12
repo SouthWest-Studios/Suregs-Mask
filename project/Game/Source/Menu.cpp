@@ -10,6 +10,7 @@
 #include "GuiCheckBox.h"
 #include "GuiControlButton.h"
 #include "GuiManager.h"
+#include "InventoryManager.h"
 #include "Menu.h"
 #include "Scene_menu.h"
 #include "Scene_Testing.h"
@@ -216,7 +217,14 @@ bool Menu::Update(float dt)
 		title->click = false;
 	}
 
-
+	if (ventana == 1)
+	{
+		app->inventoryManager->mostrar = true;
+	}
+	else
+	{
+		app->inventoryManager->mostrar = false;
+	}
 	return true;
 }
 

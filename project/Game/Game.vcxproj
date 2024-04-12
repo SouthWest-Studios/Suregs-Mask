@@ -95,6 +95,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Cuerno.cpp" />
     <ClCompile Include="Source\DebugCommand.cpp" />
     <ClCompile Include="Source\DebugCommandBase.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -103,7 +104,6 @@
     <ClCompile Include="Source\DialogManager.cpp" />
     <ClCompile Include="Source\DialogTriggerEntity.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
-    <ClCompile Include="Source\Espada.cpp" />
     <ClCompile Include="Source\GuiCheckBox.cpp" />
     <ClCompile Include="Source\GuiControlButton.cpp" />
     <ClCompile Include="Source\GuiControlSlider.cpp" />
@@ -133,6 +133,8 @@
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\ArmaduraInv.h" />
+    <ClInclude Include="Source\Cuerno.h" />
+    <ClInclude Include="Source\CuernoInv.h" />
     <ClInclude Include="Source\DebugCommand.h" />
     <ClInclude Include="Source\DebugCommandBase.h" />
     <ClInclude Include="Source\DebugConsole.h" />
@@ -141,7 +143,6 @@
     <ClInclude Include="Source\DialogTriggerEntity.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />
-    <ClInclude Include="Source\espada.h" />
     <ClInclude Include="Source\GuiCheckBox.h" />
     <ClInclude Include="Source\GuiControl.h" />
     <ClInclude Include="Source\GuiControlButton.h" />

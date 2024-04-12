@@ -18,7 +18,7 @@
 #include <string>
 #include <vector>
 #include "DialogTriggerEntity.h"
-#include "espada.h"
+#include "Cuerno.h"
 
 Map::Map(App* app, bool start_enabled) : Module(app, start_enabled), mapLoaded(false)
 {
@@ -807,12 +807,12 @@ bool Map::LoadEntities(std::string layerName)
 
 					}
 
-					//ESPADA
+					//CUERNO
 					if (gid == tileset->firstgid + 40) {
-						Espada* espada = (Espada*)app->entityManager->CreateEntity(EntityType::RESOURCE_ESPADA);
-						espada->config = configNode.child("entities_data").child("resource_espada");
-						espada->position = iPoint(pos.x + 16, pos.y + 16);
-						espada->Start();
+						Cuerno* cuerno = (Cuerno*)app->entityManager->CreateEntity(EntityType::RESOURCE_CUERNO);
+						cuerno->config = configNode.child("entities_data").child("resource_cuerno");
+						cuerno->position = iPoint(pos.x + 16, pos.y + 16);
+						cuerno->Start();
 						
 
 					}

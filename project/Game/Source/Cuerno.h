@@ -1,5 +1,5 @@
-#ifndef __ESPADA_H__
-#define __ESPADA_H__
+#ifndef __Cuerno_H__
+#define __Cuerno_H__
 
 #include "Entity.h"
 #include "Point.h"
@@ -7,13 +7,13 @@
 
 struct SDL_Texture;
 
-class Espada : public Entity
+class Cuerno : public Entity
 {
 public:
 	/*Espada() : Entity(EntityType::ESPADA, 0, 100, 0, 0, 0) {}*/
 
-	Espada(EntityType type, int id, int ataque,int durabilidad, int magia, float peso); // Constructor con parámetros
-	virtual ~Espada();
+	Cuerno(EntityType type, int id, int ataque,int durabilidad, int magia, float peso); // Constructor con parámetros
+	virtual ~Cuerno();
 
 	bool Awake();
 
@@ -50,4 +50,4 @@ private:
 	
 };
 
-#endif // __ITEM_H__
+#endif // __Cuerno_H__
