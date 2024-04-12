@@ -10,6 +10,7 @@
 #include "Scene_Testing.h"
 #include "Player.h"
 #include "DialogTriggerEntity.h"
+#include "NPC_Vendedor.h"
 
 
 #include "Defs.h"
@@ -112,6 +113,10 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		entity = new DialogTrigger();
 		break;
 
+	case EntityType::NPC_VENDEDOR:
+		entity = new NPCVendedor();
+		break;
+
 	default:
 		break;
 	}
@@ -148,37 +153,6 @@ Player* EntityManager::GetPlayer()
 {
 	return actualPlayer;
 }
-
-void EntityManager::SetOsiris(Enemy_Osiris* osiris)
-{
-	actualOsiris = osiris;
-}
-
-Enemy_Osiris* EntityManager::GetOsiris()
-{
-	return actualOsiris;
-}
-
-void EntityManager::SetOls(Enemy_Ols* ols)
-{
-	actualOls = ols;
-}
-
-Enemy_Ols* EntityManager::GetOls()
-{
-	return actualOls;
-}
-
-void EntityManager::SetShar(Enemy_Shar* shar)
-{
-	actualShar = shar;
-}
-
-Enemy_Shar* EntityManager::GetShar()
-{
-	return actualShar;
-}
-
 
 bool EntityManager::Update(float dt)
 {
