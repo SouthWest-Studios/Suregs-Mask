@@ -38,7 +38,7 @@ bool Menu::Start()
 {
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 
-	fondoInventario = app->tex->Load("Assets/Textures/Interfaz/Inventario.png");
+	fondoInventario = app->tex->Load("Assets/Textures/Interfaz/libro01.png");
 	fondoEquipo = app->tex->Load("Assets/Textures/Interfaz/Equipo.png");
 	fondoDiario = app->tex->Load("Assets/Textures/Interfaz/Diario.png");
 	fondoAjustes = app->tex->Load("Assets/Textures/Interfaz/Ajustes.png");
