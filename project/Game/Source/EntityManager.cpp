@@ -149,37 +149,6 @@ Player* EntityManager::GetPlayer()
 	return actualPlayer;
 }
 
-void EntityManager::SetOsiris(Enemy_Osiris* osiris)
-{
-	actualOsiris = osiris;
-}
-
-Enemy_Osiris* EntityManager::GetOsiris()
-{
-	return actualOsiris;
-}
-
-void EntityManager::SetOls(Enemy_Ols* ols)
-{
-	actualOls = ols;
-}
-
-Enemy_Ols* EntityManager::GetOls()
-{
-	return actualOls;
-}
-
-void EntityManager::SetShar(Enemy_Shar* shar)
-{
-	actualShar = shar;
-}
-
-Enemy_Shar* EntityManager::GetShar()
-{
-	return actualShar;
-}
-
-
 bool EntityManager::Update(float dt)
 {
 	bool ret = true;
