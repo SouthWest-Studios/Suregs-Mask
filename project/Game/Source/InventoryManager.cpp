@@ -341,12 +341,12 @@ void InventoryManager::UseItemSelected(int id)
 void InventoryManager::OnMovePointer()
 {
 
-	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN && PointerPosition.x < 420) {
-		PointerPosition.x += 75;
+	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN && PointerPosition.x < 143) {
+		PointerPosition.x += 100;
 		PointerId += 1;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && PointerPosition.x > 125) {
-		PointerPosition.x -= 75;
+	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && PointerPosition.x > -43) {
+		PointerPosition.x -= 100;
 		PointerId -= 1;
 	}
 
@@ -354,7 +354,7 @@ void InventoryManager::OnMovePointer()
 		PointerPosition.y += 76;
 		PointerId += 5;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && PointerPosition.y > -75) {
+	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && PointerPosition.y > -160) {
 		PointerPosition.y -= 76;
 		PointerId -= 5;
 	}
@@ -464,13 +464,9 @@ bool InventoryManager::PostUpdate()
 		ListItem<Inventity*>* item;
 		Inventity* pEntity = NULL;
 		
-		
-		
-		
-
 		app->render->DrawTexture(EquipedItemText, equiped.x, equiped.y);
 
-		app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y);
+		app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y,SDL_FLIP_NONE, 0, 0);
 		app->render->DrawTexture(SelectedItemText, selected.x, selected.y);
 
 		for (item = inventities.start; item != nullptr; item = item->next)
@@ -491,7 +487,7 @@ bool InventoryManager::PostUpdate()
 								
 								if (itam->data->id < 5)
 								{
-									app->render->DrawText(quantityStr.c_str(), 485 + itam->data->id * 75, 340, 20, 20);
+									app->render->DrawText(quantityStr.c_str(), 320 + itam->data->id * 75, 260, 20, 20);
 								}
 								else
 								{
@@ -501,11 +497,11 @@ bool InventoryManager::PostUpdate()
 							{
 								if (itam->data->id < 5)
 								{
-									app->render->DrawTexture(pEntity->icon, 435 + pEntity->id * 75, 300, SDL_FLIP_NONE,0,0);
+									app->render->DrawTexture(pEntity->icon, 290 + pEntity->id * 75, 230, SDL_FLIP_NONE,0,0);
 								}
 								else
 								{
-									app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 75), 380);
+									app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 75), 380, SDL_FLIP_NONE, 0, 0);
 								}
 								
 							}
@@ -517,12 +513,12 @@ bool InventoryManager::PostUpdate()
 			{
 				if (pEntity->id < 5) //if(inventities.cout() < 5)
 				{
-					app->render->DrawTexture(pEntity->icon, 445 + pEntity->id * 75, 300);
+					app->render->DrawTexture(pEntity->icon, 445 + pEntity->id * 75, 300, SDL_FLIP_NONE, 0, 0);
 				}
 				else
 				{
 
-					app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 75), 380);
+					app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 75), 380, SDL_FLIP_NONE, 0, 0);
 				}
 				
 				
