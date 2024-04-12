@@ -229,7 +229,7 @@ void Player::CameraMovement(float dt)
 
 	int targetPosX = (-position.x * app->win->GetScale() + (windowW / 2) - 10);
 	int targetPosY = (-position.y * app->win->GetScale() + (windowH / 2) - 10) + 100;
-
+	
 	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
 	{
 		camaralibre = !camaralibre; // Esto alternar?el valor de camaralibre cada vez que se presione la tecla C en modo debug
@@ -253,7 +253,7 @@ void Player::CameraMovement(float dt)
 		app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
 		app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.005f);
 	}
-
+	
 
 }
 

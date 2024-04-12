@@ -45,9 +45,9 @@ bool Scene_testing::Start()
 	config = configFile.child("config").child("scene_testing");
 	//L03: DONE 3b: Instantiate the player using the entity manager
 	//L04 DONE 7: Get player paremeters
-	//player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
+	/*player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);*/
 	////Assigns the XML node to a member in player
-	//player->config = config.child("player");
+	/*player->config = config.child("player");*/
 
 	//Get the map name from the config file and assigns the value in the module
 	app->map->name = config.child("map").attribute("name").as_string();
@@ -57,6 +57,12 @@ bool Scene_testing::Start()
 	// iterate all items in the Scene_testing
 	// Checkhttps://pugixml.org/docs/quickstart.html#access
 
+
+	for (pugi::xml_node itemNode = config.child("player"); itemNode; itemNode = itemNode.next_sibling("player"))
+	{
+		player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
+		player->parameters = itemNode;
+	}
 	/*for (pugi::xml_node itemNode = config.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
 	{
 		Item* item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);

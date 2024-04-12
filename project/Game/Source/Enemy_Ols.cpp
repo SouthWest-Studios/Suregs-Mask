@@ -105,7 +105,7 @@ bool Enemy_Ols::Update(float dt)
 		break;
 	}
 
-	//Olsfinding(dt);
+	Olsfinding(dt);
 	currentAnimation->Update();
 
 	return true;
@@ -197,9 +197,10 @@ void Enemy_Ols::SetPlayer(Player* player)
 
 bool Enemy_Ols::Olsfinding(float dt)
 {
-	if (app->map->pathfinding->GetDistance(app->scene_testing->GetPLayer()->position, position) <= 120) {
+	
+	if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 120) {
 
-		iPoint playerPos = app->map->WorldToMap(app->scene_testing->GetPLayer()->position.x, app->scene_testing->GetPLayer()->position.y);
+		iPoint playerPos = app->map->WorldToMap(app->entityManager->GetPlayer()->position.x, app->entityManager->GetPlayer()->position.y);
 		playerPos.x += 1;
 		playerPos.y += 1;
 		iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
@@ -233,7 +234,7 @@ bool Enemy_Ols::Olsfinding(float dt)
 			pbody->body->SetLinearVelocity(vel);
 		}
 
-		if (app->map->pathfinding->GetDistance(app->scene_testing->GetPLayer()->position, position) <= 66) {
+		if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 66) {
 
 			if (isFacingLeft) {
 				vel.x -= speed * dt;
