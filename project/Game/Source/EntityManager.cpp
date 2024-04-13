@@ -11,6 +11,14 @@
 #include "Player.h"
 #include "DialogTriggerEntity.h"
 #include "NPC_Vendedor.h"
+#include "NPC_Pescador.h"
+#include "NPC_Abuelo.h"
+#include "NPC_Bruja.h"
+#include "NPC_Bully1.h"
+#include "NPC_Bully2.h"
+#include "NPC_Herrera.h"
+#include "NPC_MujerEnamorada.h"
+#include "NPC_MujerPreocupada.h"
 #include "Item_diamante.h"
 
 
@@ -119,6 +127,30 @@ Entity* EntityManager::CreateEntity(EntityType type)
 
 	case EntityType::NPC_VENDEDOR:
 		entity = new NPCVendedor();
+		break;
+	case EntityType::NPC_PESCADOR:
+		entity = new NPCPescador();
+		break;
+	case EntityType::NPC_BRUJA:
+		entity = new NPCBruja();
+		break;
+	case EntityType::NPC_HERRERA:
+		entity = new NPCHerrera();
+		break;
+	case EntityType::NPC_ABUELO:
+		entity = new NPCAbuelo();
+		break;
+	case EntityType::NPC_MUJER_PREOCUPADA:
+		entity = new NPCMujerPreocupada();
+		break;
+	case EntityType::NPC_MUJER_ENAMORADA:
+		entity = new NPCMujerEnamorada();
+		break;
+	case EntityType::NPC_BULLY_1:
+		entity = new NPCBully1();
+		break;
+	case EntityType::NPC_BULLY_2:
+		entity = new NPCBully2();
 		break;
 
 	default:

@@ -1,4 +1,4 @@
-#include "NPC_Vendedor.h"
+#include "NPC_Bully2.h"
 #include "App.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -13,24 +13,24 @@
 #include "ModuleFadeToBlack.h"
 
 
-NPCVendedor::NPCVendedor() : Entity(EntityType::NPC_VENDEDOR)
+NPCBully2::NPCBully2() : Entity(EntityType::NPC_BULLY_2)
 {
-	name.Create("npc_vendedor");
+	name.Create("npc_bully2");
 
 }
 
-NPCVendedor::~NPCVendedor() {
+NPCBully2::~NPCBully2() {
 
 }
 
-bool NPCVendedor::Awake() {
+bool NPCBully2::Awake() {
 
 
 
 	return true;
 }
 
-bool NPCVendedor::Start() {
+bool NPCBully2::Start() {
 
 
 	//position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
@@ -59,7 +59,7 @@ bool NPCVendedor::Start() {
 	return true;
 }
 
-bool NPCVendedor::Update(float dt)
+bool NPCBully2::Update(float dt)
 {
 	//nextState = EntityState::IDLE;
 
@@ -69,7 +69,7 @@ bool NPCVendedor::Update(float dt)
 }
 
 
-bool NPCVendedor::PostUpdate() {
+bool NPCBully2::PostUpdate() {
 
 	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
@@ -80,7 +80,7 @@ bool NPCVendedor::PostUpdate() {
 }
 
 
-bool NPCVendedor::CleanUp()
+bool NPCBully2::CleanUp()
 {
 	//app->physics->GetWorld()->DestroyBody(pbody->body);
 	SDL_DestroyTexture(texture);
@@ -88,7 +88,7 @@ bool NPCVendedor::CleanUp()
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 
-void NPCVendedor::OnCollision(PhysBody* physA, PhysBody* physB) {
+void NPCBully2::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 	case ColliderType::PLATFORM:
