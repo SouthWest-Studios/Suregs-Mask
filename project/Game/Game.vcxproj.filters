@@ -112,6 +112,31 @@
     <ClCompile Include="Source\NPC_Vendedor.cpp">
       <Filter>Entities\NPC</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Item_Diamante.cpp" />
+    <ClCompile Include="Source\NPC_Abuelo.cpp">
+      <Filter>Entities\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\NPC_Bully1.cpp">
+      <Filter>Entities\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\NPC_Bully2.cpp">
+      <Filter>Entities\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\NPC_Herrera.cpp">
+      <Filter>Entities\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\NPC_MujerEnamorada.cpp">
+      <Filter>Entities\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\NPC_MujerPreocupada.cpp">
+      <Filter>Entities\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\NPC_Pescador.cpp">
+      <Filter>Entities\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\NPC_Bruja.cpp">
+      <Filter>Entities\NPC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -274,6 +299,32 @@
       <Filter>Inventory</Filter>
     </ClInclude>
     <ClInclude Include="Source\NPC_Vendedor.h">
+      <Filter>Entities\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DiamanteInv.h" />
+    <ClInclude Include="Source\Item_Diamante.h" />
+    <ClInclude Include="Source\NPC_Abuelo.h">
+      <Filter>Entities\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NPC_Bruja.h">
+      <Filter>Entities\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NPC_Bully1.h">
+      <Filter>Entities\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NPC_Bully2.h">
+      <Filter>Entities\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NPC_Herrera.h">
+      <Filter>Entities\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NPC_MujerEnamorada.h">
+      <Filter>Entities\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NPC_MujerPreocupada.h">
+      <Filter>Entities\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NPC_Pescador.h">
       <Filter>Entities\NPC</Filter>
     </ClInclude>
   </ItemGroup>

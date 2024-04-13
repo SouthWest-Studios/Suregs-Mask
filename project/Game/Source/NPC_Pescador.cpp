@@ -1,4 +1,4 @@
-#include "NPC_Vendedor.h"
+#include "NPC_Pescador.h"
 #include "App.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -13,24 +13,24 @@
 #include "ModuleFadeToBlack.h"
 
 
-NPCVendedor::NPCVendedor() : Entity(EntityType::NPC_VENDEDOR)
+NPCPescador::NPCPescador() : Entity(EntityType::NPC_PESCADOR)
 {
-	name.Create("npc_vendedor");
+	name.Create("npc_pescador");
 
 }
 
-NPCVendedor::~NPCVendedor() {
+NPCPescador::~NPCPescador() {
 
 }
 
-bool NPCVendedor::Awake() {
+bool NPCPescador::Awake() {
 
 
 
 	return true;
 }
 
-bool NPCVendedor::Start() {
+bool NPCPescador::Start() {
 
 
 	//position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
@@ -59,7 +59,7 @@ bool NPCVendedor::Start() {
 	return true;
 }
 
-bool NPCVendedor::Update(float dt)
+bool NPCPescador::Update(float dt)
 {
 	//nextState = EntityState::IDLE;
 
@@ -69,7 +69,7 @@ bool NPCVendedor::Update(float dt)
 }
 
 
-bool NPCVendedor::PostUpdate() {
+bool NPCPescador::PostUpdate() {
 
 	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
@@ -80,7 +80,7 @@ bool NPCVendedor::PostUpdate() {
 }
 
 
-bool NPCVendedor::CleanUp()
+bool NPCPescador::CleanUp()
 {
 	//app->physics->GetWorld()->DestroyBody(pbody->body);
 	SDL_DestroyTexture(texture);
@@ -88,7 +88,7 @@ bool NPCVendedor::CleanUp()
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 
-void NPCVendedor::OnCollision(PhysBody* physA, PhysBody* physB) {
+void NPCPescador::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 	case ColliderType::PLATFORM:

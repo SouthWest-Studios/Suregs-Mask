@@ -20,6 +20,14 @@
 #include "DialogTriggerEntity.h"
 #include "Cuerno.h"
 #include "NPC_Vendedor.h"
+#include "NPC_Pescador.h"
+#include "NPC_Abuelo.h"
+#include "NPC_Bruja.h"
+#include "NPC_Bully1.h"
+#include "NPC_Bully2.h"
+#include "NPC_Herrera.h"
+#include "NPC_MujerEnamorada.h"
+#include "NPC_MujerPreocupada.h"
 #include "Item_Diamante.h"
 
 Map::Map(App* app, bool start_enabled) : Module(app, start_enabled), mapLoaded(false)
@@ -787,6 +795,96 @@ bool Map::LoadEntities(std::string layerName)
 
 					}
 
+					//NPC_PESCADOR
+					if (gid == tileset->firstgid + 2) {
+
+
+						NPCVendedor* npc = (NPCVendedor*)app->entityManager->CreateEntity(EntityType::NPC_PESCADOR);
+						npc->config = configNode.child("entities_data").child("npc_pescador");
+						npc->position = iPoint(pos.x + 16, pos.y + 16);
+						npc->Start();
+
+					}
+
+					//NPC_BRUJA
+					if (gid == tileset->firstgid + 3) {
+
+
+						NPCVendedor* npc = (NPCVendedor*)app->entityManager->CreateEntity(EntityType::NPC_BRUJA);
+						npc->config = configNode.child("entities_data").child("npc_bruja");
+						npc->position = iPoint(pos.x + 16, pos.y + 16);
+						npc->Start();
+
+					}
+
+					//NPC_BULLY1
+					if (gid == tileset->firstgid + 4) {
+
+
+						NPCVendedor* npc = (NPCVendedor*)app->entityManager->CreateEntity(EntityType::NPC_BULLY_1);
+						npc->config = configNode.child("entities_data").child("npc_bully1");
+						npc->position = iPoint(pos.x + 16, pos.y + 16);
+						npc->Start();
+
+					}
+
+					//NPC_BULLY2
+					if (gid == tileset->firstgid + 5) {
+
+
+						NPCVendedor* npc = (NPCVendedor*)app->entityManager->CreateEntity(EntityType::NPC_BULLY_2);
+						npc->config = configNode.child("entities_data").child("npc_bully2");
+						npc->position = iPoint(pos.x + 16, pos.y + 16);
+						npc->Start();
+
+					}
+
+					//NPC_HERRERA
+					if (gid == tileset->firstgid + 6) {
+
+
+						NPCVendedor* npc = (NPCVendedor*)app->entityManager->CreateEntity(EntityType::NPC_HERRERA);
+						npc->config = configNode.child("entities_data").child("npc_herrera");
+						npc->position = iPoint(pos.x + 16, pos.y + 16);
+						npc->Start();
+
+					}
+
+					//NPC_ABUELO
+					if (gid == tileset->firstgid + 7) {
+
+
+						NPCVendedor* npc = (NPCVendedor*)app->entityManager->CreateEntity(EntityType::NPC_ABUELO);
+						npc->config = configNode.child("entities_data").child("npc_abuelo");
+						npc->position = iPoint(pos.x + 16, pos.y + 16);
+						npc->Start();
+
+					}
+
+					//NPC_MUJER_PREOCUPADA
+					if (gid == tileset->firstgid + 8) {
+
+
+						NPCVendedor* npc = (NPCVendedor*)app->entityManager->CreateEntity(EntityType::NPC_MUJER_PREOCUPADA);
+						npc->config = configNode.child("entities_data").child("npc_mujer_preocupada");
+						npc->position = iPoint(pos.x + 16, pos.y + 16);
+						npc->Start();
+
+					}
+
+					//NPC_MUJER_ENAMORADA
+					if (gid == tileset->firstgid + 9) {
+
+
+						NPCVendedor* npc = (NPCVendedor*)app->entityManager->CreateEntity(EntityType::NPC_MUJER_ENAMORADA);
+						npc->config = configNode.child("entities_data").child("npc_mujer_enamorada");
+						npc->position = iPoint(pos.x + 16, pos.y + 16);
+						npc->Start();
+
+					}
+
+					
+
 
 
 					//OSIRIS
@@ -838,95 +936,6 @@ bool Map::LoadEntities(std::string layerName)
 						diamante->position = iPoint(pos.x + 16, pos.y + 16);
 						diamante->Start();
 					}
-					////Monedas
-					//if (gid == tileset->firstgid) {
-					//	Coin* coin = (Coin*)app->entityManager->CreateEntity(EntityType::COIN);
-					//	coin->parameters = configNode.child("scene").child("textures").child("coin");
-					//	coin->position = iPoint(pos.x + 16, pos.y + 16);
-					//}
-
-					////cofre con Monedas
-					//if (gid == tileset->firstgid + 1) {
-					//	Chest* chest = (Chest*)app->entityManager->CreateEntity(EntityType::CHEST_COIN);
-					//	chest->parameters = configNode.child("scene").child("textures").child("chest");
-					//	chest->position = iPoint(pos.x + 16, pos.y + 16);
-
-					//}
-
-					////espina que se rompe
-					//if (gid == tileset->firstgid + 2) {
-					//	PlantBreakable* entity = (PlantBreakable*)app->entityManager->CreateEntity(EntityType::PLANT_BREAKABLE);
-					//	entity->parameters = configNode.child("scene").child("textures").child("plant_breakable");
-					//	entity->position = iPoint(pos.x + 16, pos.y + 16);
-					//}
-
-					////barrera de espinas
-					//if (gid == tileset->firstgid + 3) {
-					//	PlantBarrier* entity = (PlantBarrier*)app->entityManager->CreateEntity(EntityType::PLANT_BARRIER);
-					//	entity->parameters = configNode.child("scene").child("textures").child("plant_barrier");
-					//	entity->position = iPoint(pos.x, pos.y + 16);
-					//}
-
-					////player
-					//if (gid == tileset->firstgid + 4) {
-
-					//	app->scene->setPlayer((Player*)app->entityManager->CreateEntity(EntityType::PLAYER));
-					//	app->scene->getPlayer()->parameters = configNode.child("scene").child("player");
-					//	app->scene->getPlayer()->position = iPoint(pos.x + 16, pos.y + 16);
-
-					//}
-
-					////Enemy armadillo
-					//if (gid == tileset->firstgid + 5) {
-
-					//	EnemyArmadillo* entity = (EnemyArmadillo*)app->entityManager->CreateEntity(EntityType::ENEMY_ARMADILLO);
-					//	entity->parameters = configNode.child("scene").child("enemyArmadillo");
-					//	entity->position = iPoint(pos.x + 16, pos.y + 16);
-
-					//}
-
-					////Entidad de guardar
-					//if (gid == tileset->firstgid + 6) {
-
-					//	SaveStatue* entity = (SaveStatue*)app->entityManager->CreateEntity(EntityType::SAVE_STATUE);
-					//	entity->parameters = configNode.child("scene").child("textures").child("saveStatue");
-					//	entity->position = iPoint(pos.x + 16, pos.y + 16 - 32);
-
-					//}
-
-					////Enemy pajaro con cuchillo
-					//if (gid == tileset->firstgid + 7) {
-
-					//	SaveStatue* entity = (SaveStatue*)app->entityManager->CreateEntity(EntityType::ENEMY_PAJARO);
-					//	entity->parameters = configNode.child("scene").child("enemyPajaro");
-					//	entity->position = iPoint(pos.x + 16, pos.y + 16 - 32);
-
-					//}
-
-					////Comida
-					//if (gid == tileset->firstgid + 8) {
-					//	Food* food = (Food*)app->entityManager->CreateEntity(EntityType::FOOD);
-					//	food->parameters = configNode.child("scene").child("textures").child("food");
-					//	food->position = iPoint(pos.x + 16, pos.y + 16);
-					//}
-
-					////Boss
-					//if (gid == tileset->firstgid + 9) {
-					//	EnemyBoss* boss = (EnemyBoss*)app->entityManager->CreateEntity(EntityType::BOSS);
-					//	boss->parameters = configNode.child("scene").child("enemyBoss");
-					//	boss->position = iPoint(pos.x + 16, pos.y + 16);
-					//}
-
-					////Wall Boss
-					//if (gid == tileset->firstgid + 10) {
-					//	WallBoss* boss = (WallBoss*)app->entityManager->CreateEntity(EntityType::WALL_BOSS);
-					//	boss->parameters = configNode.child("scene").child("textures").child("wallBoss");
-					//	boss->position = iPoint(pos.x + 16, pos.y + 16);
-					//}
-
-
-
-
 				}
 			}
 
