@@ -401,20 +401,44 @@ void InventoryManager::OnMovePointer()
 void InventoryManager::AddItem(Inventity* entity)
 {
 
-	bool encontrado = false;
+	bool CuernoEncontrado = false;
+
+	bool DiamanteEncontrado = false;
 	if (entity != nullptr) {
 
-		if (entity->stackable) {
-			for (int i = 0; i < inventities.Count(); i++) {
-				if (entity->stackable) {
-					inventities.At(i)->data->quantity += entity->quantity;
-					encontrado = true;
-					break;
+		if (entity->stackable)
+		{
+			if (entity->type == InventityType::CUERNO)
+			{
+
+
+				for (int i = 0; i < inventities.Count(); i++) {
+					if (inventities.At(i)->data->type == InventityType::CUERNO) {
+						inventities.At(i)->data->quantity += entity->quantity;
+						CuernoEncontrado = true;
+						break;
+					}
+					
+				}
+				if (!CuernoEncontrado)
+				{
+					inventities.Add(entity);
 				}
 			}
-			if (!encontrado)
+			else if (entity->type == InventityType::DIAMANTE)
 			{
-				inventities.Add(entity);
+				for (int i = 0; i < inventities.Count(); i++) {
+					
+					if (inventities.At(i)->data->type == InventityType::DIAMANTE) {
+						inventities.At(i)->data->quantity += entity->quantity;
+						DiamanteEncontrado = true;
+						break;
+					}
+				}
+				if (!DiamanteEncontrado)
+				{
+					inventities.Add(entity);
+				}
 			}
 		
 		}
@@ -524,21 +548,21 @@ bool InventoryManager::PostUpdate()
 
 							if (item->data->id < 5)
 							{
-								app->render->DrawText(quantityStr.c_str(), 320 + item->data->id * 75, 260, 20, 20);
+								app->render->DrawText(quantityStr.c_str(), 320 + item->data->id * 100, 260, 20, 20);
 							}
 							else
 							{
-								app->render->DrawText(quantityStr.c_str(), 485 + (item->data->id - 5) * 75, 420, 20, 20);
+								app->render->DrawText(quantityStr.c_str(), 485 + (item->data->id - 5) * 100, 420, 20, 20);
 							}
 						}
 						{
 							if (item->data->id < 5)
 							{
-								app->render->DrawTexture(pEntity->icon, 290 + pEntity->id * 75, 230, SDL_FLIP_NONE, 0, 0);
+								app->render->DrawTexture(pEntity->icon, 290 + pEntity->id * 100, 230, SDL_FLIP_NONE, 0, 0);
 							}
 							else
 							{
-								app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 75), 380, SDL_FLIP_NONE, 0, 0);
+								app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 100), 380, SDL_FLIP_NONE, 0, 0);
 							}
 
 						}
@@ -553,21 +577,21 @@ bool InventoryManager::PostUpdate()
 
 							if (item->data->id < 5)
 							{
-								app->render->DrawText(quantityStr.c_str(), 320 + item->data->id * 75, 260, 20, 20);
+								app->render->DrawText(quantityStr.c_str(), 320 + item->data->id * 100, 260, 20, 20);
 							}
 							else
 							{
-								app->render->DrawText(quantityStr.c_str(), 485 + (item->data->id - 5) * 75, 420, 20, 20);
+								app->render->DrawText(quantityStr.c_str(), 485 + (item->data->id - 5) * 100, 420, 20, 20);
 							}
 						}
 						{
 							if (item->data->id < 5)
 							{
-								app->render->DrawTexture(pEntity->icon, 290 + pEntity->id * 75, 230, SDL_FLIP_NONE, 0, 0);
+								app->render->DrawTexture(pEntity->icon, 290 + pEntity->id * 100, 230, SDL_FLIP_NONE, 0, 0);
 							}
 							else
 							{
-								app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 75), 380, SDL_FLIP_NONE, 0, 0);
+								app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 100), 380, SDL_FLIP_NONE, 0, 0);
 							}
 
 						}
@@ -579,12 +603,12 @@ bool InventoryManager::PostUpdate()
 			{
 				if (pEntity->id < 5) //if(inventities.cout() < 5)
 				{
-					app->render->DrawTexture(pEntity->icon, 445 + pEntity->id * 75, 300, SDL_FLIP_NONE, 0, 0);
+					app->render->DrawTexture(pEntity->icon, 445 + pEntity->id * 100, 300, SDL_FLIP_NONE, 0, 0);
 				}
 				else
 				{
 
-					app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 75), 380, SDL_FLIP_NONE, 0, 0);
+					app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 100), 380, SDL_FLIP_NONE, 0, 0);
 				}
 				
 				
