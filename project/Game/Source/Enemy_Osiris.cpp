@@ -226,65 +226,67 @@ void Enemy_Osiris::SetPlayer(Player* player)
 }
 
 bool Enemy_Osiris::Osirisfinding(float dt)
-
+{
 	if (app->map->pathfinding->GetDistance(app->scene_testing->GetPlayer()->position, position) <= 120) {
 
 		iPoint playerPos = app->map->WorldToMap(app->scene_testing->GetPlayer()->position.x, app->scene_testing->GetPlayer()->position.y);
 
-	if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 120) {
 
-		iPoint playerPos = app->map->WorldToMap(app->entityManager->GetPlayer()->position.x, app->entityManager->GetPlayer()->position.y);
+		if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 120) {
 
-		playerPos.x += 1;
-		playerPos.y += 1;
-		iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
-		enemyPos.y += 1;
+			iPoint playerPos = app->map->WorldToMap(app->entityManager->GetPlayer()->position.x, app->entityManager->GetPlayer()->position.y);
 
-		app->map->pathfinding->CreatePath(playerPos, enemyPos);
-		lastPath = *app->map->pathfinding->GetLastPath();
+			playerPos.x += 1;
+			playerPos.y += 1;
+			iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
+			enemyPos.y += 1;
 
-		//Get the latest calculated path and draw
-		for (uint i = 0; i < lastPath.Count(); ++i)
-		{
-			iPoint pos = app->map->MapToWorld(lastPath.At(i)->x, lastPath.At(i)->y);
-			if (app->physics->debug == true) {
-				app->render->DrawTexture(app->map->pathfinding->mouseTileTex, pos.x, pos.y, SDL_FLIP_NONE);
+			app->map->pathfinding->CreatePath(playerPos, enemyPos);
+			lastPath = *app->map->pathfinding->GetLastPath();
+
+			//Get the latest calculated path and draw
+			for (uint i = 0; i < lastPath.Count(); ++i)
+			{
+				iPoint pos = app->map->MapToWorld(lastPath.At(i)->x, lastPath.At(i)->y);
+				if (app->physics->debug == true) {
+					app->render->DrawTexture(app->map->pathfinding->mouseTileTex, pos.x, pos.y, SDL_FLIP_NONE);
+				}
+			}
+
+			if (lastPath.Count() > 2) {
+				if (lastPath.At(lastPath.Count() - 2)->x < enemyPos.x) {
+					vel.x -= speed * dt;
+					isFacingLeft = true;
+				}
+
+				if (lastPath.At(lastPath.Count() - 2)->x > enemyPos.x) {
+					vel.x += speed * dt;
+					isFacingLeft = false;
+				}
+
+				isAttacking = false;
+				attackAnim.Reset();
+				pbody->body->SetLinearVelocity(vel);
+			}
+
+
+			if (app->map->pathfinding->GetDistance(app->scene_testing->GetPlayer()->position, position) <= 66) {
+
+				if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 66) {
+
+
+					if (isFacingLeft) {
+						vel.x -= speed * dt;
+					}
+					else {
+						vel.x += speed * dt;
+
+					}
+					isAttacking = true;
+					pbody->body->SetLinearVelocity(vel);
+				}
 			}
 		}
-
-		if (lastPath.Count() > 2) {
-			if (lastPath.At(lastPath.Count() - 2)->x < enemyPos.x) {
-				vel.x -= speed * dt;
-				isFacingLeft = true;
-			}
-
-			if (lastPath.At(lastPath.Count() - 2)->x > enemyPos.x) {
-				vel.x += speed * dt;
-				isFacingLeft = false;
-			}
-
-			isAttacking = false;
-			attackAnim.Reset();
-			pbody->body->SetLinearVelocity(vel);
-		}
-
-
-		if (app->map->pathfinding->GetDistance(app->scene_testing->GetPlayer()->position, position) <= 66) {
-
-		if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 66) {
-
-
-			if (isFacingLeft) {
-				vel.x -= speed * dt;
-			}
-			else {
-				vel.x += speed * dt;
-
-			}
-			isAttacking = true;
-			pbody->body->SetLinearVelocity(vel);
-		}
-
 	}
 	return true;
 }
