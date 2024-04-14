@@ -25,14 +25,16 @@ enum bodyType {
 
 enum class ColliderType {
 	PLAYER, 
+	PLAYER_ATTACK,
 	ITEM,
 	PLATFORM,
 	ENEMY,
 	RESOURCE_ESPADA,
 	RESOURCE_DIAMANTE,
 	DIALOG_TRIGGER,
+	TP_ENTITY,
 	UNKNOWN,
-	PLAYER_ATTACK
+	
 	// ..
 };
 

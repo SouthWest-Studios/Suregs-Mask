@@ -85,10 +85,6 @@ bool Scene_Mazmorra0::Update(float dt)
 
    	OPTICK_EVENT();
 
-	
-
-
-
 	//L02 DONE 3: Make the camera movement independent of framerate
 	float camSpeed = 1; 
 

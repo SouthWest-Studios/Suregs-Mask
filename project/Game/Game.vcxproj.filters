@@ -73,9 +73,6 @@
     <ClCompile Include="Source\DialogManager.cpp">
       <Filter>Modules\DialogManager</Filter>
     </ClCompile>
-    <ClCompile Include="Source\DialogTriggerEntity.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Enemy_Osiris.cpp">
       <Filter>Entities\Enemies</Filter>
     </ClCompile>
@@ -139,6 +136,12 @@
     </ClCompile>
     <ClCompile Include="Source\Scene_Mazmorra0.cpp">
       <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DialogTriggerEntity.cpp">
+      <Filter>Entities\Meta</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TPEntity.cpp">
+      <Filter>Entities\Meta</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -256,9 +259,6 @@
     <ClInclude Include="Source\DialogManager.h">
       <Filter>Modules\DialogManager</Filter>
     </ClInclude>
-    <ClInclude Include="Source\DialogTriggerEntity.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Enemy_Osiris.h">
       <Filter>Entities\Enemies</Filter>
     </ClInclude>
@@ -333,6 +333,12 @@
     <ClInclude Include="Source\Scene_Mazmorra0.h">
       <Filter>Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="Source\DialogTriggerEntity.h">
+      <Filter>Entities\Meta</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TPEntity.h">
+      <Filter>Entities\Meta</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -376,6 +382,9 @@
     </Filter>
     <Filter Include="Entities\NPC">
       <UniqueIdentifier>{2142dd33-81d1-45e5-9822-3a15956c346a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Meta">
+      <UniqueIdentifier>{e785cbf2-9afb-41aa-85bf-59da29eacc99}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
