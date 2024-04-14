@@ -84,8 +84,16 @@ public:
 	Fishing fishing;
 
 
-	List<const char*>chosefishing_path;
-	List<const char*>choseName_path;
+	/*List<const char*>chosefishing_path;
+	List<const char*>choseName_path;*/
+
+	std::vector<std::vector<const char*>>chosefishing_path;
+	std::vector<std::vector<const char*>>choseName_path;
+
+	std::vector<std::vector<const char*>*> chosefishing_path_ptr;
+	std::vector<std::vector<const char*>*> choseName_path_ptr;
+
+
 	const char*fishing_path;
 	const char*name_path;
 	//fishingfloat
@@ -126,8 +134,7 @@ public:
 	bool playerGoplay = false;
 	bool playerGoplay_TimeOver = false;
 	Fishlevel selected_fish;
-	const char* fishLevel;
-	const char* fishName;
+	int fishLevel;
 	
 
 	//GamePlay

@@ -70,7 +70,19 @@ bool MiniGameFishing::Start() {
 	floatChangeDistance = 100;
 
 
-
+	for (pugi::xml_node node : parameters.child("fishlevel").children()) {
+		std::vector<const char*> row; 
+		std::vector<const char*> name; 
+		for (pugi::xml_node itemNode : node.children()) {
+			const char* texturepath = itemNode.attribute("texturepath").value();
+			row.push_back(texturepath); 
+			texturepath = itemNode.attribute("name").value();
+			name.push_back(texturepath);
+		}
+		chosefishing_path.push_back(row);
+		choseName_path.push_back(name);
+	}
+	
 	return true;
 }
 
@@ -85,7 +97,8 @@ bool MiniGameFishing::Update(float dt)
 	miniGameEnd(dt);
 
 	//printf("\nss: %s", fishingfloat_path);
-
+	
+	
 	return true;
 }
 
@@ -99,6 +112,7 @@ bool MiniGameFishing::PostUpdate()
 			floatCollision(app->entityManager->GetPlayer()->player_Direction, cheke_x, cheke_y);
 		}
 	}
+
 	return true;
 }
 
@@ -140,11 +154,11 @@ void MiniGameFishing::ani_castingline(Direction direction)
 
 
 	//Calculate the final position of the float
-	if (direction == Direction::UP) { printf("\n1"); fishingflota_CenterX = app->entityManager->GetPlayer()->position.x; fishingflota_CenterY = app->entityManager->GetPlayer()->position.y - floatDistance; }
-	else if (direction == Direction::DOWN) { printf("\n2"); fishingflota_CenterX = app->entityManager->GetPlayer()->position.x; fishingflota_CenterY = app->entityManager->GetPlayer()->position.y + floatDistance; }
-	else if (direction == Direction::LEFT) { printf("\n3"); fishingflota_CenterX = app->entityManager->GetPlayer()->position.x - floatDistance; fishingflota_CenterY = app->entityManager->GetPlayer()->position.y; }
-	else if (direction == Direction::RIGHT) { printf("\n4"); fishingflota_CenterX = app->entityManager->GetPlayer()->position.x + floatDistance; fishingflota_CenterY = app->entityManager->GetPlayer()->position.y; }
-	else { printf("\n5"); fishingflota_CenterX = app->entityManager->GetPlayer()->position.x; fishingflota_CenterY = app->entityManager->GetPlayer()->position.y + floatDistance; }
+	if (direction == Direction::UP) { fishingflota_CenterX = app->entityManager->GetPlayer()->position.x; fishingflota_CenterY = app->entityManager->GetPlayer()->position.y - floatDistance; }
+	else if (direction == Direction::DOWN) { fishingflota_CenterX = app->entityManager->GetPlayer()->position.x; fishingflota_CenterY = app->entityManager->GetPlayer()->position.y + floatDistance; }
+	else if (direction == Direction::LEFT) { fishingflota_CenterX = app->entityManager->GetPlayer()->position.x - floatDistance; fishingflota_CenterY = app->entityManager->GetPlayer()->position.y; }
+	else if (direction == Direction::RIGHT) { fishingflota_CenterX = app->entityManager->GetPlayer()->position.x + floatDistance; fishingflota_CenterY = app->entityManager->GetPlayer()->position.y; }
+	else { fishingflota_CenterX = app->entityManager->GetPlayer()->position.x; fishingflota_CenterY = app->entityManager->GetPlayer()->position.y + floatDistance; }
 
 
 
@@ -349,7 +363,6 @@ void MiniGameFishing::floatCollision(Direction direction, float cheke_x, float c
 		else {
 			floatbody->body->SetLinearVelocity(b2Vec2(0, 0));
 		}
-		printf("entra1");
 		app->render->DrawTexture(fishingfloat_texture, fishingflota_position_x - 23, fishingflota_position_y, 3);
 	}
 	else if (direction == Direction::DOWN) {
@@ -360,7 +373,7 @@ void MiniGameFishing::floatCollision(Direction direction, float cheke_x, float c
 		else {
 			floatbody->body->SetLinearVelocity(b2Vec2(0, 0));
 		}
-		printf("entra2");
+		
 		app->render->DrawTexture(fishingfloat_texture, fishingflota_position_x - 23, fishingflota_position_y, 3);
 	}
 	else if (direction == Direction::LEFT) {
@@ -371,14 +384,13 @@ void MiniGameFishing::floatCollision(Direction direction, float cheke_x, float c
 		else {
 			floatbody->body->SetLinearVelocity(b2Vec2(0, 0));
 		}
-		printf("entra3");
+		
 		app->render->DrawTexture(fishingfloat_texture, fishingflota_position_x, fishingflota_position_y - 23, 3);
 	}
 	else if (direction == Direction::RIGHT) {
 		if (cheke_x <= fishingflota_position_x) {
 			b2Vec2 force(10.0f, 0.0f);
 			floatbody->body->ApplyForceToCenter(force, true);
-			printf("entra4");
 		}
 		else {
 			floatbody->body->SetLinearVelocity(b2Vec2(0, 0));
@@ -394,7 +406,6 @@ void MiniGameFishing::floatCollision(Direction direction, float cheke_x, float c
 		else {
 			floatbody->body->SetLinearVelocity(b2Vec2(0, 0));
 		}
-		printf("entra5");
 		app->render->DrawTexture(fishingfloat_texture, fishingflota_position_x - 23, fishingflota_position_y, 3);
 	}
 }
@@ -690,34 +701,35 @@ bool MiniGameFishing::miniGameEnd(float dt)
 
 void MiniGameFishing::reward_pool(Fishlevel fishingType)
 {
+	
+	printf("entra1");
 	switch (fishingType)
 	{
-	case Fishlevel::NOTHING: fishLevel = "nonthings", fishName = "nonthing"; break;
-	case Fishlevel::TRASH: fishLevel = "trashes", fishName = "trash"; break;
-	case Fishlevel::SMALL: fishLevel = "smalls", fishName = "small"; break;
-	case Fishlevel::MEDIUM: fishLevel = "mediums", fishName = "medium"; break;
-	case Fishlevel::BIG: fishLevel = "bigs", fishName = "big"; break;
+	case Fishlevel::NOTHING: fishLevel = 0; break;
+	case Fishlevel::TRASH: fishLevel = 1; break;
+	case Fishlevel::SMALL: fishLevel = 2; break;
+	case Fishlevel::MEDIUM: fishLevel = 3; break;
+	case Fishlevel::BIG: fishLevel = 4; break;
 	case Fishlevel::UNKNOWN:LOG("Collision UNKNOWN"); break;
 	}//Reaction upon knowing what is obtained
 
-	chosefishing_path.Clear();
-	choseName_path.Clear();
-	int numNodes = 0;
-	for (pugi::xml_node itemNode = parameters.child("fishlevel").child(fishLevel).child(fishName); itemNode; itemNode = itemNode.next_sibling(fishName))
-	{
-		chosefishing_path.Add(itemNode.attribute("texturepath").as_string());
-		choseName_path.Add(itemNode.attribute("name").as_string());
-		numNodes++;
-	}
+	//chosefishing_path.clear();
+	//choseName_path.clear();
 
+	
+	printf("%c", chosefishing_path[1][1]);
 	int num = 0;
-	num = getRandomNumber(0, numNodes - 1);
-
-	fishing_path = chosefishing_path[num];
-	name_path = choseName_path[num];
+	num = getRandomNumber(0,chosefishing_path[fishLevel].size() - 1);
+	fishing_path = chosefishing_path[1][1];
+	name_path = choseName_path[fishLevel][num];
+	
+	//fishing_path = chosefishing_path[num];
+	
+	/*name_path = choseName_path[num];*/
 	std::string strNumber = std::to_string(player_click_count);
 	dialogoClose(0);
 	app->dialogManager->CreateDialogSinEntity("you click " + strNumber + " veces " + " tu obtenido " + name_path, "Fishing System", fishing_path);
+	//app->dialogManager->CreateDialogSinEntity("you click " + strNumber + " veces " + " tu obtenido " , "Fishing System", nullptr);
 	fishingOver();
 	resetProbability();
 }

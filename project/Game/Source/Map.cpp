@@ -625,6 +625,14 @@ bool Map::LoadCollisions(std::string layerName)
 					}
 
 
+					
+					if (gid == tileset->firstgid + 2) {
+						c1 = app->physics->CreateRectangleSensor(pos.x + 16, pos.y + 16, 32, 32, STATIC);
+						c1->ctype = ColliderType::LAGO;
+						collisionsList.Add(c1);
+						ret = true;
+					}
+
 					//if (gid == tileset->firstgid + 1) {
 					//    c1 = app->physics->CreateRectangle(pos.x + 16, pos.y + 2, 32, 4, STATIC);
 					//    c1->ctype = ColliderType::PLATFORM_TRASPASS;
