@@ -60,7 +60,7 @@ bool Menu::PreUpdate()
 // Called each loop iteration
 bool Menu::Update(float dt)
 {
-	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN)
 	{
 
 		menuu = !menuu;
@@ -76,7 +76,7 @@ bool Menu::Update(float dt)
 			ventana++;
 		}
 		
-		if (app->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 		{
 			if (ventana == 4)
 			{
@@ -85,6 +85,19 @@ bool Menu::Update(float dt)
 			else
 			{
 				ventana++;
+			}
+
+			app->audio->PlayFx(change_inventory_audio);
+		}
+		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
+		{
+			if (ventana == 1)
+			{
+				ventana = 4;
+			}
+			else
+			{
+				ventana--;
 			}
 
 			app->audio->PlayFx(change_inventory_audio);

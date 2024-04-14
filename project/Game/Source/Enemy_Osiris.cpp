@@ -122,7 +122,7 @@ bool Enemy_Osiris::Update(float dt)
 		nextState = EntityState::IDLE;
 	}
 
-
+	Osirisfinding(dt);
 	currentAnimation->Update();
 	return true;
 }
@@ -227,9 +227,9 @@ void Enemy_Osiris::SetPlayer(Player* player)
 
 bool Enemy_Osiris::Osirisfinding(float dt)
 {
-	if (app->map->pathfinding->GetDistance(app->scene_testing->GetPlayer()->position, position) <= 120) {
+	if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 120) {
 
-		iPoint playerPos = app->map->WorldToMap(app->scene_testing->GetPlayer()->position.x, app->scene_testing->GetPlayer()->position.y);
+		iPoint playerPos = app->map->WorldToMap(app->entityManager->GetPlayer()->position.x, app->entityManager->GetPlayer()->position.y);
 
 
 		if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 120) {

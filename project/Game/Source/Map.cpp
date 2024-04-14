@@ -1013,7 +1013,7 @@ bool Map::LoadEntities(std::string layerName)
 
 					//CUERNO
 					if (gid == tileset->firstgid + 40) {
-						Cuerno* cuerno = (Cuerno*)app->entityManager->CreateEntity(EntityType::RESOURCE_CUERNO);
+						Cuerno* cuerno = (Cuerno*)app->entityManager->CreateEntity(EntityType::ITEM_CUERNO);
 						cuerno->config = configNode.child("entities_data").child("item_cuerno");
 						cuerno->position = iPoint(pos.x + 16, pos.y + 16);
 						cuerno->Start();

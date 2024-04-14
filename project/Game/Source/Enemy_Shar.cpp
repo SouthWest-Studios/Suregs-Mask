@@ -112,7 +112,7 @@ bool Enemy_Shar::Update(float dt)
 		nextState = EntityState::IDLE;
 	}
 
-
+	Sharfinding(dt);
 	currentAnimation->Update();
 
 	return true;
@@ -203,9 +203,9 @@ void Enemy_Shar::SetPlayer(Player* player)
 
 bool Enemy_Shar::Sharfinding(float dt)
 {
-	if (app->map->pathfinding->GetDistance(app->scene_testing->GetPlayer()->position, position) <= 120) {
+	if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 120) {
 
-		iPoint playerPos = app->map->WorldToMap(app->scene_testing->GetPlayer()->position.x, app->scene_testing->GetPlayer()->position.y);
+		iPoint playerPos = app->map->WorldToMap(app->entityManager->GetPlayer()->position.x, app->entityManager->GetPlayer()->position.y);
 
 		if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 120) {
 

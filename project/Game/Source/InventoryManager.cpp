@@ -124,7 +124,7 @@ Inventity* InventoryManager::CreateItem(EntityType type, int id, int ataque, int
 		break;
 	}
 
-	case EntityType::RESOURCE_CUERNO:
+	case EntityType::ITEM_CUERNO:
 	{
 		int newId = 0;
 		for (ListItem<Inventity*>* item = inventities.start; item != nullptr; item = item->next)
@@ -200,7 +200,7 @@ Inventity* InventoryManager::CreateItem(EntityType type, int id, int ataque, int
 		entity = diamante;
 		break;
 	}
-	case EntityType::RESOURCE_ARMADURA:
+	case EntityType::ITEM_ARMADURA:
 	{
 		for (ListItem<Inventity*>* item = inventities.start; item != NULL; item = item->next)
 		{
@@ -379,20 +379,20 @@ void InventoryManager::UseItemSelected(int id)
 void InventoryManager::OnMovePointer()
 {
 
-	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN && PointerPosition.x < 143) {
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && PointerPosition.x < 143) {
 		PointerPosition.x += 100;
 		PointerId += 1;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && PointerPosition.x > -43) {
+	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN && PointerPosition.x > -43) {
 		PointerPosition.x -= 100;
 		PointerId -= 1;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && PointerPosition.y < 1) {
+	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && PointerPosition.y < 1) {
 		PointerPosition.y += 76;
 		PointerId += 5;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && PointerPosition.y > -160) {
+	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && PointerPosition.y > -160) {
 		PointerPosition.y -= 76;
 		PointerId -= 5;
 	}
@@ -471,7 +471,7 @@ bool InventoryManager::Update(float dt)
 	{
 		OnMovePointer();
 
-		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) {
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
 			options = true;
 			selected = { PointerPosition.x, PointerPosition.y };
 			selectedId = PointerId;

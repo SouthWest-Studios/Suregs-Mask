@@ -48,55 +48,57 @@
 		<shar texturePath="Assets/Textures/Entidades/Shar/Sprites.png" Tsprite="45" Pwidth="2190" sprite_x="146" sprite_y="153"/>
 		<item_cuerno texturePath="Assets/Textures/Entidades/Items/cuerno.png"/>
 		<item_diamante texturePath="Assets/Textures/Entidades/Items/texture_diamond.png"/>
+		
 
 		<item x="1200" y="2600" texturePath="Assets/Textures/Entidades/Jugador/salamanda1.png" Tsprite="23" Pwidth="1000" sprite_x="100" sprite_y="160"/>
 
 
 		<!-- <npc_vendedor texturePath="Assets/Textures/Entidades/NPCs/general.png" Tsprite="9" Pwidth="138" sprite_x="138" sprite_y="1836"/>  -->
-		<npc_vendedor texturePath="Assets/Textures/Entidades/NPCs/general.png" Tsprite="9" Pwidth="138" sprite_x="138" sprite_y="177"/>
-		<npc_pescador texturePath="Assets/Textures/Entidades/NPCs/general.png" Tsprite="9" Pwidth="138" sprite_x="138" sprite_y="220"/>
-		<npc_bruja texturePath="Assets/Textures/Entidades/NPCs/general.png" Tsprite="9" Pwidth="138" sprite_x="138" sprite_y="229"/>
-		<npc_bully1 texturePath="Assets/Textures/Entidades/NPCs/general.png" Tsprite="9" Pwidth="138" sprite_x="138" sprite_y="181"/>
-		<npc_bully2 texturePath="Assets/Textures/Entidades/NPCs/general.png" Tsprite="9" Pwidth="138" sprite_x="138" sprite_y="188"/>
-		<npc_herrera texturePath="Assets/Textures/Entidades/NPCs/general.png" Tsprite="9" Pwidth="138" sprite_x="138" sprite_y="200"/>
-		<npc_abuelo texturePath="Assets/Textures/Entidades/NPCs/general.png" Tsprite="9" Pwidth="138" sprite_x="138" sprite_y="200"/>
-		<npc_mujer_preocupada texturePath="Assets/Textures/Entidades/NPCs/general.png" Tsprite="9" Pwidth="138" sprite_x="138" sprite_y="200"/>
-		<npc_mujer_enamorada texturePath="Assets/Textures/Entidades/NPCs/general.png" Tsprite="9" Pwidth="138" sprite_x="138" sprite_y="200"/>
+		<npc_vendedor texturePath="Assets/Textures/Entidades/NPCs/textura_npc_vendedor.png" Tsprite="1" Pwidth="138" sprite_x="138" sprite_y="185"/>
+		<npc_pescador texturePath="Assets/Textures/Entidades/NPCs/textura_npc_pescador.png" Tsprite="1" Pwidth="138" sprite_x="138" sprite_y="233"/>
+		<npc_bruja texturePath="Assets/Textures/Entidades/NPCs/textura_npc_bruja.png" Tsprite="1" Pwidth="138" sprite_x="138" sprite_y="217"/>
+		<npc_bully1 texturePath="Assets/Textures/Entidades/NPCs/textura_npc_bully1.png" Tsprite="1" Pwidth="138" sprite_x="138" sprite_y="181"/>
+		<npc_bully2 texturePath="Assets/Textures/Entidades/NPCs/textura_npc_bully2.png" Tsprite="1" Pwidth="138" sprite_x="138" sprite_y="180"/>
+		<npc_herrera texturePath="Assets/Textures/Entidades/NPCs/textura_npc_herrera.png" Tsprite="1" Pwidth="138" sprite_x="138" sprite_y="189"/>
+		<npc_abuelo texturePath="Assets/Textures/Entidades/NPCs/textura_npc_abuelo.png" Tsprite="1" Pwidth="138" sprite_x="138" sprite_y="195"/>
+		<npc_mujer_preocupada texturePath="Assets/Textures/Entidades/NPCs/textura_npc_mujer_preocupada.png" Tsprite="1" Pwidth="138" sprite_x="138" sprite_y="194"/>     
+		<npc_mujer_enamorada texturePath="Assets/Textures/Entidades/NPCs/textura_npc_mujer_enamorada.png" Tsprite="1" Pwidth="138" sprite_x="138" sprite_y="194"/>
 	
 	</entities_data>
 
 	<!--Scenes-->
 	<scene_testing>
 		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Testing/TestingMap.tmx"/>
+			<mouseTileTex texturepath="Assets/Textures/pathfinding.png"/>
 
-		<minigamefishing>
-			<fishingfloat texturepath="Assets/Textures/fishingfloat.png" />
+			<minigamefishing>
+				<fishingfloat texturepath="Assets/Textures/fishingfloat.png" />
 			
 			
-			<fishlevel>
-				<nonthings>
-					<nonthing texturepath="Assets/Textures/Fishing/trash1.png" name = "nonthing" />
-				</nonthings>
-				<trashes>
-					<trash texturepath="Assets/Textures/Fishing/trash1.png" name = "trash1" />
-					<trash texturepath="Assets/Textures/Fishing/trash2.png" name = "trash2" />
-					<trash texturepath="Assets/Textures/Fishing/trash3.png" name = "trash3" />
-					<trash texturepath="Assets/Textures/Fishing/trash4.png" name = "trash4" />
-				</trashes>
-				<smalls>
-					<small texturepath="Assets/Textures/Fishing/small1.png" name = "small1" />
-					<small texturepath="Assets/Textures/Fishing/small2.png" name = "small2" />
-					<small texturepath="Assets/Textures/Fishing/small3.png" name = "small3" />
-				</smalls>
-				<mediums>
-					<medium texturepath="Assets/Textures/Fishing/medium1.png" name = "medium1" />
-					<medium texturepath="Assets/Textures/Fishing/medium2.png" name = "medium2" />
-				</mediums>
-				<bigs>
-					<big texturepath="Assets/Textures/Fishing/big.png" name = "Bigfishing" />
-				</bigs>
-			</fishlevel>
-		</minigamefishing>
+				<fishlevel>
+					<nonthings>
+						<nonthing texturepath="Assets/Textures/Fishing/trash1.png" name = "nonthing" />
+					</nonthings>
+					<trashes>
+						<trash texturepath="Assets/Textures/Fishing/trash1.png" name = "trash1" />
+						<trash texturepath="Assets/Textures/Fishing/trash2.png" name = "trash2" />
+						<trash texturepath="Assets/Textures/Fishing/trash3.png" name = "trash3" />
+						<trash texturepath="Assets/Textures/Fishing/trash4.png" name = "trash4" />
+					</trashes>
+					<smalls>
+						<small texturepath="Assets/Textures/Fishing/small1.png" name = "small1" />
+						<small texturepath="Assets/Textures/Fishing/small2.png" name = "small2" />
+						<small texturepath="Assets/Textures/Fishing/small3.png" name = "small3" />
+					</smalls>
+					<mediums>
+						<medium texturepath="Assets/Textures/Fishing/medium1.png" name = "medium1" />
+						<medium texturepath="Assets/Textures/Fishing/medium2.png" name = "medium2" />
+					</mediums>
+					<bigs>
+						<big texturepath="Assets/Textures/Fishing/big.png" name = "Bigfishing" />
+					</bigs>
+				</fishlevel>
+			</minigamefishing>
 	</scene_testing>
 
 	<scene_mazmorra0>
