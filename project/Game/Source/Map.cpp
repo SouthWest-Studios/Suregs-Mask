@@ -271,6 +271,7 @@ bool Map::Load(SString mapFileName)
 	LoadObjects();
 	LoadCollisions("Collisions");
 	LoadEntities("Entities");
+	LoadTPEntities("TPLayers");
 
 
 
@@ -703,11 +704,15 @@ bool Map::LoadTPEntities(std::string layerName)
 					SDL_Rect r = tileset->GetRect(gid);
 					iPoint pos = MapToWorld(x, y);
 
-					int tpID = gid - tileset->firstgid;
-
-					TPEntity* tp = (TPEntity*)app->entityManager->CreateEntity(EntityType::TP_ENTITY);
-					tp->tpID = tpID;
-					tp->position = iPoint(pos.x + 16, pos.y + 16);
+					
+					if (gid != 0) {
+						int tpID = gid - tileset->firstgid;
+						TPEntity* tp = (TPEntity*)app->entityManager->CreateEntity(EntityType::TP_ENTITY);
+						tp->tpID = tpID;
+						tp->position = iPoint(pos.x + 16, pos.y + 16);
+						//tp->Start();
+					}
+					
 					
 
 

@@ -24,9 +24,9 @@ bool TPEntity::Awake() {
 
 bool TPEntity::Start() {
 
-	pbody = app->physics->CreateRectangleSensor(position.x+10, position.y, 32, 32, bodyType::KINEMATIC);
+	pbody = app->physics->CreateRectangleSensor(position.x+10, position.y, 32, 32, bodyType::DYNAMIC);
 	pbody->listener = this;
-	pbody->ctype = ColliderType::DIALOG_TRIGGER;
+	pbody->ctype = ColliderType::TP_ENTITY;
 
 	return true;
 }

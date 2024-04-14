@@ -186,7 +186,12 @@ void EntityManager::AddEntity(Entity* entity)
 
 void EntityManager::LinkTPEntities()
 {
+	ListItem<TPEntity*>* item;
 
+	for (item = tpEntities.start; item != NULL; item = item->next)
+	{
+		item->data->Start();
+	}
 }
 
 

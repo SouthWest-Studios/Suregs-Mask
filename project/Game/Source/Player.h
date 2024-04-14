@@ -108,7 +108,6 @@ private:
 
 	Timer timerDash;
 	Timer cdTimerDash; 
-	Timer timerSpawnPlayer;
 
 	int cdTimerAttackMS = 250;
 	Timer timerAttack;

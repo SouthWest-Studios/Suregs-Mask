@@ -59,9 +59,6 @@ bool Player::Start() {
 
 	cdTimerDashMS = 500;
 
-	timerSpawnPlayer.Start();
-
-
 	return true;
 }
 
