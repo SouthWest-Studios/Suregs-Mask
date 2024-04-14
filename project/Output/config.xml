@@ -64,10 +64,14 @@
 	
 	</entities_data>
 
-
+	<!--Scenes-->
 	<scene_testing>
 		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Testing/TestingMap.tmx"/>
 	</scene_testing>
+
+	<scene_mazmorra0>
+		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Mazmorras/Mazmorra0.tmx"/>
+	</scene_mazmorra0>
 
 	<!--Animation-->
 	<animations>

@@ -137,6 +137,9 @@
     <ClCompile Include="Source\NPC_Bruja.cpp">
       <Filter>Entities\NPC</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Scene_Mazmorra0.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -326,6 +329,9 @@
     </ClInclude>
     <ClInclude Include="Source\NPC_Pescador.h">
       <Filter>Entities\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene_Mazmorra0.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

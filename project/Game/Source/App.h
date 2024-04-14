@@ -21,6 +21,7 @@ class ModuleFadeToBlack;
 class Scene_intro;
 class Scene_menu;
 class Scene_testing;
+class Scene_Mazmorra0;
 class EntityManager;
 class Map;
 //L07 DONE 2: Add Physics module
@@ -112,6 +113,7 @@ public:
 	Scene_intro* scene_intro;
 	Scene_menu* scene_menu;
 	Scene_testing* scene_testing;
+	Scene_Mazmorra0* scene_mazmorra0;
 	EntityManager* entityManager;
 	Map* map;
 	//L07 DONE 2: Add Physics module
