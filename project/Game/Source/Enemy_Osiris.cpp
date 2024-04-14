@@ -62,6 +62,9 @@ bool Enemy_Osiris::Start() {
 	speed = 0.2f;
 	attackDamage = 50;
 
+	deathTime = 0.0f;
+	reviveDelay = 2.0f;
+
 	return true;
 }
 
@@ -75,25 +78,15 @@ bool Enemy_Osiris::Update(float dt)
 	}
 	else(isFacingLeft = false);
 
-	if (state == EntityState::DEAD) {
+
+
+	if (nextState == EntityState::DEAD) {
 		float currentTime = dt / 1000.0f;
 		if (currentTime - deathTime >= reviveDelay) {
-			Revive(dt);
+			nextState = EntityState::REVIVING;
 		}
 	}
-		
-	if (health <= 0) {
-		nextState = EntityState::DEAD;
-	}
-	else if (abs(playerPos.x - position.x) <= 30 && abs(playerPos.y - position.y) <= 30 /*cambiar si hace falta*/) {
-		nextState = EntityState::ATTACKING;
-	}
-	else if (abs(playerPos.x - position.x) <= 100 && abs(playerPos.y - position.y) <= 100/*cambiar si hace falta*/) {
-		nextState = EntityState::RUNNING;
-	}
-	else {
-		nextState = EntityState::IDLE;
-	}
+
 
 	switch (nextState) {
 	case EntityState::RUNNING:
@@ -105,13 +98,31 @@ bool Enemy_Osiris::Update(float dt)
 	case EntityState::DEAD:
 		Die(dt);
 		break;
+	case EntityState::REVIVING:
+		Revive(dt);
+		break;
 	case EntityState::IDLE:
 		DoNothing(dt);
 		break;
 	default:
 		break;
 	}
-	//Osirisfinding(dt);
+
+		
+	if (health <= 0) {
+		nextState = EntityState::DEAD;
+	}
+	else if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 20 /*Cambiar*/) {
+		nextState = EntityState::ATTACKING;
+	}
+	else if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 120/*Cambiar*/) {
+		nextState = EntityState::RUNNING;
+	}
+	else {
+		nextState = EntityState::IDLE;
+	}
+
+
 	currentAnimation->Update();
 	return true;
 }
@@ -154,8 +165,8 @@ void Enemy_Osiris::Chase(float dt)
 {
 	//printf("Osiris chasing");
 	currentAnimation = &runAnim;
-	//iPoint playerPos = app->entityManager->GetPlayer()->position;
-	//path->CreatePath(position, playerPos);
+	Osirisfinding(dt);
+
 }
 
 void Enemy_Osiris::Attack(float dt)
@@ -166,8 +177,14 @@ void Enemy_Osiris::Attack(float dt)
 }
 
 void Enemy_Osiris::Die(float dt) {
-	state = EntityState::DEAD;
 	deathTime = dt / 1000.0f;
+
+	if (hasRevived)
+	{
+		app->entityManager->DestroyEntity(this);
+		app->physics->GetWorld()->DestroyBody(pbody->body);
+		SDL_DestroyTexture(texture);
+	}
 }
 
 void Enemy_Osiris::Revive(float dt)
@@ -176,7 +193,7 @@ void Enemy_Osiris::Revive(float dt)
 	// Solo revivir si Osiris no ha revivido antes
 	if (!hasRevived) {
 		health = maxHealth;
-		state = EntityState::IDLE;
+		nextState = EntityState::IDLE;
 		hasRevived = true;
 	}
 }
@@ -210,9 +227,9 @@ void Enemy_Osiris::SetPlayer(Player* player)
 
 bool Enemy_Osiris::Osirisfinding(float dt)
 {
-	if (app->map->pathfinding->GetDistance(app->scene_testing->GetPLayer()->position, position) <= 120) {
+	if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 120) {
 
-		iPoint playerPos = app->map->WorldToMap(app->scene_testing->GetPLayer()->position.x, app->scene_testing->GetPLayer()->position.y);
+		iPoint playerPos = app->map->WorldToMap(app->entityManager->GetPlayer()->position.x, app->entityManager->GetPlayer()->position.y);
 		playerPos.x += 1;
 		playerPos.y += 1;
 		iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
@@ -246,7 +263,7 @@ bool Enemy_Osiris::Osirisfinding(float dt)
 			pbody->body->SetLinearVelocity(vel);
 		}
 
-		if (app->map->pathfinding->GetDistance(app->scene_testing->GetPLayer()->position, position) <= 66) {
+		if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 66) {
 
 			if (isFacingLeft) {
 				vel.x -= speed * dt;

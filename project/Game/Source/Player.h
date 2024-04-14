@@ -120,12 +120,13 @@ private:
 public:
 
 	Branch transitionTable[static_cast<int>(EntityState::STATE_COUNT)][static_cast<int>(EntityState::STATE_COUNT)] = {
-		// isMoving               isAttacking						 isDead                else                MASK_ATTACK
-		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // IDLE
-		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // RUNNING
-		{ {EntityState::IDLE},	  {EntityState::IDLE},		{EntityState::DEAD}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // ATTACKING
-		{ {EntityState::DEAD},	  {EntityState::DEAD},		{EntityState::DEAD}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // DEAD
-		{ {EntityState::IDLE},	  {EntityState::IDLE},	    {EntityState::DEAD}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}} // MASK_ATTACK
+		// isMoving					isAttacking				isDead               isReviving					else                MASK_ATTACK
+		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // IDLE
+		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // RUNNING
+		{ {EntityState::IDLE},	  {EntityState::IDLE},		{EntityState::DEAD}, {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // ATTACKING
+		{ {EntityState::DEAD},	  {EntityState::DEAD},		{EntityState::DEAD}, {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // DEAD
+		{ {EntityState::IDLE},	  {EntityState::IDLE},	    {EntityState::DEAD}, {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // MASK_ATTACK
+		{ {EntityState::IDLE},	  {EntityState::IDLE},	    {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::IDLE}} // REVIVING
 	};
 
 	EntityState currentState = state;

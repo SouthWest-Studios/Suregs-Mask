@@ -40,6 +40,7 @@ enum class EntityState
 	RUNNING,
 	ATTACKING,
 	DEAD,
+	REVIVING,
 	MASK_ATTACK,
 	STATE_COUNT
 };
