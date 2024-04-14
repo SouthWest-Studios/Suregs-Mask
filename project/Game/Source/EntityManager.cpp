@@ -10,6 +10,7 @@
 #include "Scene_Testing.h"
 #include "Player.h"
 #include "DialogTriggerEntity.h"
+#include "TPEntity.h"
 #include "NPC_Vendedor.h"
 #include "NPC_Pescador.h"
 #include "NPC_Abuelo.h"
@@ -124,6 +125,10 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::DIALOG_TRIGGER:
 		entity = new DialogTrigger();
 		break;
+	case EntityType::TP_ENTITY:
+		entity = new TPEntity();
+		tpEntities.Add((TPEntity*)entity);
+		break;
 
 	case EntityType::NPC_VENDEDOR:
 		entity = new NPCVendedor();
@@ -177,6 +182,11 @@ void EntityManager::DestroyEntity(Entity* entity)
 void EntityManager::AddEntity(Entity* entity)
 {
 	if ( entity != nullptr) entities.Add(entity);
+}
+
+void EntityManager::LinkTPEntities()
+{
+
 }
 
 

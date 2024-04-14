@@ -34,6 +34,7 @@ private:
 
 
 public:
+	int tpID;
 
 private:
 

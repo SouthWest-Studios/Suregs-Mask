@@ -29,6 +29,7 @@
 #include "NPC_MujerEnamorada.h"
 #include "NPC_MujerPreocupada.h"
 #include "Item_Diamante.h"
+#include "TPEntity.h"
 
 Map::Map(App* app, bool start_enabled) : Module(app, start_enabled), mapLoaded(false)
 {
@@ -668,6 +669,80 @@ bool Map::LoadCollisions(std::string layerName)
 		mapLayerItem = mapLayerItem->next;
 
 	}
+
+	return ret;
+}
+
+bool Map::LoadTPEntities(std::string layerName)
+{
+	ListItem<MapLayer*>* mapLayerItem;
+	mapLayerItem = mapData.layers.start;
+	bool ret = false;
+
+	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
+	if (parseResult) {
+		configNode = configFile.child("config");
+	}
+	else {
+		LOG("Error in Map::LoadEntities(): %s", parseResult.description());
+		return false;
+	}
+	LOG("CARGA TP ENTIDADES");
+	while (mapLayerItem != NULL) {
+
+		if (mapLayerItem->data->name.GetString() == layerName) {
+			for (int x = 0; x < mapLayerItem->data->width; x++)
+			{
+
+				for (int y = 0; y < mapLayerItem->data->height; y++)
+				{
+
+
+					int gid = mapLayerItem->data->Get(x, y);
+					TileSet* tileset = GetTilesetFromTileId(gid);
+					SDL_Rect r = tileset->GetRect(gid);
+					iPoint pos = MapToWorld(x, y);
+
+					int tpID = gid - tileset->firstgid;
+
+					TPEntity* tp = (TPEntity*)app->entityManager->CreateEntity(EntityType::TP_ENTITY);
+					tp->tpID = tpID;
+					tp->position = iPoint(pos.x + 16, pos.y + 16);
+					
+
+
+					////PLAYER
+					//if (gid == tileset->firstgid + 0) {
+
+					//	app->entityManager->SetPlayer((Player*)app->entityManager->CreateEntity(EntityType::PLAYER));
+					//	app->entityManager->GetPlayer()->config = configNode.child("entities_data").child("player");
+					//	app->entityManager->GetPlayer()->position = iPoint(pos.x + 16, pos.y + 16);
+					//	app->entityManager->GetPlayer()->Start();
+
+					//}
+
+					////NPC_VENDEDOR
+					//if (gid == tileset->firstgid + 1) {
+
+
+					//	NPCVendedor* npc = (NPCVendedor*)app->entityManager->CreateEntity(EntityType::NPC_VENDEDOR);
+					//	npc->config = configNode.child("entities_data").child("npc_vendedor");
+					//	npc->position = iPoint(pos.x + 16, pos.y + 16);
+					//	npc->Start();
+
+					//}
+
+					
+				}
+			}
+
+		}
+		mapLayerItem = mapLayerItem->next;
+
+	}
+	app->entityManager->LinkTPEntities();
+
+
 
 	return ret;
 }

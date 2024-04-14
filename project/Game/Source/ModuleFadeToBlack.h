@@ -32,12 +32,7 @@ public:
 
 private:
 
-	enum Fade_Step
-	{
-		NONE,
-		TO_BLACK,
-		FROM_BLACK
-	} currentStep = Fade_Step::NONE;
+	
 
 	// A frame count system to handle the fade time and ratio
 	Uint32 frameCount = 0;
@@ -51,6 +46,14 @@ private:
 	Module* moduleToDisable = nullptr;
 
 public:
+
+	enum Fade_Step
+	{
+		NONE,
+		TO_BLACK,
+		FROM_BLACK
+	} currentStep = Fade_Step::NONE;
+
 	Module* activeScene = nullptr;
 };
 
