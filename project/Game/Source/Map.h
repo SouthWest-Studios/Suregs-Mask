@@ -58,7 +58,7 @@ struct Properties
     struct Property
     {
         SString name;
-        bool value; //We assume that we are going to work only with bool for the moment
+        std::string value; //We assume that we are going to work only with bool for the moment
     };
 
     List<Property*> propertyList;

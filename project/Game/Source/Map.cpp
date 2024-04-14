@@ -88,7 +88,7 @@ bool Map::PostUpdate()
 	// iterates the layers in the map
 	while (mapLayer != NULL) {
 		//Check if the property Draw exist get the value, if it's true draw the lawyer
-		if (mapLayer->data->properties.GetProperty("Draw") != NULL && mapLayer->data->properties.GetProperty("Draw")->value) {
+		if (mapLayer->data->properties.GetProperty("Draw") != NULL && mapLayer->data->properties.GetProperty("Draw")->value == "true") {
 
 			iPoint playerPos = app->entityManager->GetPlayer()->position;
 			int xToTiledLeft = MAX((playerPos.x / 32) - TILES_TO_LOAD, 0);
@@ -311,7 +311,7 @@ bool Map::Load(SString mapFileName)
 
 	//Search the layer in the map that contains information for navigation
 	while (mapLayerItem != NULL) {
-		if (mapLayerItem->data->properties.GetProperty("Navigation") != NULL && mapLayerItem->data->properties.GetProperty("Navigation")->value) {
+		if (mapLayerItem->data->properties.GetProperty("Navigation") != NULL && mapLayerItem->data->properties.GetProperty("Navigation")->value == "true") {
 			navigationLayer = mapLayerItem->data;
 			break;
 		}
@@ -353,7 +353,7 @@ bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 	{
 		Properties::Property* p = new Properties::Property();
 		p->name = propertieNode.attribute("name").as_string();
-		p->value = propertieNode.attribute("value").as_bool(); // (!!) I'm assuming that all values are bool !!
+		p->value = propertieNode.attribute("value").as_string();
 
 		properties.propertyList.Add(p);
 	}
@@ -697,7 +697,10 @@ bool Map::LoadObjects()
 
 			if (object->properties.GetProperty("dialogID") != NULL) {
 
-				pugi::xml_node dialogNode = dialoguesNode.find_child_by_attribute("dialog", "id", std::to_string(object->properties.GetProperty("dialogID")->value).c_str());
+			
+
+
+				pugi::xml_node dialogNode = dialoguesNode.find_child_by_attribute("dialog", "id", object->properties.GetProperty("dialogID")->value.c_str());
 
 				if (!dialogNode) {
 					std::cerr << "No se encontró ningún diálogo con el id=" << object->properties.GetProperty("dialogID")->value << std::endl;
