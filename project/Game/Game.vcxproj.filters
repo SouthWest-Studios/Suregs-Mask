@@ -109,7 +109,7 @@
     <ClCompile Include="Source\NPC_Vendedor.cpp">
       <Filter>Entities\NPC</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Item_Diamante.cpp" />
+    <ClCompile Include="Source\Item_Diamante.cpp"/>
     <ClCompile Include="Source\NPC_Abuelo.cpp">
       <Filter>Entities\NPC</Filter>
     </ClCompile>
@@ -134,10 +134,9 @@
     <ClCompile Include="Source\NPC_Bruja.cpp">
       <Filter>Entities\NPC</Filter>
     </ClCompile>
-
     <ClCompile Include="Source\MiniGameFishing.cpp">
       <Filter>MiniGame</Filter>
-
+    </ClCompile>
     <ClCompile Include="Source\Scene_Mazmorra0.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
@@ -146,7 +145,6 @@
     </ClCompile>
     <ClCompile Include="Source\TPEntity.cpp">
       <Filter>Entities\Meta</Filter>
-
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -341,7 +339,7 @@
     </ClInclude>
     <ClInclude Include="Source\MiniGameFishing.h">
       <Filter>MiniGame</Filter>
-
+   </ClInclude>
     <ClInclude Include="Source\Scene_Mazmorra0.h">
       <Filter>Scenes</Filter>
     </ClInclude>
@@ -350,7 +348,6 @@
     </ClInclude>
     <ClInclude Include="Source\TPEntity.h">
       <Filter>Entities\Meta</Filter>
-
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -399,10 +396,9 @@
 
     <Filter Include="MiniGame">
       <UniqueIdentifier>{dc0edb71-7353-4634-b94c-b47ded8115ea}</UniqueIdentifier>
-
+    </Filter>
     <Filter Include="Entities\Meta">
       <UniqueIdentifier>{e785cbf2-9afb-41aa-85bf-59da29eacc99}</UniqueIdentifier>
-
     </Filter>
   </ItemGroup>
   <ItemGroup>
