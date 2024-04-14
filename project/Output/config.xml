@@ -11,7 +11,8 @@
 	</renderer>
 
 	<window>
-		<resolution width="1280" height="768" scale="1"/>
+		<!--<resolution width="1280" height="768" scale="1"/>-->
+		<resolution width="1280" height="720" scale="1"/>
 		<fullscreen value="false"/>
 		<borderless value="false"/>
 		<resizable value="false"/>
@@ -64,7 +65,7 @@
 	
 	</entities_data>
 
-
+	<!--Scenes-->
 	<scene_testing>
 		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Testing/TestingMap.tmx"/>
 
@@ -97,6 +98,10 @@
 			</fishlevel>
 		</minigamefishing>
 	</scene_testing>
+
+	<scene_mazmorra0>
+		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Mazmorras/Mazmorra0.tmx"/>
+	</scene_mazmorra0>
 
 	<!--Animation-->
 	<animations>

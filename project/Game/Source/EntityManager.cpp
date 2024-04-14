@@ -10,6 +10,7 @@
 #include "Scene_Testing.h"
 #include "Player.h"
 #include "DialogTriggerEntity.h"
+#include "TPEntity.h"
 #include "NPC_Vendedor.h"
 #include "NPC_Pescador.h"
 #include "NPC_Abuelo.h"
@@ -128,6 +129,10 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::DIALOG_TRIGGER:
 		entity = new DialogTrigger();
 		break;
+	case EntityType::TP_ENTITY:
+		entity = new TPEntity();
+		tpEntities.Add((TPEntity*)entity);
+		break;
 
 	case EntityType::NPC_VENDEDOR:
 		entity = new NPCVendedor();
@@ -184,6 +189,29 @@ void EntityManager::DestroyEntity(Entity* entity)
 void EntityManager::AddEntity(Entity* entity)
 {
 	if ( entity != nullptr) entities.Add(entity);
+}
+
+void EntityManager::LinkTPEntities()
+{
+	ListItem<TPEntity*>* itemMajor;
+	ListItem<TPEntity*>* itemMinor;
+
+	for (itemMajor = tpEntities.start; itemMajor != NULL; itemMajor = itemMajor->next)
+	{
+		
+
+		for (itemMinor = tpEntities.start; itemMinor != NULL; itemMinor = itemMinor->next) {
+			//Se busca del in al out, es decir (0,1 - 2,3 - 4,5)
+			if ((itemMajor->data->tpID == 0 || itemMajor->data->tpID % 2 == 0) && itemMajor->data->tpID+1 == itemMinor->data->tpID) {
+				itemMajor->data->targetPosition = itemMinor->data->position;
+				itemMinor->data->targetPosition = itemMajor->data->position;
+
+				itemMajor->data->Start();
+				itemMinor->data->Start();
+				break;
+			}
+		}
+	}
 }
 
 

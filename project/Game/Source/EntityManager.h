@@ -7,6 +7,7 @@
 #include "Enemy_Osiris.h"
 #include "Enemy_Ols.h"
 #include "Enemy_Shar.h"
+#include "TPEntity.h"
 #include "List.h"
 #include "MiniGameFishing.h"
 
@@ -40,6 +41,8 @@ public:
 
 	void AddEntity(Entity* entity);
 
+	void LinkTPEntities();
+
 
 	void SetPlayer(Player* player);
 	Player* GetPlayer();
@@ -50,6 +53,7 @@ public:
 public:
 
 	List<Entity*> entities;
+	List<TPEntity*> tpEntities;
 
 private:
 	Player* actualPlayer;

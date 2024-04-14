@@ -75,28 +75,16 @@ bool Enemy_Ols::Update(float dt)
 	}
 	else(isFacingLeft = false);
 
-	if (health <= 0) {
-		nextState = EntityState::DEAD;
-	}
-	else if (abs(playerPos.x - position.x) <= 30 && abs(playerPos.y - position.y) <= 30 /*cambiar si hace falta*/) {
-		/*nextState = EntityState::ATTACKING;*/
-	}
-	else if (abs(playerPos.x - position.x) <= 100 && abs(playerPos.y - position.y) <= 100/*cambiar si hace falta*/) {
-	/*	nextState = EntityState::RUNNING;*/
-	}
-	else {
-		nextState = EntityState::IDLE;
-	}
 
 	switch (nextState) {
 	case EntityState::DEAD:
 		Die(dt);
 		break;
-	case EntityState::RUNNING:
-		Chase(dt);
-		break;
 	case EntityState::ATTACKING:
 		Attack(dt);
+		break;
+	case EntityState::RUNNING:
+		Chase(dt);
 		break;
 	case EntityState::IDLE:
 		DoNothing(dt);
@@ -105,7 +93,26 @@ bool Enemy_Ols::Update(float dt)
 		break;
 	}
 
-	Olsfinding(dt);
+
+	if (nextState == EntityState::DEAD)
+	{
+		return true;
+	}
+
+	if (health <= 0) {
+		nextState = EntityState::DEAD;
+	}
+	else if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 20 /*Cambiar*/) {
+		nextState = EntityState::ATTACKING;
+	}
+	else if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 120/*Cambiar*/) {
+		nextState = EntityState::RUNNING;
+	}
+	else {
+		nextState = EntityState::IDLE;
+	}
+
+
 	currentAnimation->Update();
 
 	return true;
@@ -135,7 +142,8 @@ bool Enemy_Ols::PostUpdate() {
 
 bool Enemy_Ols::CleanUp()
 {
-	app->physics->GetWorld()->DestroyBody(pbody->body);
+	app->entityManager->DestroyEntity(pbody->entity);
+	app->physics->DestroyBody(pbody);
 	SDL_DestroyTexture(texture);
 	return true;
 }
@@ -150,8 +158,7 @@ void Enemy_Ols::Chase(float dt)
 {
 	//printf("Osiris chasing");
 	currentAnimation = &runAnim;
-	//iPoint playerPos = app->entityManager->GetPlayer()->position;
-	//path->CreatePath(position, playerPos);
+	Olsfinding(dt);
 }
 
 void Enemy_Ols::Attack(float dt)
@@ -162,10 +169,9 @@ void Enemy_Ols::Attack(float dt)
 }
 
 void Enemy_Ols::Die(float dt) {
-	app->entityManager->DestroyEntity(pbody->entity);
-	app->physics->DestroyBody(pbody);
+	app->entityManager->DestroyEntity(this);
+	app->physics->GetWorld()->DestroyBody(pbody->body);
 	SDL_DestroyTexture(texture);
-	nextState = EntityState::DEAD;
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 
@@ -182,6 +188,7 @@ void Enemy_Ols::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::PLAYER_ATTACK:
 		LOG("Collision Player_Attack");
 		nextState = EntityState::DEAD;
+		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;
@@ -197,7 +204,6 @@ void Enemy_Ols::SetPlayer(Player* player)
 
 bool Enemy_Ols::Olsfinding(float dt)
 {
-	
 	if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 120) {
 
 		iPoint playerPos = app->map->WorldToMap(app->entityManager->GetPlayer()->position.x, app->entityManager->GetPlayer()->position.y);

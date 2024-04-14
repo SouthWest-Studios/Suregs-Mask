@@ -260,8 +260,15 @@ void Player::CameraMovement(float dt)
 	}
 	else
 	{
-		app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
-		app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.005f);
+		if (app->fadeToBlack->currentStep != 0) {
+			app->render->camera.x = lerp(app->render->camera.x, targetPosX, 1);
+			app->render->camera.y = lerp(app->render->camera.y, targetPosY, 1);
+		}
+		else {
+			app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
+			app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.005f);
+		}
+		
 	}
 	
 

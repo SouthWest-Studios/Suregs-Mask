@@ -25,6 +25,7 @@ enum bodyType {
 
 enum class ColliderType {
 	PLAYER, 
+	PLAYER_ATTACK,
 	ITEM,
 	FLOAT,
 	LAGO,
@@ -33,8 +34,9 @@ enum class ColliderType {
 	RESOURCE_ESPADA,
 	RESOURCE_DIAMANTE,
 	DIALOG_TRIGGER,
+	TP_ENTITY,
 	UNKNOWN,
-	PLAYER_ATTACK
+	
 	// ..
 };
 

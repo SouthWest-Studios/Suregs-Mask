@@ -29,6 +29,7 @@
 #include "NPC_MujerEnamorada.h"
 #include "NPC_MujerPreocupada.h"
 #include "Item_Diamante.h"
+#include "TPEntity.h"
 
 Map::Map(App* app, bool start_enabled) : Module(app, start_enabled), mapLoaded(false)
 {
@@ -88,7 +89,7 @@ bool Map::PostUpdate()
 	// iterates the layers in the map
 	while (mapLayer != NULL) {
 		//Check if the property Draw exist get the value, if it's true draw the lawyer
-		if (mapLayer->data->properties.GetProperty("Draw") != NULL && mapLayer->data->properties.GetProperty("Draw")->value) {
+		if (mapLayer->data->properties.GetProperty("Draw") != NULL && mapLayer->data->properties.GetProperty("Draw")->value == "true") {
 
 			iPoint playerPos = app->entityManager->GetPlayer()->position;
 			int xToTiledLeft = MAX((playerPos.x / 32) - TILES_TO_LOAD, 0);
@@ -270,6 +271,7 @@ bool Map::Load(SString mapFileName)
 	LoadObjects();
 	LoadCollisions("Collisions");
 	LoadEntities("Entities");
+	LoadTPEntities("TPLayers");
 
 
 
@@ -311,7 +313,7 @@ bool Map::Load(SString mapFileName)
 
 	//Search the layer in the map that contains information for navigation
 	while (mapLayerItem != NULL) {
-		if (mapLayerItem->data->properties.GetProperty("Navigation") != NULL && mapLayerItem->data->properties.GetProperty("Navigation")->value) {
+		if (mapLayerItem->data->properties.GetProperty("Navigation") != NULL && mapLayerItem->data->properties.GetProperty("Navigation")->value == "true") {
 			navigationLayer = mapLayerItem->data;
 			break;
 		}
@@ -353,7 +355,7 @@ bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 	{
 		Properties::Property* p = new Properties::Property();
 		p->name = propertieNode.attribute("name").as_string();
-		p->value = propertieNode.attribute("value").as_bool(); // (!!) I'm assuming that all values are bool !!
+		p->value = propertieNode.attribute("value").as_string();
 
 		properties.propertyList.Add(p);
 	}
@@ -672,6 +674,84 @@ bool Map::LoadCollisions(std::string layerName)
 	return ret;
 }
 
+bool Map::LoadTPEntities(std::string layerName)
+{
+	ListItem<MapLayer*>* mapLayerItem;
+	mapLayerItem = mapData.layers.start;
+	bool ret = false;
+
+	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
+	if (parseResult) {
+		configNode = configFile.child("config");
+	}
+	else {
+		LOG("Error in Map::LoadEntities(): %s", parseResult.description());
+		return false;
+	}
+	LOG("CARGA TP ENTIDADES");
+	while (mapLayerItem != NULL) {
+
+		if (mapLayerItem->data->name.GetString() == layerName) {
+			for (int x = 0; x < mapLayerItem->data->width; x++)
+			{
+
+				for (int y = 0; y < mapLayerItem->data->height; y++)
+				{
+
+
+					int gid = mapLayerItem->data->Get(x, y);
+					TileSet* tileset = GetTilesetFromTileId(gid);
+					SDL_Rect r = tileset->GetRect(gid);
+					iPoint pos = MapToWorld(x, y);
+
+					
+					if (gid != 0) {
+						int tpID = gid - tileset->firstgid;
+						TPEntity* tp = (TPEntity*)app->entityManager->CreateEntity(EntityType::TP_ENTITY);
+						tp->tpID = tpID;
+						tp->position = iPoint(pos.x + 16, pos.y + 16);
+						//tp->Start();
+					}
+					
+					
+
+
+					////PLAYER
+					//if (gid == tileset->firstgid + 0) {
+
+					//	app->entityManager->SetPlayer((Player*)app->entityManager->CreateEntity(EntityType::PLAYER));
+					//	app->entityManager->GetPlayer()->config = configNode.child("entities_data").child("player");
+					//	app->entityManager->GetPlayer()->position = iPoint(pos.x + 16, pos.y + 16);
+					//	app->entityManager->GetPlayer()->Start();
+
+					//}
+
+					////NPC_VENDEDOR
+					//if (gid == tileset->firstgid + 1) {
+
+
+					//	NPCVendedor* npc = (NPCVendedor*)app->entityManager->CreateEntity(EntityType::NPC_VENDEDOR);
+					//	npc->config = configNode.child("entities_data").child("npc_vendedor");
+					//	npc->position = iPoint(pos.x + 16, pos.y + 16);
+					//	npc->Start();
+
+					//}
+
+					
+				}
+			}
+
+		}
+		mapLayerItem = mapLayerItem->next;
+
+	}
+	app->entityManager->LinkTPEntities();
+
+
+
+	return ret;
+}
+
 bool Map::LoadObjects()
 {
 	ListItem<MapObjects*>* mapObjectsItem;
@@ -697,7 +777,10 @@ bool Map::LoadObjects()
 
 			if (object->properties.GetProperty("dialogID") != NULL) {
 
-				pugi::xml_node dialogNode = dialoguesNode.find_child_by_attribute("dialog", "id", std::to_string(object->properties.GetProperty("dialogID")->value).c_str());
+			
+
+
+				pugi::xml_node dialogNode = dialoguesNode.find_child_by_attribute("dialog", "id", object->properties.GetProperty("dialogID")->value.c_str());
 
 				if (!dialogNode) {
 					std::cerr << "No se encontr?ningún diálogo con el id=" << object->properties.GetProperty("dialogID")->value << std::endl;

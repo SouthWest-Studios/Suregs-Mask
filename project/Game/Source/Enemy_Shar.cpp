@@ -69,35 +69,22 @@ bool Enemy_Shar::Update(float dt)
 {
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
 
-	if (playerPos.x > position.x)
+	if (playerPos.x < position.x)
 	{
 		isFacingLeft = true;
 	}
 	else(isFacingLeft = false);
 
 
-	if (health <= 0) {
-		nextState = EntityState::DEAD;
-	}
-	else if (abs(playerPos.x - position.x) <= 30 && abs(playerPos.y - position.y) <= 30 /*cambiar si hace falta*/) {
-		//nextState = EntityState::ATTACKING;
-	}
-	else if (abs(playerPos.x - position.x) <= 100 && abs(playerPos.y - position.y) <= 100/*cambiar si hace falta*/) {
-		//nextState = EntityState::RUNNING;
-	}
-	else {
-		nextState = EntityState::IDLE;
-	}
-
 	switch (nextState) {
 	case EntityState::DEAD:
 		Die(dt);
 		break;
-	case EntityState::RUNNING:
-		Chase(dt);
-		break;
 	case EntityState::ATTACKING:
 		Attack(dt);
+		break;
+	case EntityState::RUNNING:
+		Chase(dt);
 		break;
 	case EntityState::IDLE:
 		DoNothing(dt);
@@ -106,8 +93,28 @@ bool Enemy_Shar::Update(float dt)
 		break;
 	}
 
-	//Sharfinding(dt);
+
+	if (nextState == EntityState::DEAD)
+	{
+		return true;
+	}
+
+	if (health <= 0) {
+		nextState = EntityState::DEAD;
+	}
+	else if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 20 /*Cambiar*/) {
+		nextState = EntityState::ATTACKING;
+	}
+	else if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 120/*Cambiar*/) {
+		nextState = EntityState::RUNNING;
+	}
+	else {
+		nextState = EntityState::IDLE;
+	}
+
+
 	currentAnimation->Update();
+
 	return true;
 }
 
@@ -135,7 +142,8 @@ bool Enemy_Shar::PostUpdate() {
 
 bool Enemy_Shar::CleanUp()
 {
-	app->physics->GetWorld()->DestroyBody(pbody->body);
+	app->entityManager->DestroyEntity(pbody->entity);
+	app->physics->DestroyBody(pbody);
 	SDL_DestroyTexture(texture);
 	return true;
 }
@@ -150,9 +158,7 @@ void Enemy_Shar::Chase(float dt)
 {
 	//printf("Osiris chasing");
 	currentAnimation = &runAnim;
-	//Sharfinding(dt);
-	//iPoint playerPos = app->entityManager->GetPlayer()->position;
-	//path->CreatePath(position, playerPos);
+	Sharfinding(dt);
 }
 
 void Enemy_Shar::Attack(float dt)
@@ -163,12 +169,9 @@ void Enemy_Shar::Attack(float dt)
 }
 
 void Enemy_Shar::Die(float dt) {
-
-	app->entityManager->DestroyEntity(pbody->entity);
-	app->physics->DestroyBody(pbody);
+	app->entityManager->DestroyEntity(this);
+	app->physics->GetWorld()->DestroyBody(pbody->body);
 	SDL_DestroyTexture(texture);
-	nextState = EntityState::DEAD;
-
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 
@@ -203,6 +206,11 @@ bool Enemy_Shar::Sharfinding(float dt)
 	if (app->map->pathfinding->GetDistance(app->scene_testing->GetPlayer()->position, position) <= 120) {
 
 		iPoint playerPos = app->map->WorldToMap(app->scene_testing->GetPlayer()->position.x, app->scene_testing->GetPlayer()->position.y);
+
+	if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 120) {
+
+		iPoint playerPos = app->map->WorldToMap(app->entityManager->GetPlayer()->position.x, app->entityManager->GetPlayer()->position.y);
+
 		playerPos.x += 1;
 		playerPos.y += 1;
 		iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
@@ -236,7 +244,10 @@ bool Enemy_Shar::Sharfinding(float dt)
 			pbody->body->SetLinearVelocity(vel);
 		}
 
+
 		if (app->map->pathfinding->GetDistance(app->scene_testing->GetPlayer()->position, position) <= 66) {
+		if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 66) {
+
 
 			if (isFacingLeft) {
 				vel.x -= speed * dt;

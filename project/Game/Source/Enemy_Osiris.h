@@ -55,6 +55,7 @@ public:
 	SDL_Texture* texture = NULL;
 	pugi::xml_node config;
 	uint texW, texH;
+
 	//Estadisticas
 	float speed;
 	b2Vec2 vel;
@@ -98,12 +99,13 @@ private:
 public:
 
 	Branch_Osiris transitionTable[static_cast<int>(EntityState::STATE_COUNT)][static_cast<int>(EntityState::STATE_COUNT)] = {
-		// isMoving               isAttacking						 isDead                else                MASK_ATTACK
-		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // IDLE
-		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // RUNNING
-		{ {EntityState::IDLE},	  {EntityState::IDLE},		{EntityState::DEAD}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // ATTACKING
-		{ {EntityState::DEAD},	  {EntityState::DEAD},		{EntityState::DEAD}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // DEAD
-		{ {EntityState::IDLE},	  {EntityState::IDLE},	    {EntityState::DEAD}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}} // MASK_ATTACK
+		// isMoving               isAttacking				isDead				isReviving					else                MASK_ATTACK
+		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::IDLE},		{EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // IDLE
+		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::IDLE},		{EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // RUNNING
+		{ {EntityState::IDLE},	  {EntityState::IDLE},		{EntityState::DEAD}, {EntityState::IDLE},		{EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // ATTACKING
+		{ {EntityState::DEAD},	  {EntityState::DEAD},		{EntityState::DEAD}, {EntityState::REVIVING},	{EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // DEAD
+		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::IDLE},		{EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // REVIVING
+		{ {EntityState::IDLE},	  {EntityState::IDLE},	    {EntityState::DEAD}, {EntityState::IDLE},		{EntityState::IDLE}, {EntityState::MASK_ATTACK}} // MASK_ATTACK
 	};
 
 	EntityState currentState = state;
