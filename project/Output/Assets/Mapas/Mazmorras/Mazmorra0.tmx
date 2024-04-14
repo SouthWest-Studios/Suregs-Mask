@@ -9,6 +9,9 @@
  <tileset firstgid="17306" name="Entities" tilewidth="100" tileheight="100" tilecount="100" columns="10">
   <image source="../../Textures/Mapas/Metadatos/Entities.png" width="1000" height="1000"/>
  </tileset>
+ <tileset firstgid="17406" name="TPMeta" tilewidth="32" tileheight="32" tilecount="72" columns="12">
+  <image source="../../Textures/Mapas/Metadatos/TPMeta.png" width="384" height="192"/>
+ </tileset>
  <layer id="1" name="Map" width="126" height="160">
   <properties>
    <property name="Draw" type="bool" value="true"/>
@@ -43711,6 +43714,9 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="17411"/>
+   <tile gid="17411"/>
+   <tile gid="17411"/>
    <tile/>
    <tile/>
    <tile/>
@@ -47488,6 +47494,9 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="17410"/>
+   <tile gid="17410"/>
+   <tile gid="17410"/>
    <tile/>
    <tile/>
    <tile/>
@@ -48574,6 +48583,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="17409"/>
    <tile/>
    <tile/>
    <tile/>
@@ -48601,6 +48611,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="17408"/>
    <tile/>
    <tile/>
    <tile/>
@@ -48698,6 +48709,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="17409"/>
    <tile/>
    <tile/>
    <tile/>
@@ -48725,6 +48737,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="17408"/>
    <tile/>
    <tile/>
    <tile/>
@@ -48822,6 +48835,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="17409"/>
    <tile/>
    <tile/>
    <tile/>
@@ -48849,6 +48863,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="17408"/>
    <tile/>
    <tile/>
    <tile/>
@@ -52645,6 +52660,9 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="17407"/>
+   <tile gid="17407"/>
+   <tile gid="17407"/>
    <tile/>
    <tile/>
    <tile/>
@@ -56169,24 +56187,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="17406"/>
+   <tile gid="17406"/>
+   <tile gid="17406"/>
    <tile/>
    <tile/>
    <tile/>
@@ -80698,7 +80701,7 @@
   <object id="57" x="3462" y="52" width="102" height="940"/>
   <object id="58" x="2090" y="54" width="136" height="930"/>
   <object id="59" x="2224" y="56" width="1234" height="132"/>
-  <object id="60" x="2224" y="862" width="1236" height="128"/>
+  <object id="60" x="2224" y="868.667" width="1236" height="121.333"/>
  </objectgroup>
  <objectgroup color="#c8c8c8" id="12" name="Dialogos">
   <properties>
