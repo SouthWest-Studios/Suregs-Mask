@@ -26,6 +26,8 @@ enum bodyType {
 enum class ColliderType {
 	PLAYER, 
 	ITEM,
+	FLOAT,
+	LAGO,
 	PLATFORM,
 	ENEMY,
 	RESOURCE_ESPADA,
@@ -34,6 +36,14 @@ enum class ColliderType {
 	UNKNOWN,
 	PLAYER_ATTACK
 	// ..
+};
+
+enum class Direction {
+	LEFT,
+	RIGHT,
+	UP,
+	DOWN,
+	UNKNOWN
 };
 
 // Small class to return to other modules to track position and rotation of physics bodies

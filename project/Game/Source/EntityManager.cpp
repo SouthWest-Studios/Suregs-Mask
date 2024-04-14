@@ -20,6 +20,10 @@
 #include "NPC_MujerEnamorada.h"
 #include "NPC_MujerPreocupada.h"
 #include "Item_diamante.h"
+#include "MiniGameFishing.h"
+#include "Fishing.h"
+
+
 
 
 #include "Defs.h"
@@ -152,6 +156,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::NPC_BULLY_2:
 		entity = new NPCBully2();
 		break;
+	case EntityType::ROD:
+		entity = new MiniGameFishing();
+		break;
 
 	default:
 		break;
@@ -189,6 +196,13 @@ Player* EntityManager::GetPlayer()
 {
 	return actualPlayer;
 }
+
+MiniGameFishing* EntityManager::GetRod()
+{
+	return fishing;
+}
+
+
 
 bool EntityManager::Update(float dt)
 {

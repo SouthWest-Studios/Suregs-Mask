@@ -200,9 +200,9 @@ void Enemy_Shar::SetPlayer(Player* player)
 
 bool Enemy_Shar::Sharfinding(float dt)
 {
-	if (app->map->pathfinding->GetDistance(app->scene_testing->GetPLayer()->position, position) <= 120) {
+	if (app->map->pathfinding->GetDistance(app->scene_testing->GetPlayer()->position, position) <= 120) {
 
-		iPoint playerPos = app->map->WorldToMap(app->scene_testing->GetPLayer()->position.x, app->scene_testing->GetPLayer()->position.y);
+		iPoint playerPos = app->map->WorldToMap(app->scene_testing->GetPlayer()->position.x, app->scene_testing->GetPlayer()->position.y);
 		playerPos.x += 1;
 		playerPos.y += 1;
 		iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
@@ -236,7 +236,7 @@ bool Enemy_Shar::Sharfinding(float dt)
 			pbody->body->SetLinearVelocity(vel);
 		}
 
-		if (app->map->pathfinding->GetDistance(app->scene_testing->GetPLayer()->position, position) <= 66) {
+		if (app->map->pathfinding->GetDistance(app->scene_testing->GetPlayer()->position, position) <= 66) {
 
 			if (isFacingLeft) {
 				vel.x -= speed * dt;

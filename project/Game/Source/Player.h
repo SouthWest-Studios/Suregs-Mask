@@ -6,6 +6,8 @@
 #include "SDL/include/SDL.h"
 #include "Animation.h"
 #include "Timer.h"
+#include "Fishing.h"
+#include "Physics.h"
 
 struct SDL_Texture;
 
@@ -48,8 +50,10 @@ private:
 	void CameraMovement(float dt);
 	void GodMode(float dt);
 	void PlayerMovement(float dt);
-	void Rodar(float dt);
+	void FishingDirecction(bool verticalMovement, bool horizontalMovement);
 	void MaskAttack(float dt);
+
+		
 
 public:
 
@@ -91,6 +95,11 @@ public:
 	
 	//Mascara
 	bool isAttackingMask = true;
+
+	//Fishing
+	//New//
+	bool playermove = false;
+	Direction player_Direction;
 
 
 private:

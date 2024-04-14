@@ -14,6 +14,8 @@ public:
 	uint32 ReadSec() const;
 	float ReadMSec() const;
 
+	uint32 CountDown(int total) const;
+
 private:
 	uint32 startTime;
 };

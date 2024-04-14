@@ -13,6 +13,9 @@
 #include "ModuleFadeToBlack.h"
 
 
+#include "Fishing.h"
+
+
 Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("player");
@@ -59,7 +62,7 @@ bool Player::Start() {
 
 	cdTimerDashMS = 500;
 
-
+	player_Direction = Direction::UNKNOWN;
 	return true;
 }
 
@@ -78,10 +81,7 @@ bool Player::Update(float dt)
 
 	CameraMovement(dt);
 
-	/*if (inRodar) {
-		Rodar(dt);
 
-	}*/
 
 
 	//printf("\nposx:%d, posy: %d",position.x, position.y);
@@ -327,6 +327,7 @@ void Player::PlayerMovement(float dt)
 	int horizontalMovement = pressingRight - pressingLeft;
 	int verticalMovement = pressingDown - pressingUp;
 
+	//printf("%d", pressingUp);
 	// Actualizar velocidad
 	if (!isDashing) {
 		velocity.x = horizontalMovement * 0.2 * dt;
@@ -341,6 +342,8 @@ void Player::PlayerMovement(float dt)
 		}
 	}
 
+	
+	FishingDirecction(verticalMovement, horizontalMovement);
 
 	//Si pulsas espacio
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && timerDash.ReadMSec() > cdTimerDashMS) {
@@ -388,6 +391,59 @@ void Player::PlayerMovement(float dt)
 	b2Transform pbodyPos = pbody->body->GetTransform();
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2;
+}
+void Player::FishingDirecction(bool verticalMovement, bool horizontalMovement)
+{
+	
+
+	// Si jugador Mueve
+	if (playermove) {
+		if (horizontalMovement > 0) {
+			// Derecha
+			player_Direction = Direction::RIGHT;
+			if (app->entityManager->GetRod()->fishing.isFishing) {
+				playermove = true;
+				app->entityManager->GetRod()->fishing.startFishing = false;
+			}
+			else {
+				playermove = false;
+			}
+		}
+		else if (horizontalMovement < 0) {
+			// izquierda
+			player_Direction = Direction::LEFT;
+			if (app->entityManager->GetRod()->fishing.isFishing) {
+				playermove = true;
+				app->entityManager->GetRod()->fishing.startFishing = false;
+			}
+			else {
+				playermove = false;
+			}
+		}
+		else if (verticalMovement > 0) {
+			// abajo
+			player_Direction = Direction::DOWN;
+			if (app->entityManager->GetRod()->fishing.isFishing) {
+				playermove = true;
+				app->entityManager->GetRod()->fishing.startFishing = false;
+			}
+			else {
+				playermove = false;
+			}
+		}
+		else if (verticalMovement < 0) {
+			// arriba
+			player_Direction = Direction::UP;
+			if (app->entityManager->GetRod()->fishing.isFishing) {
+				playermove = true;
+				app->entityManager->GetRod()->fishing.startFishing = false;
+			}
+			else {
+				playermove = false;
+			}
+		}
+	}
+
 }
 //
 //void Player::Rodar(float dt)

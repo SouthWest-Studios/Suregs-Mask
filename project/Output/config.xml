@@ -67,6 +67,35 @@
 
 	<scene_testing>
 		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Testing/TestingMap.tmx"/>
+
+		<minigamefishing>
+			<fishingfloat texturepath="Assets/Textures/fishingfloat.png" />
+			
+			
+			<fishlevel>
+				<nonthings>
+					<nonthing texturepath="Assets/Textures/Fishing/trash1.png" name = "nonthing" />
+				</nonthings>
+				<trashes>
+					<trash texturepath="Assets/Textures/Fishing/trash1.png" name = "trash1" />
+					<trash texturepath="Assets/Textures/Fishing/trash2.png" name = "trash2" />
+					<trash texturepath="Assets/Textures/Fishing/trash3.png" name = "trash3" />
+					<trash texturepath="Assets/Textures/Fishing/trash4.png" name = "trash4" />
+				</trashes>
+				<smalls>
+					<small texturepath="Assets/Textures/Fishing/small1.png" name = "small1" />
+					<small texturepath="Assets/Textures/Fishing/small2.png" name = "small2" />
+					<small texturepath="Assets/Textures/Fishing/small3.png" name = "small3" />
+				</smalls>
+				<mediums>
+					<medium texturepath="Assets/Textures/Fishing/medium1.png" name = "medium1" />
+					<medium texturepath="Assets/Textures/Fishing/medium2.png" name = "medium2" />
+				</mediums>
+				<bigs>
+					<big texturepath="Assets/Textures/Fishing/big.png" name = "Bigfishing" />
+				</bigs>
+			</fishlevel>
+		</minigamefishing>
 	</scene_testing>
 
 	<!--Animation-->

@@ -9,6 +9,7 @@
 #include "Item.h"
 #include "ModuleFadeToBlack.h"
 #include "Optick/include/optick.h"
+#include "MiniGameFishing.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -58,16 +59,26 @@ bool Scene_testing::Start()
 	// Checkhttps://pugixml.org/docs/quickstart.html#access
 
 
-	for (pugi::xml_node itemNode = config.child("player"); itemNode; itemNode = itemNode.next_sibling("player"))
+	/*for (pugi::xml_node itemNode = config.child("player"); itemNode; itemNode = itemNode.next_sibling("player"))
 	{
 		player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 		player->parameters = itemNode;
-	}
+	}*/
 	/*for (pugi::xml_node itemNode = config.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
 	{
 		Item* item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
 		item->parameters = itemNode;
 	}*/
+
+	
+	
+	/*for (pugi::xml_node itemNode = config.child("minigamefishing"); itemNode; itemNode = itemNode.next_sibling("minigamefishing"))
+	{
+		fishing = (MiniGameFishing*)app->entityManager->CreateEntity(EntityType::ROD);
+		fishing->parameters = itemNode;
+	}*/
+	fishing = (MiniGameFishing*)app->entityManager->CreateEntity(EntityType::ROD);
+	fishing->parameters = config.child("minigamefishing");
 
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	img = app->tex->Load("Assets/Textures/test.png");
@@ -182,6 +193,11 @@ bool Scene_testing::CleanUp()
 
 
 
+MiniGameFishing* Scene_testing::GetRod()
+{
+	return fishing;
+}
+
 bool Scene_testing::OnGuiMouseClickEvent(GuiControl* control)
 {
 	// L15: DONE 5: Implement the OnGuiMouseClickEvent method
@@ -190,7 +206,7 @@ bool Scene_testing::OnGuiMouseClickEvent(GuiControl* control)
 	return true;
 }
 
-Player* Scene_testing::GetPLayer()
+Player* Scene_testing::GetPlayer()
 {
 	return player;
 }

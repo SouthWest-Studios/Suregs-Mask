@@ -154,6 +154,11 @@ void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
 			
 			if (!app->dialogManager->isPlaying && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
 				PlayDialog();
+
+				if (strcmp(parameters.attribute("name").as_string(), "FishingMaster") == 0) {
+					app->scene_testing->GetRod()->fishing.rodReady = true;
+					app->scene_testing->GetRod()->fishing.playerGetRod = true;
+				}
 			}
 			break;
 	}

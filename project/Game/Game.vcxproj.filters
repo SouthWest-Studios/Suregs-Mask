@@ -137,6 +137,9 @@
     <ClCompile Include="Source\NPC_Bruja.cpp">
       <Filter>Entities\NPC</Filter>
     </ClCompile>
+    <ClCompile Include="Source\MiniGameFishing.cpp">
+      <Filter>MiniGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -327,6 +330,12 @@
     <ClInclude Include="Source\NPC_Pescador.h">
       <Filter>Entities\NPC</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Fishing.h">
+      <Filter>MiniGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MiniGameFishing.h">
+      <Filter>MiniGame</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -370,6 +379,9 @@
     </Filter>
     <Filter Include="Entities\NPC">
       <UniqueIdentifier>{2142dd33-81d1-45e5-9822-3a15956c346a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MiniGame">
+      <UniqueIdentifier>{dc0edb71-7353-4634-b94c-b47ded8115ea}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

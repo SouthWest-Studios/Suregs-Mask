@@ -105,6 +105,37 @@ Dialog* DialogManager::CreateDialog(pugi::xml_node itemNode, std::string name, c
 	return dialog;
 }
 
+//New//
+void DialogManager::CreateDialogSinEntity(std::string Texto, std::string nombre, const char* texture)
+{
+	Dialog* dialogoPesca = new Dialog(Texto);
+	dialogoPesca->name = nombre;
+	dialogoPesca->font = app->render->primaryFont;
+	if (texture != nullptr) {
+		dialogoPesca->face_tex = app->tex->Load(texture);
+	}
+	//dialogoPesca->face_tex = ;
+	app->dialogManager->AddDialog(dialogoPesca);
+}
+
+//New//
+void DialogManager::AutoNextDiagolo(int autoNextTime)
+{
+	isPlaying = (dialogues.Count() > 0);
+	autoNextTime_show = autoNextTime_TimerDown.CountDown(autoNextTime);
+
+	if (isPlaying) {
+		if ((int)autoNextTime_show == 0) {
+			if (app->scene_testing->GetRod()->fishingEndCloseDialogo == true) {
+				app->scene_testing->GetRod()->isEnd = true;
+			}
+			indexText = 1;
+			dialogues.Del(dialogues.At(0));
+			app->scene_testing->GetRod()->dialogoautoclose = false;
+		}
+	}
+}
+
 bool DialogManager::AddDialog(Dialog* dialog)
 {
 	dialogues.Add(dialog);

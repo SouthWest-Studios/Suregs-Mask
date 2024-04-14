@@ -36,6 +36,10 @@ public:
 	//Funcion para añadir a la lista de dialogos
 	bool AddDialog(Dialog* dialog);
 	
+
+	//Fishing
+	void CreateDialogSinEntity(std::string Texto, std::string nombre, const char* texture);
+	void AutoNextDiagolo(int autoNextTime);
 private:
 	//Funcion que se encarga de mostrar los dialogos
 	bool ShowDialog(Dialog* dialog);
@@ -50,6 +54,9 @@ public:
 	List<Dialog*> dialogues;
 
 	bool isPlaying;
+
+	uint32 autoNextTime_show;
+	Timer autoNextTime_TimerDown;
 
 
 private:

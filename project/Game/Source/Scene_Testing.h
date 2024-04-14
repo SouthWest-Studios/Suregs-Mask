@@ -6,6 +6,8 @@
 #include "GuiControl.h"
 #include "GuiControlButton.h"
 
+#include "MiniGameFishing.h"
+
 struct SDL_Texture;
 
 class Scene_testing : public Module
@@ -41,11 +43,12 @@ public:
 	// Handles multiple Gui Event methods
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
-	
+	MiniGameFishing* GetRod();
+	Player* GetPlayer();
 
 public:
-	Player* player;
-	Player* GetPLayer();
+	Player* player = new Player;
+	MiniGameFishing* fishing = new MiniGameFishing;
 private:
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;

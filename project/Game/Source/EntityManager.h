@@ -8,6 +8,7 @@
 #include "Enemy_Ols.h"
 #include "Enemy_Shar.h"
 #include "List.h"
+#include "MiniGameFishing.h"
 
 class EntityManager : public Module
 {
@@ -43,12 +44,16 @@ public:
 	void SetPlayer(Player* player);
 	Player* GetPlayer();
 
+	MiniGameFishing* GetRod();
+	
+
 public:
 
 	List<Entity*> entities;
 
 private:
 	Player* actualPlayer;
+	MiniGameFishing* fishing = new MiniGameFishing;
 
 };
 

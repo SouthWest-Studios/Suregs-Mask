@@ -26,6 +26,7 @@ enum class EntityType
 	NPC_MUJER_ENAMORADA,
 	NPC_BULLY_1,
 	NPC_BULLY_2,
+	ROD,
 	UNKNOWN
 };
 

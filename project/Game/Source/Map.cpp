@@ -700,7 +700,7 @@ bool Map::LoadObjects()
 				pugi::xml_node dialogNode = dialoguesNode.find_child_by_attribute("dialog", "id", std::to_string(object->properties.GetProperty("dialogID")->value).c_str());
 
 				if (!dialogNode) {
-					std::cerr << "No se encontró ningún diálogo con el id=" << object->properties.GetProperty("dialogID")->value << std::endl;
+					std::cerr << "No se encontr?ningún diálogo con el id=" << object->properties.GetProperty("dialogID")->value << std::endl;
 					return false;
 				}
 				//Spawn dialogo con x id
