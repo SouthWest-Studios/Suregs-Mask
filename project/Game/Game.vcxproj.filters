@@ -7,9 +7,6 @@
     <ClCompile Include="Source\External\PugiXml\src\pugixml.cpp">
       <Filter>External\PugiXml</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Item.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Player.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
@@ -103,13 +100,9 @@
     <ClCompile Include="Source\EntityManager.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Cuerno.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Source\NPC_Vendedor.cpp">
       <Filter>Entities\NPC</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Item_Diamante.cpp"/>
     <ClCompile Include="Source\NPC_Abuelo.cpp">
       <Filter>Entities\NPC</Filter>
     </ClCompile>
@@ -146,6 +139,15 @@
     <ClCompile Include="Source\TPEntity.cpp">
       <Filter>Entities\Meta</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Cuerno.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Item.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Item_Diamante.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -177,12 +179,6 @@
     </ClInclude>
     <ClInclude Include="Source\PQueue.h">
       <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Entity.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Item.h">
-      <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="Source\Player.h">
       <Filter>Entities</Filter>
@@ -298,17 +294,12 @@
     <ClInclude Include="Source\SwordInv.h">
       <Filter>Inventory</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Cuerno.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Source\CuernoInv.h">
       <Filter>Inventory</Filter>
     </ClInclude>
     <ClInclude Include="Source\NPC_Vendedor.h">
       <Filter>Entities\NPC</Filter>
     </ClInclude>
-    <ClInclude Include="Source\DiamanteInv.h" />
-    <ClInclude Include="Source\Item_Diamante.h" />
     <ClInclude Include="Source\NPC_Abuelo.h">
       <Filter>Entities\NPC</Filter>
     </ClInclude>
@@ -333,13 +324,12 @@
     <ClInclude Include="Source\NPC_Pescador.h">
       <Filter>Entities\NPC</Filter>
     </ClInclude>
-
     <ClInclude Include="Source\Fishing.h">
       <Filter>MiniGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\MiniGameFishing.h">
       <Filter>MiniGame</Filter>
-   </ClInclude>
+    </ClInclude>
     <ClInclude Include="Source\Scene_Mazmorra0.h">
       <Filter>Scenes</Filter>
     </ClInclude>
@@ -348,6 +338,21 @@
     </ClInclude>
     <ClInclude Include="Source\TPEntity.h">
       <Filter>Entities\Meta</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Cuerno.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entity.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Item.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Item_Diamante.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DiamanteInv.h">
+      <Filter>Inventory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -393,12 +398,14 @@
     <Filter Include="Entities\NPC">
       <UniqueIdentifier>{2142dd33-81d1-45e5-9822-3a15956c346a}</UniqueIdentifier>
     </Filter>
-
     <Filter Include="MiniGame">
       <UniqueIdentifier>{dc0edb71-7353-4634-b94c-b47ded8115ea}</UniqueIdentifier>
     </Filter>
     <Filter Include="Entities\Meta">
       <UniqueIdentifier>{e785cbf2-9afb-41aa-85bf-59da29eacc99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Items">
+      <UniqueIdentifier>{6f0d7545-e388-4aa2-9e49-5f0d23ee4f41}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

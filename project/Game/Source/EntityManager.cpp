@@ -117,7 +117,7 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::ENEMY_SHAR:
 		entity = new Enemy_Shar();
 		break;
-	case EntityType::RESOURCE_CUERNO:
+	case EntityType::ITEM_CUERNO:
 		entity = new Cuerno(type, 1, 100, 300, 5, 2);
 		break;
 	case EntityType::ITEM_DIAMANTE:

@@ -38,7 +38,7 @@ bool Item_Diamante::Start() {
 	pbody = app->physics->CreateCircle(position.x, position.y, 11, bodyType::STATIC);
 	pbody->ctype = ColliderType::RESOURCE_DIAMANTE;
 	pbody->listener = this;
-
+	pbody->body->GetFixtureList()->SetSensor(true);
 
 	return true;
 }
