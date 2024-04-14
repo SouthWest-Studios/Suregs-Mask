@@ -61,7 +61,7 @@ bool DebugConsole::Awake(pugi::xml_node config)
 		{
 
 		case -2: app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu); break;
-		case -1: app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_testing); break;
+		case -1: case 1000: app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_testing); break;
 		case 0: app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra0); break;
 		
 			/*case 2: app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu); break;

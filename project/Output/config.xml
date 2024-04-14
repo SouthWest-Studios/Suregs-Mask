@@ -53,15 +53,15 @@
 
 
 		<!-- <npc_vendedor texturePath="Assets/Textures/Entidades/NPCs/general.png" Tsprite="9" Pwidth="138" sprite_x="138" sprite_y="1836"/>  -->
-		<npc_vendedor texturePath="Assets/Textures/Entidades/NPCs/general.png" Tsprite="9" Pwidth="138" sprite_x="138" sprite_y="177"/>
-		<npc_pescador texturePath="Assets/Textures/Entidades/NPCs/general.png" Tsprite="9" Pwidth="138" sprite_x="138" sprite_y="220"/>
-		<npc_bruja texturePath="Assets/Textures/Entidades/NPCs/general.png" Tsprite="9" Pwidth="138" sprite_x="138" sprite_y="229"/>
-		<npc_bully1 texturePath="Assets/Textures/Entidades/NPCs/general.png" Tsprite="9" Pwidth="138" sprite_x="138" sprite_y="181"/>
-		<npc_bully2 texturePath="Assets/Textures/Entidades/NPCs/general.png" Tsprite="9" Pwidth="138" sprite_x="138" sprite_y="188"/>
-		<npc_herrera texturePath="Assets/Textures/Entidades/NPCs/general.png" Tsprite="9" Pwidth="138" sprite_x="138" sprite_y="200"/>
-		<npc_abuelo texturePath="Assets/Textures/Entidades/NPCs/general.png" Tsprite="9" Pwidth="138" sprite_x="138" sprite_y="200"/>
-		<npc_mujer_preocupada texturePath="Assets/Textures/Entidades/NPCs/general.png" Tsprite="9" Pwidth="138" sprite_x="138" sprite_y="200"/>
-		<npc_mujer_enamorada texturePath="Assets/Textures/Entidades/NPCs/general.png" Tsprite="9" Pwidth="138" sprite_x="138" sprite_y="200"/>
+		<npc_vendedor texturePath="Assets/Textures/Entidades/NPCs/textura_npc_vendedor.png" Tsprite="1" Pwidth="138" sprite_x="138" sprite_y="185"/>
+		<npc_pescador texturePath="Assets/Textures/Entidades/NPCs/textura_npc_pescador.png" Tsprite="1" Pwidth="138" sprite_x="138" sprite_y="233"/>
+		<npc_bruja texturePath="Assets/Textures/Entidades/NPCs/textura_npc_bruja.png" Tsprite="1" Pwidth="138" sprite_x="138" sprite_y="217"/>
+		<npc_bully1 texturePath="Assets/Textures/Entidades/NPCs/textura_npc_bully1.png" Tsprite="1" Pwidth="138" sprite_x="138" sprite_y="181"/>
+		<npc_bully2 texturePath="Assets/Textures/Entidades/NPCs/textura_npc_bully2.png" Tsprite="1" Pwidth="138" sprite_x="138" sprite_y="180"/>
+		<npc_herrera texturePath="Assets/Textures/Entidades/NPCs/textura_npc_herrera.png" Tsprite="1" Pwidth="138" sprite_x="138" sprite_y="189"/>
+		<npc_abuelo texturePath="Assets/Textures/Entidades/NPCs/textura_npc_abuelo.png" Tsprite="1" Pwidth="138" sprite_x="138" sprite_y="195"/>
+		<npc_mujer_preocupada texturePath="Assets/Textures/Entidades/NPCs/textura_npc_mujer_preocupada.png" Tsprite="1" Pwidth="138" sprite_x="138" sprite_y="194"/>     
+		<npc_mujer_enamorada texturePath="Assets/Textures/Entidades/NPCs/textura_npc_mujer_enamorada.png" Tsprite="1" Pwidth="138" sprite_x="138" sprite_y="194"/>
 	
 	</entities_data>
 
