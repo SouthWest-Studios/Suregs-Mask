@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="126" height="107" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="34">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="126" height="107" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="39">
  <tileset firstgid="1" name="Testing" tilewidth="32" tileheight="32" tilecount="13250" columns="125">
   <image source="../../Textures/Mapas/Testing/background.png" width="4015" height="3423"/>
  </tileset>
@@ -40496,24 +40496,24 @@
     <property name="dialogID" type="int" value="1"/>
    </properties>
   </object>
-  <object id="28" x="1216.67" y="2625.33" width="64" height="64">
+  <object id="33" x="1215" y="2400" width="64" height="64">
+   <properties>
+    <property name="dialogID" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="34" x="1216.5" y="2623.5" width="63" height="65.5">
    <properties>
     <property name="dialogID" type="int" value="2"/>
    </properties>
   </object>
-  <object id="31" x="1439.33" y="2496.67" width="64" height="64">
+  <object id="36" x="1344" y="2623" width="63.5" height="65">
    <properties>
     <property name="dialogID" type="int" value="3"/>
    </properties>
   </object>
-  <object id="32" x="1440" y="2622.67" width="64" height="64">
+  <object id="38" x="1440" y="2561" width="64.5" height="62.5">
    <properties>
     <property name="dialogID" type="int" value="4"/>
-   </properties>
-  </object>
-  <object id="33" x="1215" y="2400" width="64" height="64">
-   <properties>
-    <property name="dialogID" type="int" value="0"/>
    </properties>
   </object>
  </objectgroup>

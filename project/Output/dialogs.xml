@@ -13,10 +13,10 @@
 		</sentences>
 	</dialog>
 	
-	<dialog id="2" texturepath="Assets/Textures/npc1.png" facetexturepath="Assets/Textures/npc1.png" name="Hemyl">
+	<dialog id="2" type="choose" texturepath="Assets/Textures/npc1.png" facetexturepath="Assets/Textures/npc1.png" name="Hemyl">
 		<sentences>
 			<sentence text="¡Qué madrugón Jakhov! ¿Vas a entrenar tan pronto?"/>
-			<sentence type="choose" text="¡Hay que ver como te esfuerzas! Por cierto, ¿cuándo vuelvas le puedes dar esto a tu abuela?">
+			<sentence  text="¡Hay que ver como te esfuerzas! Por cierto, ¿cuándo vuelvas le puedes dar esto a tu abuela?">
 				<option1 text="Sí.">
 					<sentence text="¡Muchas gracias Jakhov! Siempre tan amable. No te molesto más, ¡mucha suerte en el entreno de hoy!"/>
 				</option1>
