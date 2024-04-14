@@ -42,7 +42,7 @@ bool Scene_Mazmorra0::Start()
 	pugi::xml_document configFile;
 	pugi::xml_node config;
 	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
-	config = configFile.child("config").child("Scene_Mazmorra0");
+	config = configFile.child("config").child(name.GetString());
 	//L03: DONE 3b: Instantiate the player using the entity manager
 	//L04 DONE 7: Get player paremeters
 	/*player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);*/
