@@ -35,6 +35,7 @@ private:
 
 public:
 	int tpID;
+	iPoint targetPosition;
 
 private:
 

@@ -186,11 +186,24 @@ void EntityManager::AddEntity(Entity* entity)
 
 void EntityManager::LinkTPEntities()
 {
-	ListItem<TPEntity*>* item;
+	ListItem<TPEntity*>* itemMajor;
+	ListItem<TPEntity*>* itemMinor;
 
-	for (item = tpEntities.start; item != NULL; item = item->next)
+	for (itemMajor = tpEntities.start; itemMajor != NULL; itemMajor = itemMajor->next)
 	{
-		item->data->Start();
+		
+
+		for (itemMinor = tpEntities.start; itemMinor != NULL; itemMinor = itemMinor->next) {
+			//Se busca del in al out, es decir (0,1 - 2,3 - 4,5)
+			if ((itemMajor->data->tpID == 0 || itemMajor->data->tpID % 2 == 0) && itemMajor->data->tpID+1 == itemMinor->data->tpID) {
+				itemMajor->data->targetPosition = itemMinor->data->position;
+				itemMinor->data->targetPosition = itemMajor->data->position;
+
+				itemMajor->data->Start();
+				itemMinor->data->Start();
+				break;
+			}
+		}
 	}
 }
 

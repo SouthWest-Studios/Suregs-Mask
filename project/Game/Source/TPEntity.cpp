@@ -47,6 +47,7 @@ void TPEntity::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 		case ColliderType::PLAYER:
+			LOG("Player se mueve a: X: %d, Y: %d", targetPosition.x, targetPosition.y);
 			break;
 	}
 }
