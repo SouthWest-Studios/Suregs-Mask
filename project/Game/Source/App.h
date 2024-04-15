@@ -21,6 +21,7 @@ class ModuleFadeToBlack;
 class Scene_intro;
 class Scene_menu;
 class Scene_testing;
+class Scene_Pueblo;
 class Scene_Mazmorra0;
 class EntityManager;
 class Map;
@@ -110,10 +111,13 @@ public:
 	Textures* tex;
 	Audio* audio;
 	ModuleFadeToBlack* fadeToBlack;
+
 	Scene_intro* scene_intro;
 	Scene_menu* scene_menu;
 	Scene_testing* scene_testing;
+	Scene_Pueblo* scene_pueblo;
 	Scene_Mazmorra0* scene_mazmorra0;
+
 	EntityManager* entityManager;
 	Map* map;
 	//L07 DONE 2: Add Physics module

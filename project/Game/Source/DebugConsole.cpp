@@ -11,6 +11,7 @@
 #include "Scene_menu.h"
 #include "Scene_Testing.h"
 #include "Scene_Mazmorra0.h"
+#include "Scene_Pueblo.h"
 #include "Optick/include/optick.h"
 #include "Menu.h"
 
@@ -61,14 +62,11 @@ bool DebugConsole::Awake(pugi::xml_node config)
 		switch (nivel)
 		{
 
-		case -2: 
-			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu); app->menu->active = false; break;
-		case -1: case 1000: app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_testing); app->menu->active = true; break;
-		case 0: app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra0); app->menu->active = true; break;
-		
-			/*case 2: app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu); break;
-			case 3: app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu); break;
-			case 4: app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu); break;*/
+		case -3:				app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu);			app->menu->active = false;			break;
+		case -2:	case 1000:	app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_testing);		app->menu->active = true;			break;
+		case -1:	case 1001:	app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_pueblo);		app->menu->active = true;			break;
+		case 0:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra0);		app->menu->active = true;			break;
+
 		default:
 			break;
 		}

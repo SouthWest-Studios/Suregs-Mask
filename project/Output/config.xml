@@ -101,6 +101,10 @@
 			</minigamefishing>
 	</scene_testing>
 
+	<scene_pueblo>
+		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Pueblo/Pueblo.tmx"/>
+	</scene_pueblo>
+
 	<scene_mazmorra0>
 		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Mazmorras/Mazmorra0.tmx"/>
 	</scene_mazmorra0>

@@ -148,6 +148,9 @@
     <ClCompile Include="Source\Item_Diamante.cpp">
       <Filter>Entities\Items</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Scene_Pueblo.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -353,6 +356,9 @@
     </ClInclude>
     <ClInclude Include="Source\DiamanteInv.h">
       <Filter>Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene_Pueblo.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
