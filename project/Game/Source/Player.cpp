@@ -203,7 +203,7 @@ void Player::CastLightning() {
     Entity* target = GetEnemyWithHighestHealthWithinRadius(position, 500);
     if (target != nullptr) {
         printf("Enemy hit: %p at position (%d, %d)\n", (void*)target, target->position.x, target->position.y);
-        target->active = false;
+        target->TakeDamage(attackDamage);
     } else {
         printf("No enemy alive in range to attack\n");
     }
