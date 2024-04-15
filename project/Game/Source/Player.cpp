@@ -325,10 +325,10 @@ void Player::PlayerMovement(float dt)
 	b2Vec2 velocity = b2Vec2(0, 0);
 
 	// Obtener teclado
-	bool pressingUp = app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT;
-	bool pressingDown = app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT;
-	bool pressingLeft = app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT;
-	bool pressingRight = app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT;
+	pressingUp = app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT;
+	pressingDown = app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT;
+	pressingLeft = app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT;
+	pressingRight = app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT;
 
 	// Calcular la velocidad horizontal y vertical
 	int horizontalMovement = pressingRight - pressingLeft;
@@ -404,50 +404,48 @@ void Player::FishingDirecction(bool verticalMovement, bool horizontalMovement)
 	
 
 	// Si jugador Mueve
-	if (playermove) {
-		if (horizontalMovement > 0) {
-			// Derecha
-			player_Direction = Direction::RIGHT;
-			if (app->entityManager->GetRod()->fishing.isFishing) {
-				playermove = true;
-				app->entityManager->GetRod()->fishing.startFishing = false;
-			}
-			else {
-				playermove = false;
-			}
+	if (pressingRight) {
+		// Derecha
+		player_Direction = Direction::RIGHT;
+		if (app->scene_testing->GetRod()->fishing.isFishing) {
+			playermove = true;
+			app->scene_testing->GetRod()->fishing.startFishing = false;
 		}
-		else if (horizontalMovement < 0) {
-			// izquierda
-			player_Direction = Direction::LEFT;
-			if (app->entityManager->GetRod()->fishing.isFishing) {
-				playermove = true;
-				app->entityManager->GetRod()->fishing.startFishing = false;
-			}
-			else {
-				playermove = false;
-			}
+		else {
+			playermove = false;
 		}
-		else if (verticalMovement > 0) {
-			// abajo
-			player_Direction = Direction::DOWN;
-			if (app->entityManager->GetRod()->fishing.isFishing) {
-				playermove = true;
-				app->entityManager->GetRod()->fishing.startFishing = false;
-			}
-			else {
-				playermove = false;
-			}
+	}
+	else if (pressingLeft) {
+		// izquierda
+		player_Direction = Direction::LEFT;
+		if (app->scene_testing->GetRod()->fishing.isFishing) {
+			playermove = true;
+			app->scene_testing->GetRod()->fishing.startFishing = false;
 		}
-		else if (verticalMovement < 0) {
-			// arriba
-			player_Direction = Direction::UP;
-			if (app->entityManager->GetRod()->fishing.isFishing) {
-				playermove = true;
-				app->entityManager->GetRod()->fishing.startFishing = false;
-			}
-			else {
-				playermove = false;
-			}
+		else {
+			playermove = false;
+		}
+	}
+	else if (pressingDown) {
+		// abajo
+		player_Direction = Direction::DOWN;
+		if (app->scene_testing->GetRod()->fishing.isFishing) {
+			playermove = true;
+			app->scene_testing->GetRod()->fishing.startFishing = false;
+		}
+		else {
+			playermove = false;
+		}
+	}
+	else if (pressingUp) {
+		// arriba
+		player_Direction = Direction::UP;
+		if (app->scene_testing->GetRod()->fishing.isFishing) {
+			playermove = true;
+			app->scene_testing->GetRod()->fishing.startFishing = false;
+		}
+		else {
+			playermove = false;
 		}
 	}
 

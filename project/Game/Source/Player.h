@@ -101,6 +101,14 @@ public:
 	bool playermove = false;
 	Direction player_Direction;
 
+	//Player move
+	bool pressingUp;
+	bool pressingDown;
+	bool pressingLeft;
+	bool pressingRight;
+
+
+
 
 private:
 	Animation idleAnim;
