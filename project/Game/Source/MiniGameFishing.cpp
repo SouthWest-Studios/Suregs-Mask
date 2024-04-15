@@ -125,6 +125,7 @@ bool MiniGameFishing::PostUpdate()
 
 bool MiniGameFishing::CleanUp()
 {
+	delete chosefishing_path_ptr;
 	return true;
 }
 
@@ -720,7 +721,7 @@ void MiniGameFishing::reward_pool(Fishlevel fishingType, std::vector<std::vector
 
 	if (chosefishing_path_ptr && !chosefishing_path_ptr->empty()) {
 		
-		const char* first_element = (*chosefishing_path_ptr)[0][0];
+		const char* first_element = (*chosefishing_path_ptr)[1][1];
 		printf("The first element of the first row is: %s\n", first_element);
 	}
 	else {
