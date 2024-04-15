@@ -49,6 +49,8 @@ public:
 
 	void SetPlayer(Player* player);
 
+	float GetHealth() const;
+
 public:
 
 	//L02: DONE 2: Declare player parameters
@@ -63,6 +65,11 @@ public:
 	float maxHealth;
 	float attackDamage;
 
+	//Revivir
+	bool hasRevived = false;
+	float deathTime = 0.0f;
+	float reviveDelay = 2.0f;
+
 	Animation* currentAnimation = nullptr;
 	EntityState state;
 
@@ -76,13 +83,6 @@ public:
 	int Photowidth;
 
 	int currentPosX;
-
-
-	//Revivir
-	bool hasRevived = false;
-	float deathTime = 0.0f;
-	float reviveDelay = 2.0f;
-
 
 	PathFinding* path;
 	Player* player;

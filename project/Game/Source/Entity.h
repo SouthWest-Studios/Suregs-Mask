@@ -109,6 +109,10 @@ public:
 	virtual void OnCollision(PhysBody* physA, PhysBody* physB) {};
 	virtual void OnExitCollision(PhysBody* physA, PhysBody* physB) {};
 
+	virtual float GetHealth() const {
+		return health;
+	}
+
 	virtual void TakeDamage(float damage) {
 		health -= damage;
 	}

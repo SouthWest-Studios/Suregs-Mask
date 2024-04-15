@@ -48,6 +48,7 @@ public:
 	Player* GetPlayer();
 
 	MiniGameFishing* GetRod();
+	std::vector<Entity*> GetEnemies();
 	
 
 public:

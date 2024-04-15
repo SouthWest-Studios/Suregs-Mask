@@ -17,8 +17,7 @@
 
 
 
-Enemy_Osiris::Enemy_Osiris() : Entity(EntityType::ENEMY_OSIRIS)
-{
+Enemy_Osiris::Enemy_Osiris() : Entity(EntityType::ENEMY_OSIRIS), maxHealth(150.0f), health(150.0f), speed(2.5f), attackDamage(50.0f){
 	name.Create("osiris");
 
 }
@@ -55,16 +54,6 @@ bool Enemy_Osiris::Start() {
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMY;
 
-
-	//Estadisticas
-	health = 100.0f;
-	maxHealth = 100.0f;
-	speed = 0.2f;
-	attackDamage = 50;
-
-	deathTime = 0.0f;
-	reviveDelay = 2.0f;
-
 	return true;
 }
 
@@ -77,8 +66,6 @@ bool Enemy_Osiris::Update(float dt)
 		isFacingLeft = true;
 	}
 	else(isFacingLeft = false);
-
-
 
 	if (nextState == EntityState::DEAD) {
 		float currentTime = dt / 1000.0f;
@@ -115,14 +102,14 @@ bool Enemy_Osiris::Update(float dt)
 	else if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 20 /*Cambiar*/) {
 		nextState = EntityState::ATTACKING;
 	}
-	else if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 120/*Cambiar*/) {
+	else if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 400/*Cambiar*/) {
 		nextState = EntityState::RUNNING;
 	}
 	else {
 		nextState = EntityState::IDLE;
 	}
 
-	Osirisfinding(dt);
+
 	currentAnimation->Update();
 	return true;
 }
@@ -159,6 +146,8 @@ void Enemy_Osiris::DoNothing(float dt)
 {
 	currentAnimation = &idleAnim;
 	//printf("Osiris idle");
+	pbody->body->SetLinearVelocity(b2Vec2_zero);
+
 }
 
 void Enemy_Osiris::Chase(float dt)
@@ -227,67 +216,52 @@ void Enemy_Osiris::SetPlayer(Player* player)
 
 bool Enemy_Osiris::Osirisfinding(float dt)
 {
-	if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 120) {
+	iPoint playerPos = app->map->WorldToMap(app->entityManager->GetPlayer()->position.x, app->entityManager->GetPlayer()->position.y);
+	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
 
-		iPoint playerPos = app->map->WorldToMap(app->entityManager->GetPlayer()->position.x, app->entityManager->GetPlayer()->position.y);
+	app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posición del enemigo hacia la posición del jugador
+	lastPath = *app->map->pathfinding->GetLastPath();
 
-
-		if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 120) {
-
-			iPoint playerPos = app->map->WorldToMap(app->entityManager->GetPlayer()->position.x, app->entityManager->GetPlayer()->position.y);
-
-			playerPos.x += 1;
-			playerPos.y += 1;
-			iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
-			enemyPos.y += 1;
-
-			app->map->pathfinding->CreatePath(playerPos, enemyPos);
-			lastPath = *app->map->pathfinding->GetLastPath();
-
-			//Get the latest calculated path and draw
-			for (uint i = 0; i < lastPath.Count(); ++i)
-			{
-				iPoint pos = app->map->MapToWorld(lastPath.At(i)->x, lastPath.At(i)->y);
-				if (app->physics->debug == true) {
-					app->render->DrawTexture(app->map->pathfinding->mouseTileTex, pos.x, pos.y, SDL_FLIP_NONE);
-				}
-			}
-
-			if (lastPath.Count() > 2) {
-				if (lastPath.At(lastPath.Count() - 2)->x < enemyPos.x) {
-					vel.x -= speed * dt;
-					isFacingLeft = true;
-				}
-
-				if (lastPath.At(lastPath.Count() - 2)->x > enemyPos.x) {
-					vel.x += speed * dt;
-					isFacingLeft = false;
-				}
-
-				isAttacking = false;
-				attackAnim.Reset();
-				pbody->body->SetLinearVelocity(vel);
-			}
-
-
-			if (app->map->pathfinding->GetDistance(app->scene_testing->GetPlayer()->position, position) <= 66) {
-
-				if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 66) {
-
-
-					if (isFacingLeft) {
-						vel.x -= speed * dt;
-					}
-					else {
-						vel.x += speed * dt;
-
-					}
-					isAttacking = true;
-					pbody->body->SetLinearVelocity(vel);
-				}
-			}
+	//Get the latest calculated path and draw
+	for (uint i = 0; i < lastPath.Count(); ++i)
+	{
+		iPoint pos = app->map->MapToWorld(lastPath.At(i)->x, lastPath.At(i)->y);
+		if (app->physics->debug == true) {
+			app->render->DrawTexture(app->map->pathfinding->mouseTileTex, pos.x, pos.y, SDL_FLIP_NONE);
 		}
 	}
+
+	if (lastPath.Count() > 1) { // Asegúrate de que haya al menos una posición en el camino
+
+		// Toma la primera posición del camino como el objetivo al que el enemigo debe dirigirse
+		iPoint targetPos = app->map->MapToWorld(lastPath.At(1)->x, lastPath.At(1)->y);
+
+		// Calcula la dirección hacia el objetivo
+		b2Vec2 direction(targetPos.x - position.x, targetPos.y - position.y);
+		direction.Normalize();
+
+		// Calcula la velocidad del movimiento
+		b2Vec2 velocity(direction.x * speed, direction.y * speed);
+
+		// Aplica la velocidad al cuerpo del enemigo
+		pbody->body->SetLinearVelocity(velocity);
+
+		// Determina si el enemigo está mirando hacia la izquierda o hacia la derecha
+		if (direction.x < 0) {
+			isFacingLeft = true;
+		}
+		else {
+			isFacingLeft = false;
+		}
+
+		isAttacking = false;
+		attackAnim.Reset();
+
+	}
 	return true;
+}
+
+float Enemy_Osiris::GetHealth() const {
+	return health;
 }
 

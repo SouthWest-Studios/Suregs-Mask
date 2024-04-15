@@ -44,6 +44,8 @@ public:
 	void Die(float dt);
 	bool Olsfinding(float dt);
 
+	float GetHealth() const;
+
 	// L07 DONE 6: Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
@@ -61,6 +63,7 @@ public:
 	float health;
 	float maxHealth;
 	float attackDamage;
+
 
 	Animation* currentAnimation = nullptr;
 	EntityState state;

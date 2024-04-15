@@ -135,7 +135,6 @@ bool Player::PostUpdate() {
 	else {
 		app->render->DrawTexture(texture, position.x - 50, position.y - 200, SDL_FLIP_NONE, &rect);
 	}
-
 	return true;
 }
 
@@ -179,8 +178,35 @@ void Player::Attack(float dt)
 
 void Player::MaskAttack(float dt)
 {
-	printf("mask");
-	
+	CastLightning();
+}
+
+Entity* Player::GetEnemyWithHighestHealthWithinRadius(iPoint position, int radius) {
+	Entity* highestHealthEnemy = nullptr;
+	int highestHealth = 0;
+	for (Entity* enemy : app->entityManager->GetEnemies()) {
+		int dx = position.x - enemy->position.x;
+		int dy = position.y - enemy->position.y;
+		if (dx * dx + dy * dy <= radius * radius) {
+			printf("Considering enemy at (%d, %d) with health %f\n", enemy->position.x, enemy->position.y, enemy->GetHealth());
+			if (enemy->GetHealth() > highestHealth) {
+				printf("Selected as highest health enemy so far\n");
+				highestHealthEnemy = enemy;
+				highestHealth = enemy->GetHealth();
+			}
+		}
+	}
+	return highestHealthEnemy;
+}
+
+void Player::CastLightning() {
+    Entity* target = GetEnemyWithHighestHealthWithinRadius(position, 500);
+    if (target != nullptr) {
+        printf("Enemy hit: %p at position (%d, %d)\n", (void*)target, target->position.x, target->position.y);
+        target->active = false;
+    } else {
+        printf("No enemy alive in range to attack\n");
+    }
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 
@@ -325,10 +351,10 @@ void Player::PlayerMovement(float dt)
 	b2Vec2 velocity = b2Vec2(0, 0);
 
 	// Obtener teclado
-	bool pressingUp = app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT;
-	bool pressingDown = app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT;
-	bool pressingLeft = app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT;
-	bool pressingRight = app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT;
+	pressingUp = app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT;
+	pressingDown = app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT;
+	pressingLeft = app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT;
+	pressingRight = app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT;
 
 	// Calcular la velocidad horizontal y vertical
 	int horizontalMovement = pressingRight - pressingLeft;
@@ -404,50 +430,48 @@ void Player::FishingDirecction(bool verticalMovement, bool horizontalMovement)
 	
 
 	// Si jugador Mueve
-	if (playermove) {
-		if (horizontalMovement > 0) {
-			// Derecha
-			player_Direction = Direction::RIGHT;
-			if (app->entityManager->GetRod()->fishing.isFishing) {
-				playermove = true;
-				app->entityManager->GetRod()->fishing.startFishing = false;
-			}
-			else {
-				playermove = false;
-			}
+	if (pressingRight) {
+		// Derecha
+		player_Direction = Direction::RIGHT;
+		if (app->scene_testing->GetRod()->fishing.isFishing) {
+			playermove = true;
+			app->scene_testing->GetRod()->fishing.startFishing = false;
 		}
-		else if (horizontalMovement < 0) {
-			// izquierda
-			player_Direction = Direction::LEFT;
-			if (app->entityManager->GetRod()->fishing.isFishing) {
-				playermove = true;
-				app->entityManager->GetRod()->fishing.startFishing = false;
-			}
-			else {
-				playermove = false;
-			}
+		else {
+			playermove = false;
 		}
-		else if (verticalMovement > 0) {
-			// abajo
-			player_Direction = Direction::DOWN;
-			if (app->entityManager->GetRod()->fishing.isFishing) {
-				playermove = true;
-				app->entityManager->GetRod()->fishing.startFishing = false;
-			}
-			else {
-				playermove = false;
-			}
+	}
+	else if (pressingLeft) {
+		// izquierda
+		player_Direction = Direction::LEFT;
+		if (app->scene_testing->GetRod()->fishing.isFishing) {
+			playermove = true;
+			app->scene_testing->GetRod()->fishing.startFishing = false;
 		}
-		else if (verticalMovement < 0) {
-			// arriba
-			player_Direction = Direction::UP;
-			if (app->entityManager->GetRod()->fishing.isFishing) {
-				playermove = true;
-				app->entityManager->GetRod()->fishing.startFishing = false;
-			}
-			else {
-				playermove = false;
-			}
+		else {
+			playermove = false;
+		}
+	}
+	else if (pressingDown) {
+		// abajo
+		player_Direction = Direction::DOWN;
+		if (app->scene_testing->GetRod()->fishing.isFishing) {
+			playermove = true;
+			app->scene_testing->GetRod()->fishing.startFishing = false;
+		}
+		else {
+			playermove = false;
+		}
+	}
+	else if (pressingUp) {
+		// arriba
+		player_Direction = Direction::UP;
+		if (app->scene_testing->GetRod()->fishing.isFishing) {
+			playermove = true;
+			app->scene_testing->GetRod()->fishing.startFishing = false;
+		}
+		else {
+			playermove = false;
 		}
 	}
 

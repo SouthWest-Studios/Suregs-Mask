@@ -41,7 +41,7 @@ public:
 	bool miniGameStart(float dt);
 	bool miniGameLoop(float dt);
 	bool miniGameEnd(float dt);
-	void reward_pool(Fishlevel fishingType);
+	void reward_pool(Fishlevel fishingType, std::vector<std::vector<const char*>>* chosefishing_path_ptr);
 
 
 	void castingline(FISHINGTYPE type);
@@ -87,15 +87,9 @@ public:
 	/*List<const char*>chosefishing_path;
 	List<const char*>choseName_path;*/
 
-	std::vector<std::vector<const char*>>chosefishing_path;
-	std::vector<std::vector<const char*>>choseName_path;
+	
 
-	std::vector<std::vector<const char*>*> chosefishing_path_ptr;
-	std::vector<std::vector<const char*>*> choseName_path_ptr;
-
-
-	const char*fishing_path;
-	const char*name_path;
+	
 	//fishingfloat
 	const char* fishingfloat_path;
 	SDL_Texture* fishingfloat_texture = NULL;
@@ -149,6 +143,12 @@ public:
 	bool fishingEndCloseDialogo = false;
 	bool isEnd = false;
 	int gamePlayTime;
+
+private:
+	std::vector<std::vector<const char*>>* chosefishing_path_ptr = new std::vector<std::vector<const char*>>();
+	std::vector<std::vector<const char*>>* choseName_path = new std::vector<std::vector<const char*>>();
+	const char* fishing_path;
+	const char* name_path;
 	
 };
 #endif 

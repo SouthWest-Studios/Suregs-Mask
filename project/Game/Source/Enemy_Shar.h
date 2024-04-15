@@ -49,6 +49,8 @@ public:
 
 	void SetPlayer(Player* player);
 
+	float GetHealth() const;
+
 public:
 
 	//L02: DONE 2: Declare player parameters
@@ -59,8 +61,8 @@ public:
 	float speed;
 	b2Vec2 vel;
 	float health;
-	float maxHealth;
-	float attackDamage;
+	float maxHealth = 100.0f;
+	float attackDamage = 50;
 
 	Animation* currentAnimation = nullptr;
 	EntityState state;
