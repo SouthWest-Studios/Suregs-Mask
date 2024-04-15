@@ -41,7 +41,7 @@ public:
 	bool miniGameStart(float dt);
 	bool miniGameLoop(float dt);
 	bool miniGameEnd(float dt);
-	void reward_pool(Fishlevel fishingType);
+	void reward_pool(Fishlevel fishingType, std::vector<std::vector<const char*>>* chosefishing_path_ptr);
 
 
 	void castingline(FISHINGTYPE type);
@@ -87,8 +87,8 @@ public:
 	/*List<const char*>chosefishing_path;
 	List<const char*>choseName_path;*/
 
-	std::vector<std::vector<const char*>>chosefishing_path;
-	std::vector<std::vector<const char*>>choseName_path;
+	std::vector<std::vector<const char*>>* chosefishing_path_ptr = new std::vector<std::vector<const char*>>();
+	std::vector<std::vector<const char*>>* choseName_path = new std::vector<std::vector<const char*>>();;
 
 	const char*fishing_path;
 	const char*name_path;
