@@ -55,8 +55,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	guiManager = new GuiManager(this);
 	debugConsole = new DebugConsole(this);
 	dialogManager = new DialogManager(this);
-	
-	menu = new Menu(this);
+	menu = new Menu(this,false);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp

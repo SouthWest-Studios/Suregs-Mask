@@ -10,6 +10,7 @@
 #include "ModuleFadeToBlack.h"
 #include "Optick/include/optick.h"
 #include "MiniGameFishing.h"
+#include "Menu.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -54,7 +55,7 @@ bool Scene_testing::Start()
 	app->map->name = config.child("map").attribute("name").as_string();
 	app->map->path = config.child("map").attribute("path").as_string();
 	app->map->pathTextures = config.child("map").attribute("pathTextures").as_string();
-
+	
 	// iterate all items in the Scene_testing
 	// Checkhttps://pugixml.org/docs/quickstart.html#access
 
@@ -100,8 +101,8 @@ bool Scene_testing::Start()
 
 	// L15: DONE 2: Instantiate a new GuiControlButton in the Scene_testing
 
-	SDL_Rect btPos = { windowW / 2 - 60,20, 120,20};
-	gcButtom = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);
+	/*SDL_Rect btPos = { windowW / 2 - 60,20, 120,20};
+	gcButtom = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);*/
 
 	app->entityManager->Enable();
 
@@ -165,6 +166,7 @@ bool Scene_testing::Update(float dt)
 	// L14: DONE 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
 		app->fadeToBlack->FadeToBlack(this, app->scene_testing);
+		app->menu->active = true;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();

@@ -6,7 +6,7 @@
 #include "Textures.h"
 #include "Scene_Testing.h"
 
-GuiCheckBox::GuiCheckBox(uint32 id, SDL_Rect bounds, SDL_Rect bounds2, const char* text) : GuiControl(GuiControlType::BUTTON, id), click(false)
+GuiCheckBox::GuiCheckBox(uint32 id, SDL_Rect bounds, SDL_Rect bounds2, const char* text) : GuiControl(GuiControlType::CHECKBOX, id), click(false)
 {
 	this->bounds = bounds;
 	this->bounds2 = bounds2;
@@ -18,6 +18,7 @@ GuiCheckBox::GuiCheckBox(uint32 id, SDL_Rect bounds, SDL_Rect bounds2, const cha
 
 	img = app->tex->Load("Assets/Textures/Interfaz/CheckBoxUnMarked.png");
 	img2 = app->tex->Load("Assets/Textures/Interfaz/CheckBoxMarked.png");
+	img3 = app->tex->Load("Assets/Textures/Interfaz/CheckBoxSelected.png");
 }
 
 GuiCheckBox::~GuiCheckBox()
@@ -53,31 +54,26 @@ bool GuiCheckBox::PostUpdate()
 
 		mouseY *= 2;
 
-		//If the position of the mouse if inside the bounds of the button 
-		/*if (mouseX > bouunds.x && mouseX < bouunds.x + bouunds.w && mouseY > bouunds.y && mouseY < bouunds.y + bouunds.h)*/ {
+		if (selected) {
 
-			/*state = GuiControlState::FOCUSED;
-			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-			{
+			state = GuiControlState::FOCUSED;
+
+			if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) {
 				state = GuiControlState::PRESSED;
 			}
-			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
-			{
-				NotifyObserver();
-				click = !click;
-			}*/
-			/*if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT) {
-				state = GuiControlState::PRESSED;
-			}*/
 
-			/*if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP) {
+			if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) {
 				NotifyObserver();
-				click = !click;
-			}*/
+				click = true;
+
+				app->audio->PlayFx(select_audio);
+			}
 		}
-		/*else*/ {
+		else {
 			state = GuiControlState::NORMAL;
 		}
+	
+		
 		if (!click)
 		{
 			switch (state)
@@ -89,7 +85,7 @@ bool GuiCheckBox::PostUpdate()
 				app->render->DrawTexture(img, bounds.x, bounds.y, SDL_FLIP_NONE, 0, 0, true);
 				break;
 			case GuiControlState::FOCUSED:
-				app->render->DrawTexture(img, bounds.x, bounds.y, SDL_FLIP_NONE, 0, 0, true);
+				app->render->DrawTexture(img3, bounds.x, bounds.y, SDL_FLIP_NONE, 0, 0, true);
 				break;
 			case GuiControlState::PRESSED:
 				app->render->DrawTexture(img, bounds.x, bounds.y, SDL_FLIP_NONE, 0, 0, true);				

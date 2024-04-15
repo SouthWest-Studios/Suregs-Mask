@@ -60,7 +60,7 @@ private:
 	SDL_Texture* fondoDiario;
 	SDL_Texture* fondoAjustes;
 	
-
+	int a = 0;
 	
 	int contadormenu = 0;
 	bool menuusettings = false;

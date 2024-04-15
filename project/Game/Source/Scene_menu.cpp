@@ -8,6 +8,7 @@
 #include "Scene_Testing.h"
 #include "ModuleFadeToBlack.h"
 #include "Optick/include/optick.h"
+#include "Menu.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -15,6 +16,7 @@
 #include "GuiManager.h"
 #include "GuiControlSlider.h"
 #include "GuiCheckBox.h"
+
 
 Scene_menu::Scene_menu(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -91,6 +93,7 @@ bool Scene_menu::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
 		app->fadeToBlack->FadeToBlack(this, app->scene_testing, 90);
+		app->menu->active = true;
 	}
 	return true;
 }
@@ -249,7 +252,7 @@ void Scene_menu::ShowCredits()
 		ListItem<GuiControl*>* control;
 		for (control = controlsScene.start; control != NULL; control = control->next)
 		{
-			control->data->state = GuiControlState::DISABLED;
+			control->data->state = GuiControlState::DISABLED; 
 		}
 
 		gcCloseCredits = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 150,	136,46 }, this);

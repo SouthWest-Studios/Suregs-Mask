@@ -28,8 +28,11 @@ private:
 	bool canClick = true;
 	bool drawBasic = false;
 
+	int select_audio;
+
 	SDL_Texture* img;
 	SDL_Texture* img2;
+	SDL_Texture* img3;
 };
 
 #endif // __GUICHECKBOX_H__
