@@ -143,35 +143,35 @@
 		</npc_vendedor>
 		
 		<npc_pescador>
-			<idleAnim start="1" end="2" speed="1.0f" loop="false"/>
+			<idleAnim start="0" end="1" speed="1.0f" loop="false"/>
 		</npc_pescador>
 		
 		<npc_bruja>
-			<idleAnim start="2" end="3" speed="1.0f" loop="false"/>
+			<idleAnim start="0" end="1" speed="1.0f" loop="false"/>
 		</npc_bruja>
 
 		<npc_bully1>
-			<idleAnim start="3" end="4" speed="1.0f" loop="false"/>
+			<idleAnim start="0" end="1" speed="1.0f" loop="false"/>
 		</npc_bully1>
 
 		<npc_bully2>
-			<idleAnim start="4" end="5" speed="1.0f" loop="false"/>
+			<idleAnim start="0" end="1" speed="1.0f" loop="false"/>
 		</npc_bully2>
 
 		<npc_herrera>
-			<idleAnim start="5" end="6" speed="1.0f" loop="false"/>
+			<idleAnim start="0" end="1" speed="1.0f" loop="false"/>
 		</npc_herrera>
 
 		<npc_abuelo>
-			<idleAnim start="6" end="7" speed="1.0f" loop="false"/>
+			<idleAnim start="0" end="1" speed="1.0f" loop="false"/>
 		</npc_abuelo>
 
 		<npc_mujer_preocupada>
-			<idleAnim start="7" end="8" speed="1.0f" loop="false"/>
+			<idleAnim start="0" end="1" speed="1.0f" loop="false"/>
 		</npc_mujer_preocupada>
 
 		<npc_mujer_enamorada>
-			<idleAnim start="8" end="9" speed="1.0f" loop="false"/>
+			<idleAnim start="0" end="1" speed="1.0f" loop="false"/>
 		</npc_mujer_enamorada>
 
 	</animations>
