@@ -135,7 +135,6 @@ bool Player::PostUpdate() {
 	else {
 		app->render->DrawTexture(texture, position.x - 50, position.y - 200, SDL_FLIP_NONE, &rect);
 	}
-
 	return true;
 }
 
@@ -179,8 +178,35 @@ void Player::Attack(float dt)
 
 void Player::MaskAttack(float dt)
 {
-	printf("mask");
-	
+	CastLightning();
+}
+
+Entity* Player::GetEnemyWithHighestHealthWithinRadius(iPoint position, int radius) {
+    Entity* highestHealthEnemy = nullptr;
+    int highestHealth = 0;
+    for (Entity* enemy : app->entityManager->GetEnemies()) {
+        int dx = position.x - enemy->position.x;
+        int dy = position.y - enemy->position.y;
+        if (dx * dx + dy * dy <= radius * radius) {
+            printf("Considering enemy at (%d, %d) with health %d\n", enemy->position.x, enemy->position.y, enemy->health);
+            if (enemy->health > highestHealth) {
+                printf("Selected as highest health enemy so far\n");
+                highestHealthEnemy = enemy;
+                highestHealth = enemy->health;
+            }
+        }
+    }
+    return highestHealthEnemy;
+}
+
+void Player::CastLightning() {
+    Entity* target = GetEnemyWithHighestHealthWithinRadius(position, 500);
+    if (target != nullptr) {
+        printf("Enemy hit: %p at position (%d, %d)\n", (void*)target, target->position.x, target->position.y);
+        target->active = false;
+    } else {
+        printf("No enemy alive in range to attack\n");
+    }
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 

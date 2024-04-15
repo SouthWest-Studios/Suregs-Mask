@@ -230,6 +230,16 @@ MiniGameFishing* EntityManager::GetRod()
 	return fishing;
 }
 
+std::vector<Entity*> EntityManager::GetEnemies() {
+    std::vector<Entity*> enemies;
+    for (ListItem<Entity*>* item = entities.start; item != NULL; item = item->next) {
+        Entity* entity = item->data;
+        if (entity->type == EntityType::ENEMY_OSIRIS || entity->type == EntityType::ENEMY_OLS || entity->type == EntityType::ENEMY_SHAR) {
+            enemies.push_back(entity);
+        }
+    }
+    return enemies;
+}
 
 
 bool EntityManager::Update(float dt)

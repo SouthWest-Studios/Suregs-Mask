@@ -45,6 +45,11 @@ public:
 	//Branch transitionTable[static_cast<int>(EntityState::STATE_COUNT)][static_cast<int>(EntityState::STATE_COUNT)];
 	// L07 DONE 6: Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
+    
+    Entity* GetEnemyWithHighestHealthWithinRadius(iPoint position, int radius);
+	
+	//Funciones ataques mascara
+	void CastLightning();
 
 private:
 	void CameraMovement(float dt);
