@@ -35,6 +35,7 @@ enum class ColliderType {
 	RESOURCE_DIAMANTE,
 	DIALOG_TRIGGER,
 	TP_ENTITY,
+	ENTRADA_MAZMORRA0,
 	UNKNOWN,
 	
 	// ..

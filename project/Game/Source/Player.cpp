@@ -5,6 +5,7 @@
 #include "Input.h"
 #include "Render.h"
 #include "Scene_Testing.h"
+#include "Scene_Mazmorra0.h"
 #include "Log.h"
 #include "InventoryManager.h"
 #include "Point.h"
@@ -248,6 +249,11 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			physB->body->SetActive(false);
 		}
 
+		break;
+
+	case ColliderType::ENTRADA_MAZMORRA0:
+		LOG("Collision ENTRADA_MAZMORRA0");
+		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra0);
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
