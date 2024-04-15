@@ -17,8 +17,7 @@
 
 
 
-Enemy_Osiris::Enemy_Osiris() : Entity(EntityType::ENEMY_OSIRIS)
-{
+Enemy_Osiris::Enemy_Osiris() : Entity(EntityType::ENEMY_OSIRIS), maxHealth(150.0f), health(150.0f), speed(2.5f), attackDamage(50.0f){
 	name.Create("osiris");
 
 }
@@ -54,16 +53,6 @@ bool Enemy_Osiris::Start() {
 	pbody->entity = this;
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMY;
-
-
-	//Estadisticas
-	health = 100.0f;
-	maxHealth = 100.0f;
-	speed = 2.2f;
-	attackDamage = 50;
-
-	deathTime = 0.0f;
-	reviveDelay = 2.0f;
 
 	return true;
 }
@@ -270,5 +259,9 @@ bool Enemy_Osiris::Osirisfinding(float dt)
 
 	}
 	return true;
+}
+
+float Enemy_Osiris::GetHealth() const {
+	return health;
 }
 

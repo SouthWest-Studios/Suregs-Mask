@@ -17,10 +17,8 @@
 
 
 
-Enemy_Ols::Enemy_Ols() : Entity(EntityType::ENEMY_OLS)
-{
+Enemy_Ols::Enemy_Ols() : Entity(EntityType::ENEMY_OLS), maxHealth(100.0f), health(100.0f), speed(2.5f), attackDamage(50.0f){
 	name.Create("ols");
-
 }
 
 Enemy_Ols::~Enemy_Ols() {
@@ -56,12 +54,6 @@ bool Enemy_Ols::Start() {
 	pbody->ctype = ColliderType::ENEMY;
 
 
-	//Estadisticas
-	health = 100.0f;
-	maxHealth = 100.0f;
-	speed = 2.2f;
-	attackDamage = 50;
-
 	return true;
 }
 
@@ -74,7 +66,6 @@ bool Enemy_Ols::Update(float dt)
 		isFacingLeft = true;
 	}
 	else(isFacingLeft = false);
-
 
 	switch (nextState) {
 	case EntityState::DEAD:
@@ -248,6 +239,12 @@ bool Enemy_Ols::Olsfinding(float dt)
 
 	}
 	return true;
+}
+
+float Enemy_Ols::GetHealth() const {
+	printf("Initial health: %f\n", health);
+	return health;
+
 }
 
 

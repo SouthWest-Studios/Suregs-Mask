@@ -182,21 +182,21 @@ void Player::MaskAttack(float dt)
 }
 
 Entity* Player::GetEnemyWithHighestHealthWithinRadius(iPoint position, int radius) {
-    Entity* highestHealthEnemy = nullptr;
-    int highestHealth = 0;
-    for (Entity* enemy : app->entityManager->GetEnemies()) {
-        int dx = position.x - enemy->position.x;
-        int dy = position.y - enemy->position.y;
-        if (dx * dx + dy * dy <= radius * radius) {
-            printf("Considering enemy at (%d, %d) with health %d\n", enemy->position.x, enemy->position.y, enemy->health);
-            if (enemy->health > highestHealth) {
-                printf("Selected as highest health enemy so far\n");
-                highestHealthEnemy = enemy;
-                highestHealth = enemy->health;
-            }
-        }
-    }
-    return highestHealthEnemy;
+	Entity* highestHealthEnemy = nullptr;
+	int highestHealth = 0;
+	for (Entity* enemy : app->entityManager->GetEnemies()) {
+		int dx = position.x - enemy->position.x;
+		int dy = position.y - enemy->position.y;
+		if (dx * dx + dy * dy <= radius * radius) {
+			printf("Considering enemy at (%d, %d) with health %f\n", enemy->position.x, enemy->position.y, enemy->GetHealth());
+			if (enemy->GetHealth() > highestHealth) {
+				printf("Selected as highest health enemy so far\n");
+				highestHealthEnemy = enemy;
+				highestHealth = enemy->GetHealth();
+			}
+		}
+	}
+	return highestHealthEnemy;
 }
 
 void Player::CastLightning() {

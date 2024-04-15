@@ -17,8 +17,8 @@
 
 
 
-Enemy_Shar::Enemy_Shar() : Entity(EntityType::ENEMY_SHAR)
-{
+Enemy_Shar::Enemy_Shar() : Entity(EntityType::ENEMY_SHAR), maxHealth(80.0f), health(80.0f), speed(2.5f), attackDamage(50.0f){
+
 	name.Create("shar");
 
 }
@@ -54,13 +54,6 @@ bool Enemy_Shar::Start() {
 	pbody->entity = this;
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMY;
-
-
-	//Estadisticas
-	health = 100.0f;
-	maxHealth = 100.0f;
-	speed = 2.5f;
-	attackDamage = 50;
 
 	return true;
 }
@@ -250,6 +243,10 @@ bool Enemy_Shar::Sharfinding(float dt)
 
 	}
 	return true;
+}
+
+float Enemy_Shar::GetHealth() const {
+	return health;
 }
 
 
