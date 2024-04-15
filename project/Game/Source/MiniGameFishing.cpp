@@ -54,8 +54,6 @@ MiniGameFishing::~MiniGameFishing() {}
 
 bool MiniGameFishing::Awake() {
 
-
-
 	//texturePath = parameters.attribute("texturePath").as_string();
 
 
@@ -71,18 +69,25 @@ bool MiniGameFishing::Start() {
 
 
 	for (pugi::xml_node node : parameters.child("fishlevel").children()) {
-		std::vector<const char*> row; 
-		std::vector<const char*> name; 
+		std::vector<const char*> fishrow;
+		std::vector<const char*> fishname;
 		for (pugi::xml_node itemNode : node.children()) {
 			const char* texturepath = itemNode.attribute("texturepath").value();
-			row.push_back(texturepath); 
+			fishrow.push_back(texturepath);
 			texturepath = itemNode.attribute("name").value();
-			name.push_back(texturepath);
+			fishname.push_back(texturepath);
 		}
-		chosefishing_path.push_back(row);
-		choseName_path.push_back(name);
+		chosefishing_path.push_back(fishrow);
+		choseName_path.push_back(fishname);
 	}
 	
+	printf("chosefishing_path vector contents:\n");
+	/*for (const auto& vec : chosefishing_path) {
+		for (const auto& str : vec) {
+			printf("%s ", str);
+		}
+		printf("\n");
+	}*/
 	return true;
 }
 
@@ -717,10 +722,10 @@ void MiniGameFishing::reward_pool(Fishlevel fishingType)
 	//choseName_path.clear();
 
 	
-	printf("%c", chosefishing_path[1][1]);
+	printf("\nPool: %s", chosefishing_path[1][1]);
 	int num = 0;
 	num = getRandomNumber(0,chosefishing_path[fishLevel].size() - 1);
-	fishing_path = chosefishing_path[1][1];
+	fishing_path = chosefishing_path[fishLevel][num];
 	name_path = choseName_path[fishLevel][num];
 	
 	//fishing_path = chosefishing_path[num];

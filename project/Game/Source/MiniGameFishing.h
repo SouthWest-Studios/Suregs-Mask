@@ -90,10 +90,6 @@ public:
 	std::vector<std::vector<const char*>>chosefishing_path;
 	std::vector<std::vector<const char*>>choseName_path;
 
-	std::vector<std::vector<const char*>*> chosefishing_path_ptr;
-	std::vector<std::vector<const char*>*> choseName_path_ptr;
-
-
 	const char*fishing_path;
 	const char*name_path;
 	//fishingfloat
