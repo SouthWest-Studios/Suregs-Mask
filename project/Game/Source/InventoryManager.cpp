@@ -526,10 +526,10 @@ bool InventoryManager::PostUpdate()
 		ListItem<Inventity*>* item;
 		Inventity* pEntity = NULL;
 		
-		app->render->DrawTexture(EquipedItemText, equiped.x, equiped.y);
+		app->render->DrawTexture(EquipedItemText, equiped.x, equiped.y, SDL_FLIP_NONE, 0, 0);
 
 		app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y,SDL_FLIP_NONE, 0, 0);
-		app->render->DrawTexture(SelectedItemText, selected.x, selected.y);
+		app->render->DrawTexture(SelectedItemText, selected.x, selected.y, SDL_FLIP_NONE, 0, 0);
 
 		for (item = inventities.start; item != nullptr; item = item->next)
 		{

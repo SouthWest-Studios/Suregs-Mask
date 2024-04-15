@@ -13,7 +13,7 @@
 #include "Log.h"
 #include "GuiControl.h"
 #include "GuiManager.h"
-
+#include "Menu.h"
 Scene_intro::Scene_intro(App* app, bool start_enabled) : Module(app, start_enabled)
 {
 	name.Create("Scene_intro");
@@ -43,6 +43,8 @@ bool Scene_intro::Start()
 
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
+
+	
 
 	return true;
 }
