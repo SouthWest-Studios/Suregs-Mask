@@ -31,6 +31,8 @@ bool Menu::Awake(pugi::xml_node config)
 	LOG("Menu");
 	bool ret = true;
 
+	
+
 	return ret;
 }
 
@@ -38,7 +40,6 @@ bool Menu::Awake(pugi::xml_node config)
 bool Menu::Start()
 {
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
-
 	fondoInventario = app->tex->Load("Assets/Textures/Interfaz/libro01.png");
 	fondoEquipo = app->tex->Load("Assets/Textures/Interfaz/Equipo.png");
 	fondoDiario = app->tex->Load("Assets/Textures/Interfaz/Diario.png");
@@ -47,6 +48,7 @@ bool Menu::Start()
 	inventory_audio = app->audio->LoadAudioFx("inventory_fx");
 	change_inventory_audio = app->audio->LoadAudioFx("change_inventory_fx");
 	
+	
 
 	return true;
 }
@@ -54,6 +56,12 @@ bool Menu::Start()
 // Called each loop iteration
 bool Menu::PreUpdate()
 {
+	
+	if (a == 0)
+	{
+		Start();
+		a++;
+	}
 	return true;
 }
 
@@ -62,7 +70,7 @@ bool Menu::Update(float dt)
 {
 	if (app->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN)
 	{
-
+		
 		menuu = !menuu;
 
 		app->audio->PlayFx(inventory_audio);
@@ -134,19 +142,19 @@ bool Menu::Update(float dt)
 		{
 
 			SDL_Rect MusicPos = { windowWidth / 2 - 400 ,windowHeight / 2 -100, 200, 50 };
-			music = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 1, "MUSIC", MusicPos, this, { 0, 0, 20, 20 }, { 0,0,0,0 },0 ,100);
+			music = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 100, "MUSIC", MusicPos, this, { 0, 0, 20, 20 }, { 0,0,0,0 },0 ,100);
 
 			SDL_Rect SfxPos = { windowWidth / 2 - 400 ,windowHeight / 2 - 50, 200, 50 };
-			sfx = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 1, "SFX", SfxPos, this, { 0, 0, 20, 20 }, { 0,0,0,0 }, 0, 100);
+			sfx = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 101, "SFX", SfxPos, this, { 0, 0, 20, 20 }, { 0,0,0,0 }, 0, 100);
 	
 			SDL_Rect vSyncpos = { windowWidth / 2 -100 ,windowHeight / 2 + 200, 200, 50 };
-			vsync = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 1, "VSYNC", vSyncpos, this, { 0, 0, 20, 20 } );
+			vsync = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 102, "VSYNC", vSyncpos, this, { 0, 0, 20, 20 } );
 
 			SDL_Rect FullScreen = { windowWidth / 2 - 100 ,windowHeight / 2 + 50, 230,50 };
-			fullScreen = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 1, "FULLSCREEN", FullScreen, this, { 0,0,0,0 }, { -50,0,0,0 });
+			fullScreen = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 103, "FULLSCREEN", FullScreen, this, { 0,0,0,0 }, { -50,0,0,0 });
 
 			SDL_Rect TitlePos = { windowWidth / 2 + 100 ,windowHeight / 2 +  50, 230,50 };
-			title = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "VOLVER AL MEN?", TitlePos, this, { 0,0,0,0 });
+			title = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 104, "VOLVER AL MENU", TitlePos, this, { 0,0,0,0 });
 		}
 
 
@@ -185,10 +193,10 @@ bool Menu::Update(float dt)
 		}
 		
 
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+		/*if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
 		{
 			fullScreen->click = !fullScreen->click;
-		}
+		}*/
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 		{
 			vsync->click = !vsync->click;
@@ -227,6 +235,7 @@ bool Menu::Update(float dt)
 		/*app->guiManager->active = false;*/
 		/*app->scene_testing->active = false;*/
 		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu);
+		app->menu->active = false;
 		title->click = false;
 	}
 
