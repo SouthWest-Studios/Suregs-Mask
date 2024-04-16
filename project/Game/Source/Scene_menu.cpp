@@ -131,10 +131,12 @@ bool Scene_menu::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 1:
 		app->fadeToBlack->FadeToBlack(this, app->scene_testing, 90);
+		app->menu->active = true;
 		break;
 
 	case 2:
 		app->fadeToBlack->FadeToBlack(this, app->scene_testing, 90);
+		app->menu->active = true;
 		break;
 
 	case 3:

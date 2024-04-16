@@ -70,7 +70,9 @@ bool Menu::Update(float dt)
 {
 	if (app->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN)
 	{
-		
+		app->guiManager->minId = 100;
+		app->guiManager->maxId = 104;
+		app->guiManager->columnSize = 2;
 		menuu = !menuu;
 
 		app->audio->PlayFx(inventory_audio);
@@ -147,11 +149,12 @@ bool Menu::Update(float dt)
 			SDL_Rect SfxPos = { windowWidth / 2 - 400 ,windowHeight / 2 - 50, 200, 50 };
 			sfx = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 101, "SFX", SfxPos, this, { 0, 0, 20, 20 }, { 0,0,0,0 }, 0, 100);
 	
-			SDL_Rect vSyncpos = { windowWidth / 2 -100 ,windowHeight / 2 + 200, 200, 50 };
-			vsync = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 102, "VSYNC", vSyncpos, this, { 0, 0, 20, 20 } );
-
 			SDL_Rect FullScreen = { windowWidth / 2 - 100 ,windowHeight / 2 + 50, 230,50 };
-			fullScreen = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 103, "FULLSCREEN", FullScreen, this, { 0,0,0,0 }, { -50,0,0,0 });
+			fullScreen = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 102, "FULLSCREEN", FullScreen, this, { 0,0,0,0 }, { -50,0,0,0 });
+
+			SDL_Rect vSyncpos = { windowWidth / 2 -100 ,windowHeight / 2 + 200, 200, 50 };
+			vsync = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 103, "VSYNC", vSyncpos, this, { 0, 0, 20, 20 } );
+
 
 			SDL_Rect TitlePos = { windowWidth / 2 + 100 ,windowHeight / 2 +  50, 230,50 };
 			title = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 104, "VOLVER AL MENU", TitlePos, this, { 0,0,0,0 });
@@ -193,15 +196,15 @@ bool Menu::Update(float dt)
 		}
 		
 
-		/*if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+		if (fullScreen->selected && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 		{
 			fullScreen->click = !fullScreen->click;
-		}*/
-		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		}
+		if (vsync->selected && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 		{
 			vsync->click = !vsync->click;
 		}
-		if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
+		if (title->selected && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 		{
 			title->click = true;
 		}
@@ -237,6 +240,23 @@ bool Menu::Update(float dt)
 		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu);
 		app->menu->active = false;
 		title->click = false;
+		if (title != nullptr)
+		{
+
+			title->state = GuiControlState::DISABLED;
+			title = nullptr;
+			fullScreen->state = GuiControlState::DISABLED;
+			fullScreen = nullptr;
+			vsync->state = GuiControlState::DISABLED;
+			vsync = nullptr;
+			music->state = GuiControlState::DISABLED;
+			music = nullptr;
+			sfx->state = GuiControlState::DISABLED;
+			sfx = nullptr;
+
+			contadormenu = 0;
+		}
+		
 	}
 
 	if (ventana == 1)
