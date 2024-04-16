@@ -216,10 +216,7 @@ void Player::CastLightning() {
 //Ataque mascara 1
 
 void Player::AreaAttack(float dt) {
-    int attackWidth = 300;  
-    int attackHeight = 300; 
-
-    mask1AttackSensor = app->physics->CreateRectangleSensor(this->position.x, this->position.y, attackWidth, attackHeight, DYNAMIC);
+    mask1AttackSensor = app->physics->CreateRectangleSensor(this->position.x, this->position.y, attackMask1Width, attackMask1Height, DYNAMIC);
 	mask1AttackSensor->ctype = ColliderType::MASK1_ATTACK;
 	mask1AttackSensor->listener = this;
 }
