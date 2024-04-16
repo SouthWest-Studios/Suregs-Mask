@@ -371,6 +371,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			if (physB->entity != nullptr) {
 				physB->entity->TakeDamage(maskStats[static_cast<int>(primaryMask)].maskDamage);
 			}
+			collisionTimer.Start();
 		}
 	break;
 	case ColliderType::RESOURCE_ESPADA:
@@ -576,6 +577,11 @@ void Player::PlayerMovement(float dt)
 			app->physics->DestroyBody(mask1AttackSensor);
 			mask1AttackSensor = nullptr;
 		}
+	}
+	
+	if (collisionTimer.ReadSec() > 0.25) {
+		app->physics->DestroyBody(mask1AttackSensor);
+		mask1AttackSensor = nullptr;
 	}
 
 	//Si pulsas Q para cambiar de mascara

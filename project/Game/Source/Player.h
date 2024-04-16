@@ -160,6 +160,7 @@ public:
 	int attackMask1Width = 300;  
     int attackMask1Height = 300; 
 
+	Timer collisionTimer;
 
 	//Fishing
 	//New//
