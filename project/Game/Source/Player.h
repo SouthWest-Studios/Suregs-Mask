@@ -18,6 +18,23 @@ struct Branch {
 
 };
 
+enum class Mask{
+	MASK0,
+	MASK1
+};
+
+struct Stats {
+	int health;
+	int movementSpeed;
+	int attackDamage;
+};
+
+struct MaskStats {
+    int healthModifier;
+    int movementSpeedModifier;
+    int attackDamageModifier;
+};
+
 class Player : public Entity
 {
 
@@ -53,12 +70,18 @@ public:
 
 	void AreaAttack(float dt);
 
+	//Estadísticas
+
+    Stats baseStats;
+    Stats currentStats;
+
 private:
 	void CameraMovement(float dt);
 	void GodMode(float dt);
 	void PlayerMovement(float dt);
 	void FishingDirecction(bool verticalMovement, bool horizontalMovement);
 	void MaskAttack(float dt);
+	void ChangeMask();
 
 		
 
@@ -101,6 +124,8 @@ public:
 	float attackDamage = 50;
 	
 	//Mascara
+	Mask currentMask;
+
 	bool isAttackingMask = true;
 	PhysBody* mask1AttackSensor = nullptr;
 	int attackMask1Width = 300;  

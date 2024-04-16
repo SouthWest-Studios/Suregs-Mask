@@ -177,10 +177,24 @@ void Player::Attack(float dt)
     attackSensor->listener = this;
 }
 
+void Player::ChangeMask() {
+    if (currentMask == Mask::MASK0) {
+        currentMask = Mask::MASK1;
+    } else {
+        currentMask = Mask::MASK0;
+    }
+	printf("Mask changed to %d\n", currentMask);
+}
 void Player::MaskAttack(float dt)
 {
-	//CastLightning();
-	AreaAttack(dt);
+	switch (currentMask) {
+        case Mask::MASK0:
+            CastLightning();
+            break;
+        case Mask::MASK1:
+            AreaAttack(dt);
+            break;
+    }
 }
 
 //Rango ataque mascara 0
@@ -444,7 +458,10 @@ void Player::PlayerMovement(float dt)
 		}
 	}
 
-
+	//Si pulsas Q para cambiar de mascara
+	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN) {
+		ChangeMask();
+	}
 
 	
 	b2Transform pbodyPos = pbody->body->GetTransform();
