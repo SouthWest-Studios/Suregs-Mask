@@ -21,6 +21,63 @@ Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("player");
 
+	// Inicializa las estadísticas base
+    baseStats.maxHealth = 100;
+    baseStats.currentHealth = 100;
+    baseStats.movementSpeed = 100;
+    baseStats.attackSpeed = 100;
+    baseStats.attackDamage = 100;
+
+    // Inicializa las estadísticas actuales a las estadísticas base
+    currentStats = baseStats;
+
+    // Estadísticas de la máscara 0
+    maskStats[static_cast<int>(Mask::MASK0)].maxHealthModifier = 0;
+    maskStats[static_cast<int>(Mask::MASK0)].movementSpeedModifier = -10;
+    maskStats[static_cast<int>(Mask::MASK0)].attackDamageModifier = 10;
+    maskStats[static_cast<int>(Mask::MASK0)].attackSpeedModifier = 10;
+
+	// Estadísticas de la máscara 1
+	maskStats[static_cast<int>(Mask::MASK1)].maxHealthModifier = -10;
+    maskStats[static_cast<int>(Mask::MASK1)].movementSpeedModifier = 10;
+    maskStats[static_cast<int>(Mask::MASK1)].attackDamageModifier = 10;
+    maskStats[static_cast<int>(Mask::MASK2)].attackSpeedModifier = 0;
+
+	//Estadísticas de la máscara 2
+	maskStats[static_cast<int>(Mask::MASK2)].maxHealthModifier = -20;
+	maskStats[static_cast<int>(Mask::MASK2)].movementSpeedModifier = 10;
+	maskStats[static_cast<int>(Mask::MASK2)].attackDamageModifier = 10;
+	maskStats[static_cast<int>(Mask::MASK2)].attackSpeedModifier = 10;
+
+	//Estadísticas de la máscara 3
+	maskStats[static_cast<int>(Mask::MASK3)].maxHealthModifier = -5;
+	maskStats[static_cast<int>(Mask::MASK3)].movementSpeedModifier = -5;
+	maskStats[static_cast<int>(Mask::MASK3)].attackDamageModifier = -5;
+	maskStats[static_cast<int>(Mask::MASK3)].attackSpeedModifier = -5;
+
+	//Estadísticas pasivas mascara 0
+	passiveStats[static_cast<int>(Mask::MASK0)].damageBoost = 20;
+	passiveStats[static_cast<int>(Mask::MASK0)].rangeBoost = 0;
+	passiveStats[static_cast<int>(Mask::MASK0)].dashBoost = 0;
+
+	//Estadísticas pasivas mascara 1
+	passiveStats[static_cast<int>(Mask::MASK1)].damageBoost = 0.33;
+	passiveStats[static_cast<int>(Mask::MASK1)].rangeBoost = 25;
+	passiveStats[static_cast<int>(Mask::MASK1)].dashBoost = 0;
+
+	//Estadísticas pasivas mascara 2
+	passiveStats[static_cast<int>(Mask::MASK2)].damageBoost = 0;
+	passiveStats[static_cast<int>(Mask::MASK2)].rangeBoost = 0;
+	passiveStats[static_cast<int>(Mask::MASK2)].dashBoost = 2;
+
+	//Estadísticas pasivas mascara 3
+	passiveStats[static_cast<int>(Mask::MASK3)].damageBoost = 20;
+	passiveStats[static_cast<int>(Mask::MASK3)].rangeBoost = 0;
+	passiveStats[static_cast<int>(Mask::MASK3)].dashBoost = 0;
+
+    // Máscaras a NOMASK
+    primaryMask = Mask::MASK0;
+    secondaryMask = Mask::MASK1;
 }
 
 Player::~Player() {
@@ -81,9 +138,6 @@ bool Player::Update(float dt)
 	else PlayerMovement(dt);
 
 	CameraMovement(dt);
-
-
-
 
 	//printf("\nposx:%d, posy: %d",position.x, position.y);
 
@@ -153,6 +207,10 @@ void Player::DoNothing(float dt)
 	//printf("idle");
 }
 
+float Player::GetRealMovementSpeed() const {
+	return 0.2f * (currentStats.movementSpeed / 100.0f);
+}
+
 void Player::Run(float dt)
 {
 	//printf("runn");
@@ -162,10 +220,7 @@ void Player::Run(float dt)
 
 void Player::Attack(float dt)
 {
- 	//printf("attack");
-
-    int attackWidth = 50; 
-    int attackHeight = 50; 
+ 	//printf("attack"); 
 
     // Dirección del ataque
     int attackX = position.x + lastMovementDirection.x * attackWidth;
@@ -175,19 +230,66 @@ void Player::Attack(float dt)
     attackSensor = app->physics->CreateRectangleSensor(attackX, attackY, attackWidth, attackHeight, DYNAMIC);
     attackSensor->ctype = ColliderType::PLAYER_ATTACK;
     attackSensor->listener = this;
+
+	//Onda expansiva ataque pasivo mascara 1
+	if (secondaryMask == Mask::MASK1) {
+		mask1PassiveSensor = app->physics->CreateRectangleSensor(attackX, attackY, 100, 100, DYNAMIC);
+		mask1PassiveSensor->ctype = ColliderType::MASK0_PASSIVE_ATTACK;
+		mask1PassiveSensor->listener = this;
+	}
+
+}
+
+void Player::UnequipMasks() {
+    currentStats = baseStats;
+}
+
+void Player::EquipPrimaryMask(Mask mask){
+	primaryMask = mask;
+
+    // Si la máscara no es NOMASK, aplica las modificaciones de estadísticas
+    if (mask != Mask::NOMASK) {
+        currentStats.maxHealth = baseStats.maxHealth * (1 + maskStats[static_cast<int>(mask)].maxHealthModifier / 100);
+        currentStats.movementSpeed = baseStats.movementSpeed * (1 + maskStats[static_cast<int>(mask)].movementSpeedModifier / 100);
+        currentStats.attackSpeed = baseStats.attackSpeed * (1 + maskStats[static_cast<int>(mask)].attackSpeedModifier / 100);
+        currentStats.attackDamage = baseStats.attackDamage * (1 + maskStats[static_cast<int>(mask)].attackDamageModifier / 100);
+    }
+}
+
+void Player::EquipSecondaryMask(Mask mask) {
+    secondaryMask = mask;
+
+    // Si la máscara no es NOMASK, aplica las modificaciones de estadísticas
+    if (mask != Mask::NOMASK) {
+        currentStats.attackDamage = baseStats.attackDamage * (1 + passiveStats[static_cast<int>(mask)].damageBoost / 100);
+    }
 }
 
 void Player::ChangeMask() {
-    if (currentMask == Mask::MASK0) {
-        currentMask = Mask::MASK1;
-    } else {
-        currentMask = Mask::MASK0;
-    }
-	printf("Mask changed to %d\n", currentMask);
+    Mask temp = primaryMask;
+	primaryMask = secondaryMask;
+	secondaryMask = temp;
+	
+	UnequipMasks();
+  
+    EquipPrimaryMask(primaryMask);
+    EquipSecondaryMask(secondaryMask);
+	
+	printf("Player primary mask after mask change: %d\n", static_cast<int>(primaryMask));
+    printf("Player secondary mask after mask change: %d\n", static_cast<int>(secondaryMask));
+	printf("Player stats after mask change:\n");
+    printf("Max Health: %f\n", currentStats.maxHealth);
+    printf("Movement Speed: %f\n", currentStats.movementSpeed);
+    printf("Attack Speed: %f\n", currentStats.attackSpeed);
+    printf("Attack Damage: %f\n", currentStats.attackDamage);
 }
+
 void Player::MaskAttack(float dt)
 {
-	switch (currentMask) {
+	switch (primaryMask) {
+		case Mask::NOMASK:
+			//No hace nada
+			break;
         case Mask::MASK0:
             CastLightning();
             break;
@@ -250,13 +352,13 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (physA == attackSensor) {
 			LOG("Collision ENEMY");
 			if (physB->entity != nullptr) {
-				physB->entity->TakeDamage(attackDamage);
+				physB->entity->TakeDamage(currentStats.attackDamage);
 			}
 		}
 		if (physA == mask1AttackSensor) {
 			LOG("Collision ENEMY");
 			if (physB->entity != nullptr) {
-				physB->entity->TakeDamage(attackDamage);
+				physB->entity->TakeDamage(currentStats.attackDamage * passiveStats[static_cast<int>(secondaryMask)].damageBoost);
 			}
 		}
 	break;
@@ -399,8 +501,8 @@ void Player::PlayerMovement(float dt)
 	//printf("%d", pressingUp);
 	// Actualizar velocidad
 	if (!isDashing) {
-		velocity.x = horizontalMovement * 0.2 * dt;
-		velocity.y = verticalMovement * 0.2 * dt;
+		velocity.x = horizontalMovement * GetRealMovementSpeed() * dt;
+		velocity.y = verticalMovement * GetRealMovementSpeed() * dt;
 
 		// Si hay entrada de movimiento, actualizar estado y direcci��n.
 
@@ -439,6 +541,10 @@ void Player::PlayerMovement(float dt)
 		if (attackSensor) {
 			app->physics->DestroyBody(attackSensor);
 			attackSensor = nullptr;
+		}
+		if(mask1PassiveSensor){
+			app->physics->DestroyBody(mask1PassiveSensor);
+			mask1PassiveSensor = nullptr;
 		}
 	}
 

@@ -19,20 +19,33 @@ struct Branch {
 };
 
 enum class Mask{
+	NOMASK,
 	MASK0,
-	MASK1
+	MASK1,
+	MASK2,
+	MASK3
 };
 
 struct Stats {
-	int health;
-	int movementSpeed;
-	int attackDamage;
+	float maxHealth;
+	float currentHealth;
+	float movementSpeed;
+	float attackSpeed;
+	float attackDamage;
+	float armor;
 };
 
 struct MaskStats {
-    int healthModifier;
-    int movementSpeedModifier;
-    int attackDamageModifier;
+	float maxHealthModifier;
+	float movementSpeedModifier;
+    float attackDamageModifier;
+	float attackSpeedModifier;
+};
+
+struct PassiveStats {
+	float damageBoost;
+	float rangeBoost;
+	float dashBoost;
 };
 
 class Player : public Entity
@@ -59,6 +72,8 @@ public:
 	void Run(float dt);
 	void Attack(float dt);
 
+	float GetRealMovementSpeed() const;
+
 	//Branch transitionTable[static_cast<int>(EntityState::STATE_COUNT)][static_cast<int>(EntityState::STATE_COUNT)];
 	// L07 DONE 6: Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
@@ -67,13 +82,20 @@ public:
 	
 	//Funciones ataques mascara
 	void CastLightning();
-
 	void AreaAttack(float dt);
+
+	//Mascaras
+	void UnequipMasks();
+	void ChangeMask();
+	void EquipPrimaryMask(Mask mask);
+	void EquipSecondaryMask(Mask mask);
 
 	//Estadísticas
 
     Stats baseStats;
     Stats currentStats;
+	MaskStats maskStats[5];
+	PassiveStats passiveStats[5];
 
 private:
 	void CameraMovement(float dt);
@@ -81,8 +103,6 @@ private:
 	void PlayerMovement(float dt);
 	void FishingDirecction(bool verticalMovement, bool horizontalMovement);
 	void MaskAttack(float dt);
-	void ChangeMask();
-
 		
 
 public:
@@ -119,12 +139,17 @@ public:
 	float speedDash = 3;
 
 	//Ataque
+	int attackWidth = 50; 
+    int attackHeight = 50;
 	bool isAttacking = false;
 	PhysBody* attackSensor = nullptr;
-	float attackDamage = 50;
 	
+	//Pasiva de la mascara 1
+	PhysBody* mask1PassiveSensor = nullptr;
+
 	//Mascara
-	Mask currentMask;
+	Mask primaryMask;
+	Mask secondaryMask;
 
 	bool isAttackingMask = true;
 	PhysBody* mask1AttackSensor = nullptr;
