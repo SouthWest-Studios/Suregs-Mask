@@ -1,6 +1,7 @@
 #ifndef __ENEMY_OSIRIS_H__
 #define __ENEMY_OSIRIS_H__
 
+
 #include "Entity.h"
 #include "Point.h"
 #include "SDL/include/SDL.h"
@@ -40,8 +41,8 @@ public:
 	void DoNothing(float dt);
 	void Chase(float dt);
 	void Attack(float dt);
-	void Die(float dt);
-	void Revive(float dt);
+	void Die();
+	void Revive();
 	bool Osirisfinding(float dt);
 
 	// L07 DONE 6: Define OnCollision function for the player. 
@@ -51,6 +52,7 @@ public:
 
 	float GetHealth() const;
 	void TakeDamage(float damage);
+
 
 public:
 
@@ -67,9 +69,11 @@ public:
 	float attackDamage;
 
 	//Revivir
+	bool isDead = false;
 	bool hasRevived = false;
-	float deathTime = 0.0f;
-	float reviveDelay = 2.0f;
+	bool tempo = false;
+	Timer reviveTimer;
+	const float reviveTime = 5.0f;
 
 	Animation* currentAnimation = nullptr;
 	EntityState state;

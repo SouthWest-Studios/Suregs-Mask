@@ -13,8 +13,9 @@
 #include "Pathfinding.h"
 #include "Map.h"
 #include "Physics.h"
- 
 
+
+ 
 
 
 Enemy_Osiris::Enemy_Osiris() : Entity(EntityType::ENEMY_OSIRIS), maxHealth(150.0f), health(150.0f), speed(2.5f), attackDamage(50.0f){
@@ -65,17 +66,14 @@ bool Enemy_Osiris::Update(float dt)
 	{
 		isFacingLeft = true;
 	}
-	else(isFacingLeft = false);
-
-	if (nextState == EntityState::DEAD) {
-		float currentTime = dt / 1000.0f;
-		if (currentTime - deathTime >= reviveDelay) {
-			nextState = EntityState::REVIVING;
-		}
+	else
+	{
+		isFacingLeft = false;
 	}
 
 
-	switch (nextState) {
+	switch (nextState)
+	{
 	case EntityState::RUNNING:
 		Chase(dt);
 		break;
@@ -83,10 +81,10 @@ bool Enemy_Osiris::Update(float dt)
 		Attack(dt);
 		break;
 	case EntityState::DEAD:
-		Die(dt);
+		Die();
 		break;
 	case EntityState::REVIVING:
-		Revive(dt);
+		Revive();
 		break;
 	case EntityState::IDLE:
 		DoNothing(dt);
@@ -95,21 +93,31 @@ bool Enemy_Osiris::Update(float dt)
 		break;
 	}
 
-		
-	if (health <= 0) {
-		nextState = EntityState::DEAD;
+	if (health <= 0)
+	{
+		if (nextState == EntityState::DEAD)
+		{
+			nextState = EntityState::REVIVING;
+		}
+		else
+		{
+			nextState = EntityState::DEAD;
+		}
 	}
-	else if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 20 /*Cambiar*/) {
+	else if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 20)
+	{
 		nextState = EntityState::ATTACKING;
 	}
-	else if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 400/*Cambiar*/) {
+	else if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 400)
+	{
 		nextState = EntityState::RUNNING;
 	}
-	else {
+	else
+	{
 		nextState = EntityState::IDLE;
 	}
 
-
+	currentState = nextState;
 	currentAnimation->Update();
 	return true;
 }
@@ -165,27 +173,50 @@ void Enemy_Osiris::Attack(float dt)
 	//sonido ataque
 }
 
-void Enemy_Osiris::Die(float dt) {
-	deathTime = dt / 1000.0f;
+void Enemy_Osiris::Die() {
+	pbody->body->SetLinearVelocity(b2Vec2_zero);
 
-	if (hasRevived)
+	if (!hasRevived)
+	{
+		nextState = EntityState::REVIVING;
+		Revive();
+	}
+	else
 	{
 		app->entityManager->DestroyEntity(this);
 		app->physics->GetWorld()->DestroyBody(pbody->body);
 		SDL_DestroyTexture(texture);
 	}
+
 }
 
-void Enemy_Osiris::Revive(float dt)
+void Enemy_Osiris::Revive()
 {
-	//printf("Osiris reviving");
-	// Solo revivir si Osiris no ha revivido antes
-	if (!hasRevived) {
-		health = maxHealth;
-		nextState = EntityState::IDLE;
-		hasRevived = true;
+	pbody->body->SetLinearVelocity(b2Vec2_zero);
+	printf("Inside Revive function\n");
+
+	if (!tempo)
+	{
+		reviveTimer.Start();
+		tempo = true;
 	}
+
+	if (reviveTimer.CountDown(4) <= 0)
+	{
+		printf("Osiris: Time to revive, setting next state to IDLE\n");
+
+		health = maxHealth;
+		hasRevived = true;
+
+		currentState = EntityState::IDLE;
+		nextState = EntityState::IDLE;
+
+		return;
+	}
+	printf("Condition not met for revival\n");
+	nextState = EntityState::REVIVING;
 }
+
 
 // L07 DONE 6: Define OnCollision function for the player. 
 void Enemy_Osiris::OnCollision(PhysBody* physA, PhysBody* physB) {
@@ -200,7 +231,7 @@ void Enemy_Osiris::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLAYER_ATTACK:
 		LOG("Collision Player_Attack");
-		nextState = EntityState::DEAD;
+		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;
@@ -266,8 +297,9 @@ float Enemy_Osiris::GetHealth() const {
 }
 
 void Enemy_Osiris::TakeDamage(float damage) {
-
-	health -= damage;
-	printf("Enemy_Osiris has received  %f damage\n", damage);
+	if (currentState != EntityState::DEAD) {
+		health -= damage;
+		printf("Enemy_Osiris has received  %f damage\n", damage);
+	}
 }
 

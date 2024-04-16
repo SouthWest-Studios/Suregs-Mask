@@ -86,12 +86,6 @@ bool Enemy_Shar::Update(float dt)
 		break;
 	}
 
-
-	if (nextState == EntityState::DEAD)
-	{
-		return true;
-	}
-
 	if (health <= 0) {
 		nextState = EntityState::DEAD;
 	}
@@ -180,7 +174,6 @@ void Enemy_Shar::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLAYER_ATTACK:
 		LOG("Collision Player_Attack");
-		nextState = EntityState::DEAD;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;

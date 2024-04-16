@@ -84,12 +84,6 @@ bool Enemy_Ols::Update(float dt)
 		break;
 	}
 
-
-	if (nextState == EntityState::DEAD)
-	{
-		return true;
-	}
-
 	if (health <= 0) {
 		nextState = EntityState::DEAD;
 	}
