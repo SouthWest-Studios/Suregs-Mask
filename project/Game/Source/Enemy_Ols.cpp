@@ -179,7 +179,6 @@ void Enemy_Ols::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLAYER_ATTACK:
 		LOG("Collision Player_Attack");
-		nextState = EntityState::DEAD;
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
@@ -247,6 +246,10 @@ float Enemy_Ols::GetHealth() const {
 
 }
 
+void Enemy_Ols::TakeDamage(float damage) {
 
+	health -= damage;
+	printf("Enemy_Ols has received  %f damage\n", damage);
+}
 
 

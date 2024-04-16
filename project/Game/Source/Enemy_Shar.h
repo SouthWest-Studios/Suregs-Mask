@@ -51,6 +51,8 @@ public:
 
 	float GetHealth() const;
 
+	void TakeDamage(float damage);
+
 public:
 
 	//L02: DONE 2: Declare player parameters

@@ -265,3 +265,9 @@ float Enemy_Osiris::GetHealth() const {
 	return health;
 }
 
+void Enemy_Osiris::TakeDamage(float damage) {
+
+	health -= damage;
+	printf("Enemy_Osiris has received  %f damage\n", damage);
+}
+

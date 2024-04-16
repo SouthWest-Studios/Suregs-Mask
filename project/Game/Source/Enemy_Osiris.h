@@ -50,6 +50,7 @@ public:
 	void SetPlayer(Player* player);
 
 	float GetHealth() const;
+	void TakeDamage(float damage);
 
 public:
 

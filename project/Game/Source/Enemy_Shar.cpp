@@ -249,5 +249,9 @@ float Enemy_Shar::GetHealth() const {
 	return health;
 }
 
+void Enemy_Shar::TakeDamage(float damage) {
 
+	health -= damage;
+	printf("Enemy_Shar has received  %f damage\n", damage);
+}
 

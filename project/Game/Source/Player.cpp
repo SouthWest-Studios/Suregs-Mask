@@ -639,6 +639,14 @@ void Player::FishingDirecction(bool verticalMovement, bool horizontalMovement)
 	}
 
 }
+
+void Player::TakeDamage(float damage) {
+
+	currentStats.currentHealth -= damage;
+	printf("Player has received  %f damage\n", damage);
+}
+
+
 //
 //void Player::Rodar(float dt)
 //{

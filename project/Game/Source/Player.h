@@ -107,7 +107,7 @@ private:
 	void PlayerMovement(float dt);
 	void FishingDirecction(bool verticalMovement, bool horizontalMovement);
 	void MaskAttack(float dt);
-		
+	void TakeDamage(float damage);
 
 public:
 
