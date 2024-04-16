@@ -40,6 +40,10 @@ struct MaskStats {
 	float movementSpeedModifier;
     float attackDamageModifier;
 	float attackSpeedModifier;
+
+	float maskDamage;
+	float maskCoolDown;
+	bool firstTimeUsed;
 };
 
 struct PassiveStats {

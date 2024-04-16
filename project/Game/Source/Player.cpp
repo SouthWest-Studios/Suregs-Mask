@@ -36,12 +36,18 @@ Player::Player() : Entity(EntityType::PLAYER)
     maskStats[static_cast<int>(Mask::MASK0)].movementSpeedModifier = -10;
     maskStats[static_cast<int>(Mask::MASK0)].attackDamageModifier = 10;
     maskStats[static_cast<int>(Mask::MASK0)].attackSpeedModifier = 10;
+	maskStats[static_cast<int>(Mask::MASK0)].maskDamage = 50;
+	maskStats[static_cast<int>(Mask::MASK0)].maskCoolDown = 25000; //En Milisegundos
+	maskStats[static_cast<int>(Mask::MASK0)].firstTimeUsed = false;
 
 	// Estadísticas de la máscara 1
 	maskStats[static_cast<int>(Mask::MASK1)].maxHealthModifier = -10;
     maskStats[static_cast<int>(Mask::MASK1)].movementSpeedModifier = 10;
     maskStats[static_cast<int>(Mask::MASK1)].attackDamageModifier = 10;
     maskStats[static_cast<int>(Mask::MASK2)].attackSpeedModifier = 0;
+	maskStats[static_cast<int>(Mask::MASK1)].maskDamage = 100;
+	maskStats[static_cast<int>(Mask::MASK1)].maskCoolDown = 30000; //En Milisegundos
+	maskStats[static_cast<int>(Mask::MASK1)].firstTimeUsed = false;
 
 	//Estadísticas de la máscara 2
 	maskStats[static_cast<int>(Mask::MASK2)].maxHealthModifier = -20;
@@ -78,6 +84,7 @@ Player::Player() : Entity(EntityType::PLAYER)
     // Máscaras a NOMASK
     primaryMask = Mask::MASK0;
     secondaryMask = Mask::MASK1;
+
 }
 
 Player::~Player() {
@@ -112,8 +119,6 @@ bool Player::Start() {
 	pbody->entity = this;
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
-
-	attackDamage = 50;
 
 	//initialize audio effect
 	pickCoinFxId = app->audio->LoadFx(config.attribute("coinfxpath").as_string());
@@ -323,7 +328,7 @@ void Player::CastLightning() {
     Entity* target = GetEnemyWithHighestHealthWithinRadius(position, 500);
     if (target != nullptr) {
         printf("Enemy hit: %p at position (%d, %d)\n", (void*)target, target->position.x, target->position.y);
-        target->TakeDamage(attackDamage);
+        target->TakeDamage(maskStats[static_cast<int>(primaryMask)].maskDamage);
     } else {
         printf("No enemy alive in range to attack\n");
     }
@@ -355,10 +360,16 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 				physB->entity->TakeDamage(currentStats.attackDamage);
 			}
 		}
-		if (physA == mask1AttackSensor) {
+		if (physA == mask1PassiveSensor) {
 			LOG("Collision ENEMY");
 			if (physB->entity != nullptr) {
 				physB->entity->TakeDamage(currentStats.attackDamage * passiveStats[static_cast<int>(secondaryMask)].damageBoost);
+			}
+		}
+		if(physA == mask1AttackSensor){
+			LOG("Collision ENEMY");
+			if (physB->entity != nullptr) {
+				physB->entity->TakeDamage(maskStats[static_cast<int>(primaryMask)].maskDamage);
 			}
 		}
 	break;
@@ -550,13 +561,16 @@ void Player::PlayerMovement(float dt)
 
 	//Si pulsas K para mascara principal
 
-	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN && timerMaskAttack.ReadMSec() > cdTimerMaskAttackMS){
+	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN && 
+    (timerMaskAttack.ReadMSec() > maskStats[static_cast<int>(primaryMask)].maskCoolDown || 
+    !maskStats[static_cast<int>(primaryMask)].firstTimeUsed)){
+		maskStats[static_cast<int>(primaryMask)].firstTimeUsed = true;
 		isAttackingMask = true;
 		timerMaskAttack.Start();
 		nextState = EntityState::MASK_ATTACK;
 	}
 
-	if (!(timerMaskAttack.ReadMSec() < cdTimerMaskAttackMS && isAttackingMask)) {
+	if (!(timerMaskAttack.ReadMSec() < maskStats[static_cast<int>(primaryMask)].maskCoolDown && isAttackingMask)) {
 		isAttackingMask = false;
 		if(mask1AttackSensor){
 			app->physics->DestroyBody(mask1AttackSensor);
