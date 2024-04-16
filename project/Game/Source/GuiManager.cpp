@@ -68,7 +68,7 @@ bool GuiManager::Update(float dt)
 		control = control->next;
 	}
 
-	if (app->scene_menu->active || app->menu->menuu) {
+	if (app->scene_menu->active || app->menu->ventana == 4) {
 		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
 			NavigateUp();
 			app->audio->PlayFx(button_audio);
@@ -77,11 +77,11 @@ bool GuiManager::Update(float dt)
 			NavigateDown();
 			app->audio->PlayFx(button_audio);
 		}
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN) {
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && app->menu->music->selected == false && app->menu->sfx->selected == false) {
 			NavigateRight();
 			app->audio->PlayFx(button_audio);
 		}
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) {
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN && app->menu->music->selected == false && app->menu->sfx->selected == false) {
 			NavigateLeft();
 			app->audio->PlayFx(button_audio);
 		}

@@ -17,6 +17,7 @@ GuiControlSlider::GuiControlSlider(uint32 id, SDL_Rect bounds, int minValue, int
     drawBasic = false;
     
     slider = app->tex->Load("Assets/Textures/Interfaz/slider.png");
+    slider2 = app->tex->Load("Assets/Textures/Interfaz/sliderSelected.png");
     knob = app->tex->Load("Assets/Textures/Interfaz/knob.png");
 }
 
@@ -42,28 +43,29 @@ bool GuiControlSlider::PostUpdate()
         mouseY *= app->win->GetScale();
 
         // Update the state based on the mouse position
-        if (mouseX > bounds.x && mouseX < bounds.x + bounds.w && mouseY > bounds.y && mouseY < bounds.y + bounds.h)
+        if (selected)
         {
             state = GuiControlState::FOCUSED;
 
-            if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+            /*if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
             {
                 state = GuiControlState::PRESSED;
+            }*/
+            if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && value >= 0)
+            {
+                value--;
+
+            }
+            if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && value <= 100)
+            {
+                value++;
+
             }
         }else{
             state = GuiControlState::NORMAL;
         }
 
-        if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT && value >= 0)
-        {
-            value--;
-
-        }
-        if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT && value <= 100)
-        {
-            value++;
-
-        }
+        
         //// Update the value if the mouse is pressed and the slider is focused or pressed
         //if (state == GuiControlState::PRESSED || (state == GuiControlState::FOCUSED && app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT))
         //{
@@ -89,8 +91,14 @@ void GuiControlSlider::Draw()
 {
     
     //app->render->DrawRectangle(bounds, 150, 150, 150, 255, true, false);
-    
-    app->render->DrawTexture(slider, bounds.x, bounds.y, SDL_FLIP_NONE, 0, 0, true);
+    if (state == GuiControlState::NORMAL)
+    {
+        app->render->DrawTexture(slider, bounds.x, bounds.y, SDL_FLIP_NONE, 0, 0, true);
+    }
+    if (state == GuiControlState::FOCUSED)
+    {
+        app->render->DrawTexture(slider2, bounds.x, bounds.y, SDL_FLIP_NONE, 0, 0, true);
+    }
 
     // Calculate the position of the slider knob based on the current value
     float normalizedValue = static_cast<float>(value - minValue) / static_cast<float>(maxValue - minValue);

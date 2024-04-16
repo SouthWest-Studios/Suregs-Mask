@@ -21,6 +21,7 @@ public:
 
 	SDL_Texture* knob;
 	SDL_Texture* slider;
+	SDL_Texture* slider2;
 	
 	int minValue, maxValue, value;
 private:

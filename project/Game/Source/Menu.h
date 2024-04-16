@@ -54,6 +54,10 @@ public:
 	bool visible = true;
 	bool menuu = false;
 
+	GuiControlSlider* music;
+	GuiControlSlider* sfx;
+	int ventana = 1;
+
 private:
 	SDL_Texture* fondoInventario;
 	SDL_Texture* fondoEquipo;
@@ -67,7 +71,6 @@ private:
 	bool fullScreenActive = false;
 	
 
-	int ventana = 1;
 
 	GuiControlButton* gcButtom;
 	GuiControlButton* exit;
@@ -75,8 +78,7 @@ private:
 	GuiCheckBox* vsync;
 	GuiControlButton* title;
 	GuiControlButton* cruz;
-	GuiControlSlider* music;
-	GuiControlSlider* sfx;
+	
 
 	int inventory_audio;
 	int change_inventory_audio;
