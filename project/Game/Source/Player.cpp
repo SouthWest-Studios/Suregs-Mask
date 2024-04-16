@@ -179,9 +179,11 @@ void Player::Attack(float dt)
 
 void Player::MaskAttack(float dt)
 {
-	CastLightning();
+	//CastLightning();
+	AreaAttack(dt);
 }
 
+//Rango ataque mascara 0
 Entity* Player::GetEnemyWithHighestHealthWithinRadius(iPoint position, int radius) {
 	Entity* highestHealthEnemy = nullptr;
 	int highestHealth = 0;
@@ -200,6 +202,7 @@ Entity* Player::GetEnemyWithHighestHealthWithinRadius(iPoint position, int radiu
 	return highestHealthEnemy;
 }
 
+//Ataque mascara 0
 void Player::CastLightning() {
     Entity* target = GetEnemyWithHighestHealthWithinRadius(position, 500);
     if (target != nullptr) {
@@ -208,6 +211,17 @@ void Player::CastLightning() {
     } else {
         printf("No enemy alive in range to attack\n");
     }
+}
+
+//Ataque mascara 1
+
+void Player::AreaAttack(float dt) {
+    int attackWidth = 300;  
+    int attackHeight = 300; 
+
+    mask1AttackSensor = app->physics->CreateRectangleSensor(this->position.x, this->position.y, attackWidth, attackHeight, DYNAMIC);
+	mask1AttackSensor->ctype = ColliderType::MASK1_ATTACK;
+	mask1AttackSensor->listener = this;
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 
@@ -227,7 +241,12 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			if (physB->entity != nullptr) {
 				physB->entity->TakeDamage(attackDamage);
 			}
-
+		}
+		if (physA == mask1AttackSensor) {
+			LOG("Collision ENEMY");
+			if (physB->entity != nullptr) {
+				physB->entity->TakeDamage(attackDamage);
+			}
 		}
 	break;
 	case ColliderType::RESOURCE_ESPADA:
@@ -422,6 +441,10 @@ void Player::PlayerMovement(float dt)
 
 	if (!(timerMaskAttack.ReadMSec() < cdTimerMaskAttackMS && isAttackingMask)) {
 		isAttackingMask = false;
+		if(mask1AttackSensor){
+			app->physics->DestroyBody(mask1AttackSensor);
+			mask1AttackSensor = nullptr;
+		}
 	}
 
 

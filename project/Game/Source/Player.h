@@ -51,6 +51,8 @@ public:
 	//Funciones ataques mascara
 	void CastLightning();
 
+	void AreaAttack(float dt);
+
 private:
 	void CameraMovement(float dt);
 	void GodMode(float dt);
@@ -100,6 +102,10 @@ public:
 	
 	//Mascara
 	bool isAttackingMask = true;
+	PhysBody* mask1AttackSensor = nullptr;
+	int attackMask1Width = 300;  
+    int attackMask1Height = 300; 
+
 
 	//Fishing
 	//New//
@@ -111,8 +117,6 @@ public:
 	bool pressingDown;
 	bool pressingLeft;
 	bool pressingRight;
-
-
 
 
 private:
