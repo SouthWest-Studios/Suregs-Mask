@@ -32,6 +32,7 @@ class DebugConsole;
 class DialogManager;
 class InventoryManager;
 class Menu;
+class Hud;
 
 class App
 {
@@ -127,6 +128,7 @@ public:
 	DialogManager* dialogManager;
 	InventoryManager* inventoryManager;
 	Menu* menu;
+	Hud* hud;
 
 	bool closeApplication = false;
 	bool fullscreen = false;

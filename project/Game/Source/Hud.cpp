@@ -18,7 +18,7 @@
 
 Hud::Hud(App* app, bool start_enabled) : Module(app, start_enabled)
 {
-	name.Create("Menu");
+	name.Create("Hud");
 }
 
 // Destructor
@@ -39,7 +39,7 @@ bool Hud::Awake(pugi::xml_node config)
 // Called before the first frame
 bool Hud::Start()
 {
-	
+	texturaMoneda = app->tex->Load("Assets/Textures/Interfaz/Moneda.png");
 	
 	
 
@@ -64,7 +64,12 @@ bool Hud::Update(float dt)
 // Called each loop iteration
 bool Hud::PostUpdate()
 {
-	
+	uint windowWidth, windowHeight;
+	app->win->GetWindowSize(windowWidth, windowHeight);
+
+	std::string quantityStr = std::to_string(cantidadMonedas);
+	app->render->DrawText(quantityStr.c_str(), windowWidth / 8 + 1020, windowHeight / 8 - 35, 18, 18);
+	app->render->DrawTexture(texturaMoneda, windowWidth / 8 + 1050, windowHeight / 8 - 50, SDL_FLIP_NONE, 0, 0);
 
 	return true;
 }

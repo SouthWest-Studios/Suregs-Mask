@@ -1,5 +1,5 @@
-#ifndef __MENU_H__
-#define __MENU_H__
+#ifndef __HUD_H__
+#define __HUD_H__
 
 #include "Module.h"
 #include "Player.h"
@@ -11,14 +11,14 @@
 
 struct SDL_Texture;
 
-class Menu : public Module
+class Hud : public Module
 {
 public:
 
-	Menu(App* app, bool start_enabled = true);
+	Hud(App* app, bool start_enabled = true);
 
 	// Destructor
-	virtual ~Menu();
+	virtual ~Hud();
 
 	// Called before render is available
 	bool Awake(pugi::xml_node conf);
@@ -38,50 +38,11 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	bool OnGuiMouseClickEvent(GuiControl* control);
 
-	void SettingsInterface();
-	void ShowSettingsInterface();
-	void ShowCredits();
-	void DestroySettingsInterface();
-
-	void Fullscreen();
-
-	bool LoadState(pugi::xml_node node);
-	bool SaveState(pugi::xml_node node);
-
-	bool vsyncActive = false;
-	bool visible = true;
-	bool menuu = false;
-
-	GuiControlSlider* music;
-	GuiControlSlider* sfx;
-	int ventana = 1;
 
 private:
-	SDL_Texture* fondoInventario;
-	SDL_Texture* fondoEquipo;
-	SDL_Texture* fondoDiario;
-	SDL_Texture* fondoAjustes;
-	
-	int a = 0;
-	
-	int contadormenu = 0;
-	bool menuusettings = false;
-	bool fullScreenActive = false;
-	
+	SDL_Texture* texturaMoneda;
+	int cantidadMonedas = 0;
 
-
-	GuiControlButton* gcButtom;
-	GuiControlButton* exit;
-	GuiCheckBox* fullScreen;
-	GuiCheckBox* vsync;
-	GuiControlButton* title;
-	GuiControlButton* cruz;
-	
-
-	int inventory_audio;
-	int change_inventory_audio;
 };
-
-#endif // __MENU_H__
+#endif // __HUD_H__

@@ -2,8 +2,9 @@
 #include "Map.h"
 #include "EntityManager.h"
 #include "Scene_Intro.h"
-
+#include "Hud.h"
 #include "App.h"
+#include "Menu.h"
 #include "Window.h"
 #include "Module.h"
 #include "SDL/include/SDL_render.h"
@@ -74,7 +75,14 @@ bool ModuleFadeToBlack::Update(float dt)
 			moduleToEnable->Awake(config);
 
 			if(moduleToEnable != (Module*)app->scene_intro && moduleToEnable != (Module*)app->scene_menu){
+				app->hud->Enable();
 				app->map->Enable();
+				app->menu->Enable();
+			}
+			else
+			{
+				app->hud->Disable();
+				app->menu->Disable();
 			}
 			/*app->entityManager->Enable();*/
 			activeScene = moduleToEnable;

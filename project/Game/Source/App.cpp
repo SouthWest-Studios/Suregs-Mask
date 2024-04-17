@@ -17,6 +17,7 @@
 #include "DialogManager.h"
 #include "InventoryManager.h"
 #include "Menu.h"
+#include "Hud.h"
 #include "Optick/include/optick.h"
 
 #include "Defs.h"
@@ -59,6 +60,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	debugConsole = new DebugConsole(this);
 	dialogManager = new DialogManager(this);
 	menu = new Menu(this,false);
+	hud = new Hud(this, false);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -76,7 +78,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(scene_testing);
 	AddModule(scene_pueblo);
 	AddModule(scene_mazmorra0);
-
+	AddModule(hud);
 	AddModule(entityManager);
 	AddModule(menu);
 	AddModule(inventoryManager);
