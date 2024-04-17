@@ -41,9 +41,10 @@ bool Scene_Menu::Awake(pugi::xml_node config)
 bool Scene_Menu::Start()
 {
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
-	placeholderMenu = app->tex->Load("Assets/Textures/suscat.jpg");
-	placeholderSettings = app->tex->Load("Assets/Textures/suscat2.jpg");
-	placeholderCredits = app->tex->Load("Assets/Textures/suscat3.jpg");
+	placeholderMenu = app->tex->Load("Assets/Textures/Interfaz/MenuIntro.png");
+	placeholderMenu2 = app->tex->Load("Assets/Textures/Interfaz/suscat.jpg");
+	placeholderSettings = app->tex->Load("Assets/Textures/Interfaz/Ajustes.png");
+	placeholderCredits = app->tex->Load("Assets/Textures/Interfaz/suscat3.jpg");
 
 	//AQUÍ CARGAR TODAS LAS TEXTURAS DEL MENÚ (cuando las tengamos xd)
 	
@@ -52,12 +53,12 @@ bool Scene_Menu::Start()
 	app->win->GetWindowSize(windowW, windowH);
 
 	//Añadir los controles a una lista 
-	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "NUEVA PARTIDA", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 - 30 - 30,	136,46 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "NUEVA PARTIDA", SDL_Rect{ 75, 403,	136,46 }, this));
 	controlsScene.end->data->selected = true;
-	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "CONTINUAR", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 + 40 - 30,	136,46 }, this));
-	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "AJUSTES", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 + 110 - 30,	136,46 }, this));
-	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "CRÉDITOS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 + 180 - 30,	136,46 }, this));
-	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "SALIR", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 + 250 - 30,	136,46 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "CONTINUAR", SDL_Rect{ 75,457,136,46 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "AJUSTES", SDL_Rect{ 75, 512,136,46 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "CRÉDITOS", SDL_Rect{75, 565,136,46 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "SALIR", SDL_Rect{75, 622,136,46 }, this));
 
 
 	app->audio->LoadAudioMusic("menu", 1.0f);

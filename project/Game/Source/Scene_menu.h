@@ -47,6 +47,7 @@ public:
 	bool SaveState(pugi::xml_node node);
 
 	SDL_Texture* placeholderMenu;
+	SDL_Texture* placeholderMenu2;
 	SDL_Texture* placeholderSettings;
 	SDL_Texture* placeholderCredits;
 
