@@ -67,6 +67,11 @@ bool GuiManager::Update(float dt)
 		control->data->Update(dt);
 		control = control->next;
 	}
+	GuiControl* control1 = nullptr;
+	control1 = GetControlById(pointerId);
+	if (control1 != nullptr) {
+		control1->selected = true;
+	}
 
 	if (app->scene_menu->active || app->menu->ventana == 4) {
 		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
