@@ -200,7 +200,7 @@ bool Enemy_Ols::Olsfinding(float dt)
 	{
 		iPoint pos = app->map->MapToWorld(lastPath.At(i)->x, lastPath.At(i)->y);
 		if (app->physics->debug == true) {
-			app->render->DrawTexture(app->map->pathfinding->mouseTileTex, pos.x, pos.y, SDL_FLIP_NONE);
+			app->render->DrawTexture(app->scene_testing->mouseTileTex, pos.x, pos.y, SDL_FLIP_NONE);
 		}
 	}
 
