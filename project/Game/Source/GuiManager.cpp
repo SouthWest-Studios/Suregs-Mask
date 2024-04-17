@@ -5,7 +5,7 @@
 #include "GuiControlButton.h"
 #include "GuiControlSlider.h"
 #include "Audio.h"
-#include "Scene_menu.h"
+#include "Scene_Menu.h"
 #include "Menu.h"
 
 GuiManager::GuiManager(App* app, bool start_enabled) : Module(app, start_enabled)
@@ -66,6 +66,11 @@ bool GuiManager::Update(float dt)
 	{
 		control->data->Update(dt);
 		control = control->next;
+	}
+	GuiControl* control1 = nullptr;
+	control1 = GetControlById(pointerId);
+	if (control1 != nullptr) {
+		control1->selected = true;
 	}
 
 	if (app->scene_menu->active || app->menu->ventana == 4) {

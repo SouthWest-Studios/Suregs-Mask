@@ -191,7 +191,7 @@ private:
 	Timer timerDash;
 	Timer cdTimerDash; 
 
-	int cdTimerAttackMS = 250;
+	int cdTimerAttackMS;
 	Timer timerAttack;
 
 	fPoint lastMovementDirection;

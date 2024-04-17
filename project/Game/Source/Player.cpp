@@ -82,8 +82,9 @@ Player::Player() : Entity(EntityType::PLAYER)
 	passiveStats[static_cast<int>(Mask::MASK3)].dashBoost = 0;
 
     // Máscaras a NOMASK
-    primaryMask = Mask::MASK0;
-    secondaryMask = Mask::MASK1;
+    primaryMask = Mask::NOMASK;
+    secondaryMask = Mask::NOMASK;
+
 
 }
 
@@ -124,6 +125,7 @@ bool Player::Start() {
 	pickCoinFxId = app->audio->LoadFx(config.attribute("coinfxpath").as_string());
 
 	cdTimerDashMS = 500;
+	cdTimerAttackMS = 100000 / currentStats.attackSpeed;
 
 	player_Direction = Direction::UNKNOWN;
 	return true;
@@ -279,9 +281,11 @@ void Player::ChangeMask() {
   
     EquipPrimaryMask(primaryMask);
     EquipSecondaryMask(secondaryMask);
+
+	cdTimerAttackMS = 100000 / currentStats.attackSpeed;
 	
-	printf("Player primary mask after mask change: %d\n", static_cast<int>(primaryMask));
-    printf("Player secondary mask after mask change: %d\n", static_cast<int>(secondaryMask));
+	printf("Player primary mask after mask change: %d\n", (static_cast<int>(primaryMask)-1));
+    printf("Player secondary mask after mask change: %d\n", (static_cast<int>(secondaryMask)-1));
 	printf("Player stats after mask change:\n");
     printf("Max Health: %f\n", currentStats.maxHealth);
     printf("Movement Speed: %f\n", currentStats.movementSpeed);
@@ -449,8 +453,6 @@ void Player::CameraMovement(float dt)
 		}
 		
 	}
-	
-
 }
 
 void Player::GodMode(float dt)

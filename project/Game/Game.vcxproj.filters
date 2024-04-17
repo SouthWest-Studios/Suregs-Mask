@@ -55,10 +55,10 @@
     <ClCompile Include="Source\ModuleFadeToBlack.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Scene_intro.cpp">
+    <ClCompile Include="Source\Scene_Intro.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Scene_menu.cpp">
+    <ClCompile Include="Source\Scene_Menu.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Source\DebugConsole.cpp">
@@ -93,9 +93,6 @@
     </ClCompile>
     <ClCompile Include="Source\GuiControlSlider.cpp">
       <Filter>GuiControls</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\InventoryManager.cpp">
-      <Filter>Inventory</Filter>
     </ClCompile>
     <ClCompile Include="Source\EntityManager.cpp">
       <Filter>Modules</Filter>
@@ -150,6 +147,9 @@
     </ClCompile>
     <ClCompile Include="Source\Scene_Pueblo.cpp">
       <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\InventoryManager.cpp">
+      <Filter>Inventory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -240,10 +240,10 @@
     <ClInclude Include="Source\ModuleFadeToBlack.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Scene_intro.h">
+    <ClInclude Include="Source\Scene_Intro.h">
       <Filter>Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Scene_menu.h">
+    <ClInclude Include="Source\Scene_Menu.h">
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Source\DebugConsole.h">
