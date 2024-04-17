@@ -220,6 +220,7 @@
   <ItemGroup>
     <Xml Include="..\Output\config.xml" />
     <Xml Include="..\Output\dialogs.xml" />
+    <Xml Include="..\Output\save_game.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
