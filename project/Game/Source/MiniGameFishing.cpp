@@ -73,20 +73,29 @@ bool MiniGameFishing::Start() {
 		std::vector<const char*> fishname;
 		for (pugi::xml_node itemNode : node.children()) {
 			const char* texturepath = itemNode.attribute("texturepath").value();
-			fishrow.push_back(texturepath);
-			//texturepath = itemNode.attribute("name").value();
-			//fishname.push_back(texturepath);
+
+			size_t path_length = strlen(texturepath);
+
+			char* texturepath_with_null = new char[path_length + 1];
+
+			strcpy_s(texturepath_with_null, path_length + 1, texturepath);
+
+			texturepath_with_null[path_length] = '\0';
+
+			fishrow.push_back(texturepath_with_null);
+
 		}
 		chosefishing_path_ptr->push_back(fishrow);
 		//choseName_path->push_back(fishname);
 	}
-	
-	/*for (const auto& vec : chosefishing_path) {
+
+
+	for (const auto& vec :  (*chosefishing_path_ptr)) {
 		for (const auto& str : vec) {
 			printf("%s ", str);
 		}
 		printf("\n");
-	}*/
+	}
 	return true;
 }
 
@@ -101,8 +110,8 @@ bool MiniGameFishing::Update(float dt)
 	miniGameEnd(dt);
 
 	//printf("\nss: %s", fishingfloat_path);
-	
-	
+
+
 	return true;
 }
 
@@ -378,7 +387,7 @@ void MiniGameFishing::floatCollision(Direction direction, float cheke_x, float c
 		else {
 			floatbody->body->SetLinearVelocity(b2Vec2(0, 0));
 		}
-		
+
 		app->render->DrawTexture(fishingfloat_texture, fishingflota_position_x - 23, fishingflota_position_y, 3);
 	}
 	else if (direction == Direction::LEFT) {
@@ -389,7 +398,7 @@ void MiniGameFishing::floatCollision(Direction direction, float cheke_x, float c
 		else {
 			floatbody->body->SetLinearVelocity(b2Vec2(0, 0));
 		}
-		
+
 		app->render->DrawTexture(fishingfloat_texture, fishingflota_position_x, fishingflota_position_y - 23, 3);
 	}
 	else if (direction == Direction::RIGHT) {
@@ -719,26 +728,24 @@ void MiniGameFishing::reward_pool(Fishlevel fishingType, std::vector<std::vector
 	//chosefishing_path.clear();
 	//choseName_path.clear();
 
-	if (chosefishing_path_ptr && !chosefishing_path_ptr->empty()) {
-		
+	/*if (chosefishing_path_ptr && !chosefishing_path_ptr->empty()) {
+
 		const char* first_element = (*chosefishing_path_ptr)[1][1];
 		printf("The first element of the first row is: %s\n", first_element);
 	}
 	else {
 		printf("Error: Invalid pointer to chosefishing_path or it's empty.\n");
-	}
+	}*/
 
-	/*int num = 0;
-	num = getRandomNumber(0, (*chosefishing_path)[fishLevel].size() - 1);
-	fishing_path = (*chosefishing_path)[fishLevel][num];*/
+	int num = 0;
+	num = getRandomNumber(0, (*chosefishing_path_ptr)[fishLevel].size() - 1);
+	fishing_path = (*chosefishing_path_ptr)[fishLevel][num];
 	//name_path = (*choseName_path)[fishLevel][num];
-	
-	//fishing_path = chosefishing_path[num];
-	
+	//fishing_path = chosefishing_path_ptr[num];
 	/*name_path = choseName_path[num];*/
 	std::string strNumber = std::to_string(player_click_count);
 	dialogoClose(0);
-	app->dialogManager->CreateDialogSinEntity("you click " + strNumber + " veces " + " tu obtenido " , "Fishing System", fishing_path);
+	app->dialogManager->CreateDialogSinEntity("you click " + strNumber + " veces " + " tu obtenido ", "Fishing System", fishing_path);
 	//app->dialogManager->CreateDialogSinEntity("you click " + strNumber + " veces " + " tu obtenido " , "Fishing System", nullptr);+ name_path
 	fishingOver();
 	resetProbability();
