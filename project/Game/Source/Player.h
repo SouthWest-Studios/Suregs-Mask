@@ -146,6 +146,7 @@ public:
 	int attackWidth = 50; 
     int attackHeight = 50;
 	bool isAttacking = false;
+	bool attackDealed = false;
 	PhysBody* attackSensor = nullptr;
 	
 	//Pasiva de la mascara 1
@@ -190,7 +191,7 @@ private:
 	Timer timerDash;
 	Timer cdTimerDash; 
 
-	int cdTimerAttackMS = 250;
+	int cdTimerAttackMS;
 	Timer timerAttack;
 
 	fPoint lastMovementDirection;

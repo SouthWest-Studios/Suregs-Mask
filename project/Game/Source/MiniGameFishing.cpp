@@ -136,7 +136,6 @@ char* MiniGameFishing::rutaPath(const char* filePath)
 	char* texturepath_with_null = new char[path_length + 1];
 	strcpy_s(texturepath_with_null, path_length + 1, filePath);
 	texturepath_with_null[path_length] = '\0';
-	
 	return texturepath_with_null;
 }
 
@@ -168,15 +167,12 @@ void MiniGameFishing::ani_castingline(Direction direction)
 
 	floatDistance = floatChangeDistance;
 
-
 	//Calculate the final position of the float
 	if (direction == Direction::UP) { fishingflota_CenterX = app->entityManager->GetPlayer()->position.x; fishingflota_CenterY = app->entityManager->GetPlayer()->position.y - floatDistance; }
 	else if (direction == Direction::DOWN) { fishingflota_CenterX = app->entityManager->GetPlayer()->position.x; fishingflota_CenterY = app->entityManager->GetPlayer()->position.y + floatDistance; }
 	else if (direction == Direction::LEFT) { fishingflota_CenterX = app->entityManager->GetPlayer()->position.x - floatDistance; fishingflota_CenterY = app->entityManager->GetPlayer()->position.y; }
 	else if (direction == Direction::RIGHT) { fishingflota_CenterX = app->entityManager->GetPlayer()->position.x + floatDistance; fishingflota_CenterY = app->entityManager->GetPlayer()->position.y; }
 	else { fishingflota_CenterX = app->entityManager->GetPlayer()->position.x; fishingflota_CenterY = app->entityManager->GetPlayer()->position.y + floatDistance; }
-
-
 
 	//crear float collision
 	if (floatbody == nullptr && crearfloatbody) {
@@ -185,7 +181,6 @@ void MiniGameFishing::ani_castingline(Direction direction)
 		floatbody->body->SetFixedRotation(true);
 		floatbody->listener = this;
 		crearfloatbody = false;
-
 	}
 
 	//lerp
@@ -193,17 +188,11 @@ void MiniGameFishing::ani_castingline(Direction direction)
 	fishingflota_position_x = fishingflota_position_x * (1 - timeLerp) + fishingflota_CenterX * timeLerp;
 	fishingflota_position_y = fishingflota_position_y * (1 - timeLerp) + fishingflota_CenterY * timeLerp;
 
-	//printf("\nfishingflota_CenterX: %f", fishingflota_CenterX);
-
 	//moving collision
-
-	//printf("\nfishingflota_CenterX: %f", fishingflota_position_x);
-
 	cheke_x = (METERS_TO_PIXELS(floatbody->body->GetPosition().x) - texH / 2) - 23;
 	cheke_y = (METERS_TO_PIXELS(floatbody->body->GetPosition().y) - texH / 2) - 23;
 
 	startAniFloat = true;
-
 }
 
 void MiniGameFishing::playNormalFishing()
@@ -311,57 +300,38 @@ void MiniGameFishing::playLureFishing()
 void MiniGameFishing::fishing_line(Direction direction, float cheke_x, float cheke_y)
 {
 	//Lure fishing, confirm direction, reel in
-	if (direction == Direction::UP) {
-		if (cheke_y <= fishingflota_position_y) {
-			b2Vec2 force(0.0f, 10.0f);
-			floatbody->body->ApplyForceToCenter(force, true);
-		}
-		else {
-			floatbody->body->SetLinearVelocity(b2Vec2(0, 0));
-		}
-		app->render->DrawTexture(fishingfloat_texture, fishingflota_position_x - 23, fishingflota_position_y, 3);
-	}
-	else if (direction == Direction::DOWN) {
-		if (cheke_y >= fishingflota_position_y) {
+	b2Vec2 force(0.0f, 0.0f);
 
-			b2Vec2 force(0.0f, -10.0f);
-			floatbody->body->ApplyForceToCenter(force, true);
-		}
-		else {
-			floatbody->body->SetLinearVelocity(b2Vec2(0, 0));
-		}
-		app->render->DrawTexture(fishingfloat_texture, fishingflota_position_x - 23, fishingflota_position_y, 3);
+	if (direction == Direction::UP && cheke_y <= fishingflota_position_y) {
+		force.y = 10.0f;
 	}
-	else if (direction == Direction::LEFT) {
-		if (cheke_x <= fishingflota_position_x) {
-			b2Vec2 force(10.0f, 0.0f);
-			floatbody->body->ApplyForceToCenter(force, true);
-		}
-		else {
-			floatbody->body->SetLinearVelocity(b2Vec2(0, 0));
-		}
-		app->render->DrawTexture(fishingfloat_texture, fishingflota_position_x, fishingflota_position_y - 23, 3);
+	else if (direction == Direction::DOWN && cheke_y >= fishingflota_position_y) {
+		force.y = -10.0f;
 	}
-	else if (direction == Direction::RIGHT) {
-		if (cheke_x >= fishingflota_position_x) {
-			b2Vec2 force(-10.0f, 0.0f);
-			floatbody->body->ApplyForceToCenter(force, true);
-		}
-		else {
-			floatbody->body->SetLinearVelocity(b2Vec2(0, 0));
-		}
+	else if (direction == Direction::LEFT && cheke_x <= fishingflota_position_x) {
+		force.x = 10.0f;
+	}
+	else if (direction == Direction::RIGHT && cheke_x >= fishingflota_position_x) {
+		force.x = -10.0f;
+	}
+	else if (cheke_y >= fishingflota_position_y) {
+		force.y = -10.0f;
+	}
+
+	if (force == b2Vec2(0.0f, 0.0f)) {
+		floatbody->body->SetLinearVelocity(b2Vec2(0, 0));
+	}
+	else {
+		floatbody->body->ApplyForceToCenter(force, true);
+	}
+
+	if (direction == Direction::LEFT || direction == Direction::RIGHT) {
 		app->render->DrawTexture(fishingfloat_texture, fishingflota_position_x, fishingflota_position_y - 23, 3);
 	}
 	else {
-		if (cheke_y >= fishingflota_position_y) {
-			b2Vec2 force(0.0f, -10.0f);
-			floatbody->body->ApplyForceToCenter(force, true);
-		}
-		else {
-			floatbody->body->SetLinearVelocity(b2Vec2(0, 0));
-		}
 		app->render->DrawTexture(fishingfloat_texture, fishingflota_position_x - 23, fishingflota_position_y, 3);
 	}
+
 
 
 
