@@ -356,20 +356,23 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::ENEMY:
 		if (physA == attackSensor) {
 			LOG("Collision ENEMY");
-			if (physB->entity != nullptr) {
+			if (physB->entity != nullptr && attackDealed == false) {
 				physB->entity->TakeDamage(currentStats.attackDamage);
+				attackDealed = true;
 			}
 		}
 		if (physA == mask1PassiveSensor) {
 			LOG("Collision ENEMY");
-			if (physB->entity != nullptr) {
+			if (physB->entity != nullptr && attackDealed == false) {
 				physB->entity->TakeDamage(currentStats.attackDamage * passiveStats[static_cast<int>(secondaryMask)].damageBoost);
+				attackDealed = true;
 			}
 		}
 		if(physA == mask1AttackSensor){
 			LOG("Collision ENEMY");
-			if (physB->entity != nullptr) {
+			if (physB->entity != nullptr && attackDealed == false) {
 				physB->entity->TakeDamage(maskStats[static_cast<int>(primaryMask)].maskDamage);
+				attackDealed = true;
 			}
 			collisionTimer.Start();
 		}
@@ -550,6 +553,7 @@ void Player::PlayerMovement(float dt)
 
 	if (!(timerAttack.ReadMSec() < cdTimerAttackMS && isAttacking)) {
 		isAttacking = false;
+		attackDealed = false;
 		if (attackSensor) {
 			app->physics->DestroyBody(attackSensor);
 			attackSensor = nullptr;
@@ -573,6 +577,7 @@ void Player::PlayerMovement(float dt)
 
 	if (!(timerMaskAttack.ReadMSec() < maskStats[static_cast<int>(primaryMask)].maskCoolDown && isAttackingMask)) {
 		isAttackingMask = false;
+		attackDealed = false;
 		if(mask1AttackSensor){
 			app->physics->DestroyBody(mask1AttackSensor);
 			mask1AttackSensor = nullptr;
