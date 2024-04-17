@@ -31,19 +31,22 @@ public:
 	bool CleanUp();
 
 	// Additional methods
-	Inventity* InventoryManager::CreateItem(EntityType type, int id, int ataque, int durabilidad, int magia, float peso, int defensa = 0);
+	Inventity* CreateItem(EntityType type, int id, int ataque, int durabilidad, int magia, float peso, int defensa = 0);
 
 	void AddItem(Inventity* Inventity);
 
 	void DestroyItem(Inventity* Inventity);
 
-	void InventoryManager::DestroyItem2(int entityId);
+	void DestroyItem2(int entityId);
 
 	void UseItemSelected(int id);
 
 	void OnMovePointer();
 
-	bool InventoryManager::IsFull();
+	bool IsFull();
+
+	bool LoadState(pugi::xml_node node);
+	bool SaveState(pugi::xml_node node);
 
 	
 

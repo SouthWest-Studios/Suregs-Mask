@@ -6,6 +6,7 @@
 #include "Window.h"
 #include "Scene_Menu.h"
 #include "Scene_Testing.h"
+#include "Scene_Pueblo.h"
 #include "ModuleFadeToBlack.h"
 #include "Optick/include/optick.h"
 #include "Menu.h"
@@ -130,7 +131,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 	{
 
 	case 1:
-		app->fadeToBlack->FadeToBlack(this, app->scene_testing, 90);
+		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
 		app->menu->active = true;
 		break;
 

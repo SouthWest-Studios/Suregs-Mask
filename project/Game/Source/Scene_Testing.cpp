@@ -168,7 +168,9 @@ bool Scene_testing::Update(float dt)
 		app->fadeToBlack->FadeToBlack(this, app->scene_testing);
 		app->menu->active = true;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
+	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) {
+		app->SaveRequest();
+	}
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 
 	return true;

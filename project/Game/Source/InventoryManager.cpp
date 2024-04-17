@@ -247,6 +247,88 @@ bool InventoryManager::IsFull()
 		
 }
 
+bool InventoryManager::LoadState(pugi::xml_node node)
+{
+	bool ret = true;
+	
+	//Inventity* inventoryItem = app->inventoryManager->CreateItem(, 0, 0, 0, 0, 0, 0);
+	for (pugi::xml_node itemNode = node.child("inventory").child("inventity"); itemNode; itemNode = itemNode.next_sibling("inventity"))
+	{
+
+		Inventity* itemLoaded = nullptr;
+
+		switch ((InventityType)itemNode.attribute("type").as_int())
+		{
+
+		case InventityType::ARMADURA:
+			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_ARMADURA, 0, 0, 0, 0, 0, 0);
+			break;
+		case InventityType::CUERNO:
+			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_CUERNO, 0, 0, 0, 0, 0, 0);
+			break;
+		case InventityType::DIAMANTE:
+			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_DIAMANTE, 0, 0, 0, 0, 0, 0);
+			break;
+		case InventityType::ESPADA2:
+			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_ARMADURA, 0, 0, 0, 0, 0, 0);
+			break;
+		case InventityType::ITEM:
+			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_ARMADURA, 0, 0, 0, 0, 0, 0);
+			break;
+		case InventityType::UNKNOWN:
+			break;
+		default:
+			break;
+		}
+		itemLoaded->quantity = itemNode.attribute("quantity").as_int();
+		
+	}
+
+
+
+
+	return ret;
+}
+
+bool InventoryManager::SaveState(pugi::xml_node node)
+{
+	bool ret = true;
+	pugi::xml_node inventoryNode = node.append_child("inventory");
+
+	for (int i = 0; i < inventities.Count(); i++) {
+
+		Inventity* inventoryItem = inventities.At(i)->data;
+
+		pugi::xml_node inventoryItemNode = inventoryNode.append_child("inventity");
+		inventoryItemNode.append_attribute("type").set_value((int)inventoryItem->type);
+		inventoryItemNode.append_attribute("quantity").set_value(inventoryItem->quantity);
+	}
+
+	/*playerNode.append_attribute("x").set_value(player->position.x);
+	playerNode.append_attribute("y").set_value(player->position.y);
+	playerNode.append_attribute("sceneLevel").set_value(app->sceneLevel);
+
+	playerNode.append_attribute("coins").set_value(app->scene->getPlayer()->coins);
+
+	pugi::xml_node cameraNode = node.append_child("camera");
+	cameraNode.append_attribute("x").set_value(app->render->camera.x);
+	cameraNode.append_attribute("y").set_value(app->render->camera.y);
+
+
+
+	pugi::xml_node coinsListNode = node.append_child("coinsPicked");
+
+	for (int i = 0; i < app->entityManager->coins.Count(); i++) {
+		pugi::xml_node cointNode = coinsListNode.append_child("coin");
+		cointNode.append_attribute("x").set_value(app->entityManager->coins.At(i)->data->position.x);
+		cointNode.append_attribute("y").set_value(app->entityManager->coins.At(i)->data->position.y);
+		cointNode.append_attribute("active").set_value(app->entityManager->coins.At(i)->data->active);
+	}*/
+
+
+	return ret;
+}
+
 void InventoryManager::DestroyItem(Inventity* entity)
 {
 	ListItem<Inventity*>* item;
@@ -629,3 +711,9 @@ bool InventoryManager::PostUpdate()
 
 	return ret;
 }
+
+
+
+
+
+
