@@ -148,6 +148,8 @@ public:
 	bool isAttacking = false;
 	bool attackDealed = false;
 	PhysBody* attackSensor = nullptr;
+
+	Timer collisionAttackTimer;
 	
 	//Pasiva de la mascara 1
 	PhysBody* mask1PassiveSensor = nullptr;
@@ -161,7 +163,7 @@ public:
 	int attackMask1Width = 300;  
     int attackMask1Height = 300; 
 
-	Timer collisionTimer;
+	Timer collisionMask1Timer;
 
 	//Fishing
 	//New//

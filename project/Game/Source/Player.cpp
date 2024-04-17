@@ -244,7 +244,6 @@ void Player::Attack(float dt)
 		mask1PassiveSensor->ctype = ColliderType::MASK0_PASSIVE_ATTACK;
 		mask1PassiveSensor->listener = this;
 	}
-
 }
 
 void Player::UnequipMasks() {
@@ -364,6 +363,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 				physB->entity->TakeDamage(currentStats.attackDamage);
 				attackDealed = true;
 			}
+			collisionAttackTimer.Start();
 		}
 		if (physA == mask1PassiveSensor) {
 			LOG("Collision ENEMY");
@@ -378,7 +378,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 				physB->entity->TakeDamage(maskStats[static_cast<int>(primaryMask)].maskDamage);
 				attackDealed = true;
 			}
-			collisionTimer.Start();
+			collisionMask1Timer.Start();
 		}
 	break;
 	case ColliderType::RESOURCE_ESPADA:
@@ -566,6 +566,16 @@ void Player::PlayerMovement(float dt)
 		}
 	}
 
+	if (collisionAttackTimer.ReadSec() > 0.25) {
+		app->physics->DestroyBody(attackSensor);
+		attackSensor = nullptr;
+		if(mask1PassiveSensor){
+			app->physics->DestroyBody(mask1PassiveSensor);
+			mask1PassiveSensor = nullptr;
+		}
+	}
+
+
 	//Si pulsas K para mascara principal
 
 	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN && 
@@ -586,7 +596,7 @@ void Player::PlayerMovement(float dt)
 		}
 	}
 	
-	if (collisionTimer.ReadSec() > 0.25) {
+	if (collisionMask1Timer.ReadSec() > 0.25) {
 		app->physics->DestroyBody(mask1AttackSensor);
 		mask1AttackSensor = nullptr;
 	}
