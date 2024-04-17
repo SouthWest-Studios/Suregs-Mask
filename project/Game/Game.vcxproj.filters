@@ -94,9 +94,6 @@
     <ClCompile Include="Source\GuiControlSlider.cpp">
       <Filter>GuiControls</Filter>
     </ClCompile>
-    <ClCompile Include="Source\InventoryManager.cpp">
-      <Filter>Inventory</Filter>
-    </ClCompile>
     <ClCompile Include="Source\EntityManager.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
@@ -150,6 +147,9 @@
     </ClCompile>
     <ClCompile Include="Source\Scene_Pueblo.cpp">
       <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\InventoryManager.cpp">
+      <Filter>Inventory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

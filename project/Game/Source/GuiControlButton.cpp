@@ -41,6 +41,7 @@ bool GuiControlButton::PostUpdate()
 
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
 				state = GuiControlState::PRESSED;
+				
 			}
 
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
