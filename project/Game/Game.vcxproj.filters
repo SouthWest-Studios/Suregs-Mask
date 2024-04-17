@@ -94,6 +94,9 @@
     <ClCompile Include="Source\GuiControlSlider.cpp">
       <Filter>GuiControls</Filter>
     </ClCompile>
+    <ClCompile Include="Source\InventoryManager.cpp">
+      <Filter>Modules\Inventory</Filter>
+    </ClCompile>
     <ClCompile Include="Source\EntityManager.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
@@ -283,22 +286,22 @@
       <Filter>GuiControls</Filter>
     </ClInclude>
     <ClInclude Include="Source\ArmaduraInv.h">
-      <Filter>Inventory</Filter>
+      <Filter>Modules\Inventory</Filter>
     </ClInclude>
     <ClInclude Include="Source\inventity.h">
-      <Filter>Inventory</Filter>
+      <Filter>Modules\Inventory</Filter>
     </ClInclude>
     <ClInclude Include="Source\InventoryManager.h">
-      <Filter>Inventory</Filter>
+      <Filter>Modules\Inventory</Filter>
     </ClInclude>
     <ClInclude Include="Source\ItemInv.h">
-      <Filter>Inventory</Filter>
+      <Filter>Modules\Inventory</Filter>
     </ClInclude>
     <ClInclude Include="Source\SwordInv.h">
-      <Filter>Inventory</Filter>
+      <Filter>Modules\Inventory</Filter>
     </ClInclude>
     <ClInclude Include="Source\CuernoInv.h">
-      <Filter>Inventory</Filter>
+      <Filter>Modules\Inventory</Filter>
     </ClInclude>
     <ClInclude Include="Source\NPC_Vendedor.h">
       <Filter>Entities\NPC</Filter>
@@ -355,7 +358,7 @@
       <Filter>Entities\Items</Filter>
     </ClInclude>
     <ClInclude Include="Source\DiamanteInv.h">
-      <Filter>Inventory</Filter>
+      <Filter>Modules\Inventory</Filter>
     </ClInclude>
     <ClInclude Include="Source\Scene_Pueblo.h">
       <Filter>Scenes</Filter>
@@ -398,9 +401,6 @@
     <Filter Include="Entities\Enemies">
       <UniqueIdentifier>{767205a1-f550-4feb-8631-a7a22f02b007}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Inventory">
-      <UniqueIdentifier>{e25e82e0-d2c5-414e-ab44-ad5e3f6f1c77}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Entities\NPC">
       <UniqueIdentifier>{2142dd33-81d1-45e5-9822-3a15956c346a}</UniqueIdentifier>
     </Filter>
@@ -413,9 +413,13 @@
     <Filter Include="Entities\Items">
       <UniqueIdentifier>{6f0d7545-e388-4aa2-9e49-5f0d23ee4f41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\Inventory">
+      <UniqueIdentifier>{e25e82e0-d2c5-414e-ab44-ad5e3f6f1c77}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Output\config.xml" />
     <Xml Include="..\Output\dialogs.xml" />
+    <Xml Include="..\Output\save_game.xml" />
   </ItemGroup>
 </Project>
