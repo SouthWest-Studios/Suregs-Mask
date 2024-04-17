@@ -41,4 +41,27 @@
 			<sentence text="¡Ay, mi Patza!, qué guapa eres…"/>
 		</sentences>
 	</dialog>
+
+	<dialog id="5" texturepath="Assets/Textures/grupoJovenes.jpg" facetexturepath="Assets/Textures/grupoJovenes.jpg" name="Huhan, Xiby, Ferny y Lixy.">
+		<sentences>
+			<sentence text="¿Enserio va a volver al entrenamiento?"/>
+			<sentence text="Hoy hay que darle una buena paliza para que no vuelva más…"/>
+		</sentences>
+	</dialog>
+	
+	
+	
+	<dialog id="991" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phoska">
+		<sentences>
+			<sentence type= "choose" text="¡Buenos días! Bienvenido a la herrería de Phoska."/>
+			
+			<option1 text= "¿Qué ofreces?">
+				<sentence text= "Con los materiales necesarios podré forjar mejoras para tu equipo. ¡No dudes en venir cuando quieras mejorar tus herramientas de combate!"/>	
+			</option1>
+			
+			<option2 text="¡Adiós!">
+				<sentence text="¡No dudes en venir más por aquí!"/>
+			</option2>
+		</sentences>
+	</dialog>
 </dialogues>

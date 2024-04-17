@@ -18,8 +18,8 @@ class Render;
 class Textures;
 class Audio;
 class ModuleFadeToBlack;
-class Scene_intro;
-class Scene_menu;
+class Scene_Intro;
+class Scene_Menu;
 class Scene_testing;
 class Scene_Pueblo;
 class Scene_Mazmorra0;
@@ -112,8 +112,8 @@ public:
 	Audio* audio;
 	ModuleFadeToBlack* fadeToBlack;
 
-	Scene_intro* scene_intro;
-	Scene_menu* scene_menu;
+	Scene_Intro* scene_intro;
+	Scene_Menu* scene_menu;
 	Scene_testing* scene_testing;
 	Scene_Pueblo* scene_pueblo;
 	Scene_Mazmorra0* scene_mazmorra0;

@@ -17,7 +17,7 @@
 
 
 
-Enemy_Ols::Enemy_Ols() : Entity(EntityType::ENEMY_OLS), maxHealth(100.0f), health(100.0f), speed(2.5f), attackDamage(50.0f){
+Enemy_Ols::Enemy_Ols() : Entity(EntityType::ENEMY_OLS), maxHealth(350.0f), health(350.0f), speed(1.0f), attackDamage(50.0f){
 	name.Create("ols");
 }
 

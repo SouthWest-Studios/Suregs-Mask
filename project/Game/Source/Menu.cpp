@@ -12,7 +12,7 @@
 #include "GuiManager.h"
 #include "InventoryManager.h"
 #include "Menu.h"
-#include "Scene_menu.h"
+#include "Scene_Menu.h"
 #include "Scene_Testing.h"
 #include "ModuleFadeToBlack.h"
 
@@ -307,7 +307,7 @@ bool Menu::PostUpdate()
 // Called before quitting
 bool Menu::CleanUp()
 {
-	LOG("Freeing Scene_intro");
+	LOG("Freeing Scene_Intro");
 
 	return true;
 }

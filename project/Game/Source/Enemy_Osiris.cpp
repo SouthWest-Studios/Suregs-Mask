@@ -18,7 +18,7 @@
  
 
 
-Enemy_Osiris::Enemy_Osiris() : Entity(EntityType::ENEMY_OSIRIS), maxHealth(150.0f), health(150.0f), speed(2.5f), attackDamage(50.0f){
+Enemy_Osiris::Enemy_Osiris() : Entity(EntityType::ENEMY_OSIRIS), maxHealth(250.0f), health(250.0f), speed(2.5f), attackDamage(50.0f){
 	name.Create("osiris");
 
 }

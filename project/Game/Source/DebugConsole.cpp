@@ -8,7 +8,7 @@
 #include "Map.h"
 #include "Item.h"
 #include "ModuleFadeToBlack.h"
-#include "Scene_menu.h"
+#include "Scene_Menu.h"
 #include "Scene_Testing.h"
 #include "Scene_Mazmorra0.h"
 #include "Scene_Pueblo.h"
@@ -56,6 +56,25 @@ bool DebugConsole::Awake(pugi::xml_node config)
 		});
 	commandList.Add(SET_GOLD);
 
+	SET_PRIMARY_MASK = new DebugCommandArg<int>("set_primary_mask", "Establece la mascara primaria del jugador", "set_primary_mask <int mask>", [this](int mask) {
+			if (mask >= -1 && mask < 4) {
+				app->entityManager->GetPlayer()->primaryMask = static_cast<Mask>(mask + 1);
+				std::cout << "Comando SET_PRIMARY_MASK ejecutado con " << mask << " como mascara primaria" << std::endl;
+			} else {
+				std::cout << "Valor de mascara no valido (NOMASK = -1 | MASK0 = 0 | MASK1 = 1 | MASK2 = 2 | MASK3 = 3)" << std::endl;
+			}
+		});
+	commandList.Add(SET_PRIMARY_MASK);
+
+	SET_SECONDARY_MASK = new DebugCommandArg<int>("set_secondary_mask", "Establece la mascara secundaria del jugador", "set_secondary_mask <int mask>", [this](int mask) {
+			if (mask >= -1 && mask < 4) {
+				app->entityManager->GetPlayer()->secondaryMask = static_cast<Mask>(mask + 1);
+				std::cout << "Comando SET_SECONDARY_MASK ejecutado con " << mask << " como mascara secundaria" << std::endl;
+			} else {
+				std::cout << "Valor de mascara no valido (NOMASK = -1 | MASK0 = 0 | MASK1 = 1 | MASK2 = 2 | MASK3 = 3)" << std::endl;
+			}
+		});
+	commandList.Add(SET_SECONDARY_MASK);
 
 	GOTO = new DebugCommandArg<int>("goto", "Te cambia de escena por la elegida", "goto <int nivel>", [this](int nivel) {
 
@@ -120,7 +139,7 @@ bool DebugConsole::Update(float dt)
 
 	OPTICK_EVENT();
 
-	if (app->input->GetKey(SDL_SCANCODE_GRAVE) == KEY_DOWN) { //SE MUESTRA CON LA TECLA: º
+	if (app->input->GetKey(SDL_SCANCODE_GRAVE) == KEY_DOWN) { //SE MUESTRA CON LA TECLA: ï¿½
 		showConsole = !showConsole;
 		app->input->ResetInputText();
 	}
@@ -165,7 +184,7 @@ bool DebugConsole::PostLateUpdate()
 		SDL_Color textColor = { 255, 255, 255, 255 }; // Color del texto blanco
 		SDL_Surface* surface = TTF_RenderText_Blended(app->render->consoleFont, ("> " + currentCommand).c_str(), textColor);
 		SDL_Texture* texture = SDL_CreateTextureFromSurface(app->render->renderer, surface);
-		SDL_Rect textRect = { 10, 7, surface->w, surface->h }; // Posición del texto
+		SDL_Rect textRect = { 10, 7, surface->w, surface->h }; // Posiciï¿½n del texto
 		SDL_RenderCopy(app->render->renderer, texture, NULL, &textRect);
 		SDL_FreeSurface(surface);
 		SDL_DestroyTexture(texture);
@@ -180,7 +199,7 @@ bool DebugConsole::PostLateUpdate()
 				DebugCommandBase* command = dynamic_cast<DebugCommandBase*>(commandList[i]);
 				std::string label = command->GetCommandFormat() + " - " + command->GetCommandDescription();
 
-				// Calcular posición de la etiqueta
+				// Calcular posiciï¿½n de la etiqueta
 				int labelX = 5;
 				int labelY = y + i * 30;
 
@@ -190,7 +209,7 @@ bool DebugConsole::PostLateUpdate()
 				int texW, texH;
 				SDL_QueryTexture(texture, nullptr, nullptr, &texW, &texH);
 
-				// Definir el rectángulo de destino
+				// Definir el rectï¿½ngulo de destino
 				SDL_Rect dstRect = { labelX, labelY - scrollY, texW, texH };
 
 				// Renderizar la textura en la pantalla
@@ -254,7 +273,7 @@ void DebugConsole::HandleInput()
 
 			DebugCommandArg<int>* commandArg = dynamic_cast<DebugCommandArg<int>*>(commandBase);
 			if (commandArg != nullptr) {
-				// El puntero se ha convertido con éxito
+				// El puntero se ha convertido con ï¿½xito
 				std::string commandArgId = commandArg->GetCommandId();
 				if (currentCommand.find(commandArgId) != std::string::npos) {
 					// Ejecutar el comando con el argumento entero
@@ -266,16 +285,16 @@ void DebugConsole::HandleInput()
 							commandArg->Invoke(argValue);
 						}
 						catch (const std::invalid_argument& e) {
-							std::cerr << "Error: Argumento no válido. " << e.what() << std::endl;
+							std::cerr << "Error: Argumento no vï¿½lido. " << e.what() << std::endl;
 						}
 						catch (const std::out_of_range& e) {
 							std::cerr << "Error: Valor fuera de rango. " << e.what() << std::endl;
 						}
 						catch (const std::exception& e) {
-							std::cerr << "Error: Ocurrió una excepción. " << e.what() << std::endl;
+							std::cerr << "Error: Ocurriï¿½ una excepciï¿½n. " << e.what() << std::endl;
 						}
 						catch (...) {
-							std::cerr << "Error: Ocurrió una excepción desconocida." << std::endl;
+							std::cerr << "Error: Ocurriï¿½ una excepciï¿½n desconocida." << std::endl;
 						}
 					}
 				}
@@ -292,13 +311,13 @@ std::vector<std::string> DebugConsole::SplitString(const std::string& input, cha
 	while (end != std::string::npos) {
 		// Extraer la subcadena entre start y end
 		result.push_back(input.substr(start, end - start));
-		// Actualizar start para el próximo substring
+		// Actualizar start para el prï¿½ximo substring
 		start = end + 1;
 		// Buscar el siguiente delimitador
 		end = input.find(delimiter, start);
 	}
 
-	// Agregar la última subcadena
+	// Agregar la ï¿½ltima subcadena
 	result.push_back(input.substr(start));
 
 	return result;
