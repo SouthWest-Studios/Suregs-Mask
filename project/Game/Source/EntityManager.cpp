@@ -94,6 +94,9 @@ bool EntityManager::CleanUp()
 	}
 
 	entities.Clear();
+	tpEntities.Clear();
+
+
 
 	return ret;
 }
