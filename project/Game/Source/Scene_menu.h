@@ -8,14 +8,14 @@
 
 struct SDL_Texture;
 
-class Scene_menu : public Module
+class Scene_Menu : public Module
 {
 public:
 
-	Scene_menu(App* app, bool start_enabled = true);
+	Scene_Menu(App* app, bool start_enabled = true);
 
 	// Destructor
-	virtual ~Scene_menu();
+	virtual ~Scene_Menu();
 
 	// Called before render is available
 	bool Awake(pugi::xml_node config);

@@ -5,7 +5,7 @@
 #include "GuiControlButton.h"
 #include "GuiControlSlider.h"
 #include "Audio.h"
-#include "Scene_menu.h"
+#include "Scene_Menu.h"
 #include "Menu.h"
 
 GuiManager::GuiManager(App* app, bool start_enabled) : Module(app, start_enabled)

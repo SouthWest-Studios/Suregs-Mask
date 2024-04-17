@@ -1,7 +1,7 @@
 #include "ModuleFadeToBlack.h"
 #include "Map.h"
 #include "EntityManager.h"
-#include "Scene_intro.h"
+#include "Scene_Intro.h"
 
 #include "App.h"
 #include "Window.h"
