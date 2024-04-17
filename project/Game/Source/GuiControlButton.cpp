@@ -39,11 +39,12 @@ bool GuiControlButton::PostUpdate()
 
 			state = GuiControlState::FOCUSED;
 
-			if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) {
+			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
 				state = GuiControlState::PRESSED;
+				
 			}
 
-			if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) {
+			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
 				NotifyObserver();
 				click = true;
 

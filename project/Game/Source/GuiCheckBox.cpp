@@ -64,7 +64,7 @@ bool GuiCheckBox::PostUpdate()
 
 			if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) {
 				NotifyObserver();
-				click = true;
+				click = !click;
 
 				app->audio->PlayFx(select_audio);
 			}

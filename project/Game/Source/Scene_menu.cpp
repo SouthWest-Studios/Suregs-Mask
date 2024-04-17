@@ -4,8 +4,9 @@
 #include "Audio.h"
 #include "Render.h"
 #include "Window.h"
-#include "Scene_menu.h"
+#include "Scene_Menu.h"
 #include "Scene_Testing.h"
+#include "Scene_Pueblo.h"
 #include "ModuleFadeToBlack.h"
 #include "Optick/include/optick.h"
 #include "Menu.h"
@@ -18,26 +19,26 @@
 #include "GuiCheckBox.h"
 
 
-Scene_menu::Scene_menu(App* app, bool start_enabled) : Module(app, start_enabled)
+Scene_Menu::Scene_Menu(App* app, bool start_enabled) : Module(app, start_enabled)
 {
-	name.Create("Scene_menu");
+	name.Create("Scene_Menu");
 }
 
 // Destructor
-Scene_menu::~Scene_menu()
+Scene_Menu::~Scene_Menu()
 {}
 
 // Called before render is available
-bool Scene_menu::Awake(pugi::xml_node config)
+bool Scene_Menu::Awake(pugi::xml_node config)
 {
-	LOG("Loading Scene_menu");
+	LOG("Loading Scene_Menu");
 	bool ret = true;
 
 	return ret;
 }
 
 // Called before the first frame
-bool Scene_menu::Start()
+bool Scene_Menu::Start()
 {
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	placeholderMenu = app->tex->Load("Assets/Textures/suscat.jpg");
@@ -73,13 +74,13 @@ bool Scene_menu::Start()
 }
 
 // Called each loop iteration
-bool Scene_menu::PreUpdate()
+bool Scene_Menu::PreUpdate()
 {
 	return true;
 }
 
 // Called each loop iteration
-bool Scene_menu::Update(float dt)
+bool Scene_Menu::Update(float dt)
 {
 
 	OPTICK_EVENT();
@@ -99,7 +100,7 @@ bool Scene_menu::Update(float dt)
 }
 
 // Called each loop iteration
-bool Scene_menu::PostUpdate()
+bool Scene_Menu::PostUpdate()
 {
 	
 	bool ret = true;
@@ -110,9 +111,9 @@ bool Scene_menu::PostUpdate()
 }
 
 // Called before quitting
-bool Scene_menu::CleanUp()
+bool Scene_Menu::CleanUp()
 {
-	LOG("Freeing Scene_menu");
+	LOG("Freeing Scene_Menu");
 	
 	ListItem<GuiControl*>* control;
 	for (control = controlsScene.start; control != NULL; control = control->next) {
@@ -122,7 +123,7 @@ bool Scene_menu::CleanUp()
 	return true;
 }
 
-bool Scene_menu::OnGuiMouseClickEvent(GuiControl* control)
+bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 {
 	LOG("Press Gui Control: %d", control->id);
 
@@ -130,7 +131,7 @@ bool Scene_menu::OnGuiMouseClickEvent(GuiControl* control)
 	{
 
 	case 1:
-		app->fadeToBlack->FadeToBlack(this, app->scene_testing, 90);
+		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
 		app->menu->active = true;
 		break;
 
@@ -205,7 +206,7 @@ bool Scene_menu::OnGuiMouseClickEvent(GuiControl* control)
 	return true;
 }
 
-void Scene_menu::SettingsInterface()
+void Scene_Menu::SettingsInterface()
 {
 	app->render->DrawTexture(placeholderSettings, 0, 0);
 
@@ -248,7 +249,7 @@ void Scene_menu::SettingsInterface()
 	_showSettings = true;
 }
 
-void Scene_menu::ShowCredits()
+void Scene_Menu::ShowCredits()
 {
 	if (showCredits && !_showCredits) {
 		ListItem<GuiControl*>* control;
@@ -264,7 +265,7 @@ void Scene_menu::ShowCredits()
 	app->render->DrawTexture(placeholderCredits, 0, 0);
 }
 
-void Scene_menu::DestroySettingsInterface()
+void Scene_Menu::DestroySettingsInterface()
 {
 	ListItem<GuiControl*>* control;
 	for (control = controlsSettings.start; control != NULL; control = control->next)
@@ -281,16 +282,16 @@ void Scene_menu::DestroySettingsInterface()
 	}
 }
 
-void Scene_menu::Fullscreen()
+void Scene_Menu::Fullscreen()
 {
 }
 
-bool Scene_menu::LoadState(pugi::xml_node node)
+bool Scene_Menu::LoadState(pugi::xml_node node)
 {
 	return false;
 }
 
-bool Scene_menu::SaveState(pugi::xml_node node)
+bool Scene_Menu::SaveState(pugi::xml_node node)
 {
 	return false;
 }

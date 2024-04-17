@@ -38,8 +38,9 @@ bool TPEntity::Update(float dt)
 
 bool TPEntity::CleanUp()
 {
-
-
+	if (pbody != nullptr) {
+		app->physics->GetWorld()->DestroyBody(pbody->body);
+	}
 	return true;
 }
 

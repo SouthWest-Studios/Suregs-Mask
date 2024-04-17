@@ -12,7 +12,7 @@
 #include "GuiManager.h"
 #include "InventoryManager.h"
 #include "Menu.h"
-#include "Scene_menu.h"
+#include "Scene_Menu.h"
 #include "Scene_Testing.h"
 #include "ModuleFadeToBlack.h"
 
@@ -72,7 +72,9 @@ bool Menu::Update(float dt)
 	{
 		app->guiManager->minId = 100;
 		app->guiManager->maxId = 104;
-		app->guiManager->columnSize = 2;
+		app->guiManager->pointerId = 100;
+		
+		/*app->guiManager->columnSize = 2;*/
 		menuu = !menuu;
 
 		app->audio->PlayFx(inventory_audio);
@@ -86,7 +88,7 @@ bool Menu::Update(float dt)
 			ventana++;
 		}
 		
-		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 		{
 			if (ventana == 4)
 			{
@@ -99,7 +101,7 @@ bool Menu::Update(float dt)
 
 			app->audio->PlayFx(change_inventory_audio);
 		}
-		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN)
 		{
 			if (ventana == 1)
 			{
@@ -129,20 +131,19 @@ bool Menu::Update(float dt)
 	if (ventana == 4)
 	{
 		contadormenu++;
-		if (title != nullptr)
+		if (title != nullptr )
 		{
 			
 			title->state = GuiControlState::NORMAL;
 			fullScreen->state = GuiControlState::NORMAL;
 			vsync->state = GuiControlState::NORMAL;
-			music->state = GuiControlState::NORMAL;
+			music->state = GuiControlState::FOCUSED;
 			sfx->state = GuiControlState::NORMAL;
 		}
-
-
+		
 		else
 		{
-
+			
 			SDL_Rect MusicPos = { windowWidth / 2 - 400 ,windowHeight / 2 -100, 200, 50 };
 			music = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 100, "MUSIC", MusicPos, this, { 0, 0, 20, 20 }, { 0,0,0,0 },0 ,100);
 
@@ -171,17 +172,22 @@ bool Menu::Update(float dt)
 
 			if (title != nullptr)
 			{
-				
-				title->state = GuiControlState::DISABLED;
+				app->guiManager->DestroyGuiControl(title);
 				title = nullptr;
-				fullScreen->state = GuiControlState::DISABLED;
-				fullScreen = nullptr;
-				vsync->state = GuiControlState::DISABLED;
-				vsync = nullptr;
-				music->state = GuiControlState::DISABLED;
-				music = nullptr;
-				sfx->state = GuiControlState::DISABLED;
-				sfx = nullptr;
+				/*title->state = GuiControlState::DISABLED;
+				title = nullptr;*/
+				app->guiManager->DestroyGuiControl(fullScreen);
+				/*fullScreen->state = GuiControlState::DISABLED;
+				fullScreen = nullptr;*/
+				app->guiManager->DestroyGuiControl(vsync);
+				/*vsync->state = GuiControlState::DISABLED;
+				vsync = nullptr;*/
+				app->guiManager->DestroyGuiControl(music);
+				/*music->state = GuiControlState::DISABLED;
+				music = nullptr;*/
+				app->guiManager->DestroyGuiControl(sfx);
+				/*sfx->state = GuiControlState::DISABLED;
+				sfx = nullptr;*/
 
 				contadormenu = 0;
 			}
@@ -301,7 +307,7 @@ bool Menu::PostUpdate()
 // Called before quitting
 bool Menu::CleanUp()
 {
-	LOG("Freeing Scene_intro");
+	LOG("Freeing Scene_Intro");
 
 	return true;
 }
