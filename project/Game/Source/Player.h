@@ -146,6 +146,7 @@ public:
 	int attackWidth = 50; 
     int attackHeight = 50;
 	bool isAttacking = false;
+	bool attackDealed = false;
 	PhysBody* attackSensor = nullptr;
 	
 	//Pasiva de la mascara 1

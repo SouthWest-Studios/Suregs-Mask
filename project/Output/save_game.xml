@@ -6,14 +6,20 @@
 	<audio />
 	<:anonymous />
 	<:anonymous />
-	<Scene_intro />
-	<Scene_menu />
-	<scene />
+	<scene_testing />
 	<entitymanager />
+	<Menu />
+	<iventorymanager>
+		<inventory>
+			<inventity type="2" quantity="3" />
+			<inventity type="1" quantity="1" />
+		</inventory>
+	</iventorymanager>
 	<guiManager />
+	<dialogmanager />
 	<:anonymous />
 	<debugConsole />
 	<renderer>
-		<camera x="-709" y="-1850" />
+		<camera x="-904" y="-2076" />
 	</renderer>
 </game_state>

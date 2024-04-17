@@ -339,10 +339,10 @@ void Menu::Fullscreen()
 
 bool Menu::LoadState(pugi::xml_node node)
 {
-	return false;
+	return true;
 }
 
 bool Menu::SaveState(pugi::xml_node node)
 {
-	return false;
+	return true;
 }

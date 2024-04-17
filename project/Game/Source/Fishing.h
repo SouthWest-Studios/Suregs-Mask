@@ -17,14 +17,6 @@ enum class Fishlevel
 	UNKNOWN
 };
 
-enum class Rodlevel
-{
-	BASIC,
-	INTERMEDIATE,
-	ADVANCED
-};
-
-
 enum class FISHINGTYPE
 {
 	FISHING,
@@ -35,7 +27,6 @@ class Fishing
 {
 public:
 	Fishlevel fishlever;
-	Rodlevel rodlevel;
 	FISHINGTYPE fishingtype = FISHINGTYPE::FISHING;
 
 	bool rodReady = true;

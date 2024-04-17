@@ -490,7 +490,9 @@ bool App::LoadFromFile() {
 
 		while (item != NULL && ret == true)
 		{
-			ret = item->data->LoadState(saveFile.child("game_state").child(item->data->name.GetString()));
+			if (item->data->active) {
+				ret = item->data->LoadState(saveFile.child("game_state").child(item->data->name.GetString()));
+			}
 			item = item->next;
 		}
 
@@ -522,8 +524,10 @@ bool App::SaveFromFile() {
 
 	while (item != NULL && ret == true)
 	{
-		pugi::xml_node module = gameState.append_child(item->data->name.GetString());
-		ret = item->data->SaveState(module);
+		if (item->data->active) {
+			pugi::xml_node module = gameState.append_child(item->data->name.GetString());
+			ret = item->data->SaveState(module);
+		}
 		item = item->next;
 	}
 

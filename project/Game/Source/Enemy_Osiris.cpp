@@ -136,6 +136,14 @@ bool Enemy_Osiris::PostUpdate() {
 		app->render->DrawTexture(texture, position.x - 50, position.y - 25, SDL_FLIP_NONE, &rect);
 	}
 
+	for (uint i = 0; i < lastPath.Count(); ++i)
+	{
+		iPoint pos = app->map->MapToWorld(lastPath.At(i)->x, lastPath.At(i)->y);
+		if (app->physics->debug == true) {
+			app->render->DrawTexture(app->scene_testing->mouseTileTex, pos.x, pos.y, SDL_FLIP_NONE);
+		}
+	}
+
 	b2Transform pbodyPos = pbody->body->GetTransform();
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
@@ -254,13 +262,7 @@ bool Enemy_Osiris::Osirisfinding(float dt)
 	lastPath = *app->map->pathfinding->GetLastPath();
 
 	//Get the latest calculated path and draw
-	for (uint i = 0; i < lastPath.Count(); ++i)
-	{
-		iPoint pos = app->map->MapToWorld(lastPath.At(i)->x, lastPath.At(i)->y);
-		if (app->physics->debug == true) {
-			app->render->DrawTexture(app->scene_testing->mouseTileTex, pos.x, pos.y, SDL_FLIP_NONE);
-		}
-	}
+	
 
 	if (lastPath.Count() > 1) { // Asegúrate de que haya al menos una posición en el camino
 
