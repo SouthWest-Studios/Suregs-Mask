@@ -41,9 +41,10 @@ public:
 	bool miniGameStart(float dt);
 	bool miniGameLoop(float dt);
 	bool miniGameEnd(float dt);
-	void reward_pool(Fishlevel fishingType, std::vector<std::vector<const char*>>* chosefishing_path_ptr);
+	void reward_pool(Fishlevel fishingType);
 
 
+	char* rutaPath(const char* filePath);
 	void castingline(FISHINGTYPE type);
 	void ani_castingline(Direction direction);
 	void playNormalFishing();
@@ -145,8 +146,8 @@ public:
 	int gamePlayTime;
 
 private:
-	std::vector<std::vector<const char*>>* chosefishing_path_ptr = new std::vector<std::vector<const char*>>();
-	std::vector<std::vector<const char*>>* choseName_path = new std::vector<std::vector<const char*>>();
+	std::vector<std::vector<const char*>>chosefishing_path;
+	std::vector<std::vector<const char*>>choseName_path;
 	const char* fishing_path;
 	const char* name_path;
 	
