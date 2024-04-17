@@ -5,8 +5,8 @@
 #include "Textures.h"
 #include "Audio.h"
 #include "Scene_Testing.h"
-#include "Scene_intro.h"
-#include "Scene_menu.h"
+#include "Scene_Intro.h"
+#include "Scene_Menu.h"
 #include "Scene_Pueblo.h"
 #include "Scene_Mazmorra0.h"
 #include "Map.h"
@@ -47,8 +47,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	physics = new Physics(this);
 	fadeToBlack = new ModuleFadeToBlack(this);
 
-	scene_intro = new Scene_intro(this, true);
-	scene_menu = new Scene_menu(this, false);
+	scene_intro = new Scene_Intro(this, true);
+	scene_menu = new Scene_Menu(this, false);
 	scene_testing = new Scene_testing(this, false);
 	scene_pueblo = new Scene_Pueblo(this, false);
 	scene_mazmorra0 = new Scene_Mazmorra0(this, false);
