@@ -112,6 +112,7 @@
     <ClCompile Include="Source\InventoryManager.cpp" />
     <ClCompile Include="Source\Item.cpp" />
     <ClCompile Include="Source\Item_Diamante.cpp" />
+    <ClCompile Include="Source\Item_Ojo.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\App.cpp" />
     <ClCompile Include="Source\Audio.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="Source\Item.h" />
     <ClInclude Include="Source\ItemInv.h" />
     <ClInclude Include="Source\Item_Diamante.h" />
+    <ClInclude Include="Source\Item_Ojo.h" />
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\Menu.h" />
     <ClInclude Include="Source\MiniGameFishing.h" />

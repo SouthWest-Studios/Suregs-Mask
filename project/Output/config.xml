@@ -48,6 +48,7 @@
 		<shar texturePath="Assets/Textures/Entidades/Shar/Sprites.png" Tsprite="45" Pwidth="2190" sprite_x="146" sprite_y="153"/>
 		<item_cuerno texturePath="Assets/Textures/Entidades/Items/cuerno.png"/>
 		<item_diamante texturePath="Assets/Textures/Entidades/Items/texture_diamond.png"/>
+		<item_ojo texturePath="Assets/Textures/Entidades/Items/texture_eye.png"/>
 		
 
 		<item x="1200" y="2600" texturePath="Assets/Textures/Entidades/Jugador/salamanda1.png" Tsprite="23" Pwidth="1000" sprite_x="100" sprite_y="160"/>

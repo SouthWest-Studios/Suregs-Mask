@@ -29,6 +29,7 @@
 #include "NPC_MujerEnamorada.h"
 #include "NPC_MujerPreocupada.h"
 #include "Item_Diamante.h"
+#include "Item_Ojo.h"
 #include "TPEntity.h"
 
 Map::Map(App* app, bool start_enabled) : Module(app, start_enabled), mapLoaded(false)
@@ -1034,6 +1035,14 @@ bool Map::LoadEntities(std::string layerName)
 						diamante->config = configNode.child("entities_data").child("item_diamante");
 						diamante->position = iPoint(pos.x + 16, pos.y + 16);
 						diamante->Start();
+					}
+					//OJO
+					if (gid == tileset->firstgid + 41) {
+							Item_Ojo* ojo = (Item_Ojo*)app->entityManager->CreateEntity(EntityType::ITEM_OJO);
+							ojo->config = configNode.child("entities_data").child("item_ojo");
+							ojo->position = iPoint(pos.x + 16, pos.y + 16);
+							ojo->Start();
+						
 					}
 				}
 			}

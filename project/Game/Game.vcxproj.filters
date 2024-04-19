@@ -157,6 +157,9 @@
     <ClCompile Include="Source\Hud.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Item_Ojo.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -368,6 +371,9 @@
     </ClInclude>
     <ClInclude Include="Source\Hud.h">
       <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Item_Ojo.h">
+      <Filter>Entities\Items</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,5 @@
-#ifndef __ITEMDIAMANTE_H__
-#define __ITEMDIAMANTE_H__
+#ifndef __ITEMOJO_H__
+#define __ITEMOJO_H__
 
 #include "Entity.h"
 #include "Point.h"
@@ -7,13 +7,13 @@
 
 struct SDL_Texture;
 
-class Item_Diamante : public Entity
+class Item_Ojo : public Entity
 {
 public:
 	/*Espada() : Entity(EntityType::ESPADA, 0, 100, 0, 0, 0) {}*/
 
-	Item_Diamante(EntityType type, int id, int ataque,int durabilidad, int magia, float peso); // Constructor con parámetros
-	virtual ~Item_Diamante();
+	Item_Ojo(EntityType type, int id, int ataque,int durabilidad, int magia, float peso); // Constructor con parámetros
+	virtual ~Item_Ojo();
 
 	bool Awake();
 
@@ -50,4 +50,4 @@ private:
 	
 };
 
-#endif // __ITEMDIAMANTE_H__
+#endif // __ITEMOJO_H__
