@@ -20,8 +20,8 @@
 	</window>
 
 	<audio>
-		<music volume="50"/>
-		<fx volume="50"/>
+		<music volume="64"/>
+		<fx volume="64"/>
 	</audio>
 
 	<sounds>

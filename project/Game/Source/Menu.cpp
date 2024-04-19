@@ -16,6 +16,8 @@
 #include "Scene_Testing.h"
 #include "ModuleFadeToBlack.h"
 
+#include "SDL_mixer/include/SDL_mixer.h"
+
 Menu::Menu(App* app, bool start_enabled) : Module(app, start_enabled)
 {
 	name.Create("Menu");
@@ -206,7 +208,11 @@ bool Menu::Update(float dt)
 	{
 		if (music != nullptr)
 		{
-			app->audio->volumeMusic = ((GuiControlSlider*)music)->value;
+			int newVolume = ((GuiControlSlider*)music)->value;
+			// Asegurarse de que el nuevo volumen esté dentro de los límites válidos (0-128 para SDL Mixer)
+			newVolume = std::max(0, std::min(128, newVolume));
+			// Establecer el volumen de la música
+			Mix_VolumeMusic(newVolume);
 		}
 		
 
