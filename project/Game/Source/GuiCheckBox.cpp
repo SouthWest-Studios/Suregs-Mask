@@ -19,6 +19,7 @@ GuiCheckBox::GuiCheckBox(uint32 id, SDL_Rect bounds, SDL_Rect bounds2, const cha
 	img = app->tex->Load("Assets/Textures/Interfaz/CheckBoxUnMarked.png");
 	img2 = app->tex->Load("Assets/Textures/Interfaz/CheckBoxMarked.png");
 	img3 = app->tex->Load("Assets/Textures/Interfaz/CheckBoxSelected.png");
+	img4 = app->tex->Load("Assets/Textures/Interfaz/ChecKBoxMarkedSelected.png");
 }
 
 GuiCheckBox::~GuiCheckBox()
@@ -104,7 +105,7 @@ bool GuiCheckBox::PostUpdate()
 				app->render->DrawTexture(img2, bounds.x, bounds.y, SDL_FLIP_NONE, 0, 0, 0, 0, true);
 				break;
 			case GuiControlState::FOCUSED:
-				app->render->DrawTexture(img2, bounds.x, bounds.y, SDL_FLIP_NONE, 0, 0, 0, 0, true);
+				app->render->DrawTexture(img4, bounds.x, bounds.y, SDL_FLIP_NONE, 0, 0, 0, 0, true);
 				break;
 			case GuiControlState::PRESSED:
 				app->render->DrawTexture(img2, bounds.x, bounds.y, SDL_FLIP_NONE, 0, 0, 0, 0, true);

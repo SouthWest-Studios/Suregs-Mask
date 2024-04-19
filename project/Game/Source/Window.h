@@ -35,7 +35,7 @@ public:
 public:
 	// The window we'll be rendering to
 	SDL_Window* window;
-
+	bool fullscreen = false;
 	// The surface contained by the window
 	SDL_Surface* screenSurface;
 
@@ -44,7 +44,7 @@ private:
 	uint width;
 	uint height;
 	uint scale;
-	bool fullscreen = false;
+	
 };
 
 #endif // __WINDOW_H__

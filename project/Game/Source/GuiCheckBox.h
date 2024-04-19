@@ -33,6 +33,7 @@ private:
 	SDL_Texture* img;
 	SDL_Texture* img2;
 	SDL_Texture* img3;
+	SDL_Texture* img4;
 };
 
 #endif // __GUICHECKBOX_H__
