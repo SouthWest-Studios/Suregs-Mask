@@ -521,8 +521,8 @@ void Player::PlayerMovement(float dt)
 	//printf("%d", pressingUp);
 	// Actualizar velocidad
 	if (!isDashing) {
-		velocity.x = horizontalMovement * GetRealMovementSpeed() * dt;
-		velocity.y = verticalMovement * GetRealMovementSpeed() * dt;
+		velocity.x = horizontalMovement * GetRealMovementSpeed() * speed * 10 * dt;
+		velocity.y = verticalMovement * GetRealMovementSpeed() * speed * 10 * dt;
 
 		// Si hay entrada de movimiento, actualizar estado y direcci��n.
 
