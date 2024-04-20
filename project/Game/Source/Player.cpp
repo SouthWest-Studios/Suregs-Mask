@@ -122,7 +122,7 @@ bool Player::Start() {
 	pbody->ctype = ColliderType::PLAYER;
 
 	//initialize audio effect
-	pickCoinFxId = app->audio->LoadFx(config.attribute("coinfxpath").as_string());
+	run_fx = app->audio->LoadAudioFx("run_fx");
 
 	cdTimerDashMS = 500;
 	cdTimerAttackMS = 100000 / currentStats.attackSpeed;
@@ -151,6 +151,7 @@ bool Player::Update(float dt)
 	switch (nextState) {
 	case EntityState::RUNNING:
 		Run(dt);
+		app->audio->PlayFx(run_fx);
 		break;
 	case EntityState::ATTACKING:
 		Attack(dt);
@@ -357,7 +358,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");
-		app->audio->PlayFx(pickCoinFxId);
 		break;
 	case ColliderType::ENEMY:
 		if (physA == attackSensor) {
