@@ -13,6 +13,7 @@
 #include "Pathfinding.h"
 #include "Map.h"
 #include "Physics.h"
+#include <Optick/include/optick.h>
 
 
 
@@ -34,7 +35,7 @@ bool Enemy_Shar::Awake() {
 
 bool Enemy_Shar::Start() {
 
-
+	OPTICK_EVENT();
 	//position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
 
 	TSprite = config.attribute("Tsprite").as_int();
@@ -60,6 +61,8 @@ bool Enemy_Shar::Start() {
 
 bool Enemy_Shar::Update(float dt)
 {
+	OPTICK_EVENT();
+
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
 
 	if (playerPos.x < position.x)

@@ -13,6 +13,7 @@
 #include "Pathfinding.h"
 #include "Map.h"
 #include "Physics.h"
+#include <Optick/include/optick.h>
 
 
  
@@ -34,7 +35,7 @@ bool Enemy_Osiris::Awake() {
 
 bool Enemy_Osiris::Start() {
 
-
+	OPTICK_EVENT();
 	//position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
 
 	TSprite = config.attribute("Tsprite").as_int();
@@ -60,6 +61,8 @@ bool Enemy_Osiris::Start() {
 
 bool Enemy_Osiris::Update(float dt)
 {
+	OPTICK_EVENT();
+
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
 
 	if (playerPos.x < position.x)

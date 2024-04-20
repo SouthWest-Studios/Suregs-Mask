@@ -53,6 +53,7 @@ bool Map::Awake(pugi::xml_node config)
 
 bool Map::Start() {
 
+	OPTICK_EVENT();
 	//Calls the functon to load the map, make sure that the filename is assigned
 	SString mapPath = path;
 	mapPath += name;
@@ -80,6 +81,7 @@ bool Map::Update(float dt)
 
 bool Map::PostUpdate()
 {
+
 	OPTICK_CATEGORY("Map", Optick::Category::GameLogic)
 		bool ret = true;
 
