@@ -123,7 +123,7 @@ bool Player::Start() {
 	pbody->ctype = ColliderType::PLAYER;
 
 	//initialize audio effect
-	pickCoinFxId = app->audio->LoadFx(config.attribute("coinfxpath").as_string());
+	run_fx = app->audio->LoadAudioFx("run_fx");
 
 	cdTimerDashMS = 500;
 	cdTimerAttackMS = 100000 / currentStats.attackSpeed;
@@ -170,6 +170,7 @@ bool Player::Update(float dt)
 	switch (nextState) {
 	case EntityState::RUNNING:
 		Run(dt);
+		app->audio->PlayFx(run_fx);
 		break;
 	case EntityState::ATTACKING:
 		Attack(dt);
@@ -188,21 +189,7 @@ bool Player::Update(float dt)
 	default:
 		break;
 	}
-	//switch (state)
-	//{
-	//case EntityState::IDLE:
-	//	currentAnimation = &idleAnim;
-	//	break;
-	//case EntityState::RUNNING:
-	//	currentAnimation = &runAnim;
-	//	break;
-	//case EntityState::ATTACKING:
-	//	//currentAnimation = &attackAnim;
-	//	break;
-	//default:
-	//	//currentAnimation = &idleAnim;
-	//	break;
-	//}
+
 
 	currentAnimation->Update();
 	return true;
@@ -217,12 +204,12 @@ bool Player::PostUpdate() {
 
 	if (isFacingLeft) {
 		//app->render->DrawTexture(texture, position.x - 50, position.y - 200, SDL_FLIP_HORIZONTAL, &rect);
-		app->render->DrawTexture(texture, position.x - 50, position.y - 200, 0.5f, SDL_FLIP_NONE, &rect);
-
+		app->render->DrawTexture(texture, position.x - 75, position.y - 100, 0.5f, SDL_FLIP_NONE, &rect);
+		
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 50, position.y - 200, 0.5f, SDL_FLIP_HORIZONTAL, &rect);
-
+		app->render->DrawTexture(texture, position.x - 75, position.y - 100, 0.5f, SDL_FLIP_HORIZONTAL, &rect);
+		
 	}
 	return true;
 }
@@ -387,7 +374,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");
-		app->audio->PlayFx(pickCoinFxId);
 		break;
 	case ColliderType::ENEMY:
 		if (physA == attackSensor) {
@@ -454,8 +440,10 @@ void Player::CameraMovement(float dt)
 	app->win->GetWindowSize(windowW, windowH);
 
 	int targetPosX = (-position.x * app->win->GetScale() + (windowW / 2) - 10);
-	int targetPosY = (-position.y * app->win->GetScale() + (windowH / 2) - 10) + 100;
+	int targetPosY = (-position.y * app->win->GetScale() + (windowH / 2) - 10) + 50;
 
+	
+	
 	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
 	{
 		camaralibre = !camaralibre; // Esto alternar?el valor de camaralibre cada vez que se presione la tecla C en modo debug
@@ -551,8 +539,8 @@ void Player::PlayerMovement(float dt)
 	//printf("%d", pressingUp);
 	// Actualizar velocidad
 	if (!isDashing) {
-		velocity.x = horizontalMovement * GetRealMovementSpeed() * dt;
-		velocity.y = verticalMovement * GetRealMovementSpeed() * dt;
+		velocity.x = horizontalMovement * GetRealMovementSpeed() * speed * 10 * dt;
+		velocity.y = verticalMovement * GetRealMovementSpeed() * speed * 10 * dt;
 
 		// Si hay entrada de movimiento, actualizar estado y direcci��n.
 

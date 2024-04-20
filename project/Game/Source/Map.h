@@ -221,6 +221,8 @@ private:
     MapLayer* navigationLayer;
     int blockedGid = 49; //!!!! make sure that you assign blockedGid according to your map
 
+    uint windowW, windowH;
+
     List<PhysBody*> collisionsList;
 
     pugi::xml_document configFile;

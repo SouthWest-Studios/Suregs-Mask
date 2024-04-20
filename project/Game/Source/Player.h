@@ -119,7 +119,7 @@ public:
 	uint texW, texH;
 
 	//Audio fx
-	int pickCoinFxId;
+	int run_fx;
 
 
 	Animation* currentAnimation = nullptr;

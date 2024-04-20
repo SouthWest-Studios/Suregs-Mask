@@ -37,6 +37,7 @@
       <select_fx path="Assets/Audio/Fx/mixkit-arrow-shot-through-air-2771.wav"/>
       <inventory_fx path="Assets/Audio/Fx/backpack-34942.wav"/>
       <change_inventory_fx path="Assets/Audio/Fx/turnpage-99756.wav"/>
+      <run_fx path="Assets/Audio/Fx/run_fx.wav"/>
 		</fx>
 	</sounds>
 	<entities_data>
