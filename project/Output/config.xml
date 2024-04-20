@@ -42,7 +42,7 @@
 	<entities_data>
 		<!-- <player x="1450" y="2500" texturePath="Assets/Textures/Entidades/Jugador/salamanda.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg" Posx="150" Posy="570" Tsprite="23" Pwidth="1000" sprite_x="100" sprite_y="160"/>
             -->
-		<player texturePath="Assets/Textures/Entidades/Jugador/textura_player.png" Tsprite="24" Pwidth="2404" sprite_x="300" sprite_y="250"/>
+		<player texturePath="Assets/Textures/Entidades/Jugador/textura_player.png" Tsprite="24" Pwidth="2408" sprite_x="301" sprite_y="250"/>
 		<osiris texturePath="Assets/Textures/Entidades/Osiris/Viking/VikingNoEffect-Sheet.png" Tsprite="60" Pwidth="1380" sprite_x="115" sprite_y="84"/>
 		<ols texturePath="Assets/Textures/Entidades/Ols/animations/spritesheets/Sprites.png" Tsprite="374" Pwidth="6336" sprite_x="288" sprite_y="128"/>
 		<shar texturePath="Assets/Textures/Entidades/Shar/Sprites.png" Tsprite="45" Pwidth="2190" sprite_x="146" sprite_y="153"/>
