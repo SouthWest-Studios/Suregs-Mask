@@ -646,7 +646,6 @@ bool MiniGameFishing::miniGameLoop(float dt)
 
 	//Animation float
 	if (fishingfloat_lineReady) {
-		//ani_castingline(app->scene_testing->GetPlayer()->player_Direction);//animation and collision of the float
 		ani_castingline(app->entityManager->GetPlayer()->player_Direction);//animation and collision of the float
 		//printf("%s", Direction::DOWN);
 	}//end_if can fishing or not
