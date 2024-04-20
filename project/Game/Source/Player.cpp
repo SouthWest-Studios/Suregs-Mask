@@ -165,21 +165,7 @@ bool Player::Update(float dt)
 	default:
 		break;
 	}
-	//switch (state)
-	//{
-	//case EntityState::IDLE:
-	//	currentAnimation = &idleAnim;
-	//	break;
-	//case EntityState::RUNNING:
-	//	currentAnimation = &runAnim;
-	//	break;
-	//case EntityState::ATTACKING:
-	//	//currentAnimation = &attackAnim;
-	//	break;
-	//default:
-	//	//currentAnimation = &idleAnim;
-	//	break;
-	//}
+
 
 	currentAnimation->Update();
 	return true;
@@ -194,11 +180,11 @@ bool Player::PostUpdate() {
 
 	if (isFacingLeft) {
 		//app->render->DrawTexture(texture, position.x - 50, position.y - 200, SDL_FLIP_HORIZONTAL, &rect);
-		app->render->DrawTexture(texture, position.x - 50, position.y - 200, 0.5f, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 75, position.y - 100, 0.5f, SDL_FLIP_NONE, &rect);
 		
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 50, position.y - 200, 0.5f, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x - 75, position.y - 100, 0.5f, SDL_FLIP_HORIZONTAL, &rect);
 		
 	}
 	return true;
@@ -424,7 +410,9 @@ void Player::CameraMovement(float dt)
 	app->win->GetWindowSize(windowW, windowH);
 
 	int targetPosX = (-position.x * app->win->GetScale() + (windowW / 2) - 10);
-	int targetPosY = (-position.y * app->win->GetScale() + (windowH / 2) - 10) + 100;
+	int targetPosY = (-position.y * app->win->GetScale() + (windowH / 2) - 10) + 50;
+
+	
 	
 	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
 	{

@@ -31,6 +31,7 @@
 #include "Item_Diamante.h"
 #include "Item_Ojo.h"
 #include "TPEntity.h"
+#include "Window.h"
 
 Map::Map(App* app, bool start_enabled) : Module(app, start_enabled), mapLoaded(false)
 {
@@ -66,6 +67,9 @@ bool Map::Start() {
     pathfinding->SetNavigationMap((uint)mapData.width, (uint)mapData.height, navigationMap);
     RELEASE_ARRAY(navigationMap);
 
+
+	app->win->GetWindowSize(windowW, windowH);
+
 	return true;
 }
 
@@ -92,7 +96,8 @@ bool Map::PostUpdate()
 		//Check if the property Draw exist get the value, if it's true draw the lawyer
 		if (mapLayer->data->properties.GetProperty("Draw") != NULL && mapLayer->data->properties.GetProperty("Draw")->value == "true") {
 
-			iPoint playerPos = app->entityManager->GetPlayer()->position;
+			//iPoint playerPos = app->entityManager->GetPlayer()->position;
+			iPoint playerPos = iPoint(-app->render->camera.x + (windowW/2), -app->render->camera.y + (windowH/2));
 			int xToTiledLeft = MAX((playerPos.x / 32) - TILES_TO_LOAD, 0);
 			int xToTiledRight = MIN((playerPos.x / 32) + TILES_TO_LOAD, mapLayer->data->width);
 
