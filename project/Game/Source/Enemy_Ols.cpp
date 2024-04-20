@@ -199,7 +199,7 @@ bool Enemy_Ols::Olsfinding(float dt)
 	iPoint playerPos = app->map->WorldToMap(app->entityManager->GetPlayer()->position.x, app->entityManager->GetPlayer()->position.y);
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
 
-	app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posición del enemigo hacia la posición del jugador
+	app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
 	lastPath = app->map->pathfinding->GetLastPath();
 
 	//Get the latest calculated path and draw
@@ -211,12 +211,12 @@ bool Enemy_Ols::Olsfinding(float dt)
 		}
 	}
 
-	if (lastPath->Count() > 1) { // Asegúrate de que haya al menos una posición en el camino
+	if (lastPath->Count() > 1) { // Asegate de que haya al menos una posicion en el camino
 
-		// Toma la primera posición del camino como el objetivo al que el enemigo debe dirigirse
+		// Toma la primera posicion del camino como el objetivo al que el enemigo debe dirigirse
 		iPoint targetPos = app->map->MapToWorld(lastPath->At(1)->x, lastPath->At(1)->y);
 
-		// Calcula la dirección hacia el objetivo
+		// Calcula la direccion hacia el objetivo
 		b2Vec2 direction(targetPos.x - position.x, targetPos.y - position.y);
 		direction.Normalize();
 
@@ -226,7 +226,7 @@ bool Enemy_Ols::Olsfinding(float dt)
 		// Aplica la velocidad al cuerpo del enemigo
 		pbody->body->SetLinearVelocity(velocity);
 
-		// Determina si el enemigo está mirando hacia la izquierda o hacia la derecha
+		// Determina si el enemigo est?mirando hacia la izquierda o hacia la derecha
 		if (direction.x < 0) {
 			isFacingLeft = true;
 		}
