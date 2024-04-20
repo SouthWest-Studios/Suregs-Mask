@@ -61,7 +61,7 @@ bool Scene_Pueblo::Start()
 	app->win->GetWindowSize(windowW, windowH);
 
 	// Texture to highligh mouse position 
-	mouseTileTex = app->tex->Load("Assets/Mapas/tileSelection.png");
+	//mouseTileTex = app->tex->Load("Assets/Mapas/tileSelection.png");
 
 	// L15: DONE 2: Instantiate a new GuiControlButton in the Scene_Pueblo
 

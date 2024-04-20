@@ -214,7 +214,23 @@ bool Map::CleanUp()
 
 	while (objectsItem != NULL)
 	{
+
+		ListItem<MapObject*>* objectItem;
+		objectItem = objectsItem->data->objects.start;
+		while (objectItem != NULL)
+		{
+			RELEASE(objectItem->data);
+			delete objectItem->data;
+
+			objectItem = objectItem->next;
+		}
+
 		RELEASE(objectsItem->data);
+		delete objectsItem->data;
+
+
+
+
 		objectsItem = objectsItem->next;
 	}
 	mapData.mapObjects.Clear();
