@@ -24,8 +24,6 @@ bool PathFinding::CleanUp()
 	LOG("Freeing pathfinding library");
 
 	lastPath.Clear();
-
-
 	RELEASE_ARRAY(map);
 
 	return true;

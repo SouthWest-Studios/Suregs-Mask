@@ -126,7 +126,7 @@ bool MiniGameFishing::PostUpdate()
 
 bool MiniGameFishing::CleanUp()
 {
-
+	app->tex->UnLoad(texture);
 	return true;
 }
 

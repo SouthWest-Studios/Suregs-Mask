@@ -189,6 +189,7 @@ bool Map::CleanUp()
 	tileset = mapData.tilesets.start;
 
 	while (tileset != NULL) {
+		app->tex->UnLoad(tileset->data->texture);
 		RELEASE(tileset->data);
 		tileset = tileset->next;
 	}
