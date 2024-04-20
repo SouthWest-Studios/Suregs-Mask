@@ -109,6 +109,10 @@ bool DialogTrigger::CleanUp()
 
 	dialoguesRepeat.Clear();
 
+	app->entityManager->DestroyEntity(pbody->entity);
+	app->physics->DestroyBody(pbody);
+	SDL_DestroyTexture(texture);
+
 	return true;
 }
 
