@@ -192,10 +192,13 @@ bool Player::PostUpdate() {
 
 
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 50, position.y - 200, SDL_FLIP_HORIZONTAL, &rect);
+		//app->render->DrawTexture(texture, position.x - 50, position.y - 200, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x - 50, position.y - 200, 0.5f,SDL_FLIP_HORIZONTAL, &rect);
+		
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 50, position.y - 200, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 50, position.y - 200, 0.5f, SDL_FLIP_NONE, &rect);
+		
 	}
 	return true;
 }
