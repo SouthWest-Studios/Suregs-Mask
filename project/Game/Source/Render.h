@@ -8,6 +8,14 @@
 #include "SDL/include/SDL.h"
 #include "SDL_ttf/include/SDL_ttf.h"
 
+struct DrawableObject
+{
+	SDL_Texture* texture;
+	int x, y;
+	int anchorY;
+	int width, height;
+};
+
 class Render : public Module
 {
 public:
@@ -64,6 +72,9 @@ public:
 	TTF_Font* secondaryFont;
 
 	bool vsync = false;
+
+	std::vector<DrawableObject> objectsToDraw;
+
 };
 
 #endif // __RENDER_H__

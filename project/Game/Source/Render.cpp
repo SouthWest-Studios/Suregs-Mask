@@ -74,6 +74,24 @@ bool Render::Start()
 // Called each loop iteration
 bool Render::PreUpdate()
 {
+	//Ejemplo añadir sprite en los Start():	app->render->objectsToDraw.push_back({ textura, posicion X, posicion Y, punto de anclaje en Y = (posY + num), ancho, largo});
+
+	for (DrawableObject& obj : objectsToDraw)
+	{
+		if (obj.texture == app->entityManager->GetPlayer()->texture)
+		{
+			obj.x = app->entityManager->GetPlayer()->position.x;
+			obj.y = app->entityManager->GetPlayer()->position.y;
+			obj.anchorY = app->entityManager->GetPlayer()->position.y + 0; //Según el sprite, añadir el valor que corresponda -> !0
+			break;
+		}
+	}
+
+	std::sort(objectsToDraw.begin(), objectsToDraw.end(),
+		[](const DrawableObject& a, const DrawableObject& b)
+		{
+			return a.anchorY < b.anchorY;
+		});
 	SDL_RenderClear(renderer);
 	return true;
 }
@@ -84,7 +102,15 @@ bool Render::Update(float dt)
 }
 
 bool Render::PostUpdate() {
-
+	for (const DrawableObject& obj : objectsToDraw)
+	{
+		// Verifica si la posición del objeto está dentro de los límites de la cámara
+		if (obj.x + obj.width >= app->render->camera.x && obj.x <= app->render->camera.x + app->render->camera.w &&
+			obj.y + obj.height >= app->render->camera.y && obj.y <= app->render->camera.y + app->render->camera.h)
+		{
+			app->render->DrawTexture(obj.texture, obj.x, obj.y);
+		}
+	}
 	return true;
 }
 
