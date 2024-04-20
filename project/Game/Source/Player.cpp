@@ -22,29 +22,29 @@ Player::Player() : Entity(EntityType::PLAYER)
 	name.Create("player");
 
 	// Inicializa las estadísticas base
-    baseStats.maxHealth = 100;
-    baseStats.currentHealth = 100;
-    baseStats.movementSpeed = 100;
-    baseStats.attackSpeed = 100;
-    baseStats.attackDamage = 100;
+	baseStats.maxHealth = 100;
+	baseStats.currentHealth = 100;
+	baseStats.movementSpeed = 100;
+	baseStats.attackSpeed = 100;
+	baseStats.attackDamage = 100;
 
-    // Inicializa las estadísticas actuales a las estadísticas base
-    currentStats = baseStats;
+	// Inicializa las estadísticas actuales a las estadísticas base
+	currentStats = baseStats;
 
-    // Estadísticas de la máscara 0
-    maskStats[static_cast<int>(Mask::MASK0)].maxHealthModifier = 0;
-    maskStats[static_cast<int>(Mask::MASK0)].movementSpeedModifier = -10;
-    maskStats[static_cast<int>(Mask::MASK0)].attackDamageModifier = 10;
-    maskStats[static_cast<int>(Mask::MASK0)].attackSpeedModifier = 10;
+	// Estadísticas de la máscara 0
+	maskStats[static_cast<int>(Mask::MASK0)].maxHealthModifier = 0;
+	maskStats[static_cast<int>(Mask::MASK0)].movementSpeedModifier = -10;
+	maskStats[static_cast<int>(Mask::MASK0)].attackDamageModifier = 10;
+	maskStats[static_cast<int>(Mask::MASK0)].attackSpeedModifier = 10;
 	maskStats[static_cast<int>(Mask::MASK0)].maskDamage = 50;
 	maskStats[static_cast<int>(Mask::MASK0)].maskCoolDown = 25000; //En Milisegundos
 	maskStats[static_cast<int>(Mask::MASK0)].firstTimeUsed = false;
 
 	// Estadísticas de la máscara 1
 	maskStats[static_cast<int>(Mask::MASK1)].maxHealthModifier = -10;
-    maskStats[static_cast<int>(Mask::MASK1)].movementSpeedModifier = 10;
-    maskStats[static_cast<int>(Mask::MASK1)].attackDamageModifier = 10;
-    maskStats[static_cast<int>(Mask::MASK2)].attackSpeedModifier = 0;
+	maskStats[static_cast<int>(Mask::MASK1)].movementSpeedModifier = 10;
+	maskStats[static_cast<int>(Mask::MASK1)].attackDamageModifier = 10;
+	maskStats[static_cast<int>(Mask::MASK2)].attackSpeedModifier = 0;
 	maskStats[static_cast<int>(Mask::MASK1)].maskDamage = 100;
 	maskStats[static_cast<int>(Mask::MASK1)].maskCoolDown = 30000; //En Milisegundos
 	maskStats[static_cast<int>(Mask::MASK1)].firstTimeUsed = false;
@@ -81,9 +81,9 @@ Player::Player() : Entity(EntityType::PLAYER)
 	passiveStats[static_cast<int>(Mask::MASK3)].rangeBoost = 0;
 	passiveStats[static_cast<int>(Mask::MASK3)].dashBoost = 0;
 
-    // Máscaras a NOMASK
-    primaryMask = Mask::NOMASK;
-    secondaryMask = Mask::NOMASK;
+	// Máscaras a NOMASK
+	primaryMask = Mask::NOMASK;
+	secondaryMask = Mask::NOMASK;
 
 
 }
@@ -112,6 +112,7 @@ bool Player::Start() {
 
 	idleAnim.LoadAnim("player", "idleAnim", spritePositions);
 	runAnim.LoadAnim("player", "runAnim", spritePositions);
+	dashiAnim.LoadAnim("player", "dashiAnim", spritePositions);
 
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
@@ -133,12 +134,20 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
-	nextState = EntityState::IDLE;
+	if (!inAnimation) {
+		nextState = EntityState::IDLE;
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
 		godmode = !godmode;
 		pbody->body->GetFixtureList()[0].SetSensor(godmode);
+	}
+
+	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "dashiAnim") {
+		printf("\nReset");
+		inAnimation = false;
+		dashiAnim.Reset();
 	}
 
 	if (godmode) { GodMode(dt); }
@@ -147,6 +156,16 @@ bool Player::Update(float dt)
 	CameraMovement(dt);
 
 	//printf("\nposx:%d, posy: %d",position.x, position.y);
+
+	
+
+
+
+	//if (isDashing) {
+	//	//printf("dashi");
+	//	printf("\nAnimationName: %s:", currentAnimation->getNameAnimation());
+	//	currentAnimation = &dashiAnim;
+	//}
 
 	switch (nextState) {
 	case EntityState::RUNNING:
@@ -157,6 +176,11 @@ bool Player::Update(float dt)
 		break;
 	case EntityState::IDLE:
 		DoNothing(dt);
+		break;
+	case EntityState::DASHI:
+		if (isDashing) {
+			Dashi(dt);
+		}
 		break;
 	case EntityState::MASK_ATTACK:
 		MaskAttack(dt);
@@ -194,11 +218,11 @@ bool Player::PostUpdate() {
 	if (isFacingLeft) {
 		//app->render->DrawTexture(texture, position.x - 50, position.y - 200, SDL_FLIP_HORIZONTAL, &rect);
 		app->render->DrawTexture(texture, position.x - 50, position.y - 200, 0.5f, SDL_FLIP_NONE, &rect);
-		
+
 	}
 	else {
 		app->render->DrawTexture(texture, position.x - 50, position.y - 200, 0.5f, SDL_FLIP_HORIZONTAL, &rect);
-		
+
 	}
 	return true;
 }
@@ -228,18 +252,23 @@ void Player::Run(float dt)
 	currentAnimation = &runAnim;
 }
 
+void Player::Dashi(float dt)
+{
+	//printf("runn");
+	currentAnimation = &dashiAnim;
+}
 void Player::Attack(float dt)
 {
- 	//printf("attack"); 
+	//printf("attack"); 
 
-    // Dirección del ataque
-    int attackX = position.x + lastMovementDirection.x * attackWidth;
-    int attackY = position.y + lastMovementDirection.y * attackHeight;
+	// Dirección del ataque
+	int attackX = position.x + lastMovementDirection.x * attackWidth;
+	int attackY = position.y + lastMovementDirection.y * attackHeight;
 
-    //Sensor
-    attackSensor = app->physics->CreateRectangleSensor(attackX, attackY, attackWidth, attackHeight, DYNAMIC);
-    attackSensor->ctype = ColliderType::PLAYER_ATTACK;
-    attackSensor->listener = this;
+	//Sensor
+	attackSensor = app->physics->CreateRectangleSensor(attackX, attackY, attackWidth, attackHeight, DYNAMIC);
+	attackSensor->ctype = ColliderType::PLAYER_ATTACK;
+	attackSensor->listener = this;
 
 	//Onda expansiva ataque pasivo mascara 1
 	if (secondaryMask == Mask::MASK1) {
@@ -250,64 +279,64 @@ void Player::Attack(float dt)
 }
 
 void Player::UnequipMasks() {
-    currentStats = baseStats;
+	currentStats = baseStats;
 }
 
-void Player::EquipPrimaryMask(Mask mask){
+void Player::EquipPrimaryMask(Mask mask) {
 	primaryMask = mask;
 
-    // Si la máscara no es NOMASK, aplica las modificaciones de estadísticas
-    if (mask != Mask::NOMASK) {
-        currentStats.maxHealth = baseStats.maxHealth * (1 + maskStats[static_cast<int>(mask)].maxHealthModifier / 100);
-        currentStats.movementSpeed = baseStats.movementSpeed * (1 + maskStats[static_cast<int>(mask)].movementSpeedModifier / 100);
-        currentStats.attackSpeed = baseStats.attackSpeed * (1 + maskStats[static_cast<int>(mask)].attackSpeedModifier / 100);
-        currentStats.attackDamage = baseStats.attackDamage * (1 + maskStats[static_cast<int>(mask)].attackDamageModifier / 100);
-    }
+	// Si la máscara no es NOMASK, aplica las modificaciones de estadísticas
+	if (mask != Mask::NOMASK) {
+		currentStats.maxHealth = baseStats.maxHealth * (1 + maskStats[static_cast<int>(mask)].maxHealthModifier / 100);
+		currentStats.movementSpeed = baseStats.movementSpeed * (1 + maskStats[static_cast<int>(mask)].movementSpeedModifier / 100);
+		currentStats.attackSpeed = baseStats.attackSpeed * (1 + maskStats[static_cast<int>(mask)].attackSpeedModifier / 100);
+		currentStats.attackDamage = baseStats.attackDamage * (1 + maskStats[static_cast<int>(mask)].attackDamageModifier / 100);
+	}
 }
 
 void Player::EquipSecondaryMask(Mask mask) {
-    secondaryMask = mask;
+	secondaryMask = mask;
 
-    // Si la máscara no es NOMASK, aplica las modificaciones de estadísticas
-    if (mask != Mask::NOMASK) {
-        currentStats.attackDamage = baseStats.attackDamage * (1 + passiveStats[static_cast<int>(mask)].damageBoost / 100);
-    }
+	// Si la máscara no es NOMASK, aplica las modificaciones de estadísticas
+	if (mask != Mask::NOMASK) {
+		currentStats.attackDamage = baseStats.attackDamage * (1 + passiveStats[static_cast<int>(mask)].damageBoost / 100);
+	}
 }
 
 void Player::ChangeMask() {
-    Mask temp = primaryMask;
+	Mask temp = primaryMask;
 	primaryMask = secondaryMask;
 	secondaryMask = temp;
-	
+
 	UnequipMasks();
-  
-    EquipPrimaryMask(primaryMask);
-    EquipSecondaryMask(secondaryMask);
+
+	EquipPrimaryMask(primaryMask);
+	EquipSecondaryMask(secondaryMask);
 
 	cdTimerAttackMS = 100000 / currentStats.attackSpeed;
-	
-	printf("Player primary mask after mask change: %d\n", (static_cast<int>(primaryMask)-1));
-    printf("Player secondary mask after mask change: %d\n", (static_cast<int>(secondaryMask)-1));
+
+	printf("Player primary mask after mask change: %d\n", (static_cast<int>(primaryMask) - 1));
+	printf("Player secondary mask after mask change: %d\n", (static_cast<int>(secondaryMask) - 1));
 	printf("Player stats after mask change:\n");
-    printf("Max Health: %f\n", currentStats.maxHealth);
-    printf("Movement Speed: %f\n", currentStats.movementSpeed);
-    printf("Attack Speed: %f\n", currentStats.attackSpeed);
-    printf("Attack Damage: %f\n", currentStats.attackDamage);
+	printf("Max Health: %f\n", currentStats.maxHealth);
+	printf("Movement Speed: %f\n", currentStats.movementSpeed);
+	printf("Attack Speed: %f\n", currentStats.attackSpeed);
+	printf("Attack Damage: %f\n", currentStats.attackDamage);
 }
 
 void Player::MaskAttack(float dt)
 {
 	switch (primaryMask) {
-		case Mask::NOMASK:
-			//No hace nada
-			break;
-        case Mask::MASK0:
-            CastLightning();
-            break;
-        case Mask::MASK1:
-            AreaAttack(dt);
-            break;
-    }
+	case Mask::NOMASK:
+		//No hace nada
+		break;
+	case Mask::MASK0:
+		CastLightning();
+		break;
+	case Mask::MASK1:
+		AreaAttack(dt);
+		break;
+	}
 }
 
 //Rango ataque mascara 0
@@ -331,19 +360,20 @@ Entity* Player::GetEnemyWithHighestHealthWithinRadius(iPoint position, int radiu
 
 //Ataque mascara 0
 void Player::CastLightning() {
-    Entity* target = GetEnemyWithHighestHealthWithinRadius(position, 500);
-    if (target != nullptr) {
-        printf("Enemy hit: %p at position (%d, %d)\n", (void*)target, target->position.x, target->position.y);
-        target->TakeDamage(maskStats[static_cast<int>(primaryMask)].maskDamage);
-    } else {
-        printf("No enemy alive in range to attack\n");
-    }
+	Entity* target = GetEnemyWithHighestHealthWithinRadius(position, 500);
+	if (target != nullptr) {
+		printf("Enemy hit: %p at position (%d, %d)\n", (void*)target, target->position.x, target->position.y);
+		target->TakeDamage(maskStats[static_cast<int>(primaryMask)].maskDamage);
+	}
+	else {
+		printf("No enemy alive in range to attack\n");
+	}
 }
 
 //Ataque mascara 1
 
 void Player::AreaAttack(float dt) {
-    mask1AttackSensor = app->physics->CreateRectangleSensor(this->position.x, this->position.y, attackMask1Width, attackMask1Height, DYNAMIC);
+	mask1AttackSensor = app->physics->CreateRectangleSensor(this->position.x, this->position.y, attackMask1Width, attackMask1Height, DYNAMIC);
 	mask1AttackSensor->ctype = ColliderType::MASK1_ATTACK;
 	mask1AttackSensor->listener = this;
 }
@@ -375,7 +405,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 				attackDealed = true;
 			}
 		}
-		if(physA == mask1AttackSensor){
+		if (physA == mask1AttackSensor) {
 			LOG("Collision ENEMY");
 			if (physB->entity != nullptr && attackDealed == false) {
 				physB->entity->TakeDamage(maskStats[static_cast<int>(primaryMask)].maskDamage);
@@ -383,7 +413,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			}
 			collisionMask1Timer.Start();
 		}
-	break;
+		break;
 	case ColliderType::RESOURCE_ESPADA:
 		LOG("Collision ESPADA");
 		if (physB->listener->active) {
@@ -425,7 +455,7 @@ void Player::CameraMovement(float dt)
 
 	int targetPosX = (-position.x * app->win->GetScale() + (windowW / 2) - 10);
 	int targetPosY = (-position.y * app->win->GetScale() + (windowH / 2) - 10) + 100;
-	
+
 	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
 	{
 		camaralibre = !camaralibre; // Esto alternar?el valor de camaralibre cada vez que se presione la tecla C en modo debug
@@ -454,7 +484,7 @@ void Player::CameraMovement(float dt)
 			app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
 			app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.005f);
 		}
-		
+
 	}
 }
 
@@ -527,20 +557,24 @@ void Player::PlayerMovement(float dt)
 		// Si hay entrada de movimiento, actualizar estado y direcci��n.
 
 		if (horizontalMovement != 0 || verticalMovement != 0) {
-			nextState = EntityState::RUNNING;
+			if (!inAnimation) {
+				nextState = EntityState::RUNNING;
+			}
 			isFacingLeft = (horizontalMovement < 0);
 			lastMovementDirection = fPoint(horizontalMovement, verticalMovement);
 		}
 	}
 
-	
+
 	FishingDirecction(verticalMovement, horizontalMovement);
 
 	//Si pulsas espacio
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && timerDash.ReadMSec() > cdTimerDashMS) {
 
 		isDashing = true;
+		inAnimation = true;
 		timerDash.Start();
+		nextState = EntityState::DASHI;
 		pbody->body->ApplyForce(b2Vec2(velocity.x * 100, velocity.y * 100), pbody->body->GetWorldCenter(), false);
 	}
 
@@ -550,7 +584,7 @@ void Player::PlayerMovement(float dt)
 	}
 
 	//Si pulsas J para atacar
-	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN && timerAttack.ReadMSec() > cdTimerAttackMS + 100){
+	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN && timerAttack.ReadMSec() > cdTimerAttackMS + 100) {
 		isAttacking = true;
 		timerAttack.Start();
 		nextState = EntityState::ATTACKING;
@@ -563,7 +597,7 @@ void Player::PlayerMovement(float dt)
 			app->physics->DestroyBody(attackSensor);
 			attackSensor = nullptr;
 		}
-		if(mask1PassiveSensor){
+		if (mask1PassiveSensor) {
 			app->physics->DestroyBody(mask1PassiveSensor);
 			mask1PassiveSensor = nullptr;
 		}
@@ -572,7 +606,7 @@ void Player::PlayerMovement(float dt)
 	if (collisionAttackTimer.ReadSec() > 0.25) {
 		app->physics->DestroyBody(attackSensor);
 		attackSensor = nullptr;
-		if(mask1PassiveSensor){
+		if (mask1PassiveSensor) {
 			app->physics->DestroyBody(mask1PassiveSensor);
 			mask1PassiveSensor = nullptr;
 		}
@@ -581,9 +615,9 @@ void Player::PlayerMovement(float dt)
 
 	//Si pulsas K para mascara principal
 
-	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN && 
-    (timerMaskAttack.ReadMSec() > maskStats[static_cast<int>(primaryMask)].maskCoolDown || 
-    !maskStats[static_cast<int>(primaryMask)].firstTimeUsed)){
+	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN &&
+		(timerMaskAttack.ReadMSec() > maskStats[static_cast<int>(primaryMask)].maskCoolDown ||
+			!maskStats[static_cast<int>(primaryMask)].firstTimeUsed)) {
 		maskStats[static_cast<int>(primaryMask)].firstTimeUsed = true;
 		isAttackingMask = true;
 		timerMaskAttack.Start();
@@ -593,12 +627,12 @@ void Player::PlayerMovement(float dt)
 	if (!(timerMaskAttack.ReadMSec() < maskStats[static_cast<int>(primaryMask)].maskCoolDown && isAttackingMask)) {
 		isAttackingMask = false;
 		attackDealed = false;
-		if(mask1AttackSensor){
+		if (mask1AttackSensor) {
 			app->physics->DestroyBody(mask1AttackSensor);
 			mask1AttackSensor = nullptr;
 		}
 	}
-	
+
 	if (collisionMask1Timer.ReadSec() > 0.25) {
 		app->physics->DestroyBody(mask1AttackSensor);
 		mask1AttackSensor = nullptr;
@@ -609,14 +643,14 @@ void Player::PlayerMovement(float dt)
 		ChangeMask();
 	}
 
-	
+
 	b2Transform pbodyPos = pbody->body->GetTransform();
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2;
 }
 void Player::FishingDirecction(bool verticalMovement, bool horizontalMovement)
 {
-	
+
 
 	// Si jugador Mueve
 	if (pressingRight) {

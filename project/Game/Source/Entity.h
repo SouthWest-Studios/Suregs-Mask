@@ -44,7 +44,9 @@ enum class EntityState
 	DEAD,
 	REVIVING,
 	MASK_ATTACK,
-	STATE_COUNT
+	STATE_COUNT,
+	DASHI,
+	NONE
 };
 
 

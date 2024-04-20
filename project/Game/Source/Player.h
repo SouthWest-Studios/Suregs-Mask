@@ -74,6 +74,7 @@ public:
 
 	void DoNothing(float dt);
 	void Run(float dt);
+	void Dashi(float dt);
 	void Attack(float dt);
 
 	float GetRealMovementSpeed() const;
@@ -133,9 +134,9 @@ public:
 	int SpriteY;
 	int Photowidth;
 
-	//Rodar
-	
-	bool getPlayerPosition = false;
+	bool inAnimation = false;
+	//Dashi
+	bool playerInDashi = false;
 	int rodar_PlayerPosition;
 	int rodar_PotisionX;
 	int currentPosX;
@@ -180,6 +181,7 @@ public:
 private:
 	Animation idleAnim;
 	Animation runAnim;
+	Animation dashiAnim;
 
 	bool isFacingLeft = false;
 	bool isDashing = false;
@@ -209,9 +211,15 @@ public:
 		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // RUNNING
 		{ {EntityState::IDLE},	  {EntityState::IDLE},		{EntityState::DEAD}, {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // ATTACKING
 		{ {EntityState::DEAD},	  {EntityState::DEAD},		{EntityState::DEAD}, {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // DEAD
-		{ {EntityState::IDLE},	  {EntityState::IDLE},	    {EntityState::DEAD}, {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // MASK_ATTACK
-		{ {EntityState::IDLE},	  {EntityState::IDLE},	    {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::IDLE}} // REVIVING
+		{ {EntityState::IDLE},	  {EntityState::IDLE},	    {EntityState::DEAD}, {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // REVIVING
+		{ {EntityState::IDLE},	  {EntityState::IDLE},	    {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::IDLE}} // MASK_ATTACK
+		//{ {EntityState::RUN},	  {EntityState::IDLE},	    {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::IDLE}}, // STATE_COUNT
+		//{ {EntityState::IDLE},	  {EntityState::IDLE},	    {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::IDLE}}, // DASHI
+		//{ {EntityState::IDLE},	  {EntityState::IDLE},	    {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::IDLE}} // NONE
+		//
 	};
+
+
 
 	EntityState currentState = state;
 
