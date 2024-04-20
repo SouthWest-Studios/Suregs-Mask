@@ -104,7 +104,7 @@ bool Render::Update(float dt)
 bool Render::PostUpdate() {
 	for (const DrawableObject& obj : objectsToDraw)
 	{
-		// Verifica si la posición del objeto está dentro de los límites de la cámara
+		// Verifica si la posición del objeto est?dentro de los límites de la cámara
 		if (obj.x + obj.width >= app->render->camera.x && obj.x <= app->render->camera.x + app->render->camera.w &&
 			obj.y + obj.height >= app->render->camera.y && obj.y <= app->render->camera.y + app->render->camera.h)
 		{
