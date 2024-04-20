@@ -134,6 +134,10 @@ bool Enemy_Shar::CleanUp()
 	app->entityManager->DestroyEntity(pbody->entity);
 	app->physics->DestroyBody(pbody);
 	SDL_DestroyTexture(texture);
+
+	RELEASE(spritePositions);
+	delete spritePositions;
+
 	return true;
 }
 

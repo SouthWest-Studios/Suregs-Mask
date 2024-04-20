@@ -175,6 +175,7 @@ int PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 				neighbourg = neighbourg->next;
 			}
 			++iterations;
+			//RELEASE(node);
 		}
 	}
 

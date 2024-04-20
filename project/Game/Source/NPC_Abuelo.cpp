@@ -84,6 +84,10 @@ bool NPCAbuelo::CleanUp()
 {
 	//app->physics->GetWorld()->DestroyBody(pbody->body);
 	SDL_DestroyTexture(texture);
+
+	RELEASE(spritePositions);
+	delete spritePositions;
+
 	return true;
 }
 
