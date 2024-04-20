@@ -217,6 +217,7 @@ bool Player::PostUpdate() {
 
 bool Player::CleanUp()
 {
+	app->entityManager->DestroyEntity(pbody->entity);
 	app->physics->GetWorld()->DestroyBody(pbody->body);
 	SDL_DestroyTexture(texture);
 	return true;

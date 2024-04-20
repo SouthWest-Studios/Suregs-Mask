@@ -83,7 +83,7 @@ public:
 
 	PathFinding* path;
 	Player* player;
-	DynArray<iPoint> lastPath;
+	const DynArray<iPoint>* lastPath;
 
 private:
 	Animation idleAnim;

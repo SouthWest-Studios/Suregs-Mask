@@ -90,6 +90,7 @@ bool EntityManager::CleanUp()
 	while (item != NULL && ret == true)
 	{
 		ret = item->data->CleanUp();
+		RELEASE(item->data);
 		item = item->prev;
 	}
 

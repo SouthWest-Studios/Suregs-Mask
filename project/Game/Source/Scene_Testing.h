@@ -44,10 +44,8 @@ public:
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
 	MiniGameFishing* GetRod();
-	Player* GetPlayer();
 
 public:
-	Player* player = new Player;
 	MiniGameFishing* fishing = new MiniGameFishing;
 	SDL_Texture* mouseTileTex = nullptr;
 private:

@@ -196,21 +196,21 @@ bool Enemy_Ols::Olsfinding(float dt)
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
 
 	app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posición del enemigo hacia la posición del jugador
-	lastPath = *app->map->pathfinding->GetLastPath();
+	lastPath = app->map->pathfinding->GetLastPath();
 
 	//Get the latest calculated path and draw
-	for (uint i = 0; i < lastPath.Count(); ++i)
+	for (uint i = 0; i < lastPath->Count(); ++i)
 	{
-		iPoint pos = app->map->MapToWorld(lastPath.At(i)->x, lastPath.At(i)->y);
+		iPoint pos = app->map->MapToWorld(lastPath->At(i)->x, lastPath->At(i)->y);
 		if (app->physics->debug == true) {
-			app->render->DrawTexture(app->scene_testing->mouseTileTex, pos.x, pos.y, SDL_FLIP_NONE);
+			//app->render->DrawTexture(app->scene_testing->mouseTileTex, pos.x, pos.y, SDL_FLIP_NONE);
 		}
 	}
 
-	if (lastPath.Count() > 1) { // Asegúrate de que haya al menos una posición en el camino
+	if (lastPath->Count() > 1) { // Asegúrate de que haya al menos una posición en el camino
 
 		// Toma la primera posición del camino como el objetivo al que el enemigo debe dirigirse
-		iPoint targetPos = app->map->MapToWorld(lastPath.At(1)->x, lastPath.At(1)->y);
+		iPoint targetPos = app->map->MapToWorld(lastPath->At(1)->x, lastPath->At(1)->y);
 
 		// Calcula la dirección hacia el objetivo
 		b2Vec2 direction(targetPos.x - position.x, targetPos.y - position.y);

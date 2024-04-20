@@ -89,10 +89,12 @@ bool DialogTrigger::CleanUp()
 
 	for (item = dialogues.start; item != NULL; item = item->next)
 	{
+
 		pDialog = item->data;
 		//pDialog->face_tex = faceTexture;
 		pDialog->CleanUp();
 		SDL_DestroyTexture(pDialog->face_tex);
+		RELEASE(item->data);
 	}
 
 	dialogues.Clear();
@@ -105,6 +107,7 @@ bool DialogTrigger::CleanUp()
 		pDialog = item->data;
 		//pDialog->face_tex = faceTexture;
 		SDL_DestroyTexture(pDialog->face_tex);
+		RELEASE(item->data);
 	}
 
 	dialoguesRepeat.Clear();

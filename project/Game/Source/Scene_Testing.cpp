@@ -210,8 +210,3 @@ bool Scene_testing::OnGuiMouseClickEvent(GuiControl* control)
 	return true;
 }
 
-Player* Scene_testing::GetPlayer()
-{
-	return player;
-}
-
