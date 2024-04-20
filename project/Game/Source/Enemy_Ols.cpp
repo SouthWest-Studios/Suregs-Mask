@@ -199,7 +199,7 @@ bool Enemy_Ols::Olsfinding(float dt)
 	iPoint playerPos = app->map->WorldToMap(app->entityManager->GetPlayer()->position.x, app->entityManager->GetPlayer()->position.y);
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
 
-	if (abs(playerPos.x - enemyPos.x) < 3 && abs(playerPos.y - enemyPos.y) < 3) {
+	if (abs(playerPos.x - enemyPos.x) < 15 && abs(playerPos.y - enemyPos.y) < 15) {
 		app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
 		lastPath = app->map->pathfinding->GetLastPath();
 
