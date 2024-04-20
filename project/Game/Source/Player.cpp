@@ -219,7 +219,8 @@ bool Player::CleanUp()
 {
 	app->entityManager->DestroyEntity(pbody->entity);
 	app->physics->GetWorld()->DestroyBody(pbody->body);
-	SDL_DestroyTexture(texture);
+	/*app->tex->UnLoad(texture);*/
+	app->tex->UnLoad(texture);
 
 	RELEASE(spritePositions);
 	delete spritePositions;

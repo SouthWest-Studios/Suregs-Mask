@@ -65,7 +65,7 @@ bool Item_Ojo::PostUpdate()
 bool Item_Ojo::CleanUp()
 {
 	app->physics->GetWorld()->DestroyBody(pbody->body);
-	SDL_DestroyTexture(texture);
+	app->tex->UnLoad(texture);
 	return true;
 }
 

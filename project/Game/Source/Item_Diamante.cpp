@@ -65,7 +65,7 @@ bool Item_Diamante::PostUpdate()
 bool Item_Diamante::CleanUp()
 {
 	app->physics->GetWorld()->DestroyBody(pbody->body);
-	SDL_DestroyTexture(texture);
+	app->tex->UnLoad(texture);
 	return true;
 }
 

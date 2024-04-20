@@ -187,7 +187,7 @@ bool DebugConsole::PostLateUpdate()
 		SDL_Rect textRect = { 10, 7, surface->w, surface->h }; // Posici�n del texto
 		SDL_RenderCopy(app->render->renderer, texture, NULL, &textRect);
 		SDL_FreeSurface(surface);
-		SDL_DestroyTexture(texture);
+		app->tex->UnLoad(texture);
 
 		if (showHelp) {
 			int y = 40;
@@ -216,7 +216,7 @@ bool DebugConsole::PostLateUpdate()
 				SDL_RenderCopy(app->render->renderer, texture, nullptr, &dstRect);
 
 				// Liberar la textura y la superficie
-				SDL_DestroyTexture(texture);
+				app->tex->UnLoad(texture);
 				SDL_FreeSurface(surface);
 
 			}

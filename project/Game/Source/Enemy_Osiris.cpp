@@ -157,7 +157,7 @@ bool Enemy_Osiris::PostUpdate() {
 bool Enemy_Osiris::CleanUp()
 {
 	app->physics->GetWorld()->DestroyBody(pbody->body);
-	SDL_DestroyTexture(texture);
+	app->tex->UnLoad(texture);
 
 	RELEASE(spritePositions);
 	delete spritePositions;
@@ -200,7 +200,7 @@ void Enemy_Osiris::Die() {
 	{
 		app->entityManager->DestroyEntity(this);
 		app->physics->GetWorld()->DestroyBody(pbody->body);
-		SDL_DestroyTexture(texture);
+		app->tex->UnLoad(texture);
 	}
 
 }

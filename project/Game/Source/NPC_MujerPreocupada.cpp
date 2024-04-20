@@ -83,7 +83,7 @@ bool NPCMujerPreocupada::PostUpdate() {
 bool NPCMujerPreocupada::CleanUp()
 {
 	//app->physics->GetWorld()->DestroyBody(pbody->body);
-	SDL_DestroyTexture(texture);
+	app->tex->UnLoad(texture);
 
 	RELEASE(spritePositions);
 	delete spritePositions;

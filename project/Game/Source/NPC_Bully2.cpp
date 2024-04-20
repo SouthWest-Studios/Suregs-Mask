@@ -83,7 +83,7 @@ bool NPCBully2::PostUpdate() {
 bool NPCBully2::CleanUp()
 {
 	//app->physics->GetWorld()->DestroyBody(pbody->body);
-	SDL_DestroyTexture(texture);
+	app->tex->UnLoad(texture);
 
 	RELEASE(spritePositions);
 	delete spritePositions;

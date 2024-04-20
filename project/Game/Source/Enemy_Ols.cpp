@@ -132,7 +132,7 @@ bool Enemy_Ols::CleanUp()
 {
 	app->entityManager->DestroyEntity(pbody->entity);
 	app->physics->DestroyBody(pbody);
-	SDL_DestroyTexture(texture);
+	app->tex->UnLoad(texture);
 
 	RELEASE(spritePositions);
 	delete spritePositions;
@@ -164,7 +164,7 @@ void Enemy_Ols::Attack(float dt)
 void Enemy_Ols::Die(float dt) {
 	app->entityManager->DestroyEntity(this);
 	app->physics->GetWorld()->DestroyBody(pbody->body);
-	SDL_DestroyTexture(texture);
+	app->tex->UnLoad(texture);
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 

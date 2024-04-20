@@ -81,7 +81,7 @@ bool DialogTrigger::Update(float dt)
 bool DialogTrigger::CleanUp()
 {
 
-	SDL_DestroyTexture(texture);
+	app->tex->UnLoad(texture);
 	SDL_DestroyTexture(faceTexture);
 
 	ListItem<Dialog*>* item;
@@ -114,7 +114,7 @@ bool DialogTrigger::CleanUp()
 
 	app->entityManager->DestroyEntity(pbody->entity);
 	app->physics->DestroyBody(pbody);
-	SDL_DestroyTexture(texture);
+	app->tex->UnLoad(texture);
 
 	return true;
 }

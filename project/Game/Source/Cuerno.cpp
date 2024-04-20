@@ -65,7 +65,7 @@ bool Cuerno::PostUpdate()
 bool Cuerno::CleanUp()
 {
 	app->physics->GetWorld()->DestroyBody(pbody->body);
-	SDL_DestroyTexture(texture);
+	app->tex->UnLoad(texture);
 	return true;
 }
 
