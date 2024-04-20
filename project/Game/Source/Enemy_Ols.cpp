@@ -199,45 +199,49 @@ bool Enemy_Ols::Olsfinding(float dt)
 	iPoint playerPos = app->map->WorldToMap(app->entityManager->GetPlayer()->position.x, app->entityManager->GetPlayer()->position.y);
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
 
-	app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
-	lastPath = app->map->pathfinding->GetLastPath();
+	if (abs(playerPos.x - enemyPos.x) < 3 && abs(playerPos.y - enemyPos.y) < 3) {
+		app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
+		lastPath = app->map->pathfinding->GetLastPath();
 
-	//Get the latest calculated path and draw
-	for (uint i = 0; i < lastPath->Count(); ++i)
-	{
-		iPoint pos = app->map->MapToWorld(lastPath->At(i)->x, lastPath->At(i)->y);
-		if (app->physics->debug == true) {
-			//app->render->DrawTexture(app->scene_testing->mouseTileTex, pos.x, pos.y, SDL_FLIP_NONE);
+		//Get the latest calculated path and draw
+		for (uint i = 0; i < lastPath->Count(); ++i)
+		{
+			iPoint pos = app->map->MapToWorld(lastPath->At(i)->x, lastPath->At(i)->y);
+			if (app->physics->debug == true) {
+				//app->render->DrawTexture(app->scene_testing->mouseTileTex, pos.x, pos.y, SDL_FLIP_NONE);
+			}
+		}
+
+		if (lastPath->Count() > 1) { // Asegate de que haya al menos una posicion en el camino
+
+			// Toma la primera posicion del camino como el objetivo al que el enemigo debe dirigirse
+			iPoint targetPos = app->map->MapToWorld(lastPath->At(1)->x, lastPath->At(1)->y);
+
+			// Calcula la direccion hacia el objetivo
+			b2Vec2 direction(targetPos.x - position.x, targetPos.y - position.y);
+			direction.Normalize();
+
+			// Calcula la velocidad del movimiento
+			b2Vec2 velocity(direction.x * speed, direction.y * speed);
+
+			// Aplica la velocidad al cuerpo del enemigo
+			pbody->body->SetLinearVelocity(velocity);
+
+			// Determina si el enemigo est?mirando hacia la izquierda o hacia la derecha
+			if (direction.x < 0) {
+				isFacingLeft = true;
+			}
+			else {
+				isFacingLeft = false;
+			}
+
+			isAttacking = false;
+			attackAnim.Reset();
+
 		}
 	}
 
-	if (lastPath->Count() > 1) { // Asegate de que haya al menos una posicion en el camino
-
-		// Toma la primera posicion del camino como el objetivo al que el enemigo debe dirigirse
-		iPoint targetPos = app->map->MapToWorld(lastPath->At(1)->x, lastPath->At(1)->y);
-
-		// Calcula la direccion hacia el objetivo
-		b2Vec2 direction(targetPos.x - position.x, targetPos.y - position.y);
-		direction.Normalize();
-
-		// Calcula la velocidad del movimiento
-		b2Vec2 velocity(direction.x * speed, direction.y * speed);
-
-		// Aplica la velocidad al cuerpo del enemigo
-		pbody->body->SetLinearVelocity(velocity);
-
-		// Determina si el enemigo est?mirando hacia la izquierda o hacia la derecha
-		if (direction.x < 0) {
-			isFacingLeft = true;
-		}
-		else {
-			isFacingLeft = false;
-		}
-
-		isAttacking = false;
-		attackAnim.Reset();
-
-	}
+	
 	return true;
 }
 

@@ -24,6 +24,8 @@ bool PathFinding::CleanUp()
 	LOG("Freeing pathfinding library");
 
 	lastPath.Clear();
+
+
 	RELEASE_ARRAY(map);
 
 	return true;
@@ -113,7 +115,7 @@ int PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 			// L13: DONE 3: Get the lowest score cell from frontier list and delete it from the frontier list
 			// Keep a reference to the node before deleting the node from the list
 			ListItem<PathNode>* lowest = frontier.GetNodeLowestScore();
-			ListItem<PathNode>* node = new ListItem<PathNode>(*lowest);
+			ListItem<PathNode>* node = new ListItem<PathNode>(*lowest); 
 			frontier.list.Del(lowest);
 
 
@@ -126,15 +128,20 @@ int PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 				// Use the Pathnode::parent and Flip() the path when you are finish
 				const PathNode* pathNode = &node->data;
 
-				while (pathNode)
+				int actualNodeList = 0;
+				
+
+				while (pathNode && actualNodeList < 50)
 				{
 					lastPath.PushBack(pathNode->pos);
+					actualNodeList++;
 					pathNode = pathNode->parent;
 				}
 
 				lastPath.Flip();
 				ret = lastPath.Count();
 				LOG("Created path of %d steps in %d iterations", ret, iterations);
+				RELEASE(node);
 				break;
 			}
 
@@ -173,9 +180,10 @@ int PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 				}
 
 				neighbourg = neighbourg->next;
+				RELEASE(node);
 			}
 			++iterations;
-			//RELEASE(node);
+			//
 		}
 	}
 
