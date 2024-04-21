@@ -72,8 +72,9 @@ bool Scene_Menu::Start()
 	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "SALIR", SDL_Rect{75, 622,136,46 }, this));
 
 
-	app->audio->LoadAudioMusic("menu", 1.0f);
-	//app->audio->PlayMusic("PATH DE MUSICA MENU AQU?)
+	app->audio->LoadAudioMusic("menu", 10.0f);
+	menu_fx = app->audio->LoadAudioFx("menu_fx");
+	app->audio->PlayFx(menu_fx);
 
 	app->guiManager->minId = 1;
 	app->guiManager->maxId = 5;
