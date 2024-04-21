@@ -41,8 +41,27 @@ public:
 
 
 private:
-	SDL_Texture* texturaMoneda;
+	SDL_Texture* hudTexture;
 	int cantidadMonedas = 0;
+
+	SDL_Rect* rectBarraVida;
+	SDL_Rect* rectFondoBarraVida;
+	SDL_Rect* rectFondoMascara;
+	SDL_Rect* rectFondoMascaraSecundaria;
+	SDL_Rect* rectFondoPociones;
+	SDL_Rect* rectFondoHabilidad1;
+	SDL_Rect* rectFondoHabilidad2;
+	SDL_Rect* rectFondoInventario;
+	SDL_Rect* rectFondoMonedas;
+	SDL_Rect* rectFondoObjetosConseguidos;
+	SDL_Rect* rectMascara0;
+	SDL_Rect* rectMascara1;
+	SDL_Rect* rectMascara2;
+	SDL_Rect* rectMascara3;
+	SDL_Rect* rectMascara4;
+
+
+	uint windowWidth, windowHeight;
 
 };
 #endif // __HUD_H__

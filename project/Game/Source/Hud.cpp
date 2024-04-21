@@ -19,7 +19,7 @@
 
 Hud::Hud(App* app, bool start_enabled) : Module(app, start_enabled)
 {
-	name.Create("Hud");
+	name.Create("hud");
 }
 
 // Destructor
@@ -29,7 +29,7 @@ Hud::~Hud()
 // Called before render is available
 bool Hud::Awake(pugi::xml_node config)
 {
-	LOG("Menu");
+
 	bool ret = true;
 
 	
@@ -40,7 +40,22 @@ bool Hud::Awake(pugi::xml_node config)
 // Called before the first frame
 bool Hud::Start()
 {
-	texturaMoneda = app->tex->Load("Assets/Textures/Interfaz/Moneda.png");
+	hudTexture = app->tex->Load("Assets/Textures/Interfaz/HUD/texture_general_hud.png");
+	rectBarraVida					= new SDL_Rect{ 220,0,220,28 };
+	rectFondoBarraVida				= new SDL_Rect{ 0,0,220,28 };
+	rectFondoMascara				= new SDL_Rect{ 0,38,101,101 };
+	rectFondoMascaraSecundaria		= new SDL_Rect{ 115,48,79,79 };
+	rectFondoPociones				= new SDL_Rect{ 0,0,0,0 };
+	rectFondoHabilidad1				= new SDL_Rect{ 0,0,0,0 };
+	rectFondoHabilidad2				= new SDL_Rect{ 0,0,0,0 };
+	rectFondoInventario				= new SDL_Rect{ 0,0,0,0 };
+	rectFondoMonedas				= new SDL_Rect{0,338,97,32};
+	rectFondoObjetosConseguidos		= new SDL_Rect{ 0,338,97,32 };
+	rectMascara0					= new SDL_Rect{ 0,0,0,0 };
+	rectMascara1					= new SDL_Rect{ 0,0,0,0 };
+	rectMascara2					= new SDL_Rect{ 0,0,0,0 };
+	rectMascara3					= new SDL_Rect{ 0,0,0,0 };
+	rectMascara4					= new SDL_Rect{ 0,0,0,0 };
 	
 	
 
@@ -65,15 +80,25 @@ bool Hud::Update(float dt)
 // Called each loop iteration
 bool Hud::PostUpdate()
 {
-	uint windowWidth, windowHeight;
 	app->win->GetWindowSize(windowWidth, windowHeight);
+	
 
-	if (app->menu->menuu)
-	{
-		std::string quantityStr = std::to_string(cantidadMonedas);
-		app->render->DrawText(quantityStr.c_str(), windowWidth / 8 + 1020, windowHeight / 8 - 35, 18, 18);
-		app->render->DrawTexture(texturaMoneda, windowWidth / 8 + 1050, windowHeight / 8 - 50, SDL_FLIP_NONE, 0, 0);
-	}
+
+	//Barra de vida
+	app->render->DrawTexture(hudTexture, 150, 50, SDL_FLIP_NONE, rectFondoBarraVida, 0);
+	app->render->DrawTexture(hudTexture, 150, 50, SDL_FLIP_NONE, rectBarraVida, 0);
+	
+	//Monedas
+	std::string quantityStr = std::to_string(cantidadMonedas);
+	
+	app->render->DrawTexture(hudTexture, windowWidth - rectFondoMonedas->w - 20, windowHeight / 8 - 50, SDL_FLIP_NONE, rectFondoMonedas, 0);
+	app->render->DrawText(quantityStr.c_str(), windowWidth - rectFondoMonedas->w + 10, windowHeight / 8 - 40, 18, 18);
+
+
+	//Fondos
+	app->render->DrawTexture(hudTexture, 75, 50, SDL_FLIP_NONE, rectFondoMascaraSecundaria, 0);
+	app->render->DrawTexture(hudTexture, 50, 50, SDL_FLIP_NONE, rectFondoMascara, 0);
+	
 	
 
 	return true;
