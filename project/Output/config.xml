@@ -199,4 +199,8 @@
 		</textures>
 	</dialogmanager>
 
+	<hud>
+		<mainTexture texturepath="Assets/Textures/Interfaz/HUD/texture_general_hud.png"/>
+	</hud>
+
 </config>
