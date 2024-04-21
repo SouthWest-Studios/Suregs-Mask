@@ -161,6 +161,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 2:
 		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
+		app->LoadRequest();
 		app->menu->active = true;
 		break;
 
@@ -428,10 +429,10 @@ void Scene_Menu::Fullscreen()
 
 bool Scene_Menu::LoadState(pugi::xml_node node)
 {
-	return false;
+	return true;
 }
 
 bool Scene_Menu::SaveState(pugi::xml_node node)
 {
-	return false;
+	return true;
 }

@@ -54,7 +54,7 @@ bool InventoryManager::Start() {
 	SelectedItemText = app->tex->Load("Assets/Textures/Interfaz/selected.png");
 	EquipedItemText = app->tex->Load("Assets/Textures/Interfaz/equiped.png");
 
-	bool ret = true; 
+	bool ret = true;
 
 	//Iterates over the entities and calls Start
 	ListItem<Inventity*>* item;
@@ -136,7 +136,7 @@ Inventity* InventoryManager::CreateItem(EntityType type, int id, int ataque, int
 			item->data->id = newId;
 			newId++;
 		}
-		/*for (ListItem<Inventity*>* item = inventities.start; item != NULL; item = item->next) 
+		/*for (ListItem<Inventity*>* item = inventities.start; item != NULL; item = item->next)
 		{
 			if (item->data->id > highestId)
 			{
@@ -151,10 +151,10 @@ Inventity* InventoryManager::CreateItem(EntityType type, int id, int ataque, int
 		{
 			highestId = -1;
 		}
-		
+
 
 		GarraInv* garra = new GarraInv();
-		garra->id = highestId+1;
+		garra->id = highestId + 1;
 		garra->type = InventityType::GARRA;
 		garra->stackable = true;
 		/*sword->damage = ataque;
@@ -260,13 +260,13 @@ Inventity* InventoryManager::CreateItem(EntityType type, int id, int ataque, int
 		armadura->icon = app->tex->Load("Assets/Textures/armaduraicon.png");
 		entity = armadura;
 	}
-		
+
 	default:
 		break;
 	}
 
 
-	
+
 	AddItem(entity);
 
 	return entity;
@@ -274,10 +274,10 @@ Inventity* InventoryManager::CreateItem(EntityType type, int id, int ataque, int
 
 bool InventoryManager::IsFull()
 {
-	
+
 	// Encontrar el ID más alto actualmente asignado
 
-	
+
 	// Verificar si el siguiente ID disponible es 9
 	if (inventities.Count() == 10) {
 		return true;
@@ -285,13 +285,25 @@ bool InventoryManager::IsFull()
 	else {
 		return false;
 	}
-		
+
 }
 
 bool InventoryManager::LoadState(pugi::xml_node node)
 {
 	bool ret = true;
-	
+
+	ListItem<Inventity*>* item;
+	item = inventities.end;
+
+	while (item != NULL && ret == true)
+	{
+		ret = item->data->CleanUp();
+		item = item->prev;
+	}
+
+	inventities.Clear();
+
+
 	//Inventity* inventoryItem = app->inventoryManager->CreateItem(, 0, 0, 0, 0, 0, 0);
 	for (pugi::xml_node itemNode = node.child("inventory").child("inventity"); itemNode; itemNode = itemNode.next_sibling("inventity"))
 	{
@@ -325,7 +337,7 @@ bool InventoryManager::LoadState(pugi::xml_node node)
 			break;
 		}
 		itemLoaded->quantity = itemNode.attribute("quantity").as_int();
-		
+
 	}
 
 
@@ -390,23 +402,23 @@ void InventoryManager::DestroyItem2(int entityId)
 	for (item = inventities.start; item != NULL; item = item->next)
 	{
 
-			if (item->data->id == entityId) // Comprueba si el ID coincide
+		if (item->data->id == entityId) // Comprueba si el ID coincide
+		{
+			if (item->data->stackable && item->data->quantity > 1)
 			{
-				if (item->data->stackable && item->data->quantity > 1)
-				{
-					item->data->quantity--;
-				}
-				else
-				{
-					inventities.Del(item);
-					delete item->data; // Libera la memoria de la espada eliminada
-				}
-				
-
-				break; // Termina el bucle después de eliminar la espada
+				item->data->quantity--;
 			}
-		
-		
+			else
+			{
+				inventities.Del(item);
+				delete item->data; // Libera la memoria de la espada eliminada
+			}
+
+
+			break; // Termina el bucle después de eliminar la espada
+		}
+
+
 	}
 	// Reasignar los IDs después de la eliminación
 	int newId = 0;
@@ -434,31 +446,31 @@ void InventoryManager::UseItemSelected(int id)
 
 		if (item->data->id == id) // Comprueba si el ID coincide
 		{
-			 foundMatchingID = true;
+			foundMatchingID = true;
 			item->data->active = true;
 			switch (item->data->type)
 			{
-			//case InventityType::CU:
-			//	{
-			//		//app->scene->GetPlayer()->espadaHierro = false; //ponemos la textura de la correspondiente
-			//		//app->scene->GetPlayer()->espadaMadera = true;
-			//		//app->scene->GetPlayer()->armaduraPoner = false;
-			//		//Swordinv* espada = dynamic_cast<Swordinv*>(item->data); // Convierte a Espada si es posible
+				//case InventityType::CU:
+				//	{
+				//		//app->scene->GetPlayer()->espadaHierro = false; //ponemos la textura de la correspondiente
+				//		//app->scene->GetPlayer()->espadaMadera = true;
+				//		//app->scene->GetPlayer()->armaduraPoner = false;
+				//		//Swordinv* espada = dynamic_cast<Swordinv*>(item->data); // Convierte a Espada si es posible
 
-			//		//	app->scene->GetPlayer()->espadaMadera = true;
-			//		//	app->scene->GetPlayer()->espadaHierro = false;
-			//		//	app->scene->GetPlayer()->ataque = espada->damage;
-			//		//	app->scene->GetPlayer()->durabilidadArma = espada->durability;
-			//		//	app->scene->GetPlayer()->magia = espada->magic;
-			//		//	app->scene->GetPlayer()->peso = espada->weight;
-			//		
-			//		
+				//		//	app->scene->GetPlayer()->espadaMadera = true;
+				//		//	app->scene->GetPlayer()->espadaHierro = false;
+				//		//	app->scene->GetPlayer()->ataque = espada->damage;
+				//		//	app->scene->GetPlayer()->durabilidadArma = espada->durability;
+				//		//	app->scene->GetPlayer()->magia = espada->magic;
+				//		//	app->scene->GetPlayer()->peso = espada->weight;
+				//		
+				//		
 
-			//		
-			//		break;
-			//	}
+				//		
+				//		break;
+				//	}
 			case InventityType::ESPADA2:
-				{
+			{
 				//app->scene->GetPlayer()->espadaHierro = true; //ponemos la textura de la correspondiente
 				//app->scene->GetPlayer()->espadaMadera = false;
 				//app->scene->GetPlayer()->armaduraPoner = false;
@@ -468,10 +480,10 @@ void InventoryManager::UseItemSelected(int id)
 				//app->scene->GetPlayer()->durabilidadArma = espada->durability;
 				//app->scene->GetPlayer()->magia = espada->magic;
 				//app->scene->GetPlayer()->peso = espada->weight;
-					
-					
-					break;
-				}
+
+
+				break;
+			}
 			case InventityType::ARMADURA:
 			{
 				//app->scene->GetPlayer()->armaduraPoner = true; //ponemos la textura de la correspondiente
@@ -489,7 +501,7 @@ void InventoryManager::UseItemSelected(int id)
 			}
 			}
 
-			
+
 		}
 
 
@@ -546,7 +558,7 @@ void InventoryManager::AddItem(Inventity* entity)
 						CuernoEncontrado = true;
 						break;
 					}
-					
+
 				}
 				if (!CuernoEncontrado)
 				{
@@ -556,7 +568,7 @@ void InventoryManager::AddItem(Inventity* entity)
 			else if (entity->type == InventityType::DIAMANTE)
 			{
 				for (int i = 0; i < inventities.Count(); i++) {
-					
+
 					if (inventities.At(i)->data->type == InventityType::DIAMANTE) {
 						inventities.At(i)->data->quantity += entity->quantity;
 						DiamanteEncontrado = true;
@@ -583,7 +595,7 @@ void InventoryManager::AddItem(Inventity* entity)
 					inventities.Add(entity);
 				}
 			}
-		
+
 		}
 		else {
 			inventities.Add(entity);
@@ -598,14 +610,14 @@ void InventoryManager::AddItem(Inventity* entity)
 			item->data->id = newId;
 			newId++;
 		}
-		
-	
-	} 
+
+
+	}
 }
 
 bool InventoryManager::Update(float dt)
 {
-	
+
 	bool ret = true;
 
 
@@ -618,7 +630,7 @@ bool InventoryManager::Update(float dt)
 			options = true;
 			selected = { PointerPosition.x, PointerPosition.y };
 			selectedId = PointerId;
-			
+
 		}
 
 		if (options == true)
@@ -626,8 +638,8 @@ bool InventoryManager::Update(float dt)
 			if (app->input->GetKey(SDL_SCANCODE_BACKSPACE) == KEY_DOWN)
 			{
 				DestroyItem2(selectedId);
-				 options = false;
-				 selected = { -1000, -1000 };
+				options = false;
+				selected = { -1000, -1000 };
 
 			}
 
@@ -636,17 +648,17 @@ bool InventoryManager::Update(float dt)
 				equiped = { PointerPosition.x, PointerPosition.y };
 				equipedId = PointerId;
 				UseItemSelected(equipedId);
-				 options = false;
-				 selected = { -1000, -1000 };
+				options = false;
+				selected = { -1000, -1000 };
 
 			}
 		}
 
-		
+
 
 	}
 
-	
+
 
 
 
@@ -659,7 +671,7 @@ bool InventoryManager::PostUpdate()
 	bool ret = true;
 	app->tex->GetSize(InventoryBackground, texW, texH);
 
-	
+
 
 
 
@@ -668,108 +680,108 @@ bool InventoryManager::PostUpdate()
 	{
 		ListItem<Inventity*>* item;
 		Inventity* pEntity = NULL;
-		
+
 		app->render->DrawTexture(EquipedItemText, equiped.x, equiped.y, SDL_FLIP_NONE, 0, 0);
 
-		app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y,SDL_FLIP_NONE, 0, 0);
+		app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y, SDL_FLIP_NONE, 0, 0);
 		app->render->DrawTexture(SelectedItemText, selected.x, selected.y, SDL_FLIP_NONE, 0, 0);
 
 		for (item = inventities.start; item != nullptr; item = item->next)
 		{
 			pEntity = item->data;
 
-			if((pEntity->stackable))
+			if ((pEntity->stackable))
 			{
 				std::string quantityStr = std::to_string(pEntity->quantity);
-				
-					if (pEntity->type == InventityType::GARRA)
+
+				if (pEntity->type == InventityType::GARRA)
+				{
+
+					if (pEntity->quantity > 1)
 					{
 
-						if (pEntity->quantity > 1)
+
+						if (item->data->id < 5)
 						{
-
-
-							if (item->data->id < 5)
-							{
-								app->render->DrawText(quantityStr.c_str(), 320 + item->data->id * 100, 260, 20, 20);
-							}
-							else
-							{
-								app->render->DrawText(quantityStr.c_str(), 485 + (item->data->id - 5) * 100, 420, 20, 20);
-							}
+							app->render->DrawText(quantityStr.c_str(), 320 + item->data->id * 100, 260, 20, 20);
 						}
+						else
 						{
-							if (item->data->id < 5)
-							{
-								app->render->DrawTexture(pEntity->icon, 290 + pEntity->id * 100, 230, SDL_FLIP_NONE, 0, 0);
-							}
-							else
-							{
-								app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 100), 380, SDL_FLIP_NONE, 0, 0);
-							}
-
+							app->render->DrawText(quantityStr.c_str(), 485 + (item->data->id - 5) * 100, 420, 20, 20);
+						}
+					}
+					{
+						if (item->data->id < 5)
+						{
+							app->render->DrawTexture(pEntity->icon, 290 + pEntity->id * 100, 230, SDL_FLIP_NONE, 0, 0);
+						}
+						else
+						{
+							app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 100), 380, SDL_FLIP_NONE, 0, 0);
 						}
 
 					}
-					else if (pEntity->type == InventityType::DIAMANTE)
+
+				}
+				else if (pEntity->type == InventityType::DIAMANTE)
+				{
+
+					if (pEntity->quantity > 1)
 					{
 
-						if (pEntity->quantity > 1)
+
+						if (item->data->id < 5)
 						{
-
-
-							if (item->data->id < 5)
-							{
-								app->render->DrawText(quantityStr.c_str(), 320 + item->data->id * 100, 260, 20, 20);
-							}
-							else
-							{
-								app->render->DrawText(quantityStr.c_str(), 485 + (item->data->id - 5) * 100, 420, 20, 20);
-							}
+							app->render->DrawText(quantityStr.c_str(), 320 + item->data->id * 100, 260, 20, 20);
 						}
+						else
 						{
-							if (item->data->id < 5)
-							{
-								app->render->DrawTexture(pEntity->icon, 290 + pEntity->id * 100, 230, SDL_FLIP_NONE, 0, 0);
-							}
-							else
-							{
-								app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 100), 380, SDL_FLIP_NONE, 0, 0);
-							}
-
+							app->render->DrawText(quantityStr.c_str(), 485 + (item->data->id - 5) * 100, 420, 20, 20);
+						}
+					}
+					{
+						if (item->data->id < 5)
+						{
+							app->render->DrawTexture(pEntity->icon, 290 + pEntity->id * 100, 230, SDL_FLIP_NONE, 0, 0);
+						}
+						else
+						{
+							app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 100), 380, SDL_FLIP_NONE, 0, 0);
 						}
 
 					}
-					else if (pEntity->type == InventityType::OJO)
+
+				}
+				else if (pEntity->type == InventityType::OJO)
+				{
+
+					if (pEntity->quantity > 1)
 					{
 
-						if (pEntity->quantity > 1)
+
+						if (item->data->id < 5)
 						{
-
-
-							if (item->data->id < 5)
-							{
-								app->render->DrawText(quantityStr.c_str(), 320 + item->data->id * 100, 260, 20, 20);
-							}
-							else
-							{
-								app->render->DrawText(quantityStr.c_str(), 485 + (item->data->id - 5) * 100, 420, 20, 20);
-							}
+							app->render->DrawText(quantityStr.c_str(), 320 + item->data->id * 100, 260, 20, 20);
 						}
+						else
 						{
-							if (item->data->id < 5)
-							{
-								app->render->DrawTexture(pEntity->icon, 290 + pEntity->id * 100, 230, SDL_FLIP_NONE, 0, 0);
-							}
-							else
-							{
-								app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 100), 380, SDL_FLIP_NONE, 0, 0);
-							}
-
+							app->render->DrawText(quantityStr.c_str(), 485 + (item->data->id - 5) * 100, 420, 20, 20);
+						}
+					}
+					{
+						if (item->data->id < 5)
+						{
+							app->render->DrawTexture(pEntity->icon, 290 + pEntity->id * 100, 230, SDL_FLIP_NONE, 0, 0);
+						}
+						else
+						{
+							app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 100), 380, SDL_FLIP_NONE, 0, 0);
 						}
 
 					}
-				
+
+				}
+
 			}
 			else
 			{
@@ -782,19 +794,19 @@ bool InventoryManager::PostUpdate()
 
 					app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 100), 380, SDL_FLIP_NONE, 0, 0);
 				}
-				
-				
+
+
 			}
-			
-			
-			
-			
-			
-			
+
+
+
+
+
+
 
 		}
 
-		
+
 	}
 
 
