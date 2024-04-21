@@ -173,7 +173,33 @@ bool Hud::PostUpdate()
 // Called before quitting
 bool Hud::CleanUp()
 {
-	LOG("Freeing Scene_Intro");
+	LOG("Freeing Hud");
+
+
+
+	 delete rectBarraVida;
+	 delete rectFondoBarraVida;
+
+	 delete rectFondoMascara;
+	 delete rectFondoMascaraSecundaria;
+	 delete rectFondoPociones;
+	 delete rectFondoHabilidad1;
+	 delete rectFondoHabilidad2;
+	 delete rectFondoInventario;
+	 delete rectFondoMonedas;
+	 delete rectFondoObjetosConseguidos;
+
+	 delete rectMascara0;
+	 delete rectMascara1;
+	 delete rectMascara2;
+	 delete rectMascara3;
+	 delete rectMascara4;
+
+	 delete rectBotonPlaceholder;
+	 delete rectBotonTAB;
+	 delete rectBotonQ;
+
+	 app->tex->UnLoad(hudTexture);
 
 	return true;
 }
