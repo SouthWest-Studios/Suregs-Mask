@@ -50,11 +50,13 @@ public:
 	SDL_Texture* menuMain2;
 	SDL_Texture* settings;
 	SDL_Texture* credits;
+	SDL_Texture* logo;
 
 	const char* menuMain_tp;
 	const char* menuMain2_tp;
 	const char* settings_tp;
 	const char* credits_tp;
+	const char* logo_tp;
 
 	List<GuiControl*> controlsScene;
 	List<GuiControl*> controlsSettings;
