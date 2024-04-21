@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "GuiControl.h"
 #include "GuiControlButton.h"
+#include "GuiCheckBox.h"
 
 struct SDL_Texture;
 
@@ -61,6 +62,8 @@ public:
 	List<GuiControl*> controlsScene;
 	List<GuiControl*> controlsSettings;
 	GuiControl* gcCloseCredits;
+	GuiCheckBox* fullscreen;
+	GuiCheckBox* vsync;
 
 private:
 

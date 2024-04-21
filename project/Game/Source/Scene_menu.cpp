@@ -110,6 +110,9 @@ bool Scene_Menu::Update(float dt)
 		app->fadeToBlack->FadeToBlack(this, app->scene_testing, 90);
 		app->menu->active = true;
 	}
+	if (fullscreen != nullptr && fullscreen->click) {
+		Fullscreen();
+	}
 	return true;
 }
 
@@ -206,7 +209,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		/*app->audio->sfvVolumne = ((GuiControlSlider*)control)->value;*/
 		break;
 
-	case 1031:
+	case 9:
 		Fullscreen();
 		break;
 
@@ -241,7 +244,8 @@ void Scene_Menu::SettingsInterface()
 	/*((GuiControlSlider*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->value = app->audio->musicVolume;*/
 	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 8, "SFX", SDL_Rect{ 550, 200, 120,20 }, this));
 	/*((GuiControlSlider*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->value = app->audio->sfvVolume;*/
-	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 9, "FULLSCREEN", SDL_Rect{ 550, 300, 20,20 }, this));
+	fullscreen = (GuiCheckBox*)controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 9, "FULLSCREEN", SDL_Rect{ 550, 300, 20,20 }, this));
+
 
 	if (app->fullscreen)
 	{
@@ -263,6 +267,9 @@ void Scene_Menu::SettingsInterface()
 		((GuiCheckBox*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->click = false;
 	}
 
+	if (fullscreen->selected && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && fullscreen != nullptr) {
+		fullscreen->click = !fullscreen->click;
+	}
 	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "ATRÁS", SDL_Rect{ 550, 500,	136,46 }, this));
 
 	_showSettings = true;
