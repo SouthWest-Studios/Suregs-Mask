@@ -65,6 +65,8 @@ public:
 private:
 
 	uint windowW, windowH;
+
+	int menu_fx;
 	
 
 	bool showSettings = false;

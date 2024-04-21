@@ -31,8 +31,8 @@
 		</music>
 
 		<fx>
-			<intro_fx path="Assets/Audio/Fx/.wav"/>
-      <menu_fx path="Assets/Audio/Fx/.wav"/>
+			<intro_fx path="Assets/Audio/Fx/intro_fx.wav"/>
+      <menu_fx path="Assets/Audio/Fx/menu_fx.wav"/>
       <button_fx path="Assets/Audio/Fx/button_fx.wav"/>
       <select_fx path="Assets/Audio/Fx/select_fx.wav"/>
       <inventory_fx path="Assets/Audio/Fx/inventory_fx.wav"/>

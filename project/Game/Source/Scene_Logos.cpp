@@ -51,7 +51,8 @@ bool Scene_Logos::Start()
 	timerIntro.Start();
 
 	//sus = app->audio->LoadAudioFx("");
-	//app->audio->PlayFx(sus);
+	intro_fx = app->audio->LoadAudioFx("intro_fx");
+	app->audio->PlayFx(intro_fx);
 
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
