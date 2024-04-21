@@ -91,17 +91,20 @@ bool Hud::PostUpdate()
 	//Monedas
 	std::string quantityStr = std::to_string(cantidadMonedas);
 	
-	app->render->DrawTexture(hudTexture, windowWidth - rectFondoMonedas->w - 20, windowHeight / 8 - 50, SDL_FLIP_NONE, rectFondoMonedas, 0);
-	app->render->DrawText(quantityStr.c_str(), windowWidth - rectFondoMonedas->w + 10, windowHeight / 8 - 40, 18, 18);
+	app->render->DrawTexture(hudTexture, windowWidth - rectFondoMonedas->w - 35, 130, SDL_FLIP_NONE, rectFondoMonedas, 0);
+	app->render->DrawText(quantityStr.c_str(), windowWidth - rectFondoMonedas->w + 10, 140, 18, 18);
 
 
 	//Fondos
 	app->render->DrawTexture(hudTexture, 75, 15, SDL_FLIP_NONE, rectFondoMascaraSecundaria, 0);
 	app->render->DrawTexture(hudTexture, 25, 40, SDL_FLIP_NONE, rectFondoMascara, 0);
-	//app->render->DrawTexture(hudTexture, 50, 50, SDL_FLIP_NONE, rectFondoPociones, 0);
-	//app->render->DrawTexture(hudTexture, 50, 50, SDL_FLIP_NONE, rectFondoHabilidad1, 0);
-	//app->render->DrawTexture(hudTexture, 50, 50, SDL_FLIP_NONE, rectFondoHabilidad2, 0);
-	//app->render->DrawTexture(hudTexture, 50, 50, SDL_FLIP_NONE, rectFondoInventario, 0);
+
+	app->render->DrawTexture(hudTexture, 395, 32, SDL_FLIP_NONE, rectFondoPociones, 0);
+
+	app->render->DrawTexture(hudTexture, 45, 150, SDL_FLIP_NONE, rectFondoHabilidad1, 0);
+	app->render->DrawTexture(hudTexture, 51, 220, SDL_FLIP_NONE, rectFondoHabilidad2, 0);
+	
+	app->render->DrawTexture(hudTexture, windowWidth - rectFondoInventario->w - 20, 15, SDL_FLIP_NONE, rectFondoInventario, 0);
 
 
 
