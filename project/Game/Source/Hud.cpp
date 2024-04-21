@@ -57,9 +57,11 @@ bool Hud::Start()
 	rectMascara1					= new SDL_Rect{ 105,499,100,100 };
 	rectMascara2					= new SDL_Rect{ 207,499,100,100 };
 	rectMascara3					= new SDL_Rect{ 309,499,0,0 };
-	rectMascara4					= new SDL_Rect{ 4011,499,0,0 };
+	rectMascara4					= new SDL_Rect{ 411,499,0,0 };
 
-	
+	rectBotonPlaceholder			= new SDL_Rect{ 0,619,45,45 };
+	rectBotonTAB					= new SDL_Rect{ 48,619,45,45 };
+	rectBotonQ						= new SDL_Rect{ 96,619,45,45 };
 	
 
 	return true;
@@ -156,6 +158,11 @@ bool Hud::PostUpdate()
 
 	//Fin mascaras
 
+
+
+	//Botones
+	app->render->DrawTexture(hudTexture, windowWidth - rectFondoInventario->w + 10, 70, SDL_FLIP_NONE, rectBotonTAB, 0);
+	app->render->DrawTexture(hudTexture, 120, 85, SDL_FLIP_NONE, rectBotonQ, 0);
 	
 	
 
