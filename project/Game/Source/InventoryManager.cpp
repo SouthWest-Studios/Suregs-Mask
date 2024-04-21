@@ -291,6 +291,18 @@ bool InventoryManager::IsFull()
 bool InventoryManager::LoadState(pugi::xml_node node)
 {
 	bool ret = true;
+
+	ListItem<Inventity*>* item;
+	item = inventities.end;
+
+	while (item != NULL && ret == true)
+	{
+		ret = item->data->CleanUp();
+		item = item->prev;
+	}
+
+	inventities.Clear();
+
 	
 	//Inventity* inventoryItem = app->inventoryManager->CreateItem(, 0, 0, 0, 0, 0, 0);
 	for (pugi::xml_node itemNode = node.child("inventory").child("inventity"); itemNode; itemNode = itemNode.next_sibling("inventity"))
