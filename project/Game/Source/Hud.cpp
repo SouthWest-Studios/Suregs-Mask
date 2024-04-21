@@ -45,13 +45,13 @@ bool Hud::Start()
 	rectFondoBarraVida				= new SDL_Rect{ 0,0,220,28 };
 	rectFondoMascara				= new SDL_Rect{ 0,38,101,101 };
 	rectFondoMascaraSecundaria		= new SDL_Rect{ 115,48,79,79 };
-	rectFondoPociones				= new SDL_Rect{ 0,0,0,0 };
-	rectFondoHabilidad1				= new SDL_Rect{ 0,0,0,0 };
-	rectFondoHabilidad2				= new SDL_Rect{ 0,0,0,0 };
-	rectFondoInventario				= new SDL_Rect{ 0,0,0,0 };
+	rectFondoPociones				= new SDL_Rect{ 213,67,44,44 };
+	rectFondoHabilidad1				= new SDL_Rect{ 1,149,60,60 };
+	rectFondoHabilidad2				= new SDL_Rect{ 65,157,45,45 };
+	rectFondoInventario				= new SDL_Rect{ 0,218,113,113 };
 	rectFondoMonedas				= new SDL_Rect{0,338,97,32};
 	rectFondoObjetosConseguidos		= new SDL_Rect{ 0,338,97,32 };
-	rectMascara0					= new SDL_Rect{ 0,0,0,0 };
+	rectMascara0					= new SDL_Rect{ 3,499,100,100 };
 	rectMascara1					= new SDL_Rect{ 0,0,0,0 };
 	rectMascara2					= new SDL_Rect{ 0,0,0,0 };
 	rectMascara3					= new SDL_Rect{ 0,0,0,0 };
@@ -85,8 +85,8 @@ bool Hud::PostUpdate()
 
 
 	//Barra de vida
-	app->render->DrawTexture(hudTexture, 150, 50, SDL_FLIP_NONE, rectFondoBarraVida, 0);
-	app->render->DrawTexture(hudTexture, 150, 50, SDL_FLIP_NONE, rectBarraVida, 0);
+	app->render->DrawTexture(hudTexture, 165, 40, SDL_FLIP_NONE, rectFondoBarraVida, 0);
+	app->render->DrawTexture(hudTexture, 165, 40, SDL_FLIP_NONE, rectBarraVida, 0);
 	
 	//Monedas
 	std::string quantityStr = std::to_string(cantidadMonedas);
@@ -96,8 +96,17 @@ bool Hud::PostUpdate()
 
 
 	//Fondos
-	app->render->DrawTexture(hudTexture, 75, 50, SDL_FLIP_NONE, rectFondoMascaraSecundaria, 0);
-	app->render->DrawTexture(hudTexture, 50, 50, SDL_FLIP_NONE, rectFondoMascara, 0);
+	app->render->DrawTexture(hudTexture, 75, 15, SDL_FLIP_NONE, rectFondoMascaraSecundaria, 0);
+	app->render->DrawTexture(hudTexture, 25, 40, SDL_FLIP_NONE, rectFondoMascara, 0);
+	//app->render->DrawTexture(hudTexture, 50, 50, SDL_FLIP_NONE, rectFondoPociones, 0);
+	//app->render->DrawTexture(hudTexture, 50, 50, SDL_FLIP_NONE, rectFondoHabilidad1, 0);
+	//app->render->DrawTexture(hudTexture, 50, 50, SDL_FLIP_NONE, rectFondoHabilidad2, 0);
+	//app->render->DrawTexture(hudTexture, 50, 50, SDL_FLIP_NONE, rectFondoInventario, 0);
+
+
+
+	//Objeto conseguido
+	//app->render->DrawTexture(hudTexture, 50, 50, SDL_FLIP_NONE, rectFondoObjetosConseguidos, 0);
 	
 	
 
