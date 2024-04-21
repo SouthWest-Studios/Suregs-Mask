@@ -6,6 +6,7 @@
 #include "GuiControl.h"
 #include "GuiControlButton.h"
 #include "GuiCheckBox.h"
+#include "GuiControlSlider.h"
 
 struct SDL_Texture;
 
@@ -67,10 +68,19 @@ public:
 
 private:
 
+	GuiControlButton* gcButtom;
+	GuiControlButton* exit;
+	GuiControlButton* title;
+	GuiControlSlider* music;
+	GuiControlSlider* sfx;
+
+	bool vsyncActive = false;
+
 	uint windowW, windowH;
 
 	int menu_fx;
 	
+	bool fullScreenActive = false;
 
 	bool showSettings = false;
 	bool _showSettings = false;

@@ -10,6 +10,7 @@
 #include "ModuleFadeToBlack.h"
 #include "Optick/include/optick.h"
 #include "Menu.h"
+#include "SDL_mixer/include/SDL_mixer.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -182,7 +183,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 	case 11:
 		showSettings = false;
 		_showSettings = false;
-		DestroySettingsInterface();
+		/*DestroySettingsInterface();*/
 		app->guiManager->minId = 1;
 		app->guiManager->maxId = 5;
 		break;
@@ -231,6 +232,9 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 
 void Scene_Menu::SettingsInterface()
 {
+	uint windowWidth, windowHeight;
+	app->win->GetWindowSize(windowWidth, windowHeight);
+
 	app->render->DrawTexture(settings, 0, 0);
 
 	ListItem<GuiControl*>* control;
@@ -240,24 +244,133 @@ void Scene_Menu::SettingsInterface()
 	}
 
 	//SETTINGS
+	if (showSettings)
+	{
+		
+		if (music != nullptr)
+		{
 
-	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 7, "MUSIC", SDL_Rect{ 550,100,120,20 }, this));
-	/*((GuiControlSlider*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->value = app->audio->musicVolume;*/
-	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 8, "SFX", SDL_Rect{ 550, 200, 120,20 }, this));
-	/*((GuiControlSlider*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->value = app->audio->sfvVolume;*/
-	fullscreen = (GuiCheckBox*)controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 9, "FULLSCREEN", SDL_Rect{ 550, 300, 20,20 }, this));
+			title->state = GuiControlState::NORMAL;
+			fullscreen->state = GuiControlState::NORMAL;
+			vsync->state = GuiControlState::NORMAL;
+			music->state = GuiControlState::FOCUSED;
+			sfx->state = GuiControlState::NORMAL;
+		}
+
+		else
+		{
+
+			SDL_Rect MusicPos = { windowWidth / 2 - 400 ,windowHeight / 2 - 100, 200, 50 };
+			music = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 7, "MUSIC", MusicPos, this, { 0, 0, 20, 20 }, { 0,0,0,0 }, 0, 100);
+
+			SDL_Rect SfxPos = { windowWidth / 2 - 400 ,windowHeight / 2 - 50, 200, 50 };
+			sfx = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 8, "SFX", SfxPos, this, { 0, 0, 20, 20 }, { 0,0,0,0 }, 0, 100);
+
+			SDL_Rect FullScreen = { windowWidth / 2 - 100 ,windowHeight / 2 + 50, 230,50 };
+			fullscreen = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 9, "FULLSCREEN", FullScreen, this, { 0,0,0,0 }, { -50,0,0,0 });
+
+			SDL_Rect vSyncpos = { windowWidth / 2 - 100 ,windowHeight / 2 + 200, 200, 50 };
+			vsync = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 10, "VSYNC", vSyncpos, this, { 0, 0, 20, 20 });
 
 
-	if (app->fullscreen)
+
+			if (app->win->fullscreen)
+			{
+				fullscreen->click = true;
+			}
+			if (vsyncActive)
+			{
+				vsync->click = true;
+			}
+		}
+	}
+	else
+	{
+
+
+		if (music != nullptr)
+		{
+			
+			/*title->state = GuiControlState::DISABLED;
+			title = nullptr;*/
+			app->guiManager->DestroyGuiControl(fullscreen);
+			/*fullScreen->state = GuiControlState::DISABLED;*/
+			
+			app->guiManager->DestroyGuiControl(vsync);
+			/*vsync->state = GuiControlState::DISABLED;
+			vsync = nullptr;*/
+			app->guiManager->DestroyGuiControl(music);
+			/*music->state = GuiControlState::DISABLED;*/
+			music = nullptr;
+			app->guiManager->DestroyGuiControl(sfx);
+			/*sfx->state = GuiControlState::DISABLED;
+			sfx = nullptr;*/
+
+			
+		}
+
+
+	}
+	if (showSettings)
+	{
+		if (music != nullptr)
+		{
+			int newVolume = ((GuiControlSlider*)music)->value;
+			// Asegurarse de que el nuevo volumen esté dentro de los límites válidos (0-128 para SDL Mixer)
+			newVolume = std::max(0, std::min(128, newVolume));
+			// Establecer el volumen de la música
+			Mix_VolumeMusic(newVolume);
+		}
+
+
+		if (fullscreen->selected && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		{
+			fullscreen->click = !fullscreen->click;
+		}
+		if (vsync->selected && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		{
+			vsync->click = !vsync->click;
+		}
+		
+		if (fullscreen != nullptr && fullscreen->click == true && fullScreenActive == false)
+		{
+			fullScreenActive = true;
+			app->win->ToggleFullscreen();
+		}
+
+		if (fullscreen != nullptr && fullscreen->click == false && fullScreenActive == true)
+		{
+			fullScreenActive = false;
+			app->win->ToggleFullscreen();
+		}
+
+		if (vsync != nullptr && vsync->click == true)
+		{
+			vsyncActive = true;
+		}
+
+		if (vsync != nullptr && vsync->click == false)
+		{
+			vsyncActive = false;
+		}
+	}
+	//controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 7, "MUSIC", SDL_Rect{ 550,100,120,20 }, this));
+	///*((GuiControlSlider*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->value = app->audio->musicVolume;*/
+	//controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 8, "SFX", SDL_Rect{ 550, 200, 120,20 }, this));
+	///*((GuiControlSlider*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->value = app->audio->sfvVolume;*/
+	//fullscreen = (GuiCheckBox*)controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 9, "FULLSCREEN", SDL_Rect{ 550, 300, 20,20 }, this));
+
+
+	/*if (app->fullscreen)
 	{
 		((GuiCheckBox*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->click = true;
 	}
 	else
 	{
 		((GuiCheckBox*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->click = false;
-	}
+	}*/
 
-	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 10, "VSYNC", SDL_Rect{ 650, 300,	20,20 }, this));
+	/*controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 10, "VSYNC", SDL_Rect{ 650, 300,	20,20 }, this));
 
 	if (app->render->vsync)
 	{
@@ -266,11 +379,11 @@ void Scene_Menu::SettingsInterface()
 	else
 	{
 		((GuiCheckBox*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->click = false;
-	}
+	}*/
 
-	if (fullscreen->selected && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && fullscreen != nullptr) {
+	/*if (fullscreen->selected && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && fullscreen != nullptr) {
 		fullscreen->click = !fullscreen->click;
-	}
+	}*/
 	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "ATRÁS", SDL_Rect{ 550, 500,	136,46 }, this));
 
 	_showSettings = true;
