@@ -78,8 +78,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(scene_testing);
 	AddModule(scene_pueblo);
 	AddModule(scene_mazmorra0);
-	AddModule(hud);
 	AddModule(entityManager);
+	AddModule(hud);
 	AddModule(menu);
 	AddModule(inventoryManager);
 	AddModule(guiManager);
