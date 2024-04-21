@@ -53,7 +53,7 @@ bool Scene_Menu::Start()
 
 	menuMain = app->tex->Load(menuMain_tp);
 	menuMain2 = app->tex->Load(menuMain2_tp);
-	/*settings = app->tex->Load(settings_tp);*/
+	settings = app->tex->Load(settings_tp);
 	credits = app->tex->Load(credits_tp);
 	logo = app->tex->Load(logo_tp);
 
@@ -102,7 +102,7 @@ bool Scene_Menu::Update(float dt)
 	if (showSettings && !_showSettings) {
 		SettingsInterface();
 	}
-	if (showSettings) { app->render->DrawTexture(menuMain, 0, 0); }
+	if (showSettings) { app->render->DrawTexture(settings, 0, 0); }
 
 	if (showCredits) { ShowCredits(); }
 
@@ -227,7 +227,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 
 void Scene_Menu::SettingsInterface()
 {
-	app->render->DrawTexture(menuMain, 0, 0);
+	app->render->DrawTexture(settings, 0, 0);
 
 	ListItem<GuiControl*>* control;
 	for (control = controlsScene.start; control != NULL; control = control->next)
@@ -237,11 +237,11 @@ void Scene_Menu::SettingsInterface()
 
 	//SETTINGS
 
-	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 7, "MUSIC", SDL_Rect{ (int)windowW / 2 + 60,	(int)windowH / 2 - 10,	120,20 }, this));
+	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 7, "MUSIC", SDL_Rect{ 550,100,120,20 }, this));
 	/*((GuiControlSlider*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->value = app->audio->musicVolume;*/
-	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 8, "SFX", SDL_Rect{ (int)windowW / 2 + 60,	(int)windowH / 2 + 50,	120,20 }, this));
+	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 8, "SFX", SDL_Rect{ 550, 200, 120,20 }, this));
 	/*((GuiControlSlider*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->value = app->audio->sfvVolume;*/
-	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 9, "FULLSCREEN", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH / 2 + 180,	20,20 }, this));
+	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 9, "FULLSCREEN", SDL_Rect{ 550, 300, 20,20 }, this));
 
 	if (app->fullscreen)
 	{
@@ -252,7 +252,7 @@ void Scene_Menu::SettingsInterface()
 		((GuiCheckBox*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->click = false;
 	}
 
-	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 10, "VSYNC", SDL_Rect{ (int)windowW / 2 + 80,	(int)windowH / 2 + 180,	20,20 }, this));
+	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 10, "VSYNC", SDL_Rect{ 650, 300,	20,20 }, this));
 
 	if (app->render->vsync)
 	{
@@ -263,7 +263,7 @@ void Scene_Menu::SettingsInterface()
 		((GuiCheckBox*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->click = false;
 	}
 
-	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 150,	136,46 }, this));
+	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "ATRÁS", SDL_Rect{ 550, 500,	136,46 }, this));
 
 	_showSettings = true;
 }
