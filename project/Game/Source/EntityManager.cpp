@@ -1,4 +1,4 @@
-#include "EntityManager.h"
+﻿#include "EntityManager.h"
 #include "Player.h"
 #include "Enemy_Ols.h"
 #include "Enemy_Osiris.h"
@@ -245,6 +245,33 @@ std::vector<Entity*> EntityManager::GetEnemies() {
     return enemies;
 }
 
+bool EntityManager::PreUpdate()
+{
+	//Ejemplo a�adir sprite en los Start():	app->render->objectsToDraw.push_back({ textura, posicion X, posicion Y, punto de anclaje en Y = (posY + num), ancho, largo});
+
+	for (DrawableObject& obj : objectsToDraw)
+	{
+		if (obj.texture == app->entityManager->GetPlayer()->texture)
+		{
+			obj.x = app->entityManager->GetPlayer()->position.x - 75;
+			obj.y = app->entityManager->GetPlayer()->position.y - 100;
+			obj.anchorY = app->entityManager->GetPlayer()->position.y + 218; //Seg�n el sprite, a�adir el valor que corresponda -> !0
+			if (app->entityManager->GetPlayer()->currentAnimation != nullptr) {
+				obj.currentFrame = app->entityManager->GetPlayer()->currentAnimation->GetCurrentFrame();
+			}
+			obj.isFacingLeft = app->entityManager->GetPlayer()->isFacingLeft;
+			break;
+		}
+	}
+
+	std::sort(objectsToDraw.begin(), objectsToDraw.end(),
+		[](const DrawableObject& a, const DrawableObject& b)
+		{
+			return a.anchorY < b.anchorY;
+		});
+
+	return true;
+}
 
 bool EntityManager::Update(float dt)
 {
@@ -277,6 +304,25 @@ bool EntityManager::PostUpdate()
 		ret = item->data->PostUpdate();
 	}
 
+	for (const DrawableObject& obj : objectsToDraw)
+	{
+		// Verifica si la posici�n del objeto est?dentro de los l�mites de la c�mara
+		/*if (obj.x + obj.width >= app->render->camera.x && obj.x <= app->render->camera.x + app->render->camera.w &&
+			obj.y + obj.height >= app->render->camera.y && obj.y <= app->render->camera.y + app->render->camera.h){*/
+		if (obj.isFacingLeft) {
+			app->render->DrawTexture(obj.texture, obj.x, obj.y, 0.5f, SDL_FLIP_NONE, &obj.currentFrame);
+		}
+		else if (!obj.isFacingLeft) {
+			app->render->DrawTexture(obj.texture, obj.x, obj.y, 0.5f, SDL_FLIP_HORIZONTAL, &obj.currentFrame);
+		}
+		//app->render->DrawTexture(obj.texture, obj.x, obj.y, 0.5f, SDL_FLIP_NONE, &obj.currentFrame);
+		//app->render->DrawTexture(texture, position.x - 75, position.y - 100, 0.5f, SDL_FLIP_NONE, &rect);
+//}
+		if (obj.texture != app->entityManager->GetPlayer()->texture) {
+			app->render->DrawTexture(obj.texture, obj.x, obj.y);
+		}
+
+	}
 	//app->map->UpdateFrontEntities();
 
 	return ret;

@@ -11,6 +11,16 @@
 #include "List.h"
 #include "MiniGameFishing.h"
 
+struct DrawableObject
+{
+	SDL_Texture* texture;
+	int x, y;
+	int anchorY;
+	int width, height;
+	SDL_Rect currentFrame;
+	bool isFacingLeft;
+};
+
 class EntityManager : public Module
 {
 public:
@@ -27,6 +37,8 @@ public:
 	bool Start();
 
 	// Called every frame
+	bool PreUpdate();
+
 	bool Update(float dt);
 
 	bool PostUpdate();
@@ -55,6 +67,9 @@ public:
 
 	List<Entity*> entities;
 	List<TPEntity*> tpEntities;
+
+	std::vector<DrawableObject> objectsToDraw;
+
 
 private:
 	Player* actualPlayer;

@@ -47,7 +47,7 @@ bool NPCAbuelo::Start() {
 
 	texture = app->tex->Load(texturePath.c_str());
 
-	app->render->objectsToDraw.push_back({
+	app->entityManager->objectsToDraw.push_back({
 		texture,
 		position.x - 50, // x
 		position.y - 200, // y
