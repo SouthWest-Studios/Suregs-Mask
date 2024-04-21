@@ -80,7 +80,7 @@
 	<!--Scenes-->
 	<scene_testing>
 		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Testing/TestingMap.tmx"/>
-			<mouseTileTex texturepath="Assets/Textures/pathfinding.png"/>
+			<mouseTileTex pathtextures="Assets/Textures/pathfinding.png"/>
 
 			<minigamefishing>
 				<fishingfloat texturepath="Assets/Textures/fishingfloat.png" />
