@@ -46,7 +46,7 @@ bool Scene_Menu::Start()
 	placeholderSettings = app->tex->Load("Assets/Textures/Interfaz/Ajustes.png");
 	placeholderCredits = app->tex->Load("Assets/Textures/Interfaz/suscat3.jpg");
 
-	//AQUÍ CARGAR TODAS LAS TEXTURAS DEL MENÚ (cuando las tengamos xd)
+	//AQU?CARGAR TODAS LAS TEXTURAS DEL MEN?(cuando las tengamos xd)
 	
 
 	//Get window size
@@ -62,7 +62,7 @@ bool Scene_Menu::Start()
 
 
 	app->audio->LoadAudioMusic("menu", 1.0f);
-	//app->audio->PlayMusic("PATH DE MUSICA MENU AQUÍ")
+	//app->audio->PlayMusic("PATH DE MUSICA MENU AQU?)
 
 	app->guiManager->minId = 1;
 	app->guiManager->maxId = 5;
