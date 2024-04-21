@@ -145,7 +145,6 @@ bool Player::Update(float dt)
 	}
 
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "dashiAnim") {
-		printf("\nReset");
 		inAnimation = false;
 		dashiAnim.Reset();
 	}
