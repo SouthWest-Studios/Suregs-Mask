@@ -137,7 +137,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 
 	case 2:
-		app->fadeToBlack->FadeToBlack(this, app->scene_testing, 90);
+		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
 		app->menu->active = true;
 		break;
 
