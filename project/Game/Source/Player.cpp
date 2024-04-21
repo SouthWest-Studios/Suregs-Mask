@@ -421,7 +421,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 				physB->entity->TakeDamage(currentStats.attackDamage);
 				attackDealed = true;
 			}
-			collisionAttackTimer.Start();
+			//collisionAttackTimer.Start();
 		}
 		if (physA == mask1PassiveSensor) {
 			LOG("Collision ENEMY");
@@ -436,7 +436,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 				physB->entity->TakeDamage(maskStats[static_cast<int>(primaryMask)].maskDamage);
 				attackDealed = true;
 			}
-			collisionMask1Timer.Start();
+			//collisionMask1Timer.Start();
 		}
 		if (physA == pbody) {
 			//TakeDamage(physB->entity->attackDamage);
