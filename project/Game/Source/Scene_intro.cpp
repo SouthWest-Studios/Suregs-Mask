@@ -36,7 +36,7 @@ bool Scene_Intro::Awake(pugi::xml_node config)
 bool Scene_Intro::Start()
 {
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
-	placeholder = app->tex->Load("Assets/Textures/intro_textura.png");
+	placeholder = app->tex->Load("Assets/Textures/Interfaz/intro_textura.png");
 	timerIntro.Start();
 	sus = app->audio->LoadAudioFx("");
 	app->audio->PlayFx(sus);
