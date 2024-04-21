@@ -32,7 +32,30 @@ bool Hud::Awake(pugi::xml_node config)
 
 	bool ret = true;
 
+
+	hudTexturePath = (char*)config.child("mainTexture").attribute("texturepath").as_string();
 	
+	rectBarraVida = new SDL_Rect{ 220,0,220,28 };
+	rectFondoBarraVida = new SDL_Rect{ 0,0,220,28 };
+
+	rectFondoMascara = new SDL_Rect{ 0,38,101,101 };
+	rectFondoMascaraSecundaria = new SDL_Rect{ 115,48,79,79 };
+	rectFondoPociones = new SDL_Rect{ 213,67,44,44 };
+	rectFondoHabilidad1 = new SDL_Rect{ 1,149,60,60 };
+	rectFondoHabilidad2 = new SDL_Rect{ 65,157,45,45 };
+	rectFondoInventario = new SDL_Rect{ 0,218,113,113 };
+	rectFondoMonedas = new SDL_Rect{ 0,338,97,32 };
+	rectFondoObjetosConseguidos = new SDL_Rect{ 0,338,97,32 };
+
+	rectMascara0 = new SDL_Rect{ 3,499,100,100 };
+	rectMascara1 = new SDL_Rect{ 105,499,100,100 };
+	rectMascara2 = new SDL_Rect{ 207,499,100,100 };
+	rectMascara3 = new SDL_Rect{ 309,499,0,0 };
+	rectMascara4 = new SDL_Rect{ 411,499,0,0 };
+
+	rectBotonPlaceholder = new SDL_Rect{ 0,619,45,45 };
+	rectBotonTAB = new SDL_Rect{ 48,619,45,45 };
+	rectBotonQ = new SDL_Rect{ 96,619,45,45 };
 
 	return ret;
 }
@@ -40,29 +63,7 @@ bool Hud::Awake(pugi::xml_node config)
 // Called before the first frame
 bool Hud::Start()
 {
-	hudTexture = app->tex->Load("Assets/Textures/Interfaz/HUD/texture_general_hud.png");
-	rectBarraVida					= new SDL_Rect{ 220,0,220,28 };
-	rectFondoBarraVida				= new SDL_Rect{ 0,0,220,28 };
-
-	rectFondoMascara				= new SDL_Rect{ 0,38,101,101 };
-	rectFondoMascaraSecundaria		= new SDL_Rect{ 115,48,79,79 };
-	rectFondoPociones				= new SDL_Rect{ 213,67,44,44 };
-	rectFondoHabilidad1				= new SDL_Rect{ 1,149,60,60 };
-	rectFondoHabilidad2				= new SDL_Rect{ 65,157,45,45 };
-	rectFondoInventario				= new SDL_Rect{ 0,218,113,113 };
-	rectFondoMonedas				= new SDL_Rect{0,338,97,32};
-	rectFondoObjetosConseguidos		= new SDL_Rect{ 0,338,97,32 };
-
-	rectMascara0					= new SDL_Rect{ 3,499,100,100 };
-	rectMascara1					= new SDL_Rect{ 105,499,100,100 };
-	rectMascara2					= new SDL_Rect{ 207,499,100,100 };
-	rectMascara3					= new SDL_Rect{ 309,499,0,0 };
-	rectMascara4					= new SDL_Rect{ 411,499,0,0 };
-
-	rectBotonPlaceholder			= new SDL_Rect{ 0,619,45,45 };
-	rectBotonTAB					= new SDL_Rect{ 48,619,45,45 };
-	rectBotonQ						= new SDL_Rect{ 96,619,45,45 };
-	
+	hudTexture = app->tex->Load(hudTexturePath);
 
 	return true;
 }

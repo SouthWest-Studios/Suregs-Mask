@@ -41,6 +41,7 @@ public:
 
 
 private:
+	char* hudTexturePath;
 	SDL_Texture* hudTexture;
 	int cantidadMonedas = 0;
 
