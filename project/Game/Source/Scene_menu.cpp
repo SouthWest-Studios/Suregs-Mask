@@ -131,6 +131,11 @@ bool Scene_Menu::CleanUp()
 		app->guiManager->DestroyGuiControl(control->data);
 	}
 
+	app->tex->UnLoad(menuMain);
+	app->tex->UnLoad(menuMain2);
+	app->tex->UnLoad(settings);
+	app->tex->UnLoad(credits);
+
 	return true;
 }
 
