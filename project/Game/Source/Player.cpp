@@ -134,7 +134,8 @@ bool Player::Start() {
 	pbody->ctype = ColliderType::PLAYER;
 
 	//initialize audio effect
-	run_fx = app->audio->LoadAudioFx("run_fx");
+	run_fx = app->audio->LoadAudioFx("runAlt_fx");
+	dash_fx = app->audio->LoadAudioFx("dash_fx");
 
 	cdTimerDashMS = 500;
 	cdTimerAttackMS = 100000 / currentStats.attackSpeed;
@@ -614,6 +615,9 @@ void Player::PlayerMovement(float dt)
 		timerDash.Start();
 		nextState = EntityState::DASHI;
 		pbody->body->ApplyForce(b2Vec2(velocity.x * 100, velocity.y * 100), pbody->body->GetWorldCenter(), false);
+
+		app->audio->StopFx(-1);
+		app->audio->PlayFx(dash_fx);
 	}
 
 	if (!(timerDash.ReadMSec() < speed * 1000 && isDashing)) {

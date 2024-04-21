@@ -125,6 +125,7 @@ public:
 
 	//Audio fx
 	int run_fx;
+	int dash_fx;
 
 
 	Animation* currentAnimation = nullptr;

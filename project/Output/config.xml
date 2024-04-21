@@ -38,6 +38,9 @@
       <inventory_fx path="Assets/Audio/Fx/inventory_fx.wav"/>
       <change_inventory_fx path="Assets/Audio/Fx/change_inventory_fx.wav"/>
       <run_fx path="Assets/Audio/Fx/run_fx.wav"/>
+      <runAlt_fx path="Assets/Audio/Fx/runAlt_fx.wav"/>
+      <runAlt2_fx path="Assets/Audio/Fx/runAlt2_fx.wav"/>
+      <dash_fx path="Assets/Audio/Fx/dash_fx.wav"/>
 		</fx>
 	</sounds>
 	<entities_data>
