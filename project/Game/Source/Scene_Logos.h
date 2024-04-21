@@ -47,6 +47,8 @@ private:
 	SDL_Texture* background;
 
 	Timer timerIntro;
+
+	int intro_fx;
 };
 
 #endif // __SCENE_LOGOS_H__

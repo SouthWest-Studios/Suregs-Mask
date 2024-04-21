@@ -31,13 +31,16 @@
 		</music>
 
 		<fx>
-			<intro_fx path="Assets/Audio/Fx/.wav"/>
-      <menu_fx path="Assets/Audio/Fx/.wav"/>
+			<intro_fx path="Assets/Audio/Fx/intro_fx.wav"/>
+      <menu_fx path="Assets/Audio/Fx/menu_fx.wav"/>
       <button_fx path="Assets/Audio/Fx/button_fx.wav"/>
       <select_fx path="Assets/Audio/Fx/select_fx.wav"/>
       <inventory_fx path="Assets/Audio/Fx/inventory_fx.wav"/>
       <change_inventory_fx path="Assets/Audio/Fx/change_inventory_fx.wav"/>
       <run_fx path="Assets/Audio/Fx/run_fx.wav"/>
+      <runAlt_fx path="Assets/Audio/Fx/runAlt_fx.wav"/>
+      <runAlt2_fx path="Assets/Audio/Fx/runAlt2_fx.wav"/>
+      <dash_fx path="Assets/Audio/Fx/dash_fx.wav"/>
 		</fx>
 	</sounds>
 	<entities_data>
@@ -112,8 +115,8 @@
 	<scene_menu>
 		<menuMain texturepath ="Assets/Textures/Interfaz/MenuIntro.png"/>
 		<menuMain2 texturepath ="Assets/Textures/Interfaz/textura_menu2.png"/>
-		<settings texturepath ="Assets/Textures/Interfaz/Ajustes.png"/>
-		<credits texturepath ="Assets/Textures/Interfaz/suscat3.jpg"/>
+		<settings texturepath ="Assets/Textures/Interfaz/textura_background_settings.png"/>
+		<credits texturepath ="Assets/Textures/Interfaz/textura_creditos.png"/>
 		<logo texturepath ="Assets/Textures/Interfaz/textura_logo.png"/>
 	</scene_menu>
 	<scene_intro>
