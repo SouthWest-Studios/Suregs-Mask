@@ -107,7 +107,7 @@
 		<menuMain texturepath ="Assets/Textures/Interfaz/MenuIntro.png"/>
 		<menuMain2 texturepath ="Assets/Textures/Interfaz/textura_menu2.png"/>
 		<settings texturepath ="Assets/Textures/Interfaz/textura_background_settings.png"/>
-		<credits texturepath ="Assets/Textures/Interfaz/suscat3.jpg"/>
+		<credits texturepath ="Assets/Textures/Interfaz/textura_creditos.png"/>
 		<logo texturepath ="Assets/Textures/Interfaz/textura_logo.png"/>
 	</scene_menu>
 	<scene_intro>
