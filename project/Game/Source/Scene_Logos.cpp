@@ -41,7 +41,13 @@ bool Scene_Logos::Start()
 	config = configFile.child("config").child(name.GetString());
 
 	logoGamePath = config.child("logoGame").attribute("texturepath").as_string();
+	logoUpcPath = config.child("logoUpc").attribute("texturepath").as_string();
+	logoStudioPath = config.child("logoStudio").attribute("texturepath").as_string();
+	backgroundPath = config.child("background").attribute("texturepath").as_string();
 	logoGame = app->tex->Load(logoGamePath);
+	logoUpc = app->tex->Load(logoUpcPath);
+	logoStudio = app->tex->Load(logoStudioPath);
+	background = app->tex->Load(backgroundPath);
 	timerIntro.Start();
 
 	//sus = app->audio->LoadAudioFx("");
@@ -68,7 +74,7 @@ bool Scene_Logos::Update(float dt)
 	OPTICK_EVENT();
 	
 	if (timerIntro.ReadSec() < 5) {
-		app->render->DrawTexture(logoGame, 200, 200);
+
 	}
 	else {
 		app->fadeToBlack->FadeToBlack(this, app->scene_intro, 90);
@@ -83,7 +89,10 @@ bool Scene_Logos::Update(float dt)
 // Called each loop iteration
 bool Scene_Logos::PostUpdate()
 {
-	app->render->DrawTexture(logoGame, 200, 200);
+	app->render->DrawTexture(background, 0, 0);
+	app->render->DrawTexture(logoGame, 500, 100);
+	app->render->DrawTexture(logoUpc, 600, 400);
+	app->render->DrawTexture(logoStudio, 300, 350);
 	bool ret = true;
 
 	return ret;

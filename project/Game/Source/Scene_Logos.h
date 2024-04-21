@@ -40,6 +40,7 @@ private:
 	const char* logoUpcPath;
 	const char* logoStudioPath;
 	const char* backgroundPath;
+
 	SDL_Texture* logoGame;
 	SDL_Texture* logoUpc;
 	SDL_Texture* logoStudio;
