@@ -87,6 +87,6 @@ bool Scene_Intro::PostUpdate()
 bool Scene_Intro::CleanUp()
 {
 	LOG("Freeing Scene_intro");
-
+	app->tex->UnLoad(placeholder);
 	return true;
 }

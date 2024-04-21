@@ -84,7 +84,9 @@ bool InventoryManager::CleanUp()
 	}
 
 	inventities.Clear();
-
+	app->tex->UnLoad(PointerItemText);
+	app->tex->UnLoad(SelectedItemText);
+	app->tex->UnLoad(EquipedItemText);
 	return ret;
 }
 int highestId = -1;

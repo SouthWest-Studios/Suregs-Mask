@@ -208,7 +208,6 @@ bool Map::CleanUp()
 	mapData.layers.Clear();
 
 
-
 	// Remove all groupobject
 	ListItem<MapObjects*>* objectsItem;
 	objectsItem = mapData.mapObjects.start;
@@ -252,7 +251,7 @@ bool Map::CleanUp()
 	collisionsList.Clear();
 
 
-
+	pathfinding->CleanUp();
 
 	return true;
 }

@@ -22,8 +22,8 @@ PathFinding::~PathFinding()
 bool PathFinding::CleanUp()
 {
 	LOG("Freeing pathfinding library");
-
 	lastPath.Clear();
+	
 	RELEASE_ARRAY(map);
 
 	return true;
@@ -129,20 +129,21 @@ int PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 				int actualNodeList = 0;
 				
 
-				while (pathNode && actualNodeList < 50)
+				while (pathNode /*&& actualNodeList < 30*/)
 				{
 					lastPath.PushBack(pathNode->pos);
-					actualNodeList++;
+					//actualNodeList++;
 					pathNode = pathNode->parent;
+					
 				}
 
 				lastPath.Flip();
 				ret = lastPath.Count();
 				LOG("Created path of %d steps in %d iterations", ret, iterations);
-				RELEASE(node);
+				//RELEASE(node);
 				break;
 			}
-
+			
 			// L13: DONE 4: Fill a list of all adjancent nodes. 
 			// use the FindWalkableAdjacents function
 			PathList adjacent;
@@ -178,10 +179,11 @@ int PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 				}
 
 				neighbourg = neighbourg->next;
-				RELEASE(node);
+				//RELEASE(node);
+				
 			}
 			++iterations;
-			//
+			
 		}
 	}
 

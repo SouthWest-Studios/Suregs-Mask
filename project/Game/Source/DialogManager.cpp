@@ -62,10 +62,11 @@ bool DialogManager::CleanUp()
 
 	while (item != NULL && ret == true)
 	{
+
 		ret = item->data->CleanUp();
 		item = item->prev;
 	}
-
+	app->tex->UnLoad(background_tex);
 	dialogues.Clear();
 
 	return ret;
