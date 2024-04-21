@@ -70,6 +70,7 @@ public:
 	TTF_Font* consoleFont;
 	TTF_Font* primaryFont;
 	TTF_Font* secondaryFont;
+	TTF_Font* buttonFont;
 
 	bool vsync = false;
 
