@@ -26,9 +26,12 @@ public:
 
 	void PushBack(const SDL_Rect& rect)
 	{
-		if (totalFrames < MAX_FRAMES) {
+		if (totalFrames < MAX_FRAMES && totalFrames < sizeof(frames) / sizeof(frames[0])) {
 			frames[totalFrames++] = rect;
 		}
+		/*if (totalFrames < MAX_FRAMES) {
+			frames[totalFrames++] = rect;
+		}*/
 		//frames[totalFrames++] = rect;
 	}
 

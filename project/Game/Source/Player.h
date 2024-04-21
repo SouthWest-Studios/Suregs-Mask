@@ -182,13 +182,13 @@ public:
 	bool pressingLeft;
 	bool pressingRight;
 
+	bool isFacingLeft = false;
 
 private:
 	Animation idleAnim;
 	Animation runAnim;
 	Animation dashiAnim;
 
-	bool isFacingLeft = false;
 	bool isDashing = false;
 
 	bool godmode = false;

@@ -117,6 +117,16 @@ bool Player::Start() {
 
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
+	app->entityManager->objectsToDraw.push_back({
+		texture,
+		position.x, // x
+		position.y, // y
+		position.y + 236, // anchorY
+		300, // width
+		250, // height
+		NULL, // currentFrame
+		isFacingLeft
+	});
 
 	pbody = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
 	pbody->entity = this;
@@ -130,6 +140,11 @@ bool Player::Start() {
 	cdTimerAttackMS = 100000 / currentStats.attackSpeed;
 
 	player_Direction = Direction::UNKNOWN;
+
+
+	EquipPrimaryMask(Mask::NOMASK);
+	EquipSecondaryMask(Mask::MASK1);
+
 	return true;
 }
 
@@ -205,11 +220,11 @@ bool Player::PostUpdate() {
 
 	if (isFacingLeft) {
 		//app->render->DrawTexture(texture, position.x - 50, position.y - 200, SDL_FLIP_HORIZONTAL, &rect);
-		app->render->DrawTexture(texture, position.x - 75, position.y - 100, 0.5f, SDL_FLIP_NONE, &rect);
+		//app->render->DrawTexture(texture, position.x - 75, position.y - 100, 0.5f, SDL_FLIP_NONE, &rect);
 		
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 75, position.y - 100, 0.5f, SDL_FLIP_HORIZONTAL, &rect);
+		//app->render->DrawTexture(texture, position.x - 75, position.y - 100, 0.5f, SDL_FLIP_HORIZONTAL, &rect);
 		
 	}
 	return true;
@@ -406,7 +421,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 				physB->entity->TakeDamage(currentStats.attackDamage);
 				attackDealed = true;
 			}
-			collisionAttackTimer.Start();
+			//collisionAttackTimer.Start();
 		}
 		if (physA == mask1PassiveSensor) {
 			LOG("Collision ENEMY");
@@ -421,7 +436,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 				physB->entity->TakeDamage(maskStats[static_cast<int>(primaryMask)].maskDamage);
 				attackDealed = true;
 			}
-			collisionMask1Timer.Start();
+			//collisionMask1Timer.Start();
 		}
 		if (physA == pbody) {
 			//TakeDamage(physB->entity->attackDamage);
@@ -455,6 +470,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::ENTRADA_MAZMORRA0:
 		LOG("Collision ENTRADA_MAZMORRA0");
 		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra0);
+		break;
+	case ColliderType::SALIDA_MAZMORRA0:
+		LOG("Collision SALIDA_MAZMORRA0");
+		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_pueblo);
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");

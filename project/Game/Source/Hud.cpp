@@ -43,6 +43,7 @@ bool Hud::Start()
 	hudTexture = app->tex->Load("Assets/Textures/Interfaz/HUD/texture_general_hud.png");
 	rectBarraVida					= new SDL_Rect{ 220,0,220,28 };
 	rectFondoBarraVida				= new SDL_Rect{ 0,0,220,28 };
+
 	rectFondoMascara				= new SDL_Rect{ 0,38,101,101 };
 	rectFondoMascaraSecundaria		= new SDL_Rect{ 115,48,79,79 };
 	rectFondoPociones				= new SDL_Rect{ 213,67,44,44 };
@@ -51,12 +52,16 @@ bool Hud::Start()
 	rectFondoInventario				= new SDL_Rect{ 0,218,113,113 };
 	rectFondoMonedas				= new SDL_Rect{0,338,97,32};
 	rectFondoObjetosConseguidos		= new SDL_Rect{ 0,338,97,32 };
+
 	rectMascara0					= new SDL_Rect{ 3,499,100,100 };
-	rectMascara1					= new SDL_Rect{ 0,0,0,0 };
-	rectMascara2					= new SDL_Rect{ 0,0,0,0 };
-	rectMascara3					= new SDL_Rect{ 0,0,0,0 };
-	rectMascara4					= new SDL_Rect{ 0,0,0,0 };
-	
+	rectMascara1					= new SDL_Rect{ 105,499,100,100 };
+	rectMascara2					= new SDL_Rect{ 207,499,100,100 };
+	rectMascara3					= new SDL_Rect{ 309,499,0,0 };
+	rectMascara4					= new SDL_Rect{ 411,499,0,0 };
+
+	rectBotonPlaceholder			= new SDL_Rect{ 0,619,45,45 };
+	rectBotonTAB					= new SDL_Rect{ 48,619,45,45 };
+	rectBotonQ						= new SDL_Rect{ 96,619,45,45 };
 	
 
 	return true;
@@ -104,8 +109,7 @@ bool Hud::PostUpdate()
 
 
 	//Fondos
-	app->render->DrawTexture(hudTexture, 75, 15, SDL_FLIP_NONE, rectFondoMascaraSecundaria, 0);
-	app->render->DrawTexture(hudTexture, 25, 40, SDL_FLIP_NONE, rectFondoMascara, 0);
+	
 
 	app->render->DrawTexture(hudTexture, 395, 32, SDL_FLIP_NONE, rectFondoPociones, 0);
 
@@ -118,6 +122,47 @@ bool Hud::PostUpdate()
 
 	//Objeto conseguido
 	//app->render->DrawTexture(hudTexture, 50, 50, SDL_FLIP_NONE, rectFondoObjetosConseguidos, 0);
+
+
+	//Mascaras
+	Mask* primaryMask = app->entityManager->GetPlayer()->GetPrimaryMask();
+	Mask* secondaryMask = app->entityManager->GetPlayer()->GetSecondaryMask();
+
+	SDL_Rect rectPrimaryMask;
+	SDL_Rect rectSecondaryMask;
+
+	switch (*primaryMask)	
+	{
+		case Mask::NOMASK: rectPrimaryMask = *rectMascara0; break;
+		case Mask::MASK1: rectPrimaryMask = *rectMascara1; break;
+		case Mask::MASK2: rectPrimaryMask = *rectMascara2; break;
+		case Mask::MASK3: rectPrimaryMask = *rectMascara3; break;
+		default: rectPrimaryMask = *rectMascara0; break;
+	}
+
+	switch (*secondaryMask)
+	{
+		case Mask::NOMASK: rectSecondaryMask = *rectMascara0; break;
+		case Mask::MASK1: rectSecondaryMask = *rectMascara1; break;
+		case Mask::MASK2: rectSecondaryMask = *rectMascara2; break;
+		case Mask::MASK3: rectSecondaryMask = *rectMascara3; break;
+		default: rectSecondaryMask = *rectMascara0; break;
+	}
+
+
+	app->render->DrawTexture(hudTexture, 75, 15, SDL_FLIP_NONE, rectFondoMascaraSecundaria, 0);
+	app->render->DrawTexture(hudTexture, 75, 15, 0.79f,SDL_FLIP_NONE, &rectSecondaryMask, 0);
+
+	app->render->DrawTexture(hudTexture, 25, 40, SDL_FLIP_NONE, rectFondoMascara, 0);
+	app->render->DrawTexture(hudTexture, 25, 40, SDL_FLIP_NONE, &rectPrimaryMask, 0);
+
+	//Fin mascaras
+
+
+
+	//Botones
+	app->render->DrawTexture(hudTexture, windowWidth - rectFondoInventario->w + 10, 70, SDL_FLIP_NONE, rectBotonTAB, 0);
+	app->render->DrawTexture(hudTexture, 120, 85, SDL_FLIP_NONE, rectBotonQ, 0);
 	
 	
 

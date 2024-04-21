@@ -39,6 +39,7 @@ enum class ColliderType {
 	DIALOG_TRIGGER,
 	TP_ENTITY,
 	ENTRADA_MAZMORRA0,
+	SALIDA_MAZMORRA0,
 	UNKNOWN,
 	
 	// ..

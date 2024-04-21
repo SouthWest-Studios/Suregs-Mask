@@ -8,13 +8,15 @@
 #include "SDL/include/SDL.h"
 #include "SDL_ttf/include/SDL_ttf.h"
 
-struct DrawableObject
-{
-	SDL_Texture* texture;
-	int x, y;
-	int anchorY;
-	int width, height;
-};
+//struct DrawableObject
+//{
+//	SDL_Texture* texture;
+//	int x, y;
+//	int anchorY;
+//	int width, height;
+//	SDL_Rect currentFrame;
+//	bool isFacingLeft;
+//};
 
 class Render : public Module
 {
@@ -74,7 +76,7 @@ public:
 
 	bool vsync = false;
 
-	std::vector<DrawableObject> objectsToDraw;
+	//std::vector<DrawableObject> objectsToDraw;
 
 };
 

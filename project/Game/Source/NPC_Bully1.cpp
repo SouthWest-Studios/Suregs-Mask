@@ -47,6 +47,15 @@ bool NPCBully1::Start() {
 
 	texture = app->tex->Load(texturePath.c_str());
 
+	app->entityManager->objectsToDraw.push_back({
+		texture,
+		position.x - 50, // x
+		position.y - 200, // y
+		position.y + 170, // anchorY
+		138, // width
+		181, // height
+		true // isFacingLeft
+	});
 	//pbody = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
 	//pbody->entity = this;
 	//pbody->listener = this;
@@ -73,7 +82,7 @@ bool NPCBully1::PostUpdate() {
 
 	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-	app->render->DrawTexture(texture, position.x - 50, position.y - 200, SDL_FLIP_NONE, &rect);
+	//app->render->DrawTexture(texture, position.x - 50, position.y - 200, SDL_FLIP_NONE, &rect);
 	
 
 	return true;

@@ -46,6 +46,7 @@ private:
 
 	SDL_Rect* rectBarraVida;
 	SDL_Rect* rectFondoBarraVida;
+
 	SDL_Rect* rectFondoMascara;
 	SDL_Rect* rectFondoMascaraSecundaria;
 	SDL_Rect* rectFondoPociones;
@@ -54,11 +55,17 @@ private:
 	SDL_Rect* rectFondoInventario;
 	SDL_Rect* rectFondoMonedas;
 	SDL_Rect* rectFondoObjetosConseguidos;
+
 	SDL_Rect* rectMascara0;
 	SDL_Rect* rectMascara1;
 	SDL_Rect* rectMascara2;
 	SDL_Rect* rectMascara3;
 	SDL_Rect* rectMascara4;
+
+	SDL_Rect* rectBotonPlaceholder;
+	SDL_Rect* rectBotonTAB;
+	SDL_Rect* rectBotonQ;
+	
 
 
 	uint windowWidth, windowHeight;
