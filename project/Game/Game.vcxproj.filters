@@ -160,6 +160,9 @@
     <ClCompile Include="Source\Item_Ojo.cpp">
       <Filter>Entities\Items</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Scene_Logos.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -374,6 +377,9 @@
     </ClInclude>
     <ClInclude Include="Source\Item_Ojo.h">
       <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene_Logos.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

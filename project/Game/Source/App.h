@@ -18,6 +18,7 @@ class Render;
 class Textures;
 class Audio;
 class ModuleFadeToBlack;
+class Scene_Logos;
 class Scene_Intro;
 class Scene_Menu;
 class Scene_testing;
@@ -114,6 +115,7 @@ public:
 	ModuleFadeToBlack* fadeToBlack;
 
 	Scene_Intro* scene_intro;
+	Scene_Logos* scene_logos;
 	Scene_Menu* scene_menu;
 	Scene_testing* scene_testing;
 	Scene_Pueblo* scene_pueblo;

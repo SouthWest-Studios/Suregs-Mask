@@ -138,6 +138,7 @@
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\Render.cpp" />
     <ClCompile Include="Source\Scene_Intro.cpp" />
+    <ClCompile Include="Source\Scene_Logos.cpp" />
     <ClCompile Include="Source\Scene_Mazmorra0.cpp" />
     <ClCompile Include="Source\Scene_Menu.cpp" />
     <ClCompile Include="Source\Enemy_Shar.cpp" />
@@ -200,6 +201,7 @@
     <ClInclude Include="Source\Module.h" />
     <ClInclude Include="Source\Render.h" />
     <ClInclude Include="Source\Scene_Intro.h" />
+    <ClInclude Include="Source\Scene_Logos.h" />
     <ClInclude Include="Source\Scene_Mazmorra0.h" />
     <ClInclude Include="Source\Scene_Menu.h" />
     <ClInclude Include="Source\Enemy_Shar.h" />

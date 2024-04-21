@@ -113,6 +113,11 @@
 	<scene_intro>
 		<texturaIntro texturepath ="Assets/Textures/Interfaz/intro_textura.png"/>
 	</scene_intro>
+	<scene_logos>
+		<logoGame texturepath ="Assets/Textures/Interfaz/textura_logo.png"/>
+		<logoUpc texturepath ="Assets/Textures/Interfaz/textura_logo.png"/>
+		<logoStudio texturepath ="Assets/Textures/Interfaz/textura_logo.png"/>
+	</scene_logos>
 	<scene_pueblo>
 		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Pueblo/Pueblo.tmx"/>
 	</scene_pueblo>

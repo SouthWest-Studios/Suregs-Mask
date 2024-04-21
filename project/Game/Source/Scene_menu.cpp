@@ -161,7 +161,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 3:
 		showSettings = true;
-		app->guiManager->minId = 6;
+		app->guiManager->minId = 7;
 		app->guiManager->maxId = 11;
 		break;
 

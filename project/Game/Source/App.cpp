@@ -6,6 +6,7 @@
 #include "Audio.h"
 #include "Scene_Testing.h"
 #include "Scene_Intro.h"
+#include "Scene_Logos.h"
 #include "Scene_Menu.h"
 #include "Scene_Pueblo.h"
 #include "Scene_Mazmorra0.h"
@@ -48,7 +49,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	physics = new Physics(this);
 	fadeToBlack = new ModuleFadeToBlack(this);
 
-	scene_intro = new Scene_Intro(this, true);
+	scene_logos = new Scene_Logos(this, true);
+	scene_intro = new Scene_Intro(this, false);
 	scene_menu = new Scene_Menu(this, false);
 	scene_testing = new Scene_testing(this, false);
 	scene_pueblo = new Scene_Pueblo(this, false);
@@ -73,6 +75,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 
 	AddModule(map);
 
+	AddModule(scene_logos);
 	AddModule(scene_intro);
 	AddModule(scene_menu);
 	AddModule(scene_testing);
