@@ -219,6 +219,16 @@ bool Menu::Update(float dt)
 			// Establecer el volumen de la música
 			Mix_VolumeMusic(newVolume);
 		}
+
+		if (sfx != nullptr)
+		{
+			int newSFXVolume = ((GuiControlSlider*)sfx)->value;
+			// Asegurarse de que el nuevo volumen esté dentro de los límites válidos (0-128 para SDL Mixer)
+			newSFXVolume = std::max(0, std::min(128, newSFXVolume));
+			// Establecer el volumen de la música
+			Mix_Volume(-1, newSFXVolume);
+		}
+
 		
 
 		if (fullScreen->selected && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
