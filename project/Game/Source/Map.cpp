@@ -18,7 +18,7 @@
 #include <string>
 #include <vector>
 #include "DialogTriggerEntity.h"
-#include "Cuerno.h"
+#include "Item_Garra.h"
 #include "NPC_Vendedor.h"
 #include "NPC_Pescador.h"
 #include "NPC_Abuelo.h"
@@ -30,6 +30,7 @@
 #include "NPC_MujerPreocupada.h"
 #include "Item_Diamante.h"
 #include "Item_Ojo.h"
+#include "Enemy_Ols.h"
 #include "TPEntity.h"
 #include "Window.h"
 
@@ -1055,10 +1056,10 @@ bool Map::LoadEntities(std::string layerName)
 
 					//CUERNO
 					if (gid == tileset->firstgid + 40) {
-						Cuerno* cuerno = (Cuerno*)app->entityManager->CreateEntity(EntityType::ITEM_CUERNO);
-						cuerno->config = configNode.child("entities_data").child("item_cuerno");
-						cuerno->position = iPoint(pos.x + 16, pos.y + 16);
-						cuerno->Start();
+						Item_Garra* garra = (Item_Garra*)app->entityManager->CreateEntity(EntityType::ITEM_GARRA);
+						garra->config = configNode.child("entities_data").child("item_garra");
+						garra->position = iPoint(pos.x + 16, pos.y + 16);
+						garra->Start();
 						
 
 					}

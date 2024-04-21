@@ -8,7 +8,7 @@
 #include "Pathfinding.h"
 #include "Player.h"
 #include "Physics.h"
-
+#include "Item_Garra.h"
 
 struct SDL_Texture;
 
@@ -92,6 +92,9 @@ private:
 	Animation dieAnim;
 
 	bool isFacingLeft = false;
+
+	Item_Garra* garra;
+
 
 public:
 

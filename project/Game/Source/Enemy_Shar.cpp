@@ -165,6 +165,11 @@ void Enemy_Shar::Attack(float dt)
 }
 
 void Enemy_Shar::Die(float dt) {
+	ojo = (Item_Ojo*)app->entityManager->CreateEntity(EntityType::ITEM_OJO);
+	/*garra->config = configNode.child("entities_data").child("item_garra");*/
+	ojo->position = iPoint(position.x, position.y);
+	ojo->Start();
+
 	app->entityManager->DestroyEntity(this);
 	app->physics->GetWorld()->DestroyBody(pbody->body);
 	app->tex->UnLoad(texture);

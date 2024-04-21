@@ -20,7 +20,7 @@
 
 Menu::Menu(App* app, bool start_enabled) : Module(app, start_enabled)
 {
-	name.Create("Menu");
+	name.Create("menu");
 }
 
 // Destructor
@@ -30,7 +30,7 @@ Menu::~Menu()
 // Called before render is available
 bool Menu::Awake(pugi::xml_node config)
 {
-	LOG("Menu");
+	LOG("menu");
 	bool ret = true;
 
 	
@@ -42,10 +42,15 @@ bool Menu::Awake(pugi::xml_node config)
 bool Menu::Start()
 {
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
+	/*fondoInventario = app->tex->Load(config.child("texture1").attribute("texturePath1").as_string());
+	fondoEquipo = app->tex->Load(config.child("texture2").attribute("texturePath2").as_string());
+	fondoDiario = app->tex->Load(config.attribute("texturePath3").as_string());
+	fondoAjustes = app->tex->Load(config.attribute("texturePath4").as_string());*/
 	fondoInventario = app->tex->Load("Assets/Textures/Interfaz/libro01.png");
 	fondoEquipo = app->tex->Load("Assets/Textures/Interfaz/Equipo.png");
 	fondoDiario = app->tex->Load("Assets/Textures/Interfaz/Diario.png");
 	fondoAjustes = app->tex->Load("Assets/Textures/Interfaz/Ajustes.png");
+
 
 	inventory_audio = app->audio->LoadAudioFx("inventory_fx");
 	change_inventory_audio = app->audio->LoadAudioFx("change_inventory_fx");
@@ -321,6 +326,10 @@ bool Menu::PostUpdate()
 // Called before quitting
 bool Menu::CleanUp()
 {
+	app->tex->UnLoad(fondoInventario);
+	app->tex->UnLoad(fondoEquipo);
+	app->tex->UnLoad(fondoDiario);
+	app->tex->UnLoad(fondoAjustes);
 	LOG("Freeing Scene_Intro");
 
 	return true;

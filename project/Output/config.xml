@@ -47,7 +47,7 @@
 		<osiris texturePath="Assets/Textures/Entidades/Osiris/Viking/VikingNoEffect-Sheet.png" Tsprite="60" Pwidth="1380" sprite_x="115" sprite_y="84"/>
 		<ols texturePath="Assets/Textures/Entidades/Ols/animations/spritesheets/Sprites.png" Tsprite="374" Pwidth="6336" sprite_x="288" sprite_y="128"/>
 		<shar texturePath="Assets/Textures/Entidades/Shar/Sprites.png" Tsprite="45" Pwidth="2190" sprite_x="146" sprite_y="153"/>
-		<item_cuerno texturePath="Assets/Textures/Entidades/Items/cuerno.png"/>
+		<item_garra texturePath="Assets/Textures/Entidades/Items/item_Garra.png"/>
 		<item_diamante texturePath="Assets/Textures/Entidades/Items/texture_diamond.png"/>
 		<item_ojo texturePath="Assets/Textures/Entidades/Items/texture_eye.png"/>
 		
@@ -67,6 +67,12 @@
 		<npc_mujer_enamorada texturePath="Assets/Textures/Entidades/NPCs/textura_npc_mujer_enamorada.png" Tsprite="1" Pwidth="138" sprite_x="138" sprite_y="194"/>
 	
 	</entities_data>
+	<menu>
+		<texture1 texturePath1="Assets/Textures/Interfaz/libro01.png"/>
+		<texture2 texturePath2="Assets/Textures/Interfaz/Equipo.png"/>
+		<texture3 texturePath3="Assets/Textures/Interfaz/Diario.png"/>
+		<texture4 texturePath4="Assets/Textures/Interfaz/Ajustes.png"/>
+	</menu>
 
 	<!--Scenes-->
 	<scene_testing>

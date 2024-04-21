@@ -95,7 +95,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Cuerno.cpp" />
     <ClCompile Include="Source\DebugCommand.cpp" />
     <ClCompile Include="Source\DebugCommandBase.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -112,6 +111,7 @@
     <ClCompile Include="Source\InventoryManager.cpp" />
     <ClCompile Include="Source\Item.cpp" />
     <ClCompile Include="Source\Item_Diamante.cpp" />
+    <ClCompile Include="Source\Item_Garra.cpp" />
     <ClCompile Include="Source\Item_Ojo.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\App.cpp" />
@@ -150,8 +150,6 @@
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\ArmaduraInv.h" />
-    <ClInclude Include="Source\Cuerno.h" />
-    <ClInclude Include="Source\CuernoInv.h" />
     <ClInclude Include="Source\DebugCommand.h" />
     <ClInclude Include="Source\DebugCommandBase.h" />
     <ClInclude Include="Source\DebugConsole.h" />
@@ -162,6 +160,7 @@
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\Fishing.h" />
+    <ClInclude Include="Source\GarraInv.h" />
     <ClInclude Include="Source\GuiCheckBox.h" />
     <ClInclude Include="Source\GuiControl.h" />
     <ClInclude Include="Source\GuiControlButton.h" />
@@ -173,6 +172,7 @@
     <ClInclude Include="Source\Item.h" />
     <ClInclude Include="Source\ItemInv.h" />
     <ClInclude Include="Source\Item_Diamante.h" />
+    <ClInclude Include="Source\Item_Garra.h" />
     <ClInclude Include="Source\Item_Ojo.h" />
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\Menu.h" />
@@ -189,6 +189,7 @@
     <ClInclude Include="Source\NPC_MujerPreocupada.h" />
     <ClInclude Include="Source\NPC_Pescador.h" />
     <ClInclude Include="Source\NPC_Vendedor.h" />
+    <ClInclude Include="Source\OjoInv.h" />
     <ClInclude Include="Source\Pathfinding.h" />
     <ClInclude Include="Source\PerfTimer.h" />
     <ClInclude Include="Source\Physics.h" />

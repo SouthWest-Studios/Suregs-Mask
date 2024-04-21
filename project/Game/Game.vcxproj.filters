@@ -139,9 +139,6 @@
     <ClCompile Include="Source\TPEntity.cpp">
       <Filter>Entities\Meta</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Cuerno.cpp">
-      <Filter>Entities\Items</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Item.cpp">
       <Filter>Entities\Items</Filter>
     </ClCompile>
@@ -162,6 +159,9 @@
     </ClCompile>
     <ClCompile Include="Source\Scene_Logos.cpp">
       <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Item_Garra.cpp">
+      <Filter>Entities\Items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -309,9 +309,6 @@
     <ClInclude Include="Source\SwordInv.h">
       <Filter>Modules\Inventory</Filter>
     </ClInclude>
-    <ClInclude Include="Source\CuernoInv.h">
-      <Filter>Modules\Inventory</Filter>
-    </ClInclude>
     <ClInclude Include="Source\NPC_Vendedor.h">
       <Filter>Entities\NPC</Filter>
     </ClInclude>
@@ -354,9 +351,6 @@
     <ClInclude Include="Source\TPEntity.h">
       <Filter>Entities\Meta</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Cuerno.h">
-      <Filter>Entities\Items</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Entity.h">
       <Filter>Entities\Items</Filter>
     </ClInclude>
@@ -380,6 +374,15 @@
     </ClInclude>
     <ClInclude Include="Source\Scene_Logos.h">
       <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Item_Garra.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GarraInv.h">
+      <Filter>Modules\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\OjoInv.h">
+      <Filter>Modules\Inventory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

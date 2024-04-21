@@ -58,6 +58,8 @@ public:
 	GuiControlSlider* sfx;
 	int ventana = 1;
 
+	pugi::xml_node config;
+
 private:
 	SDL_Texture* fondoInventario;
 	SDL_Texture* fondoEquipo;

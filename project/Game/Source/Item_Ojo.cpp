@@ -1,4 +1,4 @@
-#include "Cuerno.h"
+
 #include "App.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -11,7 +11,7 @@
 #include "Physics.h"
 
 Item_Ojo::Item_Ojo(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
-	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_DIAMANTE)
+	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_OJO)
 {
 	name.Create("item_ojo");
 }
@@ -32,6 +32,7 @@ bool Item_Ojo::Start() {
 	/*position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();*/
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
+	texture = app->tex->Load("Assets/Textures/Entidades/Items/texture_eye.png");
 	
 	// L07 DONE 4: Add a physics to an item - initialize the physics body
 	app->tex->GetSize(texture, texW, texH);

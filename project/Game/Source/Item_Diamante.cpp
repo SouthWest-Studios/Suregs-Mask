@@ -1,4 +1,4 @@
-#include "Cuerno.h"
+
 #include "App.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -64,8 +64,8 @@ bool Item_Diamante::PostUpdate()
 
 bool Item_Diamante::CleanUp()
 {
-	app->physics->GetWorld()->DestroyBody(pbody->body);
-	app->tex->UnLoad(texture);
+	/*app->physics->GetWorld()->DestroyBody(pbody->body);
+	app->tex->UnLoad(texture);*/
 	return true;
 }
 

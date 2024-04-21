@@ -12,6 +12,7 @@
 #include "Window.h"
 #include "Pathfinding.h"
 #include "Map.h"
+#include "Item_Garra.h"
 #include "Physics.h"
 #include <Optick/include/optick.h>
 
@@ -91,6 +92,7 @@ bool Enemy_Ols::Update(float dt)
 
 	if (health <= 0) {
 		nextState = EntityState::DEAD;
+		
 	}
 	else if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 20 /*Cambiar*/) {
 		nextState = EntityState::ATTACKING;
@@ -164,6 +166,11 @@ void Enemy_Ols::Attack(float dt)
 }
 
 void Enemy_Ols::Die(float dt) {
+	garra = (Item_Garra*)app->entityManager->CreateEntity(EntityType::ITEM_GARRA);
+	/*garra->config = configNode.child("entities_data").child("item_garra");*/
+	garra->position = iPoint(position.x, position.y);
+	garra->Start();
+
 	app->entityManager->DestroyEntity(this);
 	app->physics->GetWorld()->DestroyBody(pbody->body);
 	app->tex->UnLoad(texture);

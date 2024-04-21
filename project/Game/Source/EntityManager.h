@@ -5,7 +5,7 @@
 #include "Entity.h"
 #include "Player.h"
 #include "Enemy_Osiris.h"
-#include "Enemy_Ols.h"
+#include "Item_garra.h"
 #include "Enemy_Shar.h"
 #include "TPEntity.h"
 #include "List.h"
@@ -72,6 +72,8 @@ public:
 
 
 private:
+	pugi::xml_node configNode;
+	Item_Garra* garra;
 	Player* actualPlayer;
 	MiniGameFishing* fishing = new MiniGameFishing;
 

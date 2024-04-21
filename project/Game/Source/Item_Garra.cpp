@@ -1,4 +1,4 @@
-#include "Cuerno.h"
+#include "Item_Garra.h"
 #include "App.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -9,15 +9,15 @@
 #include "Point.h"
 #include "Physics.h"
 
-Cuerno::Cuerno(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
-	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_CUERNO)
+Item_Garra::Item_Garra(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
+	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_GARRA)
 {
-	name.Create("espada");
+	name.Create("item_Garra");
 }
 
-Cuerno::~Cuerno() {}
+Item_Garra::~Item_Garra() {}
 
-bool Cuerno::Awake() {
+bool Item_Garra::Awake() {
 
 	
 	 
@@ -25,17 +25,17 @@ bool Cuerno::Awake() {
 	return true;
 }
 
-bool Cuerno::Start() {
+bool Item_Garra::Start() {
 
 	//initilize textures
 	/*position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();*/
-	texture = app->tex->Load(config.attribute("texturePath").as_string());
-	
+	/*texture = app->tex->Load(config.attribute("texturePath").as_string());*/
+	texture = app->tex->Load("Assets/Textures/Entidades/Items/item_Garra.png");
 	// L07 DONE 4: Add a physics to an item - initialize the physics body
 	app->tex->GetSize(texture, texW, texH);
 	pbody = app->physics->CreateCircle(position.x, position.y, 11, bodyType::STATIC);
-	pbody->ctype = ColliderType::RESOURCE_ESPADA;
+	pbody->ctype = ColliderType::RESOURCE_GARRA;
 	pbody->listener = this;
 	pbody->body->GetFixtureList()->SetSensor(true);
 
@@ -43,7 +43,7 @@ bool Cuerno::Start() {
 	return true;
 }
 
-bool Cuerno::Update(float dt)
+bool Item_Garra::Update(float dt)
 {
 	// L07 DONE 4: Add a physics to an item - update the position of the object from the physics.  
 
@@ -56,13 +56,13 @@ bool Cuerno::Update(float dt)
 	return true;
 }
 
-bool Cuerno::PostUpdate()
+bool Item_Garra::PostUpdate()
 {
 	app->render->DrawTexture(texture, position.x, position.y);
 	return true;
 }
 
-bool Cuerno::CleanUp()
+bool Item_Garra::CleanUp()
 {
 	app->physics->GetWorld()->DestroyBody(pbody->body);
 	app->tex->UnLoad(texture);

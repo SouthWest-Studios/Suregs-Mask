@@ -1,5 +1,5 @@
-#ifndef __CUERNOINV_H__
-#define __CUERNOINV_H__
+#ifndef __GARRAINV_H__
+#define __GARRAINV_H__
 
 #include "inventity.h"
 #include "Point.h"
@@ -7,12 +7,12 @@
 
 struct SDL_Texture;
 
-class CuernoInv : public Inventity
+class GarraInv : public Inventity
 {
 public:
-	CuernoInv::CuernoInv() : Inventity(InventityType::CUERNO)
+	GarraInv::GarraInv() : Inventity(InventityType::GARRA)
 	{
-		name.Create("Cuernoinv");
+		name.Create("GarraInv");
 	}
 	
 	/*virtual ~Swordinv();*/

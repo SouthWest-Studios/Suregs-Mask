@@ -5,7 +5,7 @@
 #include "Enemy_Shar.h"
 #include "Item.h"
 #include "App.h"
-#include "Cuerno.h"
+#include "Item_Garra.h"
 #include "Textures.h"
 #include "Scene_Testing.h"
 #include "Player.h"
@@ -23,6 +23,7 @@
 #include "Item_diamante.h"
 #include "MiniGameFishing.h"
 #include "Fishing.h"
+#include "Item_Ojo.h"
 
 
 
@@ -121,11 +122,14 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::ENEMY_SHAR:
 		entity = new Enemy_Shar();
 		break;
-	case EntityType::ITEM_CUERNO:
-		entity = new Cuerno(type, 1, 100, 300, 5, 2);
+	case EntityType::ITEM_GARRA:
+		entity = new Item_Garra(type, 1, 100, 300, 5, 2);
 		break;
 	case EntityType::ITEM_DIAMANTE:
 		entity = new Item_Diamante(type, 100, 100, 300, 5, 2);
+		break;
+	case EntityType::ITEM_OJO:
+		entity = new Item_Ojo(type, 100, 100, 300, 5, 2);
 		break;
 	case EntityType::ITEM:
 		entity = new Item();
@@ -186,7 +190,19 @@ void EntityManager::DestroyEntity(Entity* entity)
 
 	for (item = entities.start; item != NULL; item = item->next)
 	{
+		if (item->data == entity)
+		{
+			//if (item->data->type == EntityType::ENEMY_OSIRIS || item->data->type == EntityType::ENEMY_OLS || item->data->type == EntityType::ENEMY_SHAR)
+			//{
+			//	garra = (Item_Garra*)app->entityManager->CreateEntity(EntityType::ITEM_GARRA);
+			//	/*garra->config = configNode.child("entities_data").child("item_garra");*/
+			//	garra->position = iPoint(entity->position.x,entity->position.y);
+			//	garra->Start();
+			//}
+		}
+		
 		if (item->data == entity) entities.Del(item);
+
 	}
 }
 
