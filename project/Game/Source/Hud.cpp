@@ -43,6 +43,7 @@ bool Hud::Start()
 	hudTexture = app->tex->Load("Assets/Textures/Interfaz/HUD/texture_general_hud.png");
 	rectBarraVida					= new SDL_Rect{ 220,0,220,28 };
 	rectFondoBarraVida				= new SDL_Rect{ 0,0,220,28 };
+
 	rectFondoMascara				= new SDL_Rect{ 0,38,101,101 };
 	rectFondoMascaraSecundaria		= new SDL_Rect{ 115,48,79,79 };
 	rectFondoPociones				= new SDL_Rect{ 213,67,44,44 };
@@ -51,11 +52,13 @@ bool Hud::Start()
 	rectFondoInventario				= new SDL_Rect{ 0,218,113,113 };
 	rectFondoMonedas				= new SDL_Rect{0,338,97,32};
 	rectFondoObjetosConseguidos		= new SDL_Rect{ 0,338,97,32 };
+
 	rectMascara0					= new SDL_Rect{ 3,499,100,100 };
 	rectMascara1					= new SDL_Rect{ 105,499,100,100 };
-	rectMascara2					= new SDL_Rect{ 0,0,0,0 };
-	rectMascara3					= new SDL_Rect{ 0,0,0,0 };
-	rectMascara4					= new SDL_Rect{ 0,0,0,0 };
+	rectMascara2					= new SDL_Rect{ 207,499,100,100 };
+	rectMascara3					= new SDL_Rect{ 309,499,0,0 };
+	rectMascara4					= new SDL_Rect{ 4011,499,0,0 };
+
 	
 	
 
@@ -128,20 +131,20 @@ bool Hud::PostUpdate()
 
 	switch (*primaryMask)	
 	{
-		case Mask::NOMASK: rectPrimaryMask = { 0,0,0,0 }; break;
+		case Mask::NOMASK: rectPrimaryMask = *rectMascara0; break;
 		case Mask::MASK1: rectPrimaryMask = *rectMascara1; break;
 		case Mask::MASK2: rectPrimaryMask = *rectMascara2; break;
 		case Mask::MASK3: rectPrimaryMask = *rectMascara3; break;
-		default: rectPrimaryMask = { 0,0,0,0 }; break;
+		default: rectPrimaryMask = *rectMascara0; break;
 	}
 
 	switch (*secondaryMask)
 	{
-		case Mask::NOMASK: rectSecondaryMask = { 0,0,0,0 }; break;
+		case Mask::NOMASK: rectSecondaryMask = *rectMascara0; break;
 		case Mask::MASK1: rectSecondaryMask = *rectMascara1; break;
 		case Mask::MASK2: rectSecondaryMask = *rectMascara2; break;
 		case Mask::MASK3: rectSecondaryMask = *rectMascara3; break;
-		default: rectSecondaryMask = { 0,0,0,0 }; break;
+		default: rectSecondaryMask = *rectMascara0; break;
 	}
 
 
@@ -151,6 +154,7 @@ bool Hud::PostUpdate()
 	app->render->DrawTexture(hudTexture, 25, 40, SDL_FLIP_NONE, rectFondoMascara, 0);
 	app->render->DrawTexture(hudTexture, 25, 40, SDL_FLIP_NONE, &rectPrimaryMask, 0);
 
+	//Fin mascaras
 
 	
 	

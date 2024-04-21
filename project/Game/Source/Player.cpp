@@ -132,7 +132,8 @@ bool Player::Start() {
 	player_Direction = Direction::UNKNOWN;
 
 
-	EquipPrimaryMask(Mask::MASK1);
+	EquipPrimaryMask(Mask::NOMASK);
+	EquipSecondaryMask(Mask::MASK1);
 
 	return true;
 }
