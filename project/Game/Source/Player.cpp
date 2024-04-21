@@ -297,6 +297,23 @@ void Player::EquipSecondaryMask(Mask mask) {
 	}
 }
 
+
+
+Mask* Player::GetPrimaryMask()
+{
+	return &primaryMask;
+}
+
+Mask* Player::GetSecondaryMask()
+{
+	return &secondaryMask;
+}
+
+MaskStats* Player::GetMaskStats(Mask mask)
+{
+	return &maskStats[static_cast<int>(mask)];
+}
+
 void Player::ChangeMask() {
 	Mask temp = primaryMask;
 	primaryMask = secondaryMask;

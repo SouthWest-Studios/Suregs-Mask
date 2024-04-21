@@ -95,6 +95,11 @@ public:
 	void EquipPrimaryMask(Mask mask);
 	void EquipSecondaryMask(Mask mask);
 
+	Mask* GetPrimaryMask();
+	Mask* GetSecondaryMask();
+	
+	MaskStats* GetMaskStats(Mask mask);
+
 	//Estadísticas
 
     Stats baseStats;
