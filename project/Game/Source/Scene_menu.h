@@ -70,7 +70,7 @@ private:
 
 	GuiControlButton* gcButtom;
 	GuiControlButton* exit;
-	GuiControlButton* title;
+	GuiControlButton* atras;
 	GuiControlSlider* music;
 	GuiControlSlider* sfx;
 
@@ -84,6 +84,8 @@ private:
 
 	bool showSettings = false;
 	bool _showSettings = false;
+
+	bool ajustes = false;
 
 	bool showCredits = false;
 	bool _showCredits = false;

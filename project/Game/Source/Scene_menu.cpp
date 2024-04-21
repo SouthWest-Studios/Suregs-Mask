@@ -101,9 +101,9 @@ bool Scene_Menu::Update(float dt)
 	app->render->DrawTexture(menuMain, 0, 0);
 	app->render->DrawTexture(menuMain2, 550, 0);
 	app->render->DrawTexture(logo, 130, 100);
-	if (showSettings && !_showSettings) {
+	/*if (showSettings && !_showSettings) {
 		SettingsInterface();
-	}
+	}*/
 	if (showSettings) { app->render->DrawTexture(settings, 0, 0); }
 
 	if (showCredits) { ShowCredits(); }
@@ -114,6 +114,32 @@ bool Scene_Menu::Update(float dt)
 	}
 	if (fullscreen != nullptr && fullscreen->click) {
 		Fullscreen();
+	}
+
+	if (ajustes == false && showCredits == false)
+	{
+
+		ListItem<GuiControl*>* control;
+		for (control = controlsScene.start; control != NULL; control = control->next)
+		{
+			control->data->state = GuiControlState::NORMAL;
+		}
+	}
+	
+
+	if (ajustes)
+	{
+		SettingsInterface();
+	}
+
+	if (showSettings == false)
+	{
+		ajustes = false;
+
+	}
+	if (showSettings == true)
+	{
+		ajustes = true;
 	}
 	return true;
 }
@@ -167,14 +193,18 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 3:
 		showSettings = true;
+		control->selected = false;
 		app->guiManager->minId = 7;
 		app->guiManager->maxId = 11;
+		app->guiManager->pointerId = 7;
 		break;
 
 	case 4:
 		showCredits = true;
+		control->selected = false;
 		app->guiManager->minId = 12;
 		app->guiManager->maxId = 12;
+		app->guiManager->pointerId = 12;
 		break;
 
 	case 5:
@@ -187,6 +217,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		/*DestroySettingsInterface();*/
 		app->guiManager->minId = 1;
 		app->guiManager->maxId = 5;
+		app->guiManager->pointerId = 1;
 		break;
 
 	case 12:
@@ -200,6 +231,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		app->guiManager->DestroyGuiControl(gcCloseCredits);
 		app->guiManager->minId = 1;
 		app->guiManager->maxId = 5;
+		app->guiManager->pointerId = 1;
 		break;
 
 	case 1011:
@@ -251,7 +283,6 @@ void Scene_Menu::SettingsInterface()
 		if (music != nullptr)
 		{
 
-			title->state = GuiControlState::NORMAL;
 			fullscreen->state = GuiControlState::NORMAL;
 			vsync->state = GuiControlState::NORMAL;
 			music->state = GuiControlState::FOCUSED;
@@ -261,19 +292,22 @@ void Scene_Menu::SettingsInterface()
 		else
 		{
 
-			SDL_Rect MusicPos = { windowWidth / 2 - 400 ,windowHeight / 2 - 100, 200, 50 };
+			SDL_Rect MusicPos = { windowWidth / 2 - 100 ,windowHeight / 2 - 200, 200, 50 };
 			music = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 7, "MUSIC", MusicPos, this, { 0, 0, 20, 20 }, { 0,0,0,0 }, 0, 100);
 
-			SDL_Rect SfxPos = { windowWidth / 2 - 400 ,windowHeight / 2 - 50, 200, 50 };
+			SDL_Rect SfxPos = { windowWidth / 2 - 100 ,windowHeight / 2 - 150, 200, 50 };
 			sfx = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 8, "SFX", SfxPos, this, { 0, 0, 20, 20 }, { 0,0,0,0 }, 0, 100);
 
-			SDL_Rect FullScreen = { windowWidth / 2 - 100 ,windowHeight / 2 + 50, 230,50 };
+			SDL_Rect FullScreen = { windowWidth / 2 + 100 ,windowHeight / 2 - 50, 230,50 };
 			fullscreen = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 9, "FULLSCREEN", FullScreen, this, { 0,0,0,0 }, { -50,0,0,0 });
 
-			SDL_Rect vSyncpos = { windowWidth / 2 - 100 ,windowHeight / 2 + 200, 200, 50 };
+			SDL_Rect vSyncpos = { windowWidth / 2 + 100 ,windowHeight / 2 + 100, 200, 50 };
 			vsync = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 10, "VSYNC", vSyncpos, this, { 0, 0, 20, 20 });
 
+			SDL_Rect TitlePos = { 550, 600,	136,46 };
+			atras = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "ATRAS", TitlePos, this, { 0,0,0,0 });
 
+			/*controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "ATRÁS", SDL_Rect{ 550, 600,	136,46 }, this));*/
 
 			if (app->win->fullscreen)
 			{
@@ -284,10 +318,12 @@ void Scene_Menu::SettingsInterface()
 				vsync->click = true;
 			}
 		}
+
+		
 	}
 	else
 	{
-
+		
 
 		if (music != nullptr)
 		{
@@ -306,11 +342,35 @@ void Scene_Menu::SettingsInterface()
 			app->guiManager->DestroyGuiControl(sfx);
 			/*sfx->state = GuiControlState::DISABLED;
 			sfx = nullptr;*/
+			app->guiManager->DestroyGuiControl(atras);
 
 			
 		}
 
 
+	}
+	if (atras->click == true)
+	{
+		if (music != nullptr)
+		{
+
+			/*title->state = GuiControlState::DISABLED;
+			title = nullptr;*/
+			app->guiManager->DestroyGuiControl(fullscreen);
+			/*fullScreen->state = GuiControlState::DISABLED;*/
+
+			app->guiManager->DestroyGuiControl(vsync);
+			/*vsync->state = GuiControlState::DISABLED;
+			vsync = nullptr;*/
+			app->guiManager->DestroyGuiControl(music);
+			/*music->state = GuiControlState::DISABLED;*/
+			music = nullptr;
+			app->guiManager->DestroyGuiControl(sfx);
+			/*sfx->state = GuiControlState::DISABLED;
+			sfx = nullptr;*/
+
+
+		}
 	}
 	if (showSettings)
 	{
@@ -385,7 +445,7 @@ void Scene_Menu::SettingsInterface()
 	/*if (fullscreen->selected && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && fullscreen != nullptr) {
 		fullscreen->click = !fullscreen->click;
 	}*/
-	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "ATRÁS", SDL_Rect{ 550, 500,	136,46 }, this));
+	
 
 	_showSettings = true;
 }
