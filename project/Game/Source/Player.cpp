@@ -117,6 +117,16 @@ bool Player::Start() {
 
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
+	app->render->objectsToDraw.push_back({
+		texture,
+		position.x, // x
+		position.y, // y
+		position.y + 236, // anchorY
+		300, // width
+		250, // height
+		NULL, // currentFrame
+		isFacingLeft
+	});
 
 	pbody = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
 	pbody->entity = this;
@@ -210,11 +220,11 @@ bool Player::PostUpdate() {
 
 	if (isFacingLeft) {
 		//app->render->DrawTexture(texture, position.x - 50, position.y - 200, SDL_FLIP_HORIZONTAL, &rect);
-		app->render->DrawTexture(texture, position.x - 75, position.y - 100, 0.5f, SDL_FLIP_NONE, &rect);
+		//app->render->DrawTexture(texture, position.x - 75, position.y - 100, 0.5f, SDL_FLIP_NONE, &rect);
 		
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 75, position.y - 100, 0.5f, SDL_FLIP_HORIZONTAL, &rect);
+		//app->render->DrawTexture(texture, position.x - 75, position.y - 100, 0.5f, SDL_FLIP_HORIZONTAL, &rect);
 		
 	}
 	return true;

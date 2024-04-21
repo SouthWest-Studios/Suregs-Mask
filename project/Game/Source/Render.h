@@ -14,6 +14,8 @@ struct DrawableObject
 	int x, y;
 	int anchorY;
 	int width, height;
+	SDL_Rect currentFrame;
+	bool isFacingLeft;
 };
 
 class Render : public Module

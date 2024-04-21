@@ -75,15 +75,19 @@ bool Render::Start()
 // Called each loop iteration
 bool Render::PreUpdate()
 {
-	//Ejemplo añadir sprite en los Start():	app->render->objectsToDraw.push_back({ textura, posicion X, posicion Y, punto de anclaje en Y = (posY + num), ancho, largo});
+	//Ejemplo aï¿½adir sprite en los Start():	app->render->objectsToDraw.push_back({ textura, posicion X, posicion Y, punto de anclaje en Y = (posY + num), ancho, largo});
 
 	for (DrawableObject& obj : objectsToDraw)
 	{
 		if (obj.texture == app->entityManager->GetPlayer()->texture)
 		{
-			obj.x = app->entityManager->GetPlayer()->position.x;
-			obj.y = app->entityManager->GetPlayer()->position.y;
-			obj.anchorY = app->entityManager->GetPlayer()->position.y + 0; //Según el sprite, añadir el valor que corresponda -> !0
+			obj.x = app->entityManager->GetPlayer()->position.x - 75;
+			obj.y = app->entityManager->GetPlayer()->position.y - 100;
+			obj.anchorY = app->entityManager->GetPlayer()->position.y + 218; //Segï¿½n el sprite, aï¿½adir el valor que corresponda -> !0
+			if (app->entityManager->GetPlayer()->currentAnimation != nullptr) {
+				obj.currentFrame = app->entityManager->GetPlayer()->currentAnimation->GetCurrentFrame();
+			}
+			obj.isFacingLeft = app->entityManager->GetPlayer()->isFacingLeft;
 			break;
 		}
 	}
@@ -105,12 +109,22 @@ bool Render::Update(float dt)
 bool Render::PostUpdate() {
 	for (const DrawableObject& obj : objectsToDraw)
 	{
-		// Verifica si la posición del objeto est?dentro de los límites de la cámara
-		if (obj.x + obj.width >= app->render->camera.x && obj.x <= app->render->camera.x + app->render->camera.w &&
-			obj.y + obj.height >= app->render->camera.y && obj.y <= app->render->camera.y + app->render->camera.h)
-		{
+		// Verifica si la posiciï¿½n del objeto est?dentro de los lï¿½mites de la cï¿½mara
+		/*if (obj.x + obj.width >= app->render->camera.x && obj.x <= app->render->camera.x + app->render->camera.w &&
+			obj.y + obj.height >= app->render->camera.y && obj.y <= app->render->camera.y + app->render->camera.h){*/
+		if (obj.isFacingLeft)	{
+			DrawTexture(obj.texture, obj.x, obj.y, 0.5f, SDL_FLIP_NONE, &obj.currentFrame);
+		}
+		else if(!obj.isFacingLeft)	{
+			DrawTexture(obj.texture, obj.x, obj.y, 0.5f, SDL_FLIP_HORIZONTAL, &obj.currentFrame);
+		}
+				//app->render->DrawTexture(obj.texture, obj.x, obj.y, 0.5f, SDL_FLIP_NONE, &obj.currentFrame);
+				//app->render->DrawTexture(texture, position.x - 75, position.y - 100, 0.5f, SDL_FLIP_NONE, &rect);
+		//}
+		if (obj.texture != app->entityManager->GetPlayer()->texture) {
 			app->render->DrawTexture(obj.texture, obj.x, obj.y);
 		}
+		
 	}
 	return true;
 }

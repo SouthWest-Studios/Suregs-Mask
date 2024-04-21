@@ -47,6 +47,15 @@ bool NPCPescador::Start() {
 
 	texture = app->tex->Load(texturePath.c_str());
 
+	app->render->objectsToDraw.push_back({
+		texture,
+		position.x - 50, // x
+		position.y - 200, // y
+		position.y + 220, // anchorY
+		138, // width
+		225, // height
+		true // isFacingLeft
+	});
 	//pbody = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
 	//pbody->entity = this;
 	//pbody->listener = this;
@@ -73,7 +82,7 @@ bool NPCPescador::PostUpdate() {
 
 	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-	app->render->DrawTexture(texture, position.x - 50, position.y - 200, SDL_FLIP_NONE, &rect);
+	//app->render->DrawTexture(texture, position.x - 50, position.y - 200, SDL_FLIP_NONE, &rect);
 	
 
 	return true;

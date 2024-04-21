@@ -46,6 +46,16 @@ bool NPCHerrera::Start() {
 	std::string texturePath = config.attribute("texturePath").as_string();
 
 	texture = app->tex->Load(texturePath.c_str());
+	
+	app->render->objectsToDraw.push_back({
+		texture,
+		position.x - 50, // x
+		position.y - 200, // y
+		position.y + 178, // anchorY
+		138, // width
+		189, // height
+		true // isFacingLeft
+	});
 
 	//pbody = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
 	//pbody->entity = this;
@@ -73,7 +83,7 @@ bool NPCHerrera::PostUpdate() {
 
 	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-	app->render->DrawTexture(texture, position.x - 50, position.y - 200, SDL_FLIP_NONE, &rect);
+	//app->render->DrawTexture(texture, position.x - 50, position.y - 200, SDL_FLIP_NONE, &rect);
 	
 
 	return true;
