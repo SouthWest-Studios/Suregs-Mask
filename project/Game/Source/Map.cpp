@@ -48,9 +48,8 @@ bool Map::Awake(pugi::xml_node config)
 {
 	LOG("Loading Map Parser");
 	bool ret = true;
-
-	pathTextures = config.child("map").child("mouseTileTex").attribute("pathtextures").as_string();
 	
+	pathTextures = config.child("map").child("mouseTileTex").attribute("pathtextures").as_string();
 
 	return ret;
 }
@@ -73,8 +72,8 @@ bool Map::Start() {
 	pathfinding->mouseTileTex = app->tex->Load(pathTextures.GetString());
     RELEASE_ARRAY(navigationMap);
 
-
 	app->win->GetWindowSize(windowW, windowH);
+
 
 	return true;
 }
