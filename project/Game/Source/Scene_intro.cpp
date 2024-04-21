@@ -16,7 +16,7 @@
 #include "Menu.h"
 Scene_Intro::Scene_Intro(App* app, bool start_enabled) : Module(app, start_enabled)
 {
-	name.Create("Scene_intro");
+	name.Create("scene_intro");
 }
 
 // Destructor
@@ -35,8 +35,13 @@ bool Scene_Intro::Awake(pugi::xml_node config)
 // Called before the first frame
 bool Scene_Intro::Start()
 {
-	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
-	placeholder = app->tex->Load("Assets/Textures/Interfaz/intro_textura.png");
+	pugi::xml_document configFile;
+	pugi::xml_node config;
+	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
+	config = configFile.child("config").child(name.GetString());
+
+	texturaIntroPath = config.child("texturaIntro").attribute("texturepath").as_string();
+	texturaIntro = app->tex->Load(texturaIntroPath);
 	timerIntro.Start();
 	sus = app->audio->LoadAudioFx("");
 	app->audio->PlayFx(sus);
@@ -62,7 +67,7 @@ bool Scene_Intro::Update(float dt)
 	OPTICK_EVENT();
 	
 	if (timerIntro.ReadSec() < 10) {
-		app->render->DrawTexture(placeholder, 0, 0);
+		app->render->DrawTexture(texturaIntro, 0, 0);
 	}
 	else {
 		app->fadeToBlack->FadeToBlack(this, app->scene_menu, 90);
@@ -77,7 +82,7 @@ bool Scene_Intro::Update(float dt)
 // Called each loop iteration
 bool Scene_Intro::PostUpdate()
 {
-	app->render->DrawTexture(placeholder, 0, 0);
+	app->render->DrawTexture(texturaIntro, 0, 0);
 	bool ret = true;
 
 	return ret;
@@ -87,6 +92,6 @@ bool Scene_Intro::PostUpdate()
 bool Scene_Intro::CleanUp()
 {
 	LOG("Freeing Scene_intro");
-	app->tex->UnLoad(placeholder);
+	app->tex->UnLoad(texturaIntro);
 	return true;
 }

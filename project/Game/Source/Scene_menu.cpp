@@ -21,7 +21,7 @@
 
 Scene_Menu::Scene_Menu(App* app, bool start_enabled) : Module(app, start_enabled)
 {
-	name.Create("Scene_Menu");
+	name.Create("scene_menu");
 }
 
 // Destructor
@@ -31,7 +31,7 @@ Scene_Menu::~Scene_Menu()
 // Called before render is available
 bool Scene_Menu::Awake(pugi::xml_node config)
 {
-	LOG("Loading Scene_Menu");
+	LOG("Loading scene_menu");
 	bool ret = true;
 
 	return ret;
@@ -40,11 +40,20 @@ bool Scene_Menu::Awake(pugi::xml_node config)
 // Called before the first frame
 bool Scene_Menu::Start()
 {
-	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
-	placeholderMenu = app->tex->Load("Assets/Textures/Interfaz/MenuIntro.png");
-	placeholderMenu2 = app->tex->Load("Assets/Textures/Interfaz/suscat.jpg");
-	placeholderSettings = app->tex->Load("Assets/Textures/Interfaz/Ajustes.png");
-	placeholderCredits = app->tex->Load("Assets/Textures/Interfaz/suscat3.jpg");
+	pugi::xml_document configFile;
+	pugi::xml_node config;
+	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
+	config = configFile.child("config").child(name.GetString());
+
+	menuMain_tp= config.child("menuMain").attribute("texturepath").as_string(); 
+	menuMain2_tp = config.child("menuMain2").attribute("texturepath").as_string();
+	settings_tp = config.child("settings").attribute("texturepath").as_string();
+	credits_tp = config.child("credits").attribute("texturepath").as_string();
+
+	menuMain = app->tex->Load(menuMain_tp);
+	menuMain2 = app->tex->Load(menuMain2_tp);
+	settings = app->tex->Load(settings_tp);
+	credits = app->tex->Load(credits_tp);
 
 	//AQU?CARGAR TODAS LAS TEXTURAS DEL MEN?(cuando las tengamos xd)
 	
@@ -85,11 +94,12 @@ bool Scene_Menu::Update(float dt)
 {
 
 	OPTICK_EVENT();
-	app->render->DrawTexture(placeholderMenu, 0, 0);
+	app->render->DrawTexture(menuMain, 0, 0);
+	app->render->DrawTexture(menuMain2, 550, 0);
 	if (showSettings && !_showSettings) {
 		SettingsInterface();
 	}
-	if (showSettings) { app->render->DrawTexture(placeholderSettings, 0, 0); }
+	if (showSettings) { app->render->DrawTexture(settings, 0, 0); }
 
 	if (showCredits) { ShowCredits(); }
 
@@ -209,7 +219,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 
 void Scene_Menu::SettingsInterface()
 {
-	app->render->DrawTexture(placeholderSettings, 0, 0);
+	app->render->DrawTexture(settings, 0, 0);
 
 	ListItem<GuiControl*>* control;
 	for (control = controlsScene.start; control != NULL; control = control->next)
@@ -263,7 +273,7 @@ void Scene_Menu::ShowCredits()
 		_showCredits = true;
 	}
 
-	app->render->DrawTexture(placeholderCredits, 0, 0);
+	app->render->DrawTexture(credits, 0, 0);
 }
 
 void Scene_Menu::DestroySettingsInterface()

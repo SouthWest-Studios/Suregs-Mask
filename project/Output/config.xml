@@ -103,6 +103,15 @@
 			</minigamefishing>
 	</scene_testing>
 
+	<scene_menu>
+		<menuMain texturepath ="Assets/Textures/Interfaz/MenuIntro.png"/>
+		<menuMain2 texturepath ="Assets/Textures/Interfaz/suscat.jpg"/>
+		<settings texturepath ="Assets/Textures/Interfaz/Ajustes.png"/>
+		<credits texturepath ="Assets/Textures/Interfaz/suscat3.jpg"/>
+	</scene_menu>
+	<scene_intro>
+		<texturaIntro texturepath ="Assets/Textures/Interfaz/intro_textura.png"/>
+	</scene_intro>
 	<scene_pueblo>
 		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Pueblo/Pueblo.tmx"/>
 	</scene_pueblo>

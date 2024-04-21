@@ -36,7 +36,8 @@ public:
 	bool CleanUp();
 
 private:
-	SDL_Texture* placeholder;
+	const char* texturaIntroPath;
+	SDL_Texture* texturaIntro;
 	Timer timerIntro;
 	int sus;
 };

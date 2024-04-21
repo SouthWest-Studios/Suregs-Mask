@@ -46,10 +46,15 @@ public:
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
 
-	SDL_Texture* placeholderMenu;
-	SDL_Texture* placeholderMenu2;
-	SDL_Texture* placeholderSettings;
-	SDL_Texture* placeholderCredits;
+	SDL_Texture* menuMain;
+	SDL_Texture* menuMain2;
+	SDL_Texture* settings;
+	SDL_Texture* credits;
+
+	const char* menuMain_tp;
+	const char* menuMain2_tp;
+	const char* settings_tp;
+	const char* credits_tp;
 
 	List<GuiControl*> controlsScene;
 	List<GuiControl*> controlsSettings;
