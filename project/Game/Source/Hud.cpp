@@ -52,7 +52,7 @@ bool Hud::Start()
 	rectFondoMonedas				= new SDL_Rect{0,338,97,32};
 	rectFondoObjetosConseguidos		= new SDL_Rect{ 0,338,97,32 };
 	rectMascara0					= new SDL_Rect{ 3,499,100,100 };
-	rectMascara1					= new SDL_Rect{ 0,0,0,0 };
+	rectMascara1					= new SDL_Rect{ 105,499,100,100 };
 	rectMascara2					= new SDL_Rect{ 0,0,0,0 };
 	rectMascara3					= new SDL_Rect{ 0,0,0,0 };
 	rectMascara4					= new SDL_Rect{ 0,0,0,0 };
@@ -104,8 +104,7 @@ bool Hud::PostUpdate()
 
 
 	//Fondos
-	app->render->DrawTexture(hudTexture, 75, 15, SDL_FLIP_NONE, rectFondoMascaraSecundaria, 0);
-	app->render->DrawTexture(hudTexture, 25, 40, SDL_FLIP_NONE, rectFondoMascara, 0);
+	
 
 	app->render->DrawTexture(hudTexture, 395, 32, SDL_FLIP_NONE, rectFondoPociones, 0);
 
@@ -118,6 +117,41 @@ bool Hud::PostUpdate()
 
 	//Objeto conseguido
 	//app->render->DrawTexture(hudTexture, 50, 50, SDL_FLIP_NONE, rectFondoObjetosConseguidos, 0);
+
+
+	//Mascaras
+	Mask* primaryMask = app->entityManager->GetPlayer()->GetPrimaryMask();
+	Mask* secondaryMask = app->entityManager->GetPlayer()->GetSecondaryMask();
+
+	SDL_Rect rectPrimaryMask;
+	SDL_Rect rectSecondaryMask;
+
+	switch (*primaryMask)	
+	{
+		case Mask::NOMASK: rectPrimaryMask = { 0,0,0,0 }; break;
+		case Mask::MASK1: rectPrimaryMask = *rectMascara1; break;
+		case Mask::MASK2: rectPrimaryMask = *rectMascara2; break;
+		case Mask::MASK3: rectPrimaryMask = *rectMascara3; break;
+		default: rectPrimaryMask = { 0,0,0,0 }; break;
+	}
+
+	switch (*secondaryMask)
+	{
+		case Mask::NOMASK: rectSecondaryMask = { 0,0,0,0 }; break;
+		case Mask::MASK1: rectSecondaryMask = *rectMascara1; break;
+		case Mask::MASK2: rectSecondaryMask = *rectMascara2; break;
+		case Mask::MASK3: rectSecondaryMask = *rectMascara3; break;
+		default: rectSecondaryMask = { 0,0,0,0 }; break;
+	}
+
+
+	app->render->DrawTexture(hudTexture, 75, 15, SDL_FLIP_NONE, rectFondoMascaraSecundaria, 0);
+	app->render->DrawTexture(hudTexture, 75, 15, 0.79f,SDL_FLIP_NONE, &rectSecondaryMask, 0);
+
+	app->render->DrawTexture(hudTexture, 25, 40, SDL_FLIP_NONE, rectFondoMascara, 0);
+	app->render->DrawTexture(hudTexture, 25, 40, SDL_FLIP_NONE, &rectPrimaryMask, 0);
+
+
 	
 	
 

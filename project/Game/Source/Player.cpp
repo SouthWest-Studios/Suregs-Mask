@@ -130,6 +130,10 @@ bool Player::Start() {
 	cdTimerAttackMS = 100000 / currentStats.attackSpeed;
 
 	player_Direction = Direction::UNKNOWN;
+
+
+	EquipPrimaryMask(Mask::MASK1);
+
 	return true;
 }
 
