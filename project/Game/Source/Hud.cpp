@@ -86,7 +86,15 @@ bool Hud::PostUpdate()
 
 	//Barra de vida
 	app->render->DrawTexture(hudTexture, 165, 40, SDL_FLIP_NONE, rectFondoBarraVida, 0);
-	app->render->DrawTexture(hudTexture, 165, 40, SDL_FLIP_NONE, rectBarraVida, 0);
+
+	int rectW = rectFondoBarraVida->w;
+	rectW = (rectFondoBarraVida->w * app->entityManager->GetPlayer()->currentStats.currentHealth) / app->entityManager->GetPlayer()->currentStats.maxHealth;
+
+	SDL_Rect* rectBarraVidaCalculado = new SDL_Rect{ rectBarraVida->x, rectBarraVida->y, rectW, rectBarraVida->h };
+
+	//LOG("Vida player: %d, max vida player: %d, rect: %d", app->entityManager->GetPlayer()->health, app->entityManager->GetPlayer()->maxHealth, rectW);
+
+	app->render->DrawTexture(hudTexture, 165, 40, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
 	
 	//Monedas
 	std::string quantityStr = std::to_string(cantidadMonedas);

@@ -56,6 +56,8 @@ bool Enemy_Osiris::Start() {
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMY;
 
+	attackDamage = 20;
+
 	return true;
 }
 

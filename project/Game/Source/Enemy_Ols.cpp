@@ -54,6 +54,8 @@ bool Enemy_Ols::Start() {
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMY;
 
+	attackDamage = 10;
+
 
 	return true;
 }

@@ -56,6 +56,8 @@ bool Enemy_Shar::Start() {
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMY;
 
+	attackDamage = 30;
+
 	return true;
 }
 

@@ -5,6 +5,7 @@
 #include "Input.h"
 #include "Render.h"
 #include "Scene_Testing.h"
+#include "Scene_Pueblo.h"
 #include "Scene_Mazmorra0.h"
 #include "Log.h"
 #include "InventoryManager.h"
@@ -404,6 +405,13 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 				attackDealed = true;
 			}
 			collisionMask1Timer.Start();
+		}
+		if (physA == pbody) {
+			//TakeDamage(physB->entity->attackDamage);
+			TakeDamage(10);
+			if (currentStats.currentHealth <= 0) {
+				app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_pueblo);
+			}
 		}
 		break;
 	case ColliderType::RESOURCE_ESPADA:
