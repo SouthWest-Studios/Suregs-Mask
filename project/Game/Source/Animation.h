@@ -15,23 +15,34 @@ public:
 	// Allows the animation to keep going back and forth
 	bool pingpong = false;
 	const char* aniName;
+	
 
 private:
 	float currentFrame = 0.0f;
 	int totalFrames = 0;
 	int loopCount = 0;
 	int pingpongDirection = 1;
+	int numRect;
 
 public:
 
 	void PushBack(const SDL_Rect& rect)
 	{
-		if (totalFrames < MAX_FRAMES && totalFrames < sizeof(frames) / sizeof(frames[0])) {
+		if (totalFrames < MAX_FRAMES && totalFrames < sizeof(frames) / sizeof(frames[0]) && &rect != nullptr) {
 			frames[totalFrames++] = rect;
 		}
 		/*if (totalFrames < MAX_FRAMES) {
+		frames[totalFrames++] = rect;
+		}*/
+		/*if (&rect != nullptr) {
 			frames[totalFrames++] = rect;
 		}*/
+		/*printf("\ntotalFrames: %d", totalFrames);
+		printf("\nrect.x: %d", rect.x);
+		printf("\nrect.y: %d", rect.y);
+		printf("\nrect.w: %d", rect.w);
+		printf("\nrect.h: %d", rect.h);
+		printf("\nframcount: %d", framcount++);*/
 		//frames[totalFrames++] = rect;
 	}
 
@@ -124,7 +135,6 @@ public:
 
 	void LoadAnim(char* Anipart, const char* NombreAni, SDL_Rect* spritePositions) {
 
-
 		aniName = NombreAni;
 		pugi::xml_document configFile;
 		pugi::xml_node AniInfo;
@@ -134,17 +144,16 @@ public:
 		if (AniInfo.attribute("start").as_int() > AniInfo.attribute("end").as_int()) {
 			for (int i = AniInfo.attribute("start").as_int(); i > AniInfo.attribute("end").as_int(); i--)
 			{
-				this->PushBack({ spritePositions[i] });
-
+				this->PushBack({spritePositions[i]});
 			}
 		}
 		else {
 			for (int i = AniInfo.attribute("start").as_int(); i < AniInfo.attribute("end").as_int(); i++)
 			{
-				this->PushBack({ spritePositions[i] });
-
+				this->PushBack({spritePositions[i]});
 			}
 		}
+
 		this->speed = AniInfo.attribute("speed").as_float();
 		this->loop = AniInfo.attribute("loop").as_bool();
 	}
