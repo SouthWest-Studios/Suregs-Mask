@@ -177,6 +177,7 @@ bool Player::Update(float dt)
 		break;
 	case EntityState::IDLE:
 		DoNothing(dt);
+		app->audio->StopFx(-1);
 		break;
 	case EntityState::DASHI:
 		if (isDashing) {

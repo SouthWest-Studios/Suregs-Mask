@@ -33,10 +33,10 @@
 		<fx>
 			<intro_fx path="Assets/Audio/Fx/.wav"/>
       <menu_fx path="Assets/Audio/Fx/.wav"/>
-      <button_fx path="Assets/Audio/Fx/mixkit-fast-sword-whoosh-2792.wav"/>
-      <select_fx path="Assets/Audio/Fx/mixkit-arrow-shot-through-air-2771.wav"/>
-      <inventory_fx path="Assets/Audio/Fx/backpack-34942.wav"/>
-      <change_inventory_fx path="Assets/Audio/Fx/turnpage-99756.wav"/>
+      <button_fx path="Assets/Audio/Fx/button_fx.wav"/>
+      <select_fx path="Assets/Audio/Fx/select_fx.wav"/>
+      <inventory_fx path="Assets/Audio/Fx/inventory_fx.wav"/>
+      <change_inventory_fx path="Assets/Audio/Fx/change_inventory_fx.wav"/>
       <run_fx path="Assets/Audio/Fx/run_fx.wav"/>
 		</fx>
 	</sounds>

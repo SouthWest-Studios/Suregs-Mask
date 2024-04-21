@@ -184,6 +184,12 @@ bool Audio::PlayFx(unsigned int id, int channel, int repeat)
 	return ret;
 }
 
+bool Audio::StopFx(int channel)
+{
+	Mix_HaltChannel(channel);
+	return false;
+}
+
 bool Audio::LoadAudioMusic(const char* name, float fadeTime)
 {
 	pugi::xml_document config;

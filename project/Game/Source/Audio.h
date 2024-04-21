@@ -32,6 +32,9 @@ public:
 	// Play a previously loaded WAV
 	bool PlayFx(unsigned int fx, int channel = -1, int repeat = 0);
 
+	// Stop playing a WAV
+	bool StopFx(int channel);
+
 	// Play a music from the config
 	bool LoadAudioMusic(const char* name, float fadeTime = DEFAULT_MUSIC_FADE_TIME);
 
