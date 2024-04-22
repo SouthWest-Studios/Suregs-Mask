@@ -441,9 +441,11 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		}
 		if (physA == pbody) {
 			//TakeDamage(physB->entity->attackDamage);
-			TakeDamage(10);
-			if (currentStats.currentHealth <= 0) {
-				app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_pueblo);
+			if (!godmode) {
+				TakeDamage(10);
+				if (currentStats.currentHealth <= 0) {
+					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_pueblo);
+				}
 			}
 		}
 		break;
