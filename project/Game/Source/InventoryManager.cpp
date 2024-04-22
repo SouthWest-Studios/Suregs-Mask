@@ -703,11 +703,11 @@ bool InventoryManager::PostUpdate()
 
 						if (item->data->id < 5)
 						{
-							app->render->DrawText(quantityStr.c_str(), 320 + item->data->id * 105, 230, 20, 20);
+							app->render->DrawText(quantityStr.c_str(), 320 + item->data->id * 105, 230, 20, 20,0,0,0,0);
 						}
 						else
 						{
-							app->render->DrawText(quantityStr.c_str(), 485 + (item->data->id - 5) * 100, 420, 20, 20);
+							app->render->DrawText(quantityStr.c_str(), 485 + (item->data->id - 5) * 100, 420, 20, 20,0,0,0,0);
 						}
 					}
 					{
@@ -732,11 +732,11 @@ bool InventoryManager::PostUpdate()
 
 						if (item->data->id < 5)
 						{
-							app->render->DrawText(quantityStr.c_str(), 320 + item->data->id * 105, 230, 20, 20);
+							app->render->DrawText(quantityStr.c_str(), 320 + item->data->id * 105, 230, 20, 20,0,0,0,0);
 						}
 						else
 						{
-							app->render->DrawText(quantityStr.c_str(), 485 + (item->data->id - 5) * 100, 420, 20, 20);
+							app->render->DrawText(quantityStr.c_str(), 485 + (item->data->id - 5) * 100, 420, 20, 20,0,0,0,0);
 						}
 					}
 					{
@@ -761,11 +761,11 @@ bool InventoryManager::PostUpdate()
 
 						if (item->data->id < 5)
 						{
-							app->render->DrawText(quantityStr.c_str(), 320 + item->data->id * 105, 230, 20, 20);
+							app->render->DrawText(quantityStr.c_str(), 320 + item->data->id * 105, 230, 20, 20,0,0,0,0);
 						}
 						else
 						{
-							app->render->DrawText(quantityStr.c_str(), 485 + (item->data->id - 5) * 100, 420, 20, 20);
+							app->render->DrawText(quantityStr.c_str(), 485 + (item->data->id - 5) * 100, 420, 20, 200,0,0,0,0);
 						}
 					}
 					{

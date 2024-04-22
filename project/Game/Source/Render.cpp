@@ -336,12 +336,12 @@ bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uin
 	return ret;
 }
 
-bool Render::DrawText(const char* text, int posx, int posy, int w, int h, TTF_Font* font) {
+bool Render::DrawText(const char* text, int posx, int posy, int w, int h, TTF_Font* font, int r, int g, int b) {
 
 	if (font == NULL) {
 		font = primaryFont;
 	}
-	SDL_Color color = { 255, 255, 255 };
+	SDL_Color color = { r, g, b };
 	SDL_Surface* surface = TTF_RenderText_Solid(font, text, color);
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
 
