@@ -277,6 +277,27 @@ bool Menu::Update(float dt)
 		title->click = false;
 		if (title != nullptr)
 		{
+			app->guiManager->DestroyGuiControl(title);
+			title = nullptr;
+			/*title->state = GuiControlState::DISABLED;
+			title = nullptr;*/
+			app->guiManager->DestroyGuiControl(fullScreen);
+			/*fullScreen->state = GuiControlState::DISABLED;
+			fullScreen = nullptr;*/
+			app->guiManager->DestroyGuiControl(vsync);
+			/*vsync->state = GuiControlState::DISABLED;
+			vsync = nullptr;*/
+			app->guiManager->DestroyGuiControl(music);
+			/*music->state = GuiControlState::DISABLED;
+			music = nullptr;*/
+			app->guiManager->DestroyGuiControl(sfx);
+			/*sfx->state = GuiControlState::DISABLED;
+			sfx = nullptr;*/
+
+			contadormenu = 0;
+		}
+		/*if (title != nullptr)
+		{
 
 			title->state = GuiControlState::DISABLED;
 			title = nullptr;
@@ -290,8 +311,8 @@ bool Menu::Update(float dt)
 			sfx = nullptr;
 
 			contadormenu = 0;
-		}
-		
+		}*/
+
 	}
 
 	if (ventana == 1)

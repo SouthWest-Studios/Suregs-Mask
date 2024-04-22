@@ -41,6 +41,8 @@ bool Scene_Menu::Awake(pugi::xml_node config)
 // Called before the first frame
 bool Scene_Menu::Start()
 {
+	app->entityManager->active = false;
+	app->physics->active = false;
 	pugi::xml_document configFile;
 	pugi::xml_node config;
 	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
@@ -65,8 +67,12 @@ bool Scene_Menu::Start()
 	app->win->GetWindowSize(windowW, windowH);
 
 	//Añadir los controles a una lista 
+	/*SDL_Rect TitlePos = { 75, 403,	136,46 };
+	NuevaPartida = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "NUEVA PARTIDA", TitlePos, this, { 0,0,0,0 });*/
 	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "NUEVA PARTIDA", SDL_Rect{ 75, 403,	136,46 }, this));
-	controlsScene.end->data->selected = true;
+	/*controlsScene.end->data->selected = true;*/
+	/*SDL_Rect TitlePos2 = { 75,457,136,46 };
+	Continuar = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "CONTINUAR", TitlePos2, this, { 0,0,0,0 });*/
 	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "CONTINUAR", SDL_Rect{ 75,457,136,46 }, this));
 	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "AJUSTES", SDL_Rect{ 75, 512,136,46 }, this));
 	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "CRÉDITOS", SDL_Rect{75, 565,136,46 }, this));
@@ -79,10 +85,17 @@ bool Scene_Menu::Start()
 
 	app->guiManager->minId = 1;
 	app->guiManager->maxId = 5;
+	app->guiManager->pointerId = 1;
 	app->guiManager->columnSize = 0;
 
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
+
+	/*if (Continuar != nullptr)
+	{
+		NuevaPartida->selected = false;
+		Continuar->selected = false;
+	}*/
 
 	return true;
 }
@@ -141,6 +154,7 @@ bool Scene_Menu::Update(float dt)
 	{
 		ajustes = true;
 	}
+	
 	return true;
 }
 
@@ -183,12 +197,18 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 	case 1:
 		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
 		app->menu->active = true;
+		app->guiManager->pointerId = 100;
+		/*app->guiManager->DestroyGuiControl(NuevaPartida);
+		app->guiManager->DestroyGuiControl(Continuar);*/
+
 		break;
 
 	case 2:
 		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
 		app->LoadRequest();
 		app->menu->active = true;
+		/*app->guiManager->DestroyGuiControl(NuevaPartida);
+		app->guiManager->DestroyGuiControl(Continuar);*/
 		break;
 
 	case 3:
@@ -197,6 +217,8 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		app->guiManager->minId = 7;
 		app->guiManager->maxId = 11;
 		app->guiManager->pointerId = 7;
+	/*	app->guiManager->DestroyGuiControl(NuevaPartida);
+		app->guiManager->DestroyGuiControl(Continuar);*/
 		break;
 
 	case 4:
@@ -205,6 +227,8 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		app->guiManager->minId = 12;
 		app->guiManager->maxId = 12;
 		app->guiManager->pointerId = 12;
+		/*app->guiManager->DestroyGuiControl(NuevaPartida);
+		app->guiManager->DestroyGuiControl(Continuar);*/
 		break;
 
 	case 5:
@@ -351,8 +375,7 @@ void Scene_Menu::SettingsInterface()
 	}
 	if (atras->click == true)
 	{
-		if (music != nullptr)
-		{
+		
 
 			/*title->state = GuiControlState::DISABLED;
 			title = nullptr;*/
@@ -370,7 +393,8 @@ void Scene_Menu::SettingsInterface()
 			sfx = nullptr;*/
 
 
-		}
+			
+
 	}
 	if (showSettings)
 	{
@@ -447,7 +471,7 @@ void Scene_Menu::SettingsInterface()
 	}*/
 	
 
-	_showSettings = true;
+	/*_showSettings = true;*/
 }
 
 void Scene_Menu::ShowCredits()

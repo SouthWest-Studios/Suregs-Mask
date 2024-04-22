@@ -68,6 +68,9 @@ public:
 
 private:
 
+	GuiControlButton* NuevaPartida;
+	GuiControlButton* Continuar;
+
 	GuiControlButton* gcButtom;
 	GuiControlButton* exit;
 	GuiControlButton* atras;
