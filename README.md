@@ -1,8 +1,8 @@
-# The Curse of the Mask 
+# Süreg's Mask 
 
 
 
-The Curse of the Mask is a project team of the subject “Project II” in CITM University: Videogames Design & Developments degree and Design, animation and digital art. *[Website](https://southwest-studios.github.io/Suregs-Mask/)
+Süreg's Mask is a project team of the subject “Project II” in CITM University: Videogames Design & Developments degree and Design, animation and digital art. *[Website](https://southwest-studios.github.io/Suregs-Mask/)
 
 <br>
 
@@ -31,6 +31,44 @@ It is an RPG game in 2.5d, where you must go into the dungeon down floors to fin
 
 <img src="https://github.com/SouthWest-Studios/Suregs-Mask/assets/71668554/e08aca71-b533-48b7-bfcf-f8db3a72128f" width="600px">
 
+## Controls
+### Basic controls
+- Movement: WASD / Left joystick
+- Interact: E / A
+- Open inventory: TAB / Start
+- Settings navigation: J L / LB RB
+- Pause menu: ESC / Options
+- Menu navigation: WASD + E / Left joystick + A
+
+### Combat controls
+- Basic attack: J / B
+- Dash: SPACE / X
+- Mask ability: K / LB
+- Switch masks: Q / RB
+- Use potions: * / *
+- Switch potions: * / *
+- Fishing: F + K / **
+
+## New features
+- Player update
+- Game scenes transitions
+- Dialog's system
+- Entity system through tiled
+- Combat system
+- General audio
+- Village level (with 4 locations)
+- Dungeon 0 level
+- 3 enemies
+- Fishing minigame
+- Interface (HUD, Menu)
+- Animations
+
+## Improvements
+- Camera occlusion
+- Tiled optimization
+- Animations loading
+- Fixed memory leaks
+
 ## Team members
 
 <br>
@@ -52,13 +90,13 @@ It is an RPG game in 2.5d, where you must go into the dungeon down floors to fin
 - Cristina Parra.
 - Martí Sabaté. Github: [@msabate00](https://github.com/msabate00). Rol: Lead Programmer
 - Raül Sánchez. Github: [@Galycon]([https://github.com/msabate00](https://github.com/Galycon)). Rol: Game Designer
-- Guillem Montes. Github: [@Guillem257](https://github.com/Guillem257). Rol: Game Designer
+- Guillem Montes. Github: [@Guillem257](https://github.com/Guillem257). Rol: Lead Designer
 - Jiajie Lin. Github: [@Linjiajie2002](https://github.com/Linjiajie2002). Rol: Programmer
 - Aleix Botella. Github: [@Aleix3](https://github.com/Aleix3). Rol: Programmer
 - Núria Casé. Github: [@CaseChips](https://github.com/CaseChips). Rol: Technical Artist
 - Albert Cifuentes. Github: [@Cifu2004](https://github.com/Cifu2004). Rol: Programmer
 - Eduardo Bergillos. Github: [@eduardobr33](https://github.com/eduardobr33). Rol: Audio
-- Eduard García. Github: [@Eduuuuuuuuuuuu](https://github.com/Eduuuuuuuuuuuu). Rol: Level Designer
+- Eduard García. Github: [@Eduuuuuuuuuuuu](https://github.com/Eduuuuuuuuuuuu). Rol: Programmer
 - Alejandro Ibáñez. Github: [@AlejandroIR](https://github.com/AlejandroIR). Rol: Programmer
 
 
