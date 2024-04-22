@@ -58,7 +58,7 @@ bool Item_Garra::Update(float dt)
 
 bool Item_Garra::PostUpdate()
 {
-	app->render->DrawTexture(texture, position.x, position.y);
+	app->render->DrawTexture(texture, position.x, position.y, 0.5f);
 	return true;
 }
 

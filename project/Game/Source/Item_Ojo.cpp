@@ -59,7 +59,8 @@ bool Item_Ojo::Update(float dt)
 
 bool Item_Ojo::PostUpdate()
 {
-	app->render->DrawTexture(texture, position.x, position.y);
+	app->render->DrawTexture(texture, position.x, position.y,0.5f);
+	
 	return true;
 }
 

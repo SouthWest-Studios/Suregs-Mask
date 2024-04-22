@@ -237,7 +237,7 @@ Inventity* InventoryManager::CreateItem(EntityType type, int id, int ataque, int
 		sword->durability = durabilidad;
 		sword->magic = magia;
 		sword->weight = peso;*/
-		ojo->icon = app->tex->Load("Assets/Textures/Entidades/Items/texture_eye.png");
+		ojo->icon = app->tex->Load("Assets/Textures/Interfaz/ojoInv.png");
 		entity = ojo;
 		break;
 	}
@@ -681,10 +681,10 @@ bool InventoryManager::PostUpdate()
 		ListItem<Inventity*>* item;
 		Inventity* pEntity = NULL;
 
-		app->render->DrawTexture(EquipedItemText, equiped.x, equiped.y, SDL_FLIP_NONE, 0, 0);
+		app->render->DrawTexture(EquipedItemText, equiped.x, equiped.y, 0.8,SDL_FLIP_NONE, 0, 0);
 
-		app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y, SDL_FLIP_NONE, 0, 0);
-		app->render->DrawTexture(SelectedItemText, selected.x, selected.y, SDL_FLIP_NONE, 0, 0);
+		app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y, 0.8,SDL_FLIP_NONE, 0, 0);
+		app->render->DrawTexture(SelectedItemText, selected.x, selected.y, 0.8, SDL_FLIP_NONE, 0, 0);
 
 		for (item = inventities.start; item != nullptr; item = item->next)
 		{
@@ -703,7 +703,7 @@ bool InventoryManager::PostUpdate()
 
 						if (item->data->id < 5)
 						{
-							app->render->DrawText(quantityStr.c_str(), 320 + item->data->id * 100, 260, 20, 20);
+							app->render->DrawText(quantityStr.c_str(), 320 + item->data->id * 105, 230, 20, 20);
 						}
 						else
 						{
@@ -713,11 +713,11 @@ bool InventoryManager::PostUpdate()
 					{
 						if (item->data->id < 5)
 						{
-							app->render->DrawTexture(pEntity->icon, 290 + pEntity->id * 100, 230, SDL_FLIP_NONE, 0, 0);
+							app->render->DrawTexture(pEntity->icon, 280 + pEntity->id * 100, 180, 0.8, SDL_FLIP_NONE, 0, 0);
 						}
 						else
 						{
-							app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 100), 380, SDL_FLIP_NONE, 0, 0);
+							app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 105), 380, 0.8, SDL_FLIP_NONE, 0, 0);
 						}
 
 					}
@@ -732,7 +732,7 @@ bool InventoryManager::PostUpdate()
 
 						if (item->data->id < 5)
 						{
-							app->render->DrawText(quantityStr.c_str(), 320 + item->data->id * 100, 260, 20, 20);
+							app->render->DrawText(quantityStr.c_str(), 320 + item->data->id * 105, 230, 20, 20);
 						}
 						else
 						{
@@ -742,11 +742,11 @@ bool InventoryManager::PostUpdate()
 					{
 						if (item->data->id < 5)
 						{
-							app->render->DrawTexture(pEntity->icon, 290 + pEntity->id * 100, 230, SDL_FLIP_NONE, 0, 0);
+							app->render->DrawTexture(pEntity->icon, 280 + pEntity->id * 100, 180, 0.8, SDL_FLIP_NONE, 0, 0);
 						}
 						else
 						{
-							app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 100), 380, SDL_FLIP_NONE, 0, 0);
+							app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 100), 380, 0.8, SDL_FLIP_NONE, 0, 0);
 						}
 
 					}
@@ -761,7 +761,7 @@ bool InventoryManager::PostUpdate()
 
 						if (item->data->id < 5)
 						{
-							app->render->DrawText(quantityStr.c_str(), 320 + item->data->id * 100, 260, 20, 20);
+							app->render->DrawText(quantityStr.c_str(), 320 + item->data->id * 105, 230, 20, 20);
 						}
 						else
 						{
@@ -771,11 +771,11 @@ bool InventoryManager::PostUpdate()
 					{
 						if (item->data->id < 5)
 						{
-							app->render->DrawTexture(pEntity->icon, 290 + pEntity->id * 100, 230, SDL_FLIP_NONE, 0, 0);
+							app->render->DrawTexture(pEntity->icon, 280 + pEntity->id * 100, 180, 0.8, SDL_FLIP_NONE, 0, 0);
 						}
 						else
 						{
-							app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 100), 380, SDL_FLIP_NONE, 0, 0);
+							app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 100), 380, 0.8, SDL_FLIP_NONE, 0, 0);
 						}
 
 					}
@@ -787,12 +787,12 @@ bool InventoryManager::PostUpdate()
 			{
 				if (pEntity->id < 5) //if(inventities.cout() < 5)
 				{
-					app->render->DrawTexture(pEntity->icon, 445 + pEntity->id * 100, 300, SDL_FLIP_NONE, 0, 0);
+					app->render->DrawTexture(pEntity->icon, 445 + pEntity->id * 100, 300, 0.8, SDL_FLIP_NONE, 0, 0);
 				}
 				else
 				{
 
-					app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 100), 380, SDL_FLIP_NONE, 0, 0);
+					app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 100), 380, 0.8, SDL_FLIP_NONE, 0, 0);
 				}
 
 

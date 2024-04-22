@@ -338,7 +338,7 @@ bool Menu::PostUpdate()
 	app->win->GetWindowSize(windowWidth, windowHeight);
 	if (ventana == 1)
 	{
-		app->render->DrawTexture(fondoInventario, windowWidth / 8, windowHeight / 8, SDL_FLIP_NONE, 0, 0);
+		app->render->DrawTexture(fondoInventario, windowWidth / 8, windowHeight / 8 - 80, 0.8f, SDL_FLIP_NONE, 0, 0);
 	}
 	if (ventana == 2)
 	{
