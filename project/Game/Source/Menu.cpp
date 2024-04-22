@@ -86,6 +86,11 @@ bool Menu::Update(float dt)
 
 		app->audio->PlayFx(inventory_audio);
 	}
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	{
+		menuu = !menuu;
+		ventana = 4;
+	}
 	if (menuu)
 	{
 		app->entityManager->active = false;

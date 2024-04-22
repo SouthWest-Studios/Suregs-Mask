@@ -463,21 +463,27 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::RESOURCE_DIAMANTE:
 		LOG("Collision DIAMANTE");
-		if (physB->listener->active) {
-			app->inventoryManager->CreateItem(physB->listener->type, 0, 0, 0, 0, 0, 0);
-			physB->listener->active = false;
-			app->entityManager->DestroyEntity(physB->listener);
-			physB->body->SetActive(false);
+		if (physA != attackSensor && physA != mask1PassiveSensor && physA != mask1AttackSensor)
+		{
+			if (physB->listener->active) {
+				app->inventoryManager->CreateItem(physB->listener->type, 0, 0, 0, 0, 0, 0);
+				physB->listener->active = false;
+				app->entityManager->DestroyEntity(physB->listener);
+				physB->body->SetActive(false);
+			}
 		}
 
 		break;
 	case ColliderType::RESOURCE_OJO:
 		LOG("Collision OJO");
-		if (physB->listener->active) {
-			app->inventoryManager->CreateItem(physB->listener->type, 0, 0, 0, 0, 0, 0);
-			physB->listener->active = false;
-			app->entityManager->DestroyEntity(physB->listener);
-			physB->body->SetActive(false);
+		if (physA != attackSensor && physA != mask1PassiveSensor && physA != mask1AttackSensor)
+		{
+			if (physB->listener->active) {
+				app->inventoryManager->CreateItem(physB->listener->type, 0, 0, 0, 0, 0, 0);
+				physB->listener->active = false;
+				app->entityManager->DestroyEntity(physB->listener);
+				physB->body->SetActive(false);
+			}
 		}
 
 		break;
