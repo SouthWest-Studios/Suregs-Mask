@@ -1,0 +1,67 @@
+<dialogues>
+	<dialog id="0" texturepath="Assets/Textures/group1.png" facetexturepath="Assets/Textures/group1.png" name="Dorothy, Hely y Pathy">
+		<sentences>
+			<sentence text="..."/>
+		</sentences>
+	</dialog>
+	
+	<dialog id="1" texturepath="Assets/Textures/group1.png" facetexturepath="Assets/Textures/group1.png" name="Dorothy, Hely y Pathy">
+		<sentences>
+			<sentence text="Hola Jakhov, ¡hay que ver como creces!"/>
+			<sentence text="¿Vas al entrenamiento? Creo que ya te están esperando."/>
+			<sentence text="No te molestamos más, ¡cuando salgas podemos seguir hablando!"/>
+		</sentences>
+	</dialog>
+	
+	<dialog id="2" texturepath="Assets/Textures/npc1.png" facetexturepath="Assets/Textures/npc1.png" name="Hemyl">
+		<sentences>
+			<sentence text="¡Qué madrugón Jakhov! ¿Vas a entrenar tan pronto?"/>
+			<sentence  type="choose" text="¡Hay que ver como te esfuerzas! Por cierto, ¿cuándo vuelvas le puedes dar esto a tu abuela?">
+				<option1 text="Sí.">
+					<sentence text="¡Muchas gracias Jakhov! Siempre tan amable. No te molesto más, ¡mucha suerte en el entreno de hoy!"/>
+				</option1>
+				<option2 text="No tengo tiempo.">
+					<sentence text="Vaya... Se lo tendré que ir a dar yo mismo, a pesar de ser vecinos, sé que desde lo que sucedió aquél día, a Vhea no le gusta recibir muchas visitas... Da igual, ya me las arreglaré, suerte en el entreno de hoy Jakhov."/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="3" texturepath="Assets/Textures/npc2.png" facetexturepath="Assets/Textures/npc2.png" name="Phylippa">
+		<sentences>
+			<sentence text="Como estará mi Fukho..."/>
+			<sentence text="Qué mal lo paso cuando se tiene que ir a patrullar la cueva…"/>
+			<sentence text="¿Por qué nunca se pone en la primera fila para que le pueda ver?"/>
+		</sentences>
+	</dialog>
+
+	<dialog id="4" texturepath="Assets/Textures/group2.png" facetexturepath="Assets/Textures/group2.png" name="Dorothy, Hely y Pathy">
+		<sentences>
+			<sentence text="¡Ay, mi Patzo!, qué guapo eres…"/>
+			<sentence text="¡Ay, mi Patza!, qué guapa eres…"/>
+		</sentences>
+	</dialog>
+
+	<dialog id="5" texturepath="Assets/Textures/grupoJovenes.jpg" facetexturepath="Assets/Textures/grupoJovenes.jpg" name="Huhan, Xiby, Ferny y Lixy.">
+		<sentences>
+			<sentence text="¿Enserio va a volver al entrenamiento?"/>
+			<sentence text="Hoy hay que darle una buena paliza para que no vuelva más…"/>
+		</sentences>
+	</dialog>
+	
+	
+	
+	<dialog id="991" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phoska">
+		<sentences>
+			<sentence type= "choose" text="¡Buenos días! Bienvenido a la herrería de Phoska."/>
+			
+			<option1 text= "¿Qué ofreces?">
+				<sentence text= "Con los materiales necesarios podré forjar mejoras para tu equipo. ¡No dudes en venir cuando quieras mejorar tus herramientas de combate!"/>	
+			</option1>
+			
+			<option2 text="¡Adiós!">
+				<sentence text="¡No dudes en venir más por aquí!"/>
+			</option2>
+		</sentences>
+	</dialog>
+</dialogues>
