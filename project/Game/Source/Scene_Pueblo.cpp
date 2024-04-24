@@ -60,6 +60,10 @@ bool Scene_Pueblo::Start()
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
+
+	fishing = (MiniGameFishing*)app->entityManager->CreateEntity(EntityType::ROD);
+	fishing->parameters = config.child("minigamefishing");
+
 	// Texture to highligh mouse position 
 	//mouseTileTex = app->tex->Load("Assets/Mapas/tileSelection.png");
 
@@ -107,7 +111,7 @@ bool Scene_Pueblo::PostUpdate()
 bool Scene_Pueblo::CleanUp()
 {
 	LOG("Freeing Scene_Pueblo");
-
+	delete fishing;
 	return true;
 }
 
@@ -121,4 +125,9 @@ bool Scene_Pueblo::OnGuiMouseClickEvent(GuiControl* control)
 	return true;
 }
 
+
+MiniGameFishing* Scene_Pueblo::GetRod()
+{
+	return fishing;
+}
 

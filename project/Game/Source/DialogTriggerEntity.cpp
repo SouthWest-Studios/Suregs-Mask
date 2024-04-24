@@ -6,6 +6,7 @@
 #include "Input.h"
 #include "Render.h"
 #include "Scene_Testing.h"
+#include "Scene_Pueblo.h"
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
@@ -165,6 +166,11 @@ void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
 				if (strcmp(parameters.attribute("name").as_string(), "FishingMaster") == 0) {
 					app->scene_testing->GetRod()->fishing.rodReady = true;
 					app->scene_testing->GetRod()->fishing.playerGetRod = true;
+				}
+
+				if (strcmp(parameters.attribute("name").as_string(), "Dorothy, Hely y Pathy") == 0) {
+					app->scene_pueblo->GetRod()->fishing.rodReady = true;
+					app->scene_pueblo->GetRod()->fishing.playerGetRod = true;
 				}
 			}
 			break;

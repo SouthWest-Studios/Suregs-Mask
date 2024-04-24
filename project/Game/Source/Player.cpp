@@ -720,9 +720,10 @@ void Player::FishingDirecction(bool verticalMovement, bool horizontalMovement)
 	if (pressingRight) {
 		// Derecha
 		player_Direction = Direction::RIGHT;
-		if (app->scene_testing->GetRod()->fishing.isFishing) {
+		if (app->scene_testing->GetRod()->fishing.isFishing || app->scene_pueblo->GetRod()->fishing.isFishing) {
 			playermove = true;
 			app->scene_testing->GetRod()->fishing.startFishing = false;
+			app->scene_pueblo->GetRod()->fishing.startFishing = false;
 		}
 		else {
 			playermove = false;
@@ -731,9 +732,10 @@ void Player::FishingDirecction(bool verticalMovement, bool horizontalMovement)
 	else if (pressingLeft) {
 		// izquierda
 		player_Direction = Direction::LEFT;
-		if (app->scene_testing->GetRod()->fishing.isFishing) {
+		if (app->scene_testing->GetRod()->fishing.isFishing || app->scene_pueblo->GetRod()->fishing.isFishing) {
 			playermove = true;
 			app->scene_testing->GetRod()->fishing.startFishing = false;
+			app->scene_pueblo->GetRod()->fishing.startFishing = false;
 		}
 		else {
 			playermove = false;
@@ -742,9 +744,10 @@ void Player::FishingDirecction(bool verticalMovement, bool horizontalMovement)
 	else if (pressingDown) {
 		// abajo
 		player_Direction = Direction::DOWN;
-		if (app->scene_testing->GetRod()->fishing.isFishing) {
+		if (app->scene_testing->GetRod()->fishing.isFishing || app->scene_pueblo->GetRod()->fishing.isFishing) {
 			playermove = true;
 			app->scene_testing->GetRod()->fishing.startFishing = false;
+			app->scene_pueblo->GetRod()->fishing.startFishing = false;
 		}
 		else {
 			playermove = false;
@@ -753,9 +756,10 @@ void Player::FishingDirecction(bool verticalMovement, bool horizontalMovement)
 	else if (pressingUp) {
 		// arriba
 		player_Direction = Direction::UP;
-		if (app->scene_testing->GetRod()->fishing.isFishing) {
+		if (app->scene_testing->GetRod()->fishing.isFishing || app->scene_pueblo->GetRod()->fishing.isFishing) {
 			playermove = true;
 			app->scene_testing->GetRod()->fishing.startFishing = false;
+			app->scene_pueblo->GetRod()->fishing.startFishing = false;
 		}
 		else {
 			playermove = false;

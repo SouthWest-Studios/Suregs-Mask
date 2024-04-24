@@ -39,6 +39,8 @@ public:
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
 	
+	MiniGameFishing* GetRod();
+
 private:
 
 	float textPosX, textPosY = 0;
@@ -53,7 +55,8 @@ private:
 	// L15: TODO 2: Declare a GUI Control Button 
 	GuiControlButton* gcButtom;
 
-
+public:
+	MiniGameFishing* fishing = new MiniGameFishing;
 };
 
 #endif // __Scene_Pueblo_H__
