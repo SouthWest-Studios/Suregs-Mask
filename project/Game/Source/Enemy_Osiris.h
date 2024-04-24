@@ -39,11 +39,11 @@ public:
 	bool CleanUp();
 
 	void DoNothing(float dt);
-	void Chase(float dt);
+	void Chase(float dt, iPoint playerPos);
 	void Attack(float dt);
 	void Die();
 	void Revive();
-	bool Osirisfinding(float dt);
+	bool Osirisfinding(float dt, iPoint playerPos);
 
 	// L07 DONE 6: Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
@@ -67,6 +67,8 @@ public:
 	float health;
 	float maxHealth;
 	float attackDamage;
+
+	float viewDistance;
 
 	//Revivir
 	bool isDead = false;
@@ -100,6 +102,8 @@ private:
 	Animation dieAnim;
 
 	bool isFacingLeft = false;
+
+	iPoint originalPosition;
 
 public:
 
