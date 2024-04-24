@@ -65,7 +65,7 @@ bool MiniGameFishing::Start() {
 	fishingfloat_path = parameters.child("fishingfloat").attribute("texturepath").as_string();
 	fishingfloat_texture = app->tex->Load(fishingfloat_path);
 	fishing.fishingtype = FISHINGTYPE::FISHING;
-	floatChangeDistance = 100;
+	floatChangeDistance = 300;
 
 
 	for (pugi::xml_node node : parameters.child("fishlevel").children()) {
@@ -180,14 +180,15 @@ void MiniGameFishing::ani_castingline(Direction direction)
 		floatbody->listener = this;
 		crearfloatbody = false;
 	}
-	if (floatbody != nullptr) {
+
+	
 	//lerp
 	float timeLerp = 0.1f;
 	fishingflota_position_x = fishingflota_position_x * (1 - timeLerp) + fishingflota_CenterX * timeLerp;
 	fishingflota_position_y = fishingflota_position_y * (1 - timeLerp) + fishingflota_CenterY * timeLerp;
-
-	//moving collision
 	
+	//moving collision
+	if (floatbody != nullptr) {
 		cheke_x = (METERS_TO_PIXELS(floatbody->body->GetPosition().x) - texH / 2) - 23;
 		cheke_y = (METERS_TO_PIXELS(floatbody->body->GetPosition().y) - texH / 2) - 23;
 	}
@@ -298,31 +299,31 @@ void MiniGameFishing::playLureFishing()
 
 void MiniGameFishing::fishing_line(Direction direction, float cheke_x, float cheke_y)
 {
-	//Lure fishing, confirm direction, reel in
-	b2Vec2 force(0.0f, 0.0f);
+	////Lure fishing, confirm direction, reel in
+	//b2Vec2 force(0.0f, 0.0f);
 
-	if (direction == Direction::UP && cheke_y <= fishingflota_position_y) {
-		force.y = 10.0f;
-	}
-	else if (direction == Direction::DOWN && cheke_y >= fishingflota_position_y) {
-		force.y = -10.0f;
-	}
-	else if (direction == Direction::LEFT && cheke_x <= fishingflota_position_x) {
-		force.x = 10.0f;
-	}
-	else if (direction == Direction::RIGHT && cheke_x >= fishingflota_position_x) {
-		force.x = -10.0f;
-	}
-	else if (direction == Direction::UNKNOWN && cheke_y >= fishingflota_position_y) {
-		force.y = -10.0f;
-	}
+	//if (direction == Direction::UP && cheke_y <= fishingflota_position_y) {
+	//	force.y = 10.0f;
+	//}
+	//else if (direction == Direction::DOWN && cheke_y >= fishingflota_position_y) {
+	//	force.y = -10.0f;
+	//}
+	//else if (direction == Direction::LEFT && cheke_x <= fishingflota_position_x) {
+	//	force.x = 10.0f;
+	//}
+	//else if (direction == Direction::RIGHT && cheke_x >= fishingflota_position_x) {
+	//	force.x = -10.0f;
+	//}
+	//else if (direction == Direction::UNKNOWN && cheke_y >= fishingflota_position_y) {
+	//	force.y = -10.0f;
+	//}
 
-	if (force == b2Vec2(0.0f, 0.0f)) {
-		floatbody->body->SetLinearVelocity(b2Vec2(0, 0));
-	}
-	else {
-		floatbody->body->ApplyForceToCenter(force, true);
-	}
+	//if (force == b2Vec2(0.0f, 0.0f)) {
+	//	floatbody->body->SetLinearVelocity(b2Vec2(0, 0));
+	//}
+	//else {
+	//	floatbody->body->ApplyForceToCenter(force, true);
+	//}
 
 	if (direction == Direction::LEFT || direction == Direction::RIGHT) {
 		app->render->DrawTexture(fishingfloat_texture, fishingflota_position_x, fishingflota_position_y - 23, 3);
@@ -430,13 +431,15 @@ void MiniGameFishing::floatCollision(Direction direction, float cheke_x, float c
 
 
 	if (force == b2Vec2(0.0f, 0.0f)) {
-		if (floatbody != nullptr) {
-			floatbody->body->SetLinearVelocity(b2Vec2(0, 0));
-		}
+		
 		if (floatbody != nullptr) {
 			floatbody->body->GetWorld()->DestroyBody(floatbody->body);
 			floatbody = nullptr;
+			printf("delete");
 		}//end_if, delete collision
+		if (floatbody != nullptr) {
+			floatbody->body->SetLinearVelocity(b2Vec2(0, 0));
+		}
 	}
 	else {
 		if (floatbody != nullptr) {
@@ -682,7 +685,7 @@ bool MiniGameFishing::miniGameLoop(float dt)
 			floatChangeDistance = lureDistance * 100;
 		}//end_if is lurefishing and get irregular distance
 		else {
-			floatChangeDistance = 100;
+			floatChangeDistance = 300;
 		}//normal fishing distance
 
 

@@ -107,7 +107,7 @@ public:
 	PhysBody* floatbody = nullptr;
 	float floatDistance;
 	float lureDistance;
-	float floatChangeDistance = 100;
+	float floatChangeDistance = 200;
 	bool startFinishingLine = false;
 	bool lureDistanceGetRandom;
 
