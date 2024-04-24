@@ -106,7 +106,7 @@ void GuiControlSlider::Draw()
 
     // Draw the slider knob
     
-    SDL_Rect knobRect = { knobX - 5, bounds.y - 5, 10, bounds.h + 10 };
+    SDL_Rect knobRect = { knobX , bounds.y - 5, 10, bounds.h + 10 };
     //app->render->DrawRectangle(knobRect, 255, 255, 0, 255, true, false);
    
     app->render->DrawTexture(knob, knobRect.x, knobRect.y, SDL_FLIP_NONE, 0, 0, true);

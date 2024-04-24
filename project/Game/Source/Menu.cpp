@@ -179,9 +179,15 @@ bool Menu::Update(float dt)
 			{
 				vsync->click = true;
 			}
+			int currentVolume = Mix_VolumeMusic(-1);
+			music->value = currentVolume;
+
+			/*int currentSFXVolume = Mix_Volume(-1, -1);
+			sfx->value = currentSFXVolume;*/
+			
 		}
 
-
+		
 
 
 

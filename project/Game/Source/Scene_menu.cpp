@@ -111,13 +111,17 @@ bool Scene_Menu::Update(float dt)
 {
 
 	OPTICK_EVENT();
-	app->render->DrawTexture(menuMain, 0, 0);
-	app->render->DrawTexture(menuMain2, 550, 0);
-	app->render->DrawTexture(logo, 130, 100);
+	if (showSettings == false)
+	{
+		app->render->DrawTexture(menuMain, 0, 0);
+		app->render->DrawTexture(menuMain2, 550, 0);
+		app->render->DrawTexture(logo, 130, 100);
+	}
+	
 	/*if (showSettings && !_showSettings) {
 		SettingsInterface();
 	}*/
-	if (showSettings) { app->render->DrawTexture(settings, 0, 0); }
+	/*if (showSettings) { app->render->DrawTexture(settings, 500, 500); }*/
 
 	if (showCredits) { ShowCredits(); }
 
@@ -292,7 +296,7 @@ void Scene_Menu::SettingsInterface()
 	uint windowWidth, windowHeight;
 	app->win->GetWindowSize(windowWidth, windowHeight);
 
-	app->render->DrawTexture(settings, 0, 0);
+	app->render->DrawTexture(settings, 400, 100);
 
 	ListItem<GuiControl*>* control;
 	for (control = controlsScene.start; control != NULL; control = control->next)
@@ -328,7 +332,7 @@ void Scene_Menu::SettingsInterface()
 			SDL_Rect vSyncpos = { windowWidth / 2 + 100 ,windowHeight / 2 + 100, 200, 50 };
 			vsync = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 10, "VSYNC", vSyncpos, this, { 0, 0, 20, 20 });
 
-			SDL_Rect TitlePos = { 550, 600,	136,46 };
+			SDL_Rect TitlePos = { 550, 550,	136,46 };
 			atras = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "ATRAS", TitlePos, this, { 0,0,0,0 });
 
 			/*controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "ATRÁS", SDL_Rect{ 550, 600,	136,46 }, this));*/
@@ -341,6 +345,8 @@ void Scene_Menu::SettingsInterface()
 			{
 				vsync->click = true;
 			}
+			int currentVolume = Mix_VolumeMusic(-1);
+			music->value = currentVolume;
 		}
 
 		
