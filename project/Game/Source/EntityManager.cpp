@@ -334,7 +334,7 @@ bool EntityManager::PostUpdate()
 		//app->render->DrawTexture(obj.texture, obj.x, obj.y, 0.5f, SDL_FLIP_NONE, &obj.currentFrame);
 		//app->render->DrawTexture(texture, position.x - 75, position.y - 100, 0.5f, SDL_FLIP_NONE, &rect);
 //}
-		if (obj.texture != app->entityManager->GetPlayer()->texture) {
+		if (app->entityManager->GetPlayer() != nullptr && obj.texture != app->entityManager->GetPlayer()->texture) {
 			app->render->DrawTexture(obj.texture, obj.x, obj.y);
 		}
 
