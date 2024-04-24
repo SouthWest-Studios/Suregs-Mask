@@ -671,7 +671,7 @@ bool MiniGameFishing::miniGameLoop(float dt)
 	//Cast the rod and StartFishing
 	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
 		fishing.isFishing = !fishing.isFishing;//Start fishing o Stop fishing
-
+		
 		/*if (fishing.isFishing == true && fishing.startFishing == false) {
 			fishing.isFishing = true;
 		}
