@@ -62,11 +62,11 @@ bool Map::Start() {
 	mapPath += name;
 	Load(mapPath);
 
+
 	pugi::xml_document configFile;
 	pugi::xml_node configNode;
 	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
 	configNode = configFile.child("config").child("map");
-
 	pathTextures = configNode.child("pathfindingTexture").attribute("pathtexture").as_string();
 
 

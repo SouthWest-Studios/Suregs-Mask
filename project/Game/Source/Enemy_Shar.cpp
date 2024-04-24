@@ -128,13 +128,13 @@ bool Enemy_Shar::PostUpdate() {
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
 
-	for (uint i = 0; i < lastPath.Count(); ++i)
-	{
-		iPoint pos = app->map->MapToWorld(lastPath.At(i)->x, lastPath.At(i)->y);
-		if (app->physics->debug == true) {
-			app->render->DrawTexture(app->map->pathfinding->mouseTileTex, pos.x, pos.y, SDL_FLIP_NONE);
-		}
-	}
+	//for (uint i = 0; i < lastPath.Count(); ++i)
+	//{
+	//	iPoint pos = app->map->MapToWorld(lastPath.At(i)->x, lastPath.At(i)->y);
+	//	if (app->physics->debug == true) {
+	//		app->render->DrawTexture(app->map->pathfinding->mouseTileTex, pos.x, pos.y, SDL_FLIP_NONE);
+	//	}
+	//}
 
 	return true;
 

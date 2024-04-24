@@ -82,12 +82,12 @@ bool Enemy_Osiris::Update(float dt)
 	}
 
 
-	switch (nextState)
+	switch (currentState)
 	{
 	case EntityState::RUNNING:
 		Chase(dt, playerPos);
 		break;
-	/*case EntityState::ATTACKING:
+	case EntityState::ATTACKING:
 		Attack(dt);
 		break;
 	case EntityState::DEAD:
@@ -96,7 +96,7 @@ bool Enemy_Osiris::Update(float dt)
 	case EntityState::REVIVING:
 		Revive();
 		break;
-	case EntityState::IDLE:
+		/*case EntityState::IDLE:
 		DoNothing(dt);
 		break;*/
 	default:
@@ -124,7 +124,7 @@ bool Enemy_Osiris::Update(float dt)
 	}
 	else
 	{
-		nextState = EntityState::IDLE;
+		nextState = EntityState::RUNNING;
 	}
 
 	currentState = nextState;
@@ -274,7 +274,6 @@ bool Enemy_Osiris::Osirisfinding(float dt, iPoint playerPosP)
 
 
 	if (dist(playerPos, enemyPos) < viewDistance) {
-
 		app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
 		lastPath = *app->map->pathfinding->GetLastPath();
 	}
