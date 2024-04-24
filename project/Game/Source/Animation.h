@@ -15,7 +15,7 @@ public:
 	// Allows the animation to keep going back and forth
 	bool pingpong = false;
 	const char* aniName;
-	
+
 
 private:
 	float currentFrame = 0.0f;
@@ -89,8 +89,8 @@ public:
 
 		animationNode = animationsNode.child("frame");
 		//animationsNode.child("anim").next_sibling
-		while(animationNode != NULL){
-		
+		while (animationNode != NULL) {
+
 			//map.attribute("height").as_int();
 			this->PushBack({
 					animationNode.attribute("x").as_int(),
@@ -141,21 +141,63 @@ public:
 		pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
 		AniInfo = configFile.child("config").child("animations").child(Anipart).child(NombreAni);
 
+		if (checkSDLRect(AniInfo, spritePositions)) {
+			printf("SDL_Rect数据正确！\n");
+		}
+		else {
+			printf("SDL_Rect数据不正确！\n");
+		}
+
+
+		/*for (int i = AniInfo.attribute("start").as_int(); i < AniInfo.attribute("end").as_int(); i++)
+		{
+			this->PushBack({ spritePositions[i] });
+		}*/
+
 		if (AniInfo.attribute("start").as_int() > AniInfo.attribute("end").as_int()) {
 			for (int i = AniInfo.attribute("start").as_int(); i > AniInfo.attribute("end").as_int(); i--)
 			{
-				this->PushBack({spritePositions[i]});
+				this->PushBack({ spritePositions[i] });
 			}
 		}
 		else {
 			for (int i = AniInfo.attribute("start").as_int(); i < AniInfo.attribute("end").as_int(); i++)
 			{
-				this->PushBack({spritePositions[i]});
+				this->PushBack({ spritePositions[i] });
 			}
 		}
 
 		this->speed = AniInfo.attribute("speed").as_float();
 		this->loop = AniInfo.attribute("loop").as_bool();
+	}
+
+
+	int checkSDLRect(pugi::xml_node AniInfo, SDL_Rect* rect) {
+
+		if (rect == NULL) {
+			printf("SDL_Rect指针为空！\n");
+			return 0;
+		}
+
+		for (int i = AniInfo.attribute("start").as_int(); i < AniInfo.attribute("end").as_int(); i++) {
+			try {
+				int check_access = rect[i].x; // 检查数组边界
+				check_access = rect[i].y;
+				check_access = rect[i].w;
+				check_access = rect[i].h;
+			}
+			catch (const std::exception& e) {
+				printf("异常捕获：%s\n", e.what());
+				return 0;
+			}
+			catch (...) {
+				printf("未知异常捕获！\n");
+				return 0;
+			}
+		}
+
+
+		return 1;
 	}
 
 	const char* getNameAnimation() {

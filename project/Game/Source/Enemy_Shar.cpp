@@ -46,7 +46,7 @@ bool Enemy_Shar::Start() {
 
 	idleAnim.LoadAnim("osiris", "idleAnim", spritePositions);
 	runAnim.LoadAnim("osiris", "runAnim", spritePositions);
-	attackAnim.LoadAnim("osiris", "attackAnim", spritePositions);
+	attackAnim.LoadAnim("osiris", "attackAnim3", spritePositions);
 	dieAnim.LoadAnim("osiris", "dieAnim", spritePositions);
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
