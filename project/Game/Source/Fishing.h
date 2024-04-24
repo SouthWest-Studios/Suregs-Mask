@@ -29,8 +29,8 @@ public:
 	Fishlevel fishlever;
 	FISHINGTYPE fishingtype = FISHINGTYPE::FISHING;
 
-	bool rodReady = true;
-	bool playerGetRod = true;
+	bool rodReady = false;
+	bool playerGetRod = false;
 	bool isFishing = false;
 	bool startFishing = false;
 

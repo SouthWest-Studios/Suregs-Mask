@@ -54,6 +54,9 @@ bool Menu::Start()
 
 	inventory_audio = app->audio->LoadAudioFx("inventory_fx");
 	change_inventory_audio = app->audio->LoadAudioFx("change_inventory_fx");
+
+	newVolumeAudio = app->audio->volumeMusic;
+	newVolumeFx = app->audio->volumeFx;
 	
 	
 
@@ -179,12 +182,10 @@ bool Menu::Update(float dt)
 			{
 				vsync->click = true;
 			}
-			int currentVolume = Mix_VolumeMusic(-1);
-			music->value = currentVolume;
 
-			/*int currentSFXVolume = Mix_Volume(-1, -1);
-			sfx->value = currentSFXVolume;*/
-			
+			//Cargar la barra de audio del save_game
+			((GuiControlSlider*)music)->value = newVolumeAudio;
+			((GuiControlSlider*)sfx)->value = newVolumeFx;
 		}
 
 		
@@ -225,19 +226,19 @@ bool Menu::Update(float dt)
 		if (music != nullptr)
 		{
 			int newVolume = ((GuiControlSlider*)music)->value;
-			// Asegurarse de que el nuevo volumen esté dentro de los límites válidos (0-128 para SDL Mixer)
+			// Asegurarse de que el nuevo volumen estï¿½ dentro de los lï¿½mites vï¿½lidos (0-128 para SDL Mixer)
 			newVolume = std::max(0, std::min(128, newVolume));
-			// Establecer el volumen de la música
+			// Establecer el volumen de la mï¿½sica
 			Mix_VolumeMusic(newVolume);
+			newVolumeAudio = newVolume;
 		}
 
 		if (sfx != nullptr)
 		{
 			int newSFXVolume = ((GuiControlSlider*)sfx)->value;
-			// Asegurarse de que el nuevo volumen esté dentro de los límites válidos (0-128 para SDL Mixer)
 			newSFXVolume = std::max(0, std::min(128, newSFXVolume));
-			// Establecer el volumen de la música
 			Mix_Volume(-1, newSFXVolume);
+			newVolumeFx = newSFXVolume;
 		}
 
 		
@@ -404,6 +405,8 @@ void Menu::Fullscreen()
 
 bool Menu::LoadState(pugi::xml_node node)
 {
+
+
 	return true;
 }
 

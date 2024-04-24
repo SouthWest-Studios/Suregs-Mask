@@ -66,7 +66,7 @@ bool Scene_Menu::Start()
 	//Get window size
 	app->win->GetWindowSize(windowW, windowH);
 
-	//Añadir los controles a una lista 
+	//Aï¿½adir los controles a una lista 
 	/*SDL_Rect TitlePos = { 75, 403,	136,46 };
 	NuevaPartida = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "NUEVA PARTIDA", TitlePos, this, { 0,0,0,0 });*/
 	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "NUEVA PARTIDA", SDL_Rect{ 75, 403,	136,46 }, this));
@@ -75,13 +75,16 @@ bool Scene_Menu::Start()
 	Continuar = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "CONTINUAR", TitlePos2, this, { 0,0,0,0 });*/
 	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "CONTINUAR", SDL_Rect{ 75,457,136,46 }, this));
 	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "AJUSTES", SDL_Rect{ 75, 512,136,46 }, this));
-	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "CRÉDITOS", SDL_Rect{75, 565,136,46 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "CRï¿½DITOS", SDL_Rect{75, 565,136,46 }, this));
 	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "SALIR", SDL_Rect{75, 622,136,46 }, this));
 
 
 	app->audio->LoadAudioMusic("menu", 10.0f);
 	menu_fx = app->audio->LoadAudioFx("menu_fx");
 	app->audio->PlayFx(menu_fx);
+
+	newVolumeAudio = app->audio->volumeMusic;
+	newVolumeFx = app->audio->volumeFx;
 
 	app->guiManager->minId = 1;
 	app->guiManager->maxId = 5;
@@ -335,7 +338,7 @@ void Scene_Menu::SettingsInterface()
 			SDL_Rect TitlePos = { 550, 550,	136,46 };
 			atras = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "ATRAS", TitlePos, this, { 0,0,0,0 });
 
-			/*controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "ATRÁS", SDL_Rect{ 550, 600,	136,46 }, this));*/
+			/*controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "ATRï¿½S", SDL_Rect{ 550, 600,	136,46 }, this));*/
 
 			if (app->win->fullscreen)
 			{
@@ -345,8 +348,10 @@ void Scene_Menu::SettingsInterface()
 			{
 				vsync->click = true;
 			}
-			int currentVolume = Mix_VolumeMusic(-1);
-			music->value = currentVolume;
+
+			//Cargar la barra de audio del save_game
+			((GuiControlSlider*)music)->value = newVolumeAudio;
+			((GuiControlSlider*)sfx)->value = newVolumeFx;
 		}
 
 		
@@ -407,10 +412,19 @@ void Scene_Menu::SettingsInterface()
 		if (music != nullptr)
 		{
 			int newVolume = ((GuiControlSlider*)music)->value;
-			// Asegurarse de que el nuevo volumen esté dentro de los límites válidos (0-128 para SDL Mixer)
+			// Asegurarse de que el nuevo volumen estï¿½ dentro de los lï¿½mites vï¿½lidos (0-128 para SDL Mixer)
 			newVolume = std::max(0, std::min(128, newVolume));
-			// Establecer el volumen de la música
+			// Establecer el volumen de la mï¿½sica
 			Mix_VolumeMusic(newVolume);
+			newVolumeAudio = newVolume;
+		}
+
+		if (sfx != nullptr)
+		{
+			int newSFXVolume = ((GuiControlSlider*)sfx)->value;
+			newSFXVolume = std::max(0, std::min(128, newSFXVolume));
+			Mix_Volume(-1, newSFXVolume);
+			newVolumeFx = newSFXVolume;
 		}
 
 
@@ -489,7 +503,7 @@ void Scene_Menu::ShowCredits()
 			control->data->state = GuiControlState::DISABLED; 
 		}
 
-		gcCloseCredits = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 100,	136,46 }, this);
+		gcCloseCredits = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, "ATRï¿½S", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 100,	136,46 }, this);
 		_showCredits = true;
 	}
 

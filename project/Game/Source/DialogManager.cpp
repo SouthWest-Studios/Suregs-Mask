@@ -4,6 +4,7 @@
 #include "App.h"
 #include "Textures.h"
 #include "Scene_Testing.h"
+#include "Scene_Pueblo.h"
 #include "Window.h"
 
 #include "Defs.h"
@@ -130,9 +131,13 @@ void DialogManager::AutoNextDiagolo(int autoNextTime)
 			if (app->scene_testing->GetRod()->fishingEndCloseDialogo == true) {
 				app->scene_testing->GetRod()->isEnd = true;
 			}
+			if (app->scene_pueblo->GetRod()->fishingEndCloseDialogo == true) {
+				app->scene_pueblo->GetRod()->isEnd = true;
+			}
 			indexText = 1;
 			dialogues.Del(dialogues.At(0));
 			app->scene_testing->GetRod()->dialogoautoclose = false;
+			app->scene_pueblo->GetRod()->dialogoautoclose = false;
 		}
 	}
 }

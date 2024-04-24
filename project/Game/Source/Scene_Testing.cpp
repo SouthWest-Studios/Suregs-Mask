@@ -191,7 +191,7 @@ bool Scene_testing::PostUpdate()
 bool Scene_testing::CleanUp()
 {
 	LOG("Freeing Scene_testing");
-
+	delete fishing;
 	return true;
 }
 

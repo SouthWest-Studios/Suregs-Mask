@@ -92,6 +92,9 @@ private:
 
 	bool showCredits = false;
 	bool _showCredits = false;
+
+	int newVolumeAudio;
+	int newVolumeFx;
 };
 
 #endif // __SCENE_MENU_H__
