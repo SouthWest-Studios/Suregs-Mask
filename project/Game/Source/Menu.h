@@ -84,6 +84,9 @@ private:
 
 	int inventory_audio;
 	int change_inventory_audio;
+
+	int newVolumeAudio;
+	int newVolumeFx;
 };
 
 #endif // __MENU_H__
