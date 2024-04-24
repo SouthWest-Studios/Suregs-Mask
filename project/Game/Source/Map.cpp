@@ -49,7 +49,7 @@ bool Map::Awake(pugi::xml_node config)
 	LOG("Loading Map Parser");
 	bool ret = true;
 	
-	pathTextures = config.child("map").child("mouseTileTex").attribute("pathtextures").as_string();
+	
 
 	return ret;
 }
@@ -61,6 +61,14 @@ bool Map::Start() {
 	SString mapPath = path;
 	mapPath += name;
 	Load(mapPath);
+
+	pugi::xml_document configFile;
+	pugi::xml_node configNode;
+	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
+	configNode = configFile.child("config").child("map");
+
+	pathTextures = configNode.child("pathfindingTexture").attribute("pathtexture").as_string();
+
 
 	//Initialize pathfinding 
 	pathfinding = new PathFinding();

@@ -129,6 +129,7 @@
 		<background texturepath ="Assets/Textures/Interfaz/textura_background_logos.png"/>
 	</scene_logos>
 	<scene_pueblo>
+		<pathfindingTexture pathtexture="Assets/Textures/pathfinding.png"/>
 		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Pueblo/Pueblo.tmx"/>
 	</scene_pueblo>
 
@@ -217,5 +218,9 @@
 	<hud>
 		<mainTexture texturepath="Assets/Textures/Interfaz/HUD/texture_general_hud.png"/>
 	</hud>
+
+	<map>
+		<pathfindingTexture pathtexture="Assets/Textures/pathfinding.png"/>
+	</map>
 
 </config>
