@@ -94,7 +94,8 @@ private:
 	bool isFacingLeft = false;
 
 	Item_Garra* garra;
-
+	pugi::xml_document configFile;
+	pugi::xml_node configNode;
 
 public:
 

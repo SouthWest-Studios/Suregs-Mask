@@ -175,8 +175,14 @@ void Enemy_Shar::Attack(float dt)
 }
 
 void Enemy_Shar::Die(float dt) {
+
+	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
+	if (parseResult) {
+		configNode = configFile.child("config");
+	}
+
 	ojo = (Item_Ojo*)app->entityManager->CreateEntity(EntityType::ITEM_OJO);
-	/*garra->config = configNode.child("entities_data").child("item_garra");*/
+	ojo->config = configNode.child("entities_data").child("item_ojo");
 	ojo->position = iPoint(position.x, position.y);
 	ojo->Start();
 

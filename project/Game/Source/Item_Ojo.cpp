@@ -32,7 +32,8 @@ bool Item_Ojo::Start() {
 	/*position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();*/
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
-	texture = app->tex->Load("Assets/Textures/Entidades/Items/texture_eye.png");
+	description = (config.attribute("description").as_string());
+	tipo = (config.attribute("type").as_string());
 	
 	// L07 DONE 4: Add a physics to an item - initialize the physics body
 	app->tex->GetSize(texture, texW, texH);

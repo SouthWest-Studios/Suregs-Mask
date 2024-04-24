@@ -166,8 +166,14 @@ void Enemy_Ols::Attack(float dt)
 }
 
 void Enemy_Ols::Die(float dt) {
+
+	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
+	if (parseResult) {
+		configNode = configFile.child("config");
+	}
+
 	garra = (Item_Garra*)app->entityManager->CreateEntity(EntityType::ITEM_GARRA);
-	/*garra->config = configNode.child("entities_data").child("item_garra");*/
+	garra->config = configNode.child("entities_data").child("item_garra");
 	garra->position = iPoint(position.x, position.y);
 	garra->Start();
 

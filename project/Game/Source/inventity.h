@@ -97,8 +97,8 @@ public:
 	bool active;
 	bool stackable = false;
 	InventityType type;
-	
-	
+	std::string desc;
+	std::string tipo;
 
 	
 };

@@ -4,6 +4,7 @@
 #include "Entity.h"
 #include "Point.h"
 #include "SDL/include/SDL.h"
+#include "SString.h"
 
 struct SDL_Texture;
 
@@ -37,7 +38,8 @@ public:
 	int magia;
 	float peso; // Peso de la espada
 	PhysBody* pbody;
-	SDL_Texture* texture;
+	SDL_Texture* texture = NULL;
+	
 	iPoint position;
 	pugi::xml_node config;
 private:

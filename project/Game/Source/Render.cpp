@@ -3,7 +3,11 @@
 #include "Render.h"
 #include "Menu.h"
 #include "Defs.h"
+#include <vector>
+#include <string>
 #include "Log.h"
+#include <iostream>
+
 
 #define VSYNC true
 
@@ -336,24 +340,117 @@ bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uin
 	return ret;
 }
 
-bool Render::DrawText(const char* text, int posx, int posy, int w, int h, TTF_Font* font, int r, int g, int b) {
+//bool Render::DrawText(const char* text, int posx, int posy, int w, int h, TTF_Font* font, int r, int g, int b) {
+//
+//	if (font == NULL) {
+//		font = primaryFont;
+//	}
+//	SDL_Color color = { r, g, b };
+//	SDL_Surface* surface = TTF_RenderText_Solid(font, text, color);
+//	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+//
+//	int texW = 0;
+//	int texH = 0;
+//	SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
+//	SDL_Rect dstrect = { posx, posy, w, h };
+//
+//	SDL_RenderCopy(renderer, texture, NULL, &dstrect);
+//
+//	SDL_DestroyTexture(texture);
+//	SDL_FreeSurface(surface);
+//
+//	return true;
+//}
 
+std::vector<std::string> WrapText(const std::string& text, int maxWidth, TTF_Font* font) {
+	std::vector<std::string> lines;
+	if (text.empty()) return lines;
+
+	int textWidth = 0;
+	int startIndex = 0;
+	int lastSpaceIndex = -1;
+	for (int i = 0; i < text.length(); ++i) {
+		char character = text[i];
+		if (character == ' ') {
+			lastSpaceIndex = i;
+		}
+
+		int charWidth = 0;
+		TTF_GlyphMetrics(font, static_cast<unsigned char>(character), NULL, NULL, NULL, NULL, &charWidth);
+		textWidth += charWidth;
+
+		if (textWidth > maxWidth) {
+			if (lastSpaceIndex != -1) {
+				lines.push_back(text.substr(startIndex, lastSpaceIndex - startIndex));
+				startIndex = lastSpaceIndex + 1;
+				lastSpaceIndex = -1;
+			}
+			else {
+				lines.push_back(text.substr(startIndex, i - startIndex));
+				startIndex = i;
+			}
+			textWidth = 0;
+			--i; // Retroceder un índice para incluir el carácter actual en la próxima línea
+		}
+	}
+	lines.push_back(text.substr(startIndex));
+
+	return lines;
+}
+
+// Función principal que dibuja el texto con salto de línea si es necesario
+bool Render::DrawText(const char* text, int posx, int posy, int w, int h, TTF_Font* font, int r, int g, int b, bool adjustToText) {
 	if (font == NULL) {
 		font = primaryFont;
 	}
 	SDL_Color color = { r, g, b };
-	SDL_Surface* surface = TTF_RenderText_Solid(font, text, color);
-	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+	std::vector<std::string> textLines;
 
-	int texW = 0;
-	int texH = 0;
-	SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
-	SDL_Rect dstrect = { posx, posy, w, h };
+	if (adjustToText) {
+		// Si se ajusta al texto, no hay necesidad de dividir el texto en líneas
+		textLines.push_back(text);
+	}
+	else {
+		// Si no se ajusta al texto, dividir el texto en líneas que quepan dentro del ancho especificado
+		textLines = WrapText(text, w, font);
+	}
 
-	SDL_RenderCopy(renderer, texture, NULL, &dstrect);
+	if (adjustToText == false)
+	{
+		// Renderizar cada línea de texto
+		int lineHeight = TTF_FontHeight(font);
+		int y = posy;
+		for (const auto& line : textLines) {
+			SDL_Surface* surface = TTF_RenderText_Solid(font, line.c_str(), color);
+			SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+			int texW = 0;
+			int texH = 0;
+			SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
+			SDL_Rect dstrect = { posx, y, texW, texH };
+			SDL_RenderCopy(renderer, texture, NULL, &dstrect);
+			y += lineHeight; // Moverse a la siguiente línea
+			SDL_DestroyTexture(texture);
+			SDL_FreeSurface(surface);
+		}
+	}
+	else
+	{
+		
+		
+		SDL_Surface* surface = TTF_RenderText_Solid(font, text, color);
+		SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
 
-	SDL_DestroyTexture(texture);
-	SDL_FreeSurface(surface);
+		int texW = 0;
+		int texH = 0;
+		SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
+		SDL_Rect dstrect = { posx, posy, w, h };
+
+		SDL_RenderCopy(renderer, texture, NULL, &dstrect);
+
+		SDL_DestroyTexture(texture);
+		SDL_FreeSurface(surface);
+	}
+	
 
 	return true;
 }

@@ -31,7 +31,7 @@ public:
 	bool CleanUp();
 
 	// Additional methods
-	Inventity* CreateItem(EntityType type, int id, int ataque, int durabilidad, int magia, float peso, int defensa = 0);
+	Inventity* CreateItem(EntityType type, std::string descripcioon, std::string tipo);
 
 	void AddItem(Inventity* Inventity);
 
@@ -55,7 +55,7 @@ public:
 
 
 	List<Inventity*> inventities;
-	iPoint PointerPosition = { -43,-160 };
+	iPoint PointerPosition = { 176,-60 };
 	int PointerId = 0;
 	iPoint selected = { -1000,-1000 };
 	iPoint equiped = { -1000,-1000 };

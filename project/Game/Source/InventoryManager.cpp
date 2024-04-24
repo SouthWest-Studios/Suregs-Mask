@@ -54,6 +54,7 @@ bool InventoryManager::Start() {
 	SelectedItemText = app->tex->Load("Assets/Textures/Interfaz/selected.png");
 	EquipedItemText = app->tex->Load("Assets/Textures/Interfaz/equiped.png");
 
+
 	bool ret = true;
 
 	//Iterates over the entities and calls Start
@@ -91,7 +92,7 @@ bool InventoryManager::CleanUp()
 	return ret;
 }
 int highestId = -1;
-Inventity* InventoryManager::CreateItem(EntityType type, int id, int ataque, int durabilidad, int magia, float peso, int defensa)
+Inventity* InventoryManager::CreateItem(EntityType type, std::string descripcioon, std::string tipoo)
 {
 	Inventity* entity = nullptr;
 
@@ -157,6 +158,9 @@ Inventity* InventoryManager::CreateItem(EntityType type, int id, int ataque, int
 		garra->id = highestId + 1;
 		garra->type = InventityType::GARRA;
 		garra->stackable = true;
+		garra->desc = descripcioon;
+		garra->tipo = tipoo;
+
 		/*sword->damage = ataque;
 		sword->durability = durabilidad;
 		sword->magic = magia;
@@ -195,6 +199,8 @@ Inventity* InventoryManager::CreateItem(EntityType type, int id, int ataque, int
 		diamante->id = highestId + 1;
 		diamante->type = InventityType::DIAMANTE;
 		diamante->stackable = true;
+		diamante->desc = descripcioon;
+		diamante->tipo = tipoo;
 		/*sword->damage = ataque;
 		sword->durability = durabilidad;
 		sword->magic = magia;
@@ -233,6 +239,8 @@ Inventity* InventoryManager::CreateItem(EntityType type, int id, int ataque, int
 		ojo->id = highestId + 1;
 		ojo->type = InventityType::OJO;
 		ojo->stackable = true;
+		ojo->desc = descripcioon;
+		ojo->tipo = tipoo;
 		/*sword->damage = ataque;
 		sword->durability = durabilidad;
 		sword->magic = magia;
@@ -251,14 +259,14 @@ Inventity* InventoryManager::CreateItem(EntityType type, int id, int ataque, int
 			}
 		}
 
-		ArmaduraInv* armadura = new ArmaduraInv();
+		/*ArmaduraInv* armadura = new ArmaduraInv();
 		armadura->id = highestId + 1;
 		armadura->type = InventityType::ARMADURA;
 		armadura->defense = defensa;
 		armadura->durability = durabilidad;
 		armadura->weight = peso;
 		armadura->icon = app->tex->Load("Assets/Textures/armaduraicon.png");
-		entity = armadura;
+		entity = armadura;*/
 	}
 
 	default:
@@ -314,22 +322,22 @@ bool InventoryManager::LoadState(pugi::xml_node node)
 		{
 
 		case InventityType::ARMADURA:
-			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_ARMADURA, 0, 0, 0, 0, 0, 0);
+			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_ARMADURA, item->data->desc, item->data->tipo);
 			break;
 		case InventityType::GARRA:
-			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_GARRA, 0, 0, 0, 0, 0, 0);
+			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_GARRA, item->data->desc, item->data->tipo);
 			break;
 		case InventityType::DIAMANTE:
-			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_DIAMANTE, 0, 0, 0, 0, 0, 0);
+			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_DIAMANTE, item->data->desc, item->data->tipo);
 			break;
 		case InventityType::OJO:
-			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_OJO, 0, 0, 0, 0, 0, 0);
+			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_OJO, item->data->desc, item->data->tipo);
 			break;
 		case InventityType::ESPADA2:
-			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_ARMADURA, 0, 0, 0, 0, 0, 0);
+			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_ARMADURA, item->data->desc, item->data->tipo);
 			break;
 		case InventityType::ITEM:
-			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_ARMADURA, 0, 0, 0, 0, 0, 0);
+			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_ARMADURA, item->data->desc, item->data->tipo);
 			break;
 		case InventityType::UNKNOWN:
 			break;
@@ -517,21 +525,21 @@ void InventoryManager::UseItemSelected(int id)
 void InventoryManager::OnMovePointer()
 {
 
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && PointerPosition.x < 143) {
-		PointerPosition.x += 100;
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && PointerPosition.x < 300) {
+		PointerPosition.x += 106;
 		PointerId += 1;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN && PointerPosition.x > -43) {
-		PointerPosition.x -= 100;
+	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN && PointerPosition.x > 176) {
+		PointerPosition.x -= 106;
 		PointerId -= 1;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && PointerPosition.y < 1) {
-		PointerPosition.y += 76;
+	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && PointerPosition.y < 200) {
+		PointerPosition.y += 103;
 		PointerId += 5;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && PointerPosition.y > -160) {
-		PointerPosition.y -= 76;
+	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && PointerPosition.y > -60) {
+		PointerPosition.y -= 103;
 		PointerId -= 5;
 	}
 }
@@ -681,7 +689,7 @@ bool InventoryManager::PostUpdate()
 		ListItem<Inventity*>* item;
 		Inventity* pEntity = NULL;
 
-		app->render->DrawTexture(EquipedItemText, equiped.x, equiped.y, 0.8,SDL_FLIP_NONE, 0, 0);
+		app->render->DrawTexture(EquipedItemText, equiped.x, equiped.y,0.8,SDL_FLIP_NONE, 0, 0);
 
 		app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y, 0.8,SDL_FLIP_NONE, 0, 0);
 		app->render->DrawTexture(SelectedItemText, selected.x, selected.y, 0.8, SDL_FLIP_NONE, 0, 0);
@@ -721,6 +729,7 @@ bool InventoryManager::PostUpdate()
 						}
 
 					}
+					
 
 				}
 				else if (pEntity->type == InventityType::DIAMANTE)
@@ -808,9 +817,27 @@ bool InventoryManager::PostUpdate()
 
 
 	}
+	if (mostrar == true)
+	{
+		ListItem<Inventity*>* itum;
+		for (itum = inventities.start; itum != nullptr; itum = itum->next)
+		{
+			if (PointerId == itum->data->id)
+			{
+				app->render->DrawText(itum->data->desc.c_str(), 680, 450, 270, 400, 0, 0, 0, 0, false);
 
+				if (itum->data->type == InventityType::OJO || itum->data->type == InventityType::GARRA)
+				{
+					app->render->DrawText(itum->data->tipo.c_str(), 680, 340, 90, 60, 0, 165, 42, 42);
+				}
+				else
+				{
+					app->render->DrawText(itum->data->tipo.c_str(), 680, 340, 90, 60, 0, 135, 206, 235);
+				}
+			}
 
-
+		}
+	}
 	return ret;
 }
 

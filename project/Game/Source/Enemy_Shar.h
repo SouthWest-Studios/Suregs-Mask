@@ -85,6 +85,9 @@ public:
 	Player* player;
 	DynArray<iPoint> lastPath;
 
+	pugi::xml_document configFile;
+	pugi::xml_node configNode;
+
 private:
 	Animation idleAnim;
 	Animation runAnim;

@@ -140,6 +140,9 @@ public:
 	float health;
 	float maxHealth;
 	float attackDamage;
+
+	std::string description;
+	std::string tipo;
 };
 
 #endif // __ENTITY_H__

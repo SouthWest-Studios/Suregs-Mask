@@ -1,4 +1,4 @@
-<!-- Config file for the game -->
+ <!-- Config file for the game -->
 <!-- L01: DONE 1: Create configuration file-->
 <config>
 	<app>
@@ -50,9 +50,9 @@
 		<osiris texturePath="Assets/Textures/Entidades/Osiris/Viking/VikingNoEffect-Sheet.png" Tsprite="60" Pwidth="1380" sprite_x="115" sprite_y="84"/>
 		<ols texturePath="Assets/Textures/Entidades/Ols/animations/spritesheets/Sprites.png" Tsprite="374" Pwidth="6336" sprite_x="288" sprite_y="128"/>
 		<shar texturePath="Assets/Textures/Entidades/Shar/Sprites.png" Tsprite="45" Pwidth="2190" sprite_x="146" sprite_y="153"/>
-		<item_garra texturePath="Assets/Textures/Entidades/Items/item_Garra.png"/>
-		<item_diamante texturePath="Assets/Textures/Entidades/Items/texture_diamond.png"/>
-		<item_ojo texturePath="Assets/Textures/Entidades/Items/texture_eye.png"/>
+		<item_garra texturePath="Assets/Textures/Entidades/Items/item_Garra.png" description="Esta es una garra muy bonita, buenos dias." type ="apendice"/>
+		<item_diamante texturePath="Assets/Textures/Entidades/Items/texture_diamond.png" description="Este diamante brilla mas que mi futuro." type ="Material"/>
+		<item_ojo texturePath="Assets/Textures/Entidades/Items/texture_eye.png" description="La leyenda dice que es un ojo." type ="apendice"/>
 		
 
 		<item x="1200" y="2600" texturePath="Assets/Textures/Entidades/Jugador/salamanda1.png" Tsprite="23" Pwidth="1000" sprite_x="100" sprite_y="160"/>
