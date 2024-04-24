@@ -14,6 +14,7 @@
 #include "Map.h"
 #include "Physics.h"
 #include <Optick/include/optick.h>
+#include "Utils.cpp"
 
 
  
@@ -46,7 +47,7 @@ bool Enemy_Osiris::Start() {
 
 	idleAnim.LoadAnim("osiris", "idleAnim", spritePositions);
 	runAnim.LoadAnim("osiris", "runAnim", spritePositions);
-	attackAnim.LoadAnim("osiris", "attackAnim", spritePositions);
+	attackAnim.LoadAnim("osiris", "attackAnim1", spritePositions);
 	dieAnim.LoadAnim("osiris", "dieAnim", spritePositions);
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
@@ -56,7 +57,11 @@ bool Enemy_Osiris::Start() {
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMY;
 
+
+	originalPosition = app->map->WorldToMap(position.x, position.y);
+
 	attackDamage = 20;
+	viewDistance = 10;
 
 	return true;
 }
@@ -77,10 +82,10 @@ bool Enemy_Osiris::Update(float dt)
 	}
 
 
-	switch (nextState)
+	switch (currentState)
 	{
 	case EntityState::RUNNING:
-		Chase(dt);
+		Chase(dt, playerPos);
 		break;
 	case EntityState::ATTACKING:
 		Attack(dt);
@@ -91,9 +96,9 @@ bool Enemy_Osiris::Update(float dt)
 	case EntityState::REVIVING:
 		Revive();
 		break;
-	case EntityState::IDLE:
+		/*case EntityState::IDLE:
 		DoNothing(dt);
-		break;
+		break;*/
 	default:
 		break;
 	}
@@ -119,7 +124,7 @@ bool Enemy_Osiris::Update(float dt)
 	}
 	else
 	{
-		nextState = EntityState::IDLE;
+		nextState = EntityState::RUNNING;
 	}
 
 	currentState = nextState;
@@ -175,11 +180,11 @@ void Enemy_Osiris::DoNothing(float dt)
 
 }
 
-void Enemy_Osiris::Chase(float dt)
+void Enemy_Osiris::Chase(float dt, iPoint playerPos)
 {
 	//printf("Osiris chasing");
 	currentAnimation = &runAnim;
-	Osirisfinding(dt);
+	Osirisfinding(dt, playerPos);
 
 }
 
@@ -262,13 +267,26 @@ void Enemy_Osiris::SetPlayer(Player* player)
 	this->player = player;
 }
 
-bool Enemy_Osiris::Osirisfinding(float dt)
+bool Enemy_Osiris::Osirisfinding(float dt, iPoint playerPosP)
 {
-	iPoint playerPos = app->map->WorldToMap(app->entityManager->GetPlayer()->position.x, app->entityManager->GetPlayer()->position.y);
+	iPoint playerPos = app->map->WorldToMap(playerPosP.x, playerPosP.y);
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
 
-	app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
-	lastPath = *app->map->pathfinding->GetLastPath();
+
+	if (dist(playerPos, enemyPos) < viewDistance) {
+		app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
+		lastPath = *app->map->pathfinding->GetLastPath();
+	}
+	else {
+		app->map->pathfinding->CreatePath(enemyPos, originalPosition); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
+		lastPath = *app->map->pathfinding->GetLastPath();
+	}
+
+
+
+
+
+	b2Vec2 velocity = b2Vec2(0, 0);
 
 	//Get the latest calculated path and draw
 	
@@ -283,10 +301,7 @@ bool Enemy_Osiris::Osirisfinding(float dt)
 		direction.Normalize();
 
 		// Calcula la velocidad del movimiento
-		b2Vec2 velocity(direction.x * speed, direction.y * speed);
-
-		// Aplica la velocidad al cuerpo del enemigo
-		pbody->body->SetLinearVelocity(velocity);
+		velocity = b2Vec2(direction.x * speed, direction.y * speed);
 
 		// Determina si el enemigo est?mirando hacia la izquierda o hacia la derecha
 		if (direction.x < 0) {
@@ -300,6 +315,10 @@ bool Enemy_Osiris::Osirisfinding(float dt)
 		attackAnim.Reset();
 
 	}
+
+	// Aplica la velocidad al cuerpo del enemigo
+	pbody->body->SetLinearVelocity(velocity);
+
 	return true;
 }
 

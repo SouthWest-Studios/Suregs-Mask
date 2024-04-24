@@ -88,7 +88,7 @@
 			
 				<fishlevel>
 					<nonthings>
-						<nonthing texturepath="Assets/Textures/Fishing/trash1.png" name = "nonthing" />
+						<nonthing texturepath="Assets/Textures/Fishing/nonthing.png" name = "nonthing" />
 					</nonthings>
 					<trashes>
 						<trash texturepath="Assets/Textures/Fishing/trash1.png" name = "trash1" />
@@ -129,6 +129,7 @@
 		<background texturepath ="Assets/Textures/Interfaz/textura_background_logos.png"/>
 	</scene_logos>
 	<scene_pueblo>
+		<pathfindingTexture pathtexture="Assets/Textures/pathfinding.png"/>
 		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Pueblo/Pueblo.tmx"/>
 	</scene_pueblo>
 
@@ -148,21 +149,21 @@
 		<osiris>
 			<idleAnim start="0" end="2" speed="0.05f" loop="true"/>
 			<runAnim start="39" end="42" speed="0.2f" loop="true"/>
-			<attackAnim start="49" end="56" speed="0.2f" loop="false"/>
+			<attackAnim1 start="49" end="56" speed="0.2f" loop="false"/>
 			<dieAnim start="13" end="24" speed="0.2f" loop="false"/>
 		</osiris>
 
 		<ols>
 			<idleAnim start="0" end="2" speed="0.05f" loop="true"/>
 			<runAnim start="23" end="33" speed="0.07f" loop="true"/>
-			<attackAnim start="49" end="56" speed="0.2f" loop="false"/>
+			<attackAnim2 start="49" end="56" speed="0.2f" loop="false"/>
 			<dieAnim start="13" end="24" speed="0.2f" loop="false"/>
 		</ols>
 
 		<shar>
 			<idleAnim start="16" end="21" speed="0.05f" loop="true"/>
 			<runAnim start="16" end="30" speed="0.2f" loop="true"/>
-			<attackAnim start="220" end="234" speed="0.2f" loop="false"/>18
+			<attackAnim3 start="220" end="234" speed="0.2f" loop="false"/>18
 			<dieAnim start="353" end="370" speed="0.2f" loop="false"/>
 		</shar>
 
@@ -217,5 +218,9 @@
 	<hud>
 		<mainTexture texturepath="Assets/Textures/Interfaz/HUD/texture_general_hud.png"/>
 	</hud>
+
+	<map>
+		<pathfindingTexture pathtexture="Assets/Textures/pathfinding.png"/>
+	</map>
 
 </config>

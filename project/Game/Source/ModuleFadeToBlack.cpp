@@ -1,7 +1,7 @@
 #include "ModuleFadeToBlack.h"
 #include "Map.h"
 #include "EntityManager.h"
-#include "Scene_Intro.h"
+#include "Scene_Logos.h"
 #include "Hud.h"
 #include "App.h"
 #include "Menu.h"
@@ -39,7 +39,7 @@ bool ModuleFadeToBlack::Start()
 
 	currentStep = Fade_Step::NONE;
 
-	activeScene = app->scene_intro;
+	activeScene = app->scene_logos;
 
 	// Enable blending mode for transparency
 	SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);

@@ -45,7 +45,7 @@ bool Enemy_Ols::Start() {
 
 	idleAnim.LoadAnim("ols", "idleAnim", spritePositions);
 	runAnim.LoadAnim("ols", "runAnim", spritePositions);
-	attackAnim.LoadAnim("ols", "attackAnim", spritePositions);
+	attackAnim.LoadAnim("ols", "attackAnim2", spritePositions);
 	dieAnim.LoadAnim("ols", "dieAnim", spritePositions);
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
