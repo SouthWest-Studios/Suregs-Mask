@@ -142,10 +142,10 @@ public:
 		AniInfo = configFile.child("config").child("animations").child(Anipart).child(NombreAni);
 
 		if (checkSDLRect(AniInfo, spritePositions)) {
-			printf("SDL_Rect数据正确！\n");
+			/*printf("SDL_RectCorrecta！\n");*/
 		}
 		else {
-			printf("SDL_Rect数据不正确！\n");
+			/*printf("SDL_RectNoCorrecta！\n");*/
 		}
 
 
@@ -175,7 +175,7 @@ public:
 	int checkSDLRect(pugi::xml_node AniInfo, SDL_Rect* rect) {
 
 		if (rect == NULL) {
-			printf("SDL_Rect指针为空！\n");
+			printf("SDL_Rect ES NULL！\n");
 			return 0;
 		}
 
@@ -187,11 +187,11 @@ public:
 				check_access = rect[i].h;
 			}
 			catch (const std::exception& e) {
-				printf("异常捕获：%s\n", e.what());
+				printf("Error：%s\n", e.what());
 				return 0;
 			}
 			catch (...) {
-				printf("未知异常捕获！\n");
+				printf("no pillo Error！\n");
 				return 0;
 			}
 		}
