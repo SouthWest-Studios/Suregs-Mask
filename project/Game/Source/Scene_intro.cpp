@@ -66,7 +66,7 @@ bool Scene_Intro::Update(float dt)
 
 	OPTICK_EVENT();
 	
-	if (timerIntro.ReadSec() < 10) {
+	if (timerIntro.ReadSec() < 5 ) {
 		app->render->DrawTexture(texturaIntro, 0, 0);
 	}
 	else {

@@ -74,7 +74,7 @@ bool Scene_Logos::Update(float dt)
 
 	OPTICK_EVENT();
 	
-	if (timerIntro.ReadSec() < 5) {
+	if (timerIntro.ReadSec() < 10) {
 
 	}
 	else {
