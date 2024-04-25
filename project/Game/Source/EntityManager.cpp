@@ -323,19 +323,18 @@ bool EntityManager::PostUpdate()
 	for (const DrawableObject& obj : objectsToDraw)
 	{
 		// Verifica si la posici�n del objeto est?dentro de los l�mites de la c�mara
-		/*if (obj.x + obj.width >= app->render->camera.x && obj.x <= app->render->camera.x + app->render->camera.w &&
-			obj.y + obj.height >= app->render->camera.y && obj.y <= app->render->camera.y + app->render->camera.h){*/
-		if (obj.isFacingLeft) {
-			app->render->DrawTexture(obj.texture, obj.x, obj.y, 0.5f, SDL_FLIP_NONE, &obj.currentFrame);
-		}
-		else if (!obj.isFacingLeft) {
-			app->render->DrawTexture(obj.texture, obj.x, obj.y, 0.5f, SDL_FLIP_HORIZONTAL, &obj.currentFrame);
-		}
-		//app->render->DrawTexture(obj.texture, obj.x, obj.y, 0.5f, SDL_FLIP_NONE, &obj.currentFrame);
-		//app->render->DrawTexture(texture, position.x - 75, position.y - 100, 0.5f, SDL_FLIP_NONE, &rect);
-//}
-		if (app->entityManager->GetPlayer() != nullptr && obj.texture != app->entityManager->GetPlayer()->texture) {
-			app->render->DrawTexture(obj.texture, obj.x, obj.y);
+		if (obj.x + obj.width >= -app->render->camera.x && obj.x <= -app->render->camera.x + app->render->camera.w &&
+			obj.y + obj.height >= -app->render->camera.y && obj.y <= -app->render->camera.y + app->render->camera.h){
+			if (obj.isFacingLeft) {
+				app->render->DrawTexture(obj.texture, obj.x, obj.y, 0.5f, SDL_FLIP_NONE, &obj.currentFrame);
+			}
+			else if (!obj.isFacingLeft) {
+				app->render->DrawTexture(obj.texture, obj.x, obj.y, 0.5f, SDL_FLIP_HORIZONTAL, &obj.currentFrame);
+			}
+		
+			if (app->entityManager->GetPlayer() != nullptr && obj.texture != app->entityManager->GetPlayer()->texture) {
+				app->render->DrawTexture(obj.texture, obj.x, obj.y);
+			}
 		}
 
 	}
