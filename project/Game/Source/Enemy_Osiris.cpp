@@ -57,10 +57,10 @@ bool Enemy_Osiris::Start() {
 	pbodyFoot->listener = this;
 	pbodyFoot->ctype = ColliderType::ENEMY;
 
-	/*pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 40, 60, bodyType::DYNAMIC);
+	pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 40, 60, bodyType::DYNAMIC);
 	pbodySensor->entity = this;
 	pbodySensor->listener = this;
-	pbodySensor->ctype = ColliderType::UNKNOWN;*/
+	pbodySensor->ctype = ColliderType::UNKNOWN;
 
 	originalPosition = app->map->WorldToMap(position.x, position.y);
 
@@ -81,8 +81,8 @@ bool Enemy_Osiris::Update(float dt)
 	OPTICK_EVENT();
 
 	//Pone el sensor del cuerpo en su posicion
-	/*b2Transform pbodyPos = pbodyFoot->body->GetTransform();
-	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);*/
+	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
+	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
 
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
 
@@ -181,7 +181,7 @@ bool Enemy_Osiris::PostUpdate() {
 bool Enemy_Osiris::CleanUp()
 {
 	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
-	//app->physics->GetWorld()->DestroyBody(pbodySensor->body);
+	app->physics->GetWorld()->DestroyBody(pbodySensor->body);
 	app->tex->UnLoad(texture);
 	lastPath.Clear();
 
@@ -229,7 +229,7 @@ void Enemy_Osiris::Die() {
 	{
 		app->entityManager->DestroyEntity(this);
 		app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
-		//app->physics->GetWorld()->DestroyBody(pbodySensor->body);
+		app->physics->GetWorld()->DestroyBody(pbodySensor->body);
 		app->tex->UnLoad(texture);
 		//CleanUp();
 	}

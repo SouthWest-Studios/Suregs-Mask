@@ -133,10 +133,10 @@ bool Player::Start() {
 	pbodyFoot->listener = this;
 	pbodyFoot->ctype = ColliderType::PLAYER;
 
-	/*pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 20, 60, bodyType::DYNAMIC);
+	pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 20, 60, bodyType::DYNAMIC);
 	pbodySensor->entity = this;
 	pbodySensor->listener = this;
-	pbodySensor->ctype = ColliderType::UNKNOWN;*/
+	pbodySensor->ctype = ColliderType::UNKNOWN;
 
 	//initialize audio effect
 	run_fx = app->audio->LoadAudioFx("runAlt_fx");
@@ -156,8 +156,8 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
-	/*b2Transform pbodyPos = pbodyFoot->body->GetTransform();
-	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);*/
+	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
+	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
 
 
 
@@ -246,7 +246,7 @@ bool Player::CleanUp()
 {
 	app->entityManager->DestroyEntity(pbodyFoot->entity);
 	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
-	//app->physics->GetWorld()->DestroyBody(pbodySensor->body);
+	app->physics->GetWorld()->DestroyBody(pbodySensor->body);
 	/*app->tex->UnLoad(texture);*/
 	app->tex->UnLoad(texture);
 
