@@ -141,12 +141,12 @@ public:
 		pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
 		AniInfo = configFile.child("config").child("animations").child(Anipart).child(NombreAni);
 
-		if (checkSDLRect(AniInfo, spritePositions)) {
-			/*printf("SDL_RectCorrecta£¡\n");*/
-		}
-		else {
-			/*printf("SDL_RectNoCorrecta£¡\n");*/
-		}
+		//if (checkSDLRect(AniInfo, spritePositions)) {
+		//	/*printf("SDL_RectCorrecta£¡\n");*/
+		//}
+		//else {
+		//	/*printf("SDL_RectNoCorrecta£¡\n");*/
+		//}
 
 
 		/*for (int i = AniInfo.attribute("start").as_int(); i < AniInfo.attribute("end").as_int(); i++)

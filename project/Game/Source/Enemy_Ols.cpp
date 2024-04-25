@@ -43,10 +43,10 @@ bool Enemy_Ols::Start() {
 	Photowidth = config.attribute("Pwidth").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
-	idleAnim.LoadAnim("ols", "idleAnim", spritePositions);
-	runAnim.LoadAnim("ols", "runAnim", spritePositions);
-	attackAnim.LoadAnim("ols", "attackAnim2", spritePositions);
-	dieAnim.LoadAnim("ols", "dieAnim", spritePositions);
+	idleAnim.LoadAnim("ols", "idleAnim_ols", spritePositions);
+	runAnim.LoadAnim("ols", "runAnim_ols", spritePositions);
+	attackAnim.LoadAnim("ols", "attackAnim_ols", spritePositions);
+	dieAnim.LoadAnim("ols", "dieAnim_ols", spritePositions);
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 

@@ -44,10 +44,10 @@ bool Enemy_Shar::Start() {
 	Photowidth = config.attribute("Pwidth").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
-	idleAnim.LoadAnim("osiris", "idleAnim", spritePositions);
-	runAnim.LoadAnim("osiris", "runAnim", spritePositions);
-	attackAnim.LoadAnim("osiris", "attackAnim3", spritePositions);
-	dieAnim.LoadAnim("osiris", "dieAnim", spritePositions);
+	idleAnim.LoadAnim("osiris", "idleAnim_osiris", spritePositions);
+	runAnim.LoadAnim("osiris", "runAnim_osiris", spritePositions);
+	attackAnim.LoadAnim("osiris", "attackAnim_osiris", spritePositions);
+	dieAnim.LoadAnim("osiris", "dieAnim_osiris", spritePositions);
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 

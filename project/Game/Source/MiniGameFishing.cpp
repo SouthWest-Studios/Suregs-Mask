@@ -124,7 +124,13 @@ bool MiniGameFishing::PostUpdate()
 
 bool MiniGameFishing::CleanUp()
 {
-	app->tex->UnLoad(texture);
+	if (floatbody != nullptr) {
+		floatbody->body->GetWorld()->DestroyBody(floatbody->body);
+		floatbody = nullptr;
+	}
+	app->tex->UnLoad(fishingfloat_texture);
+	SDL_DestroyTexture(fishingfloat_texture);
+	
 	return true;
 }
 
@@ -669,7 +675,7 @@ bool MiniGameFishing::miniGameLoop(float dt)
 
 
 	//Cast the rod and StartFishing
-	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && fishing.rodReady) {
 		fishing.isFishing = !fishing.isFishing;//Start fishing o Stop fishing
 		
 		/*if (fishing.isFishing == true && fishing.startFishing == false) {
