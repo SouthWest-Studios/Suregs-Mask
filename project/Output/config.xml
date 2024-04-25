@@ -41,6 +41,22 @@
       <runAlt_fx path="Assets/Audio/Fx/runAlt_fx.wav"/>
       <runAlt2_fx path="Assets/Audio/Fx/runAlt2_fx.wav"/>
       <dash_fx path="Assets/Audio/Fx/dash_fx.wav"/>
+      <basic_attack_fx path=""/>
+      <mask_ability_fx path=""/>
+      <switch_masks_fx path=""/>
+      <use_potion_fx path=""/>
+      <switch_potion_fx path=""/>
+      <player_death_fx path=""/>
+      <get_item_fx path=""/>
+      <sell_item_fx path=""/>
+      <buy_item_fx path=""/>
+      <fishing_fx path=""/>
+      <ols_attack_fx path=""/>
+      <ols_death_fx path=""/>
+      <osiris_attack_fx path=""/>
+      <osiris_death_fx path=""/>
+      <shar_attack_fx path=""/>
+      <shar_death_fx path=""/>
 		</fx>
 	</sounds>
 	<entities_data>
