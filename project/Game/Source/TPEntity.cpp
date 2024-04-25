@@ -69,7 +69,7 @@ void TPEntity::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 			
 
-			app->entityManager->GetPlayer()->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(targetPos.x),PIXEL_TO_METERS(targetPos.y)), 0);
+			app->entityManager->GetPlayer()->pbodyFoot->body->SetTransform(b2Vec2(PIXEL_TO_METERS(targetPos.x),PIXEL_TO_METERS(targetPos.y)), 0);
 			break;
 	}
 }

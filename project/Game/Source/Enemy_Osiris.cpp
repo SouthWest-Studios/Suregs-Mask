@@ -45,18 +45,22 @@ bool Enemy_Osiris::Start() {
 	Photowidth = config.attribute("Pwidth").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
-	idleAnim.LoadAnim("osiris", "idleAnim_osiris", spritePositions);
-	runAnim.LoadAnim("osiris", "runAnim_osiris", spritePositions);
-	attackAnim.LoadAnim("osiris", "attackAnim_osiris", spritePositions);
-	dieAnim.LoadAnim("osiris", "dieAnim_osiris", spritePositions);
+	idleAnim.LoadAnim("osiris", "idleAnim", spritePositions);
+	runAnim.LoadAnim("osiris", "runAnim", spritePositions);
+	attackAnim.LoadAnim("osiris", "attackAnim", spritePositions);
+	dieAnim.LoadAnim("osiris", "dieAnim", spritePositions);
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
-	pbody = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
-	pbody->entity = this;
-	pbody->listener = this;
-	pbody->ctype = ColliderType::ENEMY;
+	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
+	pbodyFoot->entity = this;
+	pbodyFoot->listener = this;
+	pbodyFoot->ctype = ColliderType::ENEMY;
 
+	/*pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 40, 60, bodyType::DYNAMIC);
+	pbodySensor->entity = this;
+	pbodySensor->listener = this;
+	pbodySensor->ctype = ColliderType::UNKNOWN;*/
 
 	originalPosition = app->map->WorldToMap(position.x, position.y);
 
@@ -76,19 +80,12 @@ bool Enemy_Osiris::Update(float dt)
 {
 	OPTICK_EVENT();
 
+	//Pone el sensor del cuerpo en su posicion
+	/*b2Transform pbodyPos = pbodyFoot->body->GetTransform();
+	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);*/
+
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
 
-	if (playerPos.x < position.x)
-	{
-		isFacingLeft = true;
-	}
-	else
-	{
-		isFacingLeft = false;
-	}
-
-
-	
 
 	if (health <= 0)
 	{
@@ -155,10 +152,10 @@ bool Enemy_Osiris::PostUpdate() {
 
 
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 50, position.y - 25, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x - 25, position.y - 65, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 50, position.y - 25, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 40, position.y - 65, SDL_FLIP_NONE, &rect);
 	}
 
 
@@ -174,7 +171,7 @@ bool Enemy_Osiris::PostUpdate() {
 		}
 	}
 
-	b2Transform pbodyPos = pbody->body->GetTransform();
+	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
 	return true;
@@ -183,8 +180,10 @@ bool Enemy_Osiris::PostUpdate() {
 
 bool Enemy_Osiris::CleanUp()
 {
-	app->physics->GetWorld()->DestroyBody(pbody->body);
+	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
+	//app->physics->GetWorld()->DestroyBody(pbodySensor->body);
 	app->tex->UnLoad(texture);
+	lastPath.Clear();
 
 	RELEASE(spritePositions);
 	delete spritePositions;
@@ -196,7 +195,7 @@ void Enemy_Osiris::DoNothing(float dt)
 {
 	currentAnimation = &idleAnim;
 	//printf("Osiris idle");
-	pbody->body->SetLinearVelocity(b2Vec2_zero);
+	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 
 }
 
@@ -212,13 +211,14 @@ void Enemy_Osiris::Attack(float dt)
 {
 	//printf("Osiris attacking");
 	currentAnimation = &attackAnim;	
-	pbody->body->SetLinearVelocity(b2Vec2_zero); //No se mueve mientras ataca
+	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero); //No se mueve mientras ataca
 	LOG("Esta atacando");
 	//sonido ataque
 }
 
 void Enemy_Osiris::Die() {
-	pbody->body->SetLinearVelocity(b2Vec2_zero);
+	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
+	currentAnimation = &dieAnim;
 
 	if (!hasRevived)
 	{
@@ -228,15 +228,17 @@ void Enemy_Osiris::Die() {
 	else
 	{
 		app->entityManager->DestroyEntity(this);
-		app->physics->GetWorld()->DestroyBody(pbody->body);
+		app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
+		//app->physics->GetWorld()->DestroyBody(pbodySensor->body);
 		app->tex->UnLoad(texture);
+		//CleanUp();
 	}
 
 }
 
 void Enemy_Osiris::Revive()
 {
-	pbody->body->SetLinearVelocity(b2Vec2_zero);
+	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	printf("Inside Revive function\n");
 
 	if (!tempo)
@@ -322,12 +324,8 @@ bool Enemy_Osiris::Osirisfinding(float dt, iPoint playerPosP)
 		velocity = b2Vec2(direction.x * speed, direction.y * speed);
 
 		// Determina si el enemigo est?mirando hacia la izquierda o hacia la derecha
-		if (direction.x < 0) {
-			isFacingLeft = true;
-		}
-		else {
-			isFacingLeft = false;
-		}
+		isFacingLeft = (direction.x >= 0);
+		
 
 		isAttacking = false;
 		attackAnim.Reset();
@@ -338,7 +336,7 @@ bool Enemy_Osiris::Osirisfinding(float dt, iPoint playerPosP)
 	}
 
 	// Aplica la velocidad al cuerpo del enemigo
-	pbody->body->SetLinearVelocity(velocity);
+	pbodyFoot->body->SetLinearVelocity(velocity);
 
 	return true;
 }

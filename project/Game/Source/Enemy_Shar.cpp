@@ -51,10 +51,10 @@ bool Enemy_Shar::Start() {
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
-	pbody = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
-	pbody->entity = this;
-	pbody->listener = this;
-	pbody->ctype = ColliderType::ENEMY;
+	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
+	pbodyFoot->entity = this;
+	pbodyFoot->listener = this;
+	pbodyFoot->ctype = ColliderType::ENEMY;
 
 	attackDamage = 30;
 
@@ -124,7 +124,7 @@ bool Enemy_Shar::PostUpdate() {
 		app->render->DrawTexture(texture, position.x - 40, position.y - 100, SDL_FLIP_NONE, &rect);
 	}
 
-	b2Transform pbodyPos = pbody->body->GetTransform();
+	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
 
@@ -143,8 +143,8 @@ bool Enemy_Shar::PostUpdate() {
 
 bool Enemy_Shar::CleanUp()
 {
-	app->entityManager->DestroyEntity(pbody->entity);
-	app->physics->DestroyBody(pbody);
+	app->entityManager->DestroyEntity(pbodyFoot->entity);
+	app->physics->DestroyBody(pbodyFoot);
 	app->tex->UnLoad(texture);
 
 	RELEASE(spritePositions);
@@ -157,7 +157,7 @@ void Enemy_Shar::DoNothing(float dt)
 {
 	currentAnimation = &idleAnim;
 	//printf("Osiris idle");
-	pbody->body->SetLinearVelocity(b2Vec2_zero);
+	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 }
 
 void Enemy_Shar::Chase(float dt)
@@ -187,7 +187,7 @@ void Enemy_Shar::Die(float dt) {
 	ojo->Start();
 
 	app->entityManager->DestroyEntity(this);
-	app->physics->GetWorld()->DestroyBody(pbody->body);
+	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 	app->tex->UnLoad(texture);
 }
 
@@ -237,7 +237,7 @@ bool Enemy_Shar::Sharfinding(float dt)
 	if (lastPath.Count() > 1) { // Asegate de que haya al menos una posicion en el camino
 
 		if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) > 400) {
-			pbody->body->SetLinearVelocity(b2Vec2_zero);
+			pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 		}
 
 		// Toma la primera posicion del camino como el objetivo al que el enemigo debe dirigirse
@@ -251,7 +251,7 @@ bool Enemy_Shar::Sharfinding(float dt)
 		b2Vec2 velocity(direction.x * speed, direction.y * speed);
 
 		// Aplica la velocidad al cuerpo del enemigo
-		pbody->body->SetLinearVelocity(velocity);
+		pbodyFoot->body->SetLinearVelocity(velocity);
 
 		// Determina si el enemigo est?mirando hacia la izquierda o hacia la derecha
 		if (direction.x < 0) {

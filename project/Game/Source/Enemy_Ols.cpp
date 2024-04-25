@@ -50,10 +50,10 @@ bool Enemy_Ols::Start() {
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
-	pbody = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
-	pbody->entity = this;
-	pbody->listener = this;
-	pbody->ctype = ColliderType::ENEMY;
+	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
+	pbodyFoot->entity = this;
+	pbodyFoot->listener = this;
+	pbodyFoot->ctype = ColliderType::ENEMY;
 
 	attackDamage = 10;
 
@@ -125,7 +125,7 @@ bool Enemy_Ols::PostUpdate() {
 		app->render->DrawTexture(texture, position.x - 120, position.y - 60, SDL_FLIP_NONE, &rect);
 	}
 
-	b2Transform pbodyPos = pbody->body->GetTransform();
+	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
 	return true;
@@ -134,8 +134,8 @@ bool Enemy_Ols::PostUpdate() {
 
 bool Enemy_Ols::CleanUp()
 {
-	app->entityManager->DestroyEntity(pbody->entity);
-	app->physics->DestroyBody(pbody);
+	app->entityManager->DestroyEntity(pbodyFoot->entity);
+	app->physics->DestroyBody(pbodyFoot);
 	app->tex->UnLoad(texture);
 
 	RELEASE(spritePositions);
@@ -148,7 +148,7 @@ void Enemy_Ols::DoNothing(float dt)
 {
 	currentAnimation = &idleAnim;
 	//printf("Osiris idle");
-	pbody->body->SetLinearVelocity(b2Vec2_zero);
+	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 }
 
 void Enemy_Ols::Chase(float dt)
@@ -178,7 +178,7 @@ void Enemy_Ols::Die(float dt) {
 	garra->Start();
 
 	app->entityManager->DestroyEntity(this);
-	app->physics->GetWorld()->DestroyBody(pbody->body);
+	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 	app->tex->UnLoad(texture);
 }
 
@@ -240,7 +240,7 @@ bool Enemy_Ols::Olsfinding(float dt)
 			b2Vec2 velocity(direction.x * speed, direction.y * speed);
 
 			// Aplica la velocidad al cuerpo del enemigo
-			pbody->body->SetLinearVelocity(velocity);
+			pbodyFoot->body->SetLinearVelocity(velocity);
 
 			// Determina si el enemigo est?mirando hacia la izquierda o hacia la derecha
 			if (direction.x < 0) {
