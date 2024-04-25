@@ -128,10 +128,15 @@ bool Player::Start() {
 		isFacingLeft
 	});
 
-	pbody = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
-	pbody->entity = this;
-	pbody->listener = this;
-	pbody->ctype = ColliderType::PLAYER;
+	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
+	pbodyFoot->entity = this;
+	pbodyFoot->listener = this;
+	pbodyFoot->ctype = ColliderType::PLAYER;
+
+	/*pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 20, 60, bodyType::DYNAMIC);
+	pbodySensor->entity = this;
+	pbodySensor->listener = this;
+	pbodySensor->ctype = ColliderType::UNKNOWN;*/
 
 	//initialize audio effect
 	run_fx = app->audio->LoadAudioFx("runAlt_fx");
@@ -151,6 +156,11 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
+	/*b2Transform pbodyPos = pbodyFoot->body->GetTransform();
+	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);*/
+
+
+
 	if (!inAnimation) {
 		nextState = EntityState::IDLE;
 	}
@@ -158,7 +168,7 @@ bool Player::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
 		godmode = !godmode;
-		pbody->body->GetFixtureList()[0].SetSensor(godmode);
+		pbodyFoot->body->GetFixtureList()[0].SetSensor(godmode);
 	}
 
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "dashiAnim") {
@@ -234,8 +244,9 @@ bool Player::PostUpdate() {
 
 bool Player::CleanUp()
 {
-	app->entityManager->DestroyEntity(pbody->entity);
-	app->physics->GetWorld()->DestroyBody(pbody->body);
+	app->entityManager->DestroyEntity(pbodyFoot->entity);
+	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
+	//app->physics->GetWorld()->DestroyBody(pbodySensor->body);
 	/*app->tex->UnLoad(texture);*/
 	app->tex->UnLoad(texture);
 
@@ -439,7 +450,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			}
 			//collisionMask1Timer.Start();
 		}
-		if (physA == pbody) {
+		if (physA == pbodyFoot) {
 			//TakeDamage(physB->entity->attackDamage);
 			if (!godmode) {
 				TakeDamage(10);
@@ -561,7 +572,7 @@ void Player::GodMode(float dt)
 
 
 	b2Vec2 velocity = b2Vec2(0, 0);
-	pbody->body->SetLinearVelocity(velocity);
+	pbodyFoot->body->SetLinearVelocity(velocity);
 
 	//Moverse a la izquierda
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
@@ -586,8 +597,8 @@ void Player::GodMode(float dt)
 		nextState = EntityState::RUNNING;
 		isFacingLeft = false;
 	}
-	pbody->body->SetLinearVelocity(velocity);
-	b2Transform pbodyPos = pbody->body->GetTransform();
+	pbodyFoot->body->SetLinearVelocity(velocity);
+	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2;
 
@@ -636,7 +647,7 @@ void Player::PlayerMovement(float dt)
 		inAnimation = true;
 		timerDash.Start();
 		nextState = EntityState::DASHI;
-		pbody->body->ApplyForce(b2Vec2(velocity.x * 100, velocity.y * 100), pbody->body->GetWorldCenter(), false);
+		pbodyFoot->body->ApplyForce(b2Vec2(velocity.x * 100, velocity.y * 100), pbodyFoot->body->GetWorldCenter(), false);
 
 		app->audio->StopFx(-1);
 		app->audio->PlayFx(dash_fx);
@@ -644,7 +655,7 @@ void Player::PlayerMovement(float dt)
 
 	if (!(timerDash.ReadMSec() < speed * 1000 && isDashing)) {
 		isDashing = false;
-		pbody->body->SetLinearVelocity(velocity);
+		pbodyFoot->body->SetLinearVelocity(velocity);
 	}
 
 	//Si pulsas J para atacar
@@ -708,7 +719,7 @@ void Player::PlayerMovement(float dt)
 	}
 
 
-	b2Transform pbodyPos = pbody->body->GetTransform();
+	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2;
 }
@@ -781,8 +792,8 @@ void Player::TakeDamage(float damage) {
 //	printf("\nlerp: %d", rodar_PlayerPosition);
 //	velocity.x = rodar_PlayerPosition;
 //
-//	pbody->body->SetLinearVelocity(velocity);
-//	b2Transform pbodyPos = pbody->body->GetTransform();
+//	pbodyFoot->body->SetLinearVelocity(velocity);
+//	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 //	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2;
 //	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2;
 //}
