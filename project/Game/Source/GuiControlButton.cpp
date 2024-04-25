@@ -62,17 +62,20 @@ bool GuiControlButton::PostUpdate()
 			app->render->DrawRectangle(bounds, 200, 200, 200, 255, true, false);
 			break;
 		case GuiControlState::NORMAL:
-			app->render->DrawRectangle(bounds, 0, 0, 255, 255, true, false);
+			
+			app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h, app->render->buttonFont, 25, 0 , 70);
 			break;
 		case GuiControlState::FOCUSED:
-			app->render->DrawRectangle(bounds, 0, 0, 20, 255, true, false);
+			
+			app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h, app->render->buttonFont, 204, 204, 255);
 			break;
 		case GuiControlState::PRESSED:
-			app->render->DrawRectangle(bounds, 0, 255, 0, 255, true, false);
+			
+			app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h, app->render->buttonFont, 25, 0, 70);
 			break;
 		}
 
-		app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h,app->render->buttonFont);
+		
 
 	}
 	
