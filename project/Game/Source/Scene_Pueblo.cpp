@@ -61,8 +61,8 @@ bool Scene_Pueblo::Start()
 	app->win->GetWindowSize(windowW, windowH);
 
 
-	fishing = (MiniGameFishing*)app->entityManager->CreateEntity(EntityType::ROD);
-	fishing->parameters = config.child("minigamefishing");
+	/*fishing = (MiniGameFishing*)app->entityManager->CreateEntity(EntityType::ROD);
+	fishing->parameters = config.child("minigamefishing");*/
 
 	// Texture to highligh mouse position 
 	//mouseTileTex = app->tex->Load("Assets/Mapas/tileSelection.png");
