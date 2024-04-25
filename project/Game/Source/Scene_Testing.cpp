@@ -78,8 +78,8 @@ bool Scene_testing::Start()
 		fishing = (MiniGameFishing*)app->entityManager->CreateEntity(EntityType::ROD);
 		fishing->parameters = itemNode;
 	}*/
-	fishing = (MiniGameFishing*)app->entityManager->CreateEntity(EntityType::ROD);
-	fishing->parameters = config.child("minigamefishing");
+	/*fishing = (MiniGameFishing*)app->entityManager->CreateEntity(EntityType::ROD);
+	fishing->parameters = config.child("minigamefishing");*/
 
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	img = app->tex->Load("Assets/Textures/test.png");
@@ -191,16 +191,16 @@ bool Scene_testing::PostUpdate()
 bool Scene_testing::CleanUp()
 {
 	LOG("Freeing Scene_testing");
-	delete fishing;
+	//delete fishing;
 	return true;
 }
 
 
 
-MiniGameFishing* Scene_testing::GetRod()
-{
-	return fishing;
-}
+//MiniGameFishing* Scene_testing::GetRod()
+//{
+//	return fishing;
+//}
 
 bool Scene_testing::OnGuiMouseClickEvent(GuiControl* control)
 {

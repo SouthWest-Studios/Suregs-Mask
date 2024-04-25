@@ -43,10 +43,10 @@ public:
 	// Handles multiple Gui Event methods
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
-	MiniGameFishing* GetRod();
+	//MiniGameFishing* GetRod();
 
 public:
-	MiniGameFishing* fishing = new MiniGameFishing;
+	//MiniGameFishing* fishing = new MiniGameFishing;
 	SDL_Texture* mouseTileTex = nullptr;
 private:
 	SDL_Texture* img;

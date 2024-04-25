@@ -128,15 +128,15 @@ void DialogManager::AutoNextDiagolo(int autoNextTime)
 
 	if (isPlaying) {
 		if ((int)autoNextTime_show == 0) {
-			if (app->scene_testing->GetRod()->fishingEndCloseDialogo == true) {
+			/*if (app->scene_testing->GetRod()->fishingEndCloseDialogo == true) {
 				app->scene_testing->GetRod()->isEnd = true;
-			}
+			}*/
 			if (app->scene_pueblo->GetRod()->fishingEndCloseDialogo == true) {
 				app->scene_pueblo->GetRod()->isEnd = true;
 			}
 			indexText = 1;
 			dialogues.Del(dialogues.At(0));
-			app->scene_testing->GetRod()->dialogoautoclose = false;
+			//app->scene_testing->GetRod()->dialogoautoclose = false;
 			app->scene_pueblo->GetRod()->dialogoautoclose = false;
 		}
 	}
