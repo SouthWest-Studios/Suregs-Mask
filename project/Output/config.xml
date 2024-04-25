@@ -136,7 +136,7 @@
 	</scene_testing>
 
 	<scene_menu>
-		<menuMain texturepath ="Assets/Textures/Interfaz/MenuIntro.png"/>
+		<menuMain texturepath ="Assets/Textures/Interfaz/textura_menu_background.png"/>
 		<menuMain2 texturepath ="Assets/Textures/Interfaz/textura_menu2.png"/>
 		<settings texturepath ="Assets/Textures/Interfaz/textura_background_settings.png"/>
 		<credits texturepath ="Assets/Textures/Interfaz/textura_creditos.png"/>

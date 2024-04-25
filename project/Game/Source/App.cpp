@@ -49,9 +49,9 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	physics = new Physics(this);
 	fadeToBlack = new ModuleFadeToBlack(this);
 
-	scene_logos = new Scene_Logos(this, true);
+	scene_logos = new Scene_Logos(this, false);
 	scene_intro = new Scene_Intro(this, false);
-	scene_menu = new Scene_Menu(this, false);
+	scene_menu = new Scene_Menu(this, true);
 	scene_testing = new Scene_testing(this, false);
 	scene_pueblo = new Scene_Pueblo(this, false);
 	scene_mazmorra0 = new Scene_Mazmorra0(this, false);

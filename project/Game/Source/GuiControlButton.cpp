@@ -2,9 +2,12 @@
 #include "Render.h"
 #include "App.h"
 #include "Audio.h"
+#include "Textures.h"
+#include "Log.h"
 
 GuiControlButton::GuiControlButton(uint32 id, SDL_Rect bounds, const char* text) : GuiControl(GuiControlType::BUTTON, id)
 {
+	
 	this->bounds = bounds;
 	this->text = text;
 
@@ -16,7 +19,17 @@ GuiControlButton::GuiControlButton(uint32 id, SDL_Rect bounds, const char* text)
 
 GuiControlButton::~GuiControlButton()
 {
+	button = app->tex->Load("Assets/Textures/Interfaz/textura_boton.png");
 
+}
+
+bool GuiControlButton::Start()
+{
+	if (button == nullptr) {
+		LOG("Error con las texturas de los botones");
+		return false;
+	}
+	return false;
 }
 
 bool GuiControlButton::Update(float dt)
@@ -62,7 +75,6 @@ bool GuiControlButton::PostUpdate()
 			app->render->DrawRectangle(bounds, 200, 200, 200, 255, true, false);
 			break;
 		case GuiControlState::NORMAL:
-			
 			app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h, app->render->buttonFont, 25, 0 , 70);
 			break;
 		case GuiControlState::FOCUSED:
