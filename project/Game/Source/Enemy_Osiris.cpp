@@ -64,7 +64,10 @@ bool Enemy_Osiris::Start() {
 	health = maxHealth;
 	speed = config.attribute("speed").as_float();
 	attackDamage = config.attribute("attackDamage").as_float();
+	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();
+
+	
 
 	return true;
 }
@@ -89,20 +92,13 @@ bool Enemy_Osiris::Update(float dt)
 
 	if (health <= 0)
 	{
-		if (nextState == EntityState::DEAD)
-		{
-			nextState = EntityState::REVIVING;
-		}
-		else
-		{
-			nextState = EntityState::DEAD;
-		}
+		nextState = EntityState::DEAD;
 	}
-	else if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 20)
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance*32)
 	{
 		nextState = EntityState::ATTACKING;
 	}
-	else if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 400)
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance*32)
 	{
 		nextState = EntityState::RUNNING;
 	}
@@ -147,12 +143,28 @@ bool Enemy_Osiris::PostUpdate() {
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
 
+	if (timerRecibirDañoColor.ReadMSec() <= 100) {
+		float alpha = (100 - timerRecibirDañoColor.ReadMSec()) / 100;
+		SDL_SetTextureAlphaMod(texture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
+
+	}
+	else {
+		SDL_SetTextureAlphaMod(texture, 255);
+	}
+
+
+
 	if (isFacingLeft) {
 		app->render->DrawTexture(texture, position.x - 50, position.y - 25, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
 		app->render->DrawTexture(texture, position.x - 50, position.y - 25, SDL_FLIP_NONE, &rect);
 	}
+
+
+	//Efecto daño
+	
+
 
 	for (uint i = 0; i < lastPath.Count(); ++i)
 	{
@@ -199,7 +211,9 @@ void Enemy_Osiris::Chase(float dt, iPoint playerPos)
 void Enemy_Osiris::Attack(float dt)
 {
 	//printf("Osiris attacking");
-	currentAnimation = &attackAnim;		
+	currentAnimation = &attackAnim;	
+	pbody->body->SetLinearVelocity(b2Vec2_zero); //No se mueve mientras ataca
+	LOG("Esta atacando");
 	//sonido ataque
 }
 
@@ -229,6 +243,7 @@ void Enemy_Osiris::Revive()
 	{
 		reviveTimer.Start();
 		tempo = true;
+		isReviving = true;
 	}
 
 	if (reviveTimer.CountDown(4) <= 0)
@@ -237,7 +252,7 @@ void Enemy_Osiris::Revive()
 
 		health = maxHealth;
 		hasRevived = true;
-
+		isReviving = false;
 		currentState = EntityState::IDLE;
 		nextState = EntityState::IDLE;
 
@@ -335,7 +350,15 @@ float Enemy_Osiris::GetHealth() const {
 void Enemy_Osiris::TakeDamage(float damage) {
 	if (currentState != EntityState::DEAD) {
 		health -= damage;
+		timerRecibirDañoColor.Start();
+
 		printf("Enemy_Osiris has received  %f damage\n", damage);
+		if (currentState == EntityState::REVIVING) {
+			if (!hasRevived) {
+				hasRevived = true;
+			}
+		}
+		
 	}
 }
 

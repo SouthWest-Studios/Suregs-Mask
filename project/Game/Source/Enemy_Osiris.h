@@ -69,31 +69,11 @@ public:
 	float attackDamage;
 
 	float viewDistance;
+	float attackDistance;
 
 	//Revivir
-	bool isDead = false;
-	bool hasRevived = false;
-	bool tempo = false;
-	Timer reviveTimer;
-	const float reviveTime = 5.0f;
 
-	Animation* currentAnimation = nullptr;
-	EntityState state;
-
-
-	Animation SPosition;
-	SDL_Rect* spritePositions;
-
-	int TSprite;
-	int SpriteX;
-	int SpriteY;
-	int Photowidth;
-
-	int currentPosX;
-
-	PathFinding* path;
-	Player* player;
-	DynArray<iPoint> lastPath;
+	
 
 private:
 	Animation idleAnim;
@@ -104,6 +84,35 @@ private:
 	bool isFacingLeft = false;
 
 	iPoint originalPosition;
+
+	bool isDead = false;
+	bool isReviving = false;
+	bool hasRevived = false;
+	bool tempo = false;
+	Timer reviveTimer;
+
+	const float reviveTime = 5.0f;
+
+	int TSprite;
+	int SpriteX;
+	int SpriteY;
+	int Photowidth;
+
+	int currentPosX;
+
+	PathFinding* path;
+	DynArray<iPoint> lastPath;
+
+	Animation* currentAnimation = nullptr;
+	EntityState state;
+
+
+	Animation SPosition;
+	SDL_Rect* spritePositions;
+
+	Timer timerRecibirDañoColor;
+	
+
 
 public:
 
