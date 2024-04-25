@@ -69,14 +69,14 @@ bool Scene_Menu::Start()
 	//A�adir los controles a una lista 
 	/*SDL_Rect TitlePos = { 75, 403,	136,46 };
 	NuevaPartida = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "NUEVA PARTIDA", TitlePos, this, { 0,0,0,0 });*/
-	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "NUEVA PARTIDA", SDL_Rect{ 75, 403,	136,46 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "NUEVA PARTIDA", SDL_Rect{ 533, 360,	136,25 }, this));
 	/*controlsScene.end->data->selected = true;*/
 	/*SDL_Rect TitlePos2 = { 75,457,136,46 };
 	Continuar = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "CONTINUAR", TitlePos2, this, { 0,0,0,0 });*/
-	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "CONTINUAR", SDL_Rect{ 75,457,136,46 }, this));
-	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "AJUSTES", SDL_Rect{ 75, 512,136,46 }, this));
-	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "CR�DITOS", SDL_Rect{75, 565,136,46 }, this));
-	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "SALIR", SDL_Rect{75, 622,136,46 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "CONTINUAR", SDL_Rect{ 545,390,100,25 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "AJUSTES", SDL_Rect{ 553, 420,80,25 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "CREDITOS", SDL_Rect{ 550, 450,90,25 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "SALIR", SDL_Rect{ 560, 480,60,25 }, this));
 
 
 	app->audio->LoadAudioMusic("menu", 10.0f);
@@ -117,8 +117,7 @@ bool Scene_Menu::Update(float dt)
 	if (showSettings == false)
 	{
 		app->render->DrawTexture(menuMain, 0, 0);
-		app->render->DrawTexture(menuMain2, 550, 0);
-		app->render->DrawTexture(logo, 130, 100);
+		app->render->DrawTexture(logo, 500, 100);
 	}
 	
 	/*if (showSettings && !_showSettings) {
