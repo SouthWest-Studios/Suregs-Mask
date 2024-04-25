@@ -153,7 +153,7 @@ public:
 	int attackWidth = 50; 
     int attackHeight = 50;
 	bool isAttacking = false;
-	bool attackDealed = false;
+	bool basicAttackDealed = false;
 	PhysBody* attackSensor = nullptr;
 
 	Timer collisionAttackTimer;
@@ -169,6 +169,9 @@ public:
 	PhysBody* mask1AttackSensor = nullptr;
 	int attackMask1Width = 300;  
     int attackMask1Height = 300; 
+	
+	bool mask1AttackDealed = false;
+	bool mask1PassiveAttackDealed = false;
 
 	Timer collisionMask1Timer;
 

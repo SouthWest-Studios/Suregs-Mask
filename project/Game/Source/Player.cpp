@@ -430,24 +430,24 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::ENEMY:
 		if (physA == attackSensor) {
 			LOG("Collision ENEMY");
-			if (physB->entity != nullptr && attackDealed == false) {
+			if (physB->entity != nullptr && basicAttackDealed == false) {
 				physB->entity->TakeDamage(currentStats.attackDamage);
-				attackDealed = true;
+				basicAttackDealed = true;
 			}
 			//collisionAttackTimer.Start();
 		}
 		if (physA == mask1PassiveSensor) {
 			LOG("Collision ENEMY");
-			if (physB->entity != nullptr && attackDealed == false) {
+			if (physB->entity != nullptr && mask1PassiveAttackDealed == false) {
 				physB->entity->TakeDamage(currentStats.attackDamage * passiveStats[static_cast<int>(secondaryMask)].damageBoost);
-				attackDealed = true;
+				mask1PassiveAttackDealed = true;
 			}
 		}
 		if (physA == mask1AttackSensor) {
 			LOG("Collision ENEMY");
-			if (physB->entity != nullptr && attackDealed == false) {
+			if (physB->entity != nullptr && mask1PassiveAttackDealed == false) {
 				physB->entity->TakeDamage(maskStats[static_cast<int>(primaryMask)].maskDamage);
-				attackDealed = true;
+				mask1PassiveAttackDealed = true;
 			}
 			//collisionMask1Timer.Start();
 		}
@@ -641,7 +641,7 @@ void Player::PlayerMovement(float dt)
 
 	if (!(timerAttack.ReadMSec() < cdTimerAttackMS && isAttacking)) {
 		isAttacking = false;
-		attackDealed = false;
+		basicAttackDealed = false;
 		if (attackSensor) {
 			app->physics->DestroyBody(attackSensor);
 			attackSensor = nullptr;
@@ -675,7 +675,7 @@ void Player::PlayerMovement(float dt)
 
 	if (!(timerMaskAttack.ReadMSec() < maskStats[static_cast<int>(primaryMask)].maskCoolDown && isAttackingMask)) {
 		isAttackingMask = false;
-		attackDealed = false;
+		mask1PassiveAttackDealed = false;
 		if (mask1AttackSensor) {
 			app->physics->DestroyBody(mask1AttackSensor);
 			mask1AttackSensor = nullptr;
