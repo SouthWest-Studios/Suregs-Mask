@@ -82,26 +82,7 @@ bool Enemy_Osiris::Update(float dt)
 	}
 
 
-	switch (currentState)
-	{
-	case EntityState::RUNNING:
-		Chase(dt, playerPos);
-		break;
-	case EntityState::ATTACKING:
-		Attack(dt);
-		break;
-	case EntityState::DEAD:
-		Die();
-		break;
-	case EntityState::REVIVING:
-		Revive();
-		break;
-		/*case EntityState::IDLE:
-		DoNothing(dt);
-		break;*/
-	default:
-		break;
-	}
+	
 
 	if (health <= 0)
 	{
@@ -125,6 +106,30 @@ bool Enemy_Osiris::Update(float dt)
 	else
 	{
 		nextState = EntityState::RUNNING;
+	}
+
+	
+
+
+	switch (nextState)
+	{
+	case EntityState::RUNNING:
+		Chase(dt, playerPos);
+		break;
+	case EntityState::ATTACKING:
+		Attack(dt);
+		break;
+	case EntityState::DEAD:
+		Die();
+		break;
+	case EntityState::REVIVING:
+		Revive();
+		break;
+	case EntityState::IDLE:
+		DoNothing(dt);
+		break;
+	default:
+		break;
 	}
 
 	currentState = nextState;
@@ -262,11 +267,6 @@ void Enemy_Osiris::OnCollision(PhysBody* physA, PhysBody* physB) {
 	}
 }
 
-void Enemy_Osiris::SetPlayer(Player* player)
-{
-	this->player = player;
-}
-
 bool Enemy_Osiris::Osirisfinding(float dt, iPoint playerPosP)
 {
 	iPoint playerPos = app->map->WorldToMap(playerPosP.x, playerPosP.y);
@@ -314,6 +314,9 @@ bool Enemy_Osiris::Osirisfinding(float dt, iPoint playerPosP)
 		isAttacking = false;
 		attackAnim.Reset();
 
+	}
+	else {
+		LOG("HA LLEGADO AL DESTINO");
 	}
 
 	// Aplica la velocidad al cuerpo del enemigo

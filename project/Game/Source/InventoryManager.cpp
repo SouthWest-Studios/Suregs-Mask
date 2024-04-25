@@ -311,33 +311,43 @@ bool InventoryManager::LoadState(pugi::xml_node node)
 
 	inventities.Clear();
 
+	pugi::xml_document configFile;
+	pugi::xml_node entitiesDataNode;
+	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
+	entitiesDataNode = configFile.child("config").child("entities_data");
 
 	//Inventity* inventoryItem = app->inventoryManager->CreateItem(, 0, 0, 0, 0, 0, 0);
 	for (pugi::xml_node itemNode = node.child("inventory").child("inventity"); itemNode; itemNode = itemNode.next_sibling("inventity"))
 	{
 
 		Inventity* itemLoaded = nullptr;
-
+		pugi::xml_node itemConfigurationNode;
 		switch ((InventityType)itemNode.attribute("type").as_int())
 		{
 
 		case InventityType::ARMADURA:
-			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_ARMADURA, item->data->desc, item->data->tipo);
+			itemConfigurationNode = entitiesDataNode.child("item_garra");
+			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_ARMADURA, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
 			break;
 		case InventityType::GARRA:
-			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_GARRA, item->data->desc, item->data->tipo);
+			itemConfigurationNode = entitiesDataNode.child("item_garra");
+			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_GARRA, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
 			break;
 		case InventityType::DIAMANTE:
-			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_DIAMANTE, item->data->desc, item->data->tipo);
+			itemConfigurationNode = entitiesDataNode.child("item_diamante");
+			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_DIAMANTE, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
 			break;
 		case InventityType::OJO:
-			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_OJO, item->data->desc, item->data->tipo);
+			itemConfigurationNode = entitiesDataNode.child("item_ojo");
+			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_OJO, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
 			break;
 		case InventityType::ESPADA2:
-			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_ARMADURA, item->data->desc, item->data->tipo);
+			itemConfigurationNode = entitiesDataNode.child("item_garra");
+			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_ARMADURA, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
 			break;
 		case InventityType::ITEM:
-			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_ARMADURA, item->data->desc, item->data->tipo);
+			itemConfigurationNode = entitiesDataNode.child("item_garra");
+			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_ARMADURA, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
 			break;
 		case InventityType::UNKNOWN:
 			break;
