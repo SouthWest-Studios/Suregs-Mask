@@ -13,6 +13,7 @@
 		<inventory>
 			<inventity type="2" quantity="3" />
 			<inventity type="1" quantity="1" />
+			<inventity type="3" quantity="13" />
 		</inventory>
 	</iventorymanager>
 	<guiManager />
