@@ -54,6 +54,7 @@ public:
 	SDL_Texture* credits;
 	SDL_Texture* logo;
 
+
 	const char* menuMain_tp;
 	const char* menuMain2_tp;
 	const char* settings_tp;

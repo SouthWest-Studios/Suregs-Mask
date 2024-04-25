@@ -142,6 +142,9 @@
 		<credits texturepath ="Assets/Textures/Interfaz/textura_creditos.png"/>
 		<logo texturepath ="Assets/Textures/Interfaz/textura_logo.png"/>
 	</scene_menu>
+	<guiManager>
+		<button texturepath ="Assets/Textures/Interfaz/textura_boton.png"/>
+	</guiManager>
 	<scene_intro>
 		<texturaIntro texturepath ="Assets/Textures/Interfaz/intro_textura.png"/>
 	</scene_intro>

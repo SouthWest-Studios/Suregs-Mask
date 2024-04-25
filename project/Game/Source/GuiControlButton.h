@@ -14,7 +14,6 @@ public:
 	GuiControlButton(uint32 id, SDL_Rect bounds, const char* text);
 	virtual ~GuiControlButton();
 
-	bool Start();
 	// Called each loop iteration
 	bool Update(float dt);
 
@@ -24,7 +23,6 @@ public:
 
 private:
 	
-	SDL_Texture* button;
 	
 	int mouseX, mouseY;
 	/*unsigned int click;*/

@@ -3,7 +3,7 @@
 #include "App.h"
 #include "Audio.h"
 #include "Textures.h"
-#include "Log.h"
+#include "GuiManager.h"
 
 GuiControlButton::GuiControlButton(uint32 id, SDL_Rect bounds, const char* text) : GuiControl(GuiControlType::BUTTON, id)
 {
@@ -19,18 +19,11 @@ GuiControlButton::GuiControlButton(uint32 id, SDL_Rect bounds, const char* text)
 
 GuiControlButton::~GuiControlButton()
 {
-	button = app->tex->Load("Assets/Textures/Interfaz/textura_boton.png");
+	
 
 }
 
-bool GuiControlButton::Start()
-{
-	if (button == nullptr) {
-		LOG("Error con las texturas de los botones");
-		return false;
-	}
-	return false;
-}
+
 
 bool GuiControlButton::Update(float dt)
 {
@@ -78,11 +71,11 @@ bool GuiControlButton::PostUpdate()
 			app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h, app->render->buttonFont, 25, 0 , 70);
 			break;
 		case GuiControlState::FOCUSED:
-			
-			app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h, app->render->buttonFont, 204, 204, 255);
+			app->render->DrawTexture(app->guiManager->button, bounds.x - 30 , bounds.y, 1);
+			app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h, app->render->buttonFont, 50, 35, 130);
 			break;
 		case GuiControlState::PRESSED:
-			
+			app->render->DrawTexture(app->guiManager->button, bounds.x - 25, bounds.y + 5, 0.7f);
 			app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h, app->render->buttonFont, 25, 0, 70);
 			break;
 		}

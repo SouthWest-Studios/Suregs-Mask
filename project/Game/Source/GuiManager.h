@@ -46,6 +46,9 @@ public:
 
 	List<GuiControl*> guiControlsList;
 	SDL_Texture* texture;
+	SDL_Texture* button;
+
+	const char* buttonPath;
 
 	int button_audio;
 
