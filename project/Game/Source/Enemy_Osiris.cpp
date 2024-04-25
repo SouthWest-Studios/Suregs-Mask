@@ -20,7 +20,7 @@
  
 
 
-Enemy_Osiris::Enemy_Osiris() : Entity(EntityType::ENEMY_OSIRIS), maxHealth(250.0f), health(250.0f), speed(2.5f), attackDamage(50.0f){
+Enemy_Osiris::Enemy_Osiris() : Entity(EntityType::ENEMY_OSIRIS){
 	name.Create("osiris");
 
 }
@@ -60,8 +60,11 @@ bool Enemy_Osiris::Start() {
 
 	originalPosition = app->map->WorldToMap(position.x, position.y);
 
-	attackDamage = 20;
-	viewDistance = 10;
+	maxHealth = config.attribute("maxHealth").as_float();
+	health = maxHealth;
+	speed = config.attribute("speed").as_float();
+	attackDamage = config.attribute("attackDamage").as_float();
+	viewDistance = config.attribute("viewDistance").as_float();
 
 	return true;
 }
