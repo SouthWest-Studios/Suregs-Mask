@@ -75,7 +75,7 @@ bool Scene_Menu::Start()
 	Continuar = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "CONTINUAR", TitlePos2, this, { 0,0,0,0 });*/
 	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "CONTINUAR", SDL_Rect{ 545,390,100,25 }, this));
 	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "AJUSTES", SDL_Rect{ 553, 420,80,25 }, this));
-	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "CREDITOS", SDL_Rect{ 550, 450,90,25 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "CRÉDITOS", SDL_Rect{ 550, 450,90,25 }, this));
 	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "SALIR", SDL_Rect{ 560, 480,60,25 }, this));
 
 
@@ -298,6 +298,7 @@ void Scene_Menu::SettingsInterface()
 	uint windowWidth, windowHeight;
 	app->win->GetWindowSize(windowWidth, windowHeight);
 
+	app->render->DrawTexture(menuMain, 0, 0);
 	app->render->DrawTexture(settings, 400, 100);
 
 	ListItem<GuiControl*>* control;
@@ -323,7 +324,7 @@ void Scene_Menu::SettingsInterface()
 		{
 
 			SDL_Rect MusicPos = { windowWidth / 2 - 100 ,windowHeight / 2 - 200, 200, 50 };
-			music = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 7, "MUSIC", MusicPos, this, { 0, 0, 20, 20 }, { 0,0,0,0 }, 0, 100);
+			music = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 7, "MUSIC", MusicPos, this, { 0, 0,20, 20 }, { 0,0,0,0 }, 0, 100);
 
 			SDL_Rect SfxPos = { windowWidth / 2 - 100 ,windowHeight / 2 - 150, 200, 50 };
 			sfx = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 8, "SFX", SfxPos, this, { 0, 0, 20, 20 }, { 0,0,0,0 }, 0, 100);
@@ -335,7 +336,7 @@ void Scene_Menu::SettingsInterface()
 			vsync = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 10, "VSYNC", vSyncpos, this, { 0, 0, 20, 20 });
 
 			SDL_Rect TitlePos = { 550, 550,	136,46 };
-			atras = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "ATRAS", TitlePos, this, { 0,0,0,0 });
+			atras = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "ATRÁS", TitlePos, this, { 0,0,0,0 });
 
 			/*controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "ATR�S", SDL_Rect{ 550, 600,	136,46 }, this));*/
 

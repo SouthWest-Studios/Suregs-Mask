@@ -421,7 +421,8 @@ bool Render::DrawText(const char* text, int posx, int posy, int w, int h, TTF_Fo
 		int lineHeight = TTF_FontHeight(font);
 		int y = posy;
 		for (const auto& line : textLines) {
-			SDL_Surface* surface = TTF_RenderText_Solid(font, line.c_str(), color);
+			/*SDL_Surface* surface = TTF_RenderText_Solid(font, line.c_str(), color);*/
+			SDL_Surface* surface = TTF_RenderUTF8_Solid(font, line.c_str(), color);
 			SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
 			int texW = 0;
 			int texH = 0;
@@ -437,7 +438,7 @@ bool Render::DrawText(const char* text, int posx, int posy, int w, int h, TTF_Fo
 	{
 		
 		
-		SDL_Surface* surface = TTF_RenderText_Solid(font, text, color);
+		SDL_Surface* surface = TTF_RenderUTF8_Solid(font, text, color);
 		SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
 
 		int texW = 0;
