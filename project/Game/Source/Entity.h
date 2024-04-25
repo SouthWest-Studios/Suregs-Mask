@@ -135,7 +135,7 @@ public:
 	bool isAttacking;
 
 	PhysBody* pbodyFoot;
-	//PhysBody* pbodySensor;
+	PhysBody* pbodySensor;
 
 	float speed;
 	float health;
