@@ -166,6 +166,15 @@
     <ClCompile Include="Source\Utils.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Item_Cola.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Item_Hueso.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Item_Carbon.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -386,6 +395,15 @@
     </ClInclude>
     <ClInclude Include="Source\OjoInv.h">
       <Filter>Modules\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Item_Cola.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Item_Hueso.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Item_Carbon.h">
+      <Filter>Entities\Items</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

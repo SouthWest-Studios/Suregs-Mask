@@ -349,10 +349,10 @@ void Physics::BeginContact(b2Contact* contact)
 	PhysBody* physA = (PhysBody*)contact->GetFixtureA()->GetBody()->GetUserData();
 	PhysBody* physB = (PhysBody*)contact->GetFixtureB()->GetBody()->GetUserData();
 
-	if (physA && physA->listener != NULL)
+	if (physA && physA->listener != NULL && physA->listener != nullptr)
 		physA->listener->OnCollision(physA, physB);
 
-	if (physB && physB->listener != NULL)
+	if (physB && physB->listener != NULL && physB->listener != nullptr)
 		physB->listener->OnCollision(physB, physA);
 }
 

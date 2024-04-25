@@ -110,8 +110,11 @@
     <ClCompile Include="Source\Hud.cpp" />
     <ClCompile Include="Source\InventoryManager.cpp" />
     <ClCompile Include="Source\Item.cpp" />
+    <ClCompile Include="Source\Item_Carbon.cpp" />
+    <ClCompile Include="Source\Item_Cola.cpp" />
     <ClCompile Include="Source\Item_Diamante.cpp" />
     <ClCompile Include="Source\Item_Garra.cpp" />
+    <ClCompile Include="Source\Item_Hueso.cpp" />
     <ClCompile Include="Source\Item_Ojo.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\App.cpp" />
@@ -172,8 +175,11 @@
     <ClInclude Include="Source\InventoryManager.h" />
     <ClInclude Include="Source\Item.h" />
     <ClInclude Include="Source\ItemInv.h" />
+    <ClInclude Include="Source\Item_Carbon.h" />
+    <ClInclude Include="Source\Item_Cola.h" />
     <ClInclude Include="Source\Item_Diamante.h" />
     <ClInclude Include="Source\Item_Garra.h" />
+    <ClInclude Include="Source\Item_Hueso.h" />
     <ClInclude Include="Source\Item_Ojo.h" />
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\Menu.h" />

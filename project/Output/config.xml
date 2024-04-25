@@ -74,8 +74,11 @@
 		
 	
 		<item_garra texturePath="Assets/Textures/Entidades/Items/item_Garra.png" description="Esta es una garra muy bonita, buenos dias." type ="apendice"/>
-		<item_diamante texturePath="Assets/Textures/Entidades/Items/texture_diamond.png" description="Este diamante brilla mas que mi futuro." type ="Material"/>
+		<item_diamante texturePath="Assets/Textures/Entidades/Items/texture_diamond.png" description="Este diamante brilla mas que mi futuro." type ="material"/>
 		<item_ojo texturePath="Assets/Textures/Entidades/Items/texture_eye.png" description="La leyenda dice que es un ojo." type ="apendice"/>
+		<item_hueso texturePath="Assets/Textures/Entidades/Items/textura_hueso.png" description="La leyenda dice que es un hueso." type ="apendice"/>
+		<item_carbon texturePath="Assets/Textures/Entidades/Items/textura_carbon.png" description="Mas negro que mi alma." type ="material"/>
+		
 		
 
 		<item x="1200" y="2600" texturePath="Assets/Textures/Entidades/Jugador/salamanda1.png" Tsprite="23" Pwidth="1000" sprite_x="100" sprite_y="160"/>

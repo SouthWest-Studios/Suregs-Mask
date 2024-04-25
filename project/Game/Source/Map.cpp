@@ -30,6 +30,7 @@
 #include "NPC_MujerPreocupada.h"
 #include "Item_Diamante.h"
 #include "Item_Ojo.h"
+#include "Item_Hueso.h"
 #include "Enemy_Ols.h"
 #include "TPEntity.h"
 #include "Window.h"
@@ -1082,13 +1083,13 @@ bool Map::LoadEntities(std::string layerName)
 						diamante->Start();
 					}
 					//OJO
-					if (gid == tileset->firstgid + 1009) { 
+					/*if (gid == tileset->firstgid + 1009) { 
 							Item_Ojo* ojo = (Item_Ojo*)app->entityManager->CreateEntity(EntityType::ITEM_OJO);
 							ojo->config = configNode.child("entities_data").child("item_ojo");
 							ojo->position = iPoint(pos.x + 16, pos.y + 16);
 							ojo->Start();
 						
-					}
+					}*/
 				}
 			}
 

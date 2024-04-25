@@ -37,7 +37,7 @@ public:
 
 	void DestroyItem(Inventity* Inventity);
 
-	void DestroyItem2(int entityId);
+	void DestroyItemById(int entityId);
 
 	void UseItemSelected(int id);
 
@@ -73,7 +73,8 @@ public:
 
 	int highestIde = -1;
 
-
+private:
+	int maxItemsPerRow = 3; // Define el número máximo de elementos por fila
 };
 
 #endif // __INVENTORYMANAGER_H__

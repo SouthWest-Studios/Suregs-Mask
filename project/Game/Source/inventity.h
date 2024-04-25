@@ -12,6 +12,15 @@ enum class InventityType
 	GARRA,
 	OJO,
 	DIAMANTE,
+	VISCERA,
+	RUBI,
+	POLVORA,
+	NOTA,
+	HUESO,
+	DIENTE,
+	COLA,
+	CARBON,
+	AMATISTA,
 	ESPADA2,
 	ARMADURA,
 	UNKNOWN
@@ -24,6 +33,8 @@ class Inventity
 public:
 
 	Inventity(InventityType type) : type(type), active(true) {}
+	
+	Inventity() : active(true) {}
 
 	
 

@@ -37,7 +37,7 @@ bool Item_Garra::Start() {
 	// L07 DONE 4: Add a physics to an item - initialize the physics body
 	app->tex->GetSize(texture, texW, texH);
 	pbody = app->physics->CreateCircle(position.x, position.y, 11, bodyType::STATIC);
-	pbody->ctype = ColliderType::RESOURCE_GARRA;
+	pbody->ctype = ColliderType::RESOURCE;
 	pbody->listener = this;
 	pbody->body->GetFixtureList()->SetSensor(true);
 

@@ -98,181 +98,239 @@ Inventity* InventoryManager::CreateItem(EntityType type, std::string descripcioo
 
 
 	//L03: DONE 3a: Instantiate entity according to the type and add the new entity to the list of Entities
+	//switch (type)
+	//{
+	//case EntityType::ITEM:
+	//{
+	//	int newId = 0;
+	//	for (ListItem<Inventity*>* item = inventities.start; item != nullptr; item = item->next)
+	//	{
+
+	//		item->data->id = newId;
+	//		newId++;
+	//	}
+	//	if (inventities.Count() > 0)
+	//	{
+	//		highestId = inventities.end->data->id;
+	//	}
+	//	else
+	//	{
+	//		highestId = -1;
+	//	}
+
+	//	Iteminv* itemm = new Iteminv();
+	//	itemm->id = highestId + 1;
+	//	itemm->type = InventityType::ITEM;
+	//	itemm->icon = app->tex->Load("Assets/Textures/CoinIcon.png");
+	//	itemm->stackable = true;
+	//	entity = itemm;
+
+	//	break;
+	//}
+
+	//case EntityType::ITEM_GARRA:
+	//{
+	//	int newId = 0;
+	//	for (ListItem<Inventity*>* item = inventities.start; item != nullptr; item = item->next)
+	//	{
+
+	//		item->data->id = newId;
+	//		newId++;
+	//	}
+	//	/*for (ListItem<Inventity*>* item = inventities.start; item != NULL; item = item->next)
+	//	{
+	//		if (item->data->id > highestId)
+	//		{
+	//			highestId = item->data->id;
+	//		}
+	//	}*/
+	//	if (inventities.Count() > 0)
+	//	{
+	//		highestId = inventities.end->data->id;
+	//	}
+	//	else
+	//	{
+	//		highestId = -1;
+	//	}
+
+
+	//	GarraInv* garra = new GarraInv();
+	//	garra->id = highestId + 1;
+	//	garra->type = InventityType::GARRA;
+	//	garra->stackable = true;
+	//	garra->desc = descripcioon;
+	//	garra->tipo = tipoo;
+
+	//	/*sword->damage = ataque;
+	//	sword->durability = durabilidad;
+	//	sword->magic = magia;
+	//	sword->weight = peso;*/
+	//	garra->icon = app->tex->Load("Assets/Textures/Interfaz/garraInv.png");
+	//	entity = garra;
+	//	break;
+	//}
+	//case EntityType::ITEM_DIAMANTE:
+	//{
+	//	int newId = 0;
+	//	for (ListItem<Inventity*>* item = inventities.start; item != nullptr; item = item->next)
+	//	{
+
+	//		item->data->id = newId;
+	//		newId++;
+	//	}
+	//	/*for (ListItem<Inventity*>* item = inventities.start; item != NULL; item = item->next)
+	//	{
+	//		if (item->data->id > highestId)
+	//		{
+	//			highestId = item->data->id;
+	//		}
+	//	}*/
+	//	if (inventities.Count() > 0)
+	//	{
+	//		highestId = inventities.end->data->id;
+	//	}
+	//	else
+	//	{
+	//		highestId = -1;
+	//	}
+
+
+	//	DiamanteInv* diamante = new DiamanteInv();
+	//	diamante->id = highestId + 1;
+	//	diamante->type = InventityType::DIAMANTE;
+	//	diamante->stackable = true;
+	//	diamante->desc = descripcioon;
+	//	diamante->tipo = tipoo;
+	//	/*sword->damage = ataque;
+	//	sword->durability = durabilidad;
+	//	sword->magic = magia;
+	//	sword->weight = peso;*/
+	//	diamante->icon = app->tex->Load("Assets/Textures/Interfaz/diamante_inv.png");
+	//	entity = diamante;
+	//	break;
+	//}
+	//case EntityType::ITEM_OJO:
+	//{
+	//	int newId = 0;
+	//	for (ListItem<Inventity*>* item = inventities.start; item != nullptr; item = item->next)
+	//	{
+
+	//		item->data->id = newId;
+	//		newId++;
+	//	}
+	//	/*for (ListItem<Inventity*>* item = inventities.start; item != NULL; item = item->next)
+	//	{
+	//		if (item->data->id > highestId)
+	//		{
+	//			highestId = item->data->id;
+	//		}
+	//	}*/
+	//	if (inventities.Count() > 0)
+	//	{
+	//		highestId = inventities.end->data->id;
+	//	}
+	//	else
+	//	{
+	//		highestId = -1;
+	//	}
+
+
+	//	OjoInv* ojo = new OjoInv();
+	//	ojo->id = highestId + 1;
+	//	ojo->type = InventityType::OJO;
+	//	ojo->stackable = true;
+	//	ojo->desc = descripcioon;
+	//	ojo->tipo = tipoo;
+	//	/*sword->damage = ataque;
+	//	sword->durability = durabilidad;
+	//	sword->magic = magia;
+	//	sword->weight = peso;*/
+	//	ojo->icon = app->tex->Load("Assets/Textures/Interfaz/ojoInv.png");
+	//	entity = ojo;
+	//	break;
+	//}
+	//case EntityType::ITEM_COLA:
+	//{
+
+	//	
+	//	
+
+
+
+	//	OjoInv* ojo = new OjoInv();
+	//	ojo->id = highestId + 1;
+	//	ojo->type = InventityType::OJO;
+	//	ojo->stackable = true;
+	//	ojo->desc = descripcioon;
+	//	ojo->tipo = tipoo;
+	//	/*sword->damage = ataque;
+	//	sword->durability = durabilidad;
+	//	sword->magic = magia;
+	//	sword->weight = peso;*/
+	//	ojo->icon = app->tex->Load("Assets/Textures/Interfaz/ojoInv.png");
+	//	entity = ojo;
+	//	break;
+	//}
+	//case EntityType::ITEM_ARMADURA:
+	//{
+	//	for (ListItem<Inventity*>* item = inventities.start; item != NULL; item = item->next)
+	//	{
+	//		if (item->data->id > highestId)
+	//		{
+	//			highestId = item->data->id;
+	//		}
+	//	}
+
+	//	/*ArmaduraInv* armadura = new ArmaduraInv();
+	//	armadura->id = highestId + 1;
+	//	armadura->type = InventityType::ARMADURA;
+	//	armadura->defense = defensa;
+	//	armadura->durability = durabilidad;
+	//	armadura->weight = peso;
+	//	armadura->icon = app->tex->Load("Assets/Textures/armaduraicon.png");
+	//	entity = armadura;*/
+	//}
+
+	//default:
+	//	break;
+	//}
+
+	highestId = (inventities.Count() > 0) ? inventities.end->data->id : -1;
+	entity = new Inventity();
+	entity->id = highestId + 1;
+	entity->stackable = true;
+	entity->desc = descripcioon;
+	entity->tipo = tipoo;
 	switch (type)
 	{
-	case EntityType::ITEM:
-	{
-		int newId = 0;
-		for (ListItem<Inventity*>* item = inventities.start; item != nullptr; item = item->next)
-		{
-
-			item->data->id = newId;
-			newId++;
-		}
-		if (inventities.Count() > 0)
-		{
-			highestId = inventities.end->data->id;
-		}
-		else
-		{
-			highestId = -1;
-		}
-
-		Iteminv* itemm = new Iteminv();
-		itemm->id = highestId + 1;
-		itemm->type = InventityType::ITEM;
-		itemm->icon = app->tex->Load("Assets/Textures/CoinIcon.png");
-		itemm->stackable = true;
-		entity = itemm;
-
+	case EntityType::ITEM_COLA:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_cola.png");
+		entity->type = InventityType::COLA;
 		break;
-	}
-
-	case EntityType::ITEM_GARRA:
-	{
-		int newId = 0;
-		for (ListItem<Inventity*>* item = inventities.start; item != nullptr; item = item->next)
-		{
-
-			item->data->id = newId;
-			newId++;
-		}
-		/*for (ListItem<Inventity*>* item = inventities.start; item != NULL; item = item->next)
-		{
-			if (item->data->id > highestId)
-			{
-				highestId = item->data->id;
-			}
-		}*/
-		if (inventities.Count() > 0)
-		{
-			highestId = inventities.end->data->id;
-		}
-		else
-		{
-			highestId = -1;
-		}
-
-
-		GarraInv* garra = new GarraInv();
-		garra->id = highestId + 1;
-		garra->type = InventityType::GARRA;
-		garra->stackable = true;
-		garra->desc = descripcioon;
-		garra->tipo = tipoo;
-
-		/*sword->damage = ataque;
-		sword->durability = durabilidad;
-		sword->magic = magia;
-		sword->weight = peso;*/
-		garra->icon = app->tex->Load("Assets/Textures/Interfaz/garraInv.png");
-		entity = garra;
-		break;
-	}
 	case EntityType::ITEM_DIAMANTE:
-	{
-		int newId = 0;
-		for (ListItem<Inventity*>* item = inventities.start; item != nullptr; item = item->next)
-		{
-
-			item->data->id = newId;
-			newId++;
-		}
-		/*for (ListItem<Inventity*>* item = inventities.start; item != NULL; item = item->next)
-		{
-			if (item->data->id > highestId)
-			{
-				highestId = item->data->id;
-			}
-		}*/
-		if (inventities.Count() > 0)
-		{
-			highestId = inventities.end->data->id;
-		}
-		else
-		{
-			highestId = -1;
-		}
-
-
-		DiamanteInv* diamante = new DiamanteInv();
-		diamante->id = highestId + 1;
-		diamante->type = InventityType::DIAMANTE;
-		diamante->stackable = true;
-		diamante->desc = descripcioon;
-		diamante->tipo = tipoo;
-		/*sword->damage = ataque;
-		sword->durability = durabilidad;
-		sword->magic = magia;
-		sword->weight = peso;*/
-		diamante->icon = app->tex->Load("Assets/Textures/Interfaz/diamante_inv.png");
-		entity = diamante;
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_diamante.png");
+		entity->type = InventityType::DIAMANTE;
 		break;
-	}
 	case EntityType::ITEM_OJO:
-	{
-		int newId = 0;
-		for (ListItem<Inventity*>* item = inventities.start; item != nullptr; item = item->next)
-		{
-
-			item->data->id = newId;
-			newId++;
-		}
-		/*for (ListItem<Inventity*>* item = inventities.start; item != NULL; item = item->next)
-		{
-			if (item->data->id > highestId)
-			{
-				highestId = item->data->id;
-			}
-		}*/
-		if (inventities.Count() > 0)
-		{
-			highestId = inventities.end->data->id;
-		}
-		else
-		{
-			highestId = -1;
-		}
-
-
-		OjoInv* ojo = new OjoInv();
-		ojo->id = highestId + 1;
-		ojo->type = InventityType::OJO;
-		ojo->stackable = true;
-		ojo->desc = descripcioon;
-		ojo->tipo = tipoo;
-		/*sword->damage = ataque;
-		sword->durability = durabilidad;
-		sword->magic = magia;
-		sword->weight = peso;*/
-		ojo->icon = app->tex->Load("Assets/Textures/Interfaz/ojoInv.png");
-		entity = ojo;
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_ojo.png");
+		entity->type = InventityType::OJO;
 		break;
-	}
-	case EntityType::ITEM_ARMADURA:
-	{
-		for (ListItem<Inventity*>* item = inventities.start; item != NULL; item = item->next)
-		{
-			if (item->data->id > highestId)
-			{
-				highestId = item->data->id;
-			}
-		}
-
-		/*ArmaduraInv* armadura = new ArmaduraInv();
-		armadura->id = highestId + 1;
-		armadura->type = InventityType::ARMADURA;
-		armadura->defense = defensa;
-		armadura->durability = durabilidad;
-		armadura->weight = peso;
-		armadura->icon = app->tex->Load("Assets/Textures/armaduraicon.png");
-		entity = armadura;*/
-	}
-
+	case EntityType::ITEM_GARRA:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_garra.png");
+		entity->type = InventityType::GARRA;
+		break;
+	case EntityType::ITEM_HUESO:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_hueso.png");
+		entity->type = InventityType::HUESO;
+		break;
+	case EntityType::ITEM_CARBON:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_carbon.png");
+		entity->type = InventityType::CARBON;
+		break;
+	
 	default:
 		break;
 	}
-
 
 
 	AddItem(entity);
@@ -413,7 +471,7 @@ void InventoryManager::DestroyItem(Inventity* entity)
 	}
 }
 
-void InventoryManager::DestroyItem2(int entityId)
+void InventoryManager::DestroyItemById(int entityId)
 {
 	ListItem<Inventity*>* item;
 
@@ -546,91 +604,34 @@ void InventoryManager::OnMovePointer()
 
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && PointerPosition.y < 200) {
 		PointerPosition.y += 103;
-		PointerId += 5;
+		PointerId += 3;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && PointerPosition.y > -60) {
 		PointerPosition.y -= 103;
-		PointerId -= 5;
+		PointerId -= 3;
 	}
 }
 
 void InventoryManager::AddItem(Inventity* entity)
 {
 
-	bool CuernoEncontrado = false;
-
-	bool DiamanteEncontrado = false;
-
-	bool OjoEncontrado = false;
+	bool itemEncontrado = false;
 	if (entity != nullptr) {
 
-		if (entity->stackable)
-		{
-			if (entity->type == InventityType::GARRA)
-			{
-
-
-				for (int i = 0; i < inventities.Count(); i++) {
-					if (inventities.At(i)->data->type == InventityType::GARRA) {
-						inventities.At(i)->data->quantity += entity->quantity;
-						CuernoEncontrado = true;
-						break;
-					}
-
-				}
-				if (!CuernoEncontrado)
-				{
-					inventities.Add(entity);
-				}
-			}
-			else if (entity->type == InventityType::DIAMANTE)
-			{
-				for (int i = 0; i < inventities.Count(); i++) {
-
-					if (inventities.At(i)->data->type == InventityType::DIAMANTE) {
-						inventities.At(i)->data->quantity += entity->quantity;
-						DiamanteEncontrado = true;
-						break;
-					}
-				}
-				if (!DiamanteEncontrado)
-				{
-					inventities.Add(entity);
-				}
-			}
-			else if (entity->type == InventityType::OJO)
-			{
-				for (int i = 0; i < inventities.Count(); i++) {
-
-					if (inventities.At(i)->data->type == InventityType::OJO) {
-						inventities.At(i)->data->quantity += entity->quantity;
-						OjoEncontrado = true;
-						break;
-					}
-				}
-				if (!OjoEncontrado)
-				{
-					inventities.Add(entity);
-				}
+		for (int i = 0; i < inventities.Count(); i++) {
+			if (inventities.At(i)->data->type == entity->type) {
+				inventities.At(i)->data->quantity += entity->quantity;
+				itemEncontrado = true;
+				break;
 			}
 
 		}
-		else {
+		if (!itemEncontrado)
+		{
 			inventities.Add(entity);
 		}
-
-		ListItem<Inventity*>* item;
-
-		int newId = 0;
-		for (item = inventities.start; item != nullptr; item = item->next)
-		{
-
-			item->data->id = newId;
-			newId++;
-		}
-
-
 	}
+	
 }
 
 bool InventoryManager::Update(float dt)
@@ -655,7 +656,7 @@ bool InventoryManager::Update(float dt)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_BACKSPACE) == KEY_DOWN)
 			{
-				DestroyItem2(selectedId);
+				DestroyItemById(selectedId);
 				options = false;
 				selected = { -1000, -1000 };
 
@@ -689,139 +690,34 @@ bool InventoryManager::PostUpdate()
 	bool ret = true;
 	app->tex->GetSize(InventoryBackground, texW, texH);
 
-
-
-
-
-
 	if (mostrar == true)
 	{
 		ListItem<Inventity*>* item;
 		Inventity* pEntity = NULL;
 
-		app->render->DrawTexture(EquipedItemText, equiped.x, equiped.y,0.8,SDL_FLIP_NONE, 0, 0);
+		app->render->DrawTexture(EquipedItemText, equiped.x, equiped.y, 0.8, SDL_FLIP_NONE, 0, 0);
 
-		app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y, 0.8,SDL_FLIP_NONE, 0, 0);
+		app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y, 0.8, SDL_FLIP_NONE, 0, 0);
 		app->render->DrawTexture(SelectedItemText, selected.x, selected.y, 0.8, SDL_FLIP_NONE, 0, 0);
 
 		for (item = inventities.start; item != nullptr; item = item->next)
 		{
 			pEntity = item->data;
-
-			if ((pEntity->stackable))
+			int rowIndex = item->data->id / maxItemsPerRow; // Calcula el índice de la fila
+			int columnIndex = item->data->id % maxItemsPerRow; // Calcula el índice de la columna
+			int horizontalPosition = 320 + columnIndex * 105; // Calcula la posición horizontal
+			int verticalPosition = 230 + rowIndex * 105; // Calcula la posición vertical
+			if (pEntity->quantity > 1)
 			{
 				std::string quantityStr = std::to_string(pEntity->quantity);
-
-				if (pEntity->type == InventityType::GARRA)
-				{
-
-					if (pEntity->quantity > 1)
-					{
-
-
-						if (item->data->id < 5)
-						{
-							app->render->DrawText(quantityStr.c_str(), 320 + item->data->id * 105, 230, 20, 20,0,0,0,0);
-						}
-						else
-						{
-							app->render->DrawText(quantityStr.c_str(), 485 + (item->data->id - 5) * 100, 420, 20, 20,0,0,0,0);
-						}
-					}
-					{
-						if (item->data->id < 5)
-						{
-							app->render->DrawTexture(pEntity->icon, 280 + pEntity->id * 100, 180, 0.8, SDL_FLIP_NONE, 0, 0);
-						}
-						else
-						{
-							app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 105), 380, 0.8, SDL_FLIP_NONE, 0, 0);
-						}
-
-					}
-					
-
-				}
-				else if (pEntity->type == InventityType::DIAMANTE)
-				{
-
-					if (pEntity->quantity > 1)
-					{
-
-
-						if (item->data->id < 5)
-						{
-							app->render->DrawText(quantityStr.c_str(), 320 + item->data->id * 105, 230, 20, 20,0,0,0,0);
-						}
-						else
-						{
-							app->render->DrawText(quantityStr.c_str(), 485 + (item->data->id - 5) * 100, 420, 20, 20,0,0,0,0);
-						}
-					}
-					{
-						if (item->data->id < 5)
-						{
-							app->render->DrawTexture(pEntity->icon, 280 + pEntity->id * 100, 180, 0.8, SDL_FLIP_NONE, 0, 0);
-						}
-						else
-						{
-							app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 100), 380, 0.8, SDL_FLIP_NONE, 0, 0);
-						}
-
-					}
-
-				}
-				else if (pEntity->type == InventityType::OJO)
-				{
-
-					if (pEntity->quantity > 1)
-					{
-
-
-						if (item->data->id < 5)
-						{
-							app->render->DrawText(quantityStr.c_str(), 320 + item->data->id * 105, 230, 20, 20,0,0,0,0);
-						}
-						else
-						{
-							app->render->DrawText(quantityStr.c_str(), 485 + (item->data->id - 5) * 100, 420, 20, 200,0,0,0,0);
-						}
-					}
-					{
-						if (item->data->id < 5)
-						{
-							app->render->DrawTexture(pEntity->icon, 280 + pEntity->id * 100, 180, 0.8, SDL_FLIP_NONE, 0, 0);
-						}
-						else
-						{
-							app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 100), 380, 0.8, SDL_FLIP_NONE, 0, 0);
-						}
-
-					}
-
-				}
-
+				app->render->DrawText(quantityStr.c_str(), horizontalPosition, verticalPosition, 20, 20, 0, 0, 0, 0);			
+				
 			}
-			else
-			{
-				if (pEntity->id < 5) //if(inventities.cout() < 5)
-				{
-					app->render->DrawTexture(pEntity->icon, 445 + pEntity->id * 100, 300, 0.8, SDL_FLIP_NONE, 0, 0);
-				}
-				else
-				{
+			
+			horizontalPosition = 280 + columnIndex * 105; // Calcula la posición horizontal para pEntity
+			verticalPosition = 180 + rowIndex * 105; // Calcula la posición vertical para pEntity
 
-					app->render->DrawTexture(pEntity->icon, 445 + ((pEntity->id - 5) * 100), 380, 0.8, SDL_FLIP_NONE, 0, 0);
-				}
-
-
-			}
-
-
-
-
-
-
+			app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
 
 		}
 
@@ -835,14 +731,26 @@ bool InventoryManager::PostUpdate()
 			if (PointerId == itum->data->id)
 			{
 				app->render->DrawText(itum->data->desc.c_str(), 680, 450, 270, 400, 0, 0, 0, 0, false);
-
-				if (itum->data->type == InventityType::OJO || itum->data->type == InventityType::GARRA)
+				switch (itum->data->type)	
 				{
+				case InventityType::OJO:
+				case InventityType::GARRA:
+				case InventityType::COLA:
+				case InventityType::VISCERA:
+				case InventityType::HUESO:
+				case InventityType::DIENTE:
 					app->render->DrawText(itum->data->tipo.c_str(), 680, 340, 90, 60, 0, 165, 42, 42);
-				}
-				else
-				{
+					break;
+				case InventityType::RUBI:
+				case InventityType::POLVORA:
+				case InventityType::DIAMANTE:
+				case InventityType::CARBON:
+				case InventityType::AMATISTA:
+					app->render->DrawText(itum->data->tipo.c_str(), 680, 340, 90, 60, 0, 65, 136, 165);
+					break;
+				default:
 					app->render->DrawText(itum->data->tipo.c_str(), 680, 340, 90, 60, 0, 135, 206, 235);
+					break;
 				}
 			}
 

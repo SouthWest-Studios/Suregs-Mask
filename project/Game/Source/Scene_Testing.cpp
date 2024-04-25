@@ -16,6 +16,7 @@
 #include "Log.h"
 #include "GuiControl.h"
 #include "GuiManager.h"
+#include "Item_Carbon.h"
 
 Scene_testing::Scene_testing(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -106,6 +107,21 @@ bool Scene_testing::Start()
 
 	app->entityManager->Enable();
 
+	pugi::xml_parse_result parseResult2 = configFile.load_file("config.xml");
+	if (parseResult2) {
+		configNode = configFile.child("config");
+	}
+
+	Item_Carbon* carbon = (Item_Carbon*)app->entityManager->CreateEntity(EntityType::ITEM_CARBON);
+	carbon->config = configNode.child("entities_data").child("item_carbon");
+	carbon->position = iPoint(1903, 2595);
+	carbon->Start();
+
+	Item_Carbon* carbon2 = (Item_Carbon*)app->entityManager->CreateEntity(EntityType::ITEM_CARBON);
+	carbon2->config = configNode.child("entities_data").child("item_carbon");
+	carbon2->position = iPoint(1923, 2595);
+	carbon2->Start();
+
 	return true;
 }
 
@@ -121,6 +137,7 @@ bool Scene_testing::Update(float dt)
 
    	OPTICK_EVENT();
 
+	
 	//Dibujar mapa
 	//app->render->DrawTexture(mapaFondo, 0, 0);
 

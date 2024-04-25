@@ -228,6 +228,7 @@ bool Player::PostUpdate() {
 	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
+	printf("Posición: (%d, %d)\n", position.x, position.y);
 
 	if (isFacingLeft) {
 		//app->render->DrawTexture(texture, position.x - 50, position.y - 200, SDL_FLIP_HORIZONTAL, &rect);
@@ -460,8 +461,8 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			}
 		}
 		break;
-	case ColliderType::RESOURCE_GARRA:
-		LOG("Collision Garra");
+	case ColliderType::RESOURCE:
+		LOG("Collision RESOURCE");
 		if (physA != attackSensor && physA != mask1PassiveSensor && physA != mask1AttackSensor)
 		{
 			if (physB->listener->active) {
@@ -471,35 +472,8 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 				physB->body->SetActive(false);
 			}
 		}
-		
-
 		break;
-	case ColliderType::RESOURCE_DIAMANTE:
-		LOG("Collision DIAMANTE");
-		if (physA != attackSensor && physA != mask1PassiveSensor && physA != mask1AttackSensor)
-		{
-			if (physB->listener->active) {
-				app->inventoryManager->CreateItem(physB->listener->type, physB->listener->description, physB->listener->tipo);
-				physB->listener->active = false;
-				app->entityManager->DestroyEntity(physB->listener);
-				physB->body->SetActive(false);
-			}
-		}
-
-		break;
-	case ColliderType::RESOURCE_OJO:
-		LOG("Collision OJO");
-		if (physA != attackSensor && physA != mask1PassiveSensor && physA != mask1AttackSensor)
-		{
-			if (physB->listener->active) {
-				app->inventoryManager->CreateItem(physB->listener->type, physB->listener->description, physB->listener->tipo);
-				physB->listener->active = false;
-				app->entityManager->DestroyEntity(physB->listener);
-				physB->body->SetActive(false);
-			}
-		}
-
-		break;
+	
 
 	case ColliderType::ENTRADA_MAZMORRA0:
 		LOG("Collision ENTRADA_MAZMORRA0");

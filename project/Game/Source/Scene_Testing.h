@@ -61,6 +61,10 @@ private:
 	GuiControlButton* gcButtom;
 
 	SDL_Texture* mapaFondo;
+
+	pugi::xml_node config;
+	pugi::xml_document configFile;
+	pugi::xml_node configNode;
 };
 
 #endif // __Scene_testing_H__

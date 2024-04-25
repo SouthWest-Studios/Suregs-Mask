@@ -76,6 +76,10 @@ public:
 	
 
 private:
+	pugi::xml_document configFile;
+	pugi::xml_node configNode;
+	
+
 	Animation idleAnim;
 	Animation runAnim;
 	Animation attackAnim;

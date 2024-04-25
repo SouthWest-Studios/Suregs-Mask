@@ -13,6 +13,7 @@
 #include "Pathfinding.h"
 #include "Map.h"
 #include "Physics.h"
+#include "Item_Hueso.h"
 #include <Optick/include/optick.h>
 #include "Utils.cpp"
 
@@ -217,6 +218,9 @@ void Enemy_Osiris::Attack(float dt)
 }
 
 void Enemy_Osiris::Die() {
+
+	
+
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	currentAnimation = &dieAnim;
 
@@ -232,6 +236,15 @@ void Enemy_Osiris::Die() {
 		app->physics->GetWorld()->DestroyBody(pbodySensor->body);
 		app->tex->UnLoad(texture);
 		//CleanUp();
+		pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
+		if (parseResult) {
+			configNode = configFile.child("config");
+		}
+
+		Item_Hueso* hueso = (Item_Hueso*)app->entityManager->CreateEntity(EntityType::ITEM_HUESO);
+		hueso->config = configNode.child("entities_data").child("item_hueso");
+		hueso->position = iPoint(position.x, position.y);
+		hueso->Start();
 	}
 
 }

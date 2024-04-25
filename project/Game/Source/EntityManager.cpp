@@ -24,7 +24,8 @@
 #include "MiniGameFishing.h"
 #include "Fishing.h"
 #include "Item_Ojo.h"
-
+#include "Item_Hueso.h"
+#include "Item_Carbon.h"
 
 
 
@@ -98,7 +99,7 @@ bool EntityManager::CleanUp()
 	entities.Clear();
 	tpEntities.Clear();
 
-
+	objectsToDraw.clear();
 
 	return ret;
 }
@@ -130,6 +131,12 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		break;
 	case EntityType::ITEM_OJO:
 		entity = new Item_Ojo(type, 100, 100, 300, 5, 2);
+		break;
+	case EntityType::ITEM_HUESO:
+		entity = new Item_Hueso(type, 100, 100, 300, 5, 2);
+		break;
+	case EntityType::ITEM_CARBON:
+		entity = new Item_Carbon(type, 100, 100, 300, 5, 2);
 		break;
 	case EntityType::ITEM:
 		entity = new Item();
