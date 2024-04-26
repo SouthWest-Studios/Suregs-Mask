@@ -37,6 +37,7 @@
       <select_fx path="Assets/Audio/Fx/select_fx.wav"/>
       <inventory_fx path="Assets/Audio/Fx/inventory_fx.wav"/>
       <change_inventory_fx path="Assets/Audio/Fx/change_inventory_fx.wav"/>
+      <level_up_fx path=""/>
       <run_fx path="Assets/Audio/Fx/run_fx.wav"/>
       <runAlt_fx path="Assets/Audio/Fx/runAlt_fx.wav"/>
       <runAlt2_fx path="Assets/Audio/Fx/runAlt2_fx.wav"/>
@@ -58,8 +59,6 @@
       <osiris_get_damage_fx path=""/>
       <osiris_res_fx path=""/>
       <osiris_death_fx path=""/>
-      <shar_attack_fx path=""/>
-      <shar_death_fx path=""/>
       <khurt_dig_start_fx path=""/>
       <khurt_dig_move_fx path=""/>
       <khurt_dig_end_fx path=""/>
@@ -70,14 +69,41 @@
       <boorok_attack_fx path=""/>
       <boorok_sleep_fx path=""/>
       <boorok_get_damage_fx path=""/>
-      <boorok_death_fx path=""/>
+      <boorok_death_fx path=""/>      
       <muur_attack_fx path=""/>
       <muur_stun_fx path=""/>
       <muur_get_damage_fx path=""/>
       <muur_death_fx path=""/>
-      
+      <boss1_melee_attack_fx path=""/>
+      <boss1_ranged_attack_fx path=""/>
+      <boss1_charged_attack_fx path=""/>
+      <boss1_magic_attack_fx path=""/>
+      <boss1_get_damage_fx path=""/>
+      <boss1_death_fx path=""/>
+      <boss2_melee_attack_fx path=""/>
+      <boss2_ranged_attack_fx path=""/>
+      <boss2_charged_attack_fx path=""/>
+      <boss2_invisible_dash_fx path=""/>
+      <boss2_get_damage_fx path=""/>
+      <boss2_death_fx path=""/>
+      <boss3_fast_melee_attack_fx path=""/>
+      <boss3_charged_melee_attack_fx path=""/>
+      <boss3_explosion_attack_fx path=""/>
+      <boss3_ranged_attack_fx path=""/>
+      <boss3_get_damage_fx path=""/>
+      <boss3_death_fx path=""/>
+      <father_melee_attack_fx path=""/>
+      <father_generate_sureg_fx path=""/>
+      <father_charged_melee_attack_fx path=""/>
+      <father_shield_fx path=""/>
+      <father_shield_broken_fx path=""/>
+      <father_magic_attack_fx path=""/>
+      <father_get_damage_fx path=""/>
+      <father_death_fx path=""/>
 		</fx>
 	</sounds>
+  
+  
 	<entities_data>
 		<!-- <player x="1450" y="2500" texturePath="Assets/Textures/Entidades/Jugador/salamanda.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg" Posx="150" Posy="570" Tsprite="23" Pwidth="1000" sprite_x="100" sprite_y="160"/>
             -->
