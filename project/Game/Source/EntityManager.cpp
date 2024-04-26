@@ -26,8 +26,12 @@
 #include "Item_Ojo.h"
 #include "Item_Hueso.h"
 #include "Item_Carbon.h"
-
-
+#include "Item_Viscera.h"
+#include "Item_Rubi.h"
+#include "Item_Diente.h"
+#include "Item_Amatista.h"
+#include "Item_Cola.h"
+#include "Item_Polvora.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -137,6 +141,24 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		break;
 	case EntityType::ITEM_CARBON:
 		entity = new Item_Carbon(type, 100, 100, 300, 5, 2);
+		break;
+	case EntityType::ITEM_VISCERAS:
+		entity = new Item_Viscera(type, 100, 100, 300, 5, 2);
+		break;
+	case EntityType::ITEM_RUBI:
+		entity = new Item_Rubi(type, 100, 100, 300, 5, 2);
+		break;
+	case EntityType::ITEM_DIENTE:
+		entity = new Item_Diente(type, 100, 100, 300, 5, 2);
+		break;
+	case EntityType::ITEM_AMATISTA:
+		entity = new Item_Amatista(type, 100, 100, 300, 5, 2);
+		break;
+	case EntityType::ITEM_COLA:
+		entity = new Item_Cola(type, 100, 100, 300, 5, 2);
+		break;
+	case EntityType::ITEM_POLVORA:
+		entity = new Item_Polvora(type, 100, 100, 300, 5, 2);
 		break;
 	case EntityType::ITEM:
 		entity = new Item();

@@ -78,6 +78,13 @@
 		<item_ojo texturePath="Assets/Textures/Entidades/Items/texture_eye.png" description="La leyenda dice que es un ojo." type ="apendice"/>
 		<item_hueso texturePath="Assets/Textures/Entidades/Items/textura_hueso.png" description="La leyenda dice que es un hueso." type ="apendice"/>
 		<item_carbon texturePath="Assets/Textures/Entidades/Items/textura_carbon.png" description="Mas negro que mi alma." type ="material"/>
+		<item_viscera texturePath="Assets/Textures/Entidades/Items/textura_visceras.png" description="lorem ipsum sit amet." type ="apendice"/>
+		<item_rubi texturePath="Assets/Textures/Entidades/Items/textura_rubi.png" description="lorem ipsum sit amet." type ="material"/>
+		<item_diente texturePath="Assets/Textures/Entidades/Items/textura_diente.png" description="lorem ipsum sit amet." type ="apendice"/>
+		<item_amatista texturePath="Assets/Textures/Entidades/Items/textura_amatista.png" description="lorem ipsum sit amet." type ="material"/>
+		<item_cola texturePath="Assets/Textures/Entidades/Items/textura_cola.png" description="Esta es la cola de los sureg masculinos." type ="apendice"/>
+		<item_polvora texturePath="Assets/Textures/Entidades/Items/textura_polvora.png" description="polvora, polvora, polvora, polvora, polvora, polvora, polvora, polvora" type ="material"/>
+		
 		
 		
 
