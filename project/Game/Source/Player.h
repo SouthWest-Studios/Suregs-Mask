@@ -175,6 +175,9 @@ public:
 
 	Timer collisionMask1Timer;
 
+	Timer timerChangeMask;
+	const int changeMaskCooldown = 5000; //5s
+
 	//Fishing
 	//New//
 	bool playermove = false;
