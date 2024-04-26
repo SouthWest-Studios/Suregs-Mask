@@ -52,11 +52,30 @@
       <buy_item_fx path=""/>
       <fishing_fx path=""/>
       <ols_attack_fx path=""/>
+      <ols_get_damage_fx path=""/>
       <ols_death_fx path=""/>
       <osiris_attack_fx path=""/>
+      <osiris_get_damage_fx path=""/>
+      <osiris_res_fx path=""/>
       <osiris_death_fx path=""/>
       <shar_attack_fx path=""/>
       <shar_death_fx path=""/>
+      <khurt_dig_start_fx path=""/>
+      <khurt_dig_move_fx path=""/>
+      <khurt_dig_end_fx path=""/>
+      <khurt_attack_fx path=""/>
+      <khurt_stun_fx path=""/>
+      <khurt_get_damage_fx path=""/>
+      <khurt_death_fx path=""/>
+      <boorok_attack_fx path=""/>
+      <boorok_sleep_fx path=""/>
+      <boorok_get_damage_fx path=""/>
+      <boorok_death_fx path=""/>
+      <muur_attack_fx path=""/>
+      <muur_stun_fx path=""/>
+      <muur_get_damage_fx path=""/>
+      <muur_death_fx path=""/>
+      
 		</fx>
 	</sounds>
 	<entities_data>
