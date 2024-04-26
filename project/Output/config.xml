@@ -19,6 +19,7 @@
 		<fullscreen_window value="false"/>
 	</window>
 
+  <!--Audio-->
 	<audio>
 		<music volume="64"/>
 		<fx volume="64"/>
@@ -31,6 +32,7 @@
 		</music>
 
 		<fx>
+      <!--ui-->
 			<intro_fx path="Assets/Audio/Fx/intro_fx.wav"/>
       <menu_fx path="Assets/Audio/Fx/menu_fx.wav"/>
       <button_fx path="Assets/Audio/Fx/button_fx.wav"/>
@@ -38,6 +40,11 @@
       <inventory_fx path="Assets/Audio/Fx/inventory_fx.wav"/>
       <change_inventory_fx path="Assets/Audio/Fx/change_inventory_fx.wav"/>
       <level_up_fx path=""/>
+      <get_item_fx path=""/>
+      <sell_item_fx path=""/>
+      <buy_item_fx path=""/>
+
+      <!--player-->
       <run_fx path="Assets/Audio/Fx/run_fx.wav"/>
       <runAlt_fx path="Assets/Audio/Fx/runAlt_fx.wav"/>
       <runAlt2_fx path="Assets/Audio/Fx/runAlt2_fx.wav"/>
@@ -48,17 +55,20 @@
       <use_potion_fx path=""/>
       <switch_potion_fx path=""/>
       <player_death_fx path=""/>
-      <get_item_fx path=""/>
-      <sell_item_fx path=""/>
-      <buy_item_fx path=""/>
+
+      <!--fishing-->
       <fishing_fx path=""/>
+
+      <!--enemies-->
       <ols_attack_fx path=""/>
       <ols_get_damage_fx path=""/>
       <ols_death_fx path=""/>
+      
       <osiris_attack_fx path=""/>
       <osiris_get_damage_fx path=""/>
       <osiris_res_fx path=""/>
       <osiris_death_fx path=""/>
+      
       <khurt_dig_start_fx path=""/>
       <khurt_dig_move_fx path=""/>
       <khurt_dig_end_fx path=""/>
@@ -66,32 +76,39 @@
       <khurt_stun_fx path=""/>
       <khurt_get_damage_fx path=""/>
       <khurt_death_fx path=""/>
+      
       <boorok_attack_fx path=""/>
       <boorok_sleep_fx path=""/>
       <boorok_get_damage_fx path=""/>
-      <boorok_death_fx path=""/>      
+      <boorok_death_fx path=""/>  
+      
       <muur_attack_fx path=""/>
       <muur_stun_fx path=""/>
       <muur_get_damage_fx path=""/>
       <muur_death_fx path=""/>
+
+      <!--bosses-->
       <boss1_melee_attack_fx path=""/>
       <boss1_ranged_attack_fx path=""/>
       <boss1_charged_attack_fx path=""/>
       <boss1_magic_attack_fx path=""/>
       <boss1_get_damage_fx path=""/>
       <boss1_death_fx path=""/>
+      
       <boss2_melee_attack_fx path=""/>
       <boss2_ranged_attack_fx path=""/>
       <boss2_charged_attack_fx path=""/>
       <boss2_invisible_dash_fx path=""/>
       <boss2_get_damage_fx path=""/>
       <boss2_death_fx path=""/>
+      
       <boss3_fast_melee_attack_fx path=""/>
       <boss3_charged_melee_attack_fx path=""/>
       <boss3_explosion_attack_fx path=""/>
       <boss3_ranged_attack_fx path=""/>
       <boss3_get_damage_fx path=""/>
       <boss3_death_fx path=""/>
+      
       <father_melee_attack_fx path=""/>
       <father_generate_sureg_fx path=""/>
       <father_charged_melee_attack_fx path=""/>
