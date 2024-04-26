@@ -343,24 +343,29 @@ MaskStats* Player::GetMaskStats(Mask mask)
 }
 
 void Player::ChangeMask() {
-	Mask temp = primaryMask;
-	primaryMask = secondaryMask;
-	secondaryMask = temp;
+	if (timerChangeMask.ReadMSec() > changeMaskCooldown) {
 
-	UnequipMasks();
+		Mask temp = primaryMask;
+		primaryMask = secondaryMask;
+		secondaryMask = temp;
 
-	EquipPrimaryMask(primaryMask);
-	EquipSecondaryMask(secondaryMask);
+		UnequipMasks();
 
-	cdTimerAttackMS = 100000 / currentStats.attackSpeed;
+		EquipPrimaryMask(primaryMask);
+		EquipSecondaryMask(secondaryMask);
 
-	printf("Player primary mask after mask change: %d\n", (static_cast<int>(primaryMask) - 1));
-	printf("Player secondary mask after mask change: %d\n", (static_cast<int>(secondaryMask) - 1));
-	printf("Player stats after mask change:\n");
-	printf("Max Health: %f\n", currentStats.maxHealth);
-	printf("Movement Speed: %f\n", currentStats.movementSpeed);
-	printf("Attack Speed: %f\n", currentStats.attackSpeed);
-	printf("Attack Damage: %f\n", currentStats.attackDamage);
+		cdTimerAttackMS = 100000 / currentStats.attackSpeed;
+
+		timerChangeMask.Start();
+
+		printf("Player primary mask after mask change: %d\n", (static_cast<int>(primaryMask) - 1));
+		printf("Player secondary mask after mask change: %d\n", (static_cast<int>(secondaryMask) - 1));
+		printf("Player stats after mask change:\n");
+		printf("Max Health: %f\n", currentStats.maxHealth);
+		printf("Movement Speed: %f\n", currentStats.movementSpeed);
+		printf("Attack Speed: %f\n", currentStats.attackSpeed);
+		printf("Attack Damage: %f\n", currentStats.attackDamage);
+	}
 }
 
 void Player::MaskAttack(float dt)
@@ -688,7 +693,7 @@ void Player::PlayerMovement(float dt)
 	}
 
 	//Si pulsas Q para cambiar de mascara
-	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN && timerChangeMask.ReadMSec() > changeMaskCooldown) {
 		ChangeMask();
 	}
 
