@@ -2,6 +2,7 @@
 #define __AUDIO_H__
 
 #include "Module.h"
+#include "Timer.h"
 
 #define DEFAULT_MUSIC_FADE_TIME 2.0f
 
@@ -41,6 +42,9 @@ public:
 	// Play a WAV from the config
 	unsigned int LoadAudioFx(const char* name);
 
+	// Play a music after the specified time
+	void PlayMusicAfterDelay(const char* name, float delayInSeconds, float fadeTime = DEFAULT_MUSIC_FADE_TIME);
+
 public:
 
 	int volumeMusic;
@@ -50,6 +54,8 @@ private:
 
 	_Mix_Music* music;
 	List<Mix_Chunk *>	fx;
+
+	Timer timer;
 };
 
 #endif // __AUDIO_H__

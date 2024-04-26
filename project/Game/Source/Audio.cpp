@@ -210,3 +210,17 @@ unsigned int Audio::LoadAudioFx(const char* name)
 
 	return LoadFx(audioNode.attribute("path").as_string());
 }
+
+void Audio::PlayMusicAfterDelay(const char* name, float delayInSeconds, float fadeTime)
+{
+	// Crear un temporizador de rendimiento
+	timer.Start();
+
+	// Esperar el tiempo especificado
+	while (timer.ReadSec() < delayInSeconds) {
+		// Hacer una espera 
+	}
+
+	// Una vez que haya pasado el tiempo especificado, reproducir la canción
+	LoadAudioMusic(name, fadeTime);
+}
