@@ -56,6 +56,7 @@ bool Scene_Pueblo::Start()
 	
 	//Music is commented so that you can add your own music
 	app->audio->LoadAudioMusic("town", 2.0f);
+	//app->audio->PlayMusicAfterDelay("town", 5.0f, 2.0f);  <--- Poner la musica despues de 5 seg (no funciona)
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
