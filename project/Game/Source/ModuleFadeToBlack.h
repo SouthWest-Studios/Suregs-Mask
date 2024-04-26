@@ -4,6 +4,8 @@
 #include "Module.h"
 #include "SDL\include\SDL_rect.h"
 
+struct SDL_Texture;
+
 class ModuleFadeToBlack : public Module
 {
 public:
@@ -44,6 +46,9 @@ private:
 	// The modules that should be switched after the first step
 	Module* moduleToEnable = nullptr;
 	Module* moduleToDisable = nullptr;
+
+	const char* transitionPath;
+	SDL_Texture* transition;
 
 public:
 

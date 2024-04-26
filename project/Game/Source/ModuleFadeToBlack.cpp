@@ -9,11 +9,12 @@
 #include "Module.h"
 #include "SDL/include/SDL_render.h"
 #include "Log.h"
+#include "Textures.h"
 
 ModuleFadeToBlack::ModuleFadeToBlack(App* app, bool start_enabled) : Module(app, start_enabled)
 {
 
-
+	name.Create("fadeToBlack");
 
 	
 }
@@ -27,6 +28,13 @@ bool ModuleFadeToBlack::Start()
 {
 	LOG("Preparing Fade Screen");
 
+	pugi::xml_document configFile;
+	pugi::xml_node config;
+	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
+	config = configFile.child("config").child(name.GetString());
+
+	transitionPath = config.child("transition").attribute("texturepath").as_string();
+	transition = app->tex->Load(transitionPath);
 
 	uint winW, winH;
 	app->win->GetWindowSize(winW, winH);
@@ -112,6 +120,9 @@ bool ModuleFadeToBlack::PostUpdate()
 	// Render the black square with alpha on the screen
 	SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, (Uint8)(fadeRatio * 255.0f));
 	SDL_RenderFillRect(app->render->renderer, &screenRect);
+
+	/*app->render->DrawTexture(transition, 0, 0, 1, SDL_FLIP_NONE, &screenRect, fadeRatio * 1.0f);*/
+	
 
 	return true;
 }
