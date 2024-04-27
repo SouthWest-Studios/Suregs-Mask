@@ -43,17 +43,21 @@
       <get_item_fx path=""/>
       <sell_item_fx path=""/>
       <buy_item_fx path=""/>
+      <dialog_fx path="Assets/Audio/Fx/dialog_fx.wav"/>
 
       <!--player-->
       <run_fx path="Assets/Audio/Fx/run_fx.wav"/>
       <runAlt_fx path="Assets/Audio/Fx/runAlt_fx.wav"/>
       <runAlt2_fx path="Assets/Audio/Fx/runAlt2_fx.wav"/>
       <dash_fx path="Assets/Audio/Fx/dash_fx.wav"/>
-      <basic_attack_fx path=""/>
+      <basic_combo_attack1_fx path="Assets/Audio/Fx/basic_combo_attack1_fx.wav"/>
+      <basic_combo_attack2_fx path="Assets/Audio/Fx/basic_combo_attack2_fx.wav"/>
+      <basic_combo_attack3_fx path="Assets/Audio/Fx/basic_combo_attack3_fx.wav"/>
       <mask_ability_fx path=""/>
       <switch_masks_fx path=""/>
       <use_potion_fx path=""/>
       <switch_potion_fx path=""/>
+      <player_get_damage_fx path="Assets/Audio/Fx/player_get_damage_fx.wav"/>
       <player_death_fx path=""/>
 
       <!--fishing-->
@@ -61,8 +65,10 @@
 
       <!--enemies-->
       <ols_attack_fx path=""/>
-      <ols_get_damage_fx path=""/>
-      <ols_death_fx path=""/>
+      <ols_get_damage_fx path="Assets/Audio/Fx/ols_get_damage_fx.wav"/>
+      <ols_get_damageAlt_fx path="Assets/Audio/Fx/ols_getAlt_damage_fx.wav"/>
+      <ols_get_damageAlt2_fx path="Assets/Audio/Fx/ols_getAlt2_damage_fx.wav"/>
+      <ols_death_fx path="Assets/Audio/Fx/ols_death_fx.wav"/>
       
       <osiris_attack_fx path=""/>
       <osiris_get_damage_fx path=""/>
@@ -79,7 +85,8 @@
       
       <boorok_attack_fx path=""/>
       <boorok_sleep_fx path=""/>
-      <boorok_get_damage_fx path=""/>
+      <boorok_get_damage_fx path="Assets/Audio/Fx/boorok_get_damage_fx.wav"/>
+      <boorok_get_damageAlt_fx path="Assets/Audio/Fx/boorok_get_damageAlt_fx.wav"/>
       <boorok_death_fx path=""/>  
       
       <muur_attack_fx path=""/>

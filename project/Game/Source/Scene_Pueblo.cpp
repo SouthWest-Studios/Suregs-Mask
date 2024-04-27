@@ -100,7 +100,7 @@ bool Scene_Pueblo::Update(float dt)
 
 	if (app->audio->playingMusic == false) 
 	{
-		app->audio->PlayMusicAfterDelay("town", 5.0f, 0.0f);
+		app->audio->PlayMusicAfterDelay("town", 5.0f);
 	}
 
 	return true;

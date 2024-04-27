@@ -131,7 +131,8 @@ public:
 	//Audio fx
 	int run_fx;
 	int dash_fx;
-
+	int basic_combo_attack1_fx;
+	int player_get_damage_fx;
 
 	Animation* currentAnimation = nullptr;
 	EntityState state;
