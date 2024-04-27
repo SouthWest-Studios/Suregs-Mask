@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="126" height="160" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="62">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="126" height="160" tilewidth="32" tileheight="32" infinite="0" nextlayerid="16" nextobjectid="108">
  <tileset firstgid="1" name="Mazmorra0" tilewidth="32" tileheight="32" tilecount="17289" columns="113">
   <image source="../../Textures/Mapas/Mazmorras/Mazmorra0.png" width="3626" height="4920"/>
  </tileset>
@@ -80684,6 +80684,31 @@
    <tile/>
   </data>
  </layer>
+ <objectgroup id="15" name="CollisionCamera">
+  <properties>
+   <property name="Salas" type="bool" value="true"/>
+  </properties>
+  <object id="104" x="2174.5" y="1312" width="1288.68" height="726">
+   <properties>
+    <property name="Type" value="isSmallRoom"/>
+   </properties>
+  </object>
+  <object id="105" x="810.667" y="2098.67" width="1289.58" height="724.083">
+   <properties>
+    <property name="Type" value="isSmallRoom"/>
+   </properties>
+  </object>
+  <object id="106" x="2160.5" y="3595" width="1289" height="723.5">
+   <properties>
+    <property name="Type" value="isSmallRoom"/>
+   </properties>
+  </object>
+  <object id="107" x="2163.45" y="2087.58" width="1285.63" height="1449.33">
+   <properties>
+    <property name="Type" value="isLargeRoom"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup color="#ff0000" id="11" name="CollisionWalls">
   <object id="41" x="2240" y="3680" width="32" height="544"/>
   <object id="42" x="2240" y="4224" width="1120" height="32"/>

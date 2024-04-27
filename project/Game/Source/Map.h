@@ -213,10 +213,13 @@ public:
     SString path;
     SString pathTextures;
     PathFinding* pathfinding;
+    MapData mapData;
+    List<MapObject*> smallRoomsList;
+    List<MapObject*> largeRoomsList;
 
 private:
     
-    MapData mapData;
+
     bool mapLoaded;
     MapLayer* navigationLayer;
     int blockedGid = 49; //!!!! make sure that you assign blockedGid according to your map

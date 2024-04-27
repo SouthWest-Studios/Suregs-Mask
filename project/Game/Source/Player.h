@@ -8,6 +8,7 @@
 #include "Timer.h"
 #include "Fishing.h"
 #include "Physics.h"
+#include "Map.h"
 #include <map>
 
 struct SDL_Texture;
@@ -221,6 +222,10 @@ public:
 	bool pressingRight;
 
 	bool isFacingLeft = false;
+
+	//Camera
+	MapObject* GetCurrentRoom();
+	int clamp(int val, int min, int max);
 
 private:
 	Animation idleAnim;

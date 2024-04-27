@@ -706,13 +706,98 @@ void Player::CameraMovement(float dt)
 			app->render->camera.x = lerp(app->render->camera.x, targetPosX, 1);
 			app->render->camera.y = lerp(app->render->camera.y, targetPosY, 1);
 		}
-		else {
-			app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
-			app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.005f);
-		}
+		else
+		{
+			MapObject* currentRoom = GetCurrentRoom();
+			if (currentRoom != nullptr)
+			{
+				/*int cameraMinX = -(int)(currentRoom->x * app->win->GetScale());
+				int cameraMaxX = -(int)((currentRoom->x + currentRoom->width - windowW / app->win->GetScale()) * app->win->GetScale());
+				int cameraMinY = -(int)(currentRoom->y * app->win->GetScale());
+				int cameraMaxY = -(int)((currentRoom->y + currentRoom->height - windowH / app->win->GetScale()) * app->win->GetScale());*/
 
+				// Comprueba si la sala actual es pequeña
+				if (app->map->smallRoomsList.Find(currentRoom) != -1)
+				{
+					int targetPosX = (-(int)(currentRoom->x + currentRoom->width / 2) * app->win->GetScale() + (windowW / 2) - 10);
+					int targetPosY = (-(int)(currentRoom->y + currentRoom->height / 2) * app->win->GetScale() + (windowH / 2) - 10);
+					app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
+					app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.005f);
+				}
+				// Comprueba si la sala actual es grande
+				else if (app->map->largeRoomsList.Find(currentRoom) != -1)
+				{
+					app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
+					app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.005f);
+
+
+					//int targetPosX = lerp(app->render->camera.x, -position.x * app->win->GetScale() + (windowW / 2) - 10, dt * 0.005f);
+					//int targetPosY = lerp(app->render->camera.y, -position.y * app->win->GetScale() + (windowH / 2) - 10, dt * 0.005f);
+
+					//if (targetPosX < cameraMaxX) targetPosX = cameraMaxX;
+					//if (targetPosX > cameraMinX) targetPosX = cameraMinX;
+					//if (targetPosY < cameraMaxY) targetPosY = cameraMaxY;
+					//if (targetPosY > cameraMinY) targetPosY = cameraMinY;
+
+					//app->render->camera.x = targetPosX;
+					//app->render->camera.y = targetPosY;
+				}
+			}
+
+
+			else
+			{
+				app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
+				app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.005f);
+			}
+		}
 	}
 }
+
+int Player::clamp(int val, int min, int max)
+{
+	if (val < min)
+		return min;
+	else if (val > max)
+		return max;
+	else
+		return val;
+}
+
+MapObject* Player::GetCurrentRoom()
+{
+	//salas pequeñas
+	for (ListItem<MapObject*>* item = app->map->smallRoomsList.start; item != nullptr; item = item->next)
+	{
+		MapObject* room = item->data;
+
+		// el jugador está dentro de la sala
+		if (position.x >= room->x && position.x <= room->x + room->width &&
+			position.y >= room->y && position.y <= room->y + room->height)
+		{
+			printf("Player is in the room at position (%d, %d)\n", room->x, room->y);
+			return room;
+		}
+	}
+
+	//salas grandes
+	for (ListItem<MapObject*>* item = app->map->largeRoomsList.start; item != nullptr; item = item->next)
+	{
+		MapObject* room = item->data;
+
+		// el jugador está dentro de la sala
+		if (position.x >= room->x && position.x <= room->x + room->width &&
+			position.y >= room->y && position.y <= room->y + room->height)
+		{
+			return room;
+		}
+	}
+
+	return nullptr;
+}
+
+
+
 
 void Player::GodMode(float dt)
 {
