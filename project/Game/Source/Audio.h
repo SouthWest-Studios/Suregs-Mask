@@ -27,6 +27,9 @@ public:
 	// Play a music file
 	bool PlayMusic(const char* path, float fadeTime = DEFAULT_MUSIC_FADE_TIME);
 
+	// Stop playing a music
+	bool StopMusic(float fadeTime = DEFAULT_MUSIC_FADE_TIME);
+
 	// Load a WAV in memory
 	unsigned int LoadFx(const char* path);
 
@@ -50,12 +53,13 @@ public:
 	int volumeMusic;
 	int volumeFx;
 
+	bool playingMusic = false;
+	Timer timer;
+
 private:
 
 	_Mix_Music* music;
 	List<Mix_Chunk *>	fx;
-
-	Timer timer;
 };
 
 #endif // __AUDIO_H__
