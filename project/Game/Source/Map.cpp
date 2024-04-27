@@ -837,7 +837,6 @@ bool Map::LoadObjects()
 
 			MapObject* object = mapObjectsItem->data->objects[i];
 			
-
 			if (object->properties.GetProperty("dialogID") != NULL) {
 
 			
@@ -859,11 +858,23 @@ bool Map::LoadObjects()
 
 
 
-
 				
 				/*c1 = app->physics->CreateRectangleSensor(object->x + object->width / 2, object->y + object->height / 2, object->width, object->height, STATIC);
 				c1->ctype = ColliderType::UNKNOWN;*/
 			}
+
+			// el objeto es una sala pequeña
+			else if (object->properties.GetProperty("Type") != NULL && object->properties.GetProperty("Type")->value == "isSmallRoom")
+			{
+				smallRoomsList.Add(object);
+			}
+			// el objeto es una sala grande
+			else if (object->properties.GetProperty("Type") != NULL && object->properties.GetProperty("Type")->value == "isLargeRoom")
+			{
+				largeRoomsList.Add(object); 
+			}
+
+
 			else {
 				PhysBody* c1;
 
