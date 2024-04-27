@@ -55,7 +55,7 @@ bool Physics::PreUpdate()
 
 	// Because Box2D does not automatically broadcast collisions/contacts with sensors, 
 	// we have to manually search for collisions and "call" the equivalent to the ModulePhysics::BeginContact() ourselves...
-	for (b2Contact* c = world->GetContactList(); c; c = c->GetNext())
+	for (b2Contact* c = world->GetContactList(); c && c != nullptr && c != NULL; c = c->GetNext())
 	{
 		// For each contact detected by Box2D, see if the first one colliding is a sensor
 		if (c->IsTouching() && c->GetFixtureA()->IsSensor())
@@ -349,10 +349,10 @@ void Physics::BeginContact(b2Contact* contact)
 	PhysBody* physA = (PhysBody*)contact->GetFixtureA()->GetBody()->GetUserData();
 	PhysBody* physB = (PhysBody*)contact->GetFixtureB()->GetBody()->GetUserData();
 
-	if (physA && physA->listener != NULL && physA->listener != nullptr)
+	if (physA && physA->listener != NULL && physA->listener != nullptr && physA->listener)
 		physA->listener->OnCollision(physA, physB);
 
-	if (physB && physB->listener != NULL && physB->listener != nullptr)
+	if (physB && physB->listener != NULL && physB->listener != nullptr && physB->listener)
 		physB->listener->OnCollision(physB, physA);
 }
 
