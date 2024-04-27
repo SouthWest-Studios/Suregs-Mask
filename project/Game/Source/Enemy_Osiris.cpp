@@ -129,6 +129,17 @@ bool Enemy_Osiris::Update(float dt)
 		break;
 	}
 
+	if (poisonTimer < poisonDuration) {
+		poisonTimer += 1/dt;
+		timeSinceLastTick += 1/dt ;
+
+		if (timeSinceLastTick >= poisonTickRate) {
+			// Asume que tienes una funciÃ³n TakeDamage() que maneja la lÃ³gica de daÃ±o
+			TakeDamage(poisonDamage);
+			timeSinceLastTick -= poisonTickRate;
+		}
+	}
+
 	currentState = nextState;
 	currentAnimation->Update();
 	return true;
@@ -141,8 +152,8 @@ bool Enemy_Osiris::PostUpdate() {
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
 
-	if (timerRecibirDañoColor.ReadMSec() <= 100) {
-		float alpha = (100 - timerRecibirDañoColor.ReadMSec()) / 100;
+	if (timerRecibirDanioColor.ReadMSec() <= 100) {
+		float alpha = (100 - timerRecibirDanioColor.ReadMSec()) / 100;
 		SDL_SetTextureAlphaMod(texture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
 
 	}
@@ -160,7 +171,7 @@ bool Enemy_Osiris::PostUpdate() {
 	}
 
 
-	//Efecto daño
+	//Efecto daï¿½o
 	
 
 
@@ -242,7 +253,7 @@ void Enemy_Osiris::Die() {
 		}
 		float randomValue = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
 
-		// Determina si el ítem debe crearse basado en un 30% de probabilidad
+		// Determina si el ï¿½tem debe crearse basado en un 30% de probabilidad
 		if (randomValue <= 0.25f) {
 			Item_Hueso* hueso = (Item_Hueso*)app->entityManager->CreateEntity(EntityType::ITEM_HUESO);
 			hueso->config = configNode.child("entities_data").child("item_hueso");
@@ -365,7 +376,7 @@ float Enemy_Osiris::GetHealth() const {
 void Enemy_Osiris::TakeDamage(float damage) {
 	if (currentState != EntityState::DEAD) {
 		health -= damage;
-		timerRecibirDañoColor.Start();
+		timerRecibirDanioColor.Start();
 
 		printf("Enemy_Osiris has received  %f damage\n", damage);
 		if (currentState == EntityState::REVIVING) {
@@ -377,3 +388,10 @@ void Enemy_Osiris::TakeDamage(float damage) {
 	}
 }
 
+void Enemy_Osiris::ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate) {
+	this->poisonDamage = poisonDamage;
+	this->poisonDuration = poisonDuration;
+	this->poisonTickRate = poisonTickRate;
+	this->poisonTimer = 0.0f;
+	this->timeSinceLastTick = 0.0f;
+}

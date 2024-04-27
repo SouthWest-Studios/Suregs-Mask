@@ -60,6 +60,11 @@ struct MaskStats {
 
 	//Mask3
 
+
+	//Venenos
+	int poisonDamage;
+	float poisonDuration;
+	float poisonTickRate;
 };
 
 struct PassiveStats {
@@ -111,6 +116,7 @@ public:
 	void ChangeMask();
 	void EquipPrimaryMask(Mask mask);
 	void EquipSecondaryMask(Mask mask);
+	void ApplyPoison(Entity* entity);
 
 	Mask* GetPrimaryMask();
 	Mask* GetSecondaryMask();

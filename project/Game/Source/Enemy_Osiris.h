@@ -53,7 +53,9 @@ public:
 	float GetHealth() const;
 	void TakeDamage(float damage);
 
-
+	//Veneno
+	void ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate);
+	
 public:
 
 	//L02: DONE 2: Declare player parameters
@@ -114,9 +116,14 @@ private:
 	Animation SPosition;
 	SDL_Rect* spritePositions;
 
-	Timer timerRecibirDañoColor;
+	Timer timerRecibirDanioColor;
 	
-
+	//Veneno
+	float poisonTimer = 0.0f; // Tiempo desde que se aplicï¿½ el veneno
+	float poisonDuration = 0.0f; // Duraciï¿½n total del veneno
+	float poisonTickRate = 0.0f; // Tiempo entre cada tick de daï¿½o de veneno
+	float poisonDamage = 0.0f; // Daï¿½o de veneno por tick
+	float timeSinceLastTick = 0.0f; // Tiempo desde el ï¿½ltimo tick de daï¿½o de veneno
 
 public:
 

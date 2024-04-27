@@ -133,6 +133,21 @@ public:
 		health -= damage;
 	}
 
+	virtual void ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate) {
+		this->poisonDamage = poisonDamage;
+		this->poisonDuration = poisonDuration;
+		this->poisonTickRate = poisonTickRate;
+		this->poisonTimer = 0.0f;
+		this->timeSinceLastTick = 0.0f;
+	}
+
+protected:
+	int poisonDamage;
+	float poisonDuration;
+	float poisonTickRate;
+	float poisonTimer = 0.0f;
+	float timeSinceLastTick = 0.0f;
+
 public:
 
 	SString name;

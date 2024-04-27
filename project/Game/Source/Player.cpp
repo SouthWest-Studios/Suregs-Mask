@@ -41,6 +41,9 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK0][0].maskCoolDown = 25000; //En Milisegundos
 	maskStats[Mask::MASK0][0].firstTimeUsed = false;
 	maskStats[Mask::MASK0][0].numberLightning = 1;
+	maskStats[Mask::MASK0][0].poisonDamage = 0;
+	maskStats[Mask::MASK0][0].poisonDuration = 0;
+	maskStats[Mask::MASK0][0].poisonTickRate = 0;
 	
 
 	// maskStats[static_cast<int>(Mask::MASK0)].maxHealthModifier = 0;
@@ -61,6 +64,9 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK0][1].maskCoolDown = 23000; //En Milisegundos
 	maskStats[Mask::MASK0][1].firstTimeUsed = false;
 	maskStats[Mask::MASK0][1].numberLightning = 2;
+	maskStats[Mask::MASK0][1].poisonDamage = 10;
+	maskStats[Mask::MASK0][1].poisonDuration = 6.0f;
+	maskStats[Mask::MASK0][1].poisonTickRate = 1.5f;
 
 	//Estadísticas de la máscara 0 a nivel 2
 	
@@ -72,6 +78,9 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK0][2].maskCoolDown = 20000; //En Milisegundos
 	maskStats[Mask::MASK0][2].firstTimeUsed = false;
 	maskStats[Mask::MASK0][2].numberLightning = 3;
+	maskStats[Mask::MASK0][2].poisonDamage = 20;
+	maskStats[Mask::MASK0][2].poisonDuration = 6.0f;
+	maskStats[Mask::MASK0][2].poisonTickRate = 1.5f;
 
 	//Estadísticas de la máscara 0 a nivel 3
 	
@@ -83,6 +92,9 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK0][3].maskCoolDown = 17000; //En Milisegundos
 	maskStats[Mask::MASK0][3].firstTimeUsed = false;
 	maskStats[Mask::MASK0][3].numberLightning = 4;
+	maskStats[Mask::MASK0][3].poisonDamage = 20;
+	maskStats[Mask::MASK0][3].poisonDuration = 9.0f;
+	maskStats[Mask::MASK0][3].poisonTickRate = 1.5f;
 
 	//Estadísticas de la máscara 0 a nivel 4
 	
@@ -94,6 +106,9 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK0][4].maskCoolDown = 15000; //En Milisegundos
 	maskStats[Mask::MASK0][4].firstTimeUsed = false;
 	maskStats[Mask::MASK0][4].numberLightning = 5;
+	maskStats[Mask::MASK0][4].poisonDamage = 30;
+	maskStats[Mask::MASK0][4].poisonDuration = 11.0f;
+	maskStats[Mask::MASK0][4].poisonTickRate = 1.5f;
 
 
 	// Estadísticas de la máscara 1 a nivel 0
@@ -284,7 +299,7 @@ bool Player::Start() {
 	EquipSecondaryMask(Mask::NOMASK);
 
 	//PARA TESTEAR
-	maskLevels[Mask::MASK0] = 3; 
+	maskLevels[Mask::MASK0] = 4; 
 	printf("Primary mask: %d, Level: %d\n", static_cast<int>(primaryMask), maskLevels[primaryMask]);
 	return true;
 }
@@ -518,6 +533,15 @@ void Player::MaskAttack(float dt)
 		break;
 	}
 }
+void Player::ApplyPoison(Entity* entity) {
+	int poisonDamage = maskStats[Mask::MASK0][maskLevels[Mask::MASK0]].poisonDamage;
+	float poisonDuration = maskStats[Mask::MASK0][maskLevels[Mask::MASK0]].poisonDuration / 1000.0f; // Convertir a segundos
+	float poisonTickRate = maskStats[Mask::MASK0][maskLevels[Mask::MASK0]].poisonTickRate / 1000.0f; // Convertir a segundos
+
+	// Aquí asumimos que Entity tiene una función ApplyPoison que toma estos parámetros.
+	// Si no es el caso, necesitarás ajustar este código.
+	entity->ApplyPoison(poisonDamage, poisonDuration, poisonTickRate);
+}
 
 //Rango ataque mascara 0
 Entity* Player::GetEnemyWithHighestHealthWithinRadius(iPoint position, int radius) {
@@ -552,10 +576,13 @@ void Player::CastLightning() {
 	if (target != nullptr) {
 		printf("Enemy hit: %p at position (%d, %d)\n", (void*)target, target->position.x, target->position.y);
         target->TakeDamage(maskStats[primaryMask][maskLevels[primaryMask]].maskDamage);
+		target->ApplyPoison(maskStats[primaryMask][maskLevels[primaryMask]].poisonDamage, maskStats[primaryMask][maskLevels[primaryMask]].poisonDuration, maskStats[primaryMask][maskLevels[primaryMask]].poisonTickRate);
+		//ApplyPoison(target);
 	}
 	else {
 		printf("No enemy alive in range to attack\n");
 	}
+	
 }
 
 //Ataque mascara 1
