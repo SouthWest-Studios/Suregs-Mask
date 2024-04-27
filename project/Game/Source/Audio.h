@@ -46,7 +46,7 @@ public:
 	unsigned int LoadAudioFx(const char* name);
 
 	// Play a music after the specified time
-	void PlayMusicAfterDelay(const char* name, float delayInSeconds, float fadeTime = 0); // <-- Si en fadeTime se pone algo que no sea 0 retrasa el Update dela escena
+	void PlayMusicAfterDelay(const char* name, float delayInSeconds, float fadeTime = DEFAULT_MUSIC_FADE_TIME);
 
 public:
 

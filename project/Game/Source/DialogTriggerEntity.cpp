@@ -58,6 +58,8 @@ bool DialogTrigger::Start() {
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 
+	dialog_fx = app->audio->LoadAudioFx("dialog_fx");
+
 	if (faceTexturePath != "") {
 		faceTexture = app->tex->Load(faceTexturePath);
 	}

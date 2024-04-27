@@ -266,6 +266,8 @@ bool Player::Start() {
 	//initialize audio effect
 	run_fx = app->audio->LoadAudioFx("runAlt_fx");
 	dash_fx = app->audio->LoadAudioFx("dash_fx");
+	basic_combo_attack1_fx = app->audio->LoadAudioFx("basic_combo_attack1_fx");
+	player_get_damage_fx = app->audio->LoadAudioFx("player_get_damage_fx");
 
 	cdTimerDashMS = 500;
 	cdTimerAttackMS = 100000 / currentStats.attackSpeed;
@@ -321,7 +323,7 @@ bool Player::Update(float dt)
 	switch (nextState) {
 	case EntityState::RUNNING:
 		Run(dt);
-		app->audio->PlayFx(run_fx);
+		app->audio->PlayFx(run_fx); // <--- Hay que arreglarlo
 		break;
 	case EntityState::ATTACKING:
 		Attack(dt);
@@ -423,6 +425,8 @@ void Player::Attack(float dt)
 		mask1PassiveSensor->ctype = ColliderType::MASK0_PASSIVE_ATTACK;
 		mask1PassiveSensor->listener = this;
 	}
+
+	app->audio->PlayFx(basic_combo_attack1_fx); // <--- No funciona
 }
 
 void Player::UnequipMasks() {
@@ -589,6 +593,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 				}
 			}
 		}
+		app->audio->PlayFx(player_get_damage_fx); // <--- Hay que arreglarlo
 		break;
 	case ColliderType::RESOURCE:
 		LOG("Collision RESOURCE");
