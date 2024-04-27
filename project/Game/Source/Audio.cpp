@@ -143,6 +143,27 @@ bool Audio::PlayMusic(const char* path, float fadeTime)
 	return ret;
 }
 
+bool Audio::StopMusic(float fadeTime)
+{
+	if (!active || music == NULL) {
+		return false;
+	}
+
+	if (fadeTime > 0.0f) {
+		Mix_FadeOutMusic(int(fadeTime * 1000.0f));
+	}
+	else {
+		Mix_HaltMusic();
+	}
+
+	Mix_FreeMusic(music);
+	music = NULL;
+
+	playingMusic = false;
+
+	return true;
+}
+
 // Load WAV
 unsigned int Audio::LoadFx(const char* path)
 {
@@ -209,4 +230,14 @@ unsigned int Audio::LoadAudioFx(const char* name)
 
 
 	return LoadFx(audioNode.attribute("path").as_string());
+}
+
+void Audio::PlayMusicAfterDelay(const char* name, float delayInSeconds, float fadeTime)
+{
+	// Esperar el tiempo especificado
+	if (timer.ReadSec() >= delayInSeconds) {
+		// Una vez que haya pasado el tiempo especificado, reproducir la canción
+		LoadAudioMusic(name, fadeTime);
+		playingMusic = true;
+	}
 }

@@ -112,6 +112,6 @@ void GuiControlSlider::Draw()
     app->render->DrawTexture(knob, knobRect.x, knobRect.y, SDL_FLIP_NONE, 0, 0, true);
 
     // Draw the text label
-    app->render->DrawText(text.GetString(), bounds.x, bounds.y - 20, bounds.w, 20);
+    app->render->DrawText(text.GetString(), bounds.x, bounds.y - 20, 70, 25);
 
 }

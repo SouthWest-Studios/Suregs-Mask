@@ -17,6 +17,13 @@
 #include "GuiControl.h"
 #include "GuiManager.h"
 #include "Item_Carbon.h"
+#include "Item_Viscera.h"
+#include "Item_Rubi.h"
+#include "Item_Diente.h"
+#include "Item_Amatista.h"
+#include "Item_Cola.h"
+#include "Item_Polvora.h"
+#include "Item_Hueso.h"
 
 Scene_testing::Scene_testing(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -117,10 +124,40 @@ bool Scene_testing::Start()
 	carbon->position = iPoint(1903, 2595);
 	carbon->Start();
 
-	Item_Carbon* carbon2 = (Item_Carbon*)app->entityManager->CreateEntity(EntityType::ITEM_CARBON);
-	carbon2->config = configNode.child("entities_data").child("item_carbon");
-	carbon2->position = iPoint(1923, 2595);
-	carbon2->Start();
+	Item_Viscera* viscera = (Item_Viscera*)app->entityManager->CreateEntity(EntityType::ITEM_VISCERAS);
+	viscera->config = configNode.child("entities_data").child("item_viscera");
+	viscera->position = iPoint(1923, 2595);
+	viscera->Start();
+
+	Item_Rubi* rubi = (Item_Rubi*)app->entityManager->CreateEntity(EntityType::ITEM_RUBI);
+	rubi->config = configNode.child("entities_data").child("item_rubi");
+	rubi->position = iPoint(1943, 2595);
+	rubi->Start();
+
+	Item_Diente* diente = (Item_Diente*)app->entityManager->CreateEntity(EntityType::ITEM_DIENTE);
+	diente->config = configNode.child("entities_data").child("item_diente");
+	diente->position = iPoint(1973, 2595);
+	diente->Start();
+
+	Item_Amatista* amatista = (Item_Amatista*)app->entityManager->CreateEntity(EntityType::ITEM_AMATISTA);
+	amatista->config = configNode.child("entities_data").child("item_amatista");
+	amatista->position = iPoint(1873, 2595);
+	amatista->Start();
+
+	Item_Cola* cola = (Item_Cola*)app->entityManager->CreateEntity(EntityType::ITEM_COLA);
+	cola->config = configNode.child("entities_data").child("item_cola");
+	cola->position = iPoint(1873, 2555);
+	cola->Start();
+
+	Item_Polvora* polvora = (Item_Polvora*)app->entityManager->CreateEntity(EntityType::ITEM_POLVORA);
+	polvora->config = configNode.child("entities_data").child("item_polvora");
+	polvora->position = iPoint(1853, 2555);
+	polvora->Start();
+
+	Item_Hueso* hueso = (Item_Hueso*)app->entityManager->CreateEntity(EntityType::ITEM_HUESO);
+	hueso->config = configNode.child("entities_data").child("item_hueso");
+	hueso->position = iPoint(1823, 2555);
+	hueso->Start();
 
 	return true;
 }

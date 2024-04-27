@@ -323,16 +323,16 @@ void Scene_Menu::SettingsInterface()
 		else
 		{
 
-			SDL_Rect MusicPos = { windowWidth / 2 - 100 ,windowHeight / 2 - 200, 200, 50 };
+			SDL_Rect MusicPos = { windowWidth / 2 - 110 ,windowHeight / 2 - 40, 200, 50 };
 			music = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 7, "MUSIC", MusicPos, this, { 0, 0,20, 20 }, { 0,0,0,0 }, 0, 100);
 
-			SDL_Rect SfxPos = { windowWidth / 2 - 100 ,windowHeight / 2 - 150, 200, 50 };
+			SDL_Rect SfxPos = { windowWidth / 2 - 110 ,windowHeight / 2 + 20, 200, 50 };
 			sfx = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 8, "SFX", SfxPos, this, { 0, 0, 20, 20 }, { 0,0,0,0 }, 0, 100);
 
-			SDL_Rect FullScreen = { windowWidth / 2 + 100 ,windowHeight / 2 - 50, 230,50 };
+			SDL_Rect FullScreen = { windowWidth / 2 + 100 ,windowHeight / 2 + 60, 230,50 };
 			fullscreen = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 9, "FULLSCREEN", FullScreen, this, { 0,0,0,0 }, { -50,0,0,0 });
 
-			SDL_Rect vSyncpos = { windowWidth / 2 + 100 ,windowHeight / 2 + 100, 200, 50 };
+			SDL_Rect vSyncpos = { windowWidth / 2 + 100 ,windowHeight / 2 + 130, 200, 50 };
 			vsync = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 10, "VSYNC", vSyncpos, this, { 0, 0, 20, 20 });
 
 			SDL_Rect TitlePos = { 550, 550,	136,46 };

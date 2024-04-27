@@ -303,10 +303,6 @@ Inventity* InventoryManager::CreateItem(EntityType type, std::string descripcioo
 	entity->tipo = tipoo;
 	switch (type)
 	{
-	case EntityType::ITEM_COLA:
-		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_cola.png");
-		entity->type = InventityType::COLA;
-		break;
 	case EntityType::ITEM_DIAMANTE:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_diamante.png");
 		entity->type = InventityType::DIAMANTE;
@@ -327,7 +323,30 @@ Inventity* InventoryManager::CreateItem(EntityType type, std::string descripcioo
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_carbon.png");
 		entity->type = InventityType::CARBON;
 		break;
-	
+	case EntityType::ITEM_VISCERAS:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_visceras.png");
+		entity->type = InventityType::VISCERA;
+		break;
+	case EntityType::ITEM_RUBI:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_rubi.png");
+		entity->type = InventityType::RUBI;
+		break;
+	case EntityType::ITEM_DIENTE:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_diente.png");
+		entity->type = InventityType::DIENTE;
+		break;
+	case EntityType::ITEM_AMATISTA:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_amatista.png");
+		entity->type = InventityType::AMATISTA;
+		break;
+	case EntityType::ITEM_COLA:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_cola.png");
+		entity->type = InventityType::COLA;
+		break;
+	case EntityType::ITEM_POLVORA:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_polvora.png");
+		entity->type = InventityType::POLVORA;
+		break;
 	default:
 		break;
 	}
@@ -345,7 +364,7 @@ bool InventoryManager::IsFull()
 
 
 	// Verificar si el siguiente ID disponible es 9
-	if (inventities.Count() == 10) {
+	if (inventities.Count() == 12) {
 		return true;
 	}
 	else {
@@ -407,6 +426,7 @@ bool InventoryManager::LoadState(pugi::xml_node node)
 			itemConfigurationNode = entitiesDataNode.child("item_garra");
 			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_ARMADURA, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
 			break;
+
 		case InventityType::UNKNOWN:
 			break;
 		default:
@@ -706,7 +726,7 @@ bool InventoryManager::PostUpdate()
 			int rowIndex = item->data->id / maxItemsPerRow; // Calcula el índice de la fila
 			int columnIndex = item->data->id % maxItemsPerRow; // Calcula el índice de la columna
 			int horizontalPosition = 320 + columnIndex * 105; // Calcula la posición horizontal
-			int verticalPosition = 230 + rowIndex * 105; // Calcula la posición vertical
+			int verticalPosition = 230 + rowIndex * 103; // Calcula la posición vertical
 			if (pEntity->quantity > 1)
 			{
 				std::string quantityStr = std::to_string(pEntity->quantity);
@@ -715,7 +735,7 @@ bool InventoryManager::PostUpdate()
 			}
 			
 			horizontalPosition = 280 + columnIndex * 105; // Calcula la posición horizontal para pEntity
-			verticalPosition = 180 + rowIndex * 105; // Calcula la posición vertical para pEntity
+			verticalPosition = 180 + rowIndex * 104; // Calcula la posición vertical para pEntity
 
 			app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
 

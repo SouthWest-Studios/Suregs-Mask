@@ -8,6 +8,7 @@
 #include "Timer.h"
 #include "Fishing.h"
 #include "Physics.h"
+#include <map>
 
 struct SDL_Texture;
 
@@ -104,8 +105,12 @@ public:
 
     Stats baseStats;
     Stats currentStats;
-	MaskStats maskStats[5];
-	PassiveStats passiveStats[5];
+	
+	std::map<Mask, std::map<int, MaskStats>> maskStats; 
+	std::map<Mask, std::map<int, PassiveStats>> passiveStats;
+	std::map<Mask, int> maskLevels;
+	//MaskStats maskStats[5];
+	//PassiveStats passiveStats[5];
 
 private:
 	void CameraMovement(float dt);
@@ -141,7 +146,7 @@ public:
 	int Photowidth;
 
 	bool inAnimation = false;
-	//Dashi
+	//Dash
 	bool playerInDashi = false;
 	int rodar_PlayerPosition;
 	int rodar_PotisionX;
@@ -170,10 +175,16 @@ public:
 	int attackMask1Width = 300;  
     int attackMask1Height = 300; 
 	
+
 	bool mask1AttackDealed = false;
 	bool mask1PassiveAttackDealed = false;
+	bool mask2AttackDealed = false;
+	bool mask2PassiveAttackDealed = false;
 
 	Timer collisionMask1Timer;
+
+	Timer timerChangeMask;
+	const int changeMaskCooldown = 5000; //5s
 
 	//Fishing
 	//New//
