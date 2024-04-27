@@ -150,6 +150,8 @@ private:
 	std::vector<std::vector<const char*>>choseName_path;
 	const char* fishing_path;
 	const char* name_path;
+	pugi::xml_document configFile;
+	pugi::xml_node configNode;
 	
 };
 #endif 

@@ -347,6 +347,18 @@ Inventity* InventoryManager::CreateItem(EntityType type, std::string descripcioo
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_polvora.png");
 		entity->type = InventityType::POLVORA;
 		break;
+	case EntityType::ITEM_PEZ_PEQUENO:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_pez_pequeno.png");
+		entity->type = InventityType::PEZ_PEQUENO;
+		break;
+	case EntityType::ITEM_PEZ_MEDIANO:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_pez_mediano.png");
+		entity->type = InventityType::PEZ_MEDIANO;
+		break;
+	case EntityType::ITEM_PEZ_GRANDE:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_pez_grande.png");
+		entity->type = InventityType::PEZ_GRANDE;
+		break;
 	default:
 		break;
 	}

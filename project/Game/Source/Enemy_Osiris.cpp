@@ -240,11 +240,15 @@ void Enemy_Osiris::Die() {
 		if (parseResult) {
 			configNode = configFile.child("config");
 		}
+		float randomValue = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
 
-		Item_Hueso* hueso = (Item_Hueso*)app->entityManager->CreateEntity(EntityType::ITEM_HUESO);
-		hueso->config = configNode.child("entities_data").child("item_hueso");
-		hueso->position = iPoint(position.x, position.y);
-		hueso->Start();
+		// Determina si el ítem debe crearse basado en un 30% de probabilidad
+		if (randomValue <= 0.25f) {
+			Item_Hueso* hueso = (Item_Hueso*)app->entityManager->CreateEntity(EntityType::ITEM_HUESO);
+			hueso->config = configNode.child("entities_data").child("item_hueso");
+			hueso->position = iPoint(position.x, position.y);
+			hueso->Start();
+		}
 	}
 
 }

@@ -595,10 +595,14 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (physA != attackSensor && physA != mask1PassiveSensor && physA != mask1AttackSensor)
 		{
 			if (physB->listener->active) {
-				app->inventoryManager->CreateItem(physB->listener->type, physB->listener->description, physB->listener->tipo);
-				physB->listener->active = false;
-				app->entityManager->DestroyEntity(physB->listener);
-				physB->body->SetActive(false);
+				if (app->inventoryManager->IsFull() == false)
+				{
+					app->inventoryManager->CreateItem(physB->listener->type, physB->listener->description, physB->listener->tipo);
+					physB->listener->active = false;
+					app->entityManager->DestroyEntity(physB->listener);
+					physB->body->SetActive(false);
+				}
+				
 			}
 		}
 		break;

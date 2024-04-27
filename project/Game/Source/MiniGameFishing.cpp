@@ -18,6 +18,7 @@
 #include "DialogTriggerEntity.h"
 #include "DialogManager.h"
 #include "Dialog.h"
+#include "InventoryManager.h"
 #include <map>
 #include <random>
 
@@ -751,13 +752,43 @@ bool MiniGameFishing::miniGameEnd(float dt)
 
 void MiniGameFishing::reward_pool(Fishlevel fishingType)
 {
+	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
+	if (parseResult) {
+		configNode = configFile.child("config");
+	}
+	std::string descripcionPequeno;
+	descripcionPequeno = "Un pez pequeño";
+	std::string descripcionMediano;
+	descripcionMediano = "Un pez mediano";
+	std::string descripcionGrande;
+	descripcionGrande = "Un pez grande";
+	std::string tipo;
+	tipo = "Pez";
 	switch (fishingType)
 	{
 	case Fishlevel::NOTHING: fishLevel = 0; break;
 	case Fishlevel::TRASH: fishLevel = 1; break;
-	case Fishlevel::SMALL: fishLevel = 2; break;
-	case Fishlevel::MEDIUM: fishLevel = 3; break;
-	case Fishlevel::BIG: fishLevel = 4; break;
+	case Fishlevel::SMALL: 
+		fishLevel = 2;
+		if (app->inventoryManager->IsFull() == false)
+		{
+			app->inventoryManager->CreateItem(EntityType::ITEM_PEZ_PEQUENO, descripcionPequeno, tipo);
+		}
+		break;
+	case Fishlevel::MEDIUM: 
+		fishLevel = 3;
+		if (app->inventoryManager->IsFull() == false)
+		{
+			app->inventoryManager->CreateItem(EntityType::ITEM_PEZ_MEDIANO, descripcionMediano, tipo);
+		}
+		break;
+	case Fishlevel::BIG: 
+		fishLevel = 4; 
+		if (app->inventoryManager->IsFull() == false)
+		{
+			app->inventoryManager->CreateItem(EntityType::ITEM_PEZ_GRANDE, descripcionGrande, tipo);
+		}
+		break;
 	case Fishlevel::UNKNOWN:LOG("Collision UNKNOWN"); break;
 	}//Reaction upon knowing what is obtained
 

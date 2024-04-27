@@ -23,6 +23,9 @@ enum class InventityType
 	AMATISTA,
 	ESPADA2,
 	ARMADURA,
+	PEZ_PEQUENO,
+	PEZ_MEDIANO,
+	PEZ_GRANDE,
 	UNKNOWN
 };
 
