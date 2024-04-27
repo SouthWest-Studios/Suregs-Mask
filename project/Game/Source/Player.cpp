@@ -620,7 +620,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 				{
 					app->inventoryManager->CreateItem(physB->listener->type, physB->listener->description, physB->listener->tipo);
 					physB->listener->active = false;
-					app->entityManager->DestroyEntity(physB->listener);
 					physB->body->SetActive(false);
 				}
 				
