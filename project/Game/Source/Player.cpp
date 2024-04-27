@@ -120,33 +120,33 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	// Estadísticas de la máscara 1 a nivel 2
 	
-	maskStats[Mask::MASK1][1].maxHealthModifier = -10;
-	maskStats[Mask::MASK1][1].movementSpeedModifier = 10;
-	maskStats[Mask::MASK1][1].attackDamageModifier = 10;
-	maskStats[Mask::MASK1][1].attackSpeedModifier = 0;
-	maskStats[Mask::MASK1][1].maskDamage = 180;
-	maskStats[Mask::MASK1][1].maskCoolDown = 25000; //En Milisegundos
-	maskStats[Mask::MASK1][1].firstTimeUsed = false;
+	maskStats[Mask::MASK1][2].maxHealthModifier = -10;
+	maskStats[Mask::MASK1][2].movementSpeedModifier = 10;
+	maskStats[Mask::MASK1][2].attackDamageModifier = 10;
+	maskStats[Mask::MASK1][2].attackSpeedModifier = 0;
+	maskStats[Mask::MASK1][2].maskDamage = 180;
+	maskStats[Mask::MASK1][2].maskCoolDown = 25000; //En Milisegundos
+	maskStats[Mask::MASK1][2].firstTimeUsed = false;
 
 	// Estadísticas de la máscara 1 a nivel 3
 	
-	maskStats[Mask::MASK1][1].maxHealthModifier = -10;
-	maskStats[Mask::MASK1][1].movementSpeedModifier = 10;
-	maskStats[Mask::MASK1][1].attackDamageModifier = 10;
-	maskStats[Mask::MASK1][1].attackSpeedModifier = 0;
-	maskStats[Mask::MASK1][1].maskDamage = 250;
-	maskStats[Mask::MASK1][1].maskCoolDown = 23000; //En Milisegundos
-	maskStats[Mask::MASK1][1].firstTimeUsed = false;
+	maskStats[Mask::MASK1][3].maxHealthModifier = -10;
+	maskStats[Mask::MASK1][3].movementSpeedModifier = 10;
+	maskStats[Mask::MASK1][3].attackDamageModifier = 10;
+	maskStats[Mask::MASK1][3].attackSpeedModifier = 0;
+	maskStats[Mask::MASK1][3].maskDamage = 250;
+	maskStats[Mask::MASK1][3].maskCoolDown = 23000; //En Milisegundos
+	maskStats[Mask::MASK1][3].firstTimeUsed = false;
 
 	// Estadísticas de la máscara 1 a nivel 4
 	
-	maskStats[Mask::MASK1][1].maxHealthModifier = -10;
-	maskStats[Mask::MASK1][1].movementSpeedModifier = 10;
-	maskStats[Mask::MASK1][1].attackDamageModifier = 10;
-	maskStats[Mask::MASK1][1].attackSpeedModifier = 0;
-	maskStats[Mask::MASK1][1].maskDamage = 400;
-	maskStats[Mask::MASK1][1].maskCoolDown = 20000; //En Milisegundos
-	maskStats[Mask::MASK1][1].firstTimeUsed = false;
+	maskStats[Mask::MASK1][4].maxHealthModifier = -10;
+	maskStats[Mask::MASK1][4].movementSpeedModifier = 10;
+	maskStats[Mask::MASK1][4].attackDamageModifier = 10;
+	maskStats[Mask::MASK1][4].attackSpeedModifier = 0;
+	maskStats[Mask::MASK1][4].maskDamage = 400;
+	maskStats[Mask::MASK1][4].maskCoolDown = 20000; //En Milisegundos
+	maskStats[Mask::MASK1][4].firstTimeUsed = false;
 
 
 	//Estadísticas de la máscara 2 a nivel 0
