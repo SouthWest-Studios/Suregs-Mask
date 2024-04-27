@@ -54,9 +54,10 @@ bool Scene_Pueblo::Start()
 	app->map->path = config.child("map").attribute("path").as_string();
 	app->map->pathTextures = config.child("map").attribute("pathTextures").as_string();
 	
-	//Music is commented so that you can add your own music
-	app->audio->LoadAudioMusic("town", 2.0f);
-	//app->audio->PlayMusicAfterDelay("town", 5.0f, 2.0f);  <--- Poner la musica despues de 5 seg (no funciona)
+	// Stop the music from previous scenes
+	app->audio->StopMusic();
+	// Timer for music
+	app->audio->timer.Start();
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
@@ -95,6 +96,12 @@ bool Scene_Pueblo::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
+
+
+	if (app->audio->playingMusic == false) 
+	{
+		app->audio->PlayMusicAfterDelay("town", 5.0f, 0.0f);
+	}
 
 	return true;
 }
