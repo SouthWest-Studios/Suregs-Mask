@@ -40,6 +40,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK0][0].maskDamage = 50;
 	maskStats[Mask::MASK0][0].maskCoolDown = 25000; //En Milisegundos
 	maskStats[Mask::MASK0][0].firstTimeUsed = false;
+	maskStats[Mask::MASK0][0].numberLightning = 1;
 	
 
 	// maskStats[static_cast<int>(Mask::MASK0)].maxHealthModifier = 0;
@@ -59,6 +60,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK0][1].maskDamage = 80;
 	maskStats[Mask::MASK0][1].maskCoolDown = 23000; //En Milisegundos
 	maskStats[Mask::MASK0][1].firstTimeUsed = false;
+	maskStats[Mask::MASK0][1].numberLightning = 2;
 
 	//Estadísticas de la máscara 0 a nivel 2
 	
@@ -69,6 +71,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK0][2].maskDamage = 130;
 	maskStats[Mask::MASK0][2].maskCoolDown = 20000; //En Milisegundos
 	maskStats[Mask::MASK0][2].firstTimeUsed = false;
+	maskStats[Mask::MASK0][2].numberLightning = 3;
 
 	//Estadísticas de la máscara 0 a nivel 3
 	
@@ -79,6 +82,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK0][3].maskDamage = 200;
 	maskStats[Mask::MASK0][3].maskCoolDown = 17000; //En Milisegundos
 	maskStats[Mask::MASK0][3].firstTimeUsed = false;
+	maskStats[Mask::MASK0][3].numberLightning = 4;
 
 	//Estadísticas de la máscara 0 a nivel 4
 	
@@ -89,6 +93,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK0][4].maskDamage = 300;
 	maskStats[Mask::MASK0][4].maskCoolDown = 15000; //En Milisegundos
 	maskStats[Mask::MASK0][4].firstTimeUsed = false;
+	maskStats[Mask::MASK0][4].numberLightning = 5;
 
 
 	// Estadísticas de la máscara 1 a nivel 0
@@ -275,9 +280,12 @@ bool Player::Start() {
 	player_Direction = Direction::UNKNOWN;
 
 
-	EquipPrimaryMask(Mask::NOMASK);
-	EquipSecondaryMask(Mask::MASK1);
+	EquipPrimaryMask(Mask::MASK0);
+	EquipSecondaryMask(Mask::NOMASK);
 
+	//PARA TESTEAR
+	maskLevels[Mask::MASK0] = 3; 
+	printf("Primary mask: %d, Level: %d\n", static_cast<int>(primaryMask), maskLevels[primaryMask]);
 	return true;
 }
 
@@ -355,7 +363,7 @@ bool Player::PostUpdate() {
 	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
-	printf("Posición: (%d, %d)\n", position.x, position.y);
+	//printf("Posición: (%d, %d)\n", position.x, position.y);
 
 	if (isFacingLeft) {
 		//app->render->DrawTexture(texture, position.x - 50, position.y - 200, SDL_FLIP_HORIZONTAL, &rect);
@@ -503,7 +511,7 @@ void Player::MaskAttack(float dt)
 		//No hace nada
 		break;
 	case Mask::MASK0:
-		CastLightning();
+		CastMultipleLightnings();
 		break;
 	case Mask::MASK1:
 		AreaAttack(dt);
@@ -519,15 +527,23 @@ Entity* Player::GetEnemyWithHighestHealthWithinRadius(iPoint position, int radiu
 		int dx = position.x - enemy->position.x;
 		int dy = position.y - enemy->position.y;
 		if (dx * dx + dy * dy <= radius * radius) {
-			printf("Considering enemy at (%d, %d) with health %f\n", enemy->position.x, enemy->position.y, enemy->GetHealth());
+			//printf("Considering enemy at (%d, %d) with health %f\n", enemy->position.x, enemy->position.y, enemy->GetHealth());
 			if (enemy->GetHealth() > highestHealth) {
-				printf("Selected as highest health enemy so far\n");
+				//printf("Selected as highest health enemy so far\n");
 				highestHealthEnemy = enemy;
 				highestHealth = enemy->GetHealth();
 			}
 		}
 	}
 	return highestHealthEnemy;
+}
+
+void Player::CastMultipleLightnings() {
+	int numLightnings = maskLevels[Mask::MASK0]; // Obtiene el número de rayos basado en el nivel de la máscara
+
+	for (int i = 0; i <= numLightnings; i++) {
+		CastLightning();
+	}
 }
 
 //Ataque mascara 0

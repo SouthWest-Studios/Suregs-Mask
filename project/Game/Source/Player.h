@@ -37,14 +37,29 @@ struct Stats {
 };
 
 struct MaskStats {
+	//Modificadores
 	float maxHealthModifier;
 	float movementSpeedModifier;
     float attackDamageModifier;
 	float attackSpeedModifier;
 
+	//Habilidades
 	float maskDamage;
 	float maskCoolDown;
 	bool firstTimeUsed;
+
+	//Mask0
+	int numberLightning;
+
+	//Mask1
+	float rangeBall;
+
+	//Mask2
+	float distanceDash;
+	float invisibilityTime;
+
+	//Mask3
+
 };
 
 struct PassiveStats {
@@ -88,6 +103,7 @@ public:
 	
 	//Funciones ataques mascara
 	void CastLightning();
+	void CastMultipleLightnings();
 	void AreaAttack(float dt);
 
 	//Mascaras
@@ -223,6 +239,8 @@ private:
 
 	int cdTimerMaskAttackMS = 1000;
 	Timer timerMaskAttack;
+
+	Timer timerBetweenLightnings;
 
 public:
 
