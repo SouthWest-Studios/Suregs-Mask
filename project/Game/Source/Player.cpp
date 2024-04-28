@@ -551,6 +551,8 @@ void Player::Attack(float dt)
 	attackSensor->ctype = ColliderType::PLAYER_ATTACK;
 	attackSensor->listener = this;
 
+	pbodyFoot->body->ApplyForceToCenter(b2Vec2(lastMovementDirection.x * attackMovement, lastMovementDirection.y * attackMovement), true);
+
 	//Onda expansiva ataque pasivo mascara 1
 	if (secondaryMask == Mask::MASK1) {
 		mask1PassiveSensor = app->physics->CreateRectangleSensor(attackX, attackY, 100, 100, DYNAMIC);
