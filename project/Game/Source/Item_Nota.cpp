@@ -1,4 +1,4 @@
-#include "Item_Garra.h"
+#include "Item_Nota.h"
 #include "App.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -9,15 +9,15 @@
 #include "Point.h"
 #include "Physics.h"
 
-Item_Garra::Item_Garra(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
-	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_GARRA)
+Item_Nota::Item_Nota(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
+	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_NOTA)
 {
-	name.Create("item_garra");
+	name.Create("item_nota");
 }
 
-Item_Garra::~Item_Garra() {}
+Item_Nota::~Item_Nota() {}
 
-bool Item_Garra::Awake() {
+bool Item_Nota::Awake() {
 
 	
 	 
@@ -25,7 +25,7 @@ bool Item_Garra::Awake() {
 	return true;
 }
 
-bool Item_Garra::Start() {
+bool Item_Nota::Start() {
 	
 	//initilize textures
 	/*position.x = parameters.attribute("x").as_int();
@@ -37,7 +37,7 @@ bool Item_Garra::Start() {
 	// L07 DONE 4: Add a physics to an item - initialize the physics body
 	app->tex->GetSize(texture, texW, texH);
 	pbody = app->physics->CreateCircle(position.x, position.y, 11, bodyType::STATIC);
-	pbody->ctype = ColliderType::RESOURCE_GARRA;
+	pbody->ctype = ColliderType::NOTA;
 	pbody->listener = this;
 	pbody->body->GetFixtureList()->SetSensor(true);
 
@@ -45,7 +45,7 @@ bool Item_Garra::Start() {
 	return true;
 }
 
-bool Item_Garra::Update(float dt)
+bool Item_Nota::Update(float dt)
 {
 	// L07 DONE 4: Add a physics to an item - update the position of the object from the physics.  
 
@@ -58,13 +58,13 @@ bool Item_Garra::Update(float dt)
 	return true;
 }
 
-bool Item_Garra::PostUpdate()
+bool Item_Nota::PostUpdate()
 {
 	app->render->DrawTexture(texture, position.x, position.y, 0.5f);
 	return true;
 }
 
-bool Item_Garra::CleanUp()
+bool Item_Nota::CleanUp()
 {
 	app->physics->GetWorld()->DestroyBody(pbody->body);
 	app->tex->UnLoad(texture);

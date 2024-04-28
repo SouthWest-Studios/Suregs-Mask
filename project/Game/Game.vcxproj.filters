@@ -214,6 +214,9 @@
     <ClCompile Include="Source\CommerceManager.cpp">
       <Filter>Modules\SistemaComercio</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Item_Nota.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -482,6 +485,9 @@
     </ClInclude>
     <ClInclude Include="Source\CommerceManager.h">
       <Filter>Modules\SistemaComercio</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Item_Nota.h">
+      <Filter>Entities\Items</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

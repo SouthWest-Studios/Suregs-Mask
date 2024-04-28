@@ -153,6 +153,7 @@
 		<item_amatista texturePath="Assets/Textures/Entidades/Items/textura_amatista.png" description="lorem ipsum sit amet." type ="material"/>
 		<item_cola texturePath="Assets/Textures/Entidades/Items/textura_cola.png" description="Esta es la cola de los sureg masculinos." type ="apendice"/>
 		<item_polvora texturePath="Assets/Textures/Entidades/Items/textura_polvora.png" description="polvora, polvora, polvora, polvora, polvora, polvora, polvora, polvora" type ="material"/>
+		<item_nota texturePath="Assets/Textures/Entidades/Items/textura_nota.png" description="polvora, polvora, polvora, polvora, polvora, polvora, polvora, polvora" type ="material"/>
 		
 		
 		

@@ -24,6 +24,7 @@
 #include "Item_Cola.h"
 #include "Item_Polvora.h"
 #include "Item_Hueso.h"
+#include "Item_Nota.h"
 
 Scene_testing::Scene_testing(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -158,6 +159,11 @@ bool Scene_testing::Start()
 	hueso->config = configNode.child("entities_data").child("item_hueso");
 	hueso->position = iPoint(1823, 2555);
 	hueso->Start();
+
+	Item_Nota* nota = (Item_Nota*)app->entityManager->CreateEntity(EntityType::ITEM_NOTA);
+	nota->config = configNode.child("entities_data").child("item_nota");
+	nota->position = iPoint(1803, 2555);
+	nota->Start();
 
 	return true;
 }

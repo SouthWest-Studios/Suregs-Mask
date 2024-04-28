@@ -32,6 +32,7 @@
 #include "Item_Amatista.h"
 #include "Item_Cola.h"
 #include "Item_Polvora.h"
+#include "Item_Nota.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -159,6 +160,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		break;
 	case EntityType::ITEM_POLVORA:
 		entity = new Item_Polvora(type, 100, 100, 300, 5, 2);
+		break;
+	case EntityType::ITEM_NOTA:
+		entity = new Item_Nota(type, 100, 100, 300, 5, 2);
 		break;
 	case EntityType::ITEM:
 		entity = new Item();

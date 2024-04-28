@@ -1,5 +1,5 @@
-#ifndef __GARRA_H__
-#define __GARRA_H__
+#ifndef __NOTA_H__
+#define __NOTA_H__
 
 #include "Entity.h"
 #include "Point.h"
@@ -8,13 +8,13 @@
 
 struct SDL_Texture;
 
-class Item_Garra : public Entity
+class Item_Nota : public Entity
 {
 public:
 	/*Espada() : Entity(EntityType::ESPADA, 0, 100, 0, 0, 0) {}*/
 
-	Item_Garra(EntityType type, int id, int ataque,int durabilidad, int magia, float peso); // Constructor con parámetros
-	virtual ~Item_Garra();
+	Item_Nota(EntityType type, int id, int ataque,int durabilidad, int magia, float peso); // Constructor con parámetros
+	virtual ~Item_Nota();
 
 	bool Awake();
 
