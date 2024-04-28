@@ -58,9 +58,10 @@ bool ModuleFadeToBlack::Update(float dt)
 {
 	// Exit this function if we are not performing a fade
 	if (currentStep == Fade_Step::NONE) return true;
-
+	
 	if (currentStep == Fade_Step::TO_BLACK)
 	{
+		app->menu->menuu = false;
 		++frameCount;
 		if (frameCount >= maxFadeFrames)
 		{
@@ -100,6 +101,7 @@ bool ModuleFadeToBlack::Update(float dt)
 	}
 	else
 	{
+		
 		--frameCount;
 		if (frameCount <= 0)
 		{
