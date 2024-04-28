@@ -838,24 +838,24 @@ void Player::GodMode(float dt)
 	//Moverse a la izquierda
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 		velocity.y += -speedFast * dt;
-		nextState = EntityState::RUNNING;
+		desiredState = EntityState::RUNNING;
 		isFacingLeft = false;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
 		velocity.y += speedFast * dt;
-		nextState = EntityState::RUNNING;
+		desiredState = EntityState::RUNNING;
 		isFacingLeft = true;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 		velocity.x = -speedFast * dt;
-		nextState = EntityState::RUNNING;
+		desiredState = EntityState::RUNNING;
 		isFacingLeft = true;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 		velocity.x = speedFast * dt;
-		nextState = EntityState::RUNNING;
+		desiredState = EntityState::RUNNING;
 		isFacingLeft = false;
 	}
 	pbodyFoot->body->SetLinearVelocity(velocity);
@@ -923,7 +923,7 @@ void Player::PlayerMovement(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN && timerAttack.ReadMSec() > cdTimerAttackMS + 100) {
 		isAttacking = true;
 		timerAttack.Start();
-		nextState = EntityState::ATTACKING;
+		desiredState = EntityState::ATTACKING;
 	}
 
 	if (!(timerAttack.ReadMSec() < cdTimerAttackMS && isAttacking)) {
@@ -957,7 +957,7 @@ void Player::PlayerMovement(float dt)
 		maskStats[primaryMask][maskLevels[primaryMask]].firstTimeUsed = true;
 		isAttackingMask = true;
 		timerMaskAttack.Start();
-		nextState = EntityState::MASK_ATTACK;
+		desiredState = EntityState::MASK_ATTACK;
 	}
 
 	if (!(timerMaskAttack.ReadMSec() < maskStats[primaryMask][maskLevels[primaryMask]].maskCoolDown && isAttackingMask)) {
