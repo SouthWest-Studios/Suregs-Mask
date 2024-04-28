@@ -231,6 +231,7 @@ public:
 	bool isInvisible = false;
 
 	Timer mask3Timer;
+	bool mask3Active = false;
 
 	//Fishing
 	//New//
