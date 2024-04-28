@@ -332,14 +332,9 @@ bool Player::Update(float dt)
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
 
-
-
 	if (!inAnimation) {
 		desiredState = EntityState::IDLE;
-		printf("\nentra");
 	}
-
-
 
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
@@ -402,7 +397,6 @@ bool Player::CleanUp()
 void Player::DoNothing(float dt)
 {
 	currentAnimation = &idleAnim;
-	//printf("idle");
 }
 
 float Player::GetRealMovementSpeed() const {
@@ -467,8 +461,6 @@ void Player::EquipSecondaryMask(Mask mask) {
         currentStats.attackDamage = baseStats.attackDamage * (1 + passiveStats[mask][maskLevels[mask]].damageBoost / 100);
     }
 }
-
-
 
 Mask* Player::GetPrimaryMask()
 {
@@ -536,10 +528,13 @@ void Player::ApplyPoison(Entity* entity) {
 
 void Player::stateMachine(float dt)
 {
-	printf("\ncurrentState: %d, desiredState: %d", static_cast<int>(currentState), static_cast<int>(desiredState));
-
+	//printf("\ncurrentState: %d, desiredState: %d", static_cast<int>(currentState), static_cast<int>(desiredState));
 	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
 	switch (nextState) {
+	case EntityState::IDLE:
+		DoNothing(dt);
+		app->audio->StopFx(-1);
+		break;
 	case EntityState::RUNNING:
 
 		Run(dt);
@@ -548,13 +543,15 @@ void Player::stateMachine(float dt)
 	case EntityState::ATTACKING:
 		Attack(dt);
 		break;
-	case EntityState::IDLE:
-
-		DoNothing(dt);
-		app->audio->StopFx(-1);
+	case EntityState::DEAD:
+	
+		break;
+	case EntityState::REVIVING:
+		break;
+	case EntityState::MASK_ATTACK:
+		MaskAttack(dt);
 		break;
 	case EntityState::DASHI:
-
 		if (isDashing) {
 			Dashi(dt);
 		}
@@ -563,13 +560,10 @@ void Player::stateMachine(float dt)
 
 		desiredState = EntityState::IDLE;
 		break;
-	case EntityState::MASK_ATTACK:
-		MaskAttack(dt);
-		break;
+	
 	default:
 		break;
 	}
-
 	currentState = nextState;
 }
 

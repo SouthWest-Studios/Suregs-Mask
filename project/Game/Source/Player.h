@@ -250,14 +250,16 @@ private:
 public:
 
 	Branch transitionTable[static_cast<int>(EntityState::STATE_COUNT)][static_cast<int>(EntityState::STATE_COUNT)] = {
-	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING},	 {EntityState::DEAD},	  {EntityState::REVIVING},	   {EntityState::MASK_ATTACK},	   {EntityState::NONE},	   {EntityState::IDLE}}, // IDLE
-	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING},	 {EntityState::DEAD},	  {EntityState::REVIVING},	   {EntityState::MASK_ATTACK},	   {EntityState::DASHI},	   {EntityState::IDLE}}, // RUNNING
-	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING},	 {EntityState::DEAD},	  {EntityState::REVIVING},	   {EntityState::MASK_ATTACK},	   {EntityState::DASHI},	   {EntityState::IDLE}}, // ATTACKING
-	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING},	 {EntityState::DEAD},	  {EntityState::REVIVING},	   {EntityState::MASK_ATTACK},	   {EntityState::DASHI},	   {EntityState::IDLE}}, // DEAD
-	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING},	 {EntityState::DEAD},	  {EntityState::REVIVING},	   {EntityState::MASK_ATTACK},	   {EntityState::DASHI},	   {EntityState::IDLE}}, // REVIVING
-	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING},	 {EntityState::DEAD},	  {EntityState::REVIVING},	   {EntityState::MASK_ATTACK},	   {EntityState::DASHI},	   {EntityState::IDLE}}, // MASK_ATTACK
-	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING},	 {EntityState::DEAD},	  {EntityState::REVIVING},	   {EntityState::MASK_ATTACK},	   {EntityState::DASHI},	   {EntityState::IDLE}}, // DASHI
-	{ {EntityState::IDLE}, {EntityState::NONE}, {EntityState::NONE},	 {EntityState::NONE},	  {EntityState::NONE},	   {EntityState::NONE},	   {EntityState::NONE},	   {EntityState::IDLE}} // NONE
+
+	//		IDLE					RUNNING					ATTACKING					DEAD				REVIVING				MASK_ATTACK					  DASHI				   NONE
+	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::REVIVING}, {EntityState::MASK_ATTACK}, {EntityState::DASHI}, {EntityState::IDLE}}, // IDLE
+	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::REVIVING}, {EntityState::MASK_ATTACK}, {EntityState::DASHI}, {EntityState::IDLE}}, // RUNNING
+	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::REVIVING}, {EntityState::MASK_ATTACK}, {EntityState::DASHI}, {EntityState::IDLE}}, // ATTACKING
+	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::REVIVING}, {EntityState::MASK_ATTACK}, {EntityState::DASHI}, {EntityState::IDLE}}, // DEAD
+	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::REVIVING}, {EntityState::MASK_ATTACK}, {EntityState::DASHI}, {EntityState::IDLE}}, // REVIVING
+	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::REVIVING}, {EntityState::MASK_ATTACK}, {EntityState::DASHI}, {EntityState::IDLE}}, // MASK_ATTACK
+	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::REVIVING}, {EntityState::MASK_ATTACK}, {EntityState::DASHI}, {EntityState::IDLE}}, // DASHI
+	{ {EntityState::IDLE}, {EntityState::NONE}, {EntityState::NONE}, {EntityState::NONE}, {EntityState::NONE}, {EntityState::NONE}, {EntityState::NONE}, {EntityState::IDLE}} // NONE
 	};
 
 	EntityState currentState = state;
