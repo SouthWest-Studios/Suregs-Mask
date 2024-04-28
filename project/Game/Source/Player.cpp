@@ -342,7 +342,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	passiveStats[Mask::MASK2][4].rangeBoost = 0;
 	passiveStats[Mask::MASK2][4].dashBoost = 2;
 	passiveStats[Mask::MASK2][4].invisibilityDuration = 2000.0f;
-	
+
 	// passiveStats[static_cast<int>(Mask::MASK2)].damageBoost = 0;
 	// passiveStats[static_cast<int>(Mask::MASK2)].rangeBoost = 0;
 	// passiveStats[static_cast<int>(Mask::MASK2)].dashBoost = 2;
@@ -437,13 +437,13 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
+
+	
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
 
-
-
 	if (!inAnimation) {
-		nextState = EntityState::IDLE;
+		desiredState = EntityState::IDLE;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
@@ -464,7 +464,6 @@ bool Player::Update(float dt)
 
 	//printf("\nposx:%d, posy: %d",position.x, position.y);
 
-	//Para volver a ser visible
 	if (maskStats[primaryMask][maskLevels[primaryMask]].invisibilityTimer.ReadSec() > maskStats[primaryMask][maskLevels[primaryMask]].invisibilityDuration) {
         SDL_SetTextureAlphaMod(texture, 255);
 		isInvisible = false;
@@ -481,40 +480,7 @@ bool Player::Update(float dt)
 		SDL_SetTextureAlphaMod(texture, 255);
 	}
 
-
-
-	//if (isDashing) {
-	//	//printf("dashi");
-	//	printf("\nAnimationName: %s:", currentAnimation->getNameAnimation());
-	//	currentAnimation = &dashiAnim;
-	//}
-
-	switch (nextState) {
-	case EntityState::RUNNING:
-		Run(dt);
-		app->audio->PlayFx(run_fx); // <--- Hay que arreglarlo
-		break;
-	case EntityState::ATTACKING:
-		Attack(dt);
-		isInvisible = false;
-		break;
-	case EntityState::IDLE:
-		DoNothing(dt);
-		app->audio->StopFx(-1);
-		break;
-	case EntityState::DASHI:
-		if (isDashing) {
-			Dashi(dt);
-		}
-		break;
-	case EntityState::MASK_ATTACK:
-		MaskAttack(dt);
-		break;
-	default:
-		break;
-	}
-
-
+	stateMachine(dt);
 	currentAnimation->Update();
 	return true;
 }
@@ -557,7 +523,6 @@ bool Player::CleanUp()
 void Player::DoNothing(float dt)
 {
 	currentAnimation = &idleAnim;
-	//printf("idle");
 }
 
 float Player::GetRealMovementSpeed() const {
@@ -565,16 +530,15 @@ float Player::GetRealMovementSpeed() const {
 }
 
 void Player::Run(float dt)
-{
-	//printf("runn");
-
+{	
 	currentAnimation = &runAnim;
 }
 
 void Player::Dashi(float dt)
 {
-	//printf("runn");
+	inAnimation = true;
 	currentAnimation = &dashiAnim;
+	
 }
 void Player::Attack(float dt)
 {
@@ -623,8 +587,6 @@ void Player::EquipSecondaryMask(Mask mask) {
         currentStats.attackDamage = baseStats.attackDamage * (1 + passiveStats[mask][maskLevels[mask]].damageBoost / 100);
     }
 }
-
-
 
 Mask* Player::GetPrimaryMask()
 {
@@ -692,6 +654,47 @@ void Player::ApplyPoison(Entity* entity) {
 	// Aquí asumimos que Entity tiene una función ApplyPoison que toma estos parámetros.
 	// Si no es el caso, necesitarás ajustar este código.
 	entity->ApplyPoison(poisonDamage, poisonDuration, poisonTickRate);
+}
+
+void Player::stateMachine(float dt)
+{
+	//printf("\ncurrentState: %d, desiredState: %d", static_cast<int>(currentState), static_cast<int>(desiredState));
+	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
+	switch (nextState) {
+	case EntityState::IDLE:
+		DoNothing(dt);
+		app->audio->StopFx(-1);
+		break;
+	case EntityState::RUNNING:
+
+		Run(dt);
+		app->audio->PlayFx(run_fx); // <--- Hay que arreglarlo
+		break;
+	case EntityState::ATTACKING:
+		Attack(dt);
+		break;
+	case EntityState::DEAD:
+	
+		break;
+	case EntityState::REVIVING:
+		break;
+	case EntityState::MASK_ATTACK:
+		MaskAttack(dt);
+		break;
+	case EntityState::DASHI:
+		if (isDashing) {
+			Dashi(dt);
+		}
+		break;
+	case EntityState::NONE:
+
+		desiredState = EntityState::IDLE;
+		break;
+	
+	default:
+		break;
+	}
+	currentState = nextState;
 }
 
 //Rango ataque mascara 0
@@ -1069,7 +1072,7 @@ void Player::PlayerMovement(float dt)
 
 		if (horizontalMovement != 0 || verticalMovement != 0) {
 			if (!inAnimation) {
-				nextState = EntityState::RUNNING;
+				desiredState = EntityState::RUNNING;
 			}
 			isFacingLeft = (horizontalMovement < 0);
 			lastMovementDirection = fPoint(horizontalMovement, verticalMovement);
@@ -1083,9 +1086,8 @@ void Player::PlayerMovement(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && timerDash.ReadMSec() > cdTimerDashMS) {
 
 		isDashing = true;
-		inAnimation = true;
 		timerDash.Start();
-		nextState = EntityState::DASHI;
+		desiredState = EntityState::DASHI;
 		pbodyFoot->body->ApplyForce(b2Vec2(velocity.x * 100, velocity.y * 100), pbodyFoot->body->GetWorldCenter(), false);
 
 		SetPassiveInvisible();
