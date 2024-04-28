@@ -116,9 +116,13 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK1][0].movementSpeedModifier = 10;
 	maskStats[Mask::MASK1][0].attackDamageModifier = 10;
 	maskStats[Mask::MASK1][0].attackSpeedModifier = 0;
+	maskStats[Mask::MASK1][0].rangeBallModifier = 0.0f;
 	maskStats[Mask::MASK1][0].maskDamage = 100;
 	maskStats[Mask::MASK1][0].maskCoolDown = 30000; //En Milisegundos
 	maskStats[Mask::MASK1][0].firstTimeUsed = false;
+	maskStats[Mask::MASK1][0].poisonDamage = 0;
+	maskStats[Mask::MASK1][0].poisonDuration = 0;
+	maskStats[Mask::MASK1][0].poisonTickRate = 0;
 
 	// maskStats[static_cast<int>(Mask::MASK1)].maxHealthModifier = -10;
 	// maskStats[static_cast<int>(Mask::MASK1)].movementSpeedModifier = 10;
@@ -134,9 +138,13 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK1][1].movementSpeedModifier = 10;
 	maskStats[Mask::MASK1][1].attackDamageModifier = 10;
 	maskStats[Mask::MASK1][1].attackSpeedModifier = 0;
+	maskStats[Mask::MASK1][1].rangeBallModifier = 0.05f;
 	maskStats[Mask::MASK1][1].maskDamage = 120;
 	maskStats[Mask::MASK1][1].maskCoolDown = 28000; //En Milisegundos
 	maskStats[Mask::MASK1][1].firstTimeUsed = false;
+	maskStats[Mask::MASK1][1].poisonDamage = 5;
+	maskStats[Mask::MASK1][1].poisonDuration = 5.0f;
+	maskStats[Mask::MASK1][1].poisonTickRate = 1.5f;
 
 	// Estadísticas de la máscara 1 a nivel 2
 	
@@ -144,9 +152,13 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK1][2].movementSpeedModifier = 10;
 	maskStats[Mask::MASK1][2].attackDamageModifier = 10;
 	maskStats[Mask::MASK1][2].attackSpeedModifier = 0;
+	maskStats[Mask::MASK1][2].rangeBallModifier = 0.10f;
 	maskStats[Mask::MASK1][2].maskDamage = 180;
 	maskStats[Mask::MASK1][2].maskCoolDown = 25000; //En Milisegundos
 	maskStats[Mask::MASK1][2].firstTimeUsed = false;
+	maskStats[Mask::MASK1][2].poisonDamage = 10;
+	maskStats[Mask::MASK1][2].poisonDuration = 5.0f;
+	maskStats[Mask::MASK1][2].poisonTickRate = 1.5f;
 
 	// Estadísticas de la máscara 1 a nivel 3
 	
@@ -154,9 +166,13 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK1][3].movementSpeedModifier = 10;
 	maskStats[Mask::MASK1][3].attackDamageModifier = 10;
 	maskStats[Mask::MASK1][3].attackSpeedModifier = 0;
+	maskStats[Mask::MASK1][3].rangeBallModifier = 0.15f;
 	maskStats[Mask::MASK1][3].maskDamage = 250;
 	maskStats[Mask::MASK1][3].maskCoolDown = 23000; //En Milisegundos
 	maskStats[Mask::MASK1][3].firstTimeUsed = false;
+	maskStats[Mask::MASK1][3].poisonDamage = 10;
+	maskStats[Mask::MASK1][3].poisonDuration = 10.0f;
+	maskStats[Mask::MASK1][3].poisonTickRate = 1.5f;
 
 	// Estadísticas de la máscara 1 a nivel 4
 	
@@ -164,9 +180,13 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK1][4].movementSpeedModifier = 10;
 	maskStats[Mask::MASK1][4].attackDamageModifier = 10;
 	maskStats[Mask::MASK1][4].attackSpeedModifier = 0;
+	maskStats[Mask::MASK1][4].rangeBallModifier = 0.20f; // 20% de aumento en el rango
 	maskStats[Mask::MASK1][4].maskDamage = 400;
 	maskStats[Mask::MASK1][4].maskCoolDown = 20000; //En Milisegundos
 	maskStats[Mask::MASK1][4].firstTimeUsed = false;
+	maskStats[Mask::MASK1][4].poisonDamage = 15;
+	maskStats[Mask::MASK1][4].poisonDuration = 15.0f;
+	maskStats[Mask::MASK1][4].poisonTickRate = 1.5f;
 
 
 	//Estadísticas de la máscara 2 a nivel 0
@@ -295,11 +315,11 @@ bool Player::Start() {
 	player_Direction = Direction::UNKNOWN;
 
 
-	EquipPrimaryMask(Mask::MASK0);
+	EquipPrimaryMask(Mask::MASK1);
 	EquipSecondaryMask(Mask::NOMASK);
 
 	//PARA TESTEAR
-	maskLevels[Mask::MASK0] = 4; 
+	maskLevels[primaryMask] = 4; 
 	printf("Primary mask: %d, Level: %d\n", static_cast<int>(primaryMask), maskLevels[primaryMask]);
 	//nextState = transitionTable[static_cast<int>(EntityState::IDLE)][static_cast<int>(EntityState::IDLE)].next_state;
 	return true;
@@ -598,7 +618,7 @@ void Player::CastLightning() {
 //Ataque mascara 1
 
 void Player::AreaAttack(float dt) {
-	mask1AttackSensor = app->physics->CreateRectangleSensor(this->position.x, this->position.y, attackMask1Width, attackMask1Height, DYNAMIC);
+	mask1AttackSensor = app->physics->CreateRectangleSensor(this->position.x, this->position.y, attackMask1Width + attackMask1Width * maskStats[primaryMask][maskLevels[primaryMask]].rangeBallModifier, attackMask1Height + attackMask1Height * maskStats[primaryMask][maskLevels[primaryMask]].rangeBallModifier, DYNAMIC);
 	mask1AttackSensor->ctype = ColliderType::MASK1_ATTACK;
 	mask1AttackSensor->listener = this;
 }
@@ -616,24 +636,22 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::ENEMY:
 		if (physA == attackSensor) {
 			LOG("Collision ENEMY");
-			if (physB->entity != nullptr && basicAttackDealed == false) {
+			if (physB->entity != nullptr) {
 				physB->entity->TakeDamage(currentStats.attackDamage);
-				basicAttackDealed = true;
 			}
 			//collisionAttackTimer.Start();
 		}
 		if (physA == mask1PassiveSensor) {
 			LOG("Collision ENEMY");
-			if (physB->entity != nullptr && mask1PassiveAttackDealed == false) {
+			if (physB->entity != nullptr) {
 				physB->entity->TakeDamage(currentStats.attackDamage * passiveStats[secondaryMask][maskLevels[secondaryMask]].damageBoost);
-				mask1PassiveAttackDealed = true;
 			}
 		}
 		if (physA == mask1AttackSensor) {
 			LOG("Collision ENEMY");
-			if (physB->entity != nullptr && mask1PassiveAttackDealed == false) {
+			if (physB->entity != nullptr) {
 				physB->entity->TakeDamage(maskStats[primaryMask][maskLevels[primaryMask]].maskDamage);
-				mask1PassiveAttackDealed = true;
+				physB->entity->ApplyPoison(maskStats[primaryMask][maskLevels[primaryMask]].poisonDamage, maskStats[primaryMask][maskLevels[primaryMask]].poisonDuration, maskStats[primaryMask][maskLevels[primaryMask]].poisonTickRate);
 			}
 			//collisionMask1Timer.Start();
 		}
@@ -785,7 +803,7 @@ MapObject* Player::GetCurrentRoom()
 		if (position.x >= room->x && position.x <= room->x + room->width &&
 			position.y >= room->y && position.y <= room->y + room->height)
 		{
-			printf("Player is in the room at position (%d, %d)\n", room->x, room->y);
+			//printf("Player is in the room at position (%d, %d)\n", room->x, room->y);
 			return room;
 		}
 	}
@@ -950,7 +968,6 @@ void Player::PlayerMovement(float dt)
 
 	if (!(timerMaskAttack.ReadMSec() < maskStats[primaryMask][maskLevels[primaryMask]].maskCoolDown && isAttackingMask)) {
 		isAttackingMask = false;
-		mask1PassiveAttackDealed = false;
 		if (mask1AttackSensor) {
 			app->physics->DestroyBody(mask1AttackSensor);
 			mask1AttackSensor = nullptr;

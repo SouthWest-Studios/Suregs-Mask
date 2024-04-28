@@ -52,7 +52,7 @@ struct MaskStats {
 	int numberLightning;
 
 	//Mask1
-	float rangeBall;
+	float rangeBallModifier;
 
 	//Mask2
 	float distanceDash;
@@ -199,12 +199,6 @@ public:
 	int attackMask1Width = 300;  
     int attackMask1Height = 300; 
 	
-
-	bool mask1AttackDealed = false;
-	bool mask1PassiveAttackDealed = false;
-	bool mask2AttackDealed = false;
-	bool mask2PassiveAttackDealed = false;
-
 	Timer collisionMask1Timer;
 
 	Timer timerChangeMask;
