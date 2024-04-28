@@ -42,6 +42,7 @@ private:
 
 	// The rectangle of the screen, used to render the black rectangle
 	SDL_Rect screenRect;
+	SDL_Rect transitionRect;
 
 	// The modules that should be switched after the first step
 	Module* moduleToEnable = nullptr;
@@ -49,6 +50,8 @@ private:
 
 	const char* transitionPath;
 	SDL_Texture* transition;
+
+	int transitionX, transitionY;
 
 public:
 
