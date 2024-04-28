@@ -440,8 +440,8 @@ bool Player::Start() {
 	player_Direction = Direction::UNKNOWN;
 
 
-	EquipPrimaryMask(Mask::NOMASK);
-	EquipSecondaryMask(Mask::MASK2);
+	EquipPrimaryMask(Mask::MASK3);
+	EquipSecondaryMask(Mask::NOMASK);
 
 	//PARA TESTEAR
 	maskLevels[primaryMask] = 0; 
@@ -496,10 +496,11 @@ bool Player::Update(float dt)
 		SDL_SetTextureAlphaMod(texture, 255);
 	}
 
-	if (mask3Timer.ReadSec() >= maskStats[Mask::MASK3][maskLevels[Mask::MASK3]].durationTime) {
+	if (mask3Timer.ReadMSec() >= maskStats[Mask::MASK3][maskLevels[Mask::MASK3]].durationTime && mask3Active) {
         // Revertir las estadísticas a sus valores originales
         currentStats.attackDamage = baseStats.attackDamage * (1 + maskStats[Mask::MASK3][maskLevels[Mask::MASK3]].maxActiveDamageModifier / 100); 
         currentStats.maxHealth = baseStats.maxHealth * (1 + maskStats[Mask::MASK3][maskLevels[Mask::MASK3]].maxActiveHealthModifier / 100);
+		mask3Active = false;
     }
 
 	if(secondaryMask == Mask::MASK3){
@@ -824,9 +825,10 @@ void Player::SetPassiveInvisible() {
 
 //Mascara 3
 void Player::Mask3Statistics(){
-	currentStats.attackDamage = baseStats.attackDamage * maskStats[Mask::MASK3][maskLevels[Mask::MASK3]].maxActiveDamageModifier;
-	currentStats.maxHealth = baseStats.maxHealth * maskStats[Mask::MASK3][maskLevels[Mask::MASK3]].maxActiveHealthModifier;   
-
+	currentStats.attackDamage = baseStats.attackDamage * (1 + maskStats[Mask::MASK3][maskLevels[Mask::MASK3]].maxActiveDamageModifier);
+	currentStats.maxHealth = baseStats.maxHealth * (1 + maskStats[Mask::MASK3][maskLevels[Mask::MASK3]].maxActiveHealthModifier);   
+	printf("current stats attack damage: %f\n", currentStats.attackDamage);
+	mask3Active = true;
 	mask3Timer.Start();
 }
 
