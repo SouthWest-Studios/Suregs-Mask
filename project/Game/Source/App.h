@@ -24,6 +24,13 @@ class Scene_Menu;
 class Scene_testing;
 class Scene_Pueblo;
 class Scene_Mazmorra0;
+class Scene_Mazmorra1;
+class Scene_Mazmorra2;
+class Scene_Mazmorra3;
+class Scene_Mazmorra4;
+class Scene_Mazmorra5;
+class Scene_Mazmorra6;
+class Scene_Mazmorra7;
 class EntityManager;
 class Map;
 //L07 DONE 2: Add Physics module
@@ -119,7 +126,15 @@ public:
 	Scene_Menu* scene_menu;
 	Scene_testing* scene_testing;
 	Scene_Pueblo* scene_pueblo;
+
 	Scene_Mazmorra0* scene_mazmorra0;
+	Scene_Mazmorra1* scene_mazmorra1;
+	Scene_Mazmorra2* scene_mazmorra2;
+	Scene_Mazmorra3* scene_mazmorra3;
+	Scene_Mazmorra4* scene_mazmorra4;
+	Scene_Mazmorra5* scene_mazmorra5;
+	Scene_Mazmorra6* scene_mazmorra6;
+	Scene_Mazmorra7* scene_mazmorra7;
 
 	EntityManager* entityManager;
 	Map* map;

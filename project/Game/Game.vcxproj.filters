@@ -130,9 +130,6 @@
     <ClCompile Include="Source\MiniGameFishing.cpp">
       <Filter>MiniGame</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Scene_Mazmorra0.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="Source\DialogTriggerEntity.cpp">
       <Filter>Entities\Meta</Filter>
     </ClCompile>
@@ -189,6 +186,30 @@
     </ClCompile>
     <ClCompile Include="Source\Item_Polvora.cpp">
       <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene_Mazmorra0.cpp">
+      <Filter>Scenes\Mazmorras</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene_Mazmorra1.cpp">
+      <Filter>Scenes\Mazmorras</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene_Mazmorra2.cpp">
+      <Filter>Scenes\Mazmorras</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene_Mazmorra3.cpp">
+      <Filter>Scenes\Mazmorras</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene_Mazmorra4.cpp">
+      <Filter>Scenes\Mazmorras</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene_Mazmorra5.cpp">
+      <Filter>Scenes\Mazmorras</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene_Mazmorra6.cpp">
+      <Filter>Scenes\Mazmorras</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene_Mazmorra7.cpp">
+      <Filter>Scenes\Mazmorras</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -369,9 +390,6 @@
     <ClInclude Include="Source\MiniGameFishing.h">
       <Filter>MiniGame</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Scene_Mazmorra0.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="Source\DialogTriggerEntity.h">
       <Filter>Entities\Meta</Filter>
     </ClInclude>
@@ -435,6 +453,30 @@
     <ClInclude Include="Source\Item_Polvora.h">
       <Filter>Entities\Items</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene_Mazmorra0.h">
+      <Filter>Scenes\Mazmorras</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene_Mazmorra1.h">
+      <Filter>Scenes\Mazmorras</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene_Mazmorra2.h">
+      <Filter>Scenes\Mazmorras</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene_Mazmorra3.h">
+      <Filter>Scenes\Mazmorras</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene_Mazmorra4.h">
+      <Filter>Scenes\Mazmorras</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene_Mazmorra5.h">
+      <Filter>Scenes\Mazmorras</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene_Mazmorra6.h">
+      <Filter>Scenes\Mazmorras</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene_Mazmorra7.h">
+      <Filter>Scenes\Mazmorras</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -487,6 +529,9 @@
     </Filter>
     <Filter Include="Modules\Inventory">
       <UniqueIdentifier>{e25e82e0-d2c5-414e-ab44-ad5e3f6f1c77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Mazmorras">
+      <UniqueIdentifier>{01e9f8e4-a9b0-4977-b904-6bb585bcfb6d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -11,6 +11,13 @@
 #include "Scene_Menu.h"
 #include "Scene_Testing.h"
 #include "Scene_Mazmorra0.h"
+#include "Scene_Mazmorra1.h"
+#include "Scene_Mazmorra2.h"
+#include "Scene_Mazmorra3.h"
+#include "Scene_Mazmorra4.h"
+#include "Scene_Mazmorra5.h"
+#include "Scene_Mazmorra6.h"
+#include "Scene_Mazmorra7.h"
 #include "Scene_Pueblo.h"
 #include "Optick/include/optick.h"
 #include "Menu.h"
@@ -85,6 +92,13 @@ bool DebugConsole::Awake(pugi::xml_node config)
 		case -2:	case 1000:	app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_testing);		app->menu->active = true;			break;
 		case -1:	case 1001:	app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_pueblo);		app->menu->active = true;			break;
 		case 0:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra0);		app->menu->active = true;			break;
+		case 1:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra1);		app->menu->active = true;			break;
+		case 2:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra2);		app->menu->active = true;			break;
+		case 3:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra3);		app->menu->active = true;			break;
+		case 4:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra4);		app->menu->active = true;			break;
+		case 5:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra5);		app->menu->active = true;			break;
+		case 6:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra6);		app->menu->active = true;			break;
+		case 7:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra7);		app->menu->active = true;			break;
 
 		default:
 			break;

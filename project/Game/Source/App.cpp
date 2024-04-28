@@ -10,6 +10,13 @@
 #include "Scene_Menu.h"
 #include "Scene_Pueblo.h"
 #include "Scene_Mazmorra0.h"
+#include "Scene_Mazmorra1.h"
+#include "Scene_Mazmorra2.h"
+#include "Scene_Mazmorra3.h"
+#include "Scene_Mazmorra4.h"
+#include "Scene_Mazmorra5.h"
+#include "Scene_Mazmorra6.h"
+#include "Scene_Mazmorra7.h"
 #include "Map.h"
 #include "Physics.h"
 #include "GuiManager.h"
@@ -54,7 +61,16 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	scene_menu = new Scene_Menu(this, false);
 	scene_testing = new Scene_testing(this, false);
 	scene_pueblo = new Scene_Pueblo(this, false);
+
 	scene_mazmorra0 = new Scene_Mazmorra0(this, false);
+	scene_mazmorra1 = new Scene_Mazmorra1(this, false);
+	scene_mazmorra2 = new Scene_Mazmorra2(this, false);
+	scene_mazmorra3 = new Scene_Mazmorra3(this, false);
+	scene_mazmorra4 = new Scene_Mazmorra4(this, false);
+	scene_mazmorra5 = new Scene_Mazmorra5(this, false);
+	scene_mazmorra6 = new Scene_Mazmorra6(this, false);
+	scene_mazmorra7 = new Scene_Mazmorra7(this, false);
+
 	map = new Map(this, false);
 	entityManager = new EntityManager(this);
 	inventoryManager = new InventoryManager(this);

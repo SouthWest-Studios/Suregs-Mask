@@ -148,6 +148,13 @@
     <ClCompile Include="Source\Scene_Intro.cpp" />
     <ClCompile Include="Source\Scene_Logos.cpp" />
     <ClCompile Include="Source\Scene_Mazmorra0.cpp" />
+    <ClCompile Include="Source\Scene_Mazmorra1.cpp" />
+    <ClCompile Include="Source\Scene_Mazmorra2.cpp" />
+    <ClCompile Include="Source\Scene_Mazmorra3.cpp" />
+    <ClCompile Include="Source\Scene_Mazmorra4.cpp" />
+    <ClCompile Include="Source\Scene_Mazmorra5.cpp" />
+    <ClCompile Include="Source\Scene_Mazmorra6.cpp" />
+    <ClCompile Include="Source\Scene_Mazmorra7.cpp" />
     <ClCompile Include="Source\Scene_Menu.cpp" />
     <ClCompile Include="Source\Enemy_Shar.cpp" />
     <ClCompile Include="Source\Scene_Pueblo.cpp" />
@@ -221,6 +228,13 @@
     <ClInclude Include="Source\Scene_Intro.h" />
     <ClInclude Include="Source\Scene_Logos.h" />
     <ClInclude Include="Source\Scene_Mazmorra0.h" />
+    <ClInclude Include="Source\Scene_Mazmorra1.h" />
+    <ClInclude Include="Source\Scene_Mazmorra2.h" />
+    <ClInclude Include="Source\Scene_Mazmorra3.h" />
+    <ClInclude Include="Source\Scene_Mazmorra4.h" />
+    <ClInclude Include="Source\Scene_Mazmorra5.h" />
+    <ClInclude Include="Source\Scene_Mazmorra6.h" />
+    <ClInclude Include="Source\Scene_Mazmorra7.h" />
     <ClInclude Include="Source\Scene_Menu.h" />
     <ClInclude Include="Source\Enemy_Shar.h" />
     <ClInclude Include="Source\Scene_Pueblo.h" />

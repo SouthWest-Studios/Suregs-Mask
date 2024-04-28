@@ -243,6 +243,27 @@
 	<scene_mazmorra0>
 		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Mazmorras/Mazmorra0.tmx"/>
 	</scene_mazmorra0>
+	<scene_mazmorra1>
+		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Mazmorras/Mazmorra1.tmx"/>
+	</scene_mazmorra1>
+	<scene_mazmorra2>
+		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Mazmorras/Mazmorra2.tmx"/>
+	</scene_mazmorra2>
+	<scene_mazmorra3>
+		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Mazmorras/Mazmorra3.tmx"/>
+	</scene_mazmorra3>
+	<scene_mazmorra4>
+		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Mazmorras/Mazmorra4.tmx"/>
+	</scene_mazmorra4>
+	<scene_mazmorra5>
+		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Mazmorras/Mazmorra5.tmx"/>
+	</scene_mazmorra5>
+	<scene_mazmorra6>
+		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Mazmorras/Mazmorra6.tmx"/>
+	</scene_mazmorra6>
+	<scene_mazmorra7>
+		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Mazmorras/Mazmorra7.tmx"/>
+	</scene_mazmorra7>
 
 	<!--Animation-->
 	<animations>
