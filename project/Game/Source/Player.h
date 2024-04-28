@@ -16,8 +16,7 @@ struct SDL_Texture;
 
 struct Branch {
 	enum EntityState const next_state;
-	//Branch() : next_state(EntityState::STATE_COUNT) {}
-
+	Branch(EntityState next) : next_state(next) {}
 };
 
 enum class Mask{
@@ -142,6 +141,7 @@ private:
 	void FishingDirecction(bool verticalMovement, bool horizontalMovement);
 	void MaskAttack(float dt);
 	void TakeDamage(float damage);
+	void stateMachine(float dt);
 
 public:
 
@@ -256,26 +256,19 @@ private:
 public:
 
 	Branch transitionTable[static_cast<int>(EntityState::STATE_COUNT)][static_cast<int>(EntityState::STATE_COUNT)] = {
-		// isMoving					isAttacking				isDead               isReviving					else                MASK_ATTACK
-		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // IDLE
-		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // RUNNING
-		{ {EntityState::IDLE},	  {EntityState::IDLE},		{EntityState::DEAD}, {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // ATTACKING
-		{ {EntityState::DEAD},	  {EntityState::DEAD},		{EntityState::DEAD}, {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // DEAD
-		{ {EntityState::IDLE},	  {EntityState::IDLE},	    {EntityState::DEAD}, {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::MASK_ATTACK}}, // REVIVING
-		{ {EntityState::IDLE},	  {EntityState::IDLE},	    {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::IDLE}} // MASK_ATTACK
-		//{ {EntityState::RUN},	  {EntityState::IDLE},	    {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::IDLE}}, // STATE_COUNT
-		//{ {EntityState::IDLE},	  {EntityState::IDLE},	    {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::IDLE}}, // DASHI
-		//{ {EntityState::IDLE},	  {EntityState::IDLE},	    {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::IDLE}, {EntityState::IDLE}} // NONE
-		//
+	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING},	 {EntityState::DEAD},	  {EntityState::REVIVING},	   {EntityState::MASK_ATTACK},	   {EntityState::NONE},	   {EntityState::IDLE}}, // IDLE
+	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING},	 {EntityState::DEAD},	  {EntityState::REVIVING},	   {EntityState::MASK_ATTACK},	   {EntityState::DASHI},	   {EntityState::IDLE}}, // RUNNING
+	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING},	 {EntityState::DEAD},	  {EntityState::REVIVING},	   {EntityState::MASK_ATTACK},	   {EntityState::DASHI},	   {EntityState::IDLE}}, // ATTACKING
+	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING},	 {EntityState::DEAD},	  {EntityState::REVIVING},	   {EntityState::MASK_ATTACK},	   {EntityState::DASHI},	   {EntityState::IDLE}}, // DEAD
+	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING},	 {EntityState::DEAD},	  {EntityState::REVIVING},	   {EntityState::MASK_ATTACK},	   {EntityState::DASHI},	   {EntityState::IDLE}}, // REVIVING
+	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING},	 {EntityState::DEAD},	  {EntityState::REVIVING},	   {EntityState::MASK_ATTACK},	   {EntityState::DASHI},	   {EntityState::IDLE}}, // MASK_ATTACK
+	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING},	 {EntityState::DEAD},	  {EntityState::REVIVING},	   {EntityState::MASK_ATTACK},	   {EntityState::DASHI},	   {EntityState::IDLE}}, // DASHI
+	{ {EntityState::IDLE}, {EntityState::NONE}, {EntityState::NONE},	 {EntityState::NONE},	  {EntityState::NONE},	   {EntityState::NONE},	   {EntityState::NONE},	   {EntityState::IDLE}} // NONE
 	};
 
-
-
 	EntityState currentState = state;
-
-
-	EntityState nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(currentState)].next_state;
-
+	EntityState desiredState = nextState; 
+	EntityState nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
 };
 
 

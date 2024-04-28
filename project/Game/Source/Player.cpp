@@ -301,19 +301,25 @@ bool Player::Start() {
 	//PARA TESTEAR
 	maskLevels[Mask::MASK0] = 4; 
 	printf("Primary mask: %d, Level: %d\n", static_cast<int>(primaryMask), maskLevels[primaryMask]);
+	//nextState = transitionTable[static_cast<int>(EntityState::IDLE)][static_cast<int>(EntityState::IDLE)].next_state;
 	return true;
 }
 
 bool Player::Update(float dt)
 {
+
+	
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
 
 
 
 	if (!inAnimation) {
-		nextState = EntityState::IDLE;
+		desiredState = EntityState::IDLE;
+		printf("\nentra");
 	}
+
+
 
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
@@ -333,41 +339,7 @@ bool Player::Update(float dt)
 
 	//printf("\nposx:%d, posy: %d",position.x, position.y);
 
-	
-
-
-
-	//if (isDashing) {
-	//	//printf("dashi");
-	//	printf("\nAnimationName: %s:", currentAnimation->getNameAnimation());
-	//	currentAnimation = &dashiAnim;
-	//}
-
-	switch (nextState) {
-	case EntityState::RUNNING:
-		Run(dt);
-		app->audio->PlayFx(run_fx); // <--- Hay que arreglarlo
-		break;
-	case EntityState::ATTACKING:
-		Attack(dt);
-		break;
-	case EntityState::IDLE:
-		DoNothing(dt);
-		app->audio->StopFx(-1);
-		break;
-	case EntityState::DASHI:
-		if (isDashing) {
-			Dashi(dt);
-		}
-		break;
-	case EntityState::MASK_ATTACK:
-		MaskAttack(dt);
-		break;
-	default:
-		break;
-	}
-
-
+	stateMachine(dt);
 	currentAnimation->Update();
 	return true;
 }
@@ -418,16 +390,15 @@ float Player::GetRealMovementSpeed() const {
 }
 
 void Player::Run(float dt)
-{
-	//printf("runn");
-
+{	
 	currentAnimation = &runAnim;
 }
 
 void Player::Dashi(float dt)
 {
-	//printf("runn");
+	inAnimation = true;
 	currentAnimation = &dashiAnim;
+	
 }
 void Player::Attack(float dt)
 {
@@ -541,6 +512,45 @@ void Player::ApplyPoison(Entity* entity) {
 	// Aquí asumimos que Entity tiene una función ApplyPoison que toma estos parámetros.
 	// Si no es el caso, necesitarás ajustar este código.
 	entity->ApplyPoison(poisonDamage, poisonDuration, poisonTickRate);
+}
+
+void Player::stateMachine(float dt)
+{
+	printf("\ncurrentState: %d, desiredState: %d", static_cast<int>(currentState), static_cast<int>(desiredState));
+
+	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
+	switch (nextState) {
+	case EntityState::RUNNING:
+
+		Run(dt);
+		app->audio->PlayFx(run_fx); // <--- Hay que arreglarlo
+		break;
+	case EntityState::ATTACKING:
+		Attack(dt);
+		break;
+	case EntityState::IDLE:
+
+		DoNothing(dt);
+		app->audio->StopFx(-1);
+		break;
+	case EntityState::DASHI:
+
+		if (isDashing) {
+			Dashi(dt);
+		}
+		break;
+	case EntityState::NONE:
+
+		desiredState = EntityState::IDLE;
+		break;
+	case EntityState::MASK_ATTACK:
+		MaskAttack(dt);
+		break;
+	default:
+		break;
+	}
+
+	currentState = nextState;
 }
 
 //Rango ataque mascara 0
@@ -869,7 +879,7 @@ void Player::PlayerMovement(float dt)
 
 		if (horizontalMovement != 0 || verticalMovement != 0) {
 			if (!inAnimation) {
-				nextState = EntityState::RUNNING;
+				desiredState = EntityState::RUNNING;
 			}
 			isFacingLeft = (horizontalMovement < 0);
 			lastMovementDirection = fPoint(horizontalMovement, verticalMovement);
@@ -883,9 +893,8 @@ void Player::PlayerMovement(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && timerDash.ReadMSec() > cdTimerDashMS) {
 
 		isDashing = true;
-		inAnimation = true;
 		timerDash.Start();
-		nextState = EntityState::DASHI;
+		desiredState = EntityState::DASHI;
 		pbodyFoot->body->ApplyForce(b2Vec2(velocity.x * 100, velocity.y * 100), pbodyFoot->body->GetWorldCenter(), false);
 
 
