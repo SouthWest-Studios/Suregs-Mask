@@ -194,6 +194,50 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK2][0].movementSpeedModifier = 10;
 	maskStats[Mask::MASK2][0].attackDamageModifier = 10;
 	maskStats[Mask::MASK2][0].attackSpeedModifier = 10;
+	maskStats[Mask::MASK2][0].distanceDashModifier = 1.30f;
+	maskStats[Mask::MASK2][0].maskDamage = 40.0f;
+	maskStats[Mask::MASK2][0].maskCoolDown = 20000.0f;
+	maskStats[Mask::MASK2][0].invisibilityDuration = 5.0f;
+
+	//Estadísticas de la máscara 2 a nivel 1
+	maskStats[Mask::MASK2][1].maxHealthModifier = -20;
+	maskStats[Mask::MASK2][1].movementSpeedModifier = 10;
+	maskStats[Mask::MASK2][1].attackDamageModifier = 10;
+	maskStats[Mask::MASK2][1].attackSpeedModifier = 10;
+	maskStats[Mask::MASK2][1].distanceDashModifier = 1.35f;
+	maskStats[Mask::MASK2][1].maskDamage = 50.0f;
+	maskStats[Mask::MASK2][1].maskCoolDown = 18000.0f;
+	maskStats[Mask::MASK2][1].invisibilityDuration = 6.0f;
+
+	//Estadísticas de la máscara 2 a nivel 2
+	maskStats[Mask::MASK2][2].maxHealthModifier = -20;
+	maskStats[Mask::MASK2][2].movementSpeedModifier = 10;
+	maskStats[Mask::MASK2][2].attackDamageModifier = 10;
+	maskStats[Mask::MASK2][2].attackSpeedModifier = 10;
+	maskStats[Mask::MASK2][2].distanceDashModifier = 1.40f;
+	maskStats[Mask::MASK2][2].maskDamage = 70.0f;
+	maskStats[Mask::MASK2][2].maskCoolDown = 16000.0f;
+	maskStats[Mask::MASK2][2].invisibilityDuration = 7.3f;
+
+	//Estadísticas de la máscara 2 a nivel 3
+	maskStats[Mask::MASK2][3].maxHealthModifier = -20;
+	maskStats[Mask::MASK2][3].movementSpeedModifier = 10;
+	maskStats[Mask::MASK2][3].attackDamageModifier = 10;
+	maskStats[Mask::MASK2][3].attackSpeedModifier = 10;
+	maskStats[Mask::MASK2][3].distanceDashModifier = 1.45f;
+	maskStats[Mask::MASK2][3].maskDamage = 100.0f;
+	maskStats[Mask::MASK2][3].maskCoolDown = 18000.0f;
+	maskStats[Mask::MASK2][3].invisibilityDuration = 8.6f;
+
+	//Estadísticas de la máscara 2 a nivel 4
+	maskStats[Mask::MASK2][4].maxHealthModifier = -20;
+	maskStats[Mask::MASK2][4].movementSpeedModifier = 10;
+	maskStats[Mask::MASK2][4].attackDamageModifier = 10;
+	maskStats[Mask::MASK2][4].attackSpeedModifier = 10;
+	maskStats[Mask::MASK2][4].distanceDashModifier = 1.50f;
+	maskStats[Mask::MASK2][4].maskDamage = 150.0f;
+	maskStats[Mask::MASK2][4].maskCoolDown = 10000.0f;
+	maskStats[Mask::MASK2][4].invisibilityDuration = 10.0f;
 
 	// maskStats[static_cast<int>(Mask::MASK2)].maxHealthModifier = -20;
 	// maskStats[static_cast<int>(Mask::MASK2)].movementSpeedModifier = 10;
@@ -216,6 +260,24 @@ Player::Player() : Entity(EntityType::PLAYER)
 	passiveStats[Mask::MASK0][0].rangeBoost = 0;
 	passiveStats[Mask::MASK0][0].dashBoost = 0;
 
+	//Estadísticas pasivas mascara 0 a nivel 1
+	passiveStats[Mask::MASK0][1].damageBoost = 20;
+	passiveStats[Mask::MASK0][1].rangeBoost = 0;
+	passiveStats[Mask::MASK0][1].dashBoost = 0;
+
+	//Estadísticas pasivas mascara 0 a nivel 2
+	passiveStats[Mask::MASK0][2].damageBoost = 20;
+	passiveStats[Mask::MASK0][2].rangeBoost = 0;
+	passiveStats[Mask::MASK0][2].dashBoost = 0;
+	//Estadísticas pasivas mascara 0 a nivel 3
+	passiveStats[Mask::MASK0][3].damageBoost = 20;
+	passiveStats[Mask::MASK0][3].rangeBoost = 0;
+	passiveStats[Mask::MASK0][3].dashBoost = 0;
+	//Estadísticas pasivas mascara 0 a nivel 4
+	passiveStats[Mask::MASK0][4].damageBoost = 20;
+	passiveStats[Mask::MASK0][4].rangeBoost = 0;
+	passiveStats[Mask::MASK0][4].dashBoost = 0;
+
 	// passiveStats[static_cast<int>(Mask::MASK0)].damageBoost = 20;
 	// passiveStats[static_cast<int>(Mask::MASK0)].rangeBoost = 0;
 	// passiveStats[static_cast<int>(Mask::MASK0)].dashBoost = 0;
@@ -225,14 +287,59 @@ Player::Player() : Entity(EntityType::PLAYER)
 	passiveStats[Mask::MASK1][0].rangeBoost = 25;
 	passiveStats[Mask::MASK1][0].dashBoost = 0;
 
+	//Estadísticas pasivas mascara 1 a nivel 1
+	passiveStats[Mask::MASK1][1].damageBoost = 0.33;
+	passiveStats[Mask::MASK1][1].rangeBoost = 25;
+	passiveStats[Mask::MASK1][1].dashBoost = 0;
+
+	//Estadísticas pasivas mascara 1 a nivel 2
+	passiveStats[Mask::MASK1][2].damageBoost = 0.33;
+	passiveStats[Mask::MASK1][2].rangeBoost = 25;
+	passiveStats[Mask::MASK1][2].dashBoost = 0;
+
+	//Estadísticas pasivas mascara 1 a nivel 3
+	passiveStats[Mask::MASK1][3].damageBoost = 0.33;
+	passiveStats[Mask::MASK1][3].rangeBoost = 25;
+	passiveStats[Mask::MASK1][3].dashBoost = 0;
+
+	//Estadísticas pasivas mascara 1 a nivel 4
+	passiveStats[Mask::MASK1][4].damageBoost = 0.33;
+	passiveStats[Mask::MASK1][4].rangeBoost = 25;
+	passiveStats[Mask::MASK1][4].dashBoost = 0;
+
 	// passiveStats[static_cast<int>(Mask::MASK1)].damageBoost = 0.33;
 	// passiveStats[static_cast<int>(Mask::MASK1)].rangeBoost = 25;
 	// passiveStats[static_cast<int>(Mask::MASK1)].dashBoost = 0;
 
-	//Estadísticas pasivas mascara 2
+	//Estadísticas pasivas mascara 2 a nivel 0
 	passiveStats[Mask::MASK2][0].damageBoost = 0;
 	passiveStats[Mask::MASK2][0].rangeBoost = 0;
 	passiveStats[Mask::MASK2][0].dashBoost = 2;
+	passiveStats[Mask::MASK2][0].invisibilityDuration = 2000.0f;
+
+	//Estadísticas pasivas mascara 2 a nivel 1
+	passiveStats[Mask::MASK2][1].damageBoost = 0;
+	passiveStats[Mask::MASK2][1].rangeBoost = 0;
+	passiveStats[Mask::MASK2][1].dashBoost = 2;
+	passiveStats[Mask::MASK2][1].invisibilityDuration = 2000.0f;
+
+	//Estadísticas pasivas mascara 2 a nivel 2
+	passiveStats[Mask::MASK2][2].damageBoost = 0;
+	passiveStats[Mask::MASK2][2].rangeBoost = 0;
+	passiveStats[Mask::MASK2][2].dashBoost = 2;
+	passiveStats[Mask::MASK2][2].invisibilityDuration = 2000.0f;
+
+	//Estadísticas pasivas mascara 2 a nivel 3
+	passiveStats[Mask::MASK2][3].damageBoost = 0;
+	passiveStats[Mask::MASK2][3].rangeBoost = 0;
+	passiveStats[Mask::MASK2][3].dashBoost = 2;
+	passiveStats[Mask::MASK2][3].invisibilityDuration = 2000.0f;
+
+	//Estadísticas pasivas mascara 2 a nivel 4
+	passiveStats[Mask::MASK2][4].damageBoost = 0;
+	passiveStats[Mask::MASK2][4].rangeBoost = 0;
+	passiveStats[Mask::MASK2][4].dashBoost = 2;
+	passiveStats[Mask::MASK2][4].invisibilityDuration = 2000.0f;
 
 	// passiveStats[static_cast<int>(Mask::MASK2)].damageBoost = 0;
 	// passiveStats[static_cast<int>(Mask::MASK2)].rangeBoost = 0;
@@ -315,13 +422,14 @@ bool Player::Start() {
 	player_Direction = Direction::UNKNOWN;
 
 
-	EquipPrimaryMask(Mask::MASK1);
-	EquipSecondaryMask(Mask::NOMASK);
+	EquipPrimaryMask(Mask::NOMASK);
+	EquipSecondaryMask(Mask::MASK2);
 
 	//PARA TESTEAR
-	maskLevels[primaryMask] = 4; 
-	printf("Primary mask: %d, Level: %d\n", static_cast<int>(primaryMask), maskLevels[primaryMask]);
-	//nextState = transitionTable[static_cast<int>(EntityState::IDLE)][static_cast<int>(EntityState::IDLE)].next_state;
+	maskLevels[primaryMask] = 0; 
+	maskLevels[secondaryMask] = 0;
+	printf("Primary mask: %d, Level: %d\n", static_cast<int>(primaryMask) - 1, maskLevels[primaryMask]);
+	printf("Secondary mask: %d, Level: %d\n", static_cast<int>(secondaryMask) - 1, maskLevels[secondaryMask]);
 	return true;
 }
 
@@ -353,6 +461,22 @@ bool Player::Update(float dt)
 	CameraMovement(dt);
 
 	//printf("\nposx:%d, posy: %d",position.x, position.y);
+
+	if (maskStats[primaryMask][maskLevels[primaryMask]].invisibilityTimer.ReadSec() > maskStats[primaryMask][maskLevels[primaryMask]].invisibilityDuration) {
+        SDL_SetTextureAlphaMod(texture, 255);
+		isInvisible = false;
+		maskStats[primaryMask][maskLevels[primaryMask]].invisibilityTimer.Start();
+
+    }
+	if(passiveStats[secondaryMask][maskLevels[secondaryMask]].invisibilityTimer.ReadSec() > passiveStats[secondaryMask][maskLevels[secondaryMask]].invisibilityDuration){
+		SDL_SetTextureAlphaMod(texture, 255);
+		isInvisible = false;
+		passiveStats[secondaryMask][maskLevels[secondaryMask]].invisibilityTimer.Start();
+
+	}
+	if(!isInvisible){
+		SDL_SetTextureAlphaMod(texture, 255);
+	}
 
 	stateMachine(dt);
 	currentAnimation->Update();
@@ -514,6 +638,10 @@ void Player::MaskAttack(float dt)
 	case Mask::MASK1:
 		AreaAttack(dt);
 		break;
+	case Mask::MASK2:
+		DashAttack(dt);
+		SetInvisible();
+		break;
 	}
 }
 void Player::ApplyPoison(Entity* entity) {
@@ -617,6 +745,50 @@ void Player::AreaAttack(float dt) {
 	mask1AttackSensor->listener = this;
 }
 
+//Ataque mascara 2
+
+void Player::DashAttack(float dt) {
+	b2Vec2 velocity = b2Vec2(0, 0);
+
+	// Obtener teclado
+	pressingUp = app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT;
+	pressingDown = app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT;
+	pressingLeft = app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT;
+	pressingRight = app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT;
+
+	// Calcular la velocidad horizontal y vertical
+	int horizontalMovement = pressingRight - pressingLeft;
+	int verticalMovement = pressingDown - pressingUp;
+
+	//printf("%d", pressingUp);
+	// Actualizar velocidad
+	if (!isDashing) {
+		velocity.x = horizontalMovement * GetRealMovementSpeed() * speed * 10 * dt;
+		velocity.y = verticalMovement * GetRealMovementSpeed() * speed * 10 * dt;
+
+		isDashing = true;
+		timerDash.Start();
+		
+		dashCollision = app->physics->CreateRectangleSensor(position.x, position.y, 150, 150, DYNAMIC);
+		dashCollision->ctype = ColliderType::MASK2_ATTACK;
+		dashCollision->listener = this;
+		
+		pbodyFoot->body->ApplyForce(b2Vec2(velocity.x * 100 * maskStats[primaryMask][maskLevels[primaryMask]].distanceDashModifier, velocity.y * 100 * maskStats[primaryMask][maskLevels[primaryMask]].distanceDashModifier), pbodyFoot->body->GetWorldCenter(), false);
+	}	
+}
+
+void Player::SetInvisible() {
+    SDL_SetTextureAlphaMod(texture, 100);
+    maskStats[primaryMask][maskLevels[primaryMask]].invisibilityTimer.Start();
+	isInvisible = true;
+}
+
+void Player::SetPassiveInvisible() {
+    SDL_SetTextureAlphaMod(texture, 100);
+	isInvisible = true;
+    passiveStats[secondaryMask][maskLevels[secondaryMask]].invisibilityTimer.Start();
+}
+
 // L07 DONE 6: Define OnCollision function for the player. 
 void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
@@ -650,6 +822,12 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 				physB->entity->ApplyPoison(maskStats[primaryMask][maskLevels[primaryMask]].poisonDamage, maskStats[primaryMask][maskLevels[primaryMask]].poisonDuration, maskStats[primaryMask][maskLevels[primaryMask]].poisonTickRate);
 			}
 			//collisionMask1Timer.Start();
+		}
+		if(physA == dashCollision)
+		{
+			if (physB->entity != nullptr) {
+				physB->entity->TakeDamage(maskStats[Mask::MASK2][maskLevels[Mask::MASK2]].maskDamage);
+			}
 		}
 		if (physA == pbodyFoot) {
 			//TakeDamage(physB->entity->attackDamage);
@@ -839,7 +1017,7 @@ void Player::GodMode(float dt)
 	}
 
 
-	b2Vec2 velocity = b2Vec2(0, 0);
+	velocity = b2Vec2(0, 0);
 	pbodyFoot->body->SetLinearVelocity(velocity);
 
 	//Moverse a la izquierda
@@ -916,14 +1094,30 @@ void Player::PlayerMovement(float dt)
 		desiredState = EntityState::DASHI;
 		pbodyFoot->body->ApplyForce(b2Vec2(velocity.x * 100, velocity.y * 100), pbodyFoot->body->GetWorldCenter(), false);
 
+		if(secondaryMask == Mask::MASK2)
+		{
+			SetPassiveInvisible();
+			passiveStats[secondaryMask][maskLevels[secondaryMask]].invisibilityTimer.Start();
+		}
 
 		app->audio->StopFx(-1);
 		app->audio->PlayFx(dash_fx);
 	}
 
+	if (isDashing && dashCollision != nullptr) {
+    	dashCollision->body->SetTransform(pbodyFoot->body->GetPosition(), 0);
+	}
+
 	if (!(timerDash.ReadMSec() < speed * 1000 && isDashing)) {
 		isDashing = false;
 		pbodyFoot->body->SetLinearVelocity(velocity);
+	}
+
+	if (!(timerDash.ReadMSec() < speed * 1000 && isDashing) && dashCollision != nullptr) {
+		isDashing = false;
+		pbodyFoot->body->SetLinearVelocity(velocity);
+		app->physics->DestroyBody(dashCollision);
+		dashCollision = nullptr;
 	}
 
 	//Si pulsas J para atacar
@@ -1043,9 +1237,14 @@ void Player::FishingDirecction(bool verticalMovement, bool horizontalMovement)
 }
 
 void Player::TakeDamage(float damage) {
-
-	currentStats.currentHealth -= damage;
-	printf("Player has received  %f damage\n", damage);
+    if (damageTimer.ReadSec() >= damageCooldown) {
+        if(dashCollision == nullptr){
+            currentStats.currentHealth -= damage;
+            isInvisible = false;
+            printf("Player has received  %f damage\n", damage);
+            damageTimer.Start();
+        }
+    }
 }
 
 
