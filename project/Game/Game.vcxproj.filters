@@ -211,6 +211,9 @@
     <ClCompile Include="Source\Scene_Mazmorra7.cpp">
       <Filter>Scenes\Mazmorras</Filter>
     </ClCompile>
+    <ClCompile Include="Source\CommerceManager.cpp">
+      <Filter>Modules\SistemaComercio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -477,6 +480,9 @@
     <ClInclude Include="Source\Scene_Mazmorra7.h">
       <Filter>Scenes\Mazmorras</Filter>
     </ClInclude>
+    <ClInclude Include="Source\CommerceManager.h">
+      <Filter>Modules\SistemaComercio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -532,6 +538,9 @@
     </Filter>
     <Filter Include="Scenes\Mazmorras">
       <UniqueIdentifier>{01e9f8e4-a9b0-4977-b904-6bb585bcfb6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\SistemaComercio">
+      <UniqueIdentifier>{2334312c-c9a9-44f4-927a-81d2550c5738}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

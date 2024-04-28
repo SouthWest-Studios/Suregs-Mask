@@ -44,6 +44,7 @@ bool ModuleFadeToBlack::Start()
 	int screenHeight = static_cast<int>(winH * app->win->GetScale());
 
 	screenRect = { 0, 0, screenWidth, screenHeight };
+	transitionRect = { 0, 0, screenWidth, screenHeight };
 
 	currentStep = Fade_Step::NONE;
 
@@ -109,6 +110,8 @@ bool ModuleFadeToBlack::Update(float dt)
 		}
 	}
 
+	/*transitionRect.x += static_cast <int>(1.0f * dt);*/
+
 	return true;
 }
 
@@ -119,11 +122,19 @@ bool ModuleFadeToBlack::PostUpdate()
 
 	float fadeRatio = (float)frameCount / (float)maxFadeFrames;
 
+	
+
 	// Render the black square with alpha on the screen
 	SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, (Uint8)(fadeRatio * 255.0f));
 	SDL_RenderFillRect(app->render->renderer, &screenRect);
 
-	/*app->render->DrawTexture(transition, 0, 0, 1, SDL_FLIP_NONE, &screenRect, fadeRatio * 1.0f);*/
+	/*int transitionX = transitionRect.x;
+	int transitionY = transitionRect.y;
+
+	SDL_SetTextureAlphaMod(transition, fadeRatio * 255.0f);
+	app->render->DrawTexture(transition, transitionX, transitionY, 1.0f, SDL_FLIP_NONE, nullptr);*/
+
+	//app->render->DrawTexture(transition, 0, 0, 1, SDL_FLIP_NONE, &screenRect, fadeRatio * 1.0f);
 	
 
 	return true;

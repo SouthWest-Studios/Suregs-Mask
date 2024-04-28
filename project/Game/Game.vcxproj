@@ -95,6 +95,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\CommerceManager.cpp" />
     <ClCompile Include="Source\DebugCommand.cpp" />
     <ClCompile Include="Source\DebugCommandBase.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -166,6 +167,7 @@
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\ArmaduraInv.h" />
+    <ClInclude Include="Source\CommerceManager.h" />
     <ClInclude Include="Source\DebugCommand.h" />
     <ClInclude Include="Source\DebugCommandBase.h" />
     <ClInclude Include="Source\DebugConsole.h" />

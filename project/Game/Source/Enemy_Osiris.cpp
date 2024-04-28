@@ -235,7 +235,7 @@ void Enemy_Osiris::Attack(float dt)
 	//printf("Osiris attacking");
 	currentAnimation = &attackAnim;	
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero); //No se mueve mientras ataca
-	LOG("Esta atacando");
+	
 	//sonido ataque
 }
 
@@ -278,7 +278,6 @@ void Enemy_Osiris::Die() {
 void Enemy_Osiris::Revive()
 {
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
-	printf("Inside Revive function\n");
 
 	if (!tempo)
 	{
@@ -289,7 +288,6 @@ void Enemy_Osiris::Revive()
 
 	if (reviveTimer.CountDown(4) <= 0)
 	{
-		printf("Osiris: Time to revive, setting next state to IDLE\n");
 
 		health = maxHealth;
 		hasRevived = true;
@@ -299,7 +297,6 @@ void Enemy_Osiris::Revive()
 
 		return;
 	}
-	printf("Condition not met for revival\n");
 	nextState = EntityState::REVIVING;
 }
 
@@ -370,9 +367,9 @@ bool Enemy_Osiris::Osirisfinding(float dt, iPoint playerPosP)
 		attackAnim.Reset();
 
 	}
-	else {
+	/*else {
 		LOG("HA LLEGADO AL DESTINO");
-	}
+	}*/
 
 	// Aplica la velocidad al cuerpo del enemigo
 	pbodyFoot->body->SetLinearVelocity(velocity);

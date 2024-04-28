@@ -26,7 +26,11 @@ enum class InventityType
 	PEZ_PEQUENO,
 	PEZ_MEDIANO,
 	PEZ_GRANDE,
-	UNKNOWN
+
+	//De aqui para abajo no importa el orden
+	MONEDA,
+	UNKNOWN //<-- Salvo este, el ultimo
+
 };
 
 class PhysBody;

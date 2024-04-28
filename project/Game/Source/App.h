@@ -39,6 +39,7 @@ class GuiManager;
 class DebugConsole;
 class DialogManager;
 class InventoryManager;
+class CommerceManager;
 class Menu;
 class Hud;
 
@@ -144,6 +145,7 @@ public:
 	DebugConsole* debugConsole;
 	DialogManager* dialogManager;
 	InventoryManager* inventoryManager;
+	CommerceManager* commerceManager;
 	Menu* menu;
 	Hud* hud;
 
