@@ -133,9 +133,20 @@ bool Enemy_Osiris::Update(float dt)
 		poisonTimer += 1/dt;
 		timeSinceLastTick += 1/dt ;
 
-		if (timeSinceLastTick >= poisonTickRate) {
-			// Asume que tienes una función TakeDamage() que maneja la lógica de daño
-			TakeDamage(poisonDamage);
+		if (timeSinceLastTick >= poisonTickRate && poisoned) {
+			if (currentState != EntityState::DEAD && invulnerabilityTimer.ReadMSec() >= 500) {
+					health -= poisonDamage;
+					invulnerabilityTimer.Start();
+					timerRecibirDanioColor.Start();
+
+					printf("Enemy_Osiris has received  %f damage of poison\n", poisonDamage);
+					if (currentState == EntityState::REVIVING) {
+						if (!hasRevived) {
+							hasRevived = true;
+						}
+						poisoned = false;
+					}			
+			}
 			timeSinceLastTick -= poisonTickRate;
 		}
 	}
@@ -374,8 +385,9 @@ float Enemy_Osiris::GetHealth() const {
 }
 
 void Enemy_Osiris::TakeDamage(float damage) {
-	if (currentState != EntityState::DEAD) {
+	if (currentState != EntityState::DEAD && invulnerabilityTimer.ReadMSec() >= 500) {
 		health -= damage;
+		invulnerabilityTimer.Start();
 		timerRecibirDanioColor.Start();
 
 		printf("Enemy_Osiris has received  %f damage\n", damage);
@@ -394,4 +406,5 @@ void Enemy_Osiris::ApplyPoison(int poisonDamage, float poisonDuration, float poi
 	this->poisonTickRate = poisonTickRate;
 	this->poisonTimer = 0.0f;
 	this->timeSinceLastTick = 0.0f;
+	this->poisoned = true;
 }

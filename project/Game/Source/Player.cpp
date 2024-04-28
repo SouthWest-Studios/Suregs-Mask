@@ -621,24 +621,21 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::ENEMY:
 		if (physA == attackSensor) {
 			LOG("Collision ENEMY");
-			if (physB->entity != nullptr && basicAttackDealed == false) {
+			if (physB->entity != nullptr) {
 				physB->entity->TakeDamage(currentStats.attackDamage);
-				basicAttackDealed = true;
 			}
 			//collisionAttackTimer.Start();
 		}
 		if (physA == mask1PassiveSensor) {
 			LOG("Collision ENEMY");
-			if (physB->entity != nullptr && mask1PassiveAttackDealed == false) {
+			if (physB->entity != nullptr) {
 				physB->entity->TakeDamage(currentStats.attackDamage * passiveStats[secondaryMask][maskLevels[secondaryMask]].damageBoost);
-				mask1PassiveAttackDealed = true;
 			}
 		}
 		if (physA == mask1AttackSensor) {
 			LOG("Collision ENEMY");
-			if (physB->entity != nullptr && mask1AttackDealed == false) {
+			if (physB->entity != nullptr) {
 				physB->entity->TakeDamage(maskStats[primaryMask][maskLevels[primaryMask]].maskDamage);
-				mask1AttackDealed = true;
 				physB->entity->ApplyPoison(maskStats[primaryMask][maskLevels[primaryMask]].poisonDamage, maskStats[primaryMask][maskLevels[primaryMask]].poisonDuration, maskStats[primaryMask][maskLevels[primaryMask]].poisonTickRate);
 			}
 			//collisionMask1Timer.Start();
@@ -957,7 +954,6 @@ void Player::PlayerMovement(float dt)
 
 	if (!(timerMaskAttack.ReadMSec() < maskStats[primaryMask][maskLevels[primaryMask]].maskCoolDown && isAttackingMask)) {
 		isAttackingMask = false;
-		mask1PassiveAttackDealed = false;
 		if (mask1AttackSensor) {
 			app->physics->DestroyBody(mask1AttackSensor);
 			mask1AttackSensor = nullptr;

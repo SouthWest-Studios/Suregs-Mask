@@ -69,6 +69,7 @@ public:
 	float health;
 	float maxHealth;
 	float attackDamage;
+	Timer invulnerabilityTimer;
 
 	float viewDistance;
 	float attackDistance;
@@ -124,6 +125,7 @@ private:
 	float poisonTickRate = 0.0f; // Tiempo entre cada tick de da�o de veneno
 	float poisonDamage = 0.0f; // Da�o de veneno por tick
 	float timeSinceLastTick = 0.0f; // Tiempo desde el �ltimo tick de da�o de veneno
+	bool poisoned = false;
 
 public:
 
