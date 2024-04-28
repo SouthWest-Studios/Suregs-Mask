@@ -619,6 +619,8 @@ void Player::AreaAttack(float dt) {
 
 // L07 DONE 6: Define OnCollision function for the player. 
 void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
+
+	//Colision general
 	switch (physB->ctype)
 	{
 	case ColliderType::PLATFORM:
@@ -675,22 +677,27 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			}
 		}
 		break;
-	
-
-	case ColliderType::ENTRADA_MAZMORRA0:
-		LOG("Collision ENTRADA_MAZMORRA0");
-		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra0);
-		break;
-	case ColliderType::SALIDA_MAZMORRA0:
-		LOG("Collision SALIDA_MAZMORRA0");
-		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_pueblo);
-		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;
 	default:
 		break;
 	}
+
+	//Colisiones de sool el pie
+	if (physA == pbodyFoot) {
+		switch (physB->ctype) {
+		case ColliderType::ENTRADA_MAZMORRA0:
+			LOG("Collision ENTRADA_MAZMORRA0");
+			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra0);
+			break;
+		case ColliderType::SALIDA_MAZMORRA0:
+			LOG("Collision SALIDA_MAZMORRA0");
+			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_pueblo);
+			break;
+		}
+	}
+
 }
 
 void Player::CameraMovement(float dt)
