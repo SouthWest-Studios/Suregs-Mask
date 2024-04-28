@@ -24,6 +24,7 @@
 #include "DebugConsole.h"
 #include "DialogManager.h"
 #include "InventoryManager.h"
+#include "CommerceManager.h"
 #include "Menu.h"
 #include "Hud.h"
 #include "Optick/include/optick.h"
@@ -74,6 +75,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	map = new Map(this, false);
 	entityManager = new EntityManager(this);
 	inventoryManager = new InventoryManager(this);
+	commerceManager = new CommerceManager(this);
 	guiManager = new GuiManager(this);
 	debugConsole = new DebugConsole(this);
 	dialogManager = new DialogManager(this);
@@ -97,10 +99,18 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(scene_testing);
 	AddModule(scene_pueblo);
 	AddModule(scene_mazmorra0);
+	AddModule(scene_mazmorra1);
+	AddModule(scene_mazmorra2);
+	AddModule(scene_mazmorra3);
+	AddModule(scene_mazmorra4);
+	AddModule(scene_mazmorra5);
+	AddModule(scene_mazmorra6);
+	AddModule(scene_mazmorra7);
 	AddModule(entityManager);
 	AddModule(hud);
 	AddModule(menu);
 	AddModule(inventoryManager);
+	AddModule(commerceManager);
 	AddModule(guiManager);
 	AddModule(dialogManager);
 	AddModule(fadeToBlack);
