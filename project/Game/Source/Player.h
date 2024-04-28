@@ -68,7 +68,9 @@ struct MaskStats {
 	float invisibilityDuration;
 
 	//Mask3
-
+	float durationTime;
+	float maxActiveHealthModifier;
+	float maxActiveDamageModifier;
 
 	//Venenos
 	int poisonDamage;
@@ -82,6 +84,7 @@ struct PassiveStats {
 	float dashBoost;
 	Timer invisibilityTimer;
 	float invisibilityDuration;
+	float velocityBoost;
 };
 
 class Player : public Entity
@@ -131,6 +134,7 @@ public:
 	void ApplyPoison(Entity* entity);
 	void SetInvisible();
 	void SetPassiveInvisible();
+	void Mask3Statistics();
 
 	Mask* GetPrimaryMask();
 	Mask* GetSecondaryMask();
@@ -220,9 +224,12 @@ public:
 	Timer collisionMask1Timer;
 
 	Timer timerChangeMask;
+	
 	const int changeMaskCooldown = 5000; //5s
 	
 	bool isInvisible = false;
+
+	Timer mask3Timer;
 
 	//Fishing
 	//New//
