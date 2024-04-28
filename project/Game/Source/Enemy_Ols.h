@@ -91,6 +91,8 @@ private:
 	Animation attackAnim;
 	Animation dieAnim;
 
+	int ols_death_fx;
+
 	bool isFacingLeft = false;
 
 	Item_Garra* garra;

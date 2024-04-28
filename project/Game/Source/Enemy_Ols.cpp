@@ -50,6 +50,8 @@ bool Enemy_Ols::Start() {
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
+	ols_death_fx = app->audio->LoadAudioFx("ols_death_fx");
+
 	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
 	pbodyFoot->entity = this;
 	pbodyFoot->listener = this;
@@ -76,6 +78,7 @@ bool Enemy_Ols::Update(float dt)
 	switch (nextState) {
 	case EntityState::DEAD:
 		Die(dt);
+		app->audio->PlayFx(ols_death_fx);
 		break;
 	case EntityState::ATTACKING:
 		Attack(dt);

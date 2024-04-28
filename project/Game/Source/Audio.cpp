@@ -190,19 +190,19 @@ unsigned int Audio::LoadFx(const char* path)
 // Play WAV
 bool Audio::PlayFx(unsigned int id, int channel, int repeat)
 {
-	bool ret = false;
+	if (!active) {
+		return false; // Audio no activo
+	}
 
-	if(!active)
-		return false;
-
-	if(id > 0 && id <= fx.Count())
+	if (id > 0 && id <= fx.Count())
 	{
 		Mix_PlayChannel(channel, fx[id - 1], repeat);
 	}
 
-	Mix_Volume(channel, volumeFx);
+	// Asociar el ID del efecto de sonido con el canal de reproducción
+	activeChannels[id] = channel;
 
-	return ret;
+	return true;
 }
 
 bool Audio::StopFx(int channel)
