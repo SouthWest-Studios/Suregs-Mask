@@ -19,6 +19,14 @@ struct Branch {
 	Branch(EntityState next) : next_state(next) {}
 };
 
+enum RoomType {
+	ROOM_SQUARE,
+	ROOM_RECTANGLE_W,
+	ROOM_RECTANGLE_H,
+	ROOM_L_SHAPED,
+	ROOM_UNKNOWN
+};
+
 enum class Mask{
 	NOMASK,
 	MASK0,
@@ -232,6 +240,8 @@ public:
 	//Camera
 	MapObject* GetCurrentRoom();
 	int clamp(int val, int min, int max);
+	RoomType roomType;
+	void DetermineRoomType(MapObject* room);
 
 private:
 	Animation idleAnim;

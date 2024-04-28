@@ -887,8 +887,8 @@ void Player::CameraMovement(float dt)
 	int targetPosX = (-position.x * app->win->GetScale() + (windowW / 2) - 10);
 	int targetPosY = (-position.y * app->win->GetScale() + (windowH / 2) - 10) + 50;
 
-	
-	
+
+
 	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
 	{
 		camaralibre = !camaralibre; // Esto alternar?el valor de camaralibre cada vez que se presione la tecla C en modo debug
@@ -918,40 +918,130 @@ void Player::CameraMovement(float dt)
 			MapObject* currentRoom = GetCurrentRoom();
 			if (currentRoom != nullptr)
 			{
-				/*int cameraMinX = -(int)(currentRoom->x * app->win->GetScale());
-				int cameraMaxX = -(int)((currentRoom->x + currentRoom->width - windowW / app->win->GetScale()) * app->win->GetScale());
-				int cameraMinY = -(int)(currentRoom->y * app->win->GetScale());
-				int cameraMaxY = -(int)((currentRoom->y + currentRoom->height - windowH / app->win->GetScale()) * app->win->GetScale());*/
-
 				// Comprueba si la sala actual es pequeña
 				if (app->map->smallRoomsList.Find(currentRoom) != -1)
 				{
 					int targetPosX = (-(int)(currentRoom->x + currentRoom->width / 2) * app->win->GetScale() + (windowW / 2) - 10);
 					int targetPosY = (-(int)(currentRoom->y + currentRoom->height / 2) * app->win->GetScale() + (windowH / 2) - 10);
+
 					app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
 					app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.005f);
 				}
 				// Comprueba si la sala actual es grande
 				else if (app->map->largeRoomsList.Find(currentRoom) != -1)
 				{
-					app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
-					app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.005f);
+					DetermineRoomType(currentRoom);
 
+					switch (roomType) {
+					case ROOM_SQUARE:
+						//X
+						if (position.x < currentRoom->x + app->render->camera.w / 2) //izq
+						{
+							int targetPosX = (-(int)(currentRoom->x - 50 + currentRoom->width / 2) * app->win->GetScale() + (windowW / 2) - 10);
+							app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
+						}
+						else if (position.x > currentRoom->x + currentRoom->width - app->render->camera.w / 2) //der
+						{
+							int targetPosX = (-(int)(currentRoom->x + currentRoom->width - app->render->camera.w / 2) * app->win->GetScale() + (windowW / 2) - 10);
+							app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
+						}
+						else
+						{
+							int targetPosX = (-(int)(position.x) * app->win->GetScale() + (windowW / 2) - 10);
+							app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
+						}
 
-					//int targetPosX = lerp(app->render->camera.x, -position.x * app->win->GetScale() + (windowW / 2) - 10, dt * 0.005f);
-					//int targetPosY = lerp(app->render->camera.y, -position.y * app->win->GetScale() + (windowH / 2) - 10, dt * 0.005f);
+						//Y
+						if (position.y < currentRoom->y + app->render->camera.h / 2) //arriba
+						{
+							int targetPosY = (-(int)(currentRoom->y + app->render->camera.h / 2) * app->win->GetScale() + (windowH / 2) - 10);
+							app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.005f);
+						}
+						else if (position.y > currentRoom->y + currentRoom->height - app->render->camera.h / 2) //abajo
+						{
+							int targetPosY = (-(int)(currentRoom->y + currentRoom->height - app->render->camera.h / 2) * app->win->GetScale() + (windowH / 2) - 10);
+							app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.005f);
+						}
+						else
+						{
+							int targetPosY = (-(int)(position.y) * app->win->GetScale() + (windowH / 2) - 10);
+							app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.005f);
+						}
+						break;
 
-					//if (targetPosX < cameraMaxX) targetPosX = cameraMaxX;
-					//if (targetPosX > cameraMinX) targetPosX = cameraMinX;
-					//if (targetPosY < cameraMaxY) targetPosY = cameraMaxY;
-					//if (targetPosY > cameraMinY) targetPosY = cameraMinY;
+					case ROOM_RECTANGLE_H:
+						if (position.y > currentRoom->y + currentRoom->height - app->render->camera.h / 2)
+						{
+							int targetPosX = (-(int)(currentRoom->x + currentRoom->width / 2) * app->win->GetScale() + (windowW / 2) - 10);
+							int targetPosY = (-(int)(currentRoom->y + currentRoom->height - app->render->camera.h / 2) * app->win->GetScale() + (windowH / 2) - 10);
 
-					//app->render->camera.x = targetPosX;
-					//app->render->camera.y = targetPosY;
+							app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
+							app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.005f);
+						}
+						else if (position.y < currentRoom->y + app->render->camera.h / 2)
+						{
+							int targetPosX = (-(int)(currentRoom->x + currentRoom->width / 2) * app->win->GetScale() + (windowW / 2) - 10);
+							int targetPosY = (-(int)(currentRoom->y + app->render->camera.h / 2) * app->win->GetScale() + (windowH / 2) - 10);
+
+							app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
+							app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.005f);
+						}
+						else
+						{
+							int targetPosX = (-(int)(currentRoom->x + currentRoom->width / 2) * app->win->GetScale() + (windowW / 2) - 10);
+							int targetPosY = (-(int)(position.y) * app->win->GetScale() + (windowH / 2) - 10);
+
+							app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
+							app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.005f);
+						}
+						break;
+
+					case ROOM_RECTANGLE_W:
+
+						//X
+						if (position.x < currentRoom->x + app->render->camera.w / 2) //izq
+						{
+							int targetPosX = (-(int)(currentRoom->x - 50 + currentRoom->width / 2) * app->win->GetScale() + (windowW / 2) - 10);
+							app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
+						}
+						else if (position.x > currentRoom->x + currentRoom->width - app->render->camera.w / 2) //der
+						{
+							int targetPosX = (-(int)(currentRoom->x + currentRoom->width - app->render->camera.w / 2) * app->win->GetScale() + (windowW / 2) - 10);
+							app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
+						}
+						else
+						{
+							int targetPosX = (-(int)(position.x) * app->win->GetScale() + (windowW / 2) - 10);
+							app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
+						}
+
+						//Y
+						if (position.y < currentRoom->y + app->render->camera.h / 2) //arriba
+						{
+							int targetPosY = (-(int)(currentRoom->y + app->render->camera.h / 2) * app->win->GetScale() + (windowH / 2) - 10);
+							app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.005f);
+						}
+						else if (position.y > currentRoom->y + currentRoom->height - app->render->camera.h / 2) //abajo
+						{
+							int targetPosY = (-(int)(currentRoom->y + currentRoom->height - app->render->camera.h / 2) * app->win->GetScale() + (windowH / 2) - 10);
+							app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.005f);
+						}
+						else
+						{
+							int targetPosY = (-(int)(position.y) * app->win->GetScale() + (windowH / 2) - 10);
+							app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.005f);
+						}
+						break;
+
+					case ROOM_L_SHAPED:
+
+						break;
+
+					default:
+						break;
+					}
 				}
 			}
-
-
 			else
 			{
 				app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
@@ -982,7 +1072,6 @@ MapObject* Player::GetCurrentRoom()
 		if (position.x >= room->x && position.x <= room->x + room->width &&
 			position.y >= room->y && position.y <= room->y + room->height)
 		{
-			//printf("Player is in the room at position (%d, %d)\n", room->x, room->y);
 			return room;
 		}
 	}
@@ -1001,6 +1090,27 @@ MapObject* Player::GetCurrentRoom()
 	}
 
 	return nullptr;
+}
+
+void Player::DetermineRoomType(MapObject* room) {
+
+	float width = room->width;
+	float height = room->height;
+
+	if (width > height) {
+		roomType = ROOM_RECTANGLE_W;
+	}
+	else if (height > width) {
+		roomType = ROOM_RECTANGLE_H;
+	}
+	else if (height = width) {
+
+		roomType = ROOM_SQUARE;
+	}
+	else
+	{
+		roomType = ROOM_L_SHAPED;
+	}
 }
 
 
