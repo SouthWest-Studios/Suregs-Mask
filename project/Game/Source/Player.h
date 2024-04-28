@@ -53,7 +53,7 @@ struct MaskStats {
 	int numberLightning;
 
 	//Mask1
-	float rangeBall;
+	float rangeBallModifier;
 
 	//Mask2
 	float distanceDash;

@@ -116,6 +116,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK1][0].movementSpeedModifier = 10;
 	maskStats[Mask::MASK1][0].attackDamageModifier = 10;
 	maskStats[Mask::MASK1][0].attackSpeedModifier = 0;
+	maskStats[Mask::MASK1][0].rangeBallModifier = 0.0f;
 	maskStats[Mask::MASK1][0].maskDamage = 100;
 	maskStats[Mask::MASK1][0].maskCoolDown = 30000; //En Milisegundos
 	maskStats[Mask::MASK1][0].firstTimeUsed = false;
@@ -137,6 +138,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK1][1].movementSpeedModifier = 10;
 	maskStats[Mask::MASK1][1].attackDamageModifier = 10;
 	maskStats[Mask::MASK1][1].attackSpeedModifier = 0;
+	maskStats[Mask::MASK1][1].rangeBallModifier = 0.05f;
 	maskStats[Mask::MASK1][1].maskDamage = 120;
 	maskStats[Mask::MASK1][1].maskCoolDown = 28000; //En Milisegundos
 	maskStats[Mask::MASK1][1].firstTimeUsed = false;
@@ -150,6 +152,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK1][2].movementSpeedModifier = 10;
 	maskStats[Mask::MASK1][2].attackDamageModifier = 10;
 	maskStats[Mask::MASK1][2].attackSpeedModifier = 0;
+	maskStats[Mask::MASK1][2].rangeBallModifier = 0.10f;
 	maskStats[Mask::MASK1][2].maskDamage = 180;
 	maskStats[Mask::MASK1][2].maskCoolDown = 25000; //En Milisegundos
 	maskStats[Mask::MASK1][2].firstTimeUsed = false;
@@ -163,6 +166,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK1][3].movementSpeedModifier = 10;
 	maskStats[Mask::MASK1][3].attackDamageModifier = 10;
 	maskStats[Mask::MASK1][3].attackSpeedModifier = 0;
+	maskStats[Mask::MASK1][3].rangeBallModifier = 0.15f;
 	maskStats[Mask::MASK1][3].maskDamage = 250;
 	maskStats[Mask::MASK1][3].maskCoolDown = 23000; //En Milisegundos
 	maskStats[Mask::MASK1][3].firstTimeUsed = false;
@@ -176,6 +180,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK1][4].movementSpeedModifier = 10;
 	maskStats[Mask::MASK1][4].attackDamageModifier = 10;
 	maskStats[Mask::MASK1][4].attackSpeedModifier = 0;
+	maskStats[Mask::MASK1][4].rangeBallModifier = 0.20f; // 20% de aumento en el rango
 	maskStats[Mask::MASK1][4].maskDamage = 400;
 	maskStats[Mask::MASK1][4].maskCoolDown = 20000; //En Milisegundos
 	maskStats[Mask::MASK1][4].firstTimeUsed = false;
@@ -603,7 +608,7 @@ void Player::CastLightning() {
 //Ataque mascara 1
 
 void Player::AreaAttack(float dt) {
-	mask1AttackSensor = app->physics->CreateRectangleSensor(this->position.x, this->position.y, attackMask1Width, attackMask1Height, DYNAMIC);
+	mask1AttackSensor = app->physics->CreateRectangleSensor(this->position.x, this->position.y, attackMask1Width + attackMask1Width * maskStats[primaryMask][maskLevels[primaryMask]].rangeBallModifier, attackMask1Height + attackMask1Height * maskStats[primaryMask][maskLevels[primaryMask]].rangeBallModifier, DYNAMIC);
 	mask1AttackSensor->ctype = ColliderType::MASK1_ATTACK;
 	mask1AttackSensor->listener = this;
 }
