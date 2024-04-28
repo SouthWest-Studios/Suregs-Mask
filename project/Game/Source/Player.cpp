@@ -119,6 +119,9 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK1][0].maskDamage = 100;
 	maskStats[Mask::MASK1][0].maskCoolDown = 30000; //En Milisegundos
 	maskStats[Mask::MASK1][0].firstTimeUsed = false;
+	maskStats[Mask::MASK1][0].poisonDamage = 0;
+	maskStats[Mask::MASK1][0].poisonDuration = 0;
+	maskStats[Mask::MASK1][0].poisonTickRate = 0;
 
 	// maskStats[static_cast<int>(Mask::MASK1)].maxHealthModifier = -10;
 	// maskStats[static_cast<int>(Mask::MASK1)].movementSpeedModifier = 10;
@@ -137,6 +140,9 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK1][1].maskDamage = 120;
 	maskStats[Mask::MASK1][1].maskCoolDown = 28000; //En Milisegundos
 	maskStats[Mask::MASK1][1].firstTimeUsed = false;
+	maskStats[Mask::MASK1][1].poisonDamage = 5;
+	maskStats[Mask::MASK1][1].poisonDuration = 5.0f;
+	maskStats[Mask::MASK1][1].poisonTickRate = 1.5f;
 
 	// Estadísticas de la máscara 1 a nivel 2
 	
@@ -147,6 +153,9 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK1][2].maskDamage = 180;
 	maskStats[Mask::MASK1][2].maskCoolDown = 25000; //En Milisegundos
 	maskStats[Mask::MASK1][2].firstTimeUsed = false;
+	maskStats[Mask::MASK1][2].poisonDamage = 10;
+	maskStats[Mask::MASK1][2].poisonDuration = 5.0f;
+	maskStats[Mask::MASK1][2].poisonTickRate = 1.5f;
 
 	// Estadísticas de la máscara 1 a nivel 3
 	
@@ -157,6 +166,9 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK1][3].maskDamage = 250;
 	maskStats[Mask::MASK1][3].maskCoolDown = 23000; //En Milisegundos
 	maskStats[Mask::MASK1][3].firstTimeUsed = false;
+	maskStats[Mask::MASK1][3].poisonDamage = 10;
+	maskStats[Mask::MASK1][3].poisonDuration = 10.0f;
+	maskStats[Mask::MASK1][3].poisonTickRate = 1.5f;
 
 	// Estadísticas de la máscara 1 a nivel 4
 	
@@ -167,6 +179,9 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK1][4].maskDamage = 400;
 	maskStats[Mask::MASK1][4].maskCoolDown = 20000; //En Milisegundos
 	maskStats[Mask::MASK1][4].firstTimeUsed = false;
+	maskStats[Mask::MASK1][4].poisonDamage = 15;
+	maskStats[Mask::MASK1][4].poisonDuration = 15.0f;
+	maskStats[Mask::MASK1][4].poisonTickRate = 1.5f;
 
 
 	//Estadísticas de la máscara 2 a nivel 0
@@ -295,11 +310,11 @@ bool Player::Start() {
 	player_Direction = Direction::UNKNOWN;
 
 
-	EquipPrimaryMask(Mask::MASK0);
+	EquipPrimaryMask(Mask::MASK1);
 	EquipSecondaryMask(Mask::NOMASK);
 
 	//PARA TESTEAR
-	maskLevels[Mask::MASK0] = 4; 
+	maskLevels[primaryMask] = 4; 
 	printf("Primary mask: %d, Level: %d\n", static_cast<int>(primaryMask), maskLevels[primaryMask]);
 	return true;
 }
@@ -621,9 +636,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		}
 		if (physA == mask1AttackSensor) {
 			LOG("Collision ENEMY");
-			if (physB->entity != nullptr && mask1PassiveAttackDealed == false) {
+			if (physB->entity != nullptr && mask1AttackDealed == false) {
 				physB->entity->TakeDamage(maskStats[primaryMask][maskLevels[primaryMask]].maskDamage);
-				mask1PassiveAttackDealed = true;
+				mask1AttackDealed = true;
+				physB->entity->ApplyPoison(maskStats[primaryMask][maskLevels[primaryMask]].poisonDamage, maskStats[primaryMask][maskLevels[primaryMask]].poisonDuration, maskStats[primaryMask][maskLevels[primaryMask]].poisonTickRate);
 			}
 			//collisionMask1Timer.Start();
 		}
@@ -775,7 +791,7 @@ MapObject* Player::GetCurrentRoom()
 		if (position.x >= room->x && position.x <= room->x + room->width &&
 			position.y >= room->y && position.y <= room->y + room->height)
 		{
-			printf("Player is in the room at position (%d, %d)\n", room->x, room->y);
+			//printf("Player is in the room at position (%d, %d)\n", room->x, room->y);
 			return room;
 		}
 	}
