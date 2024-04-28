@@ -237,7 +237,14 @@ bool Menu::Update(float dt)
 		{
 			int newSFXVolume = ((GuiControlSlider*)sfx)->value;
 			newSFXVolume = std::max(0, std::min(128, newSFXVolume));
-			Mix_Volume(-1, newSFXVolume);
+
+			// Iterar sobre cada canal activo y ajustar su volumen
+			for (const auto& pair : app->audio->activeChannels)
+			{
+				int channel = pair.second; // Obtener el canal asociado al ID del efecto de sonido
+				Mix_Volume(channel, newSFXVolume);
+			}
+
 			newVolumeFx = newSFXVolume;
 		}
 

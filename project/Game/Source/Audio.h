@@ -4,7 +4,11 @@
 #include "Module.h"
 #include "Timer.h"
 
+#include <map>
+
 #define DEFAULT_MUSIC_FADE_TIME 2.0f
+
+using namespace std;
 
 struct _Mix_Music;
 struct Mix_Chunk;
@@ -55,6 +59,8 @@ public:
 
 	bool playingMusic = false;
 	Timer timer;
+
+	map<unsigned int, int> activeChannels;
 
 private:
 
