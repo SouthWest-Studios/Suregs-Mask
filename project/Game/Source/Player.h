@@ -192,6 +192,8 @@ public:
 	bool isAttacking = false;
 	bool basicAttackDealed = false;
 	PhysBody* attackSensor = nullptr;
+	Timer damageTimer;
+	float damageCooldown = 0.2f;
 
 	Timer collisionAttackTimer;
 	
