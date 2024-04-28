@@ -111,6 +111,9 @@ public:
 	int id;
 	SString name;
 	SDL_Texture* icon;
+	char* iconPath;
+	SDL_Texture* closeUpItems;
+	char* closeUpItemsPath;
 	uint quantity = 1;
 	bool active;
 	bool stackable = false;

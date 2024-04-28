@@ -53,7 +53,6 @@ public:
 public:
 
 
-
 	List<Inventity*> inventities;
 	iPoint PointerPosition = { 176,-60 };
 	int PointerId = 0;
@@ -74,6 +73,8 @@ public:
 	int highestIde = -1;
 
 private:
+	pugi::xml_document configFile;
+	pugi::xml_node configNode;
 	int maxItemsPerRow = 3; // Define el número máximo de elementos por fila
 };
 

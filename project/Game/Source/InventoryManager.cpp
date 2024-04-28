@@ -96,204 +96,10 @@ Inventity* InventoryManager::CreateItem(EntityType type, std::string descripcioo
 {
 	Inventity* entity = nullptr;
 
-
-	//L03: DONE 3a: Instantiate entity according to the type and add the new entity to the list of Entities
-	//switch (type)
-	//{
-	//case EntityType::ITEM:
-	//{
-	//	int newId = 0;
-	//	for (ListItem<Inventity*>* item = inventities.start; item != nullptr; item = item->next)
-	//	{
-
-	//		item->data->id = newId;
-	//		newId++;
-	//	}
-	//	if (inventities.Count() > 0)
-	//	{
-	//		highestId = inventities.end->data->id;
-	//	}
-	//	else
-	//	{
-	//		highestId = -1;
-	//	}
-
-	//	Iteminv* itemm = new Iteminv();
-	//	itemm->id = highestId + 1;
-	//	itemm->type = InventityType::ITEM;
-	//	itemm->icon = app->tex->Load("Assets/Textures/CoinIcon.png");
-	//	itemm->stackable = true;
-	//	entity = itemm;
-
-	//	break;
-	//}
-
-	//case EntityType::ITEM_GARRA:
-	//{
-	//	int newId = 0;
-	//	for (ListItem<Inventity*>* item = inventities.start; item != nullptr; item = item->next)
-	//	{
-
-	//		item->data->id = newId;
-	//		newId++;
-	//	}
-	//	/*for (ListItem<Inventity*>* item = inventities.start; item != NULL; item = item->next)
-	//	{
-	//		if (item->data->id > highestId)
-	//		{
-	//			highestId = item->data->id;
-	//		}
-	//	}*/
-	//	if (inventities.Count() > 0)
-	//	{
-	//		highestId = inventities.end->data->id;
-	//	}
-	//	else
-	//	{
-	//		highestId = -1;
-	//	}
-
-
-	//	GarraInv* garra = new GarraInv();
-	//	garra->id = highestId + 1;
-	//	garra->type = InventityType::GARRA;
-	//	garra->stackable = true;
-	//	garra->desc = descripcioon;
-	//	garra->tipo = tipoo;
-
-	//	/*sword->damage = ataque;
-	//	sword->durability = durabilidad;
-	//	sword->magic = magia;
-	//	sword->weight = peso;*/
-	//	garra->icon = app->tex->Load("Assets/Textures/Interfaz/garraInv.png");
-	//	entity = garra;
-	//	break;
-	//}
-	//case EntityType::ITEM_DIAMANTE:
-	//{
-	//	int newId = 0;
-	//	for (ListItem<Inventity*>* item = inventities.start; item != nullptr; item = item->next)
-	//	{
-
-	//		item->data->id = newId;
-	//		newId++;
-	//	}
-	//	/*for (ListItem<Inventity*>* item = inventities.start; item != NULL; item = item->next)
-	//	{
-	//		if (item->data->id > highestId)
-	//		{
-	//			highestId = item->data->id;
-	//		}
-	//	}*/
-	//	if (inventities.Count() > 0)
-	//	{
-	//		highestId = inventities.end->data->id;
-	//	}
-	//	else
-	//	{
-	//		highestId = -1;
-	//	}
-
-
-	//	DiamanteInv* diamante = new DiamanteInv();
-	//	diamante->id = highestId + 1;
-	//	diamante->type = InventityType::DIAMANTE;
-	//	diamante->stackable = true;
-	//	diamante->desc = descripcioon;
-	//	diamante->tipo = tipoo;
-	//	/*sword->damage = ataque;
-	//	sword->durability = durabilidad;
-	//	sword->magic = magia;
-	//	sword->weight = peso;*/
-	//	diamante->icon = app->tex->Load("Assets/Textures/Interfaz/diamante_inv.png");
-	//	entity = diamante;
-	//	break;
-	//}
-	//case EntityType::ITEM_OJO:
-	//{
-	//	int newId = 0;
-	//	for (ListItem<Inventity*>* item = inventities.start; item != nullptr; item = item->next)
-	//	{
-
-	//		item->data->id = newId;
-	//		newId++;
-	//	}
-	//	/*for (ListItem<Inventity*>* item = inventities.start; item != NULL; item = item->next)
-	//	{
-	//		if (item->data->id > highestId)
-	//		{
-	//			highestId = item->data->id;
-	//		}
-	//	}*/
-	//	if (inventities.Count() > 0)
-	//	{
-	//		highestId = inventities.end->data->id;
-	//	}
-	//	else
-	//	{
-	//		highestId = -1;
-	//	}
-
-
-	//	OjoInv* ojo = new OjoInv();
-	//	ojo->id = highestId + 1;
-	//	ojo->type = InventityType::OJO;
-	//	ojo->stackable = true;
-	//	ojo->desc = descripcioon;
-	//	ojo->tipo = tipoo;
-	//	/*sword->damage = ataque;
-	//	sword->durability = durabilidad;
-	//	sword->magic = magia;
-	//	sword->weight = peso;*/
-	//	ojo->icon = app->tex->Load("Assets/Textures/Interfaz/ojoInv.png");
-	//	entity = ojo;
-	//	break;
-	//}
-	//case EntityType::ITEM_COLA:
-	//{
-
-	//	
-	//	
-
-
-
-	//	OjoInv* ojo = new OjoInv();
-	//	ojo->id = highestId + 1;
-	//	ojo->type = InventityType::OJO;
-	//	ojo->stackable = true;
-	//	ojo->desc = descripcioon;
-	//	ojo->tipo = tipoo;
-	//	/*sword->damage = ataque;
-	//	sword->durability = durabilidad;
-	//	sword->magic = magia;
-	//	sword->weight = peso;*/
-	//	ojo->icon = app->tex->Load("Assets/Textures/Interfaz/ojoInv.png");
-	//	entity = ojo;
-	//	break;
-	//}
-	//case EntityType::ITEM_ARMADURA:
-	//{
-	//	for (ListItem<Inventity*>* item = inventities.start; item != NULL; item = item->next)
-	//	{
-	//		if (item->data->id > highestId)
-	//		{
-	//			highestId = item->data->id;
-	//		}
-	//	}
-
-	//	/*ArmaduraInv* armadura = new ArmaduraInv();
-	//	armadura->id = highestId + 1;
-	//	armadura->type = InventityType::ARMADURA;
-	//	armadura->defense = defensa;
-	//	armadura->durability = durabilidad;
-	//	armadura->weight = peso;
-	//	armadura->icon = app->tex->Load("Assets/Textures/armaduraicon.png");
-	//	entity = armadura;*/
-	//}
-
-	//default:
-	//	break;
-	//}
+	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
+	if (parseResult) {
+		configNode = configFile.child("config");
+	}
 
 	highestId = (inventities.Count() > 0) ? inventities.end->data->id : -1;
 	entity = new Inventity();
@@ -304,8 +110,11 @@ Inventity* InventoryManager::CreateItem(EntityType type, std::string descripcioo
 	switch (type)
 	{
 	case EntityType::ITEM_DIAMANTE:
+		/*entity->iconPath = (char*)configNode.child("item_diamante").attribute("texturePath").as_string();
+		entity->icon = app->tex->Load(entity->iconPath);*/
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_diamante.png");
 		entity->type = InventityType::DIAMANTE;
+		entity->closeUpItems = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_diamante.png");
 		break;
 	case EntityType::ITEM_OJO:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_ojo.png");
@@ -684,8 +493,8 @@ bool InventoryManager::Update(float dt)
 
 		}
 
-		if (options == true)
-		{
+		/*if (options == true)
+		{*/
 			if (app->input->GetKey(SDL_SCANCODE_BACKSPACE) == KEY_DOWN)
 			{
 				DestroyItemById(selectedId);
@@ -694,7 +503,7 @@ bool InventoryManager::Update(float dt)
 
 			}
 
-			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+			/*if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 			{
 				equiped = { PointerPosition.x, PointerPosition.y };
 				equipedId = PointerId;
@@ -702,8 +511,8 @@ bool InventoryManager::Update(float dt)
 				options = false;
 				selected = { -1000, -1000 };
 
-			}
-		}
+			}*/
+		/*}*/
 
 
 
@@ -779,6 +588,8 @@ bool InventoryManager::PostUpdate()
 				case InventityType::CARBON:
 				case InventityType::AMATISTA:
 					app->render->DrawText(itum->data->tipo.c_str(), 680, 340, 90, 60, 0, 65, 136, 165);
+					app->render->DrawTexture(itum->data->closeUpItems, 820, 200, 1.8, SDL_FLIP_NONE, 0, 0);
+					
 					break;
 				default:
 					app->render->DrawText(itum->data->tipo.c_str(), 680, 340, 90, 60, 0, 135, 206, 235);

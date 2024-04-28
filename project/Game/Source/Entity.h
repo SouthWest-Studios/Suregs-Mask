@@ -172,6 +172,7 @@ public:
 
 	std::string description;
 	std::string tipo;
+	
 };
 
 #endif // __ENTITY_H__

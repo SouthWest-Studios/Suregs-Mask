@@ -355,6 +355,20 @@
 		<mainTexture texturepath="Assets/Textures/Interfaz/HUD/texture_general_hud.png"/>
 	</hud>
 
+	<inventorymanager>
+		<item_garra texturePath="Assets/Textures/Entidades/Items/item_Garra.png"/>
+		<item_diamante texturePath="Assets/Textures/Entidades/Items/texture_diamond.png"/>
+		<item_ojo texturePath="Assets/Textures/Entidades/Items/texture_eye.png"/>
+		<item_hueso texturePath="Assets/Textures/Entidades/Items/textura_hueso.png"/>
+		<item_carbon texturePath="Assets/Textures/Entidades/Items/textura_carbon.png"/>
+		<item_viscera texturePath="Assets/Textures/Entidades/Items/textura_visceras.png"/>
+		<item_rubi texturePath="Assets/Textures/Entidades/Items/textura_rubi.png"/>
+		<item_diente texturePath="Assets/Textures/Entidades/Items/textura_diente.png"/>
+		<item_amatista texturePath="Assets/Textures/Entidades/Items/textura_amatista.png"/>
+		<item_cola texturePath="Assets/Textures/Entidades/Items/textura_cola.png"/>
+		<item_polvora texturePath="Assets/Textures/Entidades/Items/textura_polvora.png"/>
+	</inventorymanager>
+
 	<map>
 		<pathfindingTexture pathtexture="Assets/Textures/pathfinding.png"/>
 	</map>
