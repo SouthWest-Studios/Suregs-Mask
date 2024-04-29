@@ -573,7 +573,6 @@ void Player::Run(float dt)
 {	
 	currentAnimation = &runAnim;
 	app->audio->PlayRunFx(run_fx, runAlt_fx, runAlt2_fx);
-	//app->audio->PlayFx(run_fx); // <--- Hay que arreglarlo
 }
 
 void Player::Dashi(float dt)

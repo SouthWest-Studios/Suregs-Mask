@@ -420,15 +420,24 @@ void Scene_Menu::SettingsInterface()
 			newVolume = std::max(0, std::min(128, newVolume));
 			// Establecer el volumen de la m�sica
 			Mix_VolumeMusic(newVolume);
-			
+			newVolumeAudio = newVolume;
+			app->audio->volumeMusic = newVolume;
 		}
 
 		if (sfx != nullptr)
 		{
 			int newSFXVolume = ((GuiControlSlider*)sfx)->value;
 			newSFXVolume = std::max(0, std::min(128, newSFXVolume));
-			Mix_Volume(-1, newSFXVolume);
-			
+
+			// Iterar sobre cada canal activo y ajustar su volumen
+			for (const auto& pair : app->audio->activeChannels)
+			{
+				int channel = pair.second; // Obtener el canal asociado al ID del efecto de sonido
+				Mix_Volume(channel, newSFXVolume);
+			}
+
+			newVolumeFx = newSFXVolume;
+			app->audio->volumeFx = newSFXVolume;
 		}
 
 
