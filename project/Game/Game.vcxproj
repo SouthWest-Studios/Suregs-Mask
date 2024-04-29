@@ -133,6 +133,7 @@
     <ClCompile Include="Source\ModuleFadeToBlack.cpp" />
     <ClCompile Include="Source\Enemy_Ols.cpp" />
     <ClCompile Include="Source\Enemy_Osiris.cpp" />
+    <ClCompile Include="Source\NotesManager.cpp" />
     <ClCompile Include="Source\NPC_Abuelo.cpp" />
     <ClCompile Include="Source\NPC_Bruja.cpp" />
     <ClCompile Include="Source\NPC_Bully1.cpp" />
@@ -208,6 +209,8 @@
     <ClInclude Include="Source\ModuleFadeToBlack.h" />
     <ClInclude Include="Source\Enemy_Ols.h" />
     <ClInclude Include="Source\Enemy_Osiris.h" />
+    <ClInclude Include="Source\Note.h" />
+    <ClInclude Include="Source\NotesManager.h" />
     <ClInclude Include="Source\NPC_Abuelo.h" />
     <ClInclude Include="Source\NPC_Bruja.h" />
     <ClInclude Include="Source\NPC_Bully1.h" />

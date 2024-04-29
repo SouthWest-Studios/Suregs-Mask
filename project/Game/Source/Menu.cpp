@@ -11,6 +11,7 @@
 #include "GuiControlButton.h"
 #include "GuiManager.h"
 #include "InventoryManager.h"
+#include "NotesManager.h"
 #include "Menu.h"
 #include "Scene_Menu.h"
 #include "Scene_Testing.h"
@@ -89,7 +90,7 @@ bool Menu::Update(float dt)
 
 		app->audio->PlayFx(inventory_audio);
 	}
-	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN && app->notesManager->zoomIn == false)
 	{
 		menuu = !menuu;
 		ventana = 4;
@@ -341,6 +342,15 @@ bool Menu::Update(float dt)
 	else
 	{
 		app->inventoryManager->mostrar = false;
+	}
+
+	if (ventana == 3)
+	{
+		app->notesManager->mostrar = true;
+	}
+	else
+	{
+		app->notesManager->mostrar = false;
 	}
 	return true;
 }

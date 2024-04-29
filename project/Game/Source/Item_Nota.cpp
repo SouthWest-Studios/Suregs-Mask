@@ -8,6 +8,7 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "Window.h"
 
 Item_Nota::Item_Nota(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
 	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_NOTA)
@@ -31,8 +32,7 @@ bool Item_Nota::Start() {
 	/*position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();*/
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
-	description = (config.attribute("description").as_string());
-	tipo = (config.attribute("type").as_string());
+	CloseTexture = app->tex->Load("Assets/Textures/Entidades/Items/textura_NoteCloseUp.png");
 	/*texture = app->tex->Load("Assets/Textures/Entidades/Items/item_Garra.png");*/
 	// L07 DONE 4: Add a physics to an item - initialize the physics body
 	app->tex->GetSize(texture, texW, texH);
@@ -60,6 +60,9 @@ bool Item_Nota::Update(float dt)
 
 bool Item_Nota::PostUpdate()
 {
+	uint windowWidth, windowHeight;
+	app->win->GetWindowSize(windowWidth, windowHeight);
+
 	app->render->DrawTexture(texture, position.x, position.y, 0.5f);
 	return true;
 }

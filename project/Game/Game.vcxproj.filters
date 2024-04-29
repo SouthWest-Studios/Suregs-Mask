@@ -217,6 +217,9 @@
     <ClCompile Include="Source\Item_Nota.cpp">
       <Filter>Entities\Items</Filter>
     </ClCompile>
+    <ClCompile Include="Source\NotesManager.cpp">
+      <Filter>Notes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -489,6 +492,12 @@
     <ClInclude Include="Source\Item_Nota.h">
       <Filter>Entities\Items</Filter>
     </ClInclude>
+    <ClInclude Include="Source\NotesManager.h">
+      <Filter>Notes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Note.h">
+      <Filter>Notes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -547,6 +556,9 @@
     </Filter>
     <Filter Include="Modules\SistemaComercio">
       <UniqueIdentifier>{2334312c-c9a9-44f4-927a-81d2550c5738}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Notes">
+      <UniqueIdentifier>{cd095046-c48c-4abf-ab5f-a278e447e42c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -40,6 +40,7 @@ public:
 	PhysBody* pbody;
 	SDL_Texture* texture = NULL;
 	
+	
 	iPoint position;
 	pugi::xml_node config;
 private:

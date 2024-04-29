@@ -172,6 +172,8 @@ public:
 
 	std::string description;
 	std::string tipo;
+
+	SDL_Texture* CloseTexture = NULL;
 	
 };
 

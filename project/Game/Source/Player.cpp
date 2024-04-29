@@ -9,6 +9,7 @@
 #include "Scene_Mazmorra0.h"
 #include "Log.h"
 #include "InventoryManager.h"
+#include "NotesManager.h"
 #include "Point.h"
 #include "Physics.h"
 #include "Window.h"
@@ -895,6 +896,21 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 					physB->body->SetActive(false);
 				}
 				
+			}
+		}
+		break;
+	case ColliderType::NOTA:
+		LOG("Collision NOTA");
+		if (physA != attackSensor && physA != mask1PassiveSensor && physA != mask1AttackSensor)
+		{
+			if (physB->listener->active) {
+				if (app->notesManager->IsFull() == false)
+				{
+					app->notesManager->CreateItem(physB->listener->type, physB->listener->CloseTexture);
+					physB->listener->active = false;
+					physB->body->SetActive(false);
+				}
+
 			}
 		}
 		break;
