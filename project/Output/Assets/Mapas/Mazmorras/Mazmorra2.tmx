@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="400" height="160" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="127">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="400" height="160" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="138">
  <tileset firstgid="1" name="Colisiones" tilewidth="32" tileheight="32" tilecount="16" columns="4">
   <image source="../../Textures/Mapas/Metadatos/Collisions_32x32.png" width="128" height="128"/>
  </tileset>
@@ -256050,22 +256050,22 @@
     <property name="Type" value="isSmallRoom"/>
    </properties>
   </object>
-  <object id="121" x="3844.16" y="1581.71" width="1287.67" height="724.572">
+  <object id="121" x="3844.16" y="1581.71" width="1300.17" height="728.072">
    <properties>
     <property name="Type" value="isSmallRoom"/>
    </properties>
   </object>
-  <object id="122" x="5208.16" y="1593.71" width="1287.67" height="724.572">
+  <object id="122" x="5205.66" y="1587.04" width="1287.5" height="724.239">
    <properties>
     <property name="Type" value="isSmallRoom"/>
    </properties>
   </object>
-  <object id="123" x="5196.16" y="781.714" width="1287.67" height="724.572">
+  <object id="123" x="5204.83" y="781.714" width="1287.67" height="724.572">
    <properties>
     <property name="Type" value="isSmallRoom"/>
    </properties>
   </object>
-  <object id="124" x="5200.16" y="3101.71" width="1287.67" height="724.572">
+  <object id="124" x="5204.16" y="3101.04" width="1287.67" height="725.239">
    <properties>
     <property name="Type" value="isSmallRoom"/>
    </properties>
@@ -256075,9 +256075,68 @@
     <property name="Type" value="isSmallRoom"/>
    </properties>
   </object>
-  <object id="126" x="7828.16" y="2337.71" width="1287.67" height="724.572">
+  <object id="126" x="7832.16" y="2343.71" width="1290" height="725.239">
    <properties>
     <property name="Type" value="isSmallRoom"/>
+   </properties>
+  </object>
+  <object id="127" x="9201.5" y="2342" width="2575.83" height="726.333">
+   <properties>
+    <property name="Type" value="isLargeRoom"/>
+   </properties>
+  </object>
+  <object id="128" x="2575.33" y="2376.67" width="1392.67" height="723.333">
+   <properties>
+    <property name="Type" value="isLRoom"/>
+    <property name="lType" value="l"/>
+   </properties>
+  </object>
+  <object id="130" x="3848.66" y="3101.33" width="1287.67" height="725.333">
+   <properties>
+    <property name="Type" value="isLRoom"/>
+    <property name="lType" value="d"/>
+   </properties>
+  </object>
+  <object id="131" x="3970.67" y="2375.67" width="1166.67" height="723">
+   <properties>
+    <property name="Type" value="isLRoom"/>
+    <property name="lType" value="dl"/>
+   </properties>
+  </object>
+  <object id="132" x="7949.03" y="1586.5" width="1172.96" height="724.528">
+   <properties>
+    <property name="Type" value="isLRoom"/>
+    <property name="lType" value="ul"/>
+   </properties>
+  </object>
+  <object id="133" x="7834.36" y="861.773" width="1285.34" height="724.711">
+   <properties>
+    <property name="Type" value="isLRoom"/>
+    <property name="lType" value="u"/>
+   </properties>
+  </object>
+  <object id="134" x="6562.12" y="1586.38" width="1386.49" height="724.667">
+   <properties>
+    <property name="Type" value="isLRoom"/>
+    <property name="lType" value="l"/>
+   </properties>
+  </object>
+  <object id="135" x="6561.66" y="3822.16" width="1287.67" height="725.333">
+   <properties>
+    <property name="Type" value="isLRoom"/>
+    <property name="lType" value="d"/>
+   </properties>
+  </object>
+  <object id="136" x="6560.67" y="3101.84" width="1171.67" height="723.667">
+   <properties>
+    <property name="Type" value="isLRoom"/>
+    <property name="lType" value="dr"/>
+   </properties>
+  </object>
+  <object id="137" x="7728.66" y="3103.33" width="1392.67" height="723.333">
+   <properties>
+    <property name="Type" value="isLRoom"/>
+    <property name="lType" value="r"/>
    </properties>
   </object>
  </objectgroup>
