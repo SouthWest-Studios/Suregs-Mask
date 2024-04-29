@@ -718,7 +718,6 @@ void Player::stateMachine(float dt)
 		Run(dt);
 		break;
 	case EntityState::ATTACKING:
-		app->audio->PlayFx(basic_combo_attack1_fx);
 		Attack(dt);
 		break;
 	case EntityState::DEAD:
@@ -896,7 +895,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 				}
 			}
 		}
-		app->audio->PlayFx(player_get_damage_fx); // <--- Hay que arreglarlo
+		app->audio->PlayHitFx(player_get_damage_fx); // <--- Hay que arreglarlo
 		break;
 	case ColliderType::RESOURCE:
 		LOG("Collision RESOURCE");

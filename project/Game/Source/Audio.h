@@ -55,6 +55,8 @@ public:
 	// Play a WAV after the specified time
 	void PlayRunFx(unsigned int name, unsigned int name2, unsigned int name3);
 
+	void PlayHitFx(unsigned int name);
+
 public:
 
 	int volumeMusic;
@@ -69,8 +71,10 @@ public:
 private:
 
 	int runTime = 840;
-
 	Timer runTimer;
+
+	int hitTime = 575;
+	Timer hitTimer;
 
 	_Mix_Music* music;
 	List<Mix_Chunk *>	fx;

@@ -263,3 +263,12 @@ void Audio::PlayRunFx(unsigned int name, unsigned int name2, unsigned int name3)
 		runTimer.Start();
 	}
 }
+
+void Audio::PlayHitFx(unsigned int name)
+{
+	if (hitTimer.ReadMSec() > hitTime) {
+
+		PlayFx(name);
+		hitTimer.Start();
+	}
+}
