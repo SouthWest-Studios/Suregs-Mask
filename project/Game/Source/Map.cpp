@@ -873,6 +873,43 @@ bool Map::LoadObjects()
 			{
 				largeRoomsList.Add(object); 
 			}
+			// el objeto es una sala l
+			else if (object->properties.GetProperty("Type") != NULL && object->properties.GetProperty("Type")->value == "isLRoom")
+			{
+				LRoomsList.Add(object);
+				if (object->properties.GetProperty("lType") != NULL && object->properties.GetProperty("lType")->value == "dl")
+				{
+					dlRoomsList.Add(object);
+				}
+				else if (object->properties.GetProperty("lType") != NULL && object->properties.GetProperty("lType")->value == "dr")
+				{
+					drRoomsList.Add(object);
+				}
+				else if (object->properties.GetProperty("lType") != NULL && object->properties.GetProperty("lType")->value == "ul")
+				{
+					ulRoomsList.Add(object);
+				}
+				else if (object->properties.GetProperty("lType") != NULL && object->properties.GetProperty("lType")->value == "ur")
+				{
+					urRoomsList.Add(object);
+				}
+				else if (object->properties.GetProperty("lType") != NULL && object->properties.GetProperty("lType")->value == "d")
+				{
+					dRoomsList.Add(object);
+				}
+				else if (object->properties.GetProperty("lType") != NULL && object->properties.GetProperty("lType")->value == "u")
+				{
+					uRoomsList.Add(object);
+				}
+				else if (object->properties.GetProperty("lType") != NULL && object->properties.GetProperty("lType")->value == "l")
+				{
+					lRoomsList.Add(object);
+				}
+				else if (object->properties.GetProperty("lType") != NULL && object->properties.GetProperty("lType")->value == "r")
+				{
+					rRoomsList.Add(object);
+				}
+			}
 
 
 			else {
