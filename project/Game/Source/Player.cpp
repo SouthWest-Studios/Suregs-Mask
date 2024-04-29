@@ -1079,7 +1079,7 @@ void Player::CameraMovement(float dt)
 						//X
 						if (position.x < currentRoom->x + app->render->camera.w / 2) //izq
 						{
-							int targetPosX = (-(int)(currentRoom->x + currentRoom->width / 2) * app->win->GetScale() + (windowW / 2) - 10);
+							int targetPosX = (-(int)(currentRoom->x + app->render->camera.w / 2) * app->win->GetScale() + (windowW / 2) - 10);
 							app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
 						}
 						else if (position.x > currentRoom->x + currentRoom->width - app->render->camera.w / 2) //der
