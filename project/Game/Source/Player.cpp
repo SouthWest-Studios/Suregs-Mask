@@ -508,6 +508,15 @@ bool Player::Update(float dt)
 		currentStats.movementSpeed = baseStats.movementSpeed * (1 + passiveStats[Mask::MASK3][maskLevels[Mask::MASK3]].velocityBoost);
 	}
 
+	if (playerXP >= XPtoLevelUp) {
+		playerXP -= XPtoLevelUp;
+		XPtoLevelUp += 20;
+		maskPoints++;
+		level++;
+
+		printf("Has subido a nivel %i y tu experiencia actual es %i \n", level, playerXP);
+	}
+
 	stateMachine(dt);
 	currentAnimation->Update();
 	return true;

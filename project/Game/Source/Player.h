@@ -159,6 +159,13 @@ public:
 	//MaskStats maskStats[5];
 	//PassiveStats passiveStats[5];
 
+	//Level
+	int playerXP;
+	int level;
+	int XPtoLevelUp = 20;
+	int maskPoints;
+
+
 private:
 	void CameraMovement(float dt);
 	void GodMode(float dt);
@@ -223,6 +230,7 @@ public:
 	//Mascara
 	Mask primaryMask;
 	Mask secondaryMask;
+
 
 	bool isAttackingMask = true;
 	PhysBody* mask1AttackSensor = nullptr;
