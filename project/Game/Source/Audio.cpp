@@ -241,3 +241,25 @@ void Audio::PlayMusicAfterDelay(const char* name, float delayInSeconds, float fa
 		playingMusic = true;
 	}
 }
+
+void Audio::PlayRunFx(unsigned int name, unsigned int name2, unsigned int name3)
+{
+	if (runTimer.ReadMSec() > runTime) {
+
+		int run = rand() % 3 + 1;
+
+		switch (run)
+		{
+		case 1:
+			PlayFx(name);
+			break;
+		case 2:
+			PlayFx(name2);
+			break;
+		case 3:
+			PlayFx(name3);
+			break;
+		}
+		runTimer.Start();
+	}
+}

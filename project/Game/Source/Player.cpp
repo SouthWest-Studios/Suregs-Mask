@@ -430,7 +430,9 @@ bool Player::Start() {
 	pbodySensor->ctype = ColliderType::UNKNOWN;
 
 	//initialize audio effect
-	run_fx = app->audio->LoadAudioFx("runAlt_fx");
+	run_fx = app->audio->LoadAudioFx("run_fx");
+	runAlt_fx = app->audio->LoadAudioFx("runAlt_fx");
+	runAlt2_fx = app->audio->LoadAudioFx("runAlt2_fx");
 	dash_fx = app->audio->LoadAudioFx("dash_fx");
 	basic_combo_attack1_fx = app->audio->LoadAudioFx("basic_combo_attack1_fx");
 	player_get_damage_fx = app->audio->LoadAudioFx("player_get_damage_fx");
@@ -570,6 +572,8 @@ float Player::GetRealMovementSpeed() const {
 void Player::Run(float dt)
 {	
 	currentAnimation = &runAnim;
+	app->audio->PlayRunFx(run_fx, runAlt_fx, runAlt2_fx);
+	//app->audio->PlayFx(run_fx); // <--- Hay que arreglarlo
 }
 
 void Player::Dashi(float dt)
@@ -709,11 +713,10 @@ void Player::stateMachine(float dt)
 		app->audio->StopFx(-1);
 		break;
 	case EntityState::RUNNING:
-
 		Run(dt);
-		app->audio->PlayFx(run_fx); // <--- Hay que arreglarlo
 		break;
 	case EntityState::ATTACKING:
+		app->audio->PlayFx(basic_combo_attack1_fx);
 		Attack(dt);
 		break;
 	case EntityState::DEAD:
