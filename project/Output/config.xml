@@ -159,8 +159,8 @@
 		<item_diente texturePath="Assets/Textures/Entidades/Items/textura_diente.png" description="lorem ipsum sit amet." type ="apendice"/>
 		<item_amatista texturePath="Assets/Textures/Entidades/Items/textura_amatista.png" description="lorem ipsum sit amet." type ="material"/>
 		<item_cola texturePath="Assets/Textures/Entidades/Items/textura_cola.png" description="Esta es la cola de los sureg masculinos." type ="apendice"/>
-		<item_polvora texturePath="Assets/Textures/Entidades/Items/textura_polvora.png" description="polvora, polvora, polvora, polvora, polvora, polvora, polvora, polvora" type ="material"/>
-		<item_nota texturePath="Assets/Textures/Entidades/Items/textura_nota.png" CloseTexturePath="Assets/Textures/Entidades/Items/textura_NoteCloseUp"/>
+		<item_polvora texturePath="Assets/Textures/Entidades/Items/textura_polvora.png" description="22000 stacks de polvora por hora en la granja de creeper" type ="material"/>
+		<item_nota texturePath="Assets/Textures/Entidades/Items/textura_nota.png" closeTexturePath="Assets/Textures/Entidades/Items/textura_NoteCloseUp.png"/>
 		
 		
 		
@@ -380,5 +380,8 @@
 	<map>
 		<pathfindingTexture pathtexture="Assets/Textures/pathfinding.png"/>
 	</map>
+	<notesmanager>
+		<nota texturePath ="Assets/Textures/Interfaz/noteselect.png"/>
+	</notesmanager>
 
 </config>

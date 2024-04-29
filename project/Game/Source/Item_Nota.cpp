@@ -32,7 +32,8 @@ bool Item_Nota::Start() {
 	/*position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();*/
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
-	CloseTexture = app->tex->Load("Assets/Textures/Entidades/Items/textura_NoteCloseUp.png");
+	CloseTexture = app->tex->Load(config.attribute("closeTexturePath").as_string());
+	/*CloseTexture = app->tex->Load("Assets/Textures/Entidades/Items/textura_NoteCloseUp.png");*/
 	/*texture = app->tex->Load("Assets/Textures/Entidades/Items/item_Garra.png");*/
 	// L07 DONE 4: Add a physics to an item - initialize the physics body
 	app->tex->GetSize(texture, texW, texH);

@@ -44,6 +44,7 @@ bool NotesManager::Awake(pugi::xml_node config)
 		ret = item->data->Awake();
 	}
 
+	iconoNotaTexture = ((char*)config.child("nota").attribute("texturePath").as_string());
 	return ret;
 
 }
@@ -102,8 +103,9 @@ Note* NotesManager::CreateItem(EntityType type, SDL_Texture* CloseUp)
 	/*entity->closeUpNotes = app->tex->Load("Assets/Textures/Entidades/Items/textura_NoteCloseUp.png"); */
 	switch (type)
 	{
-	
+		
 	case EntityType::ITEM_NOTA:
+		entity->icon = app->tex->Load(iconoNotaTexture);
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_nota.png");
 		entity->type = NoteType::NOTE;
 		break;

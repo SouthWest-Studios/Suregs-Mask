@@ -78,6 +78,8 @@ private:
 	pugi::xml_document configFile;
 	pugi::xml_node configNode;
 	int maxItemsPerRow = 2; // Define el número máximo de elementos por fila
+
+	char* iconoNotaTexture;
 };
 
 #endif // __INVENTORYMANAGER_H__
