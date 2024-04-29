@@ -271,6 +271,8 @@ void Enemy_Osiris::Die() {
 			hueso->position = iPoint(position.x, position.y);
 			hueso->Start();
 		}
+		app->entityManager->GetPlayer()->playerXP += 20;
+		printf("Current XP %i \n", app->entityManager->GetPlayer()->playerXP);
 	}
 
 }

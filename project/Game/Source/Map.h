@@ -214,8 +214,19 @@ public:
     SString pathTextures;
     PathFinding* pathfinding;
     MapData mapData;
+
+    //Camara xd
     List<MapObject*> smallRoomsList;
     List<MapObject*> largeRoomsList;
+    List<MapObject*> LRoomsList;
+    List<MapObject*> dlRoomsList;
+    List<MapObject*> drRoomsList;
+    List<MapObject*> ulRoomsList;
+    List<MapObject*> urRoomsList;
+    List<MapObject*> dRoomsList;
+    List<MapObject*> uRoomsList;
+    List<MapObject*> lRoomsList;
+    List<MapObject*> rRoomsList;
 
 private:
     

@@ -13,6 +13,7 @@
 #include "Pathfinding.h"
 #include "Map.h"
 #include "Physics.h"
+#include "Log.h"
 #include <Optick/include/optick.h>
 
 
@@ -189,6 +190,9 @@ void Enemy_Shar::Die(float dt) {
 	app->entityManager->DestroyEntity(this);
 	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 	app->tex->UnLoad(texture);
+
+	app->entityManager->GetPlayer()->playerXP += 20;
+	printf("Current XP %i \n", app->entityManager->GetPlayer()->playerXP);
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 

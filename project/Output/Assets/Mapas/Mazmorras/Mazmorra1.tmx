@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="300" height="160" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="62">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="300" height="160" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="70">
  <tileset firstgid="1" name="Colisiones" tilewidth="32" tileheight="32" tilecount="16" columns="4">
   <image source="../../Textures/Mapas/Metadatos/Collisions_32x32.png" width="128" height="128"/>
  </tileset>
@@ -192041,6 +192041,51 @@
    <tile/>
   </data>
  </layer>
+ <objectgroup id="14" name="CollisionCamera">
+  <properties>
+   <property name="Salas" type="bool" value="true"/>
+  </properties>
+  <object id="62" x="1450.33" y="2726.42" width="1287.67" height="724.572">
+   <properties>
+    <property name="Type" value="isSmallRoom"/>
+   </properties>
+  </object>
+  <object id="63" x="1456.84" y="1927.84" width="1287.33" height="723.655">
+   <properties>
+    <property name="Type" value="isSmallRoom"/>
+   </properties>
+  </object>
+  <object id="64" x="2804.5" y="1945.84" width="1288.41" height="725.322">
+   <properties>
+    <property name="Type" value="isSmallRoom"/>
+   </properties>
+  </object>
+  <object id="65" x="4169.17" y="1170.84" width="1287" height="725.655">
+   <properties>
+    <property name="Type" value="isSmallRoom"/>
+   </properties>
+  </object>
+  <object id="66" x="5504.84" y="2672.84" width="1289.33" height="722.322">
+   <properties>
+    <property name="Type" value="isSmallRoom"/>
+   </properties>
+  </object>
+  <object id="67" x="5504.84" y="3449.84" width="1289.33" height="725.322">
+   <properties>
+    <property name="Type" value="isSmallRoom"/>
+   </properties>
+  </object>
+  <object id="68" x="6870.84" y="3451.84" width="1283.33" height="721.322">
+   <properties>
+    <property name="Type" value="isSmallRoom"/>
+   </properties>
+  </object>
+  <object id="69" x="4154" y="1946.06" width="1287.88" height="1449.56">
+   <properties>
+    <property name="Type" value="isLargeRoom"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup color="#ff0000" id="11" name="CollisionWalls"/>
  <objectgroup color="#c8c8c8" id="12" name="Dialogos">
   <properties>

@@ -23,7 +23,14 @@ enum RoomType {
 	ROOM_SQUARE,
 	ROOM_RECTANGLE_W,
 	ROOM_RECTANGLE_H,
-	ROOM_L_SHAPED,
+	ROOM_L_DL,
+	ROOM_L_DR,
+	ROOM_L_UL,
+	ROOM_L_UR,
+	ROOM_L_D,
+	ROOM_L_U,
+	ROOM_L_L,
+	ROOM_L_R,
 	ROOM_UNKNOWN
 };
 
@@ -152,6 +159,13 @@ public:
 	//MaskStats maskStats[5];
 	//PassiveStats passiveStats[5];
 
+	//Level
+	int playerXP;
+	int level;
+	int XPtoLevelUp = 20;
+	int maskPoints;
+
+
 private:
 	void CameraMovement(float dt);
 	void GodMode(float dt);
@@ -217,6 +231,7 @@ public:
 	Mask primaryMask;
 	Mask secondaryMask;
 
+
 	bool isAttackingMask = true;
 	PhysBody* mask1AttackSensor = nullptr;
 	int attackMask1Width = 300;  
@@ -248,9 +263,9 @@ public:
 
 	//Camera
 	MapObject* GetCurrentRoom();
-	int clamp(int val, int min, int max);
 	RoomType roomType;
 	void DetermineRoomType(MapObject* room);
+	void DetermineRoomTypel(MapObject* room);
 
 private:
 	Animation idleAnim;
