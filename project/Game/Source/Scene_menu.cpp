@@ -507,7 +507,7 @@ void Scene_Menu::ShowCredits()
 			control->data->state = GuiControlState::DISABLED; 
 		}
 
-		gcCloseCredits = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, "ATR�S", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 100,	136,46 }, this);
+		gcCloseCredits = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 100,	136,46 }, this);
 		_showCredits = true;
 	}
 
