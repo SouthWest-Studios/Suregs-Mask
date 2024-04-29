@@ -434,6 +434,7 @@ bool Player::Start() {
 	runAlt_fx = app->audio->LoadAudioFx("runAlt_fx");
 	runAlt2_fx = app->audio->LoadAudioFx("runAlt2_fx");
 	dash_fx = app->audio->LoadAudioFx("dash_fx");
+	switch_masks_fx = app->audio->LoadAudioFx("switch_masks_fx");
 	basic_combo_attack1_fx = app->audio->LoadAudioFx("basic_combo_attack1_fx");
 	player_get_damage_fx = app->audio->LoadAudioFx("player_get_damage_fx");
 
@@ -651,6 +652,8 @@ void Player::ChangeMask() {
 		Mask temp = primaryMask;
 		primaryMask = secondaryMask;
 		secondaryMask = temp;
+
+		app->audio->PlayFx(switch_masks_fx);  // <--- No funciona
 
 		UnequipMasks();
 
