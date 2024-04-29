@@ -146,6 +146,10 @@
 
 		<shar texturePath="Assets/Textures/Entidades/Shar/Sprites.png" 
 				Tsprite="45" Pwidth="2190" sprite_x="146" sprite_y="153"/>
+
+		<khurt texturePath="Assets/Textures/Entidades/Khurt/textura_khurt.png" 
+			   maxHealth="220.0f" speed="7.5f" attackDamage="90.0f" attackDistance="2" viewDistance="20"
+			   Tsprite="4" Pwidth="40" sprite_x="20" sprite_y="20"/>
 		
 		
 	
@@ -310,6 +314,12 @@
 			<attackAnim_shar start="220" end="234" speed="0.2f" loop="false"/>18
 			<dieAnim_shar start="353" end="370" speed="0.2f" loop="false"/>
 		</shar>
+		<khurt>
+			<idleAnim start="1" end="1" speed="0.05f" loop="true"/>
+			<runAnim start="1" end="2" speed="0.05f" loop="true"/>
+			<underAnim start="3" end="3" speed="0.05f" loop="true"/>
+			<dieAnim start="4" end="4" speed="0.05f" loop="true"/>
+		</khurt>
 
 		<item>
 			<idleAnim start="0" end="23" speed="0.2f" loop="true"/>

@@ -103,6 +103,7 @@
     <ClCompile Include="Source\DebugConsole.cpp" />
     <ClCompile Include="Source\DialogManager.cpp" />
     <ClCompile Include="Source\DialogTriggerEntity.cpp" />
+    <ClCompile Include="Source\Enemy_Khurt.cpp" />
     <ClCompile Include="Source\Enemy_Muur.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\GuiCheckBox.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="Source\DialogManager.h" />
     <ClInclude Include="Source\DialogTriggerEntity.h" />
     <ClInclude Include="Source\DiamanteInv.h" />
+    <ClInclude Include="Source\Enemy_Khurt.h" />
     <ClInclude Include="Source\Enemy_Muur.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />

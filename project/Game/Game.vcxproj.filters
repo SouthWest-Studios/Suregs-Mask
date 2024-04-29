@@ -223,6 +223,9 @@
     <ClCompile Include="Source\Enemy_Muur.cpp">
       <Filter>Entities\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Enemy_Khurt.cpp">
+      <Filter>Entities\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -502,6 +505,9 @@
       <Filter>Notes</Filter>
     </ClInclude>
     <ClInclude Include="Source\Enemy_Muur.h">
+      <Filter>Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy_Khurt.h">
       <Filter>Entities\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
