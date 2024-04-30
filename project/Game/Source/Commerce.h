@@ -40,6 +40,22 @@ public:
 
 private:
 
+	SDL_Texture* backgroundTexture;
+
+	SDL_Texture* SellerTexture;
+
+	SDL_Texture* backgroundTradeTexture;
+	SDL_Texture* backgroundTradeHoverTexture;
+	SDL_Texture* backgroundSelectAllTexture;
+	SDL_Texture* backgroundSelectAllHoverTexture;
+
+	SDL_Texture* backgroundSliderTexture;
+	SDL_Texture* knobSliderTexture;
+
+	SDL_Texture* backgroundConfirmTexture;
+	SDL_Texture* backgroundConfirmHoverTexture;
+
+
 
 	
 };
