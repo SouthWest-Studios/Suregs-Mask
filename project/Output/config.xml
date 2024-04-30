@@ -29,6 +29,8 @@
 		<music>
 			<menu path="Assets/Audio/Music/o-herbologista.ogg"/>
       <town path="Assets/Audio/Music/Entre las Sombras.ogg"/>
+      <dungeon path="Assets/Audio/Music/dungeon.ogg"/>
+      <credits path="Assets/Audio/Music/"/>
 		</music>
 
 		<fx>
