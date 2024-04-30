@@ -7,6 +7,14 @@
 #include "List.h"
 #include "Textures.h"
 
+struct Trade {
+	std::vector<Inventity> itemsOffered;
+	std::vector<Inventity> itemsRequested;
+	std::vector<uint32_t> quantityOffered;
+	std::vector<uint32_t> quantityRequested;
+	uint32_t quantityTraded;
+};
+
 class Commerce
 {
 public:
@@ -27,19 +35,41 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	bool SelectTrade(uint id, bool add = true);
+	bool SelectAllTrade(uint id, bool add = true);
+	bool ApplyTrades();
+
+	bool LoadTextures();
 	
 
 public:
 
+	char* backgroundPathexture;
 
+	char* sellerPathTexture;
+
+	char* backgroundTradePathTexture;
+	char* backgroundTradeHoverPathTexture;
+	char* backgroundSelectAllPathTexture;
+	char* backgroundSelectAllHoverPathTexture;
+
+	char* backgroundSliderPathTexture;
+	char* knobSliderPathTexture;
+
+	char* backgroundConfirmPathTexture;
+	char* backgroundConfirmHoverPathTexture;
 
 
 
 private:
 
+	uint id;
+
+
+
 	SDL_Texture* backgroundTexture;
 
-	SDL_Texture* SellerTexture;
+	SDL_Texture* sellerTexture;
 
 	SDL_Texture* backgroundTradeTexture;
 	SDL_Texture* backgroundTradeHoverTexture;
@@ -59,6 +89,8 @@ private:
 	iPoint positionInList;
 	uint tradeSpacing;
 	uint itemSpacing;
+
+	List<Trade*> trades;
 	
 };
 

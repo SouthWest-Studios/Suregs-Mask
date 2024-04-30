@@ -43,6 +43,29 @@ bool Commerce::CleanUp()
 	return ret;
 }
 
+bool Commerce::SelectTrade(uint id, bool add)
+{
+	return false;
+}
+
+bool Commerce::SelectAllTrade(uint id, bool add)
+{
+	return false;
+}
+
+bool Commerce::ApplyTrades()
+{
+	return false;
+}
+
+bool Commerce::LoadTextures()
+{
+
+
+
+	return false;
+}
+
 bool Commerce::Update(float dt)
 {
 
