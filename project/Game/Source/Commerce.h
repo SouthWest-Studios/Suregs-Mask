@@ -7,17 +7,14 @@
 #include "List.h"
 #include "Textures.h"
 
-class Commerce : public Module
+class Commerce
 {
 public:
 
-	Commerce(App* app, bool start_enabled = true);
+	Commerce();
 
 	// Destructor
 	virtual ~Commerce();
-
-	// Called before render is available
-	bool Awake(pugi::xml_node config);
 
 	// Called after Awake
 	bool Start();
@@ -57,6 +54,11 @@ private:
 
 
 
+	iPoint positionGeneral;
+	iPoint positionList;
+	iPoint positionInList;
+	uint tradeSpacing;
+	uint itemSpacing;
 	
 };
 

@@ -17,24 +17,15 @@
 #include "Log.h"
 #include "SString.h"
 
-Commerce::Commerce(App* app, bool start_enabled) : Module(app, start_enabled)
+Commerce::Commerce()
 {
-	name.Create("commerce");
+
 }
 
 // Destructor
 Commerce::~Commerce()
 {}
 
-// Called before render is available
-bool Commerce::Awake(pugi::xml_node config)
-{
-	LOG("Loading Commerce");
-	bool ret = true;
-
-	return ret;
-
-}
 
 bool Commerce::Start() {
 
