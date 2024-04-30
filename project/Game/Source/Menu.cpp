@@ -295,7 +295,7 @@ bool Menu::Update(float dt)
 		/*app->guiManager->active = false;*/
 		/*app->scene_testing->active = false;*/
 		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu);
-		app->menu->active = false;
+		
 		title->click = false;
 		if (title != nullptr)
 		{

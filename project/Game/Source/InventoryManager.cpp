@@ -537,7 +537,6 @@ bool InventoryManager::PostUpdate()
 		Inventity* pEntity = NULL;
 
 		app->render->DrawTexture(EquipedItemText, equiped.x, equiped.y, 0.8, SDL_FLIP_NONE, 0, 0);
-
 		app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y, 0.8, SDL_FLIP_NONE, 0, 0);
 		app->render->DrawTexture(SelectedItemText, selected.x, selected.y, 0.8, SDL_FLIP_NONE, 0, 0);
 
@@ -548,15 +547,14 @@ bool InventoryManager::PostUpdate()
 			int columnIndex = item->data->id % maxItemsPerRow; // Calcula el índice de la columna
 			int horizontalPosition = 320 + columnIndex * 105; // Calcula la posición horizontal
 			int verticalPosition = 230 + rowIndex * 103; // Calcula la posición vertical
-			if (pEntity->quantity > 1)
+			if (pEntity->quantity > 0)
 			{
 				std::string quantityStr = std::to_string(pEntity->quantity);
 				app->render->DrawText(quantityStr.c_str(), horizontalPosition, verticalPosition, 20, 20, 0, 0, 0, 0);			
 				
 			}
-			
-			horizontalPosition = 280 + columnIndex * 105; // Calcula la posición horizontal para pEntity
-			verticalPosition = 180 + rowIndex * 104; // Calcula la posición vertical para pEntity
+			horizontalPosition = 260 + columnIndex * 105; // Calcula la posición horizontal para pEntity
+			verticalPosition = 160 + rowIndex * 104; // Calcula la posición vertical para pEntity
 
 			app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
 
