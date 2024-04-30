@@ -7,6 +7,7 @@
 #include "Textures.h"
 #include "Scene_testing.h"
 #include "inventity.h"
+#include "InventoryManager.h"
 #include "SwordInv.h"
 #include "GarraInv.h"
 #include "ArmaduraInv.h"
@@ -118,8 +119,11 @@ std::vector<Trade*> CommerceManager::LoadTrades(pugi::xml_node nodeTrade)
 	while (tradeNode != NULL) {
 
 		Trade* trade = new Trade();
-		//trade->itemsOffered.push_back()
-
+		trade->itemsOffered.push_back(app->inventoryManager->CreateItem((InventityType)tradeNode.attribute("itemOffered").as_int()));
+		trade->quantityOffered.push_back(tradeNode.attribute("quantityItemOffered").as_int());
+		trade->itemsRequested.push_back(app->inventoryManager->CreateItem((InventityType)tradeNode.attribute("itemRequested").as_int()));
+		trade->quantityRequested.push_back(tradeNode.attribute("quantityItemRequested").as_int());
+		trades.push_back(trade);
 		tradeNode = tradeNode.next_sibling();
 	}
 
