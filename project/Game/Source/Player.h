@@ -165,7 +165,6 @@ public:
 	int XPtoLevelUp = 20;
 	int maskPoints;
 
-
 private:
 	void CameraMovement(float dt);
 	void GodMode(float dt);
