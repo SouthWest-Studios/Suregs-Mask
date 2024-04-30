@@ -1578,6 +1578,13 @@ void Player::GodMode(float dt)
 	velocity = b2Vec2(0, 0);
 	pbodyFoot->body->SetLinearVelocity(velocity);
 
+	/*fPoint joystick = app->input->GetAxis(MOVE_HORIZONTAL, MOVE_VERTICAL);
+	KeyState sprint = app->input->GetButton(BACK);
+	float speed = (sprint == KEY_REPEAT) ? 0.5f : 0.2f;
+
+	position.x += speed * joystick.x * dt;
+	position.y += speed * joystick.y * dt;*/
+
 	//Moverse a la izquierda
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 		velocity.y += -speedFast * dt;
@@ -1605,7 +1612,7 @@ void Player::GodMode(float dt)
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2;
-
+	
 }
 
 void Player::PlayerMovement(float dt)
