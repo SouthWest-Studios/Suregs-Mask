@@ -222,6 +222,7 @@ bool DebugConsole::PostLateUpdate()
 				SDL_Texture* texture = SDL_CreateTextureFromSurface(app->render->renderer, surface);
 				int texW, texH;
 				SDL_QueryTexture(texture, nullptr, nullptr, &texW, &texH);
+			
 
 				// Definir el rect�ngulo de destino
 				SDL_Rect dstRect = { labelX, labelY - scrollY, texW, texH };
