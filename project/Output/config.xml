@@ -378,6 +378,7 @@
 
 	<hud>
 		<mainTexture texturepath="Assets/Textures/Interfaz/HUD/texture_general_hud.png"/>
+		<messageTexture texturepath="Assets/Textures/Interfaz/HUD/texture_message.png"/>
 	</hud>
 
 	<inventorymanager>
