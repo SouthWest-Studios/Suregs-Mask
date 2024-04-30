@@ -33,6 +33,8 @@ public:
 	// Additional methods
 	Inventity* CreateItem(EntityType type, std::string descripcioon, std::string tipo);
 
+	Inventity* CreateItem(InventityType type); //Necesario para las tiendas
+
 	void AddItem(Inventity* Inventity);
 
 	void DestroyItem(Inventity* Inventity);

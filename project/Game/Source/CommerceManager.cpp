@@ -7,6 +7,7 @@
 #include "Textures.h"
 #include "Scene_testing.h"
 #include "inventity.h"
+#include "InventoryManager.h"
 #include "SwordInv.h"
 #include "GarraInv.h"
 #include "ArmaduraInv.h"
@@ -32,6 +33,37 @@ bool CommerceManager::Awake(pugi::xml_node config)
 	LOG("Loading Commerce Manager");
 	bool ret = true;
 
+
+
+	backgroundPathTexture					= (char*)config.child("backgroundPathTexture").attribute("texturePath").as_string();
+	sellerPathTexture						= (char*)config.child("sellerPathTexture").attribute("texturePath").as_string();
+	backgroundTradePathTexture				= (char*)config.child("backgroundTradePathTexture").attribute("texturePath").as_string();
+	backgroundTradeHoverPathTexture			= (char*)config.child("backgroundTradeHoverPathTexture").attribute("texturePath").as_string();
+	backgroundSelectAllPathTexture			= (char*)config.child("backgroundSelectAllPathTexture").attribute("texturePath").as_string();
+	backgroundSelectAllHoverPathTexture		= (char*)config.child("backgroundSelectAllHoverPathTexture").attribute("texturePath").as_string();
+	backgroundSliderPathTexture				= (char*)config.child("backgroundSliderPathTexture").attribute("texturePath").as_string();
+	knobSliderPathTexture					= (char*)config.child("knobSliderPathTexture").attribute("texturePath").as_string();
+	backgroundConfirmPathTexture			= (char*)config.child("backgroundConfirmPathTexture").attribute("texturePath").as_string();
+	backgroundConfirmHoverPathTexture		= (char*)config.child("backgroundConfirmHoverPathTexture").attribute("texturePath").as_string();
+
+
+	pugi::xml_node commerceNode;
+	commerceNode = config.child("commerce");
+	while (commerceNode != NULL) {
+
+		Commerce* commerce = CreateCommerce(CommerceType::BASICO, commerceNode.attribute("id").as_uint(), LoadTrades(commerceNode.child("trades")));
+
+		commerce->positionGeneral	= iPoint(commerceNode.attribute("positionGeneralX").as_int(), commerceNode.attribute("positionGeneralY").as_int());
+		commerce->positionList		= iPoint(commerceNode.attribute("positionListX").as_int(), commerceNode.attribute("positionListY").as_int());
+		commerce->positionInList	= iPoint(commerceNode.attribute("positionInListX").as_int(), commerceNode.attribute("positionInListY").as_int());
+		commerce->tradeSpacing		= commerceNode.attribute("tradeSpacing").as_int();
+		commerce->itemSpacing		= commerceNode.attribute("itemSpacing").as_int();
+		
+		commerces.push_back(commerce);
+
+		commerceNode = commerceNode.next_sibling();
+	}
+
 	return ret;
 
 }
@@ -40,6 +72,7 @@ bool CommerceManager::Start() {
 
 	bool ret = true;
 
+	//PlayCommerce(0);
 
 	return ret;
 }
@@ -52,23 +85,73 @@ bool CommerceManager::CleanUp()
 	return ret;
 }
 
-Commerce* CommerceManager::CreateCommerce(CommerceType type, uint id)
+Commerce* CommerceManager::CreateCommerce(CommerceType type, uint id, std::vector<Trade*> trades)
 {
-	Commerce* commerce = new Commerce();
+	Commerce* commerce = new Commerce(id);
 
+	commerce->backgroundPathTexture						= backgroundPathTexture;
+	commerce->sellerPathTexture							= sellerPathTexture;
+	commerce->backgroundTradePathTexture				= backgroundTradePathTexture;
+	commerce->backgroundTradeHoverPathTexture			= backgroundTradeHoverPathTexture;
+	commerce->backgroundSelectAllPathTexture			= backgroundSelectAllPathTexture;
+	commerce->backgroundSelectAllHoverPathTexture		= backgroundSelectAllHoverPathTexture;
+	commerce->backgroundSliderPathTexture				= backgroundSliderPathTexture;
+	commerce->knobSliderPathTexture						= knobSliderPathTexture;
+	commerce->backgroundConfirmPathTexture				= backgroundConfirmPathTexture;
+	commerce->backgroundConfirmHoverPathTexture			= backgroundConfirmHoverPathTexture;
+
+	commerce->SetTrades(trades);
+
+	
 
 	return commerce;
 }
 
 void CommerceManager::PlayCommerce(uint id)
 {
+	for (int i = 0; i < commerces.size(); i++) {
+		if (commerces.at(i)->GetId() == id) {
+			commerces.at(i)->LoadTextures();
+			commerces.at(i)->active = true;
+			break;
+		}
+	}
+}
 
+std::vector<Trade*> CommerceManager::LoadTrades(pugi::xml_node nodeTrade)
+{
+	std::vector<Trade*> trades;
+
+	pugi::xml_node tradeNode = nodeTrade.child("trade");
+
+	while (tradeNode != NULL) {
+
+		Trade* trade = new Trade();
+		trade->itemsOffered.push_back(app->inventoryManager->CreateItem((InventityType)tradeNode.attribute("itemOffered").as_int()));
+		trade->quantityOffered.push_back(tradeNode.attribute("quantityItemOffered").as_int());
+		trade->itemsRequested.push_back(app->inventoryManager->CreateItem((InventityType)tradeNode.attribute("itemRequested").as_int()));
+		trade->quantityRequested.push_back(tradeNode.attribute("quantityItemRequested").as_int());
+		trades.push_back(trade);
+		tradeNode = tradeNode.next_sibling();
+	}
+
+
+
+	return trades;
 }
 
 bool CommerceManager::Update(float dt)
 {
 
 	bool ret = true;
+
+	
+
+	for (int i = 0; i < commerces.size(); i++) {
+		if (commerces.at(i)->active) {
+			commerces.at(i)->Update(dt);
+		}
+	}
 
 
 
@@ -78,6 +161,12 @@ bool CommerceManager::Update(float dt)
 bool CommerceManager::PostUpdate()
 {
 	bool ret = true;
+
+	for (int i = 0; i < commerces.size(); i++) {
+		if (commerces.at(i)->active) {
+			commerces.at(i)->PostUpdate();
+		}
+	}
 	
 	return ret;
 }

@@ -173,6 +173,11 @@
 					texto4 ="blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO"
 					texto5 ="blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blablu"/>
 
+		<item_pez_pequeno texturePath="---" description="aleix" type ="Pez"/>
+		<item_pez_mediano texturePath="---" description="es un" type ="Pez"/>
+		<item_pez_grande texturePath="---" description="bobo que mezcla sistemas" type ="Pez"/>
+		<item_moneda texturePath="---" description="Esto no deberias de tenerlo en el invenatario... solo en las tiendas jeje" type ="Miscelanea"/>
+
 
 
 
@@ -404,5 +409,37 @@
 	<notesmanager>
 		<nota texturePath ="Assets/Textures/Interfaz/noteselect.png" />
 	</notesmanager>
+
+	<commercemanager>
+		<backgroundPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_tienda.png" />
+		<sellerPathTexture texturePath="Assets/Textures/Interfaz/Comercio/falta.png" />
+		<backgroundTradePathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_trade.png" />
+		<backgroundTradeHoverPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_trade_hover.png" />
+		<backgroundSelectAllPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_boton_all.png" />
+		<backgroundSelectAllHoverPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_boton_all_hover.png" />
+		<backgroundSliderPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_slider.png" />
+		<knobSliderPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_knob_slider.png" />
+		<backgroundConfirmPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_boton.png" />
+		<backgroundConfirmHoverPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_boton_hover.png" />
+
+		<commerce id="0" positionGeneralX="66" positionGeneralY="33" positionListX="280" positionListY="10" positionInListX="0" positionInListY="0" tradeSpacing="100" itemSpacing="0">
+			<trades>
+				<trade itemOffered="1" quantityItemOffered="1" itemRequested="2" quantityItemRequested="3"/>
+				<trade itemOffered="3" quantityItemOffered="3" itemRequested="4" quantityItemRequested="1"/>
+				<trade itemOffered="5" quantityItemOffered="1" itemRequested="6" quantityItemRequested="1"/>
+				<trade itemOffered="5" quantityItemOffered="1" itemRequested="6" quantityItemRequested="1"/>
+				<trade itemOffered="5" quantityItemOffered="1" itemRequested="6" quantityItemRequested="1"/>
+				<trade itemOffered="5" quantityItemOffered="1" itemRequested="6" quantityItemRequested="1"/>
+				<trade itemOffered="5" quantityItemOffered="1" itemRequested="6" quantityItemRequested="1"/>
+				<trade itemOffered="5" quantityItemOffered="1" itemRequested="6" quantityItemRequested="1"/>
+				<trade itemOffered="5" quantityItemOffered="1" itemRequested="6" quantityItemRequested="1"/>
+				<trade itemOffered="5" quantityItemOffered="1" itemRequested="6" quantityItemRequested="1"/>
+				<trade itemOffered="5" quantityItemOffered="1" itemRequested="6" quantityItemRequested="1"/>
+				
+			</trades>
+		</commerce>
+		
+		
+	</commercemanager>
 
 </config>

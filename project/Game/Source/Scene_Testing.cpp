@@ -239,10 +239,10 @@ bool Scene_testing::Update(float dt)
 	//}
 	
 	// L14: DONE 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
-	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
+	/*if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
 		app->fadeToBlack->FadeToBlack(this, app->scene_testing);
 		app->menu->active = true;
-	}
+	}*/
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) {
 		app->SaveRequest();
 	}

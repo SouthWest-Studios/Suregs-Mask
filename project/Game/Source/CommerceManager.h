@@ -8,6 +8,12 @@
 #include "Textures.h"
 #include "Commerce.h"
 
+#include <vector> // Necesario para std::vector
+#include <cstdint> // Necesario para uint32_t
+
+class Commerce;
+
+struct Trade;
 
 enum class CommerceType
 {
@@ -41,8 +47,10 @@ public:
 	bool CleanUp();
 
 
-	Commerce* CreateCommerce(CommerceType type, uint id);
+	Commerce* CreateCommerce(CommerceType type, uint id, std::vector<Trade*> trades);
 	void PlayCommerce(uint id);
+
+	std::vector<Trade*> LoadTrades(pugi::xml_node nodeTrade);
 
 	
 
@@ -54,7 +62,22 @@ public:
 
 private:
 
+	char* backgroundPathTexture;
 
+	char* sellerPathTexture;
+
+	char* backgroundTradePathTexture;
+	char* backgroundTradeHoverPathTexture;
+	char* backgroundSelectAllPathTexture;
+	char* backgroundSelectAllHoverPathTexture;
+
+	char* backgroundSliderPathTexture;
+	char* knobSliderPathTexture;
+
+	char* backgroundConfirmPathTexture;
+	char* backgroundConfirmHoverPathTexture;
+
+	std::vector<Commerce*> commerces;
 	
 };
 
