@@ -47,7 +47,7 @@ public:
 	bool CleanUp();
 
 	// Additional methods
-	Entity* CreateEntity(EntityType type);
+	Entity* CreateEntity(EntityType type, int id = 0);
 
 	void DestroyEntity(Entity* entity);
 

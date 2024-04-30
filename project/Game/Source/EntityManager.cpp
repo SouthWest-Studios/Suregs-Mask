@@ -110,7 +110,7 @@ bool EntityManager::CleanUp()
 	return ret;
 }
 
-Entity* EntityManager::CreateEntity(EntityType type)
+Entity* EntityManager::CreateEntity(EntityType type, int id)
 {
 	Entity* entity = nullptr; 
 
@@ -166,7 +166,7 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		entity = new Item_Polvora(type, 100, 100, 300, 5, 2);
 		break;
 	case EntityType::ITEM_NOTA:
-		entity = new Item_Nota(type, 100, 100, 300, 5, 2);
+		entity = new Item_Nota(type, id, 100, 300, 5, 2);
 		break;
 	case EntityType::ITEM:
 		entity = new Item();

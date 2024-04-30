@@ -11,7 +11,7 @@
 #include "Window.h"
 
 Item_Nota::Item_Nota(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
-	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_NOTA)
+	: type(type), id(id), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_NOTA)
 {
 	name.Create("item_nota");
 }
@@ -31,8 +31,40 @@ bool Item_Nota::Start() {
 	//initilize textures
 	/*position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();*/
+
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
-	CloseTexture = app->tex->Load("Assets/Textures/Entidades/Items/textura_NoteCloseUp.png");
+	CloseTexture = app->tex->Load(config.attribute("closeTexturePath").as_string());
+	switch (id)
+	{
+	case 1:
+		description = config.attribute("texto1").as_string();
+		break;
+	case 2:
+		description = config.attribute("texto2").as_string();
+		break;
+	case 3:
+		description = config.attribute("texto3").as_string();
+		break;
+	case 4:
+		description = config.attribute("texto4").as_string();
+		break;
+	case 5:
+		description = config.attribute("texto5").as_string();
+		break;
+	case 6:
+		description = config.attribute("texto6").as_string();
+		break;
+	case 7:
+		description = config.attribute("texto7").as_string();
+		break;
+	case 8:
+		description = config.attribute("texto8").as_string();
+		break;
+	default:
+		description = config.attribute("texto9").as_string();
+		break;
+	}
+	/*CloseTexture = app->tex->Load("Assets/Textures/Entidades/Items/textura_NoteCloseUp.png");*/
 	/*texture = app->tex->Load("Assets/Textures/Entidades/Items/item_Garra.png");*/
 	// L07 DONE 4: Add a physics to an item - initialize the physics body
 	app->tex->GetSize(texture, texW, texH);

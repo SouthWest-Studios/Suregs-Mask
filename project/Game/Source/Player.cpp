@@ -430,8 +430,11 @@ bool Player::Start() {
 	pbodySensor->ctype = ColliderType::UNKNOWN;
 
 	//initialize audio effect
-	run_fx = app->audio->LoadAudioFx("runAlt_fx");
+	run_fx = app->audio->LoadAudioFx("run_fx");
+	runAlt_fx = app->audio->LoadAudioFx("runAlt_fx");
+	runAlt2_fx = app->audio->LoadAudioFx("runAlt2_fx");
 	dash_fx = app->audio->LoadAudioFx("dash_fx");
+	switch_masks_fx = app->audio->LoadAudioFx("switch_masks_fx");
 	basic_combo_attack1_fx = app->audio->LoadAudioFx("basic_combo_attack1_fx");
 	player_get_damage_fx = app->audio->LoadAudioFx("player_get_damage_fx");
 
@@ -570,6 +573,7 @@ float Player::GetRealMovementSpeed() const {
 void Player::Run(float dt)
 {	
 	currentAnimation = &runAnim;
+	app->audio->PlayRunFx(run_fx, runAlt_fx, runAlt2_fx);
 }
 
 void Player::Dashi(float dt)
@@ -649,6 +653,8 @@ void Player::ChangeMask() {
 		primaryMask = secondaryMask;
 		secondaryMask = temp;
 
+		app->audio->PlayFx(switch_masks_fx);  // <--- No funciona
+
 		UnequipMasks();
 
 		EquipPrimaryMask(primaryMask);
@@ -709,9 +715,7 @@ void Player::stateMachine(float dt)
 		app->audio->StopFx(-1);
 		break;
 	case EntityState::RUNNING:
-
 		Run(dt);
-		app->audio->PlayFx(run_fx); // <--- Hay que arreglarlo
 		break;
 	case EntityState::ATTACKING:
 		Attack(dt);
@@ -891,7 +895,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 				}
 			}
 		}
-		app->audio->PlayFx(player_get_damage_fx); // <--- Hay que arreglarlo
+		app->audio->PlayHitFx(player_get_damage_fx); // <--- Hay que arreglarlo
 		break;
 	case ColliderType::RESOURCE:
 		LOG("Collision RESOURCE");
@@ -915,7 +919,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			if (physB->listener->active) {
 				if (app->notesManager->IsFull() == false)
 				{
-					app->notesManager->CreateItem(physB->listener->type, physB->listener->CloseTexture);
+					app->notesManager->CreateItem(physB->listener->type, physB->listener->CloseTexture, physB->listener->description);
 					physB->listener->active = false;
 					physB->body->SetActive(false);
 				}

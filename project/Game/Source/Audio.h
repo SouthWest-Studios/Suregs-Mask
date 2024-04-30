@@ -52,17 +52,29 @@ public:
 	// Play a music after the specified time
 	void PlayMusicAfterDelay(const char* name, float delayInSeconds, float fadeTime = DEFAULT_MUSIC_FADE_TIME);
 
+	// Play a WAV after the specified time
+	void PlayRunFx(unsigned int name, unsigned int name2, unsigned int name3);
+
+	void PlayHitFx(unsigned int name);
+
 public:
 
 	int volumeMusic;
 	int volumeFx;
 
 	bool playingMusic = false;
+	bool playingRunFx = false;
 	Timer timer;
 
 	map<unsigned int, int> activeChannels;
 
 private:
+
+	int runTime = 840;
+	Timer runTimer;
+
+	int hitTime = 575;
+	Timer hitTimer;
 
 	_Mix_Music* music;
 	List<Mix_Chunk *>	fx;

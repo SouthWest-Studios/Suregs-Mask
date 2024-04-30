@@ -185,7 +185,10 @@ public:
 
 	//Audio fx
 	int run_fx;
+	int runAlt_fx;
+	int runAlt2_fx;
 	int dash_fx;
+	int switch_masks_fx;
 	int basic_combo_attack1_fx;
 	int player_get_damage_fx;
 

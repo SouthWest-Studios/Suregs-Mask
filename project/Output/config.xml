@@ -54,7 +54,7 @@
       <basic_combo_attack2_fx path="Assets/Audio/Fx/basic_combo_attack2_fx.wav"/>
       <basic_combo_attack3_fx path="Assets/Audio/Fx/basic_combo_attack3_fx.wav"/>
       <mask_ability_fx path=""/>
-      <switch_masks_fx path=""/>
+      <switch_masks_fx path="Assets/Audio/Fx/switch_masks_fx.wav"/>
       <use_potion_fx path=""/>
       <switch_potion_fx path=""/>
       <player_get_damage_fx path="Assets/Audio/Fx/player_get_damage_fx.wav"/>
@@ -146,6 +146,10 @@
 
 		<shar texturePath="Assets/Textures/Entidades/Shar/Sprites.png" 
 				Tsprite="45" Pwidth="2190" sprite_x="146" sprite_y="153"/>
+
+		<khurt texturePath="Assets/Textures/Entidades/Khurt/textura_khurt.png" 
+			   maxHealth="220.0f" speed="7.5f" attackDamage="90.0f" attackDistance="2" viewDistance="20"
+			   Tsprite="4" Pwidth="40" sprite_x="20" sprite_y="20"/>
 		
 		
 	
@@ -159,11 +163,18 @@
 		<item_diente texturePath="Assets/Textures/Entidades/Items/textura_diente.png" description="lorem ipsum sit amet." type ="apendice"/>
 		<item_amatista texturePath="Assets/Textures/Entidades/Items/textura_amatista.png" description="lorem ipsum sit amet." type ="material"/>
 		<item_cola texturePath="Assets/Textures/Entidades/Items/textura_cola.png" description="Esta es la cola de los sureg masculinos." type ="apendice"/>
-		<item_polvora texturePath="Assets/Textures/Entidades/Items/textura_polvora.png" description="polvora, polvora, polvora, polvora, polvora, polvora, polvora, polvora" type ="material"/>
-		<item_nota texturePath="Assets/Textures/Entidades/Items/textura_nota.png" CloseTexturePath="Assets/Textures/Entidades/Items/textura_NoteCloseUp"/>
-		
-		
-		
+		<item_polvora texturePath="Assets/Textures/Entidades/Items/textura_polvora.png" description="22000 stacks de polvora por hora en la granja de creeper" type ="material"/>
+		<item_nota texturePath="Assets/Textures/Entidades/Items/textura_nota.png" closeTexturePath="Assets/Textures/Entidades/Items/textura_NoteCloseUp.png" 
+					texto1 ="bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla"
+					texto2 ="ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble blable"
+					texto3 ="bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli"
+					texto4 ="blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO"
+					texto5 ="blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blablu"/>
+
+
+
+
+
 
 		<item x="1200" y="2600" texturePath="Assets/Textures/Entidades/Jugador/salamanda1.png" Tsprite="23" Pwidth="1000" sprite_x="100" sprite_y="160"/>
 
@@ -310,6 +321,12 @@
 			<attackAnim_shar start="220" end="234" speed="0.2f" loop="false"/>18
 			<dieAnim_shar start="353" end="370" speed="0.2f" loop="false"/>
 		</shar>
+		<khurt>
+			<idleAnim start="1" end="1" speed="0.05f" loop="true"/>
+			<runAnim start="1" end="2" speed="0.05f" loop="true"/>
+			<underAnim start="3" end="3" speed="0.05f" loop="true"/>
+			<dieAnim start="4" end="4" speed="0.05f" loop="true"/>
+		</khurt>
 
 		<item>
 			<idleAnim start="0" end="23" speed="0.2f" loop="true"/>
@@ -380,5 +397,8 @@
 	<map>
 		<pathfindingTexture pathtexture="Assets/Textures/pathfinding.png"/>
 	</map>
+	<notesmanager>
+		<nota texturePath ="Assets/Textures/Interfaz/noteselect.png" />
+	</notesmanager>
 
 </config>

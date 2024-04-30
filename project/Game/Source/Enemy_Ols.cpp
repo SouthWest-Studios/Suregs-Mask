@@ -78,7 +78,6 @@ bool Enemy_Ols::Update(float dt)
 	switch (nextState) {
 	case EntityState::DEAD:
 		Die(dt);
-		app->audio->PlayFx(ols_death_fx);
 		break;
 	case EntityState::ATTACKING:
 		Attack(dt);
@@ -169,6 +168,7 @@ void Enemy_Ols::Attack(float dt)
 }
 
 void Enemy_Ols::Die(float dt) {
+	app->audio->PlayFx(ols_death_fx); // <--- No funciona
 
 	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
 	if (parseResult) {

@@ -232,6 +232,7 @@ bool Menu::Update(float dt)
 			// Establecer el volumen de la m�sica
 			Mix_VolumeMusic(newVolume);
 			newVolumeAudio = newVolume;
+			app->audio->volumeMusic = newVolume;
 		}
 
 		if (sfx != nullptr)
@@ -247,6 +248,7 @@ bool Menu::Update(float dt)
 			}
 
 			newVolumeFx = newSFXVolume;
+			app->audio->volumeFx = newSFXVolume;
 		}
 
 		
