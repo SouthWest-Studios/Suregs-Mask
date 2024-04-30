@@ -52,6 +52,12 @@ bool CommerceManager::Awake(pugi::xml_node config)
 	while (commerceNode != NULL) {
 
 		Commerce* commerce = CreateCommerce(CommerceType::BASICO, commerceNode.attribute("id").as_uint(), LoadTrades(commerceNode.child("trades")));
+
+		commerce->positionGeneral	= iPoint(commerceNode.attribute("positionGeneralX").as_int(), commerceNode.attribute("positionGeneralY").as_int());
+		commerce->positionList		= iPoint(commerceNode.attribute("positionListX").as_int(), commerceNode.attribute("positionListY").as_int());
+		commerce->positionInList	= iPoint(commerceNode.attribute("positionInListX").as_int(), commerceNode.attribute("positionInListY").as_int());
+		commerce->tradeSpacing		= commerceNode.attribute("tradeSpacing").as_int();
+		commerce->itemSpacing		= commerceNode.attribute("itemSpacing").as_int();
 		
 		commerces.push_back(commerce);
 
@@ -66,6 +72,7 @@ bool CommerceManager::Start() {
 
 	bool ret = true;
 
+	//PlayCommerce(0);
 
 	return ret;
 }
@@ -104,6 +111,7 @@ void CommerceManager::PlayCommerce(uint id)
 {
 	for (int i = 0; i < commerces.size(); i++) {
 		if (commerces.at(i)->GetId() == id) {
+			commerces.at(i)->LoadTextures();
 			commerces.at(i)->active = true;
 			break;
 		}
@@ -136,6 +144,8 @@ bool CommerceManager::Update(float dt)
 {
 
 	bool ret = true;
+
+	
 
 	for (int i = 0; i < commerces.size(); i++) {
 		if (commerces.at(i)->active) {

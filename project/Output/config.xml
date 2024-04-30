@@ -422,10 +422,18 @@
 		<backgroundConfirmPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_boton.png" />
 		<backgroundConfirmHoverPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_boton_hover.png" />
 
-		<commerce id="0">
+		<commerce id="0" positionGeneralX="66" positionGeneralY="33" positionListX="280" positionListY="10" positionInListX="0" positionInListY="0" tradeSpacing="100" itemSpacing="0">
 			<trades>
 				<trade itemOffered="1" quantityItemOffered="1" itemRequested="2" quantityItemRequested="3"/>
 				<trade itemOffered="3" quantityItemOffered="3" itemRequested="4" quantityItemRequested="1"/>
+				<trade itemOffered="5" quantityItemOffered="1" itemRequested="6" quantityItemRequested="1"/>
+				<trade itemOffered="5" quantityItemOffered="1" itemRequested="6" quantityItemRequested="1"/>
+				<trade itemOffered="5" quantityItemOffered="1" itemRequested="6" quantityItemRequested="1"/>
+				<trade itemOffered="5" quantityItemOffered="1" itemRequested="6" quantityItemRequested="1"/>
+				<trade itemOffered="5" quantityItemOffered="1" itemRequested="6" quantityItemRequested="1"/>
+				<trade itemOffered="5" quantityItemOffered="1" itemRequested="6" quantityItemRequested="1"/>
+				<trade itemOffered="5" quantityItemOffered="1" itemRequested="6" quantityItemRequested="1"/>
+				<trade itemOffered="5" quantityItemOffered="1" itemRequested="6" quantityItemRequested="1"/>
 				<trade itemOffered="5" quantityItemOffered="1" itemRequested="6" quantityItemRequested="1"/>
 				
 			</trades>

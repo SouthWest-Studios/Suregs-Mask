@@ -71,6 +71,13 @@ public:
 	bool active; //Para saber si tiene que llamar al update o postUpdate del comercio o no.
 
 
+	iPoint positionGeneral;
+	iPoint positionList;
+	iPoint positionInList;
+	uint tradeSpacing;
+	uint itemSpacing;
+
+
 private:
 
 	uint id;
@@ -94,13 +101,11 @@ private:
 
 
 
-	iPoint positionGeneral;
-	iPoint positionList;
-	iPoint positionInList;
-	uint tradeSpacing;
-	uint itemSpacing;
+	
 
 	std::vector<Trade*> trades;
+
+	int pointerIndex;
 	
 };
 

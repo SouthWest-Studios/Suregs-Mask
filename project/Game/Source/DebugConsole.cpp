@@ -23,6 +23,7 @@
 #include "Menu.h"
 
 #include "DialogManager.h"
+#include "CommerceManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -82,6 +83,12 @@ bool DebugConsole::Awake(pugi::xml_node config)
 			}
 		});
 	commandList.Add(SET_SECONDARY_MASK);
+
+	PLAY_COMMERCE = new DebugCommandArg<int>("play_commerce", "Abre una tienda", "play_commerce <int commerceID>", [this](int id) {
+			app->commerceManager->PlayCommerce(id);
+		});
+	commandList.Add(PLAY_COMMERCE);
+
 
 	GOTO = new DebugCommandArg<int>("goto", "Te cambia de escena por la elegida", "goto <int nivel>", [this](int nivel) {
 
