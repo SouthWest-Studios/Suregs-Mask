@@ -6,6 +6,16 @@
 #include "inventity.h"
 #include "List.h"
 #include "Textures.h"
+#include "Commerce.h"
+
+
+enum class CommerceType
+{
+	BASICO,
+	HERRERIA,
+	UNKNOWN 
+};
+
 
 class CommerceManager : public Module
 {
@@ -29,6 +39,10 @@ public:
 
 	// Called before quitting
 	bool CleanUp();
+
+
+	Commerce* CreateCommerce(CommerceType type, uint id);
+	void PlayCommerce(uint id);
 
 	
 

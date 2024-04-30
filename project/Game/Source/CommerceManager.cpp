@@ -52,6 +52,19 @@ bool CommerceManager::CleanUp()
 	return ret;
 }
 
+Commerce* CommerceManager::CreateCommerce(CommerceType type, uint id)
+{
+	Commerce* commerce = new Commerce();
+
+
+	return commerce;
+}
+
+void CommerceManager::PlayCommerce(uint id)
+{
+
+}
+
 bool CommerceManager::Update(float dt)
 {
 
@@ -68,6 +81,8 @@ bool CommerceManager::PostUpdate()
 	
 	return ret;
 }
+
+
 
 
 
