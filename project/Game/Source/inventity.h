@@ -8,6 +8,7 @@
 
 enum class InventityType
 {
+	MONEDA = -1,
 	ITEM,
 	GARRA,
 	OJO,
@@ -28,7 +29,7 @@ enum class InventityType
 	PEZ_GRANDE,
 
 	//De aqui para abajo no importa el orden
-	MONEDA,
+	
 	UNKNOWN //<-- Salvo este, el ultimo
 
 };

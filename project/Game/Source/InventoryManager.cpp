@@ -102,6 +102,7 @@ Inventity* InventoryManager::CreateItem(EntityType type, std::string descripcioo
 	}
 
 	highestId = (inventities.Count() > 0) ? inventities.end->data->id : -1;
+
 	entity = new Inventity();
 	entity->id = highestId + 1;
 	entity->stackable = true;
@@ -176,6 +177,86 @@ Inventity* InventoryManager::CreateItem(EntityType type, std::string descripcioo
 	AddItem(entity);
 
 	return entity;
+}
+
+Inventity* InventoryManager::CreateItem(InventityType type) {
+
+	pugi::xml_document configFile;
+	pugi::xml_node entitiesDataNode;
+	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
+	entitiesDataNode = configFile.child("config").child("entities_data");
+	pugi::xml_node itemConfigurationNode;
+
+	Inventity* inventity = nullptr;
+
+
+	switch (type) {
+		case InventityType::GARRA:
+			itemConfigurationNode = entitiesDataNode.child("item_garra");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_GARRA, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
+			break;
+		case InventityType::OJO:
+			itemConfigurationNode = entitiesDataNode.child("item_ojo");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_OJO, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
+			break;
+		case InventityType::DIAMANTE:
+			itemConfigurationNode = entitiesDataNode.child("item_diamante");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_DIAMANTE, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
+			break;
+		case InventityType::VISCERA:
+			itemConfigurationNode = entitiesDataNode.child("item_viscera");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_VISCERAS, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
+			break;
+		case InventityType::RUBI:
+			itemConfigurationNode = entitiesDataNode.child("item_rubi");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_RUBI, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
+			break;
+		case InventityType::POLVORA:
+			itemConfigurationNode = entitiesDataNode.child("item_polvora");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_POLVORA, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
+			break;
+		case InventityType::HUESO:
+			itemConfigurationNode = entitiesDataNode.child("item_hueso");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_HUESO, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
+			break;
+		case InventityType::DIENTE:
+			itemConfigurationNode = entitiesDataNode.child("item_diente");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_DIENTE, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
+			break;
+		case InventityType::COLA:
+			itemConfigurationNode = entitiesDataNode.child("item_cola");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_COLA, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
+			break;
+		case InventityType::CARBON:
+			itemConfigurationNode = entitiesDataNode.child("item_carbon");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_CARBON, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
+			break;
+		case InventityType::AMATISTA:
+			itemConfigurationNode = entitiesDataNode.child("item_amatista");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_AMATISTA, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
+			break;
+		case InventityType::PEZ_PEQUENO:
+			itemConfigurationNode = entitiesDataNode.child("item_pez_pequeno");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_PEZ_PEQUENO, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
+			break;
+		case InventityType::PEZ_MEDIANO:
+			itemConfigurationNode = entitiesDataNode.child("item_pez_mediano");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_PEZ_MEDIANO, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
+			break;
+		case InventityType::PEZ_GRANDE:
+			itemConfigurationNode = entitiesDataNode.child("item_pez_grande");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_PEZ_GRANDE, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
+			break;
+		case InventityType::MONEDA:
+			itemConfigurationNode = entitiesDataNode.child("item_moneda");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_MONEDA, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
+			break;
+	}
+
+
+	return inventity;
+
+
 }
 
 bool InventoryManager::IsFull()

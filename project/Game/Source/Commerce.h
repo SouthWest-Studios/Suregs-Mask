@@ -6,6 +6,7 @@
 #include "inventity.h"
 #include "List.h"
 #include "Textures.h"
+#include "CommerceManager.h"
 
 struct Trade {
 	std::vector<Inventity> itemsOffered;
@@ -19,7 +20,7 @@ class Commerce
 {
 public:
 
-	Commerce();
+	Commerce(uint id);
 
 	// Destructor
 	virtual ~Commerce();
@@ -40,11 +41,18 @@ public:
 	bool ApplyTrades();
 
 	bool LoadTextures();
+
+	bool CloseCommerce();
+
+
+	void SetTrades(std::vector<Trade*> trades);
+
+	uint GetId();
 	
 
 public:
 
-	char* backgroundPathexture;
+	char* backgroundPathTexture;
 
 	char* sellerPathTexture;
 
@@ -59,6 +67,8 @@ public:
 	char* backgroundConfirmPathTexture;
 	char* backgroundConfirmHoverPathTexture;
 
+
+	bool active; //Para saber si tiene que llamar al update o postUpdate del comercio o no.
 
 
 private:
@@ -90,7 +100,7 @@ private:
 	uint tradeSpacing;
 	uint itemSpacing;
 
-	List<Trade*> trades;
+	std::vector<Trade*> trades;
 	
 };
 

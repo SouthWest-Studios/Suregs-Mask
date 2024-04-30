@@ -16,8 +16,9 @@
 #include "Defs.h"
 #include "Log.h"
 #include "SString.h"
+#include "CommerceManager.h"
 
-Commerce::Commerce()
+Commerce::Commerce(uint id) : id(id)
 {
 
 }
@@ -61,9 +62,39 @@ bool Commerce::ApplyTrades()
 bool Commerce::LoadTextures()
 {
 
-
+	backgroundTexture = app->tex->Load(backgroundPathTexture);
+	sellerTexture = app->tex->Load(sellerPathTexture);
+	backgroundTradeTexture = app->tex->Load(backgroundTradePathTexture);
+	backgroundTradeHoverTexture = app->tex->Load(backgroundTradeHoverPathTexture);
+	backgroundSelectAllTexture = app->tex->Load(backgroundSelectAllPathTexture);
+	backgroundSelectAllHoverTexture = app->tex->Load(backgroundSelectAllHoverPathTexture);
+	backgroundSliderTexture = app->tex->Load(backgroundSliderPathTexture);
+	knobSliderTexture = app->tex->Load(knobSliderPathTexture);
+	backgroundConfirmTexture = app->tex->Load(backgroundConfirmPathTexture);
+	backgroundConfirmHoverTexture = app->tex->Load(backgroundConfirmHoverPathTexture);
 
 	return false;
+}
+
+bool Commerce::CloseCommerce()
+{
+	bool ret = true;
+
+	active = false;
+
+	//Descargar todas las texturas;
+
+	return ret;
+}
+
+void Commerce::SetTrades(std::vector<Trade*> trades)
+{
+	this->trades = trades;
+}
+
+uint Commerce::GetId()
+{
+	return id;
 }
 
 bool Commerce::Update(float dt)
