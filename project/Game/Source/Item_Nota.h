@@ -30,7 +30,7 @@ public:
 public:
 
 	bool isPicked = false;
-
+	int id;
 	
 	EntityType type;
 	int ataque = 100;
@@ -39,7 +39,7 @@ public:
 	float peso; // Peso de la espada
 	PhysBody* pbody;
 	SDL_Texture* texture = NULL;
-	
+	std::string texto;
 	
 	iPoint position;
 	pugi::xml_node config;

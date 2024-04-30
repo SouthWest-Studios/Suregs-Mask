@@ -91,7 +91,7 @@ bool NotesManager::CleanUp()
 	return ret;
 }
 int highesttId = -1;
-Note* NotesManager::CreateItem(EntityType type, SDL_Texture* CloseUp)
+Note* NotesManager::CreateItem(EntityType type, SDL_Texture* CloseUp, std::string texto)
 {
 	Note* entity = nullptr;
 
@@ -100,6 +100,7 @@ Note* NotesManager::CreateItem(EntityType type, SDL_Texture* CloseUp)
 	entity = new Note();
 	entity->id = highesttId + 1;
 	entity->closeUpNotes = CloseUp;
+	entity->desc = texto;
 	/*entity->closeUpNotes = app->tex->Load("Assets/Textures/Entidades/Items/textura_NoteCloseUp.png"); */
 	switch (type)
 	{
@@ -255,11 +256,11 @@ void NotesManager::OnMovePointer()
 
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && PointerPosition.y < 100) {
 		PointerPosition.y += 83;
-		PointerId += 2;
+		PointerId += 1;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && PointerPosition.y > -60) {
 		PointerPosition.y -= 83;
-		PointerId -= 2;
+		PointerId -= 1;
 	}
 }
 
@@ -361,6 +362,22 @@ bool NotesManager::PostUpdate()
 		}
 
 
+	}
+
+	if (mostrar == true)
+	{
+
+		ListItem<Note*>* itum;
+		for (itum = notes.start; itum != nullptr; itum = itum->next)
+		{
+			if (itum->data->zoom)
+			{
+				if (PointerId == itum->data->id)
+				{
+					app->render->DrawText(itum->data->desc.c_str(), 450, 200, 270, 400, 0, 0, 0, 0, false);
+				}
+			}
+		}
 	}
 	
 	return ret;

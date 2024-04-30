@@ -31,7 +31,7 @@ public:
 	bool CleanUp();
 
 	// Additional methods
-	Note* CreateItem(EntityType type, SDL_Texture* CloseUp);
+	Note* CreateItem(EntityType type, SDL_Texture* CloseUp, std::string texto);
 
 	void AddNote(Note* Inventity);
 
@@ -77,7 +77,7 @@ public:
 private:
 	pugi::xml_document configFile;
 	pugi::xml_node configNode;
-	int maxItemsPerRow = 2; // Define el número máximo de elementos por fila
+	int maxItemsPerRow = 1; // Define el número máximo de elementos por fila
 
 	char* iconoNotaTexture;
 };
