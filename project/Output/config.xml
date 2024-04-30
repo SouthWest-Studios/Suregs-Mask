@@ -212,6 +212,7 @@
 		<settings texturepath ="Assets/Textures/Interfaz/textura_background_settings.png"/>
 		<credits texturepath ="Assets/Textures/Interfaz/textura_creditos.png"/>
 		<logo texturepath ="Assets/Textures/Interfaz/textura_logo.png"/>
+		<savedGames texturepath ="Assets/Textures/Interfaz/textura_saved_games.png"/>
 	</scene_menu>
 	<fadeToBlack>
 		<transition texturepath ="Assets/Textures/Interfaz/transition.png"/>
