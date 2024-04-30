@@ -81,6 +81,11 @@ bool GuiManager::Update(float dt)
 	}
 
 	if (app->scene_menu->active || app->menu->ventana == 4) {
+		if (app->menu->ventana == 4)
+		{
+			minId = 100;
+			maxId = 104;
+		}
 		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
 			NavigateUp();
 			app->audio->PlayFx(button_audio);
