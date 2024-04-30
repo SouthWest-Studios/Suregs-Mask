@@ -34,6 +34,7 @@ bool Hud::Awake(pugi::xml_node config)
 
 
 	hudTexturePath = (char*)config.child("mainTexture").attribute("texturepath").as_string();
+	messageTexturePath = (char*)config.child("messageTexture").attribute("texturepath").as_string();
 	
 	rectBarraVida = new SDL_Rect{ 220,0,220,28 };
 	rectFondoBarraVida = new SDL_Rect{ 0,0,220,28 };
@@ -64,6 +65,7 @@ bool Hud::Awake(pugi::xml_node config)
 bool Hud::Start()
 {
 	hudTexture = app->tex->Load(hudTexturePath);
+	messageTexture = app->tex->Load(messageTexturePath);
 
 	return true;
 }
@@ -165,7 +167,8 @@ bool Hud::PostUpdate()
 	app->render->DrawTexture(hudTexture, windowWidth - rectFondoInventario->w + 10, 70, SDL_FLIP_NONE, rectBotonTAB, 0);
 	app->render->DrawTexture(hudTexture, 120, 85, SDL_FLIP_NONE, rectBotonQ, 0);
 	
-	
+	//mensaje
+	app->render->DrawTexture(messageTexture, 980, 550, SDL_FLIP_NONE, 0, 0);
 
 	return true;
 }
@@ -202,6 +205,11 @@ bool Hud::CleanUp()
 	 app->tex->UnLoad(hudTexture);
 
 	return true;
+}
+
+void Hud::PopUpMessage()
+{
+	 
 }
 
 

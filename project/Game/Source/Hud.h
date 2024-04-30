@@ -38,11 +38,15 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	void PopUpMessage();
+
 
 
 private:
 	char* hudTexturePath;
+	char* messageTexturePath;
 	SDL_Texture* hudTexture;
+	SDL_Texture* messageTexture;
 	int cantidadMonedas = 0;
 
 	SDL_Rect* rectBarraVida;
