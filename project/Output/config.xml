@@ -44,7 +44,7 @@
       <level_up_fx path=""/>
       <get_item_fx path=""/>
       <sell_item_fx path=""/>
-      <buy_item_fx path=""/>
+			<buy_item_fx path=""/>
       <dialog_fx path="Assets/Audio/Fx/dialog_fx.wav"/>
 
       <!--player-->
@@ -57,10 +57,10 @@
       <basic_combo_attack3_fx path="Assets/Audio/Fx/basic_combo_attack3_fx.wav"/>
       <mask_ability_fx path=""/>
       <switch_masks_fx path="Assets/Audio/Fx/switch_masks_fx.wav"/>
-      <use_potion_fx path=""/>
+      <use_potion_fx path="Assets/Audio/Fx/use_potion_fx.wav"/>
       <switch_potion_fx path=""/>
       <player_get_damage_fx path="Assets/Audio/Fx/player_get_damage_fx.wav"/>
-      <player_death_fx path=""/>
+      <player_death_fx path="Assets/Audio/Fx/player_death_fx.wav"/>
 
       <!--fishing-->
       <fishing_fx path=""/>
