@@ -179,7 +179,7 @@
 					texto5 ="blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blablu"/>
 
 		<item_pez_pequeno texturePath="---" description="aleix" type ="Pez" name="Pez pequeño"/>
-		<item_pez_mediano texturePath="---" description="es un" type ="Pez" name="Pez mediano"/>
+		<item_pez_mediano texturePath="---" description="es un pez pequeño" type ="Pez" name="Pez mediano"/>
 		<item_pez_grande texturePath="---" description="bobo que mezcla sistemas" type="Pez" name="Pez grande"/>
 		<item_moneda texturePath="---" description="La moneda principal del juego, utilizada para comprar una variedad de bienes" type ="Miscelanea" name="Monedas"/>
 
