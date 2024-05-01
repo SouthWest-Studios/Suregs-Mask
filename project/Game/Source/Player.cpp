@@ -479,7 +479,6 @@ bool Player::Update(float dt)
 	}
 
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atackAnim_player") {
-		printf("entraAtack");
 		inAnimation = false;
 		atack_Anim = false;
 		desiredState = EntityState::IDLE;
