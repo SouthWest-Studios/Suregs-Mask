@@ -35,6 +35,7 @@
 #include "Item_Polvora.h"
 #include "Item_Nota.h"
 #include "Boss_Inuit.h"
+#include "Enemy_Khurt.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -132,6 +133,9 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 		break;
 	case EntityType::ENEMY_MUUR:
 		entity = new Enemy_Muur();
+		break;
+	case EntityType::ENEMY_KHURT:
+		entity = new Enemy_Khurt();
 		break;
 	case EntityType::ITEM_GARRA:
 		entity = new Item_Garra(type, 1, 100, 300, 5, 2);
@@ -295,7 +299,7 @@ std::vector<Entity*> EntityManager::GetEnemies() {
     std::vector<Entity*> enemies;
     for (ListItem<Entity*>* item = entities.start; item != NULL; item = item->next) {
         Entity* entity = item->data;
-        if (entity->type == EntityType::ENEMY_OSIRIS || entity->type == EntityType::ENEMY_OLS || entity->type == EntityType::ENEMY_SHAR) {
+        if (entity->type == EntityType::ENEMY_OSIRIS || entity->type == EntityType::ENEMY_OLS || entity->type == EntityType::ENEMY_SHAR || entity->type == EntityType::ENEMY_KHURT) {
             enemies.push_back(entity);
         }
     }

@@ -346,10 +346,10 @@
 			<dieAnim_shar start="353" end="370" speed="0.2f" loop="false"/>
 		</shar>
 		<khurt>
-			<idleAnim start="1" end="1" speed="0.05f" loop="true"/>
-			<runAnim start="1" end="2" speed="0.05f" loop="true"/>
-			<underAnim start="3" end="3" speed="0.05f" loop="true"/>
-			<dieAnim start="4" end="4" speed="0.05f" loop="true"/>
+			<idleAnim start="0" end="0" speed="0.05f" loop="true"/>
+			<runAnim start="0" end="1" speed="0.05f" loop="true"/>
+			<underAnim start="2" end="2" speed="0.05f" loop="true"/>
+			<dieAnim start="3" end="3" speed="0.05f" loop="true"/>
 		</khurt>
 
 		<item>
