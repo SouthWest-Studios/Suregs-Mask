@@ -273,6 +273,7 @@ private:
 	Animation idleAnim;
 	Animation runAnim;
 	Animation dashiAnim;
+	Animation atackAnim_player;
 
 	bool isDashing = false;
 
@@ -294,6 +295,9 @@ private:
 	Timer timerMaskAttack;
 
 	Timer timerBetweenLightnings;
+
+	//Atack
+	bool atack_Anim = false;
 
 public:
 

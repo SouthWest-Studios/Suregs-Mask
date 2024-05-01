@@ -60,6 +60,8 @@ bool Scene_Mazmorra2::Start()
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
+
+
 	// Texture to highligh mouse position 
 	//mouseTileTex = app->tex->Load("Assets/Mapas/tileSelection.png");
 

@@ -229,6 +229,9 @@
     <ClCompile Include="Source\Commerce.cpp">
       <Filter>Modules\SistemaComercio</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Boss1.cpp">
+      <Filter>Entities\Boss</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -516,6 +519,9 @@
     <ClInclude Include="Source\Commerce.h">
       <Filter>Modules\SistemaComercio</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Boss1.h">
+      <Filter>Entities\Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -577,6 +583,9 @@
     </Filter>
     <Filter Include="Notes">
       <UniqueIdentifier>{cd095046-c48c-4abf-ab5f-a278e447e42c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Boss">
+      <UniqueIdentifier>{02da5046-0df8-4942-bd9f-56acabcad68a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
