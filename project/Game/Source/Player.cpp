@@ -564,6 +564,7 @@ bool Player::CleanUp()
 void Player::DoNothing(float dt)
 {
 	currentAnimation = &idleAnim;
+	app->audio->StopFx(1);
 }
 
 float Player::GetRealMovementSpeed() const {
@@ -604,7 +605,7 @@ void Player::Attack(float dt)
 		mask1PassiveSensor->listener = this;
 	}
 
-	app->audio->PlayFx(basic_combo_attack1_fx); // <--- No funciona
+	app->audio->PlayFx(basic_combo_attack1_fx);
 }
 
 void Player::UnequipMasks() {
@@ -653,7 +654,7 @@ void Player::ChangeMask() {
 		primaryMask = secondaryMask;
 		secondaryMask = temp;
 
-		app->audio->PlayFx(switch_masks_fx);  // <--- No funciona
+		app->audio->PlayFx(switch_masks_fx);
 
 		UnequipMasks();
 
@@ -712,7 +713,6 @@ void Player::stateMachine(float dt)
 	switch (nextState) {
 	case EntityState::IDLE:
 		DoNothing(dt);
-		app->audio->StopFx(-1);
 		break;
 	case EntityState::RUNNING:
 		Run(dt);

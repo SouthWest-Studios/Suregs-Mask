@@ -140,6 +140,8 @@ void DialogTrigger::PlayDialog()
 		}
 		played = true;
 
+		app->audio->PlayFx(dialog_fx);
+
 
 	//Play el dialogo repetido
 	}else if (played && repeatDialog) {
