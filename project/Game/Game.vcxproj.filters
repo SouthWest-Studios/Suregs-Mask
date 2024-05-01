@@ -229,7 +229,7 @@
     <ClCompile Include="Source\Commerce.cpp">
       <Filter>Modules\SistemaComercio</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Boss1.cpp">
+    <ClCompile Include="Source\Boss_Inutil.cpp">
       <Filter>Entities\Boss</Filter>
     </ClCompile>
   </ItemGroup>
@@ -519,7 +519,7 @@
     <ClInclude Include="Source\Commerce.h">
       <Filter>Modules\SistemaComercio</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Boss1.h">
+    <ClInclude Include="Source\Boss_Inutil.h">
       <Filter>Entities\Boss</Filter>
     </ClInclude>
   </ItemGroup>

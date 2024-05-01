@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "GuiControl.h"
 #include "GuiControlButton.h"
+#include "Boss_Inutil.h"
 
 struct SDL_Texture;
 
@@ -45,13 +46,11 @@ private:
 	uint texW, texH;
 	uint windowW, windowH;
 	SDL_Texture* mouseTileTex = nullptr;
-	
-
-	//L03: DONE 3b: Declare a Player attribute
-	
-
-	// L15: TODO 2: Declare a GUI Control Button 
 	GuiControlButton* gcButtom;
+
+public:
+	Boss_Inutil* boss_inutil = new Boss_Inutil;
+
 
 
 };
