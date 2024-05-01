@@ -276,6 +276,10 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
 		app->menu->active = true;
 		app->guiManager->pointerId = 100;
+		app->guiManager->DestroyGuiControl(partida1);
+		app->guiManager->DestroyGuiControl(partida2);
+		app->guiManager->DestroyGuiControl(partida3);
+		
 		/*app->LoadRequest();*/
 		break;
 
@@ -284,6 +288,10 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
 		app->menu->active = true;
 		app->guiManager->pointerId = 100;
+		app->guiManager->DestroyGuiControl(gcCloseSavedGames);
+		app->guiManager->DestroyGuiControl(partida1);
+		app->guiManager->DestroyGuiControl(partida2);
+		app->guiManager->DestroyGuiControl(partida3);
 		break;
 
 	case 15:
@@ -291,6 +299,10 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
 		app->menu->active = true;
 		app->guiManager->pointerId = 100;
+		app->guiManager->DestroyGuiControl(gcCloseSavedGames);
+		app->guiManager->DestroyGuiControl(partida1);
+		app->guiManager->DestroyGuiControl(partida2);
+		app->guiManager->DestroyGuiControl(partida3);
 		break;
 
 	case 16:
