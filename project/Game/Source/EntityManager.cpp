@@ -132,6 +132,7 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 		entity = new Enemy_Shar();
 		break;
 	case EntityType::ENEMY_MUUR:
+		printf("MUUR");
 		entity = new Enemy_Muur();
 		break;
 	case EntityType::ENEMY_KHURT:
