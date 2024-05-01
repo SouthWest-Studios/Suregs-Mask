@@ -8,19 +8,37 @@
 	<:anonymous />
 	<scene_testing />
 	<entitymanager />
-	<Menu />
+	<hud />
+	<menu />
 	<iventorymanager>
 		<inventory>
-			<inventity type="2" quantity="3" />
-			<inventity type="1" quantity="1" />
-			<inventity type="3" quantity="13" />
+			<inventity type="8" quantity="2" />
+			<inventity type="2" quantity="5" />
+			<inventity type="3" quantity="1" />
+			<inventity type="4" quantity="3" />
+			<inventity type="5" quantity="3" />
+			<inventity type="6" quantity="6" />
+			<inventity type="1" quantity="3" />
+			<inventity type="9" quantity="2" />
+			<inventity type="10" quantity="2" />
+			<inventity type="16" quantity="1" />
+			<inventity type="11" quantity="2" />
+			<inventity type="12" quantity="6" />
+			<inventity type="17" quantity="1" />
 		</inventory>
 	</iventorymanager>
+	<commercemanager />
+	<notesmanager>
+		<Note>
+			<Note type="0" quantity="1" />
+			<Note type="0" quantity="1" />
+			<Note type="0" quantity="1" />
+			<Note type="0" quantity="1" />
+		</Note>
+	</notesmanager>
 	<guiManager />
 	<dialogmanager />
-	<:anonymous />
+	<fadeToBlack />
 	<debugConsole />
-	<renderer>
-		<camera x="-904" y="-2076" />
-	</renderer>
+	<renderer />
 </game_state>

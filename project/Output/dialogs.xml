@@ -53,15 +53,17 @@
 	
 	<dialog id="991" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phoska">
 		<sentences>
-			<sentence type= "choose" text="¡Buenos días! Bienvenido a la herrería de Phoska."/>
+			<sentence type="choose" text="¡Buenos días! Bienvenido a la herrería de Phoska.">
 			
-			<option1 text= "¿Qué ofreces?">
-				<sentence text= "Con los materiales necesarios podré forjar mejoras para tu equipo. ¡No dudes en venir cuando quieras mejorar tus herramientas de combate!"/>	
-			</option1>
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Con los materiales necesarios podré forjar mejoras para tu equipo. ¡No dudes en venir cuando quieras mejorar tus herramientas de combate!"/>
+					<commerce id="0"/> 
+				</option1>
 			
-			<option2 text="¡Adiós!">
-				<sentence text="¡No dudes en venir más por aquí!"/>
-			</option2>
+				<option2 text="¡Adiós!">
+					<sentence text="¡No dudes en venir más por aquí!"/>
+				</option2>
+			</sentence>
 		</sentences>
 	</dialog>
 </dialogues>
