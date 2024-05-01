@@ -5,6 +5,7 @@
 #include "Textures.h"
 #include "Scene_Testing.h"
 #include "Scene_Pueblo.h"
+#include "CommerceManager.h"
 #include "Window.h"
 
 #include "Defs.h"
@@ -93,8 +94,11 @@ Dialog* DialogManager::CreateDialog(pugi::xml_node itemNode, std::string name, c
 		dialog->option1 = itemNode.child("option1").attribute("text").as_string();
 		for (pugi::xml_node optionNode = itemNode.child("option1").child("sentence"); optionNode; optionNode = optionNode.next_sibling("sentence")) {
 			Dialog* dialogOp1 = CreateDialog(optionNode, name, faceTexturePath, font);
+			dialogOp1->commerceId = itemNode.child("option1").child("commerce").attribute("id").as_int();
 			dialog->options1.Add(dialogOp1);
 		}
+
+		
 
 		//Options2
 		dialog->option2 = itemNode.child("option2").attribute("text").as_string();
@@ -302,6 +306,9 @@ bool DialogManager::PostUpdate() {
 			
 			
 			indexText = 1;
+			if (dialogues.At(0)->data->commerceId != -1) {
+				app->commerceManager->PlayCommerce(dialogues.At(0)->data->commerceId);
+			}
 			dialogues.Del(dialogues.At(0));
 			
 			
@@ -319,6 +326,9 @@ bool DialogManager::PostUpdate() {
 				dialogues.InsertAfter(0, actualDialog->options2);
 			}
 			
+			if (dialogues.At(0)->data->commerceId != -1) {
+				app->commerceManager->PlayCommerce(dialogues.At(0)->data->commerceId);
+			}
 
 			//Reiniciar varialbes de dialogo y quitar el dialogo actual de su lista
 			optionSelected = 0;

@@ -6,6 +6,7 @@
 #include "Window.h"
 #include "Scene_Intro.h"
 #include "Scene_Logos.h"
+#include "Scene_Testing.h"
 #include "ModuleFadeToBlack.h"
 #include "Optick/include/optick.h"
 
@@ -73,6 +74,7 @@ bool Scene_Logos::Update(float dt)
 {
 
 	OPTICK_EVENT();
+	//app->fadeToBlack->FadeToBlack(this, app->scene_testing, 10); /*BORRAR AL TERMINAR*/
 	
 	if (timerIntro.ReadSec() < 10) {
 

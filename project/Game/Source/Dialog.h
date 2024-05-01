@@ -68,6 +68,8 @@ public:
 	List<Dialog*> options1;
 	List<Dialog*> options2;
 
+	int commerceId = -1;
+
 	TTF_Font* font;
 	
 };

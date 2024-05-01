@@ -176178,7 +176178,7 @@
   </object>
   <object id="66" x="1502.67" y="2103.33" width="96" height="96">
    <properties>
-    <property name="dialogID" type="int" value="2"/>
+    <property name="dialogID" type="int" value="991"/>
    </properties>
   </object>
   <object id="67" x="2528" y="985" width="96" height="96">
@@ -176208,12 +176208,12 @@
   </object>
   <object id="117" x="3841" y="2492" width="96" height="96">
    <properties>
-    <property name="dialogID" type="int" value="1"/>
+    <property name="dialogID" type="int" value="991"/>
    </properties>
   </object>
   <object id="118" x="4320" y="4286" width="96" height="96">
    <properties>
-    <property name="dialogID" type="int" value="1"/>
+    <property name="dialogID" type="int" value="991"/>
    </properties>
   </object>
   <object id="119" x="3582" y="4674" width="96" height="96">

@@ -105,7 +105,7 @@ bool Hud::PostUpdate()
 	app->render->DrawTexture(hudTexture, 165, 40, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
 	
 	//Monedas
-	std::string quantityStr = std::to_string(cantidadMonedas);
+	std::string quantityStr = std::to_string(app->inventoryManager->monedasObtenidas);
 	
 	app->render->DrawTexture(hudTexture, windowWidth - rectFondoMonedas->w - 35, 130, SDL_FLIP_NONE, rectFondoMonedas, 0);
 	app->render->DrawText(quantityStr.c_str(), windowWidth - rectFondoMonedas->w + 10, 140, 18, 18);

@@ -169,6 +169,10 @@ Inventity* InventoryManager::CreateItem(EntityType type, std::string descripcioo
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_pez_grande.png");
 		entity->type = InventityType::PEZ_GRANDE;
 		break;
+	case EntityType::ITEM_MONEDA:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_moneda.png");
+		entity->type = InventityType::MONEDA;
+		break;
 	default:
 		break;
 	}
@@ -338,7 +342,9 @@ bool InventoryManager::LoadState(pugi::xml_node node)
 
 	}
 
+	//inventoryMoneyNode.append_attribute("quantity").set_value(monedasObtenidas);
 
+	monedasObtenidas = node.child("inventory").child("money").attribute("quantity").as_int(0);
 
 
 	return ret;
@@ -357,6 +363,9 @@ bool InventoryManager::SaveState(pugi::xml_node node)
 		inventoryItemNode.append_attribute("type").set_value((int)inventoryItem->type);
 		inventoryItemNode.append_attribute("quantity").set_value(inventoryItem->quantity);
 	}
+
+	pugi::xml_node inventoryMoneyNode = inventoryNode.append_child("money");
+	inventoryMoneyNode.append_attribute("quantity").set_value(monedasObtenidas);
 
 	/*playerNode.append_attribute("x").set_value(player->position.x);
 	playerNode.append_attribute("y").set_value(player->position.y);
