@@ -363,9 +363,20 @@ bool Commerce::PostUpdate()
 
 	if (pointerIndexF == trades.size()) {
 		app->render->DrawTexture(backgroundConfirmHoverTexture, positionGeneral.x + positionList.x + 424, positionGeneral.y + viewport.h + 92, 1, SDL_FLIP_NONE, nullptr, 0, 0);
-
-
 	}
+
+
+	//Slider scroll texture
+	app->render->DrawTexture(backgroundSliderTexture, positionGeneral.x + positionList.x + 760, positionGeneral.y + positionList.y + 80, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+	int calculoAltura;
+	if (pointerIndexF < trades.size()) {
+		calculoAltura = ((320 * pointerIndexF) / (trades.size()) + 80);
+	}
+	else {
+		calculoAltura = 400;
+	}
+	app->render->DrawTexture(knobSliderTexture, positionGeneral.x + positionList.x + 760, positionGeneral.y + positionList.y + calculoAltura, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+
 
 
 	
