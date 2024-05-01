@@ -90,6 +90,8 @@ struct PathNode
 
 	// Fills a list (PathList) of all valid adjacent pathnodes
 	uint FindWalkableAdjacents(PathList& list_to_fill) const;
+	void SmoothPath(PathList& pathList) const;
+	bool IsStraightPath(const iPoint& from, const iPoint& to) const;
 	// Calculates this tile score
 	int Score() const;
 	// Calculate the F for a specific destination tile
