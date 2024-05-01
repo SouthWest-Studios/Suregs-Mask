@@ -86,7 +86,37 @@ bool Commerce::SelectTrade(uint id, bool add)
 
 bool Commerce::SelectAllTrade(uint id, bool add)
 {
-	return false;
+	bool ret = true;
+
+	Trade* trade = trades.at(id);
+
+	if (add) {
+
+		bool canBuy = true;
+
+		while (canBuy) {
+			for (int i = 0; i < trade->itemsRequested.size(); i++) {
+
+				int cantidadEnInventario = app->inventoryManager->GetInventityQuantity(trade->itemsRequested.at(i)->type);
+				int cantidadEnActivoTodosTrades = GetInventoryTradesQuantity(trade->itemsRequested.at(i)->type);
+
+				int calculoCantidad = (cantidadEnInventario - cantidadEnActivoTodosTrades);
+				calculoCantidad -= trade->quantityRequested.at(i);
+
+				if (calculoCantidad < 0) {
+					canBuy = false;
+				}
+
+			}
+
+			if (canBuy) trade->quantityTraded++;
+		}
+	}
+	else {
+		trade->quantityTraded = 0;
+	}
+
+	return ret;
 }
 
 bool Commerce::ApplyTrades()
