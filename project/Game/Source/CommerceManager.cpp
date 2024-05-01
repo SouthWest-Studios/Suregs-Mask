@@ -53,6 +53,12 @@ bool CommerceManager::Awake(pugi::xml_node config)
 	backgroundConfirmHoverPathTexture		= (char*)config.child("backgroundConfirmHoverPathTexture").attribute("texturePath").as_string();
 
 
+	backgroundButtonPathTexture				= (char*)config.child("backgroundButtonPathTexture").attribute("texturePath").as_string();
+	backgroundButtonHoverPathTexture		= (char*)config.child("backgroundButtonHoverPathTexture").attribute("texturePath").as_string();
+	backgroundMoneyPathTexture				= (char*)config.child("backgroundMoneyPathTexture").attribute("texturePath").as_string();
+
+	backgroundDescriptionPathTexture		= (char*)config.child("backgroundDescriptionPathTexture").attribute("texturePath").as_string();
+
 	
 	commerceNode = config.child("commerce");
 	
@@ -110,6 +116,12 @@ Commerce* CommerceManager::CreateCommerce(CommerceType type, uint id, std::vecto
 	commerce->knobSliderPathTexture						= knobSliderPathTexture;
 	commerce->backgroundConfirmPathTexture				= backgroundConfirmPathTexture;
 	commerce->backgroundConfirmHoverPathTexture			= backgroundConfirmHoverPathTexture;
+
+	commerce->backgroundButtonPathTexture				= backgroundButtonPathTexture;
+	commerce->backgroundButtonHoverPathTexture			= backgroundButtonHoverPathTexture;
+	commerce->backgroundMoneyPathTexture				= backgroundMoneyPathTexture;
+
+	commerce->backgroundDescriptionPathTexture			= backgroundDescriptionPathTexture;
 
 	commerce->SetTrades(trades);
 

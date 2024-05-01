@@ -174,7 +174,7 @@
 		<item_pez_pequeno texturePath="---" description="aleix" type ="Pez" name="Pez pequeño"/>
 		<item_pez_mediano texturePath="---" description="es un" type ="Pez" name="Pez mediano"/>
 		<item_pez_grande texturePath="---" description="bobo que mezcla sistemas" type="Pez" name="Pez grande"/>
-		<item_moneda texturePath="---" description="Esto no deberias de tenerlo en el invenatario... solo en las tiendas jeje" type ="Miscelanea" name="Monedas"/>
+		<item_moneda texturePath="---" description="La moneda principal del juego, utilizada para comprar una variedad de bienes" type ="Miscelanea" name="Monedas"/>
 
 		<item_saliva texturePath="Assets/Textures/Entidades/Items/textura_saliva.png" description="lorem ipsum sit amet." type ="material" name="Saliva"/>
 		
@@ -445,6 +445,15 @@
 		<backgroundConfirmHoverPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_boton_hover.png" />
 		
 		<backgroundTradeItemTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_icono.png" />
+
+		<backgroundButtonPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_boton_abajo.png" />
+		<backgroundButtonHoverPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_boton_abajo_hover.png" />
+		
+		<backgroundMoneyPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_oro.png" />
+
+		<backgroundDescriptionPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_descripcion.png" />
+		
+		
 		
 		
 

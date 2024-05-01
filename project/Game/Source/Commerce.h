@@ -72,6 +72,12 @@ public:
 	char* backgroundConfirmPathTexture;
 	char* backgroundConfirmHoverPathTexture;
 
+	char* backgroundButtonPathTexture;
+	char* backgroundButtonHoverPathTexture;
+	char* backgroundMoneyPathTexture;
+
+	char* backgroundDescriptionPathTexture;
+
 	
 
 
@@ -108,6 +114,12 @@ private:
 
 	SDL_Texture* backgroundConfirmTexture;
 	SDL_Texture* backgroundConfirmHoverTexture;
+
+	SDL_Texture* backgroundButtonTexture;
+	SDL_Texture* backgroundButtonHoverTexture;
+	SDL_Texture* backgroundMoneyTexture;
+
+	SDL_Texture* backgroundDescriptionTexture;
 
 
 

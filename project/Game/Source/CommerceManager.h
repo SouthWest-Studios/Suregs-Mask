@@ -79,6 +79,12 @@ private:
 	char* backgroundConfirmPathTexture;
 	char* backgroundConfirmHoverPathTexture;
 
+	char* backgroundButtonPathTexture;
+	char* backgroundButtonHoverPathTexture;
+	char* backgroundMoneyPathTexture;
+
+	char* backgroundDescriptionPathTexture;
+
 	std::vector<Commerce*> commerces;
 
 	pugi::xml_node commerceNode;
