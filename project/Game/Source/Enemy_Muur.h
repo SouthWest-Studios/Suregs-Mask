@@ -73,6 +73,7 @@ public:
 
 	float viewDistance;
 	float attackDistance;
+	float chargeattackDistance;
 
 private:
 	pugi::xml_document configFile;
@@ -82,6 +83,8 @@ private:
 	Animation idleAnim;
 	Animation runAnim;
 	Animation attackAnim;
+	Animation chargeAnim;
+	Animation stunAnim;
 	Animation dieAnim;
 
 	int muur_get_damage_fx;
@@ -113,6 +116,8 @@ private:
 	//Charge Attack
 	Timer stunTimer;
 	Timer chargeTimer;
+	bool charging;
+	bool isStunned;
 	
 	//Veneno
 	float poisonTimer = 0.0f; // Tiempo desde que se aplico el veneno

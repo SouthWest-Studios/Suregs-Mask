@@ -1117,16 +1117,6 @@ bool Map::LoadEntities(std::string layerName)
 
 					}
 
-					//MUUR
-					if (gid == tileset->firstgid + 23) {
-
-						Enemy_Muur* muur = (Enemy_Muur*)app->entityManager->CreateEntity(EntityType::ENEMY_MUUR);
-						muur->config = configNode.child("entities_data").child("muur");
-						muur->position = iPoint(pos.x + 16, pos.y + 16);
-						muur->Start();
-
-					}
-
 					//KHURT
 					if (gid == tileset->firstgid + 23) {
 
@@ -1135,6 +1125,16 @@ bool Map::LoadEntities(std::string layerName)
 						khurt->config = configNode.child("entities_data").child("khurt");
 						khurt->position = iPoint(pos.x + 16, pos.y + 16);
 						khurt->Start();
+
+					}
+
+					//MUUR
+					if (gid == tileset->firstgid + 24) {
+
+						Enemy_Muur* muur = (Enemy_Muur*)app->entityManager->CreateEntity(EntityType::ENEMY_MUUR);
+						muur->config = configNode.child("entities_data").child("muur");
+						muur->position = iPoint(pos.x + 16, pos.y + 16);
+						muur->Start();
 
 					}
 
