@@ -93,7 +93,7 @@
       
       <muur_attack_fx path=""/>
       <muur_stun_fx path=""/>
-      <muur_get_damage_fx path=""/>
+      <muur_get_damage_fx path="Assets/Audio/Fx/Enemies/muur_get_damage_fx.wav"/>
       <muur_death_fx path=""/>
 
       <!--bosses-->

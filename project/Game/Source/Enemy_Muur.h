@@ -81,6 +81,8 @@ private:
 	Animation attackAnim;
 	Animation dieAnim;
 
+	int muur_get_damage_fx;
+
 	bool isFacingLeft = false;
 
 	iPoint originalPosition;
