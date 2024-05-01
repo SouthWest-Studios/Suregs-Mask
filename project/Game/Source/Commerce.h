@@ -78,7 +78,7 @@ public:
 
 	char* backgroundDescriptionPathTexture;
 
-	
+	char* npcPathTexture;
 
 
 	bool active; //Para saber si tiene que llamar al update o postUpdate del comercio o no.
@@ -90,6 +90,8 @@ public:
 	uint tradeSpacing;
 	uint itemSpacing;
 	uint itemsRequestedSpacing;
+
+	iPoint npcPosition;
 
 
 private:
@@ -120,6 +122,8 @@ private:
 	SDL_Texture* backgroundMoneyTexture;
 
 	SDL_Texture* backgroundDescriptionTexture;
+
+	SDL_Texture* npcTexture;
 
 
 

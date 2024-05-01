@@ -80,8 +80,11 @@ bool CommerceManager::Start() {
 		commerce->positionInList = iPoint(commerceNode.attribute("positionInListX").as_int(), commerceNode.attribute("positionInListY").as_int());
 		commerce->tradeSpacing = commerceNode.attribute("tradeSpacing").as_int();
 		commerce->itemSpacing = commerceNode.attribute("itemSpacing").as_int();
+		commerce->npcPosition = iPoint(commerceNode.attribute("npcPositionX").as_int(), commerceNode.attribute("npcPositionY").as_int());
 
 		commerce->itemsRequestedSpacing = commerceNode.attribute("itemsRequestedSpacing").as_int();
+
+		commerce->npcPathTexture = (char*)commerceNode.attribute("NPCTexturePath").as_string();
 
 		commerces.push_back(commerce);
 
@@ -122,6 +125,8 @@ Commerce* CommerceManager::CreateCommerce(CommerceType type, uint id, std::vecto
 	commerce->backgroundMoneyPathTexture				= backgroundMoneyPathTexture;
 
 	commerce->backgroundDescriptionPathTexture			= backgroundDescriptionPathTexture;
+
+	
 
 	commerce->SetTrades(trades);
 
@@ -188,6 +193,7 @@ bool CommerceManager::Update(float dt)
 	for (int i = 0; i < commerces.size(); i++) {
 		if (commerces.at(i)->active) {
 			commerces.at(i)->Update(dt);
+			app->entityManager->active = false;
 		}
 	}
 

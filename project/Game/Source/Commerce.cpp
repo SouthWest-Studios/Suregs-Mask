@@ -183,6 +183,8 @@ bool Commerce::LoadTextures()
 
 	backgroundDescriptionTexture = app->tex->Load(backgroundDescriptionPathTexture);
 
+	npcTexture = app->tex->Load(npcPathTexture);
+
 	pointerIndexF = 0;
 	scrollY = 0;
 
@@ -211,6 +213,8 @@ bool Commerce::CloseCommerce()
 	app->tex->UnLoad(backgroundButtonHoverTexture);
 	app->tex->UnLoad(backgroundMoneyTexture);
 	app->tex->UnLoad(backgroundDescriptionTexture);
+	app->tex->UnLoad(npcTexture);
+
 
 	return ret;
 }
@@ -450,6 +454,10 @@ bool Commerce::PostUpdate()
 	//Fondo Mondes
 	app->render->DrawTexture(backgroundMoneyTexture, positionGeneral.x + 970, positionGeneral.y + 30, 1, SDL_FLIP_NONE, 0, 0);
 	app->render->DrawTextBound(std::to_string(app->inventoryManager->monedasObtenidas).c_str(), positionGeneral.x + 990, positionGeneral.y + 44, 60);
+
+
+	//Npc
+	app->render->DrawTexture(npcTexture, npcPosition.x-20, npcPosition.y+20, 1, SDL_FLIP_NONE, 0, 0);
 	
 	return ret;
 }

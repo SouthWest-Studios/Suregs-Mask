@@ -476,7 +476,9 @@
 			</trades>
 		</commerce>
 
-		<commerce id="1" positionGeneralX="66" positionGeneralY="33" positionListX="280" positionListY="10" positionInListX="23" positionInListY="22" tradeSpacing="100" itemSpacing="150" itemsRequestedSpacing="350">
+		<commerce id="1" positionGeneralX="66" positionGeneralY="33" positionListX="280" positionListY="10" positionInListX="23" positionInListY="22" tradeSpacing="100" itemSpacing="150" itemsRequestedSpacing="350"
+				  NPCTexturePath="Assets/Textures/Entidades/NPCs/Dialogo/texture_mercader.png" npcPositionX="0" npcPositionY="0"
+				  >
 			<trades>
 				<trade itemOffered="-1" quantityItemOffered="7" itemRequested="10" quantityItemRequested="1"/>
 				<trade itemOffered="-1" quantityItemOffered="10" itemRequested="8" quantityItemRequested="1"/>
