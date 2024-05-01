@@ -28,7 +28,14 @@ enum class InventityType
 	PEZ_MEDIANO,
 	PEZ_GRANDE,
 	SALIVA,
-
+	POCION_VIDA_1,
+	POCION_VIDA_2,
+	POCION_VIDA_3,
+	POCION_VIDA_MAX,
+	POCION_REGENERACION,
+	POCION_DANO,
+	POCION_VELOCIDAD,
+	ORBE_MAGICO,
 
 	//De aqui para abajo no importa el orden
 	

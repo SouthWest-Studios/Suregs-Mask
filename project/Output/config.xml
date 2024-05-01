@@ -179,6 +179,16 @@
 		<item_pez_grande texturePath="---" description="bobo que mezcla sistemas" type ="Pez"/>
 		<item_moneda texturePath="---" description="Esto no deberias de tenerlo en el invenatario... solo en las tiendas jeje" type ="Miscelanea"/>
 
+		<item_saliva texturePath="Assets/Textures/Entidades/Items/textura_saliva.png" description="lorem ipsum sit amet." type ="material"/>
+		
+		<item_pocion_vida_1 texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_1.png" description="lorem ipsum sit amet." type ="consumible"/>
+		<item_pocion_vida_2 texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_2.png" description="lorem ipsum sit amet." type ="consumible"/>
+		<item_pocion_vida_3 texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_3.png" description="lorem ipsum sit amet." type ="consumible"/>
+		<item_pocion_vida_max texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_max.png" description="lorem ipsum sit amet." type ="consumible"/>
+		<item_pocion_regenracion texturePath="Assets/Textures/Entidades/Items/textura_pocion_regeneracion.png" description="lorem ipsum sit amet." type ="consumible"/>
+		<item_pocion_dano texturePath="Assets/Textures/Entidades/Items/textura_pocion_dano.png" description="lorem ipsum sit amet." type ="consumible"/>
+		<item_pocion_velocidad texturePath="Assets/Textures/Entidades/Items/textura_pocion_velocidad.png" description="lorem ipsum sit amet." type ="consumible"/>
+		<item_pocion_orbe_magico texturePath="Assets/Textures/Entidades/Items/textura_orbe_magico.png" description="lorem ipsum sit amet." type ="consumible"/>
 
 
 
