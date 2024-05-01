@@ -37,7 +37,7 @@ public:
 
 	void AddItem(Inventity* Inventity);
 
-	void DestroyItem(Inventity* Inventity);
+	void DestroyItem(InventityType type, int cantidad);
 
 	void DestroyItemById(int entityId);
 

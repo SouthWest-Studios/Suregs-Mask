@@ -84,7 +84,7 @@ bool Hud::Update(float dt)
 	
 	return true;
 }
-
+bool fade = false;
 // Called each loop iteration
 bool Hud::PostUpdate()
 {
@@ -167,8 +167,50 @@ bool Hud::PostUpdate()
 	app->render->DrawTexture(hudTexture, windowWidth - rectFondoInventario->w + 10, 70, SDL_FLIP_NONE, rectBotonTAB, 0);
 	app->render->DrawTexture(hudTexture, 120, 85, SDL_FLIP_NONE, rectBotonQ, 0);
 	
-	//mensaje
-	app->render->DrawTexture(messageTexture, 980, 550, SDL_FLIP_NONE, 0, 0);
+	//if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
+	//{
+	//	fade = true;
+	//}
+	//const float fadeInSpeed = 0.01f; // Velocidad de fade in
+	//const float fadeOutSpeed = 0.005f; // Velocidad de fade out
+
+	//// Variable para controlar el estado del fade
+	//float alpha = 0.0f; // Inicialmente completamente transparente
+	//float noteAlpha = 0.0f; // Inicialmente completamente transparente
+	//if (fade)
+	//{
+	//	SDL_RenderClear(app->render->renderer);
+
+	//	// Renderizar otras texturas del juego (sin fade)
+
+	//	// Actualizar el alpha de la nota para el próximo cuadro
+	//	if (noteAlpha < 1.0f) {
+	//		// Fade in
+	//		noteAlpha += fadeInSpeed;
+	//	}
+	//	else {
+	//		// Fade out después de que el fade in esté completo
+	//		noteAlpha -= fadeOutSpeed;
+	//	}
+
+	//	// Controlar que noteAlpha esté dentro del rango [0, 1]
+	//	if (noteAlpha < 0.0f) {
+	//		noteAlpha = 0.0f;
+	//	}
+	//	else if (noteAlpha > 1.0f) {
+	//		noteAlpha = 1.0f;
+	//	}
+
+	//	// Renderizar la nota con el alpha actual
+	//	SDL_SetTextureAlphaMod(messageTexture, static_cast<Uint8>(255 * noteAlpha)); // Aplicar el alpha
+	//	app->render->DrawTexture(messageTexture, 980, 550, SDL_FLIP_NONE, 0, 0);
+
+	//	// Renderizar otras texturas del juego (sin fade)
+
+	//	// Actualizar la pantalla
+	//	SDL_RenderPresent(app->render->renderer);
+	//}
+	
 
 	return true;
 }
