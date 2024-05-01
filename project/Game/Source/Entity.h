@@ -46,7 +46,7 @@ enum class EntityType
 	NPC_BULLY_2,
 	ROD,
 
-	BOSS_INUTIL,
+	BOSS_INUIT,
 	UNKNOWN
 
 	
@@ -82,7 +82,7 @@ enum class EntityState_Enemy
 	STATE_COUNT
 };
 
-enum class EntityState_Boss_Inutil
+enum class EntityState_Boss_Inuit
 {
 	IDLE,
 	RUNNING,

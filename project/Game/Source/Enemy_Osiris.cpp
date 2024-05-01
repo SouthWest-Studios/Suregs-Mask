@@ -73,7 +73,7 @@ bool Enemy_Osiris::Start() {
 	viewDistance = config.attribute("viewDistance").as_float();
 
 	
-
+	
 	return true;
 }
 

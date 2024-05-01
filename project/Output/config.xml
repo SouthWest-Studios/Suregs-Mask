@@ -152,9 +152,10 @@
 		<khurt texturePath="Assets/Textures/Entidades/Khurt/textura_khurt.png" 
 			   maxHealth="220.0f" speed="7.5f" attackDamage="90.0f" attackDistance="2" viewDistance="20"
 			   Tsprite="4" Pwidth="40" sprite_x="20" sprite_y="20"/>
-		
-		
-	
+
+		<boss_inuit texturePath="Assets/Textures/Entidades/Boss/Miniboss1.png" Tsprite="1" Pwidth="1640" sprite_x="1640" sprite_y="2360"/>
+
+
 		<item_garra texturePath="Assets/Textures/Entidades/Items/item_Garra.png" description="Esta es una garra muy bonita, buenos dias." type ="apendice"/>
 		<item_diamante texturePath="Assets/Textures/Entidades/Items/texture_diamond.png" description="Este diamante brilla mas que mi futuro." type ="material"/>
 		<item_ojo texturePath="Assets/Textures/Entidades/Items/texture_eye.png" description="La leyenda dice que es un ojo." type ="apendice"/>
@@ -275,9 +276,7 @@
 	</scene_mazmorra1>
 	<scene_mazmorra2>
 		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Mazmorras/Mazmorra2.tmx"/>
-		
-		<boss_inutil texturePath="Assets/Textures/Entidades/Boss/Miniboss1.png" Tsprite="1" Pwidth="1640" sprite_x="1640" sprite_y="2360"/>
-		
+	
 	</scene_mazmorra2>
 	<scene_mazmorra3>
 		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Mazmorras/Mazmorra3.tmx"/>
@@ -305,9 +304,9 @@
 			<atackAnim_player start="25" end="30" speed="0.25f" loop="false"/>
 		</player>
 
-		<boss_inutil>
-			<idleAnim_boss_inutil start="0" end="1" speed="0.2f" loop="true"/>
-		</boss_inutil>
+		<boss_inuit>
+			<idleAnim_boss_inuit start="0" end="1" speed="0.2f" loop="true"/>
+		</boss_inuit>
 		<osiris>
 			<!--
 			<idleAnim_osiris start="0" end="2" speed="0.05f" loop="true"/>

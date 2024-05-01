@@ -95,7 +95,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Boss_Inutil.cpp" />
+    <ClCompile Include="Source\Boss_Inuit.cpp" />
     <ClCompile Include="Source\Commerce.cpp" />
     <ClCompile Include="Source\CommerceManager.cpp" />
     <ClCompile Include="Source\DebugCommand.cpp" />
@@ -173,7 +173,7 @@
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\ArmaduraInv.h" />
-    <ClInclude Include="Source\Boss_Inutil.h" />
+    <ClInclude Include="Source\Boss_Inuit.h" />
     <ClInclude Include="Source\Commerce.h" />
     <ClInclude Include="Source\CommerceManager.h" />
     <ClInclude Include="Source\DebugCommand.h" />

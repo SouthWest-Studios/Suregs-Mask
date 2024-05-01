@@ -34,6 +34,7 @@
 #include "Enemy_Ols.h"
 #include "TPEntity.h"
 #include "Window.h"
+#include "Boss_Inuit.h"
 
 Map::Map(App* app, bool start_enabled) : Module(app, start_enabled), mapLoaded(false)
 {
@@ -1129,6 +1130,14 @@ bool Map::LoadEntities(std::string layerName)
 						diamante->config = configNode.child("entities_data").child("item_diamante");
 						diamante->position = iPoint(pos.x + 16, pos.y + 16);
 						diamante->Start();
+					}
+
+					//DIAMANTE
+					if (gid == tileset->firstgid + 60) {
+						Boss_Inuit* boss_Inuit = (Boss_Inuit*)app->entityManager->CreateEntity(EntityType::BOSS_INUIT);
+						boss_Inuit->config = configNode.child("entities_data").child("boss_inuit");
+						boss_Inuit->position = iPoint(pos.x + 16, pos.y + 16);
+						boss_Inuit->Start();
 					}
 					//OJO
 					/*if (gid == tileset->firstgid + 1009) { 

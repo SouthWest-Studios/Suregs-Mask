@@ -5,8 +5,6 @@
 #include "Player.h"
 #include "GuiControl.h"
 #include "GuiControlButton.h"
-#include "Boss_Inutil.h"
-
 struct SDL_Texture;
 
 class Scene_Mazmorra2 : public Module
@@ -49,7 +47,6 @@ private:
 	GuiControlButton* gcButtom;
 
 public:
-	Boss_Inutil* boss_inutil = new Boss_Inutil;
 
 
 

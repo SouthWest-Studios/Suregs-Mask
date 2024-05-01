@@ -17,8 +17,6 @@
 #include <Optick/include/optick.h>
 
 
-
-
 Enemy_Shar::Enemy_Shar() : Entity(EntityType::ENEMY_SHAR), maxHealth(80.0f), health(80.0f), speed(2.5f), attackDamage(50.0f){
 
 	name.Create("shar");
