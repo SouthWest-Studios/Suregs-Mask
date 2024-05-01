@@ -57,10 +57,22 @@ bool Commerce::SelectTrade(uint id, bool add)
 
 		for (int i = 0; i < trade->itemsRequested.size(); i++) {
 
-			int cantidad = app->inventoryManager->GetInventityQuantity(trade->itemsRequested.at(i)->type);
-			int cantidadFinal = cantidad - ((trade->quantityTraded+1) * trade->quantityRequested.at(i));
+			int cantidadEnInventario = app->inventoryManager->GetInventityQuantity(trade->itemsRequested.at(i)->type);
+			int cantidadEnActivoTodosTrades = GetInventoryTradesQuantity(trade->itemsRequested.at(i)->type);
 
-			if (cantidadFinal >= 0) {
+			int calculoCantidad = (cantidadEnInventario - cantidadEnActivoTodosTrades);
+
+			calculoCantidad -= trade->quantityRequested.at(i);
+			//- ((trade->quantityTraded + 1) * trade->quantityRequested.at(i));
+
+
+
+			
+
+			//int cantidadFinal = cantidadInventario - ((trade->quantityTraded+1) * trade->quantityRequested.at(i));
+			//cantidadFinal -= cantidadOtrosTrades;
+
+			if (calculoCantidad >= 0) {
 				canBuy = true;
 			}
 
@@ -138,6 +150,26 @@ bool Commerce::CloseCommerce()
 void Commerce::SetTrades(std::vector<Trade*> trades)
 {
 	this->trades = trades;
+}
+
+int Commerce::GetInventoryTradesQuantity(InventityType type)
+{
+	int cantidad = 0;
+
+	for (int i = 0; i < trades.size(); i++) {
+
+		Trade* trade = trades.at(i);
+
+		for (int j = 0; j < trade->itemsRequested.size(); j++) {
+			Inventity* inventity = trade->itemsRequested.at(j);
+			if (inventity->type == type) {
+				cantidad += trade->quantityRequested.at(j) * trade->quantityTraded;
+			}
+		}
+	}
+	
+
+	return cantidad;
 }
 
 uint Commerce::GetId()
@@ -231,8 +263,17 @@ bool Commerce::PostUpdate()
 				app->render->DrawTextBound(std::to_string(trade->quantityRequested.at(j)).c_str(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j)+ itemsRequestedSpacing + 50, y + positionInList.y, 20);
 
 				//Cantidad inventario:
-				int cantidad = app->inventoryManager->GetInventityQuantity(trade->itemsRequested.at(j)->type);
-				std::string cantidadObtener = "(" + std::to_string((cantidad - (trade->quantityTraded * trade->quantityRequested.at(j)))) + ")";
+				int cantidadEnInventario = app->inventoryManager->GetInventityQuantity(trade->itemsRequested.at(j)->type);
+				int cantidadEnActivoTodosTrades = GetInventoryTradesQuantity(trade->itemsRequested.at(j)->type);
+
+				int calculoCantidad = cantidadEnInventario - cantidadEnActivoTodosTrades;
+
+				//int calculoCantidad = (cantidad - (trade->quantityTraded * trade->quantityRequested.at(j)));
+
+				//calculoCantidad -= GetInventoryTradesQuantity(trade->itemsRequested.at(j)->type);
+
+
+				std::string cantidadObtener = "(" + std::to_string(calculoCantidad) + ")";
 				app->render->DrawTextBound(cantidadObtener.c_str(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j) + itemsRequestedSpacing + 55, y + positionInList.y + 20, 20);
 
 			}

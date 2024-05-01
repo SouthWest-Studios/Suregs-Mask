@@ -47,6 +47,8 @@ public:
 
 	void SetTrades(std::vector<Trade*> trades);
 
+	int GetInventoryTradesQuantity(InventityType type);
+
 	uint GetId();
 	
 
