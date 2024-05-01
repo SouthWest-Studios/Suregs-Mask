@@ -173,6 +173,42 @@ Inventity* InventoryManager::CreateItem(EntityType type, std::string descripcioo
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_moneda.png");
 		entity->type = InventityType::MONEDA;
 		break;
+	case EntityType::ITEM_SALIVA:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_saliva.png");
+		entity->type = InventityType::SALIVA;
+		break;
+	case EntityType::ITEM_POCION_VIDA_1:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_pocion_vida_1.png");
+		entity->type = InventityType::POCION_VIDA_1;
+		break;
+	case EntityType::ITEM_POCION_VIDA_2:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_pocion_vida_2.png");
+		entity->type = InventityType::POCION_VIDA_2;
+		break;
+	case EntityType::ITEM_POCION_VIDA_3:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_pocion_vida_3.png");
+		entity->type = InventityType::POCION_VIDA_3;
+		break;
+	case EntityType::ITEM_POCION_VIDA_MAX:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_pocion_vida_max.png");
+		entity->type = InventityType::POCION_VIDA_MAX;
+		break;
+	case EntityType::ITEM_POCION_REGENERACION:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_pocion_regeneracion.png");
+		entity->type = InventityType::POCION_REGENERACION;
+		break;
+	case EntityType::ITEM_POCION_DANO:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_pocion_dano.png");
+		entity->type = InventityType::POCION_DANO;
+		break;
+	case EntityType::ITEM_POCION_VELOCIDAD:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_pocion_velocidad.png");
+		entity->type = InventityType::POCION_VELOCIDAD;
+		break;
+	case EntityType::ITEM_ORBE_MAGICO:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_orbe_magico.png");
+		entity->type = InventityType::ORBE_MAGICO;
+		break;
 	default:
 		break;
 	}
@@ -254,6 +290,42 @@ Inventity* InventoryManager::CreateItem(InventityType type) {
 		case InventityType::MONEDA:
 			itemConfigurationNode = entitiesDataNode.child("item_moneda");
 			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_MONEDA, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
+			break;
+		case InventityType::SALIVA:
+			itemConfigurationNode = entitiesDataNode.child("item_saliva");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_SALIVA, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
+			break;
+		case InventityType::POCION_VIDA_1:
+			itemConfigurationNode = entitiesDataNode.child("item_pocion_vida_1");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_POCION_VIDA_1, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
+			break;
+		case InventityType::POCION_VIDA_2:
+			itemConfigurationNode = entitiesDataNode.child("item_pocion_vida_2");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_POCION_VIDA_2, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
+			break;
+		case InventityType::POCION_VIDA_3:
+			itemConfigurationNode = entitiesDataNode.child("item_pocion_vida_3");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_POCION_VIDA_3, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
+			break;
+		case InventityType::POCION_VIDA_MAX:
+			itemConfigurationNode = entitiesDataNode.child("item_pocion_vida_max");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_POCION_VIDA_MAX, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
+			break;
+		case InventityType::POCION_REGENERACION:
+			itemConfigurationNode = entitiesDataNode.child("item_pocion_regenracion");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_POCION_REGENERACION, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
+			break;
+		case InventityType::POCION_DANO:
+			itemConfigurationNode = entitiesDataNode.child("item_pocion_dano");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_POCION_DANO, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
+			break;
+		case InventityType::POCION_VELOCIDAD:
+			itemConfigurationNode = entitiesDataNode.child("item_pocion_velocidad");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_POCION_VELOCIDAD, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
+			break;
+		case InventityType::ORBE_MAGICO:
+			itemConfigurationNode = entitiesDataNode.child("item_pocion_orbe_magico");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_ORBE_MAGICO, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());
 			break;
 	}
 
