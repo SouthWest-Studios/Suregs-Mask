@@ -114,10 +114,10 @@ bool Boss_Inuit::PostUpdate() {
 
 
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 25, position.y - 65, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x - 25, position.y - 65, 2, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 40, position.y - 65, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 40, position.y - 65, 2, SDL_FLIP_NONE, &rect);
 	}
 
 	for (uint i = 0; i < lastPath.Count(); ++i)
@@ -175,12 +175,12 @@ void Boss_Inuit::Attack(float dt)
 
 void Boss_Inuit::Die() {
 
-	
+
 }
 
 void Boss_Inuit::Revive()
 {
-	
+
 }
 
 
