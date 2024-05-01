@@ -140,7 +140,7 @@ bool Scene_Menu::Update(float dt)
 		Fullscreen();
 	}
 
-	if (ajustes == false && showCredits == false)
+	if (ajustes == false && showCredits == false && showSavedGames == false)
 	{
 
 		ListItem<GuiControl*>* control;
@@ -271,6 +271,18 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		app->guiManager->pointerId = 1;
 		break;
 
+	case 13:
+		/*app->LoadRequest();*/
+		break;
+
+	case 14:
+		/*app->LoadRequest();*/
+		break;
+
+	case 15:
+		/*app->LoadRequest();*/
+		break;
+
 	case 16:
 		showSavedGames = false;
 		_showSavedGames = false;
@@ -280,6 +292,9 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 			controlB->data->state = GuiControlState::NORMAL;
 		}
 		app->guiManager->DestroyGuiControl(gcCloseSavedGames);
+		app->guiManager->DestroyGuiControl(partida1);
+		app->guiManager->DestroyGuiControl(partida2);
+		app->guiManager->DestroyGuiControl(partida3);
 		app->guiManager->minId = 1;
 		app->guiManager->maxId = 5;
 		app->guiManager->pointerId = 1;
@@ -545,12 +560,15 @@ void Scene_Menu::ShowCredits()
 
 void Scene_Menu::ShowSavedGames()
 {
+	ListItem<GuiControl*>* control;
+	for (control = controlsScene.start; control != NULL; control = control->next)
+	{
+		control->data->state = GuiControlState::DISABLED;
+	}
 	if (showSavedGames && !_showSavedGames) {
-		ListItem<GuiControl*>* control;
-		for (control = controlsScene.start; control != NULL; control = control->next)
-		{
-			control->data->state = GuiControlState::DISABLED;
-		}
+		partida1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 13, "PARTIDA GUARDADA 1", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 485,	180,25 }, this);
+		partida2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, "PARTIDA GUARDADA 2", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 395,	180,25 }, this);
+		partida3 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, "PARTIDA GUARDADA 3", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 300,	180,25 }, this);
 		gcCloseSavedGames = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 16, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 200,	60,25 }, this);
 		_showSavedGames = true;
 	}

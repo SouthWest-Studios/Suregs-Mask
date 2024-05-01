@@ -36,6 +36,7 @@
 #include "TPEntity.h"
 #include "Window.h"
 #include "Boss_Inuit.h"
+#include "Enemy_Khurt.h"
 
 Map::Map(App* app, bool start_enabled) : Module(app, start_enabled), mapLoaded(false)
 {
@@ -1123,6 +1124,17 @@ bool Map::LoadEntities(std::string layerName)
 						muur->config = configNode.child("entities_data").child("muur");
 						muur->position = iPoint(pos.x + 16, pos.y + 16);
 						muur->Start();
+
+					}
+
+					//KHURT
+					if (gid == tileset->firstgid + 23) {
+
+
+						Enemy_Khurt* khurt = (Enemy_Khurt*)app->entityManager->CreateEntity(EntityType::ENEMY_KHURT);
+						khurt->config = configNode.child("entities_data").child("khurt");
+						khurt->position = iPoint(pos.x + 16, pos.y + 16);
+						khurt->Start();
 
 					}
 
