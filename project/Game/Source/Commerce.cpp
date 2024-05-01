@@ -53,7 +53,7 @@ bool Commerce::SelectTrade(uint id, bool add)
 
 	if (add) {
 		//Comprovar que se pueda
-		bool canBuy = false;
+		bool canBuy = true;
 
 		for (int i = 0; i < trade->itemsRequested.size(); i++) {
 
@@ -63,8 +63,8 @@ bool Commerce::SelectTrade(uint id, bool add)
 			int calculoCantidad = (cantidadEnInventario - cantidadEnActivoTodosTrades);
 			calculoCantidad -= trade->quantityRequested.at(i);
 
-			if (calculoCantidad >= 0) {
-				canBuy = true;
+			if (calculoCantidad < 0) {
+				canBuy = false;
 			}
 
 		}
