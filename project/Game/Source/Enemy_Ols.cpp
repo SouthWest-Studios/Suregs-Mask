@@ -50,6 +50,9 @@ bool Enemy_Ols::Start() {
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
+	ols_get_damage_fx = app->audio->LoadAudioFx("ols_get_damage_fx");
+	ols_get_damageAlt_fx = app->audio->LoadAudioFx("ols_get_damageAlt_fx");
+	ols_get_damageAlt2_fx = app->audio->LoadAudioFx("ols_get_damageAlt2_fx");
 	ols_death_fx = app->audio->LoadAudioFx("ols_death_fx");
 
 	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
@@ -168,7 +171,7 @@ void Enemy_Ols::Attack(float dt)
 }
 
 void Enemy_Ols::Die(float dt) {
-	app->audio->PlayFx(ols_death_fx);
+	app->audio->PlayFx(ols_death_fx, 2);
 
 	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
 	if (parseResult) {
@@ -274,6 +277,7 @@ float Enemy_Ols::GetHealth() const {
 void Enemy_Ols::TakeDamage(float damage) {
 
 	health -= damage;
+	app->audio->PlayRandomFx(ols_get_damage_fx, ols_get_damageAlt_fx, ols_get_damageAlt2_fx);
 	printf("Enemy_Ols has received  %f damage\n", damage);
 }
 
