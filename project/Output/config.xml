@@ -19,6 +19,11 @@
 		<fullscreen_window value="false"/>
 	</window>
 
+	<input bindingsFile="controls.xml">
+		
+		
+	</input>
+
   <!--Audio-->
 	<audio>
 		<music volume="64"/>
@@ -173,7 +178,7 @@
 					texto4 ="blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO"
 					texto5 ="blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blablu"/>
 
-		<item_pez_pequeno texturePath="---" description="aleix" type ="Pez" name="Pez pequeño"/>
+		<item_pez_pequeno texturePath="---" description="aleix" type ="Pez" name="Pez pequeÃ±o"/>
 		<item_pez_mediano texturePath="---" description="es un" type ="Pez" name="Pez mediano"/>
 		<item_pez_grande texturePath="---" description="bobo que mezcla sistemas" type="Pez" name="Pez grande"/>
 		<item_moneda texturePath="---" description="La moneda principal del juego, utilizada para comprar una variedad de bienes" type ="Miscelanea" name="Monedas"/>
@@ -185,7 +190,7 @@
 		<item_pocion_vida_3 texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_3.png" description="lorem ipsum sit amet." type ="consumible" name="Pocion de Vida Nv3"/>
 		<item_pocion_vida_max texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_max.png" description="lorem ipsum sit amet." type ="consumible" name="Pocion de Vida maxima"/>
 		<item_pocion_regenracion texturePath="Assets/Textures/Entidades/Items/textura_pocion_regeneracion.png" description="lorem ipsum sit amet." type ="consumible" name="Pocion de Regeneracion"/>
-		<item_pocion_dano texturePath="Assets/Textures/Entidades/Items/textura_pocion_dano.png" description="lorem ipsum sit amet." type ="consumible" name="Pocion de Daño"/>
+		<item_pocion_dano texturePath="Assets/Textures/Entidades/Items/textura_pocion_dano.png" description="lorem ipsum sit amet." type ="consumible" name="Pocion de DaÃ±o"/>
 		<item_pocion_velocidad texturePath="Assets/Textures/Entidades/Items/textura_pocion_velocidad.png" description="lorem ipsum sit amet." type ="consumible" name="Pocion de Velocidad"/>
 		<item_pocion_orbe_magico texturePath="Assets/Textures/Entidades/Items/textura_orbe_magico.png" description="lorem ipsum sit amet." type ="consumible" name="Orbe Magico"/>
 
