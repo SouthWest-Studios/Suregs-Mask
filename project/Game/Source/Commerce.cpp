@@ -121,7 +121,44 @@ bool Commerce::SelectAllTrade(uint id, bool add)
 
 bool Commerce::ApplyTrades()
 {
-	return false;
+	bool ret = true;
+
+
+	for (int i = 0; i < trades.size(); i++) {
+
+		Trade* trade = trades.at(i);
+
+		//Agregar estos items al inventario
+		for (int j = 0; j < trade->itemsOffered.size(); j++) {
+			Inventity inventity = *trade->itemsOffered.at(j);
+
+			if (inventity.type == InventityType::MONEDA) {
+				app->inventoryManager->monedasObtenidas += trade->quantityOffered.at(j);
+			}
+			else {
+				inventity.quantity = trade->quantityOffered.at(j);
+				app->inventoryManager->AddItem(&inventity);
+			}
+
+			
+		}
+
+		//Eliminar estos items
+		for (int j = 0; j < trade->itemsRequested.size(); j++) {
+			
+	/*		Inventity inventity = *trade->itemsOffered.at(j);
+			inventity.quantity = trade->quantityOffered.at(j);
+			app->inventoryManager->AddItem(&inventity);*/
+		}
+
+		
+
+
+	}
+
+
+
+	return ret;
 }
 
 bool Commerce::LoadTextures()

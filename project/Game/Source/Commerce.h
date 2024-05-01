@@ -38,6 +38,7 @@ public:
 
 	bool SelectTrade(uint id, bool add = true);
 	bool SelectAllTrade(uint id, bool add = true);
+
 	bool ApplyTrades();
 
 	bool LoadTextures();
