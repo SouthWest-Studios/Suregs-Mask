@@ -27,6 +27,8 @@ enum class InventityType
 	PEZ_PEQUENO,
 	PEZ_MEDIANO,
 	PEZ_GRANDE,
+	SALIVA,
+
 
 	//De aqui para abajo no importa el orden
 	
