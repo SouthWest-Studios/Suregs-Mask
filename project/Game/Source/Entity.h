@@ -66,6 +66,19 @@ enum class EntityState
 };
 
 
+enum class EntityState_Enemy
+{
+	IDLE,
+	RUNNING,
+	ATTACKING,
+	DEAD,
+	REVIVING,
+	DASHI,
+	NONE,
+	STATE_COUNT
+};
+
+
 
 class Entity
 {

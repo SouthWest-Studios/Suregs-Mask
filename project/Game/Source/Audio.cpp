@@ -251,13 +251,13 @@ void Audio::PlayRunFx(unsigned int name, unsigned int name2, unsigned int name3)
 		switch (run)
 		{
 		case 1:
-			PlayFx(name);
+			PlayFx(name, 1);
 			break;
 		case 2:
-			PlayFx(name2);
+			PlayFx(name2, 1);
 			break;
 		case 3:
-			PlayFx(name3);
+			PlayFx(name3, 1);
 			break;
 		}
 		runTimer.Start();
