@@ -526,13 +526,45 @@ int InventoryManager::GetInventityQuantity(InventityType type)
 	return cantidad;
 }
 
-void InventoryManager::DestroyItem(Inventity* entity)
+void InventoryManager::DestroyItem(InventityType type, int cantidad)
 {
 	ListItem<Inventity*>* item;
 
 	for (item = inventities.start; item != NULL; item = item->next)
 	{
-		if (item->data == entity) inventities.Del(item);
+
+		if (item->data->type == type) 
+		{
+			if (item->data->stackable)
+			{
+				item->data->quantity -= cantidad;
+				if (item->data->quantity <= 0)
+				{
+					item->data->quantity = 0;
+					inventities.Del(item);
+					
+					delete item->data;
+				}
+			}
+			else
+			{
+				inventities.Del(item);
+				delete item->data; 
+			}
+
+
+			break;
+		}
+
+
+	}
+	// Reasignar los IDs después de la eliminación
+	int newId = 0;
+	for (item = inventities.start; item != nullptr; item = item->next)
+	{
+
+		item->data->id = newId;
+		newId++;
 	}
 }
 
@@ -802,7 +834,7 @@ bool InventoryManager::PostUpdate()
 				case InventityType::VISCERA:
 				case InventityType::HUESO:
 				case InventityType::DIENTE:
-					app->render->DrawText(itum->data->tipo.c_str(), 680, 340, 90, 60, 0, 165, 42, 42);
+					app->render->DrawText(itum->data->name.GetString(), 680, 340, 90, 60, 0, 165, 42, 42);
 					break;
 				case InventityType::RUBI:
 				case InventityType::POLVORA:

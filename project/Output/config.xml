@@ -152,7 +152,7 @@
 				Tsprite="20" Pwidth="240" sprite_x="60" sprite_y="55"/>	
 
 		<khurt texturePath="Assets/Textures/Entidades/Khurt/textura_khurt.png" 
-			   maxHealth="220.0f" speed="7.5f" attackDamage="90.0f" attackDistance="2" viewDistance="20"
+			   maxHealth="220.0f" speed="1.5f" attackDamage="90.0f" attackDistance="2" viewDistance="20"
 			   Tsprite="6" Pwidth="40" sprite_x="20" sprite_y="20"/>
 
 		<boss_inuit texturePath="Assets/Textures/Entidades/Boss/Miniboss1.png" 
