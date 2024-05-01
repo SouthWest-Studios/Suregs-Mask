@@ -140,7 +140,7 @@ bool Scene_Menu::Update(float dt)
 		Fullscreen();
 	}
 
-	if (ajustes == false && showCredits == false)
+	if (ajustes == false && showCredits == false && showSavedGames == false)
 	{
 
 		ListItem<GuiControl*>* control;
