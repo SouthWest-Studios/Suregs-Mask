@@ -53,7 +53,7 @@ bool Commerce::SelectTrade(uint id, bool add)
 
 	if (add) {
 		//Comprovar que se pueda
-		bool canBuy = false;
+		bool canBuy = true;
 
 		for (int i = 0; i < trade->itemsRequested.size(); i++) {
 
@@ -61,19 +61,10 @@ bool Commerce::SelectTrade(uint id, bool add)
 			int cantidadEnActivoTodosTrades = GetInventoryTradesQuantity(trade->itemsRequested.at(i)->type);
 
 			int calculoCantidad = (cantidadEnInventario - cantidadEnActivoTodosTrades);
-
 			calculoCantidad -= trade->quantityRequested.at(i);
-			//- ((trade->quantityTraded + 1) * trade->quantityRequested.at(i));
 
-
-
-			
-
-			//int cantidadFinal = cantidadInventario - ((trade->quantityTraded+1) * trade->quantityRequested.at(i));
-			//cantidadFinal -= cantidadOtrosTrades;
-
-			if (calculoCantidad >= 0) {
-				canBuy = true;
+			if (calculoCantidad < 0) {
+				canBuy = false;
 			}
 
 		}
@@ -95,7 +86,37 @@ bool Commerce::SelectTrade(uint id, bool add)
 
 bool Commerce::SelectAllTrade(uint id, bool add)
 {
-	return false;
+	bool ret = true;
+
+	Trade* trade = trades.at(id);
+
+	if (add) {
+
+		bool canBuy = true;
+
+		while (canBuy) {
+			for (int i = 0; i < trade->itemsRequested.size(); i++) {
+
+				int cantidadEnInventario = app->inventoryManager->GetInventityQuantity(trade->itemsRequested.at(i)->type);
+				int cantidadEnActivoTodosTrades = GetInventoryTradesQuantity(trade->itemsRequested.at(i)->type);
+
+				int calculoCantidad = (cantidadEnInventario - cantidadEnActivoTodosTrades);
+				calculoCantidad -= trade->quantityRequested.at(i);
+
+				if (calculoCantidad < 0) {
+					canBuy = false;
+				}
+
+			}
+
+			if (canBuy) trade->quantityTraded++;
+		}
+	}
+	else {
+		trade->quantityTraded = 0;
+	}
+
+	return ret;
 }
 
 bool Commerce::ApplyTrades()
@@ -119,7 +140,7 @@ bool Commerce::LoadTextures()
 
 	backgroundTradeItemTexture = app->tex->Load(backgroundTradeItemPathTexture);
 
-	pointerIndex = 0;
+	pointerIndexF = 0;
 	scrollY = 0;
 
 	return false;
@@ -183,24 +204,41 @@ bool Commerce::Update(float dt)
 	bool ret = true;
 
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
-		pointerIndex++;
-		if (pointerIndex >= trades.size()) {
-			pointerIndex = 0;
+		pointerIndexF++;
+		if (pointerIndexF >= trades.size()) {
+			pointerIndexF = 0;
 		}
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
-		pointerIndex--;
-		if (pointerIndex < 0) {
-			pointerIndex = trades.size()-1;
+		pointerIndexF--;
+		if (pointerIndexF < 0) {
+			pointerIndexF = trades.size()-1;
 		}
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN) {
+		pointerIndexC++;
+		if(pointerIndexC > 1) {
+			pointerIndexC = 0;
+		}
+	}
+	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) {
+		pointerIndexC--;
+		if (pointerIndexC < 0) {
+			pointerIndexC = 1;
+		}
+	}
+
+
 	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN) {
-		SelectTrade(pointerIndex);
+
+		if(pointerIndexC == 0) SelectTrade(pointerIndexF);
+		if(pointerIndexC == 1) SelectAllTrade(pointerIndexF);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN) {
-		SelectTrade(pointerIndex, false);
+		if (pointerIndexC == 0) SelectTrade(pointerIndexF, false);
+		if (pointerIndexC == 1) SelectAllTrade(pointerIndexF, false);
 	}
 
 
@@ -279,19 +317,26 @@ bool Commerce::PostUpdate()
 			}
 
 
+			//Select all
+			app->render->DrawTexture(backgroundSelectAllTexture, positionGeneral.x + positionList.x + 675, y, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+			
 
 
-			if (pointerIndex == i) {
+			//Punteros
+			if (pointerIndexF == i && pointerIndexC == 0) {
 				app->render->DrawTexture(backgroundTradeHoverTexture, positionGeneral.x + positionList.x -3, y -2, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+			}
+			else if (pointerIndexF == i && pointerIndexC == 1) {
+				app->render->DrawTexture(backgroundSelectAllHoverTexture, positionGeneral.x + positionList.x - 3 + 677, y - 1, 1, SDL_FLIP_NONE, nullptr, 0, 0);
 			}
 
 		}
 		else {
 			//Se sale del viewport, mover el scroll
 			
-			if (pointerIndex == i) {
+			if (pointerIndexF == i) {
 
-				int targetY = positionGeneral.y + positionList.y + (57 + (tradeSpacing * (pointerIndex - 4)));
+				int targetY = positionGeneral.y + positionList.y + (57 + (tradeSpacing * (pointerIndexF - 4)));
 				if (scrollY - targetY == 400) {
 					scrollY -= 100;
 				}

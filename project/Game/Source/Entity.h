@@ -45,7 +45,11 @@ enum class EntityType
 	NPC_BULLY_1,
 	NPC_BULLY_2,
 	ROD,
+
+	BOSS_INUTIL,
 	UNKNOWN
+
+	
 };
 
 class PhysBody;
@@ -74,6 +78,19 @@ enum class EntityState_Enemy
 	DEAD,
 	REVIVING,
 	DASHI,
+	NONE,
+	STATE_COUNT
+};
+
+enum class EntityState_Boss_Inutil
+{
+	IDLE,
+	RUNNING,
+	ATTACKING_BASIC,
+	ATTACKING_DISTANCE,
+	DEAD,
+	DASHI,
+	FASE_CHANGE,
 	NONE,
 	STATE_COUNT
 };

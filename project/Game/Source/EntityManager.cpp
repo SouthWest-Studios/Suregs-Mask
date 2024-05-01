@@ -34,6 +34,7 @@
 #include "Item_Cola.h"
 #include "Item_Polvora.h"
 #include "Item_Nota.h"
+#include "Boss_Inutil.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -205,6 +206,9 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 		break;
 	case EntityType::NPC_BULLY_2:
 		entity = new NPCBully2();
+		break;
+	case EntityType::BOSS_INUTIL:
+		entity = new Boss_Inutil();
 		break;
 	case EntityType::ROD:
 		entity = new MiniGameFishing();

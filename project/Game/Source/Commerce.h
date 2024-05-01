@@ -114,7 +114,8 @@ private:
 
 	std::vector<Trade*> trades;
 
-	int pointerIndex;
+	int pointerIndexF;
+	int pointerIndexC;
 	int scrollY;
 	
 };
