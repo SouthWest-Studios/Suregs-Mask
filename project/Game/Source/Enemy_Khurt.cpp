@@ -38,7 +38,7 @@ bool Enemy_Khurt::Awake() {
 bool Enemy_Khurt::Start() {
 
 	OPTICK_EVENT();
-	position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
+	//position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
 
 	TSprite = config.attribute("Tsprite").as_int();
 	SpriteX = config.attribute("sprite_x").as_int();
@@ -72,7 +72,7 @@ bool Enemy_Khurt::Start() {
 	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();
 
-
+	printf("Speed: %f", speed);
 
 	return true;
 }
@@ -164,10 +164,10 @@ bool Enemy_Khurt::PostUpdate() {
 
 
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 25, position.y - 65, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x - 25, position.y - 65, 5,SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 40, position.y - 65, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 40, position.y - 65, 5,SDL_FLIP_NONE, &rect);
 	}
 
 
