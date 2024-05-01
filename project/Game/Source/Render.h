@@ -53,6 +53,7 @@ public:
 	bool DrawLine(int x1, int y1, int x2, int y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool useCamera = true) const;
 	bool DrawCircle(int x1, int y1, int redius, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool useCamera = true) const;
 	bool DrawText(const char* text, int posX, int posY, int w, int h, TTF_Font* font = NULL, int r = 255, int g = 255, int b = 255, bool adjustToText = true);
+	bool DrawTextBound(const char* text, int posX, int posY, int textBoundWidth, SDL_Color color = {255, 255, 255}, TTF_Font* font = NULL);
 
 	// Set background color
 	void SetBackgroundColor(SDL_Color color);

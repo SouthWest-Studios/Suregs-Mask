@@ -167,6 +167,8 @@ bool Commerce::PostUpdate()
 				//Primer item de oferta
 				app->render->DrawTexture(trade->itemsOffered.at(j)->icon, positionGeneral.x + positionList.x + positionInList.x - 25 + (itemSpacing * j), y + positionInList.y - 25, 1, SDL_FLIP_NONE, nullptr, 0, 0);
 
+				//Cantidad
+				app->render->DrawTextBound(std::to_string(trade->quantityOffered.at(j)).c_str(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j) + 50, y + positionInList.y, 20);
 			}
 
 
@@ -178,6 +180,9 @@ bool Commerce::PostUpdate()
 
 				//Primer item de oferta
 				app->render->DrawTexture(trade->itemsRequested.at(j)->icon, positionGeneral.x + positionList.x + positionInList.x - 25 + (itemSpacing * j) + itemsRequestedSpacing, y + positionInList.y - 25, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+				
+				//Cantidad
+				app->render->DrawTextBound(std::to_string(trade->quantityRequested.at(j)).c_str(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j)+ itemsRequestedSpacing + 50, y + positionInList.y, 20);
 
 			}
 

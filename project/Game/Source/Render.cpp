@@ -456,6 +456,31 @@ bool Render::DrawText(const char* text, int posx, int posy, int w, int h, TTF_Fo
 	return true;
 }
 
+bool Render::DrawTextBound(const char* text, int posX, int posY, int textBoundWidth, SDL_Color color, TTF_Font* font)
+{
+	bool ret = true;
+
+	if (font == NULL) {
+		font = primaryFont;
+	}
+
+
+	SDL_Surface* textSurface = nullptr;
+	SDL_Texture* textTexture = nullptr;
+
+
+
+	textSurface = TTF_RenderUTF8_Blended_Wrapped(font, text, color, textBoundWidth);
+	textTexture = SDL_CreateTextureFromSurface(app->render->renderer, textSurface);
+
+	app->render->DrawTexture(textTexture, posX, posY);
+
+	SDL_FreeSurface(textSurface);
+	SDL_DestroyTexture(textTexture);
+
+	return ret;
+}
+
 // L14: TODO 6: Implement a method to load the state
 // for now load camera's x and y
 bool Render::LoadState(pugi::xml_node node) {
