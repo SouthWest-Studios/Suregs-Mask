@@ -24,6 +24,7 @@
 
 #include "DialogManager.h"
 #include "CommerceManager.h"
+#include "InventoryManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -60,7 +61,7 @@ bool DebugConsole::Awake(pugi::xml_node config)
 
 
 	SET_GOLD = new DebugCommandArg<int>("set_gold", "Establece la cantidad de oro", "set_gold <cantidad>", [this](int amount) {
-		std::cout << "Comando SET_GOLD ejecutado con " << amount << " de oro" << std::endl;
+			app->inventoryManager->monedasObtenidas = amount;
 		});
 	commandList.Add(SET_GOLD);
 
