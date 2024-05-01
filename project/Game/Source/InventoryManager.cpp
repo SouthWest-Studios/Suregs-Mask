@@ -392,6 +392,19 @@ bool InventoryManager::SaveState(pugi::xml_node node)
 	return ret;
 }
 
+int InventoryManager::GetInventityQuantity(InventityType type)
+{
+	int cantidad = 0;
+
+	for (int i = 0; i < inventities.Count(); i++) {
+		if (inventities.At(i)->data->type == type) {
+			cantidad = inventities.At(i)->data->quantity;
+			break;
+		}
+	}
+	return cantidad;
+}
+
 void InventoryManager::DestroyItem(Inventity* entity)
 {
 	ListItem<Inventity*>* item;
