@@ -141,13 +141,10 @@
 
 		<ols texturePath="Assets/Textures/Entidades/Ols/animations/spritesheets/Sprites.png" 
 				Tsprite="374" Pwidth="6336" sprite_x="288" sprite_y="128"/>
-
-		<muur texturePath="Assets/Textures/Entidades/Muur/Sprites.png" 
+				
+		<muur texturePath="Assets/Textures/Entidades/Muur/Muur.png" 
 				maxHealth="100.0f" speed="7.5f" attackDamage="20.0f" attackDistance="2" viewDistance="10"
-				Tsprite="45" Pwidth="2190" sprite_x="146" sprite_y="153"/>	
-
-		<shar texturePath="Assets/Textures/Entidades/Shar/Sprites.png" 
-				Tsprite="45" Pwidth="2190" sprite_x="146" sprite_y="153"/>
+				Tsprite="20" Pwidth="180" sprite_x="60" sprite_y="55"/>	
 
 		<khurt texturePath="Assets/Textures/Entidades/Khurt/textura_khurt.png" 
 			   maxHealth="220.0f" speed="7.5f" attackDamage="90.0f" attackDistance="2" viewDistance="20"
@@ -158,29 +155,39 @@
 					Tsprite="1" Pwidth="115" sprite_x="170" sprite_y="331"/>
 
 
-		<item_garra texturePath="Assets/Textures/Entidades/Items/item_Garra.png" description="Esta es una garra muy bonita, buenos dias." type ="apendice"/>
-		<item_diamante texturePath="Assets/Textures/Entidades/Items/texture_diamond.png" description="Este diamante brilla mas que mi futuro." type ="material"/>
-		<item_ojo texturePath="Assets/Textures/Entidades/Items/texture_eye.png" description="La leyenda dice que es un ojo." type ="apendice"/>
-		<item_hueso texturePath="Assets/Textures/Entidades/Items/textura_hueso.png" description="La leyenda dice que es un hueso." type ="apendice"/>
-		<item_carbon texturePath="Assets/Textures/Entidades/Items/textura_carbon.png" description="Mas negro que mi alma." type ="material"/>
-		<item_viscera texturePath="Assets/Textures/Entidades/Items/textura_visceras.png" description="lorem ipsum sit amet." type ="apendice"/>
-		<item_rubi texturePath="Assets/Textures/Entidades/Items/textura_rubi.png" description="lorem ipsum sit amet." type ="material"/>
-		<item_diente texturePath="Assets/Textures/Entidades/Items/textura_diente.png" description="lorem ipsum sit amet." type ="apendice"/>
-		<item_amatista texturePath="Assets/Textures/Entidades/Items/textura_amatista.png" description="lorem ipsum sit amet." type ="material"/>
-		<item_cola texturePath="Assets/Textures/Entidades/Items/textura_cola.png" description="Esta es la cola de los sureg masculinos." type ="apendice"/>
-		<item_polvora texturePath="Assets/Textures/Entidades/Items/textura_polvora.png" description="22000 stacks de polvora por hora en la granja de creeper" type ="material"/>
-		<item_nota texturePath="Assets/Textures/Entidades/Items/textura_nota.png" closeTexturePath="Assets/Textures/Entidades/Items/textura_NoteCloseUp.png" 
+		<item_garra texturePath="Assets/Textures/Entidades/Items/item_Garra.png" description="Esta es una garra muy bonita, buenos dias." type ="apendice" name="Garra"/>
+		<item_diamante texturePath="Assets/Textures/Entidades/Items/texture_diamond.png" description="Este diamante brilla mas que mi futuro." type ="material" name="Diamante"/>
+		<item_ojo texturePath="Assets/Textures/Entidades/Items/texture_eye.png" description="La leyenda dice que es un ojo." type ="apendice" name="Ojo"/>
+		<item_hueso texturePath="Assets/Textures/Entidades/Items/textura_hueso.png" description="La leyenda dice que es un hueso." type ="apendice" name="Hueso"/>
+		<item_carbon texturePath="Assets/Textures/Entidades/Items/textura_carbon.png" description="Mas negro que mi alma." type ="material" name="Carbon"/>
+		<item_viscera texturePath="Assets/Textures/Entidades/Items/textura_visceras.png" description="lorem ipsum sit amet." type ="apendice" name="Visceras"/>
+		<item_rubi texturePath="Assets/Textures/Entidades/Items/textura_rubi.png" description="lorem ipsum sit amet." type ="material" name="Rubi"/>
+		<item_diente texturePath="Assets/Textures/Entidades/Items/textura_diente.png" description="lorem ipsum sit amet." type ="apendice" name="Diente"/>
+		<item_amatista texturePath="Assets/Textures/Entidades/Items/textura_amatista.png" description="lorem ipsum sit amet." type ="material" name="Amatista"/>
+		<item_cola texturePath="Assets/Textures/Entidades/Items/textura_cola.png" description="Esta es la cola de los sureg masculinos." type ="apendice" name="Cola"/>
+		<item_polvora texturePath="Assets/Textures/Entidades/Items/textura_polvora.png" description="22000 stacks de polvora por hora en la granja de creeper" type ="material" name="Polvora"/>
+		<item_nota texturePath="Assets/Textures/Entidades/Items/textura_nota.png" closeTexturePath="Assets/Textures/Entidades/Items/textura_NoteCloseUp.png"  name="Nota"
 					texto1 ="bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla"
 					texto2 ="ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble blable"
 					texto3 ="bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli"
 					texto4 ="blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO"
 					texto5 ="blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blablu"/>
 
-		<item_pez_pequeno texturePath="---" description="aleix" type ="Pez"/>
-		<item_pez_mediano texturePath="---" description="es un" type ="Pez"/>
-		<item_pez_grande texturePath="---" description="bobo que mezcla sistemas" type ="Pez"/>
-		<item_moneda texturePath="---" description="Esto no deberias de tenerlo en el invenatario... solo en las tiendas jeje" type ="Miscelanea"/>
+		<item_pez_pequeno texturePath="---" description="aleix" type ="Pez" name="Pez pequeño"/>
+		<item_pez_mediano texturePath="---" description="es un" type ="Pez" name="Pez mediano"/>
+		<item_pez_grande texturePath="---" description="bobo que mezcla sistemas" type="Pez" name="Pez grande"/>
+		<item_moneda texturePath="---" description="Esto no deberias de tenerlo en el invenatario... solo en las tiendas jeje" type ="Miscelanea" name="Monedas"/>
 
+		<item_saliva texturePath="Assets/Textures/Entidades/Items/textura_saliva.png" description="lorem ipsum sit amet." type ="material" name="Saliva"/>
+		
+		<item_pocion_vida_1 texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_1.png" description="lorem ipsum sit amet." type ="consumible" name="Pocion de Vida Nv1"/>
+		<item_pocion_vida_2 texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_2.png" description="lorem ipsum sit amet." type ="consumible" name="Pocion de Vida Nv2"/>
+		<item_pocion_vida_3 texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_3.png" description="lorem ipsum sit amet." type ="consumible" name="Pocion de Vida Nv3"/>
+		<item_pocion_vida_max texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_max.png" description="lorem ipsum sit amet." type ="consumible" name="Pocion de Vida maxima"/>
+		<item_pocion_regenracion texturePath="Assets/Textures/Entidades/Items/textura_pocion_regeneracion.png" description="lorem ipsum sit amet." type ="consumible" name="Pocion de Regeneracion"/>
+		<item_pocion_dano texturePath="Assets/Textures/Entidades/Items/textura_pocion_dano.png" description="lorem ipsum sit amet." type ="consumible" name="Pocion de Daño"/>
+		<item_pocion_velocidad texturePath="Assets/Textures/Entidades/Items/textura_pocion_velocidad.png" description="lorem ipsum sit amet." type ="consumible" name="Pocion de Velocidad"/>
+		<item_pocion_orbe_magico texturePath="Assets/Textures/Entidades/Items/textura_orbe_magico.png" description="lorem ipsum sit amet." type ="consumible" name="Orbe Magico"/>
 
 
 
@@ -337,12 +344,21 @@
 			<attackAnim_shar start="220" end="234" speed="0.2f" loop="false"/>
 			<dieAnim_shar start="353" end="370" speed="0.2f" loop="false"/>
 		</shar>
+
 		<khurt>
 			<idleAnim start="1" end="1" speed="0.05f" loop="true"/>
 			<runAnim start="1" end="2" speed="0.05f" loop="true"/>
 			<underAnim start="3" end="3" speed="0.05f" loop="true"/>
 			<dieAnim start="4" end="4" speed="0.05f" loop="true"/>
 		</khurt>
+
+		<muur>
+			<idleAnim start="0" end="0" speed="0.05f" loop="true"/>
+			<runAnim start="4" end="7" speed="0.05f" loop="true"/>
+			<attackAnim start="8" end="10" speed="0.05f" loop="true"/>
+			<chargeAnim start="12" end="14" speed="0.05f" loop="true"/>
+			<stunAnim start="16" end="18" speed="0.05f" loop="true"/>
+		</muur>
 
 		<item>
 			<idleAnim start="0" end="23" speed="0.2f" loop="true"/>
@@ -455,7 +471,7 @@
 			<trades>
 				<trade itemOffered="-1" quantityItemOffered="7" itemRequested="10" quantityItemRequested="1"/>
 				<trade itemOffered="-1" quantityItemOffered="10" itemRequested="8" quantityItemRequested="1"/>
-				<trade itemOffered="-1" quantityItemOffered="12" itemRequested="-1" quantityItemRequested="12"/>
+				<trade itemOffered="-1" quantityItemOffered="12" itemRequested="18" quantityItemRequested="12"/>
 				<trade itemOffered="-1" quantityItemOffered="12" itemRequested="1" quantityItemRequested="1"/>
 				<trade itemOffered="-1" quantityItemOffered="16" itemRequested="4" quantityItemRequested="1"/>
 				<trade itemOffered="-1" quantityItemOffered="42" itemRequested="9" quantityItemRequested="1"/>

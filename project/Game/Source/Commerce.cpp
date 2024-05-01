@@ -121,7 +121,44 @@ bool Commerce::SelectAllTrade(uint id, bool add)
 
 bool Commerce::ApplyTrades()
 {
-	return false;
+	bool ret = true;
+
+
+	for (int i = 0; i < trades.size(); i++) {
+
+		Trade* trade = trades.at(i);
+
+		//Agregar estos items al inventario
+		for (int j = 0; j < trade->itemsOffered.size(); j++) {
+			Inventity inventity = *trade->itemsOffered.at(j);
+
+			if (inventity.type == InventityType::MONEDA) {
+				app->inventoryManager->monedasObtenidas += trade->quantityOffered.at(j);
+			}
+			else {
+				inventity.quantity = trade->quantityOffered.at(j);
+				app->inventoryManager->AddItem(&inventity);
+			}
+
+			
+		}
+
+		//Eliminar estos items
+		for (int j = 0; j < trade->itemsRequested.size(); j++) {
+			
+	/*		Inventity inventity = *trade->itemsOffered.at(j);
+			inventity.quantity = trade->quantityOffered.at(j);
+			app->inventoryManager->AddItem(&inventity);*/
+		}
+
+		
+
+
+	}
+
+
+
+	return ret;
 }
 
 bool Commerce::LoadTextures()
@@ -281,7 +318,7 @@ bool Commerce::PostUpdate()
 				app->render->DrawTexture(backgroundTradeItemTexture, positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j), y + positionInList.y, 1, SDL_FLIP_NONE, nullptr, 0, 0);
 
 				//Primer item de oferta
-				app->render->DrawTexture(trade->itemsOffered.at(j)->icon, positionGeneral.x + positionList.x + positionInList.x - 25 + (itemSpacing * j), y + positionInList.y - 25, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+				app->render->DrawTexture(trade->itemsOffered.at(j)->icon, positionGeneral.x + positionList.x + positionInList.x - 10 + (itemSpacing * j), y + positionInList.y - 10, 0.65f, SDL_FLIP_NONE, nullptr, 0, 0);
 
 				//Cantidad
 				app->render->DrawTextBound(std::to_string(trade->quantityOffered.at(j)).c_str(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j) + 60, y + positionInList.y, 20);
@@ -293,6 +330,13 @@ bool Commerce::PostUpdate()
 			
 			}
 
+			//Si solo ofrece un item, poner el nombre de este al lado
+			if (trade->itemsOffered.size() == 1) {
+				
+				app->render->DrawTextBound(trade->itemsOffered.at(0)->name.GetString(), positionGeneral.x + positionList.x + positionInList.x + 100, y + positionInList.y + 0, 20);
+
+			}
+
 
 			//ItemsRequeridos
 			for (int j = 0; j < trade->itemsRequested.size(); j++) {
@@ -301,7 +345,7 @@ bool Commerce::PostUpdate()
 				app->render->DrawTexture(backgroundTradeItemTexture, positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j) + itemsRequestedSpacing, y + positionInList.y, 1, SDL_FLIP_NONE, nullptr, 0, 0);
 
 				//Primer item de oferta
-				app->render->DrawTexture(trade->itemsRequested.at(j)->icon, positionGeneral.x + positionList.x + positionInList.x - 25 + (itemSpacing * j) + itemsRequestedSpacing, y + positionInList.y - 25, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+				app->render->DrawTexture(trade->itemsRequested.at(j)->icon, positionGeneral.x + positionList.x + positionInList.x - 10 + (itemSpacing * j) + itemsRequestedSpacing, y + positionInList.y - 10, 0.65f, SDL_FLIP_NONE, nullptr, 0, 0);
 				
 				//Cantidad
 				app->render->DrawTextBound(std::to_string(trade->quantityRequested.at(j)).c_str(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j)+ itemsRequestedSpacing + 50, y + positionInList.y, 20);
@@ -311,10 +355,6 @@ bool Commerce::PostUpdate()
 				int cantidadEnActivoTodosTrades = GetInventoryTradesQuantity(trade->itemsRequested.at(j)->type);
 
 				int calculoCantidad = cantidadEnInventario - cantidadEnActivoTodosTrades;
-
-				//int calculoCantidad = (cantidad - (trade->quantityTraded * trade->quantityRequested.at(j)));
-
-				//calculoCantidad -= GetInventoryTradesQuantity(trade->itemsRequested.at(j)->type);
 
 
 				std::string cantidadObtener = "(" + std::to_string(calculoCantidad) + ")";
@@ -363,9 +403,20 @@ bool Commerce::PostUpdate()
 
 	if (pointerIndexF == trades.size()) {
 		app->render->DrawTexture(backgroundConfirmHoverTexture, positionGeneral.x + positionList.x + 424, positionGeneral.y + viewport.h + 92, 1, SDL_FLIP_NONE, nullptr, 0, 0);
-
-
 	}
+
+
+	//Slider scroll texture
+	app->render->DrawTexture(backgroundSliderTexture, positionGeneral.x + positionList.x + 760, positionGeneral.y + positionList.y + 80, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+	int calculoAltura;
+	if (pointerIndexF < trades.size()) {
+		calculoAltura = ((320 * pointerIndexF) / (trades.size()) + 80);
+	}
+	else {
+		calculoAltura = 400;
+	}
+	app->render->DrawTexture(knobSliderTexture, positionGeneral.x + positionList.x + 760, positionGeneral.y + positionList.y + calculoAltura, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+
 
 
 	

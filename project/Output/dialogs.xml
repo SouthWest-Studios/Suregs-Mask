@@ -66,4 +66,53 @@
 			</sentence>
 		</sentences>
 	</dialog>
+
+	<dialog id="992" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phrumo">
+		<sentences>
+			<sentence type="choose" text="“¡Qué sorpresa! Bienvenido a la tienda de Phrumo.">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Aquí podrás vender todo tipo de materiales obtenidos al derrotar los Sureg que intenten entrar en la aldea."/>
+					<commerce id="0"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡Estaré aquí para comprar tus objetos!"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="993" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Zhyuka">
+		<sentences>
+			<sentence type="choose" text="¿Qué tenemos por aquí, un nuevo cliente? Jijiji…">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Soy Zhyuka, la bruja de la aldea, si me das materiales te daré alguna poción a cambio, jijiji…"/>
+					<commerce id="0"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡Te estaré esperando! Jijiji…"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="994" texturepath="Assets/Textures/pescador.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Sphar">
+		<sentences>
+			<sentence type="choose" text="¿Un camarada? ¡Eres la primera persona que viene en mucho tiempo!">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Soy Sphar, el pescador. Me dedico a la compra y venta de productos marinos, también ofrezco mi puerto para pescar de manera gratuita."/>
+					<commerce id="0"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡Hasta la próxima grumete!"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
 </dialogues>
+
