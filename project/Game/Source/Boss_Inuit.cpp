@@ -74,7 +74,7 @@ bool Boss_Inuit::Start() {
 	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();
 
-	printf("Speed: %f", speed);
+	//printf("Speed: %f", speed);
 	return true;
 }
 

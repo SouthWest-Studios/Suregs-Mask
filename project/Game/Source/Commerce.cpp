@@ -133,7 +133,7 @@ bool Commerce::ApplyTrades()
 			Inventity inventity = *trade->itemsOffered.at(j);
 
 			if (inventity.type == InventityType::MONEDA) {
-				app->inventoryManager->monedasObtenidas += trade->quantityOffered.at(j);
+				app->inventoryManager->monedasObtenidas += trade->quantityOffered.at(j) * trade->quantityTraded;
 			}
 			else {
 				inventity.quantity = trade->quantityOffered.at(j);
@@ -144,11 +144,13 @@ bool Commerce::ApplyTrades()
 		}
 
 		//Eliminar estos items
-		for (int j = 0; j < trade->itemsRequested.size(); j++) {
+		for (int j = 0; j < trade->itemsRequested.size(); j++) {       
+
+			Inventity inventity = *trade->itemsRequested.at(j);
+			inventity.quantity = trade->quantityRequested.at(j) * trade->quantityTraded;
+			app->inventoryManager->DestroyItem(inventity.type, inventity.quantity);
+			trade->quantityTraded = 0;
 			
-	/*		Inventity inventity = *trade->itemsOffered.at(j);
-			inventity.quantity = trade->quantityOffered.at(j);
-			app->inventoryManager->AddItem(&inventity);*/
 		}
 
 		

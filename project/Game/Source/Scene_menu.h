@@ -82,6 +82,10 @@ private:
 	GuiControlSlider* music;
 	GuiControlSlider* sfx;
 
+	GuiControlButton* partida1;
+	GuiControlButton* partida2;
+	GuiControlButton* partida3;
+
 	bool vsyncActive = false;
 
 	uint windowW, windowH;
