@@ -1632,11 +1632,27 @@ void Player::GodMode(float dt)
 
 void Player::PlayerMovement(float dt)
 {
-
-
 	b2Vec2 velocity = b2Vec2(0, 0);
 
 	// Obtener teclado
+
+	/*fPoint joystick = app->input->GetAxis(MOVE_HORIZONTAL, MOVE_VERTICAL);
+
+	KeyState sprint = app->input->GetButton(BACK);
+	float speed = (sprint == KEY_REPEAT) ? 0.5f : 0.2f;
+
+	b2Vec2 impulse = b2Vec2_zero;
+
+	impulse.x += speed * joystick.x * dt;
+	impulse.y += speed * joystick.y * dt;
+
+	pbodyFoot->body->SetLinearVelocity(impulse);
+
+	b2Transform pBodyPos = pbodyFoot->body->GetTransform();
+
+	position.x = METERS_TO_PIXELS(pBodyPos.p.x) - 32 / 2;
+	position.y = METERS_TO_PIXELS(pBodyPos.p.y) - 32 / 2;*/
+
 	pressingUp = app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT;
 	pressingDown = app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT;
 	pressingLeft = app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT;
@@ -1647,6 +1663,7 @@ void Player::PlayerMovement(float dt)
 	int verticalMovement = pressingDown - pressingUp;
 
 	//printf("%d", pressingUp);
+	
 	// Actualizar velocidad
 	if (!isDashing) {
 		velocity.x = horizontalMovement * GetRealMovementSpeed() * speed * 10 * dt;
