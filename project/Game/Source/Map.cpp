@@ -1132,7 +1132,7 @@ bool Map::LoadEntities(std::string layerName)
 						diamante->Start();
 					}
 
-					//DIAMANTE
+					//Boss_Inuit
 					if (gid == tileset->firstgid + 60) {
 						Boss_Inuit* boss_Inuit = (Boss_Inuit*)app->entityManager->CreateEntity(EntityType::BOSS_INUIT);
 						boss_Inuit->config = configNode.child("entities_data").child("boss_inuit");

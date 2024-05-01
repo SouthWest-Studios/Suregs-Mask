@@ -19,6 +19,13 @@ struct Branch_Inuit {
 	Branch_Inuit(EntityState_Boss_Inuit next) : next_state(next) {}
 };
 
+enum class FASE
+{
+	FASE_ONE,
+	FASE_CHANGE,
+	FASE_DWO
+};
+
 class Boss_Inuit : public Entity
 {
 
