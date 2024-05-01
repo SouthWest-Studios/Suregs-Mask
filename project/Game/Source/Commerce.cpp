@@ -296,7 +296,7 @@ bool Commerce::PostUpdate()
 			//Si solo ofrece un item, poner el nombre de este al lado
 			if (trade->itemsOffered.size() == 1) {
 				
-				app->render->DrawTextBound(trade->itemsOffered.at(0)->name.GetString(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * 2) + 55, y + positionInList.y + 20, 20);
+				app->render->DrawTextBound(trade->itemsOffered.at(0)->name.GetString(), positionGeneral.x + positionList.x + positionInList.x + 100, y + positionInList.y + 0, 20);
 
 			}
 
