@@ -11,9 +11,9 @@
 struct Trade {
 	std::vector<Inventity*> itemsOffered;
 	std::vector<Inventity*> itemsRequested;
-	std::vector<uint32_t> quantityOffered;
-	std::vector<uint32_t> quantityRequested;
-	uint32_t quantityTraded;
+	std::vector<int> quantityOffered;
+	std::vector<int> quantityRequested;
+	int quantityTraded;
 };
 
 class Commerce

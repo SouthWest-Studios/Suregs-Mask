@@ -47,7 +47,38 @@ bool Commerce::CleanUp()
 
 bool Commerce::SelectTrade(uint id, bool add)
 {
-	return false;
+	bool ret = true;
+
+	Trade* trade = trades.at(id);
+
+	if (add) {
+		//Comprovar que se pueda
+		bool canBuy = false;
+
+		for (int i = 0; i < trade->itemsRequested.size(); i++) {
+
+			int cantidad = app->inventoryManager->GetInventityQuantity(trade->itemsRequested.at(i)->type);
+			int cantidadFinal = cantidad - ((trade->quantityTraded+1) * trade->quantityRequested.at(i));
+
+			if (cantidadFinal >= 0) {
+				canBuy = true;
+			}
+
+		}
+
+		if(canBuy) trade->quantityTraded++;
+		
+	}
+	else {
+		if (trade->quantityTraded > 0) {
+			trade->quantityTraded--;
+		}
+	}
+	
+
+
+
+	return ret;
 }
 
 bool Commerce::SelectAllTrade(uint id, bool add)
@@ -131,6 +162,13 @@ bool Commerce::Update(float dt)
 		if (pointerIndex < 0) {
 			pointerIndex = trades.size()-1;
 		}
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN) {
+		SelectTrade(pointerIndex);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN) {
+		SelectTrade(pointerIndex, false);
 	}
 
 
