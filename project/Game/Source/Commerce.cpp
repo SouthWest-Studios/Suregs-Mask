@@ -286,6 +286,12 @@ bool Commerce::Update(float dt)
 		}
 		else {
 			//Boton confirmar compra
+			if (pointerIndexF == trades.size()) {
+				ApplyTrades();
+			}
+			else if (pointerIndexF == trades.size() + 1) {
+				CloseCommerce();
+			}
 
 		}
 	}
