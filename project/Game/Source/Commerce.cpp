@@ -205,7 +205,7 @@ bool Commerce::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
 		pointerIndexF++;
-		if (pointerIndexF >= trades.size()) {
+		if (pointerIndexF >= trades.size() + 1) {
 			pointerIndexF = 0;
 		}
 	}
@@ -213,7 +213,7 @@ bool Commerce::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
 		pointerIndexF--;
 		if (pointerIndexF < 0) {
-			pointerIndexF = trades.size()-1;
+			pointerIndexF = trades.size();
 		}
 	}
 
@@ -233,8 +233,14 @@ bool Commerce::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN) {
 
-		if(pointerIndexC == 0) SelectTrade(pointerIndexF);
-		if(pointerIndexC == 1) SelectAllTrade(pointerIndexF);
+		if (pointerIndexF < trades.size()) {
+			if (pointerIndexC == 0) SelectTrade(pointerIndexF);
+			if (pointerIndexC == 1) SelectAllTrade(pointerIndexF);
+		}
+		else {
+			//Boton confirmar compra
+
+		}
 	}
 	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN) {
 		if (pointerIndexC == 0) SelectTrade(pointerIndexF, false);
@@ -321,7 +327,6 @@ bool Commerce::PostUpdate()
 			app->render->DrawTexture(backgroundSelectAllTexture, positionGeneral.x + positionList.x + 675, y, 1, SDL_FLIP_NONE, nullptr, 0, 0);
 			
 
-
 			//Punteros
 			if (pointerIndexF == i && pointerIndexC == 0) {
 				app->render->DrawTexture(backgroundTradeHoverTexture, positionGeneral.x + positionList.x -3, y -2, 1, SDL_FLIP_NONE, nullptr, 0, 0);
@@ -347,8 +352,20 @@ bool Commerce::PostUpdate()
 			}
 
 		}
+
+		
+
 	}
 
+	//Boton confirmar compra
+	app->render->DrawTexture(backgroundConfirmTexture, positionGeneral.x + positionList.x + 414, positionGeneral.y + viewport.h + 85, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+	app->render->DrawTextBound("Confirmar compra", positionGeneral.x + positionList.x + 485, positionGeneral.y + viewport.h + 120, 300);
+
+	if (pointerIndexF == trades.size()) {
+		app->render->DrawTexture(backgroundConfirmHoverTexture, positionGeneral.x + positionList.x + 424, positionGeneral.y + viewport.h + 92, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+
+
+	}
 
 
 	

@@ -449,6 +449,24 @@
 				
 			</trades>
 		</commerce>
+
+		<commerce id="1" positionGeneralX="66" positionGeneralY="33" positionListX="280" positionListY="10" positionInListX="23" positionInListY="22" tradeSpacing="100" itemSpacing="150" itemsRequestedSpacing="350">
+			<trades>
+				<trade itemOffered="-1" quantityItemOffered="7" itemRequested="10" quantityItemRequested="1"/>
+				<trade itemOffered="-1" quantityItemOffered="10" itemRequested="8" quantityItemRequested="1"/>
+				<trade itemOffered="-1" quantityItemOffered="12" itemRequested="-1" quantityItemRequested="12"/>
+				<trade itemOffered="-1" quantityItemOffered="12" itemRequested="1" quantityItemRequested="1"/>
+				<trade itemOffered="-1" quantityItemOffered="16" itemRequested="4" quantityItemRequested="1"/>
+				<trade itemOffered="-1" quantityItemOffered="42" itemRequested="9" quantityItemRequested="1"/>
+				<trade itemOffered="-1" quantityItemOffered="30" itemRequested="2" quantityItemRequested="1"/>
+				<trade itemOffered="-1" quantityItemOffered="24" itemRequested="6" quantityItemRequested="1"/>
+				<trade itemOffered="-1" quantityItemOffered="70" itemRequested="12" quantityItemRequested="1"/>
+				<trade itemOffered="-1" quantityItemOffered="35" itemRequested="11" quantityItemRequested="1"/>
+				<trade itemOffered="-1" quantityItemOffered="10" itemRequested="15" quantityItemRequested="1"/>
+				<trade itemOffered="-1" quantityItemOffered="20" itemRequested="16" quantityItemRequested="1"/>
+				<trade itemOffered="-1" quantityItemOffered="30" itemRequested="17" quantityItemRequested="1"/>
+			</trades>
+		</commerce>
 		
 		
 	</commercemanager>
