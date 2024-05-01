@@ -428,17 +428,17 @@
 
 		<commerce id="0" positionGeneralX="66" positionGeneralY="33" positionListX="280" positionListY="10" positionInListX="23" positionInListY="22" tradeSpacing="100" itemSpacing="150" itemsRequestedSpacing="350">
 			<trades>
-				<trade itemOffered="1" quantityItemOffered="1" itemRequested="2" quantityItemRequested="3"/>
+				<trade itemOffered="8,2" quantityItemOffered="1,2" itemRequested="2" quantityItemRequested="3"/>
 				<trade itemOffered="3" quantityItemOffered="3" itemRequested="4" quantityItemRequested="1"/>
 				<trade itemOffered="5,2" quantityItemOffered="1,1" itemRequested="6" quantityItemRequested="1"/>
-				<trade itemOffered="5" quantityItemOffered="1" itemRequested="6" quantityItemRequested="1"/>
-				<trade itemOffered="5" quantityItemOffered="1" itemRequested="6" quantityItemRequested="1"/>
-				<trade itemOffered="5" quantityItemOffered="1" itemRequested="6" quantityItemRequested="1"/>
-				<trade itemOffered="5" quantityItemOffered="1" itemRequested="6" quantityItemRequested="1"/>
-				<trade itemOffered="5" quantityItemOffered="1" itemRequested="6" quantityItemRequested="1"/>
-				<trade itemOffered="5" quantityItemOffered="1" itemRequested="6" quantityItemRequested="1"/>
-				<trade itemOffered="5" quantityItemOffered="1" itemRequested="6" quantityItemRequested="1"/>
-				<trade itemOffered="5" quantityItemOffered="1" itemRequested="6" quantityItemRequested="1"/>
+				<trade itemOffered="5" quantityItemOffered="1" itemRequested="6,1" quantityItemRequested="1,2"/>
+				<trade itemOffered="9" quantityItemOffered="1" itemRequested="2" quantityItemRequested="1"/>
+				<trade itemOffered="10" quantityItemOffered="1" itemRequested="16" quantityItemRequested="1"/>
+				<trade itemOffered="11" quantityItemOffered="1" itemRequested="6" quantityItemRequested="1"/>
+				<trade itemOffered="12" quantityItemOffered="1" itemRequested="17" quantityItemRequested="1"/>
+				<trade itemOffered="12,12" quantityItemOffered="1,1" itemRequested="4,2" quantityItemRequested="1,3"/>
+				<trade itemOffered="12" quantityItemOffered="1" itemRequested="6" quantityItemRequested="1"/>
+				<trade itemOffered="12" quantityItemOffered="1" itemRequested="6" quantityItemRequested="1"/>
 				
 			</trades>
 		</commerce>

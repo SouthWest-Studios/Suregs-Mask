@@ -473,7 +473,7 @@ bool Render::DrawTextBound(const char* text, int posX, int posY, int textBoundWi
 	textSurface = TTF_RenderUTF8_Blended_Wrapped(font, text, color, textBoundWidth);
 	textTexture = SDL_CreateTextureFromSurface(app->render->renderer, textSurface);
 
-	app->render->DrawTexture(textTexture, posX, posY);
+	app->render->DrawTexture(textTexture, posX, posY, 1, SDL_FLIP_NONE, 0, 0);
 
 	SDL_FreeSurface(textSurface);
 	SDL_DestroyTexture(textTexture);

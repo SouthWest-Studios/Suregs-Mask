@@ -76,6 +76,7 @@ bool Commerce::LoadTextures()
 	backgroundTradeItemTexture = app->tex->Load(backgroundTradeItemPathTexture);
 
 	pointerIndex = 0;
+	scrollY = 0;
 
 	return false;
 }
@@ -149,7 +150,7 @@ bool Commerce::PostUpdate()
 
 	//Trades
 	for (int i = 0; i < trades.size(); i++) {
-		int y = positionGeneral.y + positionList.y + (70 + tradeSpacing * i);
+		int y = positionGeneral.y + positionList.y + (70 + tradeSpacing * i) - scrollY;
 		if (y >= viewport.y && y <= viewport.y + viewport.h) {
 
 
@@ -160,7 +161,7 @@ bool Commerce::PostUpdate()
 
 			//ItemsOfrecidos
 			for (int j = 0; j < trade->itemsOffered.size(); j++) {
-
+				if (trade->itemsOffered.at(j) == NULL) { continue; };
 				//Items background
 				app->render->DrawTexture(backgroundTradeItemTexture, positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j), y + positionInList.y, 1, SDL_FLIP_NONE, nullptr, 0, 0);
 
@@ -191,6 +192,22 @@ bool Commerce::PostUpdate()
 
 			if (pointerIndex == i) {
 				app->render->DrawTexture(backgroundTradeHoverTexture, positionGeneral.x + positionList.x -3, y -2, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+			}
+
+		}
+		else {
+			//Se sale del viewport, mover el scroll
+			
+			if (pointerIndex == i) {
+
+				int targetY = positionGeneral.y + positionList.y + (57 + (tradeSpacing * (pointerIndex - 4)));
+				if (scrollY - targetY == 400) {
+					scrollY -= 100;
+				}
+				else {
+					scrollY = targetY;
+				}
+				scrollY = std::max(0, scrollY);
 			}
 
 		}
