@@ -82,7 +82,6 @@ bool Enemy_Muur::Start() {
 bool Enemy_Muur::Update(float dt)
 {
 	OPTICK_EVENT();
-
 	//Pone el sensor del cuerpo en su posicion
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
@@ -94,9 +93,13 @@ bool Enemy_Muur::Update(float dt)
 	{
 		nextState = EntityState::DEAD;
 	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32)
+	else if (stunTimer.ReadSec() < 2)
 	{
-		nextState = EntityState::ATTACKING;
+
+	}
+	else if (chargeTimer.ReadSec() >= 5 && app->map->pathfinding->GetDistance(playerPos, position) > 10 /*Distancia minima para hacer el ataque*/)
+	{
+
 	}
 	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance * 32)
 	{
@@ -106,7 +109,6 @@ bool Enemy_Muur::Update(float dt)
 	{
 		nextState = EntityState::RUNNING;
 	}
-
 
 
 
@@ -213,7 +215,6 @@ void Enemy_Muur::Chase(float dt, iPoint playerPos)
 {
 	//printf("Muur chasing");
 	currentAnimation = &runAnim;
-	Muurfinding(dt, playerPos);
 
 }
 
@@ -224,11 +225,6 @@ void Enemy_Muur::Attack(float dt)
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero); //No se mueve mientras ataca
 
 	//sonido ataque
-}
-
-void Enemy_Muur::ChargeAttack(float dt)
-{
-
 }
 
 void Enemy_Muur::Die() {
@@ -357,4 +353,23 @@ void Enemy_Muur::ApplyPoison(int poisonDamage, float poisonDuration, float poiso
 	this->poisonTimer = 0.0f;
 	this->timeSinceLastTick = 0.0f;
 	this->poisoned = true;
+}
+
+void Enemy_Muur::Charge(float dt, iPoint playerPos) {
+	b2Vec2 direction(playerPos.x - position.x, playerPos.y - position.y);
+	direction.Normalize();
+
+	b2Vec2 velocity = b2Vec2(direction.x * speed * 2, direction.y * speed * 2);
+	pbodyFoot->body->SetLinearVelocity(velocity);
+
+	stunTimer.Start();
+	chargeTimer.Start();
+}
+
+void Enemy_Muur::Stunned(float dt) {
+
+	if (stunTimer.ReadSec() >= 2) {
+		pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0)); 
+		stunTimer.Start();
+	}
 }

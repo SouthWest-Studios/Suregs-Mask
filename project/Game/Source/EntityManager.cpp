@@ -131,6 +131,7 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 		entity = new Enemy_Shar();
 		break;
 	case EntityType::ENEMY_MUUR:
+		printf("MUUR");
 		entity = new Enemy_Muur();
 		break;
 	case EntityType::ITEM_GARRA:
@@ -295,7 +296,7 @@ std::vector<Entity*> EntityManager::GetEnemies() {
     std::vector<Entity*> enemies;
     for (ListItem<Entity*>* item = entities.start; item != NULL; item = item->next) {
         Entity* entity = item->data;
-        if (entity->type == EntityType::ENEMY_OSIRIS || entity->type == EntityType::ENEMY_OLS || entity->type == EntityType::ENEMY_SHAR) {
+        if (entity->type == EntityType::ENEMY_OSIRIS || entity->type == EntityType::ENEMY_OLS || entity->type == EntityType::ENEMY_SHAR || entity->type == EntityType::ENEMY_MUUR) {
             enemies.push_back(entity);
         }
     }

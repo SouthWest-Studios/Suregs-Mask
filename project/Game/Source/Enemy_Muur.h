@@ -43,12 +43,15 @@ public:
 	void Attack(float dt);
 	void Die();
 	bool Muurfinding(float dt, iPoint playerPos);
-	void ChargeAttack(float dt);
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
 	float GetHealth() const;
 	void TakeDamage(float damage);
+
+	//Atque cargado
+	void Charge(float dt, iPoint playerPos);
+	void Stunned(float dt);
 
 	//Veneno
 	void ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate);
@@ -106,6 +109,11 @@ private:
 
 	Timer timerRecibirDanioColor;
 
+
+	//Charge Attack
+	Timer stunTimer;
+	Timer chargeTimer;
+	
 	//Veneno
 	float poisonTimer = 0.0f; // Tiempo desde que se aplico el veneno
 	float poisonDuration = 0.0f; // Duracion total del veneno
@@ -122,7 +130,7 @@ public:
 		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD},	 {EntityState::IDLE},	  {EntityState::IDLE},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK}}, // RUNNING
 		{ {EntityState::IDLE},	  {EntityState::IDLE},		{EntityState::DEAD},	 {EntityState::IDLE},	  {EntityState::IDLE},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK}}, // ATTACKING
 		{ {EntityState::DEAD},	  {EntityState::DEAD},		{EntityState::DEAD},	 {EntityState::IDLE},	  {EntityState::IDLE},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK}}, // DEAD
-		{ {EntityState::REVIVING},{EntityState::REVIVING},	{EntityState::DEAD},	 {EntityState::REVIVING}, {EntityState::REVIVING}, {EntityState::REVIVING},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK}}, // REVIVING
+		{ {EntityState::REVIVING},{EntityState::REVIVING},	{EntityState::DEAD},	 {EntityState::REVIVING}, {EntityState::REVIVING}, {EntityState::REVIVING},			{EntityState::MASK_ATTACK},			{EntityState::MASK_ATTACK}}, // REVIVING
 		{ {EntityState::IDLE},	  {EntityState::IDLE},	    {EntityState::DEAD},	 {EntityState::IDLE},	  {EntityState::IDLE},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK}}, // MASK_ATTACK
 		{ {EntityState::IDLE},	  {EntityState::IDLE},	    {EntityState::DEAD},	 {EntityState::IDLE},	  {EntityState::IDLE},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK}}, // MASK_ATTACK
 		{ {EntityState::IDLE},	  {EntityState::IDLE},	    {EntityState::DEAD},	 {EntityState::IDLE},	  {EntityState::IDLE},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK}} // MASK_ATTACK
@@ -137,4 +145,4 @@ public:
 
 
 
-#endif // __ENEMY_OSIRIS_H__
+#endif // __ENEMY_MUUR_H__
