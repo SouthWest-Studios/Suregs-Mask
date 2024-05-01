@@ -50,6 +50,8 @@ public:
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
 
+	int GetInventityQuantity(InventityType type);
+
 	
 
 public:

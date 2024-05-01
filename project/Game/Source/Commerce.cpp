@@ -17,6 +17,7 @@
 #include "Log.h"
 #include "SString.h"
 #include "CommerceManager.h"
+#include "InventoryManager.h"
 
 Commerce::Commerce(uint id) : id(id)
 {
@@ -169,7 +170,13 @@ bool Commerce::PostUpdate()
 				app->render->DrawTexture(trade->itemsOffered.at(j)->icon, positionGeneral.x + positionList.x + positionInList.x - 25 + (itemSpacing * j), y + positionInList.y - 25, 1, SDL_FLIP_NONE, nullptr, 0, 0);
 
 				//Cantidad
-				app->render->DrawTextBound(std::to_string(trade->quantityOffered.at(j)).c_str(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j) + 50, y + positionInList.y, 20);
+				app->render->DrawTextBound(std::to_string(trade->quantityOffered.at(j)).c_str(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j) + 60, y + positionInList.y, 20);
+			
+				//Cantidad a obtener:
+				std::string cantidadObtener = "(" + std::to_string((trade->quantityOffered.at(j) * trade->quantityTraded)) + ")";
+				app->render->DrawTextBound(cantidadObtener.c_str(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j) + 55, y + positionInList.y + 20, 20);
+
+			
 			}
 
 
@@ -184,6 +191,11 @@ bool Commerce::PostUpdate()
 				
 				//Cantidad
 				app->render->DrawTextBound(std::to_string(trade->quantityRequested.at(j)).c_str(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j)+ itemsRequestedSpacing + 50, y + positionInList.y, 20);
+
+				//Cantidad inventario:
+				int cantidad = app->inventoryManager->GetInventityQuantity(trade->itemsRequested.at(j)->type);
+				std::string cantidadObtener = "(" + std::to_string((cantidad - (trade->quantityTraded * trade->quantityRequested.at(j)))) + ")";
+				app->render->DrawTextBound(cantidadObtener.c_str(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j) + itemsRequestedSpacing + 55, y + positionInList.y + 20, 20);
 
 			}
 
