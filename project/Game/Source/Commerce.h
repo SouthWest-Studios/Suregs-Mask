@@ -47,6 +47,8 @@ public:
 
 	void SetTrades(std::vector<Trade*> trades);
 
+	int GetInventoryTradesQuantity(InventityType type);
+
 	uint GetId();
 	
 
@@ -112,7 +114,8 @@ private:
 
 	std::vector<Trade*> trades;
 
-	int pointerIndex;
+	int pointerIndexF;
+	int pointerIndexC;
 	int scrollY;
 	
 };

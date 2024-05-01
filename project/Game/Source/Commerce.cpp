@@ -57,10 +57,13 @@ bool Commerce::SelectTrade(uint id, bool add)
 
 		for (int i = 0; i < trade->itemsRequested.size(); i++) {
 
-			int cantidad = app->inventoryManager->GetInventityQuantity(trade->itemsRequested.at(i)->type);
-			int cantidadFinal = cantidad - ((trade->quantityTraded+1) * trade->quantityRequested.at(i));
+			int cantidadEnInventario = app->inventoryManager->GetInventityQuantity(trade->itemsRequested.at(i)->type);
+			int cantidadEnActivoTodosTrades = GetInventoryTradesQuantity(trade->itemsRequested.at(i)->type);
 
-			if (cantidadFinal >= 0) {
+			int calculoCantidad = (cantidadEnInventario - cantidadEnActivoTodosTrades);
+			calculoCantidad -= trade->quantityRequested.at(i);
+
+			if (calculoCantidad >= 0) {
 				canBuy = true;
 			}
 
@@ -83,7 +86,37 @@ bool Commerce::SelectTrade(uint id, bool add)
 
 bool Commerce::SelectAllTrade(uint id, bool add)
 {
-	return false;
+	bool ret = true;
+
+	Trade* trade = trades.at(id);
+
+	if (add) {
+
+		bool canBuy = true;
+
+		while (canBuy) {
+			for (int i = 0; i < trade->itemsRequested.size(); i++) {
+
+				int cantidadEnInventario = app->inventoryManager->GetInventityQuantity(trade->itemsRequested.at(i)->type);
+				int cantidadEnActivoTodosTrades = GetInventoryTradesQuantity(trade->itemsRequested.at(i)->type);
+
+				int calculoCantidad = (cantidadEnInventario - cantidadEnActivoTodosTrades);
+				calculoCantidad -= trade->quantityRequested.at(i);
+
+				if (calculoCantidad < 0) {
+					canBuy = false;
+				}
+
+			}
+
+			if (canBuy) trade->quantityTraded++;
+		}
+	}
+	else {
+		trade->quantityTraded = 0;
+	}
+
+	return ret;
 }
 
 bool Commerce::ApplyTrades()
@@ -107,7 +140,7 @@ bool Commerce::LoadTextures()
 
 	backgroundTradeItemTexture = app->tex->Load(backgroundTradeItemPathTexture);
 
-	pointerIndex = 0;
+	pointerIndexF = 0;
 	scrollY = 0;
 
 	return false;
@@ -140,6 +173,26 @@ void Commerce::SetTrades(std::vector<Trade*> trades)
 	this->trades = trades;
 }
 
+int Commerce::GetInventoryTradesQuantity(InventityType type)
+{
+	int cantidad = 0;
+
+	for (int i = 0; i < trades.size(); i++) {
+
+		Trade* trade = trades.at(i);
+
+		for (int j = 0; j < trade->itemsRequested.size(); j++) {
+			Inventity* inventity = trade->itemsRequested.at(j);
+			if (inventity->type == type) {
+				cantidad += trade->quantityRequested.at(j) * trade->quantityTraded;
+			}
+		}
+	}
+	
+
+	return cantidad;
+}
+
 uint Commerce::GetId()
 {
 	return id;
@@ -151,24 +204,41 @@ bool Commerce::Update(float dt)
 	bool ret = true;
 
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
-		pointerIndex++;
-		if (pointerIndex >= trades.size()) {
-			pointerIndex = 0;
+		pointerIndexF++;
+		if (pointerIndexF >= trades.size()) {
+			pointerIndexF = 0;
 		}
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
-		pointerIndex--;
-		if (pointerIndex < 0) {
-			pointerIndex = trades.size()-1;
+		pointerIndexF--;
+		if (pointerIndexF < 0) {
+			pointerIndexF = trades.size()-1;
 		}
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN) {
+		pointerIndexC++;
+		if(pointerIndexC > 1) {
+			pointerIndexC = 0;
+		}
+	}
+	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) {
+		pointerIndexC--;
+		if (pointerIndexC < 0) {
+			pointerIndexC = 1;
+		}
+	}
+
+
 	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN) {
-		SelectTrade(pointerIndex);
+
+		if(pointerIndexC == 0) SelectTrade(pointerIndexF);
+		if(pointerIndexC == 1) SelectAllTrade(pointerIndexF);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN) {
-		SelectTrade(pointerIndex, false);
+		if (pointerIndexC == 0) SelectTrade(pointerIndexF, false);
+		if (pointerIndexC == 1) SelectAllTrade(pointerIndexF, false);
 	}
 
 
@@ -231,26 +301,42 @@ bool Commerce::PostUpdate()
 				app->render->DrawTextBound(std::to_string(trade->quantityRequested.at(j)).c_str(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j)+ itemsRequestedSpacing + 50, y + positionInList.y, 20);
 
 				//Cantidad inventario:
-				int cantidad = app->inventoryManager->GetInventityQuantity(trade->itemsRequested.at(j)->type);
-				std::string cantidadObtener = "(" + std::to_string((cantidad - (trade->quantityTraded * trade->quantityRequested.at(j)))) + ")";
+				int cantidadEnInventario = app->inventoryManager->GetInventityQuantity(trade->itemsRequested.at(j)->type);
+				int cantidadEnActivoTodosTrades = GetInventoryTradesQuantity(trade->itemsRequested.at(j)->type);
+
+				int calculoCantidad = cantidadEnInventario - cantidadEnActivoTodosTrades;
+
+				//int calculoCantidad = (cantidad - (trade->quantityTraded * trade->quantityRequested.at(j)));
+
+				//calculoCantidad -= GetInventoryTradesQuantity(trade->itemsRequested.at(j)->type);
+
+
+				std::string cantidadObtener = "(" + std::to_string(calculoCantidad) + ")";
 				app->render->DrawTextBound(cantidadObtener.c_str(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j) + itemsRequestedSpacing + 55, y + positionInList.y + 20, 20);
 
 			}
 
 
+			//Select all
+			app->render->DrawTexture(backgroundSelectAllTexture, positionGeneral.x + positionList.x + 675, y, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+			
 
 
-			if (pointerIndex == i) {
+			//Punteros
+			if (pointerIndexF == i && pointerIndexC == 0) {
 				app->render->DrawTexture(backgroundTradeHoverTexture, positionGeneral.x + positionList.x -3, y -2, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+			}
+			else if (pointerIndexF == i && pointerIndexC == 1) {
+				app->render->DrawTexture(backgroundSelectAllHoverTexture, positionGeneral.x + positionList.x - 3 + 677, y - 1, 1, SDL_FLIP_NONE, nullptr, 0, 0);
 			}
 
 		}
 		else {
 			//Se sale del viewport, mover el scroll
 			
-			if (pointerIndex == i) {
+			if (pointerIndexF == i) {
 
-				int targetY = positionGeneral.y + positionList.y + (57 + (tradeSpacing * (pointerIndex - 4)));
+				int targetY = positionGeneral.y + positionList.y + (57 + (tradeSpacing * (pointerIndexF - 4)));
 				if (scrollY - targetY == 400) {
 					scrollY -= 100;
 				}

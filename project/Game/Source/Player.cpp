@@ -438,6 +438,7 @@ bool Player::Start() {
 	switch_masks_fx = app->audio->LoadAudioFx("switch_masks_fx");
 	basic_combo_attack1_fx = app->audio->LoadAudioFx("basic_combo_attack1_fx");
 	player_get_damage_fx = app->audio->LoadAudioFx("player_get_damage_fx");
+	get_item_fx = app->audio->LoadAudioFx("get_item_fx");
 
 	cdTimerDashMS = 500;
 	cdTimerAttackMS = 100000 / currentStats.attackSpeed;
@@ -908,7 +909,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 				}
 			}
 		}
-		app->audio->PlayHitFx(player_get_damage_fx); // <--- Hay que arreglarlo
+		app->audio->PlayHitFx(player_get_damage_fx);
 		break;
 	case ColliderType::RESOURCE:
 		LOG("Collision RESOURCE");
@@ -920,6 +921,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 					app->inventoryManager->CreateItem(physB->listener->type, physB->listener->description, physB->listener->tipo);
 					physB->listener->active = false;
 					physB->body->SetActive(false);
+					app->audio->PlayFx(get_item_fx); // <--- No funciona
 				}
 				
 			}

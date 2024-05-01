@@ -35,42 +35,42 @@
 
 		<fx>
       <!--ui-->
-			<intro_fx path="Assets/Audio/Fx/intro_fx.wav"/>
-      <menu_fx path="Assets/Audio/Fx/menu_fx.wav"/>
-      <button_fx path="Assets/Audio/Fx/button_fx.wav"/>
-      <select_fx path="Assets/Audio/Fx/select_fx.wav"/>
-      <inventory_fx path="Assets/Audio/Fx/inventory_fx.wav"/>
-      <change_inventory_fx path="Assets/Audio/Fx/change_inventory_fx.wav"/>
+			<intro_fx path="Assets/Audio/Fx/UI/intro_fx.wav"/>
+      <menu_fx path="Assets/Audio/Fx/UI/menu_fx.wav"/>
+      <button_fx path="Assets/Audio/Fx/UI/button_fx.wav"/>
+      <select_fx path="Assets/Audio/Fx/UI/select_fx.wav"/>
+      <inventory_fx path="Assets/Audio/Fx/UI/inventory_fx.wav"/>
+      <change_inventory_fx path="Assets/UI/Audio/Fx/UI/change_inventory_fx.wav"/>
       <level_up_fx path=""/>
-      <get_item_fx path=""/>
+      <get_item_fx path="Assets/UI/Audio/Fx/UI/get_item_fx.wav"/>
       <sell_item_fx path=""/>
 			<buy_item_fx path=""/>
-      <dialog_fx path="Assets/Audio/Fx/dialog_fx.wav"/>
+      <dialog_fx path="Assets/Audio/Fx/UI/dialog_fx.wav"/>
 
       <!--player-->
-      <run_fx path="Assets/Audio/Fx/run_fx.wav"/>
-      <runAlt_fx path="Assets/Audio/Fx/runAlt_fx.wav"/>
-      <runAlt2_fx path="Assets/Audio/Fx/runAlt2_fx.wav"/>
-      <dash_fx path="Assets/Audio/Fx/dash_fx.wav"/>
-      <basic_combo_attack1_fx path="Assets/Audio/Fx/basic_combo_attack1_fx.wav"/>
-      <basic_combo_attack2_fx path="Assets/Audio/Fx/basic_combo_attack2_fx.wav"/>
-      <basic_combo_attack3_fx path="Assets/Audio/Fx/basic_combo_attack3_fx.wav"/>
+      <run_fx path="Assets/Audio/Fx/Player/run_fx.wav"/>
+      <runAlt_fx path="Assets/Audio/Fx/Player/runAlt_fx.wav"/>
+      <runAlt2_fx path="Assets/Audio/Fx/Player/runAlt2_fx.wav"/>
+      <dash_fx path="Assets/Audio/Fx/Player/dash_fx.wav"/>
+      <basic_combo_attack1_fx path="Assets/Audio/Fx/Player/basic_combo_attack1_fx.wav"/>
+      <basic_combo_attack2_fx path="Assets/Audio/Fx/Player/basic_combo_attack2_fx.wav"/>
+      <basic_combo_attack3_fx path="Assets/Audio/Fx/Player/basic_combo_attack3_fx.wav"/>
       <mask_ability_fx path=""/>
-      <switch_masks_fx path="Assets/Audio/Fx/switch_masks_fx.wav"/>
-      <use_potion_fx path="Assets/Audio/Fx/use_potion_fx.wav"/>
+      <switch_masks_fx path="Assets/Audio/Fx/Player/switch_masks_fx.wav"/>
+      <use_potion_fx path="Assets/Audio/Fx/Player/use_potion_fx.wav"/>
       <switch_potion_fx path=""/>
-      <player_get_damage_fx path="Assets/Audio/Fx/player_get_damage_fx.wav"/>
-      <player_death_fx path="Assets/Audio/Fx/player_death_fx.wav"/>
+      <player_get_damage_fx path="Assets/Audio/Fx/Player/player_get_damage_fx.wav"/>
+      <player_death_fx path="Assets/Audio/Fx/Player/player_death_fx.wav"/>
 
       <!--fishing-->
       <fishing_fx path=""/>
 
       <!--enemies-->
       <ols_attack_fx path=""/>
-      <ols_get_damage_fx path="Assets/Audio/Fx/ols_get_damage_fx.wav"/>
-      <ols_get_damageAlt_fx path="Assets/Audio/Fx/ols_getAlt_damage_fx.wav"/>
-      <ols_get_damageAlt2_fx path="Assets/Audio/Fx/ols_getAlt2_damage_fx.wav"/>
-      <ols_death_fx path="Assets/Audio/Fx/ols_death_fx.wav"/>
+      <ols_get_damage_fx path="Assets/Audio/Fx/Enemies/ols_get_damage_fx.wav"/>
+      <ols_get_damageAlt_fx path="Assets/Audio/Fx/Enemies/ols_getAlt_damage_fx.wav"/>
+      <ols_get_damageAlt2_fx path="Assets/Audio/Fx/Enemies/ols_getAlt2_damage_fx.wav"/>
+      <ols_death_fx path="Assets/Audio/Fx/Enemies/ols_death_fx.wav"/>
       
       <osiris_attack_fx path=""/>
       <osiris_get_damage_fx path=""/>
@@ -87,8 +87,8 @@
       
       <boorok_attack_fx path=""/>
       <boorok_sleep_fx path=""/>
-      <boorok_get_damage_fx path="Assets/Audio/Fx/boorok_get_damage_fx.wav"/>
-      <boorok_get_damageAlt_fx path="Assets/Audio/Fx/boorok_get_damageAlt_fx.wav"/>
+      <boorok_get_damage_fx path="Assets/Audio/Fx/Enemies/boorok_get_damage_fx.wav"/>
+      <boorok_get_damageAlt_fx path="Assets/Audio/Fx/Enemies/boorok_get_damageAlt_fx.wav"/>
       <boorok_death_fx path=""/>  
       
       <muur_attack_fx path=""/>

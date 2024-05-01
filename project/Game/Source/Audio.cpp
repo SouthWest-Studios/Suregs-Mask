@@ -242,6 +242,24 @@ void Audio::PlayMusicAfterDelay(const char* name, float delayInSeconds, float fa
 	}
 }
 
+void Audio::PlayRandomFx(unsigned int name, unsigned int name2, unsigned int name3)
+{
+	int fx = rand() % 3 + 1;
+
+	switch (fx)
+	{
+	case 1:
+		PlayFx(name);
+		break;
+	case 2:
+		PlayFx(name2);
+		break;
+	case 3:
+		PlayFx(name3);
+		break;
+	}
+}
+
 void Audio::PlayRunFx(unsigned int name, unsigned int name2, unsigned int name3)
 {
 	if (runTimer.ReadMSec() > runTime) {
