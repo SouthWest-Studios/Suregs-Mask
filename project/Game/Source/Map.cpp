@@ -32,6 +32,7 @@
 #include "Item_Ojo.h"
 #include "Item_Hueso.h"
 #include "Enemy_Ols.h"
+#include "Enemy_Muur.h"
 #include "TPEntity.h"
 #include "Window.h"
 #include "Boss_Inuit.h"
@@ -1112,6 +1113,16 @@ bool Map::LoadEntities(std::string layerName)
 						shar->config = configNode.child("entities_data").child("shar");
 						shar->position = iPoint(pos.x + 16, pos.y + 16);
 						shar->Start();
+
+					}
+
+					//MUUR
+					if (gid == tileset->firstgid + 23) {
+
+						Enemy_Muur* muur = (Enemy_Muur*)app->entityManager->CreateEntity(EntityType::ENEMY_MUUR);
+						muur->config = configNode.child("entities_data").child("muur");
+						muur->position = iPoint(pos.x + 16, pos.y + 16);
+						muur->Start();
 
 					}
 

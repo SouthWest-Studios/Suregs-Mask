@@ -141,13 +141,10 @@
 
 		<ols texturePath="Assets/Textures/Entidades/Ols/animations/spritesheets/Sprites.png" 
 				Tsprite="374" Pwidth="6336" sprite_x="288" sprite_y="128"/>
-
-		<muur texturePath="Assets/Textures/Entidades/Muur/Sprites.png" 
+				
+		<muur texturePath="Assets/Textures/Entidades/Muur/Muur.png" 
 				maxHealth="100.0f" speed="7.5f" attackDamage="20.0f" attackDistance="2" viewDistance="10"
-				Tsprite="45" Pwidth="2190" sprite_x="146" sprite_y="153"/>	
-
-		<shar texturePath="Assets/Textures/Entidades/Shar/Sprites.png" 
-				Tsprite="45" Pwidth="2190" sprite_x="146" sprite_y="153"/>
+				Tsprite="20" Pwidth="180" sprite_x="60" sprite_y="55"/>	
 
 		<khurt texturePath="Assets/Textures/Entidades/Khurt/textura_khurt.png" 
 			   maxHealth="220.0f" speed="7.5f" attackDamage="90.0f" attackDistance="2" viewDistance="20"
@@ -335,12 +332,21 @@
 			<attackAnim_shar start="220" end="234" speed="0.2f" loop="false"/>
 			<dieAnim_shar start="353" end="370" speed="0.2f" loop="false"/>
 		</shar>
+
 		<khurt>
 			<idleAnim start="1" end="1" speed="0.05f" loop="true"/>
 			<runAnim start="1" end="2" speed="0.05f" loop="true"/>
 			<underAnim start="3" end="3" speed="0.05f" loop="true"/>
 			<dieAnim start="4" end="4" speed="0.05f" loop="true"/>
 		</khurt>
+
+		<muur>
+			<idleAnim start="0" end="0" speed="0.05f" loop="true"/>
+			<runAnim start="4" end="7" speed="0.05f" loop="true"/>
+			<attackAnim start="8" end="10" speed="0.05f" loop="true"/>
+			<chargeAnim start="12" end="14" speed="0.05f" loop="true"/>
+			<stunAnim start="16" end="18" speed="0.05f" loop="true"/>
+		</muur>
 
 		<item>
 			<idleAnim start="0" end="23" speed="0.2f" loop="true"/>
