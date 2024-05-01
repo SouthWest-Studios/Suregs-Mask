@@ -245,9 +245,6 @@ bool Boss_Inuit::Osirisfinding(float dt, iPoint playerPosP)
 
 	b2Vec2 velocity = b2Vec2(0, 0);
 
-	//Get the latest calculated path and draw
-
-
 	if (lastPath.Count() > 1) { // Asegate de que haya al menos una posicion en el camino
 
 		// Toma la primera posicion del camino como el objetivo al que el enemigo debe dirigirse
@@ -268,9 +265,6 @@ bool Boss_Inuit::Osirisfinding(float dt, iPoint playerPosP)
 		attackAnim.Reset();
 
 	}
-	/*else {
-		LOG("HA LLEGADO AL DESTINO");
-	}*/
 
 	// Aplica la velocidad al cuerpo del enemigo
 	pbodyFoot->body->SetLinearVelocity(velocity);
