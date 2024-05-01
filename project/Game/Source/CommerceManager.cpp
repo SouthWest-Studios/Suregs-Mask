@@ -82,7 +82,7 @@ bool CommerceManager::Start() {
 		commerceNode = commerceNode.next_sibling();
 	}
 
-	//PlayCommerce(0);
+	PlayCommerce(1);
 
 	return ret;
 }

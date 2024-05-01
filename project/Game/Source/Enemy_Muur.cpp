@@ -53,6 +53,8 @@ bool Enemy_Muur::Start() {
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
+	muur_get_damage_fx = app->audio->LoadAudioFx("muur_get_damage_fx");
+
 	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
 	pbodyFoot->entity = this;
 	pbodyFoot->listener = this;
@@ -344,6 +346,7 @@ void Enemy_Muur::TakeDamage(float damage) {
 		health -= damage;
 		invulnerabilityTimer.Start();
 		timerRecibirDanioColor.Start();
+		app->audio->PlayFx(muur_get_damage_fx);
 	}
 }
 
