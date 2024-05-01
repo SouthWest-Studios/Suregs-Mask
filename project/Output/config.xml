@@ -133,7 +133,7 @@
 	<entities_data>
 		<!-- <player x="1450" y="2500" texturePath="Assets/Textures/Entidades/Jugador/salamanda.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg" Posx="150" Posy="570" Tsprite="23" Pwidth="1000" sprite_x="100" sprite_y="160"/>
             -->
-		<player texturePath="Assets/Textures/Entidades/Jugador/textura_player.png" Tsprite="24" Pwidth="2408" sprite_x="301" sprite_y="250"/>
+		<player texturePath="Assets/Textures/Entidades/Jugador/textura_player.png" Tsprite="32" Pwidth="2352" sprite_x="294" sprite_y="237"/>
 
 		<osiris texturePath="Assets/Textures/Entidades/Osiris/textura_osiris.png" 
 				maxHealth="250.0f" speed="2.5f" attackDamage="50.0f" attackDistance="2" viewDistance="20"
@@ -297,8 +297,9 @@
 		<player>
 			<!-- chibi 100-->
 			<idleAnim start="0" end="1" speed="0.2f" loop="true"/>
-			<runAnim start="8" end="16" speed="0.15f" loop="true"/>
-			<dashiAnim start="17" end="24" speed="0.25f" loop="false"/>
+			<runAnim start="17" end="24" speed="0.15f" loop="true"/>
+			<dashiAnim start="8" end="16" speed="0.25f" loop="false"/>
+			<atackAnim_player start="25" end="30" speed="0.25f" loop="false"/>
 		</player>
 
 		<osiris>

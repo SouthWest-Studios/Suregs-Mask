@@ -405,6 +405,7 @@ bool Player::Start() {
 	idleAnim.LoadAnim("player", "idleAnim", spritePositions);
 	runAnim.LoadAnim("player", "runAnim", spritePositions);
 	dashiAnim.LoadAnim("player", "dashiAnim", spritePositions);
+	atackAnim_player.LoadAnim("player", "atackAnim_player", spritePositions);
 
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
@@ -475,6 +476,16 @@ bool Player::Update(float dt)
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "dashiAnim") {
 		inAnimation = false;
 		dashiAnim.Reset();
+	}
+
+	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atackAnim_player") {
+		inAnimation = false;
+		atack_Anim = false;
+		desiredState = EntityState::IDLE;
+		atackAnim_player.Reset();
+	}
+	if (atack_Anim) {
+		currentAnimation = &atackAnim_player;
 	}
 
 	if (godmode) { GodMode(dt); }
@@ -579,6 +590,7 @@ void Player::Run(float dt)
 
 void Player::Dashi(float dt)
 {
+	
 	inAnimation = true;
 	currentAnimation = &dashiAnim;
 	
@@ -586,7 +598,8 @@ void Player::Dashi(float dt)
 void Player::Attack(float dt)
 {
 	//printf("attack"); 
-
+	atack_Anim = true;
+	inAnimation = true;
 	// Dirección del ataque
 	int attackX = position.x + lastMovementDirection.x * attackWidth;
 	int attackY = position.y + lastMovementDirection.y * attackHeight;
