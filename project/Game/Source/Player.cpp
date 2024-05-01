@@ -918,7 +918,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			if (physB->listener->active) {
 				if (app->inventoryManager->IsFull() == false)
 				{
-					app->inventoryManager->CreateItem(physB->listener->type, physB->listener->description, physB->listener->tipo);
+					//app->inventoryManager->CreateItem(physB->listener->type, physB->listener->description, physB->listener->tipo, physB->listener->name);
 					physB->listener->active = false;
 					physB->body->SetActive(false);
 					app->audio->PlayFx(get_item_fx); // <--- No funciona
