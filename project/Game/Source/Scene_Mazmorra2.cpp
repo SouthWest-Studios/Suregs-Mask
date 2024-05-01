@@ -9,7 +9,6 @@
 #include "Item.h"
 #include "ModuleFadeToBlack.h"
 #include "Optick/include/optick.h"
-#include "Boss_Inutil.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -61,9 +60,6 @@ bool Scene_Mazmorra2::Start()
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
-
-	boss_inutil = (Boss_Inutil*)app->entityManager->CreateEntity(EntityType::BOSS_INUTIL);
-	boss_inutil->parameters = config.child("boss_inutil");
 	// Texture to highligh mouse position 
 	//mouseTileTex = app->tex->Load("Assets/Mapas/tileSelection.png");
 
@@ -111,8 +107,6 @@ bool Scene_Mazmorra2::PostUpdate()
 bool Scene_Mazmorra2::CleanUp()
 {
 	LOG("Freeing Scene_Mazmorra2");
-	app->entityManager->DestroyEntity(boss_inutil);
-	delete boss_inutil;
 	return true;
 }
 

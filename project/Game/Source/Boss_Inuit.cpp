@@ -1,4 +1,5 @@
-﻿#include "Boss_Inutil.h"
+﻿#include "Boss_Inuit.h"
+
 #include "Player.h"
 #include "App.h"
 #include "Textures.h"
@@ -21,21 +22,21 @@
 
 
 
-Boss_Inutil::Boss_Inutil() : Entity(EntityType::BOSS_INUTIL) {
-	name.Create("boss_inutil");
+Boss_Inuit::Boss_Inuit() : Entity(EntityType::BOSS_INUIT) {
+	name.Create("boss_inuit");
 
 }
 
-Boss_Inutil::~Boss_Inutil() {
+Boss_Inuit::~Boss_Inuit() {
 
 }
 
-bool Boss_Inutil::Awake() {
+bool Boss_Inuit::Awake() {
 
 	return true;
 }
 
-bool Boss_Inutil::Start() {
+bool Boss_Inuit::Start() {
 
 	OPTICK_EVENT();
 	//position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
@@ -46,14 +47,14 @@ bool Boss_Inutil::Start() {
 	Photowidth = config.attribute("Pwidth").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
-	idleAnim.LoadAnim("boss_inutil", "idleAnim", spritePositions);
+	idleAnim.LoadAnim("boss_inuit", "idleAnim_boss_inuit", spritePositions);
 	/*runAnim.LoadAnim("osiris", "runAnim", spritePositions);
 	attackAnim.LoadAnim("osiris", "attackAnim", spritePositions);
 	dieAnim.LoadAnim("osiris", "dieAnim", spritePositions);*/
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
-	/*pbodyFoot = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
+	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
 	pbodyFoot->entity = this;
 	pbodyFoot->listener = this;
 	pbodyFoot->ctype = ColliderType::ENEMY;
@@ -61,7 +62,8 @@ bool Boss_Inutil::Start() {
 	pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 40, 60, bodyType::DYNAMIC);
 	pbodySensor->entity = this;
 	pbodySensor->listener = this;
-	pbodySensor->ctype = ColliderType::UNKNOWN;*/
+	pbodySensor->ctype = ColliderType::UNKNOWN;
+
 	/*
 	originalPosition = app->map->WorldToMap(position.x, position.y);
 
@@ -72,12 +74,12 @@ bool Boss_Inutil::Start() {
 	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();*/
 
-
+	printf("%s", app->tex->Load(config.attribute("texturePath").as_string()));
 
 	return true;
 }
 
-bool Boss_Inutil::Update(float dt)
+bool Boss_Inuit::Update(float dt)
 {
 	OPTICK_EVENT();
 
@@ -94,7 +96,7 @@ bool Boss_Inutil::Update(float dt)
 }
 
 
-bool Boss_Inutil::PostUpdate() {
+bool Boss_Inuit::PostUpdate() {
 
 	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
@@ -133,7 +135,7 @@ bool Boss_Inutil::PostUpdate() {
 }
 
 
-bool Boss_Inutil::CleanUp()
+bool Boss_Inuit::CleanUp()
 {
 	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 	app->physics->GetWorld()->DestroyBody(pbodySensor->body);
@@ -146,7 +148,7 @@ bool Boss_Inutil::CleanUp()
 	return true;
 }
 
-void Boss_Inutil::DoNothing(float dt)
+void Boss_Inuit::DoNothing(float dt)
 {
 	//currentAnimation = &idleAnim;
 	////printf("Osiris idle");
@@ -154,7 +156,7 @@ void Boss_Inutil::DoNothing(float dt)
 
 }
 
-void Boss_Inutil::Chase(float dt, iPoint playerPos)
+void Boss_Inuit::Chase(float dt, iPoint playerPos)
 {
 	////printf("Osiris chasing");
 	//currentAnimation = &runAnim;
@@ -162,7 +164,7 @@ void Boss_Inutil::Chase(float dt, iPoint playerPos)
 
 }
 
-void Boss_Inutil::Attack(float dt)
+void Boss_Inuit::Attack(float dt)
 {
 	////printf("Osiris attacking");
 	//currentAnimation = &attackAnim;
@@ -171,19 +173,19 @@ void Boss_Inutil::Attack(float dt)
 	////sonido ataque
 }
 
-void Boss_Inutil::Die() {
+void Boss_Inuit::Die() {
 
 	
 }
 
-void Boss_Inutil::Revive()
+void Boss_Inuit::Revive()
 {
 	
 }
 
 
 // L07 DONE 6: Define OnCollision function for the player. 
-void Boss_Inutil::OnCollision(PhysBody* physA, PhysBody* physB) {
+void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 	case ColliderType::PLATFORM:
@@ -204,7 +206,7 @@ void Boss_Inutil::OnCollision(PhysBody* physA, PhysBody* physB) {
 	}
 }
 
-bool Boss_Inutil::Osirisfinding(float dt, iPoint playerPosP)
+bool Boss_Inuit::Osirisfinding(float dt, iPoint playerPosP)
 {
 	iPoint playerPos = app->map->WorldToMap(playerPosP.x, playerPosP.y);
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
@@ -254,41 +256,41 @@ bool Boss_Inutil::Osirisfinding(float dt, iPoint playerPosP)
 	return true;
 }
 
-float Boss_Inutil::GetHealth() const {
+float Boss_Inuit::GetHealth() const {
 	return health;
 }
 
-void Boss_Inutil::TakeDamage(float damage) {
+void Boss_Inuit::TakeDamage(float damage) {
 
 
 }
 
-void Boss_Inutil::stateMachine(float dt, iPoint playerPos)
+void Boss_Inuit::stateMachine(float dt, iPoint playerPos)
 {
 	//printf("\ncurrentState: %d, desiredState: %d", static_cast<int>(currentState), static_cast<int>(desiredState));
 	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
 	switch (nextState) {
-	case EntityState_Boss_Inutil::IDLE:
+	case EntityState_Boss_Inuit::IDLE:
 		DoNothing(dt);
 		break;
-	case EntityState_Boss_Inutil::RUNNING:
+	case EntityState_Boss_Inuit::RUNNING:
 		Chase(dt, playerPos);
 		break;
-	case EntityState_Boss_Inutil::ATTACKING_BASIC:
+	case EntityState_Boss_Inuit::ATTACKING_BASIC:
 		Attack(dt);
 		break;
-	case EntityState_Boss_Inutil::ATTACKING_DISTANCE:
+	case EntityState_Boss_Inuit::ATTACKING_DISTANCE:
 		break;
-	case EntityState_Boss_Inutil::DEAD:
+	case EntityState_Boss_Inuit::DEAD:
 		Die();
 		break;
-	case EntityState_Boss_Inutil::DASHI:
+	case EntityState_Boss_Inuit::DASHI:
 		break;
-	case EntityState_Boss_Inutil::FASE_CHANGE:
+	case EntityState_Boss_Inuit::FASE_CHANGE:
 		break;
-	case EntityState_Boss_Inutil::NONE:
+	case EntityState_Boss_Inuit::NONE:
 
-		desiredState = EntityState_Boss_Inutil::IDLE;
+		desiredState = EntityState_Boss_Inuit::IDLE;
 		break;
 
 	default:
@@ -298,7 +300,7 @@ void Boss_Inutil::stateMachine(float dt, iPoint playerPos)
 
 }
 
-void Boss_Inutil::ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate) {
+void Boss_Inuit::ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate) {
 	this->poisonDamage = poisonDamage;
 	this->poisonDuration = poisonDuration;
 	this->poisonTickRate = poisonTickRate;
