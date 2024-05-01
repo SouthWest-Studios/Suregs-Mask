@@ -272,15 +272,25 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 
 	case 13:
+		//MIENTRAS ESTO PETE, QUE POR LO MENOS PAREZCA QUE CARGAS UNA PARTIDA XD
+		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
+		app->menu->active = true;
+		app->guiManager->pointerId = 100;
 		/*app->LoadRequest();*/
 		break;
 
 	case 14:
 		/*app->LoadRequest();*/
+		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
+		app->menu->active = true;
+		app->guiManager->pointerId = 100;
 		break;
 
 	case 15:
 		/*app->LoadRequest();*/
+		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
+		app->menu->active = true;
+		app->guiManager->pointerId = 100;
 		break;
 
 	case 16:
