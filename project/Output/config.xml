@@ -148,8 +148,8 @@
 				Tsprite="374" Pwidth="6336" sprite_x="288" sprite_y="128"/>
 				
 		<muur texturePath="Assets/Textures/Entidades/Muur/Muur.png" 
-				maxHealth="100.0f" speed="7.5f" attackDamage="20.0f" attackDistance="2" viewDistance="10"
-				Tsprite="20" Pwidth="180" sprite_x="60" sprite_y="55"/>	
+				maxHealth="100.0f" speed="4f" attackDamage="20.0f" attackDistance="1" viewDistance="15"  chargeattackDistance= "10"
+				Tsprite="20" Pwidth="240" sprite_x="60" sprite_y="55"/>	
 
 		<khurt texturePath="Assets/Textures/Entidades/Khurt/textura_khurt.png" 
 			   maxHealth="220.0f" speed="1.5f" attackDamage="90.0f" attackDistance="2" viewDistance="20"
@@ -358,11 +358,11 @@
 		</khurt>
 
 		<muur>
-			<idleAnim start="0" end="0" speed="0.05f" loop="true"/>
-			<runAnim start="4" end="7" speed="0.05f" loop="true"/>
-			<attackAnim start="8" end="10" speed="0.05f" loop="true"/>
-			<chargeAnim start="12" end="14" speed="0.05f" loop="true"/>
-			<stunAnim start="16" end="18" speed="0.05f" loop="true"/>
+			<idleAnim start="0" end="1" speed="0.05f" loop="true"/>
+			<runAnim start="4" end="8" speed="0.05f" loop="true"/>
+			<attackAnim start="8" end="11" speed="0.05f" loop="true"/>
+			<chargeAnim start="12" end="15" speed="0.05f" loop="false"/>
+			<stunAnim start="16" end="19" speed="0.05f" loop="false"/>
 		</muur>
 
 		<item>

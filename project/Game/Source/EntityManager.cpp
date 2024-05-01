@@ -132,12 +132,13 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 		entity = new Enemy_Shar();
 		break;
 	case EntityType::ENEMY_MUUR:
-		printf("MUUR");
 		entity = new Enemy_Muur();
 		break;
 	case EntityType::ENEMY_KHURT:
 		entity = new Enemy_Khurt();
 		break;
+
+
 	case EntityType::ITEM_GARRA:
 		entity = new Item_Garra(type, 1, 100, 300, 5, 2);
 		break;
