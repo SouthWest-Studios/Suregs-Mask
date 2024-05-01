@@ -153,39 +153,39 @@
 		<boss_inuit texturePath="Assets/Textures/Entidades/Boss/Miniboss1.png" Tsprite="1" Pwidth="1640" sprite_x="1640" sprite_y="2360"/>
 
 
-		<item_garra texturePath="Assets/Textures/Entidades/Items/item_Garra.png" description="Esta es una garra muy bonita, buenos dias." type ="apendice"/>
-		<item_diamante texturePath="Assets/Textures/Entidades/Items/texture_diamond.png" description="Este diamante brilla mas que mi futuro." type ="material"/>
-		<item_ojo texturePath="Assets/Textures/Entidades/Items/texture_eye.png" description="La leyenda dice que es un ojo." type ="apendice"/>
-		<item_hueso texturePath="Assets/Textures/Entidades/Items/textura_hueso.png" description="La leyenda dice que es un hueso." type ="apendice"/>
-		<item_carbon texturePath="Assets/Textures/Entidades/Items/textura_carbon.png" description="Mas negro que mi alma." type ="material"/>
-		<item_viscera texturePath="Assets/Textures/Entidades/Items/textura_visceras.png" description="lorem ipsum sit amet." type ="apendice"/>
-		<item_rubi texturePath="Assets/Textures/Entidades/Items/textura_rubi.png" description="lorem ipsum sit amet." type ="material"/>
-		<item_diente texturePath="Assets/Textures/Entidades/Items/textura_diente.png" description="lorem ipsum sit amet." type ="apendice"/>
-		<item_amatista texturePath="Assets/Textures/Entidades/Items/textura_amatista.png" description="lorem ipsum sit amet." type ="material"/>
-		<item_cola texturePath="Assets/Textures/Entidades/Items/textura_cola.png" description="Esta es la cola de los sureg masculinos." type ="apendice"/>
-		<item_polvora texturePath="Assets/Textures/Entidades/Items/textura_polvora.png" description="22000 stacks de polvora por hora en la granja de creeper" type ="material"/>
-		<item_nota texturePath="Assets/Textures/Entidades/Items/textura_nota.png" closeTexturePath="Assets/Textures/Entidades/Items/textura_NoteCloseUp.png" 
+		<item_garra texturePath="Assets/Textures/Entidades/Items/item_Garra.png" description="Esta es una garra muy bonita, buenos dias." type ="apendice" name="Garra"/>
+		<item_diamante texturePath="Assets/Textures/Entidades/Items/texture_diamond.png" description="Este diamante brilla mas que mi futuro." type ="material" name="Diamante"/>
+		<item_ojo texturePath="Assets/Textures/Entidades/Items/texture_eye.png" description="La leyenda dice que es un ojo." type ="apendice" name="Ojo"/>
+		<item_hueso texturePath="Assets/Textures/Entidades/Items/textura_hueso.png" description="La leyenda dice que es un hueso." type ="apendice" name="Hueso"/>
+		<item_carbon texturePath="Assets/Textures/Entidades/Items/textura_carbon.png" description="Mas negro que mi alma." type ="material" name="Carbon"/>
+		<item_viscera texturePath="Assets/Textures/Entidades/Items/textura_visceras.png" description="lorem ipsum sit amet." type ="apendice" name="Visceras"/>
+		<item_rubi texturePath="Assets/Textures/Entidades/Items/textura_rubi.png" description="lorem ipsum sit amet." type ="material" name="Rubi"/>
+		<item_diente texturePath="Assets/Textures/Entidades/Items/textura_diente.png" description="lorem ipsum sit amet." type ="apendice" name="Diente"/>
+		<item_amatista texturePath="Assets/Textures/Entidades/Items/textura_amatista.png" description="lorem ipsum sit amet." type ="material" name="Amatista"/>
+		<item_cola texturePath="Assets/Textures/Entidades/Items/textura_cola.png" description="Esta es la cola de los sureg masculinos." type ="apendice" name="Cola"/>
+		<item_polvora texturePath="Assets/Textures/Entidades/Items/textura_polvora.png" description="22000 stacks de polvora por hora en la granja de creeper" type ="material" name="Polvora"/>
+		<item_nota texturePath="Assets/Textures/Entidades/Items/textura_nota.png" closeTexturePath="Assets/Textures/Entidades/Items/textura_NoteCloseUp.png"  name="Nota"
 					texto1 ="bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla"
 					texto2 ="ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble blable"
 					texto3 ="bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli"
 					texto4 ="blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO"
 					texto5 ="blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blablu"/>
 
-		<item_pez_pequeno texturePath="---" description="aleix" type ="Pez"/>
-		<item_pez_mediano texturePath="---" description="es un" type ="Pez"/>
-		<item_pez_grande texturePath="---" description="bobo que mezcla sistemas" type ="Pez"/>
-		<item_moneda texturePath="---" description="Esto no deberias de tenerlo en el invenatario... solo en las tiendas jeje" type ="Miscelanea"/>
+		<item_pez_pequeno texturePath="---" description="aleix" type ="Pez" name="Pez pequeño"/>
+		<item_pez_mediano texturePath="---" description="es un" type ="Pez" name="Pez mediano"/>
+		<item_pez_grande texturePath="---" description="bobo que mezcla sistemas" type="Pez" name="Pez grande"/>
+		<item_moneda texturePath="---" description="Esto no deberias de tenerlo en el invenatario... solo en las tiendas jeje" type ="Miscelanea" name="Monedas"/>
 
-		<item_saliva texturePath="Assets/Textures/Entidades/Items/textura_saliva.png" description="lorem ipsum sit amet." type ="material"/>
+		<item_saliva texturePath="Assets/Textures/Entidades/Items/textura_saliva.png" description="lorem ipsum sit amet." type ="material" name="Saliva"/>
 		
-		<item_pocion_vida_1 texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_1.png" description="lorem ipsum sit amet." type ="consumible"/>
-		<item_pocion_vida_2 texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_2.png" description="lorem ipsum sit amet." type ="consumible"/>
-		<item_pocion_vida_3 texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_3.png" description="lorem ipsum sit amet." type ="consumible"/>
-		<item_pocion_vida_max texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_max.png" description="lorem ipsum sit amet." type ="consumible"/>
-		<item_pocion_regenracion texturePath="Assets/Textures/Entidades/Items/textura_pocion_regeneracion.png" description="lorem ipsum sit amet." type ="consumible"/>
-		<item_pocion_dano texturePath="Assets/Textures/Entidades/Items/textura_pocion_dano.png" description="lorem ipsum sit amet." type ="consumible"/>
-		<item_pocion_velocidad texturePath="Assets/Textures/Entidades/Items/textura_pocion_velocidad.png" description="lorem ipsum sit amet." type ="consumible"/>
-		<item_pocion_orbe_magico texturePath="Assets/Textures/Entidades/Items/textura_orbe_magico.png" description="lorem ipsum sit amet." type ="consumible"/>
+		<item_pocion_vida_1 texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_1.png" description="lorem ipsum sit amet." type ="consumible" name="Pocion de Vida Nv1"/>
+		<item_pocion_vida_2 texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_2.png" description="lorem ipsum sit amet." type ="consumible" name="Pocion de Vida Nv2"/>
+		<item_pocion_vida_3 texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_3.png" description="lorem ipsum sit amet." type ="consumible" name="Pocion de Vida Nv3"/>
+		<item_pocion_vida_max texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_max.png" description="lorem ipsum sit amet." type ="consumible" name="Pocion de Vida maxima"/>
+		<item_pocion_regenracion texturePath="Assets/Textures/Entidades/Items/textura_pocion_regeneracion.png" description="lorem ipsum sit amet." type ="consumible" name="Pocion de Regeneracion"/>
+		<item_pocion_dano texturePath="Assets/Textures/Entidades/Items/textura_pocion_dano.png" description="lorem ipsum sit amet." type ="consumible" name="Pocion de Daño"/>
+		<item_pocion_velocidad texturePath="Assets/Textures/Entidades/Items/textura_pocion_velocidad.png" description="lorem ipsum sit amet." type ="consumible" name="Pocion de Velocidad"/>
+		<item_pocion_orbe_magico texturePath="Assets/Textures/Entidades/Items/textura_orbe_magico.png" description="lorem ipsum sit amet." type ="consumible" name="Orbe Magico"/>
 
 
 

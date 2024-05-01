@@ -281,7 +281,7 @@ bool Commerce::PostUpdate()
 				app->render->DrawTexture(backgroundTradeItemTexture, positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j), y + positionInList.y, 1, SDL_FLIP_NONE, nullptr, 0, 0);
 
 				//Primer item de oferta
-				app->render->DrawTexture(trade->itemsOffered.at(j)->icon, positionGeneral.x + positionList.x + positionInList.x - 25 + (itemSpacing * j), y + positionInList.y - 25, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+				app->render->DrawTexture(trade->itemsOffered.at(j)->icon, positionGeneral.x + positionList.x + positionInList.x - 10 + (itemSpacing * j), y + positionInList.y - 10, 0.65f, SDL_FLIP_NONE, nullptr, 0, 0);
 
 				//Cantidad
 				app->render->DrawTextBound(std::to_string(trade->quantityOffered.at(j)).c_str(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j) + 60, y + positionInList.y, 20);
@@ -293,6 +293,13 @@ bool Commerce::PostUpdate()
 			
 			}
 
+			//Si solo ofrece un item, poner el nombre de este al lado
+			if (trade->itemsOffered.size() == 1) {
+				
+				app->render->DrawTextBound(trade->itemsOffered.at(0)->name.GetString(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * 2) + 55, y + positionInList.y + 20, 20);
+
+			}
+
 
 			//ItemsRequeridos
 			for (int j = 0; j < trade->itemsRequested.size(); j++) {
@@ -301,7 +308,7 @@ bool Commerce::PostUpdate()
 				app->render->DrawTexture(backgroundTradeItemTexture, positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j) + itemsRequestedSpacing, y + positionInList.y, 1, SDL_FLIP_NONE, nullptr, 0, 0);
 
 				//Primer item de oferta
-				app->render->DrawTexture(trade->itemsRequested.at(j)->icon, positionGeneral.x + positionList.x + positionInList.x - 25 + (itemSpacing * j) + itemsRequestedSpacing, y + positionInList.y - 25, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+				app->render->DrawTexture(trade->itemsRequested.at(j)->icon, positionGeneral.x + positionList.x + positionInList.x - 10 + (itemSpacing * j) + itemsRequestedSpacing, y + positionInList.y - 10, 0.65f, SDL_FLIP_NONE, nullptr, 0, 0);
 				
 				//Cantidad
 				app->render->DrawTextBound(std::to_string(trade->quantityRequested.at(j)).c_str(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j)+ itemsRequestedSpacing + 50, y + positionInList.y, 20);
@@ -311,10 +318,6 @@ bool Commerce::PostUpdate()
 				int cantidadEnActivoTodosTrades = GetInventoryTradesQuantity(trade->itemsRequested.at(j)->type);
 
 				int calculoCantidad = cantidadEnInventario - cantidadEnActivoTodosTrades;
-
-				//int calculoCantidad = (cantidad - (trade->quantityTraded * trade->quantityRequested.at(j)));
-
-				//calculoCantidad -= GetInventoryTradesQuantity(trade->itemsRequested.at(j)->type);
 
 
 				std::string cantidadObtener = "(" + std::to_string(calculoCantidad) + ")";

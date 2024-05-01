@@ -81,6 +81,7 @@ bool CommerceManager::Start() {
 
 		commerceNode = commerceNode.next_sibling();
 	}
+
 	//PlayCommerce(1);
 
 	return ret;

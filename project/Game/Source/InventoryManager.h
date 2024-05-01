@@ -31,7 +31,7 @@ public:
 	bool CleanUp();
 
 	// Additional methods
-	Inventity* CreateItem(EntityType type, std::string descripcioon, std::string tipo);
+	Inventity* CreateItem(EntityType type, std::string descripcioon, std::string tipo, std::string nombre);
 
 	Inventity* CreateItem(InventityType type); //Necesario para las tiendas
 
