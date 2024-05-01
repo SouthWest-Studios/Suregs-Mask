@@ -150,7 +150,9 @@
 			   maxHealth="220.0f" speed="7.5f" attackDamage="90.0f" attackDistance="2" viewDistance="20"
 			   Tsprite="4" Pwidth="40" sprite_x="20" sprite_y="20"/>
 
-		<boss_inuit texturePath="Assets/Textures/Entidades/Boss/Miniboss1.png" Tsprite="1" Pwidth="1640" sprite_x="1640" sprite_y="2360"/>
+		<boss_inuit texturePath="Assets/Textures/Entidades/Boss/Miniboss1.png" 
+					maxHealth="6500.0f" speed="5f" attackDamage="90.0f" attackDistance="2" viewDistance="20"
+					Tsprite="1" Pwidth="115" sprite_x="170" sprite_y="331"/>
 
 
 		<item_garra texturePath="Assets/Textures/Entidades/Items/item_Garra.png" description="Esta es una garra muy bonita, buenos dias." type ="apendice" name="Garra"/>

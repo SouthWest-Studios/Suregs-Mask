@@ -311,7 +311,13 @@ bool EntityManager::PreUpdate()
 	{
 		if (obj.texture == app->entityManager->GetPlayer()->texture)
 		{
-			obj.x = app->entityManager->GetPlayer()->position.x - 75;
+			if (app->entityManager->GetPlayer()->isFacingLeft) {
+			obj.x = app->entityManager->GetPlayer()->position.x - 100;
+			}
+			else
+			{
+				obj.x = app->entityManager->GetPlayer()->position.x - 45;
+			}
 			obj.y = app->entityManager->GetPlayer()->position.y - 100;
 			obj.anchorY = app->entityManager->GetPlayer()->position.y + 218; //Seg�n el sprite, a�adir el valor que corresponda -> !0
 			if (app->entityManager->GetPlayer()->currentAnimation != nullptr) {
