@@ -121,7 +121,44 @@ bool Commerce::SelectAllTrade(uint id, bool add)
 
 bool Commerce::ApplyTrades()
 {
-	return false;
+	bool ret = true;
+
+
+	for (int i = 0; i < trades.size(); i++) {
+
+		Trade* trade = trades.at(i);
+
+		//Agregar estos items al inventario
+		for (int j = 0; j < trade->itemsOffered.size(); j++) {
+			Inventity inventity = *trade->itemsOffered.at(j);
+
+			if (inventity.type == InventityType::MONEDA) {
+				app->inventoryManager->monedasObtenidas += trade->quantityOffered.at(j);
+			}
+			else {
+				inventity.quantity = trade->quantityOffered.at(j);
+				app->inventoryManager->AddItem(&inventity);
+			}
+
+			
+		}
+
+		//Eliminar estos items
+		for (int j = 0; j < trade->itemsRequested.size(); j++) {
+			
+	/*		Inventity inventity = *trade->itemsOffered.at(j);
+			inventity.quantity = trade->quantityOffered.at(j);
+			app->inventoryManager->AddItem(&inventity);*/
+		}
+
+		
+
+
+	}
+
+
+
+	return ret;
 }
 
 bool Commerce::LoadTextures()
@@ -139,6 +176,14 @@ bool Commerce::LoadTextures()
 	backgroundConfirmHoverTexture = app->tex->Load(backgroundConfirmHoverPathTexture);
 
 	backgroundTradeItemTexture = app->tex->Load(backgroundTradeItemPathTexture);
+
+	backgroundButtonTexture = app->tex->Load(backgroundButtonPathTexture);
+	backgroundButtonHoverTexture = app->tex->Load(backgroundButtonHoverPathTexture);
+	backgroundMoneyTexture = app->tex->Load(backgroundMoneyPathTexture);
+
+	backgroundDescriptionTexture = app->tex->Load(backgroundDescriptionPathTexture);
+
+	npcTexture = app->tex->Load(npcPathTexture);
 
 	pointerIndexF = 0;
 	scrollY = 0;
@@ -164,6 +209,12 @@ bool Commerce::CloseCommerce()
 	app->tex->UnLoad(backgroundConfirmTexture);
 	app->tex->UnLoad(backgroundConfirmHoverTexture);
 	app->tex->UnLoad(backgroundTradeItemTexture);
+	app->tex->UnLoad(backgroundButtonTexture);
+	app->tex->UnLoad(backgroundButtonHoverTexture);
+	app->tex->UnLoad(backgroundMoneyTexture);
+	app->tex->UnLoad(backgroundDescriptionTexture);
+	app->tex->UnLoad(npcTexture);
+
 
 	return ret;
 }
@@ -205,7 +256,7 @@ bool Commerce::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
 		pointerIndexF++;
-		if (pointerIndexF >= trades.size() + 1) {
+		if (pointerIndexF >= trades.size() + 2) {
 			pointerIndexF = 0;
 		}
 	}
@@ -213,7 +264,7 @@ bool Commerce::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
 		pointerIndexF--;
 		if (pointerIndexF < 0) {
-			pointerIndexF = trades.size();
+			pointerIndexF = trades.size() + 1;
 		}
 	}
 
@@ -239,6 +290,12 @@ bool Commerce::Update(float dt)
 		}
 		else {
 			//Boton confirmar compra
+			if (pointerIndexF == trades.size()) {
+				ApplyTrades();
+			}
+			else if (pointerIndexF == trades.size() + 1) {
+				CloseCommerce();
+			}
 
 		}
 	}
@@ -361,11 +418,24 @@ bool Commerce::PostUpdate()
 	}
 
 	//Boton confirmar compra
-	app->render->DrawTexture(backgroundConfirmTexture, positionGeneral.x + positionList.x + 414, positionGeneral.y + viewport.h + 85, 1, SDL_FLIP_NONE, nullptr, 0, 0);
-	app->render->DrawTextBound("Confirmar compra", positionGeneral.x + positionList.x + 485, positionGeneral.y + viewport.h + 120, 300);
+	app->render->DrawTexture(backgroundButtonTexture, positionGeneral.x + positionList.x + 485, positionGeneral.y + viewport.h + 80, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+	app->render->DrawTextBound("Confirmar compra", positionGeneral.x + positionList.x + 520, positionGeneral.y + viewport.h + 100, 300);
 
 	if (pointerIndexF == trades.size()) {
-		app->render->DrawTexture(backgroundConfirmHoverTexture, positionGeneral.x + positionList.x + 424, positionGeneral.y + viewport.h + 92, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+		app->render->DrawTexture(backgroundButtonHoverTexture, positionGeneral.x + positionList.x + 480, positionGeneral.y + viewport.h + 74, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+	}
+
+	//Boton cancelar compra
+	app->render->DrawTexture(backgroundButtonTexture, positionGeneral.x + positionList.x + 485, positionGeneral.y + viewport.h + 135, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+	app->render->DrawTextBound("Cancelar compra", positionGeneral.x + positionList.x + 520, positionGeneral.y + viewport.h + 155, 300);
+	if (pointerIndexF == trades.size()+1) {
+		app->render->DrawTexture(backgroundButtonHoverTexture, positionGeneral.x + positionList.x + 480, positionGeneral.y + viewport.h + 129, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+	}
+
+	//Descripcion item seleccionado
+	app->render->DrawTexture(backgroundDescriptionTexture, positionGeneral.x + positionList.x , positionGeneral.y + viewport.h + 95, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+	if (pointerIndexF < trades.size()) {
+		app->render->DrawTextBound(trades.at(pointerIndexF)->itemsOffered.at(0)->desc.c_str(), positionGeneral.x + positionList.x + 10, positionGeneral.y + viewport.h + 100, 500);
 	}
 
 
@@ -381,7 +451,13 @@ bool Commerce::PostUpdate()
 	app->render->DrawTexture(knobSliderTexture, positionGeneral.x + positionList.x + 760, positionGeneral.y + positionList.y + calculoAltura, 1, SDL_FLIP_NONE, nullptr, 0, 0);
 
 
+	//Fondo Mondes
+	app->render->DrawTexture(backgroundMoneyTexture, positionGeneral.x + 970, positionGeneral.y + 30, 1, SDL_FLIP_NONE, 0, 0);
+	app->render->DrawTextBound(std::to_string(app->inventoryManager->monedasObtenidas).c_str(), positionGeneral.x + 990, positionGeneral.y + 44, 60);
 
+
+	//Npc
+	app->render->DrawTexture(npcTexture, npcPosition.x-20, npcPosition.y+20, 1, SDL_FLIP_NONE, 0, 0);
 	
 	return ret;
 }

@@ -38,6 +38,7 @@ public:
 
 	bool SelectTrade(uint id, bool add = true);
 	bool SelectAllTrade(uint id, bool add = true);
+
 	bool ApplyTrades();
 
 	bool LoadTextures();
@@ -71,7 +72,13 @@ public:
 	char* backgroundConfirmPathTexture;
 	char* backgroundConfirmHoverPathTexture;
 
-	
+	char* backgroundButtonPathTexture;
+	char* backgroundButtonHoverPathTexture;
+	char* backgroundMoneyPathTexture;
+
+	char* backgroundDescriptionPathTexture;
+
+	char* npcPathTexture;
 
 
 	bool active; //Para saber si tiene que llamar al update o postUpdate del comercio o no.
@@ -83,6 +90,8 @@ public:
 	uint tradeSpacing;
 	uint itemSpacing;
 	uint itemsRequestedSpacing;
+
+	iPoint npcPosition;
 
 
 private:
@@ -107,6 +116,14 @@ private:
 
 	SDL_Texture* backgroundConfirmTexture;
 	SDL_Texture* backgroundConfirmHoverTexture;
+
+	SDL_Texture* backgroundButtonTexture;
+	SDL_Texture* backgroundButtonHoverTexture;
+	SDL_Texture* backgroundMoneyTexture;
+
+	SDL_Texture* backgroundDescriptionTexture;
+
+	SDL_Texture* npcTexture;
 
 
 

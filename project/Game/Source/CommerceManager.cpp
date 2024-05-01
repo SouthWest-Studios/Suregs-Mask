@@ -53,6 +53,12 @@ bool CommerceManager::Awake(pugi::xml_node config)
 	backgroundConfirmHoverPathTexture		= (char*)config.child("backgroundConfirmHoverPathTexture").attribute("texturePath").as_string();
 
 
+	backgroundButtonPathTexture				= (char*)config.child("backgroundButtonPathTexture").attribute("texturePath").as_string();
+	backgroundButtonHoverPathTexture		= (char*)config.child("backgroundButtonHoverPathTexture").attribute("texturePath").as_string();
+	backgroundMoneyPathTexture				= (char*)config.child("backgroundMoneyPathTexture").attribute("texturePath").as_string();
+
+	backgroundDescriptionPathTexture		= (char*)config.child("backgroundDescriptionPathTexture").attribute("texturePath").as_string();
+
 	
 	commerceNode = config.child("commerce");
 	
@@ -74,8 +80,11 @@ bool CommerceManager::Start() {
 		commerce->positionInList = iPoint(commerceNode.attribute("positionInListX").as_int(), commerceNode.attribute("positionInListY").as_int());
 		commerce->tradeSpacing = commerceNode.attribute("tradeSpacing").as_int();
 		commerce->itemSpacing = commerceNode.attribute("itemSpacing").as_int();
+		commerce->npcPosition = iPoint(commerceNode.attribute("npcPositionX").as_int(), commerceNode.attribute("npcPositionY").as_int());
 
 		commerce->itemsRequestedSpacing = commerceNode.attribute("itemsRequestedSpacing").as_int();
+
+		commerce->npcPathTexture = (char*)commerceNode.attribute("NPCTexturePath").as_string();
 
 		commerces.push_back(commerce);
 
@@ -110,6 +119,14 @@ Commerce* CommerceManager::CreateCommerce(CommerceType type, uint id, std::vecto
 	commerce->knobSliderPathTexture						= knobSliderPathTexture;
 	commerce->backgroundConfirmPathTexture				= backgroundConfirmPathTexture;
 	commerce->backgroundConfirmHoverPathTexture			= backgroundConfirmHoverPathTexture;
+
+	commerce->backgroundButtonPathTexture				= backgroundButtonPathTexture;
+	commerce->backgroundButtonHoverPathTexture			= backgroundButtonHoverPathTexture;
+	commerce->backgroundMoneyPathTexture				= backgroundMoneyPathTexture;
+
+	commerce->backgroundDescriptionPathTexture			= backgroundDescriptionPathTexture;
+
+	
 
 	commerce->SetTrades(trades);
 
@@ -176,6 +193,7 @@ bool CommerceManager::Update(float dt)
 	for (int i = 0; i < commerces.size(); i++) {
 		if (commerces.at(i)->active) {
 			commerces.at(i)->Update(dt);
+			app->entityManager->active = false;
 		}
 	}
 

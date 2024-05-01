@@ -19,6 +19,11 @@
 		<fullscreen_window value="false"/>
 	</window>
 
+	<input bindingsFile="controls.xml">
+		
+		
+	</input>
+
   <!--Audio-->
 	<audio>
 		<music volume="64"/>
@@ -150,7 +155,9 @@
 			   maxHealth="220.0f" speed="7.5f" attackDamage="90.0f" attackDistance="2" viewDistance="20"
 			   Tsprite="4" Pwidth="40" sprite_x="20" sprite_y="20"/>
 
-		<boss_inuit texturePath="Assets/Textures/Entidades/Boss/Miniboss1.png" Tsprite="1" Pwidth="1640" sprite_x="1640" sprite_y="2360"/>
+		<boss_inuit texturePath="Assets/Textures/Entidades/Boss/Miniboss1.png" 
+					maxHealth="6500.0f" speed="5f" attackDamage="90.0f" attackDistance="2" viewDistance="20"
+					Tsprite="1" Pwidth="115" sprite_x="170" sprite_y="331"/>
 
 
 		<item_garra texturePath="Assets/Textures/Entidades/Items/item_Garra.png" description="Esta es una garra muy bonita, buenos dias." type ="apendice" name="Garra"/>
@@ -171,10 +178,10 @@
 					texto4 ="blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO"
 					texto5 ="blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blablu"/>
 
-		<item_pez_pequeno texturePath="---" description="aleix" type ="Pez" name="Pez pequeño"/>
+		<item_pez_pequeno texturePath="---" description="aleix" type ="Pez" name="Pez pequeÃ±o"/>
 		<item_pez_mediano texturePath="---" description="es un" type ="Pez" name="Pez mediano"/>
 		<item_pez_grande texturePath="---" description="bobo que mezcla sistemas" type="Pez" name="Pez grande"/>
-		<item_moneda texturePath="---" description="Esto no deberias de tenerlo en el invenatario... solo en las tiendas jeje" type ="Miscelanea" name="Monedas"/>
+		<item_moneda texturePath="---" description="La moneda principal del juego, utilizada para comprar una variedad de bienes" type ="Miscelanea" name="Monedas"/>
 
 		<item_saliva texturePath="Assets/Textures/Entidades/Items/textura_saliva.png" description="lorem ipsum sit amet." type ="material" name="Saliva"/>
 		
@@ -183,7 +190,7 @@
 		<item_pocion_vida_3 texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_3.png" description="lorem ipsum sit amet." type ="consumible" name="Pocion de Vida Nv3"/>
 		<item_pocion_vida_max texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_max.png" description="lorem ipsum sit amet." type ="consumible" name="Pocion de Vida maxima"/>
 		<item_pocion_regenracion texturePath="Assets/Textures/Entidades/Items/textura_pocion_regeneracion.png" description="lorem ipsum sit amet." type ="consumible" name="Pocion de Regeneracion"/>
-		<item_pocion_dano texturePath="Assets/Textures/Entidades/Items/textura_pocion_dano.png" description="lorem ipsum sit amet." type ="consumible" name="Pocion de Daño"/>
+		<item_pocion_dano texturePath="Assets/Textures/Entidades/Items/textura_pocion_dano.png" description="lorem ipsum sit amet." type ="consumible" name="Pocion de DaÃ±o"/>
 		<item_pocion_velocidad texturePath="Assets/Textures/Entidades/Items/textura_pocion_velocidad.png" description="lorem ipsum sit amet." type ="consumible" name="Pocion de Velocidad"/>
 		<item_pocion_orbe_magico texturePath="Assets/Textures/Entidades/Items/textura_orbe_magico.png" description="lorem ipsum sit amet." type ="consumible" name="Orbe Magico"/>
 
@@ -445,6 +452,15 @@
 		<backgroundConfirmHoverPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_boton_hover.png" />
 		
 		<backgroundTradeItemTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_icono.png" />
+
+		<backgroundButtonPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_boton_abajo.png" />
+		<backgroundButtonHoverPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_boton_abajo_hover.png" />
+		
+		<backgroundMoneyPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_oro.png" />
+
+		<backgroundDescriptionPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_descripcion.png" />
+		
+		
 		
 		
 
@@ -465,7 +481,9 @@
 			</trades>
 		</commerce>
 
-		<commerce id="1" positionGeneralX="66" positionGeneralY="33" positionListX="280" positionListY="10" positionInListX="23" positionInListY="22" tradeSpacing="100" itemSpacing="150" itemsRequestedSpacing="350">
+		<commerce id="1" positionGeneralX="66" positionGeneralY="33" positionListX="280" positionListY="10" positionInListX="23" positionInListY="22" tradeSpacing="100" itemSpacing="150" itemsRequestedSpacing="350"
+				  NPCTexturePath="Assets/Textures/Entidades/NPCs/Dialogo/texture_mercader.png" npcPositionX="0" npcPositionY="0"
+				  >
 			<trades>
 				<trade itemOffered="-1" quantityItemOffered="7" itemRequested="10" quantityItemRequested="1"/>
 				<trade itemOffered="-1" quantityItemOffered="10" itemRequested="8" quantityItemRequested="1"/>

@@ -64,7 +64,7 @@ bool Boss_Inuit::Start() {
 	pbodySensor->listener = this;
 	pbodySensor->ctype = ColliderType::UNKNOWN;
 
-	/*
+	
 	originalPosition = app->map->WorldToMap(position.x, position.y);
 
 	maxHealth = config.attribute("maxHealth").as_float();
@@ -72,10 +72,9 @@ bool Boss_Inuit::Start() {
 	speed = config.attribute("speed").as_float();
 	attackDamage = config.attribute("attackDamage").as_float();
 	attackDistance = config.attribute("attackDistance").as_float();
-	viewDistance = config.attribute("viewDistance").as_float();*/
+	viewDistance = config.attribute("viewDistance").as_float();
 
-	printf("%s", app->tex->Load(config.attribute("texturePath").as_string()));
-
+	printf("Speed: %f", speed);
 	return true;
 }
 
@@ -83,13 +82,36 @@ bool Boss_Inuit::Update(float dt)
 {
 	OPTICK_EVENT();
 
+
+	
 	//Pone el sensor del cuerpo en su posicion
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
 
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
 
+	//printf("\n %d : %d", playerPos.x, playerPos.y);
+
+	if (health <= 0)
+	{
+		desiredState = EntityState_Boss_Inuit::DEAD;
+	}
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32)
+	{
+		desiredState = EntityState_Boss_Inuit::ATTACKING_BASIC;
+	}
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance * 32)
+	{
+		desiredState = EntityState_Boss_Inuit::RUNNING;
+	}
+	else
+	{
+		desiredState = EntityState_Boss_Inuit::RUNNING;
+	}
 	stateMachine(dt, playerPos);
+
+
+
 
 	currentAnimation->Update();
 	return true;
@@ -114,10 +136,10 @@ bool Boss_Inuit::PostUpdate() {
 
 
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 25, position.y - 65, 2, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x - 70, position.y - 200, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 40, position.y - 65, 2, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 70, position.y - 200, SDL_FLIP_NONE, &rect);
 	}
 
 	for (uint i = 0; i < lastPath.Count(); ++i)
@@ -160,7 +182,7 @@ void Boss_Inuit::Chase(float dt, iPoint playerPos)
 {
 	////printf("Osiris chasing");
 	//currentAnimation = &runAnim;
-	//Osirisfinding(dt, playerPos);
+	Osirisfinding(dt, playerPos);
 
 }
 
@@ -223,9 +245,6 @@ bool Boss_Inuit::Osirisfinding(float dt, iPoint playerPosP)
 
 	b2Vec2 velocity = b2Vec2(0, 0);
 
-	//Get the latest calculated path and draw
-
-
 	if (lastPath.Count() > 1) { // Asegate de que haya al menos una posicion en el camino
 
 		// Toma la primera posicion del camino como el objetivo al que el enemigo debe dirigirse
@@ -246,9 +265,6 @@ bool Boss_Inuit::Osirisfinding(float dt, iPoint playerPosP)
 		attackAnim.Reset();
 
 	}
-	/*else {
-		LOG("HA LLEGADO AL DESTINO");
-	}*/
 
 	// Aplica la velocidad al cuerpo del enemigo
 	pbodyFoot->body->SetLinearVelocity(velocity);
@@ -286,6 +302,7 @@ void Boss_Inuit::stateMachine(float dt, iPoint playerPos)
 		break;
 	case EntityState_Boss_Inuit::DASHI:
 		break;
+
 	case EntityState_Boss_Inuit::FASE_CHANGE:
 		break;
 	case EntityState_Boss_Inuit::NONE:
