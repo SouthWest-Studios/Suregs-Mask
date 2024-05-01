@@ -71,6 +71,8 @@ private:
 	char* backgroundSelectAllPathTexture;
 	char* backgroundSelectAllHoverPathTexture;
 
+	char* backgroundTradeItemPathTexture;
+
 	char* backgroundSliderPathTexture;
 	char* knobSliderPathTexture;
 
@@ -78,6 +80,8 @@ private:
 	char* backgroundConfirmHoverPathTexture;
 
 	std::vector<Commerce*> commerces;
+
+	pugi::xml_node commerceNode;
 	
 };
 

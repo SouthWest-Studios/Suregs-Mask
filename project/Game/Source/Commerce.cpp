@@ -73,6 +73,8 @@ bool Commerce::LoadTextures()
 	backgroundConfirmTexture = app->tex->Load(backgroundConfirmPathTexture);
 	backgroundConfirmHoverTexture = app->tex->Load(backgroundConfirmHoverPathTexture);
 
+	backgroundTradeItemTexture = app->tex->Load(backgroundTradeItemPathTexture);
+
 	pointerIndex = 0;
 
 	return false;
@@ -95,6 +97,7 @@ bool Commerce::CloseCommerce()
 	app->tex->UnLoad(knobSliderTexture);
 	app->tex->UnLoad(backgroundConfirmTexture);
 	app->tex->UnLoad(backgroundConfirmHoverTexture);
+	app->tex->UnLoad(backgroundTradeItemTexture);
 
 	return ret;
 }
@@ -140,16 +143,46 @@ bool Commerce::PostUpdate()
 	app->render->DrawTexture(backgroundTexture, positionGeneral.x, positionGeneral.y, 1, SDL_FLIP_NONE, 0, 0);
 
 	int viewportWidth = 0;
-	int viewportHeight = 40000;
+	int viewportHeight = 400;
 
 	SDL_Rect viewport = { positionGeneral.x + positionList.x, positionGeneral.y + positionList.y, viewportWidth, viewportHeight };
 
-
+	//Trades
 	for (int i = 0; i < trades.size(); i++) {
 		int y = positionGeneral.y + positionList.y + (70 + tradeSpacing * i);
 		if (y >= viewport.y && y <= viewport.y + viewport.h) {
 
+
+			//Fondo
 			app->render->DrawTexture(backgroundTradeTexture, positionGeneral.x + positionList.x, y, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+
+			Trade* trade = trades.at(i);
+
+			//ItemsOfrecidos
+			for (int j = 0; j < trade->itemsOffered.size(); j++) {
+
+				//Items background
+				app->render->DrawTexture(backgroundTradeItemTexture, positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j), y + positionInList.y, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+
+				//Primer item de oferta
+				app->render->DrawTexture(trade->itemsOffered.at(j)->icon, positionGeneral.x + positionList.x + positionInList.x - 25 + (itemSpacing * j), y + positionInList.y - 25, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+
+			}
+
+
+			//ItemsRequeridos
+			for (int j = 0; j < trade->itemsRequested.size(); j++) {
+
+				//Items background
+				app->render->DrawTexture(backgroundTradeItemTexture, positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j) + itemsRequestedSpacing, y + positionInList.y, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+
+				//Primer item de oferta
+				app->render->DrawTexture(trade->itemsRequested.at(j)->icon, positionGeneral.x + positionList.x + positionInList.x - 25 + (itemSpacing * j) + itemsRequestedSpacing, y + positionInList.y - 25, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+
+			}
+
+
+
 
 			if (pointerIndex == i) {
 				app->render->DrawTexture(backgroundTradeHoverTexture, positionGeneral.x + positionList.x -3, y -2, 1, SDL_FLIP_NONE, nullptr, 0, 0);

@@ -17,6 +17,7 @@
 #include "Defs.h"
 #include "Log.h"
 #include "SString.h"
+#include "Utils.cpp"
 
 CommerceManager::CommerceManager(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -37,32 +38,24 @@ bool CommerceManager::Awake(pugi::xml_node config)
 
 	backgroundPathTexture					= (char*)config.child("backgroundPathTexture").attribute("texturePath").as_string();
 	sellerPathTexture						= (char*)config.child("sellerPathTexture").attribute("texturePath").as_string();
+
 	backgroundTradePathTexture				= (char*)config.child("backgroundTradePathTexture").attribute("texturePath").as_string();
 	backgroundTradeHoverPathTexture			= (char*)config.child("backgroundTradeHoverPathTexture").attribute("texturePath").as_string();
 	backgroundSelectAllPathTexture			= (char*)config.child("backgroundSelectAllPathTexture").attribute("texturePath").as_string();
 	backgroundSelectAllHoverPathTexture		= (char*)config.child("backgroundSelectAllHoverPathTexture").attribute("texturePath").as_string();
+
+	backgroundTradeItemPathTexture			= (char*)config.child("backgroundTradeItemTexture").attribute("texturePath").as_string();
+
 	backgroundSliderPathTexture				= (char*)config.child("backgroundSliderPathTexture").attribute("texturePath").as_string();
 	knobSliderPathTexture					= (char*)config.child("knobSliderPathTexture").attribute("texturePath").as_string();
+
 	backgroundConfirmPathTexture			= (char*)config.child("backgroundConfirmPathTexture").attribute("texturePath").as_string();
 	backgroundConfirmHoverPathTexture		= (char*)config.child("backgroundConfirmHoverPathTexture").attribute("texturePath").as_string();
 
 
-	pugi::xml_node commerceNode;
+	
 	commerceNode = config.child("commerce");
-	while (commerceNode != NULL) {
-
-		Commerce* commerce = CreateCommerce(CommerceType::BASICO, commerceNode.attribute("id").as_uint(), LoadTrades(commerceNode.child("trades")));
-
-		commerce->positionGeneral	= iPoint(commerceNode.attribute("positionGeneralX").as_int(), commerceNode.attribute("positionGeneralY").as_int());
-		commerce->positionList		= iPoint(commerceNode.attribute("positionListX").as_int(), commerceNode.attribute("positionListY").as_int());
-		commerce->positionInList	= iPoint(commerceNode.attribute("positionInListX").as_int(), commerceNode.attribute("positionInListY").as_int());
-		commerce->tradeSpacing		= commerceNode.attribute("tradeSpacing").as_int();
-		commerce->itemSpacing		= commerceNode.attribute("itemSpacing").as_int();
-		
-		commerces.push_back(commerce);
-
-		commerceNode = commerceNode.next_sibling();
-	}
+	
 
 	return ret;
 
@@ -72,7 +65,24 @@ bool CommerceManager::Start() {
 
 	bool ret = true;
 
-	//PlayCommerce(0);
+	while (commerceNode != NULL) {
+
+		Commerce* commerce = CreateCommerce(CommerceType::BASICO, commerceNode.attribute("id").as_uint(), LoadTrades(commerceNode.child("trades")));
+
+		commerce->positionGeneral = iPoint(commerceNode.attribute("positionGeneralX").as_int(), commerceNode.attribute("positionGeneralY").as_int());
+		commerce->positionList = iPoint(commerceNode.attribute("positionListX").as_int(), commerceNode.attribute("positionListY").as_int());
+		commerce->positionInList = iPoint(commerceNode.attribute("positionInListX").as_int(), commerceNode.attribute("positionInListY").as_int());
+		commerce->tradeSpacing = commerceNode.attribute("tradeSpacing").as_int();
+		commerce->itemSpacing = commerceNode.attribute("itemSpacing").as_int();
+
+		commerce->itemsRequestedSpacing = commerceNode.attribute("itemsRequestedSpacing").as_int();
+
+		commerces.push_back(commerce);
+
+		commerceNode = commerceNode.next_sibling();
+	}
+
+	PlayCommerce(0);
 
 	return ret;
 }
@@ -95,6 +105,7 @@ Commerce* CommerceManager::CreateCommerce(CommerceType type, uint id, std::vecto
 	commerce->backgroundTradeHoverPathTexture			= backgroundTradeHoverPathTexture;
 	commerce->backgroundSelectAllPathTexture			= backgroundSelectAllPathTexture;
 	commerce->backgroundSelectAllHoverPathTexture		= backgroundSelectAllHoverPathTexture;
+	commerce->backgroundTradeItemPathTexture			= backgroundTradeItemPathTexture;
 	commerce->backgroundSliderPathTexture				= backgroundSliderPathTexture;
 	commerce->knobSliderPathTexture						= knobSliderPathTexture;
 	commerce->backgroundConfirmPathTexture				= backgroundConfirmPathTexture;
@@ -127,10 +138,25 @@ std::vector<Trade*> CommerceManager::LoadTrades(pugi::xml_node nodeTrade)
 	while (tradeNode != NULL) {
 
 		Trade* trade = new Trade();
-		trade->itemsOffered.push_back(app->inventoryManager->CreateItem((InventityType)tradeNode.attribute("itemOffered").as_int()));
-		trade->quantityOffered.push_back(tradeNode.attribute("quantityItemOffered").as_int());
-		trade->itemsRequested.push_back(app->inventoryManager->CreateItem((InventityType)tradeNode.attribute("itemRequested").as_int()));
-		trade->quantityRequested.push_back(tradeNode.attribute("quantityItemRequested").as_int());
+
+		std::vector<int> itemsOfferedInts = splitToInts(tradeNode.attribute("itemOffered").as_string(), ',');
+		std::vector<int> quantityOfferedInts = splitToInts(tradeNode.attribute("quantityItemOffered").as_string(), ',');
+		std::vector<int> itemsRequestedInts = splitToInts(tradeNode.attribute("itemRequested").as_string(), ',');
+		std::vector<int> quantityRequestedInts = splitToInts(tradeNode.attribute("quantityItemRequested").as_string(), ',');
+
+		for (int i = 0; i < itemsOfferedInts.size(); i++) {
+			trade->itemsOffered.push_back(app->inventoryManager->CreateItem((InventityType)itemsOfferedInts.at(i)));
+			trade->quantityOffered.push_back(quantityOfferedInts.at(i));
+		}
+
+		for (int i = 0; i < itemsRequestedInts.size(); i++) {
+			trade->itemsRequested.push_back(app->inventoryManager->CreateItem((InventityType)itemsRequestedInts.at(i)));
+			trade->quantityRequested.push_back(quantityRequestedInts.at(i));
+		}
+
+		
+		/*trade->itemsRequested.push_back(app->inventoryManager->CreateItem((InventityType)tradeNode.attribute("itemRequested").as_int()));
+		trade->quantityRequested.push_back(tradeNode.attribute("quantityItemRequested").as_int());*/
 		trades.push_back(trade);
 		tradeNode = tradeNode.next_sibling();
 	}

@@ -61,11 +61,15 @@ public:
 	char* backgroundSelectAllPathTexture;
 	char* backgroundSelectAllHoverPathTexture;
 
+	char* backgroundTradeItemPathTexture;
+
 	char* backgroundSliderPathTexture;
 	char* knobSliderPathTexture;
 
 	char* backgroundConfirmPathTexture;
 	char* backgroundConfirmHoverPathTexture;
+
+	
 
 
 	bool active; //Para saber si tiene que llamar al update o postUpdate del comercio o no.
@@ -76,6 +80,7 @@ public:
 	iPoint positionInList;
 	uint tradeSpacing;
 	uint itemSpacing;
+	uint itemsRequestedSpacing;
 
 
 private:
@@ -93,6 +98,8 @@ private:
 	SDL_Texture* backgroundSelectAllTexture;
 	SDL_Texture* backgroundSelectAllHoverTexture;
 
+	SDL_Texture* backgroundTradeItemTexture;
+
 	SDL_Texture* backgroundSliderTexture;
 	SDL_Texture* knobSliderTexture;
 
@@ -106,6 +113,7 @@ private:
 	std::vector<Trade*> trades;
 
 	int pointerIndex;
+	int scrollY;
 	
 };
 
