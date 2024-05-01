@@ -90,57 +90,46 @@ bool Enemy_Osiris::Update(float dt)
 
 	if (health <= 0)
 	{
-		nextState = EntityState::DEAD;
+		
+		if (currentState == EntityState_Enemy::DEAD) {
+			desiredState = EntityState_Enemy::REVIVING;
+		}
+		else
+		{
+			desiredState = EntityState_Enemy::DEAD;
+		}
+		
 	}
 	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance*32)
 	{
-		nextState = EntityState::ATTACKING;
+		desiredState = EntityState_Enemy::ATTACKING;
 	}
 	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance*32)
 	{
-		nextState = EntityState::RUNNING;
+		desiredState = EntityState_Enemy::RUNNING;
 	}
 	else
 	{
-		nextState = EntityState::RUNNING;
+		desiredState = EntityState_Enemy::RUNNING;
 	}
 
 	
+	stateMachine(dt, playerPos);
 
-
-	switch (nextState)
-	{
-	case EntityState::RUNNING:
-		Chase(dt, playerPos);
-		break;
-	case EntityState::ATTACKING:
-		Attack(dt);
-		break;
-	case EntityState::DEAD:
-		Die();
-		break;
-	case EntityState::REVIVING:
-		Revive();
-		break;
-	case EntityState::IDLE:
-		DoNothing(dt);
-		break;
-	default:
-		break;
-	}
+	
 
 	if (poisonTimer < poisonDuration) {
 		poisonTimer += 1/dt;
 		timeSinceLastTick += 1/dt ;
 
 		if (timeSinceLastTick >= poisonTickRate && poisoned) {
-			if (currentState != EntityState::DEAD && invulnerabilityTimer.ReadMSec() >= 500) {
+			if (currentState != EntityState_Enemy::DEAD && invulnerabilityTimer.ReadMSec() >= 500) {
 					health -= poisonDamage;
 					invulnerabilityTimer.Start();
 					timerRecibirDanioColor.Start();
 
 					printf("Enemy_Osiris has received  %f damage of poison\n", poisonDamage);
-					if (currentState == EntityState::REVIVING) {
+					if (currentState == EntityState_Enemy::REVIVING) {
 						if (!hasRevived) {
 							hasRevived = true;
 						}
@@ -151,7 +140,6 @@ bool Enemy_Osiris::Update(float dt)
 		}
 	}
 
-	currentState = nextState;
 	currentAnimation->Update();
 	return true;
 }
@@ -241,14 +229,12 @@ void Enemy_Osiris::Attack(float dt)
 
 void Enemy_Osiris::Die() {
 
-	
-
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	currentAnimation = &dieAnim;
-
+	
 	if (!hasRevived)
 	{
-		nextState = EntityState::REVIVING;
+		desiredState = EntityState_Enemy::REVIVING;
 		Revive();
 	}
 	else
@@ -294,12 +280,12 @@ void Enemy_Osiris::Revive()
 		health = maxHealth;
 		hasRevived = true;
 		isReviving = false;
-		currentState = EntityState::IDLE;
-		nextState = EntityState::IDLE;
+		//currentState = EntityState_Enemy::IDLE;
+		desiredState = EntityState_Enemy::IDLE;
 
 		return;
 	}
-	nextState = EntityState::REVIVING;
+	desiredState = EntityState_Enemy::REVIVING;
 }
 
 
@@ -339,10 +325,6 @@ bool Enemy_Osiris::Osirisfinding(float dt, iPoint playerPosP)
 		app->map->pathfinding->CreatePath(enemyPos, originalPosition); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
 		lastPath = *app->map->pathfinding->GetLastPath();
 	}
-
-
-
-
 
 	b2Vec2 velocity = b2Vec2(0, 0);
 
@@ -384,19 +366,54 @@ float Enemy_Osiris::GetHealth() const {
 }
 
 void Enemy_Osiris::TakeDamage(float damage) {
-	if (currentState != EntityState::DEAD && invulnerabilityTimer.ReadMSec() >= 500) {
+
+	if (currentState != EntityState_Enemy::DEAD && invulnerabilityTimer.ReadMSec() >= 500) {
 		health -= damage;
 		invulnerabilityTimer.Start();
 		timerRecibirDanioColor.Start();
 
 		printf("Enemy_Osiris has received  %f damage\n", damage);
-		if (currentState == EntityState::REVIVING) {
+		if (currentState == EntityState_Enemy::REVIVING) {
 			if (!hasRevived) {
 				hasRevived = true;
 			}
 		}
 		
 	}
+}
+
+void Enemy_Osiris::stateMachine(float dt, iPoint playerPos)
+{
+	//printf("\ncurrentState: %d, desiredState: %d", static_cast<int>(currentState), static_cast<int>(desiredState));
+	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
+	switch (nextState) {
+	case EntityState_Enemy::IDLE:
+		DoNothing(dt);
+		break;
+	case EntityState_Enemy::RUNNING:
+		Chase(dt, playerPos);
+		break;
+	case EntityState_Enemy::ATTACKING:
+		Attack(dt);
+		break;
+	case EntityState_Enemy::DEAD:
+		Die();
+		break;
+	case EntityState_Enemy::REVIVING:
+		Revive();
+		break;
+	case EntityState_Enemy::DASHI:
+		break;
+	case EntityState_Enemy::NONE:
+
+		desiredState = EntityState_Enemy::IDLE;
+		break;
+
+	default:
+		break;
+	}
+	currentState = nextState;
+
 }
 
 void Enemy_Osiris::ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate) {
