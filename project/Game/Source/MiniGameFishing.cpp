@@ -779,14 +779,14 @@ void MiniGameFishing::reward_pool(Fishlevel fishingType)
 		fishLevel = 3;
 		if (app->inventoryManager->IsFull() == false)
 		{
-			app->inventoryManager->CreateItem(EntityType::ITEM_PEZ_MEDIANO, descripcionMediano, tipo, "Pez Pequeño");
+			app->inventoryManager->CreateItem(EntityType::ITEM_PEZ_MEDIANO, descripcionMediano, tipo, "Pez Mediano");
 		}
 		break;
 	case Fishlevel::BIG: 
 		fishLevel = 4; 
 		if (app->inventoryManager->IsFull() == false)
 		{
-			app->inventoryManager->CreateItem(EntityType::ITEM_PEZ_GRANDE, descripcionGrande, tipo, "Pez Pequeño");
+			app->inventoryManager->CreateItem(EntityType::ITEM_PEZ_GRANDE, descripcionGrande, tipo, "Pez Grande");
 		}
 		break;
 	case Fishlevel::UNKNOWN:LOG("Collision UNKNOWN"); break;

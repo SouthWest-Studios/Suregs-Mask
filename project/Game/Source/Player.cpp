@@ -1684,11 +1684,14 @@ void Player::PlayerMovement(float dt)
 
 	//Si pulsas espacio
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && timerDash.ReadMSec() > cdTimerDashMS) {
+		
+		velocityNormalized = velocity;
+		velocityNormalized.Normalize();
 
 		isDashing = true;
 		timerDash.Start();
 		desiredState = EntityState::DASHI;
-		pbodyFoot->body->ApplyForce(b2Vec2(velocity.x * 100, velocity.y * 100), pbodyFoot->body->GetWorldCenter(), false);
+		pbodyFoot->body->ApplyForce(b2Vec2(velocityNormalized.x * 500, velocityNormalized.y * 500), pbodyFoot->body->GetWorldCenter(), false);
 
 		if(secondaryMask == Mask::MASK2)
 		{
@@ -1834,7 +1837,7 @@ void Player::FishingDirecction(bool verticalMovement, bool horizontalMovement)
 
 void Player::TakeDamage(float damage) {
     if (damageTimer.ReadSec() >= damageCooldown) {
-        if(dashCollision == nullptr){
+        if(dashCollision == nullptr && !isDashing){
             currentStats.currentHealth -= damage;
             isInvisible = false;
 			app->audio->PlayHitFx(player_get_damage_fx);

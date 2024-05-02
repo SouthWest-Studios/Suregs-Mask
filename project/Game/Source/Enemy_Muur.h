@@ -118,6 +118,7 @@ private:
 	Timer chargeTimer;
 	bool charging;
 	bool isStunned;
+	iPoint Antposition;
 	
 	//Veneno
 	float poisonTimer = 0.0f; // Tiempo desde que se aplico el veneno

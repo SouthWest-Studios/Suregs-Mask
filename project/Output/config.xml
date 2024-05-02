@@ -156,7 +156,7 @@
 			   Tsprite="6" Pwidth="40" sprite_x="20" sprite_y="20"/>
 
 		<boss_inuit texturePath="Assets/Textures/Entidades/Boss/Miniboss1.png" 
-					maxHealth="6500.0f" speed="5f" attackDamage="90.0f" attackDistance="2" viewDistance="20"
+					maxHealth="6500.0f" speed="5f" attackDamage="90.0f" attackDistance="10" viewDistance="20"
 					Tsprite="1" Pwidth="115" sprite_x="170" sprite_y="331"/>
 
 
