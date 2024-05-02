@@ -219,6 +219,10 @@ bool Commerce::CloseCommerce()
 
 	active = false;
 
+	for (int i = 0; trades.size(); i++) {
+		trades.at(i)->quantityTraded = 0;
+	}
+
 	//Descargar todas las texturas;
 	app->tex->UnLoad(backgroundTexture);
 	app->tex->UnLoad(backgroundTradeTexture);
