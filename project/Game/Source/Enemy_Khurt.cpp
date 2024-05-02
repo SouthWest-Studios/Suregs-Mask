@@ -80,7 +80,6 @@ bool Enemy_Khurt::Start() {
 bool Enemy_Khurt::Update(float dt)
 {
 	OPTICK_EVENT();
-	stunned = false;
 	//Pone el sensor del cuerpo en su posicion
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
@@ -144,18 +143,18 @@ bool Enemy_Khurt::Update(float dt)
 
 	if (stunned) {
 		timerStun.Start();
-		currentState = EntityState::IDLE;
+		nextState = EntityState::IDLE;
 	}
 
 	if (timerStun.ReadMSec() > 2000) {
-		currentState = EntityState::RUNNING;
+		nextState = EntityState::RUNNING;
 		stunned = false;
 	}
 
 	if (app->map->pathfinding->GetDistance(playerPos, position) > (attackDistance + 3) * 32 && app->map->pathfinding->GetDistance(playerPos, position) < (viewDistance - 10) * 32) {
-		if (stunned = false) {
-			currentAnimation = &underAnim;
-		}
+
+		currentAnimation = &underAnim;
+		
 	}
 
 	currentState = nextState;
