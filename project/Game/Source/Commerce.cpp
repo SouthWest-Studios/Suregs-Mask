@@ -386,10 +386,20 @@ bool Commerce::PostUpdate()
 				app->render->DrawTextBound(std::to_string(trade->quantityRequested.at(j)).c_str(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j)+ itemsRequestedSpacing + 50, y + positionInList.y, 20);
 
 				//Cantidad inventario:
-				int cantidadEnInventario = app->inventoryManager->GetInventityQuantity(trade->itemsRequested.at(j)->type);
+				int calculoCantidad = 0;
 				int cantidadEnActivoTodosTrades = GetInventoryTradesQuantity(trade->itemsRequested.at(j)->type);
+				int cantidadEnInventario = 0;
+				if (trade->itemsRequested.at(j)->type == InventityType::MONEDA){
+					cantidadEnInventario = app->inventoryManager->monedasObtenidas;
+				}
+				else {
+					cantidadEnInventario = app->inventoryManager->GetInventityQuantity(trade->itemsRequested.at(j)->type);
 
-				int calculoCantidad = cantidadEnInventario - cantidadEnActivoTodosTrades;
+				}
+				calculoCantidad = cantidadEnInventario - cantidadEnActivoTodosTrades;
+				
+
+
 
 
 				std::string cantidadObtener = "(" + std::to_string(calculoCantidad) + ")";
