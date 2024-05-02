@@ -36,17 +36,17 @@ bool Hud::Awake(pugi::xml_node config)
 	hudTexturePath = (char*)config.child("mainTexture").attribute("texturepath").as_string();
 	messageTexturePath = (char*)config.child("messageTexture").attribute("texturepath").as_string();
 	
-	rectBarraVida = new SDL_Rect{ 220,0,220,28 };
-	rectFondoBarraVida = new SDL_Rect{ 0,0,220,28 };
+	rectBarraVida = new SDL_Rect{ 269,6,259,16 };
+	rectFondoBarraVida = new SDL_Rect{ 0,2,267,23 };
 
-	rectFondoMascara = new SDL_Rect{ 0,38,101,101 };
-	rectFondoMascaraSecundaria = new SDL_Rect{ 115,48,79,79 };
-	rectFondoPociones = new SDL_Rect{ 213,67,44,44 };
-	rectFondoHabilidad1 = new SDL_Rect{ 1,149,60,60 };
-	rectFondoHabilidad2 = new SDL_Rect{ 65,157,45,45 };
-	rectFondoInventario = new SDL_Rect{ 0,218,113,113 };
-	rectFondoMonedas = new SDL_Rect{ 0,338,97,32 };
-	rectFondoObjetosConseguidos = new SDL_Rect{ 0,338,97,32 };
+	rectFondoMascara = new SDL_Rect{ 0,37,101,102 };
+	rectFondoMascaraSecundaria = new SDL_Rect{ 110,43,90,90 };
+	rectFondoPociones = new SDL_Rect{ 215,67,41,41 };
+	//rectFondoHabilidad1 = new SDL_Rect{ 1,149,60,60 };
+	//rectFondoHabilidad2 = new SDL_Rect{ 65,157,45,45 };
+	rectFondoInventario = new SDL_Rect{ 2,220,109,109 };
+	rectFondoMonedas = new SDL_Rect{ 0,341,96,30 };
+	rectFondoObjetosConseguidos = new SDL_Rect{ 0,422,357,41 };
 
 	rectMascara0 = new SDL_Rect{ 3,499,100,100 };
 	rectMascara1 = new SDL_Rect{ 105,499,100,100 };
@@ -93,7 +93,7 @@ bool Hud::PostUpdate()
 
 
 	//Barra de vida
-	app->render->DrawTexture(hudTexture, 165, 40, SDL_FLIP_NONE, rectFondoBarraVida, 0);
+	app->render->DrawTexture(hudTexture, 170, 40, SDL_FLIP_NONE, rectFondoBarraVida, 0);
 
 	int rectW = rectFondoBarraVida->w;
 	rectW = (rectFondoBarraVida->w * app->entityManager->GetPlayer()->currentStats.currentHealth) / app->entityManager->GetPlayer()->currentStats.maxHealth;
@@ -102,7 +102,7 @@ bool Hud::PostUpdate()
 
 	//LOG("Vida player: %d, max vida player: %d, rect: %d", app->entityManager->GetPlayer()->health, app->entityManager->GetPlayer()->maxHealth, rectW);
 
-	app->render->DrawTexture(hudTexture, 165, 40, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
+	app->render->DrawTexture(hudTexture, 175, 44, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
 	
 	//Monedas
 	std::string quantityStr = std::to_string(app->inventoryManager->monedasObtenidas);
@@ -114,11 +114,11 @@ bool Hud::PostUpdate()
 	//Fondos
 	
 
-	app->render->DrawTexture(hudTexture, 395, 32, SDL_FLIP_NONE, rectFondoPociones, 0);
+	app->render->DrawTexture(hudTexture, 445, 32, SDL_FLIP_NONE, rectFondoPociones, 0);
 
-	app->render->DrawTexture(hudTexture, 45, 150, SDL_FLIP_NONE, rectFondoHabilidad1, 0);
+	/*app->render->DrawTexture(hudTexture, 45, 150, SDL_FLIP_NONE, rectFondoHabilidad1, 0);
 	app->render->DrawTexture(hudTexture, 51, 220, SDL_FLIP_NONE, rectFondoHabilidad2, 0);
-	
+	*/
 	app->render->DrawTexture(hudTexture, windowWidth - rectFondoInventario->w - 20, 15, SDL_FLIP_NONE, rectFondoInventario, 0);
 
 
@@ -228,8 +228,8 @@ bool Hud::CleanUp()
 	 delete rectFondoMascara;
 	 delete rectFondoMascaraSecundaria;
 	 delete rectFondoPociones;
-	 delete rectFondoHabilidad1;
-	 delete rectFondoHabilidad2;
+	 //delete rectFondoHabilidad1;
+	 //delete rectFondoHabilidad2;
 	 delete rectFondoInventario;
 	 delete rectFondoMonedas;
 	 delete rectFondoObjetosConseguidos;
