@@ -144,17 +144,18 @@ bool Enemy_Khurt::Update(float dt)
 	if (stunned) {
 		timerStun.Start();
 		nextState = EntityState::IDLE;
+		/*pbodyFoot->body->SetActive(false);*/
 	}
 
 	if (timerStun.ReadMSec() > 2000) {
 		nextState = EntityState::RUNNING;
+		/*pbodyFoot->body->SetActive(true);*/
 		stunned = false;
 	}
 
 	if (app->map->pathfinding->GetDistance(playerPos, position) > (attackDistance + 3) * 32 && app->map->pathfinding->GetDistance(playerPos, position) < (viewDistance - 10) * 32) {
 
-		currentAnimation = &underAnim;
-		
+		currentAnimation = &underAnim;	
 	}
 
 	currentState = nextState;
