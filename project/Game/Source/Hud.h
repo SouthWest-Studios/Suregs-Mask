@@ -55,8 +55,8 @@ private:
 	SDL_Rect* rectFondoMascara;
 	SDL_Rect* rectFondoMascaraSecundaria;
 	SDL_Rect* rectFondoPociones;
-	SDL_Rect* rectFondoHabilidad1;
-	SDL_Rect* rectFondoHabilidad2;
+	//SDL_Rect* rectFondoHabilidad1;
+	//SDL_Rect* rectFondoHabilidad2;
 	SDL_Rect* rectFondoInventario;
 	SDL_Rect* rectFondoMonedas;
 	SDL_Rect* rectFondoObjetosConseguidos;
