@@ -78,37 +78,27 @@ bool Enemy_Ols::Update(float dt)
 	}
 	else(isFacingLeft = false);
 
-	switch (nextState) {
-	case EntityState::DEAD:
-		Die(dt);
-		break;
-	case EntityState::ATTACKING:
-		Attack(dt);
-		break;
-	case EntityState::RUNNING:
-		Chase(dt);
-		break;
-	case EntityState::IDLE:
-		DoNothing(dt);
-		break;
-	default:
-		break;
-	}
 
 	if (health <= 0) {
-		nextState = EntityState::DEAD;
+		desiredState = EntityState_Enemy::DEAD;
 		
 	}
 	else if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 20 /*Cambiar*/) {
-		nextState = EntityState::ATTACKING;
+		nextState = EntityState_Enemy::ATTACKING;
 	}
 	else if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 400/*Cambiar*/) {
-		nextState = EntityState::RUNNING;
+		nextState = EntityState_Enemy::RUNNING;
 	}
 	else {
-		nextState = EntityState::IDLE;
+		nextState = EntityState_Enemy::IDLE;
 	}
 
+
+	stateMachine(dt, playerPos);
+
+	//VENENO <----------
+	CheckPoison();
+	//VENENO ---------->
 
 	currentAnimation->Update();
 
@@ -121,7 +111,14 @@ bool Enemy_Ols::PostUpdate() {
 	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
+	if (timerRecibirDanioColor.ReadMSec() <= 100) {
+		float alpha = (100 - timerRecibirDanioColor.ReadMSec()) / 100;
+		SDL_SetTextureAlphaMod(texture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
 
+	}
+	else {
+		SDL_SetTextureAlphaMod(texture, 255);
+	}
 
 	if (isFacingLeft) {
 		app->render->DrawTexture(texture, position.x - 120, position.y - 60, SDL_FLIP_HORIZONTAL, &rect);
@@ -156,7 +153,7 @@ void Enemy_Ols::DoNothing(float dt)
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 }
 
-void Enemy_Ols::Chase(float dt)
+void Enemy_Ols::Chase(float dt, iPoint playerPos)
 {
 	//printf("Osiris chasing");
 	currentAnimation = &runAnim;
@@ -170,7 +167,7 @@ void Enemy_Ols::Attack(float dt)
 	//sonido ataque
 }
 
-void Enemy_Ols::Die(float dt) {
+void Enemy_Ols::Die() {
 	app->audio->PlayFx(ols_death_fx, 2);
 
 	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
@@ -277,8 +274,84 @@ float Enemy_Ols::GetHealth() const {
 void Enemy_Ols::TakeDamage(float damage) {
 
 	health -= damage;
+	invulnerabilityTimer.Start();
+	timerRecibirDanioColor.Start();
 	app->audio->PlayRandomFx(ols_get_damage_fx, ols_get_damageAlt_fx, ols_get_damageAlt2_fx);
 	printf("Enemy_Ols has received  %f damage\n", damage);
 }
 
+void Enemy_Ols::stateMachine(float dt, iPoint playerPos)
+{
+	//printf("\ncurrentState: %d, desiredState: %d", static_cast<int>(currentState), static_cast<int>(desiredState));
+	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
+	switch (nextState) {
+	case EntityState_Enemy::IDLE:
+		DoNothing(dt);
+		break;
+	case EntityState_Enemy::RUNNING:
+		Chase(dt, playerPos);
+		break;
+	case EntityState_Enemy::ATTACKING:
+		Attack(dt);
+		break;
+	case EntityState_Enemy::DEAD:
+		Die();
+		break;
+	case EntityState_Enemy::DASHI:
+		break;
+	case EntityState_Enemy::NONE:
 
+		desiredState = EntityState_Enemy::IDLE;
+		break;
+
+	default:
+		break;
+	}
+	currentState = nextState;
+
+}
+
+//VENENO <----------
+void Enemy_Ols::ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate) {
+	this->poisonDamage = poisonDamage;
+	this->poisonDuration = poisonDuration;
+	this->poisonTickRate = poisonTickRate;
+	
+	this->poisoned = true;
+	this->firstTimePoisonRecibed = true;
+
+	poisonTimer.Start();
+	poisonTickTimer.Start();
+
+
+}
+
+void Enemy_Ols::CheckPoison() {
+	float epsilon = 0.1f; //Para margen de error
+
+    // Aplicar el primer tick de daño inmediatamente (si no, el primer tick no se aplica en el segundo 0.0)
+	if(firstTimePoisonRecibed) {
+		if (currentState != EntityState_Enemy::DEAD) {
+			health -= poisonDamage;
+			invulnerabilityTimer.Start();
+			timerRecibirDanioColor.Start();
+
+			printf("Enemy_Osiris has received  %f damage of poison\n", poisonDamage);
+		}
+		firstTimePoisonRecibed = false;
+	}
+
+	if (poisonTimer.ReadSec() <= poisonDuration + epsilon && poisoned) {
+        if (poisonTickTimer.ReadSec() >= poisonTickRate) {
+            poisonTickTimer.Start(); // Reiniciar el temporizador de ticks de veneno
+            if (currentState != EntityState_Enemy::DEAD) {
+                health -= poisonDamage;
+                invulnerabilityTimer.Start();
+                timerRecibirDanioColor.Start();
+
+                printf("Enemy_Osiris has received  %f damage of poison\n", poisonDamage);
+            }
+        }
+    }
+}
+//VENENO ---------->

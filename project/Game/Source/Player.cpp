@@ -446,11 +446,11 @@ bool Player::Start() {
 	player_Direction = Direction::UNKNOWN;
 
 
-	EquipPrimaryMask(Mask::MASK3);
+	EquipPrimaryMask(Mask::MASK0);
 	EquipSecondaryMask(Mask::NOMASK);
 
 	//PARA TESTEAR
-	maskLevels[primaryMask] = 0; 
+	maskLevels[primaryMask] = 1; 
 	maskLevels[secondaryMask] = 0;
 	printf("Primary mask: %d, Level: %d\n", static_cast<int>(primaryMask) - 1, maskLevels[primaryMask]);
 	printf("Secondary mask: %d, Level: %d\n", static_cast<int>(secondaryMask) - 1, maskLevels[secondaryMask]);
@@ -1635,33 +1635,21 @@ void Player::PlayerMovement(float dt)
 
 	// Obtener teclado
 
-	/*fPoint joystick = app->input->GetAxis(MOVE_HORIZONTAL, MOVE_VERTICAL);
+	fPoint joystick = app->input->GetAxis(MOVE_HORIZONTAL, MOVE_VERTICAL);
 
-	KeyState sprint = app->input->GetButton(BACK);
-	float speed = (sprint == KEY_REPEAT) ? 0.5f : 0.2f;
+	printf("\n%f",joystick.x);
 
-	b2Vec2 impulse = b2Vec2_zero;
+	//Controles antiguos
 
-	impulse.x += speed * joystick.x * dt;
-	impulse.y += speed * joystick.y * dt;
+	//pressingUp = app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT;
+	//pressingDown = app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT;
+	//pressingLeft = app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT;
+	//pressingRight = app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT;
 
-	pbodyFoot->body->SetLinearVelocity(impulse);
-
-	b2Transform pBodyPos = pbodyFoot->body->GetTransform();
-
-	position.x = METERS_TO_PIXELS(pBodyPos.p.x) - 32 / 2;
-	position.y = METERS_TO_PIXELS(pBodyPos.p.y) - 32 / 2;*/
-
-	pressingUp = app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT;
-	pressingDown = app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT;
-	pressingLeft = app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT;
-	pressingRight = app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT;
 
 	// Calcular la velocidad horizontal y vertical
-	int horizontalMovement = pressingRight - pressingLeft;
-	int verticalMovement = pressingDown - pressingUp;
-
-	//printf("%d", pressingUp);
+	int horizontalMovement = joystick.x;
+	int verticalMovement = joystick.y;
 	
 	// Actualizar velocidad
 	if (!isDashing) {
