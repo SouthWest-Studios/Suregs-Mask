@@ -64,7 +64,7 @@ bool Boss_Inuit::Start() {
 	pbodySensor->listener = this;
 	pbodySensor->ctype = ColliderType::UNKNOWN;
 
-	
+
 	originalPosition = app->map->WorldToMap(position.x, position.y);
 
 	maxHealth = config.attribute("maxHealth").as_float();
@@ -83,7 +83,7 @@ bool Boss_Inuit::Update(float dt)
 	OPTICK_EVENT();
 
 
-	
+
 	//Pone el sensor del cuerpo en su posicion
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
@@ -100,7 +100,7 @@ bool Boss_Inuit::Update(float dt)
 	{
 		desiredState = EntityState_Boss_Inuit::ATTACKING_BASIC;
 	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance * 32)
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance * 32 && currentState != EntityState_Boss_Inuit::ATTACKING_BASIC)
 	{
 		desiredState = EntityState_Boss_Inuit::RUNNING;
 	}
@@ -182,7 +182,7 @@ void Boss_Inuit::Chase(float dt, iPoint playerPos)
 {
 	////printf("Osiris chasing");
 	//currentAnimation = &runAnim;
-	Osirisfinding(dt, playerPos);
+	Bossfinding(dt, playerPos);
 
 }
 
@@ -190,9 +190,8 @@ void Boss_Inuit::Attack(float dt)
 {
 	////printf("Osiris attacking");
 	//currentAnimation = &attackAnim;
-	//pbodyFoot->body->SetLinearVelocity(b2Vec2_zero); //No se mueve mientras ataca
+	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero); //No se mueve mientras ataca
 
-	////sonido ataque
 }
 
 void Boss_Inuit::Die() {
@@ -228,7 +227,7 @@ void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 	}
 }
 
-bool Boss_Inuit::Osirisfinding(float dt, iPoint playerPosP)
+bool Boss_Inuit::Bossfinding(float dt, iPoint playerPosP)
 {
 	iPoint playerPos = app->map->WorldToMap(playerPosP.x, playerPosP.y);
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
@@ -265,8 +264,6 @@ bool Boss_Inuit::Osirisfinding(float dt, iPoint playerPosP)
 		attackAnim.Reset();
 
 	}
-
-	// Aplica la velocidad al cuerpo del enemigo
 	pbodyFoot->body->SetLinearVelocity(velocity);
 
 	return true;
