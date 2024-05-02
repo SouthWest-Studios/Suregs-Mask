@@ -116,29 +116,9 @@ bool Enemy_Osiris::Update(float dt)
 	
 	stateMachine(dt, playerPos);
 
-	
-
-	if (poisonTimer < poisonDuration) {
-		poisonTimer += 1/dt;
-		timeSinceLastTick += 1/dt ;
-
-		if (timeSinceLastTick >= poisonTickRate && poisoned) {
-			if (currentState != EntityState_Enemy::DEAD && invulnerabilityTimer.ReadMSec() >= 500) {
-					health -= poisonDamage;
-					invulnerabilityTimer.Start();
-					timerRecibirDanioColor.Start();
-
-					printf("Enemy_Osiris has received  %f damage of poison\n", poisonDamage);
-					if (currentState == EntityState_Enemy::REVIVING) {
-						if (!hasRevived) {
-							hasRevived = true;
-						}
-						poisoned = false;
-					}			
-			}
-			timeSinceLastTick -= poisonTickRate;
-		}
-	}
+	//VENENO <----------
+	CheckPoison();
+	//VENENO ---------->
 
 	currentAnimation->Update();
 	return true;
@@ -416,11 +396,48 @@ void Enemy_Osiris::stateMachine(float dt, iPoint playerPos)
 
 }
 
+
+//VENENO <----------
 void Enemy_Osiris::ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate) {
 	this->poisonDamage = poisonDamage;
 	this->poisonDuration = poisonDuration;
 	this->poisonTickRate = poisonTickRate;
-	this->poisonTimer = 0.0f;
-	this->timeSinceLastTick = 0.0f;
+	
 	this->poisoned = true;
+	this->firstTimePoisonRecibed = true;
+
+	poisonTimer.Start();
+	poisonTickTimer.Start();
+
+
 }
+
+void Enemy_Osiris::CheckPoison() {
+	float epsilon = 0.1f; //Para margen de error
+
+    // Aplicar el primer tick de daño inmediatamente (si no, el primer tick no se aplica en el segundo 0.0)
+	if(firstTimePoisonRecibed) {
+		if (currentState != EntityState_Enemy::DEAD) {
+			health -= poisonDamage;
+			invulnerabilityTimer.Start();
+			timerRecibirDanioColor.Start();
+
+			printf("Enemy_Osiris has received  %f damage of poison\n", poisonDamage);
+		}
+		firstTimePoisonRecibed = false;
+	}
+
+	if (poisonTimer.ReadSec() <= poisonDuration + epsilon && poisoned) {
+        if (poisonTickTimer.ReadSec() >= poisonTickRate) {
+            poisonTickTimer.Start(); // Reiniciar el temporizador de ticks de veneno
+            if (currentState != EntityState_Enemy::DEAD) {
+                health -= poisonDamage;
+                invulnerabilityTimer.Start();
+                timerRecibirDanioColor.Start();
+
+                printf("Enemy_Osiris has received  %f damage of poison\n", poisonDamage);
+            }
+        }
+    }
+}
+//VENENO ---------->
