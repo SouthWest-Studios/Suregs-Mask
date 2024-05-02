@@ -40,7 +40,7 @@ public:
 
 	void PopUpMessage();
 
-	bool isAnyMenuShowing = false;
+	
 
 private:
 	char* hudTexturePath;

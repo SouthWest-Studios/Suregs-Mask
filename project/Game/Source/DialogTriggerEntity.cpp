@@ -11,6 +11,7 @@
 #include "Point.h"
 #include "Physics.h"
 #include "Hud.h"
+#include "CommerceManager.h"
 
 DialogTrigger::DialogTrigger() : Entity(EntityType::DIALOG_TRIGGER)
 {
@@ -126,7 +127,7 @@ bool DialogTrigger::CleanUp()
 void DialogTrigger::PlayDialog()
 {
 
-	if (app->hud->isAnyMenuShowing) { return; }
+	if (app->commerceManager->AnyCommerceActive()) { return; }
 	//Play el dialogo normal
 	if ((played && !repeatDialog) || !played) {
 	

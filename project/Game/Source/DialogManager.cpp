@@ -287,7 +287,7 @@ bool DialogManager::PostUpdate() {
 
 	if (isPlaying) { //Entonces mostrar dialogos
 		
-		app->hud->isAnyMenuShowing = true;
+		
 		Dialog* actualDialog = dialogues.At(0)->data;
 		bool dialogFinished = ShowDialog(actualDialog);
 
@@ -341,11 +341,7 @@ bool DialogManager::PostUpdate() {
 		else if (!dialogFinished && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && indexText > 2) {
 			indexText = 999;
 		}
-		
-		if (dialogues.Count() == 0) {
-			app->hud->isAnyMenuShowing = false;
-		}
-
+	
 	}
 	else {
 		//Reiniciar variables mientras no este algun dialogo en marcha
