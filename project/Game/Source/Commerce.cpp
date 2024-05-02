@@ -18,6 +18,7 @@
 #include "SString.h"
 #include "CommerceManager.h"
 #include "InventoryManager.h"
+#include "Hud.h"
 
 Commerce::Commerce(uint id) : id(id)
 {
@@ -218,8 +219,9 @@ bool Commerce::CloseCommerce()
 	bool ret = true;
 
 	active = false;
+	app->hud->isAnyMenuShowing = false;
 
-	for (int i = 0; trades.size(); i++) {
+	for (int i = 0; i<trades.size(); i++) {
 		trades.at(i)->quantityTraded = 0;
 	}
 

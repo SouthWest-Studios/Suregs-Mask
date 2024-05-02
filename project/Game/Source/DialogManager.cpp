@@ -7,6 +7,7 @@
 #include "Scene_Pueblo.h"
 #include "CommerceManager.h"
 #include "Window.h"
+#include "Hud.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -286,7 +287,7 @@ bool DialogManager::PostUpdate() {
 
 	if (isPlaying) { //Entonces mostrar dialogos
 		
-
+		app->hud->isAnyMenuShowing = true;
 		Dialog* actualDialog = dialogues.At(0)->data;
 		bool dialogFinished = ShowDialog(actualDialog);
 
@@ -341,7 +342,9 @@ bool DialogManager::PostUpdate() {
 			indexText = 999;
 		}
 		
-
+		if (dialogues.Count() == 0) {
+			app->hud->isAnyMenuShowing = false;
+		}
 
 	}
 	else {

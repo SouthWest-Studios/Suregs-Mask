@@ -10,6 +10,7 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "Hud.h"
 
 DialogTrigger::DialogTrigger() : Entity(EntityType::DIALOG_TRIGGER)
 {
@@ -125,7 +126,7 @@ bool DialogTrigger::CleanUp()
 void DialogTrigger::PlayDialog()
 {
 
-
+	if (app->hud->isAnyMenuShowing) { return; }
 	//Play el dialogo normal
 	if ((played && !repeatDialog) || !played) {
 	

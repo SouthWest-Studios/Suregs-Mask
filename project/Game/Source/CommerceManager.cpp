@@ -18,6 +18,7 @@
 #include "Log.h"
 #include "SString.h"
 #include "Utils.cpp"
+#include "Hud.h"
 
 CommerceManager::CommerceManager(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -189,12 +190,12 @@ bool CommerceManager::Update(float dt)
 
 	bool ret = true;
 
-	
 
 	for (int i = 0; i < commerces.size(); i++) {
 		if (commerces.at(i)->active) {
 			commerces.at(i)->Update(dt);
 			app->entityManager->active = false;
+			app->hud->isAnyMenuShowing = true;
 		}
 	}
 
