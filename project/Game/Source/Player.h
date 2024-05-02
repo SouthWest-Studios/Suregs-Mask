@@ -213,6 +213,7 @@ public:
 	int currentPosX;
 	PhysBody* dashCollision = nullptr;
 	b2Vec2 velocity = b2Vec2(0, 0);
+	b2Vec2 velocityNormalized;
 	
 	float speedDash = 3;
 
