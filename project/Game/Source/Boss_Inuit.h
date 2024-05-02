@@ -51,7 +51,7 @@ public:
 	void Attack(float dt);
 	void Die();
 	void Revive();
-	bool Osirisfinding(float dt, iPoint playerPos);
+	bool Bossfinding(float dt, iPoint playerPos);
 
 	// L07 DONE 6: Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
