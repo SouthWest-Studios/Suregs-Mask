@@ -353,7 +353,7 @@
 		<khurt>
 			<idleAnim start="0" end="1" speed="0.05f" loop="true"/>
 			<runAnim start="0" end="2" speed="0.05f" loop="true"/>
-			<underAnim start="2" end="3" speed="0.05f" loop="true"/>
+			<underAnim start="3" end="4" speed="0.05f" loop="true"/>
 			<dieAnim start="4" end="5" speed="0.05f" loop="true"/>
 		</khurt>
 
