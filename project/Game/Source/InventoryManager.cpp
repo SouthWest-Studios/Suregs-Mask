@@ -15,6 +15,7 @@
 #include "OjoInv.h"
 #include "Defs.h"
 #include "Log.h"
+#include "Hud.h"
 #include "SString.h"
 
 InventoryManager::InventoryManager(App* app, bool start_enabled) : Module(app, start_enabled)
@@ -729,7 +730,12 @@ void InventoryManager::AddItem(Inventity* entity)
 		{
 			inventities.Add(entity);
 		}
+
+		//Mostrar mensaje hud
+		app->hud->AcquiredItemTrigger(entity->icon, entity->name.GetString());
 	}
+
+	
 	
 }
 

@@ -11,6 +11,12 @@
 
 struct SDL_Texture;
 
+struct Acquired_Item {
+	SDL_Texture* texture;
+	std::string text;
+	Timer lifeTimer;
+};
+
 class Hud : public Module
 {
 public:
@@ -39,6 +45,8 @@ public:
 	bool CleanUp();
 
 	void PopUpMessage();
+
+	void AcquiredItemTrigger(SDL_Texture* texture, std::string text);
 
 	
 
@@ -74,6 +82,9 @@ private:
 
 
 	uint windowWidth, windowHeight;
+
+	std::vector<Acquired_Item*> acquired_Items;
+	int acuiredItemLifeTimeMS = 1500;
 
 };
 #endif // __HUD_H__

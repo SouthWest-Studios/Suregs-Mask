@@ -67,6 +67,15 @@ bool Hud::Start()
 	hudTexture = app->tex->Load(hudTexturePath);
 	messageTexture = app->tex->Load(messageTexturePath);
 
+	/*Acquired_Item ai;
+	ai.lifeTimer.Start();
+	ai.text = "holaaa";
+
+	acquired_Items.push_back(ai);
+	acquired_Items.push_back(ai);
+	acquired_Items.push_back(ai);*/
+
+
 	return true;
 }
 
@@ -81,6 +90,24 @@ bool Hud::PreUpdate()
 // Called each loop iteration
 bool Hud::Update(float dt)
 {
+
+
+	//Item Acquired
+	for (int i = 0; i < acquired_Items.size(); i++) {
+
+		if (acquired_Items.at(i)->lifeTimer.ReadMSec() >= acuiredItemLifeTimeMS) {
+
+			Acquired_Item* acquiredItem = acquired_Items.at(i);
+			auto iter = acquired_Items.begin() + i;
+
+			acquired_Items.erase(iter);
+			delete acquiredItem;
+
+		}
+		
+
+	}
+
 	
 	return true;
 }
@@ -166,6 +193,35 @@ bool Hud::PostUpdate()
 	//Botones
 	app->render->DrawTexture(hudTexture, windowWidth - rectFondoInventario->w + 10, 70, SDL_FLIP_NONE, rectBotonTAB, 0);
 	app->render->DrawTexture(hudTexture, 120, 85, SDL_FLIP_NONE, rectBotonQ, 0);
+
+
+	//Item Acquired
+	for (int i = 0; i < acquired_Items.size(); i++) {
+
+
+		if (acquired_Items.at(i)->lifeTimer.ReadMSec() <= 200) {
+			//float alpha = (200 - acquired_Items.at(i)->lifeTimer.ReadMSec()) / 200;
+			float alpha = (acquired_Items.at(i)->lifeTimer.ReadMSec()*200) / 200;
+			SDL_SetTextureAlphaMod(hudTexture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
+			SDL_SetTextureAlphaMod(acquired_Items.at(i)->texture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
+
+		}
+		else {
+			SDL_SetTextureAlphaMod(hudTexture, 255);
+			SDL_SetTextureAlphaMod(acquired_Items.at(i)->texture, 255);
+		}
+
+
+
+		app->render->DrawTexture(hudTexture, 950, 600 - (i * 50), SDL_FLIP_NONE, rectFondoObjetosConseguidos, 0);
+		app->render->DrawTexture(acquired_Items.at(i)->texture, 1000, 575 - (i * 50), SDL_FLIP_NONE, 0, 0);
+		app->render->DrawTextBound(acquired_Items.at(i)->text.c_str(), 1080, 605 - (i * 50), 200);
+
+	}
+
+	SDL_SetTextureAlphaMod(hudTexture, 255);
+
+	//Me da miedo preguntar que es esto de aqui abajo, solo sabe dios que hace.
 	
 	//if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 	//{
@@ -252,6 +308,17 @@ bool Hud::CleanUp()
 void Hud::PopUpMessage()
 {
 	 
+}
+
+void Hud::AcquiredItemTrigger(SDL_Texture* texture, std::string text)
+{
+	Acquired_Item* acquiredItem = new Acquired_Item{texture, text};
+	acquiredItem->lifeTimer.Start();
+
+	acquired_Items.push_back(acquiredItem);
+
+
+
 }
 
 
