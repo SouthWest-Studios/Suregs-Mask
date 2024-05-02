@@ -98,7 +98,9 @@ bool Enemy_Khurt::Update(float dt)
 	}
 	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance * 32)
 	{
-		nextState = EntityState::RUNNING;
+		if (stunned = false) {
+			nextState = EntityState::RUNNING;
+		}
 	}
 	else
 	{
@@ -138,6 +140,20 @@ bool Enemy_Khurt::Update(float dt)
 			}
 			timeSinceLastTick -= poisonTickRate;
 		}
+	}
+
+	if (stunned) {
+		timerStun.Start();
+		currentState = EntityState::IDLE;
+	}
+
+	if (timerStun.ReadMSec() > 2000) {
+		currentState = EntityState::RUNNING;
+		stunned = false;
+	}
+
+	if (app->map->pathfinding->GetDistance(playerPos, position) > (attackDistance + 3) * 32 && app->map->pathfinding->GetDistance(playerPos, position) < (viewDistance - 10) * 32) {
+		currentAnimation = &underAnim;
 	}
 
 	currentState = nextState;
@@ -271,6 +287,7 @@ void Enemy_Khurt::OnCollision(PhysBody* physA, PhysBody* physB) {
 		//restar vida al player
 		break;
 	case ColliderType::PLAYER_ATTACK:
+		stunned = true;
 		LOG("Collision Player_Attack");
 		break;
 	case ColliderType::UNKNOWN:

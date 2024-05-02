@@ -353,7 +353,7 @@
 		<khurt>
 			<idleAnim start="0" end="1" speed="0.05f" loop="true"/>
 			<runAnim start="0" end="2" speed="0.05f" loop="true"/>
-			<underAnim start="2" end="3" speed="0.05f" loop="true"/>
+			<underAnim start="3" end="4" speed="0.05f" loop="true"/>
 			<dieAnim start="4" end="5" speed="0.05f" loop="true"/>
 		</khurt>
 
@@ -441,7 +441,6 @@
 
 	<commercemanager>
 		<backgroundPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_tienda.png" />
-		<sellerPathTexture texturePath="Assets/Textures/Interfaz/Comercio/falta.png" />
 		<backgroundTradePathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_trade.png" />
 		<backgroundTradeHoverPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_trade_hover.png" />
 		<backgroundSelectAllPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_boton_all.png" />
@@ -455,6 +454,7 @@
 
 		<backgroundButtonPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_boton_abajo.png" />
 		<backgroundButtonHoverPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_boton_abajo_hover.png" />
+		<backgroundButtonDisabledPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_boton_abajo_disabled.png" />
 		
 		<backgroundMoneyPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_oro.png" />
 
@@ -481,6 +481,7 @@
 			</trades>
 		</commerce>
 
+		<!-- vendedor -->
 		<commerce id="1" positionGeneralX="66" positionGeneralY="33" positionListX="280" positionListY="10" positionInListX="23" positionInListY="22" tradeSpacing="100" itemSpacing="150" itemsRequestedSpacing="350"
 				  NPCTexturePath="Assets/Textures/Entidades/NPCs/Dialogo/texture_mercader.png" npcPositionX="0" npcPositionY="0"
 				  >
@@ -498,6 +499,23 @@
 				<trade itemOffered="-1" quantityItemOffered="10" itemRequested="15" quantityItemRequested="1"/>
 				<trade itemOffered="-1" quantityItemOffered="20" itemRequested="16" quantityItemRequested="1"/>
 				<trade itemOffered="-1" quantityItemOffered="30" itemRequested="17" quantityItemRequested="1"/>
+			</trades>
+		</commerce>
+
+		<!-- pociones -->
+		<commerce id="2" positionGeneralX="66" positionGeneralY="33" positionListX="280" positionListY="10" positionInListX="23" positionInListY="22" tradeSpacing="100" itemSpacing="150" itemsRequestedSpacing="350"
+				  NPCTexturePath="Assets/Textures/Entidades/NPCs/Dialogo/texture_bruja.png" npcPositionX="0" npcPositionY="0"
+				  >
+			<trades>
+				<trade itemOffered="19" quantityItemOffered="1" itemRequested="-1" quantityItemRequested="20"/>
+				<trade itemOffered="20" quantityItemOffered="1" itemRequested="-1,15" quantityItemRequested="40,3"/>
+				<trade itemOffered="21" quantityItemOffered="1" itemRequested="-1,16" quantityItemRequested="90,4"/>
+				<trade itemOffered="22" quantityItemOffered="1" itemRequested="-1,4" quantityItemRequested="150,2"/>
+				<trade itemOffered="23" quantityItemOffered="1" itemRequested="-1,18" quantityItemRequested="120,4"/>
+				<trade itemOffered="24" quantityItemOffered="1" itemRequested="-1,6" quantityItemRequested="60,2"/>
+				<trade itemOffered="25" quantityItemOffered="1" itemRequested="-1,17" quantityItemRequested="60,3"/>
+				<trade itemOffered="26" quantityItemOffered="1" itemRequested="-1,2" quantityItemRequested="150,8"/>
+
 			</trades>
 		</commerce>
 		

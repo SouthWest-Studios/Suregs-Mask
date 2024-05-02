@@ -909,7 +909,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 				}
 			}
 		}
-		app->audio->PlayHitFx(player_get_damage_fx);
 		break;
 	case ColliderType::RESOURCE:
 		LOG("Collision RESOURCE");
@@ -1838,6 +1837,7 @@ void Player::TakeDamage(float damage) {
         if(dashCollision == nullptr){
             currentStats.currentHealth -= damage;
             isInvisible = false;
+			app->audio->PlayHitFx(player_get_damage_fx);
             printf("Player has received  %f damage\n", damage);
             damageTimer.Start();
         }

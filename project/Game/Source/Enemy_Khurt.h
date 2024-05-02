@@ -111,6 +111,9 @@ private:
 	float poisonDamage = 0.0f; // Daño de veneno por tick
 	float timeSinceLastTick = 0.0f; // Tiempo desde el ultimo tick de da�o de veneno
 	bool poisoned = false;
+	bool stunned = false;
+
+	Timer timerStun;
 
 public:
 

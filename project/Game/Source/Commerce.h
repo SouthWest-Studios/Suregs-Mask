@@ -50,6 +50,8 @@ public:
 
 	int GetInventoryTradesQuantity(InventityType type);
 
+	int GetTotalTradesSelected();
+
 	uint GetId();
 	
 
@@ -57,7 +59,6 @@ public:
 
 	char* backgroundPathTexture;
 
-	char* sellerPathTexture;
 
 	char* backgroundTradePathTexture;
 	char* backgroundTradeHoverPathTexture;
@@ -74,6 +75,7 @@ public:
 
 	char* backgroundButtonPathTexture;
 	char* backgroundButtonHoverPathTexture;
+	char* backgroundButtonDisabledPathTexture;
 	char* backgroundMoneyPathTexture;
 
 	char* backgroundDescriptionPathTexture;
@@ -102,8 +104,6 @@ private:
 
 	SDL_Texture* backgroundTexture;
 
-	SDL_Texture* sellerTexture;
-
 	SDL_Texture* backgroundTradeTexture;
 	SDL_Texture* backgroundTradeHoverTexture;
 	SDL_Texture* backgroundSelectAllTexture;
@@ -119,6 +119,7 @@ private:
 
 	SDL_Texture* backgroundButtonTexture;
 	SDL_Texture* backgroundButtonHoverTexture;
+	SDL_Texture* backgroundButtonDisabledTexture;
 	SDL_Texture* backgroundMoneyTexture;
 
 	SDL_Texture* backgroundDescriptionTexture;

@@ -37,7 +37,7 @@ bool CommerceManager::Awake(pugi::xml_node config)
 
 
 	backgroundPathTexture					= (char*)config.child("backgroundPathTexture").attribute("texturePath").as_string();
-	sellerPathTexture						= (char*)config.child("sellerPathTexture").attribute("texturePath").as_string();
+	
 
 	backgroundTradePathTexture				= (char*)config.child("backgroundTradePathTexture").attribute("texturePath").as_string();
 	backgroundTradeHoverPathTexture			= (char*)config.child("backgroundTradeHoverPathTexture").attribute("texturePath").as_string();
@@ -51,6 +51,7 @@ bool CommerceManager::Awake(pugi::xml_node config)
 
 	backgroundConfirmPathTexture			= (char*)config.child("backgroundConfirmPathTexture").attribute("texturePath").as_string();
 	backgroundConfirmHoverPathTexture		= (char*)config.child("backgroundConfirmHoverPathTexture").attribute("texturePath").as_string();
+	backgroundButtonDisabledPathTexture		= (char*)config.child("backgroundButtonDisabledPathTexture").attribute("texturePath").as_string();
 
 
 	backgroundButtonPathTexture				= (char*)config.child("backgroundButtonPathTexture").attribute("texturePath").as_string();
@@ -109,7 +110,6 @@ Commerce* CommerceManager::CreateCommerce(CommerceType type, uint id, std::vecto
 	Commerce* commerce = new Commerce(id);
 
 	commerce->backgroundPathTexture						= backgroundPathTexture;
-	commerce->sellerPathTexture							= sellerPathTexture;
 	commerce->backgroundTradePathTexture				= backgroundTradePathTexture;
 	commerce->backgroundTradeHoverPathTexture			= backgroundTradeHoverPathTexture;
 	commerce->backgroundSelectAllPathTexture			= backgroundSelectAllPathTexture;
@@ -119,6 +119,7 @@ Commerce* CommerceManager::CreateCommerce(CommerceType type, uint id, std::vecto
 	commerce->knobSliderPathTexture						= knobSliderPathTexture;
 	commerce->backgroundConfirmPathTexture				= backgroundConfirmPathTexture;
 	commerce->backgroundConfirmHoverPathTexture			= backgroundConfirmHoverPathTexture;
+	commerce->backgroundButtonDisabledPathTexture		= backgroundButtonDisabledPathTexture;
 
 	commerce->backgroundButtonPathTexture				= backgroundButtonPathTexture;
 	commerce->backgroundButtonHoverPathTexture			= backgroundButtonHoverPathTexture;
@@ -162,12 +163,12 @@ std::vector<Trade*> CommerceManager::LoadTrades(pugi::xml_node nodeTrade)
 		std::vector<int> quantityRequestedInts = splitToInts(tradeNode.attribute("quantityItemRequested").as_string(), ',');
 
 		for (int i = 0; i < itemsOfferedInts.size(); i++) {
-			trade->itemsOffered.push_back(app->inventoryManager->CreateItem((InventityType)itemsOfferedInts.at(i)));
+			trade->itemsOffered.push_back(app->inventoryManager->CreateItem((InventityType)itemsOfferedInts.at(i), false));
 			trade->quantityOffered.push_back(quantityOfferedInts.at(i));
 		}
 
 		for (int i = 0; i < itemsRequestedInts.size(); i++) {
-			trade->itemsRequested.push_back(app->inventoryManager->CreateItem((InventityType)itemsRequestedInts.at(i)));
+			trade->itemsRequested.push_back(app->inventoryManager->CreateItem((InventityType)itemsRequestedInts.at(i), false));
 			trade->quantityRequested.push_back(quantityRequestedInts.at(i));
 		}
 
