@@ -132,6 +132,12 @@ bool Enemy_Muur::Update(float dt)
 		break;
 	}
 
+	if (charging && dist(Antposition, position) > 350)
+	{
+		Stunned(dt);
+		isStunned = true;
+	}
+
 	if (chargeTimer.ReadSec() >= 5)
 	{
 		charging = false;
@@ -213,17 +219,18 @@ bool Enemy_Muur::CleanUp()
 void Enemy_Muur::DoNothing(float dt)
 {
 	currentAnimation = &idleAnim;
-	printf("Muur idle");
+	//printf("Muur idle");
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 
 }
 
 void Enemy_Muur::Chase(float dt, iPoint playerPos)
 {
-	printf("Muur chasing");
+	//printf("Muur chasing");
 	currentAnimation = &runAnim;
 	if(chargeTimer.ReadSec() >= 5 && app->map->pathfinding->GetDistance(playerPos, position) <= chargeattackDistance * 32)
 	{
+		Antposition = position;
 		Charge(dt, playerPos);
 	}
 	else if(!charging)
@@ -235,7 +242,7 @@ void Enemy_Muur::Chase(float dt, iPoint playerPos)
 
 void Enemy_Muur::Attack(float dt)
 {
-	printf("Muur attacking");
+	//printf("Muur attacking");
 	currentAnimation = &attackAnim;
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	//sonido ataque
@@ -377,14 +384,10 @@ void Enemy_Muur::Charge(float dt, iPoint playerPos) {
 	b2Vec2 impulse = b2Vec2(direction.x * 5, direction.y * 5);
 	pbodyFoot->body->ApplyLinearImpulse(impulse, pbodyFoot->body->GetWorldCenter(), true);
 
-	if (abs(position.x - playerPos.x) < 5 && abs((position.y - playerPos.y) < 5))
-	{
-		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
-		isStunned = true;  // El enemigo está aturdido después de la carga
-	}
 	stunTimer.Start();
 	chargeTimer.Start();
 }
+
 
 void Enemy_Muur::Stunned(float dt) {
 	if (stunTimer.ReadSec() <= 2) {
@@ -393,8 +396,9 @@ void Enemy_Muur::Stunned(float dt) {
 		pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
 	}
 	else {
-		stunTimer.Start();
-		nextState = EntityState::RUNNING;
-		isStunned = false;
+		stunTimer.Start(); 
+		nextState = EntityState::IDLE; 
+		isStunned = false;  
+		charging = false;  
 	}
 }
