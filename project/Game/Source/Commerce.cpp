@@ -167,7 +167,6 @@ bool Commerce::LoadTextures()
 {
 
 	backgroundTexture = app->tex->Load(backgroundPathTexture);
-	sellerTexture = app->tex->Load(sellerPathTexture);
 	backgroundTradeTexture = app->tex->Load(backgroundTradePathTexture);
 	backgroundTradeHoverTexture = app->tex->Load(backgroundTradeHoverPathTexture);
 	backgroundSelectAllTexture = app->tex->Load(backgroundSelectAllPathTexture);
@@ -181,6 +180,7 @@ bool Commerce::LoadTextures()
 
 	backgroundButtonTexture = app->tex->Load(backgroundButtonPathTexture);
 	backgroundButtonHoverTexture = app->tex->Load(backgroundButtonHoverPathTexture);
+	backgroundButtonDisabledTexture = app->tex->Load(backgroundButtonDisabledPathTexture);
 	backgroundMoneyTexture = app->tex->Load(backgroundMoneyPathTexture);
 
 	backgroundDescriptionTexture = app->tex->Load(backgroundDescriptionPathTexture);
@@ -201,7 +201,6 @@ bool Commerce::CloseCommerce()
 
 	//Descargar todas las texturas;
 	app->tex->UnLoad(backgroundTexture);
-	app->tex->UnLoad(sellerTexture);
 	app->tex->UnLoad(backgroundTradeTexture);
 	app->tex->UnLoad(backgroundTradeHoverTexture);
 	app->tex->UnLoad(backgroundSelectAllTexture);
@@ -213,6 +212,7 @@ bool Commerce::CloseCommerce()
 	app->tex->UnLoad(backgroundTradeItemTexture);
 	app->tex->UnLoad(backgroundButtonTexture);
 	app->tex->UnLoad(backgroundButtonHoverTexture);
+	app->tex->UnLoad(backgroundButtonDisabledTexture);
 	app->tex->UnLoad(backgroundMoneyTexture);
 	app->tex->UnLoad(backgroundDescriptionTexture);
 	app->tex->UnLoad(npcTexture);
@@ -242,6 +242,19 @@ int Commerce::GetInventoryTradesQuantity(InventityType type)
 		}
 	}
 	
+
+	return cantidad;
+}
+
+int Commerce::GetTotalTradesSelected()
+{
+	int cantidad = 0;
+
+	for (int i = 0; i < trades.size(); i++) {
+		if (trades.at(i)->quantityTraded > 0) {
+			cantidad += trades.at(i)->quantityTraded;
+		}
+	}
 
 	return cantidad;
 }
@@ -355,7 +368,7 @@ bool Commerce::PostUpdate()
 			//Si solo ofrece un item, poner el nombre de este al lado
 			if (trade->itemsOffered.size() == 1) {
 				
-				app->render->DrawTextBound(trade->itemsOffered.at(0)->name.GetString(), positionGeneral.x + positionList.x + positionInList.x + 100, y + positionInList.y + 0, 20);
+				app->render->DrawTextBound(trade->itemsOffered.at(0)->name.GetString(), positionGeneral.x + positionList.x + positionInList.x + 100, y + positionInList.y + 0, 200);
 
 			}
 
@@ -420,7 +433,13 @@ bool Commerce::PostUpdate()
 	}
 
 	//Boton confirmar compra
-	app->render->DrawTexture(backgroundButtonTexture, positionGeneral.x + positionList.x + 485, positionGeneral.y + viewport.h + 80, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+	if (GetTotalTradesSelected() > 0) {
+		app->render->DrawTexture(backgroundButtonTexture, positionGeneral.x + positionList.x + 485, positionGeneral.y + viewport.h + 80, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+	}
+	else {
+		app->render->DrawTexture(backgroundButtonDisabledTexture, positionGeneral.x + positionList.x + 485, positionGeneral.y + viewport.h + 80, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+	}
+
 	app->render->DrawTextBound("Confirmar compra", positionGeneral.x + positionList.x + 520, positionGeneral.y + viewport.h + 100, 300);
 
 	if (pointerIndexF == trades.size()) {

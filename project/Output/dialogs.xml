@@ -89,7 +89,7 @@
 
 				<option1 text="¿Qué ofreces?">
 					<sentence text="Soy Zhyuka, la bruja de la aldea, si me das materiales te daré alguna poción a cambio, jijiji…"/>
-					<commerce id="1"/>
+					<commerce id="2"/>
 				</option1>
 
 				<option2 text="¡Adiós!">

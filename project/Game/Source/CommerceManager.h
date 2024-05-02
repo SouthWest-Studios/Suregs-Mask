@@ -64,8 +64,6 @@ private:
 
 	char* backgroundPathTexture;
 
-	char* sellerPathTexture;
-
 	char* backgroundTradePathTexture;
 	char* backgroundTradeHoverPathTexture;
 	char* backgroundSelectAllPathTexture;
@@ -78,6 +76,7 @@ private:
 
 	char* backgroundConfirmPathTexture;
 	char* backgroundConfirmHoverPathTexture;
+	char* backgroundButtonDisabledPathTexture;
 
 	char* backgroundButtonPathTexture;
 	char* backgroundButtonHoverPathTexture;

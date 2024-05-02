@@ -176213,7 +176213,7 @@
   </object>
   <object id="118" x="4320" y="4286" width="96" height="96">
    <properties>
-    <property name="dialogID" type="int" value="991"/>
+    <property name="dialogID" type="int" value="993"/>
    </properties>
   </object>
   <object id="119" x="3582" y="4674" width="96" height="96">
