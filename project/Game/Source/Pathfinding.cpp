@@ -277,6 +277,8 @@ uint PathNode::FindWalkableAdjacents(PathList& listToFill) const
 		tile.Create(pos.x + dir.x, pos.y + dir.y);
 		if (app->map->pathfinding->IsWalkable(tile)) {
 			// Check if diagonal movement is possible
+			//Claro, si ve que un camino en diagonal es posible, lo va a subir sin ver que horizontalmente es mas rapido
+			//Entonces, hace una diagonal subiendo, entonces el siguiente camino para ir horzizontalmente centrado, es diagonal bajando
 			bool isDiagonal = (dir.x != 0 && dir.y != 0);
 
 			// If diagonal movement, check for additional conditions to ensure smooth path
