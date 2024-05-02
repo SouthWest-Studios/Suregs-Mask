@@ -127,19 +127,19 @@ bool Enemy_Khurt::Update(float dt)
 		break;
 	}
 
-	if (poisonTimer < poisonDuration) {
-		poisonTimer += 1 / dt;
-		timeSinceLastTick += 1 / dt;
+	//if (poisonTimer < poisonDuration) {
+	//	poisonTimer += 1 / dt;
+	//	timeSinceLastTick += 1 / dt;
 
-		if (timeSinceLastTick >= poisonTickRate && poisoned) {
-			if (currentState != EntityState::DEAD && invulnerabilityTimer.ReadMSec() >= 500) {
-				health -= poisonDamage;
-				invulnerabilityTimer.Start();
-				timerRecibirDanioColor.Start();
-			}
-			timeSinceLastTick -= poisonTickRate;
-		}
-	}
+	//	if (timeSinceLastTick >= poisonTickRate && poisoned) {
+	//		if (currentState != EntityState::DEAD && invulnerabilityTimer.ReadMSec() >= 500) {
+	//			health -= poisonDamage;
+	//			invulnerabilityTimer.Start();
+	//			timerRecibirDanioColor.Start();
+	//		}
+	//		timeSinceLastTick -= poisonTickRate;
+	//	}
+	//}
 
 	if (stunned) {
 		timerStun.Start();
@@ -157,6 +157,10 @@ bool Enemy_Khurt::Update(float dt)
 
 		currentAnimation = &underAnim;	
 	}
+
+	//VENENO <----------
+	CheckPoison();
+	//VENENO ---------->
 
 	currentState = nextState;
 	currentAnimation->Update();
@@ -370,7 +374,42 @@ void Enemy_Khurt::ApplyPoison(int poisonDamage, float poisonDuration, float pois
 	this->poisonDamage = poisonDamage;
 	this->poisonDuration = poisonDuration;
 	this->poisonTickRate = poisonTickRate;
-	this->poisonTimer = 0.0f;
-	this->timeSinceLastTick = 0.0f;
+
 	this->poisoned = true;
+	this->firstTimePoisonRecibed = true;
+
+	poisonTimer.Start();
+	poisonTickTimer.Start();
+
+
 }
+
+void Enemy_Khurt::CheckPoison() {
+	float epsilon = 0.1f; //Para margen de error
+
+	// Aplicar el primer tick de daño inmediatamente (si no, el primer tick no se aplica en el segundo 0.0)
+	if (firstTimePoisonRecibed) {
+		if (currentState != EntityState::DEAD) {
+			health -= poisonDamage;
+			invulnerabilityTimer.Start();
+			timerRecibirDanioColor.Start();
+
+			printf("Enemy_Khurt has received  %f damage of poison\n", poisonDamage);
+		}
+		firstTimePoisonRecibed = false;
+	}
+
+	if (poisonTimer.ReadSec() <= poisonDuration + epsilon && poisoned) {
+		if (poisonTickTimer.ReadSec() >= poisonTickRate) {
+			poisonTickTimer.Start(); // Reiniciar el temporizador de ticks de veneno
+			if (currentState != EntityState::DEAD) {
+				health -= poisonDamage;
+				invulnerabilityTimer.Start();
+				timerRecibirDanioColor.Start();
+
+				printf("Enemy_Khurt has received  %f damage of poison\n", poisonDamage);
+			}
+		}
+	}
+}
+//VENENO ---------->

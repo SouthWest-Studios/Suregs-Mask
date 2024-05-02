@@ -50,8 +50,10 @@ public:
 	float GetHealth() const;
 	void TakeDamage(float damage);
 
-	//Veneno
+	//VENENO <----------
 	void ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate);
+	void CheckPoison();
+	//VENENO ---------->
 
 public:
 
@@ -104,13 +106,16 @@ private:
 
 	Timer timerRecibirDanioColor;
 
-	//Veneno
-	float poisonTimer = 0.0f; // Tiempo desde que se aplico el veneno
-	float poisonDuration = 0.0f; // Duracion total del veneno
-	float poisonTickRate = 0.0f; // Tiempo entre cada tick de daño de veneno
+	//VENENO <----------
+	bool firstTimePoisonRecibed = false;
+	Timer poisonTimer;
+	Timer poisonTickTimer;
+	float poisonDuration = 0.0f; // Duración total del veneno
+	float poisonTickRate = 0.0f; // Tiempo entre cada tick de da�o de veneno
 	float poisonDamage = 0.0f; // Daño de veneno por tick
-	float timeSinceLastTick = 0.0f; // Tiempo desde el ultimo tick de da�o de veneno
 	bool poisoned = false;
+	//VENENO ---------->
+	
 	bool stunned = false;
 
 	Timer timerStun;
