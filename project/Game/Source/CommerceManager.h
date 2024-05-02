@@ -78,6 +78,7 @@ private:
 
 	char* backgroundConfirmPathTexture;
 	char* backgroundConfirmHoverPathTexture;
+	char* backgroundButtonDisabledPathTexture;
 
 	char* backgroundButtonPathTexture;
 	char* backgroundButtonHoverPathTexture;

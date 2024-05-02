@@ -455,6 +455,7 @@
 
 		<backgroundButtonPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_boton_abajo.png" />
 		<backgroundButtonHoverPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_boton_abajo_hover.png" />
+		<backgroundButtonDisabledPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_boton_abajo_disabled.png" />
 		
 		<backgroundMoneyPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_oro.png" />
 
