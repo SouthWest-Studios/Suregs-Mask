@@ -162,12 +162,12 @@ std::vector<Trade*> CommerceManager::LoadTrades(pugi::xml_node nodeTrade)
 		std::vector<int> quantityRequestedInts = splitToInts(tradeNode.attribute("quantityItemRequested").as_string(), ',');
 
 		for (int i = 0; i < itemsOfferedInts.size(); i++) {
-			trade->itemsOffered.push_back(app->inventoryManager->CreateItem((InventityType)itemsOfferedInts.at(i)));
+			trade->itemsOffered.push_back(app->inventoryManager->CreateItem((InventityType)itemsOfferedInts.at(i), false));
 			trade->quantityOffered.push_back(quantityOfferedInts.at(i));
 		}
 
 		for (int i = 0; i < itemsRequestedInts.size(); i++) {
-			trade->itemsRequested.push_back(app->inventoryManager->CreateItem((InventityType)itemsRequestedInts.at(i)));
+			trade->itemsRequested.push_back(app->inventoryManager->CreateItem((InventityType)itemsRequestedInts.at(i), false));
 			trade->quantityRequested.push_back(quantityRequestedInts.at(i));
 		}
 
