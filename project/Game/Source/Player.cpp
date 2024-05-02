@@ -1648,8 +1648,8 @@ void Player::PlayerMovement(float dt)
 
 
 	// Calcular la velocidad horizontal y vertical
-	int horizontalMovement = joystick.x;
-	int verticalMovement = joystick.y;
+	float horizontalMovement = joystick.x;
+	float verticalMovement = joystick.y;
 	
 	// Actualizar velocidad
 	if (!isDashing) {
