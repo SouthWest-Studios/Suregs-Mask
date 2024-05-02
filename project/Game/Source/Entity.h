@@ -182,8 +182,6 @@ public:
 		this->poisonDamage = poisonDamage;
 		this->poisonDuration = poisonDuration;
 		this->poisonTickRate = poisonTickRate;
-		this->poisonTimer = 0.0f;
-		this->timeSinceLastTick = 0.0f;
 	}
 
 protected:

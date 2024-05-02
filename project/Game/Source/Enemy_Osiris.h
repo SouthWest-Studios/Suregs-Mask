@@ -54,8 +54,11 @@ public:
 	float GetHealth() const;
 	void TakeDamage(float damage);
 	void stateMachine(float dt, iPoint playerPos);
-	//Veneno
+
+	//VENENO <----------
 	void ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate);
+	void CheckPoison();
+	//VENENO ---------->
 	
 public:
 
@@ -120,14 +123,16 @@ private:
 
 	Timer timerRecibirDanioColor;
 	
-	//Veneno
-	float poisonTimer = 0.0f; // Tiempo desde que se aplic� el veneno
+	//VENENO <----------
+	bool firstTimePoisonRecibed = false;
+	Timer poisonTimer;
+	Timer poisonTickTimer;
 	float poisonDuration = 0.0f; // Duraci�n total del veneno
 	float poisonTickRate = 0.0f; // Tiempo entre cada tick de da�o de veneno
 	float poisonDamage = 0.0f; // Da�o de veneno por tick
-	float timeSinceLastTick = 0.0f; // Tiempo desde el �ltimo tick de da�o de veneno
 	bool poisoned = false;
-
+	//VENENO ---------->
+	
 public:
 
 	Branch_Osiris transitionTable[static_cast<int>(EntityState_Enemy::STATE_COUNT)][static_cast<int>(EntityState_Enemy::STATE_COUNT)] = {
