@@ -167,7 +167,6 @@ bool Commerce::LoadTextures()
 {
 
 	backgroundTexture = app->tex->Load(backgroundPathTexture);
-	sellerTexture = app->tex->Load(sellerPathTexture);
 	backgroundTradeTexture = app->tex->Load(backgroundTradePathTexture);
 	backgroundTradeHoverTexture = app->tex->Load(backgroundTradeHoverPathTexture);
 	backgroundSelectAllTexture = app->tex->Load(backgroundSelectAllPathTexture);
@@ -202,7 +201,6 @@ bool Commerce::CloseCommerce()
 
 	//Descargar todas las texturas;
 	app->tex->UnLoad(backgroundTexture);
-	app->tex->UnLoad(sellerTexture);
 	app->tex->UnLoad(backgroundTradeTexture);
 	app->tex->UnLoad(backgroundTradeHoverTexture);
 	app->tex->UnLoad(backgroundSelectAllTexture);
@@ -370,7 +368,7 @@ bool Commerce::PostUpdate()
 			//Si solo ofrece un item, poner el nombre de este al lado
 			if (trade->itemsOffered.size() == 1) {
 				
-				app->render->DrawTextBound(trade->itemsOffered.at(0)->name.GetString(), positionGeneral.x + positionList.x + positionInList.x + 100, y + positionInList.y + 0, 20);
+				app->render->DrawTextBound(trade->itemsOffered.at(0)->name.GetString(), positionGeneral.x + positionList.x + positionInList.x + 100, y + positionInList.y + 0, 200);
 
 			}
 

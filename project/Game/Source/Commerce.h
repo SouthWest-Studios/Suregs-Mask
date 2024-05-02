@@ -59,7 +59,6 @@ public:
 
 	char* backgroundPathTexture;
 
-	char* sellerPathTexture;
 
 	char* backgroundTradePathTexture;
 	char* backgroundTradeHoverPathTexture;
@@ -104,8 +103,6 @@ private:
 
 
 	SDL_Texture* backgroundTexture;
-
-	SDL_Texture* sellerTexture;
 
 	SDL_Texture* backgroundTradeTexture;
 	SDL_Texture* backgroundTradeHoverTexture;

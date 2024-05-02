@@ -64,8 +64,6 @@ private:
 
 	char* backgroundPathTexture;
 
-	char* sellerPathTexture;
-
 	char* backgroundTradePathTexture;
 	char* backgroundTradeHoverPathTexture;
 	char* backgroundSelectAllPathTexture;

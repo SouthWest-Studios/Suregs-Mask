@@ -37,7 +37,7 @@ bool CommerceManager::Awake(pugi::xml_node config)
 
 
 	backgroundPathTexture					= (char*)config.child("backgroundPathTexture").attribute("texturePath").as_string();
-	sellerPathTexture						= (char*)config.child("sellerPathTexture").attribute("texturePath").as_string();
+	
 
 	backgroundTradePathTexture				= (char*)config.child("backgroundTradePathTexture").attribute("texturePath").as_string();
 	backgroundTradeHoverPathTexture			= (char*)config.child("backgroundTradeHoverPathTexture").attribute("texturePath").as_string();
@@ -110,7 +110,6 @@ Commerce* CommerceManager::CreateCommerce(CommerceType type, uint id, std::vecto
 	Commerce* commerce = new Commerce(id);
 
 	commerce->backgroundPathTexture						= backgroundPathTexture;
-	commerce->sellerPathTexture							= sellerPathTexture;
 	commerce->backgroundTradePathTexture				= backgroundTradePathTexture;
 	commerce->backgroundTradeHoverPathTexture			= backgroundTradeHoverPathTexture;
 	commerce->backgroundSelectAllPathTexture			= backgroundSelectAllPathTexture;
