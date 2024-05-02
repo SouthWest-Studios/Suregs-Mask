@@ -50,6 +50,8 @@ public:
 	Commerce* CreateCommerce(CommerceType type, uint id, std::vector<Trade*> trades);
 	void PlayCommerce(uint id);
 
+	bool AnyCommerceActive();
+
 	std::vector<Trade*> LoadTrades(pugi::xml_node nodeTrade);
 
 	

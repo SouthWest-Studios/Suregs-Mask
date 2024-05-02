@@ -148,6 +148,20 @@ void CommerceManager::PlayCommerce(uint id)
 	}
 }
 
+bool CommerceManager::AnyCommerceActive()
+{
+	bool active = false;
+
+	for (int i = 0; i < commerces.size(); i++) {
+		if (commerces.at(i)->active) {
+			active = true;
+			break;
+		}
+	}
+
+	return active;
+}
+
 std::vector<Trade*> CommerceManager::LoadTrades(pugi::xml_node nodeTrade)
 {
 	std::vector<Trade*> trades;
@@ -195,7 +209,7 @@ bool CommerceManager::Update(float dt)
 		if (commerces.at(i)->active) {
 			commerces.at(i)->Update(dt);
 			app->entityManager->active = false;
-			app->hud->isAnyMenuShowing = true;
+			//app->hud->isAnyMenuShowing = true;
 		}
 	}
 

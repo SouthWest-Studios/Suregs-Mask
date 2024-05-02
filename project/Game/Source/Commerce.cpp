@@ -186,7 +186,7 @@ bool Commerce::ApplyTrades()
 
 bool Commerce::LoadTextures()
 {
-
+	bool ret = true;
 	backgroundTexture = app->tex->Load(backgroundPathTexture);
 	backgroundTradeTexture = app->tex->Load(backgroundTradePathTexture);
 	backgroundTradeHoverTexture = app->tex->Load(backgroundTradeHoverPathTexture);
@@ -211,7 +211,9 @@ bool Commerce::LoadTextures()
 	pointerIndexF = 0;
 	scrollY = 0;
 
-	return false;
+	
+
+	return ret;
 }
 
 bool Commerce::CloseCommerce()
@@ -219,7 +221,7 @@ bool Commerce::CloseCommerce()
 	bool ret = true;
 
 	active = false;
-	app->hud->isAnyMenuShowing = false;
+	
 
 	for (int i = 0; i<trades.size(); i++) {
 		trades.at(i)->quantityTraded = 0;
