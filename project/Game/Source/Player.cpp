@@ -446,11 +446,11 @@ bool Player::Start() {
 	player_Direction = Direction::UNKNOWN;
 
 
-	EquipPrimaryMask(Mask::MASK3);
+	EquipPrimaryMask(Mask::MASK0);
 	EquipSecondaryMask(Mask::NOMASK);
 
 	//PARA TESTEAR
-	maskLevels[primaryMask] = 0; 
+	maskLevels[primaryMask] = 1; 
 	maskLevels[secondaryMask] = 0;
 	printf("Primary mask: %d, Level: %d\n", static_cast<int>(primaryMask) - 1, maskLevels[primaryMask]);
 	printf("Secondary mask: %d, Level: %d\n", static_cast<int>(secondaryMask) - 1, maskLevels[secondaryMask]);

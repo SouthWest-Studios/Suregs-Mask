@@ -14,8 +14,8 @@ struct SDL_Texture;
 
 
 struct Branch_Ols {
-	enum EntityState const next_state;
-
+	enum EntityState_Enemy const next_state;
+	Branch_Ols(EntityState_Enemy next) : next_state(next) {}
 };
 
 class Enemy_Ols : public Entity
@@ -39,14 +39,19 @@ public:
 	bool CleanUp();
 
 	void DoNothing(float dt);
-	void Chase(float dt);
+	void Chase(float dt, iPoint playerPos);
 	void Attack(float dt);
-	void Die(float dt);
+	void Die();
 	bool Olsfinding(float dt);
 
 	float GetHealth() const;
 
 	void TakeDamage(float damage);
+
+	void stateMachine(float dt, iPoint playerPos);
+
+	void ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate);
+	void CheckPoison();
 
 	// L07 DONE 6: Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
@@ -65,10 +70,14 @@ public:
 	float health;
 	float maxHealth;
 	float attackDamage;
+	Timer invulnerabilityTimer;
+
+	float viewDistance;
+	float attackDistance;
 
 
 	Animation* currentAnimation = nullptr;
-	EntityState state;
+	EntityState_Enemy state;
 
 
 	Animation SPosition;
@@ -102,24 +111,33 @@ private:
 	pugi::xml_document configFile;
 	pugi::xml_node configNode;
 
+	Timer timerRecibirDanioColor;
+
+	//VENENO <----------
+	bool firstTimePoisonRecibed = false;
+	Timer poisonTimer;
+	Timer poisonTickTimer;
+	float poisonDuration = 0.0f; // Duraci�n total del veneno
+	float poisonTickRate = 0.0f; // Tiempo entre cada tick de da�o de veneno
+	float poisonDamage = 0.0f; // Da�o de veneno por tick
+	bool poisoned = false;
+	//VENENO ---------->
 public:
 
-	Branch_Ols transitionTable[static_cast<int>(EntityState::STATE_COUNT)][static_cast<int>(EntityState::STATE_COUNT)] = {
-		// isMoving               isAttacking			 isDead                isReviving					else					MASK_ATTACK
-	{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD},	 {EntityState::IDLE},	  {EntityState::IDLE},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK}}, // IDLE
-	{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD},	 {EntityState::IDLE},	  {EntityState::IDLE},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK}}, // RUNNING
-	{ {EntityState::IDLE},	  {EntityState::IDLE},		{EntityState::DEAD},	 {EntityState::IDLE},	  {EntityState::IDLE},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK}}, // ATTACKING
-	{ {EntityState::DEAD},	  {EntityState::DEAD},		{EntityState::DEAD},	 {EntityState::IDLE},	  {EntityState::IDLE},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK}}, // DEAD
-	{ {EntityState::REVIVING},{EntityState::REVIVING},	{EntityState::DEAD},	 {EntityState::REVIVING}, {EntityState::REVIVING}, {EntityState::REVIVING},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK}}, // REVIVING
-	{ {EntityState::IDLE},	  {EntityState::IDLE},	    {EntityState::DEAD},	 {EntityState::IDLE},	  {EntityState::IDLE},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK}}, // MASK_ATTACK
-	{ {EntityState::IDLE},	  {EntityState::IDLE},	    {EntityState::DEAD},	 {EntityState::IDLE},	  {EntityState::IDLE},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK}}, // MASK_ATTACK
-	{ {EntityState::IDLE},	  {EntityState::IDLE},	    {EntityState::DEAD},	 {EntityState::IDLE},	  {EntityState::IDLE},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK}} // MASK_ATTACK
+	Branch_Ols transitionTable[static_cast<int>(EntityState_Enemy::STATE_COUNT)][static_cast<int>(EntityState_Enemy::STATE_COUNT)] = {
+		//		IDLE						RUNNING								ATTACKING					DEAD						REVIVING							DASHI						NONE
+		{ {EntityState_Enemy::IDLE}, {EntityState_Enemy::RUNNING}, {EntityState_Enemy::ATTACKING}, {EntityState_Enemy::DEAD}, {EntityState_Enemy::NONE}, {EntityState_Enemy::NONE}, {EntityState_Enemy::IDLE}}, // IDLE
+		{ {EntityState_Enemy::IDLE}, {EntityState_Enemy::RUNNING}, {EntityState_Enemy::ATTACKING}, {EntityState_Enemy::DEAD}, {EntityState_Enemy::NONE}, {EntityState_Enemy::NONE}, {EntityState_Enemy::IDLE}}, // RUNNING
+		{ {EntityState_Enemy::IDLE}, {EntityState_Enemy::RUNNING}, {EntityState_Enemy::ATTACKING}, {EntityState_Enemy::DEAD}, {EntityState_Enemy::NONE}, {EntityState_Enemy::NONE}, {EntityState_Enemy::IDLE}}, // ATTACKING
+		{ {EntityState_Enemy::IDLE}, {EntityState_Enemy::RUNNING}, {EntityState_Enemy::ATTACKING}, {EntityState_Enemy::DEAD}, {EntityState_Enemy::REVIVING}, {EntityState_Enemy::NONE}, {EntityState_Enemy::IDLE}}, // DEAD
+		{ {EntityState_Enemy::IDLE}, {EntityState_Enemy::RUNNING}, {EntityState_Enemy::ATTACKING}, {EntityState_Enemy::DEAD}, {EntityState_Enemy::NONE}, {EntityState_Enemy::NONE}, {EntityState_Enemy::IDLE}}, // REVIVING
+		{ {EntityState_Enemy::IDLE}, {EntityState_Enemy::RUNNING}, {EntityState_Enemy::ATTACKING}, {EntityState_Enemy::DEAD}, {EntityState_Enemy::NONE}, {EntityState_Enemy::NONE}, {EntityState_Enemy::IDLE}}, // DASHI
+		{ {EntityState_Enemy::IDLE}, {EntityState_Enemy::NONE}, {EntityState_Enemy::NONE}, {EntityState_Enemy::NONE}, {EntityState_Enemy::NONE}, {EntityState_Enemy::NONE},  {EntityState_Enemy::IDLE}} // NONE
 	};
 
-	EntityState currentState = state;
-
-
-	EntityState nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(currentState)].next_state;
+	EntityState_Enemy currentState = state;
+	EntityState_Enemy desiredState = nextState;
+	EntityState_Enemy nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
 
 };
 
