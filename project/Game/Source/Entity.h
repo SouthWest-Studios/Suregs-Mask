@@ -107,6 +107,19 @@ enum class EntityState_Boss_Inuit
 	STATE_COUNT
 };
 
+enum class EntityState_Boss_Musri
+{
+	IDLE,
+	RUNNING,
+	ATTACKING_BASIC,
+	ATTACKING_DISTANCE,
+	DEAD,
+	DASHI,
+	FASE_CHANGE,
+	NONE,
+	STATE_COUNT
+};
+
 
 
 class Entity

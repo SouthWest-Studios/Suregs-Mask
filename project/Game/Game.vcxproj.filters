@@ -232,6 +232,9 @@
     <ClCompile Include="Source\Boss_Inuit.cpp">
       <Filter>Entities\Boss</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Boss_Musri.cpp">
+      <Filter>Entities\Boss</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -520,6 +523,9 @@
       <Filter>Modules\SistemaComercio</Filter>
     </ClInclude>
     <ClInclude Include="Source\Boss_Inuit.h">
+      <Filter>Entities\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Boss_Musri.h">
       <Filter>Entities\Boss</Filter>
     </ClInclude>
   </ItemGroup>
