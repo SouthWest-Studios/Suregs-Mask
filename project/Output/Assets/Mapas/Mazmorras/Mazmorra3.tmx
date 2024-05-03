@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="300" height="160" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="117">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="300" height="160" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="117">
  <tileset firstgid="1" name="Colisiones" tilewidth="32" tileheight="32" tilecount="16" columns="4">
   <image source="../../Textures/Mapas/Metadatos/Collisions_32x32.png" width="128" height="128"/>
  </tileset>
@@ -192045,49 +192045,49 @@
   <properties>
    <property name="Salas" type="bool" value="true"/>
   </properties>
-  <object id="64" x="1288" y="1450" width="1286" height="726">
+  <object id="64" x="1288" y="1450.5" width="1289.5" height="725.5">
    <properties>
-    <property name="Salas" type="bool" value="true"/>
+    <property name="Type" value="isSmallRoom"/>
    </properties>
   </object>
-  <object id="66" x="1290" y="2250" width="1282" height="724">
+  <object id="66" x="1289" y="2254.33" width="1288" height="724.667">
    <properties>
-    <property name="Salas" type="bool" value="true"/>
+    <property name="Type" value="isSmallRoom"/>
    </properties>
   </object>
-  <object id="68" x="2666" y="2256" width="1290" height="720">
+  <object id="68" x="2668.91" y="2254.18" width="1287.59" height="724.318">
    <properties>
-    <property name="Salas" type="bool" value="true"/>
+    <property name="Type" value="isSmallRoom"/>
    </properties>
   </object>
-  <object id="69" x="4050" y="1530" width="2570" height="1442">
+  <object id="69" x="4048.91" y="1529" width="2569" height="1449.73">
    <properties>
-    <property name="Salas" type="bool" value="true"/>
+    <property name="Type" value="isLargeRoom"/>
    </properties>
   </object>
-  <object id="70" x="5332" y="720" width="1296" height="724">
+  <object id="70" x="5337" y="724" width="1288" height="725.667">
    <properties>
-    <property name="Salas" type="bool" value="true"/>
+    <property name="Type" value="isSmallRoom"/>
    </properties>
   </object>
-  <object id="71" x="6684" y="1528" width="1276" height="720">
+  <object id="71" x="6684" y="1528" width="1285" height="723">
    <properties>
-    <property name="Salas" type="bool" value="true"/>
+    <property name="Type" value="isSmallRoom"/>
    </properties>
   </object>
-  <object id="73" x="5336" y="3056" width="1288" height="724">
+  <object id="73" x="5344" y="3056" width="1281.67" height="726.333">
    <properties>
-    <property name="Salas" type="bool" value="true"/>
+    <property name="Type" value="isSmallRoom"/>
    </properties>
   </object>
-  <object id="74" x="6680" y="3040" width="1284" height="736">
+  <object id="74" x="6682.67" y="3044" width="1288" height="724.333">
    <properties>
-    <property name="Salas" type="bool" value="true"/>
+    <property name="Type" value="isSmallRoom"/>
    </properties>
   </object>
-  <object id="75" x="6680" y="3828" width="1288" height="744">
+  <object id="75" x="6683.45" y="3843.09" width="1288.05" height="723.909">
    <properties>
-    <property name="Salas" type="bool" value="true"/>
+    <property name="Type" value="isSmallRoom"/>
    </properties>
   </object>
  </objectgroup>

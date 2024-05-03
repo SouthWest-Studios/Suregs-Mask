@@ -256085,19 +256085,19 @@
     <property name="Type" value="isLargeRoom"/>
    </properties>
   </object>
-  <object id="128" x="2575.33" y="2376.67" width="1392.67" height="723.333">
+  <object id="128" x="2575.33" y="2376.67" width="1390" height="723.333">
    <properties>
     <property name="Type" value="isLRoom"/>
     <property name="lType" value="l"/>
    </properties>
   </object>
-  <object id="130" x="3848.66" y="3101.33" width="1287.67" height="725.333">
+  <object id="130" x="3848.66" y="3098" width="1287.67" height="728.333">
    <properties>
     <property name="Type" value="isLRoom"/>
     <property name="lType" value="d"/>
    </properties>
   </object>
-  <object id="131" x="3970.67" y="2375.67" width="1166.67" height="723">
+  <object id="131" x="3963.67" y="2375.67" width="1173.67" height="723">
    <properties>
     <property name="Type" value="isLRoom"/>
     <property name="lType" value="dl"/>
@@ -256109,13 +256109,13 @@
     <property name="lType" value="ul"/>
    </properties>
   </object>
-  <object id="133" x="7834.36" y="861.773" width="1285.34" height="724.711">
+  <object id="133" x="7834.36" y="861.773" width="1285.34" height="734.044">
    <properties>
     <property name="Type" value="isLRoom"/>
     <property name="lType" value="u"/>
    </properties>
   </object>
-  <object id="134" x="6562.12" y="1586.38" width="1386.49" height="724.667">
+  <object id="134" x="6562.12" y="1586.38" width="1392.49" height="724.667">
    <properties>
     <property name="Type" value="isLRoom"/>
     <property name="lType" value="l"/>
