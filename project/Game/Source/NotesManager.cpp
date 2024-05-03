@@ -258,13 +258,41 @@ void NotesManager::OnMovePointer()
 		PointerId -= 1;
 	}*/
 
-	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && PointerPosition.y < 100) {
-		PointerPosition.y += 83;
-		PointerId += 1;
+	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
+		if (PointerPosition.y + 83 < 500)
+		{
+			PointerPosition.y += 83;
+			int a = 0;
+		}
+		if (PointerId + 1 != notes.Count())
+		{
+			PointerId += 1;
+		}
+		else
+		{
+			PointerId = 0;
+			PointerPosition.y = 230;
+		}
+
+		
+		
 	}
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && PointerPosition.y > -60) {
-		PointerPosition.y -= 83;
-		PointerId -= 1;
+		if (PointerPosition.y - 83 > 200)
+		{
+			PointerPosition.y -= 83;
+		}
+		if (PointerId - 1 != -1)
+		{
+			PointerId -= 1;
+		}
+		else
+		{
+			PointerId = notes.Count() - 1;
+			PointerPosition.y = 479;
+		}
+		
+		
 	}
 }
 
@@ -337,9 +365,9 @@ bool NotesManager::PostUpdate()
 {
 	bool ret = true;
 
-	uint tradeSpacing = 100;
+	uint tradeSpacing = 83;
 
-	SDL_Rect viewport = { 220, 200, 400, 400 };
+	SDL_Rect viewport = { 220, 200, 400, 350 };
 	app->render->DrawRectangle(viewport, 0, 0, 0, 200, true, false);
 
 	if (mostrar == true)
@@ -350,7 +378,7 @@ bool NotesManager::PostUpdate()
 
 		
 
-		app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y, SDL_FLIP_NONE, 0, 0);
+		
 		
 
 		for (item = notes.start; item != nullptr; item = item->next)
@@ -366,24 +394,36 @@ bool NotesManager::PostUpdate()
 			int horizontalPosition = 320 + columnIndex * 492; // Calcula la posición horizontal
 			int verticalPosition = 230 + rowIndex * 83; // Calcula la posición vertical
 
-			int y = viewport.y + (70 + tradeSpacing * rowIndex) - scrollY;
-			if (y >= viewport.y && y <= viewport.y + viewport.h) {
+			int y2 = PointerPosition.y - scrollY;
 
-				app->render->DrawTexture(listTexture, 200, 217 + 83 * rowIndex, SDL_FLIP_NONE, 0, 0);
+			int y = verticalPosition - scrollY;
+			
+			if (y2 >= viewport.y && y2 <= viewport.y + viewport.h)
+			{
+				if (y >= viewport.y && y <= viewport.y + viewport.h) {
 
-				if (zoomIn == false)
-					app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
+					app->render->DrawTexture(listTexture, 200, verticalPosition, SDL_FLIP_NONE, 0, 0);
 
-				if (item->data->zoom)
-				{
-					app->render->DrawTexture(pEntity->closeUpNotes, 400, 100, SDL_FLIP_NONE, 0, 0);
+					if (zoomIn == false)
+						app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
+
+					if (item->data->zoom)
+					{
+						app->render->DrawTexture(pEntity->closeUpNotes, 400, 100, SDL_FLIP_NONE, 0, 0);
+					}
 				}
 			}
+			
 			else
 			{
-
+				int targetY = PointerId/4 * 83;
+				
+				
+				scrollY = targetY;
+				
+				scrollY = std::max(0, scrollY);
 			}
-
+			app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y, SDL_FLIP_NONE, 0, 0);
 		}
 
 
