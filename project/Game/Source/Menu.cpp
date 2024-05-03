@@ -49,7 +49,7 @@ bool Menu::Start()
 	fondoAjustes = app->tex->Load(config.attribute("texturePath4").as_string());*/
 	fondoInventario = app->tex->Load("Assets/Textures/Interfaz/libro01.png");
 	fondoEquipo = app->tex->Load("Assets/Textures/Interfaz/Equipo.png");
-	fondoDiario = app->tex->Load("Assets/Textures/Interfaz/Diario.png");
+	fondoDiario = app->tex->Load("Assets/Textures/Interfaz/Diario/Diario.png");
 	fondoAjustes = app->tex->Load("Assets/Textures/Interfaz/Ajustes.png");
 
 

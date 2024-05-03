@@ -46,14 +46,18 @@ bool NotesManager::Awake(pugi::xml_node config)
 
 	iconoNotaTexturePath = ((char*)config.child("nota").attribute("texturePath").as_string());
 	listTexturePath = ((char*)config.child("nota").attribute("list_texture").as_string());
+	sliderTexturePath = ((char*)config.child("nota").attribute("slider_texture").as_string());
+	knobTexturePath = ((char*)config.child("nota").attribute("knob_texture").as_string());
 	return ret;
 
 }
 
 bool NotesManager::Start() {
 
-	PointerItemText = app->tex->Load("Assets/Textures/Interfaz/noteselect.png");
+	PointerItemText = app->tex->Load("Assets/Textures/Interfaz/Diario/noteselect.png");
 	listTexture = app->tex->Load(listTexturePath);
+	sliderTexture = app->tex->Load(sliderTexturePath);
+	knobTexture = app->tex->Load(knobTexturePath);
 
 	bool ret = true;
 
@@ -369,7 +373,6 @@ bool NotesManager::PostUpdate()
 
 	SDL_Rect viewport = { 220, 200, 400, 350 };
 	/*app->render->DrawRectangle(viewport, 0, 0, 0, 200, true, false);*/
-	int a = 0;
 
 	if (mostrar == true)
 	{
@@ -408,10 +411,7 @@ bool NotesManager::PostUpdate()
 					if (zoomIn == false)
 						app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
 
-					if (item->data->zoom)
-					{
-						app->render->DrawTexture(pEntity->closeUpNotes, 400, 100, SDL_FLIP_NONE, 0, 0);
-					}
+					
 				}
 			}
 			
@@ -429,21 +429,39 @@ bool NotesManager::PostUpdate()
 
 
 	}
+	ret = true;
+	int knobY;
+	if (notes.Count() == 0)
+	{
+		knobY = 1;
+	}
+	else
+	{
+		knobY= 200 + (341 / (notes.Count() - 1)) * PointerId;
+	}
 
 	if (mostrar == true)
 	{
+		app->render->DrawTexture(sliderTexture, 550, 200, SDL_FLIP_NONE, 0, 0);
+		app->render->DrawTexture(knobTexture, 550, knobY, SDL_FLIP_NONE, 0, 0);
 
 		ListItem<Note*>* itum;
 		for (itum = notes.start; itum != nullptr; itum = itum->next)
 		{
 			if (itum->data->zoom)
 			{
+				
+					
+				
 				if (PointerId == itum->data->id)
 				{
+					app->render->DrawTexture(itum->data->closeUpNotes, 400, 100, SDL_FLIP_NONE, 0, 0);
 					app->render->DrawText(itum->data->desc.c_str(), 450, 200, 270, 400, 0, 0, 0, 0, false);
 				}
 			}
 		}
+
+		
 	}
 	
 	return ret;

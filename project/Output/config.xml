@@ -443,8 +443,11 @@
 	</map>
 	<notesmanager>
 		<nota texturePath ="Assets/Textures/Entidades/Items/textura_nota.png"
-			  list_texture ="Assets/Textures/Interfaz/textura_fondo_nota_lista.png"/>
-			  
+			  list_texture ="Assets/Textures/Interfaz/Diario/textura_fondo_nota_lista.png"
+			  slider_texture = "Assets/Textures/Interfaz/Diario/textura_fondo_slider.png"
+			  knob_texture="Assets/Textures/Interfaz/Diario/textura_knob_slider.png"/>
+			
+
 	</notesmanager>
 
 	<commercemanager>

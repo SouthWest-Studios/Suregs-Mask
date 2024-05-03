@@ -81,7 +81,11 @@ private:
 
 	char* iconoNotaTexturePath;
 	char* listTexturePath;
+	char* sliderTexturePath;
+	char* knobTexturePath;
 	SDL_Texture* listTexture;
+	SDL_Texture* sliderTexture;
+	SDL_Texture* knobTexture;
 
 	int scrollY;
 };
