@@ -44,7 +44,8 @@ bool NotesManager::Awake(pugi::xml_node config)
 		ret = item->data->Awake();
 	}
 
-	iconoNotaTexture = ((char*)config.child("nota").attribute("texturePath").as_string());
+	iconoNotaTexturePath = ((char*)config.child("nota").attribute("texturePath").as_string());
+	listTexturePath = ((char*)config.child("nota").attribute("list_texture").as_string());
 	return ret;
 
 }
@@ -52,7 +53,7 @@ bool NotesManager::Awake(pugi::xml_node config)
 bool NotesManager::Start() {
 
 	PointerItemText = app->tex->Load("Assets/Textures/Interfaz/noteselect.png");
-
+	listTexture = app->tex->Load(listTexturePath);
 
 	bool ret = true;
 
@@ -67,6 +68,8 @@ bool NotesManager::Start() {
 		if (pEntity->active == false) continue;
 		ret = item->data->Start();
 	}
+
+	scrollY = 0;
 
 	return ret;
 }
@@ -88,6 +91,7 @@ bool NotesManager::CleanUp()
 	app->tex->UnLoad(PointerItemText);
 	app->tex->UnLoad(SelectedItemText);
 	app->tex->UnLoad(EquipedItemText);
+	app->tex->UnLoad(listTexture);
 	return ret;
 }
 int highesttId = -1;
@@ -106,8 +110,8 @@ Note* NotesManager::CreateItem(EntityType type, SDL_Texture* CloseUp, std::strin
 	{
 		
 	case EntityType::ITEM_NOTA:
-		entity->icon = app->tex->Load(iconoNotaTexture);
-		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_nota.png");
+		entity->icon = app->tex->Load(iconoNotaTexturePath);
+		
 		entity->type = NoteType::NOTE;
 		break;
 	default:
@@ -245,14 +249,14 @@ void NotesManager::UseNoteSelected(int id)
 void NotesManager::OnMovePointer()
 {
 
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && PointerPosition.x < 300) {
+	/*if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && PointerPosition.x < 300) {
 		PointerPosition.x += 492;
 		PointerId += 1;
-	}
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN && PointerPosition.x > 176) {
+	}*/
+	/*if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN && PointerPosition.x > 176) {
 		PointerPosition.x -= 492;
 		PointerId -= 1;
-	}
+	}*/
 
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && PointerPosition.y < 100) {
 		PointerPosition.y += 83;
@@ -333,8 +337,14 @@ bool NotesManager::PostUpdate()
 {
 	bool ret = true;
 
+	uint tradeSpacing = 100;
+
+	SDL_Rect viewport = { 220, 200, 400, 400 };
+	app->render->DrawRectangle(viewport, 0, 0, 0, 200, true, false);
+
 	if (mostrar == true)
 	{
+		
 		ListItem<Note*>* item;
 		Note* pEntity = NULL;
 
@@ -345,18 +355,33 @@ bool NotesManager::PostUpdate()
 
 		for (item = notes.start; item != nullptr; item = item->next)
 		{
+			
+
+			
+			
+			
 			pEntity = item->data;
 			int rowIndex = item->data->id / maxItemsPerRow; // Calcula el índice de la fila
 			int columnIndex = item->data->id % maxItemsPerRow; // Calcula el índice de la columna
 			int horizontalPosition = 320 + columnIndex * 492; // Calcula la posición horizontal
 			int verticalPosition = 230 + rowIndex * 83; // Calcula la posición vertical
 
-			if(zoomIn == false)
-			app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
+			int y = viewport.y + (70 + tradeSpacing * rowIndex) - scrollY;
+			if (y >= viewport.y && y <= viewport.y + viewport.h) {
 
-			if (item->data->zoom)
+				app->render->DrawTexture(listTexture, 200, 217 + 83 * rowIndex, SDL_FLIP_NONE, 0, 0);
+
+				if (zoomIn == false)
+					app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
+
+				if (item->data->zoom)
+				{
+					app->render->DrawTexture(pEntity->closeUpNotes, 400, 100, SDL_FLIP_NONE, 0, 0);
+				}
+			}
+			else
 			{
-				app->render->DrawTexture(pEntity->closeUpNotes, 400, 100, SDL_FLIP_NONE, 0, 0);
+
 			}
 
 		}

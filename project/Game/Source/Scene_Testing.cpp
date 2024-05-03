@@ -180,6 +180,16 @@ bool Scene_testing::Start()
 	nota4->position = iPoint(1803, 2555);
 	nota4->Start();
 
+	Item_Nota* nota5 = (Item_Nota*)app->entityManager->CreateEntity(EntityType::ITEM_NOTA, 5);
+	nota5->config = configNode.child("entities_data").child("item_nota");
+	nota5->position = iPoint(1803, 2555);
+	nota5->Start();
+
+	Item_Nota* nota6 = (Item_Nota*)app->entityManager->CreateEntity(EntityType::ITEM_NOTA, 5);
+	nota6->config = configNode.child("entities_data").child("item_nota");
+	nota6->position = iPoint(1803, 2555);
+	nota6->Start();
+
 	return true;
 }
 

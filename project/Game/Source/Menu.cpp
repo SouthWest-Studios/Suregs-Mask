@@ -372,7 +372,7 @@ bool Menu::PostUpdate()
 	}
 	if (ventana == 3)
 	{
-		app->render->DrawTexture(fondoDiario, windowWidth / 8, windowHeight / 8, SDL_FLIP_NONE, 0, 0);
+		app->render->DrawTexture(fondoDiario, windowWidth / 8, windowHeight / 8 - 80, 0.8f, SDL_FLIP_NONE, 0, 0);
 	}
 	if (ventana == 4)
 	{
