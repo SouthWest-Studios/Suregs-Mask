@@ -256085,55 +256085,55 @@
     <property name="Type" value="isLargeRoom"/>
    </properties>
   </object>
-  <object id="128" x="2575.33" y="2376.67" width="1390" height="723.333">
+  <object id="128" x="2575.33" y="2376.67" width="1276.64" height="725.198">
    <properties>
     <property name="Type" value="isLRoom"/>
     <property name="lType" value="l"/>
    </properties>
   </object>
-  <object id="130" x="3848.66" y="3098" width="1287.67" height="728.333">
+  <object id="130" x="3849.94" y="3100.03" width="1287.66" height="727.029">
    <properties>
     <property name="Type" value="isLRoom"/>
     <property name="lType" value="d"/>
    </properties>
   </object>
-  <object id="131" x="3963.67" y="2375.67" width="1173.67" height="723">
+  <object id="131" x="3849.94" y="2376.92" width="1287.4" height="725.021">
    <properties>
     <property name="Type" value="isLRoom"/>
     <property name="lType" value="dl"/>
    </properties>
   </object>
-  <object id="132" x="7949.03" y="1586.5" width="1172.96" height="724.528">
+  <object id="132" x="7833.94" y="1586.11" width="1288.05" height="724.919">
    <properties>
     <property name="Type" value="isLRoom"/>
     <property name="lType" value="ul"/>
    </properties>
   </object>
-  <object id="133" x="7834.36" y="861.773" width="1285.34" height="734.044">
+  <object id="133" x="7834.01" y="861.773" width="1285.69" height="728.87">
    <properties>
     <property name="Type" value="isLRoom"/>
     <property name="lType" value="u"/>
    </properties>
   </object>
-  <object id="134" x="6562.12" y="1586.38" width="1392.49" height="724.667">
+  <object id="134" x="6560.12" y="1586.03" width="1278.96" height="725.077">
    <properties>
     <property name="Type" value="isLRoom"/>
     <property name="lType" value="l"/>
    </properties>
   </object>
-  <object id="135" x="6561.66" y="3822.16" width="1287.67" height="725.333">
+  <object id="135" x="6560.39" y="3825.6" width="1287.15" height="726.22">
    <properties>
     <property name="Type" value="isLRoom"/>
     <property name="lType" value="d"/>
    </properties>
   </object>
-  <object id="136" x="6560.67" y="3101.84" width="1171.67" height="723.667">
+  <object id="136" x="6560.67" y="3102.03" width="1287.36" height="724.938">
    <properties>
     <property name="Type" value="isLRoom"/>
     <property name="lType" value="dr"/>
    </properties>
   </object>
-  <object id="137" x="7728.66" y="3103.33" width="1392.67" height="723.333">
+  <object id="137" x="7845.69" y="3101.86" width="1276.14" height="725.351">
    <properties>
     <property name="Type" value="isLRoom"/>
     <property name="lType" value="r"/>
