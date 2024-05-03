@@ -178,7 +178,7 @@ public:
 
 	//L02: DONE 2: Declare player parameters
 	float speed = 0.2f;
-	float attackMovement = 100;
+	float attackMovement = 25;
 	SDL_Texture* texture = NULL;
 	
 	uint texW, texH;
