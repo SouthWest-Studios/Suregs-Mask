@@ -54,7 +54,7 @@ public:
 
 	List<Note*> notes;
 	
-	iPoint PointerPosition = { +165, -127 };
+	iPoint PointerPosition = { 205, 230 };
 	int PointerId = 0;
 	iPoint selected = { -1000,-1000 };
 	iPoint equiped = { -1000,-1000 };
