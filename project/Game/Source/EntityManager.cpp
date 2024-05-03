@@ -4,6 +4,7 @@
 #include "Enemy_Osiris.h"
 #include "Enemy_Shar.h"
 #include "Enemy_Muur.h"
+#include "Enemy_Boorok.h"
 #include "Item.h"
 #include "App.h"
 #include "Item_Garra.h"
@@ -136,6 +137,9 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 		break;
 	case EntityType::ENEMY_KHURT:
 		entity = new Enemy_Khurt();
+		break;
+	case EntityType::ENEMY_BOOROK:
+		entity = new Enemy_Boorok();
 		break;
 
 

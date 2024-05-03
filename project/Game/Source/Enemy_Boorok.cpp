@@ -1,4 +1,4 @@
-﻿#include "Enemy_Muur.h"
+#include "Enemy_Boorok.h"
 #include "Player.h"
 #include "App.h"
 #include "Textures.h"
@@ -18,24 +18,21 @@
 #include "Utils.cpp"
 
 
-
-
-
-Enemy_Muur::Enemy_Muur() : Entity(EntityType::ENEMY_MUUR) {
-	name.Create("muur");
+Enemy_Boorok::Enemy_Boorok() : Entity(EntityType::ENEMY_BOOROK) {
+	name.Create("boorok");
 
 }
 
-Enemy_Muur::~Enemy_Muur() {
+Enemy_Boorok::~Enemy_Boorok() {
 
 }
 
-bool Enemy_Muur::Awake() {
+bool Enemy_Boorok::Awake() {
 
 	return true;
 }
 
-bool Enemy_Muur::Start() {
+bool Enemy_Boorok::Start() {
 
 	OPTICK_EVENT();
 
@@ -82,7 +79,7 @@ bool Enemy_Muur::Start() {
 	return true;
 }
 
-bool Enemy_Muur::Update(float dt)
+bool Enemy_Boorok::Update(float dt)
 {
 	OPTICK_EVENT();
 
@@ -152,7 +149,7 @@ bool Enemy_Muur::Update(float dt)
 }
 
 
-bool Enemy_Muur::PostUpdate() {
+bool Enemy_Boorok::PostUpdate() {
 
 	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
@@ -192,7 +189,7 @@ bool Enemy_Muur::PostUpdate() {
 }
 
 
-bool Enemy_Muur::CleanUp()
+bool Enemy_Boorok::CleanUp()
 {
 	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 	app->physics->GetWorld()->DestroyBody(pbodySensor->body);
@@ -205,7 +202,7 @@ bool Enemy_Muur::CleanUp()
 	return true;
 }
 
-void Enemy_Muur::DoNothing(float dt)
+void Enemy_Boorok::DoNothing(float dt)
 {
 	currentAnimation = &idleAnim;
 	//printf("Muur idle");
@@ -213,23 +210,23 @@ void Enemy_Muur::DoNothing(float dt)
 
 }
 
-void Enemy_Muur::Chase(float dt, iPoint playerPos)
+void Enemy_Boorok::Chase(float dt, iPoint playerPos)
 {
 	//printf("Muur chasing");
 	currentAnimation = &runAnim;
-	if(chargeTimer.ReadSec() >= 5 && app->map->pathfinding->GetDistance(playerPos, position) <= chargeattackDistance * 32 && app->map->pathfinding->GetDistance(playerPos, position) >= (attackDistance + 5) * 32)
+	if (chargeTimer.ReadSec() >= 5 && app->map->pathfinding->GetDistance(playerPos, position) <= chargeattackDistance * 32)
 	{
 		Antposition = position;
 		Charge(dt, playerPos);
 	}
-	else if(!charging)
+	else if (!charging)
 	{
 		Muurfinding(dt, playerPos);
 	}
 
 }
 
-void Enemy_Muur::Attack(float dt)
+void Enemy_Boorok::Attack(float dt)
 {
 	//printf("Muur attacking");
 	currentAnimation = &attackAnim;
@@ -237,7 +234,7 @@ void Enemy_Muur::Attack(float dt)
 	//sonido ataque
 }
 
-void Enemy_Muur::Die() {
+void Enemy_Boorok::Die() {
 
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	currentAnimation = &dieAnim;
@@ -268,7 +265,7 @@ void Enemy_Muur::Die() {
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 
-void Enemy_Muur::OnCollision(PhysBody* physA, PhysBody* physB) {
+void Enemy_Boorok::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 	case ColliderType::PLATFORM:
@@ -289,7 +286,7 @@ void Enemy_Muur::OnCollision(PhysBody* physA, PhysBody* physB) {
 	}
 }
 
-bool Enemy_Muur::Muurfinding(float dt, iPoint playerPosP)
+bool Enemy_Boorok::Muurfinding(float dt, iPoint playerPosP)
 {
 	iPoint playerPos = app->map->WorldToMap(playerPosP.x, playerPosP.y);
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
@@ -340,11 +337,11 @@ bool Enemy_Muur::Muurfinding(float dt, iPoint playerPosP)
 	return true;
 }
 
-float Enemy_Muur::GetHealth() const {
+float Enemy_Boorok::GetHealth() const {
 	return health;
 }
 
-void Enemy_Muur::TakeDamage(float damage) {
+void Enemy_Boorok::TakeDamage(float damage) {
 	if (currentState != EntityState::DEAD && invulnerabilityTimer.ReadMSec() >= 500) {
 		health -= damage;
 		invulnerabilityTimer.Start();
@@ -354,7 +351,7 @@ void Enemy_Muur::TakeDamage(float damage) {
 }
 
 //VENENO <----------
-void Enemy_Muur::ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate) {
+void Enemy_Boorok::ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate) {
 	this->poisonDamage = poisonDamage;
 	this->poisonDuration = poisonDuration;
 	this->poisonTickRate = poisonTickRate;
@@ -368,10 +365,10 @@ void Enemy_Muur::ApplyPoison(int poisonDamage, float poisonDuration, float poiso
 
 }
 
-void Enemy_Muur::CheckPoison() {
+void Enemy_Boorok::CheckPoison() {
 	float epsilon = 0.1f; //Para margen de error
 
-	// Aplicar el primer tick de daño inmediatamente (si no, el primer tick no se aplica en el segundo 0.0)
+	// Aplicar el primer tick de da�o inmediatamente (si no, el primer tick no se aplica en el segundo 0.0)
 	if (firstTimePoisonRecibed) {
 		if (currentState != EntityState::DEAD) {
 			health -= poisonDamage;
@@ -398,7 +395,7 @@ void Enemy_Muur::CheckPoison() {
 }
 //VENENO ---------->
 
-void Enemy_Muur::Charge(float dt, iPoint playerPos) {
+void Enemy_Boorok::Charge(float dt, iPoint playerPos) {
 	printf("charge");
 	currentAnimation = &chargeAnim;
 	charging = true;
@@ -414,16 +411,16 @@ void Enemy_Muur::Charge(float dt, iPoint playerPos) {
 }
 
 
-void Enemy_Muur::Stunned(float dt) {
+void Enemy_Boorok::Stunned(float dt) {
 	if (stunTimer.ReadSec() <= 2) {
 		printf("stunned");
 		currentAnimation = &stunAnim;
 		pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
 	}
 	else {
-		stunTimer.Start(); 
-		nextState = EntityState::IDLE; 
-		isStunned = false;  
-		charging = false;  
+		stunTimer.Start();
+		nextState = EntityState::IDLE;
+		isStunned = false;
+		charging = false;
 	}
 }

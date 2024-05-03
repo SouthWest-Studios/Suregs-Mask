@@ -1,5 +1,5 @@
-﻿#ifndef __ENEMY_MUUR_H__
-#define __ENEMY_MUUR_H__
+﻿#ifndef __ENEMY_BOOROK_H__
+#define __ENEMY_BOOROK_H__
 
 
 #include "Entity.h"
@@ -13,20 +13,20 @@
 struct SDL_Texture;
 
 
-struct Branch_Muur {
+struct Branch_Boorok {
 	enum EntityState const next_state;
 
 };
 
-class Enemy_Muur : public Entity
+class Enemy_Boorok : public Entity
 {
 
 
 public:
 
-	Enemy_Muur();
+	Enemy_Boorok();
 
-	virtual ~Enemy_Muur();
+	virtual ~Enemy_Boorok();
 
 	bool Awake();
 
@@ -123,7 +123,7 @@ private:
 	bool charging;
 	bool isStunned;
 	iPoint Antposition;
-	
+
 	//VENENO <----------
 	bool firstTimePoisonRecibed = false;
 	Timer poisonTimer;
@@ -136,7 +136,7 @@ private:
 
 public:
 
-	Branch_Muur transitionTable[static_cast<int>(EntityState::STATE_COUNT)][static_cast<int>(EntityState::STATE_COUNT)] = {
+	Branch_Boorok transitionTable[static_cast<int>(EntityState::STATE_COUNT)][static_cast<int>(EntityState::STATE_COUNT)] = {
 		// isMoving               isAttacking			 isDead                isReviving					else					MASK_ATTACK
 		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD},	 {EntityState::IDLE},	  {EntityState::IDLE},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK}}, // IDLE
 		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD},	 {EntityState::IDLE},	  {EntityState::IDLE},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK}}, // RUNNING
@@ -157,4 +157,4 @@ public:
 
 
 
-#endif // __ENEMY_MUUR_H__
+#endif // __ENEMY_BOOROK_H__

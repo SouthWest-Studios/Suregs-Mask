@@ -235,6 +235,9 @@
     <ClCompile Include="Source\Boss_Musri.cpp">
       <Filter>Entities\Boss</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Enemy_Boorok.cpp">
+      <Filter>Entities\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -527,6 +530,9 @@
     </ClInclude>
     <ClInclude Include="Source\Boss_Musri.h">
       <Filter>Entities\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy_Boorok.h">
+      <Filter>Entities\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
