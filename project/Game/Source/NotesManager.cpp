@@ -368,7 +368,8 @@ bool NotesManager::PostUpdate()
 	uint tradeSpacing = 83;
 
 	SDL_Rect viewport = { 220, 200, 400, 350 };
-	app->render->DrawRectangle(viewport, 0, 0, 0, 200, true, false);
+	/*app->render->DrawRectangle(viewport, 0, 0, 0, 200, true, false);*/
+	int a = 0;
 
 	if (mostrar == true)
 	{
