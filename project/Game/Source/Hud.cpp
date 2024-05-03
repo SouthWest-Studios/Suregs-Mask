@@ -198,13 +198,24 @@ bool Hud::PostUpdate()
 	//Item Acquired
 	for (int i = 0; i < acquired_Items.size(); i++) {
 
+		
 
 		if (acquired_Items.at(i)->lifeTimer.ReadMSec() <= 200) {
 			//float alpha = (200 - acquired_Items.at(i)->lifeTimer.ReadMSec()) / 200;
-			float alpha = (acquired_Items.at(i)->lifeTimer.ReadMSec()*200) / 200;
+			//float alpha = (200 - acquired_Items.at(i)->lifeTimer.ReadMSec()) / 200;
+			float alpha = acquired_Items.at(i)->lifeTimer.ReadMSec() / 200;
+			
+
 			SDL_SetTextureAlphaMod(hudTexture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
 			SDL_SetTextureAlphaMod(acquired_Items.at(i)->texture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
 
+		}
+		else if (acquired_Items.at(i)->lifeTimer.ReadMSec() >= 1300) {
+			float alpha = 1.0f - (acquired_Items.at(i)->lifeTimer.ReadMSec() - 1300) / (acuiredItemLifeTimeMS - 1300);
+			
+			SDL_SetTextureAlphaMod(hudTexture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
+			SDL_SetTextureAlphaMod(acquired_Items.at(i)->texture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
+		
 		}
 		else {
 			SDL_SetTextureAlphaMod(hudTexture, 255);
