@@ -42,16 +42,16 @@ public:
 	void Chase(float dt, iPoint playerPos);
 	void Attack(float dt);
 	void Die();
-	bool Muurfinding(float dt, iPoint playerPos);
+	bool Boorokfinding(float dt, iPoint playerPos);
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
 	float GetHealth() const;
 	void TakeDamage(float damage);
 
-	//Atque cargado
-	void Charge(float dt, iPoint playerPos);
-	void Stunned(float dt);
+	//Ataque cargado
+	void Attacking(float dt, iPoint playerPos);
+	void Charging(float dt);
 
 	//VENENO <----------
 	void ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate);

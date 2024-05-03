@@ -42,16 +42,14 @@ bool Enemy_Boorok::Start() {
 	Photowidth = config.attribute("Pwidth").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
-	idleAnim.LoadAnim("muur", "idleAnim", spritePositions);
-	runAnim.LoadAnim("muur", "runAnim", spritePositions);
-	attackAnim.LoadAnim("muur", "attackAnim", spritePositions);
-	chargeAnim.LoadAnim("muur", "chargeAnim", spritePositions);
-	stunAnim.LoadAnim("muur", "stunAnim", spritePositions);
-	dieAnim.LoadAnim("muur", "dieAnim", spritePositions);
+	idleAnim.LoadAnim("boorok", "idleAnim", spritePositions);
+	runAnim.LoadAnim("boorok", "runAnim", spritePositions);
+	attackAnim.LoadAnim("boorok", "attackAnim", spritePositions);
+	chargeAnim.LoadAnim("boorok", "chargeAnim", spritePositions);
+	stunAnim.LoadAnim("boorok", "stunAnim", spritePositions);
+	dieAnim.LoadAnim("boorok", "dieAnim", spritePositions);
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
-
-	muur_get_damage_fx = app->audio->LoadAudioFx("muur_get_damage_fx");
 
 	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 15, bodyType::DYNAMIC);
 	pbodyFoot->entity = this;
@@ -131,7 +129,7 @@ bool Enemy_Boorok::Update(float dt)
 
 	if (charging && dist(Antposition, position) > 350)
 	{
-		Stunned(dt);
+		Charging(dt);
 		isStunned = true;
 	}
 
@@ -217,11 +215,11 @@ void Enemy_Boorok::Chase(float dt, iPoint playerPos)
 	if (chargeTimer.ReadSec() >= 5 && app->map->pathfinding->GetDistance(playerPos, position) <= chargeattackDistance * 32)
 	{
 		Antposition = position;
-		Charge(dt, playerPos);
+		Attacking(dt, playerPos);
 	}
 	else if (!charging)
 	{
-		Muurfinding(dt, playerPos);
+		Boorokfinding(dt, playerPos);
 	}
 
 }
@@ -286,7 +284,7 @@ void Enemy_Boorok::OnCollision(PhysBody* physA, PhysBody* physB) {
 	}
 }
 
-bool Enemy_Boorok::Muurfinding(float dt, iPoint playerPosP)
+bool Enemy_Boorok::Boorokfinding(float dt, iPoint playerPosP)
 {
 	iPoint playerPos = app->map->WorldToMap(playerPosP.x, playerPosP.y);
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
@@ -393,10 +391,9 @@ void Enemy_Boorok::CheckPoison() {
 		}
 	}
 }
-//VENENO ---------->
 
-void Enemy_Boorok::Charge(float dt, iPoint playerPos) {
-	printf("charge");
+void Enemy_Boorok::Attacking(float dt, iPoint playerPos) {
+	printf("Attacking_Boorok");
 	currentAnimation = &chargeAnim;
 	charging = true;
 
@@ -410,10 +407,9 @@ void Enemy_Boorok::Charge(float dt, iPoint playerPos) {
 	chargeTimer.Start();
 }
 
-
-void Enemy_Boorok::Stunned(float dt) {
+void Enemy_Boorok::Charging(float dt) {
 	if (stunTimer.ReadSec() <= 2) {
-		printf("stunned");
+		printf("Charging_Boorok");
 		currentAnimation = &stunAnim;
 		pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
 	}
