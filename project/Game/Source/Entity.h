@@ -60,6 +60,7 @@ enum class EntityType
 	ROD,
 
 	BOSS_INUIT,
+	BOSS_MUSRI,
 	UNKNOWN
 
 	

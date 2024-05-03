@@ -19,11 +19,11 @@ struct Branch_Musri {
 	Branch_Musri(EntityState_Boss_Musri next) : next_state(next) {}
 };
 
-enum class FASE
+enum class FASE_Musri
 {
 	FASE_ONE,
 	FASE_CHANGE,
-	FASE_DWO
+	FASE_TWO
 };
 
 class Boss_Musri : public Entity

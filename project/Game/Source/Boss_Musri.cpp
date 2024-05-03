@@ -22,7 +22,7 @@
 
 
 
-Boss_Musri::Boss_Musri() : Entity(EntityType::BOSS_INUIT) {
+Boss_Musri::Boss_Musri() : Entity(EntityType::BOSS_MUSRI) {
 	name.Create("boss_musri");
 
 }
@@ -47,7 +47,7 @@ bool Boss_Musri::Start() {
 	Photowidth = config.attribute("Pwidth").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
-	idleAnim.LoadAnim("boss_inuit", "idleAnim_boss_inuit", spritePositions);
+	idleAnim.LoadAnim((char*)name.GetString(), "idleAnim", spritePositions);
 	/*runAnim.LoadAnim("osiris", "runAnim", spritePositions);
 	attackAnim.LoadAnim("osiris", "attackAnim", spritePositions);
 	dieAnim.LoadAnim("osiris", "dieAnim", spritePositions);*/

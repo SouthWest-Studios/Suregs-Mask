@@ -36,6 +36,7 @@
 #include "TPEntity.h"
 #include "Window.h"
 #include "Boss_Inuit.h"
+#include "Boss_Musri.h"
 #include "Enemy_Khurt.h"
 
 Map::Map(App* app, bool start_enabled) : Module(app, start_enabled), mapLoaded(false)
@@ -1162,6 +1163,15 @@ bool Map::LoadEntities(std::string layerName)
 						boss_Inuit->position = iPoint(pos.x + 16, pos.y + 16);
 						boss_Inuit->Start();
 					}
+
+					//Boss_Musri
+					if (gid == tileset->firstgid + 61) {
+						Boss_Musri* boss_Musri = (Boss_Musri*)app->entityManager->CreateEntity(EntityType::BOSS_MUSRI);
+						boss_Musri->config = configNode.child("entities_data").child("boss_musri");
+						boss_Musri->position = iPoint(pos.x + 16, pos.y + 16);
+						boss_Musri->Start();
+					}
+
 					//OJO
 					/*if (gid == tileset->firstgid + 1009) { 
 							Item_Ojo* ojo = (Item_Ojo*)app->entityManager->CreateEntity(EntityType::ITEM_OJO);
