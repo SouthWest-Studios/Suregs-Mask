@@ -34,344 +34,424 @@ Player::Player() : Entity(EntityType::PLAYER)
 	currentStats = baseStats;
 
 	// Estadísticas de la máscara 0 a nivel 0
-	maskStats[Mask::MASK0][0].maxHealthModifier = 0;
-	maskStats[Mask::MASK0][0].movementSpeedModifier = -10;
-	maskStats[Mask::MASK0][0].attackDamageModifier = 10;
-	maskStats[Mask::MASK0][0].attackSpeedModifier = 10;
-	maskStats[Mask::MASK0][0].maskDamage = 50;
-	maskStats[Mask::MASK0][0].maskCoolDown = 25000; //En Milisegundos
-	maskStats[Mask::MASK0][0].firstTimeUsed = false;
-	maskStats[Mask::MASK0][0].numberLightning = 1;
-	maskStats[Mask::MASK0][0].poisonDamage = 0;
-	maskStats[Mask::MASK0][0].poisonDuration = 0;
-	maskStats[Mask::MASK0][0].poisonTickRate = 0;
+	maskStats[Mask::MASK0][Branches::Modifiers][0].attackDamageModifier = 0;
+	maskStats[Mask::MASK0][Branches::Modifiers][0].movementSpeedModifier = -10;
+	maskStats[Mask::MASK0][Branches::Modifiers][0].attackDamageModifier = 10;
+	maskStats[Mask::MASK0][Branches::Modifiers][0].attackSpeedModifier = 10;
+
+	maskStats[Mask::MASK0][Branches::Rama1][0].maskDamage = 50;
+
+	maskStats[Mask::MASK0][Branches::Rama2][0].maskCoolDown = 25000; //En Milisegundos
+
+	maskStats[Mask::MASK0][Branches::Rama3][0].firstTimeUsed = false;
+	maskStats[Mask::MASK0][Branches::Rama3][0].numberLightning = 1;
+
+	maskStats[Mask::MASK0][Branches::Rama4][0].poisonDamage = 0;
+	maskStats[Mask::MASK0][Branches::Rama4][0].poisonDuration = 0;
+	maskStats[Mask::MASK0][Branches::Rama4][0].poisonTickRate = 0;
 
 	//Estadísticas de la máscara 0 a nivel 1
-	maskStats[Mask::MASK0][1].maxHealthModifier = 0;
-	maskStats[Mask::MASK0][1].movementSpeedModifier = -10;
-	maskStats[Mask::MASK0][1].attackDamageModifier = 10;
-	maskStats[Mask::MASK0][1].attackSpeedModifier = 10;
-	maskStats[Mask::MASK0][1].maskDamage = 80;
-	maskStats[Mask::MASK0][1].maskCoolDown = 23000; //En Milisegundos
-	maskStats[Mask::MASK0][1].firstTimeUsed = false;
-	maskStats[Mask::MASK0][1].numberLightning = 2;
-	maskStats[Mask::MASK0][1].poisonDamage = 10;
-	maskStats[Mask::MASK0][1].poisonDuration = 6.0f;
-	maskStats[Mask::MASK0][1].poisonTickRate = 1.5f;
+	maskStats[Mask::MASK0][Branches::Modifiers][1].maxHealthModifier = 0;
+	maskStats[Mask::MASK0][Branches::Modifiers][1].movementSpeedModifier = -10;
+	maskStats[Mask::MASK0][Branches::Modifiers][1].attackDamageModifier = 10;
+	maskStats[Mask::MASK0][Branches::Modifiers][1].attackSpeedModifier = 10;
+
+	maskStats[Mask::MASK0][Branches::Rama1][1].maskDamage = 80;
+
+	maskStats[Mask::MASK0][Branches::Rama2][1].maskCoolDown = 23000; //En Milisegundos
+
+	maskStats[Mask::MASK0][Branches::Rama3][1].firstTimeUsed = false;
+	maskStats[Mask::MASK0][Branches::Rama3][1].numberLightning = 2;
+
+	maskStats[Mask::MASK0][Branches::Rama4][1].poisonDamage = 10;
+	maskStats[Mask::MASK0][Branches::Rama4][1].poisonDuration = 6.0f;
+	maskStats[Mask::MASK0][Branches::Rama4][1].poisonTickRate = 1.5f;
 
 	//Estadísticas de la máscara 0 a nivel 2
-	maskStats[Mask::MASK0][2].maxHealthModifier = 0;
-	maskStats[Mask::MASK0][2].movementSpeedModifier = -10;
-	maskStats[Mask::MASK0][2].attackDamageModifier = 10;
-	maskStats[Mask::MASK0][2].attackSpeedModifier = 10;
-	maskStats[Mask::MASK0][2].maskDamage = 130;
-	maskStats[Mask::MASK0][2].maskCoolDown = 20000; //En Milisegundos
-	maskStats[Mask::MASK0][2].firstTimeUsed = false;
-	maskStats[Mask::MASK0][2].numberLightning = 3;
-	maskStats[Mask::MASK0][2].poisonDamage = 20;
-	maskStats[Mask::MASK0][2].poisonDuration = 6.0f;
-	maskStats[Mask::MASK0][2].poisonTickRate = 1.5f;
+	maskStats[Mask::MASK0][Branches::Modifiers][2].maxHealthModifier = 0;
+	maskStats[Mask::MASK0][Branches::Modifiers][2].movementSpeedModifier = -10;
+	maskStats[Mask::MASK0][Branches::Modifiers][2].attackDamageModifier = 10;
+	maskStats[Mask::MASK0][Branches::Modifiers][2].attackSpeedModifier = 10;
+
+	maskStats[Mask::MASK0][Branches::Rama1][2].maskDamage = 130;
+
+	maskStats[Mask::MASK0][Branches::Rama2][2].maskCoolDown = 20000; //En Milisegundos
+
+	maskStats[Mask::MASK0][Branches::Rama3][2].firstTimeUsed = false;
+	maskStats[Mask::MASK0][Branches::Rama3][2].numberLightning = 3;
+
+	maskStats[Mask::MASK0][Branches::Rama4][2].poisonDamage = 20;
+	maskStats[Mask::MASK0][Branches::Rama4][2].poisonDuration = 6.0f;
+	maskStats[Mask::MASK0][Branches::Rama4][2].poisonTickRate = 1.5f;
 
 	//Estadísticas de la máscara 0 a nivel 3
-	maskStats[Mask::MASK0][3].maxHealthModifier = 0;
-	maskStats[Mask::MASK0][3].movementSpeedModifier = -10;
-	maskStats[Mask::MASK0][3].attackDamageModifier = 10;
-	maskStats[Mask::MASK0][3].attackSpeedModifier = 10;
-	maskStats[Mask::MASK0][3].maskDamage = 200;
-	maskStats[Mask::MASK0][3].maskCoolDown = 17000; //En Milisegundos
-	maskStats[Mask::MASK0][3].firstTimeUsed = false;
-	maskStats[Mask::MASK0][3].numberLightning = 4;
-	maskStats[Mask::MASK0][3].poisonDamage = 20;
-	maskStats[Mask::MASK0][3].poisonDuration = 9.0f;
-	maskStats[Mask::MASK0][3].poisonTickRate = 1.5f;
+	maskStats[Mask::MASK0][Branches::Modifiers][3].maxHealthModifier = 0;
+	maskStats[Mask::MASK0][Branches::Modifiers][3].movementSpeedModifier = -10;
+	maskStats[Mask::MASK0][Branches::Modifiers][3].attackDamageModifier = 10;
+	maskStats[Mask::MASK0][Branches::Modifiers][3].attackSpeedModifier = 10;
+
+	maskStats[Mask::MASK0][Branches::Rama1][3].maskDamage = 200;
+
+	maskStats[Mask::MASK0][Branches::Rama2][3].maskCoolDown = 17000; //En Milisegundos
+
+	maskStats[Mask::MASK0][Branches::Rama3][3].firstTimeUsed = false;
+	maskStats[Mask::MASK0][Branches::Rama3][3].numberLightning = 4;
+
+	maskStats[Mask::MASK0][Branches::Rama4][3].poisonDamage = 20;
+	maskStats[Mask::MASK0][Branches::Rama4][3].poisonDuration = 9.0f;
+	maskStats[Mask::MASK0][Branches::Rama4][3].poisonTickRate = 1.5f;
 
 	//Estadísticas de la máscara 0 a nivel 4
-	maskStats[Mask::MASK0][4].maxHealthModifier = 0;
-	maskStats[Mask::MASK0][4].movementSpeedModifier = -10;
-	maskStats[Mask::MASK0][4].attackDamageModifier = 10;
-	maskStats[Mask::MASK0][4].attackSpeedModifier = 10;
-	maskStats[Mask::MASK0][4].maskDamage = 300;
-	maskStats[Mask::MASK0][4].maskCoolDown = 15000; //En Milisegundos
-	maskStats[Mask::MASK0][4].firstTimeUsed = false;
-	maskStats[Mask::MASK0][4].numberLightning = 5;
-	maskStats[Mask::MASK0][4].poisonDamage = 30;
-	maskStats[Mask::MASK0][4].poisonDuration = 11.0f;
-	maskStats[Mask::MASK0][4].poisonTickRate = 1.5f;
+	maskStats[Mask::MASK0][Branches::Modifiers][4].maxHealthModifier = 0;
+	maskStats[Mask::MASK0][Branches::Modifiers][4].movementSpeedModifier = -10;
+	maskStats[Mask::MASK0][Branches::Modifiers][4].attackDamageModifier = 10;
+	maskStats[Mask::MASK0][Branches::Modifiers][4].attackSpeedModifier = 10;
+
+	maskStats[Mask::MASK0][Branches::Rama1][4].maskDamage = 300;
+
+	maskStats[Mask::MASK0][Branches::Rama2][4].maskCoolDown = 15000; //En Milisegundos
+
+	maskStats[Mask::MASK0][Branches::Rama3][4].firstTimeUsed = false;
+	maskStats[Mask::MASK0][Branches::Rama3][4].numberLightning = 5;
+	
+	maskStats[Mask::MASK0][Branches::Rama4][4].poisonDamage = 30;
+	maskStats[Mask::MASK0][Branches::Rama4][4].poisonDuration = 11.0f;
+	maskStats[Mask::MASK0][Branches::Rama4][4].poisonTickRate = 1.5f;
 
 
 	// Estadísticas de la máscara 1 a nivel 0
-	maskStats[Mask::MASK1][0].maxHealthModifier = -10;
-	maskStats[Mask::MASK1][0].movementSpeedModifier = 10;
-	maskStats[Mask::MASK1][0].attackDamageModifier = 10;
-	maskStats[Mask::MASK1][0].attackSpeedModifier = 0;
-	maskStats[Mask::MASK1][0].rangeBallModifier = 0.0f;
-	maskStats[Mask::MASK1][0].maskDamage = 100;
-	maskStats[Mask::MASK1][0].maskCoolDown = 30000; //En Milisegundos
-	maskStats[Mask::MASK1][0].firstTimeUsed = false;
-	maskStats[Mask::MASK1][0].poisonDamage = 0;
-	maskStats[Mask::MASK1][0].poisonDuration = 0;
-	maskStats[Mask::MASK1][0].poisonTickRate = 0;
+	maskStats[Mask::MASK1][Branches::Modifiers][0].maxHealthModifier = -10;
+	maskStats[Mask::MASK1][Branches::Modifiers][0].movementSpeedModifier = 10;
+	maskStats[Mask::MASK1][Branches::Modifiers][0].attackDamageModifier = 10;
+	maskStats[Mask::MASK1][Branches::Modifiers][0].attackSpeedModifier = 0;
+
+	maskStats[Mask::MASK1][Branches::Rama1][0].maskDamage = 100;
+
+	maskStats[Mask::MASK1][Branches::Rama2][0].maskCoolDown = 30000; //En Milisegundos
+
+	maskStats[Mask::MASK1][Branches::Rama3][0].rangeBallModifier = 0.0f;
+	maskStats[Mask::MASK1][Branches::Rama3][0].firstTimeUsed = false;
+
+	maskStats[Mask::MASK1][Branches::Rama4][0].poisonDamage = 0;
+	maskStats[Mask::MASK1][Branches::Rama4][0].poisonDuration = 0;
+	maskStats[Mask::MASK1][Branches::Rama4][0].poisonTickRate = 0;
 
 	// Estadísticas de la máscara 1 a nivel 1
-	maskStats[Mask::MASK1][1].maxHealthModifier = -10;
-	maskStats[Mask::MASK1][1].movementSpeedModifier = 10;
-	maskStats[Mask::MASK1][1].attackDamageModifier = 10;
-	maskStats[Mask::MASK1][1].attackSpeedModifier = 0;
-	maskStats[Mask::MASK1][1].rangeBallModifier = 0.05f;
-	maskStats[Mask::MASK1][1].maskDamage = 120;
-	maskStats[Mask::MASK1][1].maskCoolDown = 28000; //En Milisegundos
-	maskStats[Mask::MASK1][1].firstTimeUsed = false;
-	maskStats[Mask::MASK1][1].poisonDamage = 5;
-	maskStats[Mask::MASK1][1].poisonDuration = 5.0f;
-	maskStats[Mask::MASK1][1].poisonTickRate = 1.5f;
+	maskStats[Mask::MASK1][Branches::Modifiers][1].maxHealthModifier = -10;
+	maskStats[Mask::MASK1][Branches::Modifiers][1].movementSpeedModifier = 10;
+	maskStats[Mask::MASK1][Branches::Modifiers][1].attackDamageModifier = 10;
+	maskStats[Mask::MASK1][Branches::Modifiers][1].attackSpeedModifier = 0;
+
+	maskStats[Mask::MASK1][Branches::Rama1][1].maskDamage = 120;
+
+	maskStats[Mask::MASK1][Branches::Rama2][1].maskCoolDown = 28000; //En Milisegundos
+
+	maskStats[Mask::MASK1][Branches::Rama3][1].rangeBallModifier = 0.05f;
+	maskStats[Mask::MASK1][Branches::Rama3][1].firstTimeUsed = false;
+
+	maskStats[Mask::MASK1][Branches::Rama4][1].poisonDamage = 5;
+	maskStats[Mask::MASK1][Branches::Rama4][1].poisonDuration = 5.0f;
+	maskStats[Mask::MASK1][Branches::Rama4][1].poisonTickRate = 1.5f;
 
 	// Estadísticas de la máscara 1 a nivel 2
-	maskStats[Mask::MASK1][2].maxHealthModifier = -10;
-	maskStats[Mask::MASK1][2].movementSpeedModifier = 10;
-	maskStats[Mask::MASK1][2].attackDamageModifier = 10;
-	maskStats[Mask::MASK1][2].attackSpeedModifier = 0;
-	maskStats[Mask::MASK1][2].rangeBallModifier = 0.10f;
-	maskStats[Mask::MASK1][2].maskDamage = 180;
-	maskStats[Mask::MASK1][2].maskCoolDown = 25000; //En Milisegundos
-	maskStats[Mask::MASK1][2].firstTimeUsed = false;
-	maskStats[Mask::MASK1][2].poisonDamage = 10;
-	maskStats[Mask::MASK1][2].poisonDuration = 5.0f;
-	maskStats[Mask::MASK1][2].poisonTickRate = 1.5f;
+	maskStats[Mask::MASK1][Branches::Modifiers][2].maxHealthModifier = -10;
+	maskStats[Mask::MASK1][Branches::Modifiers][2].movementSpeedModifier = 10;
+	maskStats[Mask::MASK1][Branches::Modifiers][2].attackDamageModifier = 10;
+	maskStats[Mask::MASK1][Branches::Modifiers][2].attackSpeedModifier = 0;
+
+	maskStats[Mask::MASK1][Branches::Rama1][2].maskDamage = 180;
+
+	maskStats[Mask::MASK1][Branches::Rama2][2].maskCoolDown = 25000; //En Milisegundos
+
+	maskStats[Mask::MASK1][Branches::Rama3][2].rangeBallModifier = 0.10f;
+	maskStats[Mask::MASK1][Branches::Rama3][2].firstTimeUsed = false;
+
+	maskStats[Mask::MASK1][Branches::Rama4][2].poisonDamage = 10;
+	maskStats[Mask::MASK1][Branches::Rama4][2].poisonDuration = 5.0f;
+	maskStats[Mask::MASK1][Branches::Rama4][2].poisonTickRate = 1.5f;
 
 	// Estadísticas de la máscara 1 a nivel 3
-	maskStats[Mask::MASK1][3].maxHealthModifier = -10;
-	maskStats[Mask::MASK1][3].movementSpeedModifier = 10;
-	maskStats[Mask::MASK1][3].attackDamageModifier = 10;
-	maskStats[Mask::MASK1][3].attackSpeedModifier = 0;
-	maskStats[Mask::MASK1][3].rangeBallModifier = 0.15f;
-	maskStats[Mask::MASK1][3].maskDamage = 250;
-	maskStats[Mask::MASK1][3].maskCoolDown = 23000; //En Milisegundos
-	maskStats[Mask::MASK1][3].firstTimeUsed = false;
-	maskStats[Mask::MASK1][3].poisonDamage = 10;
-	maskStats[Mask::MASK1][3].poisonDuration = 10.0f;
-	maskStats[Mask::MASK1][3].poisonTickRate = 1.5f;
+	maskStats[Mask::MASK1][Branches::Modifiers][3].maxHealthModifier = -10;
+	maskStats[Mask::MASK1][Branches::Modifiers][3].movementSpeedModifier = 10;
+	maskStats[Mask::MASK1][Branches::Modifiers][3].attackDamageModifier = 10;
+	maskStats[Mask::MASK1][Branches::Modifiers][3].attackSpeedModifier = 0;
+
+	maskStats[Mask::MASK1][Branches::Rama1][3].maskDamage = 250;
+
+	maskStats[Mask::MASK1][Branches::Rama2][3].maskCoolDown = 23000; //En Milisegundos
+
+	maskStats[Mask::MASK1][Branches::Rama3][3].rangeBallModifier = 0.15f;
+	maskStats[Mask::MASK1][Branches::Rama3][3].firstTimeUsed = false;
+
+	maskStats[Mask::MASK1][Branches::Rama4][3].poisonDamage = 10;
+	maskStats[Mask::MASK1][Branches::Rama4][3].poisonDuration = 10.0f;
+	maskStats[Mask::MASK1][Branches::Rama4][3].poisonTickRate = 1.5f;
 
 	// Estadísticas de la máscara 1 a nivel 4
-	maskStats[Mask::MASK1][4].maxHealthModifier = -10;
-	maskStats[Mask::MASK1][4].movementSpeedModifier = 10;
-	maskStats[Mask::MASK1][4].attackDamageModifier = 10;
-	maskStats[Mask::MASK1][4].attackSpeedModifier = 0;
-	maskStats[Mask::MASK1][4].rangeBallModifier = 0.20f; // 20% de aumento en el rango
-	maskStats[Mask::MASK1][4].maskDamage = 400;
-	maskStats[Mask::MASK1][4].maskCoolDown = 20000; //En Milisegundos
-	maskStats[Mask::MASK1][4].firstTimeUsed = false;
-	maskStats[Mask::MASK1][4].poisonDamage = 15;
-	maskStats[Mask::MASK1][4].poisonDuration = 15.0f;
-	maskStats[Mask::MASK1][4].poisonTickRate = 1.5f;
+	maskStats[Mask::MASK1][Branches::Modifiers][4].maxHealthModifier = -10;
+	maskStats[Mask::MASK1][Branches::Modifiers][4].movementSpeedModifier = 10;
+	maskStats[Mask::MASK1][Branches::Modifiers][4].attackDamageModifier = 10;
+	maskStats[Mask::MASK1][Branches::Modifiers][4].attackSpeedModifier = 0;
+
+	maskStats[Mask::MASK1][Branches::Rama1][4].maskDamage = 400;
+	
+	maskStats[Mask::MASK1][Branches::Rama2][4].maskCoolDown = 20000; //En Milisegundos
+
+	maskStats[Mask::MASK1][Branches::Rama3][4].rangeBallModifier = 0.20f; // 20% de aumento en el rango
+	maskStats[Mask::MASK1][Branches::Rama3][4].firstTimeUsed = false;
+
+	maskStats[Mask::MASK1][Branches::Rama4][4].poisonDamage = 15;
+	maskStats[Mask::MASK1][Branches::Rama4][4].poisonDuration = 15.0f;
+	maskStats[Mask::MASK1][Branches::Rama4][4].poisonTickRate = 1.5f;
 
 
 	//Estadísticas de la máscara 2 a nivel 0
-	maskStats[Mask::MASK2][0].maxHealthModifier = -20;
-	maskStats[Mask::MASK2][0].movementSpeedModifier = 10;
-	maskStats[Mask::MASK2][0].attackDamageModifier = 10;
-	maskStats[Mask::MASK2][0].attackSpeedModifier = 10;
-	maskStats[Mask::MASK2][0].distanceDashModifier = 1.30f;
-	maskStats[Mask::MASK2][0].maskDamage = 40.0f;
-	maskStats[Mask::MASK2][0].maskCoolDown = 20000.0f;
-	maskStats[Mask::MASK2][0].invisibilityDuration = 5.0f;
+	maskStats[Mask::MASK2][Branches::Modifiers][0].maxHealthModifier = -20;
+	maskStats[Mask::MASK2][Branches::Modifiers][0].movementSpeedModifier = 10;
+	maskStats[Mask::MASK2][Branches::Modifiers][0].attackDamageModifier = 10;
+	maskStats[Mask::MASK2][Branches::Modifiers][0].attackSpeedModifier = 10;
+
+	maskStats[Mask::MASK2][Branches::Rama1][0].maskDamage = 40.0f;
+
+	maskStats[Mask::MASK2][Branches::Rama2][0].maskCoolDown = 20000.0f;
+
+	maskStats[Mask::MASK2][Branches::Rama3][0].distanceDashModifier = 1.30f;
+
+	maskStats[Mask::MASK2][Branches::Rama4][0].invisibilityDuration = 5.0f;
 
 	//Estadísticas de la máscara 2 a nivel 1
-	maskStats[Mask::MASK2][1].maxHealthModifier = -20;
-	maskStats[Mask::MASK2][1].movementSpeedModifier = 10;
-	maskStats[Mask::MASK2][1].attackDamageModifier = 10;
-	maskStats[Mask::MASK2][1].attackSpeedModifier = 10;
-	maskStats[Mask::MASK2][1].distanceDashModifier = 1.35f;
-	maskStats[Mask::MASK2][1].maskDamage = 50.0f;
-	maskStats[Mask::MASK2][1].maskCoolDown = 18000.0f;
-	maskStats[Mask::MASK2][1].invisibilityDuration = 6.0f;
+	maskStats[Mask::MASK2][Branches::Modifiers][1].maxHealthModifier = -20;
+	maskStats[Mask::MASK2][Branches::Modifiers][1].movementSpeedModifier = 10;
+	maskStats[Mask::MASK2][Branches::Modifiers][1].attackDamageModifier = 10;
+	maskStats[Mask::MASK2][Branches::Modifiers][1].attackSpeedModifier = 10;
+
+	maskStats[Mask::MASK2][Branches::Rama1][1].maskDamage = 50.0f;
+
+	maskStats[Mask::MASK2][Branches::Rama2][1].maskCoolDown = 18000.0f;
+
+	maskStats[Mask::MASK2][Branches::Rama3][1].distanceDashModifier = 1.35f;
+
+	maskStats[Mask::MASK2][Branches::Rama4][1].invisibilityDuration = 6.0f;
 
 	//Estadísticas de la máscara 2 a nivel 2
-	maskStats[Mask::MASK2][2].maxHealthModifier = -20;
-	maskStats[Mask::MASK2][2].movementSpeedModifier = 10;
-	maskStats[Mask::MASK2][2].attackDamageModifier = 10;
-	maskStats[Mask::MASK2][2].attackSpeedModifier = 10;
-	maskStats[Mask::MASK2][2].distanceDashModifier = 1.40f;
-	maskStats[Mask::MASK2][2].maskDamage = 70.0f;
-	maskStats[Mask::MASK2][2].maskCoolDown = 16000.0f;
-	maskStats[Mask::MASK2][2].invisibilityDuration = 7.3f;
+	maskStats[Mask::MASK2][Branches::Modifiers][2].maxHealthModifier = -20;
+	maskStats[Mask::MASK2][Branches::Modifiers][2].movementSpeedModifier = 10;
+	maskStats[Mask::MASK2][Branches::Modifiers][2].attackDamageModifier = 10;
+	maskStats[Mask::MASK2][Branches::Modifiers][2].attackSpeedModifier = 10;
+	
+	maskStats[Mask::MASK2][Branches::Rama1][2].maskDamage = 70.0f;
+
+	maskStats[Mask::MASK2][Branches::Rama2][2].maskCoolDown = 16000.0f;
+
+	maskStats[Mask::MASK2][Branches::Rama3][2].distanceDashModifier = 1.40f;
+
+	maskStats[Mask::MASK2][Branches::Rama4][2].invisibilityDuration = 7.3f;
 
 	//Estadísticas de la máscara 2 a nivel 3
-	maskStats[Mask::MASK2][3].maxHealthModifier = -20;
-	maskStats[Mask::MASK2][3].movementSpeedModifier = 10;
-	maskStats[Mask::MASK2][3].attackDamageModifier = 10;
-	maskStats[Mask::MASK2][3].attackSpeedModifier = 10;
-	maskStats[Mask::MASK2][3].distanceDashModifier = 1.45f;
-	maskStats[Mask::MASK2][3].maskDamage = 100.0f;
-	maskStats[Mask::MASK2][3].maskCoolDown = 18000.0f;
-	maskStats[Mask::MASK2][3].invisibilityDuration = 8.6f;
+	maskStats[Mask::MASK2][Branches::Modifiers][3].maxHealthModifier = -20;
+	maskStats[Mask::MASK2][Branches::Modifiers][3].movementSpeedModifier = 10;
+	maskStats[Mask::MASK2][Branches::Modifiers][3].attackDamageModifier = 10;
+	maskStats[Mask::MASK2][Branches::Modifiers][3].attackSpeedModifier = 10;
+
+	maskStats[Mask::MASK2][Branches::Rama1][3].maskDamage = 100.0f;
+
+	maskStats[Mask::MASK2][Branches::Rama2][3].maskCoolDown = 18000.0f;
+
+	maskStats[Mask::MASK2][Branches::Rama3][3].distanceDashModifier = 1.45f;
+
+	maskStats[Mask::MASK2][Branches::Rama4][3].invisibilityDuration = 8.6f;
 
 	//Estadísticas de la máscara 2 a nivel 4
-	maskStats[Mask::MASK2][4].maxHealthModifier = -20;
-	maskStats[Mask::MASK2][4].movementSpeedModifier = 10;
-	maskStats[Mask::MASK2][4].attackDamageModifier = 10;
-	maskStats[Mask::MASK2][4].attackSpeedModifier = 10;
-	maskStats[Mask::MASK2][4].distanceDashModifier = 1.50f;
-	maskStats[Mask::MASK2][4].maskDamage = 150.0f;
-	maskStats[Mask::MASK2][4].maskCoolDown = 10000.0f;
-	maskStats[Mask::MASK2][4].invisibilityDuration = 10.0f;
+	maskStats[Mask::MASK2][Branches::Modifiers][4].maxHealthModifier = -20;
+	maskStats[Mask::MASK2][Branches::Modifiers][4].movementSpeedModifier = 10;
+	maskStats[Mask::MASK2][Branches::Modifiers][4].attackDamageModifier = 10;
+	maskStats[Mask::MASK2][Branches::Modifiers][4].attackSpeedModifier = 10;
+
+	maskStats[Mask::MASK2][Branches::Rama1][4].maskDamage = 150.0f;
+
+	maskStats[Mask::MASK2][Branches::Rama2][4].maskCoolDown = 10000.0f;
+
+	maskStats[Mask::MASK2][Branches::Rama3][4].distanceDashModifier = 1.50f;
+
+	maskStats[Mask::MASK2][Branches::Rama4][4].invisibilityDuration = 10.0f;
 
 
 	//Estadísticas de la máscara 3 a nivel 0
-	maskStats[Mask::MASK3][0].maxHealthModifier = -5;
-	maskStats[Mask::MASK3][0].movementSpeedModifier = -5;
-	maskStats[Mask::MASK3][0].attackDamageModifier = -5;
-	maskStats[Mask::MASK3][0].attackSpeedModifier = -5;
-	maskStats[Mask::MASK3][0].maskDamage = 0;
-	maskStats[Mask::MASK3][0].maskCoolDown = 60000.0f;
-	maskStats[Mask::MASK3][0].durationTime = 20000.0f;
-	maskStats[Mask::MASK3][0].maxActiveHealthModifier = 0.10f; //10%
-	maskStats[Mask::MASK3][0].maxActiveDamageModifier = 0.10f; //10%
+	maskStats[Mask::MASK3][Branches::Modifiers][0].maxHealthModifier = -5;
+	maskStats[Mask::MASK3][Branches::Modifiers][0].movementSpeedModifier = -5;
+	maskStats[Mask::MASK3][Branches::Modifiers][0].attackDamageModifier = -5;
+	maskStats[Mask::MASK3][Branches::Modifiers][0].attackSpeedModifier = -5;
+	
+	maskStats[Mask::MASK3][Branches::Rama1][0].maskDamage = 0;
+
+	maskStats[Mask::MASK3][Branches::Rama2][0].maskCoolDown = 60000.0f;
+
+	maskStats[Mask::MASK3][Branches::Rama3][0].durationTime = 20000.0f;
+
+	maskStats[Mask::MASK3][Branches::Rama4][0].maxActiveHealthModifier = 0.10f; //10%
+	maskStats[Mask::MASK3][Branches::Rama4][0].maxActiveDamageModifier = 0.10f; //10%
 
 	//Estadísticas de la máscara 3 a nivel 1
-	maskStats[Mask::MASK3][1].maxHealthModifier = -5;
-	maskStats[Mask::MASK3][1].movementSpeedModifier = -5;
-	maskStats[Mask::MASK3][1].attackDamageModifier = -5;
-	maskStats[Mask::MASK3][1].attackSpeedModifier = -5;
-	maskStats[Mask::MASK3][1].maskDamage = 0;
-	maskStats[Mask::MASK3][1].maskCoolDown = 58000.0f;
-	maskStats[Mask::MASK3][1].durationTime = 22000.0f;
-	maskStats[Mask::MASK3][1].maxActiveHealthModifier = 0.15f;
-	maskStats[Mask::MASK3][1].maxActiveDamageModifier = 0.15f; 
+	maskStats[Mask::MASK3][Branches::Modifiers][1].maxHealthModifier = -5;
+	maskStats[Mask::MASK3][Branches::Modifiers][1].movementSpeedModifier = -5;
+	maskStats[Mask::MASK3][Branches::Modifiers][1].attackDamageModifier = -5;
+	maskStats[Mask::MASK3][Branches::Modifiers][1].attackSpeedModifier = -5;
+
+	maskStats[Mask::MASK3][Branches::Rama1][1].maskDamage = 0;
+
+	maskStats[Mask::MASK3][Branches::Rama2][1].maskCoolDown = 58000.0f;
+
+	maskStats[Mask::MASK3][Branches::Rama3][1].durationTime = 22000.0f;
+
+	maskStats[Mask::MASK3][Branches::Rama4][1].maxActiveHealthModifier = 0.15f;
+	maskStats[Mask::MASK3][Branches::Rama4][1].maxActiveDamageModifier = 0.15f; 
 
 	//Estadísticas de la máscara 3 a nivel 2
-	maskStats[Mask::MASK3][2].maxHealthModifier = -5;
-	maskStats[Mask::MASK3][2].movementSpeedModifier = -5;
-	maskStats[Mask::MASK3][2].attackDamageModifier = -5;
-	maskStats[Mask::MASK3][2].attackSpeedModifier = -5;
-	maskStats[Mask::MASK3][2].maskDamage = 0;
-	maskStats[Mask::MASK3][2].maskCoolDown = 56000.0f;
-	maskStats[Mask::MASK3][2].durationTime = 25000.0f;
-	maskStats[Mask::MASK3][2].maxActiveHealthModifier = 0.20f;
-	maskStats[Mask::MASK3][2].maxActiveDamageModifier = 0.20f; 
+	maskStats[Mask::MASK3][Branches::Modifiers][2].maxHealthModifier = -5;
+	maskStats[Mask::MASK3][Branches::Modifiers][2].movementSpeedModifier = -5;
+	maskStats[Mask::MASK3][Branches::Modifiers][2].attackDamageModifier = -5;
+	maskStats[Mask::MASK3][Branches::Modifiers][2].attackSpeedModifier = -5;
+
+	maskStats[Mask::MASK3][Branches::Rama1][2].maskDamage = 0;
+
+	maskStats[Mask::MASK3][Branches::Rama2][2].maskCoolDown = 56000.0f;
+
+	maskStats[Mask::MASK3][Branches::Rama3][2].durationTime = 25000.0f;
+
+	maskStats[Mask::MASK3][Branches::Rama4][2].maxActiveHealthModifier = 0.20f;
+	maskStats[Mask::MASK3][Branches::Rama4][2].maxActiveDamageModifier = 0.20f; 
 
 	//Estadísticas de la máscara 3 a nivel 3
-	maskStats[Mask::MASK3][3].maxHealthModifier = -5;
-	maskStats[Mask::MASK3][3].movementSpeedModifier = -5;
-	maskStats[Mask::MASK3][3].attackDamageModifier = -5;
-	maskStats[Mask::MASK3][3].attackSpeedModifier = -5;
-	maskStats[Mask::MASK3][3].maskDamage = 0;
-	maskStats[Mask::MASK3][3].maskCoolDown = 53000.0f;
-	maskStats[Mask::MASK3][3].durationTime = 27000.0f;
-	maskStats[Mask::MASK3][3].maxActiveHealthModifier = 0.25f;
-	maskStats[Mask::MASK3][3].maxActiveDamageModifier = 0.25f; 
+	maskStats[Mask::MASK3][Branches::Modifiers][3].maxHealthModifier = -5;
+	maskStats[Mask::MASK3][Branches::Modifiers][3].movementSpeedModifier = -5;
+	maskStats[Mask::MASK3][Branches::Modifiers][3].attackDamageModifier = -5;
+	maskStats[Mask::MASK3][Branches::Modifiers][3].attackSpeedModifier = -5;
+
+	maskStats[Mask::MASK3][Branches::Rama1][3].maskDamage = 0;
+
+	maskStats[Mask::MASK3][Branches::Rama2][3].maskCoolDown = 53000.0f;
+
+	maskStats[Mask::MASK3][Branches::Rama3][3].durationTime = 27000.0f;
+
+	maskStats[Mask::MASK3][Branches::Rama4][3].maxActiveHealthModifier = 0.25f;
+	maskStats[Mask::MASK3][Branches::Rama4][3].maxActiveDamageModifier = 0.25f; 
 
 	//Estadísticas de la máscara 3 a nivel 4
-	maskStats[Mask::MASK3][4].maxHealthModifier = -5;
-	maskStats[Mask::MASK3][4].movementSpeedModifier = -5;
-	maskStats[Mask::MASK3][4].attackDamageModifier = -5;
-	maskStats[Mask::MASK3][4].attackSpeedModifier = -5;
-	maskStats[Mask::MASK3][4].maskDamage = 0;
-	maskStats[Mask::MASK3][4].maskCoolDown = 50000.0f;
-	maskStats[Mask::MASK3][4].durationTime = 30000.0f;
-	maskStats[Mask::MASK3][4].maxActiveHealthModifier = 0.35f;
-	maskStats[Mask::MASK3][4].maxActiveDamageModifier = 0.35f; 
+	maskStats[Mask::MASK3][Branches::Modifiers][4].maxHealthModifier = -5;
+	maskStats[Mask::MASK3][Branches::Modifiers][4].movementSpeedModifier = -5;
+	maskStats[Mask::MASK3][Branches::Modifiers][4].attackDamageModifier = -5;
+	maskStats[Mask::MASK3][Branches::Modifiers][4].attackSpeedModifier = -5;
+
+	maskStats[Mask::MASK3][Branches::Rama1][4].maskDamage = 0;
+
+	maskStats[Mask::MASK3][Branches::Rama2][4].maskCoolDown = 50000.0f;
+
+	maskStats[Mask::MASK3][Branches::Rama3][4].durationTime = 30000.0f;
+
+	maskStats[Mask::MASK3][Branches::Rama4][4].maxActiveHealthModifier = 0.35f;
+	maskStats[Mask::MASK3][Branches::Rama4][4].maxActiveDamageModifier = 0.35f; 
 
 
 	//Estadísticas pasivas mascara 0 a nivel 0
-	passiveStats[Mask::MASK0][0].damageBoost = 20;
-	passiveStats[Mask::MASK0][0].rangeBoost = 0;
-	passiveStats[Mask::MASK0][0].dashBoost = 0;
+	passiveStats[Mask::MASK0][Branches::Modifiers][0].damageBoost = 20;
+	passiveStats[Mask::MASK0][Branches::Modifiers][0].rangeBoost = 0;
+	passiveStats[Mask::MASK0][Branches::Modifiers][0].dashBoost = 0;
 
 	//Estadísticas pasivas mascara 0 a nivel 1
-	passiveStats[Mask::MASK0][1].damageBoost = 20;
-	passiveStats[Mask::MASK0][1].rangeBoost = 0;
-	passiveStats[Mask::MASK0][1].dashBoost = 0;
+	passiveStats[Mask::MASK0][Branches::Modifiers][1].damageBoost = 20;
+	passiveStats[Mask::MASK0][Branches::Modifiers][1].rangeBoost = 0;
+	passiveStats[Mask::MASK0][Branches::Modifiers][1].dashBoost = 0;
 
 	//Estadísticas pasivas mascara 0 a nivel 2
-	passiveStats[Mask::MASK0][2].damageBoost = 20;
-	passiveStats[Mask::MASK0][2].rangeBoost = 0;
-	passiveStats[Mask::MASK0][2].dashBoost = 0;
+	passiveStats[Mask::MASK0][Branches::Modifiers][2].damageBoost = 20;
+	passiveStats[Mask::MASK0][Branches::Modifiers][2].rangeBoost = 0;
+	passiveStats[Mask::MASK0][Branches::Modifiers][2].dashBoost = 0;
 	//Estadísticas pasivas mascara 0 a nivel 3
-	passiveStats[Mask::MASK0][3].damageBoost = 20;
-	passiveStats[Mask::MASK0][3].rangeBoost = 0;
-	passiveStats[Mask::MASK0][3].dashBoost = 0;
+	passiveStats[Mask::MASK0][Branches::Modifiers][3].damageBoost = 20;
+	passiveStats[Mask::MASK0][Branches::Modifiers][3].rangeBoost = 0;
+	passiveStats[Mask::MASK0][Branches::Modifiers][3].dashBoost = 0;
 	//Estadísticas pasivas mascara 0 a nivel 4
-	passiveStats[Mask::MASK0][4].damageBoost = 20;
-	passiveStats[Mask::MASK0][4].rangeBoost = 0;
-	passiveStats[Mask::MASK0][4].dashBoost = 0;
+	passiveStats[Mask::MASK0][Branches::Modifiers][4].damageBoost = 20;
+	passiveStats[Mask::MASK0][Branches::Modifiers][4].rangeBoost = 0;
+	passiveStats[Mask::MASK0][Branches::Modifiers][4].dashBoost = 0;
 
 
 	//Estadísticas pasivas mascara 1 a nivel 0
-	passiveStats[Mask::MASK1][0].damageBoost = 0.33;
-	passiveStats[Mask::MASK1][0].rangeBoost = 25;
-	passiveStats[Mask::MASK1][0].dashBoost = 0;
+	passiveStats[Mask::MASK1][Branches::Modifiers][0].damageBoost = 0.33;
+	passiveStats[Mask::MASK1][Branches::Modifiers][0].rangeBoost = 25;
+	passiveStats[Mask::MASK1][Branches::Modifiers][0].dashBoost = 0;
 
 	//Estadísticas pasivas mascara 1 a nivel 1
-	passiveStats[Mask::MASK1][1].damageBoost = 0.33;
-	passiveStats[Mask::MASK1][1].rangeBoost = 25;
-	passiveStats[Mask::MASK1][1].dashBoost = 0;
+	passiveStats[Mask::MASK1][Branches::Modifiers][1].damageBoost = 0.33;
+	passiveStats[Mask::MASK1][Branches::Modifiers][1].rangeBoost = 25;
+	passiveStats[Mask::MASK1][Branches::Modifiers][1].dashBoost = 0;
 
 	//Estadísticas pasivas mascara 1 a nivel 2
-	passiveStats[Mask::MASK1][2].damageBoost = 0.33;
-	passiveStats[Mask::MASK1][2].rangeBoost = 25;
-	passiveStats[Mask::MASK1][2].dashBoost = 0;
+	passiveStats[Mask::MASK1][Branches::Modifiers][2].damageBoost = 0.33;
+	passiveStats[Mask::MASK1][Branches::Modifiers][2].rangeBoost = 25;
+	passiveStats[Mask::MASK1][Branches::Modifiers][2].dashBoost = 0;
 
 	//Estadísticas pasivas mascara 1 a nivel 3
-	passiveStats[Mask::MASK1][3].damageBoost = 0.33;
-	passiveStats[Mask::MASK1][3].rangeBoost = 25;
-	passiveStats[Mask::MASK1][3].dashBoost = 0;
+	passiveStats[Mask::MASK1][Branches::Modifiers][3].damageBoost = 0.33;
+	passiveStats[Mask::MASK1][Branches::Modifiers][3].rangeBoost = 25;
+	passiveStats[Mask::MASK1][Branches::Modifiers][3].dashBoost = 0;
 
 	//Estadísticas pasivas mascara 1 a nivel 4
-	passiveStats[Mask::MASK1][4].damageBoost = 0.33;
-	passiveStats[Mask::MASK1][4].rangeBoost = 25;
-	passiveStats[Mask::MASK1][4].dashBoost = 0;
+	passiveStats[Mask::MASK1][Branches::Modifiers][4].damageBoost = 0.33;
+	passiveStats[Mask::MASK1][Branches::Modifiers][4].rangeBoost = 25;
+	passiveStats[Mask::MASK1][Branches::Modifiers][4].dashBoost = 0;
 
 
 	//Estadísticas pasivas mascara 2 a nivel 0
-	passiveStats[Mask::MASK2][0].damageBoost = 0;
-	passiveStats[Mask::MASK2][0].rangeBoost = 0;
-	passiveStats[Mask::MASK2][0].dashBoost = 2;
-	passiveStats[Mask::MASK2][0].invisibilityDuration = 2000.0f;
+	passiveStats[Mask::MASK2][Branches::Modifiers][0].damageBoost = 0;
+	passiveStats[Mask::MASK2][Branches::Modifiers][0].rangeBoost = 0;
+	passiveStats[Mask::MASK2][Branches::Modifiers][0].dashBoost = 2;
+	passiveStats[Mask::MASK2][Branches::Modifiers][0].invisibilityDuration = 2000.0f;
 
 	//Estadísticas pasivas mascara 2 a nivel 1
-	passiveStats[Mask::MASK2][1].damageBoost = 0;
-	passiveStats[Mask::MASK2][1].rangeBoost = 0;
-	passiveStats[Mask::MASK2][1].dashBoost = 2;
-	passiveStats[Mask::MASK2][1].invisibilityDuration = 2000.0f;
+	passiveStats[Mask::MASK2][Branches::Modifiers][1].damageBoost = 0;
+	passiveStats[Mask::MASK2][Branches::Modifiers][1].rangeBoost = 0;
+	passiveStats[Mask::MASK2][Branches::Modifiers][1].dashBoost = 2;
+	passiveStats[Mask::MASK2][Branches::Modifiers][1].invisibilityDuration = 2000.0f;
 
 	//Estadísticas pasivas mascara 2 a nivel 2
-	passiveStats[Mask::MASK2][2].damageBoost = 0;
-	passiveStats[Mask::MASK2][2].rangeBoost = 0;
-	passiveStats[Mask::MASK2][2].dashBoost = 2;
-	passiveStats[Mask::MASK2][2].invisibilityDuration = 2000.0f;
+	passiveStats[Mask::MASK2][Branches::Modifiers][2].damageBoost = 0;
+	passiveStats[Mask::MASK2][Branches::Modifiers][2].rangeBoost = 0;
+	passiveStats[Mask::MASK2][Branches::Modifiers][2].dashBoost = 2;
+	passiveStats[Mask::MASK2][Branches::Modifiers][2].invisibilityDuration = 2000.0f;
 
 	//Estadísticas pasivas mascara 2 a nivel 3
-	passiveStats[Mask::MASK2][3].damageBoost = 0;
-	passiveStats[Mask::MASK2][3].rangeBoost = 0;
-	passiveStats[Mask::MASK2][3].dashBoost = 2;
-	passiveStats[Mask::MASK2][3].invisibilityDuration = 2000.0f;
+	passiveStats[Mask::MASK2][Branches::Modifiers][3].damageBoost = 0;
+	passiveStats[Mask::MASK2][Branches::Modifiers][3].rangeBoost = 0;
+	passiveStats[Mask::MASK2][Branches::Modifiers][3].dashBoost = 2;
+	passiveStats[Mask::MASK2][Branches::Modifiers][3].invisibilityDuration = 2000.0f;
 
 	//Estadísticas pasivas mascara 2 a nivel 4
-	passiveStats[Mask::MASK2][4].damageBoost = 0;
-	passiveStats[Mask::MASK2][4].rangeBoost = 0;
-	passiveStats[Mask::MASK2][4].dashBoost = 2;
-	passiveStats[Mask::MASK2][4].invisibilityDuration = 2000.0f;
+	passiveStats[Mask::MASK2][Branches::Modifiers][4].damageBoost = 0;
+	passiveStats[Mask::MASK2][Branches::Modifiers][4].rangeBoost = 0;
+	passiveStats[Mask::MASK2][Branches::Modifiers][4].dashBoost = 2;
+	passiveStats[Mask::MASK2][Branches::Modifiers][4].invisibilityDuration = 2000.0f;
 
 
 	//Estadísticas pasivas mascara 3 a level 0
-	passiveStats[Mask::MASK3][0].damageBoost = 0.20f; //20% de aumento en el daño
-	passiveStats[Mask::MASK3][0].velocityBoost = 0.10f; //10% de aumento en la velocidad
+	passiveStats[Mask::MASK3][Branches::Modifiers][0].damageBoost = 0.20f; //20% de aumento en el daño
+	passiveStats[Mask::MASK3][Branches::Modifiers][0].velocityBoost = 0.10f; //10% de aumento en la velocidad
 
 	//Estadísticas pasivas mascara 3 a level 1
-	passiveStats[Mask::MASK3][1].damageBoost = 0.20f;
-	passiveStats[Mask::MASK3][1].velocityBoost = 0.10f;
+	passiveStats[Mask::MASK3][Branches::Modifiers][1].damageBoost = 0.20f;
+	passiveStats[Mask::MASK3][Branches::Modifiers][1].velocityBoost = 0.10f;
 
 	//Estadísticas pasivas mascara 3 a level 2
-	passiveStats[Mask::MASK3][2].damageBoost = 0.20f;
-	passiveStats[Mask::MASK3][2].velocityBoost = 0.10f;
+	passiveStats[Mask::MASK3][Branches::Modifiers][2].damageBoost = 0.20f;
+	passiveStats[Mask::MASK3][Branches::Modifiers][2].velocityBoost = 0.10f;
 
 	//Estadísticas pasivas mascara 3 a level 3
-	passiveStats[Mask::MASK3][3].damageBoost = 0.20f;
-	passiveStats[Mask::MASK3][3].velocityBoost = 0.10f;
+	passiveStats[Mask::MASK3][Branches::Modifiers][3].damageBoost = 0.20f;
+	passiveStats[Mask::MASK3][Branches::Modifiers][3].velocityBoost = 0.10f;
 
 	//Estadísticas pasivas mascara 3 a level 4
-	passiveStats[Mask::MASK3][4].damageBoost = 0.20f;
-	passiveStats[Mask::MASK3][4].velocityBoost = 0.10f;
+	passiveStats[Mask::MASK3][Branches::Modifiers][4].damageBoost = 0.20f;
+	passiveStats[Mask::MASK3][Branches::Modifiers][4].velocityBoost = 0.10f;
 
 	// Máscaras a NOMASK
 	primaryMask = Mask::NOMASK;
@@ -449,11 +529,44 @@ bool Player::Start() {
 	EquipPrimaryMask(Mask::MASK0);
 	EquipSecondaryMask(Mask::NOMASK);
 
+
+	/*	------------ALEIX------------
+	PARA MEJORAR X RAMA DE X MASCARA SERIA ASI
+
+	app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama1] += 1;
+
+	Siendo [Mask::MASK0] -> El numero de la mascara (0,1,2,3)
+	Siendo [Branches::Rama1] -> El numero de la rama (1,2,3,4), según el excel de arriba a abajo (1 = daño, 2 = cooldown, 3 = mejora de habilidad principal, 4 =  veneno/invisible/aumento)	
+	
+		------------ALEIX------------ */
+
+	
 	//PARA TESTEAR
-	maskLevels[primaryMask] = 1; 
-	maskLevels[secondaryMask] = 0;
-	printf("Primary mask: %d, Level: %d\n", static_cast<int>(primaryMask) - 1, maskLevels[primaryMask]);
-	printf("Secondary mask: %d, Level: %d\n", static_cast<int>(secondaryMask) - 1, maskLevels[secondaryMask]);
+
+	maskLevels[primaryMask][Branches::Modifiers] = 0;
+	maskLevels[primaryMask][Branches::Rama1] = 1;
+	maskLevels[primaryMask][Branches::Rama2] = 2;
+	maskLevels[primaryMask][Branches::Rama3] = 3;
+	maskLevels[primaryMask][Branches::Rama4] = 4;
+
+	maskLevels[secondaryMask][Branches::Modifiers] = 0;
+	maskLevels[secondaryMask][Branches::Rama1] = 4;
+	maskLevels[secondaryMask][Branches::Rama2] = 3;
+	maskLevels[secondaryMask][Branches::Rama3] = 2;
+	maskLevels[secondaryMask][Branches::Rama4] = 1;
+
+	printf("Primary mask: %d, Level Rama1: %d, Level Rama2: %d, Level Rama3: %d, Level Rama4: %d\n", 
+		static_cast<int>(primaryMask) - 1, 
+		maskLevels[primaryMask][Branches::Rama1], 
+		maskLevels[primaryMask][Branches::Rama2], 
+		maskLevels[primaryMask][Branches::Rama3], 
+		maskLevels[primaryMask][Branches::Rama4]);
+	printf("Secondary mask: %d, Level Rama1: %d, Level Rama2: %d, Level Rama3: %d, Level Rama4: %d\n", 
+		static_cast<int>(secondaryMask) - 1, 
+		maskLevels[secondaryMask][Branches::Rama1], 
+		maskLevels[secondaryMask][Branches::Rama2], 
+		maskLevels[secondaryMask][Branches::Rama3], 
+		maskLevels[secondaryMask][Branches::Rama4]);
 	return true;
 }
 
@@ -496,32 +609,32 @@ bool Player::Update(float dt)
 
 	//printf("\nposx:%d, posy: %d",position.x, position.y);
 
-	if (maskStats[primaryMask][maskLevels[primaryMask]].invisibilityTimer.ReadSec() > maskStats[primaryMask][maskLevels[primaryMask]].invisibilityDuration) {
+	if (maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].invisibilityTimer.ReadSec() > maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].invisibilityDuration) {
         SDL_SetTextureAlphaMod(texture, 255);
 		isInvisible = false;
-		maskStats[primaryMask][maskLevels[primaryMask]].invisibilityTimer.Start();
+		maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].invisibilityTimer.Start();
 
     }
-	if(passiveStats[secondaryMask][maskLevels[secondaryMask]].invisibilityTimer.ReadSec() > passiveStats[secondaryMask][maskLevels[secondaryMask]].invisibilityDuration){
+	if(passiveStats[secondaryMask][Branches::Modifiers][maskLevels[secondaryMask][Branches::Modifiers]].invisibilityTimer.ReadSec() > passiveStats[secondaryMask][Branches::Modifiers][maskLevels[secondaryMask][Branches::Modifiers]].invisibilityDuration){
 		SDL_SetTextureAlphaMod(texture, 255);
 		isInvisible = false;
-		passiveStats[secondaryMask][maskLevels[secondaryMask]].invisibilityTimer.Start();
+		passiveStats[secondaryMask][Branches::Modifiers][maskLevels[secondaryMask][Branches::Modifiers]].invisibilityTimer.Start();
 
 	}
 	if(!isInvisible){
 		SDL_SetTextureAlphaMod(texture, 255);
 	}
 
-	if (mask3Timer.ReadMSec() >= maskStats[Mask::MASK3][maskLevels[Mask::MASK3]].durationTime && mask3Active) {
+	if (mask3Timer.ReadMSec() >= maskStats[Mask::MASK3][Branches::Rama3][maskLevels[Mask::MASK3][Branches::Rama3]].durationTime && mask3Active) {
         // Revertir las estadísticas a sus valores originales
-        currentStats.attackDamage = baseStats.attackDamage * (1 + maskStats[Mask::MASK3][maskLevels[Mask::MASK3]].maxActiveDamageModifier / 100); 
-        currentStats.maxHealth = baseStats.maxHealth * (1 + maskStats[Mask::MASK3][maskLevels[Mask::MASK3]].maxActiveHealthModifier / 100);
+        currentStats.attackDamage = baseStats.attackDamage * (1 + maskStats[Mask::MASK3][Branches::Rama4][maskLevels[Mask::MASK3][Branches::Rama4]].maxActiveDamageModifier / 100); 
+        currentStats.maxHealth = baseStats.maxHealth * (1 + maskStats[Mask::MASK3][Branches::Rama4][maskLevels[Mask::MASK3][Branches::Rama4]].maxActiveHealthModifier / 100);
 		mask3Active = false;
     }
 
 	if(secondaryMask == Mask::MASK3){
-		currentStats.attackDamage = baseStats.attackDamage * (1 + passiveStats[Mask::MASK3][maskLevels[Mask::MASK3]].damageBoost); 
-		currentStats.movementSpeed = baseStats.movementSpeed * (1 + passiveStats[Mask::MASK3][maskLevels[Mask::MASK3]].velocityBoost);
+		currentStats.attackDamage = baseStats.attackDamage * (1 + passiveStats[Mask::MASK3][Branches::Modifiers][maskLevels[Mask::MASK3][Branches::Modifiers]].damageBoost); 
+		currentStats.movementSpeed = baseStats.movementSpeed * (1 + passiveStats[Mask::MASK3][Branches::Modifiers][maskLevels[Mask::MASK3][Branches::Modifiers]].velocityBoost);
 	}
 
 	if (playerXP >= XPtoLevelUp) {
@@ -631,10 +744,10 @@ void Player::EquipPrimaryMask(Mask mask) {
 
 	// Si la máscara no es NOMASK, aplica las modificaciones de estadísticas
 	 if (mask != Mask::NOMASK) {
-        currentStats.maxHealth = baseStats.maxHealth * (1 + maskStats[mask][maskLevels[mask]].maxHealthModifier / 100);
-        currentStats.movementSpeed = baseStats.movementSpeed * (1 + maskStats[mask][maskLevels[mask]].movementSpeedModifier / 100);
-        currentStats.attackSpeed = baseStats.attackSpeed * (1 + maskStats[mask][maskLevels[mask]].attackSpeedModifier / 100);
-        currentStats.attackDamage = baseStats.attackDamage * (1 + maskStats[mask][maskLevels[mask]].attackDamageModifier / 100);
+        currentStats.maxHealth = baseStats.maxHealth * (1 + maskStats[mask][Branches::Modifiers][maskLevels[mask][Branches::Modifiers]].maxHealthModifier / 100);
+        currentStats.movementSpeed = baseStats.movementSpeed * (1 + maskStats[mask][Branches::Modifiers][maskLevels[mask][Branches::Modifiers]].movementSpeedModifier / 100);
+        currentStats.attackSpeed = baseStats.attackSpeed * (1 + maskStats[mask][Branches::Modifiers][maskLevels[mask][Branches::Modifiers]].attackSpeedModifier / 100);
+        currentStats.attackDamage = baseStats.attackDamage * (1 + maskStats[mask][Branches::Modifiers][maskLevels[mask][Branches::Modifiers]].attackDamageModifier / 100);
     }
 }
 
@@ -643,7 +756,7 @@ void Player::EquipSecondaryMask(Mask mask) {
 
 	// Si la máscara no es NOMASK, aplica las modificaciones de estadísticas
     if (mask != Mask::NOMASK) {
-        currentStats.attackDamage = baseStats.attackDamage * (1 + passiveStats[mask][maskLevels[mask]].damageBoost / 100);
+        currentStats.attackDamage = baseStats.attackDamage * (1 + passiveStats[mask][Branches::Modifiers][maskLevels[mask][Branches::Modifiers]].damageBoost / 100);
     }
 }
 
@@ -658,7 +771,7 @@ Mask* Player::GetSecondaryMask()
 }
 
 MaskStats* Player::GetMaskStats(Mask mask) {
-    return &maskStats[mask][maskLevels[mask]];
+    return &maskStats[mask][Branches::Modifiers][maskLevels[mask][Branches::Modifiers]];
 }
 
 void Player::ChangeMask() {
@@ -711,9 +824,9 @@ void Player::MaskAttack(float dt)
 	}
 }
 void Player::ApplyPoison(Entity* entity) {
-	int poisonDamage = maskStats[Mask::MASK0][maskLevels[Mask::MASK0]].poisonDamage;
-	float poisonDuration = maskStats[Mask::MASK0][maskLevels[Mask::MASK0]].poisonDuration / 1000.0f; // Convertir a segundos
-	float poisonTickRate = maskStats[Mask::MASK0][maskLevels[Mask::MASK0]].poisonTickRate / 1000.0f; // Convertir a segundos
+	int poisonDamage = maskStats[Mask::MASK0][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].poisonDamage;
+	float poisonDuration = maskStats[Mask::MASK0][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].poisonDuration / 1000.0f; // Convertir a segundos
+	float poisonTickRate = maskStats[Mask::MASK0][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].poisonTickRate / 1000.0f; // Convertir a segundos
 
 	// Aquí asumimos que Entity tiene una función ApplyPoison que toma estos parámetros.
 	// Si no es el caso, necesitarás ajustar este código.
@@ -778,7 +891,7 @@ Entity* Player::GetEnemyWithHighestHealthWithinRadius(iPoint position, int radiu
 }
 
 void Player::CastMultipleLightnings() {
-	int numLightnings = maskLevels[Mask::MASK0]; // Obtiene el número de rayos basado en el nivel de la máscara
+	int numLightnings = maskLevels[Mask::MASK0][Branches::Rama3]; // Obtiene el número de rayos basado en el nivel de la máscara
 
 	for (int i = 0; i <= numLightnings; i++) {
 		CastLightning();
@@ -790,8 +903,8 @@ void Player::CastLightning() {
 	Entity* target = GetEnemyWithHighestHealthWithinRadius(position, 500);
 	if (target != nullptr) {
 		printf("Enemy hit: %p at position (%d, %d)\n", (void*)target, target->position.x, target->position.y);
-        target->TakeDamage(maskStats[primaryMask][maskLevels[primaryMask]].maskDamage);
-		target->ApplyPoison(maskStats[primaryMask][maskLevels[primaryMask]].poisonDamage, maskStats[primaryMask][maskLevels[primaryMask]].poisonDuration, maskStats[primaryMask][maskLevels[primaryMask]].poisonTickRate);
+        target->TakeDamage(maskStats[primaryMask][Branches::Rama1][maskLevels[primaryMask][Branches::Rama1]].maskDamage);
+		target->ApplyPoison(maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].poisonDamage, maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].poisonDuration, maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].poisonTickRate);
 		//ApplyPoison(target);
 	}
 	else {
@@ -802,7 +915,7 @@ void Player::CastLightning() {
 //Ataque mascara 1
 
 void Player::AreaAttack(float dt) {
-	mask1AttackSensor = app->physics->CreateRectangleSensor(this->position.x, this->position.y, attackMask1Width + attackMask1Width * maskStats[primaryMask][maskLevels[primaryMask]].rangeBallModifier, attackMask1Height + attackMask1Height * maskStats[primaryMask][maskLevels[primaryMask]].rangeBallModifier, DYNAMIC);
+	mask1AttackSensor = app->physics->CreateRectangleSensor(this->position.x, this->position.y, attackMask1Width + attackMask1Width * maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].rangeBallModifier, attackMask1Height + attackMask1Height * maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].rangeBallModifier, DYNAMIC);
 	mask1AttackSensor->ctype = ColliderType::MASK1_ATTACK;
 	mask1AttackSensor->listener = this;
 }
@@ -835,26 +948,26 @@ void Player::DashAttack(float dt) {
 		dashCollision->ctype = ColliderType::MASK2_ATTACK;
 		dashCollision->listener = this;
 		
-		pbodyFoot->body->ApplyForce(b2Vec2(velocity.x * 100 * maskStats[primaryMask][maskLevels[primaryMask]].distanceDashModifier, velocity.y * 100 * maskStats[primaryMask][maskLevels[primaryMask]].distanceDashModifier), pbodyFoot->body->GetWorldCenter(), false);
+		pbodyFoot->body->ApplyForce(b2Vec2(velocity.x * 100 * maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].distanceDashModifier, velocity.y * 100 * maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].distanceDashModifier), pbodyFoot->body->GetWorldCenter(), false);
 	}	
 }
 
 void Player::SetInvisible() {
     SDL_SetTextureAlphaMod(texture, 100);
-    maskStats[primaryMask][maskLevels[primaryMask]].invisibilityTimer.Start();
+    maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].invisibilityTimer.Start();
 	isInvisible = true;
 }
 
 void Player::SetPassiveInvisible() {
     SDL_SetTextureAlphaMod(texture, 100);
 	isInvisible = true;
-    passiveStats[secondaryMask][maskLevels[secondaryMask]].invisibilityTimer.Start();
+    passiveStats[secondaryMask][Branches::Modifiers][maskLevels[secondaryMask][Branches::Modifiers]].invisibilityTimer.Start();
 }
 
 //Mascara 3
 void Player::Mask3Statistics(){
-	currentStats.attackDamage = baseStats.attackDamage * (1 + maskStats[Mask::MASK3][maskLevels[Mask::MASK3]].maxActiveDamageModifier);
-	currentStats.maxHealth = baseStats.maxHealth * (1 + maskStats[Mask::MASK3][maskLevels[Mask::MASK3]].maxActiveHealthModifier);   
+	currentStats.attackDamage = baseStats.attackDamage * (1 + maskStats[Mask::MASK3][Branches::Rama4][maskLevels[Mask::MASK3][Branches::Rama4]].maxActiveDamageModifier);
+	currentStats.maxHealth = baseStats.maxHealth * (1 + maskStats[Mask::MASK3][Branches::Rama4][maskLevels[Mask::MASK3][Branches::Rama4]].maxActiveHealthModifier);   
 	printf("current stats attack damage: %f\n", currentStats.attackDamage);
 	mask3Active = true;
 	mask3Timer.Start();
@@ -883,21 +996,21 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (physA == mask1PassiveSensor) {
 			LOG("Collision ENEMY");
 			if (physB->entity != nullptr) {
-				physB->entity->TakeDamage(currentStats.attackDamage * passiveStats[secondaryMask][maskLevels[secondaryMask]].damageBoost);
+				physB->entity->TakeDamage(currentStats.attackDamage * passiveStats[secondaryMask][Branches::Modifiers][maskLevels[secondaryMask][Branches::Modifiers]].damageBoost);
 			}
 		}
 		if (physA == mask1AttackSensor) {
 			LOG("Collision ENEMY");
 			if (physB->entity != nullptr) {
-				physB->entity->TakeDamage(maskStats[primaryMask][maskLevels[primaryMask]].maskDamage);
-				physB->entity->ApplyPoison(maskStats[primaryMask][maskLevels[primaryMask]].poisonDamage, maskStats[primaryMask][maskLevels[primaryMask]].poisonDuration, maskStats[primaryMask][maskLevels[primaryMask]].poisonTickRate);
+				physB->entity->TakeDamage(maskStats[primaryMask][Branches::Rama1][maskLevels[primaryMask][Branches::Rama1]].maskDamage);
+				physB->entity->ApplyPoison(maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].poisonDamage, maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].poisonDuration, maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].poisonTickRate);
 			}
 			//collisionMask1Timer.Start();
 		}
 		if(physA == dashCollision)
 		{
 			if (physB->entity != nullptr) {
-				physB->entity->TakeDamage(maskStats[Mask::MASK2][maskLevels[Mask::MASK2]].maskDamage);
+				physB->entity->TakeDamage(maskStats[Mask::MASK2][Branches::Rama1][maskLevels[Mask::MASK2][Branches::Rama1]].maskDamage);
 			}
 		}
 		if (physA == pbodyFoot) {
@@ -1637,7 +1750,7 @@ void Player::PlayerMovement(float dt)
 
 	fPoint joystick = app->input->GetAxis(MOVE_HORIZONTAL, MOVE_VERTICAL);
 
-	printf("\n%f",joystick.x);
+	//printf("\n%f",joystick.x);
 
 	//Controles antiguos
 
@@ -1684,7 +1797,7 @@ void Player::PlayerMovement(float dt)
 		if(secondaryMask == Mask::MASK2)
 		{
 			SetPassiveInvisible();
-			passiveStats[secondaryMask][maskLevels[secondaryMask]].invisibilityTimer.Start();
+			passiveStats[secondaryMask][Branches::Modifiers][maskLevels[secondaryMask][Branches::Modifiers]].invisibilityTimer.Start();
 		}
 
 		app->audio->StopFx(-1);
@@ -1740,15 +1853,15 @@ void Player::PlayerMovement(float dt)
 	//Si pulsas K para mascara principal
 
 	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN &&
-		(timerMaskAttack.ReadMSec() > maskStats[primaryMask][maskLevels[primaryMask]].maskCoolDown ||
-			!maskStats[primaryMask][maskLevels[primaryMask]].firstTimeUsed)) {
-		maskStats[primaryMask][maskLevels[primaryMask]].firstTimeUsed = true;
+		(timerMaskAttack.ReadMSec() > maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDown ||
+			!maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].firstTimeUsed)) {
+		maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].firstTimeUsed = true;
 		isAttackingMask = true;
 		timerMaskAttack.Start();
 		desiredState = EntityState::MASK_ATTACK;
 	}
 
-	if (!(timerMaskAttack.ReadMSec() < maskStats[primaryMask][maskLevels[primaryMask]].maskCoolDown && isAttackingMask)) {
+	if (!(timerMaskAttack.ReadMSec() < maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDown && isAttackingMask)) {
 		isAttackingMask = false;
 		if (mask1AttackSensor) {
 			app->physics->DestroyBody(mask1AttackSensor);
