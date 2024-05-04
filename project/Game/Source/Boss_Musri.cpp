@@ -88,6 +88,8 @@ bool Boss_Musri::Start() {
 	habilidadFlechaCargadaTimer.Start();
 	habilidadDashInvisibleTimer.Start();
 
+	numeroRafagasAct = 0;
+
 	return true;
 }
 
@@ -193,7 +195,7 @@ bool Boss_Musri::PostUpdate() {
 	for (int i = 0; i < flechasLanzadas.size(); i++) {
 
 		b2Vec2 arrowPos = flechasLanzadas.at(i).pbody->body->GetTransform().p;
-		app->render->DrawTexture(arrowTexture, arrowPos.x, arrowPos.y, 1);
+		app->render->DrawTexture(arrowTexture, METERS_TO_PIXELS(arrowPos.x), METERS_TO_PIXELS(arrowPos.y), 1);
 	}
 
 	/*LIMITES SALA*/
@@ -265,6 +267,7 @@ void Boss_Musri::OnCollision(PhysBody* physA, PhysBody* physB) {
 		case ColliderType::PLATFORM:
 			for (int i = 0; i < flechasLanzadas.size(); i++) {
 				if (flechasLanzadas.at(i).pbody->body->GetTransform().p == physA->body->GetTransform().p) {
+					app->physics->GetWorld()->DestroyBody(flechasLanzadas.at(i).pbody->body);
 					flechasLanzadas.erase(flechasLanzadas.begin() + i);
 					break;
 				}
@@ -423,7 +426,7 @@ void Boss_Musri::Fase1(float dt, iPoint playerPos)
 				
 				//Disparar rafagas
 				//flechasLanzadas
-				if (flechasLanzadas.size() < 3) {
+				if (numeroRafagasAct < numeroRafagas) {
 					if (dispararFlechaRafagaTimer.ReadMSec() >= 100) {
 
 						dispararFlechaRafagaTimer.Start();
@@ -435,11 +438,12 @@ void Boss_Musri::Fase1(float dt, iPoint playerPos)
 						flechasLanzadas.push_back(flecha);
 
 						flecha.pbody->body->ApplyForceToCenter(b2Vec2(flecha.direction.x* velocidadFlechas, flecha.direction.y * velocidadFlechas), true);
-						
+						numeroRafagasAct++;
 					}
 				}
 				else {
 					dispararRafagasTimer.Start(); //Reset el timer de las 3 flechas
+					numeroRafagasAct = 0;
 				}
 				
 
@@ -456,12 +460,13 @@ void Boss_Musri::Fase1(float dt, iPoint playerPos)
 	}
 
 	//Gestionar las flechas
-	for (int i = 0; i < flechasLanzadas.size(); i++) {
+	/*for (int i = 0; i < flechasLanzadas.size(); i++) {
 		if (flechasLanzadas.at(i).lifeTimer.ReadMSec() >= 300) {
+			app->physics->GetWorld()->DestroyBody(flechasLanzadas.at(i).pbody->body);
 			flechasLanzadas.erase(flechasLanzadas.begin() + i);
 			break;
 		}
-	}
+	}*/
 
 
 
