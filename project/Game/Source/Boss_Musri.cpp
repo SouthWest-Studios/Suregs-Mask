@@ -48,9 +48,9 @@ bool Boss_Musri::Start() {
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
 	idleAnim.LoadAnim((char*)name.GetString(), "idleAnim", spritePositions);
-	/*runAnim.LoadAnim("osiris", "runAnim", spritePositions);
-	attackAnim.LoadAnim("osiris", "attackAnim", spritePositions);
-	dieAnim.LoadAnim("osiris", "dieAnim", spritePositions);*/
+	attackEmpujarAnim.LoadAnim((char*)name.GetString(), "attackEmpujarAnim", spritePositions);;
+	attackFlechasRapidasAnim.LoadAnim((char*)name.GetString(), "attackFlechasRapidas", spritePositions);;
+	attackFlechaCargadaAnim.LoadAnim((char*)name.GetString(), "attackFlechaCargada", spritePositions);;
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
@@ -63,19 +63,23 @@ bool Boss_Musri::Start() {
 	pbodySensor->entity = this;
 	pbodySensor->listener = this;
 	pbodySensor->ctype = ColliderType::UNKNOWN;
-	
 
 
-	originalPosition = app->map->WorldToMap(position.x, position.y);
+
+	//originalPosition = app->map->WorldToMap(position.x, position.y);
 
 	maxHealth = config.attribute("maxHealth").as_float();
 	health = maxHealth;
-	speed = config.attribute("speed").as_float();
+	speed = config.attribute("speed").as_float() / 10;
 	attackDamage = config.attribute("attackDamage").as_float();
 	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();
 
-	//printf("Speed: %f", speed);
+	movePosition = GetRandomPosicion(position, 10);
+
+	fase = FASE_Musri::FASE_ONE;
+
+
 	return true;
 }
 
@@ -93,7 +97,7 @@ bool Boss_Musri::Update(float dt)
 
 	//printf("\n %d : %d", playerPos.x, playerPos.y);
 
-	if (health <= 0)
+	/*if (health <= 0)
 	{
 		desiredState = EntityState_Boss_Musri::DEAD;
 	}
@@ -108,7 +112,25 @@ bool Boss_Musri::Update(float dt)
 	else
 	{
 		desiredState = EntityState_Boss_Musri::RUNNING;
+	}*/
+
+	switch (fase)
+	{
+	case FASE_Musri::FASE_ONE:
+		Fase1(dt);
+		break;
+	case FASE_Musri::FASE_CHANGE:
+		FaseC(dt);
+		break;
+	case FASE_Musri::FASE_TWO:
+		Fase2(dt);
+		break;
 	}
+
+
+
+
+
 	stateMachine(dt, playerPos);
 
 
@@ -143,17 +165,26 @@ bool Boss_Musri::PostUpdate() {
 		app->render->DrawTexture(texture, position.x - 70, position.y - 150, SDL_FLIP_NONE, &rect);
 	}
 
-	for (uint i = 0; i < lastPath.Count(); ++i)
-	{
-		iPoint pos = app->map->MapToWorld(lastPath.At(i)->x, lastPath.At(i)->y);
-		if (app->physics->debug == true) {
+	if (app->physics->debug == true) {
+		for (uint i = 0; i < lastPath.Count(); ++i)
+		{
+			iPoint pos = app->map->MapToWorld(lastPath.At(i)->x, lastPath.At(i)->y);
+
 			app->render->DrawTexture(app->map->pathfinding->mouseTileTex, pos.x, pos.y, SDL_FLIP_NONE);
+
 		}
 	}
 
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
+
+
+	/*LIMITES SALA*/
+	//app->render->DrawRectangle(limitesSala, 255,255,255,200,true,true);
+
+
+
 	return true;
 }
 
@@ -228,19 +259,21 @@ void Boss_Musri::OnCollision(PhysBody* physA, PhysBody* physB) {
 	}
 }
 
-bool Boss_Musri::Bossfinding(float dt, iPoint playerPosP)
+bool Boss_Musri::Bossfinding(float dt, iPoint targetPosP)
 {
-	iPoint playerPos = app->map->WorldToMap(playerPosP.x, playerPosP.y);
+	bool haLlegadoDestino = false;
+
+	iPoint targetPos = app->map->WorldToMap(targetPosP.x, targetPosP.y);
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
 
 
-	if (dist(playerPos, enemyPos) < viewDistance) {
-		app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
+	if (dist(targetPos, enemyPos) < viewDistance * 100000) {
+		app->map->pathfinding->CreatePath(enemyPos, targetPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
 		lastPath = *app->map->pathfinding->GetLastPath();
 	}
 	else {
-		app->map->pathfinding->CreatePath(enemyPos, originalPosition); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
-		lastPath = *app->map->pathfinding->GetLastPath();
+		//app->map->pathfinding->CreatePath(enemyPos, originalPosition); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
+		//lastPath = *app->map->pathfinding->GetLastPath();
 	}
 
 	b2Vec2 velocity = b2Vec2(0, 0);
@@ -262,12 +295,17 @@ bool Boss_Musri::Bossfinding(float dt, iPoint playerPosP)
 
 
 		isAttacking = false;
-		attackAnim.Reset();
+		//attackAnim.Reset();
+		haLlegadoDestino = false;
 
+
+	}
+	else {
+		haLlegadoDestino = true;
 	}
 	pbodyFoot->body->SetLinearVelocity(velocity);
 
-	return true;
+	return haLlegadoDestino;
 }
 
 float Boss_Musri::GetHealth() const {
@@ -322,4 +360,51 @@ void Boss_Musri::ApplyPoison(int poisonDamage, float poisonDuration, float poiso
 	this->poisonTimer = 0.0f;
 	this->timeSinceLastTick = 0.0f;
 	this->poisoned = true;
+}
+
+void Boss_Musri::Fase1(float dt)
+{
+	bool haLlegado = false;
+	if (cambiarPosicionTimer.ReadMSec() > cambiarPosicionTime) {
+		haLlegado = Bossfinding(dt, movePosition);
+		if (haLlegado) {
+			cambiarPosicionTimer.Start();
+			movePosition = GetRandomPosicion(movePosition, 10); //Para la proxima
+		}
+	}
+	else {
+		//AtaqueFlechas + lo otro
+
+
+
+	}
+	
+
+	LOG("POSDX: %d, POSDY: %d, HA LLEGADO: %d, ", movePosition.x, movePosition.y, haLlegado);
+	LOG("Timer cambiarPosicion: %f", cambiarPosicionTimer.ReadMSec());
+
+
+
+
+
+}
+void Boss_Musri::FaseC(float dt)
+{
+}
+void Boss_Musri::Fase2(float dt)
+{
+}
+
+iPoint Boss_Musri::GetRandomPosicion(iPoint actualPosition, int distanceLimitInf, int distanceLimitSup)
+{
+	iPoint finalTarget;
+	int distT;
+
+	do {
+		finalTarget.x = limitesSala.x + rand() % limitesSala.w;
+		finalTarget.y = limitesSala.y + rand() % limitesSala.h;
+		distT = (dist(finalTarget, actualPosition) / 32);
+	} while (distT < distanceLimitInf && distT > distanceLimitSup);
+
+	return finalTarget;
 }

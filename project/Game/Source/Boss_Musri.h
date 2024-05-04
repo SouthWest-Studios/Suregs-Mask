@@ -64,6 +64,14 @@ public:
 	//Veneno
 	void ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate);
 
+
+
+	void Fase1(float dt);
+	void FaseC(float dt);
+	void Fase2(float dt);
+
+	iPoint GetRandomPosicion(iPoint actualPosition, int distanceLimitInf = 10, int distanceLimitSup = 15);
+
 public:
 
 	//L02: DONE 2: Declare player parameters
@@ -91,21 +99,11 @@ private:
 	pugi::xml_node configNode;
 
 	Animation idleAnim;
-	Animation runAnim;
-	Animation attackAnim;
-	Animation dieAnim;
-
+	Animation attackEmpujarAnim;
+	Animation attackFlechasRapidasAnim;
+	Animation attackFlechaCargadaAnim;
+	
 	bool isFacingLeft = false;
-
-	iPoint originalPosition;
-
-	bool isDead = false;
-	bool isReviving = false;
-	bool hasRevived = false;
-	bool tempo = false;
-	Timer reviveTimer;
-
-	const float reviveTime = 5.0f;
 
 	int TSprite;
 	int SpriteX;
@@ -118,11 +116,28 @@ private:
 	DynArray<iPoint> lastPath;
 
 	Animation* currentAnimation = nullptr;
+
 	EntityState_Boss_Musri state;
+	FASE_Musri fase;
 
 
 	Animation SPosition;
 	SDL_Rect* spritePositions;
+
+	Timer cambiarPosicionTimer;
+	Timer dispararRafagasTimer;
+
+	Timer habilidadEmpuje;
+	Timer habilidadFlechaCargada;
+	Timer habilidadDashInvisible;
+
+
+	int cambiarPosicionTime = 15000;
+	int dispararRafagasTime;
+	int numeroRafagas;
+	
+	SDL_Rect limitesSala = { 9900 , 2750, 2050, 1000 };
+	iPoint movePosition;
 
 
 	//Veneno

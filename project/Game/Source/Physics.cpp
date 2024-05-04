@@ -55,18 +55,24 @@ bool Physics::PreUpdate()
 
 	// Because Box2D does not automatically broadcast collisions/contacts with sensors, 
 	// we have to manually search for collisions and "call" the equivalent to the ModulePhysics::BeginContact() ourselves...
-	for (b2Contact* c = world->GetContactList(); c && c != nullptr && c != NULL; c = c->GetNext())
-	{
-		// For each contact detected by Box2D, see if the first one colliding is a sensor
-		if (c->IsTouching() && c->GetFixtureA()->IsSensor())
+
+	try {
+		for (b2Contact* c = world->GetContactList(); c && c != nullptr && c != NULL; c = c->GetNext())
 		{
-			// If so, we call the OnCollision listener function (only of the sensor), passing as inputs our custom PhysBody classes
-			PhysBody* pb1 = (PhysBody*)c->GetFixtureA()->GetBody()->GetUserData();
-			PhysBody* pb2 = (PhysBody*)c->GetFixtureB()->GetBody()->GetUserData();
-			
-			if (pb1 && pb2 && pb1->listener)
-				pb1->listener->OnCollision(pb1, pb2);
+			// For each contact detected by Box2D, see if the first one colliding is a sensor
+			if (c->IsTouching() && c->GetFixtureA()->IsSensor())
+			{
+				// If so, we call the OnCollision listener function (only of the sensor), passing as inputs our custom PhysBody classes
+				PhysBody* pb1 = (PhysBody*)c->GetFixtureA()->GetBody()->GetUserData();
+				PhysBody* pb2 = (PhysBody*)c->GetFixtureB()->GetBody()->GetUserData();
+
+				if (pb1 && pb2 && pb1->listener)
+					pb1->listener->OnCollision(pb1, pb2);
+			}
 		}
+	}
+	catch (std::exception& e) {
+		LOG("ERROR in Physics - PreUpdate: %s", e.what());
 	}
 
 	return ret;
@@ -74,11 +80,11 @@ bool Physics::PreUpdate()
 
 void Physics::DestroyBody(PhysBody* body)
 {
-    if (body)
-    {
-        world->DestroyBody(body->body);
-        delete body;
-    }
+	if (body)
+	{
+		world->DestroyBody(body->body);
+		delete body;
+	}
 }
 
 b2World* Physics::GetWorld()
@@ -240,7 +246,7 @@ bool Physics::PostLateUpdate()
 	// Activate or deactivate debug mode
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 		debug = !debug;
-	
+
 	//  Iterate all objects in the world and draw the bodies
 	if (debug)
 	{
@@ -260,7 +266,7 @@ bool Physics::PostLateUpdate()
 					app->render->DrawCircle(METERS_TO_PIXELS(pos.x), METERS_TO_PIXELS(pos.y), METERS_TO_PIXELS(shape->m_radius) * app->win->GetScale(), 255, 255, 255);
 
 					if (f->IsSensor()) {
-						app->render->DrawCircle(METERS_TO_PIXELS(pos.x), METERS_TO_PIXELS(pos.y), METERS_TO_PIXELS(shape->m_radius*0.8f) * app->win->GetScale(), 255, 0, 0);
+						app->render->DrawCircle(METERS_TO_PIXELS(pos.x), METERS_TO_PIXELS(pos.y), METERS_TO_PIXELS(shape->m_radius * 0.8f) * app->win->GetScale(), 255, 0, 0);
 					}
 
 				}
@@ -345,15 +351,22 @@ bool Physics::CleanUp()
 // Callback function to collisions with Box2D
 void Physics::BeginContact(b2Contact* contact)
 {
-	// Call the OnCollision listener function to bodies A and B, passing as inputs our custom PhysBody classes
-	PhysBody* physA = (PhysBody*)contact->GetFixtureA()->GetBody()->GetUserData();
-	PhysBody* physB = (PhysBody*)contact->GetFixtureB()->GetBody()->GetUserData();
+	try {
 
-	if (physA && physA->listener != NULL && physA->listener != nullptr && physA->listener)
-		physA->listener->OnCollision(physA, physB);
 
-	if (physB && physB->listener != NULL && physB->listener != nullptr && physB->listener)
-		physB->listener->OnCollision(physB, physA);
+		// Call the OnCollision listener function to bodies A and B, passing as inputs our custom PhysBody classes
+		PhysBody* physA = (PhysBody*)contact->GetFixtureA()->GetBody()->GetUserData();
+		PhysBody* physB = (PhysBody*)contact->GetFixtureB()->GetBody()->GetUserData();
+
+		if (physA && physA->listener != NULL && physA->listener != nullptr && physA->listener)
+			physA->listener->OnCollision(physA, physB);
+
+		if (physB && physB->listener != NULL && physB->listener != nullptr && physB->listener)
+			physB->listener->OnCollision(physB, physA);
+	}
+	catch (std::exception& e) {
+		LOG("ERROR in Physics - BeginContact: %s", e.what());
+	}
 }
 
 //--------------- PhysBody

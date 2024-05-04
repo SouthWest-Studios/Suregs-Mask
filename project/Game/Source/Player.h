@@ -34,12 +34,20 @@ enum RoomType {
 	ROOM_UNKNOWN
 };
 
-enum class Mask{
+enum class Mask {
 	NOMASK,
 	MASK0,
 	MASK1,
 	MASK2,
 	MASK3
+};
+
+enum class Branches {
+    Modifiers,
+	Rama1,
+    Rama2,
+    Rama3,
+    Rama4
 };
 
 struct Stats {
@@ -151,13 +159,18 @@ public:
 	//Estadísticas
 
     Stats baseStats;
+	
     Stats currentStats;
 	
-	std::map<Mask, std::map<int, MaskStats>> maskStats; 
-	std::map<Mask, std::map<int, PassiveStats>> passiveStats;
-	std::map<Mask, int> maskLevels;
-	//MaskStats maskStats[5];
-	//PassiveStats passiveStats[5];
+	std::map<int, PassiveStats> branchPassiveStats;
+	std::map<Branches, decltype(branchPassiveStats)> maskBranchPassiveStats;
+	std::map<Mask, decltype(maskBranchPassiveStats)> passiveStats;
+
+	std::map<int, MaskStats> branchLevels;
+	std::map<Branches, decltype(branchLevels)> maskBranches;
+	std::map<Mask, decltype(maskBranches)> maskStats;
+
+	std::map<Mask, std::map<Branches, int>> maskLevels;
 
 	//Level
 	int playerXP;

@@ -101,6 +101,10 @@ bool Hud::Update(float dt)
 			auto iter = acquired_Items.begin() + i;
 
 			acquired_Items.erase(iter);
+
+			
+			SDL_SetTextureAlphaMod(acquiredItem->texture, 255); // Ajusta la opacidad
+
 			delete acquiredItem;
 
 		}

@@ -192,6 +192,8 @@ bool App::Start()
 	// L1: DONE 3: Measure the amount of ms that takes to execute the App Start() and LOG the result
 	Timer timer = Timer();
 
+	srand(time(nullptr)); //Establece un numero random al iniciar la aplicaciones segun el tiempo
+
 	bool ret = true;
 	ListItem<Module*>* item;
 	item = modules.start;
