@@ -521,7 +521,7 @@ bool Player::Start() {
 	get_item_fx = app->audio->LoadAudioFx("get_item_fx");
 
 	cdTimerDashMS = 500;
-	cdTimerAttackMS = 100000 / currentStats.attackSpeed;
+	cdTimerAttackMS = 30000 / currentStats.attackSpeed;
 
 	player_Direction = Direction::UNKNOWN;
 
