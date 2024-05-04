@@ -99,7 +99,7 @@ bool BestiarioManager::CleanUp()
 	return ret;
 }
 int highestttId = -1;
-Bestiario* BestiarioManager::CreateItem(EntityType type, SDL_Texture* CloseUp, std::string texto)
+Bestiario* BestiarioManager::CreateItem(InventityType type)
 {
 	Bestiario* entity = nullptr;
 
@@ -366,97 +366,97 @@ bool BestiarioManager::PostUpdate()
 	uint tradeSpacing = 83;
 
 	SDL_Rect viewport = { 620, 200, 400, 350 };
-	app->render->DrawRectangle(viewport, 0, 0, 0, 200, true, false);
+	
 
-	//if (mostrar == true)
-	//{
-	//	
-	//	ListItem<Bestiario*>* item;
-	//	Bestiario* pEntity = NULL;
+	if (mostrar == true)
+	{
+		app->render->DrawRectangle(viewport, 0, 0, 0, 200, true, false);
+		ListItem<Bestiario*>* item;
+		Bestiario* pEntity = NULL;
 
-	//	
+		
 
-	//	
-	//	
+		
+		
 
-	//	for (item = bestiario.start; item != nullptr; item = item->next)
-	//	{
-	//		
+		for (item = bestiario.start; item != nullptr; item = item->next)
+		{
+			
 
-	//		
-	//		
-	//		
-	//		pEntity = item->data;
-	//		int rowIndex = item->data->id / maxItemsPerRow; // Calcula el índice de la fila
-	//		int columnIndex = item->data->id % maxItemsPerRow; // Calcula el índice de la columna
-	//		int horizontalPosition = 320 + columnIndex * 492; // Calcula la posición horizontal
-	//		int verticalPosition = 210 + rowIndex * 83; // Calcula la posición vertical
+			
+			
+			
+			pEntity = item->data;
+			int rowIndex = item->data->id / maxItemsPerRow; // Calcula el índice de la fila
+			int columnIndex = item->data->id % maxItemsPerRow; // Calcula el índice de la columna
+			int horizontalPosition = 720 + columnIndex * 492; // Calcula la posición horizontal
+			int verticalPosition = 210 + rowIndex * 83; // Calcula la posición vertical
 
-	//		int y2 = PointerPosition.y - scrollY;
+			int y2 = PointerPosition.y - scrollY;
 
-	//		int y = verticalPosition - scrollY;
-	//		
-	//		if (y2 >= viewport.y && y2 <= viewport.y + viewport.h)
-	//		{
-	//			if (y >= viewport.y && y <= viewport.y + viewport.h) {
+			int y = verticalPosition - scrollY;
+			
+			if (y2 >= viewport.y && y2 <= viewport.y + viewport.h)
+			{
+				if (y >= viewport.y && y <= viewport.y + viewport.h) {
 
-	//				app->render->DrawTexture(listTexture, 250, verticalPosition, SDL_FLIP_NONE, 0, 0);
+					app->render->DrawTexture(listTexture, 650, verticalPosition, SDL_FLIP_NONE, 0, 0);
 
-	//				if (zoomIn == false)
-	//					app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
+					if (zoomIn == false)
+						app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
 
-	//				
-	//			}
-	//		}
-	//		
-	//		else
-	//		{
-	//			int targetY = PointerId/4 * 83;
-	//			
-	//			
-	//			scrollY = targetY;
-	//			
-	//			scrollY = std::max(0, scrollY);
-	//		}
-	//		app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y, SDL_FLIP_NONE, 0, 0);
-	//	}
+					
+				}
+			}
+			
+			else
+			{
+				int targetY = PointerId/4 * 83;
+				
+				
+				scrollY = targetY;
+				
+				scrollY = std::max(0, scrollY);
+			}
+			app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y, SDL_FLIP_NONE, 0, 0);
+		}
 
 
-	//}
-	//ret = true;
-	//int knobY;
-	//if (bestiario.Count() == 0)
-	//{
-	//	knobY = 1;
-	//}
-	//else
-	//{
-	//	knobY= 200 + (341 / (bestiario.Count() - 1)) * PointerId;
-	//}
+	}
+	ret = true;
+	int knobY;
+	if (bestiario.Count() == 0)
+	{
+		knobY = 1;
+	}
+	else
+	{
+		knobY= 200 + (341 / (bestiario.Count() - 1)) * PointerId;
+	}
 
-	//if (mostrar == true)
-	//{
-	//	app->render->DrawTexture(sliderTexture, 530, 200, SDL_FLIP_NONE, 0, 0);
-	//	app->render->DrawTexture(knobTexture, 530, knobY, SDL_FLIP_NONE, 0, 0);
+	if (mostrar == true)
+	{
+		app->render->DrawTexture(sliderTexture, 930, 200, SDL_FLIP_NONE, 0, 0);
+		app->render->DrawTexture(knobTexture, 930, knobY, SDL_FLIP_NONE, 0, 0);
 
-	//	ListItem<Bestiario*>* itum;
-	//	for (itum = bestiario.start; itum != nullptr; itum = itum->next)
-	//	{
-	//		if (itum->data->zoom)
-	//		{
-	//			
-	//				
-	//			
-	//			if (PointerId == itum->data->id)
-	//			{
-	//				app->render->DrawTexture(itum->data->closeUpBestiarios, 400, 100, SDL_FLIP_NONE, 0, 0);
-	//				app->render->DrawText(itum->data->desc.c_str(), 450, 200, 270, 400, 0, 0, 0, 0, false);
-	//			}
-	//		}
-	//	}
+		ListItem<Bestiario*>* itum;
+		for (itum = bestiario.start; itum != nullptr; itum = itum->next)
+		{
+			if (itum->data->zoom)
+			{
+				
+					
+				
+				if (PointerId == itum->data->id)
+				{
+					app->render->DrawTexture(itum->data->closeUpBestiarios, 400, 100, SDL_FLIP_NONE, 0, 0);
+					app->render->DrawText(itum->data->desc.c_str(), 450, 200, 270, 400, 0, 0, 0, 0, false);
+				}
+			}
+		}
 
-	//	
-	//}
+		
+	}
 	
 	return ret;
 }
