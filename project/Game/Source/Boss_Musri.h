@@ -168,6 +168,9 @@ private:
 	float timeSinceLastTick = 0.0f; // Tiempo desde el �ltimo tick de da�o de veneno
 	bool poisoned = false;
 
+
+
+
 public:
 
 		Branch_Musri transitionTable[static_cast<int>(EntityState_Boss_Musri::STATE_COUNT)][static_cast<int>(EntityState_Boss_Musri::STATE_COUNT)] = {

@@ -189,14 +189,14 @@ bool Boss_Musri::PostUpdate() {
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
 
-
-
+	
 	//Flechas
 	for (int i = 0; i < flechasLanzadas.size(); i++) {
 
 		b2Vec2 arrowPos = flechasLanzadas.at(i).pbody->body->GetTransform().p;
-		app->render->DrawTexture(arrowTexture, METERS_TO_PIXELS(arrowPos.x), METERS_TO_PIXELS(arrowPos.y), 1);
+		app->render->DrawTexture(arrowTexture, METERS_TO_PIXELS(arrowPos.x), METERS_TO_PIXELS(arrowPos.y), 1, SDL_FLIP_NONE, 0, 1, GetAngleFromDirection(flechasLanzadas.at(i).direction) + 180, 0, 0);
 	}
+
 
 	/*LIMITES SALA*/
 	//app->render->DrawRectangle(limitesSala, 255,255,255,200,true,true);
