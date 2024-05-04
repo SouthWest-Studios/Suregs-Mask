@@ -12,6 +12,17 @@ inline float dist(iPoint a, iPoint b) {
     return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2));
 }
 
+inline fPoint getDirectionVector(iPoint a, iPoint b) {
+
+    int dx = b.x - a.x;
+    int dy = b.y - a.y;
+    double magnitude = sqrt(dx * dx + dy * dy);
+    double normalized_dx = dx / magnitude;
+    double normalized_dy = dy / magnitude;
+
+    return fPoint(normalized_dx, normalized_dy);
+}
+
 inline std::vector<int> splitToInts(const std::string& s, char delimiter) {
     std::vector<int> tokens;
     std::stringstream ss(s);

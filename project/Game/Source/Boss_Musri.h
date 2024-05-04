@@ -19,11 +19,21 @@ struct Branch_Musri {
 	Branch_Musri(EntityState_Boss_Musri next) : next_state(next) {}
 };
 
+
 enum class FASE_Musri
 {
 	FASE_ONE,
 	FASE_CHANGE,
 	FASE_TWO
+};
+
+
+
+struct FlechaMusri {
+	fPoint direction;
+	PhysBody* pbody;
+	Timer lifeTimer;
+	
 };
 
 class Boss_Musri : public Entity
@@ -66,9 +76,9 @@ public:
 
 
 
-	void Fase1(float dt);
-	void FaseC(float dt);
-	void Fase2(float dt);
+	void Fase1(float dt, iPoint playerPos);
+	void FaseC(float dt, iPoint playerPos);
+	void Fase2(float dt, iPoint playerPos);
 
 	iPoint GetRandomPosicion(iPoint actualPosition, int distanceLimitInf = 10, int distanceLimitSup = 15);
 
@@ -76,6 +86,7 @@ public:
 
 	//L02: DONE 2: Declare player parameters
 	SDL_Texture* texture = NULL;
+	SDL_Texture* arrowTexture = NULL;
 	pugi::xml_node config;
 	uint texW, texH;
 
@@ -126,18 +137,26 @@ private:
 
 	Timer cambiarPosicionTimer;
 	Timer dispararRafagasTimer;
+	Timer dispararFlechaRafagaTimer;
 
-	Timer habilidadEmpuje;
-	Timer habilidadFlechaCargada;
-	Timer habilidadDashInvisible;
+	Timer habilidadEmpujeTimer;
+	Timer habilidadFlechaCargadaTimer;
+	Timer habilidadDashInvisibleTimer;
 
 
+	int habilidadEmpujeCD = 20000;
+	int habilidadRafagasCD = 1000;
+
+	int meleeAttackDistance = 3;
 	int cambiarPosicionTime = 15000;
 	int dispararRafagasTime;
 	int numeroRafagas;
 	
 	SDL_Rect limitesSala = { 9900 , 2750, 2050, 1000 };
 	iPoint movePosition;
+
+	std::vector<FlechaMusri> flechasLanzadas;
+	float velocidadFlechas = 100;
 
 
 	//Veneno

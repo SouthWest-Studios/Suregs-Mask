@@ -7,6 +7,8 @@
 #include "Scene_Testing.h"
 #include "Map.h"
 #include "Item.h"
+#include "BestiarioManager.h"
+#include "Bestiario.h"
 #include "ModuleFadeToBlack.h"
 #include "Optick/include/optick.h"
 #include "MiniGameFishing.h"
@@ -189,6 +191,8 @@ bool Scene_testing::Start()
 	nota6->config = configNode.child("entities_data").child("item_nota");
 	nota6->position = iPoint(1803, 2555);
 	nota6->Start();
+
+	/*app->bestiarioManager->CreateItem(BestiarioType::BEST);*/
 
 	return true;
 }
