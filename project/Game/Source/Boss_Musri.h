@@ -150,7 +150,8 @@ private:
 	int meleeAttackDistance = 3;
 	int cambiarPosicionTime = 15000;
 	int dispararRafagasTime;
-	int numeroRafagas;
+	int numeroRafagasAct;
+	int numeroRafagas = 3;
 	
 	SDL_Rect limitesSala = { 9900 , 2750, 2050, 1000 };
 	iPoint movePosition;
@@ -166,6 +167,9 @@ private:
 	float poisonDamage = 0.0f; // Da�o de veneno por tick
 	float timeSinceLastTick = 0.0f; // Tiempo desde el �ltimo tick de da�o de veneno
 	bool poisoned = false;
+
+
+
 
 public:
 

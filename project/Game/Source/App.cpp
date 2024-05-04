@@ -8,6 +8,7 @@
 #include "Scene_Intro.h"
 #include "Scene_Logos.h"
 #include "Scene_Menu.h"
+#include "Scene_GameOver.h"
 #include "Scene_Pueblo.h"
 #include "Scene_Mazmorra0.h"
 #include "Scene_Mazmorra1.h"
@@ -62,6 +63,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	scene_logos = new Scene_Logos(this, true);
 	scene_intro = new Scene_Intro(this, false);
 	scene_menu = new Scene_Menu(this, false);
+	scene_gameover = new Scene_GameOver(this, false);
 	scene_testing = new Scene_testing(this, false);
 	scene_pueblo = new Scene_Pueblo(this, false);
 
@@ -110,6 +112,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(scene_mazmorra5);
 	AddModule(scene_mazmorra6);
 	AddModule(scene_mazmorra7);
+	AddModule(scene_gameover);
 	AddModule(entityManager);
 	AddModule(hud);
 	AddModule(menu);

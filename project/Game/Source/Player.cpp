@@ -6,6 +6,7 @@
 #include "Render.h"
 #include "Scene_Testing.h"
 #include "Scene_Pueblo.h"
+#include "Scene_GameOver.h"
 #include "Scene_Mazmorra0.h"
 #include "Log.h"
 #include "InventoryManager.h"
@@ -1018,6 +1019,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			if (!godmode) {
 				TakeDamage(10);
 				if (currentStats.currentHealth <= 0) {
+					//app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_gameover);
 					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_pueblo);
 				}
 			}
