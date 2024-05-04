@@ -21,6 +21,7 @@ class ModuleFadeToBlack;
 class Scene_Logos;
 class Scene_Intro;
 class Scene_Menu;
+class Scene_GameOver;
 class Scene_testing;
 class Scene_Pueblo;
 class Scene_Mazmorra0;
@@ -128,6 +129,7 @@ public:
 	Scene_Intro* scene_intro;
 	Scene_Logos* scene_logos;
 	Scene_Menu* scene_menu;
+	Scene_GameOver* scene_gameover;
 	Scene_testing* scene_testing;
 	Scene_Pueblo* scene_pueblo;
 
