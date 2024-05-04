@@ -99,7 +99,7 @@ bool BestiarioManager::CleanUp()
 	return ret;
 }
 int highestttId = -1;
-Bestiario* BestiarioManager::CreateItem(InventityType type)
+Bestiario* BestiarioManager::CreateItem(BestiarioType type)
 {
 	Bestiario* entity = nullptr;
 

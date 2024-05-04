@@ -31,7 +31,7 @@ public:
 	bool CleanUp();
 
 	// Additional methods
-	Bestiario* CreateItem(EntityType type, SDL_Texture* CloseUp, std::string texto);
+	Bestiario* CreateItem(BestiarioType type);
 
 	void AddBestiario(Bestiario* Inventity);
 
@@ -54,7 +54,7 @@ public:
 
 	List<Bestiario*> bestiario;
 	
-	iPoint PointerPosition = { 250, 230 };
+	iPoint PointerPosition = { 650, 230 };
 	int PointerId = 0;
 	iPoint selected = { -1000,-1000 };
 	iPoint equiped = { -1000,-1000 };
@@ -88,6 +88,10 @@ private:
 	SDL_Texture* knobTexture;
 
 	int scrollY;
+
+	char* CloseUpPath;
+	SDL_Texture* CloseUp;
+	std::string texto;
 };
 
 #endif // __INVENTORYMANAGER_H__
