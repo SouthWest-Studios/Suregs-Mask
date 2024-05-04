@@ -244,80 +244,25 @@ PathNode::PathNode(const PathNode& node) : g(node.g), h(node.h), pos(node.pos), 
 // ----------------------------------------------------------------------------------
 uint PathNode::FindWalkableAdjacents(PathList& listToFill) const
 {
-	//iPoint tile;
-	//uint before = listToFill.list.Count();
-
-	//// top
-	//tile.Create(pos.x, pos.y + 1);
-	//if(app->map->pathfinding->IsWalkable(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
-
-	//// bottom
-	//tile.Create(pos.x, pos.y - 1);
-	//if(app->map->pathfinding->IsWalkable(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
-
-	//// left
-	//tile.Create(pos.x + 1, pos.y);
-	//if(app->map->pathfinding->IsWalkable(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
-
-	//// right
-	//tile.Create(pos.x - 1, pos.y);
-	//if(app->map->pathfinding->IsWalkable(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
-
-	//return listToFill.list.Count();
 
 	iPoint tile;
 	uint before = listToFill.list.Count();
 
 	const std::vector<iPoint> directions = {
-		{1, 0}, {0, 1}, {-1, 0}, {0, -1},
-		{1, 1}, {-1, 1}, {1, -1}, {-1, -1}
+		{1, 0}, {0, 1}, {-1, 0}, {0, -1},  // Horizontal and vertical
+		{1, 1}, {-1, 1}, {1, -1}, {-1, -1}  // Diagonal
 	};
 
 	for (const auto& dir : directions) {
 		tile.Create(pos.x + dir.x, pos.y + dir.y);
 		if (app->map->pathfinding->IsWalkable(tile)) {
-			// Check if diagonal movement is possible
-			//Claro, si ve que un camino en diagonal es posible, lo va a subir sin ver que horizontalmente es mas rapido
-			//Entonces, hace una diagonal subiendo, entonces el siguiente camino para ir horzizontalmente centrado, es diagonal bajando
-			bool isDiagonal = (dir.x != 0 && dir.y != 0);
-
-			// If diagonal movement, check for additional conditions to ensure smooth path
-			if (isDiagonal) {
-				//printf("\nDiagonal");
-				// Check if horizontal and vertical movements are also possible
-				iPoint horizontalTile(pos.x + dir.x, pos.y);
-				iPoint verticalTile(pos.x, pos.y + dir.y);
-
-				bool isHorizontalWalkable = app->map->pathfinding->IsWalkable(horizontalTile);
-				bool isVerticalWalkable = app->map->pathfinding->IsWalkable(verticalTile);
-
-				// If both horizontal and vertical movements are possible, add the diagonal tile
-				if (isHorizontalWalkable && isVerticalWalkable) {
-					listToFill.list.Add(PathNode(-1, -1, tile, this));
-				}
-			}
-			else {
-				//printf("\Recto");
-				// For non-diagonal movement, simply add the tile to the list
-				listToFill.list.Add(PathNode(-1, -1, tile, this));
-			}
+			listToFill.list.Add(PathNode(-1, -1, tile, this));
 		}
 	}
 	return listToFill.list.Count();
 
 }
-//
-//bool PathNode::IsStraightLine(const iPoint& nextPos, const iPoint& currentPos) const {
-//	// Check if the movement forms a straight line with the current position
-//	if (nextPos.x == currentPos.x || nextPos.y == currentPos.y) {
-//		return true;
-//	}
-//	// If the current position and the next position are on the same diagonal, it's also considered straight
-//	else if (abs(nextPos.x - currentPos.x) == abs(nextPos.y - currentPos.y)) {
-//		return true;
-//	}
-//	return false;
-//}
+
 
 // PathNode -------------------------------------------------------------------------
 // Calculates this tile score
@@ -333,8 +278,7 @@ int PathNode::Score() const
 int PathNode::CalculateF(const iPoint& destination)
 {
 	g = parent->g + 1;
-	h = pos.DistanceTo(destination);
-
+	h = abs(destination.x - pos.x) + abs(destination.y - pos.y); // Use Manhattan distance
 	return g + h;
 }
 

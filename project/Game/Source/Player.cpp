@@ -1637,7 +1637,7 @@ void Player::PlayerMovement(float dt)
 
 	fPoint joystick = app->input->GetAxis(MOVE_HORIZONTAL, MOVE_VERTICAL);
 
-	printf("\n%f",joystick.x);
+	//printf("\n%f",joystick.x);
 
 	//Controles antiguos
 

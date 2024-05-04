@@ -91,9 +91,10 @@ private:
 	pugi::xml_node configNode;
 
 	Animation idleAnim;
-	Animation runAnim;
-	Animation attackAnim;
-	Animation dieAnim;
+	Animation attackEmpujarAnim;
+	Animation attackFlechasRapidasAnim;
+	Animation attackFlechaCargadaAnim;
+	
 
 	bool isFacingLeft = false;
 

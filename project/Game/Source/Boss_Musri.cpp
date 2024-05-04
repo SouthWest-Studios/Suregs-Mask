@@ -48,9 +48,9 @@ bool Boss_Musri::Start() {
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
 	idleAnim.LoadAnim((char*)name.GetString(), "idleAnim", spritePositions);
-	/*runAnim.LoadAnim("osiris", "runAnim", spritePositions);
-	attackAnim.LoadAnim("osiris", "attackAnim", spritePositions);
-	dieAnim.LoadAnim("osiris", "dieAnim", spritePositions);*/
+	attackEmpujarAnim.LoadAnim((char*)name.GetString(), "attackEmpujarAnim", spritePositions);;
+	attackFlechasRapidasAnim.LoadAnim((char*)name.GetString(), "attackFlechasRapidas", spritePositions);;
+	attackFlechaCargadaAnim.LoadAnim((char*)name.GetString(), "attackFlechaCargada", spritePositions);;
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
@@ -63,19 +63,19 @@ bool Boss_Musri::Start() {
 	pbodySensor->entity = this;
 	pbodySensor->listener = this;
 	pbodySensor->ctype = ColliderType::UNKNOWN;
-	
+
 
 
 	originalPosition = app->map->WorldToMap(position.x, position.y);
 
 	maxHealth = config.attribute("maxHealth").as_float();
 	health = maxHealth;
-	speed = config.attribute("speed").as_float();
+	speed = config.attribute("speed").as_float()/100;
 	attackDamage = config.attribute("attackDamage").as_float();
 	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();
 
-	//printf("Speed: %f", speed);
+
 	return true;
 }
 
@@ -143,11 +143,13 @@ bool Boss_Musri::PostUpdate() {
 		app->render->DrawTexture(texture, position.x - 70, position.y - 150, SDL_FLIP_NONE, &rect);
 	}
 
-	for (uint i = 0; i < lastPath.Count(); ++i)
-	{
-		iPoint pos = app->map->MapToWorld(lastPath.At(i)->x, lastPath.At(i)->y);
-		if (app->physics->debug == true) {
+	if (app->physics->debug == true) {
+		for (uint i = 0; i < lastPath.Count(); ++i)
+		{
+			iPoint pos = app->map->MapToWorld(lastPath.At(i)->x, lastPath.At(i)->y);
+
 			app->render->DrawTexture(app->map->pathfinding->mouseTileTex, pos.x, pos.y, SDL_FLIP_NONE);
+
 		}
 	}
 
@@ -262,7 +264,7 @@ bool Boss_Musri::Bossfinding(float dt, iPoint playerPosP)
 
 
 		isAttacking = false;
-		attackAnim.Reset();
+		//attackAnim.Reset();
 
 	}
 	pbodyFoot->body->SetLinearVelocity(velocity);

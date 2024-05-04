@@ -72,7 +72,7 @@ bool Enemy_Khurt::Start() {
 	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();
 
-	printf("Speed: %f", speed);
+	//printf("Speed: %f", speed);
 
 	return true;
 }
@@ -276,7 +276,7 @@ void Enemy_Khurt::Die() {
 		hueso->Start();
 	}
 	app->entityManager->GetPlayer()->playerXP += 20;
-	printf("Current XP %i \n", app->entityManager->GetPlayer()->playerXP);
+	//printf("Current XP %i \n", app->entityManager->GetPlayer()->playerXP);
 
 
 }
