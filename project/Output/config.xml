@@ -238,6 +238,12 @@
 		<logo texturepath ="Assets/Textures/Interfaz/textura_logo.png"/>
 		<savedGames texturepath ="Assets/Textures/Interfaz/textura_saved_games.png"/>
 	</scene_menu>
+
+	<scene_gameover>
+		<gameoverbackground texturepath ="Assets/Textures/Interfaz/textura_menu_background.png"/>
+		<logo texturepath ="Assets/Textures/Interfaz/textura_logo.png"/>
+	</scene_gameover>
+	
 	<fadeToBlack>
 		<transition texturepath ="Assets/Textures/Interfaz/transition.png"/>
 	</fadeToBlack>
