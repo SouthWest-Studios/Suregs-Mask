@@ -66,7 +66,7 @@ bool Boss_Musri::Start() {
 
 
 
-	originalPosition = app->map->WorldToMap(position.x, position.y);
+	//originalPosition = app->map->WorldToMap(position.x, position.y);
 
 	maxHealth = config.attribute("maxHealth").as_float();
 	health = maxHealth;
@@ -74,6 +74,8 @@ bool Boss_Musri::Start() {
 	attackDamage = config.attribute("attackDamage").as_float();
 	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();
+
+	fase = FASE_Musri::FASE_ONE;
 
 
 	return true;
@@ -93,7 +95,7 @@ bool Boss_Musri::Update(float dt)
 
 	//printf("\n %d : %d", playerPos.x, playerPos.y);
 
-	if (health <= 0)
+	/*if (health <= 0)
 	{
 		desiredState = EntityState_Boss_Musri::DEAD;
 	}
@@ -108,7 +110,25 @@ bool Boss_Musri::Update(float dt)
 	else
 	{
 		desiredState = EntityState_Boss_Musri::RUNNING;
+	}*/
+
+	switch (fase)	
+	{
+	case FASE_Musri::FASE_ONE:
+		Fase1(dt);
+		break;
+	case FASE_Musri::FASE_CHANGE:
+		FaseC(dt);
+		break;
+	case FASE_Musri::FASE_TWO:
+		Fase2(dt);
+		break;
 	}
+
+	
+
+
+
 	stateMachine(dt, playerPos);
 
 
@@ -156,6 +176,14 @@ bool Boss_Musri::PostUpdate() {
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
+
+
+	/*LIMITES SALA*/
+	/*SDL_Rect limitesSala = { 9800 , 2650, 2200, 1150 };
+	app->render->DrawRectangle(limitesSala, 255,255,255,200,true,true);*/
+
+
+
 	return true;
 }
 
@@ -230,19 +258,19 @@ void Boss_Musri::OnCollision(PhysBody* physA, PhysBody* physB) {
 	}
 }
 
-bool Boss_Musri::Bossfinding(float dt, iPoint playerPosP)
+bool Boss_Musri::Bossfinding(float dt, iPoint targetPosP)
 {
-	iPoint playerPos = app->map->WorldToMap(playerPosP.x, playerPosP.y);
+	iPoint targetPos = app->map->WorldToMap(targetPosP.x, targetPosP.y);
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
 
 
-	if (dist(playerPos, enemyPos) < viewDistance) {
-		app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
+	if (dist(targetPos, enemyPos) < viewDistance) {
+		app->map->pathfinding->CreatePath(enemyPos, targetPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
 		lastPath = *app->map->pathfinding->GetLastPath();
 	}
 	else {
-		app->map->pathfinding->CreatePath(enemyPos, originalPosition); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
-		lastPath = *app->map->pathfinding->GetLastPath();
+		//app->map->pathfinding->CreatePath(enemyPos, originalPosition); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
+		//lastPath = *app->map->pathfinding->GetLastPath();
 	}
 
 	b2Vec2 velocity = b2Vec2(0, 0);
@@ -324,4 +352,28 @@ void Boss_Musri::ApplyPoison(int poisonDamage, float poisonDuration, float poiso
 	this->poisonTimer = 0.0f;
 	this->timeSinceLastTick = 0.0f;
 	this->poisoned = true;
+}
+
+void Boss_Musri::Fase1(float dt)
+{
+	if (cambiarPosicionTimer.ReadMSec() > 15000) {
+		Bossfinding(dt, GetRandomPosicion());
+	}
+
+
+
+
+
+}
+void Boss_Musri::FaseC(float dt)
+{
+}
+void Boss_Musri::Fase2(float dt)
+{
+}
+
+iPoint Boss_Musri::GetRandomPosicion(int distanceLimit)
+{
+	SDL_Rect limitesSala = { 10,01,01,1 };
+	return iPoint();
 }
