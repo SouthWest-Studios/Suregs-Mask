@@ -65,6 +65,7 @@ bool Boss_Musri::Start() {
 	pbodySensor->ctype = ColliderType::UNKNOWN;
 
 
+	arrowTexture = app->tex->Load(config.attribute("arrowTexturePath").as_string());
 
 	//originalPosition = app->map->WorldToMap(position.x, position.y);
 
@@ -79,6 +80,13 @@ bool Boss_Musri::Start() {
 
 	fase = FASE_Musri::FASE_ONE;
 
+	cambiarPosicionTimer.Start();
+	dispararRafagasTimer.Start();
+	dispararFlechaRafagaTimer.Start();
+
+	habilidadEmpujeTimer.Start();
+	habilidadFlechaCargadaTimer.Start();
+	habilidadDashInvisibleTimer.Start();
 
 	return true;
 }
@@ -117,13 +125,13 @@ bool Boss_Musri::Update(float dt)
 	switch (fase)
 	{
 	case FASE_Musri::FASE_ONE:
-		Fase1(dt);
+		Fase1(dt, playerPos);
 		break;
 	case FASE_Musri::FASE_CHANGE:
-		FaseC(dt);
+		FaseC(dt, playerPos);
 		break;
 	case FASE_Musri::FASE_TWO:
-		Fase2(dt);
+		Fase2(dt, playerPos);
 		break;
 	}
 
@@ -179,6 +187,14 @@ bool Boss_Musri::PostUpdate() {
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
 
+
+
+	//Flechas
+	for (int i = 0; i < flechasLanzadas.size(); i++) {
+
+		b2Vec2 arrowPos = flechasLanzadas.at(i).pbody->body->GetTransform().p;
+		app->render->DrawTexture(arrowTexture, arrowPos.x, arrowPos.y, 1);
+	}
 
 	/*LIMITES SALA*/
 	//app->render->DrawRectangle(limitesSala, 255,255,255,200,true,true);
@@ -239,24 +255,47 @@ void Boss_Musri::Revive()
 
 // L07 DONE 6: Define OnCollision function for the player. 
 void Boss_Musri::OnCollision(PhysBody* physA, PhysBody* physB) {
-	switch (physB->ctype)
-	{
-	case ColliderType::PLATFORM:
-		LOG("Collision PLATFORM");
-		break;
-	case ColliderType::PLAYER:
-		LOG("Collision PLAYER");
-		//restar vida al player
-		break;
-	case ColliderType::PLAYER_ATTACK:
-		LOG("Collision Player_Attack");
-		break;
-	case ColliderType::UNKNOWN:
-		LOG("Collision UNKNOWN");
-		break;
-	default:
-		break;
+
+
+	if (physA->ctype == ColliderType::BOSS_MUSRI_ARROW) {
+		//Colisiones flecha
+		switch (physB->ctype) {
+		case ColliderType::PLAYER:
+		case ColliderType::PLAYER_ATTACK:
+		case ColliderType::PLATFORM:
+			for (int i = 0; i < flechasLanzadas.size(); i++) {
+				if (flechasLanzadas.at(i).pbody->body->GetTransform().p == physA->body->GetTransform().p) {
+					flechasLanzadas.erase(flechasLanzadas.begin() + i);
+					break;
+				}
+			}
+			break;
+
+		}
 	}
+	else {
+		//Colisiones al boss
+		switch (physB->ctype)
+		{
+		case ColliderType::PLATFORM:
+			LOG("Collision PLATFORM");
+			break;
+		case ColliderType::PLAYER:
+			LOG("Collision PLAYER");
+			//restar vida al player
+			break;
+		case ColliderType::PLAYER_ATTACK:
+			LOG("Collision Player_Attack");
+			break;
+		case ColliderType::UNKNOWN:
+			LOG("Collision UNKNOWN");
+			break;
+		default:
+			break;
+		}
+	}
+
+	
 }
 
 bool Boss_Musri::Bossfinding(float dt, iPoint targetPosP)
@@ -362,7 +401,7 @@ void Boss_Musri::ApplyPoison(int poisonDamage, float poisonDuration, float poiso
 	this->poisoned = true;
 }
 
-void Boss_Musri::Fase1(float dt)
+void Boss_Musri::Fase1(float dt, iPoint playerPos)
 {
 	bool haLlegado = false;
 	if (cambiarPosicionTimer.ReadMSec() > cambiarPosicionTime) {
@@ -374,24 +413,70 @@ void Boss_Musri::Fase1(float dt)
 	}
 	else {
 		//AtaqueFlechas + lo otro
+		if (dist(playerPos, position) < meleeAttackDistance * 32 && habilidadEmpujeTimer.ReadMSec() >= habilidadEmpujeCD) {
+			//Realizar ataque empuje
+			habilidadEmpujeTimer.Start();
+		}
+		else {
+
+			if (dispararRafagasTimer.ReadMSec() >= habilidadRafagasCD) {
+				
+				//Disparar rafagas
+				//flechasLanzadas
+				if (flechasLanzadas.size() < 3) {
+					if (dispararFlechaRafagaTimer.ReadMSec() >= 100) {
+
+						dispararFlechaRafagaTimer.Start();
+						FlechaMusri flecha = { getDirectionVector(position, playerPos), app->physics->CreateCircle(position.x, position.y, 10, bodyType::DYNAMIC) };
+						flecha.pbody->listener = this;
+						flecha.pbody->ctype = ColliderType::BOSS_MUSRI_ARROW;
+						flecha.pbody->body->GetFixtureList()->SetSensor(true);
+						flecha.lifeTimer.Start();
+						flechasLanzadas.push_back(flecha);
+
+						flecha.pbody->body->ApplyForceToCenter(b2Vec2(flecha.direction.x* velocidadFlechas, flecha.direction.y * velocidadFlechas), true);
+						
+					}
+				}
+				else {
+					dispararRafagasTimer.Start(); //Reset el timer de las 3 flechas
+				}
+				
+
+
+
+			}
+
+
+		}
+
 
 
 
 	}
-	
 
-	LOG("POSDX: %d, POSDY: %d, HA LLEGADO: %d, ", movePosition.x, movePosition.y, haLlegado);
-	LOG("Timer cambiarPosicion: %f", cambiarPosicionTimer.ReadMSec());
+	//Gestionar las flechas
+	for (int i = 0; i < flechasLanzadas.size(); i++) {
+		if (flechasLanzadas.at(i).lifeTimer.ReadMSec() >= 300) {
+			flechasLanzadas.erase(flechasLanzadas.begin() + i);
+			break;
+		}
+	}
+
+
+
+	/*LOG("POSDX: %d, POSDY: %d, HA LLEGADO: %d, ", movePosition.x, movePosition.y, haLlegado);
+	LOG("Timer cambiarPosicion: %f", cambiarPosicionTimer.ReadMSec());*/
 
 
 
 
 
 }
-void Boss_Musri::FaseC(float dt)
+void Boss_Musri::FaseC(float dt, iPoint playerPos)
 {
 }
-void Boss_Musri::Fase2(float dt)
+void Boss_Musri::Fase2(float dt, iPoint playerPos)
 {
 }
 

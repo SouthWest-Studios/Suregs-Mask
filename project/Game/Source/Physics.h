@@ -34,6 +34,7 @@ enum class ColliderType {
 	LAGO,
 	PLATFORM,
 	ENEMY,
+	BOSS_MUSRI_ARROW,
 	RESOURCE,
 	NOTA,
 	DIALOG_TRIGGER,
