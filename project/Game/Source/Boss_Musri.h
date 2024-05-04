@@ -136,7 +136,7 @@ private:
 	int dispararRafagasTime;
 	int numeroRafagas;
 	
-
+	SDL_Rect limitesSala = { 9800 , 2650, 2200, 1150 };
 
 
 	//Veneno

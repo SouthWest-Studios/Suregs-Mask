@@ -179,8 +179,7 @@ bool Boss_Musri::PostUpdate() {
 
 
 	/*LIMITES SALA*/
-	/*SDL_Rect limitesSala = { 9800 , 2650, 2200, 1150 };
-	app->render->DrawRectangle(limitesSala, 255,255,255,200,true,true);*/
+	//app->render->DrawRectangle(limitesSala, 255,255,255,200,true,true);
 
 
 
