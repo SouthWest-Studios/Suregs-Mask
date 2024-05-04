@@ -41,6 +41,7 @@ class DialogManager;
 class InventoryManager;
 class CommerceManager;
 class NotesManager;
+class BestiarioManager;
 class Menu;
 class Hud;
 
@@ -149,6 +150,8 @@ public:
 	InventoryManager* inventoryManager;
 	CommerceManager* commerceManager;
 	NotesManager* notesManager;
+	BestiarioManager* bestiarioManager;
+
 	Menu* menu;
 	Hud* hud;
 	

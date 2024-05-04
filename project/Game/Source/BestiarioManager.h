@@ -1,20 +1,20 @@
-#ifndef __NOTESMANAGER_H__
-#define __NOTESMANAGER_H__
+#ifndef __BESTIARIOMANAGER_H__
+#define __BESTARIOMANAGER_H__
 
 #include "Module.h"
 #include "Entity.h"
-#include "Note.h"
+#include "Bestiario.h"
 #include "List.h"
 #include "Textures.h"
 
-class NotesManager : public Module
+class BestiarioManager : public Module
 {
 public:
 
-	NotesManager(App* app, bool start_enabled = true);
+	BestiarioManager(App* app, bool start_enabled = true);
 
 	// Destructor
-	virtual ~NotesManager();
+	virtual ~BestiarioManager();
 
 	// Called before render is available
 	bool Awake(pugi::xml_node config);
@@ -31,15 +31,15 @@ public:
 	bool CleanUp();
 
 	// Additional methods
-	Note* CreateItem(EntityType type, SDL_Texture* CloseUp, std::string texto);
+	Bestiario* CreateItem(EntityType type, SDL_Texture* CloseUp, std::string texto);
 
-	void AddNote(Note* Inventity);
+	void AddBestiario(Bestiario* Inventity);
 
-	/*void DestroyItem(Note* Inventity);*/
+	/*void DestroyItem(Bestiario* Inventity);*/
 
 	/*void DestroyItemById(int entityId);*/
 
-	void UseNoteSelected(int id);
+	void UseBestiarioSelected(int id);
 
 	void OnMovePointer();
 
@@ -52,7 +52,7 @@ public:
 
 public:
 
-	List<Note*> notes;
+	List<Bestiario*> bestiario;
 	
 	iPoint PointerPosition = { 250, 230 };
 	int PointerId = 0;
@@ -79,7 +79,7 @@ private:
 	pugi::xml_node configNode;
 	int maxItemsPerRow = 1; // Define el número máximo de elementos por fila
 
-	char* iconoNotaTexturePath;
+	char* iconoBestiarioTexturePath;
 	char* listTexturePath;
 	char* sliderTexturePath;
 	char* knobTexturePath;

@@ -406,7 +406,7 @@ bool NotesManager::PostUpdate()
 			{
 				if (y >= viewport.y && y <= viewport.y + viewport.h) {
 
-					app->render->DrawTexture(listTexture, 200, verticalPosition, SDL_FLIP_NONE, 0, 0);
+					app->render->DrawTexture(listTexture, 250, verticalPosition, SDL_FLIP_NONE, 0, 0);
 
 					if (zoomIn == false)
 						app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
@@ -442,8 +442,8 @@ bool NotesManager::PostUpdate()
 
 	if (mostrar == true)
 	{
-		app->render->DrawTexture(sliderTexture, 550, 200, SDL_FLIP_NONE, 0, 0);
-		app->render->DrawTexture(knobTexture, 550, knobY, SDL_FLIP_NONE, 0, 0);
+		app->render->DrawTexture(sliderTexture, 530, 200, SDL_FLIP_NONE, 0, 0);
+		app->render->DrawTexture(knobTexture, 530, knobY, SDL_FLIP_NONE, 0, 0);
 
 		ListItem<Note*>* itum;
 		for (itum = notes.start; itum != nullptr; itum = itum->next)

@@ -26,6 +26,7 @@
 #include "InventoryManager.h"
 #include "CommerceManager.h"
 #include "NotesManager.h"
+#include "BestiarioManager.h"
 #include "Menu.h"
 #include "Hud.h"
 #include "Optick/include/optick.h"
@@ -83,6 +84,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	menu = new Menu(this,false);
 	hud = new Hud(this, false);
 	notesManager = new NotesManager(this);
+	bestiarioManager = new BestiarioManager(this);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -114,6 +116,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(inventoryManager);
 	AddModule(commerceManager);
 	AddModule(notesManager);
+	AddModule(bestiarioManager);
 	AddModule(guiManager);
 	AddModule(dialogManager);
 	AddModule(fadeToBlack);
