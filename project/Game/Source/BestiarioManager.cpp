@@ -44,10 +44,11 @@ bool BestiarioManager::Awake(pugi::xml_node config)
 		ret = item->data->Awake();
 	}
 
-	iconoBestiarioTexturePath = ((char*)config.child("nota").attribute("texturePath").as_string());
-	listTexturePath = ((char*)config.child("nota").attribute("list_texture").as_string());
-	sliderTexturePath = ((char*)config.child("nota").attribute("slider_texture").as_string());
-	knobTexturePath = ((char*)config.child("nota").attribute("knob_texture").as_string());
+	iconoBestiarioTexturePath = ((char*)config.child("bestiario").attribute("texturePath").as_string());
+	listTexturePath = ((char*)config.child("bestiario").attribute("list_texture").as_string());
+	sliderTexturePath = ((char*)config.child("bestiario").attribute("slider_texture").as_string());
+	knobTexturePath = ((char*)config.child("bestiario").attribute("knob_texture").as_string());
+	PointerPath = ((char*)config.child("bestiario").attribute("pointer").as_string());
 	return ret;
 
 }
@@ -58,6 +59,7 @@ bool BestiarioManager::Start() {
 	listTexture = app->tex->Load(listTexturePath);
 	sliderTexture = app->tex->Load(sliderTexturePath);
 	knobTexture = app->tex->Load(knobTexturePath);
+	PointerItemText = app->tex->Load(PointerPath);
 
 	bool ret = true;
 
@@ -390,7 +392,7 @@ bool BestiarioManager::PostUpdate()
 			int rowIndex = item->data->id / maxItemsPerRow; // Calcula el índice de la fila
 			int columnIndex = item->data->id % maxItemsPerRow; // Calcula el índice de la columna
 			int horizontalPosition = 720 + columnIndex * 492; // Calcula la posición horizontal
-			int verticalPosition = 210 + rowIndex * 83; // Calcula la posición vertical
+			int verticalPosition = 230 + rowIndex * 83; // Calcula la posición vertical
 
 			int y2 = PointerPosition.y - scrollY;
 
@@ -425,9 +427,9 @@ bool BestiarioManager::PostUpdate()
 	}
 	ret = true;
 	int knobY;
-	if (bestiario.Count() == 0)
+	if (bestiario.Count() == 0 || (bestiario.Count() - 1) == 0)
 	{
-		knobY = 1;
+		knobY = 200;
 	}
 	else
 	{

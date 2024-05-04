@@ -12,6 +12,7 @@
 #include "GuiManager.h"
 #include "InventoryManager.h"
 #include "NotesManager.h"
+#include "BestiarioManager.h"
 #include "Menu.h"
 #include "Scene_Menu.h"
 #include "Scene_Testing.h"
@@ -349,10 +350,12 @@ bool Menu::Update(float dt)
 	if (ventana == 3)
 	{
 		app->notesManager->mostrar = true;
+		app->bestiarioManager->mostrar = true;
 	}
 	else
 	{
 		app->notesManager->mostrar = false;
+		app->bestiarioManager->mostrar = false;
 	}
 	return true;
 }

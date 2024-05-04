@@ -62,6 +62,7 @@ public:
 	int equipedId = -1;
 	iPoint InventorySize;
 	SDL_Texture* InventoryBackground;
+	char* PointerPath;
 	SDL_Texture* PointerItemText;
 	SDL_Texture* SelectedItemText;
 	SDL_Texture* EquipedItemText;

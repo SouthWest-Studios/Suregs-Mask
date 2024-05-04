@@ -431,9 +431,11 @@ bool NotesManager::PostUpdate()
 	}
 	ret = true;
 	int knobY;
-	if (notes.Count() == 0)
+	if (notes.Count() == 0 || (notes.Count() - 1) == 0)
 	{
-		knobY = 1;
+		
+		knobY = 200;
+
 	}
 	else
 	{
