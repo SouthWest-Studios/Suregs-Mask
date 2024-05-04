@@ -70,7 +70,7 @@ public:
 	void FaseC(float dt);
 	void Fase2(float dt);
 
-	iPoint GetRandomPosicion(int distanceLimit = 10);
+	iPoint GetRandomPosicion(iPoint actualPosition, int distanceLimitInf = 10, int distanceLimitSup = 15);
 
 public:
 
@@ -132,11 +132,12 @@ private:
 	Timer habilidadDashInvisible;
 
 
-	int cambiarPosicionTime;
+	int cambiarPosicionTime = 15000;
 	int dispararRafagasTime;
 	int numeroRafagas;
 	
-	SDL_Rect limitesSala = { 9800 , 2650, 2200, 1150 };
+	SDL_Rect limitesSala = { 9900 , 2750, 2050, 1000 };
+	iPoint movePosition;
 
 
 	//Veneno

@@ -70,10 +70,12 @@ bool Boss_Musri::Start() {
 
 	maxHealth = config.attribute("maxHealth").as_float();
 	health = maxHealth;
-	speed = config.attribute("speed").as_float()/100;
+	speed = config.attribute("speed").as_float() / 10;
 	attackDamage = config.attribute("attackDamage").as_float();
 	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();
+
+	movePosition = GetRandomPosicion(position, 10);
 
 	fase = FASE_Musri::FASE_ONE;
 
@@ -112,7 +114,7 @@ bool Boss_Musri::Update(float dt)
 		desiredState = EntityState_Boss_Musri::RUNNING;
 	}*/
 
-	switch (fase)	
+	switch (fase)
 	{
 	case FASE_Musri::FASE_ONE:
 		Fase1(dt);
@@ -125,7 +127,7 @@ bool Boss_Musri::Update(float dt)
 		break;
 	}
 
-	
+
 
 
 
@@ -259,11 +261,13 @@ void Boss_Musri::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 bool Boss_Musri::Bossfinding(float dt, iPoint targetPosP)
 {
+	bool haLlegadoDestino = false;
+
 	iPoint targetPos = app->map->WorldToMap(targetPosP.x, targetPosP.y);
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
 
 
-	if (dist(targetPos, enemyPos) < viewDistance) {
+	if (dist(targetPos, enemyPos) < viewDistance * 100000) {
 		app->map->pathfinding->CreatePath(enemyPos, targetPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
 		lastPath = *app->map->pathfinding->GetLastPath();
 	}
@@ -292,11 +296,16 @@ bool Boss_Musri::Bossfinding(float dt, iPoint targetPosP)
 
 		isAttacking = false;
 		//attackAnim.Reset();
+		haLlegadoDestino = false;
 
+
+	}
+	else {
+		haLlegadoDestino = true;
 	}
 	pbodyFoot->body->SetLinearVelocity(velocity);
 
-	return true;
+	return haLlegadoDestino;
 }
 
 float Boss_Musri::GetHealth() const {
@@ -355,9 +364,24 @@ void Boss_Musri::ApplyPoison(int poisonDamage, float poisonDuration, float poiso
 
 void Boss_Musri::Fase1(float dt)
 {
-	if (cambiarPosicionTimer.ReadMSec() > 15000) {
-		Bossfinding(dt, GetRandomPosicion());
+	bool haLlegado = false;
+	if (cambiarPosicionTimer.ReadMSec() > cambiarPosicionTime) {
+		haLlegado = Bossfinding(dt, movePosition);
+		if (haLlegado) {
+			cambiarPosicionTimer.Start();
+			movePosition = GetRandomPosicion(movePosition, 10); //Para la proxima
+		}
 	}
+	else {
+		//AtaqueFlechas + lo otro
+
+
+
+	}
+	
+
+	LOG("POSDX: %d, POSDY: %d, HA LLEGADO: %d, ", movePosition.x, movePosition.y, haLlegado);
+	LOG("Timer cambiarPosicion: %f", cambiarPosicionTimer.ReadMSec());
 
 
 
@@ -371,8 +395,16 @@ void Boss_Musri::Fase2(float dt)
 {
 }
 
-iPoint Boss_Musri::GetRandomPosicion(int distanceLimit)
+iPoint Boss_Musri::GetRandomPosicion(iPoint actualPosition, int distanceLimitInf, int distanceLimitSup)
 {
-	SDL_Rect limitesSala = { 10,01,01,1 };
-	return iPoint();
+	iPoint finalTarget;
+	int distT;
+
+	do {
+		finalTarget.x = limitesSala.x + rand() % limitesSala.w;
+		finalTarget.y = limitesSala.y + rand() % limitesSala.h;
+		distT = (dist(finalTarget, actualPosition) / 32);
+	} while (distT < distanceLimitInf && distT > distanceLimitSup);
+
+	return finalTarget;
 }
