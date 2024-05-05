@@ -152,7 +152,6 @@ public:
 	void SetInvisible();
 	void SetPassiveInvisible();
 	void Mask3Statistics();
-	void TakeDamage(float damage);
 
 	Mask* GetPrimaryMask();
 	Mask* GetSecondaryMask();
@@ -187,7 +186,7 @@ private:
 	void PlayerMovement(float dt);
 	void FishingDirecction(bool verticalMovement, bool horizontalMovement);
 	void MaskAttack(float dt);
-	void TakeDamage(float damage);
+
 	void stateMachine(float dt);
 
 public:

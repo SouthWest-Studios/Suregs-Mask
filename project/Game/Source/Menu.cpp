@@ -91,7 +91,7 @@ bool Menu::Update(float dt)
 
 		app->audio->PlayFx(inventory_audio);
 	}
-	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN && app->notesManager->zoomIn == false)
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN && app->notesManager->zoomIn == false && app->bestiarioManager->zoomIn == false)
 	{
 		menuu = !menuu;
 		ventana = 4;
