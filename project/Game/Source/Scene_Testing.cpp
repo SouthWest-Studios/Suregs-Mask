@@ -192,7 +192,12 @@ bool Scene_testing::Start()
 	nota6->position = iPoint(1803, 2555);
 	nota6->Start();
 
-	app->bestiarioManager->CreateItem(BestiarioType::BEST);
+	app->bestiarioManager->CreateItem("osiris");
+	app->bestiarioManager->CreateItem("muur");
+	app->bestiarioManager->CreateItem("osiris");
+	app->bestiarioManager->CreateItem("muur");
+	app->bestiarioManager->CreateItem("osiris");
+	app->bestiarioManager->CreateItem("muur");
 
 	return true;
 }

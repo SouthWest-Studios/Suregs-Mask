@@ -60,6 +60,7 @@ public:
 	iPoint equiped = { -1000,-1000 };
 	int selectedId = -1;
 	int equipedId = -1;
+	char* PointerPath;
 	iPoint InventorySize;
 	SDL_Texture* InventoryBackground;
 	SDL_Texture* PointerItemText;

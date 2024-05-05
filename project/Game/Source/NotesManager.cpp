@@ -1,6 +1,7 @@
 
 #include "EntityManager.h"
 #include "NotesManager.h"
+#include "BestiarioManager.h"
 #include "Player.h"
 #include "Item.h"
 #include "App.h"
@@ -48,13 +49,14 @@ bool NotesManager::Awake(pugi::xml_node config)
 	listTexturePath = ((char*)config.child("nota").attribute("list_texture").as_string());
 	sliderTexturePath = ((char*)config.child("nota").attribute("slider_texture").as_string());
 	knobTexturePath = ((char*)config.child("nota").attribute("knob_texture").as_string());
+	PointerPath = ((char*)config.child("nota").attribute("pointer").as_string());
 	return ret;
 
 }
 
 bool NotesManager::Start() {
 
-	PointerItemText = app->tex->Load("Assets/Textures/Interfaz/Diario/noteselect.png");
+	PointerItemText = app->tex->Load(PointerPath);
 	listTexture = app->tex->Load(listTexturePath);
 	sliderTexture = app->tex->Load(sliderTexturePath);
 	knobTexture = app->tex->Load(knobTexturePath);
@@ -252,51 +254,73 @@ void NotesManager::UseNoteSelected(int id)
 
 void NotesManager::OnMovePointer()
 {
+	bool pointer = true;
+	if (PointerId != -2)
+	{
+		if (pointer == false)
+		{
+			PointerItemText = app->tex->Load(PointerPath);
+			pointer = true;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && PointerPosition.x < 300) {
+			if (PointerId == -1)
+			{
+				PointerId += 1;
+			}
+			else
+			{
+				PointerId = -2;
+				PointerItemText = nullptr;
+				app->bestiarioManager->PointerId = -1;
+			}
 
-	/*if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && PointerPosition.x < 300) {
-		PointerPosition.x += 492;
-		PointerId += 1;
-	}*/
-	/*if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN && PointerPosition.x > 176) {
-		PointerPosition.x -= 492;
-		PointerId -= 1;
-	}*/
-
-	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
-		if (PointerPosition.y + 83 < 500)
-		{
-			PointerPosition.y += 83;
-			int a = 0;
+			
 		}
-		if (PointerId + 1 != notes.Count())
-		{
-			PointerId += 1;
-		}
-		else
-		{
-			PointerId = 0;
-			PointerPosition.y = 230;
-		}
-
-		
-		
-	}
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && PointerPosition.y > -60) {
-		if (PointerPosition.y - 83 > 200)
-		{
-			PointerPosition.y -= 83;
-		}
-		if (PointerId - 1 != -1)
-		{
+		/*if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN && PointerPosition.x > 176) {
+			PointerPosition.x -= 492;
 			PointerId -= 1;
+		}*/
+
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
+			if (PointerPosition.y + 83 < 500)
+			{
+				PointerPosition.y += 83;
+				int a = 0;
+			}
+			if (PointerId + 1 != notes.Count())
+			{
+				PointerId += 1;
+			}
+			else
+			{
+				PointerId = 0;
+				PointerPosition.y = 230;
+			}
+
+
+
 		}
-		else
-		{
-			PointerId = notes.Count() - 1;
-			PointerPosition.y = 479;
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && PointerPosition.y > -60) {
+			if (PointerPosition.y - 83 > 200)
+			{
+				PointerPosition.y -= 83;
+			}
+			if (PointerId - 1 != -1)
+			{
+				PointerId -= 1;
+			}
+			else
+			{
+				PointerId = notes.Count() - 1;
+				PointerPosition.y = 479;
+			}
+
+
 		}
-		
-		
+	}
+	else
+	{
+		pointer = false;
 	}
 }
 

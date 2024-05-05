@@ -1,6 +1,7 @@
 
 #include "EntityManager.h"
 #include "BestiarioManager.h"
+#include "NotesManager.h"
 #include "Player.h"
 #include "Item.h"
 #include "App.h"
@@ -49,17 +50,25 @@ bool BestiarioManager::Awake(pugi::xml_node config)
 	sliderTexturePath = ((char*)config.child("bestiario").attribute("slider_texture").as_string());
 	knobTexturePath = ((char*)config.child("bestiario").attribute("knob_texture").as_string());
 	PointerPath = ((char*)config.child("bestiario").attribute("pointer").as_string());
+	textoOsiris = ((char*)config.child("bestiario").attribute("text_osiris").as_string());
+	textoMuur = ((char*)config.child("bestiario").attribute("text_muur").as_string());
+
+	
 	return ret;
 
 }
 
 bool BestiarioManager::Start() {
 
-	PointerItemText = app->tex->Load("Assets/Textures/Interfaz/Diario/bestiarioselect.png");
+
+	
+	
 	listTexture = app->tex->Load(listTexturePath);
 	sliderTexture = app->tex->Load(sliderTexturePath);
 	knobTexture = app->tex->Load(knobTexturePath);
 	PointerItemText = app->tex->Load(PointerPath);
+	PointerId = -2;
+	PointerItemText = nullptr;
 
 	bool ret = true;
 
@@ -101,7 +110,7 @@ bool BestiarioManager::CleanUp()
 	return ret;
 }
 int highestttId = -1;
-Bestiario* BestiarioManager::CreateItem(BestiarioType type)
+Bestiario* BestiarioManager::CreateItem(char* name)
 {
 	Bestiario* entity = nullptr;
 
@@ -110,7 +119,21 @@ Bestiario* BestiarioManager::CreateItem(BestiarioType type)
 	entity = new Bestiario();
 	entity->id = highestttId + 1;
 	entity->closeUpBestiarios = CloseUp;
-	entity->desc = texto;
+	if (strcmp(name, "osiris") == 0)
+	{
+		entity->name = name;
+		entity->desc = textoOsiris;
+	}
+	else if (strcmp(name, "muur") == 0)
+	{
+		entity->name = name;
+		entity->desc = textoMuur;
+	}
+	else
+	{
+		// Default properties if name doesn't match
+	}
+	
 	/*entity->closeUpBestiario = app->tex->Load("Assets/Textures/Entidades/Items/textura_BestiarioCloseUp.png"); */
 	entity->icon = app->tex->Load(iconoBestiarioTexturePath);
 		
@@ -248,51 +271,85 @@ void BestiarioManager::UseBestiarioSelected(int id)
 
 void BestiarioManager::OnMovePointer()
 {
-
-	/*if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && PointerPosition.x < 300) {
-		PointerPosition.x += 492;
-		PointerId += 1;
-	}*/
-	/*if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN && PointerPosition.x > 176) {
-		PointerPosition.x -= 492;
-		PointerId -= 1;
-	}*/
-
-	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
-		if (PointerPosition.y + 83 < 500)
+	bool pointer = false;
+	if (PointerId != -2)
+	{
+		if (pointer == false)
 		{
-			PointerPosition.y += 83;
-			int a = 0;
+			PointerItemText = app->tex->Load(PointerPath);
+			pointer = true;
 		}
-		if (PointerId + 1 != bestiario.Count())
-		{
-			PointerId += 1;
-		}
-		else
-		{
-			PointerId = 0;
-			PointerPosition.y = 230;
-		}
-
 		
-		
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN) {
+			if (horitzontalPointerId + 1 > 3)
+			{
+				horitzontalPointerId = 0;
+				PointerPosition.x = 660;
+				PointerId -= 3;
+			}
+			else
+			{
+				if (PointerId != -1)
+				{
+					horitzontalPointerId += 1;
+					PointerPosition.x += 83;
+				}
+				PointerId += 1;
+			}
+			
+		}
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) {
+			if (horitzontalPointerId - 1 < 0)
+			{
+				PointerId = -2;
+				PointerItemText = nullptr;
+				app->notesManager->PointerId = -1;
+			}
+			else
+			{
+				horitzontalPointerId -= 1;
+				PointerPosition.x -= 83;
+				PointerId -= 1;
+			}
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
+			if (verticalPointerId < numberRows)
+			{
+				PointerId += 4;
+				verticalPointerId += 1;
+				PointerPosition.y += 83;
+			}
+			else
+			{
+				verticalPointerId = 0;
+				PointerId /= numberRows;
+				PointerPosition.y = 230;
+			}
+
+
+
+		}
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
+			if (verticalPointerId + 1> numberRows)
+			{
+				PointerPosition.y -= 83;
+				PointerId -= 4;
+				verticalPointerId -= 1;
+			}
+			else
+			{
+				verticalPointerId = numberRows;
+				PointerId *= numberRows;
+				PointerPosition.y = 230 + 83 * (numberRows);
+			}
+
+
+		}
 	}
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && PointerPosition.y > -60) {
-		if (PointerPosition.y - 83 > 200)
-		{
-			PointerPosition.y -= 83;
-		}
-		if (PointerId - 1 != -1)
-		{
-			PointerId -= 1;
-		}
-		else
-		{
-			PointerId = bestiario.Count() - 1;
-			PointerPosition.y = 479;
-		}
-		
-		
+	else
+	{
+		pointer = false;
 	}
 }
 
@@ -349,7 +406,15 @@ bool BestiarioManager::Update(float dt)
 			}*/
 		/*}*/
 
+		int num;
 
+			num = numberRows + 1;
+		
+
+		if (bestiario.Count() > 3 * num)
+		{
+			numberRows += 1;
+		}
 
 	}
 
@@ -391,7 +456,7 @@ bool BestiarioManager::PostUpdate()
 			pEntity = item->data;
 			int rowIndex = item->data->id / maxItemsPerRow; // Calcula el índice de la fila
 			int columnIndex = item->data->id % maxItemsPerRow; // Calcula el índice de la columna
-			int horizontalPosition = 720 + columnIndex * 492; // Calcula la posición horizontal
+			int horizontalPosition = 660 + columnIndex * 83; // Calcula la posición horizontal
 			int verticalPosition = 230 + rowIndex * 83; // Calcula la posición vertical
 
 			int y2 = PointerPosition.y - scrollY;
@@ -402,7 +467,7 @@ bool BestiarioManager::PostUpdate()
 			{
 				if (y >= viewport.y && y <= viewport.y + viewport.h) {
 
-					app->render->DrawTexture(listTexture, 650, verticalPosition, SDL_FLIP_NONE, 0, 0);
+					app->render->DrawTexture(listTexture, horizontalPosition, verticalPosition, SDL_FLIP_NONE, 0, 0);
 
 					if (zoomIn == false)
 						app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
@@ -426,15 +491,30 @@ bool BestiarioManager::PostUpdate()
 
 	}
 	ret = true;
-	int knobY;
-	if (bestiario.Count() == 0 || (bestiario.Count() - 1) == 0)
+	int knobY = 200;
+	if (bestiario.Count()/4 == 0 || (bestiario.Count() - 1) / 4 == 0)
 	{
 		knobY = 200;
 	}
-	else
+	/*else
 	{
-		knobY= 200 + (341 / (bestiario.Count() - 1)) * PointerId;
+		knobY= 200 + (341 / (bestiario.Count() - 1) / 4) * verticalPointerId;
 	}
+
+	if (knobY > 541)
+	{
+		knobY = 200;
+		PointerPosition.y = 230;
+		verticalPointerId = 0;
+		PointerId = PointerId / (numberRows-1);
+	}
+	if (knobY < 200)
+	{
+		knobY = 200;
+		PointerPosition.y = 230 + 83* (numberRows -1);
+		verticalPointerId = 0;
+		PointerId = PointerId * (numberRows -1);
+	}*/
 
 	if (mostrar == true)
 	{

@@ -31,7 +31,7 @@ public:
 	bool CleanUp();
 
 	// Additional methods
-	Bestiario* CreateItem(BestiarioType type);
+	Bestiario* CreateItem(char* name);
 
 	void AddBestiario(Bestiario* Inventity);
 
@@ -54,7 +54,7 @@ public:
 
 	List<Bestiario*> bestiario;
 	
-	iPoint PointerPosition = { 650, 230 };
+	iPoint PointerPosition = { 660, 230 };
 	int PointerId = 0;
 	iPoint selected = { -1000,-1000 };
 	iPoint equiped = { -1000,-1000 };
@@ -75,15 +75,20 @@ public:
 
 	bool zoomIn = false;
 
+	int verticalPointerId = 0;
+	int horitzontalPointerId = 0;
+
 private:
 	pugi::xml_document configFile;
 	pugi::xml_node configNode;
-	int maxItemsPerRow = 1; // Define el número máximo de elementos por fila
+	int maxItemsPerRow = 4; // Define el número máximo de elementos por fila
+	int numberRows = 0;
 
 	char* iconoBestiarioTexturePath;
 	char* listTexturePath;
 	char* sliderTexturePath;
 	char* knobTexturePath;
+	SDL_Texture* iconoBestiarioTexture;
 	SDL_Texture* listTexture;
 	SDL_Texture* sliderTexture;
 	SDL_Texture* knobTexture;
@@ -92,7 +97,8 @@ private:
 
 	char* CloseUpPath;
 	SDL_Texture* CloseUp;
-	std::string texto;
+	char* textoOsiris;
+	char* textoMuur;
 };
 
 #endif // __INVENTORYMANAGER_H__

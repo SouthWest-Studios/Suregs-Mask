@@ -455,17 +455,21 @@
 		<nota texturePath ="Assets/Textures/Entidades/Items/textura_nota.png"
 			  list_texture ="Assets/Textures/Interfaz/Diario/textura_fondo_nota_lista.png"
 			  slider_texture = "Assets/Textures/Interfaz/Diario/textura_fondo_slider.png"
-			  knob_texture="Assets/Textures/Interfaz/Diario/textura_knob_slider.png"/>
+			  knob_texture="Assets/Textures/Interfaz/Diario/textura_knob_slider.png"
+			  pointer ="Assets/Textures/Interfaz/Diario/noteselect.png"/>
 			
 
 	</notesmanager>
 
 	<bestiariomanager>
-		<bestiario texturePath ="Assets/Textures/Entidades/Bestiario/textura_nota.png"
+		<bestiario texturePath ="Assets/Textures/Interfaz/Bestiario/textura_nota.png"
 			  list_texture ="Assets/Textures/Interfaz/Bestiario/textura_fondo_bestiario_lista.png"
 			  slider_texture = "Assets/Textures/Interfaz/Bestiario/textura_fondo_slider.png"
 			  knob_texture="Assets/Textures/Interfaz/Bestiario/textura_knob_slider.png"
-			  pointer="Assets/Textures/Interfaz/Bestiario/bestiarioselect.png" />
+			  pointer="Assets/Textures/Interfaz/Bestiario/bestiarioselect.png" 
+			  text_osiris ="osiris osiris osiris osiris osiris osiris osiris osiris osiris osiris osiris osiris osiris osiris osiris osiris"
+			  text_muur ="muur muur muur muur muur muur muur muur muur muur muur muur muur muur muur muur"/>
+			  
 		
 	</bestiariomanager>
 
