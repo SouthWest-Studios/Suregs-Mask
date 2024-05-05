@@ -254,7 +254,7 @@ void NotesManager::UseNoteSelected(int id)
 
 void NotesManager::OnMovePointer()
 {
-	bool pointer = true;
+	bool pointer = false;
 	if (PointerId != -2)
 	{
 		if (pointer == false)
@@ -455,7 +455,7 @@ bool NotesManager::PostUpdate()
 	}
 	ret = true;
 	int knobY;
-	if (notes.Count() == 0 || (notes.Count() - 1) == 0)
+	if (notes.Count() == 0 || (notes.Count() - 1) == 0 || PointerId < 0)
 	{
 		
 		knobY = 200;

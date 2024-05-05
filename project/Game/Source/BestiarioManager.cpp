@@ -52,6 +52,7 @@ bool BestiarioManager::Awake(pugi::xml_node config)
 	PointerPath = ((char*)config.child("bestiario").attribute("pointer").as_string());
 	textoOsiris = ((char*)config.child("bestiario").attribute("text_osiris").as_string());
 	textoMuur = ((char*)config.child("bestiario").attribute("text_muur").as_string());
+	CloseUpPath = ((char*)config.child("bestiario").attribute("closeUp").as_string());
 
 	
 	return ret;
@@ -62,7 +63,7 @@ bool BestiarioManager::Start() {
 
 
 	
-	
+	CloseUp = app->tex->Load(CloseUpPath);
 	listTexture = app->tex->Load(listTexturePath);
 	sliderTexture = app->tex->Load(sliderTexturePath);
 	knobTexture = app->tex->Load(knobTexturePath);
@@ -303,7 +304,7 @@ void BestiarioManager::OnMovePointer()
 			{
 				PointerId = -2;
 				PointerItemText = nullptr;
-				app->notesManager->PointerId = -1;
+				app->notesManager->PointerId = 0;
 			}
 			else
 			{
@@ -323,7 +324,7 @@ void BestiarioManager::OnMovePointer()
 			else
 			{
 				verticalPointerId = 0;
-				PointerId /= numberRows;
+				PointerId -= numberRows * 4;
 				PointerPosition.y = 230;
 			}
 
@@ -340,7 +341,7 @@ void BestiarioManager::OnMovePointer()
 			else
 			{
 				verticalPointerId = numberRows;
-				PointerId *= numberRows;
+				PointerId += numberRows * 4;
 				PointerPosition.y = 230 + 83 * (numberRows);
 			}
 
@@ -437,7 +438,7 @@ bool BestiarioManager::PostUpdate()
 
 	if (mostrar == true)
 	{
-		app->render->DrawRectangle(viewport, 0, 0, 0, 200, true, false);
+		/*app->render->DrawRectangle(viewport, 0, 0, 0, 200, true, false);*/
 		ListItem<Bestiario*>* item;
 		Bestiario* pEntity = NULL;
 
@@ -466,12 +467,12 @@ bool BestiarioManager::PostUpdate()
 			if (y2 >= viewport.y && y2 <= viewport.y + viewport.h)
 			{
 				if (y >= viewport.y && y <= viewport.y + viewport.h) {
+					if (zoomIn == false && app->notesManager->zoomIn == false)
+					{
+						app->render->DrawTexture(listTexture, horizontalPosition, verticalPosition, SDL_FLIP_NONE, 0, 0);
 
-					app->render->DrawTexture(listTexture, horizontalPosition, verticalPosition, SDL_FLIP_NONE, 0, 0);
-
-					if (zoomIn == false)
 						app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
-
+					}
 					
 				}
 			}
@@ -492,34 +493,20 @@ bool BestiarioManager::PostUpdate()
 	}
 	ret = true;
 	int knobY = 200;
-	if (bestiario.Count()/4 == 0 || (bestiario.Count() - 1) / 4 == 0)
+	if (numberRows == 0)
 	{
 		knobY = 200;
 	}
-	/*else
+	else
 	{
-		knobY= 200 + (341 / (bestiario.Count() - 1) / 4) * verticalPointerId;
+		knobY= 200 + (341 / numberRows ) * verticalPointerId;
 	}
 
-	if (knobY > 541)
-	{
-		knobY = 200;
-		PointerPosition.y = 230;
-		verticalPointerId = 0;
-		PointerId = PointerId / (numberRows-1);
-	}
-	if (knobY < 200)
-	{
-		knobY = 200;
-		PointerPosition.y = 230 + 83* (numberRows -1);
-		verticalPointerId = 0;
-		PointerId = PointerId * (numberRows -1);
-	}*/
 
 	if (mostrar == true)
 	{
-		app->render->DrawTexture(sliderTexture, 930, 200, SDL_FLIP_NONE, 0, 0);
-		app->render->DrawTexture(knobTexture, 930, knobY, SDL_FLIP_NONE, 0, 0);
+		app->render->DrawTexture(sliderTexture, 960, 200, SDL_FLIP_NONE, 0, 0);
+		app->render->DrawTexture(knobTexture, 960, knobY, SDL_FLIP_NONE, 0, 0);
 
 		ListItem<Bestiario*>* itum;
 		for (itum = bestiario.start; itum != nullptr; itum = itum->next)

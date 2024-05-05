@@ -481,7 +481,8 @@
 			  knob_texture="Assets/Textures/Interfaz/Bestiario/textura_knob_slider.png"
 			  pointer="Assets/Textures/Interfaz/Bestiario/bestiarioselect.png" 
 			  text_osiris ="osiris osiris osiris osiris osiris osiris osiris osiris osiris osiris osiris osiris osiris osiris osiris osiris"
-			  text_muur ="muur muur muur muur muur muur muur muur muur muur muur muur muur muur muur muur"/>
+			  text_muur ="muur muur muur muur muur muur muur muur muur muur muur muur muur muur muur muur"
+			  closeUp ="Assets/Textures/Interfaz/Bestiario/textura_NoteCloseUp.png"/>
 			  
 		
 	</bestiariomanager>
