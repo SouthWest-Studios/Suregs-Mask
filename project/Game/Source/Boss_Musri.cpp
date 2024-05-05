@@ -490,6 +490,11 @@ void Boss_Musri::Fase1(float dt, iPoint playerPos)
 }
 void Boss_Musri::FaseC(float dt, iPoint playerPos)
 {
+
+	cambiarPosicionTime = 10000;
+	numeroRafagas = 5;
+	habilidadRafagasCD = 800;
+
 	movePosition = iPoint(limitesSala.x + (limitesSala.w/2), limitesSala.y + (limitesSala.h/2));
 	if (Bossfinding(dt, movePosition)) {
 		fase = FASE_Musri::FASE_TWO;
@@ -500,6 +505,62 @@ void Boss_Musri::FaseC(float dt, iPoint playerPos)
 void Boss_Musri::Fase2(float dt, iPoint playerPos)
 {
 	//Fase 2
+	bool haLlegado = false;
+	if (cambiarPosicionTimer.ReadMSec() > cambiarPosicionTime) {
+		haLlegado = Bossfinding(dt, movePosition);
+		if (haLlegado) {
+			cambiarPosicionTimer.Start();
+			movePosition = GetRandomPosicion(movePosition, 5,10); //Para la proxima
+		}
+	}
+	else {
+		//AtaqueFlechas + lo otro
+		if (dist(playerPos, position) < meleeAttackDistance * 32 && habilidadEmpujeTimer.ReadMSec() >= habilidadEmpujeCD) {
+			//Realizar ataque empuje
+			habilidadEmpujeTimer.Start();
+
+			fPoint dirToPlayer = getDirectionVector(position, playerPos);
+			pbodyFoot->body->ApplyForceToCenter(b2Vec2(-dirToPlayer.x * fuerzaHabilidadEmpuje, -dirToPlayer.y * fuerzaHabilidadEmpuje), true);
+
+		}
+		else {
+
+			if (dispararRafagasTimer.ReadMSec() >= habilidadRafagasCD) {
+
+				//Disparar rafagas
+				//flechasLanzadas
+				if (numeroRafagasAct < numeroRafagas) {
+					if (dispararFlechaRafagaTimer.ReadMSec() >= 100) {
+
+						dispararFlechaRafagaTimer.Start();
+						FlechaMusri flecha = { getDirectionVector(position, playerPos), app->physics->CreateCircle(position.x, position.y, 10, bodyType::DYNAMIC) };
+						flecha.pbody->listener = this;
+						flecha.pbody->ctype = ColliderType::BOSS_MUSRI_ARROW;
+						flecha.pbody->body->GetFixtureList()->SetSensor(true);
+						flecha.lifeTimer.Start();
+						flechasLanzadas.push_back(flecha);
+
+						flecha.pbody->body->ApplyForceToCenter(b2Vec2(flecha.direction.x * velocidadFlechas, flecha.direction.y * velocidadFlechas), true);
+						numeroRafagasAct++;
+					}
+				}
+				else {
+					dispararRafagasTimer.Start(); //Reset el timer de las 3 flechas
+					numeroRafagasAct = 0;
+				}
+			}
+		}
+	}
+
+	if (habilidadEmpujeTimer.ReadMSec() >= 400 && cambiarPosicionTimer.ReadMSec() < cambiarPosicionTime) {
+		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
+	}
+	else {
+		if (habilidadEmpujeTimer.ReadMSec() < 400) {
+			fPoint dirToPlayer = getDirectionVector(position, playerPos);
+			app->entityManager->GetPlayer()->pbodyFoot->body->ApplyForceToCenter(b2Vec2(dirToPlayer.x * fuerzaHabilidadEmpuje, dirToPlayer.y * fuerzaHabilidadEmpuje), true);
+		}
+	}
 }
 
 iPoint Boss_Musri::GetRandomPosicion(iPoint actualPosition, int distanceLimitInf, int distanceLimitSup)
