@@ -1017,11 +1017,8 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (physA == pbodyFoot) {
 			//TakeDamage(physB->entity->attackDamage);
 			if (!godmode) {
-				TakeDamage(10);
-				if (currentStats.currentHealth <= 0) {
-					//app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_gameover);
-					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_pueblo);
-				}
+				TakeDamage(physB->listener->attackDamage);
+				
 			}
 		}
 		break;
@@ -1035,11 +1032,11 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 					app->inventoryManager->CreateItem(physB->listener->type, physB->listener->description, physB->listener->tipo, physB->listener->name.GetString());
 					physB->listener->active = false;
 					physB->body->SetActive(false);
-					app->audio->PlayFx(get_item_fx); // <--- No funciona
 				}
 				
 			}
 		}
+		app->audio->PlayFx(get_item_fx);
 		break;
 	case ColliderType::NOTA:
 		LOG("Collision NOTA");
@@ -1823,7 +1820,7 @@ void Player::PlayerMovement(float dt)
 	}
 
 	//Si pulsas J para atacar
-	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN && timerAttack.ReadMSec() > cdTimerAttackMS + 100) {
+	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN && timerAttack.ReadMSec() > cdTimerAttackMS) {
 		isAttacking = true;
 		timerAttack.Start();
 		desiredState = EntityState::ATTACKING;
@@ -1946,6 +1943,11 @@ void Player::TakeDamage(float damage) {
 			app->audio->PlayHitFx(player_get_damage_fx);
             printf("Player has received  %f damage\n", damage);
             damageTimer.Start();
+
+			if (currentStats.currentHealth <= 0) {
+				//app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_gameover);
+				app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_pueblo);
+			}
         }
     }
 }

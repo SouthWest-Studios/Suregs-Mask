@@ -24,7 +24,8 @@ enum class FASE_Musri
 {
 	FASE_ONE,
 	FASE_CHANGE,
-	FASE_TWO
+	FASE_TWO,
+	FASE_DYNIG
 };
 
 
@@ -33,6 +34,20 @@ struct FlechaMusri {
 	fPoint direction;
 	PhysBody* pbody;
 	Timer lifeTimer;
+	
+};
+struct RastroFlechaCargadaMusri {
+	iPoint position;
+	PhysBody* pbody;
+	Timer lifeTimer;
+};
+struct FlechaCargadaMusri {
+	fPoint direction;
+	PhysBody* pbody;
+	std::vector<RastroFlechaCargadaMusri> rastroGenerado;
+	int maxRastro = 40;
+	Timer dejarRastroTimer;
+	bool flechaRastroTerminado = false;
 	
 };
 
@@ -87,14 +102,16 @@ public:
 	//L02: DONE 2: Declare player parameters
 	SDL_Texture* texture = NULL;
 	SDL_Texture* arrowTexture = NULL;
+	SDL_Texture* arrowChargedTexture = NULL;
+	SDL_Texture* arrowChargedRastroTexture = NULL;
 	pugi::xml_node config;
 	uint texW, texH;
 
 	//Estadisticas
 	float speed;
 	b2Vec2 vel;
-	float health;
-	float maxHealth;
+	//float health;
+	//float maxHealth;
 	float attackDamage;
 	Timer invulnerabilityTimer;
 
@@ -138,26 +155,32 @@ private:
 	Timer cambiarPosicionTimer;
 	Timer dispararRafagasTimer;
 	Timer dispararFlechaRafagaTimer;
+	Timer cargaFlechaRafagaTimer;
 
 	Timer habilidadEmpujeTimer;
 	Timer habilidadFlechaCargadaTimer;
 	Timer habilidadDashInvisibleTimer;
 
 
-	int habilidadEmpujeCD = 20000;
+	int habilidadEmpujeCD = 10000;
 	int habilidadRafagasCD = 1000;
+	int habilidadCargadaCD = 20000;
 
 	int meleeAttackDistance = 3;
 	int cambiarPosicionTime = 15000;
 	int dispararRafagasTime;
 	int numeroRafagasAct;
 	int numeroRafagas = 3;
+	float flechaRafagaDamage = 5;
 	
 	SDL_Rect limitesSala = { 9900 , 2750, 2050, 1000 };
 	iPoint movePosition;
 
 	std::vector<FlechaMusri> flechasLanzadas;
 	float velocidadFlechas = 100;
+	int fuerzaHabilidadEmpuje = 500;
+
+	std::vector<FlechaCargadaMusri> flechasCargadas;
 
 
 	//Veneno
@@ -169,7 +192,7 @@ private:
 	bool poisoned = false;
 
 
-
+	Timer timerRecibirDanioColor;
 
 public:
 

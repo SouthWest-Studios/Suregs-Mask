@@ -72,7 +72,6 @@ public:
 	b2Vec2 vel;
 	float health;
 	float maxHealth;
-	float attackDamage;
 	Timer invulnerabilityTimer;
 
 	float viewDistance;

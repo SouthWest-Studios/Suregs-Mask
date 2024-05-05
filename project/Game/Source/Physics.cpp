@@ -53,26 +53,24 @@ bool Physics::PreUpdate()
 	// WARNING: WE ARE STEPPING BY CONSTANT 1/60 SECONDS!
 	world->Step(1.0f / 60.0f, 6, 2);
 
-	// Because Box2D does not automatically broadcast collisions/contacts with sensors, 
-	// we have to manually search for collisions and "call" the equivalent to the ModulePhysics::BeginContact() ourselves...
-
-	try {
-		for (b2Contact* c = world->GetContactList(); c && c != nullptr && c != NULL; c = c->GetNext())
+	// Iterate over contacts and handle collisions
+	for (b2Contact* c = world->GetContactList(); c != nullptr; c = c->GetNext())
+	{
+		// Check if both fixtures are valid and have user data associated with them
+		if (c->IsTouching() && c->GetFixtureA() && c->GetFixtureB() &&
+			c->GetFixtureA()->GetBody() && c->GetFixtureB()->GetBody() &&
+			c->GetFixtureA()->GetBody()->GetUserData() && c->GetFixtureB()->GetBody()->GetUserData())
 		{
-			// For each contact detected by Box2D, see if the first one colliding is a sensor
-			if (c->IsTouching() && c->GetFixtureA()->IsSensor())
-			{
-				// If so, we call the OnCollision listener function (only of the sensor), passing as inputs our custom PhysBody classes
-				PhysBody* pb1 = (PhysBody*)c->GetFixtureA()->GetBody()->GetUserData();
-				PhysBody* pb2 = (PhysBody*)c->GetFixtureB()->GetBody()->GetUserData();
+			// Ensure both bodies have listeners
+			PhysBody* pb1 = static_cast<PhysBody*>(c->GetFixtureA()->GetBody()->GetUserData());
+			PhysBody* pb2 = static_cast<PhysBody*>(c->GetFixtureB()->GetBody()->GetUserData());
 
-				if (pb1 && pb2 && pb1->listener)
-					pb1->listener->OnCollision(pb1, pb2);
+			if (pb1->listener && pb2->listener)
+			{
+				// Call the OnCollision listener function
+				pb1->listener->OnCollision(pb1, pb2);
 			}
 		}
-	}
-	catch (std::exception& e) {
-		LOG("ERROR in Physics - PreUpdate: %s", e.what());
 	}
 
 	return ret;
@@ -118,7 +116,7 @@ PhysBody* Physics::CreateRectangle(int x, int y, int width, int height, bodyType
 	b->SetUserData(pbody);
 	pbody->width = width * 0.5f;
 	pbody->height = height * 0.5f;
-
+	pbody->listener = nullptr;
 	return pbody;
 }
 
@@ -155,6 +153,7 @@ PhysBody* Physics::CreateCircle(int x, int y, int radious, bodyType type)
 	b->SetUserData(pbody);
 	pbody->width = radious * 0.5f;
 	pbody->height = radious * 0.5f;
+	pbody->listener = nullptr;
 
 	// Return our PhysBody class
 	return pbody;
@@ -191,6 +190,7 @@ PhysBody* Physics::CreateRectangleSensor(int x, int y, int width, int height, bo
 	b->SetUserData(pbody);
 	pbody->width = width;
 	pbody->height = height;
+	pbody->listener = nullptr;
 
 	// Return our PhysBody class
 	return pbody;
@@ -233,6 +233,7 @@ PhysBody* Physics::CreateChain(int x, int y, int* points, int size, bodyType typ
 	pbody->body = b;
 	b->SetUserData(pbody);
 	pbody->width = pbody->height = 0;
+	pbody->listener = nullptr;
 
 	// Return our PhysBody class
 	return pbody;
@@ -351,21 +352,23 @@ bool Physics::CleanUp()
 // Callback function to collisions with Box2D
 void Physics::BeginContact(b2Contact* contact)
 {
-	try {
+	// Check if both fixtures are valid and have user data associated with them
+	if (contact->GetFixtureA() && contact->GetFixtureB() &&
+		contact->GetFixtureA()->GetBody() && contact->GetFixtureB()->GetBody() &&
+		contact->GetFixtureA()->GetBody()->GetUserData() && contact->GetFixtureB()->GetBody()->GetUserData())
+	{
+		// Ensure both bodies have listeners
+		PhysBody* physA = static_cast<PhysBody*>(contact->GetFixtureA()->GetBody()->GetUserData());
+		PhysBody* physB = static_cast<PhysBody*>(contact->GetFixtureB()->GetBody()->GetUserData());
 
-
-		// Call the OnCollision listener function to bodies A and B, passing as inputs our custom PhysBody classes
-		PhysBody* physA = (PhysBody*)contact->GetFixtureA()->GetBody()->GetUserData();
-		PhysBody* physB = (PhysBody*)contact->GetFixtureB()->GetBody()->GetUserData();
-
-		if (physA && physA->listener != NULL && physA->listener != nullptr && physA->listener)
+		if (physA && physA->listener && physB) {
 			physA->listener->OnCollision(physA, physB);
-
-		if (physB && physB->listener != NULL && physB->listener != nullptr && physB->listener)
+		}
+		if (physB && physB->listener && physA)
+		{
 			physB->listener->OnCollision(physB, physA);
-	}
-	catch (std::exception& e) {
-		LOG("ERROR in Physics - BeginContact: %s", e.what());
+		}
+
 	}
 }
 
