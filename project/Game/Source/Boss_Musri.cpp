@@ -14,6 +14,7 @@
 #include "Pathfinding.h"
 #include "Map.h"
 #include "Physics.h"
+#include "Player.h"
 #include "Item_Hueso.h"
 #include <Optick/include/optick.h>
 #include "Utils.cpp"
@@ -262,7 +263,9 @@ void Boss_Musri::OnCollision(PhysBody* physA, PhysBody* physB) {
 	if (physA->ctype == ColliderType::BOSS_MUSRI_ARROW) {
 		//Colisiones flecha
 		switch (physB->ctype) {
+		
 		case ColliderType::PLAYER:
+			app->entityManager->GetPlayer()->TakeDamage(flechaRafagaDamage);
 		case ColliderType::PLAYER_ATTACK:
 		case ColliderType::PLATFORM:
 			for (int i = 0; i < flechasLanzadas.size(); i++) {
@@ -473,17 +476,7 @@ void Boss_Musri::Fase1(float dt, iPoint playerPos)
 		}
 	}
 
-	//Gestionar las flechas
-	/*for (int i = 0; i < flechasLanzadas.size(); i++) {
-		if (flechasLanzadas.at(i).lifeTimer.ReadMSec() >= 300) {
-			app->physics->GetWorld()->DestroyBody(flechasLanzadas.at(i).pbody->body);
-			flechasLanzadas.erase(flechasLanzadas.begin() + i);
-			break;
-		}
-	}*/
-
-
-
+	
 	/*LOG("POSDX: %d, POSDY: %d, HA LLEGADO: %d, ", movePosition.x, movePosition.y, haLlegado);
 	LOG("Timer cambiarPosicion: %f", cambiarPosicionTimer.ReadMSec());*/
 

@@ -1017,7 +1017,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (physA == pbodyFoot) {
 			//TakeDamage(physB->entity->attackDamage);
 			if (!godmode) {
-				TakeDamage(10);
+				TakeDamage(physB->listener->attackDamage);
 				if (currentStats.currentHealth <= 0) {
 					//app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_gameover);
 					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_pueblo);

@@ -152,6 +152,7 @@ private:
 	int dispararRafagasTime;
 	int numeroRafagasAct;
 	int numeroRafagas = 3;
+	float flechaRafagaDamage = 50;
 	
 	SDL_Rect limitesSala = { 9900 , 2750, 2050, 1000 };
 	iPoint movePosition;
