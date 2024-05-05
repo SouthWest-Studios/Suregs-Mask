@@ -93,8 +93,8 @@ public:
 	//Estadisticas
 	float speed;
 	b2Vec2 vel;
-	float health;
-	float maxHealth;
+	//float health;
+	//float maxHealth;
 	float attackDamage;
 	Timer invulnerabilityTimer;
 
@@ -152,7 +152,7 @@ private:
 	int dispararRafagasTime;
 	int numeroRafagasAct;
 	int numeroRafagas = 3;
-	float flechaRafagaDamage = 50;
+	float flechaRafagaDamage = 5;
 	
 	SDL_Rect limitesSala = { 9900 , 2750, 2050, 1000 };
 	iPoint movePosition;

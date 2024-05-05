@@ -293,6 +293,7 @@ void Boss_Musri::OnCollision(PhysBody* physA, PhysBody* physB) {
 		case ColliderType::PLAYER_ATTACK:
 			LOG("Collision Player_Attack");
 			timerRecibirDanioColor.Start();
+			TakeDamage(app->entityManager->GetPlayer()->currentStats.attackDamage);
 			break;
 		case ColliderType::UNKNOWN:
 			LOG("Collision UNKNOWN");
@@ -359,6 +360,13 @@ float Boss_Musri::GetHealth() const {
 }
 
 void Boss_Musri::TakeDamage(float damage) {
+
+	if (invulnerabilityTimer.ReadMSec() >= 100) {
+		health -= damage;
+		LOG("Musri health: %f / %f", health, maxHealth);
+		invulnerabilityTimer.Start();
+	}
+
 
 
 }
@@ -467,6 +475,10 @@ void Boss_Musri::Fase1(float dt, iPoint playerPos)
 		}
 	}
 
+	if (health <= 4200) {
+		fase = FASE_Musri::FASE_CHANGE;
+	}
+
 	
 	/*LOG("POSDX: %d, POSDY: %d, HA LLEGADO: %d, ", movePosition.x, movePosition.y, haLlegado);
 	LOG("Timer cambiarPosicion: %f", cambiarPosicionTimer.ReadMSec());*/
@@ -478,9 +490,16 @@ void Boss_Musri::Fase1(float dt, iPoint playerPos)
 }
 void Boss_Musri::FaseC(float dt, iPoint playerPos)
 {
+	movePosition = iPoint(limitesSala.x + (limitesSala.w/2), limitesSala.y + (limitesSala.h/2));
+	if (Bossfinding(dt, movePosition)) {
+		fase = FASE_Musri::FASE_TWO;
+	}
+
+
 }
 void Boss_Musri::Fase2(float dt, iPoint playerPos)
 {
+	//Fase 2
 }
 
 iPoint Boss_Musri::GetRandomPosicion(iPoint actualPosition, int distanceLimitInf, int distanceLimitSup)
