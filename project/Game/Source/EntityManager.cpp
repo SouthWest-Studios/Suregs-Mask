@@ -5,6 +5,7 @@
 #include "Enemy_Shar.h"
 #include "Enemy_Muur.h"
 #include "Enemy_Boorok.h"
+#include "Enemy_Khurt.h"
 #include "Item.h"
 #include "App.h"
 #include "Item_Garra.h"
@@ -37,7 +38,7 @@
 #include "Item_Nota.h"
 #include "Boss_Inuit.h"
 #include "Boss_Musri.h"
-#include "Enemy_Khurt.h"
+
 
 #include "Defs.h"
 #include "Log.h"

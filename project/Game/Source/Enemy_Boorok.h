@@ -38,7 +38,7 @@ public:
 
 	bool CleanUp();
 
-	void DoNothing(float dt);
+	void DoNothing(float dt, iPoint playerPos);
 	void Chase(float dt, iPoint playerPos);
 	void Attack(float dt);
 	void Die();
@@ -49,9 +49,11 @@ public:
 	float GetHealth() const;
 	void TakeDamage(float damage);
 
+	void Sleeping();
+
 	//Ataque cargado
-	void Attacking(float dt, iPoint playerPos);
-	void Charging(float dt);
+	void chargeAttack(iPoint playerPos);
+	void AreaAttack(iPoint playerPos);
 
 	//VENENO <----------
 	void ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate);
@@ -72,6 +74,7 @@ public:
 	b2Vec2 vel;
 	float health;
 	float maxHealth;
+	float healthIncrement;
 	float attackDamage;
 	Timer invulnerabilityTimer;
 
@@ -85,11 +88,11 @@ private:
 
 
 	Animation idleAnim;
+	Animation sleepAnim;
 	Animation runAnim;
 	Animation attackAnim;
-	Animation chargeAnim;
-	Animation stunAnim;
 	Animation dieAnim;
+	Animation chargeAttackAnim;
 
 	int muur_get_damage_fx;
 
@@ -116,13 +119,14 @@ private:
 
 	Timer timerRecibirDanioColor;
 
+	//Sleeping
+	Timer recoveryTimer;
 
 	//Charge Attack
-	Timer stunTimer;
-	Timer chargeTimer;
-	bool charging;
-	bool isStunned;
+	Timer chargeAttackTimer;
 	iPoint Antposition;
+	float areaattackdamage;
+	float chargeAttackMaxRange;
 
 	//VENENO <----------
 	bool firstTimePoisonRecibed = false;

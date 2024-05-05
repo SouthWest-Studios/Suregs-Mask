@@ -127,6 +127,8 @@ public:
 	void Dashi(float dt);
 	void Attack(float dt);
 
+	void TakeDamage(float damage);
+
 	float GetRealMovementSpeed() const;
 
 	//Branch transitionTable[static_cast<int>(EntityState::STATE_COUNT)][static_cast<int>(EntityState::STATE_COUNT)];
@@ -184,7 +186,6 @@ private:
 	void PlayerMovement(float dt);
 	void FishingDirecction(bool verticalMovement, bool horizontalMovement);
 	void MaskAttack(float dt);
-	void TakeDamage(float damage);
 	void stateMachine(float dt);
 
 public:
