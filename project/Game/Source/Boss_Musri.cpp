@@ -419,6 +419,10 @@ void Boss_Musri::Fase1(float dt, iPoint playerPos)
 		if (dist(playerPos, position) < meleeAttackDistance * 32 && habilidadEmpujeTimer.ReadMSec() >= habilidadEmpujeCD) {
 			//Realizar ataque empuje
 			habilidadEmpujeTimer.Start();
+			
+			fPoint dirToPlayer = getDirectionVector(position, playerPos);
+			pbodyFoot->body->ApplyForceToCenter(b2Vec2(-dirToPlayer.x * fuerzaHabilidadEmpuje, -dirToPlayer.y * fuerzaHabilidadEmpuje), true);
+			
 		}
 		else {
 
@@ -457,6 +461,16 @@ void Boss_Musri::Fase1(float dt, iPoint playerPos)
 
 
 
+	}
+
+	if (habilidadEmpujeTimer.ReadMSec() >= 400 && cambiarPosicionTimer.ReadMSec() < cambiarPosicionTime) {
+		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
+	}
+	else {
+		if (habilidadEmpujeTimer.ReadMSec() < 400) {
+			fPoint dirToPlayer = getDirectionVector(position, playerPos);
+			app->entityManager->GetPlayer()->pbodyFoot->body->ApplyForceToCenter(b2Vec2(dirToPlayer.x * fuerzaHabilidadEmpuje, dirToPlayer.y * fuerzaHabilidadEmpuje), true);
+		}
 	}
 
 	//Gestionar las flechas

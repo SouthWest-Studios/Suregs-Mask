@@ -144,7 +144,7 @@ private:
 	Timer habilidadDashInvisibleTimer;
 
 
-	int habilidadEmpujeCD = 20000;
+	int habilidadEmpujeCD = 10000;
 	int habilidadRafagasCD = 1000;
 
 	int meleeAttackDistance = 3;
@@ -158,6 +158,7 @@ private:
 
 	std::vector<FlechaMusri> flechasLanzadas;
 	float velocidadFlechas = 100;
+	int fuerzaHabilidadEmpuje = 500;
 
 
 	//Veneno
