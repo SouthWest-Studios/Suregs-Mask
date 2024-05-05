@@ -61,7 +61,7 @@ bool Enemy_Muur::Start() {
 	pbodyFoot->listener = this;
 	pbodyFoot->ctype = ColliderType::ENEMY;
 
-	pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 10, 15, bodyType::DYNAMIC);
+	pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y + 10, 10, 15, bodyType::DYNAMIC);
 	pbodySensor->entity = this;
 	pbodySensor->listener = this;
 	pbodySensor->ctype = ColliderType::UNKNOWN;
@@ -170,10 +170,10 @@ bool Enemy_Muur::PostUpdate() {
 
 
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 25, position.y - 65, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x, position.y - 30, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 40, position.y - 65, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 25, position.y - 30, SDL_FLIP_NONE, &rect);
 	}
 
 

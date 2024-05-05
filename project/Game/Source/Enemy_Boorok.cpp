@@ -43,20 +43,20 @@ bool Enemy_Boorok::Start() {
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
 	idleAnim.LoadAnim("boorok", "idleAnim", spritePositions);
+	sleepAnim.LoadAnim("boorok", "sleepAnim", spritePositions);
 	runAnim.LoadAnim("boorok", "runAnim", spritePositions);
 	attackAnim.LoadAnim("boorok", "attackAnim", spritePositions);
-	chargeAnim.LoadAnim("boorok", "chargeAnim", spritePositions);
-	stunAnim.LoadAnim("boorok", "stunAnim", spritePositions);
 	dieAnim.LoadAnim("boorok", "dieAnim", spritePositions);
+	chargeAttackAnim.LoadAnim("boorok", "chargeAttackAnim", spritePositions);
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
-	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 15, bodyType::DYNAMIC);
+	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 30, bodyType::DYNAMIC);
 	pbodyFoot->entity = this;
 	pbodyFoot->listener = this;
 	pbodyFoot->ctype = ColliderType::ENEMY;
 
-	pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 10, 15, bodyType::DYNAMIC);
+	pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 60, 100, bodyType::DYNAMIC);
 	pbodySensor->entity = this;
 	pbodySensor->listener = this;
 	pbodySensor->ctype = ColliderType::UNKNOWN;
@@ -65,14 +65,16 @@ bool Enemy_Boorok::Start() {
 
 	maxHealth = config.attribute("maxHealth").as_float();
 	health = maxHealth;
+	healthIncrement = 0.05;
 	speed = config.attribute("speed").as_float();
 	attackDamage = config.attribute("attackDamage").as_float();
 	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();
 	chargeattackDistance = config.attribute("chargeattackDistance").as_float();
+	areaattackdamage = config.attribute("areaattackdamage").as_float();
 
-	chargeTimer.Start();
-
+	chargeAttackTimer.Start();
+	recoveryTimer.Start();
 
 	return true;
 }
@@ -104,7 +106,7 @@ bool Enemy_Boorok::Update(float dt)
 	}
 	else
 	{
-		nextState = EntityState::RUNNING;
+		nextState = EntityState::IDLE;
 	}
 
 
@@ -121,21 +123,10 @@ bool Enemy_Boorok::Update(float dt)
 		Die();
 		break;
 	case EntityState::IDLE:
-		DoNothing(dt);
+		DoNothing(dt, playerPos);
 		break;
 	default:
 		break;
-	}
-
-	if (charging && dist(Antposition, position) > 350)
-	{
-		Charging(dt);
-		isStunned = true;
-	}
-
-	if (chargeTimer.ReadSec() >= 5)
-	{
-		charging = false;
 	}
 
 	CheckPoison();
@@ -165,10 +156,10 @@ bool Enemy_Boorok::PostUpdate() {
 
 
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 25, position.y - 65, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x - 25, position.y - 100, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 40, position.y - 65, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 120, position.y - 100, SDL_FLIP_NONE, &rect);
 	}
 
 
@@ -200,28 +191,29 @@ bool Enemy_Boorok::CleanUp()
 	return true;
 }
 
-void Enemy_Boorok::DoNothing(float dt)
+void Enemy_Boorok::DoNothing(float dt, iPoint playerPos)
 {
+	//printf("Boorok Do nothing \n");
+	if (dist(position, playerPos) > -1)
+	{
+		Sleeping();
+	}
+	chargeAttackTimer.Start();
 	currentAnimation = &idleAnim;
-	//printf("Muur idle");
-	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
-
 }
 
 void Enemy_Boorok::Chase(float dt, iPoint playerPos)
 {
-	//printf("Muur chasing");
 	currentAnimation = &runAnim;
-	if (chargeTimer.ReadSec() >= 5 && app->map->pathfinding->GetDistance(playerPos, position) <= chargeattackDistance * 32)
+	if (chargeAttackTimer.ReadSec() >= 5 && app->map->pathfinding->GetDistance(playerPos, position) <= chargeattackDistance * 32)
 	{
-		Antposition = position;
-		Attacking(dt, playerPos);
+		chargeAttack(playerPos);
+		chargeAttackTimer.Start();
 	}
-	else if (!charging)
+	else
 	{
 		Boorokfinding(dt, playerPos);
 	}
-
 }
 
 void Enemy_Boorok::Attack(float dt)
@@ -237,29 +229,30 @@ void Enemy_Boorok::Die() {
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	currentAnimation = &dieAnim;
 
-	app->entityManager->DestroyEntity(this);
-	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
-	app->physics->GetWorld()->DestroyBody(pbodySensor->body);
-	app->tex->UnLoad(texture);
+	if (currentAnimation->HasFinished())
+	{
+		app->entityManager->DestroyEntity(this);
+		app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
+		app->physics->GetWorld()->DestroyBody(pbodySensor->body);
+		app->tex->UnLoad(texture);
 
 
-	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
-	if (parseResult) {
-		configNode = configFile.child("config");
+		pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
+		if (parseResult) {
+			configNode = configFile.child("config");
+		}
+		float randomValue = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+
+		// Determina si el item debe crearse basado en un 30% de probabilidad
+		if (randomValue <= 0.25f) {
+			Item_Hueso* hueso = (Item_Hueso*)app->entityManager->CreateEntity(EntityType::ITEM_HUESO);
+			hueso->config = configNode.child("entities_data").child("item_hueso");
+			hueso->position = iPoint(position.x, position.y);
+			hueso->Start();
+		}
+		app->entityManager->GetPlayer()->playerXP += 20;
+		//printf("Current XP %i \n", app->entityManager->GetPlayer()->playerXP);
 	}
-	float randomValue = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
-
-	// Determina si el item debe crearse basado en un 30% de probabilidad
-	if (randomValue <= 0.25f) {
-		Item_Hueso* hueso = (Item_Hueso*)app->entityManager->CreateEntity(EntityType::ITEM_HUESO);
-		hueso->config = configNode.child("entities_data").child("item_hueso");
-		hueso->position = iPoint(position.x, position.y);
-		hueso->Start();
-	}
-	app->entityManager->GetPlayer()->playerXP += 20;
-	//printf("Current XP %i \n", app->entityManager->GetPlayer()->playerXP);
-
-
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 
@@ -392,31 +385,48 @@ void Enemy_Boorok::CheckPoison() {
 	}
 }
 
-void Enemy_Boorok::Attacking(float dt, iPoint playerPos) {
-	printf("Attacking_Boorok");
-	currentAnimation = &chargeAnim;
-	charging = true;
+void Enemy_Boorok::Sleeping()
+{
+	//printf("Sleeping \n");
 
-	b2Vec2 direction(playerPos.x - position.x, playerPos.y - position.y);
-	direction.Normalize();
+	pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
+	currentAnimation = &sleepAnim;
 
-	b2Vec2 impulse = b2Vec2(direction.x * 5, direction.y * 5);
-	pbodyFoot->body->ApplyLinearImpulse(impulse, pbodyFoot->body->GetWorldCenter(), true);
+	if (recoveryTimer.ReadSec() >= 0.5) {
+		if (health < maxHealth) {
+			health += health * healthIncrement;
 
-	stunTimer.Start();
-	chargeTimer.Start();
+			if (health > maxHealth) {
+				health = maxHealth;
+			}
+		}
+		recoveryTimer.Start();
+	}
+	//printf("Health: %f \n", health);
 }
 
-void Enemy_Boorok::Charging(float dt) {
-	if (stunTimer.ReadSec() <= 2) {
-		printf("Charging_Boorok");
-		currentAnimation = &stunAnim;
-		pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
-	}
-	else {
-		stunTimer.Start();
-		nextState = EntityState::IDLE;
-		isStunned = false;
-		charging = false;
+void Enemy_Boorok::chargeAttack(iPoint playerPos)
+{
+	currentAnimation = &chargeAttackAnim;
+
+	printf("Charge attack");
+
+	AreaAttack(playerPos);
+
+	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
+
+	chargeAttackTimer.Start();
+
+
+}
+
+void Enemy_Boorok::AreaAttack(iPoint playerPos) {
+	
+	float distance = dist(position, playerPos);
+
+	// Si el player esta dentro del radio del ataque
+	if (distance <= chargeattackDistance * 32) {
+		app->entityManager->GetPlayer()->TakeDamage(areaattackdamage);
+		printf("Area attack \n");
 	}
 }

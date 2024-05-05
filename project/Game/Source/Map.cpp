@@ -33,6 +33,7 @@
 #include "Item_Hueso.h"
 #include "Enemy_Ols.h"
 #include "Enemy_Muur.h"
+#include "Enemy_Boorok.h"
 #include "TPEntity.h"
 #include "Window.h"
 #include "Boss_Inuit.h"
@@ -1136,6 +1137,16 @@ bool Map::LoadEntities(std::string layerName)
 						muur->config = configNode.child("entities_data").child("muur");
 						muur->position = iPoint(pos.x + 16, pos.y + 16);
 						muur->Start();
+
+					}
+
+					////BOOROK
+					if (gid == tileset->firstgid + 25) {
+
+						Enemy_Boorok* boorok = (Enemy_Boorok*)app->entityManager->CreateEntity(EntityType::ENEMY_BOOROK);
+						boorok->config = configNode.child("entities_data").child("boorok");
+						boorok->position = iPoint(pos.x + 16, pos.y + 16);
+						boorok->Start();
 
 					}
 
