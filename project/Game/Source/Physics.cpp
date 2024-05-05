@@ -118,7 +118,7 @@ PhysBody* Physics::CreateRectangle(int x, int y, int width, int height, bodyType
 	b->SetUserData(pbody);
 	pbody->width = width * 0.5f;
 	pbody->height = height * 0.5f;
-
+	pbody->listener = nullptr;
 	return pbody;
 }
 
@@ -155,6 +155,7 @@ PhysBody* Physics::CreateCircle(int x, int y, int radious, bodyType type)
 	b->SetUserData(pbody);
 	pbody->width = radious * 0.5f;
 	pbody->height = radious * 0.5f;
+	pbody->listener = nullptr;
 
 	// Return our PhysBody class
 	return pbody;
@@ -191,6 +192,7 @@ PhysBody* Physics::CreateRectangleSensor(int x, int y, int width, int height, bo
 	b->SetUserData(pbody);
 	pbody->width = width;
 	pbody->height = height;
+	pbody->listener = nullptr;
 
 	// Return our PhysBody class
 	return pbody;
@@ -233,6 +235,7 @@ PhysBody* Physics::CreateChain(int x, int y, int* points, int size, bodyType typ
 	pbody->body = b;
 	b->SetUserData(pbody);
 	pbody->width = pbody->height = 0;
+	pbody->listener = nullptr;
 
 	// Return our PhysBody class
 	return pbody;
