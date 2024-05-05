@@ -10,7 +10,7 @@ public:
 	// Constructor
 	Timer();
 
-	void Start();
+	void Start(uint32 startingMS = 0);
 	uint32 ReadSec() const;
 	float ReadMSec() const;
 

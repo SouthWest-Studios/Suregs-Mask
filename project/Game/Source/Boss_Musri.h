@@ -35,6 +35,19 @@ struct FlechaMusri {
 	Timer lifeTimer;
 	
 };
+struct RastroFlechaCargadaMusri {
+	iPoint position;
+	PhysBody* pbody;
+	Timer lifeTimer;
+};
+struct FlechaCargadaMusri {
+	fPoint direction;
+	PhysBody* pbody;
+	std::vector<RastroFlechaCargadaMusri> rastroGenerado;
+	int maxRastro = 7;
+	Timer dejarRastroTimer;
+	
+};
 
 class Boss_Musri : public Entity
 {
@@ -87,6 +100,8 @@ public:
 	//L02: DONE 2: Declare player parameters
 	SDL_Texture* texture = NULL;
 	SDL_Texture* arrowTexture = NULL;
+	SDL_Texture* arrowChargedTexture = NULL;
+	SDL_Texture* arrowChargedRastroTexture = NULL;
 	pugi::xml_node config;
 	uint texW, texH;
 
@@ -138,6 +153,7 @@ private:
 	Timer cambiarPosicionTimer;
 	Timer dispararRafagasTimer;
 	Timer dispararFlechaRafagaTimer;
+	Timer cargaFlechaRafagaTimer;
 
 	Timer habilidadEmpujeTimer;
 	Timer habilidadFlechaCargadaTimer;
@@ -146,6 +162,7 @@ private:
 
 	int habilidadEmpujeCD = 10000;
 	int habilidadRafagasCD = 1000;
+	int habilidadCargadaCD = 20000;
 
 	int meleeAttackDistance = 3;
 	int cambiarPosicionTime = 15000;
@@ -160,6 +177,8 @@ private:
 	std::vector<FlechaMusri> flechasLanzadas;
 	float velocidadFlechas = 100;
 	int fuerzaHabilidadEmpuje = 500;
+
+	std::vector<FlechaCargadaMusri> flechasCargadas;
 
 
 	//Veneno

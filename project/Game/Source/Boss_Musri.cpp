@@ -67,6 +67,8 @@ bool Boss_Musri::Start() {
 
 
 	arrowTexture = app->tex->Load(config.attribute("arrowTexturePath").as_string());
+	arrowChargedTexture = app->tex->Load(config.attribute("arrowChargedTexturePath").as_string());
+	arrowChargedRastroTexture = app->tex->Load(config.attribute("arrowChargedRastroTexturePath").as_string());
 
 	//originalPosition = app->map->WorldToMap(position.x, position.y);
 
@@ -79,15 +81,16 @@ bool Boss_Musri::Start() {
 
 	movePosition = GetRandomPosicion(position, 10);
 
-	fase = FASE_Musri::FASE_ONE;
+	//fase = FASE_Musri::FASE_ONE;
+	fase = FASE_Musri::FASE_CHANGE;
 
-	cambiarPosicionTimer.Start();
-	dispararRafagasTimer.Start();
-	dispararFlechaRafagaTimer.Start();
+	cambiarPosicionTimer.Start(30000);
+	dispararRafagasTimer.Start(30000);
+	dispararFlechaRafagaTimer.Start(30000);
 
-	habilidadEmpujeTimer.Start();
-	habilidadFlechaCargadaTimer.Start();
-	habilidadDashInvisibleTimer.Start();
+	habilidadEmpujeTimer.Start(30000);
+	habilidadFlechaCargadaTimer.Start(30000);
+	habilidadDashInvisibleTimer.Start(30000);
 
 	numeroRafagasAct = 0;
 
@@ -196,6 +199,21 @@ bool Boss_Musri::PostUpdate() {
 
 		b2Vec2 arrowPos = flechasLanzadas.at(i).pbody->body->GetTransform().p;
 		app->render->DrawTexture(arrowTexture, METERS_TO_PIXELS(arrowPos.x), METERS_TO_PIXELS(arrowPos.y), 1, SDL_FLIP_NONE, 0, 1, GetAngleFromDirection(flechasLanzadas.at(i).direction) + 180, 0, 0);
+	}
+
+	for (int i = 0; i < flechasCargadas.size(); i++) {
+		FlechaCargadaMusri flechaC = flechasCargadas.at(i);
+		b2Vec2 arrowPos = flechaC.pbody->body->GetTransform().p;
+		app->render->DrawTexture(arrowChargedTexture, METERS_TO_PIXELS(arrowPos.x), METERS_TO_PIXELS(arrowPos.y), 1, SDL_FLIP_NONE, 0, 1, GetAngleFromDirection(flechaC.direction) + 180, 0, 0);
+
+		for (int j = 0; j < flechaC.rastroGenerado.size(); j++) {
+			RastroFlechaCargadaMusri rastro = flechaC.rastroGenerado.at(j);
+			app->render->DrawTexture(arrowChargedRastroTexture, METERS_TO_PIXELS(rastro.position.x), METERS_TO_PIXELS(rastro.position.y), 1, SDL_FLIP_NONE, 0, 1, GetAngleFromDirection(flechaC.direction) + 180, 0, 0);
+
+
+		}
+		
+	
 	}
 
 
@@ -507,6 +525,9 @@ void Boss_Musri::Fase2(float dt, iPoint playerPos)
 	//Fase 2
 	bool haLlegado = false;
 	if (cambiarPosicionTimer.ReadMSec() > cambiarPosicionTime) {
+
+		//Si tiene la habilidad de dashear invisiblem dashea 3 veces (poca distancia) cada vez mas invisible; Al terminar el dash, la invisibilidad dura 4s
+
 		haLlegado = Bossfinding(dt, movePosition);
 		if (haLlegado) {
 			cambiarPosicionTimer.Start();
@@ -522,6 +543,30 @@ void Boss_Musri::Fase2(float dt, iPoint playerPos)
 			fPoint dirToPlayer = getDirectionVector(position, playerPos);
 			pbodyFoot->body->ApplyForceToCenter(b2Vec2(-dirToPlayer.x * fuerzaHabilidadEmpuje, -dirToPlayer.y * fuerzaHabilidadEmpuje), true);
 
+		}
+		else if (habilidadFlechaCargadaTimer.ReadMSec() >= habilidadCargadaCD) {
+			//Habilidad flecha cargada
+			if (cargaFlechaRafagaTimer.ReadMSec() > 2000) { //2S de carga
+				if (cargaFlechaRafagaTimer.ReadMSec() < 3000) {
+					//Disparar la flecha
+					fPoint dirToPlayer = getDirectionVector(position, playerPos);
+					FlechaCargadaMusri flechaCargada = { dirToPlayer, app->physics->CreateCircle(position.x, position.y, 10, bodyType::DYNAMIC) };
+					flechaCargada.pbody->listener = this;
+					flechaCargada.pbody->ctype = ColliderType::BOSS_MUSRI_ARROW;
+					flechaCargada.pbody->body->GetFixtureList()->SetSensor(true);
+					flechaCargada.pbody->body->ApplyForceToCenter(b2Vec2(flechaCargada.direction.x * velocidadFlechas * 1.2f, flechaCargada.direction.y * velocidadFlechas * 1.2f), true);
+					flechaCargada.dejarRastroTimer.Start();
+					flechasCargadas.push_back(flechaCargada);
+					//flechasCargadas
+					habilidadFlechaCargadaTimer.Start();
+					dispararRafagasTimer.Start(-5000);
+				}
+				else {
+					cargaFlechaRafagaTimer.Start();
+				}
+
+			}
+			
 		}
 		else {
 
@@ -561,6 +606,26 @@ void Boss_Musri::Fase2(float dt, iPoint playerPos)
 			app->entityManager->GetPlayer()->pbodyFoot->body->ApplyForceToCenter(b2Vec2(dirToPlayer.x * fuerzaHabilidadEmpuje, dirToPlayer.y * fuerzaHabilidadEmpuje), true);
 		}
 	}
+
+
+	for (int i = 0; i < flechasCargadas.size(); i++) {
+		FlechaCargadaMusri* flechaC = &flechasCargadas.at(i);
+		if (flechaC->dejarRastroTimer.ReadMSec() > 150 && flechaC->rastroGenerado.size() < flechaC->maxRastro) {
+			//Spawn rastro
+			b2Vec2 flechaPos = flechaC->pbody->body->GetTransform().p;
+			RastroFlechaCargadaMusri rastro = { iPoint(flechaPos.x, flechaPos.y) };
+			rastro.pbody = app->physics->CreateCircle(flechaPos.x, flechaPos.y, 20, bodyType::DYNAMIC);
+			rastro.pbody->listener = this;
+			rastro.pbody->ctype = ColliderType::BOSS_MUSRI_ARROW;
+			rastro.pbody->body->GetFixtureList()->SetSensor(true);
+			rastro.lifeTimer.Start();
+			flechaC->rastroGenerado.push_back(rastro);
+		}
+
+
+
+	}
+
 }
 
 iPoint Boss_Musri::GetRandomPosicion(iPoint actualPosition, int distanceLimitInf, int distanceLimitSup)

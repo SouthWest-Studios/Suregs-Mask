@@ -13,9 +13,9 @@ Timer::Timer()
 	Start();
 }
 
-void Timer::Start()
+void Timer::Start(uint32 startingMS)
 {
-	startTime = SDL_GetTicks();
+	startTime = SDL_GetTicks() - startingMS;
 }
 
 uint32 Timer::ReadSec() const
