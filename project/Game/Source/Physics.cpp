@@ -66,7 +66,7 @@ bool Physics::PreUpdate()
 				PhysBody* pb1 = (PhysBody*)c->GetFixtureA()->GetBody()->GetUserData();
 				PhysBody* pb2 = (PhysBody*)c->GetFixtureB()->GetBody()->GetUserData();
 
-				if (pb1 && pb2 && pb1->listener)
+				if (pb1 && pb2 && pb1->listener && pb2->listener)
 					pb1->listener->OnCollision(pb1, pb2);
 			}
 		}
@@ -358,10 +358,10 @@ void Physics::BeginContact(b2Contact* contact)
 		PhysBody* physA = (PhysBody*)contact->GetFixtureA()->GetBody()->GetUserData();
 		PhysBody* physB = (PhysBody*)contact->GetFixtureB()->GetBody()->GetUserData();
 
-		if (physA && physA->listener != NULL && physA->listener != nullptr && physA->listener)
+		if (physA && physA->listener && physA->listener != NULL && physA->listener != nullptr && physA->listener)
 			physA->listener->OnCollision(physA, physB);
 
-		if (physB && physB->listener != NULL && physB->listener != nullptr && physB->listener)
+		if (physB && physB->listener && physB->listener != NULL && physB->listener != nullptr && physB->listener)
 			physB->listener->OnCollision(physB, physA);
 	}
 	catch (std::exception& e) {
