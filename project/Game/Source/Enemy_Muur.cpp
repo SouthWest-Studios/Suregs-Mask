@@ -238,6 +238,7 @@ void Enemy_Muur::Attack(float dt)
 }
 
 void Enemy_Muur::Die() {
+	app->audio->PlayFx(muur_get_damage_fx);
 
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	currentAnimation = &dieAnim;
@@ -349,7 +350,6 @@ void Enemy_Muur::TakeDamage(float damage) {
 		health -= damage;
 		invulnerabilityTimer.Start();
 		timerRecibirDanioColor.Start();
-		app->audio->PlayFx(muur_get_damage_fx);
 	}
 }
 

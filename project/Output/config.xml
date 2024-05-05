@@ -49,6 +49,7 @@
       <level_up_fx path=""/>
       <get_item_fx path="Assets/UI/Audio/Fx/UI/get_item_fx.wav"/>
       <sell_item_fx path=""/>
+      <sell_itemAlt_fx path=""/>
 			<buy_item_fx path=""/>
       <dialog_fx path="Assets/Audio/Fx/UI/dialog_fx.wav"/>
 
