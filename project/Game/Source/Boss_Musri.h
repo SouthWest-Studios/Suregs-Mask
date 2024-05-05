@@ -24,7 +24,8 @@ enum class FASE_Musri
 {
 	FASE_ONE,
 	FASE_CHANGE,
-	FASE_TWO
+	FASE_TWO,
+	FASE_DYNIG
 };
 
 
@@ -44,8 +45,9 @@ struct FlechaCargadaMusri {
 	fPoint direction;
 	PhysBody* pbody;
 	std::vector<RastroFlechaCargadaMusri> rastroGenerado;
-	int maxRastro = 7;
+	int maxRastro = 40;
 	Timer dejarRastroTimer;
+	bool flechaRastroTerminado = false;
 	
 };
 

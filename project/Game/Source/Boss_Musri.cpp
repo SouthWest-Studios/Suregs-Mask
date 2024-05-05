@@ -208,12 +208,8 @@ bool Boss_Musri::PostUpdate() {
 
 		for (int j = 0; j < flechaC.rastroGenerado.size(); j++) {
 			RastroFlechaCargadaMusri rastro = flechaC.rastroGenerado.at(j);
-			app->render->DrawTexture(arrowChargedRastroTexture, METERS_TO_PIXELS(rastro.position.x), METERS_TO_PIXELS(rastro.position.y), 1, SDL_FLIP_NONE, 0, 1, GetAngleFromDirection(flechaC.direction) + 180, 0, 0);
-
-
+			app->render->DrawTexture(arrowChargedRastroTexture, METERS_TO_PIXELS(rastro.position.x), METERS_TO_PIXELS(rastro.position.y), 1, SDL_FLIP_NONE, 0, 1, GetAngleFromDirection(flechaC.direction) + 180);
 		}
-		
-	
 	}
 
 
@@ -610,20 +606,44 @@ void Boss_Musri::Fase2(float dt, iPoint playerPos)
 
 	for (int i = 0; i < flechasCargadas.size(); i++) {
 		FlechaCargadaMusri* flechaC = &flechasCargadas.at(i);
-		if (flechaC->dejarRastroTimer.ReadMSec() > 150 && flechaC->rastroGenerado.size() < flechaC->maxRastro) {
+		if (flechaC->dejarRastroTimer.ReadMSec() > 50 &&  !flechaC->flechaRastroTerminado) {
 			//Spawn rastro
 			b2Vec2 flechaPos = flechaC->pbody->body->GetTransform().p;
 			RastroFlechaCargadaMusri rastro = { iPoint(flechaPos.x, flechaPos.y) };
-			rastro.pbody = app->physics->CreateCircle(flechaPos.x, flechaPos.y, 20, bodyType::DYNAMIC);
+			rastro.pbody = app->physics->CreateCircle(METERS_TO_PIXELS(flechaPos.x), METERS_TO_PIXELS(flechaPos.y), 20, bodyType::DYNAMIC);
+					
 			rastro.pbody->listener = this;
 			rastro.pbody->ctype = ColliderType::BOSS_MUSRI_ARROW;
 			rastro.pbody->body->GetFixtureList()->SetSensor(true);
 			rastro.lifeTimer.Start();
 			flechaC->rastroGenerado.push_back(rastro);
+			flechaC->dejarRastroTimer.Start();
 		}
 
+		if (flechaC->rastroGenerado.size() >= flechaC->maxRastro) {
+			flechaC->flechaRastroTerminado = true;
+		}
 
+		for (int j = 0; j < flechaC->rastroGenerado.size(); j++) {
 
+			RastroFlechaCargadaMusri* rastro = &flechaC->rastroGenerado.at(j);
+
+			if (rastro->lifeTimer.ReadMSec() > 3000) {
+				app->physics->GetWorld()->DestroyBody(rastro->pbody->body);
+				flechaC->rastroGenerado.erase(flechaC->rastroGenerado.begin() + j);
+
+				if (flechaC->rastroGenerado.size() == 0) {
+					app->physics->GetWorld()->DestroyBody(flechaC->pbody->body);
+					flechasCargadas.clear();
+				}
+
+				break;
+			}
+		}
+	}
+
+	if (health <= 0) {
+		fase = FASE_Musri::FASE_DYNIG;
 	}
 
 }
