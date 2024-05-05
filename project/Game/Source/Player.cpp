@@ -1018,10 +1018,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			//TakeDamage(physB->entity->attackDamage);
 			if (!godmode) {
 				TakeDamage(physB->listener->attackDamage);
-				if (currentStats.currentHealth <= 0) {
-					//app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_gameover);
-					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_pueblo);
-				}
+				
 			}
 		}
 		break;
@@ -1946,6 +1943,11 @@ void Player::TakeDamage(float damage) {
 			app->audio->PlayHitFx(player_get_damage_fx);
             printf("Player has received  %f damage\n", damage);
             damageTimer.Start();
+
+			if (currentStats.currentHealth <= 0) {
+				//app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_gameover);
+				app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_pueblo);
+			}
         }
     }
 }

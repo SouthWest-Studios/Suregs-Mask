@@ -158,14 +158,14 @@ bool Boss_Musri::PostUpdate() {
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
 
-	//if (timerRecibirDanioColor.ReadMSec() <= 100) {
-	//	float alpha = (100 - timerRecibirDanioColor.ReadMSec()) / 100;
-	//	SDL_SetTextureAlphaMod(texture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
+	if (timerRecibirDanioColor.ReadMSec() <= 100) {
+		float alpha = (100 - timerRecibirDanioColor.ReadMSec()) / 100;
+		SDL_SetTextureAlphaMod(texture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
 
-	//}
-	//else {
-	//	SDL_SetTextureAlphaMod(texture, 255);
-	//}
+	}
+	else {
+		SDL_SetTextureAlphaMod(texture, 255);
+	}
 
 
 
@@ -292,6 +292,7 @@ void Boss_Musri::OnCollision(PhysBody* physA, PhysBody* physB) {
 			break;
 		case ColliderType::PLAYER_ATTACK:
 			LOG("Collision Player_Attack");
+			timerRecibirDanioColor.Start();
 			break;
 		case ColliderType::UNKNOWN:
 			LOG("Collision UNKNOWN");
@@ -452,18 +453,8 @@ void Boss_Musri::Fase1(float dt, iPoint playerPos)
 					dispararRafagasTimer.Start(); //Reset el timer de las 3 flechas
 					numeroRafagasAct = 0;
 				}
-				
-
-
-
 			}
-
-
 		}
-
-
-
-
 	}
 
 	if (habilidadEmpujeTimer.ReadMSec() >= 400 && cambiarPosicionTimer.ReadMSec() < cambiarPosicionTime) {

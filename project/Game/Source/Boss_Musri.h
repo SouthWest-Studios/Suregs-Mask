@@ -171,7 +171,7 @@ private:
 	bool poisoned = false;
 
 
-
+	Timer timerRecibirDanioColor;
 
 public:
 
