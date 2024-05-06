@@ -38,6 +38,7 @@
 #include "Item_Nota.h"
 #include "Boss_Inuit.h"
 #include "Boss_Musri.h"
+#include "Cofre.h"
 
 
 #include "Defs.h"
@@ -228,6 +229,9 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 		break;
 	case EntityType::ROD:
 		entity = new MiniGameFishing();
+		break;
+	case EntityType::COFRE:
+		entity = new Cofre();
 		break;
 
 	default:

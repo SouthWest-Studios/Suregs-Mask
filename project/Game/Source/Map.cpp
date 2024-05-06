@@ -1197,7 +1197,7 @@ bool Map::LoadEntities(std::string layerName)
 					}
 
 					/*COFRE*/
-					if (gid == tileset->firstgid + 1009) { 
+					if (gid == tileset->firstgid + 42) { 
 							Cofre* cofre = (Cofre*)app->entityManager->CreateEntity(EntityType::COFRE);
 							cofre->config = configNode.child("entities_data").child("cofre");
 							cofre->position = iPoint(pos.x + 16, pos.y + 16);

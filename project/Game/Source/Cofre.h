@@ -24,11 +24,14 @@ public:
 
 	bool PostUpdate();
 
+	void OnCollision(PhysBody* physA, PhysBody* physB);
+
 	bool CleanUp();
 
 
 public:
-
+	pugi::xml_document configFile;
+	pugi::xml_node configNode;
 	
 	EntityType type;
 
@@ -37,9 +40,9 @@ public:
 	SDL_Texture* openTexture = NULL;
 	
 	iPoint position;
-	pugi::xml_node config;
+	
 private:
-
+	bool abierto = false;
 	
 	const char* texturePath;
 	const char* openTexturePath;
