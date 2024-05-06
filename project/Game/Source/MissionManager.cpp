@@ -52,7 +52,7 @@ bool MissionManager::Update(float dt)
 {
 
 	bool ret = true;
-	printf("LOADING MSIONS MANAGER");
+	//printf("LOADING MSIONS MANAGER");
 
 	return ret;
 }
