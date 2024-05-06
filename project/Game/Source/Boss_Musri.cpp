@@ -81,8 +81,8 @@ bool Boss_Musri::Start() {
 
 	movePosition = GetRandomPosicion(position, 10);
 
-	//fase = FASE_Musri::FASE_ONE;
-	fase = FASE_Musri::FASE_CHANGE;
+	fase = FASE_Musri::FASE_ONE;
+	//fase = FASE_Musri::FASE_CHANGE;
 
 	cambiarPosicionTimer.Start(30000);
 	dispararRafagasTimer.Start(30000);
@@ -139,6 +139,8 @@ bool Boss_Musri::Update(float dt)
 	case FASE_Musri::FASE_TWO:
 		Fase2(dt, playerPos);
 		break;
+	case FASE_Musri::FASE_DYNIG:
+		FaseDying(dt, playerPos);
 	}
 
 
@@ -163,11 +165,11 @@ bool Boss_Musri::PostUpdate() {
 
 	if (timerRecibirDanioColor.ReadMSec() <= 100) {
 		float alpha = (100 - timerRecibirDanioColor.ReadMSec()) / 100;
-		SDL_SetTextureAlphaMod(texture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
+		SDL_SetTextureAlphaMod(texture, static_cast<Uint8>(alphaTexture * alpha)); // Ajusta la opacidad
 
 	}
 	else {
-		SDL_SetTextureAlphaMod(texture, 255);
+		SDL_SetTextureAlphaMod(texture, alphaTexture);
 	}
 
 
@@ -523,12 +525,31 @@ void Boss_Musri::Fase2(float dt, iPoint playerPos)
 	if (cambiarPosicionTimer.ReadMSec() > cambiarPosicionTime) {
 
 		//Si tiene la habilidad de dashear invisiblem dashea 3 veces (poca distancia) cada vez mas invisible; Al terminar el dash, la invisibilidad dura 4s
-
-		haLlegado = Bossfinding(dt, movePosition);
-		if (haLlegado) {
-			cambiarPosicionTimer.Start();
-			movePosition = GetRandomPosicion(movePosition, 5,10); //Para la proxima
+		if (habilidadDashInvisibleTimer.ReadMSec() >= habilidadDashInvisibleCD) {
+			if (numeroDashesAct <= numeroDashes) {
+				haLlegado = Bossfinding(dt, movePosition);
+				if (haLlegado) {
+					movePosition = GetRandomPosicion(movePosition, 3, 7); //Para la proxima
+					numeroDashesAct++;
+					alphaTexture -= opacidadQuitadaDashes;
+				}
+			}
+			else {
+				habilidadDashInvisibleTimer.Start();
+				cambiarPosicionTimer.Start();
+				numeroDashesAct = 0;
+			}
 		}
+		else {
+			haLlegado = Bossfinding(dt, movePosition);
+			if (haLlegado) {
+				cambiarPosicionTimer.Start();
+				movePosition = GetRandomPosicion(movePosition, 5, 10); //Para la proxima
+			}
+		}
+
+
+		
 	}
 	else {
 		//AtaqueFlechas + lo otro
@@ -603,6 +624,20 @@ void Boss_Musri::Fase2(float dt, iPoint playerPos)
 		}
 	}
 
+	//Volver a ser visible
+	
+
+	if (habilidadDashInvisibleTimer.ReadMSec() <= 4000) {
+		alphaTexture = (255-(numeroDashes* opacidadQuitadaDashes)) + ((255 - (255 - (numeroDashes * opacidadQuitadaDashes))) * habilidadDashInvisibleTimer.ReadMSec() / 4000);
+	}
+	else {
+		if (habilidadDashInvisibleTimer.ReadMSec() <= 4500) {
+			alphaTexture = 255;
+		}
+	}
+
+
+
 
 	for (int i = 0; i < flechasCargadas.size(); i++) {
 		FlechaCargadaMusri* flechaC = &flechasCargadas.at(i);
@@ -644,6 +679,23 @@ void Boss_Musri::Fase2(float dt, iPoint playerPos)
 
 	if (health <= 0) {
 		fase = FASE_Musri::FASE_DYNIG;
+	}
+
+}
+
+void Boss_Musri::FaseDying(float dt, iPoint playerPos)
+{
+	movePosition = iPoint(limitesSala.x + (limitesSala.w / 2), limitesSala.y + (limitesSala.h / 2));
+	if (Bossfinding(dt, movePosition)) {
+		//C muere
+		if (muriendoseTimer.ReadMSec() >= 3000) {
+			app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
+			app->physics->GetWorld()->DestroyBody(pbodySensor->body);
+			app->entityManager->DestroyEntity(this);
+		}
+	}
+	else {
+		muriendoseTimer.Start();
 	}
 
 }

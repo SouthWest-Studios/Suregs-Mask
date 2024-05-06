@@ -94,6 +94,7 @@ public:
 	void Fase1(float dt, iPoint playerPos);
 	void FaseC(float dt, iPoint playerPos);
 	void Fase2(float dt, iPoint playerPos);
+	void FaseDying(float dt, iPoint playerPos);
 
 	iPoint GetRandomPosicion(iPoint actualPosition, int distanceLimitInf = 10, int distanceLimitSup = 15);
 
@@ -161,17 +162,25 @@ private:
 	Timer habilidadFlechaCargadaTimer;
 	Timer habilidadDashInvisibleTimer;
 
+	Timer muriendoseTimer;
+
 
 	int habilidadEmpujeCD = 10000;
 	int habilidadRafagasCD = 1000;
 	int habilidadCargadaCD = 20000;
+	int habilidadDashInvisibleCD = 15000;
 
 	int meleeAttackDistance = 3;
 	int cambiarPosicionTime = 15000;
 	int dispararRafagasTime;
-	int numeroRafagasAct;
+	int numeroRafagasAct = 0;
 	int numeroRafagas = 3;
 	float flechaRafagaDamage = 5;
+	int numeroDashesAct = 0;
+	int numeroDashes = 3;
+	int opacidadQuitadaDashes = 70;
+
+	int alphaTexture = 255;
 	
 	SDL_Rect limitesSala = { 9900 , 2750, 2050, 1000 };
 	iPoint movePosition;
