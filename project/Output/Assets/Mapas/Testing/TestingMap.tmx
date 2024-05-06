@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="126" height="107" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="46">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="126" height="107" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="46">
  <tileset firstgid="1" name="Testing" tilewidth="32" tileheight="32" tilecount="13250" columns="125">
   <image source="../../Textures/Mapas/Testing/background.png" width="4015" height="3423"/>
  </tileset>
@@ -8157,7 +8157,7 @@
    <tile gid="8077"/>
    <tile gid="8078"/>
    <tile gid="8079"/>
-   <tile gid="8080"/>
+   <tile gid="13291"/>
    <tile gid="8081"/>
    <tile gid="8082"/>
    <tile gid="8083"/>
@@ -10541,7 +10541,7 @@
    <tile gid="10442"/>
    <tile gid="10443"/>
    <tile gid="10444"/>
-   <tile gid="10445"/>
+   <tile gid="13292"/>
    <tile gid="10446"/>
    <tile gid="10447"/>
    <tile gid="10448"/>
