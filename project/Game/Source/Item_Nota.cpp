@@ -38,30 +38,37 @@ bool Item_Nota::Start() {
 	{
 	case 1:
 		description = config.attribute("texto1").as_string();
+		titulo = config.attribute("titulo1").as_string();
 		break;
 	case 2:
 		description = config.attribute("texto2").as_string();
+		titulo = config.attribute("titulo2").as_string();
 		break;
 	case 3:
 		description = config.attribute("texto3").as_string();
+		titulo = config.attribute("titulo3").as_string();
 		break;
 	case 4:
 		description = config.attribute("texto4").as_string();
+		titulo = config.attribute("titulo4").as_string();
 		break;
 	case 5:
 		description = config.attribute("texto5").as_string();
+		titulo = config.attribute("titulo5").as_string();
 		break;
 	case 6:
 		description = config.attribute("texto6").as_string();
+		titulo = config.attribute("titulo6").as_string();
 		break;
 	case 7:
 		description = config.attribute("texto7").as_string();
+		titulo = config.attribute("titulo7").as_string();
 		break;
 	case 8:
 		description = config.attribute("texto8").as_string();
+		titulo = config.attribute("titulo8").as_string();
 		break;
 	default:
-		description = config.attribute("texto9").as_string();
 		break;
 	}
 	/*CloseTexture = app->tex->Load("Assets/Textures/Entidades/Items/textura_NoteCloseUp.png");*/

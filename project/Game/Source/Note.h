@@ -100,6 +100,7 @@ public:
 	bool stackable = false;
 	NoteType type;
 	std::string desc;
+	std::string title;
 	std::string tipo;
 	bool zoom = false;
 

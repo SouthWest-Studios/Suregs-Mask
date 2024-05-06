@@ -31,7 +31,7 @@ public:
 	bool CleanUp();
 
 	// Additional methods
-	Note* CreateItem(EntityType type, SDL_Texture* CloseUp, std::string texto);
+	Note* CreateItem(EntityType type, SDL_Texture* CloseUp, std::string texto, std::string titulo);
 
 	void AddNote(Note* Inventity);
 
@@ -74,6 +74,8 @@ public:
 	int highestIde = -1;
 
 	bool zoomIn = false;
+
+	bool vacio = true;
 
 private:
 	pugi::xml_document configFile;

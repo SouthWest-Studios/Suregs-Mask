@@ -229,6 +229,7 @@ public:
 	float attackDamage;
 
 	std::string description;
+	std::string titulo;
 	std::string tipo;
 
 	SDL_Texture* CloseTexture = NULL;

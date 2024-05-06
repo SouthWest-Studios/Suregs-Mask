@@ -302,9 +302,13 @@ void BestiarioManager::OnMovePointer()
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) {
 			if (horitzontalPointerId - 1 < 0)
 			{
-				PointerId = -2;
-				PointerItemText = nullptr;
-				app->notesManager->PointerId = 0;
+				if (app->notesManager->vacio == false)
+				{
+					PointerId = -2;
+					PointerItemText = nullptr;
+					app->notesManager->PointerId = 0;
+				}
+			
 			}
 			else
 			{
@@ -370,7 +374,7 @@ bool BestiarioManager::Update(float dt)
 
 	bool ret = true;
 
-
+	
 
 	if (mostrar == true)
 	{

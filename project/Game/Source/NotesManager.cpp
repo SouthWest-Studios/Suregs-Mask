@@ -101,7 +101,7 @@ bool NotesManager::CleanUp()
 	return ret;
 }
 int highesttId = -1;
-Note* NotesManager::CreateItem(EntityType type, SDL_Texture* CloseUp, std::string texto)
+Note* NotesManager::CreateItem(EntityType type, SDL_Texture* CloseUp, std::string texto, std::string titulo)
 {
 	Note* entity = nullptr;
 
@@ -111,6 +111,7 @@ Note* NotesManager::CreateItem(EntityType type, SDL_Texture* CloseUp, std::strin
 	entity->id = highesttId + 1;
 	entity->closeUpNotes = CloseUp;
 	entity->desc = texto;
+	entity->title = titulo;
 	/*entity->closeUpNotes = app->tex->Load("Assets/Textures/Entidades/Items/textura_NoteCloseUp.png"); */
 	switch (type)
 	{
@@ -262,7 +263,7 @@ void NotesManager::OnMovePointer()
 			PointerItemText = app->tex->Load(PointerPath);
 			pointer = true;
 		}
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && PointerPosition.x < 300) {
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && PointerPosition.x < 300 || vacio) {
 			if (PointerId == -1)
 			{
 				PointerId += 1;
@@ -271,6 +272,9 @@ void NotesManager::OnMovePointer()
 			{
 				PointerId = -2;
 				PointerItemText = nullptr;
+				if(vacio)
+				app->bestiarioManager->PointerId = 0;
+				else
 				app->bestiarioManager->PointerId = -1;
 			}
 
@@ -282,14 +286,11 @@ void NotesManager::OnMovePointer()
 		}*/
 
 		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
-			if (PointerPosition.y + 83 < 500)
+			if (PointerId + 1 < notes.Count())
 			{
 				PointerPosition.y += 83;
-				int a = 0;
-			}
-			if (PointerId + 1 != notes.Count())
-			{
 				PointerId += 1;
+				
 			}
 			else
 			{
@@ -300,19 +301,17 @@ void NotesManager::OnMovePointer()
 
 
 		}
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && PointerPosition.y > -60) {
-			if (PointerPosition.y - 83 > 200)
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
+			if (PointerId > 0)
 			{
 				PointerPosition.y -= 83;
-			}
-			if (PointerId - 1 != -1)
-			{
 				PointerId -= 1;
+
 			}
 			else
 			{
 				PointerId = notes.Count() - 1;
-				PointerPosition.y = 479;
+				PointerPosition.y = 230 + 83 * (notes.Count() - 1);
 			}
 
 
@@ -339,9 +338,17 @@ bool NotesManager::Update(float dt)
 {
 
 	bool ret = true;
-
-
-
+	int a = notes.Count();
+	int c;
+	if (notes.Count() > 0)
+	{
+		vacio = false;
+	}
+	else
+	{
+		vacio = true;
+	}
+		
 	if (mostrar == true)
 	{
 		OnMovePointer();
@@ -430,25 +437,27 @@ bool NotesManager::PostUpdate()
 			{
 				if (y >= viewport.y && y <= viewport.y + viewport.h) {
 
-					app->render->DrawTexture(listTexture, 250, verticalPosition, SDL_FLIP_NONE, 0, 0);
+					app->render->DrawTexture(listTexture, 250, verticalPosition - scrollY, SDL_FLIP_NONE, 0, 0);
 
 					if (zoomIn == false)
-						app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
-
+					{
+						app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition - scrollY, 0.8, SDL_FLIP_NONE, 0, 0);
+						app->render->DrawText(pEntity->title.c_str(), horizontalPosition + 50, verticalPosition - scrollY, 100, 100, 0, 0, 0, 0, false);
+					}
 					
 				}
 			}
 			
 			else
 			{
-				int targetY = PointerId/4 * 83;
+				int targetY = PointerId * 83;
 				
 				
 				scrollY = targetY;
 				
 				scrollY = std::max(0, scrollY);
 			}
-			app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y, SDL_FLIP_NONE, 0, 0);
+			app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y - scrollY, SDL_FLIP_NONE, 0, 0);
 		}
 
 
