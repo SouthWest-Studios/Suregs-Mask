@@ -252,7 +252,17 @@ bool Map::CleanUp()
 		objectsItem = objectsItem->next;
 	}
 	mapData.mapObjects.Clear();
-
+	smallRoomsList.Clear();
+	largeRoomsList.Clear();
+	LRoomsList.Clear();
+	dlRoomsList.Clear();
+	drRoomsList.Clear();
+	ulRoomsList.Clear();
+	urRoomsList.Clear();
+	dRoomsList.Clear();
+	uRoomsList.Clear();
+	lRoomsList.Clear();
+	rRoomsList.Clear();
 
 	// Remove all colisions
 	ListItem<PhysBody*>* collision;

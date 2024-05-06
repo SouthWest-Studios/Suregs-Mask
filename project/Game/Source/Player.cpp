@@ -1113,6 +1113,7 @@ void Player::CameraMovement(float dt)
 		}
 		else
 		{
+
 			MapObject* currentRoom = GetCurrentRoom();
 			if (currentRoom != nullptr)
 			{
@@ -1254,7 +1255,7 @@ void Player::CameraMovement(float dt)
 					switch (roomType)
 					{
 					case ROOM_L_DL: //tiene salas abajo y izquierda
-						printf("Abajo y Izquerda \n");
+						//printf("Abajo y Izquerda \n");
 						//X
 						if (position.x < currentRoom->x + app->render->camera.w / 2) //izq
 						{
