@@ -442,7 +442,7 @@ bool NotesManager::PostUpdate()
 					if (zoomIn == false)
 					{
 						app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition - scrollY, 0.8, SDL_FLIP_NONE, 0, 0);
-						app->render->DrawText(pEntity->title.c_str(), horizontalPosition + 50, verticalPosition - scrollY, 100, 100, 0, 0, 0, 0, false);
+						app->render->DrawText(pEntity->title.c_str(), horizontalPosition + 60, verticalPosition - scrollY, 100, 100, 0, 0, 0, 0, false);
 					}
 					
 				}

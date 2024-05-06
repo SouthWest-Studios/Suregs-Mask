@@ -250,6 +250,9 @@
     <ClCompile Include="Source\MissionManager.cpp">
       <Filter>Modules\SistemaMisiones</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Cofre.cpp">
+      <Filter>Entities\Chest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -561,6 +564,9 @@
     <ClInclude Include="Source\MissionManager.h">
       <Filter>Modules\SistemaMisiones</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Cofre.h">
+      <Filter>Entities\Chest</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -631,6 +637,9 @@
     </Filter>
     <Filter Include="Modules\SistemaMisiones">
       <UniqueIdentifier>{0c0bec82-986a-4aef-bbd9-567b8b1ae92a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Chest">
+      <UniqueIdentifier>{cf5f6a5d-42aa-4cba-a854-d5f3e8a6d10c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

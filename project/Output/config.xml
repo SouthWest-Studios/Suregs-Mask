@@ -205,6 +205,7 @@
 		<item_pocion_dano texturePath="Assets/Textures/Entidades/Items/textura_pocion_dano.png" description="lorem ipsum sit amet." type ="consumible" name="Pocion de Daño"/>
 		<item_pocion_velocidad texturePath="Assets/Textures/Entidades/Items/textura_pocion_velocidad.png" description="lorem ipsum sit amet." type ="consumible" name="Pocion de Velocidad"/>
 		<item_pocion_orbe_magico texturePath="Assets/Textures/Entidades/Items/textura_orbe_magico.png" description="lorem ipsum sit amet." type ="consumible" name="Orbe Magico"/>
+		<item_pocion_orbe_magico texturePath="Assets/Textures/Entidades/Items/textura_orbe_magico.png" description="lorem ipsum sit amet." type ="consumible" name="Orbe Magico"/>
 
 
 
@@ -223,6 +224,10 @@
 		<npc_abuelo texturePath="Assets/Textures/Entidades/NPCs/textura_npc_abuelo.png" Tsprite="1" Pwidth="138" sprite_x="138" sprite_y="195"/>
 		<npc_mujer_preocupada texturePath="Assets/Textures/Entidades/NPCs/textura_npc_mujer_preocupada.png" Tsprite="1" Pwidth="138" sprite_x="138" sprite_y="194"/>     
 		<npc_mujer_enamorada texturePath="Assets/Textures/Entidades/NPCs/textura_npc_mujer_enamorada.png" Tsprite="1" Pwidth="138" sprite_x="138" sprite_y="194"/>
+		
+		
+		<cofre texturePath="Assets/Textures/Entidades/Cofre/textura_Cofre.png"
+			   opentexturePath ="Assets/Textures/Entidades/Cofre/textura_Cofre_Abierto.png"/>
 	
 	</entities_data>
 	<menu>

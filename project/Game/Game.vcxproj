@@ -96,6 +96,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\BestiarioManager.cpp" />
+    <ClCompile Include="Source\Cofre.cpp" />
     <ClCompile Include="Source\Enemy_Boorok.cpp" />
     <ClCompile Include="Source\Boss_Inuit.cpp" />
     <ClCompile Include="Source\Boss_Musri.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="Source\ArmaduraInv.h" />
     <ClInclude Include="Source\Bestiario.h" />
     <ClInclude Include="Source\BestiarioManager.h" />
+    <ClInclude Include="Source\Cofre.h" />
     <ClInclude Include="Source\Enemy_Boorok.h" />
     <ClInclude Include="Source\Boss_Inuit.h" />
     <ClInclude Include="Source\Boss_Musri.h" />

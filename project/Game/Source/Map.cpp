@@ -39,6 +39,7 @@
 #include "Boss_Inuit.h"
 #include "Boss_Musri.h"
 #include "Enemy_Khurt.h"
+#include "Cofre.h"
 
 Map::Map(App* app, bool start_enabled) : Module(app, start_enabled), mapLoaded(false)
 {
@@ -1195,14 +1196,14 @@ bool Map::LoadEntities(std::string layerName)
 						boss_Musri->Start();
 					}
 
-					//OJO
-					/*if (gid == tileset->firstgid + 1009) { 
-							Item_Ojo* ojo = (Item_Ojo*)app->entityManager->CreateEntity(EntityType::ITEM_OJO);
-							ojo->config = configNode.child("entities_data").child("item_ojo");
-							ojo->position = iPoint(pos.x + 16, pos.y + 16);
-							ojo->Start();
+					/*COFRE*/
+					if (gid == tileset->firstgid + 1009) { 
+							Cofre* cofre = (Cofre*)app->entityManager->CreateEntity(EntityType::COFRE);
+							cofre->config = configNode.child("entities_data").child("cofre");
+							cofre->position = iPoint(pos.x + 16, pos.y + 16);
+							cofre->Start();
 						
-					}*/
+					}
 				}
 			}
 
