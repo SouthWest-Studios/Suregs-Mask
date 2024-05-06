@@ -175,7 +175,9 @@ private:
 	int dispararRafagasTime;
 	int numeroRafagasAct = 0;
 	int numeroRafagas = 3;
-	float flechaRafagaDamage = 5;
+	float flechaRafagaDamage = 25;
+	float flechaCargadaDamage = 50;
+	float flechaCargadaRastroDamage = 15;
 	int numeroDashesAct = 0;
 	int numeroDashes = 3;
 	int opacidadQuitadaDashes = 70;

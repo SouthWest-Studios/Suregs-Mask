@@ -294,6 +294,32 @@ void Boss_Musri::OnCollision(PhysBody* physA, PhysBody* physB) {
 			break;
 
 		}
+	}if (physA->ctype == ColliderType::BOSS_MUSRI_CHARGED_ARROW) {
+		//Colisiones flecha
+		switch (physB->ctype) {
+
+		case ColliderType::PLAYER:
+			app->entityManager->GetPlayer()->TakeDamage(flechaCargadaDamage);
+		case ColliderType::PLAYER_ATTACK:
+		case ColliderType::PLATFORM:
+			for (int i = 0; i < flechasCargadas.size(); i++) {
+				if (flechasCargadas.at(i).pbody->body->GetTransform().p == physA->body->GetTransform().p) {
+					app->physics->GetWorld()->DestroyBody(flechasCargadas.at(i).pbody->body);
+					flechasCargadas.erase(flechasCargadas.begin() + i);
+					break;
+				}
+			}
+			break;
+
+		}
+	}if (physA->ctype == ColliderType::BOSS_MUSRI_CHARGED_RASTRO_ARROW) {
+		//Colisiones flecha
+		switch (physB->ctype) {
+
+		case ColliderType::PLAYER:
+			app->entityManager->GetPlayer()->TakeDamage(flechaCargadaRastroDamage);
+			break;
+		}
 	}
 	else {
 		//Colisiones al boss

@@ -10,6 +10,7 @@
 #include "Player.h"
 #include "Window.h"
 #include "Box2D/Box2D/Box2D.h"
+#include "ModuleFadeToBlack.h"
 
 // Tell the compiler to reference the compiled Box2D libraries
 #ifdef _DEBUG
@@ -352,24 +353,27 @@ bool Physics::CleanUp()
 // Callback function to collisions with Box2D
 void Physics::BeginContact(b2Contact* contact)
 {
-	// Check if both fixtures are valid and have user data associated with them
-	if (contact->GetFixtureA() && contact->GetFixtureB() &&
-		contact->GetFixtureA()->GetBody() && contact->GetFixtureB()->GetBody() &&
-		contact->GetFixtureA()->GetBody()->GetUserData() && contact->GetFixtureB()->GetBody()->GetUserData())
-	{
-		// Ensure both bodies have listeners
-		PhysBody* physA = static_cast<PhysBody*>(contact->GetFixtureA()->GetBody()->GetUserData());
-		PhysBody* physB = static_cast<PhysBody*>(contact->GetFixtureB()->GetBody()->GetUserData());
-
-		if (physA && physA->listener && physB) {
-			physA->listener->OnCollision(physA, physB);
-		}
-		if (physB && physB->listener && physA)
+	if (app->fadeToBlack->currentStep == 0) {
+		// Check if both fixtures are valid and have user data associated with them
+		if (contact->GetFixtureA() && contact->GetFixtureB() &&
+			contact->GetFixtureA()->GetBody() && contact->GetFixtureB()->GetBody() &&
+			contact->GetFixtureA()->GetBody()->GetUserData() && contact->GetFixtureB()->GetBody()->GetUserData())
 		{
-			physB->listener->OnCollision(physB, physA);
-		}
+			// Ensure both bodies have listeners
+			PhysBody* physA = static_cast<PhysBody*>(contact->GetFixtureA()->GetBody()->GetUserData());
+			PhysBody* physB = static_cast<PhysBody*>(contact->GetFixtureB()->GetBody()->GetUserData());
 
+			if (physA && physA->listener && physB) {
+				physA->listener->OnCollision(physA, physB);
+			}
+			if (physB && physB->listener && physA)
+			{
+				physB->listener->OnCollision(physB, physA);
+			}
+
+		}
 	}
+	
 }
 
 //--------------- PhysBody
