@@ -41,6 +41,7 @@ class DebugConsole;
 class DialogManager;
 class InventoryManager;
 class CommerceManager;
+class MissionManager;
 class NotesManager;
 class BestiarioManager;
 class Menu;
@@ -151,6 +152,7 @@ public:
 	DialogManager* dialogManager;
 	InventoryManager* inventoryManager;
 	CommerceManager* commerceManager;
+	MissionManager* missionManager;
 	NotesManager* notesManager;
 	BestiarioManager* bestiarioManager;
 

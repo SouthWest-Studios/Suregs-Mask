@@ -26,6 +26,7 @@
 #include "DialogManager.h"
 #include "InventoryManager.h"
 #include "CommerceManager.h"
+#include "MissionManager.h"
 #include "NotesManager.h"
 #include "BestiarioManager.h"
 #include "Menu.h"
@@ -80,6 +81,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	entityManager = new EntityManager(this);
 	inventoryManager = new InventoryManager(this);
 	commerceManager = new CommerceManager(this);
+	missionManager = new MissionManager(this);
 	guiManager = new GuiManager(this);
 	debugConsole = new DebugConsole(this);
 	dialogManager = new DialogManager(this);
@@ -114,6 +116,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(scene_mazmorra7);
 	AddModule(scene_gameover);
 	AddModule(entityManager);
+	AddModule(missionManager);
 	AddModule(hud);
 	AddModule(menu);
 	AddModule(inventoryManager);

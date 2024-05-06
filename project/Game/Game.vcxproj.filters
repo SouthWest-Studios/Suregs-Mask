@@ -244,6 +244,12 @@
     <ClCompile Include="Source\Scene_GameOver.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Missions.cpp">
+      <Filter>Modules\SistemaMisiones</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MissionManager.cpp">
+      <Filter>Modules\SistemaMisiones</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -549,6 +555,12 @@
     <ClInclude Include="Source\Scene_GameOver.h">
       <Filter>Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Missions.h">
+      <Filter>Modules\SistemaMisiones</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MissionManager.h">
+      <Filter>Modules\SistemaMisiones</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -616,6 +628,9 @@
     </Filter>
     <Filter Include="Bestiario">
       <UniqueIdentifier>{8601526c-a76c-4528-970c-40493ea69d1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\SistemaMisiones">
+      <UniqueIdentifier>{0c0bec82-986a-4aef-bbd9-567b8b1ae92a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
