@@ -252,6 +252,8 @@ bool Map::CleanUp()
 		objectsItem = objectsItem->next;
 	}
 	mapData.mapObjects.Clear();
+	
+	// El clean Up de la camara, no borrar
 	smallRoomsList.Clear();
 	largeRoomsList.Clear();
 	LRoomsList.Clear();
