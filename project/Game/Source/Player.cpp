@@ -1292,7 +1292,7 @@ void Player::CameraMovement(float dt)
 						break;
 
 					case ROOM_L_DR: //tiene salas abajo y derecha
-						printf("Abajo y Derecha \n");
+						/*printf("Abajo y Derecha \n");*/
 						//X
 						if (position.x < currentRoom->x + app->render->camera.w / 2) //izq
 						{
@@ -1329,7 +1329,7 @@ void Player::CameraMovement(float dt)
 						break;
 
 					case ROOM_L_UL: //tiene salas arriba y izquierda
-						printf("Arriba y Izquerda \n");
+						/*printf("Arriba y Izquerda \n");*/
 						//X
 						if (position.x < currentRoom->x + app->render->camera.w / 2) //izq
 						{
@@ -1367,7 +1367,7 @@ void Player::CameraMovement(float dt)
 
 
 					case ROOM_L_UR: //tiene salas arriba y derecha
-						printf("Arriba y Derecha \n");
+						/*printf("Arriba y Derecha \n");*/
 						//X
 						if (position.x < currentRoom->x + app->render->camera.w / 2) //izq
 						{
@@ -1404,7 +1404,7 @@ void Player::CameraMovement(float dt)
 						break;
 
 					case ROOM_L_D: //sala abajo
-						printf("Abajo \n");
+						/*printf("Abajo \n");*/
 						//X
 						if (position.x < currentRoom->x + app->render->camera.w / 2) //izq
 						{
@@ -1441,7 +1441,7 @@ void Player::CameraMovement(float dt)
 						break;
 
 					case ROOM_L_U: //sala arriba
-						printf("Arriba \n");
+						/*printf("Arriba \n");*/
 						//X
 						if (position.x < currentRoom->x + app->render->camera.w / 2) //izq
 						{
@@ -1479,7 +1479,7 @@ void Player::CameraMovement(float dt)
 						break;
 
 					case ROOM_L_L: //sala izquierda
-						printf("Izquierda \n");
+						/*printf("Izquierda \n");*/
 						//X
 						if (position.x < currentRoom->x + app->render->camera.w / 2) //izq
 						{
@@ -1517,7 +1517,7 @@ void Player::CameraMovement(float dt)
 						break;
 
 					case ROOM_L_R: //sala derecha
-						printf("Derecha \n");
+						/*printf("Derecha \n");*/
 						//X
 						if (position.x < currentRoom->x + app->render->camera.w / 2) //izq
 						{
@@ -1636,54 +1636,55 @@ void Player::DetermineRoomType(MapObject* room) {
 }
 
 void Player::DetermineRoomTypel(MapObject* room) {
-	printf("Llamada a DetermineRoomTypel\n");
+	//printf("Llamada a DetermineRoomTypel\n");
 	if (room->properties.GetProperty("lType") != NULL)
 	{
 		std::string lType = room->properties.GetProperty("lType")->value;
-		printf("El objeto tiene el atributo lType\n");
+		/*printf("El objeto tiene el atributo lType\n");*/
 
 		if (lType == "dl")
 		{
-			printf("dl");
+			/*printf("dl");*/
 			roomType = ROOM_L_DL;
 		}
 		else if (lType == "dr")
 		{
-			printf("dr");
+			//printf("dr");
 			roomType = ROOM_L_DR;
 		}
 		else if (lType == "ul")
 		{
-			printf("ul");
+			//printf("ul");
 			roomType = ROOM_L_UL;
 		}
 		else if (lType == "ur")
 		{
-			printf("ur");
+			//printf("ur");
 			roomType = ROOM_L_UR;
 		}
 		else if (lType == "d")
 		{
-			printf("d");
+			//printf("d");
 			roomType = ROOM_L_D;
 		}
 		else if (lType == "u")
 		{
-			printf("u");
+			//printf("u");
 			roomType = ROOM_L_U;
 		}
 		else if (lType == "l")
 		{
-			printf("l");
+			//printf("l");
 			roomType = ROOM_L_L;
 		}
 		else if (lType == "r")
 		{
-			printf("r");
+			//printf("r");
 			roomType = ROOM_L_R;
 		}
 		else
 		{
+			printf("UNKNOWN L ROOM");
 			roomType = ROOM_UNKNOWN;
 		}
 	}
