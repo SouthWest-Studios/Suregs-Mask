@@ -39,18 +39,26 @@ bool Scene_Logos::Start()
 	pugi::xml_document configFile;
 	pugi::xml_node config;
 	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
-	config = configFile.child("config").child(name.GetString());
+	config = configFile.child("config").child(name.GetString()).child("sceneLogos");
 
-	logoGamePath = config.child("logoGame").attribute("texturepath").as_string();
-	logoUpcPath = config.child("logoUpc").attribute("texturepath").as_string();
-	logoStudioPath = config.child("logoStudio").attribute("texturepath").as_string();
-	backgroundPath = config.child("background").attribute("texturepath").as_string();
-	logoGame = app->tex->Load(logoGamePath);
-	logoUpc = app->tex->Load(logoUpcPath);
-	logoStudio = app->tex->Load(logoStudioPath);
-	background = app->tex->Load(backgroundPath);
+	TSprite = config.attribute("Tsprite").as_int();
+	SpriteX = config.attribute("sprite_x").as_int();
+	SpriteY = config.attribute("sprite_y").as_int();
+	Photowidth = config.attribute("Pwidth").as_int();
+	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
+	sceneLogosTexture = app->tex->Load(config.attribute("texturepath").as_string());
+
+	sceneLogos.LoadAnim("scene_logos", "idleAnim", spritePositions);
+	//logoGamePath = config.child("logoGame").attribute("texturepath").as_string();
+	//logoUpcPath = config.child("logoUpc").attribute("texturepath").as_string();
+	//logoStudioPath = config.child("logoStudio").attribute("texturepath").as_string();
+	//backgroundPath = config.child("background").attribute("texturepath").as_string();
+	//logoGame = app->tex->Load(logoGamePath);
+	//logoUpc = app->tex->Load(logoUpcPath);
+	//logoStudio = app->tex->Load(logoStudioPath);
+	//background = app->tex->Load(backgroundPath);
 	timerIntro.Start();
-
+	
 	//sus = app->audio->LoadAudioFx("");
 	intro_fx = app->audio->LoadAudioFx("intro_fx");
 	app->audio->PlayFx(intro_fx);
@@ -72,30 +80,58 @@ bool Scene_Logos::PreUpdate()
 // Called each loop iteration
 bool Scene_Logos::Update(float dt)
 {
-
+	currentAnimation = &sceneLogos;
 	OPTICK_EVENT();
 	//app->fadeToBlack->FadeToBlack(this, app->scene_testing, 10); /*BORRAR AL TERMINAR*/
-	
+	//SDL_Rect currentFrameRect = sceneLogos.GetCurrentFrame();
+	//app->render->DrawTexture(sceneLogosTexture, currentFrameRect.x, currentFrameRect.y);
+	//printf("holal");
+
+
+	if (currentAnimation->HasFinished()) {
+		printf("ScenaAcabado");
+		
+	}
+
 	if (timerIntro.ReadSec() < 10) {
 
 	}
 	else {
 		app->fadeToBlack->FadeToBlack(this, app->scene_intro, 90);
+		
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
 		app->fadeToBlack->FadeToBlack(this, app->scene_intro, 90);
+		
 	}
+
+	currentAnimation->Update();
 	return true;
 }
 
 // Called each loop iteration
 bool Scene_Logos::PostUpdate()
 {
-	app->render->DrawTexture(background, 0, 0);
-	app->render->DrawTexture(logoGame, 500, 100);
-	app->render->DrawTexture(logoUpc, 600, 400);
-	app->render->DrawTexture(logoStudio, 300, 350);
+	currentAnimation = &sceneLogos;
+	SDL_Rect rect = currentAnimation->GetCurrentFrame();
+	app->render->DrawTexture(sceneLogosTexture, 0,0, 1, SDL_FLIP_NONE, &rect, 0);
+
+
+	//if (timerRecibirDanioColor.ReadMSec() <= 100) {
+	//	float alpha = (100 - timerRecibirDanioColor.ReadMSec()) / 100;
+	//	SDL_SetTextureAlphaMod(texture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
+
+	//}
+	//else {
+	//	SDL_SetTextureAlphaMod(texture, 255);
+	//}
+
+		
+	//app->render->DrawTexture(background, 0, 0);
+	//app->render->DrawTexture(logoGame, 500, 100);
+	//app->render->DrawTexture(logoUpc, 600, 400);
+	//app->render->DrawTexture(logoStudio, 300, 350);
 	bool ret = true;
 
 	return ret;
@@ -105,6 +141,10 @@ bool Scene_Logos::PostUpdate()
 bool Scene_Logos::CleanUp()
 {
 	LOG("Freeing Scene_intro");
-	app->tex->UnLoad(logoGame);
+	app->tex->UnLoad(sceneLogosTexture);
+	RELEASE(spritePositions);
+	delete spritePositions;
+	currentAnimation->Reset();
+	//app->tex->UnLoad(logoGame);
 	return true;
 }
