@@ -269,10 +269,7 @@
 		<texturaIntro texturepath ="Assets/Textures/Interfaz/intro_textura.png"/>
 	</scene_intro>
 	<scene_logos>
-		<logoGame texturepath ="Assets/Textures/Interfaz/textura_logo.png"/>
-		<logoUpc texturepath ="Assets/Textures/Interfaz/textura_logo2.png"/>
-		<logoStudio texturepath ="Assets/Textures/Interfaz/textura_logo3.png"/>
-		<background texturepath ="Assets/Textures/Interfaz/textura_background_logos.png"/>
+		<sceneLogos texturepath ="Assets/Textures/Intro.png" Tsprite="62" Pwidth="10240" sprite_x="1280" sprite_y="720"/>
 	</scene_logos>
 	<scene_pueblo>
 		<pathfindingTexture pathtexture="Assets/Textures/pathfinding.png"/>
@@ -335,6 +332,10 @@
 
 	<!--Animation-->
 	<animations>
+		<scene_logos>
+			<idleAnim start="0" end="61" speed="0.15f" loop="false"/>
+		</scene_logos>
+			
 		<player>
 			<!-- chibi 100-->
 			<idleAnim start="0" end="6" speed="0.15f" loop="true"/>
