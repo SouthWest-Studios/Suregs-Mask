@@ -67,6 +67,7 @@ bool Enemy_Ols::Start() {
 	attackDamage = config.attribute("attackDamage").as_float();
 	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();
+	minDistance = config.attribute("minDistance").as_float();
 
 	projectileSpeed = config.attribute("projectileSpeed").as_float();
 	projectileDamage = config.attribute("projectileDamage").as_float();
@@ -95,38 +96,25 @@ bool Enemy_Ols::Update(float dt)
 	{
 		desiredState = EntityState_Enemy::DEAD;
 	}
-	// Si el jugador está dentro del rango de ataque
-	else if (distanceToPlayer <= attackDistance * 32)
+	if (distanceToPlayer <= attackDistance * 32 && canAttack)
 	{
-		    if (canAttack) {
-				desiredState = EntityState_Enemy::ATTACKING;
-			}
-			else {
-				desiredState = EntityState_Enemy::IDLE;
-			}
+		desiredState = EntityState_Enemy::ATTACKING;
 	}
-	// Si el jugador está dentro del rango de visión pero fuera del rango de ataque
-	else if (distanceToPlayer <= viewDistance * 32)
+	else if (distanceToPlayer <= viewDistance * 32 && distanceToPlayer > attackDistance * 32)
 	{
 		desiredState = EntityState_Enemy::RUNNING;
-
-		// Si el jugador está demasiado cerca, alejarse
-		if (distanceToPlayer < attackDistance * 0.75f * 32)
-		{
-			position.x -= direction.x * speed * dt;
-			position.y -= direction.y * speed * dt;
-		}
-		// Si el jugador está demasiado lejos, acercarse
-		else if (distanceToPlayer > attackDistance * 32)
-		{
-			position.x += direction.x * speed * dt;
-			position.y += direction.y * speed * dt;
-		}
 	}
-	// Si el jugador está fuera del rango de visión
+	// else if(distanceToPlayer <= viewDistance && distanceToPlayer > minDistance * 32)
+	// {
+	// 	desiredState = EntityState_Enemy::RUNNING;
+	// }
+	else if(distanceToPlayer <= minDistance * 32)
+	{
+		//HUIR
+	}
 	else
 	{
-		DoNothing(dt);
+		desiredState = EntityState_Enemy::IDLE;
 	}
 
 	UpdateAttackSensor(dt);

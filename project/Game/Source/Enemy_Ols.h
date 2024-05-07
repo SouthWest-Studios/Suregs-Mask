@@ -76,7 +76,7 @@ public:
 
 	float viewDistance;
 	float attackDistance;
-
+	float minDistance;
 
 	Animation* currentAnimation = nullptr;
 	EntityState_Enemy state;

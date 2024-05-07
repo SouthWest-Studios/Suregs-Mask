@@ -1017,8 +1017,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (physA == pbodyFoot) {
 			//TakeDamage(physB->entity->attackDamage);
 			if (!godmode) {
-				TakeDamage(physB->listener->attackDamage);
-				
+				if (physB->entity->type != EntityType::ENEMY_OLS) {
+            		TakeDamage(physB->listener->attackDamage);
+        		}
 			}
 		}
 		break;
