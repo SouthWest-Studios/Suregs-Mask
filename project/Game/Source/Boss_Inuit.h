@@ -124,7 +124,7 @@ private:
 	Animation SPosition;
 	SDL_Rect* spritePositions;
 
-
+	iPoint bossArea;
 	//Veneno
 	float poisonTimer = 0.0f; // Tiempo desde que se aplic� el veneno
 	float poisonDuration = 0.0f; // Duraci�n total del veneno

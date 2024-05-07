@@ -74,6 +74,9 @@ bool Boss_Inuit::Start() {
 	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();
 
+	bossArea.x = position.x;
+	bossArea.y = position.y;
+
 	//printf("Speed: %f", speed);
 	return true;
 }
@@ -81,9 +84,6 @@ bool Boss_Inuit::Start() {
 bool Boss_Inuit::Update(float dt)
 {
 	OPTICK_EVENT();
-
-
-
 	//Pone el sensor del cuerpo en su posicion
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
@@ -232,8 +232,13 @@ bool Boss_Inuit::Bossfinding(float dt, iPoint playerPosP)
 	iPoint playerPos = app->map->WorldToMap(playerPosP.x, playerPosP.y);
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
 
+	//printf("\nBossArea:%f", dist(bossArea, enemyPos));
+	/*printf("\nEmemyPosicion:%f", enemyPos.x);
+	printf("\nBossArea:%f", playerPos.x);*/
 
-	if (dist(playerPos, enemyPos) < viewDistance) {
+	
+	if (dist(playerPos, enemyPos) < viewDistance ) {
+
 		app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
 		lastPath = *app->map->pathfinding->GetLastPath();
 	}
