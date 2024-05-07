@@ -19,6 +19,7 @@
 
 
 
+
 Enemy_Ols::Enemy_Ols() : Entity(EntityType::ENEMY_OLS), maxHealth(350.0f), health(350.0f), speed(1.0f){
 	name.Create("ols");
 }
@@ -60,8 +61,16 @@ bool Enemy_Ols::Start() {
 	pbodyFoot->listener = this;
 	pbodyFoot->ctype = ColliderType::ENEMY;
 
-	attackDamage = 10;
+	maxHealth = config.attribute("maxHealth").as_float();
+	health = maxHealth;
+	speed = config.attribute("speed").as_float();
+	attackDamage = config.attribute("attackDamage").as_float();
+	attackDistance = config.attribute("attackDistance").as_float();
+	viewDistance = config.attribute("viewDistance").as_float();
 
+	projectileSpeed = config.attribute("projectileSpeed").as_float();
+	projectileDamage = config.attribute("projectileDamage").as_float();
+	projectileTexture = app->tex->Load(config.attribute("texturePathProjectile").as_string());
 
 	return true;
 }
@@ -78,21 +87,49 @@ bool Enemy_Ols::Update(float dt)
 	}
 	else(isFacingLeft = false);
 
+	float distanceToPlayer = app->map->pathfinding->GetDistance(playerPos, position);
+	float length = sqrt((playerPos.x - position.x) * (playerPos.x - position.x) + (playerPos.y - position.y) * (playerPos.y - position.y));
+	iPoint direction = iPoint((playerPos.x - position.x) / length, (playerPos.y - position.y) / length);
 
-	if (health <= 0) {
+	if (health <= 0) 
+	{
 		desiredState = EntityState_Enemy::DEAD;
-		
 	}
-	else if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 20 /*Cambiar*/) {
-		nextState = EntityState_Enemy::ATTACKING;
+	// Si el jugador está dentro del rango de ataque
+	else if (distanceToPlayer <= attackDistance * 32)
+	{
+		    if (canAttack) {
+				desiredState = EntityState_Enemy::ATTACKING;
+			}
+			else {
+				desiredState = EntityState_Enemy::IDLE;
+			}
 	}
-	else if (app->map->pathfinding->GetDistance(app->entityManager->GetPlayer()->position, position) <= 400/*Cambiar*/) {
-		nextState = EntityState_Enemy::RUNNING;
+	// Si el jugador está dentro del rango de visión pero fuera del rango de ataque
+	else if (distanceToPlayer <= viewDistance * 32)
+	{
+		desiredState = EntityState_Enemy::RUNNING;
+
+		// Si el jugador está demasiado cerca, alejarse
+		if (distanceToPlayer < attackDistance * 0.75f * 32)
+		{
+			position.x -= direction.x * speed * dt;
+			position.y -= direction.y * speed * dt;
+		}
+		// Si el jugador está demasiado lejos, acercarse
+		else if (distanceToPlayer > attackDistance * 32)
+		{
+			position.x += direction.x * speed * dt;
+			position.y += direction.y * speed * dt;
+		}
 	}
-	else {
-		nextState = EntityState_Enemy::IDLE;
+	// Si el jugador está fuera del rango de visión
+	else
+	{
+		DoNothing(dt);
 	}
 
+	UpdateAttackSensor(dt);
 
 	stateMachine(dt, playerPos);
 
@@ -127,6 +164,17 @@ bool Enemy_Ols::PostUpdate() {
 		app->render->DrawTexture(texture, position.x - 120, position.y - 60, SDL_FLIP_NONE, &rect);
 	}
 
+    if (attackSensor != nullptr)
+    {
+        // Actualiza la posición del proyectil
+        b2Vec2 projectilePos = attackSensor->body->GetPosition();
+        projectilePosition.x = METERS_TO_PIXELS(projectilePos.x);
+        projectilePosition.y = METERS_TO_PIXELS(projectilePos.y);
+
+        // Dibuja el proyectil en su posición actualizada
+        app->render->DrawTexture(projectileTexture, projectilePosition.x-12, projectilePosition.y-12);
+    }
+
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
@@ -160,11 +208,30 @@ void Enemy_Ols::Chase(float dt, iPoint playerPos)
 	Olsfinding(dt);
 }
 
-void Enemy_Ols::Attack(float dt)
+void Enemy_Ols::Attack(float dt, iPoint playerPos)
 {
-	//printf("Osiris attacking");
-	currentAnimation = &attackAnim;
-	//sonido ataque
+    if (canAttack)
+    {
+        attackSensor = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
+        attackSensor->ctype = ColliderType::PROJECTILE;
+        attackSensor->listener = this;
+        attackSensor->body->GetFixtureList()->SetSensor(true);
+		projectilePosition = position;
+
+        b2Vec2 direction = b2Vec2(playerPos.x - position.x, playerPos.y-position.y);  
+        direction.Normalize();
+		direction *= projectileSpeed;
+
+        attackSensor->body->SetLinearVelocity(direction); 
+
+        attackCooldownTimer.Start();
+		
+
+        canAttack = false;
+
+        currentAnimation = &attackAnim;
+        //sonido ataque
+    }
 }
 
 void Enemy_Ols::Die() {
@@ -196,7 +263,9 @@ void Enemy_Ols::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLAYER:
 		LOG("Collision PLAYER");
-		//restar vida al player
+		if(physA->ctype == ColliderType::PROJECTILE) {
+			app->entityManager->GetPlayer()->TakeDamage(projectileDamage);
+		}
 		break;
 	case ColliderType::PLAYER_ATTACK:
 		LOG("Collision Player_Attack");
@@ -292,7 +361,7 @@ void Enemy_Ols::stateMachine(float dt, iPoint playerPos)
 		Chase(dt, playerPos);
 		break;
 	case EntityState_Enemy::ATTACKING:
-		Attack(dt);
+		Attack(dt, playerPos);
 		break;
 	case EntityState_Enemy::DEAD:
 		Die();
@@ -355,3 +424,23 @@ void Enemy_Ols::CheckPoison() {
     }
 }
 //VENENO ---------->
+
+void Enemy_Ols::UpdateAttackSensor(float dt)
+{
+	if (!canAttack && attackCooldownTimer.ReadSec() >= 5.0f)
+    {
+        canAttack = true;
+    }
+	
+    if (attackSensor != nullptr && canAttack)
+    {
+		canAttack = false;
+		attackCooldownTimer.Start();
+
+        if (attackSensorTimer.ReadSec() >= 2.0f)
+        {
+            app->physics->DestroyBody(attackSensor);
+            attackSensor = nullptr;
+        }
+    }
+}

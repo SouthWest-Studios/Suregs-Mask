@@ -146,6 +146,8 @@
 				Tsprite="16" Pwidth="400" sprite_x="100" sprite_y="100"/>
 
 		<ols texturePath="Assets/Textures/Entidades/Ols/animations/spritesheets/Sprites.png" 
+				texturePathProjectile="Assets/Textures/Entidades/Ols/Projectile.png"
+				maxHealth="230.0f" speed="1.1f" attackDamage="50.0f" attackDistance="10" viewDistance="20"  projectileSpeed="7" projectileDamage="20.0f"
 				Tsprite="374" Pwidth="6336" sprite_x="288" sprite_y="128"/>
 				
 		<muur texturePath="Assets/Textures/Entidades/Muur/Muur.png" 

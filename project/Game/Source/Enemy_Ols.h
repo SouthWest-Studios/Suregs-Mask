@@ -40,7 +40,7 @@ public:
 
 	void DoNothing(float dt);
 	void Chase(float dt, iPoint playerPos);
-	void Attack(float dt);
+	void Attack(float dt, iPoint playerPos);
 	void Die();
 	bool Olsfinding(float dt);
 
@@ -57,6 +57,8 @@ public:
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
 	void SetPlayer(Player* player);
+
+	void UpdateAttackSensor(float dt);
 
 public:
 
@@ -93,6 +95,17 @@ public:
 	PathFinding* path;
 	Player* player;
 	const DynArray<iPoint>* lastPath;
+
+	//Ataque
+	float attackRange;
+    float projectileSpeed; 
+	float projectileDamage;
+	PhysBody* attackSensor = nullptr;
+	SDL_Texture* projectileTexture = nullptr;
+	iPoint projectilePosition;
+	Timer attackSensorTimer;
+	Timer attackCooldownTimer;
+	bool canAttack = true;
 
 private:
 	Animation idleAnim;
