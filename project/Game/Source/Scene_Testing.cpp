@@ -27,6 +27,13 @@
 #include "Item_Polvora.h"
 #include "Item_Hueso.h"
 #include "Item_Nota.h"
+#include "Item_Pocion_Dano.h"
+#include "Item_Pocion_Regeneracion.h"
+#include "Item_Pocion_Velocidad.h"
+#include "Item_Pocion_Vida_1.h"
+#include "Item_Pocion_Vida_2.h"
+#include "Item_Pocion_Vida_3.h"
+#include "Item_Pocion_Vida_Max.h"
 
 Scene_testing::Scene_testing(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -198,6 +205,41 @@ bool Scene_testing::Start()
 	app->bestiarioManager->CreateItem("muur");
 	app->bestiarioManager->CreateItem("osiris");
 	app->bestiarioManager->CreateItem("muur");
+
+	Item_Pocion_Dano* pocion_dano = (Item_Pocion_Dano*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_DANO);
+	pocion_dano->config = configNode.child("entities_data").child("item_pocion_dano");
+	pocion_dano->position = iPoint(1703, 2255);
+	pocion_dano->Start();
+	
+	Item_Pocion_Regeneracion* pocion_regeneracion = (Item_Pocion_Regeneracion*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_REGENERACION);
+	pocion_regeneracion->config = configNode.child("entities_data").child("item_pocion_regeneracion");
+	pocion_regeneracion->position = iPoint(1733, 2255);
+	pocion_regeneracion->Start();
+
+	Item_Pocion_Velocidad* pocion_velocidad = (Item_Pocion_Velocidad*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_VELOCIDAD);
+	pocion_velocidad->config = configNode.child("entities_data").child("item_pocion_velocidad");
+	pocion_velocidad->position = iPoint(1753, 2255);
+	pocion_velocidad->Start();
+
+	Item_Pocion_Vida_1* pocion_vida_1 = (Item_Pocion_Vida_1*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_VIDA_1);
+	pocion_vida_1->config = configNode.child("entities_data").child("item_pocion_vida_1");
+	pocion_vida_1->position = iPoint(1783, 2255);
+	pocion_vida_1->Start();
+
+	Item_Pocion_Vida_2* pocion_vida_2 = (Item_Pocion_Vida_2*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_VIDA_2);
+	pocion_vida_2->config = configNode.child("entities_data").child("item_pocion_vida_2");
+	pocion_vida_2->position = iPoint(1813, 2255);
+	pocion_vida_2->Start();
+
+	Item_Pocion_Vida_3* pocion_vida_3 = (Item_Pocion_Vida_3*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_VIDA_3);
+	pocion_vida_3->config = configNode.child("entities_data").child("item_pocion_vida_3");
+	pocion_vida_3->position = iPoint(1843, 2255);
+	pocion_vida_3->Start();
+
+	Item_Pocion_Vida_Max* pocion_vida_max = (Item_Pocion_Vida_Max*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_VIDA_MAX);
+	pocion_vida_max->config = configNode.child("entities_data").child("item_pocion_vida_max");
+	pocion_vida_max->position = iPoint(1873, 2255);
+	pocion_vida_max->Start();
 
 	return true;
 }

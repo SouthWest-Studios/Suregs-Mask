@@ -39,6 +39,13 @@
 #include "Boss_Inuit.h"
 #include "Boss_Musri.h"
 #include "Cofre.h"
+#include "Item_Pocion_Dano.h"
+#include "Item_Pocion_Regeneracion.h"
+#include "Item_Pocion_Velocidad.h"
+#include "Item_Pocion_Vida_1.h"
+#include "Item_Pocion_Vida_2.h"
+#include "Item_Pocion_Vida_3.h"
+#include "Item_Pocion_Vida_Max.h"
 
 
 #include "Defs.h"
@@ -181,6 +188,27 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 		break;
 	case EntityType::ITEM_NOTA:
 		entity = new Item_Nota(type, id, 100, 300, 5, 2);
+		break;
+	case EntityType::ITEM_POCION_DANO:
+		entity = new Item_Pocion_Dano(type, id, 100, 300, 5, 2);
+		break;
+	case EntityType::ITEM_POCION_REGENERACION:
+		entity = new Item_Pocion_Regeneracion(type, id, 100, 300, 5, 2);
+		break;
+	case EntityType::ITEM_POCION_VELOCIDAD:
+		entity = new Item_Pocion_Velocidad(type, id, 100, 300, 5, 2);
+		break;
+	case EntityType::ITEM_POCION_VIDA_1:
+		entity = new Item_Pocion_Vida_1(type, id, 100, 300, 5, 2);
+		break;
+	case EntityType::ITEM_POCION_VIDA_2:
+		entity = new Item_Pocion_Vida_2(type, id, 100, 300, 5, 2);
+		break;
+	case EntityType::ITEM_POCION_VIDA_3:
+		entity = new Item_Pocion_Vida_3(type, id, 100, 300, 5, 2);
+		break;
+	case EntityType::ITEM_POCION_VIDA_MAX:
+		entity = new Item_Pocion_Vida_Max(type, id, 100, 300, 5, 2);
 		break;
 	case EntityType::ITEM:
 		entity = new Item();

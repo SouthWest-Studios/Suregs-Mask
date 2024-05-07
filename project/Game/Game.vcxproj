@@ -128,6 +128,13 @@
     <ClCompile Include="Source\Item_Hueso.cpp" />
     <ClCompile Include="Source\Item_Nota.cpp" />
     <ClCompile Include="Source\Item_Ojo.cpp" />
+    <ClCompile Include="Source\Item_Pocion_Dano.cpp" />
+    <ClCompile Include="Source\Item_Pocion_Regeneracion.cpp" />
+    <ClCompile Include="Source\Item_Pocion_Velocidad.cpp" />
+    <ClCompile Include="Source\Item_Pocion_Vida_1.cpp" />
+    <ClCompile Include="Source\Item_Pocion_Vida_2.cpp" />
+    <ClCompile Include="Source\Item_Pocion_Vida_3.cpp" />
+    <ClCompile Include="Source\Item_Pocion_Vida_Max.cpp" />
     <ClCompile Include="Source\Item_Polvora.cpp" />
     <ClCompile Include="Source\Item_Rubi.cpp" />
     <ClCompile Include="Source\Item_Viscera.cpp" />
@@ -220,6 +227,13 @@
     <ClInclude Include="Source\Item_Hueso.h" />
     <ClInclude Include="Source\Item_Nota.h" />
     <ClInclude Include="Source\Item_Ojo.h" />
+    <ClInclude Include="Source\Item_Pocion_Dano.h" />
+    <ClInclude Include="Source\Item_Pocion_Regeneracion.h" />
+    <ClInclude Include="Source\Item_Pocion_Velocidad.h" />
+    <ClInclude Include="Source\Item_Pocion_Vida_1.h" />
+    <ClInclude Include="Source\Item_Pocion_Vida_2.h" />
+    <ClInclude Include="Source\Item_Pocion_Vida_3.h" />
+    <ClInclude Include="Source\Item_Pocion_Vida_Max.h" />
     <ClInclude Include="Source\Item_Polvora.h" />
     <ClInclude Include="Source\Item_Rubi.h" />
     <ClInclude Include="Source\Item_Viscera.h" />

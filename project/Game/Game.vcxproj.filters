@@ -253,6 +253,27 @@
     <ClCompile Include="Source\Cofre.cpp">
       <Filter>Entities\Chest</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Item_Pocion_Dano.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Item_Pocion_Regeneracion.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Item_Pocion_Velocidad.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Item_Pocion_Vida_Max.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Item_Pocion_Vida_1.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Item_Pocion_Vida_2.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Item_Pocion_Vida_3.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -566,6 +587,27 @@
     </ClInclude>
     <ClInclude Include="Source\Cofre.h">
       <Filter>Entities\Chest</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Item_Pocion_Dano.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Item_Pocion_Regeneracion.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Item_Pocion_Velocidad.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Item_Pocion_Vida_Max.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Item_Pocion_Vida_1.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Item_Pocion_Vida_2.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Item_Pocion_Vida_3.h">
+      <Filter>Entities\Items</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
