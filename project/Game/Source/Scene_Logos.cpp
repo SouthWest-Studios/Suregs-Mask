@@ -98,12 +98,12 @@ bool Scene_Logos::Update(float dt)
 	}
 	else {
 		app->fadeToBlack->FadeToBlack(this, app->scene_intro, 90);
-		currentAnimation->Reset();
+		
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
 		app->fadeToBlack->FadeToBlack(this, app->scene_intro, 90);
-		currentAnimation->Reset();
+		
 	}
 
 	currentAnimation->Update();
@@ -141,6 +141,10 @@ bool Scene_Logos::PostUpdate()
 bool Scene_Logos::CleanUp()
 {
 	LOG("Freeing Scene_intro");
+	app->tex->UnLoad(sceneLogosTexture);
+	RELEASE(spritePositions);
+	delete spritePositions;
+	currentAnimation->Reset();
 	//app->tex->UnLoad(logoGame);
 	return true;
 }
