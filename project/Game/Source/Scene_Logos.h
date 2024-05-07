@@ -38,6 +38,10 @@ public:
 
 	enum EntityState;
 
+	
+
+private:
+	SDL_Texture* sceneLogosTexture;
 	Animation SPosition;
 	SDL_Rect* spritePositions;
 	pugi::xml_node config;
@@ -45,9 +49,7 @@ public:
 	int SpriteX;
 	int SpriteY;
 	int Photowidth;
-
-private:
-	SDL_Texture* sceneLogosTexture;
+	Animation* currentAnimation = nullptr;
 	//const char* logoGamePath;
 	//const char* logoUpcPath;
 	//const char* logoStudioPath;

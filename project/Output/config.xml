@@ -333,7 +333,7 @@
 	<!--Animation-->
 	<animations>
 		<scene_logos>
-			<idleAnim start="0" end="61" speed="0.15f" loop="false"/>
+			<idleAnim start="0" end="61" speed="0.4f" loop="false"/>
 		</scene_logos>
 			
 		<player>
