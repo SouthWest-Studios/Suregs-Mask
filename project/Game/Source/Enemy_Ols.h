@@ -43,6 +43,7 @@ public:
 	void Attack(float dt, iPoint playerPos);
 	void Die();
 	bool Olsfinding(float dt);
+	bool Flee(float dt);
 
 	float GetHealth() const;
 

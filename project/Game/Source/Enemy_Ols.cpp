@@ -104,14 +104,10 @@ bool Enemy_Ols::Update(float dt)
 	{
 		desiredState = EntityState_Enemy::RUNNING;
 	}
-	// else if(distanceToPlayer <= viewDistance && distanceToPlayer > minDistance * 32)
-	// {
-	// 	desiredState = EntityState_Enemy::RUNNING;
-	// }
-	else if(distanceToPlayer <= minDistance * 32)
-	{
-		//HUIR
-	}
+	 else if(distanceToPlayer <= viewDistance * 32 && distanceToPlayer <= minDistance * 32)
+	 {
+	 	desiredState = EntityState_Enemy::RUNNING;
+	 }
 	else
 	{
 		desiredState = EntityState_Enemy::IDLE;
@@ -191,9 +187,16 @@ void Enemy_Ols::DoNothing(float dt)
 
 void Enemy_Ols::Chase(float dt, iPoint playerPos)
 {
-	//printf("Osiris chasing");
+	float distanceToPlayer = app->map->pathfinding->GetDistance(playerPos, position);
+	if (distanceToPlayer <= viewDistance * 32 && distanceToPlayer > attackDistance * 32 && distanceToPlayer > minDistance * 32)
+	{
+		Olsfinding(dt);
+	}
+	else
+	{
+		Flee(dt);
+	}
 	currentAnimation = &runAnim;
-	Olsfinding(dt);
 }
 
 void Enemy_Ols::Attack(float dt, iPoint playerPos)
@@ -431,4 +434,55 @@ void Enemy_Ols::UpdateAttackSensor(float dt)
             attackSensor = nullptr;
         }
     }
+}
+
+bool Enemy_Ols::Flee(float dt) // Huye del jugador
+{
+	iPoint playerPos = app->map->WorldToMap(app->entityManager->GetPlayer()->position.x, app->entityManager->GetPlayer()->position.y);
+	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
+
+	if (abs(playerPos.x - enemyPos.x) < 15 && abs(playerPos.y - enemyPos.y) < 15) {
+		// Calcula el camino desde la posicion del jugador hacia la posicion del enemigo
+		app->map->pathfinding->CreatePath(playerPos, enemyPos); 
+		lastPath = app->map->pathfinding->GetLastPath();
+
+		//Get the latest calculated path and draw
+		for (uint i = 0; i < lastPath->Count(); ++i)
+		{
+			iPoint pos = app->map->MapToWorld(lastPath->At(i)->x, lastPath->At(i)->y);
+			if (app->physics->debug == true) {
+				app->render->DrawTexture(app->map->pathfinding->mouseTileTex, pos.x, pos.y, SDL_FLIP_NONE);
+			}
+		}
+
+		if (lastPath->Count() > 1) { // Asegate de que haya al menos una posicion en el camino
+
+			// Toma la primera posicion del camino como el objetivo al que el enemigo debe dirigirse
+			iPoint targetPos = app->map->MapToWorld(lastPath->At(1)->x, lastPath->At(1)->y);
+
+			// Calcula la direccion hacia el objetivo
+			b2Vec2 direction(targetPos.x - position.x, targetPos.y - position.y);
+			direction.Normalize();
+
+			// Invierte la dirección para alejarse del jugador
+			direction.x *= -1;
+			direction.y *= -1;
+
+			// Calcula la velocidad del movimiento
+			b2Vec2 velocity(direction.x * speed, direction.y * speed);
+
+			// Aplica la velocidad al cuerpo del enemigo
+			pbodyFoot->body->SetLinearVelocity(velocity);
+
+			// Determina si el enemigo está mirando hacia la izquierda o hacia la derecha
+			if (direction.x < 0) {
+				isFacingLeft = true;
+			}
+			else {
+				isFacingLeft = false;
+			}
+		}
+	}
+
+	return true;
 }
