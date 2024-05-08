@@ -5,9 +5,9 @@
 		</sentences>
 	</dialog>
 	
-	<dialog id="1" texturepath="Assets/Textures/group1.png" facetexturepath="Assets/Textures/group1.png" name="Dorothy, Hely y Pathy">
+	<dialog id="1" texturepath="Assets/Textures/Interfaz/Dialogos/dorothyFace.png" facetexturepath="Assets/Textures/Interfaz/Dialogos/dorothyFace.png" name="Dorothy">
 		<sentences>
-			<sentence text="Hola Jakhov, ¡hay que ver como creces!"/>
+			<sentence text="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
 			<sentence text="¿Vas al entrenamiento? Creo que ya te están esperando."/>
 			<sentence text="No te molestamos más, ¡cuando salgas podemos seguir hablando!"/>
 		</sentences>
@@ -114,5 +114,188 @@
 			</sentence>
 		</sentences>
 	</dialog>
+
+	
+	<!--DIALOGOS ABUELAS (101-109)-->
+	<dialog id="101" texturepath="Assets/Textures/Interfaz/Dialogos/Dorothy.png">
+		<sentences>
+			<sentence name="Dorothy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/dorothyFace.png"
+			text="Hola Jakhov, ¡hay que ver cómo creces! Hace nada eras aún un niño..."/>
+			
+			<sentence name="Hely"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/helyFace.png"
+			text="¿Vas al entrenamiento? Creo que ya te están esperando. Deberías darte prisa cariño..."/>
+			
+			<sentence name="Pathy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/pathyFace.png"
+			text="No te molestamos más, ¡cuando salgas podemos seguir hablando! Ya sabes que siempre estamos aquí..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="102" texturepath="Assets/Textures/Interfaz/Dialogos/Dorothy.png">
+		<sentences>
+			<sentence name="Dorothy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/dorothyFace.png"
+			text="¿Ya ha terminado el entrenamiento? Hoy ha sido más rápido de lo normal..."/>
+
+			<sentence name="Hely"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/helyFace.png"
+			text="¿Te encuentras bien Jakhov? Normalmente no eres tan hablador, creo que es una mala costumbre que se te pegó de tu abuela..."/>
+
+			<sentence name="Pathy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/pathyFace.png"
+			text="Pobrecita, desde el incidente ya no quiere salir a hablar con la gente del pueblo, Hemyl le tiene que llevar la comida siempre..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="103" texturepath="Assets/Textures/Interfaz/Dialogos/Dorothy.png">
+		<sentences>
+			<sentence name="Dorothy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/dorothyFace.png"
+			text="¿Te has metido ahí dentro? No puedes hacer estas cosas, nos hemos preocupado mucho cuando nos lo han contado los trillizos..."/>
+
+			<sentence name="Hely"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/helyFace.png"
+			text="Ya sabes lo que le pasó a tu padre, no deberías entrar ahí ni por curiosidad, él era mucho más fuerte que tú..."/>
+
+			<sentence name="Pathy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/pathyFace.png"
+			text="Ves a casa, ¿sí? La pobre Vhea debe estar super preocupada, vaya cara ha puesto cuando se lo hemos contado, ves a dormir y hablad..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="104" texturepath="Assets/Textures/Interfaz/Dialogos/Dorothy.png">
+		<sentences>
+			<sentence name="Dorothy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/dorothyFace.png"
+			text="¡Hola Jakhov! Estábamos recordando viejos tiempos del pueblo, recordábamos lo apuesto que era tu padre, siempre tan servicial..."/>
+
+			<sentence name="Hely"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/helyFace.png"
+			text="Cuánto más tiempo pasa, más te pareces a él, siempre con una sonrisa hablando con todo el mundo..."/>
+
+			<sentence name="Pathy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/pathyFace.png"
+			text="Aunque, a diferencia de él, debemos decirte que tú pareces mucho más sincero, él parecía siempre preocupado..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="104" texturepath="Assets/Textures/Interfaz/Dialogos/Dorothy.png">
+		<sentences>
+			<sentence name="Dorothy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/dorothyFace.png"
+			text="¡Hola Jakhov! Estábamos recordando viejos tiempos del pueblo, recordábamos lo apuesto que era tu padre, siempre tan servicial..."/>
+
+			<sentence name="Hely"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/helyFace.png"
+			text="Cuánto más tiempo pasa, más te pareces a él, siempre con una sonrisa hablando con todo el mundo..."/>
+
+			<sentence name="Pathy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/pathyFace.png"
+			text="Aunque, a diferencia de él, debemos decirte que tú pareces mucho más sincero, él parecía siempre preocupado..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="105" texturepath="Assets/Textures/Interfaz/Dialogos/Dorothy.png">
+		<sentences>
+			<sentence name="Dorothy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/dorothyFace.png"
+			text="¿Tú de nuevo? Realmente te estás volviendo muy abierto con nosotras, Jakhov..."/>
+
+			<sentence name="Hely"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/helyFace.png"
+			text="Nos alegra muchísimo que hables con unas ancianas como nosotras, ya estamos cansadas de hablar siempre entre nosotras..."/>
+
+			<sentence name="Pathy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/pathyFace.png"
+			text="Cada vez pareces más confiado, Jakhov. Te debes estar esforzando mucho entrenando en el bosque, cada día vas por allí..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="106" texturepath="Assets/Textures/Interfaz/Dialogos/Dorothy.png">
+		<sentences>
+			<sentence name="Dorothy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/dorothyFace.png"
+			text="Vaya día que llevamos Jakhov, este clima es muy malo para nosotras..."/>
+
+			<sentence name="Hely"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/helyFace.png"
+			text="A Dorothy y Pathy le duelen las rodillas, y a mí, la cadera, vaya lío..."/>
+
+			<sentence name="Pathy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/pathyFace.png"
+			text="Hemos ido a hablar con Zhyuka, pero dice que las pociones que puede fabricar ella son muy débiles todavía..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="107" texturepath="Assets/Textures/Interfaz/Dialogos/Dorothy.png">
+		<sentences>
+			<sentence name="Dorothy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/dorothyFace.png"
+			text="¡Que alivio! Muchas gracias Jakhov, Zhyuka nos comentó que encontraste por casualidad un objeto que potencia sus pociones..."/>
+
+			<sentence name="Hely"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/helyFace.png"
+			text="No sé donde lo habrás encontrado, pero espero que no estés yendo a esa cueva jovencito, ya te hemos dicho que es muy peligroso..."/>
+
+			<sentence name="Pathy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/pathyFace.png"
+			text="Es cierto, no deberías acercarte Jakhov, puedes seguir entrenando en el bosque, como siempre haces..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="108" texturepath="Assets/Textures/Interfaz/Dialogos/Dorothy.png">
+		<sentences>
+			<sentence name="Dorothy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/dorothyFace.png"
+			text="¿Otra vez por aquí? Como me alegra hablar con gente joven como tú, Jakhov. Además, veo mucho más fuerte últimamente..."/>
+
+			<sentence name="Hely"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/helyFace.png"
+			text="Es cierto, te estás conviertiendo en un auténtico hombre Jakhov, cada vez te pareces más a tu padre..."/>
+
+			<sentence name="Pathy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/pathyFace.png"
+			text="Desde luego, no sé cómo te irá en los entrenamientos, pero estás convirtiéndote en un auténtico guerrero."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="109" texturepath="Assets/Textures/Interfaz/Dialogos/Dorothy.png">
+		<sentences>
+			<sentence name="Dorothy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/dorothyFace.png"
+			text="¡Jakhov! Ven aquí ahora mismo, estamos muy enfadadas contigo..."/>
+
+			<sentence name="Hely"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/helyFace.png"
+			text="Nos han dicho los guardias que llevan varios días viéndote entrar en la cueva, nosotras pensábamos que ibas al bosque a entrenar..."/>
+
+			<sentence name="Pathy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/pathyFace.png"
+			text="Y además le he preguntado yo a mi nieto si vas a los entrenamientos, y me ha dicho que no..."/>
+
+			<sentence name="Dorothy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/dorothyFace.png"
+			text="Cada vez te pareces más a tu padre jovencito, pero no en el buen sentido..."/>
+
+			<sentence name="Hely"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/helyFace.png"
+			text="Es cierto lo que dice Dorothy. Como hacía tu padre, siempre estás entrando y saliendo de allí..."/>
+
+			<sentence name="Pathy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/pathyFace.png"
+			text="Además, como él, hablas con una sonrisa con todo el mundo, pero parece que estás preocupado por algo..."/>
+		</sentences>
+	</dialog>
+
+	<!--DIALOGOS ABUELAS (101-109)-->
+	<!--DIALOGOS PAREJA (201-209)-->
+	<!--DIALOGOS VECINO (301-309)-->
+	<!--DIALOGOS BULLIES (401-409)-->
+	<!--DIALOGOS PREOCUPADA (501-509)-->
+	<!--DIALOGOS ABUELO TIENDA (601-609)-->
+	<!--DIALOGOS ENAMORADA (701-709)-->
+	<!--DIALOGOS TRILLIZOS (801-809)-->
 </dialogues>
 

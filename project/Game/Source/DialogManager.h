@@ -68,17 +68,17 @@ private:
 	
 
 	//Posiciones
-	std::vector<int> dialogMargin = { 130, 50, 0, 50 };
-	iPoint dialogPosition = { 0 , 0 }; //{ 0 , 375 }
-	iPoint namePosition = { 40 , -75 };
-	iPoint optionsPosition = { 900 , 300 };
+	std::vector<int> dialogMargin = { 105, 200, 0, 30 };
+	iPoint dialogPosition = { 59 , 318 }; //{ 0 , 375 }
+	iPoint namePosition = { 70 , -45 };
+	iPoint optionsPosition = { 1200 , 300 };
 	int optionsDistanceBetween = 50;
 
 	//Dimensiones
-	int textBoundWidth;
+	int textBoundWidth= 500;
 	int textNameBoundWidth = 200;
 	int optionsBoundWidth = 350;
-	iPoint faceTextureSize = { 250, 250 };
+	iPoint faceTextureSize = { 256, 210 };
 	
 
 	//Config

@@ -446,7 +446,7 @@
 
 	<dialogmanager>
 		<textures>
-			<background_dialog texturepath="Assets/Textures/Interfaz/background_textbox.png"/>
+			<background_dialog texturepath="Assets/Textures/Interfaz/Dialogos/dialogBackgroundNew.png"/>
 		</textures>
 	</dialogmanager>
 
