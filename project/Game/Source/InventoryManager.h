@@ -39,7 +39,7 @@ public:
 
 	void DestroyItem(InventityType type, int cantidad);
 
-	void DestroyItemById(int entityId);
+	void DestroyItemById(int entityId, bool useStack = true);
 
 	void UseItemSelected(int id);
 

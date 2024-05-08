@@ -571,7 +571,7 @@ void InventoryManager::DestroyItem(InventityType type, int cantidad)
 	}
 }
 
-void InventoryManager::DestroyItemById(int entityId)
+void InventoryManager::DestroyItemById(int entityId, bool useStack)
 {
 	ListItem<Inventity*>* item;
 
@@ -580,9 +580,19 @@ void InventoryManager::DestroyItemById(int entityId)
 
 		if (item->data->id == entityId) // Comprueba si el ID coincide
 		{
-			if (item->data->stackable && item->data->quantity > 1)
+			if (item->data->stackable && item->data->quantity > 1 )
 			{
-				item->data->quantity--;
+				if (useStack == true)
+				{
+					item->data->quantity--;
+				}
+				
+
+				else
+				{
+					inventities.Del(item);
+					delete item->data;
+				}
 			}
 			else
 			{
@@ -729,6 +739,10 @@ void InventoryManager::AddItem(Inventity* entity)
 		if (!itemEncontrado)
 		{
 			inventities.Add(entity);
+		}
+		else
+		{
+			DestroyItemById(entity->id, false);
 		}
 
 		//Mostrar mensaje hud
