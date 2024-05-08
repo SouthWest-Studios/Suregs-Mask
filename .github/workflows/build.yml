@@ -16,4 +16,4 @@ jobs:
         uses: microsoft/setup-msbuild@v1.0.2
 
       - name: Build solution
-        run: msbuild /p:Configuration=Release /p:Platform=x64 ./project/Development.sln
+        run: msbuild /p:Configuration=Release /p:Platform=x32 ./project/Development.sln
