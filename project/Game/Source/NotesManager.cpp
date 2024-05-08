@@ -256,71 +256,75 @@ void NotesManager::UseNoteSelected(int id)
 void NotesManager::OnMovePointer()
 {
 	bool pointer = false;
-	if (PointerId != -2)
+	if (zoomIn == false)
 	{
-		if (pointer == false)
+		if (PointerId != -2)
 		{
-			PointerItemText = app->tex->Load(PointerPath);
-			pointer = true;
-		}
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && PointerPosition.x < 300 || vacio) {
-			if (PointerId == -1)
+			if (pointer == false)
 			{
-				PointerId += 1;
+				PointerItemText = app->tex->Load(PointerPath);
+				pointer = true;
 			}
-			else
-			{
-				PointerId = -2;
-				PointerItemText = nullptr;
-				if(vacio)
-				app->bestiarioManager->PointerId = 0;
+			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && PointerPosition.x < 300 || vacio) {
+				if (PointerId == -1)
+				{
+					PointerId += 1;
+				}
 				else
-				app->bestiarioManager->PointerId = -1;
+				{
+					PointerId = -2;
+					PointerItemText = nullptr;
+					if (vacio)
+						app->bestiarioManager->PointerId = 0;
+					else
+						app->bestiarioManager->PointerId = -1;
+				}
+
+
 			}
-
-			
-		}
-		/*if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN && PointerPosition.x > 176) {
-			PointerPosition.x -= 492;
-			PointerId -= 1;
-		}*/
-
-		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
-			if (PointerId + 1 < notes.Count())
-			{
-				PointerPosition.y += 83;
-				PointerId += 1;
-				
-			}
-			else
-			{
-				PointerId = 0;
-				PointerPosition.y = 230;
-			}
-
-
-
-		}
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
-			if (PointerId > 0)
-			{
-				PointerPosition.y -= 83;
+			/*if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN && PointerPosition.x > 176) {
+				PointerPosition.x -= 492;
 				PointerId -= 1;
+			}*/
+
+			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
+				if (PointerId + 1 < notes.Count())
+				{
+					PointerPosition.y += 83;
+					PointerId += 1;
+
+				}
+				else
+				{
+					PointerId = 0;
+					PointerPosition.y = 230;
+				}
+
+
 
 			}
-			else
-			{
-				PointerId = notes.Count() - 1;
-				PointerPosition.y = 230 + 83 * (notes.Count() - 1);
+			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
+				if (PointerId > 0)
+				{
+					PointerPosition.y -= 83;
+					PointerId -= 1;
+
+				}
+				else
+				{
+					PointerId = notes.Count() - 1;
+					PointerPosition.y = 230 + 83 * (notes.Count() - 1);
+				}
+
+
 			}
-
-
+		}
+		else
+		{
+			pointer = false;
 		}
 	}
-	else
-	{
-		pointer = false;
-	}
+	
 }
 
 void NotesManager::AddNote(Note* entity)
@@ -442,7 +446,8 @@ bool NotesManager::PostUpdate()
 					if (zoomIn == false)
 					{
 						app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition - scrollY, 0.8, SDL_FLIP_NONE, 0, 0);
-						app->render->DrawText(pEntity->title.c_str(), horizontalPosition + 60, verticalPosition - scrollY, 100, 100, 0, 0, 0, 0, false);
+						/*app->render->DrawText(pEntity->title.c_str(), horizontalPosition + 60, verticalPosition - scrollY, 100, 100, 0, 0, 0, 0, false);*/
+						app->render->DrawTextBound(pEntity->title.c_str(), horizontalPosition + 60, verticalPosition - scrollY, 100, { 0,0,0 });
 					}
 					
 				}
@@ -491,7 +496,8 @@ bool NotesManager::PostUpdate()
 				if (PointerId == itum->data->id)
 				{
 					app->render->DrawTexture(itum->data->closeUpNotes, 400, 100, SDL_FLIP_NONE, 0, 0);
-					app->render->DrawText(itum->data->desc.c_str(), 450, 200, 270, 400, 0, 0, 0, 0, false);
+					/*app->render->DrawText(itum->data->desc.c_str(), 450, 200, 270, 400, 0, 0, 0, 0, false);*/
+					app->render->DrawTextBound(itum->data->desc.c_str(), 450, 200, 370, { 0,0,0 });
 				}
 			}
 		}

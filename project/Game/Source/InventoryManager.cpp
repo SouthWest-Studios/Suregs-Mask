@@ -833,7 +833,8 @@ bool InventoryManager::PostUpdate()
 		{
 			if (PointerId == itum->data->id)
 			{
-				app->render->DrawText(itum->data->desc.c_str(), 680, 450, 270, 400, 0, 0, 0, 0, false);
+				/*app->render->DrawText(itum->data->desc.c_str(), 680, 450, 270, 400, 0, 0, 0, 0, false);*/
+				app->render->DrawTextBound(itum->data->desc.c_str(), 680, 450, 270, { 0,0,0 });
 				switch (itum->data->type)	
 				{
 				case InventityType::OJO:
@@ -842,22 +843,25 @@ bool InventoryManager::PostUpdate()
 				case InventityType::VISCERA:
 				case InventityType::HUESO:
 				case InventityType::DIENTE:
-					app->render->DrawText(itum->data->name.GetString(), 680, 340, 90, 60, 0, 165, 42, 42);
+					/*app->render->DrawText(itum->data->name.GetString(), 680, 340, 90, 60, 0, 165, 42, 42);*/
 					break;
 				case InventityType::RUBI:
 				case InventityType::POLVORA:
 				case InventityType::DIAMANTE:
 				case InventityType::CARBON:
 				case InventityType::AMATISTA:
-					app->render->DrawText(itum->data->tipo.c_str(), 680, 340, 90, 60, 0, 65, 136, 165);
-					app->render->DrawTexture(itum->data->closeUpItems, 820, 200, 1.8, SDL_FLIP_NONE, 0, 0);
+					/*app->render->DrawText(itum->data->tipo.c_str(), 680, 340, 90, 60, 0, 65, 136, 165);*/
+					
 					
 					break;
 				default:
-					app->render->DrawText(itum->data->tipo.c_str(), 680, 340, 90, 60, 0, 135, 206, 235);
+					/*app->render->DrawText(itum->data->tipo.c_str(), 680, 340, 90, 60, 0, 135, 206, 235);*/
 					break;
 				}
-			}
+				/*app->render->DrawText(itum->data->name.GetString(), 680, 340, 90, 60, 0, 135, 206, 235);*/
+				app->render->DrawTextBound(itum->data->name.GetString(), 680, 340, 90, { 0,0,0 });
+				app->render->DrawTexture(itum->data->icon, 780, 200, 1.8, SDL_FLIP_NONE, 0, 0);
+			} 
 
 		}
 	}

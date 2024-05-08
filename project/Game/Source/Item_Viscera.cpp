@@ -33,6 +33,7 @@ bool Item_Viscera::Start() {
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 	description = (config.attribute("description").as_string());
 	tipo = (config.attribute("type").as_string());
+	name = (config.attribute("name").as_string());
 	/*texture = app->tex->Load("Assets/Textures/Entidades/Items/item_Garra.png");*/
 	// L07 DONE 4: Add a physics to an item - initialize the physics body
 	app->tex->GetSize(texture, texW, texH);
