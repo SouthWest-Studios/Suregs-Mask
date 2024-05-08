@@ -16,6 +16,7 @@ class Window;
 class Input;
 class Render;
 class Textures;
+class ParticleSystem;
 class Audio;
 class ModuleFadeToBlack;
 class Scene_Logos;
@@ -79,6 +80,8 @@ public:
 	const char* GetTitle() const;
 	const char* GetOrganization() const;
 
+	pugi::xml_node App::LoadEmitters(pugi::xml_document& psystem_file) const;
+
 	// L14: TODO 1: Declare the methods LoadRequest() and SaveRequest() to request and call the Load / Save the game state at the end of the frame
 
 	// Request a save data in an XML file 
@@ -124,6 +127,7 @@ public:
 	Input* input;
 	Render* render;
 	Textures* tex;
+	ParticleSystem* psystem;
 	Audio* audio;
 	ModuleFadeToBlack* fadeToBlack;
 
@@ -163,6 +167,8 @@ public:
 	bool closeApplication = false;
 	bool fullscreen = false;
 
+	float dt;
+
 private:
 
 	int argc;
@@ -177,7 +183,7 @@ private:
 	pugi::xml_document configFile;
 	
 	uint frames;
-	float dt;
+	
 
 	// L1: DONE 4: Calculate some timing measures
     // required variables are provided:

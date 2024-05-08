@@ -3,6 +3,7 @@
 #include "Input.h"
 #include "Render.h"
 #include "Textures.h"
+#include "ParticleSystem.h"
 #include "Audio.h"
 #include "Scene_Testing.h"
 #include "Scene_Intro.h"
@@ -56,6 +57,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	input = new Input(this);
 	render = new Render(this);
 	tex = new Textures(this);
+	psystem = new ParticleSystem(this);
 	audio = new Audio(this);
 	//L07 DONE 2: Add Physics module
 	physics = new Physics(this);
@@ -95,6 +97,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(win);
 	AddModule(input);
 	AddModule(tex);
+	AddModule(psystem);
 	AddModule(audio);
 	//L07 DONE 2: Add Physics module
 	AddModule(physics);
@@ -495,6 +498,19 @@ const char* App::GetTitle() const
 const char* App::GetOrganization() const
 {
 	return organization.GetString();
+}
+
+pugi::xml_node App::LoadEmitters(pugi::xml_document& psystem_file) const
+{
+	pugi::xml_node ret;
+
+	pugi::xml_parse_result result = psystem_file.load_file("psystem_config.xml");
+
+	if (result == NULL)
+		LOG("Could not load xml file config.xml. Pugi error: %s", result.description());
+	else
+		ret = psystem_file.child("emitters");
+	return ret;
 }
 
 // L14: TODO 1: Implement the methods LoadRequest() and SaveRequest() to request and call the Load / Save the game state at the end of the frame

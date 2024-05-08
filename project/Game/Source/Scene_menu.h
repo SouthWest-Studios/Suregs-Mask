@@ -7,6 +7,9 @@
 #include "GuiControlButton.h"
 #include "GuiCheckBox.h"
 #include "GuiControlSlider.h"
+#include "Particle.h"
+#include "ParticlePool.h"
+#include "Emitter.h"
 
 struct SDL_Texture;
 
@@ -72,6 +75,8 @@ public:
 	GuiCheckBox* vsync;
 
 private:
+
+	Emitter* eMenu;
 
 	GuiControlButton* NuevaPartida;
 	GuiControlButton* Continuar;

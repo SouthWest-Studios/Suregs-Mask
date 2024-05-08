@@ -72,14 +72,15 @@ bool Scene_Menu::Start()
 	/*SDL_Rect TitlePos = { 75, 403,	136,46 };
 	NuevaPartida = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "NUEVA PARTIDA", TitlePos, this, { 0,0,0,0 });*/
 	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "NUEVA PARTIDA", SDL_Rect{ 537, 360,	136,25 }, this));
-	/*controlsScene.end->data->selected = true;*/
-	/*SDL_Rect TitlePos2 = { 75,457,136,46 };
-	Continuar = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "CONTINUAR", TitlePos2, this, { 0,0,0,0 });*/
+	///*controlsScene.end->data->selected = true;*/
+	///*SDL_Rect TitlePos2 = { 75,457,136,46 };
 	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "CONTINUAR", SDL_Rect{ 549,390,100,25 }, this));
 	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "AJUSTES", SDL_Rect{ 557, 420,80,25 }, this));
 	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "CRÉDITOS", SDL_Rect{ 554, 450,90,25 }, this));
 	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "SALIR", SDL_Rect{ 564, 480,60,25 }, this));
 
+	/*fPoint ePos(500.0f, 500.0f);*/
+	/*eMenu = app->psystem->AddEmiter(ePos, EmitterType::EMITTER_TYPE_SPARK);*/
 
 	app->audio->LoadAudioMusic("menu", 10.0f);
 	menu_fx = app->audio->LoadAudioFx("menu_fx");
@@ -114,8 +115,10 @@ bool Scene_Menu::PreUpdate()
 // Called each loop iteration
 bool Scene_Menu::Update(float dt)
 {
-
 	OPTICK_EVENT();
+
+	//fPoint pos(500.0f, 500.0f);
+	//app->psystem->AddEmiter(pos, EMITTER_TYPE_SPARK);
 	if (showSettings == false)
 	{
 		app->render->DrawTexture(menuMain, 0, 0);
@@ -194,6 +197,8 @@ bool Scene_Menu::CleanUp()
 	app->tex->UnLoad(menuMain2);
 	app->tex->UnLoad(settings);
 	app->tex->UnLoad(credits);
+
+	/*eMenu = nullptr;*/
 
 	return true;
 }
