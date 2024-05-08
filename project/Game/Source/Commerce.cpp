@@ -145,15 +145,17 @@ bool Commerce::ApplyTrades()
 		Trade* trade = trades.at(i);
 
 		//Agregar estos items al inventario
+		
 		for (int j = 0; j < trade->itemsOffered.size(); j++) {
 			Inventity inventity = *trade->itemsOffered.at(j);
-
-			if (inventity.type == InventityType::MONEDA) {
-				app->inventoryManager->monedasObtenidas += trade->quantityOffered.at(j) * trade->quantityTraded;
-			}
-			else {
-				inventity.quantity = trade->quantityOffered.at(j);
-				app->inventoryManager->AddItem(&inventity);
+			if (trade->quantityTraded > 0) {
+				if (inventity.type == InventityType::MONEDA) {
+					app->inventoryManager->monedasObtenidas += trade->quantityOffered.at(j) * trade->quantityTraded;
+				}
+				else {
+					inventity.quantity = (trade->quantityOffered.at(j) * trade->quantityTraded);
+					app->inventoryManager->AddItem(&inventity);
+				}
 			}
 
 			
@@ -163,20 +165,19 @@ bool Commerce::ApplyTrades()
 		for (int j = 0; j < trade->itemsRequested.size(); j++) {       
 
 			Inventity inventity = *trade->itemsRequested.at(j);
-			if (inventity.type == InventityType::MONEDA) {
-				app->inventoryManager->monedasObtenidas -= trade->quantityRequested.at(j) * trade->quantityTraded;
+			if (trade->quantityTraded > 0) {
+				if (inventity.type == InventityType::MONEDA) {
+					app->inventoryManager->monedasObtenidas -= trade->quantityRequested.at(j) * trade->quantityTraded;
+				}
+				else {
+					inventity.quantity = trade->quantityRequested.at(j) * trade->quantityTraded;
+					app->inventoryManager->DestroyItem(inventity.type, inventity.quantity);
+				}
 			}
-			else {
-				inventity.quantity = trade->quantityRequested.at(j) * trade->quantityTraded;
-				app->inventoryManager->DestroyItem(inventity.type, inventity.quantity);
-			}
-			trade->quantityTraded = 0;
+			
 			
 		}
-
-		
-
-
+		trade->quantityTraded = 0;
 	}
 
 
