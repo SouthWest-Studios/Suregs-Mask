@@ -14,6 +14,8 @@
 #include "Map.h"
 #include "Physics.h"
 #include "Item_Hueso.h"
+#include "Item_Viscera.h"
+#include "Item_Diente.h"
 #include <Optick/include/optick.h>
 #include "Utils.cpp"
 
@@ -244,11 +246,20 @@ void Enemy_Boorok::Die() {
 		float randomValue = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
 
 		// Determina si el item debe crearse basado en un 30% de probabilidad
-		if (randomValue <= 0.25f) {
-			Item_Hueso* hueso = (Item_Hueso*)app->entityManager->CreateEntity(EntityType::ITEM_HUESO);
-			hueso->config = configNode.child("entities_data").child("item_hueso");
-			hueso->position = iPoint(position.x, position.y);
-			hueso->Start();
+		if (randomValue <= 0.35f) {
+			Item_Viscera* visceras = (Item_Viscera*)app->entityManager->CreateEntity(EntityType::ITEM_VISCERAS);
+			visceras->config = configNode.child("entities_data").child("item_viscera");
+			visceras->position = iPoint(position.x, position.y);
+			visceras->Start();
+		}
+		float randomValue2 = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+
+		// Determina si el item debe crearse basado en un 30% de probabilidad
+		if (randomValue2 <= 0.30f) {
+			Item_Diente* diente = (Item_Diente*)app->entityManager->CreateEntity(EntityType::ITEM_DIENTE);
+			diente->config = configNode.child("entities_data").child("item_diente");
+			diente->position = iPoint(position.x, position.y);
+			diente->Start();
 		}
 		app->entityManager->GetPlayer()->playerXP += 20;
 		//printf("Current XP %i \n", app->entityManager->GetPlayer()->playerXP);

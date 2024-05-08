@@ -274,6 +274,9 @@
     <ClCompile Include="Source\Item_Pocion_Vida_3.cpp">
       <Filter>Entities\Items</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Item_Saliva.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -607,6 +610,9 @@
       <Filter>Entities\Items</Filter>
     </ClInclude>
     <ClInclude Include="Source\Item_Pocion_Vida_3.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Item_Saliva.h">
       <Filter>Entities\Items</Filter>
     </ClInclude>
   </ItemGroup>

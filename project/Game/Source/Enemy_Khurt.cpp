@@ -14,6 +14,7 @@
 #include "Map.h"
 #include "Physics.h"
 #include "Item_Hueso.h"
+#include "Item_Garra.h"
 #include <Optick/include/optick.h>
 #include "Utils.cpp"
 
@@ -270,10 +271,10 @@ void Enemy_Khurt::Die() {
 
 	// Determina si el item debe crearse basado en un 30% de probabilidad
 	if (randomValue <= 0.25f) {
-		Item_Hueso* hueso = (Item_Hueso*)app->entityManager->CreateEntity(EntityType::ITEM_HUESO);
-		hueso->config = configNode.child("entities_data").child("item_hueso");
-		hueso->position = iPoint(position.x, position.y);
-		hueso->Start();
+		Item_Garra* garra = (Item_Garra*)app->entityManager->CreateEntity(EntityType::ITEM_GARRA);
+		garra->config = configNode.child("entities_data").child("item_garra");
+		garra->position = iPoint(position.x, position.y);
+		garra->Start();
 	}
 	app->entityManager->GetPlayer()->playerXP += 20;
 	//printf("Current XP %i \n", app->entityManager->GetPlayer()->playerXP);

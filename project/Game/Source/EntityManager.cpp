@@ -36,6 +36,7 @@
 #include "Item_Cola.h"
 #include "Item_Polvora.h"
 #include "Item_Nota.h"
+#include "Item_Saliva.h"
 #include "Boss_Inuit.h"
 #include "Boss_Musri.h"
 #include "Cofre.h"
@@ -209,6 +210,9 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 		break;
 	case EntityType::ITEM_POCION_VIDA_MAX:
 		entity = new Item_Pocion_Vida_Max(type, id, 100, 300, 5, 2);
+		break;
+	case EntityType::ITEM_SALIVA:
+		entity = new Item_Saliva(type, id, 100, 300, 5, 2);
 		break;
 	case EntityType::ITEM:
 		entity = new Item();

@@ -408,12 +408,8 @@ void Scene_Menu::SettingsInterface()
 			}
 
 			//Cargar la barra de audio del save_game
-			int currentVolume = Mix_VolumeMusic(-1);
-			music->value = currentVolume;
-
-			// Establecer el valor del control deslizante de SFX
-			int currentSFXVolume = Mix_Volume(-1, -1);
-			sfx->value = currentSFXVolume;
+			((GuiControlSlider*)music)->value = newVolumeAudio;
+			((GuiControlSlider*)sfx)->value = newVolumeFx;
 		}
 
 		

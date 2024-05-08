@@ -13,6 +13,7 @@
 #include "Pathfinding.h"
 #include "Map.h"
 #include "Item_Garra.h"
+#include "Item_Saliva.h"
 #include "Physics.h"
 #include <Optick/include/optick.h>
 
@@ -233,10 +234,15 @@ void Enemy_Ols::Die() {
 		configNode = configFile.child("config");
 	}
 
-	garra = (Item_Garra*)app->entityManager->CreateEntity(EntityType::ITEM_GARRA);
-	garra->config = configNode.child("entities_data").child("item_garra");
-	garra->position = iPoint(position.x, position.y);
-	garra->Start();
+	float randomValue = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+
+	// Determina si el item debe crearse basado en un 30% de probabilidad
+	if (randomValue <= 0.30f) {
+		Item_Saliva* saliva = (Item_Saliva*)app->entityManager->CreateEntity(EntityType::ITEM_SALIVA);
+		saliva->config = configNode.child("entities_data").child("item_saliva");
+		saliva->position = iPoint(position.x, position.y);
+		saliva->Start();
+	}
 
 	app->entityManager->DestroyEntity(this);
 	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
