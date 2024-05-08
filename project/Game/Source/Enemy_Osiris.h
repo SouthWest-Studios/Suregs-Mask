@@ -77,6 +77,8 @@ public:
 	float viewDistance;
 	float attackDistance;
 
+	bool isFacingLeft = false;
+	Animation* currentAnimation = nullptr;
 	//Revivir
 
 	
@@ -91,7 +93,6 @@ private:
 	Animation attackAnim;
 	Animation dieAnim;
 
-	bool isFacingLeft = false;
 
 	iPoint originalPosition;
 
@@ -113,7 +114,6 @@ private:
 	PathFinding* path;
 	DynArray<iPoint> lastPath;
 
-	Animation* currentAnimation = nullptr;
 	EntityState_Enemy state;
 
 

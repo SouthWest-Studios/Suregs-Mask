@@ -84,7 +84,7 @@ bool EntityManager::Awake(pugi::xml_node config)
 
 bool EntityManager::Start() {
 
-	bool ret = true; 
+	bool ret = true;
 
 	//Iterates over the entities and calls Start
 	ListItem<Entity*>* item;
@@ -125,7 +125,7 @@ bool EntityManager::CleanUp()
 
 Entity* EntityManager::CreateEntity(EntityType type, int id)
 {
-	Entity* entity = nullptr; 
+	Entity* entity = nullptr;
 
 	//L03: DONE 3a: Instantiate entity according to the type and add the new entity to the list of Entities
 	switch (type)
@@ -289,7 +289,7 @@ void EntityManager::DestroyEntity(Entity* entity)
 			//	garra->Start();
 			//}
 		}
-		
+
 		if (item->data == entity) entities.Del(item);
 
 	}
@@ -307,7 +307,7 @@ void EntityManager::LinkTPEntities()
 
 	for (itemMajor = tpEntities.start; itemMajor != NULL; itemMajor = itemMajor->next)
 	{
-		
+
 
 		for (itemMinor = tpEntities.start; itemMinor != NULL; itemMinor = itemMinor->next) {
 			//Se busca del in al out, es decir (0,1 - 2,3 - 4,5)
@@ -350,6 +350,21 @@ std::vector<Entity*> EntityManager::GetEnemies() {
     return enemies;
 }
 
+std::vector<Entity*> EntityManager::GetEnemiesOsiris()
+{
+	std::vector<Entity*> enemiesOsiris;
+
+	for (Entity* enemy : GetEnemies())
+	{
+		if (enemy->type == EntityType::ENEMY_OSIRIS)
+		{
+			enemiesOsiris.push_back(enemy);
+		}
+	}
+
+	return enemiesOsiris;
+}
+
 bool EntityManager::PreUpdate()
 {
 	//Ejemplo a�adir sprite en los Start():	app->render->objectsToDraw.push_back({ textura, posicion X, posicion Y, punto de anclaje en Y = (posY + num), ancho, largo});
@@ -371,7 +386,37 @@ bool EntityManager::PreUpdate()
 				obj.currentFrame = app->entityManager->GetPlayer()->currentAnimation->GetCurrentFrame();
 			}
 			obj.isFacingLeft = app->entityManager->GetPlayer()->isFacingLeft;
+			obj.isDynamic = true;
 			break;
+		}
+	}
+
+	for (Entity* entity : app->entityManager->GetEnemiesOsiris())
+	{
+		Enemy_Osiris* enemy = static_cast<Enemy_Osiris*>(entity);
+		// Rest of the code...
+
+		for (DrawableObject& obj : objectsToDraw)
+		{
+			if (obj.texture == enemy->texture)
+			{
+				if (enemy->isFacingLeft) {
+					obj.x = enemy->position.x - 25;
+					obj.y = enemy->position.y - 65;
+				}
+				else
+				{
+					obj.x = enemy->position.x - 40;
+					obj.y = enemy->position.y - 65;
+				}
+				obj.anchorY = enemy->position.y + 200; // Según el sprite, añadir el valor que corresponda -> !0
+				if (enemy->currentAnimation != nullptr) {
+					obj.currentFrame = enemy->currentAnimation->GetCurrentFrame();
+				}
+				obj.isFacingLeft = enemy->isFacingLeft;
+				obj.isDynamic = true;
+				break;
+			}
 		}
 	}
 
@@ -420,16 +465,27 @@ bool EntityManager::PostUpdate()
 		// Verifica si la posici�n del objeto est?dentro de los l�mites de la c�mara
 		if (obj.x + obj.width >= -app->render->camera.x && obj.x <= -app->render->camera.x + app->render->camera.w &&
 			obj.y + obj.height >= -app->render->camera.y && obj.y <= -app->render->camera.y + app->render->camera.h){
-			if (obj.isFacingLeft) {
-				app->render->DrawTexture(obj.texture, obj.x, obj.y, 0.5f, SDL_FLIP_NONE, &obj.currentFrame);
+
+			// PLAYER
+			if(obj.texture != nullptr){
+				if (obj.texture == GetPlayer()->texture && obj.isFacingLeft) {
+					app->render->DrawTexture(obj.texture, obj.x, obj.y, 0.5f, SDL_FLIP_NONE, &obj.currentFrame);
+				}
+				else if (obj.texture == GetPlayer()->texture && !obj.isFacingLeft) {
+					app->render->DrawTexture(obj.texture, obj.x, obj.y, 0.5f, SDL_FLIP_HORIZONTAL, &obj.currentFrame);
+				}
+				else if (obj.texture != GetPlayer()->texture && obj.isFacingLeft && obj.isDynamic) {
+					app->render->DrawTexture(obj.texture, obj.x, obj.y, SDL_FLIP_HORIZONTAL, &obj.currentFrame);
+				}
+				else if (obj.texture != GetPlayer()->texture && !obj.isFacingLeft && obj.isDynamic) {
+					app->render->DrawTexture(obj.texture, obj.x, obj.y, SDL_FLIP_NONE, &obj.currentFrame);
+				}
+
+				if (app->entityManager->GetPlayer() != nullptr && obj.texture != app->entityManager->GetPlayer()->texture && !obj.isDynamic) {
+					app->render->DrawTexture(obj.texture, obj.x, obj.y);
+				}
 			}
-			else if (!obj.isFacingLeft) {
-				app->render->DrawTexture(obj.texture, obj.x, obj.y, 0.5f, SDL_FLIP_HORIZONTAL, &obj.currentFrame);
-			}
-		
-			if (app->entityManager->GetPlayer() != nullptr && obj.texture != app->entityManager->GetPlayer()->texture) {
-				app->render->DrawTexture(obj.texture, obj.x, obj.y);
-			}
+
 		}
 
 	}

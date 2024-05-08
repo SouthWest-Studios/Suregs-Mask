@@ -72,7 +72,17 @@ bool Enemy_Osiris::Start() {
 	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();
 
-	
+	app->entityManager->objectsToDraw.push_back({
+		texture,
+		position.x, // x
+		position.y, // y
+		position.y + 98, // anchorY
+		100, // width
+		100, // height
+		NULL, // currentFrame
+		isFacingLeft
+	});
+
 	
 	return true;
 }
@@ -143,10 +153,10 @@ bool Enemy_Osiris::PostUpdate() {
 
 
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 25, position.y - 65, SDL_FLIP_HORIZONTAL, &rect);
+		//app->render->DrawTexture(texture, position.x - 25, position.y - 65, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 40, position.y - 65, SDL_FLIP_NONE, &rect);
+		//app->render->DrawTexture(texture, position.x - 40, position.y - 65, SDL_FLIP_NONE, &rect);
 	}
 
 

@@ -54,7 +54,8 @@ bool NPCMujerPreocupada::Start() {
 		position.y + 189, // anchorY
 		138, // width
 		194, // height
-		true // isFacingLeft
+		true, // isFacingLeft
+		false
 	});
 
 	//pbody = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);

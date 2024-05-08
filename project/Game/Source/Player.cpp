@@ -498,7 +498,8 @@ bool Player::Start() {
 		300, // width
 		250, // height
 		NULL, // currentFrame
-		isFacingLeft
+		isFacingLeft,
+		true
 	});
 
 	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);

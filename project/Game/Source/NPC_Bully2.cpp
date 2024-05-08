@@ -54,7 +54,8 @@ bool NPCBully2::Start() {
 		position.y + 174, // anchorY
 		138, // width
 		180, // height
-		true // isFacingLeft
+		true, // isFacingLeft
+		false
 	});
 
 	//pbody = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);

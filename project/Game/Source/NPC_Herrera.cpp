@@ -54,7 +54,8 @@ bool NPCHerrera::Start() {
 		position.y + 178, // anchorY
 		138, // width
 		189, // height
-		true // isFacingLeft
+		true, // isFacingLeft
+		false
 	});
 
 	//pbody = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);

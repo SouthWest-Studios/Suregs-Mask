@@ -19,6 +19,7 @@ struct DrawableObject
 	int width, height;
 	SDL_Rect currentFrame;
 	bool isFacingLeft;
+	bool isDynamic;
 };
 
 class EntityManager : public Module
@@ -61,6 +62,8 @@ public:
 
 	MiniGameFishing* GetRod();
 	std::vector<Entity*> GetEnemies();
+
+	std::vector<Entity*> GetEnemiesOsiris();
 	
 
 public:

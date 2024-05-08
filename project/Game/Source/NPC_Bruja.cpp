@@ -54,7 +54,8 @@ bool NPCBruja::Start() {
 		position.y + 210, // anchorY
 		138, // width
 		217, // height
-		true // isFacingLeft
+		true, // isFacingLeft
+		false
 	});
 
 	//pbody = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);

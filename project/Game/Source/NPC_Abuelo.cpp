@@ -54,7 +54,8 @@ bool NPCAbuelo::Start() {
 		position.y + 183, // anchorY
 		138, // width
 		195, // height
-		true // isFacingLeft
+		true, // isFacingLeft
+		false // isDynamic
 	});
 
 	//pbody = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);

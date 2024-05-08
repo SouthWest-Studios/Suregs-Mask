@@ -54,7 +54,8 @@ bool NPCPescador::Start() {
 		position.y + 220, // anchorY
 		138, // width
 		225, // height
-		true // isFacingLeft
+		true, // isFacingLeft
+		false
 	});
 	//pbody = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
 	//pbody->entity = this;

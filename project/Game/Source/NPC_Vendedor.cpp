@@ -54,7 +54,8 @@ bool NPCVendedor::Start() {
 		position.y + 173, // anchorY
 		138, // width
 		185, // height
-		true // isFacingLeft
+		true, // isFacingLeft
+		false
 	});
 	//pbody = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
 	//pbody->entity = this;
