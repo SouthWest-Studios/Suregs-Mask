@@ -294,16 +294,16 @@ bool DialogManager::PostUpdate() {
 
 
 		//Gestionar la opcion seleccionada
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
+		if (app->input->GetButton(UP) == KEY_DOWN) {
 			optionSelected = 1;
 		}
-		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
+		if (app->input->GetButton(DOWN) == KEY_DOWN) {
 			optionSelected = 2;
 		}
 
 
 		//Siguiente dialogo
-		if (dialogFinished && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && actualDialog->type != DialogType::CHOOSE) {
+		if (dialogFinished && (app->input->GetButton(CONFIRM) == KEY_DOWN || app->input->GetButton(SELECT) == KEY_DOWN) && actualDialog->type != DialogType::CHOOSE) {
 			
 			
 			indexText = 1;
@@ -317,7 +317,7 @@ bool DialogManager::PostUpdate() {
 
 		}
 		//Gestion de las opciones
-		else if (dialogFinished && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && optionSelected != 0 && actualDialog->type == DialogType::CHOOSE) {
+		else if (dialogFinished && (app->input->GetButton(CONFIRM) == KEY_DOWN || app->input->GetButton(SELECT) == KEY_DOWN) && optionSelected != 0 && actualDialog->type == DialogType::CHOOSE) {
 		
 			
 			if (optionSelected == 1) {
@@ -338,7 +338,7 @@ bool DialogManager::PostUpdate() {
 
 		}
 		//Terminar el dialogo empezado
-		else if (!dialogFinished && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && indexText > 2) {
+		else if (!dialogFinished && (app->input->GetButton(CONFIRM) == KEY_DOWN || app->input->GetButton(SELECT) == KEY_DOWN) && indexText > 2) {
 			indexText = 999;
 		}
 	

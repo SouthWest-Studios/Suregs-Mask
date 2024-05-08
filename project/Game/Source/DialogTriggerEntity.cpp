@@ -166,7 +166,7 @@ void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 		case ColliderType::PLAYER:
 			
-			if (!app->dialogManager->isPlaying && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
+			if (!app->dialogManager->isPlaying && (app->input->GetButton(CONFIRM) == KEY_DOWN)) {
 				PlayDialog();
 
 				/*if (strcmp(parameters.attribute("name").as_string(), "FishingMaster") == 0) {

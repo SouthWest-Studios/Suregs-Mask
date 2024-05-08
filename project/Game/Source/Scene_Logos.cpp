@@ -101,7 +101,7 @@ bool Scene_Logos::Update(float dt)
 		
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
+	if (app->input->GetButton(CONFIRM) == KEY_DOWN) {
 		app->fadeToBlack->FadeToBlack(this, app->scene_intro, 90);
 		
 	}

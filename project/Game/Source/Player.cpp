@@ -1,4 +1,4 @@
-#include "Player.h"
+ #include "Player.h"
 #include "App.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -933,14 +933,18 @@ void Player::DashAttack(float dt) {
 	b2Vec2 velocity = b2Vec2(0, 0);
 
 	// Obtener teclado
-	pressingUp = app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT;
+	/*pressingUp = app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT;
 	pressingDown = app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT;
 	pressingLeft = app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT;
-	pressingRight = app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT;
+	pressingRight = app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT;*/
+
+	fPoint joystick = app->input->GetAxis(MOVE_HORIZONTAL, MOVE_VERTICAL);
+	float horizontalMovement = joystick.x;
+	float verticalMovement = joystick.y;
 
 	// Calcular la velocidad horizontal y vertical
-	int horizontalMovement = pressingRight - pressingLeft;
-	int verticalMovement = pressingDown - pressingUp;
+	//int horizontalMovement = pressingRight - pressingLeft;
+	//int verticalMovement = pressingDown - pressingUp;
 
 	//printf("%d", pressingUp);
 	// Actualizar velocidad
@@ -1756,7 +1760,9 @@ void Player::PlayerMovement(float dt)
 
 	// Obtener teclado
 
-	fPoint joystick = app->input->GetAxis(MOVE_HORIZONTAL, MOVE_VERTICAL);
+	
+
+
 
 	//printf("\n%f",joystick.x);
 
@@ -1769,6 +1775,8 @@ void Player::PlayerMovement(float dt)
 
 
 	// Calcular la velocidad horizontal y vertical
+
+	fPoint joystick = app->input->GetAxis(MOVE_HORIZONTAL, MOVE_VERTICAL);
 	float horizontalMovement = joystick.x;
 	float verticalMovement = joystick.y;
 	
@@ -1792,7 +1800,7 @@ void Player::PlayerMovement(float dt)
 	FishingDirecction(verticalMovement, horizontalMovement);
 
 	//Si pulsas espacio
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && timerDash.ReadMSec() > cdTimerDashMS) {
+	if (app->input->GetButton(DASH) == KEY_DOWN && timerDash.ReadMSec() > cdTimerDashMS) {
 		
 		velocityNormalized = velocity;
 		velocityNormalized.Normalize();
@@ -1829,7 +1837,7 @@ void Player::PlayerMovement(float dt)
 	}
 
 	//Si pulsas J para atacar
-	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN && timerAttack.ReadMSec() > cdTimerAttackMS) {
+	if (app->input->GetButton(ATAQUE) == KEY_DOWN && timerAttack.ReadMSec() > cdTimerAttackMS) {
 		isAttacking = true;
 		timerAttack.Start();
 		desiredState = EntityState::ATTACKING;
@@ -1860,7 +1868,7 @@ void Player::PlayerMovement(float dt)
 
 	//Si pulsas K para mascara principal
 
-	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN &&
+	if (app->input->GetButton(ATAQUE_HABILIDAD) == KEY_DOWN &&
 		(timerMaskAttack.ReadMSec() > maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDown ||
 			!maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].firstTimeUsed)) {
 		maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].firstTimeUsed = true;
@@ -1883,7 +1891,7 @@ void Player::PlayerMovement(float dt)
 	}
 
 	//Si pulsas Q para cambiar de mascara
-	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN && timerChangeMask.ReadMSec() > changeMaskCooldown) {
+	if (app->input->GetButton(INTERCAMBIAR_MASCARAS) == KEY_DOWN && timerChangeMask.ReadMSec() > changeMaskCooldown) {
 		ChangeMask();
 	}
 

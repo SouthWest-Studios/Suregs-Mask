@@ -73,7 +73,7 @@ bool Scene_Intro::Update(float dt)
 		app->fadeToBlack->FadeToBlack(this, app->scene_menu, 90);
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
+	if (app->input->GetButton(CONFIRM) == KEY_DOWN) {
 		app->fadeToBlack->FadeToBlack(this, app->scene_menu, 90);
 	}
 	return true;

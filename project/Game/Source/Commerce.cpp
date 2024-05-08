@@ -299,27 +299,29 @@ bool Commerce::Update(float dt)
 
 	bool ret = true;
 
-	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
+	
+
+	if (app->input->GetButton(DOWN) == KEY_DOWN) {
 		pointerIndexF++;
 		if (pointerIndexF >= trades.size() + 2) {
 			pointerIndexF = 0;
 		}
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
+	if (app->input->GetButton(UP) == KEY_DOWN) {
 		pointerIndexF--;
 		if (pointerIndexF < 0) {
 			pointerIndexF = trades.size() + 1;
 		}
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN) {
+	if (app->input->GetButton(RIGHT) == KEY_DOWN) {
 		pointerIndexC++;
 		if(pointerIndexC > 1) {
 			pointerIndexC = 0;
 		}
 	}
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) {
+	if (app->input->GetButton(LEFT) == KEY_DOWN) {
 		pointerIndexC--;
 		if (pointerIndexC < 0) {
 			pointerIndexC = 1;
@@ -327,7 +329,7 @@ bool Commerce::Update(float dt)
 	}
 
 
-	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN) {
+	if (app->input->GetButton(SELECT) == KEY_DOWN) {
 
 		if (pointerIndexF < trades.size()) {
 			if (pointerIndexC == 0) SelectTrade(pointerIndexF);
@@ -344,7 +346,7 @@ bool Commerce::Update(float dt)
 
 		}
 	}
-	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN) {
+	if (app->input->GetButton(BACK) == KEY_DOWN) {
 		if (pointerIndexC == 0) SelectTrade(pointerIndexF, false);
 		if (pointerIndexC == 1) SelectAllTrade(pointerIndexF, false);
 	}
