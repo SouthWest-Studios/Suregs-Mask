@@ -148,13 +148,15 @@ bool Commerce::ApplyTrades()
 		
 		for (int j = 0; j < trade->itemsOffered.size(); j++) {
 			Inventity inventity = *trade->itemsOffered.at(j);
+
 			if (trade->quantityTraded > 0) {
 				if (inventity.type == InventityType::MONEDA) {
 					app->inventoryManager->monedasObtenidas += trade->quantityOffered.at(j) * trade->quantityTraded;
 				}
 				else {
 					inventity.quantity = (trade->quantityOffered.at(j) * trade->quantityTraded);
-					app->inventoryManager->AddItem(&inventity);
+					/*app->inventoryManager->AddItem(&inventity);*/
+					app->inventoryManager->CreateItem(inventity.type, true);
 				}
 			}
 
