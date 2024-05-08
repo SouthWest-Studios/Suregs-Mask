@@ -64,8 +64,8 @@ public:
 	std::vector<Entity*> GetEnemies();
 
 	std::vector<Entity*> GetEnemiesOsiris();
+	std::vector<Entity*> GetEnemiesOls();
 	
-
 public:
 
 	List<Entity*> entities;

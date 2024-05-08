@@ -108,6 +108,8 @@ public:
 	Timer attackCooldownTimer;
 	bool canAttack = true;
 
+	bool isFacingLeft = false;
+	
 private:
 	Animation idleAnim;
 	Animation runAnim;
@@ -119,7 +121,6 @@ private:
 	int ols_get_damageAlt2_fx;
 	int ols_death_fx;
 
-	bool isFacingLeft = false;
 
 	Item_Garra* garra;
 	pugi::xml_document configFile;

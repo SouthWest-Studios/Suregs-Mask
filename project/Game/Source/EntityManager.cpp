@@ -369,6 +369,21 @@ std::vector<Entity*> EntityManager::GetEnemiesOsiris()
 	return enemiesOsiris;
 }
 
+std::vector<Entity*> EntityManager::GetEnemiesOls()
+{
+	std::vector<Entity*> enemiesOls;
+
+	for (Entity* enemy : GetEnemies())
+	{
+		if (enemy->type == EntityType::ENEMY_OLS)
+		{
+			enemiesOls.push_back(enemy);
+		}
+	}
+
+	return enemiesOls;
+}
+
 bool EntityManager::PreUpdate()
 {
 	//Ejemplo a�adir sprite en los Start():	app->render->objectsToDraw.push_back({ textura, posicion X, posicion Y, punto de anclaje en Y = (posY + num), ancho, largo});
@@ -412,6 +427,35 @@ bool EntityManager::PreUpdate()
 				{
 					obj.x = enemy->position.x - 40;
 					obj.y = enemy->position.y - 65;
+				}
+				obj.anchorY = enemy->position.y + 200; // Según el sprite, añadir el valor que corresponda -> !0
+				if (enemy->currentAnimation != nullptr) {
+					obj.currentFrame = enemy->currentAnimation->GetCurrentFrame();
+				}
+				obj.isFacingLeft = enemy->isFacingLeft;
+				obj.isDynamic = true;
+				break;
+			}
+		}
+	}
+
+	for (Entity* entity : app->entityManager->GetEnemiesOls())
+	{
+		Enemy_Ols* enemy = static_cast<Enemy_Ols*>(entity);
+		// Rest of the code...
+
+		for (DrawableObject& obj : objectsToDraw)
+		{
+			if (obj.texture == enemy->texture)
+			{
+				if (enemy->isFacingLeft) {
+					obj.x = enemy->position.x - 130;
+					obj.y = enemy->position.y - 80;
+				}
+				else
+				{
+					obj.x = enemy->position.x - 130;
+					obj.y = enemy->position.y - 80;
 				}
 				obj.anchorY = enemy->position.y + 200; // Según el sprite, añadir el valor que corresponda -> !0
 				if (enemy->currentAnimation != nullptr) {
