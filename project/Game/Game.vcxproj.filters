@@ -238,7 +238,6 @@
     <ClCompile Include="Source\Enemy_Boorok.cpp">
       <Filter>Entities\Enemies</Filter>
     </ClCompile>
-<<<<<<< Updated upstream
     <ClCompile Include="Source\BestiarioManager.cpp">
       <Filter>Bestiario</Filter>
     </ClCompile>
@@ -277,7 +276,7 @@
     </ClCompile>
     <ClCompile Include="Source\Item_Saliva.cpp">
       <Filter>Entities\Items</Filter>
-=======
+	</ClCompile>
     <ClCompile Include="Source\ParticleSystem.cpp">
       <Filter>Modules\ParticleSystem</Filter>
     </ClCompile>
@@ -289,7 +288,6 @@
     </ClCompile>
     <ClCompile Include="Source\Particle.cpp">
       <Filter>Modules\ParticleSystem</Filter>
->>>>>>> Stashed changes
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -587,7 +585,6 @@
     <ClInclude Include="Source\Enemy_Boorok.h">
       <Filter>Entities\Enemies</Filter>
     </ClInclude>
-<<<<<<< Updated upstream
     <ClInclude Include="Source\Bestiario.h">
       <Filter>Bestiario</Filter>
     </ClInclude>
@@ -629,7 +626,7 @@
     </ClInclude>
     <ClInclude Include="Source\Item_Saliva.h">
       <Filter>Entities\Items</Filter>
-=======
+	</ClInclude>
     <ClInclude Include="Source\ParticleSystem.h">
       <Filter>Modules\ParticleSystem</Filter>
     </ClInclude>
@@ -641,7 +638,6 @@
     </ClInclude>
     <ClInclude Include="Source\Particle.h">
       <Filter>Modules\ParticleSystem</Filter>
->>>>>>> Stashed changes
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -708,7 +704,6 @@
     <Filter Include="Entities\Boss">
       <UniqueIdentifier>{02da5046-0df8-4942-bd9f-56acabcad68a}</UniqueIdentifier>
     </Filter>
-<<<<<<< Updated upstream
     <Filter Include="Bestiario">
       <UniqueIdentifier>{8601526c-a76c-4528-970c-40493ea69d1f}</UniqueIdentifier>
     </Filter>
@@ -717,22 +712,18 @@
     </Filter>
     <Filter Include="Entities\Chest">
       <UniqueIdentifier>{cf5f6a5d-42aa-4cba-a854-d5f3e8a6d10c}</UniqueIdentifier>
-=======
+	</Filter>
     <Filter Include="Modules\ParticleSystem">
       <UniqueIdentifier>{d69cbfff-9744-45d9-a030-8f3ce47d43b0}</UniqueIdentifier>
->>>>>>> Stashed changes
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Output\config.xml" />
     <Xml Include="..\Output\dialogs.xml" />
     <Xml Include="..\Output\save_game.xml" />
-<<<<<<< Updated upstream
     <Xml Include="..\Output\controls.xml" />
-=======
     <Xml Include="..\Output\psystem_config.xml">
       <Filter>Modules\ParticleSystem</Filter>
     </Xml>
->>>>>>> Stashed changes
   </ItemGroup>
 </Project>

@@ -95,12 +95,9 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-<<<<<<< Updated upstream
     <ClCompile Include="Source\BestiarioManager.cpp" />
     <ClCompile Include="Source\Cofre.cpp" />
-=======
     <ClCompile Include="Source\Emitter.cpp" />
->>>>>>> Stashed changes
     <ClCompile Include="Source\Enemy_Boorok.cpp" />
     <ClCompile Include="Source\Boss_Inuit.cpp" />
     <ClCompile Include="Source\Boss_Musri.cpp" />
@@ -195,13 +192,10 @@
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\ArmaduraInv.h" />
-<<<<<<< Updated upstream
     <ClInclude Include="Source\Bestiario.h" />
     <ClInclude Include="Source\BestiarioManager.h" />
     <ClInclude Include="Source\Cofre.h" />
-=======
     <ClInclude Include="Source\Emitter.h" />
->>>>>>> Stashed changes
     <ClInclude Include="Source\Enemy_Boorok.h" />
     <ClInclude Include="Source\Boss_Inuit.h" />
     <ClInclude Include="Source\Boss_Musri.h" />
