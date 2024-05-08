@@ -80,6 +80,17 @@ bool Enemy_Ols::Start() {
 	projectileDamage = config.attribute("projectileDamage").as_float();
 	projectileTexture = app->tex->Load(config.attribute("texturePathProjectile").as_string());
 
+	app->entityManager->objectsToDraw.push_back({
+		texture,
+		position.x, // x
+		position.y, // y
+		position.y + 98, // anchorY
+		100, // width
+		100, // height
+		NULL, // currentFrame
+		isFacingLeft
+	});
+
 	return true;
 }
 
@@ -149,10 +160,10 @@ bool Enemy_Ols::PostUpdate() {
 	}
 
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 120, position.y - 60, SDL_FLIP_HORIZONTAL, &rect);
+		//app->render->DrawTexture(texture, position.x - 120, position.y - 60, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 120, position.y - 60, SDL_FLIP_NONE, &rect);
+		//app->render->DrawTexture(texture, position.x - 120, position.y - 60, SDL_FLIP_NONE, &rect);
 	}
 
     if (attackSensor != nullptr)
