@@ -2,7 +2,7 @@
 <controls>
 	<binding id="0" pKey="8" pBut="0" />
 	<binding id="1" pKey="14" pBut="1" />
-	<binding id="2" pKey="19" pBut="6" />
+	<binding id="2" pKey="43" pBut="6" />
 	<binding id="3" pKey="7" nKey="4" pBut="14" nBut="13" isAxis="true" axis="0" />
 	<binding id="4" pKey="22" nKey="26" pBut="12" nBut="11" isAxis="true" axis="1" />
 	<binding id="5" isAxisButton="true" isPositive="false" bind="4"/>

@@ -97,7 +97,7 @@ void Cofre::OnCollision(PhysBody* physA, PhysBody* physB)
       {
           if (abierto == false)
           {
-              if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+              if (app->input->GetButton(CONFIRM) == KEY_DOWN)
               {
                   abierto = true;
 

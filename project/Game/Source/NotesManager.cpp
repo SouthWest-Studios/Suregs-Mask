@@ -265,7 +265,7 @@ void NotesManager::OnMovePointer()
 				PointerItemText = app->tex->Load(PointerPath);
 				pointer = true;
 			}
-			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && PointerPosition.x < 300 || vacio) {
+			if (app->input->GetButton(RIGHT) == KEY_DOWN && PointerPosition.x < 300 || vacio) {
 				if (PointerId == -1)
 				{
 					PointerId += 1;
@@ -282,12 +282,8 @@ void NotesManager::OnMovePointer()
 
 
 			}
-			/*if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN && PointerPosition.x > 176) {
-				PointerPosition.x -= 492;
-				PointerId -= 1;
-			}*/
 
-			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
+			if (app->input->GetButton(DOWN) == KEY_DOWN) {
 				if (PointerId + 1 < notes.Count())
 				{
 					PointerPosition.y += 83;
@@ -303,7 +299,7 @@ void NotesManager::OnMovePointer()
 
 
 			}
-			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
+			if (app->input->GetButton(UP) == KEY_DOWN) {
 				if (PointerId > 0)
 				{
 					PointerPosition.y -= 83;
@@ -357,7 +353,7 @@ bool NotesManager::Update(float dt)
 	{
 		OnMovePointer();
 
-		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
+		if (app->input->GetButton(SELECT) == KEY_DOWN) {
 			/*options = true;
 			selected = { PointerPosition.x, PointerPosition.y };
 			selectedId = PointerId;*/
@@ -365,7 +361,7 @@ bool NotesManager::Update(float dt)
 
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN && zoomIn == true) {
+		if (app->input->GetButton(APP_EXIT) == KEY_DOWN && zoomIn == true) {
 			ListItem<Note*>* item;
 			for (item = notes.start; item != NULL; item = item->next)
 			{
@@ -376,17 +372,6 @@ bool NotesManager::Update(float dt)
 
 		}
 
-
-			/*if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-			{
-				equiped = { PointerPosition.x, PointerPosition.y };
-				equipedId = PointerId;
-				UseNoteSelected(equipedId);
-				options = false;
-				selected = { -1000, -1000 };
-
-			}*/
-		/*}*/
 
 
 

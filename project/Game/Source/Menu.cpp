@@ -254,15 +254,15 @@ bool Menu::Update(float dt)
 
 		
 
-		if (fullScreen->selected && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		if (fullScreen->selected && (app->input->GetButton(SELECT) == KEY_DOWN))
 		{
 			fullScreen->click = !fullScreen->click;
 		}
-		if (vsync->selected && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		if (vsync->selected && (app->input->GetButton(SELECT) == KEY_DOWN))
 		{
 			vsync->click = !vsync->click;
 		}
-		if (title->selected && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		if (title->selected && (app->input->GetButton(SELECT) == KEY_DOWN))
 		{
 			title->click = true;
 		}

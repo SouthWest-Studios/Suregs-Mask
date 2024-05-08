@@ -59,7 +59,7 @@ bool GuiCheckBox::PostUpdate()
 
 			state = GuiControlState::FOCUSED;
 
-			if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) {
+			/*if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) {
 				state = GuiControlState::PRESSED;
 			}
 
@@ -68,7 +68,7 @@ bool GuiCheckBox::PostUpdate()
 				click = !click;
 
 				app->audio->PlayFx(select_audio);
-			}
+			}*/
 		}
 		else {
 			state = GuiControlState::NORMAL;

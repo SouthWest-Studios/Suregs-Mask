@@ -52,44 +52,44 @@ public:
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
 
-	SDL_Texture* menuMain;
-	SDL_Texture* menuMain2;
-	SDL_Texture* settings;
-	SDL_Texture* credits;
-	SDL_Texture* logo;
-	SDL_Texture* savedGames;
+	SDL_Texture* menuMain = nullptr;
+	SDL_Texture* menuMain2 = nullptr;
+	SDL_Texture* settings = nullptr;
+	SDL_Texture* credits = nullptr;
+	SDL_Texture* logo = nullptr;
+	SDL_Texture* savedGames = nullptr;
 
 
-	const char* menuMain_tp;
-	const char* menuMain2_tp;
-	const char* settings_tp;
-	const char* credits_tp;
-	const char* logo_tp;
-	const char* savedGames_tp;
+	const char* menuMain_tp = nullptr;
+	const char* menuMain2_tp = nullptr;
+	const char* settings_tp = nullptr;
+	const char* credits_tp = nullptr;
+	const char* logo_tp = nullptr;
+	const char* savedGames_tp = nullptr;
 
 	List<GuiControl*> controlsScene;
 	List<GuiControl*> controlsSettings;
-	GuiControl* gcCloseCredits;
-	GuiControl* gcCloseSavedGames;
-	GuiCheckBox* fullscreen;
-	GuiCheckBox* vsync;
+	GuiControl* gcCloseCredits = nullptr;
+	GuiControl* gcCloseSavedGames = nullptr;
+	GuiCheckBox* fullscreen = nullptr;
+	GuiCheckBox* vsync = nullptr;
 
 private:
 
-	Emitter* eMenu;
+	Emitter* eMenu = nullptr;
 
-	GuiControlButton* NuevaPartida;
-	GuiControlButton* Continuar;
+	GuiControlButton* NuevaPartida = nullptr;
+	GuiControlButton* Continuar = nullptr;
 
-	GuiControlButton* gcButtom;
-	GuiControlButton* exit;
-	GuiControlButton* atras;
-	GuiControlSlider* music;
-	GuiControlSlider* sfx;
+	GuiControlButton* gcButtom = nullptr;
+	GuiControlButton* exit = nullptr;
+	GuiControlButton* atras = nullptr;
+	GuiControlSlider* music = nullptr;
+	GuiControlSlider* sfx = nullptr;
 
-	GuiControlButton* partida1;
-	GuiControlButton* partida2;
-	GuiControlButton* partida3;
+	GuiControlButton* partida1 = nullptr;
+	GuiControlButton* partida2 = nullptr;
+	GuiControlButton* partida3 = nullptr;
 
 	bool vsyncActive = false;
 

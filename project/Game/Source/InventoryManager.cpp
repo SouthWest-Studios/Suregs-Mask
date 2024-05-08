@@ -693,20 +693,20 @@ void InventoryManager::UseItemSelected(int id)
 void InventoryManager::OnMovePointer()
 {
 
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && PointerPosition.x < 300) {
+	if (app->input->GetButton(RIGHT) == KEY_DOWN && PointerPosition.x < 300) {
 		PointerPosition.x += 106;
 		PointerId += 1;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN && PointerPosition.x > 176) {
+	if (app->input->GetButton(LEFT) == KEY_DOWN && PointerPosition.x > 176) {
 		PointerPosition.x -= 106;
 		PointerId -= 1;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && PointerPosition.y < 200) {
+	if (app->input->GetButton(DOWN) == KEY_DOWN && PointerPosition.y < 200) {
 		PointerPosition.y += 103;
 		PointerId += 3;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && PointerPosition.y > -60) {
+	if (app->input->GetButton(UP) == KEY_DOWN && PointerPosition.y > -60) {
 		PointerPosition.y -= 103;
 		PointerId -= 3;
 	}
@@ -750,16 +750,14 @@ bool InventoryManager::Update(float dt)
 	{
 		OnMovePointer();
 
-		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
+		if (app->input->GetButton(SELECT) == KEY_DOWN) {
 			options = true;
 			selected = { PointerPosition.x, PointerPosition.y };
 			selectedId = PointerId;
 
 		}
 
-		/*if (options == true)
-		{*/
-			if (app->input->GetKey(SDL_SCANCODE_BACKSPACE) == KEY_DOWN)
+			if (app->input->GetButton(BACK) == KEY_DOWN)
 			{
 				DestroyItemById(selectedId);
 				options = false;
@@ -767,16 +765,6 @@ bool InventoryManager::Update(float dt)
 
 			}
 
-			/*if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-			{
-				equiped = { PointerPosition.x, PointerPosition.y };
-				equipedId = PointerId;
-				UseItemSelected(equipedId);
-				options = false;
-				selected = { -1000, -1000 };
-
-			}*/
-		/*}*/
 
 
 
