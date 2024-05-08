@@ -12,7 +12,7 @@
 Item_Carbon::Item_Carbon(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
 	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_CARBON)
 {
-	name.Create("Item_Carbon");
+	name = ("Item_Carbon");
 }
 
 Item_Carbon::~Item_Carbon() {}

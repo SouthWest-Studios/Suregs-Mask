@@ -54,17 +54,17 @@ public:
 	bool visible = true;
 	bool menuu = false;
 
-	GuiControlSlider* music;
-	GuiControlSlider* sfx;
+	GuiControlSlider* music = nullptr;
+	GuiControlSlider* sfx = nullptr;
 	int ventana = 1;
 
 	pugi::xml_node config;
 
 private:
-	SDL_Texture* fondoInventario;
-	SDL_Texture* fondoEquipo;
-	SDL_Texture* fondoDiario;
-	SDL_Texture* fondoAjustes;
+	SDL_Texture* fondoInventario = nullptr;
+	SDL_Texture* fondoEquipo = nullptr;
+	SDL_Texture* fondoDiario = nullptr;
+	SDL_Texture* fondoAjustes = nullptr;
 	
 	int a = 0;
 	
@@ -74,12 +74,12 @@ private:
 	
 
 
-	GuiControlButton* gcButtom;
-	GuiControlButton* exit;
-	GuiCheckBox* fullScreen;
-	GuiCheckBox* vsync;
-	GuiControlButton* title;
-	GuiControlButton* cruz;
+	GuiControlButton* gcButtom = nullptr;
+	GuiControlButton* exit = nullptr;
+	GuiCheckBox* fullScreen = nullptr;
+	GuiCheckBox* vsync = nullptr;
+	GuiControlButton* title = nullptr;
+	GuiControlButton* cruz = nullptr;
 	
 
 	int inventory_audio;

@@ -15,7 +15,7 @@
 
 NPCMujerPreocupada::NPCMujerPreocupada() : Entity(EntityType::NPC_MUJER_PREOCUPADA)
 {
-	name.Create("npc_mujer_preocupada");
+	name = ("npc_mujer_preocupada");
 
 }
 
@@ -41,7 +41,7 @@ bool NPCMujerPreocupada::Start() {
 	Photowidth = config.attribute("Pwidth").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
-	idleAnim.LoadAnim((char*)name.GetString(), "idleAnim", spritePositions);
+	idleAnim.LoadAnim((char*)name.c_str(), "idleAnim", spritePositions);
 
 	std::string texturePath = config.attribute("texturePath").as_string();
 

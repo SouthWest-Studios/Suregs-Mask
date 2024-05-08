@@ -47,7 +47,7 @@ std::map<bool, double> isFishCaught = {
 
 MiniGameFishing::MiniGameFishing() : Entity(EntityType::ROD)
 {
-	name.Create("minigamefishing");
+	name = ("minigamefishing");
 
 }
 

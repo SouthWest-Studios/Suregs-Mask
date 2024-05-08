@@ -15,7 +15,7 @@
 
 NPCVendedor::NPCVendedor() : Entity(EntityType::NPC_VENDEDOR)
 {
-	name.Create("npc_vendedor");
+	name = ("npc_vendedor");
 
 }
 
@@ -41,7 +41,7 @@ bool NPCVendedor::Start() {
 	Photowidth = config.attribute("Pwidth").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
-	idleAnim.LoadAnim((char*)name.GetString(), "idleAnim", spritePositions);
+	idleAnim.LoadAnim((char*)name.c_str(), "idleAnim", spritePositions);
 
 	std::string texturePath = config.attribute("texturePath").as_string();
 

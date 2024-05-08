@@ -12,7 +12,7 @@
 Item_Pocion_Regeneracion::Item_Pocion_Regeneracion(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
 	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_POCION_REGENERACION)
 {
-	name.Create("item_pocion_regeneracion");
+	name = ("item_pocion_regeneracion");
 }
 
 Item_Pocion_Regeneracion::~Item_Pocion_Regeneracion() {}

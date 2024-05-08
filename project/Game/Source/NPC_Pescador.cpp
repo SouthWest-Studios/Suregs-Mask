@@ -15,7 +15,7 @@
 
 NPCPescador::NPCPescador() : Entity(EntityType::NPC_PESCADOR)
 {
-	name.Create("npc_pescador");
+	name = ("npc_pescador");
 
 }
 
@@ -41,7 +41,7 @@ bool NPCPescador::Start() {
 	Photowidth = config.attribute("Pwidth").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
-	idleAnim.LoadAnim((char*)name.GetString(), "idleAnim", spritePositions);
+	idleAnim.LoadAnim((char*)name.c_str(), "idleAnim", spritePositions);
 
 	std::string texturePath = config.attribute("texturePath").as_string();
 

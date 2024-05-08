@@ -15,7 +15,7 @@
 
 NPCBully1::NPCBully1() : Entity(EntityType::NPC_BULLY_1)
 {
-	name.Create("npc_bully1");
+	name = ("npc_bully1");
 
 }
 
@@ -41,7 +41,7 @@ bool NPCBully1::Start() {
 	Photowidth = config.attribute("Pwidth").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
-	idleAnim.LoadAnim((char*)name.GetString(), "idleAnim", spritePositions);
+	idleAnim.LoadAnim((char*)name.c_str(), "idleAnim", spritePositions);
 
 	std::string texturePath = config.attribute("texturePath").as_string();
 

@@ -331,9 +331,12 @@ public:
 	{ {EntityState::IDLE}, {EntityState::NONE}, {EntityState::NONE}, {EntityState::NONE}, {EntityState::NONE}, {EntityState::NONE}, {EntityState::NONE}, {EntityState::IDLE}} // NONE
 	};
 
-	EntityState currentState = state;
+	/*EntityState currentState = state;
 	EntityState desiredState = nextState; 
-	EntityState nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
+	EntityState nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;*/
+	EntityState currentState;
+	EntityState desiredState;
+	EntityState nextState;
 };
 
 

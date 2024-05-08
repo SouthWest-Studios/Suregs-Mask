@@ -17,7 +17,7 @@
 
 Scene_Mazmorra4::Scene_Mazmorra4(App* app, bool start_enabled) : Module(app, start_enabled)
 {
-	name.Create("scene_mazmorra4");
+	name = ("scene_mazmorra4");
 }
 
 // Destructor

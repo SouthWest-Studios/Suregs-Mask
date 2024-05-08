@@ -83,7 +83,7 @@ public:
 	char* npcPathTexture;
 
 
-	bool active; //Para saber si tiene que llamar al update o postUpdate del comercio o no.
+	bool active = false; //Para saber si tiene que llamar al update o postUpdate del comercio o no.
 
 
 	iPoint positionGeneral;
@@ -102,29 +102,29 @@ private:
 
 
 
-	SDL_Texture* backgroundTexture;
+	SDL_Texture* backgroundTexture = nullptr;
 
-	SDL_Texture* backgroundTradeTexture;
-	SDL_Texture* backgroundTradeHoverTexture;
-	SDL_Texture* backgroundSelectAllTexture;
-	SDL_Texture* backgroundSelectAllHoverTexture;
+	SDL_Texture* backgroundTradeTexture = nullptr;
+	SDL_Texture* backgroundTradeHoverTexture = nullptr;
+	SDL_Texture* backgroundSelectAllTexture = nullptr;
+	SDL_Texture* backgroundSelectAllHoverTexture = nullptr;
 
-	SDL_Texture* backgroundTradeItemTexture;
+	SDL_Texture* backgroundTradeItemTexture = nullptr;
 
-	SDL_Texture* backgroundSliderTexture;
-	SDL_Texture* knobSliderTexture;
+	SDL_Texture* backgroundSliderTexture = nullptr;
+	SDL_Texture* knobSliderTexture = nullptr;
 
-	SDL_Texture* backgroundConfirmTexture;
-	SDL_Texture* backgroundConfirmHoverTexture;
+	SDL_Texture* backgroundConfirmTexture = nullptr;
+	SDL_Texture* backgroundConfirmHoverTexture = nullptr;
 
-	SDL_Texture* backgroundButtonTexture;
-	SDL_Texture* backgroundButtonHoverTexture;
-	SDL_Texture* backgroundButtonDisabledTexture;
-	SDL_Texture* backgroundMoneyTexture;
+	SDL_Texture* backgroundButtonTexture = nullptr;
+	SDL_Texture* backgroundButtonHoverTexture = nullptr;
+	SDL_Texture* backgroundButtonDisabledTexture = nullptr;
+	SDL_Texture* backgroundMoneyTexture = nullptr;
 
-	SDL_Texture* backgroundDescriptionTexture;
+	SDL_Texture* backgroundDescriptionTexture = nullptr;
 
-	SDL_Texture* npcTexture;
+	SDL_Texture* npcTexture = nullptr;
 
 
 

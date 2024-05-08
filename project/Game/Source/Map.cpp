@@ -43,7 +43,7 @@
 
 Map::Map(App* app, bool start_enabled) : Module(app, start_enabled), mapLoaded(false)
 {
-	name.Create("map");
+	name = ("map");
 }
 
 // Destructor

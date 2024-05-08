@@ -12,7 +12,7 @@
 Item_Diente::Item_Diente(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
 	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_DIENTE)
 {
-	name.Create("item_dientte");
+	name = ("item_dientte");
 }
 
 Item_Diente::~Item_Diente() {}

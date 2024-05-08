@@ -211,7 +211,7 @@ protected:
 
 public:
 
-	SString name;
+	std::string name;
 	EntityType type;
 	bool active = true;
 	pugi::xml_node parameters; 

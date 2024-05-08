@@ -12,7 +12,7 @@
 
 Item::Item() : Entity(EntityType::ITEM)
 {
-	name.Create("item");
+	name = ("item");
 }
 
 Item::~Item() {}

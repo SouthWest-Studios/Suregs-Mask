@@ -41,9 +41,9 @@ public:
 	
 
 private:
-	SDL_Texture* sceneLogosTexture;
+	SDL_Texture* sceneLogosTexture = nullptr;
 	Animation SPosition;
-	SDL_Rect* spritePositions;
+	SDL_Rect* spritePositions = nullptr;
 	pugi::xml_node config;
 	int TSprite;
 	int SpriteX;

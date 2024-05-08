@@ -22,7 +22,7 @@
 
 Scene_Menu::Scene_Menu(App* app, bool start_enabled) : Module(app, start_enabled)
 {
-	name.Create("scene_menu");
+	name = ("scene_menu");
 }
 
 // Destructor

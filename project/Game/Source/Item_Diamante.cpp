@@ -13,7 +13,7 @@
 Item_Diamante::Item_Diamante(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
 	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_DIAMANTE)
 {
-	name.Create("item_diamante");
+	name = ("item_diamante");
 }
 
 Item_Diamante::~Item_Diamante() {}

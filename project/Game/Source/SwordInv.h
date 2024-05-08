@@ -12,7 +12,7 @@
 //public:
 //	Swordinv::Swordinv() : Inventity(InventityType::ESPADA)
 //	{
-//		name.Create("EspadaInv");
+//		name = ("EspadaInv");
 //	}
 //	
 //	/*virtual ~Swordinv();*/

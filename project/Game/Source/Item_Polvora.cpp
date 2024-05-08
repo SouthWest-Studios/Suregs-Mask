@@ -12,7 +12,7 @@
 Item_Polvora::Item_Polvora(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
 	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_POLVORA)
 {
-	name.Create("item_polvora");
+	name = ("item_polvora");
 }
 
 Item_Polvora::~Item_Polvora() {}

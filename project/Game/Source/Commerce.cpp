@@ -209,6 +209,7 @@ bool Commerce::LoadTextures()
 	npcTexture = app->tex->Load(npcPathTexture);
 
 	pointerIndexF = 0;
+	pointerIndexC = 0;
 	scrollY = 0;
 
 	

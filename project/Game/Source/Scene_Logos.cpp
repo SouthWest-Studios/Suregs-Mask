@@ -17,7 +17,7 @@
 #include "Menu.h"
 Scene_Logos::Scene_Logos(App* app, bool start_enabled) : Module(app, start_enabled)
 {
-	name.Create("scene_logos");
+	name = ("scene_logos");
 }
 
 // Destructor
@@ -113,7 +113,7 @@ bool Scene_Logos::Update(float dt)
 // Called each loop iteration
 bool Scene_Logos::PostUpdate()
 {
-	currentAnimation = &sceneLogos;
+	
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	app->render->DrawTexture(sceneLogosTexture, 0,0, 1, SDL_FLIP_NONE, &rect, 0);
 

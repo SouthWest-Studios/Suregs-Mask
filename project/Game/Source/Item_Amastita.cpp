@@ -12,7 +12,7 @@
 Item_Amatista::Item_Amatista(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
 	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_AMATISTA)
 {
-	name.Create("item_amatista");
+	name = ("item_amatista");
 }
 
 Item_Amatista::~Item_Amatista() {}

@@ -12,7 +12,7 @@
 Item_Pocion_Dano::Item_Pocion_Dano(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
 	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_POCION_DANO)
 {
-	name.Create("item_pocion_dano");
+	name = ("item_pocion_dano");
 }
 
 Item_Pocion_Dano::~Item_Pocion_Dano() {}

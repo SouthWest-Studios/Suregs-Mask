@@ -12,7 +12,7 @@
 
 TPEntity::TPEntity() : Entity(EntityType::TP_ENTITY)
 {
-	name.Create("TPEntity");
+	name = ("TPEntity");
 }
 
 TPEntity::~TPEntity() {}

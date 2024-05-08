@@ -22,7 +22,13 @@
 
 
 Enemy_Osiris::Enemy_Osiris() : Entity(EntityType::ENEMY_OSIRIS){
-	name.Create("osiris");
+	name = ("osiris");
+
+	state = EntityState_Enemy::IDLE;
+	nextState = EntityState_Enemy::IDLE;
+	currentState = state;
+	desiredState = nextState;
+	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
 
 }
 

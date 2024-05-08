@@ -12,7 +12,7 @@
 Item_Saliva::Item_Saliva(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
 	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_SALIVA)
 {
-	name.Create("item_saliva");
+	name = ("item_saliva");
 }
 
 Item_Saliva::~Item_Saliva() {}

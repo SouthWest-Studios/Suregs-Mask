@@ -12,7 +12,7 @@
 Item_Viscera::Item_Viscera(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
 	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_VISCERAS)
 {
-	name.Create("item_viscera");
+	name = ("item_viscera");
 }
 
 Item_Viscera::~Item_Viscera() {}

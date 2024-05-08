@@ -24,7 +24,7 @@
 
 Cofre::Cofre() : Entity(EntityType::COFRE)
 {
-	name.Create("cofre");
+	name = "cofre";
 }
 
 Cofre::~Cofre() {}

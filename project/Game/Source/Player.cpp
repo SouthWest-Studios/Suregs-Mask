@@ -22,7 +22,12 @@
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
-	name.Create("player");
+	name = ("player");
+	state = EntityState::IDLE;
+	nextState = EntityState::IDLE;
+	currentState = state;
+	desiredState = nextState;
+	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
 
 	// Inicializa las estadísticas base
 	baseStats.maxHealth = 100;
@@ -1031,7 +1036,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			if (physB->listener->active) {
 				if (app->inventoryManager->IsFull() == false)
 				{
-					app->inventoryManager->CreateItem(physB->listener->type, physB->listener->description, physB->listener->tipo, physB->listener->name.GetString());
+					app->inventoryManager->CreateItem(physB->listener->type, physB->listener->description, physB->listener->tipo, physB->listener->name.c_str());
 					physB->listener->active = false;
 					physB->body->SetActive(false);
 				}

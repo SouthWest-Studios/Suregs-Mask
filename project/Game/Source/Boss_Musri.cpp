@@ -24,7 +24,7 @@
 
 
 Boss_Musri::Boss_Musri() : Entity(EntityType::BOSS_MUSRI) {
-	name.Create("boss_musri");
+	name = ("boss_musri");
 
 }
 
@@ -48,10 +48,10 @@ bool Boss_Musri::Start() {
 	Photowidth = config.attribute("Pwidth").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
-	idleAnim.LoadAnim((char*)name.GetString(), "idleAnim", spritePositions);
-	attackEmpujarAnim.LoadAnim((char*)name.GetString(), "attackEmpujarAnim", spritePositions);;
-	attackFlechasRapidasAnim.LoadAnim((char*)name.GetString(), "attackFlechasRapidas", spritePositions);;
-	attackFlechaCargadaAnim.LoadAnim((char*)name.GetString(), "attackFlechaCargada", spritePositions);;
+	idleAnim.LoadAnim((char*)name.c_str(), "idleAnim", spritePositions);
+	attackEmpujarAnim.LoadAnim((char*)name.c_str(), "attackEmpujarAnim", spritePositions);;
+	attackFlechasRapidasAnim.LoadAnim((char*)name.c_str(), "attackFlechasRapidas", spritePositions);;
+	attackFlechaCargadaAnim.LoadAnim((char*)name.c_str(), "attackFlechaCargada", spritePositions);;
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 

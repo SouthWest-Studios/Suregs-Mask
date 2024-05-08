@@ -134,10 +134,8 @@ public:
 		{ {EntityState::IDLE},	  {EntityState::IDLE},	    {EntityState::DEAD},	 {EntityState::IDLE},	  {EntityState::IDLE},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK}} // MASK_ATTACK
 	};
 
-	EntityState currentState = state;
-
-
-	EntityState nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(currentState)].next_state;
+	EntityState currentState;
+	EntityState nextState;
 
 };
 

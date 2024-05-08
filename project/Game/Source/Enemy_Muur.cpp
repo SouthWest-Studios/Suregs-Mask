@@ -23,7 +23,10 @@
 
 
 Enemy_Muur::Enemy_Muur() : Entity(EntityType::ENEMY_MUUR) {
-	name.Create("muur");
+	name = ("muur");
+	state = EntityState::IDLE;
+	currentState = state;
+	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(currentState)].next_state;
 
 }
 

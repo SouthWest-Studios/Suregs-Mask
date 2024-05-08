@@ -12,7 +12,7 @@
 Item_Pocion_Velocidad::Item_Pocion_Velocidad(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
 	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_POCION_VELOCIDAD)
 {
-	name.Create("item_pocion_velocidad");
+	name = ("item_pocion_velocidad");
 }
 
 Item_Pocion_Velocidad::~Item_Pocion_Velocidad() {}

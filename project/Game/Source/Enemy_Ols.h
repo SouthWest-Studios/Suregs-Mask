@@ -149,9 +149,13 @@ public:
 		{ {EntityState_Enemy::IDLE}, {EntityState_Enemy::NONE}, {EntityState_Enemy::NONE}, {EntityState_Enemy::NONE}, {EntityState_Enemy::NONE}, {EntityState_Enemy::NONE},  {EntityState_Enemy::IDLE}} // NONE
 	};
 
-	EntityState_Enemy currentState = state;
+	/*EntityState_Enemy currentState = state;
 	EntityState_Enemy desiredState = nextState;
-	EntityState_Enemy nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
+	EntityState_Enemy nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;*/
+
+	EntityState_Enemy currentState;
+	EntityState_Enemy desiredState;
+	EntityState_Enemy nextState;
 
 };
 

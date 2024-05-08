@@ -12,7 +12,7 @@
 Item_Pocion_Vida_Max::Item_Pocion_Vida_Max(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
 	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_POCION_VIDA_MAX)
 {
-	name.Create("item_pocion_vida_max");
+	name = ("item_pocion_vida_max");
 }
 
 Item_Pocion_Vida_Max::~Item_Pocion_Vida_Max() {}

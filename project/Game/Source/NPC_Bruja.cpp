@@ -15,7 +15,7 @@
 
 NPCBruja::NPCBruja() : Entity(EntityType::NPC_BRUJA)
 {
-	name.Create("npc_bruja");
+	name = ("npc_bruja");
 
 }
 
@@ -41,7 +41,7 @@ bool NPCBruja::Start() {
 	Photowidth = config.attribute("Pwidth").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
-	idleAnim.LoadAnim((char*)name.GetString(), "idleAnim", spritePositions);
+	idleAnim.LoadAnim((char*)name.c_str(), "idleAnim", spritePositions);
 
 	std::string texturePath = config.attribute("texturePath").as_string();
 

@@ -15,7 +15,7 @@
 
 NPCMujerEnamorada::NPCMujerEnamorada() : Entity(EntityType::NPC_MUJER_ENAMORADA)
 {
-	name.Create("npc_mujer_enamorada");
+	name = ("npc_mujer_enamorada");
 
 }
 
@@ -41,7 +41,7 @@ bool NPCMujerEnamorada::Start() {
 	Photowidth = config.attribute("Pwidth").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
-	idleAnim.LoadAnim((char*)name.GetString(), "idleAnim", spritePositions);
+	idleAnim.LoadAnim((char*)name.c_str(), "idleAnim", spritePositions);
 
 	std::string texturePath = config.attribute("texturePath").as_string();
 

@@ -12,7 +12,7 @@
 Item_Cola::Item_Cola(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
 	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_COLA)
 {
-	name.Create("Item_Cola");
+	name = ("Item_Cola");
 }
 
 Item_Cola::~Item_Cola() {}

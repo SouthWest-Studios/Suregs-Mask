@@ -10,7 +10,7 @@
 
 GuiManager::GuiManager(App* app, bool start_enabled) : Module(app, start_enabled)
 {
-	name.Create("guiManager");
+	name = ("guiManager");
 }
 
 GuiManager::~GuiManager() {}

@@ -12,7 +12,7 @@
 Item_Hueso::Item_Hueso(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
 	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_HUESO)
 {
-	name.Create("item_hueso");
+	name = ("item_hueso");
 }
 
 Item_Hueso::~Item_Hueso() {}

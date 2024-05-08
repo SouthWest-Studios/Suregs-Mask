@@ -15,7 +15,7 @@
 
 NPCHerrera::NPCHerrera() : Entity(EntityType::NPC_HERRERA)
 {
-	name.Create("npc_herrera");
+	name = ("npc_herrera");
 
 }
 
@@ -41,7 +41,7 @@ bool NPCHerrera::Start() {
 	Photowidth = config.attribute("Pwidth").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
-	idleAnim.LoadAnim((char*)name.GetString(), "idleAnim", spritePositions);
+	idleAnim.LoadAnim((char*)name.c_str(), "idleAnim", spritePositions);
 
 	std::string texturePath = config.attribute("texturePath").as_string();
 

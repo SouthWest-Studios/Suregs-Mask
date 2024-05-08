@@ -12,7 +12,7 @@ class DiamanteInv : public Inventity
 public:
 	DiamanteInv::DiamanteInv() : Inventity(InventityType::DIAMANTE)
 	{
-		name.Create("DiamanteInv");
+		name = ("DiamanteInv");
 	}
 	
 	/*virtual ~Swordinv();*/

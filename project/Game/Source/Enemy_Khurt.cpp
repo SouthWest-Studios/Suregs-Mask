@@ -23,7 +23,10 @@
 
 
 Enemy_Khurt::Enemy_Khurt() : Entity(EntityType::ENEMY_KHURT) {
-	name.Create("khurt");
+	name = ("khurt");
+	state = EntityState::IDLE;
+	currentState = state;
+	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(currentState)].next_state;
 
 }
 

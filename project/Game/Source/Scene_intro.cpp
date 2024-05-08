@@ -16,7 +16,7 @@
 #include "Menu.h"
 Scene_Intro::Scene_Intro(App* app, bool start_enabled) : Module(app, start_enabled)
 {
-	name.Create("scene_intro");
+	name = ("scene_intro");
 }
 
 // Destructor

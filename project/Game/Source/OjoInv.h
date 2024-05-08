@@ -12,7 +12,7 @@ class OjoInv : public Inventity
 public:
 	OjoInv::OjoInv() : Inventity(InventityType::OJO)
 	{
-		name.Create("OjoInv");
+		name = ("OjoInv");
 	}
 	
 	/*virtual ~Swordinv();*/

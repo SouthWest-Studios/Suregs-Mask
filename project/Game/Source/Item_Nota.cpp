@@ -13,7 +13,7 @@
 Item_Nota::Item_Nota(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
 	: type(type), id(id), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_NOTA)
 {
-	name.Create("item_nota");
+	name = ("item_nota");
 }
 
 Item_Nota::~Item_Nota() {}

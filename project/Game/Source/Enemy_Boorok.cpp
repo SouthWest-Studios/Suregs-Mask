@@ -21,7 +21,10 @@
 
 
 Enemy_Boorok::Enemy_Boorok() : Entity(EntityType::ENEMY_BOOROK) {
-	name.Create("boorok");
+	name = ("boorok");
+	state = EntityState::IDLE;
+	currentState = state;
+	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(currentState)].next_state;
 
 }
 

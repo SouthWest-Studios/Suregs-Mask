@@ -12,7 +12,7 @@
 Item_Garra::Item_Garra(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
 	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_GARRA)
 {
-	name.Create("item_garra");
+	name = ("item_garra");
 }
 
 Item_Garra::~Item_Garra() {}

@@ -15,7 +15,7 @@
 
 DialogTrigger::DialogTrigger() : Entity(EntityType::DIALOG_TRIGGER)
 {
-	name.Create("dialogTrigger");
+	name = ("dialogTrigger");
 }
 
 DialogTrigger::~DialogTrigger() {}

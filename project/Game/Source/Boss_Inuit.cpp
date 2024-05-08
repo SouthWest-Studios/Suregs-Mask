@@ -23,7 +23,7 @@
 
 
 Boss_Inuit::Boss_Inuit() : Entity(EntityType::BOSS_INUIT) {
-	name.Create("boss_inuit");
+	name = ("boss_inuit");
 
 }
 

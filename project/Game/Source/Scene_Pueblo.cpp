@@ -17,7 +17,7 @@
 
 Scene_Pueblo::Scene_Pueblo(App* app, bool start_enabled) : Module(app, start_enabled)
 {
-	name.Create("scene_pueblo");
+	name = ("scene_pueblo");
 }
 
 // Destructor

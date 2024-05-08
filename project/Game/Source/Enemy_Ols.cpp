@@ -22,7 +22,13 @@
 
 
 Enemy_Ols::Enemy_Ols() : Entity(EntityType::ENEMY_OLS), maxHealth(350.0f), health(350.0f), speed(1.0f){
-	name.Create("ols");
+	name = ("ols");
+	state = EntityState_Enemy::IDLE;
+	nextState = EntityState_Enemy::IDLE;
+	currentState = state;
+	desiredState = nextState;
+	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
+
 }
 
 Enemy_Ols::~Enemy_Ols() {

@@ -15,7 +15,7 @@
 
 NPCAbuelo::NPCAbuelo() : Entity(EntityType::NPC_ABUELO)
 {
-	name.Create("npc_abuelo");
+	name = ("npc_abuelo");
 
 }
 
@@ -41,7 +41,7 @@ bool NPCAbuelo::Start() {
 	Photowidth = config.attribute("Pwidth").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
-	idleAnim.LoadAnim((char*)name.GetString(), "idleAnim", spritePositions);
+	idleAnim.LoadAnim((char*)name.c_str(), "idleAnim", spritePositions);
 
 	std::string texturePath = config.attribute("texturePath").as_string();
 

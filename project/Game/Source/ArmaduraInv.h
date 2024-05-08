@@ -14,7 +14,7 @@ public:
 	
 	ArmaduraInv::ArmaduraInv() : Inventity(InventityType::ARMADURA)
 	{
-		name.Create("ArmaduraInv");
+		name = ("ArmaduraInv");
 	}
 	//virtual ~ArmaduraInv();
 

@@ -12,7 +12,7 @@
 Item_Rubi::Item_Rubi(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
 	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_RUBI)
 {
-	name.Create("item_rubi");
+	name = ("item_rubi");
 }
 
 Item_Rubi::~Item_Rubi() {}

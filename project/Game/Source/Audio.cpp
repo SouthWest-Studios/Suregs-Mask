@@ -15,7 +15,7 @@
 Audio::Audio(App* app, bool start_enabled) : Module(app, start_enabled)
 {
 	music = NULL;
-	name.Create("audio");
+	name = ("audio");
 }
 
 // Destructor

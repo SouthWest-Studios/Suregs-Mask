@@ -23,7 +23,7 @@
 
 Scene_GameOver::Scene_GameOver(App* app, bool start_enabled) : Module(app, start_enabled)
 {
-	name.Create("scene_gameover");
+	name = ("scene_gameover");
 }
 
 // Destructor

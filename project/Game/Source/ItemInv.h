@@ -14,7 +14,7 @@ public:
 	
 	Iteminv::Iteminv() : Inventity(InventityType::ITEM)
 	{
-		name.Create("ItemInv");
+		name = ("ItemInv");
 	}
 
 

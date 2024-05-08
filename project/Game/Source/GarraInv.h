@@ -12,7 +12,7 @@ class GarraInv : public Inventity
 public:
 	GarraInv::GarraInv() : Inventity(InventityType::GARRA)
 	{
-		name.Create("GarraInv");
+		name = ("GarraInv");
 	}
 	
 	/*virtual ~Swordinv();*/

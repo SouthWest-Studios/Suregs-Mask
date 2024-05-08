@@ -12,7 +12,7 @@
 Item_Pocion_Vida_2::Item_Pocion_Vida_2(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
 	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_POCION_VIDA_2)
 {
-	name.Create("item_pocion_vida_2");
+	name = ("item_pocion_vida_2");
 }
 
 Item_Pocion_Vida_2::~Item_Pocion_Vida_2() {}
