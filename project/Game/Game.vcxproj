@@ -137,6 +137,7 @@
     <ClCompile Include="Source\Item_Pocion_Vida_Max.cpp" />
     <ClCompile Include="Source\Item_Polvora.cpp" />
     <ClCompile Include="Source\Item_Rubi.cpp" />
+    <ClCompile Include="Source\Item_Saliva.cpp" />
     <ClCompile Include="Source\Item_Viscera.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\App.cpp" />
@@ -236,6 +237,7 @@
     <ClInclude Include="Source\Item_Pocion_Vida_Max.h" />
     <ClInclude Include="Source\Item_Polvora.h" />
     <ClInclude Include="Source\Item_Rubi.h" />
+    <ClInclude Include="Source\Item_Saliva.h" />
     <ClInclude Include="Source\Item_Viscera.h" />
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\Menu.h" />

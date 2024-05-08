@@ -34,6 +34,7 @@
 #include "Item_Pocion_Vida_2.h"
 #include "Item_Pocion_Vida_3.h"
 #include "Item_Pocion_Vida_Max.h"
+#include "Item_Saliva.h"
 
 Scene_testing::Scene_testing(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -240,6 +241,11 @@ bool Scene_testing::Start()
 	pocion_vida_max->config = configNode.child("entities_data").child("item_pocion_vida_max");
 	pocion_vida_max->position = iPoint(1873, 2255);
 	pocion_vida_max->Start();
+
+	Item_Saliva* saliva = (Item_Saliva*)app->entityManager->CreateEntity(EntityType::ITEM_SALIVA);
+	saliva->config = configNode.child("entities_data").child("item_saliva");
+	saliva->position = iPoint(1823, 2455);
+	saliva->Start();
 
 	return true;
 }

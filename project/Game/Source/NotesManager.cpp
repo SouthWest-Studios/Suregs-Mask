@@ -497,7 +497,7 @@ bool NotesManager::PostUpdate()
 				{
 					app->render->DrawTexture(itum->data->closeUpNotes, 400, 100, SDL_FLIP_NONE, 0, 0);
 					/*app->render->DrawText(itum->data->desc.c_str(), 450, 200, 270, 400, 0, 0, 0, 0, false);*/
-					app->render->DrawTextBound(itum->data->desc.c_str(), 450, 200, 370, { 0,0,0 });
+					app->render->DrawTextBound(itum->data->desc.c_str(), 445, 200, 370, { 0,0,0 });
 				}
 			}
 		}

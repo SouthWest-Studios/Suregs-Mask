@@ -14,6 +14,7 @@
 #include "Map.h"
 #include "Physics.h"
 #include "Item_Hueso.h"
+#include "Item_Cola.h"
 #include <Optick/include/optick.h>
 #include "Utils.cpp"
 
@@ -256,11 +257,11 @@ void Enemy_Muur::Die() {
 	float randomValue = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
 
 	// Determina si el item debe crearse basado en un 30% de probabilidad
-	if (randomValue <= 0.25f) {
-		Item_Hueso* hueso = (Item_Hueso*)app->entityManager->CreateEntity(EntityType::ITEM_HUESO);
-		hueso->config = configNode.child("entities_data").child("item_hueso");
-		hueso->position = iPoint(position.x, position.y);
-		hueso->Start();
+	if (randomValue <= 0.30f) {
+		Item_Cola* cola = (Item_Cola*)app->entityManager->CreateEntity(EntityType::ITEM_COLA);
+		cola->config = configNode.child("entities_data").child("item_cola");
+		cola->position = iPoint(position.x, position.y);
+		cola->Start();
 	}
 	app->entityManager->GetPlayer()->playerXP += 20;
 	//printf("Current XP %i \n", app->entityManager->GetPlayer()->playerXP);
