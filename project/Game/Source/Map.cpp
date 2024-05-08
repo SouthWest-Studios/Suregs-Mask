@@ -19,6 +19,7 @@
 #include <vector>
 #include "DialogTriggerEntity.h"
 #include "Item_Garra.h"
+#include "Item_Nota.h"
 #include "NPC_Vendedor.h"
 #include "NPC_Pescador.h"
 #include "NPC_Abuelo.h"
@@ -43,7 +44,7 @@
 
 Map::Map(App* app, bool start_enabled) : Module(app, start_enabled), mapLoaded(false)
 {
-	name = ("map");
+	name.Create("map");
 }
 
 // Destructor
@@ -1204,6 +1205,14 @@ bool Map::LoadEntities(std::string layerName)
 							cofre->Start();
 						
 					}
+					/*NOTA*/
+					/*if (gid == tileset->firstgid + 42) {
+						Item_Nota* nota = (Item_Nota*)app->entityManager->CreateEntity(EntityType::ITEM_NOTA);
+						nota->config = configNode.child("entities_data").child("item_nota");
+						nota->position = iPoint(pos.x + 16, pos.y + 16);
+						nota->Start();
+
+					}*/
 				}
 			}
 

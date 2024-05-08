@@ -153,7 +153,9 @@ bool Commerce::ApplyTrades()
 			}
 			else {
 				inventity.quantity = trade->quantityOffered.at(j);
-				app->inventoryManager->AddItem(&inventity);
+				/*inventity.quantity = trade->quantityOffered.at(j) * trade->quantityTraded;*/
+				/*app->inventoryManager->AddItem(&inventity);*/
+				app->inventoryManager->CreateItem(inventity.type, true);
 			}
 
 			
