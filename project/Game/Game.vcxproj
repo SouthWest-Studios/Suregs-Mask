@@ -95,8 +95,12 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+<<<<<<< Updated upstream
     <ClCompile Include="Source\BestiarioManager.cpp" />
     <ClCompile Include="Source\Cofre.cpp" />
+=======
+    <ClCompile Include="Source\Emitter.cpp" />
+>>>>>>> Stashed changes
     <ClCompile Include="Source\Enemy_Boorok.cpp" />
     <ClCompile Include="Source\Boss_Inuit.cpp" />
     <ClCompile Include="Source\Boss_Musri.cpp" />
@@ -161,6 +165,9 @@
     <ClCompile Include="Source\NPC_MujerPreocupada.cpp" />
     <ClCompile Include="Source\NPC_Pescador.cpp" />
     <ClCompile Include="Source\NPC_Vendedor.cpp" />
+    <ClCompile Include="Source\Particle.cpp" />
+    <ClCompile Include="Source\ParticlePool.cpp" />
+    <ClCompile Include="Source\ParticleSystem.cpp" />
     <ClCompile Include="Source\Pathfinding.cpp" />
     <ClCompile Include="Source\PerfTimer.cpp" />
     <ClCompile Include="Source\Physics.cpp" />
@@ -188,9 +195,13 @@
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\ArmaduraInv.h" />
+<<<<<<< Updated upstream
     <ClInclude Include="Source\Bestiario.h" />
     <ClInclude Include="Source\BestiarioManager.h" />
     <ClInclude Include="Source\Cofre.h" />
+=======
+    <ClInclude Include="Source\Emitter.h" />
+>>>>>>> Stashed changes
     <ClInclude Include="Source\Enemy_Boorok.h" />
     <ClInclude Include="Source\Boss_Inuit.h" />
     <ClInclude Include="Source\Boss_Musri.h" />
@@ -259,6 +270,9 @@
     <ClInclude Include="Source\NPC_Pescador.h" />
     <ClInclude Include="Source\NPC_Vendedor.h" />
     <ClInclude Include="Source\OjoInv.h" />
+    <ClInclude Include="Source\Particle.h" />
+    <ClInclude Include="Source\ParticlePool.h" />
+    <ClInclude Include="Source\ParticleSystem.h" />
     <ClInclude Include="Source\Pathfinding.h" />
     <ClInclude Include="Source\PerfTimer.h" />
     <ClInclude Include="Source\Physics.h" />
@@ -305,6 +319,7 @@
     <Xml Include="..\Output\config.xml" />
     <Xml Include="..\Output\controls.xml" />
     <Xml Include="..\Output\dialogs.xml" />
+    <Xml Include="..\Output\psystem_config.xml" />
     <Xml Include="..\Output\save_game.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

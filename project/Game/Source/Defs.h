@@ -70,7 +70,10 @@ inline double lerp(double A, double B, double t) {
 	return A + (B - A) * t;
 }
 
-
+// Maths calculations
+#define PI 3.14159265359f
+#define DEG_2_RAD(a) a * PI / 180.0f
+#define RAD_2_DEG(a) a * 180.0f / PI
 
 
 
