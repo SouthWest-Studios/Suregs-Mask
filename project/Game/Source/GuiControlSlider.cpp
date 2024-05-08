@@ -51,12 +51,12 @@ bool GuiControlSlider::PostUpdate()
             {
                 state = GuiControlState::PRESSED;
             }*/
-            if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && value >= 0)
+            if (app->input->GetButton(LEFT) == KEY_REPEAT && value >= 0)
             {
                 value--;
 
             }
-            if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && value <= 100)
+            if (app->input->GetButton(RIGHT) == KEY_REPEAT && value <= 100)
             {
                 value++;
 

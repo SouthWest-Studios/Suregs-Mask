@@ -86,21 +86,21 @@ bool GuiManager::Update(float dt)
 			minId = 100;
 			maxId = 104;
 		}
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
+		if (app->input->GetButton(UP) == KEY_DOWN) {
 			NavigateUp();
 			app->audio->PlayFx(button_audio);
 		}
-		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
+		if (app->input->GetButton(DOWN) == KEY_DOWN) {
 			NavigateDown();
 			app->audio->PlayFx(button_audio);
 		}
 		if (app->menu->music != nullptr)
 		{
-			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && app->menu->music->selected == false && app->menu->sfx->selected == false) {
+			if (app->input->GetButton(RIGHT) == KEY_DOWN && app->menu->music->selected == false && app->menu->sfx->selected == false) {
 				NavigateRight();
 				app->audio->PlayFx(button_audio);
 			}
-			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN && app->menu->music->selected == false && app->menu->sfx->selected == false) {
+			if (app->input->GetButton(LEFT) == KEY_DOWN && app->menu->music->selected == false && app->menu->sfx->selected == false) {
 				NavigateLeft();
 				app->audio->PlayFx(button_audio);
 			}

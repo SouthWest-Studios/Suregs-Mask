@@ -495,11 +495,11 @@ void Scene_Menu::SettingsInterface()
 		}
 
 
-		if (fullscreen->selected && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		if (fullscreen->selected && (app->input->GetButton(CONFIRM) == KEY_DOWN || app->input->GetButton(SELECT) == KEY_DOWN))
 		{
 			fullscreen->click = !fullscreen->click;
 		}
-		if (vsync->selected && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		if (vsync->selected && (app->input->GetButton(CONFIRM) == KEY_DOWN || app->input->GetButton(SELECT) == KEY_DOWN))
 		{
 			vsync->click = !vsync->click;
 		}

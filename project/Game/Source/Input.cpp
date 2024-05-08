@@ -96,12 +96,34 @@ bool Input::Awake(pugi::xml_node config)
 		.SetPKey(SDL_SCANCODE_J);
 		
 	bindings[ATAQUE_HABILIDAD]
-		.SetPButton(SDL_CONTROLLER_BUTTON_Y)
+		//.SetPButton(SDL_CONTROLLER_BUTTON_Y)
+		.SetAxis(SDL_CONTROLLER_AXIS_TRIGGERRIGHT)
 		.SetPKey(SDL_SCANCODE_K);
 
 	bindings[INTERCAMBIAR_MASCARAS]
 		.SetPButton(SDL_CONTROLLER_BUTTON_RIGHTSHOULDER)
 		.SetPKey(SDL_SCANCODE_L);
+
+	bindings[CAMBIAR_PESTANA_LEFT]
+		.SetPButton(SDL_CONTROLLER_BUTTON_LEFTSHOULDER)
+		.SetPKey(SDL_SCANCODE_Q);
+
+	bindings[CAMBIAR_PESTANA_RIGHT]
+		.SetPButton(SDL_CONTROLLER_BUTTON_RIGHTSHOULDER)
+		.SetPKey(SDL_SCANCODE_E);
+
+	bindings[UTILIZAR_POCION]
+		.SetAxis(SDL_CONTROLLER_AXIS_TRIGGERLEFT)
+		.SetPKey(SDL_SCANCODE_Q);
+
+	bindings[CAMBIAR_POCION_LEFT]
+		.SetPKey(SDL_SCANCODE_R);
+
+	bindings[CAMBIAR_POCION_RIGHT]
+		.SetPButton(SDL_CONTROLLER_BUTTON_LEFTSHOULDER)
+		.SetPKey(SDL_SCANCODE_T);
+
+
 
 	pugi::xml_document controlsDoc;
 	pugi::xml_parse_result result = controlsDoc.load_file(filePath.GetString());

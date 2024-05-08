@@ -13,6 +13,11 @@
 	<binding id="10" pKey="13" pBut="0"/>
 	<binding id="11" pKey="44" pBut="2"/>
 	<binding id="12" pKey="13" pBut="1"/>
-	<binding id="13" pKey="14" pBut="3"/>
+	<binding id="13" pKey="14" isAxis="true" axis="5"/>
 	<binding id="14" pKey="15" pBut="10"/>
+	<binding id="15" pKey="20" pBut="9"/>
+	<binding id="16" pKey="8" pBut="10"/>
+	<binding id="17" pKey="20" isAxis="true" axis="4"/>
+	<binding id="18" pKey="21"/>
+	<binding id="19" pKey="23" PBut="9"/>
 </controls>

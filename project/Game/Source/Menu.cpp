@@ -80,7 +80,7 @@ bool Menu::PreUpdate()
 // Called each loop iteration
 bool Menu::Update(float dt)
 {
-	if (app->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN)
+	if (app->input->GetButton(PAUSE) == KEY_DOWN)
 	{
 		app->guiManager->minId = 100;
 		app->guiManager->maxId = 104;
@@ -91,7 +91,7 @@ bool Menu::Update(float dt)
 
 		app->audio->PlayFx(inventory_audio);
 	}
-	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN && app->notesManager->zoomIn == false && app->bestiarioManager->zoomIn == false)
+	if (app->input->GetButton(APP_EXIT) == KEY_DOWN && app->notesManager->zoomIn == false && app->bestiarioManager->zoomIn == false)
 	{
 		menuu = !menuu;
 		ventana = 4;
@@ -105,7 +105,7 @@ bool Menu::Update(float dt)
 			ventana++;
 		}
 		
-		if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
+		if (app->input->GetButton(CAMBIAR_PESTANA_RIGHT) == KEY_DOWN)
 		{
 			if (ventana == 4)
 			{
@@ -118,7 +118,7 @@ bool Menu::Update(float dt)
 
 			app->audio->PlayFx(change_inventory_audio);
 		}
-		if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN)
+		if (app->input->GetButton(CAMBIAR_PESTANA_LEFT) == KEY_DOWN)
 		{
 			if (ventana == 1)
 			{

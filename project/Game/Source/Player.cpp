@@ -1868,7 +1868,7 @@ void Player::PlayerMovement(float dt)
 
 	//Si pulsas K para mascara principal
 
-	if (app->input->GetButton(ATAQUE_HABILIDAD) == KEY_DOWN &&
+	if ((app->input->GetButton(ATAQUE_HABILIDAD) == KEY_DOWN || app->input->GetAxis(ATAQUE_HABILIDAD) != 0) &&
 		(timerMaskAttack.ReadMSec() > maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDown ||
 			!maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].firstTimeUsed)) {
 		maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].firstTimeUsed = true;
