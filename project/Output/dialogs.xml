@@ -116,7 +116,8 @@
 	</dialog>
 
 	
-	<!--DIALOGOS ABUELAS (101-109)-->
+<!--DIALOGOS ABUELAS (101-109)-->
+	
 	<dialog id="101" texturepath="Assets/Textures/Interfaz/Dialogos/Dorothy.png">
 		<sentences>
 			<sentence name="Dorothy"
@@ -273,7 +274,8 @@
 		</sentences>
 	</dialog>
 
-	<!--DIALOGOS PAREJA (201-209)-->
+	
+<!--DIALOGOS PAREJA (201-209)-->
 
 	<dialog id="201" texturepath="Assets/Textures/Interfaz/Dialogos/Patzo.png">
 		<sentences>
@@ -384,7 +386,7 @@
 	</dialog>
 	
 	
-	<!--DIALOGOS VECINO (301-309)-->
+<!--DIALOGOS VECINO (301-309)-->
 
 	<dialog id="301" texturepath="Assets/Textures/Interfaz/Dialogos/Hemyl.png">
 		<sentences>
@@ -512,7 +514,8 @@
 		</sentences>
 	</dialog>
 	
-	<!--DIALOGOS BULLIES (401-409)-->
+	
+<!--DIALOGOS BULLIES (401-409)-->
 
 	<dialog id="401" texturepath="Assets/Textures/Interfaz/Dialogos/Huhan.png">
 		<sentences>
@@ -659,9 +662,419 @@
 	</dialog>
 	
 	
-	<!--DIALOGOS PREOCUPADA (501-509)-->
-	<!--DIALOGOS ABUELO TIENDA (601-609)-->
-	<!--DIALOGOS ENAMORADA (701-709)-->
-	<!--DIALOGOS TRILLIZOS (801-809)-->
+<!--DIALOGOS ABUELO TIENDA (501-509)-->
+
+	<dialog id="501" texturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png">
+		<sentences>
+			<sentence name="Rapho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
+			text="¡Hola, hola! ¿Has visto que jovenzuelo estoy hecho? Je, je, je..."/>
+
+			<sentence name="Rapho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
+			text="¿Como estamos Jakhov? ¿Has hablado con mi nietecito? Espero que sí, si te has olvidado, está aquí a mi lado. Je, je, je..."/>
+
+			<sentence name="Rapho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
+			text="Bueno, nos vamos viendo jovenzuelo. Recuerda visitar la tienda de mi nietecito, que está aquí al lado. Je, je, je..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="502" texturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png">
+		<sentences>
+			<sentence name="Rapho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
+			text="¿Que pasó jovenzuelo? Te veo muy desanimado, ¿pasó algo en el entrenamiento? Vaya, vaya..."/>
+
+			<sentence name="Rapho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
+			text="No hagas caso de las cosas malas que te pasen jovenzuelo. Con los años entenderás que es inútil..."/>
+
+			<sentence name="Rapho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
+			text="Si te sientes mal, recuerda que siempre puedes comprar alguna cosa de la tienda y ser un poco más feliz..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="503" texturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png">
+		<sentences>
+			<sentence name="Rapho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
+			text="¡Hombre! Pero si es mi jovenzuelo favorito del pueblo, ¿cómo estamos Jakhov? Je, je, je..."/>
+
+			<sentence name="Rapho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
+			text="Oye, te veo mucho más hablador, ¿te quieres empezar a parecer a tu padre? Je, je, je..."/>
+
+			<sentence name="Rapho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
+			text="Aún recuerdo cuando yo mismo le comppraba y vendía lo que conseguía con los Sureg. Je, je, je...
+Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo que te interesa. je, je, je..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="504" texturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png">
+		<sentences>
+			<sentence name="Rapho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
+			text="¡Has vuelto! ¿Cómo estamos jovenzuelo? Te veo más fuerte, ¿has estado entrenando? Je, je, je..."/>
+
+			<sentence name="Rapho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
+			text="Mi nieto no para de trabajar, me recuerda mucho a su abuelo. Je, je, je..."/>
+
+			<sentence name="Rapho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
+			text="¡Espero verte más a menudo por la tienda, jovenzuelo! Je, je, je..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="505" texturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png">
+		<sentences>
+			<sentence name="Rapho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
+			text="Que mayor me hago. ¡Ay, ay, ay...! ¿Tú otra vez por la tienda? Je, je, je..."/>
+
+			<sentence name="Rapho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
+			text="Tengo un dolor tan malo en la espalda desde hace unos minutos..."/>
+
+			<sentence name="Rapho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
+			text="Que dolor, creo que tendría que descansar un poco..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="507" texturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png">
+		<sentences>
+			<sentence name="Rapho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
+			text="Vaya... Lo siento jovenzuelo, desde ayer no estoy muy bien..."/>
+
+			<sentence name="Rapho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
+			text="No quiero estar triste o desanimado, ya sabes que siempre estoy riendo. Je... Je... Je..."/>
+
+			<sentence name="Rapho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
+			text="Ayer no pude ni estar con mi nietecito como siempre... Cada vez estoy peor..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="508" texturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png">
+		<sentences>
+			<sentence name="Rapho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
+			text="Hola jonvenzuelo. Cof, cof cof... Me encuentro bien... Sí..."/>
+
+			<sentence name="Rapho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
+			text="Desde hace unos días, desde las luces esas que hay en el árbol del norte..."/>
+
+			<sentence name="Rapho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
+			text="No estoy de lo más fino... Pero sigo bien... No te preocupes..."/>
+		</sentences>
+	</dialog>
+
+<!--DIALOGOS PREOCUPADA (601-609)-->
+
+	
+<!--DIALOGOS ENAMORADA (701-709)-->
+
+	<dialog id="701" texturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png">
+		<sentences>
+			<sentence name="Sukhy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
+			text="H-ho-hola... ¿C-co-conoces a aquél guardia tan guapo? Me gustaría hablar con él..."/>
+
+			<sentence name="Sukhy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
+			text="P-pe-perdón... Me he d-da-dado cuenta de que tienes p-pri-prisa..."/>
+
+			<sentence name="Sukhy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
+			text="O-ol-olvida lo que he d-di-dicho, ¿vale? Je, je..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="702" texturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png">
+		<sentences>
+			<sentence name="Sukhy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
+			text="¿E-es-estás bien? P-pa-parece que no ha ido b-bi-bien el entrenamiento..."/>
+
+			<sentence name="Sukhy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
+			text="L-lo s-si-siento... Deberías ir a casa... Y-yo m-me quedaré a ver s-si Zupho s-se queda s-so-solo..."/>
+
+			<sentence name="Sukhy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
+			text="N-nos v-ve-vemos... M-ma-mañana s-su-supongo..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="703" texturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png">
+		<sentences>
+			<sentence name="Sukhy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
+			text="Me lo he p-pro-¡PROPUESTO! P-pe-perdón por gritar..."/>
+
+			<sentence name="Sukhy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
+			text="¿P-po-podrías darle e-es-esta carta a Zuphe? P-por f-fa-favor... Es muy s-se-serio y varonil..."/>
+
+			<sentence name="Sukhy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
+			text="P-pe-pero... No le d-di-digas que la he escrito yo..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="704" texturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png">
+		<sentences>
+			<sentence name="Sukhy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
+			text="Zupho n-no r-res-responde... ¡A NINGUNA DE MIS SEÑALES! E-es-estoy..."/>
+
+			<sentence name="Sukhy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
+			text="Estoy a punto de darme por vencida..."/>
+
+			<sentence name="Sukhy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
+			text="¿Sabes? Solo tartamudeo h-ha-hablando s-so-sobre Zupho..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="705" texturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png">
+		<sentences>
+			<sentence name="Sukhy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
+			text="Hola compi de aventuras, ¿sabes? Tú eres el único que s-sa-sabe s-so-sobre Zupho..."/>
+
+			<sentence name="Sukhy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
+			text="Así que este será nuestro pequeño secreto..."/>
+
+			<sentence name="Sukhy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
+			text="Cada vez intento ir mejorando mi tartamudeo, p-pe-pero c-cuan-cuando pienso en Zupho..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="706" texturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png">
+		<sentences>
+			<sentence name="Sukhy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
+			text="Hoy no quiero hablar... Lo... Siento..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="707" texturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png">
+		<sentences>
+			<sentence name="Sukhy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
+			text="Estoy triste Jakhov, no es justo..."/>
+
+			<sentence name="Sukhy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
+			text="Esta mañana ha ido la herrera a devolver una espada que algún maldito le había llevado..."/>
+
+			<sentence name="Sukhy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
+			text="Maldigo a la persona que llevó la espada... ¿Porque no me lo pidió a mi? Siempre estoy aquí y ni caso..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="708" texturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png">
+		<sentences>
+			<sentence name="Sukhy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
+			text="Hola Jakhov... Vamos de mal en peor..."/>
+
+			<sentence name="Sukhy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
+			text="No sé si te has enterado, pero Patzo y Patza se casan..."/>
+
+			<sentence name="Sukhy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
+			text="Zupho va con Phoska... No quiero ir sola... Me preguntaba si querrías venir conmigo..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="709" texturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png">
+		<sentences>
+			<sentence name="Sukhy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
+			text="¡LO HE DECIDIDO! Perdón por gritar... Je, je..."/>
+
+			<sentence name="Sukhy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
+			text="¡Voy a dejar de perseguir a una persona que siquiera sabe si existo! Por cierto..."/>
+
+			<sentence name="Sukhy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
+			text="¿Te acuerdas que te pregunté si me podías acompañar a la boda de Patzo y Patza? He decidido ir sola... ¡PORQUE NO HAY NADA MALO EN ESTAR SOLA! Perdón de nuevo... Je, je..."/>
+		</sentences>
+	</dialog>
+	
+	
+<!--DIALOGOS TRILLIZOS (801-809)-->
+
+	<dialog id="801" texturepath="Assets/Textures/Interfaz/Dialogos/zuphoFace.png">
+		<sentences>
+			<sentence name="Zupho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zuphoFace.png"
+			text="¿Tú no deberías estar entrenando? El entrenamiento no puede esperar..."/>
+
+			<sentence name="Zuphe"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zupheFace.png"
+			text="Es cierto, si algún día quieres ser fuerte como yo, deberías llegar rápido al entreno..."/>
+
+			<sentence name="Zuphu"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zuphuFace.png"
+			text="Si quieres tener una novia tan guapa como mi Phylippa, debes entrenar duro..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="802" texturepath="Assets/Textures/Interfaz/Dialogos/zuphoFace.png">
+		<sentences>
+			<sentence name="Zupho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zuphoFace.png"
+			text="¿Ya has salido del entreno? Espero que haya ido bien..."/>
+
+			<sentence name="Zuphe"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zupheFace.png"
+			text="Ya sabes que por la noche no se puede cruzar Jakhov, son las normas..."/>
+
+			<sentence name="Zuphu"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zuphuFace.png"
+			text="Ves a casa con tu abuela Jakhov, yo ahora iré con mi maravillosa Phylippa..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="803" texturepath="Assets/Textures/Interfaz/Dialogos/zuphoFace.png">
+		<sentences>
+			<sentence name="Zupho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zuphoFace.png"
+			text="¿Ya has vuelto de ahí fuera? Ya sabes que cualquier cosa que te pase no es nuestra responsabilidad..."/>
+
+			<sentence name="Zuphe"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zupheFace.png"
+			text="Es cierto, nosotros abrimos por la mañana y vamos a buscar a la gente que falte por la noche..."/>
+
+			<sentence name="Zuphu"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zuphuFace.png"
+			text="Yo te recomendaría entrenar en el campo de entrenamiento, la cueva es peligrosa..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="804" texturepath="Assets/Textures/Interfaz/Dialogos/zuphoFace.png">
+		<sentences>
+			<sentence name="Zupho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zuphoFace.png"
+			text="Siento haberle contado a las ancianas sobre tu escapada del otro día a la cueva..."/>
+
+			<sentence name="Zuphe"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zupheFace.png"
+			text="Es cierto, pero entendemos que solo vas a husmear y después te marchas al bosque, tranquilo..."/>
+
+			<sentence name="Zuphu"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zuphuFace.png"
+			text="Si, tranquilo Jakhov, no hemos dicho que seguramente te marches, no queríamos herir tu honor..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="805" texturepath="Assets/Textures/Interfaz/Dialogos/zuphoFace.png">
+		<sentences>
+			<sentence name="Zupho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zuphoFace.png"
+			text="Oye, cada día vuelves más tarde, ya sabes que no podemos ayudarte si te adentras mucho en el bosque..."/>
+
+			<sentence name="Zuphe"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zupheFace.png"
+			text="¡Es cierto! Además, no sé que estás haciendo, pero desde que sales cada día está de un raro el árbol ese..."/>
+
+			<sentence name="Zuphu"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zuphuFace.png"
+			text="Justo, ya sabíamos que brillaba algo por la noche, pero siempre habíamos pensado que serían luciérnagas..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="806" texturepath="Assets/Textures/Interfaz/Dialogos/zuphoFace.png">
+		<sentences>
+			<sentence name="Zupho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zuphoFace.png"
+			text="Jakhov, a ti te estaba buscando yo. ¿Podrías darle esta espada a Phoska? Por favor..."/>
+
+			<sentence name="Zuphe"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zupheFace.png"
+			text="Es una espada de uno de los estudiantes de cavallero, le he tenido que dejar la mía momentaniamente..."/>
+
+			<sentence name="Zuphu"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zuphuFace.png"
+			text="No podemos movernos de aquí, ya sabes que son las normas. Se lo pediría a Phylippa, pero no se ha pasado hoy..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="807" texturepath="Assets/Textures/Interfaz/Dialogos/zuphoFace.png">
+		<sentences>
+			<sentence name="Zupho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zuphoFace.png"
+			text="¡Gracias por la ayuda el otro día Jakhov! Estoy muy agradecido..."/>
+
+			<sentence name="Zuphe"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zupheFace.png"
+			text="Desde hace algún tiempo te veía más alegre, el otro día te vimos con bastante mala cara..."/>
+
+			<sentence name="Zuphu"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zuphuFace.png"
+			text="Espero que no te haya molestado nuestra propuesta, se lo iba a pedir a Philyppa, pero no pasó por aquí..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="808" texturepath="Assets/Textures/Interfaz/Dialogos/zuphoFace.png">
+		<sentences>
+			<sentence name="Zupho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zuphoFace.png"
+			text="¿Te pasa algo Jakhov? Tienes cara de estar estrsado. Espero que el entreno haya ido bien..."/>
+
+			<sentence name="Zuphe"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zupheFace.png"
+			text="Parece que te está funcionando, tienes más musculatura y pones una sonrisa siempre..."/>
+
+			<sentence name="Zuphu"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zuphuFace.png"
+			text="Es cierto, siempre tienes una sonrisa en la cara pero pareces preocupado. Recuerda que puedes hablar con el pueblo..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="809" texturepath="Assets/Textures/Interfaz/Dialogos/zuphoFace.png">
+		<sentences>
+			<sentence name="Zupho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zuphoFace.png"
+			text="Jakhov, ven aquí..."/>
+
+			<sentence name="Zuphe"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zupheFace.png"
+			text="Ayer yo mismo fuí a terminar con un Sureg que había salido de la cueva, y después estuve buscándote..."/>
+
+			<sentence name="Zuphu"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zuphuFace.png"
+			text="Cuando dijo que no estabas por el bosque, nos asustamos... Y hoy sales de la cueva después de horas dentro..."/>
+
+			<sentence name="Zupho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zuphoFace.png"
+			text="Se lo hemos contado al pueblo, es muy grave esto Jakhov, no podemos prohibirte ir, pero es prácticamente un suicidio..."/>
+
+			<sentence name="Zuphe"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zupheFace.png"
+			text="Sabes que todos los guerreros admiramos a tu padre, pero creo que no deberías intentar seguir sus pasos..."/>
+
+			<sentence name="Zuphu"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/zuphuFace.png"
+			text="Piensa en tu abuela, yo no me puedo ni imaginar que pasaría si dejo a mi Philyppa sola..."/>
+		</sentences>
+	</dialog>
 </dialogues>
 
