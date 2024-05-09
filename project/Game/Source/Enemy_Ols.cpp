@@ -354,22 +354,14 @@ float Enemy_Ols::GetHealth() const {
 
 }
 
-// void Enemy_Ols::TakeDamage(float damage) {
-
-// 	health -= damage;
-// 	invulnerabilityTimer.Start();
-// 	timerRecibirDanioColor.Start();
-// 	app->audio->PlayRandomFx(ols_get_damage_fx, ols_get_damageAlt_fx, ols_get_damageAlt2_fx);
-// 	printf("Enemy_Ols has received  %f damage\n", damage);
-// }
-
-
 void Enemy_Ols::TakeDamage(float damage) {
 
 	if (currentState != EntityState_Enemy::DEAD && invulnerabilityTimer.ReadMSec() >= 500) {
 		health -= damage;
 		invulnerabilityTimer.Start();
 		timerRecibirDanioColor.Start();
+
+ 		app->audio->PlayRandomFx(ols_get_damage_fx, ols_get_damageAlt_fx, ols_get_damageAlt2_fx);
 
 		printf("Enemy_Ols has received  %f damage\n", damage);
 		
