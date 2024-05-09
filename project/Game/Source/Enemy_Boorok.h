@@ -94,7 +94,9 @@ private:
 	Animation dieAnim;
 	Animation chargeAttackAnim;
 
-	int muur_get_damage_fx;
+	int boorok_get_damage_fx;
+	int boorok_get_damageAlt_fx;
+	int boorok_death_fx;
 
 	bool isFacingLeft = false;
 

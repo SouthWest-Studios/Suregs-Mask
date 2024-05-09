@@ -56,6 +56,10 @@ bool Enemy_Boorok::Start() {
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
+	boorok_get_damage_fx = app->audio->LoadAudioFx("boorok_get_damage_fx");
+	boorok_get_damageAlt_fx = app->audio->LoadAudioFx("boorok_get_damageAlt_fx");
+	boorok_death_fx = app->audio->LoadAudioFx("boorok_death_fx");
+
 	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 30, bodyType::DYNAMIC);
 	pbodyFoot->entity = this;
 	pbodyFoot->listener = this;
@@ -351,7 +355,7 @@ void Enemy_Boorok::TakeDamage(float damage) {
 		health -= damage;
 		invulnerabilityTimer.Start();
 		timerRecibirDanioColor.Start();
-		app->audio->PlayFx(muur_get_damage_fx);
+		app->audio->PlayRandomFx(boorok_get_damage_fx, boorok_get_damageAlt_fx, NULL);
 	}
 }
 

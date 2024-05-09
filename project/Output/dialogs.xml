@@ -5,8 +5,14 @@
 		</sentences>
 	</dialog>
 
-	
-	
+		<dialog id="1" texturepath="Assets/Textures/Interfaz/Dialogos/dorothyFace.png" facetexturepath="Assets/Textures/Interfaz/Dialogos/dorothyFace.png" name="Dorothy">
+		<sentences>
+			<sentence text="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
+			<sentence text="¿Vas al entrenamiento? Creo que ya te están esperando."/>
+			<sentence text="No te molestamos más, ¡cuando salgas podemos seguir hablando!"/>
+		</sentences>
+	</dialog>
+
 
 	<dialog id="991" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phoska">
 		<sentences>

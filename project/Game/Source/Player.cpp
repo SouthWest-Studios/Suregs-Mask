@@ -739,7 +739,7 @@ void Player::Attack(float dt)
 		mask1PassiveSensor->listener = this;
 	}
 
-	app->audio->PlayFx(basic_combo_attack1_fx);
+	app->audio->PlayAttackFx(basic_combo_attack1_fx);
 }
 
 void Player::UnequipMasks() {
