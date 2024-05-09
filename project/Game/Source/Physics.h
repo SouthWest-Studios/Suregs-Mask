@@ -45,6 +45,7 @@ enum class ColliderType {
 	ENTRADA_MAZMORRA0,
 	SALIDA_MAZMORRA0,
 	PROJECTILE,
+	BOSSAREA,
 	UNKNOWN,
 	
 	// ..
