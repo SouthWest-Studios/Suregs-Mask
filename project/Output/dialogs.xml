@@ -181,22 +181,6 @@
 		</sentences>
 	</dialog>
 
-	<dialog id="104" texturepath="Assets/Textures/Interfaz/Dialogos/Dorothy.png">
-		<sentences>
-			<sentence name="Dorothy"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/dorothyFace.png"
-			text="¡Hola Jakhov! Estábamos recordando viejos tiempos del pueblo, recordábamos lo apuesto que era tu padre, siempre tan servicial..."/>
-
-			<sentence name="Hely"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/helyFace.png"
-			text="Cuánto más tiempo pasa, más te pareces a él, siempre con una sonrisa hablando con todo el mundo..."/>
-
-			<sentence name="Pathy"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/pathyFace.png"
-			text="Aunque, a diferencia de él, debemos decirte que tú pareces mucho más sincero, él parecía siempre preocupado..."/>
-		</sentences>
-	</dialog>
-
 	<dialog id="105" texturepath="Assets/Textures/Interfaz/Dialogos/Dorothy.png">
 		<sentences>
 			<sentence name="Dorothy"
@@ -289,10 +273,392 @@
 		</sentences>
 	</dialog>
 
-	<!--DIALOGOS ABUELAS (101-109)-->
 	<!--DIALOGOS PAREJA (201-209)-->
+
+	<dialog id="201" texturepath="Assets/Textures/Interfaz/Dialogos/Patzo.png">
+		<sentences>
+			<sentence name="Patzo"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzoFace.png"
+			text="Hombre, Jakhov, ¿tanta prisa llevas? No disfrutas de los placeres de la vida..."/>
+
+			<sentence name="Patza"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzaFace.png"
+			text="Tienes que buscar una pareja para poder asentar tu vida. Aunque todos los jóvenes son guerreros o se han ido del pueblo..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="202" texturepath="Assets/Textures/Interfaz/Dialogos/Patzo.png">
+		<sentences>
+			<sentence name="Patzo"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzoFace.png"
+			text="¿Sales ya de entrenar? ¿Qué tal ha ido? Se te ve cansado y con rasguños..."/>
+
+			<sentence name="Patza"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzaFace.png"
+			text="¿Has perdido el combate de entrenamiento? No pasa nada, siempre puedes mejorar..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="203" texturepath="Assets/Textures/Interfaz/Dialogos/Patzo.png">
+		<sentences>
+			<sentence name="Patzo"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzoFace.png"
+			text="¡Hola Jakhov! Estamos aquí tranquilos, ¿cómo te encuentras tú? Hoy estás muy animado..."/>
+
+			<sentence name="Patza"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzaFace.png"
+			text="Si estás mal, te recomiendo mirar algo que te pueda gustar en la tienda de mi hermana, está en el noroeste del pueblo..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="204" texturepath="Assets/Textures/Interfaz/Dialogos/Patzo.png">
+		<sentences>
+			<sentence name="Patzo"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzoFace.png"
+			text="Estamos un poco ocupados..."/>
+
+			<sentence name="Patza"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzaFace.png"
+			text="Sí, lo siento Jakhov, estamos hablando de cosas de pareja..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="205" texturepath="Assets/Textures/Interfaz/Dialogos/Patzo.png">
+		<sentences>
+			<sentence name="Patzo"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzoFace.png"
+			text="Jakhov, ¿puedes decirle, por favor, que no tiene sentido irnos del pueblo? A mí no me hace ni caso..."/>
+
+			<sentence name="Patza"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzaFace.png"
+			text="¡Ni se te ocurra! ¡Esto es una conversación de los dos! No quiero quedarme en este pueblucho..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="206" texturepath="Assets/Textures/Interfaz/Dialogos/Patzo.png">
+		<sentences>
+			<sentence name="Patzo"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzoFace.png"
+			text="Nada, Jakhov, no va a querer hablar contigo..."/>
+
+			<sentence name="Patza"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzaFace.png"
+			text="Desde la discusión que tuvimos, solo salimos y nos quedamos aquí en silencio..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="207" texturepath="Assets/Textures/Interfaz/Dialogos/Patzo.png">
+		<sentences>
+			<sentence name="Patzo"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzoFace.png"
+			text="¡Hombre Jakhov! Te veo más guapetón, ¿eh, chaval? Te ves bien..."/>
+
+			<sentence name="Patza"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzaFace.png"
+			text="Ya hemos arreglado nuestras diferencias, hemos decidido quedarnos en el pueblo por ahora..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="208" texturepath="Assets/Textures/Interfaz/Dialogos/Patzo.png">
+		<sentences>
+			<sentence name="Patzo"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzoFace.png"
+			text="¡Hola Jakhov, te tenemos que decir algo súper importante! Díselo Patza..."/>
+
+			<sentence name="Patza"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzaFace.png"
+			text="¡Vamos a casarnos! Hemos decidido casarnos en el pueblo dentro de unos meses y mudarnos a la ciudad..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="209" texturepath="Assets/Textures/Interfaz/Dialogos/Patzo.png">
+		<sentences>
+			<sentence name="Patzo"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzoFace.png"
+			text="Que feliz estoy por mi boda Jakhov, ¡espero que vengas bien guapo! Díselo también a tu abuela..."/>
+
+			<sentence name="Patza"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzaFace.png"
+			text="Hemos decidido que la boda será en tan solo 3 meses, después nos iremos a la ciudad..."/>
+		</sentences>
+	</dialog>
+	
+	
 	<!--DIALOGOS VECINO (301-309)-->
+
+	<dialog id="301" texturepath="Assets/Textures/Interfaz/Dialogos/Hemyl.png">
+		<sentences>
+			<sentence name="Hemyl"
+					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
+					  text="¡Qué madrugón Jakhov! ¿Vas a entrenar tan pronto? Que madrugón..."/>
+			<sentence name="Hemyl"
+					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
+					  text="¡Hay que ver cómo te esfuerzas! Por cierto, ¿antes de salir puedes darle esto a tu abuela? Es importante..."/>
+			<sentence name="Hemyl"
+					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
+					  text="No te molesto más, ya puedes ir a entrenar..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="302" texturepath="Assets/Textures/Interfaz/Dialogos/Hemyl.png">
+		<sentences>
+			<sentence name="Hemyl"
+					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
+					  text="¿Ya has terminado? Te veo un poco apagado, espero que no te haya pasado nada mientras entrenabas..."/>
+			<sentence name="Hemyl"
+					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
+					  text="Recuerda darle recuerdos a Vhea, mañana os llevaré la compra, es una pena que desde entonces no quiera salir de casa..."/>
+			<sentence name="Hemyl"
+					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
+					  text="Cuídala mucho Jakhov, cuando te haces mayor empiezas a entender que la vida es muy corta, no te vayas de este mundo con remordimientos..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="303" texturepath="Assets/Textures/Interfaz/Dialogos/Hemyl.png">
+		<sentences>
+			<sentence name="Hemyl"
+					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
+					  text="¡Jakhov! Se ha corrido la voz por todo el pueblo de que te has metido a la cueva del demonio..."/>
+			<sentence name="Hemyl"
+					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
+					  text="Ya sabes que yo siempre te apoyaré en lo que hagas, y si este es el camino que has escogido, no hay alternativa..."/>
+			<sentence name="Hemyl"
+					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
+					  text="Pero piensa en las consecuencias de todo Jakhov, tu padre era igual y ya viste cómo terminó todo, recuerda que no puedes dejar a tu abuela sola..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="304" texturepath="Assets/Textures/Interfaz/Dialogos/Hemyl.png">
+		<sentences>
+			<sentence name="Hemyl"
+					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
+					  text="¡Vaya! Que hablador te has vuelto, jovencito. Normalmente ibas siempre a entrenar con el ceño fruncido, que miedo..."/>
+			<sentence name="Hemyl"
+					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
+					  text="Me gusta cómo eres ahora, te ves más confiado y más... Como decirlo... Confiable..."/>
+			<sentence name="Hemyl"
+					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
+					  text="Te empiezas a parecer a tu padre chico, ¡Ja, ja, ja! Aunque, desde luego, pareces bastante menos soñador que él..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="305" texturepath="Assets/Textures/Interfaz/Dialogos/Hemyl.png">
+		<sentences>
+			<sentence name="Hemyl"
+					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
+					  text="¡Oye! ¿Has estado entrenando fuera del campo de entrenamiento? Te veo mucho más fuerte..."/>
+			<sentence name="Hemyl"
+					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
+					  text="He pasado algunos días por el campo a la hora de siempre y no te he visto, sabes que si pasa algo me lo puedes contar..."/>
+			<sentence name="Hemyl"
+					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
+					  text="Llevo desde que eras un niño contigo Jakhov, le prometí a tu abuelo que cuidaría de Vhea y su descendencia si él no estaba..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="306" texturepath="Assets/Textures/Interfaz/Dialogos/Hemyl.png">
+		<sentences>
+			<sentence name="Hemyl"
+					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
+					  text="Hola Jakhov, ¿quieres algo? Llevas un tiempo diferente, desde luego, eres más fuerte, más amable y más hablador..."/>
+			<sentence name="Hemyl"
+					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
+					  text="- ¿Qué relación tienes con mi abuela?"/>
+			<sentence name="Hemyl"
+					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
+					  text="¡Vaya! Así que es eso. ¡Ja, ja, ja! Si quieres saber qué relación tengo con tu abuela, deberías preguntárselo a ella, seguro que su respuesta te gustará..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="307" texturepath="Assets/Textures/Interfaz/Dialogos/Hemyl.png">
+		<sentences>
+			<sentence name="Hemyl"
+					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
+					  text="¿Qué pasa con esa cara Jakhov? Tienes las mismas expresiones que tu padre, ¡ja, ja, ja! Siempre con una sonrisa y con cara de pocos amigos..."/>
+			<sentence name="Hemyl"
+					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
+					  text="Sabes que yo no digo nada, pero creo que algunas personas de la aldea han descubierto tu pequeño secreto sobre la cueva..."/>
+			<sentence name="Hemyl"
+					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
+					  text="Yo te dije que hacía tiempo que te veía en el campo de entrenamiento, si yo me di cuenta, ya te puedes imaginar los otros estudiantes de caballero..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="308" texturepath="Assets/Textures/Interfaz/Dialogos/Hemyl.png">
+		<sentences>
+			<sentence name="Hemyl"
+					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
+					  text="¡Vaya cara Jakhov! De verdad cada día te veo más preocupado por algo extraño..."/>
+			<sentence name="Hemyl"
+					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
+					  text="¿Tiene algo que ver con aquella cueva? Te está pasando lo mismo que a tu padre..."/>
+			<sentence name="Hemyl"
+					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
+					  text="Recuerda estar siempre cuerdo, ¿vale? No sé realmente lo que sucede allí adentro, pero tienes que mantener la cabeza fría..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="309" texturepath="Assets/Textures/Interfaz/Dialogos/Hemyl.png">
+		<sentences>
+			<sentence name="Hemyl"
+					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
+					  text="Jakhov, ¿realmente sabes lo que estás haciendo? Todo el pueblo se ha enterado de lo de las mazmorras..."/>
+			<sentence name="Hemyl"
+					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
+					  text="Sabes que yo te apoyaré en tu camino, pero deberías comprar una buena armadura y espadas para enfrentarte a lo que tu padre no pudo..."/>
+			<sentence name="Hemyl"
+					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
+					  text="Visita las tiendas del pueblo para comprar mejores opciones de combate, por favor..."/>
+		</sentences>
+	</dialog>
+	
 	<!--DIALOGOS BULLIES (401-409)-->
+
+	<dialog id="401" texturepath="Assets/Textures/Interfaz/Dialogos/Huhan.png">
+		<sentences>
+			<sentence name="Huhan"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/huhanFace.png"
+			text="Mirad a quien tenemos aquí, el peor caballero de toda la aldea, además hijo de el mejor de todos los tiempos..."/>
+
+			<sentence name="Xiby"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/xibyFace.png"
+			text="La verdad es que es bastante triste, imaginad lo que pensaría su padre de él si lo viese..."/>
+
+			<sentence name="Ferny"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/fernyFace.png"
+			text="No digas eso, ya sabes que su padre no podrá verlo nunca más, ¡ja, ja ja...!"/>
+		</sentences>
+	</dialog>
+
+	<dialog id="402" texturepath="Assets/Textures/Interfaz/Dialogos/xibyFace.png">
+		<sentences>
+			<sentence name="Huhan"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/huhanFace.png"
+			text="¿Te vas llorando a tu casa? Que triste, ¡ja, ja, ja! Ves con tu abuelita, que ella si te aguanta..."/>
+
+			<sentence name="Xiby"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/xibyFace.png"
+			text="Esa ha sido buena, pero no creo que lo aguante siquiera..."/>
+
+			<sentence name="Ferny"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/fernyFace.png"
+			text="Es cierto, toda la familia se fué y se tuvo que quedar con el peor de todos, ¡ja, ja, ja...!"/>
+		</sentences>
+	</dialog>
+
+	<dialog id="403" texturepath="Assets/Textures/Interfaz/Dialogos/fernyFace.png">
+		<sentences>
+			<sentence name="Huhan"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/huhanFace.png"
+			text="Ayer no viniste a entrenar, ¿ya has desistido, Inútilakhov? ¡Ja, ja, ja...!"/>
+
+			<sentence name="Xiby"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/xibyFace.png"
+			text="No le llames así, hombre, recuerda que es el hijo del 'Legendario Héroe de la Aldea'..."/>
+
+			<sentence name="Ferny"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/fernyFace.png"
+			text="Seguramente su padre era igual de inútil que él. ¡Ja, ja, ja...!"/>
+		</sentences>
+	</dialog>
+
+	<dialog id="404" texturepath="Assets/Textures/Interfaz/Dialogos/huhanFace.png">
+		<sentences>
+			<sentence name="Huhan"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/huhanFace.png"
+			text="No paras de venir, ¿eh? Se nota que te gusta recibir tu dosis diaria de atención..."/>
+
+			<sentence name="Xiby"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/xibyFace.png"
+			text="Es cierto, como no quiere recibir golpes, viene a recibir insultos, ¡ja, ja, ja...!"/>
+
+			<sentence name="Ferny"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/fernyFace.png"
+			text="¿Cuántos días lleva sin venir? Yo tampoco lo notaba cuando venía, ¡ja, ja, ja...!"/>
+		</sentences>
+	</dialog>
+
+	<dialog id="405" texturepath="Assets/Textures/Interfaz/Dialogos/xibyFace.png">
+		<sentences>
+			<sentence name="Huhan"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/huhanFace.png"
+			text="Otra vez vienes, ¿eh? Por mucho que entrenes tu fuerza seguirás siendo un inútil..."/>
+
+			<sentence name="Xiby"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/xibyFace.png"
+			text="Es cierto, Inútilakhov nunca se terminará, por mucho que vayas a entrenar al bosque..."/>
+
+			<sentence name="Ferny"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/fernyFace.png"
+			text="Por mucha fuerza que tengas seguirás sin saber dominar la espada. ¡Ja, ja, ja...!"/>
+		</sentences>
+	</dialog>
+
+	<dialog id="406" texturepath="Assets/Textures/Interfaz/Dialogos/fernyFace.png">
+		<sentences>
+			<sentence name="Huhan"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/huhanFace.png"
+			text="Mirad a quien tenemos por aquí, a Inútilakhov, dile donde le has visto, Ferny..."/>
+
+			<sentence name="Xiby"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/xibyFace.png"
+			text="¡Es cierto! ¿Que pasaría si le contamos a tu pobre abuela donde estás yendo? Que pena..."/>
+
+			<sentence name="Ferny"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/fernyFace.png"
+			text="No se lo podremos decir, pobrecilla, el inútil de su hijo ya murió dentro, y ahora su nieto, ¡ja, ja, ja...!"/>
+		</sentences>
+	</dialog>
+
+	<dialog id="407" texturepath="Assets/Textures/Interfaz/Dialogos/huhanFace.png">
+		<sentences>
+			<sentence name="Huhan"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/huhanFace.png"
+			text="No hemos encontrado a tu abuela, chaval, ¿desde la muerte de tus padres no sale de casa? Vaya..."/>
+
+			<sentence name="Xiby"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/xibyFace.png"
+			text="Se lo hemos tenido que decir al viejales de tu vecino, a ver si él se lo dice a tu abuela y se pone más triste aún..."/>
+
+			<sentence name="Ferny"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/fernyFace.png"
+			text="No seas malo, ¡hombre! No puede estar más triste que ahora, ¿olvidas quién es su nieto? ¡Ja, ja, ja...!"/>
+		</sentences>
+	</dialog>
+
+	<dialog id="408" texturepath="Assets/Textures/Interfaz/Dialogos/xibyFace.png">
+		<sentences>
+			<sentence name="Huhan"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/huhanFace.png"
+			text="Mirad quien está aquí de nuevo, Inútilakhov, ¡ja, ja, ja...! Entras a la cueva pero te quedas en la entrada, ¡seguro...!"/>
+
+			<sentence name="Xiby"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/xibyFace.png"
+			text="Claro que sí, ¿dónde podría ir este pobre animal si no es a la entrada de la cueva? Dispuesto a salir por patas cuando salga un Sureg..."/>
+
+			<sentence name="Ferny"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/fernyFace.png"
+			text="¡No cantes victoria! Recuerda que su madre no pudo huir, y eso que estaba más cerca de la aldea, ¡ja, ja, ja...!"/>
+		</sentences>
+	</dialog>
+
+	<dialog id="409" texturepath="Assets/Textures/Interfaz/Dialogos/fernyFace.png">
+		<sentences>
+			<sentence name="Huhan"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/huhanFace.png"
+			text="¿Porqué nos miras así, Inútilakhov? ¿Te crees que por entrenar en la cueva esa eres más fuerte que nosotros? Espero que no..."/>
+
+			<sentence name="Xiby"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/xibyFace.png"
+			text="¿Cómo va a creer eso? No le hemos dado tanto en la cabeza para que esté loco. ¡Ja, ja, ja...!"/>
+
+			<sentence name="Ferny"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/fernyFace.png"
+			text="Como os pasáis, seguro que se cree invencible, como el 'Legendario Hérore de la Aldea'..."/>
+		</sentences>
+	</dialog>
+	
+	
 	<!--DIALOGOS PREOCUPADA (501-509)-->
 	<!--DIALOGOS ABUELO TIENDA (601-609)-->
 	<!--DIALOGOS ENAMORADA (701-709)-->
