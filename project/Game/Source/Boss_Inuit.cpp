@@ -65,6 +65,13 @@ bool Boss_Inuit::Start() {
 	pbodySensor->ctype = ColliderType::UNKNOWN;
 
 
+
+	AreaSensor = app->physics->CreateCircle(position.x, position.y, 500, bodyType::STATIC,true);
+	AreaSensor->entity = this;
+	AreaSensor->listener = this;
+	AreaSensor->ctype = ColliderType::UNKNOWN;
+
+
 	originalPosition = app->map->WorldToMap(position.x, position.y);
 
 	maxHealth = config.attribute("maxHealth").as_float();
@@ -74,8 +81,6 @@ bool Boss_Inuit::Start() {
 	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();
 
-	bossArea.x = position.x;
-	bossArea.y = position.y;
 
 	//printf("Speed: %f", speed);
 	return true;
@@ -150,9 +155,20 @@ bool Boss_Inuit::PostUpdate() {
 		}
 	}
 
+
+
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
+
+	if (getBossArea) {
+		getBossArea = false;
+		bossArea.x = position.x;
+		bossArea.y = position.y;
+	}
+	
+	//app->render->DrawCircle(bossArea.x, bossArea.y, 500, 0, 255, 255, 255, false);
+
 	return true;
 }
 
@@ -213,6 +229,31 @@ void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision PLATFORM");
 		break;
 	case ColliderType::PLAYER:
+		playerInBossArea = true;
+		printf("\nPlayerArea");
+		LOG("Collision PLAYER");
+		//restar vida al player
+		break;
+	case ColliderType::PLAYER_ATTACK:
+		LOG("Collision Player_Attack");
+		break;
+	case ColliderType::UNKNOWN:
+		LOG("Collision UNKNOWN");
+		break;
+	default:
+		break;
+	}
+}
+
+void Boss_Inuit::OnEndCollision(PhysBody* physA, PhysBody* physB) {
+	switch (physB->ctype)
+	{
+	case ColliderType::PLATFORM:
+		LOG("Collision PLATFORM");
+		break;
+	case ColliderType::PLAYER:
+		playerInBossArea = false;
+		printf("\nPlayerArea");
 		LOG("Collision PLAYER");
 		//restar vida al player
 		break;
@@ -233,11 +274,9 @@ bool Boss_Inuit::Bossfinding(float dt, iPoint playerPosP)
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
 
 	//printf("\nBossArea:%f", dist(bossArea, enemyPos));
-	/*printf("\nEmemyPosicion:%f", enemyPos.x);
-	printf("\nBossArea:%f", playerPos.x);*/
-
+	//printf("\nEmemyPosicion:%d", enemyPos);
 	
-	if (dist(playerPos, enemyPos) < viewDistance ) {
+	if (playerInBossArea) {
 
 		app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
 		lastPath = *app->map->pathfinding->GetLastPath();
@@ -246,6 +285,7 @@ bool Boss_Inuit::Bossfinding(float dt, iPoint playerPosP)
 		app->map->pathfinding->CreatePath(enemyPos, originalPosition); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
 		lastPath = *app->map->pathfinding->GetLastPath();
 	}
+
 
 	b2Vec2 velocity = b2Vec2(0, 0);
 
@@ -282,6 +322,8 @@ void Boss_Inuit::TakeDamage(float damage) {
 
 
 }
+
+
 
 void Boss_Inuit::stateMachine(float dt, iPoint playerPos)
 {
