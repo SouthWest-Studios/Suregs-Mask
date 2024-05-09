@@ -8,6 +8,7 @@
 #include "CommerceManager.h"
 #include "Window.h"
 #include "Hud.h"
+#include "Audio.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -52,6 +53,7 @@ bool DialogManager::Start() {
 
 
 	background_tex = app->tex->Load(background_tex_path.c_str());
+	dialog_fx = app->audio->LoadAudioFx("dialog_fx");
 
 	return ret;
 }
@@ -234,6 +236,8 @@ bool DialogManager::ShowDialog(Dialog* dialog)
 		if (charTimer.ReadMSec() >= charTimeMS) {
 			indexText++;
 			charTimer.Start();
+			app->audio->StopFx(-1);
+			app->audio->PlayFx(dialog_fx);
 		}
 		
 		return false;

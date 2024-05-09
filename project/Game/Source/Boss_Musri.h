@@ -131,6 +131,8 @@ private:
 	Animation attackEmpujarAnim;
 	Animation attackFlechasRapidasAnim;
 	Animation attackFlechaCargadaAnim;
+
+	int musri_dash_fx;
 	
 	bool isFacingLeft = false;
 

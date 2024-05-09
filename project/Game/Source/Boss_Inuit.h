@@ -23,7 +23,7 @@ enum class FASE
 {
 	FASE_ONE,
 	FASE_CHANGE,
-	FASE_DWO
+	FASE_TWO
 };
 
 class Boss_Inuit : public Entity
@@ -47,6 +47,7 @@ public:
 	bool CleanUp();
 
 	void DoNothing(float dt);
+
 	void Chase(float dt, iPoint playerPos);
 	void Attack(float dt);
 	void Die();
@@ -55,7 +56,6 @@ public:
 
 	// L07 DONE 6: Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
-
 	void OnEndCollision(PhysBody* physA, PhysBody* physB);
 
 	void SetPlayer(Player* player);
@@ -63,6 +63,8 @@ public:
 	float GetHealth() const;
 	void TakeDamage(float damage);
 	void stateMachine(float dt, iPoint playerPos);
+
+	bool TimerColdDown(float time);
 	//Veneno
 	void ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate);
 
@@ -83,16 +85,22 @@ public:
 
 	float viewDistance;
 	float attackDistance;
-
+	int attackTime;
 	bool getBossArea = true;
 	//Revivir
 
+	Timer atackTimeColdDown;
 
 
 private:
 	pugi::xml_document configFile;
 	pugi::xml_node configNode;
 
+	//physi body
+	PhysBody* areaSensor;
+	PhysBody* atackCube;
+
+	//animacion
 	Animation idleAnim;
 	Animation runAnim;
 	Animation attackAnim;
@@ -101,14 +109,7 @@ private:
 	bool isFacingLeft = false;
 
 	iPoint originalPosition;
-
-	bool isDead = false;
-	bool isReviving = false;
-	bool hasRevived = false;
-	bool tempo = false;
-	Timer reviveTimer;
-
-	const float reviveTime = 5.0f;
+	iPoint bossArea;
 
 	int TSprite;
 	int SpriteX;
@@ -127,7 +128,21 @@ private:
 	Animation SPosition;
 	SDL_Rect* spritePositions;
 
-	iPoint bossArea;
+	FASE fase;
+
+	//ataque
+
+	float ataqueTimeClodDown = 0;
+	bool inAtack = false;
+	bool firstAtack = true;
+
+
+	const float reviveTime = 5.0f;
+	bool isDead = false;
+	bool isReviving = false;
+	bool hasRevived = false;
+	bool tempo = false;
+	Timer reviveTimer;
 	//Veneno
 	float poisonTimer = 0.0f; // Tiempo desde que se aplic� el veneno
 	float poisonDuration = 0.0f; // Duraci�n total del veneno
@@ -138,7 +153,7 @@ private:
 
 public:
 
-		Branch_Inuit transitionTable[static_cast<int>(EntityState_Boss_Inuit::STATE_COUNT)][static_cast<int>(EntityState_Boss_Inuit::STATE_COUNT)] = {
+	Branch_Inuit transitionTable[static_cast<int>(EntityState_Boss_Inuit::STATE_COUNT)][static_cast<int>(EntityState_Boss_Inuit::STATE_COUNT)] = {
 		//				IDLE						RUNNING								ATTACKING_BASIC								ATTACKING_DISTANCE									DEAD							DASHI						FASE_CHANGE								NONE
 		{ {EntityState_Boss_Inuit::IDLE}, {EntityState_Boss_Inuit::RUNNING}, {EntityState_Boss_Inuit::ATTACKING_BASIC},{EntityState_Boss_Inuit::ATTACKING_DISTANCE}, {EntityState_Boss_Inuit::DEAD}, {EntityState_Boss_Inuit::DASHI}, {EntityState_Boss_Inuit::FASE_CHANGE}, {EntityState_Boss_Inuit::IDLE}}, // IDLE
 		{ {EntityState_Boss_Inuit::IDLE}, {EntityState_Boss_Inuit::RUNNING}, {EntityState_Boss_Inuit::ATTACKING_BASIC},{EntityState_Boss_Inuit::ATTACKING_DISTANCE}, {EntityState_Boss_Inuit::DEAD}, {EntityState_Boss_Inuit::DASHI}, {EntityState_Boss_Inuit::FASE_CHANGE}, {EntityState_Boss_Inuit::IDLE}}, // RUNNING
