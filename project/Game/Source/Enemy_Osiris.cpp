@@ -59,6 +59,9 @@ bool Enemy_Osiris::Start() {
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
+	osiris_get_damage_fx = app->audio->LoadAudioFx("osiris_get_damage_fx");
+	osiris_death_fx = app->audio->LoadAudioFx("osiris_death_fx");
+
 	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
 	pbodyFoot->entity = this;
 	pbodyFoot->listener = this;
@@ -227,6 +230,7 @@ void Enemy_Osiris::Die() {
 
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	currentAnimation = &dieAnim;
+	app->audio->PlayFx(osiris_death_fx);
 	
 	if (!hasRevived)
 	{
@@ -376,6 +380,7 @@ void Enemy_Osiris::TakeDamage(float damage) {
 		}
 		
 	}
+	app->audio->PlayFx(osiris_get_damage_fx);
 }
 
 void Enemy_Osiris::stateMachine(float dt, iPoint playerPos)
