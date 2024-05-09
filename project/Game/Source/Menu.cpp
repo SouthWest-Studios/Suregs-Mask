@@ -54,8 +54,9 @@ bool Menu::Start()
 	fondoAjustes = app->tex->Load("Assets/Textures/Interfaz/Ajustes.png");
 
 
-	inventory_audio = app->audio->LoadAudioFx("inventory_fx");
-	change_inventory_audio = app->audio->LoadAudioFx("change_inventory_fx");
+	change_inventory_fx = app->audio->LoadAudioFx("change_inventory_fx");
+	inventory_fx = app->audio->LoadAudioFx("inventory_fx");
+	
 
 	newVolumeAudio = app->audio->volumeMusic;
 	newVolumeFx = app->audio->volumeFx;
@@ -89,7 +90,7 @@ bool Menu::Update(float dt)
 		/*app->guiManager->columnSize = 2;*/
 		menuu = !menuu;
 
-		app->audio->PlayFx(inventory_audio);
+		app->audio->PlayFx(inventory_fx);
 	}
 	if (app->input->GetButton(APP_EXIT) == KEY_DOWN && app->notesManager->zoomIn == false && app->bestiarioManager->zoomIn == false)
 	{
@@ -116,7 +117,7 @@ bool Menu::Update(float dt)
 				ventana++;
 			}
 
-			app->audio->PlayFx(change_inventory_audio);
+			app->audio->PlayFx(change_inventory_fx);
 		}
 		if (app->input->GetButton(CAMBIAR_PESTANA_LEFT) == KEY_DOWN)
 		{
@@ -129,7 +130,7 @@ bool Menu::Update(float dt)
 				ventana--;
 			}
 
-			app->audio->PlayFx(change_inventory_audio);
+			app->audio->PlayFx(change_inventory_fx);
 		}
 	}
 	else {

@@ -135,6 +135,8 @@ private:
 	int pointerIndexF;
 	int pointerIndexC;
 	int scrollY;
+
+	int button_fx;
 	
 };
 

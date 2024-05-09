@@ -43,8 +43,6 @@ bool Scene_Intro::Start()
 	texturaIntroPath = config.child("texturaIntro").attribute("texturepath").as_string();
 	texturaIntro = app->tex->Load(texturaIntroPath);
 	timerIntro.Start();
-	sus = app->audio->LoadAudioFx("");
-	app->audio->PlayFx(sus);
 
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;

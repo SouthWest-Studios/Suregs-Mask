@@ -82,8 +82,8 @@ private:
 	GuiControlButton* cruz = nullptr;
 	
 
-	int inventory_audio;
-	int change_inventory_audio;
+	int change_inventory_fx;
+	int inventory_fx;
 
 	int newVolumeAudio;
 	int newVolumeFx;

@@ -39,7 +39,6 @@ private:
 	const char* texturaIntroPath;
 	SDL_Texture* texturaIntro;
 	Timer timerIntro;
-	int sus;
 };
 
 #endif // __SCENE_INTRO_H__

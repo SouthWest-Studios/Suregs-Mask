@@ -45,9 +45,9 @@
       <button_fx path="Assets/Audio/Fx/UI/button_fx.wav"/>
       <select_fx path="Assets/Audio/Fx/UI/select_fx.wav"/>
       <inventory_fx path="Assets/Audio/Fx/UI/inventory_fx.wav"/>
-      <change_inventory_fx path="Assets/UI/Audio/Fx/UI/change_inventory_fx.wav"/>
+      <change_inventory_fx path="Assets/Audio/Fx/UI/change_inventory_fx.wav"/>
       <level_up_fx path=""/>
-      <get_item_fx path="Assets/UI/Audio/Fx/UI/get_item_fx.wav"/>
+      <get_item_fx path="Assets/Audio/Fx/UI/get_item_fx.wav"/>
       <sell_item_fx path=""/>
       <sell_itemAlt_fx path=""/>
 			<buy_item_fx path=""/>
