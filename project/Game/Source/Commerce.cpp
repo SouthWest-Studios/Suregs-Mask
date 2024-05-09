@@ -20,7 +20,6 @@
 #include "InventoryManager.h"
 #include "Hud.h"
 #include "Audio.h"
-#include "GuiManager.h"
 
 Commerce::Commerce(uint id) : id(id)
 {
@@ -221,6 +220,10 @@ bool Commerce::LoadTextures()
 	scrollY = 0;
 
 	button_fx = app->audio->LoadAudioFx("button_fx");
+	sell_item_fx = app->audio->LoadAudioFx("sell_item_fx");
+	buy_item_fx = app->audio->LoadAudioFx("buy_item_fx");
+	change_inventory_fx = app->audio->LoadAudioFx("change_inventory_fx");
+	select_fx = app->audio->LoadAudioFx("select_fx");
 	
 
 	return ret;
@@ -346,14 +349,17 @@ bool Commerce::Update(float dt)
 		if (pointerIndexF < trades.size()) {
 			if (pointerIndexC == 0) SelectTrade(pointerIndexF);
 			if (pointerIndexC == 1) SelectAllTrade(pointerIndexF);
+			app->audio->PlayFx(select_fx);
 		}
 		else {
 			//Boton confirmar compra
 			if (pointerIndexF == trades.size()) {
 				ApplyTrades();
+				app->audio->PlayFx(sell_item_fx);
 			}
 			else if (pointerIndexF == trades.size() + 1) {
 				CloseCommerce();
+				app->audio->PlayFx(change_inventory_fx);
 			}
 
 		}
@@ -361,6 +367,7 @@ bool Commerce::Update(float dt)
 	if (app->input->GetButton(BACK) == KEY_DOWN) {
 		if (pointerIndexC == 0) SelectTrade(pointerIndexF, false);
 		if (pointerIndexC == 1) SelectAllTrade(pointerIndexF, false);
+		app->audio->PlayFx(select_fx);
 	}
 
 
