@@ -276,7 +276,7 @@
     </ClCompile>
     <ClCompile Include="Source\Item_Saliva.cpp">
       <Filter>Entities\Items</Filter>
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="Source\ParticleSystem.cpp">
       <Filter>Modules\ParticleSystem</Filter>
     </ClCompile>
@@ -288,6 +288,9 @@
     </ClCompile>
     <ClCompile Include="Source\Particle.cpp">
       <Filter>Modules\ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TreeManager.cpp">
+      <Filter>Modules\SistemaArbol</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -626,7 +629,7 @@
     </ClInclude>
     <ClInclude Include="Source\Item_Saliva.h">
       <Filter>Entities\Items</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="Source\ParticleSystem.h">
       <Filter>Modules\ParticleSystem</Filter>
     </ClInclude>
@@ -638,6 +641,12 @@
     </ClInclude>
     <ClInclude Include="Source\Particle.h">
       <Filter>Modules\ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Tree.h">
+      <Filter>Modules\SistemaArbol</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TreeManager.h">
+      <Filter>Modules\SistemaArbol</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -712,9 +721,12 @@
     </Filter>
     <Filter Include="Entities\Chest">
       <UniqueIdentifier>{cf5f6a5d-42aa-4cba-a854-d5f3e8a6d10c}</UniqueIdentifier>
-	</Filter>
+    </Filter>
     <Filter Include="Modules\ParticleSystem">
       <UniqueIdentifier>{d69cbfff-9744-45d9-a030-8f3ce47d43b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\SistemaArbol">
+      <UniqueIdentifier>{419ece52-a4c0-464a-b640-9b29184f1160}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
