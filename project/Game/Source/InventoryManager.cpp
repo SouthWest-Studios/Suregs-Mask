@@ -118,100 +118,124 @@ Inventity* InventoryManager::CreateItem(EntityType type, std::string descripcioo
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_diamante.png");
 		entity->type = InventityType::DIAMANTE;
 		entity->closeUpItems = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_diamante.png");
+		entity->objectID;
 		break;
 	case EntityType::ITEM_OJO:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_ojo.png");
 		entity->type = InventityType::OJO;
+		entity->objectID;
 		break;
 	case EntityType::ITEM_GARRA:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_garra.png");
 		entity->type = InventityType::GARRA;
+		entity->objectID;
 		break;
 	case EntityType::ITEM_HUESO:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_hueso.png");
 		entity->type = InventityType::HUESO;
+		entity->objectID;
 		break;
 	case EntityType::ITEM_CARBON:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_carbon.png");
 		entity->type = InventityType::CARBON;
+		entity->objectID;
 		break;
 	case EntityType::ITEM_VISCERAS:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_visceras.png");
 		entity->type = InventityType::VISCERA;
+		entity->objectID;
 		break;
 	case EntityType::ITEM_RUBI:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_rubi.png");
 		entity->type = InventityType::RUBI;
+		entity->objectID;
 		break;
 	case EntityType::ITEM_DIENTE:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_diente.png");
 		entity->type = InventityType::DIENTE;
+		entity->objectID;
 		break;
 	case EntityType::ITEM_AMATISTA:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_amatista.png");
 		entity->type = InventityType::AMATISTA;
+		entity->objectID;
 		break;
 	case EntityType::ITEM_COLA:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_cola.png");
 		entity->type = InventityType::COLA;
+		entity->objectID;
 		break;
 	case EntityType::ITEM_POLVORA:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_polvora.png");
 		entity->type = InventityType::POLVORA;
+		entity->objectID;
 		break;
 	case EntityType::ITEM_PEZ_PEQUENO:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_pez_pequeno.png");
 		entity->type = InventityType::PEZ_PEQUENO;
+		entity->objectID;
 		break;
 	case EntityType::ITEM_PEZ_MEDIANO:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_pez_mediano.png");
 		entity->type = InventityType::PEZ_MEDIANO;
+		entity->objectID;
 		break;
 	case EntityType::ITEM_PEZ_GRANDE:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_pez_grande.png");
 		entity->type = InventityType::PEZ_GRANDE;
+		entity->objectID;
 		break;
 	case EntityType::ITEM_MONEDA:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_moneda.png");
 		entity->type = InventityType::MONEDA;
+		entity->objectID;
 		break;
 	case EntityType::ITEM_SALIVA:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_saliva.png");
 		entity->type = InventityType::SALIVA;
+		entity->objectID;
 		break;
 	case EntityType::ITEM_POCION_VIDA_1:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_pocion_vida_1.png");
 		entity->type = InventityType::POCION_VIDA_1;
+		entity->objectID = 0;
 		break;
 	case EntityType::ITEM_POCION_VIDA_2:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_pocion_vida_2.png");
 		entity->type = InventityType::POCION_VIDA_2;
+		entity->objectID = 1;
 		break;
 	case EntityType::ITEM_POCION_VIDA_3:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_pocion_vida_3.png");
 		entity->type = InventityType::POCION_VIDA_3;
+		entity->objectID = 2;
 		break;
 	case EntityType::ITEM_POCION_VIDA_MAX:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_pocion_vida_max.png");
 		entity->type = InventityType::POCION_VIDA_MAX;
+		entity->objectID = 3;
 		break;
 	case EntityType::ITEM_POCION_REGENERACION:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_pocion_regeneracion.png");
 		entity->type = InventityType::POCION_REGENERACION;
+		entity->objectID = 4;
 		break;
 	case EntityType::ITEM_POCION_DANO:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_pocion_dano.png");
 		entity->type = InventityType::POCION_DANO;
+		entity->objectID = 5;
 		break;
 	case EntityType::ITEM_POCION_VELOCIDAD:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_pocion_velocidad.png");
 		entity->type = InventityType::POCION_VELOCIDAD;
+		entity->objectID = 6;
 		break;
 	case EntityType::ITEM_ORBE_MAGICO:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_orbe_magico.png");
 		entity->type = InventityType::ORBE_MAGICO;
+		entity->objectID = 7;
 		break;
-	default:
+	default:   
 		break;
 	}
 

@@ -62,7 +62,17 @@ private:
 
 	SDL_Rect* rectFondoMascara;
 	SDL_Rect* rectFondoMascaraSecundaria;
+
 	SDL_Rect* rectFondoPociones;
+	SDL_Rect* rectPocionVida1;
+	SDL_Rect* rectPocionVida2;
+	SDL_Rect* rectPocionVida3;
+	SDL_Rect* rectPocionVidaMax;
+	SDL_Rect* rectPocionRegeneracion;
+	SDL_Rect* rectPocionDano;
+	SDL_Rect* rectPocionVelocidad;
+	SDL_Rect* rectPocionOrbe;
+
 	//SDL_Rect* rectFondoHabilidad1;
 	//SDL_Rect* rectFondoHabilidad2;
 	SDL_Rect* rectFondoInventario;
