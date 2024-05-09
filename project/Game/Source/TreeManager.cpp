@@ -375,7 +375,7 @@ bool TreeManager::IsFull()
 	else {
 		return false;
 	}*/
-
+	return false;
 }
 
 bool TreeManager::LoadState(pugi::xml_node node)
