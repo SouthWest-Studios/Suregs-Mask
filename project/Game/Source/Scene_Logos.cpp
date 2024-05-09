@@ -89,7 +89,7 @@ bool Scene_Logos::Update(float dt)
 
 
 	if (currentAnimation->HasFinished()) {
-		printf("ScenaAcabado");
+		//printf("ScenaAcabado");
 		
 	}
 

@@ -796,7 +796,149 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 	
 <!--DIALOGOS PREOCUPADA (601-609)-->
 
-	
+	<dialog id="601" texturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png">
+		<sentences>
+			<sentence name="Phylippa"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
+			text="Hola Jakhov, ¿vas al entreno? Mira que bien..."/>
+
+			<sentence name="Phylippa"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
+			text="Nada, nada, ves rápido, yo estoy aquí viendo que tal está Zuphu..."/>
+
+			<sentence name="Phylippa"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
+			text="No entiendo porque siempre se tiene que poner el más alejado del pueblo..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="602" texturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png">
+		<sentences>
+			<sentence name="Phylippa"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
+			text="¿Ya vuelves? Que bien, je, je, je..."/>
+
+			<sentence name="Phylippa"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
+			text="Zuphu aún no vuelve, no sé porque siempre vuelve tarde..."/>
+
+			<sentence name="Phylippa"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
+			text="Que ganas tengo de irme de esta aldea llena de peligros..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="603" texturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png">
+		<sentences>
+			<sentence name="Phylippa"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
+			text="¿Has ido hacia la cueva? Me lo ha dicho Zuphu hoy..."/>
+
+			<sentence name="Phylippa"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
+			text="No me puedo creer que hagas estas cosas..."/>
+
+			<sentence name="Phylippa"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
+			text="Yo me volvería loca si a Zuphu se le ocurre hacer algo así..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="604" texturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png">
+		<sentences>
+			<sentence name="Phylippa"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
+			text="Me ha dicho Zuphu que sueles ir cada día por la cueva..."/>
+
+			<sentence name="Phylippa"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
+			text="Ten mucho cuidado, ¿vale? Aunque me ha dicho que seguramente salgas al instante..."/>
+
+			<sentence name="Phylippa"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
+			text="Si entrenas en el bosque no es necesario hacer esto..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="605" texturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png">
+		<sentences>
+			<sentence name="Phylippa"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
+			text="Hola Jakhov, parece que ves tú más a mi marido que yo misma..."/>
+
+			<sentence name="Phylippa"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
+			text="¿Cómo estaba hoy? Espero que le fuese bien..."/>
+
+			<sentence name="Phylippa"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
+			text="A ver si le puedes convencer de ponerse más cerca del pueblo..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="606" texturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png">
+		<sentences>
+			<sentence name="Phylippa"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
+			text="Oye, parece que estás entrenando duro, se ven los resultados..."/>
+
+			<sentence name="Phylippa"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
+			text="Aún me acuerdo cuando Zuphu era joven..."/>
+
+			<sentence name="Phylippa"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
+			text="También tuvo una época así con sus hermanos..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="607" texturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png">
+		<sentences>
+			<sentence name="Phylippa"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
+			text="¡Que mala cara Jakhov! Tienes una cara de cansado..."/>
+
+			<sentence name="Phylippa"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
+			text="Tienes que dormir bien, yo a Zuphu le hago leche con miel para que duerma..."/>
+
+			<sentence name="Phylippa"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
+			text="Aunque esto no se lo digas a nadie, que le da vergüenza..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="608" texturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png">
+		<sentences>
+			<sentence name="Phylippa"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
+			text="Hoy me he enfadado con Zuphu..."/>
+
+			<sentence name="Phylippa"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
+			text="Esta mañana se ha ido sin decirme ni adiós..."/>
+
+			<sentence name="Phylippa"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
+			text="No sé que le debe pasar, lo noto muy apático desde hace días..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="609" texturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png">
+		<sentences>
+			<sentence name="Phylippa"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
+			text="¡Hombre Jakhov! ¿Has escuchado de la boda de Patzo y Patza? Que ilusión..."/>
+
+			<sentence name="Phylippa"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
+			text="Me recuerda un montón a la boda que tuve con Zuphu..."/>
+
+			<sentence name="Phylippa"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
+			text="Que recuerdos me trae, ¡ay Dios mío! Que ilusión..."/>
+		</sentences>
+	</dialog>
 	
 	
 	

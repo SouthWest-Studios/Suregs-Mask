@@ -56,6 +56,8 @@ public:
 	// L07 DONE 6: Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
+	void OnEndCollision(PhysBody* physA, PhysBody* physB);
+
 	void SetPlayer(Player* player);
 
 	float GetHealth() const;
@@ -82,6 +84,7 @@ public:
 	float viewDistance;
 	float attackDistance;
 
+	bool getBossArea = true;
 	//Revivir
 
 

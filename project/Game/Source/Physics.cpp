@@ -121,7 +121,7 @@ PhysBody* Physics::CreateRectangle(int x, int y, int width, int height, bodyType
 	return pbody;
 }
 
-PhysBody* Physics::CreateCircle(int x, int y, int radious, bodyType type)
+PhysBody* Physics::CreateCircle(int x, int y, int radious, bodyType type, bool isSensor)
 {
 	// Create BODY at position x,y
 	b2BodyDef body;
@@ -143,6 +143,9 @@ PhysBody* Physics::CreateCircle(int x, int y, int radious, bodyType type)
 	b2FixtureDef fixture;
 	fixture.shape = &circle;
 	fixture.density = 1.0f;
+	if (isSensor) {
+		fixture.isSensor = true;
+	}
 	b->ResetMassData();
 
 	// Add fixture to the BODY
@@ -159,6 +162,8 @@ PhysBody* Physics::CreateCircle(int x, int y, int radious, bodyType type)
 	// Return our PhysBody class
 	return pbody;
 }
+
+
 
 PhysBody* Physics::CreateRectangleSensor(int x, int y, int width, int height, bodyType type)
 {
@@ -374,6 +379,18 @@ void Physics::BeginContact(b2Contact* contact)
 		}
 	}
 	
+}
+
+void Physics::EndContact(b2Contact* contact)
+{
+	PhysBody* physA = (PhysBody*)contact->GetFixtureA()->GetBody()->GetUserData();
+	PhysBody* physB = (PhysBody*)contact->GetFixtureB()->GetBody()->GetUserData();
+
+	if (physA && physA->listener != NULL)
+		physA->listener->OnEndCollision(physA, physB);
+
+	if (physB && physB->listener != NULL)
+		physB->listener->OnEndCollision(physB, physA);
 }
 
 //--------------- PhysBody

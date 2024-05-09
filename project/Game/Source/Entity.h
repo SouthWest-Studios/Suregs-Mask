@@ -186,6 +186,7 @@ public:
 	}
 
 	virtual void OnCollision(PhysBody* physA, PhysBody* physB) {};
+	virtual void OnEndCollision(PhysBody* physA, PhysBody* physB) {};
 	virtual void OnExitCollision(PhysBody* physA, PhysBody* physB) {};
 
 	virtual float GetHealth() const {
@@ -226,12 +227,15 @@ public:
 
 	PhysBody* pbodyFoot;
 	PhysBody* pbodySensor;
+	PhysBody* AreaSensor;
 
 	float speed;
 	float health;
 	float maxHealth;
 	float attackDamage;
 
+
+	bool playerInBossArea = false;
 	std::string description;
 	std::string titulo;
 	std::string tipo;
