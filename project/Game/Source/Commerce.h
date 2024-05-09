@@ -135,6 +135,12 @@ private:
 	int pointerIndexF;
 	int pointerIndexC;
 	int scrollY;
+
+	int button_fx;
+	int sell_item_fx;
+	int buy_item_fx;
+	int change_inventory_fx;
+	int select_fx;
 	
 };
 

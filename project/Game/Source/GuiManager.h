@@ -50,7 +50,7 @@ public:
 
 	const char* buttonPath;
 
-	int button_audio;
+	int button_fx;
 
 };
 

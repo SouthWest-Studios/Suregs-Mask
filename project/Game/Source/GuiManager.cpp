@@ -17,7 +17,7 @@ GuiManager::~GuiManager() {}
 
 bool GuiManager::Start()
 {
-	button_audio = app->audio->LoadAudioFx("button_fx");
+	button_fx = app->audio->LoadAudioFx("button_fx");
 	pugi::xml_document configFile;
 	pugi::xml_node config;
 	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
@@ -88,21 +88,21 @@ bool GuiManager::Update(float dt)
 		}
 		if (app->input->GetButton(UP) == KEY_DOWN) {
 			NavigateUp();
-			app->audio->PlayFx(button_audio);
+			app->audio->PlayFx(button_fx);
 		}
 		if (app->input->GetButton(DOWN) == KEY_DOWN) {
 			NavigateDown();
-			app->audio->PlayFx(button_audio);
+			app->audio->PlayFx(button_fx);
 		}
 		if (app->menu->music != nullptr)
 		{
 			if (app->input->GetButton(RIGHT) == KEY_DOWN && app->menu->music->selected == false && app->menu->sfx->selected == false) {
 				NavigateRight();
-				app->audio->PlayFx(button_audio);
+				app->audio->PlayFx(button_fx);
 			}
 			if (app->input->GetButton(LEFT) == KEY_DOWN && app->menu->music->selected == false && app->menu->sfx->selected == false) {
 				NavigateLeft();
-				app->audio->PlayFx(button_audio);
+				app->audio->PlayFx(button_fx);
 			}
 		}
 		
