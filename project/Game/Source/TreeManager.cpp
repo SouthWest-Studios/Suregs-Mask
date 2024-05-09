@@ -53,6 +53,7 @@ bool TreeManager::Awake(pugi::xml_node config)
 	CloseUpPath = ((char*)config.child("bestiario").attribute("closeUp").as_string());
 	name = ((char*)config.child("bestiario").attribute("name").as_string());
 	description = ((char*)config.child("bestiario").attribute("description").as_string());
+	BackGroundPath = ((char*)config.child("Arbol").attribute("BackGround").as_string());
 
 
 	return ret;
@@ -87,7 +88,7 @@ bool TreeManager::Start() {
 
 	scrollY = 0;
 
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		for (int j = 0; j < 4; j++)
 		{
@@ -149,11 +150,212 @@ Tree* TreeManager::CreateItem(char* name, char* description, TreeType type, int 
 	entity = new Tree();
 	entity->id = highesttttId + 1;
 	entity->closeUpTrees = CloseUp;
-	entity->name = name;
+	
 	entity->icon = app->tex->Load(iconoTreeTexturePath);
 	entity->type = type;
 	entity->nivelArbol = nivelArbol;
 	entity->nivelMejora = nivelMejora;
+
+	switch (nivelArbol)
+	{
+		
+	case 0:
+	{
+		switch (nivelMejora)
+		{
+
+		case 0:
+		{
+			entity->name = "mask 1";
+			entity->desc = "";
+
+			break;
+		}
+		case 1:
+		{
+			entity->name = "Daño 1";
+			entity->desc = "";
+
+			break;
+		}
+		case 2:
+		{
+			entity->name = "Daño 2";
+			entity->desc = "";
+
+			break;
+		}
+		case 3:
+		{
+			entity->name = "Daño 3";
+			entity->desc = "";
+
+			break;
+		}
+		case 4:
+		{
+			entity->name = "Daño 4";
+			entity->desc = "";
+
+			break;
+		}
+		}
+
+		break;
+	}
+	case 1:
+	{
+		switch (nivelMejora)
+		{
+
+		case 0:
+		{
+			entity->name = "mask 2";
+			entity->desc = "";
+
+			break;
+		}
+		case 1:
+		{
+			entity->name = "CoolDown 1";
+			entity->desc = "";
+
+			break;
+		}
+		case 2:
+		{
+			entity->name = "CoolDown 2";
+			entity->desc = "";
+
+			break;
+		}
+		case 3:
+		{
+			entity->name = "CoolDown 3";
+			entity->desc = "";
+
+			break;
+		}
+		case 4:
+		{
+			entity->name = "CoolDown 4";
+			entity->desc = "";
+
+			break;
+		}
+		}
+
+		break;
+	}
+	case 2:
+	{
+		switch (nivelMejora)
+		{
+
+		case 0:
+		{
+			entity->name = "mask3";
+			entity->desc = "";
+
+			break;
+		}
+		case 1:
+		{
+			entity->name = "Rayos 1";
+			entity->name2 = "Alcance 1";
+			entity->name3 = "Distancia 1";
+			entity->name4 = "Duracion 1";
+			entity->desc = "";
+
+			break;
+		}
+		case 2:
+		{
+			entity->name = "Rayos 2";
+			entity->name2 = "Alcance 2";
+			entity->name3 = "Distancia 2";
+			entity->name4 = "Duracion 2";
+			entity->desc = "";
+
+			break;
+		}
+		case 3:
+		{
+			entity->name = "Rayos 3";
+			entity->name2 = "Alcance 3";
+			entity->name3 = "Distancia 3";
+			entity->name4 = "Duracion 3";
+			entity->desc = "";
+
+			break;
+		}
+		case 4:
+		{
+			entity->name = "Rayos 4";
+			entity->name2 = "Alcance 4";
+			entity->name3 = "Distancia 4";
+			entity->name4 = "Duracion 4";
+			entity->desc = "";
+
+			break;
+		}
+		}
+
+		break;
+	}
+	case 3:
+	{
+		switch (nivelMejora)
+		{
+
+		case 0:
+		{
+			entity->name = "mask4";
+			entity->desc = "";
+
+			break;
+		}
+		case 1:
+		{
+			entity->name = "Veneno 1";
+			entity->name2 = "Invisible 1";
+			entity->name3 = "Aumento 1";
+			entity->desc = "";
+
+			break;
+		}
+		case 2:
+		{
+			entity->name = "Veneno 2";
+			entity->name2 = "Invisible 2";
+			entity->name3 = "Aumento 2";
+			entity->desc = "";
+
+			break;
+		}
+		case 3:
+		{
+			entity->name = "Veneno 3";
+			entity->name2 = "Invisible 3";
+			entity->name3 = "Aumento 3";
+			entity->desc = "";
+
+			break;
+		}
+		case 4:
+		{
+			entity->name = "Veneno 4";
+			entity->name2 = "Invisible 4";
+			entity->name3 = "Aumento 4";
+			entity->desc = "";
+
+			break;
+		}
+		}
+
+		break;
+	}
+	}
 
 	AddTree(entity);
 
@@ -296,12 +498,6 @@ void TreeManager::UseTreeSelected(int id)
 					switch (item->data->nivelMejora)
 					{
 
-					case 0:
-					{
-
-
-						break;
-					}
 					case 1:
 					{
 
@@ -315,6 +511,12 @@ void TreeManager::UseTreeSelected(int id)
 						break;
 					}
 					case 3:
+					{
+
+
+						break;
+					}
+					case 4:
 					{
 
 
@@ -326,12 +528,6 @@ void TreeManager::UseTreeSelected(int id)
 					switch (item->data->nivelMejora)
 					{
 
-					case 0:
-					{
-
-
-						break;
-					}
 					case 1:
 					{
 
@@ -345,6 +541,12 @@ void TreeManager::UseTreeSelected(int id)
 						break;
 					}
 					case 3:
+					{
+
+
+						break;
+					}
+					case 4:
 					{
 
 
@@ -359,12 +561,6 @@ void TreeManager::UseTreeSelected(int id)
 					switch (item->data->nivelMejora)
 					{
 
-					case 0:
-					{
-
-
-						break;
-					}
 					case 1:
 					{
 
@@ -378,6 +574,12 @@ void TreeManager::UseTreeSelected(int id)
 						break;
 					}
 					case 3:
+					{
+
+
+						break;
+					}
+					case 4:
 					{
 
 
@@ -392,12 +594,6 @@ void TreeManager::UseTreeSelected(int id)
 					switch (item->data->nivelMejora)
 					{
 
-					case 0:
-					{
-
-
-						break;
-					}
 					case 1:
 					{
 
@@ -411,6 +607,12 @@ void TreeManager::UseTreeSelected(int id)
 						break;
 					}
 					case 3:
+					{
+
+
+						break;
+					}
+					case 4:
 					{
 
 
@@ -425,12 +627,6 @@ void TreeManager::UseTreeSelected(int id)
 					switch (item->data->nivelMejora)
 					{
 
-					case 0:
-					{
-
-
-						break;
-					}
 					case 1:
 					{
 
@@ -444,6 +640,12 @@ void TreeManager::UseTreeSelected(int id)
 						break;
 					}
 					case 3:
+					{
+
+
+						break;
+					}
+					case 4:
 					{
 
 
@@ -642,13 +844,8 @@ bool TreeManager::PostUpdate()
 			int horizontalPosition = 660 + columnIndex * 83; // Calcula la posición horizontal
 			int verticalPosition = 230 + rowIndex * 83; // Calcula la posición vertical
 
-			int y2 = PointerPosition.y - scrollY;
-
-			int y = verticalPosition - scrollY;
-
-			if (y2 >= viewport.y && y2 <= viewport.y + viewport.h)
-			{
-				if (y >= viewport.y && y <= viewport.y + viewport.h) {
+			
+				
 					if (zoomIn == false && app->notesManager->zoomIn == false)
 					{
 						app->render->DrawTexture(listTexture, horizontalPosition, verticalPosition, SDL_FLIP_NONE, 0, 0);
@@ -656,39 +853,17 @@ bool TreeManager::PostUpdate()
 						app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
 					}
 
-				}
-			}
-
-			else
-			{
-				int targetY = PointerId / 4 * 83;
-
-
-				scrollY = targetY;
-
-				scrollY = std::max(0, scrollY);
-			}
+				
 			app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y, SDL_FLIP_NONE, 0, 0);
 		}
 
 
 	}
 	ret = true;
-	int knobY = 200;
-	if (numberRows == 0)
-	{
-		knobY = 200;
-	}
-	else
-	{
-		knobY = 200 + (341 / numberRows) * verticalPointerId;
-	}
 
 
 	if (mostrar == true)
 	{
-		app->render->DrawTexture(sliderTexture, 960, 200, SDL_FLIP_NONE, 0, 0);
-		app->render->DrawTexture(knobTexture, 960, knobY, SDL_FLIP_NONE, 0, 0);
 
 		ListItem<Tree*>* itum;
 		for (itum = arboles.start; itum != nullptr; itum = itum->next)

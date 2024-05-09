@@ -87,6 +87,8 @@ private:
 	char* listTexturePath;
 	char* sliderTexturePath;
 	char* knobTexturePath;
+	char* BackGroundPath;
+	SDL_Texture* BackGroundTexture;
 	SDL_Texture* iconoTreeTexture;
 	SDL_Texture* listTexture;
 	SDL_Texture* sliderTexture;
