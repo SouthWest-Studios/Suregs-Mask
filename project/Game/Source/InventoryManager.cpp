@@ -783,6 +783,20 @@ bool InventoryManager::Update(float dt)
 	bool ret = true;
 
 
+	//Iterates over the entities and calls the Awake
+	/*ListItem<Inventity*>* item;
+	int id = NULL;
+
+	for (item = inventities.start; item != NULL && ret == true; item = item->next)
+	{
+		id = item->data->objectID;
+
+		if (id != -1) {
+			idSaved = id;
+		}
+		
+	}*/
+
 
 	if (mostrar == true)
 	{

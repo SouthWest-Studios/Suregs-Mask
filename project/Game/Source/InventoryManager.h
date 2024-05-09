@@ -76,6 +76,7 @@ public:
 	bool options = false;
 
 	int highestIde = -1;
+	int idSaved;
 
 private:
 	pugi::xml_document configFile;
