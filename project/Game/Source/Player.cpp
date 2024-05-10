@@ -1041,9 +1041,18 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 				if (app->inventoryManager->IsFull() == false)
 				{
 					app->inventoryManager->CreateItem(physB->listener->type, physB->listener->description, physB->listener->tipo, physB->listener->name.c_str());
+
 					physB->listener->active = false;
 					physB->body->SetActive(false);
+
+
 				}
+				else
+				{
+					app->inventoryManager->AddQuantity(physB->listener);
+				}
+					
+				
 				
 			}
 		}

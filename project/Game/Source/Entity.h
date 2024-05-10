@@ -241,6 +241,8 @@ public:
 	std::string tipo;
 
 	SDL_Texture* CloseTexture = NULL;
+
+	bool plused = false;
 	
 };
 

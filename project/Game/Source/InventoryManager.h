@@ -37,6 +37,8 @@ public:
 
 	void AddItem(Inventity* Inventity);
 
+	void AddQuantity(Entity* entity = nullptr);
+
 	void DestroyItem(InventityType type, int cantidad);
 
 	void DestroyItemById(int entityId, bool useStack = true);
@@ -74,7 +76,7 @@ public:
 	uint texW, texH;
 	bool mostrar = false;
 	bool options = false;
-
+	bool inList = false;
 	int highestIde = -1;
 	int idSaved;
 

@@ -762,7 +762,11 @@ void InventoryManager::AddItem(Inventity* entity)
 		}
 		if (!itemEncontrado)
 		{
-			inventities.Add(entity);
+			
+				inventities.Add(entity);
+			
+
+			
 		}
 		else
 		{
@@ -773,6 +777,89 @@ void InventoryManager::AddItem(Inventity* entity)
 		app->hud->AcquiredItemTrigger(entity->icon, entity->name.GetString());
 	}
 
+	
+	
+}
+
+void InventoryManager::AddQuantity(Entity* entity)
+{
+	InventityType inventity;
+	
+	switch (entity->type)
+	{
+	case EntityType::ITEM_GARRA:
+		inventity = InventityType::GARRA;
+		break;
+	case EntityType::ITEM_DIAMANTE:
+		inventity = InventityType::DIAMANTE;
+		break;
+	case EntityType::ITEM_OJO:
+		inventity = InventityType::OJO;
+		break;
+	case EntityType::ITEM_HUESO:
+		inventity = InventityType::HUESO;
+		break;
+	case EntityType::ITEM_CARBON:
+		inventity = InventityType::CARBON;
+		break;
+	case EntityType::ITEM_VISCERAS:
+		inventity = InventityType::VISCERA;
+		break;
+	case EntityType::ITEM_RUBI:
+		inventity = InventityType::RUBI;
+		break;
+	case EntityType::ITEM_DIENTE:
+		inventity = InventityType::DIENTE;
+		break;
+	case EntityType::ITEM_AMATISTA:
+		inventity = InventityType::AMATISTA;
+		break;
+	case EntityType::ITEM_COLA:
+		inventity = InventityType::COLA;
+		break;
+	case EntityType::ITEM_POLVORA:
+		inventity = InventityType::POLVORA;
+		break;
+	case EntityType::ITEM_NOTA:
+		inventity = InventityType::NOTA;
+		break;
+	case EntityType::ITEM_POCION_DANO:
+		inventity = InventityType::POCION_DANO;
+		break;
+	case EntityType::ITEM_POCION_REGENERACION:
+		inventity = InventityType::POCION_REGENERACION;
+		break;
+	case EntityType::ITEM_POCION_VELOCIDAD:
+		inventity = InventityType::POCION_VELOCIDAD;
+		break;
+	case EntityType::ITEM_POCION_VIDA_1:
+		inventity = InventityType::POCION_VIDA_1;
+		break;
+	case EntityType::ITEM_POCION_VIDA_2:
+		inventity = InventityType::POCION_VIDA_2;
+		break;
+	case EntityType::ITEM_POCION_VIDA_3:
+		inventity = InventityType::POCION_VIDA_3;
+		break;
+	case EntityType::ITEM_POCION_VIDA_MAX:
+		inventity = InventityType::POCION_VIDA_MAX;
+		break;
+	case EntityType::ITEM_SALIVA:
+		inventity = InventityType::SALIVA;
+		break;
+	default:
+		break;
+	}
+	for (int i = 0; i < inventities.Count(); i++) {
+		if (inventities.At(i)->data->type == inventity) {
+			inventities.At(i)->data->quantity += 1;
+			/*entity->pbody->body->SetActive(false);*/
+			entity->active = false;
+			break;
+		}
+
+	}
+	
 	
 	
 }

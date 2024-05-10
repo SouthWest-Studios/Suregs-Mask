@@ -128,6 +128,7 @@ public:
 	uint quantity = 1;
 	bool active;
 	bool stackable = false;
+	bool inList = false;
 	InventityType type;
 	std::string desc;
 	std::string tipo;
