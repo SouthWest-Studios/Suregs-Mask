@@ -51,9 +51,12 @@ bool Enemy_Khurt::Start() {
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
 	idleAnim.LoadAnim("khurt", "idleAnim", spritePositions);
+	chargeAnim.LoadAnim("khurt", "idleAnim", spritePositions);
+	stunAnim.LoadAnim("khurt", "idleAnim", spritePositions);
 	runAnim.LoadAnim("khurt", "runAnim", spritePositions);
 	underAnim.LoadAnim("khurt", "underAnim", spritePositions);
 	dieAnim.LoadAnim("khurt", "dieAnim", spritePositions);
+	
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
@@ -75,6 +78,9 @@ bool Enemy_Khurt::Start() {
 	attackDamage = config.attribute("attackDamage").as_float();
 	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();
+	chargeAttackDistance = config.attribute("chargeAttackDistance").as_float();
+
+	chargeTimer.Start();
 
 	//printf("Speed: %f", speed);
 
@@ -101,9 +107,9 @@ bool Enemy_Khurt::Update(float dt)
 	}
 	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance * 32)
 	{
-		if (stunned = false) {
-			nextState = EntityState::RUNNING;
-		}
+	
+		nextState = EntityState::RUNNING;
+	
 	}
 	else
 	{
@@ -145,22 +151,30 @@ bool Enemy_Khurt::Update(float dt)
 	//	}
 	//}
 
-	if (stunned) {
-		timerStun.Start();
-		nextState = EntityState::IDLE;
-		/*pbodyFoot->body->SetActive(false);*/
+	if (charging && dist(Antposition, position) > 350)
+	{
+		Stunned(dt);
+		stunned = true;
 	}
 
-	if (timerStun.ReadMSec() > 2000) {
-		nextState = EntityState::RUNNING;
-		/*pbodyFoot->body->SetActive(true);*/
-		stunned = false;
+	if (chargeTimer.ReadSec() >= 5)
+	{
+		charging = false;
 	}
 
-	if (app->map->pathfinding->GetDistance(playerPos, position) > (attackDistance + 3) * 32 && app->map->pathfinding->GetDistance(playerPos, position) < (viewDistance - 10) * 32) {
+	//if (app->map->pathfinding->GetDistance(playerPos, position) == (attackDistance + 5) * 32) {
 
-		currentAnimation = &underAnim;	
-	}
+	//	digging = true;
+	//}
+	//if (digging = true) {
+	//	digTimer.Start();
+	//	currentAnimation = &underAnim;
+	//}
+
+	//if (digTimer.ReadSec() >= 2) {
+	//	nextState = EntityState::IDLE;
+	//	digging = false;
+	//}
 
 	//VENENO <----------
 	CheckPoison();
@@ -237,7 +251,15 @@ void Enemy_Khurt::Chase(float dt, iPoint playerPos)
 {
 	//printf("Khurt chasing");
 	currentAnimation = &runAnim;
-	Khurtfinding(dt, playerPos);
+	if (chargeTimer.ReadSec() >= 5 && app->map->pathfinding->GetDistance(playerPos, position) <= chargeAttackDistance * 32 && app->map->pathfinding->GetDistance(playerPos, position) >= (attackDistance + 5) * 32)
+	{
+		Antposition = position;
+		Charge(dt, playerPos);
+	}
+	else if (!charging)
+	{
+		Khurtfinding(dt, playerPos);
+	}
 
 }
 
@@ -248,11 +270,6 @@ void Enemy_Khurt::Attack(float dt)
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero); //No se mueve mientras ataca
 
 	//sonido ataque
-}
-
-void Enemy_Khurt::ChargeAttack(float dt)
-{
-
 }
 
 void Enemy_Khurt::Die() {
@@ -297,7 +314,6 @@ void Enemy_Khurt::OnCollision(PhysBody* physA, PhysBody* physB) {
 		//restar vida al player
 		break;
 	case ColliderType::PLAYER_ATTACK:
-		stunned = true;
 		LOG("Collision Player_Attack");
 		break;
 	case ColliderType::UNKNOWN:
@@ -371,6 +387,37 @@ void Enemy_Khurt::TakeDamage(float damage) {
 		health -= damage;
 		invulnerabilityTimer.Start();
 		timerRecibirDanioColor.Start();
+	}
+}
+
+void Enemy_Khurt::Charge(float dt, iPoint playerPos)
+{
+	printf("charging");
+	currentAnimation = &chargeAnim;
+	charging = true;
+
+	b2Vec2 direction(playerPos.x - position.x, playerPos.y - position.y);
+	direction.Normalize();
+
+	b2Vec2 impulse = b2Vec2(direction.x * 5, direction.y * 5);
+	pbodyFoot->body->ApplyLinearImpulse(impulse, pbodyFoot->body->GetWorldCenter(), true);
+
+	stunTimer.Start();
+	chargeTimer.Start();
+}
+
+void Enemy_Khurt::Stunned(float dt)
+{
+	if (stunTimer.ReadSec() <= 3) {
+		printf("stunned");
+		currentAnimation = &stunAnim;
+		pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
+	}
+	else {
+		stunTimer.Start();
+		nextState = EntityState::IDLE;
+		stunned = false;
+		charging = false;
 	}
 }
 

@@ -155,7 +155,7 @@
 				Tsprite="20" Pwidth="240" sprite_x="60" sprite_y="55"/>	
 
 		<khurt texturePath="Assets/Textures/Entidades/Khurt/textura_khurt.png" 
-			   maxHealth="220.0f" speed="1.5f" attackDamage="90.0f" attackDistance="2" viewDistance="20"
+			   maxHealth="220.0f" speed="1.5f" attackDamage="90.0f" attackDistance="2" viewDistance="20" chargeAttackDistance= "10"
 			   Tsprite="6" Pwidth="40" sprite_x="20" sprite_y="20"/>
 
 		<boorok texturePath="Assets/Textures/Entidades/Boorok/Boorok_Spritesheet.png" 
@@ -269,7 +269,7 @@
 		<texturaIntro texturepath ="Assets/Textures/Interfaz/intro_textura.png"/>
 	</scene_intro>
 	<scene_logos>
-		<sceneLogos texturepath ="Assets/Textures/Intro.png" Tsprite="64" Pwidth="10240" sprite_x="1280" sprite_y="720"/>
+		<sceneLogos texturepath ="Assets/Textures/newIntro.png" Tsprite="60" Pwidth="7680" sprite_x="1280" sprite_y="720"/>
 	</scene_logos>
 	<scene_pueblo>
 		<pathfindingTexture pathtexture="Assets/Textures/pathfinding.png"/>
@@ -333,7 +333,7 @@
 	<!--Animation-->
 	<animations>
 		<scene_logos>
-			<idleAnim start="0" end="64" speed="0.25f" loop="false"/>
+			<idleAnim start="0" end="50" speed="0.5f" loop="false"/>
 		</scene_logos>
 			
 		<player>
