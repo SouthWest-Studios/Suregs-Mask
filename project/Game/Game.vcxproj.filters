@@ -642,6 +642,10 @@
     <ClInclude Include="Source\Particle.h">
       <Filter>Modules\ParticleSystem</Filter>
     </ClInclude>
+
+    <ClInclude Include="Source\Pociones.h">
+      <Filter>Modules\SistemaPociones</Filter>
+	</ClInclude>
     <ClInclude Include="Source\Tree.h">
       <Filter>Modules\SistemaArbol</Filter>
     </ClInclude>
@@ -725,6 +729,9 @@
     <Filter Include="Modules\ParticleSystem">
       <UniqueIdentifier>{d69cbfff-9744-45d9-a030-8f3ce47d43b0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\SistemaPociones">
+      <UniqueIdentifier>{59be36b4-9fa9-449f-89db-6782e33dbde1}</UniqueIdentifier>
+	</Filter>
     <Filter Include="Modules\SistemaArbol">
       <UniqueIdentifier>{419ece52-a4c0-464a-b640-9b29184f1160}</UniqueIdentifier>
     </Filter>

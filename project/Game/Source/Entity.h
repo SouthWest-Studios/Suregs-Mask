@@ -227,7 +227,7 @@ public:
 
 	PhysBody* pbodyFoot;
 	PhysBody* pbodySensor;
-	PhysBody* AreaSensor;
+	
 
 	float speed;
 	float health;

@@ -41,7 +41,17 @@ bool Hud::Awake(pugi::xml_node config)
 
 	rectFondoMascara = new SDL_Rect{ 0,37,101,102 };
 	rectFondoMascaraSecundaria = new SDL_Rect{ 110,43,90,90 };
+
 	rectFondoPociones = new SDL_Rect{ 215,67,41,41 };
+	rectPocionVida1 = new SDL_Rect{ 1,686,60,56 };
+	rectPocionVida2 = new SDL_Rect{ 61,686,60,56 };
+	rectPocionVida3 = new SDL_Rect{ 121,686,60,56 };
+	rectPocionVidaMax = new SDL_Rect{ 181,686,60,56 };
+	rectPocionRegeneracion = new SDL_Rect{ 241,686,60,56 };
+	rectPocionDano = new SDL_Rect{ 301,686,60,56 };
+	rectPocionVelocidad = new SDL_Rect{ 361,686,60,56 };
+	rectPocionOrbe = new SDL_Rect{ 421,686,60,56 };
+
 	//rectFondoHabilidad1 = new SDL_Rect{ 1,149,60,60 };
 	//rectFondoHabilidad2 = new SDL_Rect{ 65,157,45,45 };
 	rectFondoInventario = new SDL_Rect{ 2,220,109,109 };
@@ -143,9 +153,11 @@ bool Hud::PostUpdate()
 
 
 	//Fondos
-	
+
+	//Pociones
 
 	app->render->DrawTexture(hudTexture, 445, 32, SDL_FLIP_NONE, rectFondoPociones, 0);
+	app->render->DrawTexture(hudTexture, 445, 32, SDL_FLIP_NONE, rectPocionVida1, 0);
 
 	/*app->render->DrawTexture(hudTexture, 45, 150, SDL_FLIP_NONE, rectFondoHabilidad1, 0);
 	app->render->DrawTexture(hudTexture, 51, 220, SDL_FLIP_NONE, rectFondoHabilidad2, 0);

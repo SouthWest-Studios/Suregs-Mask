@@ -93,6 +93,9 @@ private:
 	Animation attackAnim;
 	Animation dieAnim;
 
+	int osiris_get_damage_fx;
+	int osiris_death_fx;
+
 
 	iPoint originalPosition;
 

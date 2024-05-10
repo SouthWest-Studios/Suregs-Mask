@@ -60,7 +60,7 @@ bool DialogTrigger::Start() {
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 
-	dialog_fx = app->audio->LoadAudioFx("dialog_fx");
+	dialog_fx = app->audio->LoadAudioFx("dialogAlt_fx");
 
 	if (faceTexturePath != "") {
 		faceTexture = app->tex->Load(faceTexturePath);
@@ -139,10 +139,11 @@ void DialogTrigger::PlayDialog()
 		{
 			pDialog = item->data;
 			app->dialogManager->AddDialog(pDialog);
+			app->audio->PlayFx(dialog_fx);
 		}
 		played = true;
 
-		app->audio->PlayFx(dialog_fx);
+		//app->audio->PlayFx(dialog_fx);
 
 
 	//Play el dialogo repetido

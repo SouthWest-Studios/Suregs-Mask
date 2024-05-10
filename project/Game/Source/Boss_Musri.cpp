@@ -55,6 +55,8 @@ bool Boss_Musri::Start() {
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
+	musri_dash_fx = app->audio->LoadAudioFx("musri_dash_fx");
+
 	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
 	pbodyFoot->entity = this;
 	pbodyFoot->listener = this;
@@ -541,7 +543,6 @@ void Boss_Musri::FaseC(float dt, iPoint playerPos)
 	if (Bossfinding(dt, movePosition)) {
 		fase = FASE_Musri::FASE_TWO;
 	}
-
 
 }
 void Boss_Musri::Fase2(float dt, iPoint playerPos)

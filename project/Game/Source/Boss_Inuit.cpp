@@ -66,10 +66,10 @@ bool Boss_Inuit::Start() {
 
 
 
-	AreaSensor = app->physics->CreateCircle(position.x, position.y, 500, bodyType::STATIC,true);
-	AreaSensor->entity = this;
-	AreaSensor->listener = this;
-	AreaSensor->ctype = ColliderType::UNKNOWN;
+	areaSensor = app->physics->CreateCircle(position.x, position.y, 500, bodyType::STATIC, true);
+	areaSensor->entity = this;
+	areaSensor->listener = this;
+	areaSensor->ctype = ColliderType::BOSSAREA;
 
 
 	originalPosition = app->map->WorldToMap(position.x, position.y);
@@ -92,10 +92,7 @@ bool Boss_Inuit::Update(float dt)
 	//Pone el sensor del cuerpo en su posicion
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
-
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
-
-	//printf("\n %d : %d", playerPos.x, playerPos.y);
 
 	if (health <= 0)
 	{
@@ -116,7 +113,20 @@ bool Boss_Inuit::Update(float dt)
 	stateMachine(dt, playerPos);
 
 
+	if (atackCube != nullptr && playerInBossArea == false) {
+		app->physics->GetWorld()->DestroyBody(atackCube->body);
+		atackCube = nullptr;
+	}
 
+	switch (fase)
+	{
+	case FASE::FASE_ONE:
+		break;
+	case FASE::FASE_CHANGE:
+		break;
+	case FASE::FASE_TWO:
+		break;
+	}
 
 	currentAnimation->Update();
 	return true;
@@ -139,7 +149,6 @@ bool Boss_Inuit::PostUpdate() {
 	//}
 
 
-
 	if (isFacingLeft) {
 		app->render->DrawTexture(texture, position.x - 70, position.y - 200, SDL_FLIP_HORIZONTAL, &rect);
 	}
@@ -155,19 +164,9 @@ bool Boss_Inuit::PostUpdate() {
 		}
 	}
 
-
-
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
-
-	if (getBossArea) {
-		getBossArea = false;
-		bossArea.x = position.x;
-		bossArea.y = position.y;
-	}
-	
-	//app->render->DrawCircle(bossArea.x, bossArea.y, 500, 0, 255, 255, 255, false);
 
 	return true;
 }
@@ -177,6 +176,7 @@ bool Boss_Inuit::CleanUp()
 {
 	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 	app->physics->GetWorld()->DestroyBody(pbodySensor->body);
+	app->physics->GetWorld()->DestroyBody(areaSensor->body);
 	app->tex->UnLoad(texture);
 	lastPath.Clear();
 
@@ -206,7 +206,37 @@ void Boss_Inuit::Attack(float dt)
 {
 	////printf("Osiris attacking");
 	//currentAnimation = &attackAnim;
-	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero); //No se mueve mientras ataca
+
+	attackTime++;
+	switch (attackTime)
+	{
+	case 1:
+		inAtack = true;
+		printf("\nataque1");
+
+		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
+
+		break;
+	case 2:
+		inAtack = true;
+		printf("\nataque2");
+
+		//ataqueTimeClodDown = atackTimeColdDown.CountDown(1);
+		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
+		break;
+	case 3:
+		inAtack = true;
+		printf("\nataque3");
+		//ataqueTimeClodDown = atackTimeColdDown.CountDown(1);
+		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
+		attackTime = 0;
+		break;
+
+	default:
+		break;
+	}
+
+	atackTimeColdDown.Start();
 
 }
 
@@ -229,8 +259,9 @@ void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision PLATFORM");
 		break;
 	case ColliderType::PLAYER:
-		playerInBossArea = true;
-		printf("\nPlayerArea");
+		if (physA->ctype == ColliderType::BOSSAREA) {
+			playerInBossArea = true;
+		}
 		LOG("Collision PLAYER");
 		//restar vida al player
 		break;
@@ -252,8 +283,11 @@ void Boss_Inuit::OnEndCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision PLATFORM");
 		break;
 	case ColliderType::PLAYER:
-		playerInBossArea = false;
-		printf("\nPlayerArea");
+		if (physA->ctype == ColliderType::BOSSAREA) {
+			printf("Out");
+			playerInBossArea = false;
+			inAtack = false;
+		}
 		LOG("Collision PLAYER");
 		//restar vida al player
 		break;
@@ -275,11 +309,16 @@ bool Boss_Inuit::Bossfinding(float dt, iPoint playerPosP)
 
 	//printf("\nBossArea:%f", dist(bossArea, enemyPos));
 	//printf("\nEmemyPosicion:%d", enemyPos);
-	
+
 	if (playerInBossArea) {
 
 		app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
 		lastPath = *app->map->pathfinding->GetLastPath();
+		if (atackCube != nullptr) {
+			app->physics->GetWorld()->DestroyBody(atackCube->body);
+			atackCube = nullptr;
+		}
+		inAtack = false;
 	}
 	else {
 		app->map->pathfinding->CreatePath(enemyPos, originalPosition); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
@@ -337,7 +376,45 @@ void Boss_Inuit::stateMachine(float dt, iPoint playerPos)
 		Chase(dt, playerPos);
 		break;
 	case EntityState_Boss_Inuit::ATTACKING_BASIC:
-		Attack(dt);
+
+		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero); //No se mueve mientras ataca
+
+
+		if (!inAtack) {
+			Attack(dt);
+		}
+
+		if (TimerColdDown(1)) {
+			if (atackCube != nullptr) {
+				app->physics->GetWorld()->DestroyBody(atackCube->body);
+				atackCube = nullptr;
+			}
+		}
+
+		if (TimerColdDown(3)) {
+			inAtack = false;
+
+		}
+
+		/*if (atackCube != nullptr) {
+			inAtack = false;
+			firstAtack = true;
+			app->physics->GetWorld()->DestroyBody(atackCube->body);
+			atackCube = nullptr;
+		}*/
+
+
+		//if (inAtack) {
+		//	/*ataqueTimeClodDown = atackTimeColdDown.CountDown(60);*/
+		//	printf("\nataqueTimeClodDown%: %f", ataqueTimeClodDown);
+		//}
+		//else
+		//{
+		//	Attack(dt);
+		//}
+
+
+
 		break;
 	case EntityState_Boss_Inuit::ATTACKING_DISTANCE:
 		break;
@@ -358,6 +435,22 @@ void Boss_Inuit::stateMachine(float dt, iPoint playerPos)
 		break;
 	}
 	currentState = nextState;
+
+}
+
+bool Boss_Inuit::TimerColdDown(float time)
+{
+	//printf("\nataqueTimeClodDown%: %f", ataqueTimeClodDown);
+	ataqueTimeClodDown = atackTimeColdDown.CountDown(time);
+
+	if ((float)ataqueTimeClodDown == 0) {
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+
 
 }
 

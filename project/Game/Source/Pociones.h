@@ -1,33 +1,13 @@
-#ifndef __INVENTITY_H__
-#define __INVENTITY_H__
+#ifndef __POCIONES_H__
+#define __POCIONES_H__
 
 #include "Point.h"
 #include "SString.h"
 #include "Input.h"
 #include "Render.h"
 
-enum class InventityType
+enum class PocionesType
 {
-	MONEDA = -1,
-	ITEM,
-	GARRA,
-	OJO,
-	DIAMANTE,
-	VISCERA,
-	RUBI,
-	POLVORA,
-	NOTA,
-	HUESO,
-	DIENTE,
-	COLA,
-	CARBON,
-	AMATISTA,
-	ESPADA2,
-	ARMADURA,
-	PEZ_PEQUENO,
-	PEZ_MEDIANO,
-	PEZ_GRANDE,
-	SALIVA,
 	POCION_VIDA_1,
 	POCION_VIDA_2,
 	POCION_VIDA_3,
@@ -45,16 +25,13 @@ enum class InventityType
 
 class PhysBody;
 
-class Inventity
+class Pociones
 {
 public:
 
-	Inventity(InventityType type) : type(type), active(true) {}
+	Pociones(PocionesType type) : type(type), active(true) {}
 	
-	Inventity() : active(true) {}
-
-	
-
+	Pociones() : active(true) {}
 	
 
 	virtual bool Awake()
@@ -92,7 +69,7 @@ public:
 		return true;
 	}
 
-	void Inventity::Enable()
+	void Pociones::Enable()
 	{
 		if (!active)
 		{
@@ -101,7 +78,7 @@ public:
 		}
 	}
 
-	void Inventity::Disable()
+	void Pociones::Disable()
 	{
 		if (active)
 		{
@@ -119,7 +96,6 @@ public:
 public:
 
 	int id;
-	int objectID = -1;
 	SString name;
 	SDL_Texture* icon;
 	char* iconPath;
@@ -128,11 +104,11 @@ public:
 	uint quantity = 1;
 	bool active;
 	bool stackable = false;
-	InventityType type;
+	PocionesType type;
 	std::string desc;
 	std::string tipo;
 
 	
 };
 
-#endif // __INVENTITY_H__
+#endif // __POCIONES_H__
