@@ -30,6 +30,7 @@
 #include "MissionManager.h"
 #include "NotesManager.h"
 #include "BestiarioManager.h"
+#include "Menu_Equipo.h"
 #include "TreeManager.h"
 #include "Menu.h"
 #include "Hud.h"
@@ -93,6 +94,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	notesManager = new NotesManager(this);
 	bestiarioManager = new BestiarioManager(this);
 	treeManager = new TreeManager(this);
+	menuEquipo = new Menu_Equipo(this);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -128,6 +130,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(commerceManager);
 	AddModule(notesManager);
 	AddModule(bestiarioManager);
+	AddModule(menuEquipo);
 	AddModule(treeManager);
 	AddModule(guiManager);
 	AddModule(dialogManager);

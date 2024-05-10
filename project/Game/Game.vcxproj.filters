@@ -292,6 +292,9 @@
     <ClCompile Include="Source\TreeManager.cpp">
       <Filter>Modules\SistemaArbol</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Menu_Equipo.cpp">
+      <Filter>Modules\Equipo</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -642,15 +645,17 @@
     <ClInclude Include="Source\Particle.h">
       <Filter>Modules\ParticleSystem</Filter>
     </ClInclude>
-
     <ClInclude Include="Source\Pociones.h">
       <Filter>Modules\SistemaPociones</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="Source\Tree.h">
       <Filter>Modules\SistemaArbol</Filter>
     </ClInclude>
     <ClInclude Include="Source\TreeManager.h">
       <Filter>Modules\SistemaArbol</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Menu_Equipo.h">
+      <Filter>Modules\Equipo</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -731,9 +736,12 @@
     </Filter>
     <Filter Include="Modules\SistemaPociones">
       <UniqueIdentifier>{59be36b4-9fa9-449f-89db-6782e33dbde1}</UniqueIdentifier>
-	</Filter>
+    </Filter>
     <Filter Include="Modules\SistemaArbol">
       <UniqueIdentifier>{419ece52-a4c0-464a-b640-9b29184f1160}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Equipo">
+      <UniqueIdentifier>{ebbeaf97-951e-49fb-99a8-3d375e55d784}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

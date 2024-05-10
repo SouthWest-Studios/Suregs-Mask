@@ -48,6 +48,7 @@ class BestiarioManager;
 class Menu;
 class Hud;
 class TreeManager;
+class Menu_Equipo;
 
 
 class App
@@ -164,6 +165,7 @@ public:
 
 	Menu* menu;
 	Hud* hud;
+	Menu_Equipo* menuEquipo;
 	
 
 	bool closeApplication = false;

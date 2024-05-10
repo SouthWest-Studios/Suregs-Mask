@@ -17,6 +17,7 @@
 #include "Scene_Menu.h"
 #include "Scene_Testing.h"
 #include "ModuleFadeToBlack.h"
+#include "Menu_Equipo.h"
 
 #include "SDL_mixer/include/SDL_mixer.h"
 
@@ -346,6 +347,14 @@ bool Menu::Update(float dt)
 	else
 	{
 		app->inventoryManager->mostrar = false;
+	}
+	if (ventana == 2)
+	{
+		app->menuEquipo->mostrar = true;
+	}
+	else
+	{
+		app->menuEquipo->mostrar = false;
 	}
 
 	if (ventana == 3)
