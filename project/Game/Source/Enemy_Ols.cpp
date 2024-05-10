@@ -114,7 +114,7 @@ bool Enemy_Ols::Update(float dt)
 	{
 		desiredState = EntityState_Enemy::DEAD;
 	}
-	if (distanceToPlayer <= attackDistance * 32 && canAttack)
+	else if (distanceToPlayer <= attackDistance * 32 && canAttack)
 	{
 		desiredState = EntityState_Enemy::ATTACKING;
 	}
