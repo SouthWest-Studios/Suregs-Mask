@@ -269,7 +269,7 @@
 		<texturaIntro texturepath ="Assets/Textures/Interfaz/intro_textura.png"/>
 	</scene_intro>
 	<scene_logos>
-		<sceneLogos texturepath ="Assets/Textures/Intro.png" Tsprite="64" Pwidth="10240" sprite_x="1280" sprite_y="720"/>
+		<sceneLogos texturepath ="Assets/Textures/newIntro.png" Tsprite="60" Pwidth="7680" sprite_x="1280" sprite_y="720"/>
 	</scene_logos>
 	<scene_pueblo>
 		<pathfindingTexture pathtexture="Assets/Textures/pathfinding.png"/>
@@ -333,7 +333,7 @@
 	<!--Animation-->
 	<animations>
 		<scene_logos>
-			<idleAnim start="0" end="64" speed="0.25f" loop="false"/>
+			<idleAnim start="0" end="50" speed="0.5f" loop="false"/>
 		</scene_logos>
 			
 		<player>

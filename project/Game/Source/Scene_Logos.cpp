@@ -49,12 +49,12 @@ bool Scene_Logos::Start()
 	sceneLogosTexture = app->tex->Load(config.attribute("texturepath").as_string());
 
 	sceneLogos.LoadAnim("scene_logos", "idleAnim", spritePositions);
-	//logoGamePath = config.child("logoGame").attribute("texturepath").as_string();
+	//lastFramePath = config.child("lastFrame").attribute("texturepath").as_string();
 	//logoUpcPath = config.child("logoUpc").attribute("texturepath").as_string();
 	//logoStudioPath = config.child("logoStudio").attribute("texturepath").as_string();
 	//backgroundPath = config.child("background").attribute("texturepath").as_string();
-	//logoGame = app->tex->Load(logoGamePath);
-	//logoUpc = app->tex->Load(logoUpcPath);
+	//lastFrame = app->tex->Load(lastFramePath);
+	//lastFrame = app->tex->Load(lastFramePath);
 	//logoStudio = app->tex->Load(logoStudioPath);
 	//background = app->tex->Load(backgroundPath);
 	timerIntro.Start();
@@ -66,7 +66,8 @@ bool Scene_Logos::Start()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
-	
+	//app->render->DrawTexture(lastFrame, 0, 0);
+
 
 	return true;
 }
@@ -90,7 +91,8 @@ bool Scene_Logos::Update(float dt)
 
 	if (currentAnimation->HasFinished()) {
 		//printf("ScenaAcabado");
-		
+		//app->render->DrawTexture(lastFrame, 0, 0);
+
 	}
 
 	if (timerIntro.ReadSec() < 10) {
@@ -130,7 +132,7 @@ bool Scene_Logos::PostUpdate()
 		
 	//app->render->DrawTexture(background, 0, 0);
 	//app->render->DrawTexture(logoGame, 500, 100);
-	//app->render->DrawTexture(logoUpc, 600, 400);
+	//app->render->DrawTexture(lastFrame, 0, 0);
 	//app->render->DrawTexture(logoStudio, 300, 350);
 	bool ret = true;
 
