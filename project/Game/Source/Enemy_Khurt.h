@@ -43,12 +43,15 @@ public:
 	void Attack(float dt);
 	void Die();
 	bool Khurtfinding(float dt, iPoint playerPos);
-	void ChargeAttack(float dt);
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
 	float GetHealth() const;
 	void TakeDamage(float damage);
+
+	//Attack
+	void Charge(float dt, iPoint playerPos);
+	void Stunned(float dt);
 
 	//VENENO <----------
 	void ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate);
@@ -72,6 +75,7 @@ public:
 
 	float viewDistance;
 	float attackDistance;
+	float chargeAttackDistance;
 
 private:
 	pugi::xml_document configFile;
@@ -82,6 +86,8 @@ private:
 	Animation runAnim;
 	Animation underAnim;
 	Animation dieAnim;
+	Animation chargeAnim;
+	Animation stunAnim;
 
 	bool isFacingLeft = false;
 
@@ -116,7 +122,12 @@ private:
 	bool poisoned = false;
 	//VENENO ---------->
 	
-	bool stunned = false;
+	//Charge Attack
+	Timer stunTimer;
+	Timer chargeTimer;
+	bool charging;
+	bool stunned;
+	iPoint Antposition;
 
 	Timer timerStun;
 
