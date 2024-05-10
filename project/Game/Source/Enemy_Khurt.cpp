@@ -162,10 +162,19 @@ bool Enemy_Khurt::Update(float dt)
 		charging = false;
 	}
 
-	/*if (app->map->pathfinding->GetDistance(playerPos, position) > (attackDistance + 3) * 32 && app->map->pathfinding->GetDistance(playerPos, position) < (viewDistance - 10) * 32) {
+	//if (app->map->pathfinding->GetDistance(playerPos, position) == (attackDistance + 5) * 32) {
 
-		currentAnimation = &underAnim;	
-	}*/
+	//	digging = true;
+	//}
+	//if (digging = true) {
+	//	digTimer.Start();
+	//	currentAnimation = &underAnim;
+	//}
+
+	//if (digTimer.ReadSec() >= 2) {
+	//	nextState = EntityState::IDLE;
+	//	digging = false;
+	//}
 
 	//VENENO <----------
 	CheckPoison();

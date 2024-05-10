@@ -129,7 +129,9 @@ private:
 	bool stunned;
 	iPoint Antposition;
 
-	Timer timerStun;
+	//Dig underground
+	Timer digTimer;
+	bool digging = false;
 
 public:
 
