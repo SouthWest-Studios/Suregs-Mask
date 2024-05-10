@@ -95,9 +95,9 @@ public:
 
 	int id;
 	SString name;
-	SString name2;
-	SString name3;
-	SString name4;
+	SString name2 = "";
+	SString name3 = "";
+	SString name4 = "";
 	SDL_Texture* icon;
 	char* iconPath;
 	SDL_Texture* closeUpTrees;

@@ -47,6 +47,7 @@ class NotesManager;
 class BestiarioManager;
 class Menu;
 class Hud;
+class TreeManager;
 
 
 class App
@@ -159,6 +160,7 @@ public:
 	MissionManager* missionManager;
 	NotesManager* notesManager;
 	BestiarioManager* bestiarioManager;
+	TreeManager* treeManager;
 
 	Menu* menu;
 	Hud* hud;

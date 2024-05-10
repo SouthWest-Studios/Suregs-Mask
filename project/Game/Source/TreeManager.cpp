@@ -45,15 +45,11 @@ bool TreeManager::Awake(pugi::xml_node config)
 		ret = item->data->Awake();
 	}
 
-	iconoTreeTexturePath = ((char*)config.child("bestiario").attribute("texturePath").as_string());
-	listTexturePath = ((char*)config.child("bestiario").attribute("list_texture").as_string());
-	sliderTexturePath = ((char*)config.child("bestiario").attribute("slider_texture").as_string());
-	knobTexturePath = ((char*)config.child("bestiario").attribute("knob_texture").as_string());
-	PointerPath = ((char*)config.child("bestiario").attribute("pointer").as_string());
-	CloseUpPath = ((char*)config.child("bestiario").attribute("closeUp").as_string());
-	name = ((char*)config.child("bestiario").attribute("name").as_string());
-	description = ((char*)config.child("bestiario").attribute("description").as_string());
-	BackGroundPath = ((char*)config.child("Arbol").attribute("BackGround").as_string());
+	iconoTreeTexturePath = ((char*)config.child("arbol").attribute("texturePath").as_string());
+	listTexturePath = ((char*)config.child("arbol").attribute("list_texture").as_string());
+	PointerPath = ((char*)config.child("arbol").attribute("pointer").as_string());
+	CloseUpPath = ((char*)config.child("arbol").attribute("closeUp").as_string());
+	BackGroundPath = ((char*)config.child("arbol").attribute("BackGround").as_string());
 
 
 	return ret;
@@ -63,14 +59,11 @@ bool TreeManager::Awake(pugi::xml_node config)
 bool TreeManager::Start() {
 
 
-
+	BackGroundTexture = app->tex->Load("Assets/Textures/Interfaz/Arbol/ArbolFondo.png");
 	CloseUp = app->tex->Load(CloseUpPath);
-	listTexture = app->tex->Load(listTexturePath);
-	sliderTexture = app->tex->Load(sliderTexturePath);
-	knobTexture = app->tex->Load(knobTexturePath);
-	PointerItemText = app->tex->Load(PointerPath);
-	PointerId = -2;
-	PointerItemText = nullptr;
+	listTexture = app->tex->Load("Assets/Textures/Interfaz/Arbol/textura_lista.png");
+	PointerItemText = app->tex->Load("Assets/Textures/Interfaz/Arbol/noteselect.png");
+	PointerId = 0;
 
 	bool ret = true;
 
@@ -88,29 +81,29 @@ bool TreeManager::Start() {
 
 	scrollY = 0;
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 4; i++)
 	{
-		for (int j = 0; j < 4; j++)
+		for (int j = 0; j < 5; j++)
 		{
 			if (i == 0 && j == 0)
 			{
-				CreateItem(name, description, TreeType::MASK0, i, j);
+				CreateItem(TreeType::MASK0, i, j);
 			}
-			else if (i == 0 && j == 1)
+			else if (i == 1 && j == 0)
 			{
-				CreateItem(name, description, TreeType::MASK1, i, j);
+				CreateItem(TreeType::MASK1, i, j);
 			}
-			else if (i == 0 && j == 2)
+			else if (i == 2 && j == 0)
 			{
-				CreateItem(name, description, TreeType::MASK2, i, j);
+				CreateItem(TreeType::MASK2, i, j);
 			}
-			else if (i == 0 && j == 3)
+			else if (i == 3 && j == 0)
 			{
-				CreateItem(name, description, TreeType::MASK3, i, j);
+				CreateItem(TreeType::MASK3, i, j);
 			}
 			else
 			{
-				CreateItem(name, description, TreeType::BUTTON, i, j);
+				CreateItem(TreeType::BUTTON, i, j);
 			}
 			
 		}
@@ -141,7 +134,7 @@ bool TreeManager::CleanUp()
 	return ret;
 }
 int highesttttId = -1;
-Tree* TreeManager::CreateItem(char* name, char* description, TreeType type, int nivelArbol, int nivelMejora)
+Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora)
 {
 	Tree* entity = nullptr;
 
@@ -173,28 +166,28 @@ Tree* TreeManager::CreateItem(char* name, char* description, TreeType type, int 
 		}
 		case 1:
 		{
-			entity->name = "Daño 1";
+			entity->name = "Dano 1";
 			entity->desc = "";
 
 			break;
 		}
 		case 2:
 		{
-			entity->name = "Daño 2";
+			entity->name = "Dano 2";
 			entity->desc = "";
 
 			break;
 		}
 		case 3:
 		{
-			entity->name = "Daño 3";
+			entity->name = "Dano 3";
 			entity->desc = "";
 
 			break;
 		}
 		case 4:
 		{
-			entity->name = "Daño 4";
+			entity->name = "Dano 4";
 			entity->desc = "";
 
 			break;
@@ -669,19 +662,12 @@ void TreeManager::UseTreeSelected(int id)
 
 void TreeManager::OnMovePointer()
 {
-	bool pointer = false;
-	
-		if (pointer == false)
-		{
-			PointerItemText = app->tex->Load(PointerPath);
-			pointer = true;
-		}
 
 		if (app->input->GetButton(RIGHT) == KEY_DOWN) {
-			if (horitzontalPointerId + 1 > 4)
+			if (horitzontalPointerId + 1 == 5)
 			{
 				horitzontalPointerId = 0;
-				PointerPosition.x = 660;
+				PointerPosition.x = 350;
 				PointerId -= 4;
 			}
 			else
@@ -689,24 +675,24 @@ void TreeManager::OnMovePointer()
 				if (PointerId != -1)
 				{
 					horitzontalPointerId += 1;
-					PointerPosition.x += 83;
+					PointerPosition.x += 120;
 				}
 				PointerId += 1;
 			}
 
 		}
 		if (app->input->GetButton(LEFT) == KEY_DOWN) {
-			if (horitzontalPointerId - 1 < 0)
+			if (horitzontalPointerId - 1 == -1)
 			{
 
 				horitzontalPointerId += 4;
-				PointerPosition.x = 660;
+				PointerPosition.x = 350 + 4 * 120;
 				PointerId += 4;
 			}
 			else
 			{
 				horitzontalPointerId -= 1;
-				PointerPosition.x -= 83;
+				PointerPosition.x -= 120;
 				PointerId -= 1;
 			}
 		}
@@ -716,30 +702,30 @@ void TreeManager::OnMovePointer()
 			{
 				PointerId += 5;
 				verticalPointerId += 1;
-				PointerPosition.y += 83;
+				PointerPosition.y += 100;
 			}
 			else
 			{
 				verticalPointerId = 0;
-				PointerId -= 16;
-				PointerPosition.y = 230;
+				PointerId -= 15;
+				PointerPosition.y = 130;
 			}
 
 
 
 		}
 		if (app->input->GetButton(UP) == KEY_DOWN) {
-			if (verticalPointerId + 1 > 3)
+			if (verticalPointerId - 1 > -1)
 			{
-				PointerPosition.y -= 83;
+				PointerPosition.y -= 100;
 				PointerId -= 5;
 				verticalPointerId -= 1;
 			}
 			else
 			{
 				verticalPointerId = 3;
-				PointerId += 16;
-				PointerPosition.y = 230 + 83 * (3);
+				PointerId += 15;
+				PointerPosition.y = 130 + 100 * (3);
 			}
 
 
@@ -764,7 +750,7 @@ bool TreeManager::Update(float dt)
 	bool ret = true;
 
 	if (app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN) {
-		mostrar == true;
+		mostrar = true;
 
 	}
 
@@ -772,7 +758,7 @@ bool TreeManager::Update(float dt)
 	{
 		OnMovePointer();
 
-		if (app->input->GetButton(SELECT) == KEY_DOWN) {
+		if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
 			/*options = true;
 			selected = { PointerPosition.x, PointerPosition.y };
 			selectedId = PointerId;*/
@@ -822,7 +808,7 @@ bool TreeManager::PostUpdate()
 
 	if (mostrar == true)
 	{
-		/*app->render->DrawRectangle(viewport, 0, 0, 0, 200, true, false);*/
+		app->render->DrawTexture(BackGroundTexture,100, 100, SDL_FLIP_NONE, 0, 0);
 		ListItem<Tree*>* item;
 		Tree* pEntity = NULL;
 
@@ -841,20 +827,77 @@ bool TreeManager::PostUpdate()
 			pEntity = item->data;
 			int rowIndex = item->data->id / maxItemsPerRow; // Calcula el índice de la fila
 			int columnIndex = item->data->id % maxItemsPerRow; // Calcula el índice de la columna
-			int horizontalPosition = 660 + columnIndex * 83; // Calcula la posición horizontal
-			int verticalPosition = 230 + rowIndex * 83; // Calcula la posición vertical
+			int horizontalPosition = 350 + columnIndex * 120; // Calcula la posición horizontal
+			int verticalPosition = 130 + rowIndex * 100; // Calcula la posición vertical
 
 			
 				
 					if (zoomIn == false && app->notesManager->zoomIn == false)
 					{
-						app->render->DrawTexture(listTexture, horizontalPosition, verticalPosition, SDL_FLIP_NONE, 0, 0);
+						app->render->DrawTexture(listTexture, horizontalPosition, verticalPosition, 0.7, SDL_FLIP_NONE, 0, 0);
+						switch (mask)
+						{
+						case 1:
+						{
+							app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });
 
-						app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
+
+							break;
+						}
+						case 2:
+						{
+							if (pEntity->name2 == "")
+							{
+								app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });
+							}
+							else
+							{
+								app->render->DrawTextBound(pEntity->name2.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });
+							
+							}
+
+
+							break;
+						}
+						case 3:
+						{
+							if (pEntity->name3 == "")
+							{
+								app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });
+							}
+							else
+							{
+								app->render->DrawTextBound(pEntity->name3.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });
+
+							}
+
+
+							break;
+						}
+						case 4:
+						{
+							if (pEntity->name4 == "")
+							{
+								app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });
+							}
+							else
+							{
+								app->render->DrawTextBound(pEntity->name4.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });
+
+							}
+
+							break;
+						}
+						default:
+							break;
+						}
+						
+						/*app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);*/
 					}
 
 				
-			app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y, SDL_FLIP_NONE, 0, 0);
+			app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y,0.7, SDL_FLIP_NONE, 0, 0);
+			int a = 0;
 		}
 
 
@@ -876,7 +919,9 @@ bool TreeManager::PostUpdate()
 				if (PointerId == itum->data->id)
 				{
 					app->render->DrawTexture(itum->data->closeUpTrees, 400, 100, SDL_FLIP_NONE, 0, 0);
-					app->render->DrawText(itum->data->desc.c_str(), 450, 200, 270, 400, 0, 0, 0, 0, false);
+
+					
+					
 				}
 			}
 		}

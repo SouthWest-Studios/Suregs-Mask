@@ -494,15 +494,11 @@
 	</bestiariomanager>
 
 	<treemanager>
-		<Arbol BackGround=""
-			texturePath ="Assets/Textures/Interfaz/Bestiario/textura_nota.png"
-			  list_texture ="Assets/Textures/Interfaz/Bestiario/textura_fondo_bestiario_lista.png"
-			  slider_texture = "Assets/Textures/Interfaz/Bestiario/textura_fondo_slider.png"
-			  knob_texture="Assets/Textures/Interfaz/Bestiario/textura_knob_slider.png"
-			  pointer="Assets/Textures/Interfaz/Bestiario/bestiarioselect.png"
-			  text_osiris ="osiris osiris osiris osiris osiris osiris osiris osiris osiris osiris osiris osiris osiris osiris osiris osiris"
-			  text_muur ="muur muur muur muur muur muur muur muur muur muur muur muur muur muur muur muur"
-			  closeUp ="Assets/Textures/Interfaz/Bestiario/textura_NoteCloseUp.png"/>
+		<arbol texturePath ="Assets/Textures/Interfaz/Arbol/textura_nota.png"
+			  list_texture ="Assets/Textures/Interfaz/Arbol/textura_fondo_bestiario_lista.png"
+			  pointer="Assets/Textures/Interfaz/Arbol/bestiarioselect.png"
+			  closeUp ="Assets/Textures/Interfaz/Arbol/textura_NoteCloseUp.png"
+			  BackGround="Assets/Textures/Interfaz/Arbol/textura_NoteCloseUp.png"/>
 
 
 	</treemanager>

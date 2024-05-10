@@ -31,7 +31,7 @@ public:
 	bool CleanUp();
 
 	// Additional methods
-	Tree* CreateItem(char* name, char* description, TreeType type, int nivelArbol, int nivelMejora);
+	Tree* CreateItem(TreeType type, int nivelArbol, int nivelMejora);
 
 	void AddTree(Tree* Inventity);
 
@@ -51,10 +51,10 @@ public:
 	
 
 public:
-	int mask;
+	int mask = 1;
 	List<Tree*> arboles;
 	
-	iPoint PointerPosition = { 660, 230 };
+	iPoint PointerPosition = { 350, 130 };
 	int PointerId = 0;
 	iPoint selected = { -1000,-1000 };
 	iPoint equiped = { -1000,-1000 };
@@ -91,15 +91,14 @@ private:
 	SDL_Texture* BackGroundTexture;
 	SDL_Texture* iconoTreeTexture;
 	SDL_Texture* listTexture;
-	SDL_Texture* sliderTexture;
-	SDL_Texture* knobTexture;
+
 
 	int scrollY;
 
 	char* CloseUpPath;
 	SDL_Texture* CloseUp;
 
-	char* name;
+	char* name = nullptr;
 	char* description;
 
 };
