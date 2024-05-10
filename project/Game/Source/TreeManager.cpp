@@ -750,7 +750,7 @@ bool TreeManager::Update(float dt)
 	bool ret = true;
 
 	if (app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN) {
-		mostrar = true;
+		mostrar = !mostrar;
 
 	}
 

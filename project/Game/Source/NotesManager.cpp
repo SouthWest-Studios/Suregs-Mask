@@ -274,6 +274,7 @@ void NotesManager::OnMovePointer()
 				{
 					PointerId = -2;
 					PointerItemText = nullptr;
+					PointerPosition.y = 230;
 					if (vacio)
 						app->bestiarioManager->PointerId = 0;
 					else
