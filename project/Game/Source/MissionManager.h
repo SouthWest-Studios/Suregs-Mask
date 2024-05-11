@@ -7,21 +7,26 @@
 #include "List.h"
 #include "Textures.h"
 #include "Missions.h"
+#include "Dialog.h"
+#include "DialogTriggerEntity.h"
 
 #include <vector> // Necesario para std::vector
 #include <cstdint> // Necesario para uint32_t
 
 class Mission;
+class DialogTrigger;
 
 struct Missions;
 
-enum class MissionType // Tipo de misiones 
-{
-	//De momento solo secundria
-	SECUANDARIA,
-	UNKNOWN
-};
+enum class State;
 
+struct Missiones {
+	uint id;
+	std::string entityName;
+	std::string itemName;
+	uint itemQuantity;
+	uint reward;
+};
 
 class MissionManager : public Module
 {
@@ -47,53 +52,54 @@ public:
 	bool CleanUp();
 
 	// Funciones que tendrá el MissionManager
-	// 
-	//Mission* CreateCommerce(CommerceType type, uint id, std::vector<Trade*> trades);
-	//void PlayCommerce(uint id);
+	void StartMission(Mission* mission);
+	void UpdateMissionProgress(Mission* mission);
+	void CompleteMission(Mission* mission);
+	void LoadMissionsFromXML(const char* filename);
 
-	//bool AnyCommerceActive();
+	// Función para verificar si una misión está completada
+	bool IsMissionCompleted(Mission* mission) const { return false; }
 
-	//std::vector<Trade*> LoadTrades(pugi::xml_node nodeTrade);
+	// Función para obtener el progreso actual de una misión
+	void GetMissionProgress(Mission* mission) const {}
 
+	void ProcessDialog(Dialog* dialog);
 
+	void HandleDialogEvent(const DialogEvent& dialog_event);
+	void HandleMissionEvent(const std::string& event_type, Mission* mission, int newId);
+
+	Mission* FindMissionById(uint mission_id);
+
+	void ChangeDialogTriggerId(uint old_id, uint new_id);
+
+	DialogTrigger* FindDialogTriggerById(uint dialog_trigger_id);
+
+	Missiones* CreateMission(pugi::xml_node missionNode);
 
 public:
-
-
-
 
 
 private:
 
 	// Variables 
 
-	//char* backgroundPathTexture;
+	std::vector<Mission*> activeMissions;
 
-	//char* backgroundTradePathTexture;
-	//char* backgroundTradeHoverPathTexture;
-	//char* backgroundSelectAllPathTexture;
-	//char* backgroundSelectAllHoverPathTexture;
+	std::vector<DialogTrigger*> dialogTriggers;
 
-	//char* backgroundTradeItemPathTexture;
+	std::vector<Missiones*> missions;
 
-	//char* backgroundSliderPathTexture;
-	//char* knobSliderPathTexture;
 
-	//char* backgroundConfirmPathTexture;
-	//char* backgroundConfirmHoverPathTexture;
-	//char* backgroundButtonDisabledPathTexture;
-
-	//char* backgroundButtonPathTexture;
-	//char* backgroundButtonHoverPathTexture;
-	//char* backgroundMoneyPathTexture;
-
-	//char* backgroundDescriptionPathTexture;
-
-	//std::vector<Commerce*> commerces;
-
-	//pugi::xml_node commerceNode;
-
+	//verificar si una misión ya está en curso
+	bool IsMissionActive(Mission* mission) {
+		// Recorrer la lista de misiones activas y verificar si activa mision misión
+		for (Mission* activeMission : activeMissions) {
+			if (activeMission == mission) {
+				return true; // La misión ya está activa
+			}
+		}
+		return false; // La misión no está activa
+	}
 };
 
 #endif // __MISSIONMANAGER_H__
-

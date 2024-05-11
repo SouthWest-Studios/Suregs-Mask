@@ -1,4 +1,5 @@
 #include "DialogManager.h"
+#include "MissionManager.h"
 #include "Player.h"
 #include "Item.h"
 #include "App.h"
@@ -85,9 +86,19 @@ Dialog* DialogManager::CreateDialog(pugi::xml_node itemNode, std::string name, c
 	dialog->name = itemNode.attribute("name").as_string(dialog->name.c_str());
 	dialog->face_tex = app->tex->Load(itemNode.attribute("facetexturepath").as_string(faceTexturePath));
 	dialog->font = FontSelector(itemNode.attribute("font").as_string(font));
-	
 
 	const char* type = itemNode.attribute("type").as_string("");
+
+	// Crear un DialogEvent si el nodo XML tiene una etiqueta <mission_event>
+	pugi::xml_node missionEventNode = itemNode.child("mission_event");
+
+	if (missionEventNode) {
+		DialogEvent* event = new DialogEvent();
+		event->type = missionEventNode.attribute("type").as_string();
+		event->mission_id = missionEventNode.attribute("mission_id").as_uint();
+		dialog->event_ = event;
+		printf("Se ha creado un DialogEvent con tipo: %s y mission_id: %d\n", event->type.c_str(), event->mission_id);
+	}
 
 	if (strcmp(type, "choose") == 0) {
 
@@ -99,9 +110,8 @@ Dialog* DialogManager::CreateDialog(pugi::xml_node itemNode, std::string name, c
 			Dialog* dialogOp1 = CreateDialog(optionNode, name, faceTexturePath, font);
 			dialogOp1->commerceId = itemNode.child("option1").child("commerce").attribute("id").as_int();
 			dialog->options1.Add(dialogOp1);
-		}
 
-		
+		}
 
 		//Options2
 		dialog->option2 = itemNode.child("option2").attribute("text").as_string();

@@ -126,12 +126,9 @@ bool DialogTrigger::CleanUp()
 
 void DialogTrigger::PlayDialog()
 {
-
 	if (app->commerceManager->AnyCommerceActive()) { return; }
 	//Play el dialogo normal
 	if ((played && !repeatDialog) || !played) {
-	
-	
 		ListItem<Dialog*>* item;
 		Dialog* pDialog = nullptr;
 
@@ -140,16 +137,15 @@ void DialogTrigger::PlayDialog()
 			pDialog = item->data;
 			app->dialogManager->AddDialog(pDialog);
 			app->audio->PlayFx(dialog_fx);
+			// Si el diálogo tiene un evento asociado, manéjalo
+			if (pDialog->event_ != nullptr) {
+				app->missionManager->HandleDialogEvent(*(pDialog->event_));
+			}
 		}
 		played = true;
-
-		//app->audio->PlayFx(dialog_fx);
-
-
+	}
 	//Play el dialogo repetido
-	}else if (played && repeatDialog) {
-
-		
+	else if (played && repeatDialog) {
 		ListItem<Dialog*>* item;
 		Dialog* pDialog = nullptr;
 
@@ -157,10 +153,15 @@ void DialogTrigger::PlayDialog()
 		{
 			pDialog = item->data;
 			app->dialogManager->AddDialog(pDialog);
+			// Si el diálogo tiene un evento asociado, manéjalo
+			if (pDialog->event_ != nullptr) {
+				app->missionManager->HandleDialogEvent(*(pDialog->event_));
+			}
 		}
 	}
-
 }
+
+
 
 void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
@@ -169,6 +170,20 @@ void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
 			
 			if (!app->dialogManager->isPlaying && (app->input->GetButton(CONFIRM) == KEY_DOWN)) {
 				PlayDialog();
+
+				printf("COLISSION TRIGGERDIALOG");
+
+				//// Manejo de la etiqueta <mission_event>
+				//pugi::xml_node option1Node = itemNode.child("option1");
+				//pugi::xml_node missionEventNode = option1Node.child("mission_event");
+
+
+				//	printf("ASDASDASD");
+				//	DialogEvent* dialogEvent = new DialogEvent();
+				//	dialogEvent->type = missionEventNode.attribute("type").as_string();
+				//	dialogEvent->mission_id = missionEventNode.attribute("mission_id").as_uint();
+
+				//	app->missionManager->HandleDialogEvent(*dialogEvent);
 
 				/*if (strcmp(parameters.attribute("name").as_string(), "FishingMaster") == 0) {
 					app->scene_testing->GetRod()->fishing.rodReady = true;
@@ -181,6 +196,50 @@ void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
 				}
 			}
 			break;
+	}
+}
+
+void DialogTrigger::SetDialogId(uint new_id) {
+	dialogId = new_id;
+	UpdateDialog(); // Actualizar el diálogo cuando cambia el id
+}
+
+uint DialogTrigger::GetDialogId() const {
+	return dialogId;
+}
+
+void DialogTrigger::UpdateDialog() {
+	// Comprobar si hay alguna actividad comercial activa
+	if (app->commerceManager->AnyCommerceActive()) { return; }
+
+	// Obtener el id del diálogo
+	uint id = GetDialogId();
+
+	// Buscar el diálogo con el id correspondiente
+	ListItem<Dialog*>* item;
+	Dialog* pDialog = nullptr;
+
+	// Si el diálogo ha sido reproducido y no se debe repetir, o si no ha sido reproducido
+	if ((played && !repeatDialog) || !played) {
+		for (item = dialogues.start; item != NULL; item = item->next) {
+			if (item->data->id == id) {
+				pDialog = item->data;
+				app->dialogManager->AddDialog(pDialog);
+				app->audio->PlayFx(dialog_fx);
+				break;
+			}
+		}
+		played = true;
+	}
+	// Si el diálogo ha sido reproducido y se debe repetir
+	else if (played && repeatDialog) {
+		for (item = dialoguesRepeat.start; item != NULL; item = item->next) {
+			if (item->data->id == id) {
+				pDialog = item->data;
+				app->dialogManager->AddDialog(pDialog);
+				break;
+			}
+		}
 	}
 }
 

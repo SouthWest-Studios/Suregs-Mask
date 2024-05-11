@@ -7,6 +7,8 @@
 #include "List.h"
 #include "Point.h"
 #include "SDL/include/SDL.h"
+#include "Missions.h"
+#include "MissionManager.h"
 
 struct SDL_Texture;
 
@@ -29,11 +31,14 @@ public:
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
+	//misiones
+	void SetDialogId(uint new_id);
+	uint GetDialogId() const;
+	void UpdateDialog();
 
 private:
 
-	
-
+	uint dialogId;
 
 public:
 
@@ -67,7 +72,6 @@ private:
 	List<Dialog*> dialoguesRepeat;
 
 	int dialog_fx;
-
 };
 
 #endif // __DIALOGTRIGGERENTITY_H__

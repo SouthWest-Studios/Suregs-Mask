@@ -7,6 +7,17 @@
 #include "List.h"
 
 
+struct MissionEvent {
+	std::string type;
+	uint mission_id;
+};
+
+struct DialogEvent {
+	std::string type;
+	uint mission_id;
+	MissionEvent* mission_event; // Puntero a MissionEvent
+};
+
 enum class DialogType
 {
 	TEXT,
@@ -18,6 +29,8 @@ class Dialog
 public:
 
 	Dialog(std::string sentence) : sentence(sentence) {}
+
+	Dialog(uint id) : id(id) {}
 
 	virtual bool CleanUp()
 	{
@@ -42,14 +55,14 @@ public:
 		return true;
 	}
 
-
-
+	bool has_event() const { return event_ != nullptr; }
+	const DialogEvent& event() const { return *event_; }
 
 public:
 
 	//Definir el tipo del dialogo, si es normal o de elecciones
 	DialogType type;
-	
+
 	//Frase del dialogo
 	std::string sentence;
 
@@ -71,7 +84,14 @@ public:
 	int commerceId = -1;
 
 	TTF_Font* font;
-	
+
+	DialogEvent* event_ = nullptr;
+
+	uint id;
+
+private:
+
+
 };
 
 #endif // __DIALOG_H__

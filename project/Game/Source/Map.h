@@ -8,6 +8,7 @@
 #include "DynArray.h"
 #include "Pathfinding.h"
 #include "Physics.h"
+#include "Dialog.h"
 
 #include "PugiXml\src\pugixml.hpp"
 
@@ -243,6 +244,8 @@ private:
     pugi::xml_document dialoguesFile;
     pugi::xml_node configNode;
     pugi::xml_node dialoguesNode;
+
+    List<Dialog*> dialogues;
  };
 
 #endif // __MAP_H__

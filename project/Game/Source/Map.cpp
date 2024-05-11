@@ -41,6 +41,7 @@
 #include "Boss_Musri.h"
 #include "Enemy_Khurt.h"
 #include "Cofre.h"
+#include "Dialog.h"
 
 Map::Map(App* app, bool start_enabled) : Module(app, start_enabled), mapLoaded(false)
 {
@@ -859,7 +860,12 @@ bool Map::LoadObjects()
 			if (object->properties.GetProperty("dialogID") != NULL) {
 
 			
+				uint dialogId = atoi(object->properties.GetProperty("dialogID")->value.c_str());
 
+				Dialog* dialog = new Dialog(dialogId);
+
+				// Añadir el Dialog a la lista de diálogos
+				dialogues.Add(dialog);
 
 				pugi::xml_node dialogNode = dialoguesNode.find_child_by_attribute("dialog", "id", object->properties.GetProperty("dialogID")->value.c_str());
 
@@ -872,7 +878,10 @@ bool Map::LoadObjects()
 				DialogTrigger* dialogTrigger = (DialogTrigger*)app->entityManager->CreateEntity(EntityType::DIALOG_TRIGGER);
 				dialogTrigger->parameters = dialogNode;
 				dialogTrigger->position = iPoint(object->x + object->width / 2, object->y + object->height / 2);
+				
+
 				//dialogTriger
+				dialogTrigger->SetDialogId(dialogId);
 				dialogTrigger->Start();
 
 

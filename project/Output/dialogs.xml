@@ -78,18 +78,114 @@
 		</sentences>
 	</dialog>
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-<!--DIALOGOS ABUELAS (101-109)-->
+
+	<!--MISSIONES (1000-1400)-->
+	<!--PESCA (1000-1100)-->
+	<dialog id="1001" texturepath="Assets/Textures/pescador.jpg" facetexturepath="Assets/Textures/pescador.jpg" name="pescador">
+		<sentences>
+			<sentence type="choose" text="Hola Jakov, vienes a pescar no? Podrás pescarme 5 peces pequeños?">
+
+				<option1 text="Sí claro">
+					<mission_event type="activation" mission_id="3">
+						<sentence text="¡Genial! Te esperaré aquí."/>
+					</mission_event>
+
+				</option1>
+
+				<option2 text="Ahora no puedo">
+					<sentence text="No hay problema, estaré aquí cuando estés listo."/>
+					<commerce id="-1"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="1002" texturepath="Assets/Textures/pescador.jpg" facetexturepath="Assets/Textures/pescador.jpg" name="pescador">
+		<sentences>
+			<sentence type="progress" text="Cómo te va esa pesca, espero que bien">
+				<mission_event type="progress" mission_id="3">
+					<commerce id="-1"/>
+				</mission_event>
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="1003" texturepath="Assets/Textures/pescador.jpg" facetexturepath="Assets/Textures/pescador.jpg" name="pescador">
+		<sentences>
+			<sentence type="completion" text="Vaya que bien, ten 80 monedas de oro">
+				<mission_event type="completion" mission_id="3">
+					<commerce id="-1"/>
+				</mission_event>
+			</sentence>
+		</sentences>
+	</dialog>
+
+
+	<!--MUJER_ENAMORADA(1300-1400)-->
+	<dialog id="1300" texturepath="Assets/Textures/npc_enamorada.jpg" facetexturepath="Assets/Textures/npc_enamorada.jpg" name="npc_enamorada">
+		<sentences>
+			<sentence text="Hola, ¿podrías hacerme un favor?" />
+			
+			<sentence type="choose" text="¿Qué necesitas?">
+				
+				<!-- Opción 1: Aceptar la misión -->
+				<option1 text="Claro, ¿qué puedo hacer por ti?">
+					<mission_event type="activation" mission_id="1">
+						<sentence text="¡Gracias! Por favor, dile a mi querido que le echo mucho de menos."/>
+					</mission_event>
+				</option1>
+
+				<!-- Opción 2: Rechazar la misión -->
+				<option2 text="Lo siento, no puedo ayudarte en este momento.">
+					<sentence text="Está bien, no te preocupes."/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="1301" texturepath="Assets/Textures/npc_enamorado.jpg" facetexturepath="Assets/Textures/npc_enamorado.jpg" name="npc_enamorado">
+		<sentences>
+			<sentence text="Hola, ¿qué tal?" />
+			
+			<sentence type="choose" text="¿Qué deseas?">
+				
+				<!-- Opción 1: Informar sobre el mensaje -->
+				<option1 text="Hola, tu querida te echa mucho de menos.">
+					<mission_event type="progress" mission_id="1">
+						<sentence text="¡Oh, mi amor! Dile que yo también la extraño mucho."/>
+					</mission_event>
+				</option1>
+
+				
+				<!-- Opción 2: Respuesta alternativa -->
+				<option2 text="Hola, tenemos algo en común, nadie nos quiere.">
+					<!-- Respuesta alternativa del NPC -->
+					<sentence text="¡Qué comentario más triste! ¡Vete de aquí!"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="1303" texturepath="Assets/Textures/npc_enamorada.jpg" facetexturepath="Assets/Textures/npc_enamorada.jpg" name="npc_enamorada">
+		<sentences>
+			<!-- Agradecimiento final de la NPC enamorada -->
+			<sentence text="¡Muchas gracias! Aquí tienes tu recompensa." />
+
+			<!-- Recompensa -->
+			<sentence type="completion" text="Recibiste 100 monedas de oro.">
+				<!-- Evento de completado de la misión -->
+				<mission_event type="completion" mission_id="1">
+					<reward type="gold" amount="100"/>
+				</mission_event>
+			</sentence>
+		</sentences>
+	</dialog>
+
+
+
+
+
+	<!--DIALOGOS ABUELAS (101-109)-->
 	
 	<dialog id="101" texturepath="Assets/Textures/Interfaz/Dialogos/Dorothy.png">
 		<sentences>

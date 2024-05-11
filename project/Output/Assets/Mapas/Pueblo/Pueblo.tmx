@@ -176203,7 +176203,7 @@
   </object>
   <object id="119" x="3582" y="4674" width="96" height="96">
    <properties>
-    <property name="dialogID" type="int" value="1"/>
+    <property name="dialogID" type="int" value="1001"/>
    </properties>
   </object>
  </objectgroup>
