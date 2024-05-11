@@ -986,7 +986,7 @@ bool InventoryManager::Update(float dt)
 	{
 		OnMovePointer();
 
-		if (app->input->GetButton(SELECT) == KEY_DOWN && app->input->GetButton(ATAQUE) == KEY_DOWN) {
+		if (app->input->GetButton(SELECT) == KEY_DOWN) {
 			options = true;
 			selected = { PointerPosition.x, PointerPosition.y };
 			selectedId = PointerId;
