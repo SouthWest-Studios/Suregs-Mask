@@ -173,48 +173,49 @@
 					maxHealth="8200.0f" speed="200f" attackDamage="200.0f"  attackDistance="15" viewDistance="40"
 					Tsprite="16" Pwidth="752" sprite_x="188" sprite_y="175"/>
 
+		<item_rubi					texturePath="Assets/Textures/Entidades/Items/textura_rubi.png"					description="Mineral robusto con buenas propiedades para el combate."			type ="Material" name="Rubi"/>
+		<item_diamante				texturePath="Assets/Textures/Entidades/Items/texture_diamond.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Diamante"/>
+		
+		<item_polvora				texturePath="Assets/Textures/Entidades/Items/textura_polvora.png"				description=" "		type ="material" name="Polvora"/>
+		<item_amatista				texturePath="Assets/Textures/Entidades/Items/textura_amatista.png"				description=" "		type ="material" name="Amatista"/>
+		
+		<item_carbon				texturePath="Assets/Textures/Entidades/Items/textura_carbon.png"				description="Mineral con valor medio en el mercado."							type ="Material" name="Carbón"/>
+		<item_saliva				texturePath="Assets/Textures/Entidades/Items/textura_saliva.png"				description="Mineral de lujo con alto valor en el mercado."						type ="Material"	name="Saliva"/>
+		
+		<item_diente				texturePath="Assets/Textures/Entidades/Items/textura_diente.png"				description="Diente afilado sin propiedades especiales, puede valer dinero."	type ="Apéndice" name="Diente"/>
+		<item_garra					texturePath="Assets/Textures/Entidades/Items/item_Garra.png"					description="Afilada garra sin propiedades especiales, puede valer dinero."		type ="Apéndice" name="Garra"/>
+		<item_ojo					texturePath="Assets/Textures/Entidades/Items/texture_eye.png"					description="Globo ocular sin propiedades especiales, puede valer dinero."		type ="Apéndice" name="Ojo"/>
+		<item_hueso					texturePath="Assets/Textures/Entidades/Items/textura_hueso.png"					description="Hueso sin propiedades especiales, puede valer dinero."				type ="Apéndice" name="Hueso"/>
+		<item_viscera				texturePath="Assets/Textures/Entidades/Items/textura_visceras.png"				description="Vísceras sin propiedades especiales, puede valer dinero."			type ="Apéndice" name="Vísceras"/>
+		<item_cola					texturePath="Assets/Textures/Entidades/Items/textura_cola.png"					description="Cola sin propiedades especiales, puede valer dinero."				type ="Apéndice" name="Cola"/>
 
-		<item_garra texturePath="Assets/Textures/Entidades/Items/item_Garra.png" description="Esta es una garra muy bonita, buenos dias." type ="apendice" name="Garra"/>
-		<item_diamante texturePath="Assets/Textures/Entidades/Items/texture_diamond.png" description="Este diamante brilla mas que mi futuro." type ="material" name="Diamante"/>
-		<item_ojo texturePath="Assets/Textures/Entidades/Items/texture_eye.png" description="La leyenda dice que es un ojo." type ="apendice" name="Ojo"/>
-		<item_hueso texturePath="Assets/Textures/Entidades/Items/textura_hueso.png" description="La leyenda dice que es un hueso." type ="apendice" name="Hueso"/>
-		<item_carbon texturePath="Assets/Textures/Entidades/Items/textura_carbon.png" description="Mas negro que mi alma." type ="material" name="Carbon"/>
-		<item_viscera texturePath="Assets/Textures/Entidades/Items/textura_visceras.png" description="lorem ipsum sit amet." type ="apendice" name="Visceras"/>
-		<item_rubi texturePath="Assets/Textures/Entidades/Items/textura_rubi.png" description="lorem ipsum sit amet." type ="material" name="Rubi"/>
-		<item_diente texturePath="Assets/Textures/Entidades/Items/textura_diente.png" description="lorem ipsum sit amet." type ="apendice" name="Diente"/>
-		<item_amatista texturePath="Assets/Textures/Entidades/Items/textura_amatista.png" description="lorem ipsum sit amet." type ="material" name="Amatista"/>
-		<item_cola texturePath="Assets/Textures/Entidades/Items/textura_cola.png" description="Esta es la cola de los sureg masculinos." type ="apendice" name="Cola"/>
-		<item_polvora texturePath="Assets/Textures/Entidades/Items/textura_polvora.png" description="22000 stacks de polvora por hora en la granja de creeper" type ="material" name="Polvora"/>
-		<item_nota texturePath="Assets/Textures/Entidades/Items/textura_nota.png" closeTexturePath="Assets/Textures/Entidades/Items/textura_NoteCloseUp.png"  name="Nota"
+		<item_pocion_vida_1			texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_1.png"			description="Curiosa pócima que revitaliza tu salud levemente."				type ="Consumible"	name="Pócima curativa pequeña"/>
+		<item_pocion_vida_2			texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_2.png"			description="Curiosa pócima que revitaliza buena parte de tu salud."		type ="Consumible"	name="Pócima curativa mediana"/>
+		<item_pocion_vida_3			texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_3.png"			description="Curiosa pócima que revitaliza gran parte de tu salud."			type ="Consumible"	name="Pócima curativa grande"/>
+		<item_pocion_vida_max		texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_max.png"		description="Curiosa pócima que revitaliza tu salud por completo."			type ="Consumible"	name="Pócima curativa total"/>
+
+		<item_pocion_regeneracion	texturePath="Assets/Textures/Entidades/Items/textura_pocion_regeneracion.png"	description="Curiosa pócima que aumenta tu regeneración."					type ="Consumible"	name="Pócima regenerativa"/>
+		<item_pocion_dano			texturePath="Assets/Textures/Entidades/Items/textura_pocion_dano.png"			description="Curiosa pócima que aumenta tu fuerza de manera momentánea."	type ="Consumible"	name="Pócima de fuerza"/>
+		<item_pocion_velocidad		texturePath="Assets/Textures/Entidades/Items/textura_pocion_velocidad.png"		description="Curiosa pócima que aumenta tu velocidad de manera momentánea."	type ="Consumible"	name="Pócima de velocidad"/>
+		<item_pocion_orbe_magico	texturePath="Assets/Textures/Entidades/Items/textura_orbe_magico.png"			description=" "											type ="Consumible"	name="Orbe Magico"/>
+		<item_pocion_orbe_magico	texturePath="Assets/Textures/Entidades/Items/textura_orbe_magico.png"			description=" "											type ="Consumible"	name="Orbe Magico"/>
+
+		<item_pez_pequeno texturePath="---" description="aleix" type ="Pez" name="Pez pequeño"/>
+		<item_pez_mediano texturePath="---" description="es un pez pequeño" type ="Pez" name="Pez mediano"/>
+		<item_pez_grande texturePath="---" description="bobo que mezcla sistemas" type="Pez" name="Pez grande"/>
+		
+		<item_moneda texturePath="---" description="La moneda principal del juego, utilizada para comprar una variedad de bienes" type ="Miscelanea" name="Monedas"/>
+		
+		<item_nota					texturePath="Assets/Textures/Entidades/Items/textura_nota.png" closeTexturePath="Assets/Textures/Entidades/Items/textura_NoteCloseUp.png"  name="Nota"
 					texto1 ="bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla" titulo1 ="hola"
 					texto2 ="ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble blable" titulo2 ="buenas"
 					texto3 ="bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli" titulo3 ="adios"
 					texto4 ="blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO" titulo4 ="jeus"
 					texto5 ="blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blablu" titulo5 ="visual"/>
 
-		<item_pez_pequeno texturePath="---" description="aleix" type ="Pez" name="Pez pequeño"/>
-		<item_pez_mediano texturePath="---" description="es un pez pequeño" type ="Pez" name="Pez mediano"/>
-		<item_pez_grande texturePath="---" description="bobo que mezcla sistemas" type="Pez" name="Pez grande"/>
-		<item_moneda texturePath="---" description="La moneda principal del juego, utilizada para comprar una variedad de bienes" type ="Miscelanea" name="Monedas"/>
-
-		<item_saliva texturePath="Assets/Textures/Entidades/Items/textura_saliva.png" description="lorem ipsum sit amet." type ="material" name="Saliva"/>
-		
-		<item_pocion_vida_1 texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_1.png" description="lorem ipsum sit amet." type ="consumible" name="Vida Nv1"/>
-		<item_pocion_vida_2 texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_2.png" description="lorem ipsum sit amet." type ="consumible" name="Vida Nv2"/>
-		<item_pocion_vida_3 texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_3.png" description="lorem ipsum sit amet." type ="consumible" name="Vida Nv3"/>
-		<item_pocion_vida_max texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_max.png" description="lorem ipsum sit amet." type ="consumible" name="Vida maxima"/>
-		<item_pocion_regeneracion texturePath="Assets/Textures/Entidades/Items/textura_pocion_regeneracion.png" description="lorem ipsum sit amet." type ="consumible" name="Regeneracion"/>
-		<item_pocion_dano texturePath="Assets/Textures/Entidades/Items/textura_pocion_dano.png" description="lorem ipsum sit amet." type ="consumible" name="Ataque +"/>
-		<item_pocion_velocidad texturePath="Assets/Textures/Entidades/Items/textura_pocion_velocidad.png" description="lorem ipsum sit amet." type ="consumible" name="Velocidad"/>
-		<item_pocion_orbe_magico texturePath="Assets/Textures/Entidades/Items/textura_orbe_magico.png" description="lorem ipsum sit amet." type ="consumible" name="Orbe Magico"/>
-		<item_pocion_orbe_magico texturePath="Assets/Textures/Entidades/Items/textura_orbe_magico.png" description="lorem ipsum sit amet." type ="consumible" name="Orbe Magico"/>
-
-
-
 
 
 		<item x="1200" y="2600" texturePath="Assets/Textures/Entidades/Jugador/salamanda1.png" Tsprite="23" Pwidth="1000" sprite_x="100" sprite_y="160"/>
-
 
 		<!-- <npc_vendedor texturePath="Assets/Textures/Entidades/NPCs/general.png" Tsprite="9" Pwidth="138" sprite_x="138" sprite_y="1836"/>  -->
 		<npc_vendedor texturePath="Assets/Textures/Entidades/NPCs/textura_npc_vendedor.png" Tsprite="1" Pwidth="138" sprite_x="138" sprite_y="185"/>
