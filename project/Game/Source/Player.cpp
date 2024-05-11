@@ -48,6 +48,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK0][Branches::Rama1][0].maskDamage = 50;
 
 	maskStats[Mask::MASK0][Branches::Rama2][0].maskCoolDown = 25000; //En Milisegundos
+	maskStats[Mask::MASK0][Branches::Rama2][0].originalmaskCoolDown = 25000; //En Milisegundos
 
 	maskStats[Mask::MASK0][Branches::Rama3][0].firstTimeUsed = false;
 	maskStats[Mask::MASK0][Branches::Rama3][0].numberLightning = 1;
@@ -65,6 +66,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK0][Branches::Rama1][1].maskDamage = 80;
 
 	maskStats[Mask::MASK0][Branches::Rama2][1].maskCoolDown = 23000; //En Milisegundos
+	maskStats[Mask::MASK0][Branches::Rama2][1].originalmaskCoolDown = 23000; //En Milisegundos
 
 	maskStats[Mask::MASK0][Branches::Rama3][1].firstTimeUsed = false;
 	maskStats[Mask::MASK0][Branches::Rama3][1].numberLightning = 2;
@@ -82,6 +84,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK0][Branches::Rama1][2].maskDamage = 130;
 
 	maskStats[Mask::MASK0][Branches::Rama2][2].maskCoolDown = 20000; //En Milisegundos
+	maskStats[Mask::MASK0][Branches::Rama2][2].originalmaskCoolDown = 20000; //En Milisegundos
 
 	maskStats[Mask::MASK0][Branches::Rama3][2].firstTimeUsed = false;
 	maskStats[Mask::MASK0][Branches::Rama3][2].numberLightning = 3;
@@ -99,6 +102,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK0][Branches::Rama1][3].maskDamage = 200;
 
 	maskStats[Mask::MASK0][Branches::Rama2][3].maskCoolDown = 17000; //En Milisegundos
+	maskStats[Mask::MASK0][Branches::Rama2][3].originalmaskCoolDown = 17000; //En Milisegundos
 
 	maskStats[Mask::MASK0][Branches::Rama3][3].firstTimeUsed = false;
 	maskStats[Mask::MASK0][Branches::Rama3][3].numberLightning = 4;
@@ -116,6 +120,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK0][Branches::Rama1][4].maskDamage = 300;
 
 	maskStats[Mask::MASK0][Branches::Rama2][4].maskCoolDown = 15000; //En Milisegundos
+	maskStats[Mask::MASK0][Branches::Rama2][4].originalmaskCoolDown = 15000; //En Milisegundos
 
 	maskStats[Mask::MASK0][Branches::Rama3][4].firstTimeUsed = false;
 	maskStats[Mask::MASK0][Branches::Rama3][4].numberLightning = 5;
@@ -134,6 +139,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK1][Branches::Rama1][0].maskDamage = 100;
 
 	maskStats[Mask::MASK1][Branches::Rama2][0].maskCoolDown = 30000; //En Milisegundos
+	maskStats[Mask::MASK1][Branches::Rama2][0].originalmaskCoolDown = 30000; //En Milisegundos
 
 	maskStats[Mask::MASK1][Branches::Rama3][0].rangeBallModifier = 0.0f;
 	maskStats[Mask::MASK1][Branches::Rama3][0].firstTimeUsed = false;
@@ -151,6 +157,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK1][Branches::Rama1][1].maskDamage = 120;
 
 	maskStats[Mask::MASK1][Branches::Rama2][1].maskCoolDown = 28000; //En Milisegundos
+	maskStats[Mask::MASK1][Branches::Rama2][1].originalmaskCoolDown = 28000; //En Milisegundos
 
 	maskStats[Mask::MASK1][Branches::Rama3][1].rangeBallModifier = 0.05f;
 	maskStats[Mask::MASK1][Branches::Rama3][1].firstTimeUsed = false;
@@ -168,6 +175,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK1][Branches::Rama1][2].maskDamage = 180;
 
 	maskStats[Mask::MASK1][Branches::Rama2][2].maskCoolDown = 25000; //En Milisegundos
+	maskStats[Mask::MASK1][Branches::Rama2][2].originalmaskCoolDown = 25000; //En Milisegundos
 
 	maskStats[Mask::MASK1][Branches::Rama3][2].rangeBallModifier = 0.10f;
 	maskStats[Mask::MASK1][Branches::Rama3][2].firstTimeUsed = false;
@@ -185,6 +193,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK1][Branches::Rama1][3].maskDamage = 250;
 
 	maskStats[Mask::MASK1][Branches::Rama2][3].maskCoolDown = 23000; //En Milisegundos
+	maskStats[Mask::MASK1][Branches::Rama2][3].originalmaskCoolDown = 23000; //En Milisegundos
 
 	maskStats[Mask::MASK1][Branches::Rama3][3].rangeBallModifier = 0.15f;
 	maskStats[Mask::MASK1][Branches::Rama3][3].firstTimeUsed = false;
@@ -202,6 +211,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK1][Branches::Rama1][4].maskDamage = 400;
 	
 	maskStats[Mask::MASK1][Branches::Rama2][4].maskCoolDown = 20000; //En Milisegundos
+	maskStats[Mask::MASK1][Branches::Rama2][4].originalmaskCoolDown = 20000; //En Milisegundos
 
 	maskStats[Mask::MASK1][Branches::Rama3][4].rangeBallModifier = 0.20f; // 20% de aumento en el rango
 	maskStats[Mask::MASK1][Branches::Rama3][4].firstTimeUsed = false;
@@ -220,6 +230,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK2][Branches::Rama1][0].maskDamage = 40.0f;
 
 	maskStats[Mask::MASK2][Branches::Rama2][0].maskCoolDown = 20000.0f;
+	maskStats[Mask::MASK2][Branches::Rama2][0].originalmaskCoolDown = 20000.0f;
 
 	maskStats[Mask::MASK2][Branches::Rama3][0].distanceDashModifier = 1.30f;
 
@@ -234,6 +245,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK2][Branches::Rama1][1].maskDamage = 50.0f;
 
 	maskStats[Mask::MASK2][Branches::Rama2][1].maskCoolDown = 18000.0f;
+	maskStats[Mask::MASK2][Branches::Rama2][1].originalmaskCoolDown = 18000.0f;
 
 	maskStats[Mask::MASK2][Branches::Rama3][1].distanceDashModifier = 1.35f;
 
@@ -248,6 +260,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK2][Branches::Rama1][2].maskDamage = 70.0f;
 
 	maskStats[Mask::MASK2][Branches::Rama2][2].maskCoolDown = 16000.0f;
+	maskStats[Mask::MASK2][Branches::Rama2][2].originalmaskCoolDown = 16000.0f;
 
 	maskStats[Mask::MASK2][Branches::Rama3][2].distanceDashModifier = 1.40f;
 
@@ -262,6 +275,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK2][Branches::Rama1][3].maskDamage = 100.0f;
 
 	maskStats[Mask::MASK2][Branches::Rama2][3].maskCoolDown = 18000.0f;
+	maskStats[Mask::MASK2][Branches::Rama2][3].originalmaskCoolDown = 18000.0f;
 
 	maskStats[Mask::MASK2][Branches::Rama3][3].distanceDashModifier = 1.45f;
 
@@ -276,6 +290,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK2][Branches::Rama1][4].maskDamage = 150.0f;
 
 	maskStats[Mask::MASK2][Branches::Rama2][4].maskCoolDown = 10000.0f;
+	maskStats[Mask::MASK2][Branches::Rama2][4].originalmaskCoolDown = 10000.0f;
 
 	maskStats[Mask::MASK2][Branches::Rama3][4].distanceDashModifier = 1.50f;
 
@@ -291,6 +306,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK3][Branches::Rama1][0].maskDamage = 0;
 
 	maskStats[Mask::MASK3][Branches::Rama2][0].maskCoolDown = 60000.0f;
+	maskStats[Mask::MASK3][Branches::Rama2][0].originalmaskCoolDown = 60000.0f;
 
 	maskStats[Mask::MASK3][Branches::Rama3][0].durationTime = 20000.0f;
 
@@ -306,6 +322,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK3][Branches::Rama1][1].maskDamage = 0;
 
 	maskStats[Mask::MASK3][Branches::Rama2][1].maskCoolDown = 58000.0f;
+	maskStats[Mask::MASK3][Branches::Rama2][1].originalmaskCoolDown = 58000.0f;
 
 	maskStats[Mask::MASK3][Branches::Rama3][1].durationTime = 22000.0f;
 
@@ -321,6 +338,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK3][Branches::Rama1][2].maskDamage = 0;
 
 	maskStats[Mask::MASK3][Branches::Rama2][2].maskCoolDown = 56000.0f;
+	maskStats[Mask::MASK3][Branches::Rama2][2].originalmaskCoolDown = 56000.0f;
 
 	maskStats[Mask::MASK3][Branches::Rama3][2].durationTime = 25000.0f;
 
@@ -336,6 +354,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK3][Branches::Rama1][3].maskDamage = 0;
 
 	maskStats[Mask::MASK3][Branches::Rama2][3].maskCoolDown = 53000.0f;
+	maskStats[Mask::MASK3][Branches::Rama2][3].originalmaskCoolDown = 53000.0f;
 
 	maskStats[Mask::MASK3][Branches::Rama3][3].durationTime = 27000.0f;
 
@@ -351,6 +370,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK3][Branches::Rama1][4].maskDamage = 0;
 
 	maskStats[Mask::MASK3][Branches::Rama2][4].maskCoolDown = 50000.0f;
+	maskStats[Mask::MASK3][Branches::Rama2][4].originalmaskCoolDown = 50000.0f;
 
 	maskStats[Mask::MASK3][Branches::Rama3][4].durationTime = 30000.0f;
 
@@ -653,6 +673,8 @@ bool Player::Update(float dt)
 		printf("Has subido a nivel %i y tu experiencia actual es %i \n", level, playerXP);
 	}
 
+	EfectoPociones(dt);
+
 	stateMachine(dt);
 	currentAnimation->Update();
 	return true;
@@ -716,6 +738,62 @@ void Player::Dashi(float dt)
 	currentAnimation = &dashiAnim;
 	
 }
+
+void Player::EfectoPociones(float dt)
+{
+	Regenpocion(dt);
+	Damagepocion(dt);
+	Speedpocion(dt);
+}
+
+void Player::Regenpocion(float dt)
+{
+	if (currentStats.currentHealth <= currentStats.maxHealth)
+	{
+		if (regenAmount > 0)
+		{
+			if (regenTimer.ReadSec() >= 0.2f)
+			{
+				currentStats.currentHealth += regenAmount;
+				totalRegen += regenAmount;
+
+				if (totalRegen >= 50)
+				{
+					regenAmount = 0;
+					totalRegen = 0;
+				}
+				regenTimer.Start();
+			}
+		}
+	}
+}
+
+void Player::Damagepocion(float dt)
+{
+	if (damagePotionActive)
+	{
+		if (potiondamageTimer.ReadSec() < 10.0f){}
+		else
+		{
+			attackDamage = originalDamage;
+			damagePotionActive = false;
+		}
+	}
+}
+
+void Player::Speedpocion(float dt)
+{
+	if (speedPotionActive)
+	{
+		if (potionspeedTimer.ReadSec() < 20.0f) {}
+		else
+		{
+			currentStats.movementSpeed = originalSpeed;
+			speedPotionActive = false;
+		}
+	}
+}
+
 void Player::Attack(float dt)
 {
 	//printf("attack"); 
@@ -1884,6 +1962,11 @@ void Player::PlayerMovement(float dt)
 		isAttackingMask = true;
 		timerMaskAttack.Start();
 		desiredState = EntityState::MASK_ATTACK;
+
+		// Restablece el cooldown de la máscara a su valor original después de usar la habilidad
+		for (int i = 0; i < maskStats[primaryMask][Branches::Rama2].size(); i++) {
+			maskStats[primaryMask][Branches::Rama2][i].maskCoolDown = maskStats[primaryMask][Branches::Rama2][i].originalmaskCoolDown;
+		}
 	}
 
 	if (!(timerMaskAttack.ReadMSec() < maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDown && isAttackingMask)) {

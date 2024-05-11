@@ -69,6 +69,7 @@ struct MaskStats {
 	//Habilidades
 	float maskDamage;
 	float maskCoolDown;
+	float originalmaskCoolDown;
 	bool firstTimeUsed;
 
 	//Mask0
@@ -130,6 +131,12 @@ public:
 	void TakeDamage(float damage);
 
 	float GetRealMovementSpeed() const;
+
+	//Pociones
+	void EfectoPociones(float dt);
+	void Regenpocion(float dt);
+	void Speedpocion(float dt);
+	void Damagepocion(float dt);
 
 	//Branch transitionTable[static_cast<int>(EntityState::STATE_COUNT)][static_cast<int>(EntityState::STATE_COUNT)];
 	// L07 DONE 6: Define OnCollision function for the player. 
@@ -242,7 +249,27 @@ public:
 	float damageCooldown = 0.2f;
 
 	Timer collisionAttackTimer;
-	
+
+	//POCIONES
+	//Regen
+	Timer regenTimer;
+	int regenAmount = 0;
+	int totalRegen = 0;
+
+	//Damage
+	Timer potiondamageTimer;
+	float originalDamage;
+	bool damagePotionActive = false;
+
+	//Speed
+	Timer potionspeedTimer;
+	float originalSpeed;
+	bool speedPotionActive = false;
+
+	//Orbe (mascaras)
+	Mask currentMask;
+	bool maskPotionActive = false; 
+
 	//Pasiva de la mascara 1
 	PhysBody* mask1PassiveSensor = nullptr;
 

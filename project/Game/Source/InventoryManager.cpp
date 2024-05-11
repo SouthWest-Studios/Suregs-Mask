@@ -480,6 +480,38 @@ bool InventoryManager::LoadState(pugi::xml_node node)
 			itemConfigurationNode = entitiesDataNode.child("item_pez_grande");
 			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_PEZ_GRANDE, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""));
 			break;
+		case InventityType::POCION_VIDA_1:
+			itemConfigurationNode = entitiesDataNode.child("item_pocion_vida_1");
+			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_POCION_VIDA_1, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""));
+			break;
+		case InventityType::POCION_VIDA_2:
+			itemConfigurationNode = entitiesDataNode.child("item_pocion_vida_2");
+			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_POCION_VIDA_2, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""));
+			break;
+		case InventityType::POCION_VIDA_3:
+			itemConfigurationNode = entitiesDataNode.child("item_pocion_vida_3");
+			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_POCION_VIDA_3, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""));
+			break;
+		case InventityType::POCION_VIDA_MAX:
+			itemConfigurationNode = entitiesDataNode.child("item_pocion_vida_max");
+			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_POCION_VIDA_MAX, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""));
+			break;
+		case InventityType::POCION_REGENERACION:
+			itemConfigurationNode = entitiesDataNode.child("item_pocion_regeneracion");
+			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_POCION_REGENERACION, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""));
+			break;
+		case InventityType::POCION_DANO:
+			itemConfigurationNode = entitiesDataNode.child("item_pocion_dano");
+			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_POCION_DANO, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""));
+			break;
+		case InventityType::POCION_VELOCIDAD:
+			itemConfigurationNode = entitiesDataNode.child("item_pocion_velocidad");
+			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_POCION_VELOCIDAD, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""));
+			break;
+		case InventityType::ORBE_MAGICO:
+			itemConfigurationNode = entitiesDataNode.child("item_pocion_orbe_magico");
+			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_ORBE_MAGICO, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""));
+			break;
 
 		case InventityType::UNKNOWN:
 			break;
@@ -709,6 +741,71 @@ void InventoryManager::UseItemSelected(int id)
 
 				break;
 			}
+			case InventityType::POCION_VIDA_1:
+				if (app->entityManager->GetPlayer()->currentStats.currentHealth < app->entityManager->GetPlayer()->currentStats.maxHealth) {
+					app->entityManager->GetPlayer()->currentStats.currentHealth += std::min(20.0f, app->entityManager->GetPlayer()->currentStats.maxHealth - app->entityManager->GetPlayer()->currentStats.currentHealth);
+					printf("uso POCION_VIDA_1. Vida: %f \n", app->entityManager->GetPlayer()->currentStats.currentHealth);
+					DestroyItemById(id);
+				}
+				break;
+			case InventityType::POCION_VIDA_2:
+				if (app->entityManager->GetPlayer()->currentStats.currentHealth < app->entityManager->GetPlayer()->currentStats.maxHealth) {
+					app->entityManager->GetPlayer()->currentStats.currentHealth += std::min(50.0f, app->entityManager->GetPlayer()->currentStats.maxHealth - app->entityManager->GetPlayer()->currentStats.currentHealth);
+					printf("uso POCION_VIDA_2. Vida: %f \n", app->entityManager->GetPlayer()->currentStats.currentHealth);
+					DestroyItemById(id);
+				}
+				break;
+			case InventityType::POCION_VIDA_3:
+				if (app->entityManager->GetPlayer()->currentStats.currentHealth < app->entityManager->GetPlayer()->currentStats.maxHealth) {
+					app->entityManager->GetPlayer()->currentStats.currentHealth += std::min(150.0f, app->entityManager->GetPlayer()->maxHealth - app->entityManager->GetPlayer()->currentStats.currentHealth);
+					printf("uso POCION_VIDA_3. Vida: %f \n", app->entityManager->GetPlayer()->currentStats.currentHealth);
+					DestroyItemById(id);
+				}
+				break;
+			case InventityType::POCION_VIDA_MAX:
+				app->entityManager->GetPlayer()->currentStats.currentHealth = app->entityManager->GetPlayer()->currentStats.maxHealth;
+				printf("uso POCION_VIDA_MAX. Vida: %f \n", app->entityManager->GetPlayer()->currentStats.currentHealth);
+				DestroyItemById(id);
+
+				break;
+			case InventityType::POCION_REGENERACION:
+				app->entityManager->GetPlayer()->regenAmount = 50 / 25; //valor de regeneracion de la pocion dividido por la cantidad de veces que se regenerara durante la duración de la pocion
+				app->entityManager->GetPlayer()->regenTimer.Start();
+				printf("uso POCION_REGENERACION. Vida: %f \n", app->entityManager->GetPlayer()->currentStats.currentHealth);
+				DestroyItemById(id);
+				break;
+			case InventityType::POCION_DANO:
+				printf("antes uso POCION_DANO. Daño: %f \n", app->entityManager->GetPlayer()->currentStats.attackDamage);
+				app->entityManager->GetPlayer()->originalDamage = app->entityManager->GetPlayer()->attackDamage;
+				app->entityManager->GetPlayer()->currentStats.attackDamage *= 1.2f;
+				app->entityManager->GetPlayer()->potiondamageTimer.Start();
+				app->entityManager->GetPlayer()->damagePotionActive = true;
+				printf("despues uso POCION_DANO. Daño: %f \n", app->entityManager->GetPlayer()->currentStats.attackDamage);
+				DestroyItemById(id);
+				break;
+			case InventityType::POCION_VELOCIDAD:
+				printf("antes uso POCION_VELOCIDAD. Velocidad: %f \n", app->entityManager->GetPlayer()->currentStats.movementSpeed);
+				app->entityManager->GetPlayer()->originalSpeed = app->entityManager->GetPlayer()->currentStats.movementSpeed;
+				app->entityManager->GetPlayer()->currentStats.movementSpeed *= 1.1f;
+				app->entityManager->GetPlayer()->potionspeedTimer.Start();
+				app->entityManager->GetPlayer()->speedPotionActive = true;
+				printf("despues uso POCION_VELOCIDAD. Velocidad: %f \n", app->entityManager->GetPlayer()->currentStats.movementSpeed);
+				DestroyItemById(id);
+				break;
+			case InventityType::ORBE_MAGICO:
+				for (auto& mask : app->entityManager->GetPlayer()->maskStats) {
+					for (auto& branch : mask.second) {
+						if (branch.first == Branches::Rama2) {
+							for (auto& level : branch.second) {
+								level.second.maskCoolDown = 0;
+							}
+						}
+					}
+				}
+				DestroyItemById(id);
+				printf("uso ORBE_MAGICO");
+				break;
+			
 			}
 
 
@@ -889,10 +986,11 @@ bool InventoryManager::Update(float dt)
 	{
 		OnMovePointer();
 
-		if (app->input->GetButton(SELECT) == KEY_DOWN) {
+		if (app->input->GetButton(SELECT) == KEY_DOWN && app->input->GetButton(ATAQUE) == KEY_DOWN) {
 			options = true;
 			selected = { PointerPosition.x, PointerPosition.y };
 			selectedId = PointerId;
+			UseItemSelected(selectedId);
 
 		}
 
