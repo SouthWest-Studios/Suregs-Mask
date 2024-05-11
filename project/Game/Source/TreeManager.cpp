@@ -493,25 +493,25 @@ void TreeManager::UseTreeSelected(int id)
 
 					case 1:
 					{
-
+						app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama1] += 1;
 
 						break;
 					}
 					case 2:
 					{
-
+						app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama1] += 1;
 
 						break;
 					}
 					case 3:
 					{
-
+						app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama1] += 1;
 
 						break;
 					}
 					case 4:
 					{
-
+						app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama1] += 1;
 
 						break;
 					}
@@ -523,7 +523,7 @@ void TreeManager::UseTreeSelected(int id)
 
 					case 1:
 					{
-
+						app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama2] += 1;
 
 						break;
 					}
