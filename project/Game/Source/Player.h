@@ -243,10 +243,10 @@ public:
 	int attackWidth = 50; 
     int attackHeight = 50;
 	bool isAttacking = false;
-	bool basicAttackDealed = false;
 	PhysBody* attackSensor = nullptr;
 	Timer damageTimer;
 	float damageCooldown = 0.2f;
+	bool hasAttacked = false;
 
 	Timer collisionAttackTimer;
 

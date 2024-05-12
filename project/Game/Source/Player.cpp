@@ -837,17 +837,30 @@ void Player::Attack(float dt)
 	int attackY = position.y + lastMovementDirection.y * attackHeight;
 
 	//Sensor
-	attackSensor = app->physics->CreateRectangleSensor(attackX, attackY, attackWidth, attackHeight, DYNAMIC);
-	attackSensor->ctype = ColliderType::PLAYER_ATTACK;
-	attackSensor->listener = this;
-
+	 if (!attackSensor && !hasAttacked) {
+        attackSensor = app->physics->CreateRectangleSensor(attackX, attackY, attackWidth, attackHeight, DYNAMIC);
+        attackSensor->ctype = ColliderType::PLAYER_ATTACK;
+        attackSensor->listener = this;
+		//printf("CREATE SENSOR\n");
+		hasAttacked = true;
+    } 
+	else if(attackSensor && hasAttacked) {
+        // Si el sensor de ataque ya existe, actualizamos su posición
+		attackSensor->body->SetTransform(b2Vec2(PIXEL_TO_METERS(attackX), PIXEL_TO_METERS(attackY)), 0);
+		//printf("TRANSFORM SENSOR\n");
+    }
 	pbodyFoot->body->ApplyForceToCenter(b2Vec2(lastMovementDirection.x * attackMovement, lastMovementDirection.y * attackMovement), true);
 
 	//Onda expansiva ataque pasivo mascara 1
 	if (secondaryMask == Mask::MASK1) {
-		mask1PassiveSensor = app->physics->CreateRectangleSensor(attackX, attackY, 100, 100, DYNAMIC);
-		mask1PassiveSensor->ctype = ColliderType::MASK0_PASSIVE_ATTACK;
-		mask1PassiveSensor->listener = this;
+        if (!mask1PassiveSensor) {
+            mask1PassiveSensor = app->physics->CreateRectangleSensor(attackX, attackY, 100, 100, DYNAMIC);
+            mask1PassiveSensor->ctype = ColliderType::MASK0_PASSIVE_ATTACK;
+            mask1PassiveSensor->listener = this;
+        } 
+		else if(mask1PassiveSensor){
+			mask1PassiveSensor->body->SetTransform(b2Vec2(PIXEL_TO_METERS(attackX), PIXEL_TO_METERS(attackY)), 0);
+		}
 	}
 
 	app->audio->PlayAttackFx(basic_combo_attack1_fx);
@@ -1957,28 +1970,26 @@ void Player::PlayerMovement(float dt)
 	}
 
 	//Si pulsas J para atacar
-	if (app->input->GetButton(ATAQUE) == KEY_DOWN && timerAttack.ReadMSec() > cdTimerAttackMS) {
+	if (app->input->GetButton(ATAQUE) == KEY_DOWN && !isAttacking) {
+		hasAttacked = false;
 		isAttacking = true;
 		timerAttack.Start();
+		collisionAttackTimer.Start();
 		desiredState = EntityState::ATTACKING;
 	}
 
-	if (!(timerAttack.ReadMSec() < cdTimerAttackMS && isAttacking)) {
+	//Checkea según velocidad de ataque si puede atacar
+	if (timerAttack.ReadMSec() > cdTimerAttackMS) {
 		isAttacking = false;
-		basicAttackDealed = false;
-		if (attackSensor) {
+	}
+	//printf("%f\r",collisionAttackTimer.ReadMSec());
+	//Borra colisión pasados 50 milisegundos
+	if (collisionAttackTimer.ReadMSec() > 50) {
+		if(attackSensor) {
+			hasAttacked = true;
 			app->physics->DestroyBody(attackSensor);
 			attackSensor = nullptr;
 		}
-		if (mask1PassiveSensor) {
-			app->physics->DestroyBody(mask1PassiveSensor);
-			mask1PassiveSensor = nullptr;
-		}
-	}
-
-	if (collisionAttackTimer.ReadSec() > 0.25) {
-		app->physics->DestroyBody(attackSensor);
-		attackSensor = nullptr;
 		if (mask1PassiveSensor) {
 			app->physics->DestroyBody(mask1PassiveSensor);
 			mask1PassiveSensor = nullptr;
