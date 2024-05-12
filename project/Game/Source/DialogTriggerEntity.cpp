@@ -87,7 +87,8 @@ bool DialogTrigger::CleanUp()
 {
 
 	app->tex->UnLoad(texture);
-	SDL_DestroyTexture(faceTexture);
+	app->tex->UnLoad(faceTexture);
+	app->physics->DestroyBody(pbody);
 
 	ListItem<Dialog*>* item;
 	Dialog* pDialog = nullptr;
@@ -98,7 +99,8 @@ bool DialogTrigger::CleanUp()
 		pDialog = item->data;
 		//pDialog->face_tex = faceTexture;
 		pDialog->CleanUp();
-		SDL_DestroyTexture(pDialog->face_tex);
+		app->tex->UnLoad(pDialog->face_tex);
+
 		RELEASE(item->data);
 	}
 
@@ -111,15 +113,13 @@ bool DialogTrigger::CleanUp()
 	{
 		pDialog = item->data;
 		//pDialog->face_tex = faceTexture;
-		SDL_DestroyTexture(pDialog->face_tex);
+		app->tex->UnLoad(pDialog->face_tex);
 		RELEASE(item->data);
 	}
 
 	dialoguesRepeat.Clear();
 
-	app->entityManager->DestroyEntity(pbody->entity);
-	app->physics->DestroyBody(pbody);
-	app->tex->UnLoad(texture);
+	
 
 	return true;
 }

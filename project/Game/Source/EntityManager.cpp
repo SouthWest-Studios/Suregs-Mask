@@ -113,6 +113,8 @@ bool EntityManager::CleanUp()
 	{
 		ret = item->data->CleanUp();
 		RELEASE(item->data);
+		
+		//delete item->data;
 		item = item->prev;
 	}
 
