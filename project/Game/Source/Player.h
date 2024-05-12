@@ -250,6 +250,13 @@ public:
 
 	Timer collisionAttackTimer;
 
+	//Espada & Armadura
+	int attackDamagePerLevel[10];
+	int armorPerLevel[10];
+	
+	int swordLevel;
+	int armorLevel;
+	
 	//POCIONES
 	//Regen
 	Timer regenTimer;

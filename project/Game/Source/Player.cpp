@@ -29,12 +29,41 @@ Player::Player() : Entity(EntityType::PLAYER)
 	desiredState = nextState;
 	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
 
+
+	//Sword damage
+	swordLevel = 0;
+
+    attackDamagePerLevel[0] = 100;  // Daño de ataque para el nivel 1
+    attackDamagePerLevel[1] = 120;  // Daño de ataque para el nivel 2
+    attackDamagePerLevel[2] = 140;  // Daño de ataque para el nivel 3
+    attackDamagePerLevel[3] = 170;  // Daño de ataque para el nivel 4
+	attackDamagePerLevel[4] = 200;  // Daño de ataque para el nivel 5
+	attackDamagePerLevel[5] = 240;  // Daño de ataque para el nivel 6
+	attackDamagePerLevel[6] = 280;  // Daño de ataque para el nivel 7
+	attackDamagePerLevel[7] = 350;  // Daño de ataque para el nivel 8
+	attackDamagePerLevel[8] = 420;  // Daño de ataque para el nivel 9
+	attackDamagePerLevel[9] = 500;  // Daño de ataque para el nivel 10
+
+	//Armor
+	armorLevel = 0;
+
+	armorPerLevel[0] = 100;  // Armadura para el nivel 1
+	armorPerLevel[1] = 120;  // Armadura para el nivel 2
+	armorPerLevel[2] = 150;  // Armadura para el nivel 3
+	armorPerLevel[3] = 190;  // Armadura para el nivel 4
+	armorPerLevel[4] = 250;  // Armadura para el nivel 5
+	armorPerLevel[5] = 280;  // Armadura para el nivel 6
+	armorPerLevel[6] = 350;  // Armadura para el nivel 7
+	armorPerLevel[7] = 400;  // Armadura para el nivel 8
+	armorPerLevel[8] = 480;  // Armadura para el nivel 9
+	armorPerLevel[9] = 600;  // Armadura para el nivel 10
+
 	// Inicializa las estadísticas base
-	baseStats.maxHealth = 100;
-	baseStats.currentHealth = 100;
+	baseStats.maxHealth = 100 + armorPerLevel[armorLevel];
+	baseStats.currentHealth = 100 + armorPerLevel[armorLevel];
 	baseStats.movementSpeed = 100;
 	baseStats.attackSpeed = 100;
-	baseStats.attackDamage = 100;
+	baseStats.attackDamage = 100 + attackDamagePerLevel[swordLevel];
 
 	// Inicializa las estadísticas actuales a las estadísticas base
 	currentStats = baseStats;
@@ -499,7 +528,6 @@ bool Player::Awake() {
 
 bool Player::Start() {
 
-
 	//position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
 
 	TSprite = config.attribute("Tsprite").as_int();
@@ -556,7 +584,6 @@ bool Player::Start() {
 	EquipPrimaryMask(Mask::MASK2);
 	EquipSecondaryMask(Mask::NOMASK);
 
-
 	/*	------------ALEIX------------
 	PARA MEJORAR X RAMA DE X MASCARA SERIA ASI
 
@@ -569,6 +596,12 @@ bool Player::Start() {
 
 	
 	//PARA TESTEAR
+	currentStats = baseStats;
+	printf("Max Health: %f\n", currentStats.maxHealth);
+	printf("Current Health: %f\n", currentStats.currentHealth);
+	printf("Movement Speed: %f\n", currentStats.movementSpeed);
+	printf("Attack Speed: %f\n", currentStats.attackSpeed);
+	printf("Attack Damage: %f\n", currentStats.attackDamage);
 
 	maskLevels[primaryMask][Branches::Modifiers] = 0;
 	maskLevels[primaryMask][Branches::Rama1] = 1;
