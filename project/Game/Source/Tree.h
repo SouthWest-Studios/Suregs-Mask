@@ -111,6 +111,10 @@ public:
 	bool zoom = false;
 	int nivelArbol;
 	int nivelMejora;
+	bool usable1 = false;
+	bool usable2 = false;
+	bool usable3 = false;
+	bool usable4 = false;
 	
 
 	

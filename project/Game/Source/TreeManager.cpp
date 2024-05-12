@@ -47,6 +47,7 @@ bool TreeManager::Awake(pugi::xml_node config)
 
 	iconoTreeTexturePath = ((char*)config.child("arbol").attribute("texturePath").as_string());
 	listTexturePath = ((char*)config.child("arbol").attribute("list_texture").as_string());
+	listTexturePathNot = ((char*)config.child("arbol").attribute("list_texture").as_string());
 	PointerPath = ((char*)config.child("arbol").attribute("pointer").as_string());
 	CloseUpPath = ((char*)config.child("arbol").attribute("closeUp").as_string());
 	BackGroundPath = ((char*)config.child("arbol").attribute("BackGround").as_string());
@@ -63,6 +64,7 @@ bool TreeManager::Start() {
 	CloseUp = app->tex->Load(CloseUpPath);
 	listTexture = app->tex->Load("Assets/Textures/Interfaz/Arbol/textura_lista.png");
 	PointerItemText = app->tex->Load("Assets/Textures/Interfaz/Arbol/noteselect.png");
+	listTextureNot = app->tex->Load("Assets/Textures/Interfaz/Arbol/textura_lista_not.png");
 	PointerId = 0;
 
 	bool ret = true;
@@ -87,23 +89,23 @@ bool TreeManager::Start() {
 		{
 			if (i == 0 && j == 0)
 			{
-				CreateItem(TreeType::MASK0, i, j);
+				CreateItem(TreeType::MASK0, i, j, true);
 			}
 			else if (i == 1 && j == 0)
 			{
-				CreateItem(TreeType::MASK1, i, j);
+				CreateItem(TreeType::MASK1, i, j, true);
 			}
 			else if (i == 2 && j == 0)
 			{
-				CreateItem(TreeType::MASK2, i, j);
+				CreateItem(TreeType::MASK2, i, j, true);
 			}
 			else if (i == 3 && j == 0)
 			{
-				CreateItem(TreeType::MASK3, i, j);
+				CreateItem(TreeType::MASK3, i, j, true);
 			}
 			else
 			{
-				CreateItem(TreeType::BUTTON, i, j);
+				CreateItem(TreeType::BUTTON, i, j, false);
 			}
 			
 		}
@@ -134,7 +136,7 @@ bool TreeManager::CleanUp()
 	return ret;
 }
 int highesttttId = -1;
-Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora)
+Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bool usable)
 {
 	Tree* entity = nullptr;
 
@@ -148,12 +150,18 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora)
 	entity->type = type;
 	entity->nivelArbol = nivelArbol;
 	entity->nivelMejora = nivelMejora;
+	entity->usable1 = usable;
+	entity->usable2 = usable;
+	entity->usable3 = usable;
+	entity->usable4 = usable;
+	
 
 	switch (nivelArbol)
 	{
 		
 	case 0:
 	{
+		
 		switch (nivelMejora)
 		{
 
@@ -168,7 +176,10 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora)
 		{
 			entity->name = "Dano 1";
 			entity->desc = "";
-
+			entity->usable1 = true;
+			entity->usable2 = true;
+			entity->usable3 = true;
+			entity->usable4 = true;
 			break;
 		}
 		case 2:
@@ -198,6 +209,7 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora)
 	}
 	case 1:
 	{
+
 		switch (nivelMejora)
 		{
 
@@ -212,6 +224,10 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora)
 		{
 			entity->name = "CoolDown 1";
 			entity->desc = "";
+			entity->usable1 = true;
+			entity->usable2 = true;
+			entity->usable3 = true;
+			entity->usable4 = true;
 
 			break;
 		}
@@ -259,6 +275,10 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora)
 			entity->name3 = "Distancia 1";
 			entity->name4 = "Duracion 1";
 			entity->desc = "";
+			entity->usable1 = true;
+			entity->usable2 = true;
+			entity->usable3 = true;
+			entity->usable4 = true;
 
 			break;
 		}
@@ -314,6 +334,10 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora)
 			entity->name2 = "Invisible 1";
 			entity->name3 = "Aumento 1";
 			entity->desc = "";
+			entity->usable1 = true;
+			entity->usable2 = true;
+			entity->usable3 = true;
+			entity->usable4 = true;
 
 			break;
 		}
@@ -445,6 +469,7 @@ void TreeManager::UseTreeSelected(int id)
 
 	ListItem<Tree*>* item;
 
+	ListItem<Tree*>* itum;
 	/*for (item = bestiario.start; item != NULL; item = item->next)
 	{
 		item->data->active = false;
@@ -452,205 +477,310 @@ void TreeManager::UseTreeSelected(int id)
 
 	for (item = arboles.start; item != NULL; item = item->next)
 	{
-
-		if (item->data->id == id) // Comprueba si el ID coincide
+		if (item->data->usable1 || item->data->usable2 || item->data->usable3 || item->data->usable4)
 		{
-
-			item->data->active = true;
-			switch (item->data->type)
+			if (item->data->id == id) // Comprueba si el ID coincide
 			{
 
-			case TreeType::MASK0:
-			{
-				mask = 1;
-
-				break;
-			}
-			case TreeType::MASK1:
-			{
-				mask = 2;
-
-				break;
-			}
-			case TreeType::MASK2:
-			{
-				mask = 3;
-
-				break;
-			}
-			case TreeType::MASK3:
-			{
-				mask = 4;
-
-				break;
-			}
-			case TreeType::BUTTON:
-			{
-				switch (item->data->nivelArbol)
+				item->data->active = true;
+				switch (item->data->type)
 				{
-					switch (item->data->nivelMejora)
-					{
 
-					case 1:
-					{
-						app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama1] += 1;
-
-						break;
-					}
-					case 2:
-					{
-						app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama1] += 1;
-
-						break;
-					}
-					case 3:
-					{
-						app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama1] += 1;
-
-						break;
-					}
-					case 4:
-					{
-						app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama1] += 1;
-
-						break;
-					}
-					}
-				case 0:
+				case TreeType::MASK0: 
 				{
-					switch (item->data->nivelMejora)
-					{
-
-					case 1:
-					{
-						app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama2] += 1;
-
-						break;
-					}
-					case 2:
-					{
-
-
-						break;
-					}
-					case 3:
-					{
-
-
-						break;
-					}
-					case 4:
-					{
-
-
-						break;
-					}
-					}
+					mask = 1;
 
 					break;
 				}
-				case 1:
+				case TreeType::MASK1:
 				{
-					switch (item->data->nivelMejora)
-					{
+					mask = 2;
 
+					break;
+				}
+				case TreeType::MASK2:
+				{
+					mask = 3;
+
+					break;
+				}
+				case TreeType::MASK3:
+				{
+					mask = 4;
+
+					break;
+				}
+				case TreeType::BUTTON:
+				{
+					switch (item->data->nivelArbol)
+					{
+						
+					case 0:
+					{
+						bool siguiente = false;
+						if (mask == 1)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK1][Branches::Rama1] += 1;
+							item->data->usable1 = false;
+							siguiente = true;
+						}
+						else if (mask == 2)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK2][Branches::Rama1] += 1;
+							item->data->usable2 = false;
+							siguiente = true;
+						}
+						else if (mask == 3)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK2][Branches::Rama1] += 1;
+							item->data->usable3 = false;
+							siguiente = true;
+						}
+						else if (mask == 4)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK3][Branches::Rama1] += 1;
+							item->data->usable4 = false;
+							siguiente = true;
+						}
+						if (siguiente == true)
+						{
+							for (itum = arboles.start; itum != NULL; itum = itum->next)
+							{
+								if (itum->data->nivelArbol == item->data->nivelArbol && itum->data->nivelMejora == item->data->nivelMejora + 1)
+								{
+									if (mask == 1)
+									{
+										
+										itum->data->usable1 = true;
+										
+									}
+									else if (mask == 2)
+									{
+										
+										itum->data->usable2 = true;
+										
+									}
+									else if (mask == 3)
+									{
+										
+										itum->data->usable3 = true;
+										
+									}
+									else if (mask == 4)
+									{
+										
+										itum->data->usable4 = true;
+										
+									}
+								}
+
+
+							}
+							siguiente = true;
+						}
+						break;
+					}
 					case 1:
 					{
+						bool siguiente = false;
+						if (mask == 1)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK1][Branches::Rama2] += 1;
+							item->data->usable1 = false;
+							siguiente = true;
+						}
+						else if (mask == 2)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK2][Branches::Rama2] += 1;
+							item->data->usable2 = false;
+							siguiente = true;
+						}
+						else if (mask == 3)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK2][Branches::Rama2] += 1;
+							item->data->usable3 = false;
+							siguiente = true;
+						}
+						else if (mask == 4)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK3][Branches::Rama2] += 1;
+							item->data->usable4 = false;
+							siguiente = true;
+						}
+						if (siguiente == true)
+						{
+							for (itum = arboles.start; itum != NULL; itum = itum->next)
+							{
+								if (itum->data->nivelArbol == item->data->nivelArbol && itum->data->nivelMejora == item->data->nivelMejora + 1)
+								{
+									if (mask == 1)
+									{
+
+										itum->data->usable1 = true;
+
+									}
+									else if (mask == 2)
+									{
+
+										itum->data->usable2 = true;
+
+									}
+									else if (mask == 3)
+									{
+
+										itum->data->usable3 = true;
+
+									}
+									else if (mask == 4)
+									{
+
+										itum->data->usable4 = true;
+
+									}
+								}
 
 
+							}
+							siguiente = true;
+						}
 						break;
 					}
 					case 2:
 					{
+						bool siguiente = false;
+						if (mask == 1)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK1][Branches::Rama3] += 1;
+							item->data->usable1 = false;
+							siguiente = true;
+						}
+						else if (mask == 2)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK2][Branches::Rama3] += 1;
+							item->data->usable2 = false;
+							siguiente = true;
+						}
+						else if (mask == 3)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK2][Branches::Rama3] += 1;
+							item->data->usable3 = false;
+							siguiente = true;
+						}
+						else if (mask == 4)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK3][Branches::Rama3] += 1;
+							item->data->usable4 = false;
+							siguiente = true;
+						}
+						if (siguiente == true)
+						{
+							for (itum = arboles.start; itum != NULL; itum = itum->next)
+							{
+								if (itum->data->nivelArbol == item->data->nivelArbol && itum->data->nivelMejora == item->data->nivelMejora + 1)
+								{
+									if (mask == 1)
+									{
+
+										itum->data->usable1 = true;
+
+									}
+									else if (mask == 2)
+									{
+
+										itum->data->usable2 = true;
+
+									}
+									else if (mask == 3)
+									{
+
+										itum->data->usable3 = true;
+
+									}
+									else if (mask == 4)
+									{
+
+										itum->data->usable4 = true;
+
+									}
+								}
 
 
+							}
+							siguiente = true;
+						}
 						break;
 					}
 					case 3:
 					{
+						bool siguiente = false;
+						if (mask == 1)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK1][Branches::Rama4] += 1;
+							item->data->usable1 = false;
+							siguiente = true;
+						}
+						else if (mask == 2)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK2][Branches::Rama4] += 1;
+							item->data->usable2 = false;
+							siguiente = true;
+						}
+						else if (mask == 3)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK2][Branches::Rama4] += 1;
+							item->data->usable3 = false;
+							siguiente = true;
+						}
+						else if (mask == 4)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK3][Branches::Rama4] += 1;
+							item->data->usable4 = false;
+							siguiente = true;
+						}
+						if (siguiente == true)
+						{
+							for (itum = arboles.start; itum != NULL; itum = itum->next)
+							{
+								if (itum->data->nivelArbol == item->data->nivelArbol && itum->data->nivelMejora == item->data->nivelMejora + 1)
+								{
+									if (mask == 1)
+									{
+
+										itum->data->usable1 = true;
+
+									}
+									else if (mask == 2)
+									{
+
+										itum->data->usable2 = true;
+
+									}
+									else if (mask == 3)
+									{
+
+										itum->data->usable3 = true;
+
+									}
+									else if (mask == 4)
+									{
+
+										itum->data->usable4 = true;
+
+									}
+								}
 
 
-						break;
-					}
-					case 4:
-					{
-
-
-						break;
-					}
-					}
-
-					break;
-				}
-				case 2:
-				{
-					switch (item->data->nivelMejora)
-					{
-
-					case 1:
-					{
-
-
-						break;
-					}
-					case 2:
-					{
-
-
-						break;
-					}
-					case 3:
-					{
-
-
-						break;
-					}
-					case 4:
-					{
-
-
-						break;
-					}
-					}
-
-					break;
-				}
-				case 3:
-				{
-					switch (item->data->nivelMejora)
-					{
-
-					case 1:
-					{
-
-
-						break;
-					}
-					case 2:
-					{
-
-
-						break;
-					}
-					case 3:
-					{
-
-
-						break;
-					}
-					case 4:
-					{
-
-
+							}
+							siguiente = true;
+						}
 						break;
 					}
 					}
 
-					break;
 				}
 				}
-			}
-			}
+		}
+		
 
 
 		}
@@ -749,7 +879,7 @@ bool TreeManager::Update(float dt)
 
 	bool ret = true;
 
-	if (app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
 		mostrar = !mostrar;
 
 	}
@@ -839,13 +969,24 @@ bool TreeManager::PostUpdate()
 						{
 						case 1:
 						{
-							app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });
+							
+							if (pEntity->usable1 == false)
+							{
+								app->render->DrawTexture(listTextureNot, horizontalPosition, verticalPosition, 0.7, SDL_FLIP_NONE, 0, 0);
+							}
 
+								app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });
+
+							
 
 							break;
 						}
 						case 2:
 						{
+							if (pEntity->usable2 == false)
+							{
+								app->render->DrawTexture(listTextureNot, horizontalPosition, verticalPosition, 0.7, SDL_FLIP_NONE, 0, 0);
+							}
 							if (pEntity->name2 == "")
 							{
 								app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });
@@ -861,6 +1002,13 @@ bool TreeManager::PostUpdate()
 						}
 						case 3:
 						{
+							
+
+								if (pEntity->usable3 == false)
+								{
+									app->render->DrawTexture(listTextureNot, horizontalPosition, verticalPosition, 0.7, SDL_FLIP_NONE, 0, 0);
+								}
+
 							if (pEntity->name3 == "")
 							{
 								app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });
@@ -876,6 +1024,10 @@ bool TreeManager::PostUpdate()
 						}
 						case 4:
 						{
+							if (pEntity->usable4 == false)
+							{
+								app->render->DrawTexture(listTextureNot, horizontalPosition, verticalPosition, 0.7, SDL_FLIP_NONE, 0, 0);
+							}
 							if (pEntity->name4 == "")
 							{
 								app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });

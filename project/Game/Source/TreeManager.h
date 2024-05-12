@@ -31,7 +31,7 @@ public:
 	bool CleanUp();
 
 	// Additional methods
-	Tree* CreateItem(TreeType type, int nivelArbol, int nivelMejora);
+	Tree* CreateItem(TreeType type, int nivelArbol, int nivelMejora, bool usable);
 
 	void AddTree(Tree* Inventity);
 
@@ -85,12 +85,14 @@ private:
 
 	char* iconoTreeTexturePath;
 	char* listTexturePath;
+	char* listTexturePathNot;
 	char* sliderTexturePath;
 	char* knobTexturePath;
 	char* BackGroundPath;
 	SDL_Texture* BackGroundTexture;
 	SDL_Texture* iconoTreeTexture;
 	SDL_Texture* listTexture;
+	SDL_Texture* listTextureNot;
 
 
 	int scrollY;
