@@ -50,6 +50,8 @@ bool Physics::PreUpdate()
 {
 	bool ret = true;
 
+	DestroyPendingBodies();
+
 	// Step (update) the World
 	// WARNING: WE ARE STEPPING BY CONSTANT 1/60 SECONDS!
 	world->Step(1.0f / 60.0f, 6, 2);
@@ -81,9 +83,22 @@ void Physics::DestroyBody(PhysBody* body)
 {
 	if (body)
 	{
-		world->DestroyBody(body->body);
-		delete body;
+		//world->DestroyBody(body->body);
+		//delete body;
+		bodiesToDestroy.push_back(body);
 	}
+}
+
+void Physics::DestroyPendingBodies()
+{
+	for (int i = 0; i < bodiesToDestroy.size(); i++) {
+		if (bodiesToDestroy.at(i)) {
+			world->DestroyBody(bodiesToDestroy.at(i)->body);
+			delete bodiesToDestroy.at(i);
+		}
+	}
+	bodiesToDestroy.clear();
+
 }
 
 b2World* Physics::GetWorld()

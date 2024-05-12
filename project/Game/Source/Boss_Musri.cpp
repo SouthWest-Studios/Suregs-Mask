@@ -288,7 +288,7 @@ void Boss_Musri::OnCollision(PhysBody* physA, PhysBody* physB) {
 		case ColliderType::PLATFORM:
 			for (int i = 0; i < flechasLanzadas.size(); i++) {
 				if (flechasLanzadas.at(i).pbody->body->GetTransform().p == physA->body->GetTransform().p) {
-					app->physics->GetWorld()->DestroyBody(flechasLanzadas.at(i).pbody->body);
+					app->physics->DestroyBody(flechasLanzadas.at(i).pbody);
 					flechasLanzadas.erase(flechasLanzadas.begin() + i);
 					break;
 				}
@@ -306,7 +306,7 @@ void Boss_Musri::OnCollision(PhysBody* physA, PhysBody* physB) {
 		case ColliderType::PLATFORM:
 			for (int i = 0; i < flechasCargadas.size(); i++) {
 				if (flechasCargadas.at(i).pbody->body->GetTransform().p == physA->body->GetTransform().p) {
-					app->physics->GetWorld()->DestroyBody(flechasCargadas.at(i).pbody->body);
+					app->physics->DestroyBody(flechasCargadas.at(i).pbody);
 					flechasCargadas.erase(flechasCargadas.begin() + i);
 					break;
 				}

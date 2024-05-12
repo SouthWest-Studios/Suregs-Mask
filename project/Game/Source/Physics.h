@@ -112,6 +112,8 @@ public:
 	//Destroy body
 	void DestroyBody(PhysBody* body);
 
+	void DestroyPendingBodies();
+
 
 	b2World* GetWorld();
 
@@ -121,7 +123,7 @@ public:
 private:
 
 	
-
+	std::vector<PhysBody*> bodiesToDestroy;
 	// Box2D World
 	b2World* world;
 };
