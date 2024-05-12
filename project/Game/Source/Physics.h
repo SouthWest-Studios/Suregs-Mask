@@ -107,7 +107,7 @@ public:
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
 
-	void EndContact(b2Contact* contact);
+	/*void EndContact(b2Contact* contact);*/ //da bug y no se usa activamente
 
 	//Destroy body
 	void DestroyBody(PhysBody* body);
