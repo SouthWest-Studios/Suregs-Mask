@@ -57,7 +57,7 @@ bool Boss_Inuit::Start() {
 	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
 	pbodyFoot->entity = this;
 	pbodyFoot->listener = this;
-	pbodyFoot->ctype = ColliderType::ENEMY;
+	pbodyFoot->ctype = ColliderType::ENEMY_INUIT;
 
 	pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 40, 60, bodyType::DYNAMIC);
 	pbodySensor->entity = this;
@@ -80,7 +80,7 @@ bool Boss_Inuit::Start() {
 	attackDamage = config.attribute("attackDamage").as_float();
 	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();
-
+	bmrSpeed = 800;
 
 	//printf("Speed: %f", speed);
 	return true;
@@ -118,6 +118,29 @@ bool Boss_Inuit::Update(float dt)
 		atackCube = nullptr;
 	}
 
+
+
+	if (checkAtackBMR) {
+		if (bmrBack) {
+			bmrSpeed = -80;
+		}
+		else
+		{
+			bmrSpeed = 80;
+
+		}
+
+		atackBoomerang(playerDireccion);
+	}
+	else
+	{
+		if (atackBMR != nullptr) {
+			atackBMR->body->SetLinearVelocity(b2Vec2(0, 0));
+			atackBMR->body->GetWorld()->DestroyBody(atackBMR->body);
+			atackBMR = nullptr;
+			printf("delete");
+		}
+	}
 
 
 	switch (fase)
@@ -176,9 +199,18 @@ bool Boss_Inuit::PostUpdate() {
 
 bool Boss_Inuit::CleanUp()
 {
-	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
-	app->physics->GetWorld()->DestroyBody(pbodySensor->body);
-	app->physics->GetWorld()->DestroyBody(areaSensor->body);
+	if (pbodyFoot != nullptr) {
+		app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
+	}
+	if (pbodySensor != nullptr) {
+		app->physics->GetWorld()->DestroyBody(pbodySensor->body);
+	}
+	if (areaSensor != nullptr) {
+		app->physics->GetWorld()->DestroyBody(areaSensor->body);
+	}
+	if (atackBMR != nullptr) {
+		app->physics->GetWorld()->DestroyBody(atackBMR->body);
+	}
 	app->tex->UnLoad(texture);
 	lastPath.Clear();
 
@@ -188,185 +220,7 @@ bool Boss_Inuit::CleanUp()
 	return true;
 }
 
-void Boss_Inuit::DoNothing(float dt)
-{
-	//currentAnimation = &idleAnim;
-	////printf("Osiris idle");
-	//pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 
-}
-
-void Boss_Inuit::Chase(float dt, iPoint playerPos)
-{
-	////printf("Osiris chasing");
-	//currentAnimation = &runAnim;
-	Bossfinding(dt, playerPos);
-
-}
-
-void Boss_Inuit::Attack(float dt)
-{
-	////printf("Osiris attacking");
-	//currentAnimation = &attackAnim;
-
-	attackTime++;
-	switch (attackTime)
-	{
-	case 1:
-		inAtack = true;
-		printf("\nataque1");
-
-		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
-
-		break;
-	case 2:
-		inAtack = true;
-		printf("\nataque2");
-		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
-		break;
-	case 3:
-		inAtack = true;
-		printf("\nataque3");
-		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
-		break;
-
-	case 4:
-		inAtack = true;
-		printf("\nataque4");
-		playerDireccion = calculate_direction();
-		printplayerDireccion = directionToString(playerDireccion);
-		printf("\n PlayerDireccion %s", printplayerDireccion.c_str());
-
-		attackTime = 0;
-		break;
-
-	default:
-		break;
-	}
-
-	atackTimeColdDown.Start();
-
-}
-
-void Boss_Inuit::Die() {
-
-
-}
-
-void Boss_Inuit::Revive()
-{
-
-}
-
-
-
-bool Boss_Inuit::Bossfinding(float dt, iPoint playerPosP)
-{
-
-	iPoint playerPos = app->map->WorldToMap(playerPosP.x, playerPosP.y);
-	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
-
-	//printf("\nBossArea:%f", dist(bossArea, enemyPos));
-	//printf("\nEmemyPosicion:%d", enemyPos);
-
-	if (playerInBossArea) {
-
-		app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
-		lastPath = *app->map->pathfinding->GetLastPath();
-		if (atackCube != nullptr) {
-			app->physics->GetWorld()->DestroyBody(atackCube->body);
-			atackCube = nullptr;
-		}
-		inAtack = false;
-	}
-	else {
-		app->map->pathfinding->CreatePath(enemyPos, originalPosition); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
-		lastPath = *app->map->pathfinding->GetLastPath();
-	}
-
-
-	b2Vec2 velocity = b2Vec2(0, 0);
-
-	if (lastPath.Count() > 1) { // Asegate de que haya al menos una posicion en el camino
-
-		// Toma la primera posicion del camino como el objetivo al que el enemigo debe dirigirse
-		iPoint targetPos = app->map->MapToWorld(lastPath.At(1)->x, lastPath.At(1)->y);
-
-		// Calcula la direccion hacia el objetivo
-		b2Vec2 direction(targetPos.x - position.x, targetPos.y - position.y);
-		direction.Normalize();
-
-		// Calcula la velocidad del movimiento
-		velocity = b2Vec2(direction.x * speed, direction.y * speed);
-
-		// Determina si el enemigo est?mirando hacia la izquierda o hacia la derecha
-		isFacingLeft = (direction.x >= 0);
-
-
-		isAttacking = false;
-		attackAnim.Reset();
-
-	}
-	pbodyFoot->body->SetLinearVelocity(velocity);
-
-	return true;
-}
-
-float Boss_Inuit::GetHealth() const {
-	return health;
-}
-
-void Boss_Inuit::TakeDamage(float damage) {
-
-
-}
-
-
-BTPDirection  Boss_Inuit::calculate_direction() {
-	iPoint playerPos = app->entityManager->GetPlayer()->position;
-	playerPos = app->map->WorldToMap(playerPos.x, playerPos.y);
-	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
-
-	int dx = playerPos.x - enemyPos.x;
-	int dy = playerPos.y - enemyPos.y;
-
-	double angle_rad = atan2(dy, dx);
-
-	// 将弧度转换为角度
-	double angle_deg = angle_rad * 180 / M_PI;
-	if (angle_deg < 0) {
-		angle_deg += 360; 
-	}
-	BTPDirection directions[] = { BTPDirection::RIGHT, BTPDirection::DOWNRIGHT, BTPDirection::UP, BTPDirection::DOWNLEFT, BTPDirection::LEFT, BTPDirection::UPLEFT, BTPDirection::DOWN, BTPDirection::UPRIGHT };
-	int index = static_cast<int>(round(angle_deg / 45)) % 8;
-	BTPDirection direction = directions[index];
-
-	return direction;
-}
-
-
-std::string Boss_Inuit::directionToString(BTPDirection direction) {
-	switch (direction) {
-	case BTPDirection::LEFT:
-		return "LEFT";
-	case BTPDirection::RIGHT:
-		return "RIGHT";
-	case BTPDirection::UP:
-		return "UP";
-	case BTPDirection::DOWN:
-		return "DOWN";
-	case BTPDirection::UPLEFT:
-		return "UPLEFT";
-	case BTPDirection::UPRIGHT:
-		return "UPRIGHT";
-	case BTPDirection::DOWNLEFT:
-		return "DOWNLEFT";
-	case BTPDirection::DOWNRIGHT:
-		return "DOWNRIGHT";
-	default:
-		return "UNKNOWN";
-	}
-}
 
 void Boss_Inuit::stateMachine(float dt, iPoint playerPos)
 {
@@ -395,9 +249,8 @@ void Boss_Inuit::stateMachine(float dt, iPoint playerPos)
 			}
 		}
 
-		if (TimerColdDown(3)) {
+		if (TimerColdDown(3) && inbmrAtack == false) {
 			inAtack = false;
-
 		}
 
 		/*if (atackCube != nullptr) {
@@ -442,6 +295,243 @@ void Boss_Inuit::stateMachine(float dt, iPoint playerPos)
 
 }
 
+void Boss_Inuit::DoNothing(float dt)
+{
+	//currentAnimation = &idleAnim;
+	////printf("Osiris idle");
+	//pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
+
+}
+
+void Boss_Inuit::Chase(float dt, iPoint playerPos)
+{
+	////printf("Osiris chasing");
+	//currentAnimation = &runAnim;
+	Bossfinding(dt, playerPos);
+
+}
+
+void Boss_Inuit::Attack(float dt)
+{
+	////printf("Osiris attacking");
+	//currentAnimation = &attackAnim;
+
+	attackTime++;
+	switch (attackTime)
+	{
+	case 1:
+		inAtack = true;
+		printf("\nataque1");
+		bmrBack = false;
+		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
+
+		break;
+	case 2:
+		inAtack = true;
+		printf("\nataque2");
+		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
+		break;
+	case 3:
+		inAtack = true;
+		printf("\nataque3");
+		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
+		break;
+
+	case 4:
+		inAtack = true;
+		printf("\nataque4");
+		playerDireccion = calculate_direction();
+		printplayerDireccion = directionToString(playerDireccion);
+		printf("\n PlayerDireccion %s", printplayerDireccion.c_str());
+		atackBMR = app->physics->CreateCircle(position.x, position.y, 120, DYNAMIC, true);
+		atackBMR->entity = this;
+		atackBMR->listener = this;
+		atackBMR->ctype = ColliderType::ATACKBMR;
+		checkAtackBMR = true;
+		inbmrAtack = true;
+		attackTime = 0;
+		break;
+
+	default:
+		break;
+	}
+
+	atackTimeColdDown.Start();
+
+}
+
+void Boss_Inuit::atackBoomerang(BTPDirection direccion)
+{
+	b2Vec2 force(0.0f, 0.0f);
+
+	switch (direccion) {
+	case BTPDirection::LEFT:
+		force.x = -bmrSpeed;
+		break;
+	case BTPDirection::RIGHT:
+		force.x = bmrSpeed;
+		break;
+	case BTPDirection::UP:
+		force.y = -bmrSpeed;
+		break;
+	case BTPDirection::DOWN:
+		force.y = bmrSpeed;
+		break;
+	case BTPDirection::UPLEFT:
+		force.y = -bmrSpeed;
+		force.x = -bmrSpeed;
+		break;
+	case BTPDirection::UPRIGHT:
+		force.y = -bmrSpeed;
+		force.x = bmrSpeed;
+		break;
+	case BTPDirection::DOWNLEFT:
+		force.y = bmrSpeed;
+		force.x = -bmrSpeed;
+		break;
+	case BTPDirection::DOWNRIGHT:
+		force.y = bmrSpeed;
+		force.x = bmrSpeed;
+		break;
+	default:
+		force.y = bmrSpeed;
+	}
+	if (atackBMR != nullptr) {
+		atackBMR->body->ApplyForceToCenter(force, true);
+	}
+}
+
+void Boss_Inuit::Die() {
+
+
+}
+
+void Boss_Inuit::Revive()
+{
+
+}
+
+
+
+bool Boss_Inuit::Bossfinding(float dt, iPoint playerPosP)
+{
+
+	iPoint playerPos = app->map->WorldToMap(playerPosP.x, playerPosP.y);
+	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
+
+	//printf("\nBossArea:%f", dist(bossArea, enemyPos));
+	//printf("\nEmemyPosicion:%d", enemyPos);
+
+	if (!inbmrAtack) {
+		if (playerInBossArea) {
+
+			app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
+			lastPath = *app->map->pathfinding->GetLastPath();
+			if (atackCube != nullptr) {
+				app->physics->GetWorld()->DestroyBody(atackCube->body);
+				atackCube = nullptr;
+			}
+			inAtack = false;
+		}
+		else {
+			app->map->pathfinding->CreatePath(enemyPos, originalPosition); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
+			lastPath = *app->map->pathfinding->GetLastPath();
+		}
+
+
+		b2Vec2 velocity = b2Vec2(0, 0);
+
+		if (lastPath.Count() > 1) { // Asegate de que haya al menos una posicion en el camino
+
+			// Toma la primera posicion del camino como el objetivo al que el enemigo debe dirigirse
+			iPoint targetPos = app->map->MapToWorld(lastPath.At(1)->x, lastPath.At(1)->y);
+
+			// Calcula la direccion hacia el objetivo
+			b2Vec2 direction(targetPos.x - position.x, targetPos.y - position.y);
+			direction.Normalize();
+
+			// Calcula la velocidad del movimiento
+			velocity = b2Vec2(direction.x * speed, direction.y * speed);
+
+			// Determina si el enemigo est?mirando hacia la izquierda o hacia la derecha
+			isFacingLeft = (direction.x >= 0);
+
+
+			isAttacking = false;
+			attackAnim.Reset();
+
+		}
+		pbodyFoot->body->SetLinearVelocity(velocity);
+	}
+
+	return true;
+}
+
+void Boss_Inuit::deleteCollision(PhysBody* phy)
+{
+	if (phy != nullptr) {
+		phy->body->SetLinearVelocity(b2Vec2(0, 0));
+		phy->body->GetWorld()->DestroyBody(phy->body);
+		phy = nullptr;
+		printf("delete");
+	}
+
+}
+
+float Boss_Inuit::GetHealth() const {
+	return health;
+}
+
+void Boss_Inuit::TakeDamage(float damage) {
+
+
+}
+
+
+BTPDirection  Boss_Inuit::calculate_direction() {
+	iPoint playerPos = app->entityManager->GetPlayer()->position;
+	playerPos = app->map->WorldToMap(playerPos.x, playerPos.y);
+	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
+
+	int dx = playerPos.x - enemyPos.x;
+	int dy = playerPos.y - enemyPos.y;
+
+	double angle_rad = atan2(dy, dx);
+
+	double angle_deg = angle_rad * 180 / M_PI;
+	if (angle_deg < 0) {
+		angle_deg += 360;
+	}
+	BTPDirection directions[] = { BTPDirection::RIGHT, BTPDirection::DOWNRIGHT, BTPDirection::DOWN, BTPDirection::DOWNLEFT, BTPDirection::LEFT, BTPDirection::UPLEFT, BTPDirection::UP, BTPDirection::UPRIGHT };
+	int index = static_cast<int>(round(angle_deg / 45)) % 8;
+	BTPDirection direction = directions[index];
+
+	return direction;
+}
+
+
+std::string Boss_Inuit::directionToString(BTPDirection direction) {
+	switch (direction) {
+	case BTPDirection::LEFT:
+		return "LEFT";
+	case BTPDirection::RIGHT:
+		return "RIGHT";
+	case BTPDirection::UP:
+		return "UP";
+	case BTPDirection::DOWN:
+		return "DOWN";
+	case BTPDirection::UPLEFT:
+		return "UPLEFT";
+	case BTPDirection::UPRIGHT:
+		return "UPRIGHT";
+	case BTPDirection::DOWNLEFT:
+		return "DOWNLEFT";
+	case BTPDirection::DOWNRIGHT:
+		return "DOWNRIGHT";
+	}
+}
+
+
 bool Boss_Inuit::TimerColdDown(float time)
 {
 	//printf("\nataqueTimeClodDown%: %f", ataqueTimeClodDown);
@@ -472,6 +562,21 @@ void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
+
+		if (physA->ctype == ColliderType::ATACKBMR) {
+			//checkAtackBMR = false;
+			//atackBMR->body->SetLinearVelocity(b2Vec2(0, 0));
+			bmrBack = true;
+		}
+
+		break;
+	case ColliderType::ENEMY_INUIT:
+		if (physA->ctype == ColliderType::ATACKBMR && bmrBack == true) {
+			printf("\n Enemyy");
+			atackTimeColdDown.Start();
+			checkAtackBMR = false;
+			inbmrAtack = false;
+		}
 		break;
 	case ColliderType::PLAYER:
 		if (physA->ctype == ColliderType::BOSSAREA) {
@@ -484,6 +589,7 @@ void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::PLAYER_ATTACK:
 		LOG("Collision Player_Attack");
 		health -= app->entityManager->GetPlayer()->attackDamage;
+		printf("\n BossHeal %f", app->entityManager->GetPlayer()->attackDamage);
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
