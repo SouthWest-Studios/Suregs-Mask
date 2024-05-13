@@ -264,8 +264,8 @@ void Enemy_Ols::Die() {
 	app->entityManager->DestroyEntity(this);
 	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 	app->tex->UnLoad(texture);
-	app->entityManager->GetPlayer()->playerXP += 30;
-	printf("Current XP %i \n", app->entityManager->GetPlayer()->playerXP);
+	app->entityManager->GetPlayer()->maskZeroXP += 30;
+	printf("Current XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 

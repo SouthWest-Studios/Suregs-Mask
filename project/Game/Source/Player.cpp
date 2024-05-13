@@ -583,7 +583,7 @@ bool Player::Start() {
 	player_Direction = Direction::UNKNOWN;
 
 
-	EquipPrimaryMask(Mask::MASK2);
+	EquipPrimaryMask(Mask::MASK0);
 	EquipSecondaryMask(Mask::NOMASK);
 
 	/*	------------ALEIX------------
@@ -699,13 +699,15 @@ bool Player::Update(float dt)
 		currentStats.movementSpeed = baseStats.movementSpeed * (1 + passiveStats[Mask::MASK3][Branches::Modifiers][maskLevels[Mask::MASK3][Branches::Modifiers]].velocityBoost);
 	}
 
-	if (playerXP >= XPtoLevelUp) {
-		playerXP -= XPtoLevelUp;
-		XPtoLevelUp += 20;
-		maskPoints++;
-		level++;
 
-		printf("Has subido a nivel %i y tu experiencia actual es %i \n", level, playerXP);
+	//Mask XP System
+	if (maskZeroXP >= XPtoLevelUpZero) {
+		maskZeroXP -= XPtoLevelUpZero;
+		maskZeroPoints++;
+		maskZeroLevel++;
+		XPtoLevelUpZero += 20;
+
+		printf("Has subido a nivel %i y tu experiencia actual es %i \n", maskZeroLevel, maskZeroXP);
 	}
 
 	EfectoPociones(dt);

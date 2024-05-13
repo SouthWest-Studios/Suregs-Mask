@@ -296,8 +296,8 @@ void Enemy_Khurt::Die() {
 		garra->position = iPoint(position.x, position.y);
 		garra->Start();
 	}
-	app->entityManager->GetPlayer()->playerXP += 20;
-	//printf("Current XP %i \n", app->entityManager->GetPlayer()->playerXP);
+	app->entityManager->GetPlayer()->maskZeroXP += 20;
+	//printf("Current XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
 
 
 }

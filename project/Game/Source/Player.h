@@ -181,11 +181,29 @@ public:
 
 	std::map<Mask, std::map<Branches, int>> maskLevels;
 
-	//Level
-	int playerXP;
-	int level;
-	int XPtoLevelUp = 20;
-	int maskPoints;
+	//MasksLevel
+	int maskZeroXP;
+	int maskOneXP;
+	int maskTwoXP;
+	int maskThreeXP;
+
+	int maskZeroLevel;
+	int maskOneLevel;
+	int maskTwoLevel;
+	int maskThreeLevel;
+
+	int maxMaskLevel = 8;
+
+	int XPtoLevelUpZero = 1000;
+	int XPtoLevelUpOne = 1000;
+	int XPtoLevelUpTwo = 1000;
+	int XPtoLevelUpThree = 1000;
+
+	int maskZeroPoints;
+	int maskOnePoints;
+	int maskTwoPoints;
+	int maskThreePoints;
+	
 
 private:
 	void CameraMovement(float dt);

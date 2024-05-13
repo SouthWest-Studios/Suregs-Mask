@@ -266,8 +266,8 @@ void Enemy_Muur::Die() {
 		cola->position = iPoint(position.x, position.y);
 		cola->Start();
 	}
-	app->entityManager->GetPlayer()->playerXP += 20;
-	//printf("Current XP %i \n", app->entityManager->GetPlayer()->playerXP);
+	app->entityManager->GetPlayer()->maskZeroXP += 20;
+	//printf("Current XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
 
 
 }

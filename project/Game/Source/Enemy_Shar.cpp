@@ -192,8 +192,8 @@ void Enemy_Shar::Die(float dt) {
 	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 	app->tex->UnLoad(texture);
 
-	app->entityManager->GetPlayer()->playerXP += 20;
-	printf("Current XP %i \n", app->entityManager->GetPlayer()->playerXP);
+	app->entityManager->GetPlayer()->maskZeroXP += 20;
+	printf("Current XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 
