@@ -40,6 +40,7 @@ enum class ColliderType {
 	RESOURCE,
 	NOTA,
 	COFRE,
+	ARBOL,
 	DIALOG_TRIGGER,
 	TP_ENTITY,
 	ENTRADA_MAZMORRA0,

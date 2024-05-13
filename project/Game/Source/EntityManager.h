@@ -10,6 +10,7 @@
 #include "TPEntity.h"
 #include "List.h"
 #include "MiniGameFishing.h"
+#include "Cofre.h"
 
 struct DrawableObject
 {
@@ -65,6 +66,9 @@ public:
 
 	std::vector<Entity*> GetEnemiesOsiris();
 	std::vector<Entity*> GetEnemiesOls();
+
+	Cofre* EntityManager::GetCofre();
+	
 	
 public:
 
@@ -78,6 +82,7 @@ private:
 	pugi::xml_node configNode;
 	Item_Garra* garra;
 	Player* actualPlayer;
+	Cofre* cofre;
 	MiniGameFishing* fishing = new MiniGameFishing;
 
 };

@@ -12,6 +12,7 @@
 #include "Physics.h"
 #include "Hud.h"
 #include "CommerceManager.h"
+#include "TreeManager.h"
 
 DialogTrigger::DialogTrigger() : Entity(EntityType::DIALOG_TRIGGER)
 {
@@ -70,7 +71,9 @@ bool DialogTrigger::Start() {
 	pbody->listener = this;
 	pbody->ctype = ColliderType::DIALOG_TRIGGER;
 
-
+	pbody2 = app->physics->CreateRectangleSensor(4281, 1760, 100, 100, bodyType::KINEMATIC);
+	pbody2->listener = this;
+	pbody2->ctype = ColliderType::ARBOL;
 
 
 	return true;
@@ -167,8 +170,16 @@ void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 		case ColliderType::PLAYER:
-			
-			if (!app->dialogManager->isPlaying && (app->input->GetButton(CONFIRM) == KEY_DOWN)) {
+			if (physA->ctype == ColliderType::ARBOL)
+			{
+				if (app->input->GetButton(CONFIRM) == KEY_DOWN)
+				{
+					app->treeManager->mostrar = true;
+					
+
+				}
+			}
+			else if (!app->dialogManager->isPlaying && (app->input->GetButton(CONFIRM) == KEY_DOWN)) {
 				PlayDialog();
 
 				printf("COLISSION TRIGGERDIALOG");

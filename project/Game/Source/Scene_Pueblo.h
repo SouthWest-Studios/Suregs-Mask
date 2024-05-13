@@ -57,6 +57,8 @@ private:
 
 public:
 	MiniGameFishing* fishing = new MiniGameFishing;
+
+	PhysBody* pbody;
 };
 
 #endif // __Scene_Pueblo_H__

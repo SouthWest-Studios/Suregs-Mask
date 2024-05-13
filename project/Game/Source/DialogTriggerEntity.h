@@ -59,7 +59,7 @@ private:
 	//Cuerpo de fisicas, para detectar cuando el jugador esta cerca
 	//y activar el dialogo en caso de que el jugador asi lo quiera
 	PhysBody* pbody;
-
+	PhysBody* pbody2;
 	//Lista de los dialogos que puede decir este trigger
 	List<Dialog*> dialogues;
 

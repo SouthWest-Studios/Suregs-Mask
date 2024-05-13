@@ -15,6 +15,8 @@
 #include "Physics.h"
 #include "Window.h"
 #include "ModuleFadeToBlack.h"
+#include "DebugConsole.h"
+#include "TreeManager.h"
 
 
 #include "Fishing.h"
@@ -512,7 +514,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	primaryMask = Mask::NOMASK;
 	secondaryMask = Mask::NOMASK;
 
-
+	
 }
 
 Player::~Player() {
@@ -1195,6 +1197,14 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 				}
 
 			}
+		}
+		break;
+	case ColliderType::ARBOL:
+		LOG("Collision ARBOL");
+		if (app->input->GetButton(CONFIRM) == KEY_DOWN)
+		{
+			app->treeManager->mostrar = true;
+			
 		}
 		break;
 	case ColliderType::UNKNOWN:

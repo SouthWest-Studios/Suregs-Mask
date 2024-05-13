@@ -386,6 +386,11 @@ std::vector<Entity*> EntityManager::GetEnemiesOls()
 	return enemiesOls;
 }
 
+Cofre* EntityManager::GetCofre()
+{
+	return cofre;
+}
+
 bool EntityManager::PreUpdate()
 {
 	//Ejemplo a�adir sprite en los Start():	app->render->objectsToDraw.push_back({ textura, posicion X, posicion Y, punto de anclaje en Y = (posY + num), ancho, largo});

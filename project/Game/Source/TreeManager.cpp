@@ -516,9 +516,9 @@ void TreeManager::UseTreeSelected(int id)
 					{
 						
 					case 0:
-					{
+					{ 
 						bool siguiente = false;
-						if (mask == 1)
+						if (mask == 1 /*&& app->entityManager->GetPlayer()->playerXP >*/ )
 						{
 							app->entityManager->GetPlayer()->maskLevels[Mask::MASK1][Branches::Rama1] += 1;
 							item->data->usable1 = false;
@@ -879,16 +879,12 @@ bool TreeManager::Update(float dt)
 
 	bool ret = true;
 
-	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
-		mostrar = !mostrar;
-
-	}
-
 	if (mostrar == true)
 	{
 		OnMovePointer();
-
-		if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
+		app->entityManager->active = false;
+		app->physics->active = false;
+		if (app->input->GetButton(CONFIRM) == KEY_DOWN) {
 			/*options = true;
 			selected = { PointerPosition.x, PointerPosition.y };
 			selectedId = PointerId;*/
@@ -896,15 +892,10 @@ bool TreeManager::Update(float dt)
 
 		}
 
-		if (app->input->GetButton(APP_EXIT) == KEY_DOWN && zoomIn == true) {
-			ListItem<Tree*>* item;
-			for (item = arboles.start; item != NULL; item = item->next)
-			{
-				item->data->zoom = false;
-
-			}
-			zoomIn = false;
-
+		if (app->input->GetButton(APP_EXIT) == KEY_DOWN) {
+			mostrar = false;
+			app->entityManager->active = true;
+			app->physics->active = true;
 		}
 
 		int num;

@@ -26,6 +26,8 @@ public:
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
+	void CreateArbol();
+
 	bool CleanUp();
 
 
@@ -36,6 +38,7 @@ public:
 	EntityType type;
 
 	PhysBody* pbody;
+	PhysBody* pbody2;
 	SDL_Texture* texture = NULL;
 	SDL_Texture* openTexture = NULL;
 	
