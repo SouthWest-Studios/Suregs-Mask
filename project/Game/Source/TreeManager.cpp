@@ -579,7 +579,7 @@ void TreeManager::UseTreeSelected(int id)
 					case 0:
 					{ 
 						bool siguiente = false;
-						if (mask == 1 /*&& app->entityManager->GetPlayer()->playerXP*/ )
+						if (mask == 1 /*&& app->entityManager->GetPlayer()->maskZeroXP*/ )
 						{
 							app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama1] += 1;
 							item->data->usable1 = false;
