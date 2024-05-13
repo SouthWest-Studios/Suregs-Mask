@@ -62,6 +62,8 @@ public:
 
 	float GetHealth() const;
 	void TakeDamage(float damage);
+	BTPDirection calculate_direction();
+	std::string directionToString(BTPDirection direction);
 	void stateMachine(float dt, iPoint playerPos);
 
 	bool TimerColdDown(float time);
@@ -135,6 +137,9 @@ private:
 	float ataqueTimeClodDown = 0;
 	bool inAtack = false;
 	bool firstAtack = true;
+
+	BTPDirection playerDireccion;
+	std::string printplayerDireccion;
 
 
 	const float reviveTime = 5.0f;

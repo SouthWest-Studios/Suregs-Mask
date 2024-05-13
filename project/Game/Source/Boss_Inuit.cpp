@@ -118,6 +118,8 @@ bool Boss_Inuit::Update(float dt)
 		atackCube = nullptr;
 	}
 
+
+
 	switch (fase)
 	{
 	case FASE::FASE_ONE:
@@ -220,15 +222,21 @@ void Boss_Inuit::Attack(float dt)
 	case 2:
 		inAtack = true;
 		printf("\nataque2");
-
-		//ataqueTimeClodDown = atackTimeColdDown.CountDown(1);
 		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
 		break;
 	case 3:
 		inAtack = true;
 		printf("\nataque3");
-		//ataqueTimeClodDown = atackTimeColdDown.CountDown(1);
 		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
+		break;
+
+	case 4:
+		inAtack = true;
+		printf("\nataque4");
+		playerDireccion = calculate_direction();
+		printplayerDireccion = directionToString(playerDireccion);
+		printf("\n PlayerDireccion %s", printplayerDireccion.c_str());
+
 		attackTime = 0;
 		break;
 
@@ -251,59 +259,10 @@ void Boss_Inuit::Revive()
 }
 
 
-// L07 DONE 6: Define OnCollision function for the player. 
-void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
-	switch (physB->ctype)
-	{
-	case ColliderType::PLATFORM:
-		LOG("Collision PLATFORM");
-		break;
-	case ColliderType::PLAYER:
-		if (physA->ctype == ColliderType::BOSSAREA) {
-			playerInBossArea = true;
-		}
-		LOG("Collision PLAYER");
-		//restar vida al player
-		break;
-	case ColliderType::PLAYER_ATTACK:
-		LOG("Collision Player_Attack");
-		break;
-	case ColliderType::UNKNOWN:
-		LOG("Collision UNKNOWN");
-		break;
-	default:
-		break;
-	}
-}
-
-void Boss_Inuit::OnEndCollision(PhysBody* physA, PhysBody* physB) {
-	switch (physB->ctype)
-	{
-	case ColliderType::PLATFORM:
-		LOG("Collision PLATFORM");
-		break;
-	case ColliderType::PLAYER:
-		if (physA->ctype == ColliderType::BOSSAREA) {
-			printf("Out");
-			playerInBossArea = false;
-			inAtack = false;
-		}
-		LOG("Collision PLAYER");
-		//restar vida al player
-		break;
-	case ColliderType::PLAYER_ATTACK:
-		LOG("Collision Player_Attack");
-		break;
-	case ColliderType::UNKNOWN:
-		LOG("Collision UNKNOWN");
-		break;
-	default:
-		break;
-	}
-}
 
 bool Boss_Inuit::Bossfinding(float dt, iPoint playerPosP)
 {
+
 	iPoint playerPos = app->map->WorldToMap(playerPosP.x, playerPosP.y);
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
 
@@ -363,6 +322,51 @@ void Boss_Inuit::TakeDamage(float damage) {
 }
 
 
+BTPDirection  Boss_Inuit::calculate_direction() {
+	iPoint playerPos = app->entityManager->GetPlayer()->position;
+	playerPos = app->map->WorldToMap(playerPos.x, playerPos.y);
+	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
+
+	int dx = playerPos.x - enemyPos.x;
+	int dy = playerPos.y - enemyPos.y;
+
+	double angle_rad = atan2(dy, dx);
+
+	// 将弧度转换为角度
+	double angle_deg = angle_rad * 180 / M_PI;
+	if (angle_deg < 0) {
+		angle_deg += 360; 
+	}
+	BTPDirection directions[] = { BTPDirection::RIGHT, BTPDirection::DOWNRIGHT, BTPDirection::UP, BTPDirection::DOWNLEFT, BTPDirection::LEFT, BTPDirection::UPLEFT, BTPDirection::DOWN, BTPDirection::UPRIGHT };
+	int index = static_cast<int>(round(angle_deg / 45)) % 8;
+	BTPDirection direction = directions[index];
+
+	return direction;
+}
+
+
+std::string Boss_Inuit::directionToString(BTPDirection direction) {
+	switch (direction) {
+	case BTPDirection::LEFT:
+		return "LEFT";
+	case BTPDirection::RIGHT:
+		return "RIGHT";
+	case BTPDirection::UP:
+		return "UP";
+	case BTPDirection::DOWN:
+		return "DOWN";
+	case BTPDirection::UPLEFT:
+		return "UPLEFT";
+	case BTPDirection::UPRIGHT:
+		return "UPRIGHT";
+	case BTPDirection::DOWNLEFT:
+		return "DOWNLEFT";
+	case BTPDirection::DOWNRIGHT:
+		return "DOWNRIGHT";
+	default:
+		return "UNKNOWN";
+	}
+}
 
 void Boss_Inuit::stateMachine(float dt, iPoint playerPos)
 {
@@ -461,4 +465,56 @@ void Boss_Inuit::ApplyPoison(int poisonDamage, float poisonDuration, float poiso
 	this->poisonTimer = 0.0f;
 	this->timeSinceLastTick = 0.0f;
 	this->poisoned = true;
+}
+
+void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
+	switch (physB->ctype)
+	{
+	case ColliderType::PLATFORM:
+		LOG("Collision PLATFORM");
+		break;
+	case ColliderType::PLAYER:
+		if (physA->ctype == ColliderType::BOSSAREA) {
+			//printf("\n entraBossArea");
+			playerInBossArea = true;
+		}
+		LOG("Collision PLAYER");
+		//restar vida al player
+		break;
+	case ColliderType::PLAYER_ATTACK:
+		LOG("Collision Player_Attack");
+		health -= app->entityManager->GetPlayer()->attackDamage;
+		break;
+	case ColliderType::UNKNOWN:
+		LOG("Collision UNKNOWN");
+		break;
+	default:
+		break;
+	}
+}
+
+void Boss_Inuit::OnEndCollision(PhysBody* physA, PhysBody* physB) {
+	switch (physB->ctype)
+	{
+	case ColliderType::PLATFORM:
+		LOG("Collision PLATFORM");
+		break;
+	case ColliderType::PLAYER:
+		if (physA->ctype == ColliderType::BOSSAREA) {
+			//printf("Out");
+			playerInBossArea = false;
+			inAtack = false;
+		}
+		LOG("Collision PLAYER");
+		//restar vida al player
+		break;
+	case ColliderType::PLAYER_ATTACK:
+		LOG("Collision Player_Attack");
+		break;
+	case ColliderType::UNKNOWN:
+		LOG("Collision UNKNOWN");
+		break;
+	default:
+		break;
+	}
 }

@@ -60,6 +60,18 @@ enum class Direction {
 	UNKNOWN
 };
 
+enum class BTPDirection {
+	LEFT,
+	RIGHT,
+	UP,
+	DOWN,
+	UPLEFT,
+	UPRIGHT,
+	DOWNLEFT,
+	DOWNRIGHT,
+	UNKNOWN
+};
+
 // Small class to return to other modules to track position and rotation of physics bodies
 class PhysBody
 {
@@ -108,7 +120,7 @@ public:
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
 
-	/*void EndContact(b2Contact* contact);*/ //da bug y no se usa activamente
+	void EndContact(b2Contact* contact);
 
 	//Destroy body
 	void DestroyBody(PhysBody* body);
