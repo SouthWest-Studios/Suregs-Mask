@@ -579,15 +579,15 @@ void TreeManager::UseTreeSelected(int id)
 					case 0:
 					{ 
 						bool siguiente = false;
-						if (mask == 1 /*&& app->entityManager->GetPlayer()->playerXP >*/ )
+						if (mask == 1 /*&& app->entityManager->GetPlayer()->playerXP*/ )
 						{
-							app->entityManager->GetPlayer()->maskLevels[Mask::MASK1][Branches::Rama1] += 1;
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama1] += 1;
 							item->data->usable1 = false;
 							siguiente = true;
 						}
 						else if (mask == 2)
 						{
-							app->entityManager->GetPlayer()->maskLevels[Mask::MASK2][Branches::Rama1] += 1;
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK1][Branches::Rama1] += 1;
 							item->data->usable2 = false;
 							siguiente = true;
 						}
@@ -646,13 +646,13 @@ void TreeManager::UseTreeSelected(int id)
 						bool siguiente = false;
 						if (mask == 1)
 						{
-							app->entityManager->GetPlayer()->maskLevels[Mask::MASK1][Branches::Rama2] += 1;
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama2] += 1;
 							item->data->usable1 = false;
 							siguiente = true;
 						}
 						else if (mask == 2)
 						{
-							app->entityManager->GetPlayer()->maskLevels[Mask::MASK2][Branches::Rama2] += 1;
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK1][Branches::Rama2] += 1;
 							item->data->usable2 = false;
 							siguiente = true;
 						}
@@ -711,13 +711,13 @@ void TreeManager::UseTreeSelected(int id)
 						bool siguiente = false;
 						if (mask == 1)
 						{
-							app->entityManager->GetPlayer()->maskLevels[Mask::MASK1][Branches::Rama3] += 1;
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama3] += 1;
 							item->data->usable1 = false;
 							siguiente = true;
 						}
 						else if (mask == 2)
 						{
-							app->entityManager->GetPlayer()->maskLevels[Mask::MASK2][Branches::Rama3] += 1;
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK1][Branches::Rama3] += 1;
 							item->data->usable2 = false;
 							siguiente = true;
 						}
@@ -776,13 +776,13 @@ void TreeManager::UseTreeSelected(int id)
 						bool siguiente = false;
 						if (mask == 1)
 						{
-							app->entityManager->GetPlayer()->maskLevels[Mask::MASK1][Branches::Rama4] += 1;
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama4] += 1;
 							item->data->usable1 = false;
 							siguiente = true;
 						}
 						else if (mask == 2)
 						{
-							app->entityManager->GetPlayer()->maskLevels[Mask::MASK2][Branches::Rama4] += 1;
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK1][Branches::Rama4] += 1;
 							item->data->usable2 = false;
 							siguiente = true;
 						}
@@ -870,7 +870,23 @@ void TreeManager::ReembolsarTreeSelected(int id)
 				{
 					if ((mask == 1 && item->data->usable1 == false && itum->data->usable1 == true) || (mask == 1 && item->data->usable1 == false && item->data->nivelMejora + 1 == 5))
 					{
-
+						if (item->data->nivelArbol == 0)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama1] -= 1;
+						}
+						if (item->data->nivelArbol == 1)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama2] -= 1;
+						}
+						if (item->data->nivelArbol == 2)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama3] -= 1;
+						}
+						if (item->data->nivelArbol == 3)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama4] -= 1;
+						}
+						
 						item->data->usable1 = true;
 						if (item->data->usable1 + 1 < 5)
 						{
@@ -881,7 +897,22 @@ void TreeManager::ReembolsarTreeSelected(int id)
 					}
 					else if ((mask == 2 && item->data->usable2 == false && itum->data->usable2 == true) || (mask == 2 && item->data->usable2 == false && item->data->nivelMejora + 1 == 5))
 					{
-
+						if (item->data->nivelArbol == 0)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK1][Branches::Rama1] -= 1;
+						}
+						if (item->data->nivelArbol == 1)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK1][Branches::Rama2] -= 1;
+						}
+						if (item->data->nivelArbol == 2)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK1][Branches::Rama3] -= 1;
+						}
+						if (item->data->nivelArbol == 3)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK1][Branches::Rama4] -= 1;
+						}
 						item->data->usable2 = true;
 						if (item->data->usable2 + 1 < 5)
 						{
@@ -892,7 +923,22 @@ void TreeManager::ReembolsarTreeSelected(int id)
 					}
 					else if ((mask == 3 && item->data->usable3 == false && itum->data->usable3 == true) || (mask == 3 && item->data->usable3 == false && item->data->nivelMejora + 1 == 5))
 					{
-
+						if (item->data->nivelArbol == 0)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK2][Branches::Rama1] -= 1;
+						}
+						if (item->data->nivelArbol == 1)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK2][Branches::Rama2] -= 1;
+						}
+						if (item->data->nivelArbol == 2)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK2][Branches::Rama3] -= 1;
+						}
+						if (item->data->nivelArbol == 3)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK2][Branches::Rama4] -= 1;
+						}
 						item->data->usable3 = true;
 						if (item->data->usable3 + 1 < 5)
 						{
@@ -903,7 +949,22 @@ void TreeManager::ReembolsarTreeSelected(int id)
 					}
 					else if ((mask == 4 && item->data->usable4 == false && itum->data->usable4 == true) || (mask == 4 && item->data->usable4 == false && item->data->nivelMejora + 1 == 5))
 					{
-
+						if (item->data->nivelArbol == 0)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK3][Branches::Rama1] -= 1;
+						}
+						if (item->data->nivelArbol == 1)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK3][Branches::Rama2] -= 1;
+						}
+						if (item->data->nivelArbol == 2)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK3][Branches::Rama3] -= 1;
+						}
+						if (item->data->nivelArbol == 3)
+						{
+							app->entityManager->GetPlayer()->maskLevels[Mask::MASK3][Branches::Rama4] -= 1;
+						}
 						item->data->usable4 = true;
 						if (item->data->usable4 + 1 < 5)
 						{
