@@ -168,14 +168,21 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		case 0:
 		{
 			entity->name = "mask 1";
-			entity->desc = "";
+			entity->desc = "a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a";
+			entity->desc1 = "b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b";
+			entity->desc2 = "c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c";
+			entity->desc3 = "d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d";
+
 
 			break;
 		}
 		case 1:
 		{
 			entity->name = "Dano 1";
-			entity->desc = "";
+			entity->desc = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
+			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
 			entity->usable1 = true;
 			entity->usable2 = true;
 			entity->usable3 = true;
@@ -185,21 +192,30 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		case 2:
 		{
 			entity->name = "Dano 2";
-			entity->desc = "";
+			entity->desc = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
+			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
 
 			break;
 		}
 		case 3:
 		{
 			entity->name = "Dano 3";
-			entity->desc = "";
+			entity->desc = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
+			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
 
 			break;
 		}
 		case 4:
 		{
 			entity->name = "Dano 4";
-			entity->desc = "";
+			entity->desc = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
+			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
 
 			break;
 		}
@@ -216,14 +232,20 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		case 0:
 		{
 			entity->name = "mask 2";
-			entity->desc = "";
+			entity->desc = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
+			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
 
 			break;
 		}
 		case 1:
 		{
 			entity->name = "CoolDown 1";
-			entity->desc = "";
+			entity->desc = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
+			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
 			entity->usable1 = true;
 			entity->usable2 = true;
 			entity->usable3 = true;
@@ -234,21 +256,30 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		case 2:
 		{
 			entity->name = "CoolDown 2";
-			entity->desc = "";
+			entity->desc = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
+			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
 
 			break;
 		}
 		case 3:
 		{
 			entity->name = "CoolDown 3";
-			entity->desc = "";
+			entity->desc = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
+			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
 
 			break;
 		}
 		case 4:
 		{
 			entity->name = "CoolDown 4";
-			entity->desc = "";
+			entity->desc = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
+			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
 
 			break;
 		}
@@ -264,7 +295,10 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		case 0:
 		{
 			entity->name = "mask3";
-			entity->desc = "";
+			entity->desc = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
+			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
 
 			break;
 		}
@@ -274,7 +308,10 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->name2 = "Alcance 1";
 			entity->name3 = "Distancia 1";
 			entity->name4 = "Duracion 1";
-			entity->desc = "";
+			entity->desc = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
+			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
 			entity->usable1 = true;
 			entity->usable2 = true;
 			entity->usable3 = true;
@@ -288,7 +325,10 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->name2 = "Alcance 2";
 			entity->name3 = "Distancia 2";
 			entity->name4 = "Duracion 2";
-			entity->desc = "";
+			entity->desc = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
+			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
 
 			break;
 		}
@@ -298,7 +338,10 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->name2 = "Alcance 3";
 			entity->name3 = "Distancia 3";
 			entity->name4 = "Duracion 3";
-			entity->desc = "";
+			entity->desc = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
+			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
 
 			break;
 		}
@@ -308,7 +351,10 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->name2 = "Alcance 4";
 			entity->name3 = "Distancia 4";
 			entity->name4 = "Duracion 4";
-			entity->desc = "";
+			entity->desc = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
+			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
 
 			break;
 		}
@@ -324,7 +370,10 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		case 0:
 		{
 			entity->name = "mask4";
-			entity->desc = "";
+			entity->desc = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
+			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
 
 			break;
 		}
@@ -333,7 +382,10 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->name = "Veneno 1";
 			entity->name2 = "Invisible 1";
 			entity->name3 = "Aumento 1";
-			entity->desc = "";
+			entity->desc = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
+			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
 			entity->usable1 = true;
 			entity->usable2 = true;
 			entity->usable3 = true;
@@ -346,7 +398,10 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->name = "Veneno 2";
 			entity->name2 = "Invisible 2";
 			entity->name3 = "Aumento 2";
-			entity->desc = "";
+			entity->desc = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
+			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
 
 			break;
 		}
@@ -355,7 +410,10 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->name = "Veneno 3";
 			entity->name2 = "Invisible 3";
 			entity->name3 = "Aumento 3";
-			entity->desc = "";
+			entity->desc = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
+			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
 
 			break;
 		}
@@ -364,7 +422,10 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->name = "Veneno 4";
 			entity->name2 = "Invisible 4";
 			entity->name3 = "Aumento 4";
-			entity->desc = "";
+			entity->desc = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
+			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
 
 			break;
 		}
@@ -474,10 +535,10 @@ void TreeManager::UseTreeSelected(int id)
 	{
 		item->data->active = false;
 	}*/
-
+	
 	for (item = arboles.start; item != NULL; item = item->next)
 	{
-		if (item->data->usable1 || item->data->usable2 || item->data->usable3 || item->data->usable4)
+		if (item->data->usable1 && mask ==1 || item->data->usable2 && mask == 2 || item->data->usable3 && mask == 3 || item->data->usable4 && mask == 4)
 		{
 			if (item->data->id == id) // Comprueba si el ID coincide
 			{
@@ -576,7 +637,7 @@ void TreeManager::UseTreeSelected(int id)
 
 
 							}
-							siguiente = true;
+							numMejoras += 1;
 						}
 						break;
 					}
@@ -641,7 +702,7 @@ void TreeManager::UseTreeSelected(int id)
 
 
 							}
-							siguiente = true;
+							numMejoras += 1;
 						}
 						break;
 					}
@@ -706,7 +767,7 @@ void TreeManager::UseTreeSelected(int id)
 
 
 							}
-							siguiente = true;
+							numMejoras += 1;
 						}
 						break;
 					}
@@ -771,7 +832,7 @@ void TreeManager::UseTreeSelected(int id)
 
 
 							}
-							siguiente = true;
+							numMejoras += 1;
 						}
 						break;
 					}
@@ -788,6 +849,80 @@ void TreeManager::UseTreeSelected(int id)
 
 	}
 
+	
+
+}
+
+void TreeManager::ReembolsarTreeSelected(int id)
+{
+	ListItem<Tree*>* item;
+
+	ListItem<Tree*>* itum;
+
+
+	for (item = arboles.start; item != NULL; item = item->next)
+	{
+		if (item->data->id == id)
+		{
+			for (itum = arboles.start; itum != NULL; itum = itum->next)
+			{
+				if ((itum->data->nivelArbol == item->data->nivelArbol && itum->data->nivelMejora == item->data->nivelMejora + 1) || item->data->nivelMejora + 1 == 5 && itum->data->type == TreeType::BUTTON)
+				{
+					if ((mask == 1 && item->data->usable1 == false && itum->data->usable1 == true) || (mask == 1 && item->data->usable1 == false && item->data->nivelMejora + 1 == 5))
+					{
+
+						item->data->usable1 = true;
+						if (item->data->usable1 + 1 < 5)
+						{
+							itum->data->usable1 = false;
+						}
+						numMejoras -= 1;
+						puntsRembolso += 1;
+					}
+					else if ((mask == 2 && item->data->usable2 == false && itum->data->usable2 == true) || (mask == 2 && item->data->usable2 == false && item->data->nivelMejora + 1 == 5))
+					{
+
+						item->data->usable2 = true;
+						if (item->data->usable2 + 1 < 5)
+						{
+							itum->data->usable2 = false;
+						}
+						numMejoras -= 1;
+						puntsRembolso += 1;
+					}
+					else if ((mask == 3 && item->data->usable3 == false && itum->data->usable3 == true) || (mask == 3 && item->data->usable3 == false && item->data->nivelMejora + 1 == 5))
+					{
+
+						item->data->usable3 = true;
+						if (item->data->usable3 + 1 < 5)
+						{
+							itum->data->usable3 = false;
+						}
+						numMejoras -= 1;
+						puntsRembolso += 1;
+					}
+					else if ((mask == 4 && item->data->usable4 == false && itum->data->usable4 == true) || (mask == 4 && item->data->usable4 == false && item->data->nivelMejora + 1 == 5))
+					{
+
+						item->data->usable4 = true;
+						if (item->data->usable4 + 1 < 5)
+						{
+							itum->data->usable4 = false;
+						}
+						numMejoras -= 1;
+						puntsRembolso += 1;
+					}
+				}
+
+
+			}
+		}
+		/*if (item->data->type == TreeType::MASK0)
+		{
+			item->data->usable1 = true;
+		}*/
+
+	}
 }
 
 void TreeManager::OnMovePointer()
@@ -891,13 +1026,23 @@ bool TreeManager::Update(float dt)
 			UseTreeSelected(PointerId);
 
 		}
+		if (app->input->GetButton(BACK) == KEY_DOWN)
+		{
+			ReembolsarTreeSelected(PointerId);
 
+		}
+		
 		if (app->input->GetButton(APP_EXIT) == KEY_DOWN) {
 			mostrar = false;
 			app->entityManager->active = true;
 			app->physics->active = true;
 		}
-
+		if (numMejoras > 8) {
+			numMejoras = 8; // Limitar a 8 si es mayor
+		}
+		if (puntsRembolso > 8) {
+			puntsRembolso = 8; // Limitar a 8 si es mayor
+		}
 		int num;
 
 		num = numberRows + 1;
@@ -1054,21 +1199,45 @@ bool TreeManager::PostUpdate()
 		ListItem<Tree*>* itum;
 		for (itum = arboles.start; itum != nullptr; itum = itum->next)
 		{
-			if (itum->data->zoom)
-			{
-
 
 
 				if (PointerId == itum->data->id)
 				{
-					app->render->DrawTexture(itum->data->closeUpTrees, 400, 100, SDL_FLIP_NONE, 0, 0);
+					if (mask == 1)
+					{
+
+						app->render->DrawTextBound(itum->data->desc.c_str(), 1000, 120, 100, { 0,0,0 });
+
+					}
+					else if (mask == 2)
+					{
+
+						app->render->DrawTextBound(itum->data->desc1.c_str(), 1000, 120, 100, { 0,0,0 });
+
+					}
+					else if (mask == 3)
+					{
+
+						app->render->DrawTextBound(itum->data->desc2.c_str(), 1000, 120, 100, { 0,0,0 });
+
+					}
+					else if (mask == 4)
+					{
+
+						app->render->DrawTextBound(itum->data->desc3.c_str(), 1000, 120, 100, { 0,0,0 });
+
+					}
 
 					
 					
 				}
-			}
+			
 		}
+		std::string texto =  std::to_string(numMejoras) + "/8 mejoras max";
+		app->render->DrawTextBound(texto.c_str(), 645, 400, 370, { 0,0,0 });
 
+		std::string texto1 = std::to_string(puntsRembolso) + "/8 Rembolso max";
+		app->render->DrawTextBound(texto1.c_str(), 645, 450, 370, { 0,0,0 });
 
 	}
 

@@ -41,6 +41,8 @@ public:
 
 	void UseTreeSelected(int id);
 
+	void ReembolsarTreeSelected(int id);
+
 	void OnMovePointer();
 
 	bool IsFull();
@@ -52,8 +54,10 @@ public:
 
 public:
 	int mask = 1;
-	List<Tree*> arboles;
-	
+	List<Tree*> arboles; 
+	unsigned int numMejoras = 0;
+	unsigned int puntsRembolso = 0;
+
 	iPoint PointerPosition = { 350, 130 };
 	int PointerId = 0;
 	iPoint selected = { -1000,-1000 };

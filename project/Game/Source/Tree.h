@@ -107,6 +107,9 @@ public:
 	bool stackable = false;
 	TreeType type;
 	std::string desc;
+	std::string desc1 = "";
+	std::string desc2 = "";
+	std::string desc3 = "";
 	std::string tipo;
 	bool zoom = false;
 	int nivelArbol;
