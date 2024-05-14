@@ -701,13 +701,45 @@ bool Player::Update(float dt)
 
 
 	//Mask XP System
-	if (maskZeroXP >= XPtoLevelUpZero) {
+
+	//MASK 0
+	if (maskZeroXP >= XPtoLevelUpZero && maskZeroLevel < maxMaskLevel) {
 		maskZeroXP -= XPtoLevelUpZero;
 		maskZeroPoints++;
 		maskZeroLevel++;
-		XPtoLevelUpZero += 20;
+		XPtoLevelUpZero += matrizLevelXP[maskZeroLevel];
 
-		printf("Has subido a nivel %i y tu experiencia actual es %i \n", maskZeroLevel, maskZeroXP);
+		printf("Has subido la mask 0 a nivel %i y su experiencia actual es %i \n", maskZeroLevel, maskZeroXP);
+	}
+
+	//MASK 1
+	if (maskOneXP >= XPtoLevelUpOne && maskOneLevel < maxMaskLevel) {
+		maskOneXP -= XPtoLevelUpOne;
+		maskOnePoints++;
+		maskOneLevel++;
+		XPtoLevelUpOne += matrizLevelXP[maskOneLevel];
+
+		printf("Has subido la mask 1 a nivel %i y su experiencia actual es %i \n", maskOneLevel, maskOneXP);
+	}
+
+	//MASK 2
+	if (maskTwoXP >= XPtoLevelUpTwo && maskTwoLevel < maxMaskLevel) {
+		maskTwoXP -= XPtoLevelUpTwo;
+		maskTwoPoints++;
+		maskTwoLevel++;
+		XPtoLevelUpTwo += matrizLevelXP[maskTwoLevel];
+
+		printf("Has subido la mask 2 a nivel %i y su experiencia actual es %i \n", maskTwoLevel, maskTwoXP);
+	}
+
+	//MASK 3
+	if (maskThreeXP >= XPtoLevelUpThree && maskThreeLevel < maxMaskLevel) {
+		maskThreeXP -= XPtoLevelUpThree;
+		maskThreePoints++;
+		maskThreeLevel++;
+		XPtoLevelUpThree += matrizLevelXP[maskThreeLevel];
+
+		printf("Has subido la mask 3 a nivel %i y su experiencia actual es %i \n", maskThreeLevel, maskThreeXP);
 	}
 
 	EfectoPociones(dt);

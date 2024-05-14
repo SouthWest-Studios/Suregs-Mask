@@ -264,8 +264,59 @@ void Enemy_Ols::Die() {
 	app->entityManager->DestroyEntity(this);
 	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 	app->tex->UnLoad(texture);
-	app->entityManager->GetPlayer()->maskZeroXP += 30;
-	printf("Current XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
+
+	//Mask 0
+	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
+	{
+		app->entityManager->GetPlayer()->maskZeroXP += 80;
+		//printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
+	}
+
+	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK0)
+	{
+		app->entityManager->GetPlayer()->maskZeroXP += 80;
+		//printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
+	}
+
+	//Mask 1
+	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK1)
+	{
+		app->entityManager->GetPlayer()->maskOneXP += 80;
+		//printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
+	}
+
+	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK1)
+	{
+		app->entityManager->GetPlayer()->maskOneXP += 80;
+		//printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
+	}
+
+	//Mask 2
+	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK2)
+	{
+		app->entityManager->GetPlayer()->maskTwoXP += 80;
+		//printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
+	}
+
+	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK2)
+	{
+		app->entityManager->GetPlayer()->maskTwoXP += 80;
+		//printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
+	}
+
+	//Mask 3
+	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK3)
+	{
+		app->entityManager->GetPlayer()->maskThreeXP += 80;
+		//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
+	}
+
+	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK3)
+	{
+		app->entityManager->GetPlayer()->maskThreeXP += 80;
+		//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
+	}
+
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 
