@@ -148,6 +148,12 @@ bool Boss_Inuit::Update(float dt)
 		shock_wave(position.x, position.y, 5, 520);
 	}
 
+	//if (waveTimerColdDown(2)) {
+	//	printf("\ndelete-3");
+	//	
+	//	shock_wave(position.x + distance, position.y, 5, 520);
+	//	distance += 200;
+	//}
 
 
 	switch (fase)
@@ -204,9 +210,15 @@ bool Boss_Inuit::PostUpdate() {
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
 
 
-	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT) {
+		
+		shock_wave(position.x - 200, position.y, 5, 320);
 		shock_wave(position.x, position.y, 5, 320);
 	}
+
+	//if (app->input->GetKey(SDL_SCANCODE_N) == KEY_REPEAT) {
+	//	shock_wave(position.x-200, position.y, 5, 320);
+	//}
 	return true;
 }
 
@@ -313,6 +325,8 @@ void Boss_Inuit::stateMachine(float dt, iPoint playerPos)
 void Boss_Inuit::shock_wave(int posX, int posY, float shockSpeed, float maxSize)
 {
 	printf("\ndelete-2");
+	
+
 	if (atackShockWave != nullptr) {
 		printf("\ndelete-1");
 		deleteCollision(atackShockWave);
@@ -330,10 +344,11 @@ void Boss_Inuit::shock_wave(int posX, int posY, float shockSpeed, float maxSize)
 
 	if (!waveIsMax) {
 		printf("\ndelete3");
-		atackShockWave = app->physics->CreateCircle(posX, posY, shockSize, DYNAMIC, true);
-		/*atackShockWave->entity = this;
-		atackShockWave->listener = this;
-		atackShockWave->ctype = ColliderType::UNKNOWN;*/
+		PhysBody*  NewatackShockWave = app->physics->CreateCircle(posX, posY, shockSize, DYNAMIC, true);
+		NewatackShockWave->entity = this;
+		NewatackShockWave->listener = this;
+		NewatackShockWave->ctype = ColliderType::UNKNOWN;
+		atackShockWave = NewatackShockWave;
 	}
 	else
 	{
@@ -346,7 +361,9 @@ void Boss_Inuit::shock_wave(int posX, int posY, float shockSpeed, float maxSize)
 		waveIsMax = false;
 	}
 
+	
 }
+
 
 
 
@@ -670,6 +687,7 @@ bool Boss_Inuit::waveTimerColdDown(float time)
 	if ((float)waveTimeClodDown <= 0) {
 		printf("\n delete -4");
 		waveFinishi = false;
+		//waveTime.Start();
 		return true;
 	}
 	else

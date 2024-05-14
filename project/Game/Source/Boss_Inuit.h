@@ -101,7 +101,7 @@ private:
 	PhysBody* areaSensor;
 	PhysBody* atackCube;
 	PhysBody* atackBMR;
-	PhysBody* atackShockWave;
+	PhysBody* atackShockWave = nullptr;
 
 	//animacion
 	Animation idleAnim;
@@ -151,6 +151,7 @@ private:
 	bool waveFinishi = true;
 	Timer waveTime;
 	float waveTimeClodDown = 0;
+	int distance = 0;
 
 
 	const float reviveTime = 5.0f;
