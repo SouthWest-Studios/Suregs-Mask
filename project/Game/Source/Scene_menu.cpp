@@ -54,6 +54,7 @@ bool Scene_Menu::Start()
 	credits_tp = config.child("credits").attribute("texturepath").as_string();
 	logo_tp = config.child("logo").attribute("texturepath").as_string();
 	savedGames_tp = config.child("savedGames").attribute("texturepath").as_string();
+	controls_tp = config.child("controls").attribute("texturepath").as_string();
 
 	menuMain = app->tex->Load(menuMain_tp);
 	menuMain2 = app->tex->Load(menuMain2_tp);
@@ -61,6 +62,7 @@ bool Scene_Menu::Start()
 	credits = app->tex->Load(credits_tp);
 	logo = app->tex->Load(logo_tp);
 	savedGames = app->tex->Load(savedGames_tp);
+	controls = app->tex->Load(controls_tp);
 
 	//AQU?CARGAR TODAS LAS TEXTURAS DEL MEN?(cuando las tengamos xd)
 	
@@ -76,8 +78,9 @@ bool Scene_Menu::Start()
 	///*SDL_Rect TitlePos2 = { 75,457,136,46 };
 	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "CONTINUAR", SDL_Rect{ 549,390,100,25 }, this));
 	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "AJUSTES", SDL_Rect{ 557, 420,80,25 }, this));
-	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "CRÉDITOS", SDL_Rect{ 554, 450,90,25 }, this));
-	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "SALIR", SDL_Rect{ 564, 480,60,25 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "CONTROLES", SDL_Rect{ 549, 450,100,25 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "CRÉDITOS", SDL_Rect{ 554, 480,90,25 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, "SALIR", SDL_Rect{ 564, 510,60,25 }, this));
 
 	/*fPoint ePos(500.0f, 500.0f);*/
 	/*eMenu = app->psystem->AddEmiter(ePos, EmitterType::EMITTER_TYPE_SPARK);*/
@@ -90,7 +93,7 @@ bool Scene_Menu::Start()
 	newVolumeFx = app->audio->volumeFx;
 
 	app->guiManager->minId = 1;
-	app->guiManager->maxId = 5;
+	app->guiManager->maxId = 6;
 	app->guiManager->pointerId = 1;
 	app->guiManager->columnSize = 0;
 
@@ -128,6 +131,7 @@ bool Scene_Menu::Update(float dt)
 	if (showSavedGames) {
 		ShowSavedGames();
 	}
+	if (showControls) { ShowControls(); };
 	/*if (showSettings && !_showSettings) {
 		SettingsInterface();
 	}*/
@@ -143,7 +147,7 @@ bool Scene_Menu::Update(float dt)
 		Fullscreen();
 	}
 
-	if (ajustes == false && showCredits == false && showSavedGames == false)
+	if (ajustes == false && showCredits == false && showSavedGames == false && showControls == false)
 	{
 
 		ListItem<GuiControl*>* control;
@@ -240,6 +244,14 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 
 	case 4:
+		showControls = true;
+		control->selected = false;
+		app->guiManager->minId = 17;
+		app->guiManager->maxId = 17;
+		app->guiManager->pointerId = 17;
+		break;
+
+	case 5:
 		showCredits = true;
 		control->selected = false;
 		app->guiManager->minId = 12;
@@ -249,8 +261,8 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		app->guiManager->DestroyGuiControl(Continuar);*/
 		break;
 
-	case 5:
-		app->closeApplication = true; 
+	case 6:
+		app->closeApplication = true;
 		break;
 
 	case 11:
@@ -258,7 +270,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		_showSettings = false;
 		/*DestroySettingsInterface();*/
 		app->guiManager->minId = 1;
-		app->guiManager->maxId = 5;
+		app->guiManager->maxId = 6;
 		app->guiManager->pointerId = 1;
 		break;
 
@@ -272,7 +284,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		}
 		app->guiManager->DestroyGuiControl(gcCloseCredits);
 		app->guiManager->minId = 1;
-		app->guiManager->maxId = 5;
+		app->guiManager->maxId = 6;
 		app->guiManager->pointerId = 1;
 		break;
 
@@ -324,7 +336,20 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		app->guiManager->DestroyGuiControl(partida2);
 		app->guiManager->DestroyGuiControl(partida3);
 		app->guiManager->minId = 1;
-		app->guiManager->maxId = 5;
+		app->guiManager->maxId = 6;
+		app->guiManager->pointerId = 1;
+
+	case 17:
+		showControls = false;
+		_showControls = false;
+		ListItem<GuiControl*>* controlC;
+		for (controlC = controlsScene.start; controlC != NULL; controlC = controlC->next)
+		{
+			controlC->data->state = GuiControlState::NORMAL;
+		}
+		app->guiManager->DestroyGuiControl(gcCloseControls);
+		app->guiManager->minId = 1;
+		app->guiManager->maxId = 6;
 		app->guiManager->pointerId = 1;
 
 	case 1011:
@@ -597,6 +622,20 @@ void Scene_Menu::ShowSavedGames()
 		_showSavedGames = true;
 	}
 	app->render->DrawTexture(savedGames, 0, 0);
+}
+
+void Scene_Menu::ShowControls()
+{
+	ListItem<GuiControl*>* control;
+	for (control = controlsScene.start; control != NULL; control = control->next)
+	{
+		control->data->state = GuiControlState::DISABLED;
+	}
+	if (showControls && !_showControls) {
+		gcCloseControls = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 17, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 200,	60,25 }, this);
+		_showControls = true;
+	}
+	app->render->DrawTexture(controls, 0, 0);
 }
 
 void Scene_Menu::DestroySettingsInterface()

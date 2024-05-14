@@ -45,6 +45,7 @@ public:
 	void SettingsInterface();
 	void ShowCredits();
 	void ShowSavedGames();
+	void ShowControls();
 	void DestroySettingsInterface();
 
 	void Fullscreen();
@@ -58,6 +59,7 @@ public:
 	SDL_Texture* credits = nullptr;
 	SDL_Texture* logo = nullptr;
 	SDL_Texture* savedGames = nullptr;
+	SDL_Texture* controls = nullptr;
 
 
 	const char* menuMain_tp = nullptr;
@@ -66,11 +68,13 @@ public:
 	const char* credits_tp = nullptr;
 	const char* logo_tp = nullptr;
 	const char* savedGames_tp = nullptr;
+	const char* controls_tp = nullptr;
 
 	List<GuiControl*> controlsScene;
 	List<GuiControl*> controlsSettings;
 	GuiControl* gcCloseCredits = nullptr;
 	GuiControl* gcCloseSavedGames = nullptr;
+	GuiControl* gcCloseControls = nullptr;
 	GuiCheckBox* fullscreen = nullptr;
 	GuiCheckBox* vsync = nullptr;
 
@@ -91,6 +95,8 @@ private:
 	GuiControlButton* partida2 = nullptr;
 	GuiControlButton* partida3 = nullptr;
 
+	
+
 	bool vsyncActive = false;
 
 	uint windowW, windowH;
@@ -104,6 +110,9 @@ private:
 
 	bool showSavedGames = false;
 	bool _showSavedGames = false;
+
+	bool showControls = false;
+	bool _showControls = false;
 
 	bool ajustes = false;
 
