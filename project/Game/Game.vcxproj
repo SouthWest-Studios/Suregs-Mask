@@ -112,6 +112,7 @@
     <ClCompile Include="Source\DialogTriggerEntity.cpp" />
     <ClCompile Include="Source\Enemy_Khurt.cpp" />
     <ClCompile Include="Source\Enemy_Muur.cpp" />
+    <ClCompile Include="Source\Enemy_Osiris_Variation.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\GuiCheckBox.cpp" />
     <ClCompile Include="Source\GuiControlButton.cpp" />
@@ -212,6 +213,7 @@
     <ClInclude Include="Source\DiamanteInv.h" />
     <ClInclude Include="Source\Enemy_Khurt.h" />
     <ClInclude Include="Source\Enemy_Muur.h" />
+    <ClInclude Include="Source\Enemy_Osiris_Variation.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\Fishing.h" />

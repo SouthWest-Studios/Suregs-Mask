@@ -145,6 +145,10 @@
 				maxHealth="250.0f" speed="2.5f" attackDamage="50.0f" attackDistance="2" viewDistance="20"
 				Tsprite="16" Pwidth="400" sprite_x="100" sprite_y="100"/>
 
+		<osiris_variation texturePath="Assets/Textures/Entidades/Osiris/spritesheet_osiris.png"
+				maxHealth="340.0f" speed="3.3f" attackDamage="200.0f" secondAttackDamage="230.0f" attackDistance="2" viewDistance="20"
+				Tsprite="66" Pwidth="2729" sprite_x="246" sprite_y="200"/>
+
 		<ols texturePath="Assets/Textures/Entidades/Ols/animations/spritesheets/Sprites.png" 
 				texturePathProjectile="Assets/Textures/Entidades/Ols/Projectile.png"
 				maxHealth="230.0f" speed="1.1f" attackDamage="50.0f" attackDistance="10" viewDistance="20"  projectileSpeed="7" projectileDamage="20.0f" minDistance="7"
@@ -362,9 +366,16 @@
 			<runAnim start="4" end="8" speed="0.1f" loop="true"/>
 			<attackAnim start="12" end="16" speed="0.1f" loop="true"/>
 			<dieAnim start="8" end="9" speed="0.01f" loop="true"/>
-			
-			
 		</osiris>
+
+		<osiris_variation>
+			<idleAnim start="12" end="16" speed="0.01f" loop="true"/>
+			<runAnim start="1" end="12" speed="0.1f" loop="true"/>
+			<attackAnim start="23" end="29" speed="0.15f" loop="true"/>
+			<takeDamageAnim start="34" end="38" speed="0.15f" loop="false"/>
+			<dieAnim start="45" end="53" speed="0.1f" loop="false"/>
+			<reviveAnim start="56" end="66" speed="0.1f" loop="false"/>
+		</osiris_variation>
 
 		<ols>
 			<idleAnim_ols start="0" end="2" speed="0.05f" loop="true"/>
