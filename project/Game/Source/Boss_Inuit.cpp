@@ -484,7 +484,9 @@ bool Boss_Inuit::Bossfinding(float dt, iPoint playerPosP)
 				app->physics->GetWorld()->DestroyBody(atackCube->body);
 				atackCube = nullptr;
 			}
-			inAtack = false;
+			if (inbmrAtack == false) {
+				inAtack = false;
+			}
 		}
 		else {
 			app->map->pathfinding->CreatePath(enemyPos, originalPosition); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
@@ -662,7 +664,9 @@ void Boss_Inuit::OnEndCollision(PhysBody* physA, PhysBody* physB) {
 		if (physA->ctype == ColliderType::BOSSAREA) {
 			//printf("Out");
 			playerInBossArea = false;
-			inAtack = false;
+			if (inbmrAtack == false) {
+				inAtack = false;
+			}
 		}
 		LOG("Collision PLAYER");
 		//restar vida al player
