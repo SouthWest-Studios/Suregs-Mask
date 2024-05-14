@@ -10,6 +10,7 @@
 #include "Pathfinding.h"
 #include "Player.h"
 #include "Physics.h"
+#include <unordered_map>
 
 struct SDL_Texture;
 
@@ -61,7 +62,8 @@ public:
 	BTPDirection calculate_direction();
 	std::string directionToString(BTPDirection direction);
 	void stateMachine(float dt, iPoint playerPos);
-	void shock_wave(int posX, int posY, float shockSpeed, float size);
+	void shock_wave(int posX, int posY, float shockSpeed, float size, int tag);
+	void ulti_Atack();
 	bool TimerColdDown(float time);
 	bool waveTimerColdDown(float time);
 	void OnCollision(PhysBody* physA, PhysBody* physB);
@@ -101,7 +103,9 @@ private:
 	PhysBody* areaSensor;
 	PhysBody* atackCube;
 	PhysBody* atackBMR;
-	PhysBody* atackShockWave = nullptr;
+	//PhysBody* atackShockWave = nullptr;
+	std::unordered_map<int, PhysBody*> shockWaves;
+
 
 	//animacion
 	Animation idleAnim;
