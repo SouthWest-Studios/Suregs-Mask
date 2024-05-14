@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Enemy_Ols.h"
 #include "Enemy_Osiris.h"
+#include "Enemy_Osiris_Variation.h"
 #include "Enemy_Shar.h"
 #include "Enemy_Muur.h"
 #include "Enemy_Boorok.h"
@@ -138,6 +139,9 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 		break;
 	case EntityType::ENEMY_OSIRIS:
 		entity = new Enemy_Osiris();
+		break;
+	case EntityType::ENEMY_OSIRIS_VARIATION:
+		entity = new Enemy_Osiris_Variation();
 		break;
 	case EntityType::ENEMY_OLS:
 		entity = new Enemy_Ols();

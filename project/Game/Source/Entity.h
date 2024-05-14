@@ -12,6 +12,7 @@ enum class EntityType
 	ITEM,
 
 	ENEMY_OSIRIS,
+	ENEMY_OSIRIS_VARIATION,
 	ENEMY_OLS,
 	ENEMY_SHAR,
 	ENEMY_MUUR,
@@ -233,6 +234,7 @@ public:
 	float health;
 	float maxHealth;
 	float attackDamage;
+	float secondAttackDamage;
 
 
 	bool playerInBossArea = false;

@@ -295,6 +295,9 @@
     <ClCompile Include="Source\Menu_Equipo.cpp">
       <Filter>Modules\Equipo</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Enemy_Osiris_Variation.cpp">
+      <Filter>Entities\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -656,6 +659,9 @@
     </ClInclude>
     <ClInclude Include="Source\Menu_Equipo.h">
       <Filter>Modules\Equipo</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy_Osiris_Variation.h">
+      <Filter>Entities\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
