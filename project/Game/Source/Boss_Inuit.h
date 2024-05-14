@@ -54,20 +54,18 @@ public:
 	void Revive();
 	bool Bossfinding(float dt, iPoint playerPos);
 	void deleteCollision(PhysBody* phy);
-	// L07 DONE 6: Define OnCollision function for the player. 
-	void OnCollision(PhysBody* physA, PhysBody* physB);
-	void OnEndCollision(PhysBody* physA, PhysBody* physB);
-
 	void SetPlayer(Player* player);
-
 	float GetHealth() const;
 	void TakeDamage(float damage);
 	void atackBoomerang(BTPDirection direccion);
 	BTPDirection calculate_direction();
 	std::string directionToString(BTPDirection direction);
 	void stateMachine(float dt, iPoint playerPos);
-
+	void shock_wave(int posX, int posY, float shockSpeed, float size);
 	bool TimerColdDown(float time);
+	bool waveTimerColdDown(float time);
+	void OnCollision(PhysBody* physA, PhysBody* physB);
+	void OnEndCollision(PhysBody* physA, PhysBody* physB);
 	//Veneno
 	void ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate);
 
@@ -103,6 +101,7 @@ private:
 	PhysBody* areaSensor;
 	PhysBody* atackCube;
 	PhysBody* atackBMR;
+	PhysBody* atackShockWave;
 
 	//animacion
 	Animation idleAnim;
@@ -144,6 +143,14 @@ private:
 
 	BTPDirection playerDireccion;
 	std::string printplayerDireccion;
+
+
+	//shockWave
+	float shockSize;
+	bool waveIsMax = false;
+	bool waveFinishi = true;
+	Timer waveTime;
+	float waveTimeClodDown = 0;
 
 
 	const float reviveTime = 5.0f;

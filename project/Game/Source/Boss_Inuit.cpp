@@ -81,7 +81,7 @@ bool Boss_Inuit::Start() {
 	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();
 	bmrSpeed = 800;
-
+	shockSize = 0;
 	//printf("Speed: %f", speed);
 	return true;
 }
@@ -120,6 +120,7 @@ bool Boss_Inuit::Update(float dt)
 
 
 
+
 	if (checkAtackBMR) {
 		if (bmrBack) {
 			bmrSpeed = -80;
@@ -142,6 +143,12 @@ bool Boss_Inuit::Update(float dt)
 		}
 	}
 
+	if (waveTimerColdDown(10) && !waveFinishi) {
+		printf("\ndelete-3");
+		shock_wave(position.x, position.y, 5, 520);
+	}
+
+
 
 	switch (fase)
 	{
@@ -152,6 +159,9 @@ bool Boss_Inuit::Update(float dt)
 	case FASE::FASE_TWO:
 		break;
 	}
+
+
+
 
 	currentAnimation->Update();
 	return true;
@@ -193,6 +203,10 @@ bool Boss_Inuit::PostUpdate() {
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
 
+
+	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
+		shock_wave(position.x, position.y, 5, 320);
+	}
 	return true;
 }
 
@@ -253,6 +267,7 @@ void Boss_Inuit::stateMachine(float dt, iPoint playerPos)
 			inAtack = false;
 		}
 
+
 		/*if (atackCube != nullptr) {
 			inAtack = false;
 			firstAtack = true;
@@ -295,6 +310,46 @@ void Boss_Inuit::stateMachine(float dt, iPoint playerPos)
 
 }
 
+void Boss_Inuit::shock_wave(int posX, int posY, float shockSpeed, float maxSize)
+{
+	printf("\ndelete-2");
+	if (atackShockWave != nullptr) {
+		printf("\ndelete-1");
+		deleteCollision(atackShockWave);
+	}
+
+	if (shockSize < maxSize) {
+		printf("\ndelete1");
+		shockSize += shockSpeed;
+	}
+	else
+	{
+		waveIsMax = true;
+		printf("\ndelete2");
+	}
+
+	if (!waveIsMax) {
+		printf("\ndelete3");
+		atackShockWave = app->physics->CreateCircle(posX, posY, shockSize, DYNAMIC, true);
+		/*atackShockWave->entity = this;
+		atackShockWave->listener = this;
+		atackShockWave->ctype = ColliderType::UNKNOWN;*/
+	}
+	else
+	{
+		printf("\ndelete4");
+		//deleteCollision(atackShockWave);
+		atackShockWave = nullptr;
+		waveFinishi = true;
+		shockSize = 0;
+		waveTime.Start();
+		waveIsMax = false;
+	}
+
+}
+
+
+
 void Boss_Inuit::DoNothing(float dt)
 {
 	//currentAnimation = &idleAnim;
@@ -324,7 +379,7 @@ void Boss_Inuit::Attack(float dt)
 		printf("\nataque1");
 		bmrBack = false;
 		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
-
+		shock_wave(position.x, position.y, 5, 520);
 		break;
 	case 2:
 		inAtack = true;
@@ -349,7 +404,9 @@ void Boss_Inuit::Attack(float dt)
 		atackBMR->ctype = ColliderType::ATACKBMR;
 		checkAtackBMR = true;
 		inbmrAtack = true;
+		shock_wave(position.x, position.y, 5, 520);
 		attackTime = 0;
+
 		break;
 
 	default:
@@ -524,13 +581,15 @@ bool Boss_Inuit::Bossfinding(float dt, iPoint playerPosP)
 
 void Boss_Inuit::deleteCollision(PhysBody* phy)
 {
+
 	if (phy != nullptr) {
 		phy->body->SetLinearVelocity(b2Vec2(0, 0));
-		phy->body->GetWorld()->DestroyBody(phy->body);
+		//phy->body->GetWorld()->DestroyBody(phy->body);
+		app->physics->GetWorld()->DestroyBody(phy->body);
 		phy = nullptr;
-		printf("delete");
+		//printf("delete");
 	}
-
+	printf("\ndelete0");
 }
 
 float Boss_Inuit::GetHealth() const {
@@ -602,6 +661,25 @@ bool Boss_Inuit::TimerColdDown(float time)
 
 
 }
+
+bool Boss_Inuit::waveTimerColdDown(float time)
+{
+
+	waveTimeClodDown = waveTime.CountDown(time);
+	printf("\n waveTimeClodDown%: %f", waveTimeClodDown);
+	if ((float)waveTimeClodDown <= 0) {
+		printf("\n delete -4");
+		waveFinishi = false;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+
+
+}
+
 
 void Boss_Inuit::ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate) {
 	this->poisonDamage = poisonDamage;

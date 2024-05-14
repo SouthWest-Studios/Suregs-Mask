@@ -30,8 +30,9 @@ float Timer::ReadMSec() const
 
 uint32 Timer::CountDown(int total) const
 {
-	if (total == 0) {
+	total = total - (SDL_GetTicks() - startTime) / 1000;
+	if (total <= 0) {
 		total = 0;
 	}
-	return total - (SDL_GetTicks() - startTime) / 1000;
+	return total;
 }
