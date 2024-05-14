@@ -53,7 +53,7 @@ public:
 	void Die();
 	void Revive();
 	bool Bossfinding(float dt, iPoint playerPos);
-
+	void deleteCollision(PhysBody* phy);
 	// L07 DONE 6: Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 	void OnEndCollision(PhysBody* physA, PhysBody* physB);
@@ -62,6 +62,7 @@ public:
 
 	float GetHealth() const;
 	void TakeDamage(float damage);
+	void atackBoomerang(BTPDirection direccion);
 	BTPDirection calculate_direction();
 	std::string directionToString(BTPDirection direction);
 	void stateMachine(float dt, iPoint playerPos);
@@ -101,6 +102,7 @@ private:
 	//physi body
 	PhysBody* areaSensor;
 	PhysBody* atackCube;
+	PhysBody* atackBMR;
 
 	//animacion
 	Animation idleAnim;
@@ -133,10 +135,12 @@ private:
 	FASE fase;
 
 	//ataque
-
 	float ataqueTimeClodDown = 0;
 	bool inAtack = false;
-	bool firstAtack = true;
+	bool checkAtackBMR = false;
+	float bmrSpeed;
+	bool bmrBack = false;
+	bool inbmrAtack = false;
 
 	BTPDirection playerDireccion;
 	std::string printplayerDireccion;
