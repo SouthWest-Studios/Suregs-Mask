@@ -1357,28 +1357,28 @@ bool TreeManager::PostUpdate()
 		if (mask == 1)
 		{
 
-			std::string texto = std::to_string(app->entityManager->GetPlayer()->maskZeroPoints) + "/8 mejoras max";
+			std::string texto = std::to_string(app->entityManager->GetPlayer()->maskZeroPoints) + "/8 Mask Points";
 			app->render->DrawTextBound(texto.c_str(), 945, 400, 370, { 0,0,0 });
 
 		}
 		else if (mask == 2)
 		{
 
-			std::string texto = std::to_string(app->entityManager->GetPlayer()->maskOnePoints) + "/8 mejoras max";
+			std::string texto = std::to_string(app->entityManager->GetPlayer()->maskOnePoints) + "/8 Mask Points";
 			app->render->DrawTextBound(texto.c_str(), 945, 400, 370, { 0,0,0 });
 
 		}
 		else if (mask == 3)
 		{
 
-			std::string texto = std::to_string(app->entityManager->GetPlayer()->maskTwoPoints) + "/8 mejoras max";
+			std::string texto = std::to_string(app->entityManager->GetPlayer()->maskTwoPoints) + "/8 Mask Points";
 			app->render->DrawTextBound(texto.c_str(), 945, 400, 370, { 0,0,0 });
 
 		}
 		else if (mask == 4)
 		{
 
-			std::string texto = std::to_string(app->entityManager->GetPlayer()->maskThreePoints) + "/8 mejoras max";
+			std::string texto = std::to_string(app->entityManager->GetPlayer()->maskThreePoints) + "/8 Mask Points";
 			app->render->DrawTextBound(texto.c_str(), 945, 400, 370, { 0,0,0 });
 
 		}
