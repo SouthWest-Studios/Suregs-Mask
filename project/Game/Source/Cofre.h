@@ -48,6 +48,8 @@ public:
 private:
 	bool abierto = false;
 	
+	int chest_fx;
+
 	const char* texturePath;
 	const char* openTexturePath;
 	uint texW, texH;

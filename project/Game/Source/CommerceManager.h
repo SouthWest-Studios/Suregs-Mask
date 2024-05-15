@@ -88,6 +88,11 @@ private:
 
 	char* backgroundDescriptionPathTexture;
 
+
+	char* backgroundTradeHerreriaPathTexture;
+	char* backgroundTradeHerreriaHoverPathTexture;
+	char* backgroundTradeHerreriaItemPathTexture;
+
 	std::vector<Commerce*> commerces;
 
 	pugi::xml_node commerceNode;

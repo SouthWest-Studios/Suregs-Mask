@@ -61,6 +61,10 @@ bool CommerceManager::Awake(pugi::xml_node config)
 
 	backgroundDescriptionPathTexture		= (char*)config.child("backgroundDescriptionPathTexture").attribute("texturePath").as_string();
 
+	backgroundTradeHerreriaPathTexture		= (char*)config.child("backgroundTradeHerreriaPathTexture").attribute("texturePath").as_string();
+	backgroundTradeHerreriaHoverPathTexture = (char*)config.child("backgroundTradeHerreriaHoverPathTexture").attribute("texturePath").as_string();
+	backgroundTradeHerreriaItemPathTexture	= (char*)config.child("backgroundTradeHerreriaItemPathTexture").attribute("texturePath").as_string();
+
 	
 	commerceNode = config.child("commerce");
 	
@@ -95,7 +99,7 @@ bool CommerceManager::Start() {
 		commerceNode = commerceNode.next_sibling();
 	}
 
-	//PlayCommerce(1);
+	//PlayCommerce(3);
 
 	return ret;
 }
@@ -113,6 +117,11 @@ Commerce* CommerceManager::CreateCommerce(CommerceType type, uint id, std::vecto
 	Commerce* commerce;
 	if (type == CommerceType::HERRERIA) {
 		commerce = new CommerceHerreria(id);
+
+		((CommerceHerreria*)commerce)->backgroundTradeHerreriaPathTexture = backgroundTradeHerreriaPathTexture;
+		((CommerceHerreria*)commerce)->backgroundTradeHerreriaHoverPathTexture = backgroundTradeHerreriaHoverPathTexture;
+		((CommerceHerreria*)commerce)->backgroundTradeHerreriaItemPathTexture = backgroundTradeHerreriaItemPathTexture;
+
 	}
 	else {
 		commerce = new Commerce(id);
