@@ -60,7 +60,7 @@ public:
 	void CheckPoison();
 	//VENENO ---------->
 
-
+	MapObject* GetCurrentRoom();
 
 public:
 

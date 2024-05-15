@@ -57,6 +57,8 @@ public:
 	void ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate);
 	void CheckPoison();
 	//VENENO ---------->
+	
+	MapObject* GetCurrentRoom();
 
 public:
 

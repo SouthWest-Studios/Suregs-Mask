@@ -579,6 +579,11 @@ void EntityManager::UpdateEnemyActivation() {
 			// Si no, desactívalo
 			else {
 				enemy->isActive = false;
+				enemy->pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
+				if(enemy->type == EntityType::ENEMY_OLS)
+				{
+					//limpiar colisión proyecrtiles
+				}
 				//printf("Enemy deactivated\n");
 			}
 		}

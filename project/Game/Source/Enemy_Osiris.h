@@ -60,6 +60,8 @@ public:
 	void CheckPoison();
 	//VENENO ---------->
 	
+	MapObject* GetCurrentRoom();
+
 public:
 
 	//L02: DONE 2: Declare player parameters

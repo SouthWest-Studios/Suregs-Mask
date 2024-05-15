@@ -85,6 +85,8 @@ bool Enemy_Boorok::Start() {
 	chargeAttackTimer.Start();
 	recoveryTimer.Start();
 
+	room = GetCurrentRoom();
+	
 	return true;
 }
 
@@ -427,7 +429,7 @@ void Enemy_Boorok::ApplyPoison(int poisonDamage, float poisonDuration, float poi
 void Enemy_Boorok::CheckPoison() {
 	float epsilon = 0.1f; //Para margen de error
 
-	// Aplicar el primer tick de da�o inmediatamente (si no, el primer tick no se aplica en el segundo 0.0)
+	// Aplicar el primer tick de da�o inmediatamente (si no, el primer tick no se aplica en el segundo 0.0)
 	if (firstTimePoisonRecibed) {
 		if (currentState != EntityState::DEAD) {
 			health -= poisonDamage;
@@ -497,4 +499,49 @@ void Enemy_Boorok::AreaAttack(iPoint playerPos) {
 		app->entityManager->GetPlayer()->TakeDamage(areaattackdamage);
 		printf("Area attack \n");
 	}
+}
+
+
+MapObject* Enemy_Boorok::GetCurrentRoom()
+{
+	//salas pequeñas
+	for (ListItem<MapObject*>* item = app->map->smallRoomsList.start; item != nullptr; item = item->next)
+	{
+		MapObject* room = item->data;
+
+		// el jugador está dentro de la sala
+		if (position.x >= room->x && position.x <= room->x + room->width &&
+			position.y >= room->y && position.y <= room->y + room->height)
+		{
+			return room;
+		}
+	}
+
+	//salas grandes
+	for (ListItem<MapObject*>* item = app->map->largeRoomsList.start; item != nullptr; item = item->next)
+	{
+		MapObject* room = item->data;
+
+		// el jugador está dentro de la sala
+		if (position.x >= room->x && position.x <= room->x + room->width &&
+			position.y >= room->y && position.y <= room->y + room->height)
+		{
+			return room;
+		}
+	}
+
+	//salas l
+	for (ListItem<MapObject*>* item = app->map->LRoomsList.start; item != nullptr; item = item->next)
+	{
+		MapObject* room = item->data;
+
+		// el jugador está dentro de la sala
+		if (position.x >= room->x && position.x <= room->x + room->width &&
+			position.y >= room->y && position.y <= room->y + room->height)
+		{
+			return room;
+		}
+	}
+
+	return nullptr;
 }
