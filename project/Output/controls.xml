@@ -20,4 +20,9 @@
 	<binding id="17" pKey="20" isAxis="true" axis="4"/>
 	<binding id="18" pKey="21"/>
 	<binding id="19" pKey="23" PBut="9"/>
+	<binding id="20" pKey="29" PBut="5"/>
+	<binding id="21" pKey="25" PBut="0"/>
+	<binding id="22" pKey="14" PBut="1"/>
+	<binding id="23" pKey="9" PBut="2"/>
+	<binding id="24" pKey="6" PBut="3"/>
 </controls>

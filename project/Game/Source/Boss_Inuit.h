@@ -68,6 +68,7 @@ public:
 	bool waveTimerColdDown(float time);
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 	void OnEndCollision(PhysBody* physA, PhysBody* physB);
+	bool GlobolTimerColdDown(float time);
 	//Veneno
 	void ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate);
 

@@ -711,13 +711,25 @@ bool Boss_Inuit::TimerColdDown(float time)
 	{
 		return false;
 	}
+}
 
-
+bool Boss_Inuit::GlobolTimerColdDown(float time)
+{
+	
+	Timer GTimeColdDown;
+	ataqueTimeClodDown = GTimeColdDown.CountDown(time);
+	printf("\nataqueTimeClodDown%: %f", ataqueTimeClodDown);
+	if ((float)ataqueTimeClodDown == 0) {
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 bool Boss_Inuit::waveTimerColdDown(float time)
 {
-
 	waveTimeClodDown = waveTime.CountDown(time);
 	//printf("\n waveTimeClodDown%: %f", waveTimeClodDown);
 	if ((float)waveTimeClodDown <= 0) {
@@ -730,8 +742,6 @@ bool Boss_Inuit::waveTimerColdDown(float time)
 	{
 		return false;
 	}
-
-
 }
 
 
