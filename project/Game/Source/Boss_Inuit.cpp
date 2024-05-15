@@ -203,16 +203,26 @@ bool Boss_Inuit::PostUpdate() {
 	//printf("\nPlayerPositionX: %d", position.x);
 	//printf("\nPlayerPositionY: %d", position.y);
 
+	//printf("\n inWave: %d", inWave);
 	if (app->input->GetKey(SDL_SCANCODE_N) == KEY_REPEAT) {
 		ultDef = true;
+		if (!inWave) {
+			printf("1");
 		waveTime.Start();
+		waveTimeStart = true;
+		}
 	}
-	if (ultDef) {
+	if (ultDef && !inWave && !waveTimeStart) {
+		printf("2");
+		waveTime.Start();
+		waveTimeStart = true;
+	}
+	if (ultDef && waveTimeStart) {
 		ulti_Atack();
 
 	}
 
-	if (waveTimerColdDown(10) && !ultDef) {
+	if (waveTimerColdDown(10) && !waveTimeStart) {
 		//printf("\ndelete-3");
 		shock_wave(originalWavePosition.x, originalWavePosition.y, 5, 520, 0);
 	}
@@ -327,14 +337,15 @@ void Boss_Inuit::shock_wave(int posX, int posY, float shockSpeed, float maxSize,
 		newShockWave->entity = this;
 		newShockWave->listener = this;
 		newShockWave->ctype = ColliderType::UNKNOWN;
-
 		shockWaves[tag] = newShockWave;
+		inWave = true;
 	}
 	else {
 		//waveFinishi = true;
-
+		inWave = false;
 		if (tag == 0) {
 			if (!ultDef) {
+				printf("3");
 				waveTime.Start();
 			}
 		}
@@ -383,6 +394,7 @@ void Boss_Inuit::ulti_Atack()
 		wave0Finishing = false;
 		wave1Finishing = false;
 		wave2Finishing = false;
+		waveTimeStart = false;
 		waveTime.Start();
 		ultDef = false;
 

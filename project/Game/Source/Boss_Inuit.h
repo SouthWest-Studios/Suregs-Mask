@@ -164,7 +164,8 @@ private:
 	bool wave1Finishing = false;
 	bool wave2Finishing = false;
 	bool ulti_fishing = false;
-	bool inUlti = false;
+	bool inWave = false;
+	bool waveTimeStart = false;
 
 
 	const float reviveTime = 5.0f;
