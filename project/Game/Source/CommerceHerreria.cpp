@@ -50,7 +50,7 @@ bool CommerceHerreria::SelectTrade(uint id, bool add)
 {
 	bool ret = true;
 
-	Trade* trade = trades.at(id);
+	Trade* trade = actualTrades.at(id);
 
 	if (add) {
 		//Comprovar que se pueda
@@ -77,6 +77,7 @@ bool CommerceHerreria::SelectTrade(uint id, bool add)
 		}
 
 		if(canBuy) trade->quantityTraded++;
+		if (trade->quantityTraded > 1) trade->quantityTraded = 1;
 		
 	}
 	else {
@@ -96,32 +97,19 @@ bool CommerceHerreria::ApplyTrades()
 	bool ret = true;
 
 
-	for (int i = 0; i < trades.size(); i++) {
+	for (int i = 0; i < actualTrades.size(); i++) {
 
-		Trade* trade = trades.at(i);
+		Trade* trade = actualTrades.at(i);
+		if (trade->quantityTraded >= 1)  trade->quantityTraded = 1;
 
 		//Agregar estos items al inventario
-		
-		for (int j = 0; j < trade->itemsOffered.size(); j++) {
-			Inventity inventity = *trade->itemsOffered.at(j);
-
-			if (trade->quantityTraded > 0) {
-				if (inventity.type == InventityType::MONEDA) {
-					app->inventoryManager->monedasObtenidas += trade->quantityOffered.at(j) * trade->quantityTraded;
-				}
-				else {
-					inventity.quantity = (trade->quantityOffered.at(j) * trade->quantityTraded);
-					/*app->inventoryManager->AddItem(&inventity);*/
-					for (int i = 0; i < inventity.quantity; i++)
-					{
-						app->inventoryManager->CreateItem(inventity.type, true);
-					}
-					
-				}
-			}
-
-			
+		if (trade->type == 0 && trade->quantityTraded >= 1){
+			app->entityManager->GetPlayer()->swordLevel++;
 		}
+		if (trade->type == 1 && trade->quantityTraded >= 1) {
+			app->entityManager->GetPlayer()->armorLevel++;
+		}
+		
 
 		//Eliminar estos items
 		for (int j = 0; j < trade->itemsRequested.size(); j++) {       
@@ -200,8 +188,8 @@ bool CommerceHerreria::CloseCommerce()
 	active = false;
 	
 
-	for (int i = 0; i<trades.size(); i++) {
-		trades.at(i)->quantityTraded = 0;
+	for (int i = 0; i< actualTrades.size(); i++) {
+		actualTrades.at(i)->quantityTraded = 0;
 	}
 
 	//Descargar todas las texturas;
@@ -239,9 +227,9 @@ int CommerceHerreria::GetInventoryTradesQuantity(InventityType type)
 {
 	int cantidad = 0;
 
-	for (int i = 0; i < trades.size(); i++) {
+	for (int i = 0; i < actualTrades.size(); i++) {
 
-		Trade* trade = trades.at(i);
+		Trade* trade = actualTrades.at(i);
 
 		for (int j = 0; j < trade->itemsRequested.size(); j++) {
 			Inventity* inventity = trade->itemsRequested.at(j);
@@ -259,9 +247,9 @@ int CommerceHerreria::GetTotalTradesSelected()
 {
 	int cantidad = 0;
 
-	for (int i = 0; i < trades.size(); i++) {
-		if (trades.at(i)->quantityTraded > 0) {
-			cantidad += trades.at(i)->quantityTraded;
+	for (int i = 0; i < actualTrades.size(); i++) {
+		if (actualTrades.at(i)->quantityTraded > 0) {
+			cantidad += actualTrades.at(i)->quantityTraded;
 		}
 	}
 
@@ -278,11 +266,34 @@ bool CommerceHerreria::Update(float dt)
 
 	bool ret = true;
 
+
+
+	//actualTrades
+	actualTrades.clear();
+	if (app->entityManager->GetPlayer() != nullptr) {
+		for (int i = 0; i < trades.size(); i++) {
+			if (trades.at(i)->type == 0 && trades.at(i)->level == app->entityManager->GetPlayer()->swordLevel + 1) {
+				actualTrades.push_back(trades.at(i));
+				continue;
+			}
+
+			if (trades.at(i)->type == 1 && trades.at(i)->level == app->entityManager->GetPlayer()->armorLevel + 1) {
+				actualTrades.push_back(trades.at(i));
+				break;
+			}
+
+		}
+	}
+	else {
+		actualTrades.push_back(trades.at(0));
+		actualTrades.push_back(trades.at(9));
+	}
+
 	
 
 	if (app->input->GetButton(DOWN) == KEY_DOWN) {
 		pointerIndexF++;
-		if (pointerIndexF >= trades.size() + 2) {
+		if (pointerIndexF >= actualTrades.size() + 2) {
 			pointerIndexF = 0;
 		}
 		app->audio->PlayFx(button_fx);
@@ -291,41 +302,25 @@ bool CommerceHerreria::Update(float dt)
 	if (app->input->GetButton(UP) == KEY_DOWN) {
 		pointerIndexF--;
 		if (pointerIndexF < 0) {
-			pointerIndexF = trades.size() + 1;
+			pointerIndexF = actualTrades.size() + 1;
 		}
 		app->audio->PlayFx(button_fx);
 	}
-
-	/*if (app->input->GetButton(RIGHT) == KEY_DOWN) {
-		pointerIndexC++;
-		if(pointerIndexC > 1) {
-			pointerIndexC = 0;
-		}
-		app->audio->PlayFx(button_fx);
-	}
-	if (app->input->GetButton(LEFT) == KEY_DOWN) {
-		pointerIndexC--;
-		if (pointerIndexC < 0) {
-			pointerIndexC = 1;
-		}
-		app->audio->PlayFx(button_fx);
-	}*/
-
 
 	if (app->input->GetButton(SELECT) == KEY_DOWN) {
 
-		if (pointerIndexF < trades.size()) {
+		if (pointerIndexF < actualTrades.size()) {
 			if (pointerIndexC == 0) SelectTrade(pointerIndexF);
 			if (pointerIndexC == 1) SelectAllTrade(pointerIndexF);
 			app->audio->PlayFx(select_fx);
 		}
 		else {
 			//Boton confirmar compra
-			if (pointerIndexF == trades.size()) {
+			if (pointerIndexF == actualTrades.size()) {
 				ApplyTrades();
 				app->audio->PlayFx(sell_item_fx);
 			}
-			else if (pointerIndexF == trades.size() + 1) {
+			else if (pointerIndexF == actualTrades.size() + 1) {
 				CloseCommerce();
 				app->audio->PlayFx(change_inventory_fx);
 			}
@@ -337,6 +332,10 @@ bool CommerceHerreria::Update(float dt)
 		if (pointerIndexC == 1) SelectAllTrade(pointerIndexF, false);
 		app->audio->PlayFx(select_fx);
 	}
+
+
+
+
 
 
 
@@ -355,7 +354,7 @@ bool CommerceHerreria::PostUpdate()
 	SDL_Rect viewport = { positionGeneral.x + positionList.x, positionGeneral.y + positionList.y, viewportWidth, viewportHeight };
 
 	//Trades
-	for (int i = 0; i < trades.size(); i++) {
+	for (int i = 0; i < actualTrades.size(); i++) {
 			int y = positionGeneral.y + positionList.y + (70 + tradeSpacing * i) - scrollY;
 		
 
@@ -363,7 +362,7 @@ bool CommerceHerreria::PostUpdate()
 			//Fondo
 			app->render->DrawTexture(backgroundTradeHerreriaTexture, positionGeneral.x + positionList.x, y, 1, SDL_FLIP_NONE, nullptr, 0, 0);
 
-			Trade* trade = trades.at(i);
+			Trade* trade = actualTrades.at(i);
 
 			//ItemsOfrecidos
 			for (int j = 0; j < trade->itemsOffered.size(); j++) {
@@ -372,23 +371,13 @@ bool CommerceHerreria::PostUpdate()
 				app->render->DrawTexture(backgroundTradeHerreriaItemTexture, positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j), y + positionInList.y + 7, 1, SDL_FLIP_NONE, nullptr, 0, 0);
 
 				//Primer item de oferta
-				app->render->DrawTexture(trade->itemsOffered.at(j)->icon, positionGeneral.x + positionList.x + positionInList.x - 10 + (itemSpacing * j), y + positionInList.y , 0.65f, SDL_FLIP_NONE, nullptr, 0, 0);
+				app->render->DrawTexture(trade->itemsOffered.at(j)->icon, positionGeneral.x + positionList.x + positionInList.x - 10 + (itemSpacing * j), y + positionInList.y , 1, SDL_FLIP_NONE, nullptr, 0, 0);
 
-				//Cantidad
-				app->render->DrawTextBound(std::to_string(trade->quantityOffered.at(j)).c_str(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j) + 60, y + positionInList.y, 20);
-			
-				//Cantidad a obtener:
-				std::string cantidadObtener = "(" + std::to_string((trade->quantityOffered.at(j) * trade->quantityTraded)) + ")";
-				app->render->DrawTextBound(cantidadObtener.c_str(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j) + 55, y + positionInList.y + 20, 20);
-
-			
 			}
 
 			//Si solo ofrece un item, poner el nombre de este al lado
 			if (trade->itemsOffered.size() == 1) {
-				
-				app->render->DrawTextBound(trade->itemsOffered.at(0)->name.GetString(), positionGeneral.x + positionList.x + positionInList.x + 100, y + positionInList.y + 0, 200);
-
+				app->render->DrawTextBound(trade->itemsOffered.at(0)->name.GetString(), positionGeneral.x + positionList.x + positionInList.x + 80, y + positionInList.y + 20, 200);
 			}
 
 
@@ -396,13 +385,13 @@ bool CommerceHerreria::PostUpdate()
 			for (int j = 0; j < trade->itemsRequested.size(); j++) {
 
 				//Items background
-				app->render->DrawTexture(backgroundTradeItemTexture, positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j) + itemsRequestedSpacing, y + positionInList.y, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+				app->render->DrawTexture(backgroundTradeItemTexture, positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j) + itemsRequestedSpacing, y + positionInList.y + 15, 1, SDL_FLIP_NONE, nullptr, 0, 0);
 
 				//Primer item de oferta
-				app->render->DrawTexture(trade->itemsRequested.at(j)->icon, positionGeneral.x + positionList.x + positionInList.x - 10 + (itemSpacing * j) + itemsRequestedSpacing, y + positionInList.y - 10, 0.65f, SDL_FLIP_NONE, nullptr, 0, 0);
+				app->render->DrawTexture(trade->itemsRequested.at(j)->icon, positionGeneral.x + positionList.x + positionInList.x - 10 + (itemSpacing * j) + itemsRequestedSpacing, y + positionInList.y + 5, 0.65f, SDL_FLIP_NONE, nullptr, 0, 0);
 				
 				//Cantidad
-				app->render->DrawTextBound(std::to_string(trade->quantityRequested.at(j)).c_str(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j)+ itemsRequestedSpacing + 50, y + positionInList.y, 20);
+				app->render->DrawTextBound(std::to_string(trade->quantityRequested.at(j)).c_str(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j)+ itemsRequestedSpacing + 50, y + positionInList.y + 15, 20);
 
 				//Cantidad inventario:
 				int calculoCantidad = 0;
@@ -418,7 +407,7 @@ bool CommerceHerreria::PostUpdate()
 				calculoCantidad = cantidadEnInventario - cantidadEnActivoTodosTrades;
 				
 				std::string cantidadObtener = "(" + std::to_string(calculoCantidad) + ")";
-				app->render->DrawTextBound(cantidadObtener.c_str(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j) + itemsRequestedSpacing + 55, y + positionInList.y + 20, 20);
+				app->render->DrawTextBound(cantidadObtener.c_str(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j) + itemsRequestedSpacing + 45, y + positionInList.y + 35, 20);
 
 			}
 
@@ -439,21 +428,21 @@ bool CommerceHerreria::PostUpdate()
 
 	app->render->DrawTextBound("Confirmar compra", positionGeneral.x + positionList.x + 320, positionGeneral.y + viewport.h + 100, 300);
 
-	if (pointerIndexF == trades.size()) {
+	if (pointerIndexF == actualTrades.size()) {
 		app->render->DrawTexture(backgroundButtonHoverTexture, positionGeneral.x + positionList.x + 280, positionGeneral.y + viewport.h + 74, 1, SDL_FLIP_NONE, nullptr, 0, 0);
 	}
 
 	//Boton cancelar compra
 	app->render->DrawTexture(backgroundButtonTexture, positionGeneral.x + positionList.x + 285, positionGeneral.y + viewport.h + 135, 1, SDL_FLIP_NONE, nullptr, 0, 0);
 	app->render->DrawTextBound("Cancelar compra", positionGeneral.x + positionList.x + 320, positionGeneral.y + viewport.h + 155, 300);
-	if (pointerIndexF == trades.size()+1) {
+	if (pointerIndexF == actualTrades.size()+1) {
 		app->render->DrawTexture(backgroundButtonHoverTexture, positionGeneral.x + positionList.x + 280, positionGeneral.y + viewport.h + 129, 1, SDL_FLIP_NONE, nullptr, 0, 0);
 	}
 
 	//Descripcion item seleccionado
 	app->render->DrawTexture(backgroundDescriptionTexture, positionGeneral.x + positionList.x - 200 , positionGeneral.y + viewport.h + 95, 1, SDL_FLIP_NONE, nullptr, 0, 0);
-	if (pointerIndexF < trades.size()) {
-		app->render->DrawTextBound(trades.at(pointerIndexF)->itemsOffered.at(0)->desc.c_str(), positionGeneral.x + positionList.x + 10 - 150, positionGeneral.y + viewport.h + 100, 400);
+	if (pointerIndexF < actualTrades.size()) {
+		app->render->DrawTextBound(actualTrades.at(pointerIndexF)->itemsOffered.at(0)->desc.c_str(), positionGeneral.x + positionList.x + 10 - 150, positionGeneral.y + viewport.h + 100, 400);
 	}
 
 	//Fondo Mondes

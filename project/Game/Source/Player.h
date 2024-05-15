@@ -274,8 +274,8 @@ public:
 	int attackDamagePerLevel[10];
 	int armorPerLevel[10];
 	
-	int swordLevel;
-	int armorLevel;
+	int swordLevel = 1;
+	int armorLevel = 1;
 	
 	//POCIONES
 	//Regen

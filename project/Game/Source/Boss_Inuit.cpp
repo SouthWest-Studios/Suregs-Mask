@@ -81,7 +81,7 @@ bool Boss_Inuit::Start() {
 	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();
 	bmrSpeed = 800;
-	shockSize = 0;
+	//shockSize = 0;
 	//printf("Speed: %f", speed);
 	return true;
 }
@@ -143,10 +143,8 @@ bool Boss_Inuit::Update(float dt)
 		}
 	}
 
-	if (waveTimerColdDown(10) && !waveFinishi) {
-		//printf("\ndelete-3");
-		shock_wave(position.x, position.y, 5, 520, 0);
-	}
+
+
 
 	//if (waveTimerColdDown(2)) {
 	//	printf("\ndelete-3");
@@ -209,6 +207,17 @@ bool Boss_Inuit::PostUpdate() {
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
 
+	if (saveOriginPos) {
+		originalWavePosition.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
+		originalWavePosition.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
+		saveOriginPos = false;
+
+	}
+	//printf("\noriginalPositionX: %d", originalWavePosition.x);
+	//printf("\noriginalPositionY: %d", originalWavePosition.y);
+	//printf("\nPlayerPositionX: %d", position.x);
+	//printf("\nPlayerPositionY: %d", position.y);
+
 
 	/*if (app->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT) {
 
@@ -217,8 +226,20 @@ bool Boss_Inuit::PostUpdate() {
 	}*/
 
 	if (app->input->GetKey(SDL_SCANCODE_N) == KEY_REPEAT) {
-		shock_wave(position.x, position.y, 5, 320, 1);
-		shock_wave(position.x - 200, position.y, 5, 320, 2);
+		ultDef = true;
+
+	}
+	if (ultDef) {
+		ulti_Atack();
+
+	}
+	/*printf("\noriginalPositionX: %d", originalWavePosition.x);
+	printf("\noriginalPositionY: %d", originalWavePosition.y);
+	printf("\nPlayerPositionX: %d", position.x);
+	printf("\nPlayerPositionY: %d", position.y);*/
+	if (waveTimerColdDown(10)) {
+		printf("\ndelete-3");
+		shock_wave(originalWavePosition.x, originalWavePosition.y, 5, 520, 0);
 	}
 	return true;
 }
@@ -323,53 +344,20 @@ void Boss_Inuit::stateMachine(float dt, iPoint playerPos)
 
 }
 
-//void Boss_Inuit::shock_wave(int posX, int posY, float shockSpeed, float maxSize)
-//{
-//	if (atackShockWave != nullptr) {
-//		deleteCollision(atackShockWave);
-//	}
-//	if (shockSize < maxSize) {
-//		shockSize += shockSpeed;
-//	}
-//	else
-//	{
-//		waveIsMax = true;
-//	}
-//
-//	if (!waveIsMax) {
-//		PhysBody*  NewatackShockWave = app->physics->CreateCircle(posX, posY, shockSize, DYNAMIC, true);
-//		NewatackShockWave->entity = this;
-//		NewatackShockWave->listener = this;
-//		NewatackShockWave->ctype = ColliderType::UNKNOWN;
-//		atackShockWave = NewatackShockWave;
-//	}
-//	else
-//	{
-//		//deleteCollision(atackShockWave);
-//		atackShockWave = nullptr;
-//		waveFinishi = true;
-//		shockSize = 0;
-//		waveTime.Start();
-//		waveIsMax = false;
-//	}
-//
-//}
 
 
 void Boss_Inuit::shock_wave(int posX, int posY, float shockSpeed, float maxSize, int tag)
 {
-	/*if (atackShockWave != nullptr) {
-		deleteCollision(atackShockWave);
-		atackShockWave = nullptr;
-	}*/
 
+	static std::unordered_map<int, float> shockSizes; // 用于存储每个标签对应的 shockSize
 
 	auto it = shockWaves.find(tag);
 	if (it != shockWaves.end()) {
 		deleteCollision(it->second);
 		shockWaves.erase(it);
-
 	}
+
+	float& shockSize = shockSizes[tag]; // 获取当前标签对应的 shockSize 引用
 
 	if (shockSize < maxSize) {
 		shockSize += shockSpeed;
@@ -385,7 +373,6 @@ void Boss_Inuit::shock_wave(int posX, int posY, float shockSpeed, float maxSize,
 		newShockWave->ctype = ColliderType::UNKNOWN;
 
 		shockWaves[tag] = newShockWave;
-
 	}
 	else {
 		waveFinishi = true;
@@ -398,6 +385,25 @@ void Boss_Inuit::shock_wave(int posX, int posY, float shockSpeed, float maxSize,
 
 void Boss_Inuit::ulti_Atack()
 {
+	//TimerColdDown(10);
+	//TimerColdDown(5);
+	shock_wave(originalWavePosition.x - 1000, originalWavePosition.y - 250, 3, 400, 1);
+	shock_wave(originalWavePosition.x - 1000, originalWavePosition.y + 250, 3, 400, 2);
+	shock_wave(originalWavePosition.x + 1000, originalWavePosition.y - 250, 3, 400, 3);
+	shock_wave(originalWavePosition.x + 1000, originalWavePosition.y + 250, 3, 400, 4);
+
+	if (TimerColdDown(10)) {
+		shock_wave(originalWavePosition.x - 500, originalWavePosition.y - 250, 3, 400, 5);
+		shock_wave(originalWavePosition.x - 500, originalWavePosition.y + 250, 3, 400, 6);
+		shock_wave(originalWavePosition.x + 500, originalWavePosition.y - 250, 3, 400, 7);
+		shock_wave(originalWavePosition.x + 500, originalWavePosition.y + 250, 3, 400, 8);
+	}
+
+	if (TimerColdDown(20)) {
+		shock_wave(originalWavePosition.x, originalWavePosition.y - 250, 3, 400, 9);
+		shock_wave(originalWavePosition.x, originalWavePosition.y + 250, 3, 400, 10);
+	}
+
 
 
 }
@@ -642,7 +648,7 @@ void Boss_Inuit::deleteCollision(PhysBody* phy)
 		phy = nullptr;
 		//printf("delete");
 	}
-	printf("\ndelete0");
+	//printf("\ndelete0");
 }
 
 float Boss_Inuit::GetHealth() const {
@@ -713,26 +719,12 @@ bool Boss_Inuit::TimerColdDown(float time)
 	}
 }
 
-bool Boss_Inuit::GlobolTimerColdDown(float time)
-{
-	
-	Timer GTimeColdDown;
-	ataqueTimeClodDown = GTimeColdDown.CountDown(time);
-	printf("\nataqueTimeClodDown%: %f", ataqueTimeClodDown);
-	if ((float)ataqueTimeClodDown == 0) {
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
 
 bool Boss_Inuit::waveTimerColdDown(float time)
 {
 	waveTimeClodDown = waveTime.CountDown(time);
-	//printf("\n waveTimeClodDown%: %f", waveTimeClodDown);
-	if ((float)waveTimeClodDown <= 0) {
+	printf("\n waveTimeClodDown%: %f", waveTimeClodDown);
+	if ((float)waveTimeClodDown == 0) {
 		//printf("\n delete -4");
 		waveFinishi = false;
 		//waveTime.Start();

@@ -14,6 +14,8 @@ struct Trade {
 	std::vector<int> quantityOffered;
 	std::vector<int> quantityRequested;
 	int quantityTraded;
+	uint type = 2;
+	uint level = 0;
 };
 
 class Commerce
@@ -170,6 +172,8 @@ private:
 	SDL_Texture* backgroundTradeHerreriaTexture = nullptr;
 	SDL_Texture* backgroundTradeHerreriaHoverTexture = nullptr;
 	SDL_Texture* backgroundTradeHerreriaItemTexture = nullptr;
+
+	std::vector<Trade*> actualTrades;
 
 
 };
