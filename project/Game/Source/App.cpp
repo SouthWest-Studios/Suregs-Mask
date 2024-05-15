@@ -554,15 +554,37 @@ bool App::LoadFromFile() {
 		// Iterates all modules and call the load of each with the part of the XML node that corresponds to the module
 		ListItem<Module*>* item;
 		item = modules.start;
-
-		while (item != NULL && ret == true)
-		{
-			if (item->data->active) {
-				ret = item->data->LoadState(saveFile.child("game_state").child(item->data->name.GetString()));
+		if(savedGame == 1){
+			LOG("Load number 1");
+			while (item != NULL && ret == true)
+			{
+				if (item->data->active) {
+					ret = item->data->LoadState(saveFile.child("game_state").child("save1").child(item->data->name.GetString()));
+				}
+				item = item->next;
 			}
-			item = item->next;
 		}
-
+		if (savedGame == 2) {
+			LOG("Load number 2");
+			while (item != NULL && ret == true)
+			{
+				if (item->data->active) {
+					ret = item->data->LoadState(saveFile.child("game_state").child("save2").child(item->data->name.GetString()));
+				}
+				item = item->next;
+			}
+		}
+		if (savedGame == 3) {
+			LOG("Load number 3");
+			while (item != NULL && ret == true)
+			{
+				if (item->data->active) {
+					ret = item->data->LoadState(saveFile.child("game_state").child("save3").child(item->data->name.GetString()));
+				}
+				item = item->next;
+			}
+		}
+		
 	}
 	else
 	{
@@ -588,14 +610,38 @@ bool App::SaveFromFile() {
 	// Iterates all modules and call the save of each with the part of the XML node that corresponds to the module
 	ListItem<Module*>* item;
 	item = modules.start;
-
-	while (item != NULL && ret == true)
-	{
-		if (item->data->active) {
-			pugi::xml_node module = gameState.append_child(item->data->name.GetString());
-			ret = item->data->SaveState(module);
+	if (savedGame == 1) {
+		LOG("Save number 1");
+		while (item != NULL && ret == true)
+		{
+			if (item->data->active) {
+				pugi::xml_node module = gameState.child("save1").append_child(item->data->name.GetString());
+				ret = item->data->SaveState(module);
+			}
+			item = item->next;
 		}
-		item = item->next;
+	}
+	if (savedGame == 2) {
+		LOG("Save number 2");
+		while (item != NULL && ret == true)
+		{
+			if (item->data->active) {
+				pugi::xml_node module = gameState.child("save2").append_child(item->data->name.GetString());
+				ret = item->data->SaveState(module);
+			}
+			item = item->next;
+		}
+	}
+	if (savedGame == 3) {
+		LOG("Save number 3");
+		while (item != NULL && ret == true)
+		{
+			if (item->data->active) {
+				pugi::xml_node module = gameState.child("save3").append_child(item->data->name.GetString());
+				ret = item->data->SaveState(module);
+			}
+			item = item->next;
+		}
 	}
 
 	ret = saveFile.save_file("save_game.xml");
