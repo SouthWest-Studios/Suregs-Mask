@@ -112,15 +112,12 @@ bool Boss_Inuit::Update(float dt)
 	}
 	stateMachine(dt, playerPos);
 
-
+	//Si jugador fuera de area, eliminar cubo de ataque
 	if (atackCube != nullptr && playerInBossArea == false) {
 		app->physics->GetWorld()->DestroyBody(atackCube->body);
 		atackCube = nullptr;
 	}
-
-
-
-
+	//BMR ATAQUE
 	if (checkAtackBMR) {
 		if (bmrBack) {
 			bmrSpeed = -80;
@@ -145,15 +142,6 @@ bool Boss_Inuit::Update(float dt)
 
 
 
-
-	//if (waveTimerColdDown(2)) {
-	//	printf("\ndelete-3");
-	//	
-	//	shock_wave(position.x + distance, position.y, 5, 520);
-	//	distance += 200;
-	//}
-
-
 	switch (fase)
 	{
 	case FASE::FASE_ONE:
@@ -163,9 +151,6 @@ bool Boss_Inuit::Update(float dt)
 	case FASE::FASE_TWO:
 		break;
 	}
-
-
-
 
 	currentAnimation->Update();
 	return true;
@@ -218,13 +203,6 @@ bool Boss_Inuit::PostUpdate() {
 	//printf("\nPlayerPositionX: %d", position.x);
 	//printf("\nPlayerPositionY: %d", position.y);
 
-
-	/*if (app->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT) {
-
-		shock_wave(position.x - 200, position.y, 5, 320);
-		shock_wave(position.x, position.y, 5, 320);
-	}*/
-
 	if (app->input->GetKey(SDL_SCANCODE_N) == KEY_REPEAT) {
 		ultDef = true;
 		waveTime.Start();
@@ -233,12 +211,9 @@ bool Boss_Inuit::PostUpdate() {
 		ulti_Atack();
 
 	}
-	/*printf("\noriginalPositionX: %d", originalWavePosition.x);
-	printf("\noriginalPositionY: %d", originalWavePosition.y);
-	printf("\nPlayerPositionX: %d", position.x);
-	printf("\nPlayerPositionY: %d", position.y);*/
-	if (waveTimerColdDown(10) && !ultDef) {
-		printf("\ndelete-3");
+
+	if (waveTimerColdDown(10)) {
+		//printf("\ndelete-3");
 		shock_wave(originalWavePosition.x, originalWavePosition.y, 5, 520, 0);
 	}
 	return true;
@@ -302,25 +277,6 @@ void Boss_Inuit::stateMachine(float dt, iPoint playerPos)
 		}
 
 
-		/*if (atackCube != nullptr) {
-			inAtack = false;
-			firstAtack = true;
-			app->physics->GetWorld()->DestroyBody(atackCube->body);
-			atackCube = nullptr;
-		}*/
-
-
-		//if (inAtack) {
-		//	/*ataqueTimeClodDown = atackTimeColdDown.CountDown(60);*/
-		//	printf("\nataqueTimeClodDown%: %f", ataqueTimeClodDown);
-		//}
-		//else
-		//{
-		//	Attack(dt);
-		//}
-
-
-
 		break;
 	case EntityState_Boss_Inuit::ATTACKING_DISTANCE:
 		break;
@@ -376,9 +332,11 @@ void Boss_Inuit::shock_wave(int posX, int posY, float shockSpeed, float maxSize,
 	}
 	else {
 		//waveFinishi = true;
-	
+
 		if (tag == 0) {
-			waveTime.Start();
+			if (!ultDef) {
+				waveTime.Start();
+			}
 		}
 
 		if (tag == 1 || tag == 2 || tag == 3 || tag == 4) {
@@ -745,7 +703,7 @@ bool Boss_Inuit::TimerColdDown(float time)
 bool Boss_Inuit::waveTimerColdDown(float time)
 {
 	waveTimeClodDown = waveTime.CountDown(time);
-	printf("\n waveTimeClodDown%: %f", waveTimeClodDown);
+	//printf("\n waveTimeClodDown%: %f", waveTimeClodDown);
 	if ((float)waveTimeClodDown == 0) {
 
 		return true;
