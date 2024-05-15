@@ -171,7 +171,7 @@ public:
 	bool closeApplication = false;
 	bool fullscreen = false;
 
-	int savedGame = 0;
+	int savedGame = 1;
 
 	float dt;
 
