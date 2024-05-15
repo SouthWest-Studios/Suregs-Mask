@@ -233,7 +233,6 @@ void Enemy_Osiris_Variation::Die() {
 
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	currentAnimation = &dieAnim;
-	app->audio->PlayFx(osiris_death_fx);
 	
 	if (!hasRevived)
 	{
@@ -242,6 +241,8 @@ void Enemy_Osiris_Variation::Die() {
 	}
 	else
 	{
+		app->audio->PlayFx(osiris_death_fx);
+
 		app->entityManager->DestroyEntity(this);
 		app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 		app->physics->GetWorld()->DestroyBody(pbodySensor->body);

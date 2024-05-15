@@ -73,7 +73,9 @@
       <player_death_fx path="Assets/Audio/Fx/Player/player_death_fx.wav"/>
 
       <!--fishing-->
-      <fishing_fx path=""/>
+      <fishingrod_fx path="Assets/Audio/Fx/Fishing/fishingrod_fx.wav"/>
+      <fishingrod_fx path="Assets/Audio/Fx/Fishing/fishingrod_returning_fx.wav"/>
+      <water_fx path="Assets/Audio/Fx/Fishing/water_fx.wav"/>
 
       <!--enemies-->
       <ols_attack_fx path=""/>
