@@ -35,6 +35,7 @@
 #include "Enemy_Ols.h"
 #include "Enemy_Muur.h"
 #include "Enemy_Boorok.h"
+#include "Enemy_Osiris_Variation.h"
 #include "TPEntity.h"
 #include "Window.h"
 #include "Boss_Inuit.h"
@@ -1117,6 +1118,17 @@ bool Map::LoadEntities(std::string layerName)
 						osiris->config = configNode.child("entities_data").child("osiris");
 						osiris->position = iPoint(pos.x + 16, pos.y + 16);
 						osiris->Start();
+
+					}
+
+					//OSIRIS VARIATION
+					if (gid == tileset->firstgid + 26) {
+
+
+						Enemy_Osiris_Variation* osiris_variation = (Enemy_Osiris_Variation*)app->entityManager->CreateEntity(EntityType::ENEMY_OSIRIS_VARIATION);
+						osiris_variation->config = configNode.child("entities_data").child("osiris_variation");
+						osiris_variation->position = iPoint(pos.x + 16, pos.y + 16);
+						osiris_variation->Start();
 
 					}
 
