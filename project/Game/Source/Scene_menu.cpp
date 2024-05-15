@@ -289,7 +289,8 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 
 	case 13:
-		//MIENTRAS ESTO PETE, QUE POR LO MENOS PAREZCA QUE CARGAS UNA PARTIDA XD
+		app->savedGame = 1;
+		//app->LoadRequest();
 		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
 		app->menu->active = true;
 		app->guiManager->pointerId = 100;
@@ -297,12 +298,11 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		app->guiManager->DestroyGuiControl(partida1);
 		app->guiManager->DestroyGuiControl(partida2);
 		app->guiManager->DestroyGuiControl(partida3);
-		
-		/*app->LoadRequest();*/
 		break;
 
 	case 14:
-		/*app->LoadRequest();*/
+		app->savedGame = 2;
+		//app->LoadRequest();
 		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
 		app->menu->active = true;
 		app->guiManager->pointerId = 100;
@@ -313,7 +313,8 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 
 	case 15:
-		/*app->LoadRequest();*/
+		app->savedGame = 3;
+		//app->LoadRequest();
 		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
 		app->menu->active = true;
 		app->guiManager->pointerId = 100;
