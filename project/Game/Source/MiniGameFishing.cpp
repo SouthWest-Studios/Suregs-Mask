@@ -218,7 +218,7 @@ void MiniGameFishing::playNormalFishing()
 
 
 
-		if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN) {
+		if (app->input->GetButton(FISHINGPLAY) == KEY_DOWN) {
 			player_click_count += 1;
 		}//end_if, player count
 
@@ -258,7 +258,7 @@ void MiniGameFishing::playLureFishing()
 		gamePlayTimeLimit.Start();
 	}//end_if, fish caught
 
-	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN && playerGoplay == true) {
+	if (app->input->GetButton(FISHINGPLAY) == KEY_DOWN && playerGoplay == true) {
 		player_click_count += 1;
 	}//end_if, press "K" key
 
@@ -278,7 +278,7 @@ void MiniGameFishing::playLureFishing()
 	}//end_if, player no play, end fishing
 
 	if (playerGoplay == false) {
-		if (app->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN) {
+		if (app->input->GetButton(RETURNLINE) == KEY_DOWN) {
 			printf("\nsorteo");
 			startFinishingLine = true;
 			lureRandomTime = true;
@@ -648,7 +648,7 @@ bool MiniGameFishing::miniGameStart(float dt)
 {
 
 	if (fishing.playerGetRod && !fishing.isFishing) {
-		if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
+		if (app->input->GetButton(SAVEROD) == KEY_DOWN) {
 			fishing.rodReady = !fishing.rodReady;
 		}
 	}//end_if, equip or stow the fishing rod
@@ -659,7 +659,7 @@ bool MiniGameFishing::miniGameLoop(float dt)
 {
 	//Change Rod
 	if (!fishing.isFishing && fishing.rodReady) {
-		if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN) {
+		if (app->input->GetButton(CHANGEROD) == KEY_DOWN) {
 			if (fishing.fishingtype == FISHINGTYPE::LUREFISHING) {
 				printf("\nRod:FISHING");
 				fishing.fishingtype = FISHINGTYPE::FISHING;
@@ -676,7 +676,7 @@ bool MiniGameFishing::miniGameLoop(float dt)
 
 
 	//Cast the rod and StartFishing
-	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && fishing.rodReady) {
+	if (app->input->GetButton(STARTFISHING) == KEY_DOWN && fishing.rodReady) {
 		fishing.isFishing = !fishing.isFishing;//Start fishing o Stop fishing
 		
 		/*if (fishing.isFishing == true && fishing.startFishing == false) {
