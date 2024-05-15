@@ -35,6 +35,7 @@
 #include "Item_Pocion_Vida_3.h"
 #include "Item_Pocion_Vida_Max.h"
 #include "Item_Saliva.h"
+#include "Item_Zafiro.h"
 
 Scene_testing::Scene_testing(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -246,6 +247,11 @@ bool Scene_testing::Start()
 	saliva->config = configNode.child("entities_data").child("item_saliva");
 	saliva->position = iPoint(1823, 2455);
 	saliva->Start();
+
+	Item_Zafiro* zafiro = (Item_Zafiro*)app->entityManager->CreateEntity(EntityType::ITEM_ZAFIRO);
+	zafiro->config = configNode.child("entities_data").child("item_zafiro");
+	zafiro->position = iPoint(1523, 2455);
+	zafiro->Start();
 
 	return true;
 }

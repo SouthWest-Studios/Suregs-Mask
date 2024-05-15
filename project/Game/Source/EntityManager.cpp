@@ -48,6 +48,8 @@
 #include "Item_Pocion_Vida_2.h"
 #include "Item_Pocion_Vida_3.h"
 #include "Item_Pocion_Vida_Max.h"
+#include "Item_Zafiro.h"
+
 
 
 #include "Defs.h"
@@ -219,6 +221,9 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 		break;
 	case EntityType::ITEM_SALIVA:
 		entity = new Item_Saliva(type, id, 100, 300, 5, 2);
+		break;
+	case EntityType::ITEM_ZAFIRO:
+		entity = new Item_Zafiro(type, 100, 100, 300, 5, 2);
 		break;
 	case EntityType::ITEM:
 		entity = new Item();
@@ -397,6 +402,7 @@ Cofre* EntityManager::GetCofre()
 
 bool EntityManager::PreUpdate()
 {
+	UpdateEnemyActivation();
 	//Ejemplo a�adir sprite en los Start():	app->render->objectsToDraw.push_back({ textura, posicion X, posicion Y, punto de anclaje en Y = (posY + num), ancho, largo});
 
 	for (DrawableObject& obj : objectsToDraw)
@@ -498,7 +504,7 @@ bool EntityManager::Update(float dt)
 	{
 		pEntity = item->data;
 
-		if (pEntity->active == false) continue;
+		if (pEntity->active == false || pEntity->isActive == false) continue;
 		ret = item->data->Update(dt);
 	}
 
@@ -551,4 +557,30 @@ bool EntityManager::PostUpdate()
 	//app->map->UpdateFrontEntities();
 
 	return ret;
+}
+
+void EntityManager::UpdateEnemyActivation() {
+	// Obtén la sala actual del jugador
+	MapObject* currentRoom = GetPlayer()->GetCurrentRoom();
+	//if(currentRoom != nullptr)	printf("current room: %d\n", currentRoom->id); //TESTING
+
+	// Obtén todos los enemigos
+	std::vector<Entity*> enemies = GetEnemies();
+
+	// Recorre todos los enemigos
+	for (Entity* enemy : enemies) {
+		// Asegúrate de que el enemigo tiene una sala asignada
+		if (enemy->room != nullptr) {
+			// Si el enemigo está en la misma sala que el jugador, actívalo
+			if (enemy->room == currentRoom) {
+				enemy->isActive = true;
+				//printf("Enemy activated\n");
+			}
+			// Si no, desactívalo
+			else {
+				enemy->isActive = false;
+				//printf("Enemy deactivated\n");
+			}
+		}
+	}
 }

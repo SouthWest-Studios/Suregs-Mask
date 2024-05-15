@@ -61,6 +61,10 @@ bool CommerceManager::Awake(pugi::xml_node config)
 
 	backgroundDescriptionPathTexture		= (char*)config.child("backgroundDescriptionPathTexture").attribute("texturePath").as_string();
 
+	backgroundTradeHerreriaPathTexture		= (char*)config.child("backgroundTradeHerreriaPathTexture").attribute("texturePath").as_string();
+	backgroundTradeHerreriaHoverPathTexture = (char*)config.child("backgroundTradeHerreriaHoverPathTexture").attribute("texturePath").as_string();
+	backgroundTradeHerreriaItemPathTexture	= (char*)config.child("backgroundTradeHerreriaItemPathTexture").attribute("texturePath").as_string();
+
 	
 	commerceNode = config.child("commerce");
 	
@@ -75,7 +79,9 @@ bool CommerceManager::Start() {
 
 	while (commerceNode != NULL) {
 
-		Commerce* commerce = CreateCommerce(CommerceType::BASICO, commerceNode.attribute("id").as_uint(), LoadTrades(commerceNode.child("trades")));
+
+
+		Commerce* commerce = CreateCommerce((CommerceType)commerceNode.attribute("type").as_uint(0), commerceNode.attribute("id").as_uint(), LoadTrades(commerceNode.child("trades")));
 
 		commerce->positionGeneral = iPoint(commerceNode.attribute("positionGeneralX").as_int(), commerceNode.attribute("positionGeneralY").as_int());
 		commerce->positionList = iPoint(commerceNode.attribute("positionListX").as_int(), commerceNode.attribute("positionListY").as_int());
@@ -93,7 +99,7 @@ bool CommerceManager::Start() {
 		commerceNode = commerceNode.next_sibling();
 	}
 
-	//PlayCommerce(1);
+	//PlayCommerce(3);
 
 	return ret;
 }
@@ -108,7 +114,20 @@ bool CommerceManager::CleanUp()
 
 Commerce* CommerceManager::CreateCommerce(CommerceType type, uint id, std::vector<Trade*> trades)
 {
-	Commerce* commerce = new Commerce(id);
+	Commerce* commerce;
+	if (type == CommerceType::HERRERIA) {
+		commerce = new CommerceHerreria(id);
+
+		((CommerceHerreria*)commerce)->backgroundTradeHerreriaPathTexture = backgroundTradeHerreriaPathTexture;
+		((CommerceHerreria*)commerce)->backgroundTradeHerreriaHoverPathTexture = backgroundTradeHerreriaHoverPathTexture;
+		((CommerceHerreria*)commerce)->backgroundTradeHerreriaItemPathTexture = backgroundTradeHerreriaItemPathTexture;
+
+	}
+	else {
+		commerce = new Commerce(id);
+	}
+
+	
 
 	commerce->backgroundPathTexture						= backgroundPathTexture;
 	commerce->backgroundTradePathTexture				= backgroundTradePathTexture;
@@ -187,6 +206,8 @@ std::vector<Trade*> CommerceManager::LoadTrades(pugi::xml_node nodeTrade)
 			trade->quantityRequested.push_back(quantityRequestedInts.at(i));
 		}
 
+		trade->type = tradeNode.attribute("type").as_uint(2);
+		trade->level = tradeNode.attribute("level").as_uint(0);
 		
 		/*trade->itemsRequested.push_back(app->inventoryManager->CreateItem((InventityType)tradeNode.attribute("itemRequested").as_int()));
 		trade->quantityRequested.push_back(tradeNode.attribute("quantityItemRequested").as_int());*/

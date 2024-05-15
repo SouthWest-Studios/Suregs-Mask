@@ -52,6 +52,10 @@
       <sell_itemAlt_fx path=""/>
 			<buy_item_fx path=""/>
       <dialog_fx path="Assets/Audio/Fx/UI/dialog_fx.wav"/>
+      <dialogAlt_fx path="Assets/Audio/Fx/UI/dialogAlt_fx.wav"/>
+      <dialogAlt2_fx path="Assets/Audio/Fx/UI/dialogAlt2_fx.wav"/>
+      <chest_fx path="Assets/Audio/Fx/UI/chest_fx.wav"/>
+      <chestAlt_fx path="Assets/Audio/Fx/UI/chestAlt_fx.wav"/>
 
       <!--player-->
       <run_fx path="Assets/Audio/Fx/Player/run_fx.wav"/>
@@ -69,7 +73,9 @@
       <player_death_fx path="Assets/Audio/Fx/Player/player_death_fx.wav"/>
 
       <!--fishing-->
-      <fishing_fx path=""/>
+      <fishingrod_fx path="Assets/Audio/Fx/Fishing/fishingrod_fx.wav"/>
+      <fishingrod_fx path="Assets/Audio/Fx/Fishing/fishingrod_returning_fx.wav"/>
+      <water_fx path="Assets/Audio/Fx/Fishing/water_fx.wav"/>
 
       <!--enemies-->
       <ols_attack_fx path=""/>
@@ -203,6 +209,24 @@
 		<item_pocion_velocidad		texturePath="Assets/Textures/Entidades/Items/textura_pocion_velocidad.png"		description="Curiosa pócima que aumenta tu velocidad de manera momentánea."	type ="Consumible"	name="Pócima de velocidad"/>
 		<item_pocion_orbe_magico	texturePath="Assets/Textures/Entidades/Items/textura_orbe_magico.png"			description=" "											type ="Consumible"	name="Orbe Magico"/>
 		<item_pocion_orbe_magico	texturePath="Assets/Textures/Entidades/Items/textura_orbe_magico.png"			description=" "											type ="Consumible"	name="Orbe Magico"/>
+		<item_zafiro				texturePath="Assets/Textures/Entidades/Items/textura_zafiro.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Zafiro"/>
+		<item_espada_nv2				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv2.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="espada_nv2"/>
+		<item_espada_nv3				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv3.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="espada_nv3"/>
+		<item_espada_nv4				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv4.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="espada_nv4"/>
+		<item_espada_nv4				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv4.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="espada_nv4"/>
+		<item_espada_nv5				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv3.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="espada_nv3"/>
+		<item_espada_nv6				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv6.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="espada_nv6"/>
+		<item_espada_nv7				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv7.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="espada_nv7"/>
+		<item_espada_nv8				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv8.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="espada_nv8"/>
+		<item_espada_nv9				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv9.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="espada_nv9"/>
+		<item_armadura_nv2				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv2.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="armadura_nv2"/>
+		<item_armadura_nv3				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv3.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="armadura_nv3"/>
+		<item_armadura_nv4				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv4.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="armadura_nv4"/>
+		<item_armadura_nv5				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv5.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="armadura_nv5"/>
+		<item_armadura_nv6				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv6.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="armadura_nv6"/>
+		<item_armadura_nv7				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv7.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="armadura_nv7"/>
+		<item_armadura_nv8				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv8.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="armadura_nv8"/>
+		<item_armadura_nv9				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv9.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="armadura_nv9"/>
 
 		<item_pez_pequeno texturePath="---" description="aleix" type ="Pez" name="Pez pequeño"/>
 		<item_pez_mediano texturePath="---" description="es un pez pequeño" type ="Pez" name="Pez mediano"/>
@@ -538,11 +562,15 @@
 		<backgroundMoneyPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_oro.png" />
 
 		<backgroundDescriptionPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_descripcion.png" />
-		
-		
-		
-		
 
+		<backgroundTradeHerreriaPathTexture  texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_trade_herreria.png" />
+		<backgroundTradeHerreriaHoverPathTexture  texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_trade_herreria_hover.png"/>
+		<backgroundTradeHerreriaItemPathTexture  texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_icono_grande.png"/>
+
+
+
+
+		<!-- test -->
 		<commerce id="0" positionGeneralX="66" positionGeneralY="33" positionListX="280" positionListY="10" positionInListX="23" positionInListY="22" tradeSpacing="100" itemSpacing="150" itemsRequestedSpacing="350">
 			<trades>
 				<trade itemOffered="-1,2" quantityItemOffered="100,2" itemRequested="2" quantityItemRequested="3"/>
@@ -595,6 +623,36 @@
 				<trade itemOffered="25" quantityItemOffered="1" itemRequested="-1,17" quantityItemRequested="60,3"/>
 				<trade itemOffered="26" quantityItemOffered="1" itemRequested="-1,2" quantityItemRequested="150,8"/>
 
+			</trades>
+		</commerce>
+		
+		<!-- Herreria -->
+		<commerce id="3" type="1" positionGeneralX="66" positionGeneralY="33" positionListX="520" positionListY="60" positionInListX="23" positionInListY="22" tradeSpacing="150" itemSpacing="100" itemsRequestedSpacing="250"
+				  NPCTexturePath="Assets/Textures/Entidades/NPCs/Dialogo/texture_herrera.png" npcPositionX="0" npcPositionY="0"
+				  >
+			<trades>
+				<!-- Espadas -->
+				<trade type="0" level="1" itemOffered="27" quantityItemOffered="1" itemRequested="-1" quantityItemRequested="100"/>
+				<trade type="0" level="2" itemOffered="28" quantityItemOffered="1" itemRequested="-1" quantityItemRequested="160"/>
+				<trade type="0" level="3" itemOffered="29" quantityItemOffered="1" itemRequested="-1,18" quantityItemRequested="210,1"/>
+				<trade type="0" level="4" itemOffered="30" quantityItemOffered="1" itemRequested="-1" quantityItemRequested="270"/>
+				<trade type="0" level="5" itemOffered="31" quantityItemOffered="1" itemRequested="-1" quantityItemRequested="350"/>
+				<trade type="0" level="6" itemOffered="32" quantityItemOffered="1" itemRequested="-1,1" quantityItemRequested="400,7"/>
+				<trade type="0" level="7" itemOffered="33" quantityItemOffered="1" itemRequested="-1" quantityItemRequested="520"/>
+				<trade type="0" level="8" itemOffered="34" quantityItemOffered="1" itemRequested="-1,3" quantityItemRequested="600,1"/>
+				<trade type="0" level="9" itemOffered="34" quantityItemOffered="1" itemRequested="-1" quantityItemRequested="1000"/>
+
+				<!-- Armaduras -->
+				<trade type="1" level="1" itemOffered="35" quantityItemOffered="1" itemRequested="-1" quantityItemRequested="70"/>
+				<trade type="1" level="2" itemOffered="36" quantityItemOffered="1" itemRequested="-1" quantityItemRequested="100"/>
+				<trade type="1" level="3" itemOffered="37" quantityItemOffered="1" itemRequested="-1,8" quantityItemRequested="150,6"/>
+				<trade type="1" level="4" itemOffered="38" quantityItemOffered="1" itemRequested="-1" quantityItemRequested="210"/>
+				<trade type="1" level="5" itemOffered="39" quantityItemOffered="1" itemRequested="-1,5" quantityItemRequested="280,1"/>
+				<trade type="1" level="6" itemOffered="40" quantityItemOffered="1" itemRequested="-1" quantityItemRequested="320"/>
+				<trade type="1" level="7" itemOffered="41" quantityItemOffered="1" itemRequested="-1" quantityItemRequested="400"/>
+				<trade type="1" level="8" itemOffered="42" quantityItemOffered="1" itemRequested="-1,9" quantityItemRequested="470,4"/>
+				<trade type="1" level="9" itemOffered="42" quantityItemOffered="1" itemRequested="-1" quantityItemRequested="800"/>
+				
 			</trades>
 		</commerce>
 		

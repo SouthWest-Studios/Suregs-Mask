@@ -97,6 +97,7 @@
   <ItemGroup>
     <ClCompile Include="Source\BestiarioManager.cpp" />
     <ClCompile Include="Source\Cofre.cpp" />
+    <ClCompile Include="Source\CommerceHerreria.cpp" />
     <ClCompile Include="Source\Emitter.cpp" />
     <ClCompile Include="Source\Enemy_Boorok.cpp" />
     <ClCompile Include="Source\Boss_Inuit.cpp" />
@@ -141,6 +142,7 @@
     <ClCompile Include="Source\Item_Rubi.cpp" />
     <ClCompile Include="Source\Item_Saliva.cpp" />
     <ClCompile Include="Source\Item_Viscera.cpp" />
+    <ClCompile Include="Source\Item_Zafiro.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\App.cpp" />
     <ClCompile Include="Source\Audio.cpp" />
@@ -248,6 +250,7 @@
     <ClInclude Include="Source\Item_Rubi.h" />
     <ClInclude Include="Source\Item_Saliva.h" />
     <ClInclude Include="Source\Item_Viscera.h" />
+    <ClInclude Include="Source\Item_Zafiro.h" />
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\Menu.h" />
     <ClInclude Include="Source\Menu_Equipo.h" />

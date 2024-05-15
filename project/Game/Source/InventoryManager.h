@@ -58,7 +58,7 @@ public:
 
 public:
 
-	uint monedasObtenidas;
+	uint monedasObtenidas = 0;
 
 	List<Inventity*> inventities;
 	iPoint PointerPosition = { 176,-60 };

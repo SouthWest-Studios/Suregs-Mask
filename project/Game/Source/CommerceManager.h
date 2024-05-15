@@ -7,11 +7,13 @@
 #include "List.h"
 #include "Textures.h"
 #include "Commerce.h"
+#include "CommerceHerreria.h"
 
 #include <vector> // Necesario para std::vector
 #include <cstdint> // Necesario para uint32_t
 
 class Commerce;
+class CommerceHerreria;
 
 struct Trade;
 
@@ -85,6 +87,11 @@ private:
 	char* backgroundMoneyPathTexture;
 
 	char* backgroundDescriptionPathTexture;
+
+
+	char* backgroundTradeHerreriaPathTexture;
+	char* backgroundTradeHerreriaHoverPathTexture;
+	char* backgroundTradeHerreriaItemPathTexture;
 
 	std::vector<Commerce*> commerces;
 

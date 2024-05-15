@@ -61,8 +61,10 @@ public:
 
 	void UpdateAttackSensor(float dt);
 
-public:
+	MapObject* GetCurrentRoom();
 
+public:
+	
 	//L02: DONE 2: Declare player parameters
 	SDL_Texture* texture = NULL;
 	pugi::xml_node config;

@@ -44,6 +44,9 @@ bool Cofre::Start() {
 	position.y = parameters.attribute("y").as_int();*/
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 	openTexture = app->tex->Load(config.attribute("opentexturePath").as_string());
+
+    chest_fx = app->audio->LoadAudioFx("chest_fx");
+
 	/*texture = app->tex->Load("Assets/Textures/Entidades/Items/item_Garra.png");*/
 	// L07 DONE 4: Add a physics to an item - initialize the physics body
 	/*pbody = app->physics->CreateCircle(position.x, position.y, 70, bodyType::STATIC);*/
@@ -100,6 +103,8 @@ void Cofre::OnCollision(PhysBody* physA, PhysBody* physB)
               if (app->input->GetButton(CONFIRM) == KEY_DOWN)
               {
                   abierto = true;
+
+                  app->audio->PlayFx(chest_fx);
 
                   pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
                   if (parseResult) {

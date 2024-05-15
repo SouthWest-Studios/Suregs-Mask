@@ -164,12 +164,12 @@ bool Enemy_Osiris_Variation::PostUpdate() {
 
 
 
-	if (isFacingLeft) {
-		//app->render->DrawTexture(texture, position.x - 25, position.y - 65, SDL_FLIP_HORIZONTAL, &rect);
+	/*if (isFacingLeft) {
+		app->render->DrawTexture(texture, position.x - 25, position.y - 65, 0.65, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		//app->render->DrawTexture(texture, position.x - 40, position.y - 65, SDL_FLIP_NONE, &rect);
-	}
+		app->render->DrawTexture(texture, position.x - 40, position.y - 65, 0.65, SDL_FLIP_NONE, &rect);
+	}*/
 
 
 	//Efecto da�o
@@ -233,7 +233,6 @@ void Enemy_Osiris_Variation::Die() {
 
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	currentAnimation = &dieAnim;
-	app->audio->PlayFx(osiris_death_fx);
 	
 	if (!hasRevived)
 	{
@@ -242,6 +241,8 @@ void Enemy_Osiris_Variation::Die() {
 	}
 	else
 	{
+		app->audio->PlayFx(osiris_death_fx);
+
 		app->entityManager->DestroyEntity(this);
 		app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 		app->physics->GetWorld()->DestroyBody(pbodySensor->body);

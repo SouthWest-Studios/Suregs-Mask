@@ -91,6 +91,8 @@ bool Enemy_Ols::Start() {
 		isFacingLeft
 	});
 
+	room = GetCurrentRoom();
+
 	return true;
 }
 
@@ -564,4 +566,48 @@ bool Enemy_Ols::Flee(float dt) // Huye del jugador
 	}
 
 	return true;
+}
+
+MapObject* Enemy_Ols::GetCurrentRoom()
+{
+	//salas pequeñas
+	for (ListItem<MapObject*>* item = app->map->smallRoomsList.start; item != nullptr; item = item->next)
+	{
+		MapObject* room = item->data;
+
+		// el jugador está dentro de la sala
+		if (position.x >= room->x && position.x <= room->x + room->width &&
+			position.y >= room->y && position.y <= room->y + room->height)
+		{
+			return room;
+		}
+	}
+
+	//salas grandes
+	for (ListItem<MapObject*>* item = app->map->largeRoomsList.start; item != nullptr; item = item->next)
+	{
+		MapObject* room = item->data;
+
+		// el jugador está dentro de la sala
+		if (position.x >= room->x && position.x <= room->x + room->width &&
+			position.y >= room->y && position.y <= room->y + room->height)
+		{
+			return room;
+		}
+	}
+
+	//salas l
+	for (ListItem<MapObject*>* item = app->map->LRoomsList.start; item != nullptr; item = item->next)
+	{
+		MapObject* room = item->data;
+
+		// el jugador está dentro de la sala
+		if (position.x >= room->x && position.x <= room->x + room->width &&
+			position.y >= room->y && position.y <= room->y + room->height)
+		{
+			return room;
+		}
+	}
+
+	return nullptr;
 }

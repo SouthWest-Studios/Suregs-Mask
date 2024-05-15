@@ -6,6 +6,8 @@
 #include "Input.h"
 #include "Render.h"
 
+struct MapObject;
+
 enum class EntityType
 {
 	PLAYER,
@@ -48,6 +50,23 @@ enum class EntityType
 	ITEM_POCION_DANO,
 	ITEM_POCION_VELOCIDAD,
 	ITEM_ORBE_MAGICO,
+	ITEM_ZAFIRO,
+	ITEM_ESPADA_NV2,
+	ITEM_ESPADA_NV3,
+	ITEM_ESPADA_NV4,
+	ITEM_ESPADA_NV5,
+	ITEM_ESPADA_NV6,
+	ITEM_ESPADA_NV7,
+	ITEM_ESPADA_NV8,
+	ITEM_ESPADA_NV9,
+	ITEM_ARMADURA_NV2,
+	ITEM_ARMADURA_NV3,
+	ITEM_ARMADURA_NV4,
+	ITEM_ARMADURA_NV5,
+	ITEM_ARMADURA_NV6,
+	ITEM_ARMADURA_NV7,
+	ITEM_ARMADURA_NV8,
+	ITEM_ARMADURA_NV9,
 
 	NPC_VENDEDOR,
 	NPC_PESCADOR,
@@ -127,7 +146,6 @@ enum class EntityState_Boss_Musri
 };
 
 
-
 class Entity
 {
 public:
@@ -204,6 +222,7 @@ public:
 		this->poisonTickRate = poisonTickRate;
 	}
 
+
 protected:
 	int poisonDamage;
 	float poisonDuration;
@@ -236,7 +255,6 @@ public:
 	float attackDamage;
 	float secondAttackDamage;
 
-
 	bool playerInBossArea = false;
 	std::string description;
 	std::string titulo;
@@ -245,7 +263,10 @@ public:
 	SDL_Texture* CloseTexture = NULL;
 
 	bool plused = false;
-	
+
+	MapObject* room = nullptr;
+	bool isActive = true;
+
 };
 
 #endif // __ENTITY_H__

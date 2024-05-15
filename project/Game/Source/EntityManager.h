@@ -68,6 +68,7 @@ public:
 	std::vector<Entity*> GetEnemiesOls();
 
 	Cofre* EntityManager::GetCofre();
+	void UpdateEnemyActivation();
 	
 	
 public:
@@ -79,10 +80,11 @@ public:
 
 
 private:
+
 	pugi::xml_node configNode;
-	Item_Garra* garra;
-	Player* actualPlayer;
-	Cofre* cofre;
+	Item_Garra* garra = nullptr;
+	Player* actualPlayer = nullptr;
+	Cofre* cofre = nullptr;
 	MiniGameFishing* fishing = new MiniGameFishing;
 
 };

@@ -298,6 +298,12 @@
     <ClCompile Include="Source\Enemy_Osiris_Variation.cpp">
       <Filter>Entities\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Source\CommerceHerreria.cpp">
+      <Filter>Modules\SistemaComercio</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Item_Zafiro.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -662,6 +668,9 @@
     </ClInclude>
     <ClInclude Include="Source\Enemy_Osiris_Variation.h">
       <Filter>Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Item_Zafiro.h">
+      <Filter>Entities\Items</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
