@@ -198,13 +198,15 @@ bool Boss_Inuit::PostUpdate() {
 		saveOriginPos = false;
 
 	}
-	//printf("\noriginalPositionX: %d", originalWavePosition.x);
-	//printf("\noriginalPositionY: %d", originalWavePosition.y);
-	//printf("\nPlayerPositionX: %d", position.x);
-	//printf("\nPlayerPositionY: %d", position.y);
 
-	//printf("\n inWave: %d", inWave);
-	if (app->input->GetKey(SDL_SCANCODE_N) == KEY_REPEAT) {
+	//printf("\n Heal: %f", health);
+
+
+	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
+		health -= 1000;
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN) {
 		ultDef = true;
 		if (!inWave) {
 			printf("1");
@@ -217,11 +219,11 @@ bool Boss_Inuit::PostUpdate() {
 		waveTime.Start();
 		waveTimeStart = true;
 	}
+	//Ulti
 	if (ultDef && waveTimeStart) {
 		ulti_Atack();
-
 	}
-
+	//Wave
 	if (waveTimerColdDown(10) && !waveTimeStart) {
 		//printf("\ndelete-3");
 		shock_wave(originalWavePosition.x, originalWavePosition.y, 5, 520, 0);
@@ -243,6 +245,13 @@ bool Boss_Inuit::CleanUp()
 	}
 	if (atackBMR != nullptr) {
 		app->physics->GetWorld()->DestroyBody(atackBMR->body);
+	}
+
+	if (!shockWaves.empty()) {
+		for (auto& pair : shockWaves) {
+			deleteCollision(pair.second);
+		}
+		shockWaves.clear();
 	}
 	app->tex->UnLoad(texture);
 	lastPath.Clear();
@@ -377,20 +386,20 @@ void Boss_Inuit::ulti_Atack()
 		shock_wave(originalWavePosition.x + 1000, originalWavePosition.y + 250, 3, 400, 4);
 	}
 
-	if (waveTimerColdDown(5) && !wave1Finishing) {
+	if (waveTimerColdDown(1) && !wave1Finishing) {
 		shock_wave(originalWavePosition.x - 500, originalWavePosition.y - 250, 3, 400, 5);
 		shock_wave(originalWavePosition.x - 500, originalWavePosition.y + 250, 3, 400, 6);
 		shock_wave(originalWavePosition.x + 500, originalWavePosition.y - 250, 3, 400, 7);
 		shock_wave(originalWavePosition.x + 500, originalWavePosition.y + 250, 3, 400, 8);
 	}
 
-	if (waveTimerColdDown(10) && !wave2Finishing) {
+	if (waveTimerColdDown(2) && !wave2Finishing) {
 		shock_wave(originalWavePosition.x, originalWavePosition.y - 250, 3, 400, 9);
 		shock_wave(originalWavePosition.x, originalWavePosition.y + 250, 3, 400, 10);
 	}
 
 	if (wave0Finishing && wave1Finishing && wave2Finishing) {
-		printf("UltiFishing");
+		printf("\nUltiFishing");
 		wave0Finishing = false;
 		wave1Finishing = false;
 		wave2Finishing = false;

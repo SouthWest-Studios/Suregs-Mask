@@ -138,6 +138,7 @@ private:
 
 	FASE fase;
 
+
 	//ataque
 	float ataqueTimeClodDown = 0;
 	bool inAtack = false;
@@ -151,7 +152,6 @@ private:
 
 
 	//shockWave
-	//float shockSize;
 	bool waveIsMax = false;
 	bool waveFinishi = true;
 	Timer waveTime;
