@@ -160,6 +160,10 @@ private:
 	//ulti
 	bool ultDef = false;
 	bool saveOriginPos = true;
+	bool wave0Finishing = false;
+	bool wave1Finishing = false;
+	bool wave2Finishing = false;
+	bool ulti_fishing = false;
 
 
 	const float reviveTime = 5.0f;

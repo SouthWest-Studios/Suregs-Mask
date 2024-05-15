@@ -227,7 +227,7 @@ bool Boss_Inuit::PostUpdate() {
 
 	if (app->input->GetKey(SDL_SCANCODE_N) == KEY_REPEAT) {
 		ultDef = true;
-
+		waveTime.Start();
 	}
 	if (ultDef) {
 		ulti_Atack();
@@ -237,7 +237,7 @@ bool Boss_Inuit::PostUpdate() {
 	printf("\noriginalPositionY: %d", originalWavePosition.y);
 	printf("\nPlayerPositionX: %d", position.x);
 	printf("\nPlayerPositionY: %d", position.y);*/
-	if (waveTimerColdDown(10)) {
+	if (waveTimerColdDown(10) && !ultDef) {
 		printf("\ndelete-3");
 		shock_wave(originalWavePosition.x, originalWavePosition.y, 5, 520, 0);
 	}
@@ -375,9 +375,22 @@ void Boss_Inuit::shock_wave(int posX, int posY, float shockSpeed, float maxSize,
 		shockWaves[tag] = newShockWave;
 	}
 	else {
-		waveFinishi = true;
+		//waveFinishi = true;
+	
+		if (tag == 0) {
+			waveTime.Start();
+		}
+
+		if (tag == 1 || tag == 2 || tag == 3 || tag == 4) {
+			wave0Finishing = true;
+		}
+		if (tag == 5 || tag == 6 || tag == 7 || tag == 9) {
+			wave1Finishing = true;
+		}
+		if (tag == 9 || tag == 10) {
+			wave2Finishing = true;
+		}
 		shockSize = 0;
-		waveTime.Start();
 		waveIsMax = false;
 	}
 }
@@ -387,24 +400,35 @@ void Boss_Inuit::ulti_Atack()
 {
 	//TimerColdDown(10);
 	//TimerColdDown(5);
-	shock_wave(originalWavePosition.x - 1000, originalWavePosition.y - 250, 3, 400, 1);
-	shock_wave(originalWavePosition.x - 1000, originalWavePosition.y + 250, 3, 400, 2);
-	shock_wave(originalWavePosition.x + 1000, originalWavePosition.y - 250, 3, 400, 3);
-	shock_wave(originalWavePosition.x + 1000, originalWavePosition.y + 250, 3, 400, 4);
 
-	if (TimerColdDown(10)) {
+	if (!wave0Finishing) {
+		shock_wave(originalWavePosition.x - 1000, originalWavePosition.y - 250, 3, 400, 1);
+		shock_wave(originalWavePosition.x - 1000, originalWavePosition.y + 250, 3, 400, 2);
+		shock_wave(originalWavePosition.x + 1000, originalWavePosition.y - 250, 3, 400, 3);
+		shock_wave(originalWavePosition.x + 1000, originalWavePosition.y + 250, 3, 400, 4);
+	}
+
+	if (waveTimerColdDown(5) && !wave1Finishing) {
 		shock_wave(originalWavePosition.x - 500, originalWavePosition.y - 250, 3, 400, 5);
 		shock_wave(originalWavePosition.x - 500, originalWavePosition.y + 250, 3, 400, 6);
 		shock_wave(originalWavePosition.x + 500, originalWavePosition.y - 250, 3, 400, 7);
 		shock_wave(originalWavePosition.x + 500, originalWavePosition.y + 250, 3, 400, 8);
 	}
 
-	if (TimerColdDown(20)) {
+	if (waveTimerColdDown(10) && !wave2Finishing) {
 		shock_wave(originalWavePosition.x, originalWavePosition.y - 250, 3, 400, 9);
 		shock_wave(originalWavePosition.x, originalWavePosition.y + 250, 3, 400, 10);
 	}
 
+	if (wave0Finishing && wave1Finishing && wave2Finishing) {
+		printf("UltiFishing");
+		wave0Finishing = false;
+		wave1Finishing = false;
+		wave2Finishing = false;
+		waveTime.Start();
+		ultDef = false;
 
+	}
 
 }
 
@@ -709,7 +733,6 @@ bool Boss_Inuit::TimerColdDown(float time)
 {
 	//printf("\nataqueTimeClodDown%: %f", ataqueTimeClodDown);
 	ataqueTimeClodDown = atackTimeColdDown.CountDown(time);
-
 	if ((float)ataqueTimeClodDown == 0) {
 		return true;
 	}
@@ -719,15 +742,12 @@ bool Boss_Inuit::TimerColdDown(float time)
 	}
 }
 
-
 bool Boss_Inuit::waveTimerColdDown(float time)
 {
 	waveTimeClodDown = waveTime.CountDown(time);
 	printf("\n waveTimeClodDown%: %f", waveTimeClodDown);
 	if ((float)waveTimeClodDown == 0) {
-		//printf("\n delete -4");
-		waveFinishi = false;
-		//waveTime.Start();
+
 		return true;
 	}
 	else
