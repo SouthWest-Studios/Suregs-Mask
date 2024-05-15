@@ -634,7 +634,7 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
-
+	
 	
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
@@ -746,6 +746,8 @@ bool Player::Update(float dt)
 
 	stateMachine(dt);
 	currentAnimation->Update();
+
+	
 	return true;
 }
 
