@@ -1975,7 +1975,6 @@ void Player::PlayerMovement(float dt)
 		}
 	}
 
-
 	FishingDirecction(verticalMovement, horizontalMovement);
 
 	//Si pulsas espacio
@@ -2082,12 +2081,12 @@ void Player::PlayerMovement(float dt)
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2;
 }
-void Player::FishingDirecction(bool verticalMovement, bool horizontalMovement)
+void Player::FishingDirecction(float verticalMovement, float horizontalMovement)
 {
 
 
 	// Si jugador Mueve
-	if (pressingRight) {
+	if (horizontalMovement == 1) {
 		// Derecha
 		player_Direction = Direction::RIGHT;
 		if (app->scene_pueblo->GetRod()->fishing.isFishing) {
@@ -2098,7 +2097,7 @@ void Player::FishingDirecction(bool verticalMovement, bool horizontalMovement)
 			playermove = false;
 		}
 	}
-	else if (pressingLeft) {
+	else if (horizontalMovement == -1) {
 		// izquierda
 		player_Direction = Direction::LEFT;
 		if (app->scene_pueblo->GetRod()->fishing.isFishing) {
@@ -2109,7 +2108,7 @@ void Player::FishingDirecction(bool verticalMovement, bool horizontalMovement)
 			playermove = false;
 		}
 	}
-	else if (pressingDown) {
+	else if (verticalMovement == 1) {
 		// abajo
 		player_Direction = Direction::DOWN;
 		if (app->scene_pueblo->GetRod()->fishing.isFishing) {
@@ -2120,7 +2119,7 @@ void Player::FishingDirecction(bool verticalMovement, bool horizontalMovement)
 			playermove = false;
 		}
 	}
-	else if (pressingUp) {
+	else if (verticalMovement == -1) {
 		// arriba
 		player_Direction = Direction::UP;
 		if (app->scene_pueblo->GetRod()->fishing.isFishing) {

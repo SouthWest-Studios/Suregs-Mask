@@ -202,10 +202,16 @@ void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
 					app->scene_testing->GetRod()->fishing.playerGetRod = true;
 				}*/
 
-				if (strcmp(parameters.attribute("name").as_string(), "Dorothy, Hely y Pathy") == 0) {
+
+				if (parameters.attribute("id").as_int() == 1001) {
+					printf("REEL TRUE");
 					app->scene_pueblo->GetRod()->fishing.rodReady = true;
 					app->scene_pueblo->GetRod()->fishing.playerGetRod = true;
 				}
+				/*if (strcmp(parameters.attribute("name").as_string(), "pescador") == 0) {
+					app->scene_pueblo->GetRod()->fishing.rodReady = true;
+					app->scene_pueblo->GetRod()->fishing.playerGetRod = true;
+				}*/
 			}
 			break;
 	}

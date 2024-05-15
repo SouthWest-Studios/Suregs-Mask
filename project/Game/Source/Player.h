@@ -211,7 +211,7 @@ private:
 	void CameraMovement(float dt);
 	void GodMode(float dt);
 	void PlayerMovement(float dt);
-	void FishingDirecction(bool verticalMovement, bool horizontalMovement);
+	void FishingDirecction(float verticalMovement, float horizontalMovement);
 	void MaskAttack(float dt);
 
 	void stateMachine(float dt);
