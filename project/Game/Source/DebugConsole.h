@@ -54,6 +54,7 @@ public:
 	DebugCommand* SPAWN_DIALOG;
 
 	DebugCommandArg<int>* SET_GOLD;
+	DebugCommandArg<int>* SET_MASK_POINTS;
 	DebugCommandArg<int>* SET_PRIMARY_MASK;
 	DebugCommandArg<int>* SET_SECONDARY_MASK;
 	DebugCommandArg<int>* PLAY_COMMERCE;

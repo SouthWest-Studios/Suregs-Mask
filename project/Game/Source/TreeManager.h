@@ -55,7 +55,10 @@ public:
 public:
 	int mask = 1;
 	List<Tree*> arboles; 
-	unsigned int numMejoras = 0;
+	unsigned int numMejoras0 = 0;
+	unsigned int numMejoras1 = 0;
+	unsigned int numMejoras2 = 0;
+	unsigned int numMejoras3 = 0;
 	unsigned int puntsRembolso = 0;
 
 	iPoint PointerPosition = { 350, 130 };

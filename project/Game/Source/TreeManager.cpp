@@ -538,334 +538,355 @@ void TreeManager::UseTreeSelected(int id)
 
 	Player* player = app->entityManager->GetPlayer();
 
-	for (item = arboles.start; item != NULL; item = item->next)
-	{
-		if (item->data->usable1 && mask == 1 || item->data->usable2 && mask == 2 || item->data->usable3 && mask == 3 || item->data->usable4 && mask == 4)
+	
+		for (item = arboles.start; item != NULL; item = item->next)
 		{
-			if (item->data->id == id) // Comprueba si el ID coincide
+			if (item->data->usable1 && mask == 1 || item->data->usable2 && mask == 2 || item->data->usable3 && mask == 3 || item->data->usable4 && mask == 4)
 			{
-
-				item->data->active = true;
-				switch (item->data->type)
+				if (item->data->id == id) // Comprueba si el ID coincide
 				{
 
-				case TreeType::MASK0:
-				{
-					mask = 1;
-
-					break;
-				}
-				case TreeType::MASK1:
-				{
-					mask = 2;
-
-					break;
-				}
-				case TreeType::MASK2:
-				{
-					mask = 3;
-
-					break;
-				}
-				case TreeType::MASK3:
-				{
-					mask = 4;
-
-					break;
-				}
-				case TreeType::BUTTON:
-				{
-					switch (item->data->nivelArbol)
+					item->data->active = true;
+					switch (item->data->type)
 					{
 
-					case 0:
+					case TreeType::MASK0:
 					{
-						bool siguiente = false;
-						if (mask == 1 /*&& app->entityManager->GetPlayer()->maskZeroXP*/)
-						{
-							app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama1] += 1;
-							item->data->usable1 = false;
-							siguiente = true;
-							player->maskZeroPoints -= 1;
-						}
-						else if (mask == 2)
-						{
-							player->maskLevels[Mask::MASK1][Branches::Rama1] += 1;
-							item->data->usable2 = false;
-							siguiente = true;
-							player->maskOnePoints -= 1;
-						}
-						else if (mask == 3)
-						{
-							player->maskLevels[Mask::MASK2][Branches::Rama1] += 1;
-							item->data->usable3 = false;
-							siguiente = true;
-							player->maskTwoPoints -= 1;
-						}
-						else if (mask == 4)
-						{
-							player->maskLevels[Mask::MASK3][Branches::Rama1] += 1;
-							item->data->usable4 = false;
-							siguiente = true;
-							player->maskThreePoints -= 1;
-						}
-						if (siguiente == true)
-						{
-							for (itum = arboles.start; itum != NULL; itum = itum->next)
-							{
-								if (itum->data->nivelArbol == item->data->nivelArbol && itum->data->nivelMejora == item->data->nivelMejora + 1)
-								{
-									if (mask == 1)
-									{
+						mask = 1;
 
-										itum->data->usable1 = true;
-
-									}
-									else if (mask == 2)
-									{
-
-										itum->data->usable2 = true;
-
-									}
-									else if (mask == 3)
-									{
-
-										itum->data->usable3 = true;
-
-									}
-									else if (mask == 4)
-									{
-
-										itum->data->usable4 = true;
-
-									}
-								}
-
-
-							}
-							numMejoras += 1;
-						}
 						break;
 					}
-					case 1:
+					case TreeType::MASK1:
 					{
-						bool siguiente = false;
-						if (mask == 1)
-						{
-							player->maskLevels[Mask::MASK0][Branches::Rama2] += 1;
-							item->data->usable1 = false;
-							siguiente = true;
-							player->maskZeroPoints -= 1;
-						}
-						else if (mask == 2)
-						{
-							player->maskLevels[Mask::MASK1][Branches::Rama2] += 1;
-							item->data->usable2 = false;
-							siguiente = true;
-							player->maskOnePoints -= 1;
-						}
-						else if (mask == 3)
-						{
-							player->maskLevels[Mask::MASK2][Branches::Rama2] += 1;
-							item->data->usable3 = false;
-							siguiente = true;
-							player->maskTwoPoints -= 1;
-						}
-						else if (mask == 4)
-						{
-							player->maskLevels[Mask::MASK3][Branches::Rama2] += 1;
-							item->data->usable4 = false;
-							siguiente = true;
-							player->maskThreePoints -= 1;
-						}
-						if (siguiente == true)
-						{
-							for (itum = arboles.start; itum != NULL; itum = itum->next)
-							{
-								if (itum->data->nivelArbol == item->data->nivelArbol && itum->data->nivelMejora == item->data->nivelMejora + 1)
-								{
-									if (mask == 1)
-									{
+						mask = 2;
 
-										itum->data->usable1 = true;
-
-									}
-									else if (mask == 2)
-									{
-
-										itum->data->usable2 = true;
-
-									}
-									else if (mask == 3)
-									{
-
-										itum->data->usable3 = true;
-
-									}
-									else if (mask == 4)
-									{
-
-										itum->data->usable4 = true;
-
-									}
-								}
-
-
-							}
-							numMejoras += 1;
-						}
 						break;
 					}
-					case 2:
+					case TreeType::MASK2:
 					{
-						bool siguiente = false;
-						if (mask == 1)
-						{
-							player->maskLevels[Mask::MASK0][Branches::Rama3] += 1;
-							item->data->usable1 = false;
-							siguiente = true;
-							player->maskZeroPoints -= 1;
-						}
-						else if (mask == 2)
-						{
-							player->maskLevels[Mask::MASK1][Branches::Rama3] += 1;
-							item->data->usable2 = false;
-							siguiente = true;
-							player->maskOnePoints -= 1;
-						}
-						else if (mask == 3)
-						{
-							player->maskLevels[Mask::MASK2][Branches::Rama3] += 1;
-							item->data->usable3 = false;
-							siguiente = true;
-							player->maskTwoPoints -= 1;
-						}
-						else if (mask == 4)
-						{
-							player->maskLevels[Mask::MASK3][Branches::Rama3] += 1;
-							item->data->usable4 = false;
-							siguiente = true;
-							player->maskThreePoints -= 1;
-						}
-						if (siguiente == true)
-						{
-							for (itum = arboles.start; itum != NULL; itum = itum->next)
-							{
-								if (itum->data->nivelArbol == item->data->nivelArbol && itum->data->nivelMejora == item->data->nivelMejora + 1)
-								{
-									if (mask == 1)
-									{
+						mask = 3;
 
-										itum->data->usable1 = true;
-
-									}
-									else if (mask == 2)
-									{
-
-										itum->data->usable2 = true;
-
-									}
-									else if (mask == 3)
-									{
-
-										itum->data->usable3 = true;
-
-									}
-									else if (mask == 4)
-									{
-
-										itum->data->usable4 = true;
-
-									}
-								}
-
-
-							}
-							numMejoras += 1;
-						}
 						break;
 					}
-					case 3:
+					case TreeType::MASK3:
 					{
-						bool siguiente = false;
-						if (mask == 1)
-						{
-							player->maskLevels[Mask::MASK0][Branches::Rama4] += 1;
-							item->data->usable1 = false;
-							siguiente = true;
-							player->maskZeroPoints -= 1;
-						}
-						else if (mask == 2)
-						{
-							player->maskLevels[Mask::MASK1][Branches::Rama4] += 1;
-							item->data->usable2 = false;
-							player->maskOnePoints -= 1;
-							siguiente = true;
-						}
-						else if (mask == 3)
-						{
-							player->maskLevels[Mask::MASK2][Branches::Rama4] += 1;
-							item->data->usable3 = false;
-							siguiente = true;
-							player->maskTwoPoints -= 1;
-						}
-						else if (mask == 4)
-						{
-							player->maskLevels[Mask::MASK3][Branches::Rama4] += 1;
-							item->data->usable4 = false;
-							siguiente = true;
-							player->maskThreePoints -= 1;
-						}
-						if (siguiente == true)
-						{
-							for (itum = arboles.start; itum != NULL; itum = itum->next)
-							{
-								if (itum->data->nivelArbol == item->data->nivelArbol && itum->data->nivelMejora == item->data->nivelMejora + 1)
-								{
-									if (mask == 1)
-									{
+						mask = 4;
 
-										itum->data->usable1 = true;
-
-									}
-									else if (mask == 2)
-									{
-
-										itum->data->usable2 = true;
-
-									}
-									else if (mask == 3)
-									{
-
-										itum->data->usable3 = true;
-
-									}
-									else if (mask == 4)
-									{
-
-										itum->data->usable4 = true;
-
-									}
-								}
-
-
-							}
-							numMejoras += 1;
-						}
 						break;
 					}
-					}
+					case TreeType::BUTTON:
+					{
+						
+							switch (item->data->nivelArbol)
+							{
 
+							case 0:
+							{
+								bool siguiente = false;
+								if (mask == 1 && numMejoras0 < 8 && player->maskZeroPoints > 0)
+								{
+									app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama1] += 1;
+									item->data->usable1 = false;
+									siguiente = true;
+									player->maskZeroPoints -= 1;
+									numMejoras0 += 1;
+								}
+								else if (mask == 2 && numMejoras1 < 8 && player->maskOnePoints > 0)
+								{
+									player->maskLevels[Mask::MASK1][Branches::Rama1] += 1;
+									item->data->usable2 = false;
+									siguiente = true;
+									player->maskOnePoints -= 1;
+									numMejoras1 += 1;
+								}
+								else if (mask == 3 && player->maskTwoPoints > 0)
+								{
+									player->maskLevels[Mask::MASK2][Branches::Rama1] += 1;
+									item->data->usable3 = false;
+									siguiente = true;
+									player->maskTwoPoints -= 1;
+									numMejoras2 += 1;
+								}
+								else if (mask == 4 && numMejoras3 < 8 && player->maskThreePoints > 0)
+								{
+									player->maskLevels[Mask::MASK3][Branches::Rama1] += 1;
+									item->data->usable4 = false;
+									siguiente = true;
+									player->maskThreePoints -= 1;
+									numMejoras3 += 1;
+								}
+								if (siguiente == true)
+								{
+									for (itum = arboles.start; itum != NULL; itum = itum->next)
+									{
+										if (itum->data->nivelArbol == item->data->nivelArbol && itum->data->nivelMejora == item->data->nivelMejora + 1)
+										{
+											if (mask == 1)
+											{
+
+												itum->data->usable1 = true;
+
+											}
+											else if (mask == 2)
+											{
+
+												itum->data->usable2 = true;
+
+											}
+											else if (mask == 3)
+											{
+
+												itum->data->usable3 = true;
+
+											}
+											else if (mask == 4)
+											{
+
+												itum->data->usable4 = true;
+
+											}
+										}
+
+
+									}
+									
+								}
+								break;
+							}
+							case 1:
+							{
+								bool siguiente = false;
+								if (mask == 1 && numMejoras0 < 8 && player->maskZeroPoints > 0)
+								{
+									player->maskLevels[Mask::MASK0][Branches::Rama2] += 1;
+									item->data->usable1 = false;
+									siguiente = true;
+									player->maskZeroPoints -= 1;
+									numMejoras0 += 1;
+								}
+								else if (mask == 2 && player->maskOnePoints > 0)
+								{
+									player->maskLevels[Mask::MASK1][Branches::Rama2] += 1;
+									item->data->usable2 = false;
+									siguiente = true;
+									player->maskOnePoints -= 1;
+									numMejoras1 += 1;
+								}
+								else if (mask == 3 && numMejoras2 < 8 && player->maskTwoPoints > 0)
+								{
+									player->maskLevels[Mask::MASK2][Branches::Rama2] += 1;
+									item->data->usable3 = false;
+									siguiente = true;
+									player->maskTwoPoints -= 1;
+									numMejoras2 += 1;
+								}
+								else if (mask == 4 && numMejoras3 < 8 && player->maskTwoPoints > 0)
+								{
+									player->maskLevels[Mask::MASK3][Branches::Rama2] += 1;
+									item->data->usable4 = false;
+									siguiente = true;
+									player->maskThreePoints -= 1;
+									numMejoras3 += 1;
+								}
+								if (siguiente == true)
+								{
+									for (itum = arboles.start; itum != NULL; itum = itum->next)
+									{
+										if (itum->data->nivelArbol == item->data->nivelArbol && itum->data->nivelMejora == item->data->nivelMejora + 1)
+										{
+											if (mask == 1)
+											{
+
+												itum->data->usable1 = true;
+
+											}
+											else if (mask == 2)
+											{
+
+												itum->data->usable2 = true;
+
+											}
+											else if (mask == 3)
+											{
+
+												itum->data->usable3 = true;
+
+											}
+											else if (mask == 4)
+											{
+
+												itum->data->usable4 = true;
+
+											}
+										}
+
+
+									}
+									
+								}
+								break;
+							}
+							case 2:
+							{
+								bool siguiente = false;
+								if (mask == 1 && numMejoras0 < 8 && player->maskZeroPoints > 0)
+								{
+									player->maskLevels[Mask::MASK0][Branches::Rama3] += 1;
+									item->data->usable1 = false;
+									siguiente = true;
+									player->maskZeroPoints -= 1;
+									numMejoras0 += 1;
+								}
+								else if (mask == 2 && numMejoras1 < 8 && player->maskOnePoints > 0)
+								{
+									player->maskLevels[Mask::MASK1][Branches::Rama3] += 1;
+									item->data->usable2 = false;
+									siguiente = true;
+									player->maskOnePoints -= 1;
+									numMejoras1 += 1;
+								}
+								else if (mask == 3 && numMejoras2 < 8 && player->maskTwoPoints > 0)
+								{
+									player->maskLevels[Mask::MASK2][Branches::Rama3] += 1;
+									item->data->usable3 = false;
+									siguiente = true;
+									player->maskTwoPoints -= 1;
+									numMejoras2 += 1;
+								}
+								else if (mask == 4 && numMejoras3 < 8 && player->maskThreePoints > 0)
+								{
+									player->maskLevels[Mask::MASK3][Branches::Rama3] += 1;
+									item->data->usable4 = false;
+									siguiente = true;
+									player->maskThreePoints -= 1;
+									numMejoras3 += 1;
+								}
+								if (siguiente == true)
+								{
+									for (itum = arboles.start; itum != NULL; itum = itum->next)
+									{
+										if (itum->data->nivelArbol == item->data->nivelArbol && itum->data->nivelMejora == item->data->nivelMejora + 1)
+										{
+											if (mask == 1)
+											{
+
+												itum->data->usable1 = true;
+
+											}
+											else if (mask == 2)
+											{
+
+												itum->data->usable2 = true;
+
+											}
+											else if (mask == 3)
+											{
+
+												itum->data->usable3 = true;
+
+											}
+											else if (mask == 4)
+											{
+
+												itum->data->usable4 = true;
+
+											}
+										}
+
+
+									}
+									
+								}
+								break;
+							}
+							case 3:
+							{
+								bool siguiente = false;
+								if (mask == 1 && numMejoras0 < 8 && player->maskZeroPoints > 0)
+								{
+									player->maskLevels[Mask::MASK0][Branches::Rama4] += 1;
+									item->data->usable1 = false;
+									siguiente = true;
+									player->maskZeroPoints -= 1;
+									numMejoras0 += 1;
+								}
+								else if (mask == 2 && numMejoras1 < 8 && player->maskOnePoints > 0)
+								{
+									player->maskLevels[Mask::MASK1][Branches::Rama4] += 1;
+									item->data->usable2 = false;
+									player->maskOnePoints -= 1;
+									siguiente = true;
+									numMejoras1 += 1;
+								}
+								else if (mask == 3 && numMejoras2 < 8 && player->maskTwoPoints > 0)
+								{
+									player->maskLevels[Mask::MASK2][Branches::Rama4] += 1;
+									item->data->usable3 = false;
+									siguiente = true;
+									player->maskTwoPoints -= 1;
+									numMejoras2 += 1;
+								}
+								else if (mask == 4 && numMejoras3 < 8 && player->maskThreePoints > 0)
+								{
+									player->maskLevels[Mask::MASK3][Branches::Rama4] += 1;
+									item->data->usable4 = false;
+									siguiente = true;
+									player->maskThreePoints -= 1;
+									numMejoras3 += 1;
+								}
+								if (siguiente == true)
+								{
+									for (itum = arboles.start; itum != NULL; itum = itum->next)
+									{
+										if (itum->data->nivelArbol == item->data->nivelArbol && itum->data->nivelMejora == item->data->nivelMejora + 1)
+										{
+											if (mask == 1)
+											{
+
+												itum->data->usable1 = true;
+
+											}
+											else if (mask == 2)
+											{
+
+												itum->data->usable2 = true;
+
+											}
+											else if (mask == 3)
+											{
+
+												itum->data->usable3 = true;
+
+											}
+											else if (mask == 4)
+											{
+
+												itum->data->usable4 = true;
+
+											}
+										}
+
+
+									}
+									
+								}
+								break;
+							}
+							}
+						
+
+					}
+					}
 				}
-				}
+
+
+
 			}
 
 
-
 		}
-
-
-	}
+	
+	
 
 
 
@@ -877,135 +898,137 @@ void TreeManager::ReembolsarTreeSelected(int id)
 
 	ListItem<Tree*>* itum;
 
+	
 
-	for (item = arboles.start; item != NULL; item = item->next)
-	{
-		if (item->data->id == id)
+		for (item = arboles.start; item != NULL; item = item->next)
 		{
-			for (itum = arboles.start; itum != NULL; itum = itum->next)
+			if (item->data->id == id)
 			{
-				if ((itum->data->nivelArbol == item->data->nivelArbol && itum->data->nivelMejora == item->data->nivelMejora + 1) || item->data->nivelMejora + 1 == 5 && itum->data->type == TreeType::BUTTON)
+				for (itum = arboles.start; itum != NULL; itum = itum->next)
 				{
-					if ((mask == 1 && item->data->usable1 == false && itum->data->usable1 == true) || (mask == 1 && item->data->usable1 == false && item->data->nivelMejora + 1 == 5))
+					if ((itum->data->nivelArbol == item->data->nivelArbol && itum->data->nivelMejora == item->data->nivelMejora + 1) || item->data->nivelMejora + 1 == 5 && itum->data->type == TreeType::BUTTON)
 					{
-						if (item->data->nivelArbol == 0)
+						if ((mask == 1 && item->data->usable1 == false && itum->data->usable1 == true) || (mask == 1 && item->data->usable1 == false && item->data->nivelMejora + 1 == 5))
 						{
-							app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama1] -= 1;
-						}
-						if (item->data->nivelArbol == 1)
-						{
-							app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama2] -= 1;
-						}
-						if (item->data->nivelArbol == 2)
-						{
-							app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama3] -= 1;
-						}
-						if (item->data->nivelArbol == 3)
-						{
-							app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama4] -= 1;
-						}
+							if (item->data->nivelArbol == 0)
+							{
+								app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama1] -= 1;
+							}
+							if (item->data->nivelArbol == 1)
+							{
+								app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama2] -= 1;
+							}
+							if (item->data->nivelArbol == 2)
+							{
+								app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama3] -= 1;
+							}
+							if (item->data->nivelArbol == 3)
+							{
+								app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama4] -= 1;
+							}
 
-						item->data->usable1 = true;
-						if (item->data->usable1 + 1 < 5)
-						{
-							itum->data->usable1 = false;
+							item->data->usable1 = true;
+							if (item->data->usable1 + 1 < 5)
+							{
+								itum->data->usable1 = false;
+							}
+							numMejoras0 -= 1;
+							puntsRembolso += 1;
+							app->entityManager->GetPlayer()->maskZeroPoints += 1;
 						}
-						numMejoras -= 1;
-						puntsRembolso += 1;
-						app->entityManager->GetPlayer()->maskZeroPoints += 1;
+						else if ((mask == 2 && item->data->usable2 == false && itum->data->usable2 == true) || (mask == 2 && item->data->usable2 == false && item->data->nivelMejora + 1 == 5))
+						{
+							if (item->data->nivelArbol == 0)
+							{
+								app->entityManager->GetPlayer()->maskLevels[Mask::MASK1][Branches::Rama1] -= 1;
+							}
+							if (item->data->nivelArbol == 1)
+							{
+								app->entityManager->GetPlayer()->maskLevels[Mask::MASK1][Branches::Rama2] -= 1;
+							}
+							if (item->data->nivelArbol == 2)
+							{
+								app->entityManager->GetPlayer()->maskLevels[Mask::MASK1][Branches::Rama3] -= 1;
+							}
+							if (item->data->nivelArbol == 3)
+							{
+								app->entityManager->GetPlayer()->maskLevels[Mask::MASK1][Branches::Rama4] -= 1;
+							}
+							item->data->usable2 = true;
+							if (item->data->usable2 + 1 < 5)
+							{
+								itum->data->usable2 = false;
+							}
+							numMejoras1 -= 1;
+							puntsRembolso += 1;
+							app->entityManager->GetPlayer()->maskOnePoints += 1;
+						}
+						else if ((mask == 3 && item->data->usable3 == false && itum->data->usable3 == true) || (mask == 3 && item->data->usable3 == false && item->data->nivelMejora + 1 == 5))
+						{
+							if (item->data->nivelArbol == 0)
+							{
+								app->entityManager->GetPlayer()->maskLevels[Mask::MASK2][Branches::Rama1] -= 1;
+							}
+							if (item->data->nivelArbol == 1)
+							{
+								app->entityManager->GetPlayer()->maskLevels[Mask::MASK2][Branches::Rama2] -= 1;
+							}
+							if (item->data->nivelArbol == 2)
+							{
+								app->entityManager->GetPlayer()->maskLevels[Mask::MASK2][Branches::Rama3] -= 1;
+							}
+							if (item->data->nivelArbol == 3)
+							{
+								app->entityManager->GetPlayer()->maskLevels[Mask::MASK2][Branches::Rama4] -= 1;
+							}
+							item->data->usable3 = true;
+							if (item->data->usable3 + 1 < 5)
+							{
+								itum->data->usable3 = false;
+							}
+							numMejoras2 -= 1;
+							puntsRembolso += 1;
+							app->entityManager->GetPlayer()->maskTwoPoints += 1;
+						}
+						else if ((mask == 4 && item->data->usable4 == false && itum->data->usable4 == true) || (mask == 4 && item->data->usable4 == false && item->data->nivelMejora + 1 == 5))
+						{
+							if (item->data->nivelArbol == 0)
+							{
+								app->entityManager->GetPlayer()->maskLevels[Mask::MASK3][Branches::Rama1] -= 1;
+							}
+							if (item->data->nivelArbol == 1)
+							{
+								app->entityManager->GetPlayer()->maskLevels[Mask::MASK3][Branches::Rama2] -= 1;
+							}
+							if (item->data->nivelArbol == 2)
+							{
+								app->entityManager->GetPlayer()->maskLevels[Mask::MASK3][Branches::Rama3] -= 1;
+							}
+							if (item->data->nivelArbol == 3)
+							{
+								app->entityManager->GetPlayer()->maskLevels[Mask::MASK3][Branches::Rama4] -= 1;
+							}
+							item->data->usable4 = true;
+							if (item->data->usable4 + 1 < 5)
+							{
+								itum->data->usable4 = false;
+							}
+							numMejoras3 -= 1;
+							puntsRembolso += 1;
+							app->entityManager->GetPlayer()->maskThreePoints += 1;
+						}
 					}
-					else if ((mask == 2 && item->data->usable2 == false && itum->data->usable2 == true) || (mask == 2 && item->data->usable2 == false && item->data->nivelMejora + 1 == 5))
-					{
-						if (item->data->nivelArbol == 0)
-						{
-							app->entityManager->GetPlayer()->maskLevels[Mask::MASK1][Branches::Rama1] -= 1;
-						}
-						if (item->data->nivelArbol == 1)
-						{
-							app->entityManager->GetPlayer()->maskLevels[Mask::MASK1][Branches::Rama2] -= 1;
-						}
-						if (item->data->nivelArbol == 2)
-						{
-							app->entityManager->GetPlayer()->maskLevels[Mask::MASK1][Branches::Rama3] -= 1;
-						}
-						if (item->data->nivelArbol == 3)
-						{
-							app->entityManager->GetPlayer()->maskLevels[Mask::MASK1][Branches::Rama4] -= 1;
-						}
-						item->data->usable2 = true;
-						if (item->data->usable2 + 1 < 5)
-						{
-							itum->data->usable2 = false;
-						}
-						numMejoras -= 1;
-						puntsRembolso += 1;
-						app->entityManager->GetPlayer()->maskOnePoints += 1;
-					}
-					else if ((mask == 3 && item->data->usable3 == false && itum->data->usable3 == true) || (mask == 3 && item->data->usable3 == false && item->data->nivelMejora + 1 == 5))
-					{
-						if (item->data->nivelArbol == 0)
-						{
-							app->entityManager->GetPlayer()->maskLevels[Mask::MASK2][Branches::Rama1] -= 1;
-						}
-						if (item->data->nivelArbol == 1)
-						{
-							app->entityManager->GetPlayer()->maskLevels[Mask::MASK2][Branches::Rama2] -= 1;
-						}
-						if (item->data->nivelArbol == 2)
-						{
-							app->entityManager->GetPlayer()->maskLevels[Mask::MASK2][Branches::Rama3] -= 1;
-						}
-						if (item->data->nivelArbol == 3)
-						{
-							app->entityManager->GetPlayer()->maskLevels[Mask::MASK2][Branches::Rama4] -= 1;
-						}
-						item->data->usable3 = true;
-						if (item->data->usable3 + 1 < 5)
-						{
-							itum->data->usable3 = false;
-						}
-						numMejoras -= 1;
-						puntsRembolso += 1;
-						app->entityManager->GetPlayer()->maskTwoPoints += 1;
-					}
-					else if ((mask == 4 && item->data->usable4 == false && itum->data->usable4 == true) || (mask == 4 && item->data->usable4 == false && item->data->nivelMejora + 1 == 5))
-					{
-						if (item->data->nivelArbol == 0)
-						{
-							app->entityManager->GetPlayer()->maskLevels[Mask::MASK3][Branches::Rama1] -= 1;
-						}
-						if (item->data->nivelArbol == 1)
-						{
-							app->entityManager->GetPlayer()->maskLevels[Mask::MASK3][Branches::Rama2] -= 1;
-						}
-						if (item->data->nivelArbol == 2)
-						{
-							app->entityManager->GetPlayer()->maskLevels[Mask::MASK3][Branches::Rama3] -= 1;
-						}
-						if (item->data->nivelArbol == 3)
-						{
-							app->entityManager->GetPlayer()->maskLevels[Mask::MASK3][Branches::Rama4] -= 1;
-						}
-						item->data->usable4 = true;
-						if (item->data->usable4 + 1 < 5)
-						{
-							itum->data->usable4 = false;
-						}
-						numMejoras -= 1;
-						puntsRembolso += 1;
-						app->entityManager->GetPlayer()->maskThreePoints += 1;
-					}
+
+
 				}
-
-
 			}
-		}
-		/*if (item->data->type == TreeType::MASK0)
-		{
-			item->data->usable1 = true;
-		}*/
+			/*if (item->data->type == TreeType::MASK0)
+			{
+				item->data->usable1 = true;
+			}*/
 
-	}
+		}
+	
 }
 
 void TreeManager::OnMovePointer()
@@ -1120,12 +1143,19 @@ bool TreeManager::Update(float dt)
 			app->entityManager->active = true;
 			app->physics->active = true;
 		}
-		if (numMejoras > 8) {
-			numMejoras = 8; // Limitar a 8 si es mayor
+		if (numMejoras0 > 8) {
+			numMejoras0 = 8; // Limitar a 8 si es mayor
 		}
-		if (puntsRembolso > 8) {
-			puntsRembolso = 8; // Limitar a 8 si es mayor
+		if (numMejoras1 > 8) {
+			numMejoras1 = 8; // Limitar a 8 si es mayor
 		}
+		if (numMejoras2 > 8) {
+			numMejoras2 = 8; // Limitar a 8 si es mayor
+		}
+		if (numMejoras3 > 8) {
+			numMejoras3 = 8; // Limitar a 8 si es mayor
+		}
+
 		int num;
 
 		num = numberRows + 1;
@@ -1359,6 +1389,8 @@ bool TreeManager::PostUpdate()
 
 			std::string texto = std::to_string(app->entityManager->GetPlayer()->maskZeroPoints) + "/8 Mask Points";
 			app->render->DrawTextBound(texto.c_str(), 945, 400, 370, { 0,0,0 });
+			std::string texto1 = std::to_string(numMejoras0) + "/8 Mejoras";
+			app->render->DrawTextBound(texto1.c_str(), 975, 500, 370, { 0,0,0 });
 
 		}
 		else if (mask == 2)
@@ -1366,6 +1398,8 @@ bool TreeManager::PostUpdate()
 
 			std::string texto = std::to_string(app->entityManager->GetPlayer()->maskOnePoints) + "/8 Mask Points";
 			app->render->DrawTextBound(texto.c_str(), 945, 400, 370, { 0,0,0 });
+			std::string texto1 = std::to_string(numMejoras1) + "/8 Mejoras";
+			app->render->DrawTextBound(texto1.c_str(), 975, 500, 370, { 0,0,0 });
 
 		}
 		else if (mask == 3)
@@ -1373,16 +1407,20 @@ bool TreeManager::PostUpdate()
 
 			std::string texto = std::to_string(app->entityManager->GetPlayer()->maskTwoPoints) + "/8 Mask Points";
 			app->render->DrawTextBound(texto.c_str(), 945, 400, 370, { 0,0,0 });
+			std::string texto1 = std::to_string(numMejoras2) + "/8 Mejoras";
+			app->render->DrawTextBound(texto1.c_str(), 975, 500, 370, { 0,0,0 });
 
 		}
 		else if (mask == 4)
 		{
 
 			std::string texto = std::to_string(app->entityManager->GetPlayer()->maskThreePoints) + "/8 Mask Points";
-			app->render->DrawTextBound(texto.c_str(), 945, 400, 370, { 0,0,0 });
+			app->render->DrawTextBound(texto.c_str(), 975, 400, 370, { 0,0,0 });
+			std::string texto1 = std::to_string(numMejoras3) + "/8 Mejoras";
+			app->render->DrawTextBound(texto1.c_str(), 975, 500, 370, { 0,0,0 });
 
 		}
-
+		
 
 
 

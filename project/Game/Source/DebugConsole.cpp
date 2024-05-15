@@ -64,6 +64,14 @@ bool DebugConsole::Awake(pugi::xml_node config)
 			app->inventoryManager->monedasObtenidas = amount;
 		});
 	commandList.Add(SET_GOLD);
+	
+	SET_MASK_POINTS = new DebugCommandArg<int>("set_mask_points", "Establece la cantidad de puntos de mascara(max 8) para todas las mascaras", "set_mask_points <cantidad>", [this](int amount) {
+		app->entityManager->GetPlayer()->maskZeroPoints = amount;
+		app->entityManager->GetPlayer()->maskOnePoints = amount;
+		app->entityManager->GetPlayer()->maskTwoPoints = amount;
+		app->entityManager->GetPlayer()->maskThreePoints = amount;
+			});
+	commandList.Add(SET_MASK_POINTS);
 
 	SET_PRIMARY_MASK = new DebugCommandArg<int>("set_primary_mask", "Establece la mascara primaria del jugador", "set_primary_mask <int mask>", [this](int mask) {
 			if (mask >= -1 && mask < 4) {
