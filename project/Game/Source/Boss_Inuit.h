@@ -68,7 +68,6 @@ public:
 	bool waveTimerColdDown(float time);
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 	void OnEndCollision(PhysBody* physA, PhysBody* physB);
-	bool GlobolTimerColdDown(float time);
 	//Veneno
 	void ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate);
 
@@ -117,6 +116,7 @@ private:
 	bool isFacingLeft = false;
 
 	iPoint originalPosition;
+	iPoint originalWavePosition;
 	iPoint bossArea;
 
 	int TSprite;
@@ -151,12 +151,15 @@ private:
 
 
 	//shockWave
-	float shockSize;
+	//float shockSize;
 	bool waveIsMax = false;
 	bool waveFinishi = true;
 	Timer waveTime;
 	float waveTimeClodDown = 0;
 	int distance = 0;
+	//ulti
+	bool ultDef = false;
+	bool saveOriginPos = true;
 
 
 	const float reviveTime = 5.0f;
