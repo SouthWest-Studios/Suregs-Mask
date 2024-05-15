@@ -61,8 +61,7 @@ public:
 
 	void UpdateAttackSensor(float dt);
 
-	//MapObject* GetCurrentRoom();
-	//MapObject* room;
+	MapObject* GetCurrentRoom();
 
 public:
 	

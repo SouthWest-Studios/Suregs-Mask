@@ -402,7 +402,7 @@ Cofre* EntityManager::GetCofre()
 
 bool EntityManager::PreUpdate()
 {
-	//UpdateEnemyActivation();
+	UpdateEnemyActivation();
 	//Ejemplo a�adir sprite en los Start():	app->render->objectsToDraw.push_back({ textura, posicion X, posicion Y, punto de anclaje en Y = (posY + num), ancho, largo});
 
 	for (DrawableObject& obj : objectsToDraw)
@@ -559,25 +559,29 @@ bool EntityManager::PostUpdate()
 	return ret;
 }
 
-// void EntityManager::UpdateEnemyActivation() {
-// 	// Obtén la sala actual del jugador
-// 	MapObject* currentRoom = GetPlayer()->GetCurrentRoom();
+void EntityManager::UpdateEnemyActivation() {
+	// Obtén la sala actual del jugador
+	MapObject* currentRoom = GetPlayer()->GetCurrentRoom();
+	//if(currentRoom != nullptr)	printf("current room: %d\n", currentRoom->id); //TESTING
 
-// 	// Obtén todos los enemigos
-// 	std::vector<Entity*> enemies = GetEnemies();
+	// Obtén todos los enemigos
+	std::vector<Entity*> enemies = GetEnemies();
 
-// 	// Recorre todos los enemigos
-// 	for (Entity* enemy : enemies) {
-// 		// Asegúrate de que el enemigo tiene una sala asignada
-// 		if (enemy->room != nullptr) {
-// 			// Si el enemigo está en la misma sala que el jugador, actívalo
-// 			if (enemy->room == currentRoom) {
-// 				enemy->Enable();
-// 			}
-// 			// Si no, desactívalo
-// 			else {
-// 				enemy->Disable();
-// 			}
-// 		}
-// 	}
-// }
+	// Recorre todos los enemigos
+	for (Entity* enemy : enemies) {
+		// Asegúrate de que el enemigo tiene una sala asignada
+		if (enemy->room != nullptr) {
+			printf("enemy room: %d, player room: %d\n", enemy->room->id, currentRoom->id);
+			// Si el enemigo está en la misma sala que el jugador, actívalo
+			if (enemy->room == currentRoom) {
+				enemy->Enable();
+				printf("Enemy activated\n");
+			}
+			// Si no, desactívalo
+			else {
+				enemy->Disable();
+				printf("Enemy deactivated\n");
+			}
+		}
+	}
+}
