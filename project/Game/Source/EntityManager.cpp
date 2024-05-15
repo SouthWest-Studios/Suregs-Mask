@@ -582,7 +582,8 @@ void EntityManager::UpdateEnemyActivation() {
 				enemy->pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
 				if(enemy->type == EntityType::ENEMY_OLS)
 				{
-					//limpiar colisión proyecrtiles
+					Enemy_Ols* olsEnemy = static_cast<Enemy_Ols*>(enemy);
+					olsEnemy->DestroyProjectile();
 				}
 				//printf("Enemy deactivated\n");
 			}
