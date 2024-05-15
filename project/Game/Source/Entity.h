@@ -6,6 +6,8 @@
 #include "Input.h"
 #include "Render.h"
 
+struct MapObject;
+
 enum class EntityType
 {
 	PLAYER,
@@ -220,6 +222,7 @@ public:
 		this->poisonTickRate = poisonTickRate;
 	}
 
+
 protected:
 	int poisonDamage;
 	float poisonDuration;
@@ -252,8 +255,6 @@ public:
 	float attackDamage;
 	float secondAttackDamage;
 
-	//MapObject* room;
-
 	bool playerInBossArea = false;
 	std::string description;
 	std::string titulo;
@@ -262,6 +263,8 @@ public:
 	SDL_Texture* CloseTexture = NULL;
 
 	bool plused = false;
+
+	MapObject* room = nullptr;
 
 };
 
