@@ -167,6 +167,9 @@ private:
 	bool inWave = false;
 	bool waveTimeStart = false;
 
+	//fase
+	float lifeLow40;
+	float lifeLow5;
 
 	const float reviveTime = 5.0f;
 	bool isDead = false;

@@ -80,9 +80,14 @@ bool Boss_Inuit::Start() {
 	attackDamage = config.attribute("attackDamage").as_float();
 	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();
-	bmrSpeed = 800;
-	//shockSize = 0;
-	//printf("Speed: %f", speed);
+	bmrSpeed = 80;
+	//fase
+	fase = FASE::FASE_ONE;
+	lifeLow40 = maxHealth * 0.4;
+	lifeLow5 = maxHealth * 0.05;
+
+	printf("\nlifeLow40: %f", lifeLow40);
+	printf("\nlifeLow5: %f", lifeLow5);
 	return true;
 }
 
@@ -141,7 +146,7 @@ bool Boss_Inuit::Update(float dt)
 	}
 
 
-
+	
 	switch (fase)
 	{
 	case FASE::FASE_ONE:
