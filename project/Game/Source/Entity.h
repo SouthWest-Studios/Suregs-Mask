@@ -265,6 +265,7 @@ public:
 	bool plused = false;
 
 	MapObject* room = nullptr;
+	bool isActive = true;
 
 };
 

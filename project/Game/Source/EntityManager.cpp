@@ -504,7 +504,7 @@ bool EntityManager::Update(float dt)
 	{
 		pEntity = item->data;
 
-		if (pEntity->active == false) continue;
+		if (pEntity->active == false || pEntity->isActive == false) continue;
 		ret = item->data->Update(dt);
 	}
 
@@ -571,16 +571,15 @@ void EntityManager::UpdateEnemyActivation() {
 	for (Entity* enemy : enemies) {
 		// Asegúrate de que el enemigo tiene una sala asignada
 		if (enemy->room != nullptr) {
-			printf("enemy room: %d, player room: %d\n", enemy->room->id, currentRoom->id);
 			// Si el enemigo está en la misma sala que el jugador, actívalo
 			if (enemy->room == currentRoom) {
-				enemy->Enable();
-				printf("Enemy activated\n");
+				enemy->isActive = true;
+				//printf("Enemy activated\n");
 			}
 			// Si no, desactívalo
 			else {
-				enemy->Disable();
-				printf("Enemy deactivated\n");
+				enemy->isActive = false;
+				//printf("Enemy deactivated\n");
 			}
 		}
 	}
