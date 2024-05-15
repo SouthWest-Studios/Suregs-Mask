@@ -104,10 +104,10 @@ bool CommerceHerreria::ApplyTrades()
 
 		//Agregar estos items al inventario
 		if (trade->type == 0 && trade->quantityTraded >= 1){
-			app->entityManager->GetPlayer()->swordLevel++;
+			app->inventoryManager->swordLevel++;
 		}
 		if (trade->type == 1 && trade->quantityTraded >= 1) {
-			app->entityManager->GetPlayer()->armorLevel++;
+			app->inventoryManager->armorLevel++;
 		}
 		
 
@@ -272,12 +272,12 @@ bool CommerceHerreria::Update(float dt)
 	actualTrades.clear();
 	if (app->entityManager->GetPlayer() != nullptr) {
 		for (int i = 0; i < trades.size(); i++) {
-			if (trades.at(i)->type == 0 && trades.at(i)->level == app->entityManager->GetPlayer()->swordLevel + 1) {
+			if (trades.at(i)->type == 0 && trades.at(i)->level == app->inventoryManager->swordLevel + 1) {
 				actualTrades.push_back(trades.at(i));
 				continue;
 			}
 
-			if (trades.at(i)->type == 1 && trades.at(i)->level == app->entityManager->GetPlayer()->armorLevel + 1) {
+			if (trades.at(i)->type == 1 && trades.at(i)->level == app->inventoryManager->armorLevel + 1) {
 				actualTrades.push_back(trades.at(i));
 				break;
 			}

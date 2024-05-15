@@ -80,10 +80,14 @@ public:
 	int highestIde = -1;
 	int idSaved;
 
+	int swordLevel = 0;
+	int armorLevel = 0;
+
+
 private:
 	pugi::xml_document configFile;
 	pugi::xml_node configNode;
-	int maxItemsPerRow = 3; // Define el número máximo de elementos por fila
+	int maxItemsPerRow = 3; // Define el nï¿½mero mï¿½ximo de elementos por fila
 };
 
 #endif // __INVENTORYMANAGER_H__

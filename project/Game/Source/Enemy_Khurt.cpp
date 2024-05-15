@@ -84,6 +84,8 @@ bool Enemy_Khurt::Start() {
 
 	//printf("Speed: %f", speed);
 
+	room = GetCurrentRoom();
+
 	return true;
 }
 
@@ -515,3 +517,48 @@ void Enemy_Khurt::CheckPoison() {
 	}
 }
 //VENENO ---------->
+
+
+MapObject* Enemy_Khurt::GetCurrentRoom()
+{
+	//salas pequeñas
+	for (ListItem<MapObject*>* item = app->map->smallRoomsList.start; item != nullptr; item = item->next)
+	{
+		MapObject* room = item->data;
+
+		// el jugador está dentro de la sala
+		if (position.x >= room->x && position.x <= room->x + room->width &&
+			position.y >= room->y && position.y <= room->y + room->height)
+		{
+			return room;
+		}
+	}
+
+	//salas grandes
+	for (ListItem<MapObject*>* item = app->map->largeRoomsList.start; item != nullptr; item = item->next)
+	{
+		MapObject* room = item->data;
+
+		// el jugador está dentro de la sala
+		if (position.x >= room->x && position.x <= room->x + room->width &&
+			position.y >= room->y && position.y <= room->y + room->height)
+		{
+			return room;
+		}
+	}
+
+	//salas l
+	for (ListItem<MapObject*>* item = app->map->LRoomsList.start; item != nullptr; item = item->next)
+	{
+		MapObject* room = item->data;
+
+		// el jugador está dentro de la sala
+		if (position.x >= room->x && position.x <= room->x + room->width &&
+			position.y >= room->y && position.y <= room->y + room->height)
+		{
+			return room;
+		}
+	}
+
+	return nullptr;
+}

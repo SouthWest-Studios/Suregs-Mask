@@ -62,7 +62,7 @@ public:
 	void UpdateAttackSensor(float dt);
 
 	MapObject* GetCurrentRoom();
-
+	void DestroyProjectile();
 public:
 	
 	//L02: DONE 2: Declare player parameters

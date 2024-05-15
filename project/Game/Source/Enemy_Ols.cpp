@@ -611,3 +611,11 @@ MapObject* Enemy_Ols::GetCurrentRoom()
 
 	return nullptr;
 }
+
+void Enemy_Ols::DestroyProjectile()
+{
+	if(attackSensor != nullptr){
+		app->physics->DestroyBody(attackSensor);
+		attackSensor = nullptr;
+	}
+}
