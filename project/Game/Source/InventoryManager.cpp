@@ -218,7 +218,7 @@ Inventity* InventoryManager::CreateItem(EntityType type, std::string descripcioo
 	case EntityType::ITEM_POCION_REGENERACION:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_pocion_regeneracion.png");
 		entity->type = InventityType::POCION_REGENERACION;
-		entity->objectID = 4;
+		entity->objectID = 2;
 		break;
 	case EntityType::ITEM_POCION_DANO:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_pocion_dano.png");
@@ -238,7 +238,70 @@ Inventity* InventoryManager::CreateItem(EntityType type, std::string descripcioo
 	case EntityType::ITEM_ZAFIRO:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_zafiro.png");
 		entity->type = InventityType::ORBE_MAGICO;
-		
+		break;
+	case EntityType::ITEM_ESPADA_NV2:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_espada_nv2.png");
+		entity->type = InventityType::ESPADA_NV2;
+		break;
+	case EntityType::ITEM_ESPADA_NV3:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_espada_nv3.png");
+		entity->type = InventityType::ESPADA_NV3;
+		break;
+	case EntityType::ITEM_ESPADA_NV4:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_espada_nv4.png");
+		entity->type = InventityType::ESPADA_NV4;
+		break;
+	case EntityType::ITEM_ESPADA_NV5:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_espada_nv5.png");
+		entity->type = InventityType::ESPADA_NV5;
+		break;
+	case EntityType::ITEM_ESPADA_NV6:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_espada_nv6.png");
+		entity->type = InventityType::ESPADA_NV6;
+		break;
+	case EntityType::ITEM_ESPADA_NV7:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_espada_nv7.png");
+		entity->type = InventityType::ESPADA_NV7;
+		break;
+	case EntityType::ITEM_ESPADA_NV8:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_espada_nv8.png");
+		entity->type = InventityType::ESPADA_NV8;
+		break;
+	case EntityType::ITEM_ESPADA_NV9:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_espada_nv9.png");
+		entity->type = InventityType::ESPADA_NV9;
+		break;
+	case EntityType::ITEM_ARMADURA_NV2:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_armadura_nv2.png");
+		entity->type = InventityType::ARMADURA_NV2;
+		break;
+	case EntityType::ITEM_ARMADURA_NV3:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_armadura_nv3.png");
+		entity->type = InventityType::ARMADURA_NV3;
+		break;
+	case EntityType::ITEM_ARMADURA_NV4:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_armadura_nv4.png");
+		entity->type = InventityType::ARMADURA_NV4;
+		break;
+	case EntityType::ITEM_ARMADURA_NV5:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_armadura_nv5.png");
+		entity->type = InventityType::ARMADURA_NV5;
+		break;
+	case EntityType::ITEM_ARMADURA_NV6:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_armadura_nv6.png");
+		entity->type = InventityType::ARMADURA_NV6;
+		break;
+	case EntityType::ITEM_ARMADURA_NV7:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_armadura_nv7.png");
+		entity->type = InventityType::ARMADURA_NV7;
+		break;
+	case EntityType::ITEM_ARMADURA_NV8:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_armadura_nv8.png");
+		entity->type = InventityType::ARMADURA_NV8;
+		break;
+	case EntityType::ITEM_ARMADURA_NV9:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_armadura_nv9.png");
+		entity->type = InventityType::ARMADURA_NV9;
 		break;
 	default:   
 		break;
@@ -360,6 +423,71 @@ Inventity* InventoryManager::CreateItem(InventityType type, bool addInventory) {
 			itemConfigurationNode = entitiesDataNode.child("item_pocion_orbe_magico");
 			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_ORBE_MAGICO, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""), addInventory);
 			break;
+		case InventityType::ESPADA_NV2:
+			itemConfigurationNode = entitiesDataNode.child("item_espada_nv2");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_ESPADA_NV2, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""), addInventory);
+			break;
+		case InventityType::ESPADA_NV3:
+			itemConfigurationNode = entitiesDataNode.child("item_espada_nv3");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_ESPADA_NV3, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""), addInventory);
+			break;
+		case InventityType::ESPADA_NV4:
+			itemConfigurationNode = entitiesDataNode.child("item_espada_nv4");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_ESPADA_NV4, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""), addInventory);
+			break;
+		case InventityType::ESPADA_NV5:
+			itemConfigurationNode = entitiesDataNode.child("item_espada_nv5");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_ESPADA_NV5, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""), addInventory);
+			break;
+		case InventityType::ESPADA_NV6:
+			itemConfigurationNode = entitiesDataNode.child("item_espada_nv6");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_ESPADA_NV6, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""), addInventory);
+			break;
+		case InventityType::ESPADA_NV7:
+			itemConfigurationNode = entitiesDataNode.child("item_espada_nv7");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_ESPADA_NV7, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""), addInventory);
+			break;
+		case InventityType::ESPADA_NV8:
+			itemConfigurationNode = entitiesDataNode.child("item_espada_nv8");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_ESPADA_NV8, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""), addInventory);
+			break;
+		case InventityType::ESPADA_NV9:
+			itemConfigurationNode = entitiesDataNode.child("item_espada_nv9");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_ESPADA_NV9, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""), addInventory);
+			break;
+		case InventityType::ARMADURA_NV2:
+			itemConfigurationNode = entitiesDataNode.child("item_armadura_nv2");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_ARMADURA_NV2, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""), addInventory);
+			break;
+		case InventityType::ARMADURA_NV3:
+			itemConfigurationNode = entitiesDataNode.child("item_armadura_nv3");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_ARMADURA_NV3, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""), addInventory);
+			break;
+		case InventityType::ARMADURA_NV4:
+			itemConfigurationNode = entitiesDataNode.child("item_armadura_nv4");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_ARMADURA_NV4, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""), addInventory);
+			break;
+		case InventityType::ARMADURA_NV5:
+			itemConfigurationNode = entitiesDataNode.child("item_armadura_nv5");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_ARMADURA_NV5, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""), addInventory);
+			break;
+		case InventityType::ARMADURA_NV6:
+			itemConfigurationNode = entitiesDataNode.child("item_armadura_nv6");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_ARMADURA_NV6, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""), addInventory);
+			break;
+		case InventityType::ARMADURA_NV7:
+			itemConfigurationNode = entitiesDataNode.child("item_armadura_nv7");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_ARMADURA_NV7, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""), addInventory);
+			break;
+		case InventityType::ARMADURA_NV8:
+			itemConfigurationNode = entitiesDataNode.child("item_armadura_nv8");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_ARMADURA_NV8, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""), addInventory);
+			break;
+		case InventityType::ARMADURA_NV9:
+			itemConfigurationNode = entitiesDataNode.child("item_armadura_nv9");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_ARMADURA_NV9, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""), addInventory);
+			break;
+
 	}
 
 
@@ -1064,7 +1192,7 @@ bool InventoryManager::PostUpdate()
 				
 			}
 			horizontalPosition = 260 + columnIndex * 105; // Calcula la posición horizontal para pEntity
-			verticalPosition = 160 + rowIndex * 104; // Calcula la posición vertical para pEntity
+			verticalPosition = 160 + rowIndex * 102; // Calcula la posición vertical para pEntity
 
 			app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
 
@@ -1079,9 +1207,9 @@ bool InventoryManager::PostUpdate()
 		{
 			if (PointerId == itum->data->id)
 			{
-				/*app->render->DrawText(itum->data->desc.c_str(), 680, 450, 270, 400, 0, 0, 0, 0, false);*/
-				app->render->DrawTextBound(itum->data->desc.c_str(), 680, 450, 270, { 0,0,0 });
-				app->render->DrawTextBound(itum->data->name.GetString(), 670, 340, 90, { 0,0,0 });
+				/*app->render->DrawText(itum->data->desc.c_str(), 680, 250, 270, 200, 0, 0, 0, 0, false);*/
+				app->render->DrawTextBound(itum->data->desc.c_str(), 680, 250, 270, { 0,0,0 });
+				app->render->DrawTextBound(itum->data->name.GetString(), 670, 320, 90, { 0,0,0 });
 				app->render->DrawTexture(itum->data->icon, 780, 200, 1.8, SDL_FLIP_NONE, 0, 0);
 			} 
 

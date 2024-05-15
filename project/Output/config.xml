@@ -208,7 +208,24 @@
 		<item_pocion_orbe_magico	texturePath="Assets/Textures/Entidades/Items/textura_orbe_magico.png"			description=" "											type ="Consumible"	name="Orbe Magico"/>
 		<item_pocion_orbe_magico	texturePath="Assets/Textures/Entidades/Items/textura_orbe_magico.png"			description=" "											type ="Consumible"	name="Orbe Magico"/>
 		<item_zafiro				texturePath="Assets/Textures/Entidades/Items/textura_zafiro.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Zafiro"/>
-		
+		<item_espada_nv2				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv2.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="espada_nv2"/>
+		<item_espada_nv3				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv3.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="espada_nv3"/>
+		<item_espada_nv4				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv4.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="espada_nv4"/>
+		<item_espada_nv4				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv4.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="espada_nv4"/>
+		<item_espada_nv5				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv3.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="espada_nv3"/>
+		<item_espada_nv6				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv6.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="espada_nv6"/>
+		<item_espada_nv7				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv7.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="espada_nv7"/>
+		<item_espada_nv8				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv8.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="espada_nv8"/>
+		<item_espada_nv9				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv9.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="espada_nv9"/>
+		<item_armadura_nv2				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv2.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="armadura_nv2"/>
+		<item_armadura_nv3				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv3.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="armadura_nv3"/>
+		<item_armadura_nv4				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv4.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="armadura_nv4"/>
+		<item_armadura_nv5				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv5.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="armadura_nv5"/>
+		<item_armadura_nv6				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv6.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="armadura_nv6"/>
+		<item_armadura_nv7				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv7.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="armadura_nv7"/>
+		<item_armadura_nv8				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv8.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="armadura_nv8"/>
+		<item_armadura_nv9				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv9.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="armadura_nv9"/>
+
 		<item_pez_pequeno texturePath="---" description="aleix" type ="Pez" name="Pez pequeño"/>
 		<item_pez_mediano texturePath="---" description="es un pez pequeño" type ="Pez" name="Pez mediano"/>
 		<item_pez_grande texturePath="---" description="bobo que mezcla sistemas" type="Pez" name="Pez grande"/>
