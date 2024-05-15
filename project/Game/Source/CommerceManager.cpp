@@ -206,6 +206,8 @@ std::vector<Trade*> CommerceManager::LoadTrades(pugi::xml_node nodeTrade)
 			trade->quantityRequested.push_back(quantityRequestedInts.at(i));
 		}
 
+		trade->type = tradeNode.attribute("type").as_uint(2);
+		trade->level = tradeNode.attribute("level").as_uint(0);
 		
 		/*trade->itemsRequested.push_back(app->inventoryManager->CreateItem((InventityType)tradeNode.attribute("itemRequested").as_int()));
 		trade->quantityRequested.push_back(tradeNode.attribute("quantityItemRequested").as_int());*/
