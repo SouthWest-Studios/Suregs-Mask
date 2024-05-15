@@ -127,7 +127,6 @@ enum class EntityState_Boss_Musri
 };
 
 
-
 class Entity
 {
 public:
@@ -236,6 +235,7 @@ public:
 	float attackDamage;
 	float secondAttackDamage;
 
+	//MapObject* room;
 
 	bool playerInBossArea = false;
 	std::string description;
@@ -245,7 +245,7 @@ public:
 	SDL_Texture* CloseTexture = NULL;
 
 	bool plused = false;
-	
+
 };
 
 #endif // __ENTITY_H__
