@@ -235,6 +235,11 @@ Inventity* InventoryManager::CreateItem(EntityType type, std::string descripcioo
 		entity->type = InventityType::ORBE_MAGICO;
 		entity->objectID = 7;
 		break;
+	case EntityType::ITEM_ZAFIRO:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_zafiro.png");
+		entity->type = InventityType::ORBE_MAGICO;
+		
+		break;
 	default:   
 		break;
 	}

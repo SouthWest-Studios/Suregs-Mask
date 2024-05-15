@@ -203,7 +203,8 @@
 		<item_pocion_velocidad		texturePath="Assets/Textures/Entidades/Items/textura_pocion_velocidad.png"		description="Curiosa pócima que aumenta tu velocidad de manera momentánea."	type ="Consumible"	name="Pócima de velocidad"/>
 		<item_pocion_orbe_magico	texturePath="Assets/Textures/Entidades/Items/textura_orbe_magico.png"			description=" "											type ="Consumible"	name="Orbe Magico"/>
 		<item_pocion_orbe_magico	texturePath="Assets/Textures/Entidades/Items/textura_orbe_magico.png"			description=" "											type ="Consumible"	name="Orbe Magico"/>
-
+		<item_zafiro				texturePath="Assets/Textures/Entidades/Items/textura_zafiro.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Zafiro"/>
+		
 		<item_pez_pequeno texturePath="---" description="aleix" type ="Pez" name="Pez pequeño"/>
 		<item_pez_mediano texturePath="---" description="es un pez pequeño" type ="Pez" name="Pez mediano"/>
 		<item_pez_grande texturePath="---" description="bobo que mezcla sistemas" type="Pez" name="Pez grande"/>

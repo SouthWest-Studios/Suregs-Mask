@@ -48,6 +48,7 @@
 #include "Item_Pocion_Vida_2.h"
 #include "Item_Pocion_Vida_3.h"
 #include "Item_Pocion_Vida_Max.h"
+#include "Item_Zafiro.h"
 
 
 
@@ -220,6 +221,9 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 		break;
 	case EntityType::ITEM_SALIVA:
 		entity = new Item_Saliva(type, id, 100, 300, 5, 2);
+		break;
+	case EntityType::ITEM_ZAFIRO:
+		entity = new Item_Zafiro(type, 100, 100, 300, 5, 2);
 		break;
 	case EntityType::ITEM:
 		entity = new Item();
