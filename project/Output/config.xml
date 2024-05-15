@@ -627,10 +627,11 @@
 		</commerce>
 		
 		<!-- Herreria -->
-		<commerce id="3" type="1" positionGeneralX="66" positionGeneralY="33" positionListX="520" positionListY="60" positionInListX="23" positionInListY="22" tradeSpacing="150" itemSpacing="150" itemsRequestedSpacing="350"
+		<commerce id="3" type="1" positionGeneralX="66" positionGeneralY="33" positionListX="520" positionListY="60" positionInListX="23" positionInListY="22" tradeSpacing="150" itemSpacing="100" itemsRequestedSpacing="250"
 				  NPCTexturePath="Assets/Textures/Entidades/NPCs/Dialogo/texture_herrera.png" npcPositionX="0" npcPositionY="0"
 				  >
 			<trades>
+				<!-- Espadas -->
 				<trade type="0" level="1" itemOffered="27" quantityItemOffered="1" itemRequested="-1" quantityItemRequested="100"/>
 				<trade type="0" level="2" itemOffered="28" quantityItemOffered="1" itemRequested="-1" quantityItemRequested="160"/>
 				<trade type="0" level="3" itemOffered="29" quantityItemOffered="1" itemRequested="-1,18" quantityItemRequested="210,1"/>
@@ -640,7 +641,8 @@
 				<trade type="0" level="7" itemOffered="33" quantityItemOffered="1" itemRequested="-1" quantityItemRequested="520"/>
 				<trade type="0" level="8" itemOffered="34" quantityItemOffered="1" itemRequested="-1,3" quantityItemRequested="600,1"/>
 				<trade type="0" level="9" itemOffered="34" quantityItemOffered="1" itemRequested="-1" quantityItemRequested="1000"/>
-				
+
+				<!-- Armaduras -->
 				<trade type="1" level="1" itemOffered="35" quantityItemOffered="1" itemRequested="-1" quantityItemRequested="70"/>
 				<trade type="1" level="2" itemOffered="36" quantityItemOffered="1" itemRequested="-1" quantityItemRequested="100"/>
 				<trade type="1" level="3" itemOffered="37" quantityItemOffered="1" itemRequested="-1,8" quantityItemRequested="150,6"/>

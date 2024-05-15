@@ -284,6 +284,10 @@ bool CommerceHerreria::Update(float dt)
 
 		}
 	}
+	else {
+		actualTrades.push_back(trades.at(0));
+		actualTrades.push_back(trades.at(9));
+	}
 
 	
 
@@ -367,23 +371,13 @@ bool CommerceHerreria::PostUpdate()
 				app->render->DrawTexture(backgroundTradeHerreriaItemTexture, positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j), y + positionInList.y + 7, 1, SDL_FLIP_NONE, nullptr, 0, 0);
 
 				//Primer item de oferta
-				app->render->DrawTexture(trade->itemsOffered.at(j)->icon, positionGeneral.x + positionList.x + positionInList.x - 10 + (itemSpacing * j), y + positionInList.y , 0.65f, SDL_FLIP_NONE, nullptr, 0, 0);
+				app->render->DrawTexture(trade->itemsOffered.at(j)->icon, positionGeneral.x + positionList.x + positionInList.x - 10 + (itemSpacing * j), y + positionInList.y , 1, SDL_FLIP_NONE, nullptr, 0, 0);
 
-				//Cantidad
-				app->render->DrawTextBound(std::to_string(trade->quantityOffered.at(j)).c_str(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j) + 60, y + positionInList.y, 20);
-			
-				//Cantidad a obtener:
-				std::string cantidadObtener = "(" + std::to_string((trade->quantityOffered.at(j) * trade->quantityTraded)) + ")";
-				app->render->DrawTextBound(cantidadObtener.c_str(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j) + 55, y + positionInList.y + 20, 20);
-
-			
 			}
 
 			//Si solo ofrece un item, poner el nombre de este al lado
 			if (trade->itemsOffered.size() == 1) {
-				
-				app->render->DrawTextBound(trade->itemsOffered.at(0)->name.GetString(), positionGeneral.x + positionList.x + positionInList.x + 100, y + positionInList.y + 0, 200);
-
+				app->render->DrawTextBound(trade->itemsOffered.at(0)->name.GetString(), positionGeneral.x + positionList.x + positionInList.x + 80, y + positionInList.y + 20, 200);
 			}
 
 
@@ -391,13 +385,13 @@ bool CommerceHerreria::PostUpdate()
 			for (int j = 0; j < trade->itemsRequested.size(); j++) {
 
 				//Items background
-				app->render->DrawTexture(backgroundTradeItemTexture, positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j) + itemsRequestedSpacing, y + positionInList.y, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+				app->render->DrawTexture(backgroundTradeItemTexture, positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j) + itemsRequestedSpacing, y + positionInList.y + 15, 1, SDL_FLIP_NONE, nullptr, 0, 0);
 
 				//Primer item de oferta
-				app->render->DrawTexture(trade->itemsRequested.at(j)->icon, positionGeneral.x + positionList.x + positionInList.x - 10 + (itemSpacing * j) + itemsRequestedSpacing, y + positionInList.y - 10, 0.65f, SDL_FLIP_NONE, nullptr, 0, 0);
+				app->render->DrawTexture(trade->itemsRequested.at(j)->icon, positionGeneral.x + positionList.x + positionInList.x - 10 + (itemSpacing * j) + itemsRequestedSpacing, y + positionInList.y + 5, 0.65f, SDL_FLIP_NONE, nullptr, 0, 0);
 				
 				//Cantidad
-				app->render->DrawTextBound(std::to_string(trade->quantityRequested.at(j)).c_str(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j)+ itemsRequestedSpacing + 50, y + positionInList.y, 20);
+				app->render->DrawTextBound(std::to_string(trade->quantityRequested.at(j)).c_str(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j)+ itemsRequestedSpacing + 50, y + positionInList.y + 15, 20);
 
 				//Cantidad inventario:
 				int calculoCantidad = 0;
@@ -413,7 +407,7 @@ bool CommerceHerreria::PostUpdate()
 				calculoCantidad = cantidadEnInventario - cantidadEnActivoTodosTrades;
 				
 				std::string cantidadObtener = "(" + std::to_string(calculoCantidad) + ")";
-				app->render->DrawTextBound(cantidadObtener.c_str(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j) + itemsRequestedSpacing + 55, y + positionInList.y + 20, 20);
+				app->render->DrawTextBound(cantidadObtener.c_str(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j) + itemsRequestedSpacing + 45, y + positionInList.y + 35, 20);
 
 			}
 
