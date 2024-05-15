@@ -75,7 +75,9 @@ bool CommerceManager::Start() {
 
 	while (commerceNode != NULL) {
 
-		Commerce* commerce = CreateCommerce(CommerceType::BASICO, commerceNode.attribute("id").as_uint(), LoadTrades(commerceNode.child("trades")));
+
+
+		Commerce* commerce = CreateCommerce((CommerceType)commerceNode.attribute("type").as_uint(0), commerceNode.attribute("id").as_uint(), LoadTrades(commerceNode.child("trades")));
 
 		commerce->positionGeneral = iPoint(commerceNode.attribute("positionGeneralX").as_int(), commerceNode.attribute("positionGeneralY").as_int());
 		commerce->positionList = iPoint(commerceNode.attribute("positionListX").as_int(), commerceNode.attribute("positionListY").as_int());
@@ -108,7 +110,15 @@ bool CommerceManager::CleanUp()
 
 Commerce* CommerceManager::CreateCommerce(CommerceType type, uint id, std::vector<Trade*> trades)
 {
-	Commerce* commerce = new Commerce(id);
+	Commerce* commerce;
+	if (type == CommerceType::HERRERIA) {
+		commerce = new CommerceHerreria(id);
+	}
+	else {
+		commerce = new Commerce(id);
+	}
+
+	
 
 	commerce->backgroundPathTexture						= backgroundPathTexture;
 	commerce->backgroundTradePathTexture				= backgroundTradePathTexture;

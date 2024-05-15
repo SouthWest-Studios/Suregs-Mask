@@ -97,6 +97,7 @@
   <ItemGroup>
     <ClCompile Include="Source\BestiarioManager.cpp" />
     <ClCompile Include="Source\Cofre.cpp" />
+    <ClCompile Include="Source\CommerceHerreria.cpp" />
     <ClCompile Include="Source\Emitter.cpp" />
     <ClCompile Include="Source\Enemy_Boorok.cpp" />
     <ClCompile Include="Source\Boss_Inuit.cpp" />

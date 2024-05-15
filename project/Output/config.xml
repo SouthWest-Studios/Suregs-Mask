@@ -542,7 +542,7 @@
 		
 		
 		
-
+		<!-- test -->
 		<commerce id="0" positionGeneralX="66" positionGeneralY="33" positionListX="280" positionListY="10" positionInListX="23" positionInListY="22" tradeSpacing="100" itemSpacing="150" itemsRequestedSpacing="350">
 			<trades>
 				<trade itemOffered="-1,2" quantityItemOffered="100,2" itemRequested="2" quantityItemRequested="3"/>
@@ -595,6 +595,17 @@
 				<trade itemOffered="25" quantityItemOffered="1" itemRequested="-1,17" quantityItemRequested="60,3"/>
 				<trade itemOffered="26" quantityItemOffered="1" itemRequested="-1,2" quantityItemRequested="150,8"/>
 
+			</trades>
+		</commerce>
+		
+		<!-- Herreria -->
+		<commerce id="3" type="1" positionGeneralX="66" positionGeneralY="33" positionListX="280" positionListY="10" positionInListX="23" positionInListY="22" tradeSpacing="100" itemSpacing="150" itemsRequestedSpacing="350"
+				  NPCTexturePath="Assets/Textures/Entidades/NPCs/Dialogo/texture_bruja.png" npcPositionX="0" npcPositionY="0"
+				  >
+			<trades>
+				<trade itemOffered="19" quantityItemOffered="1" itemRequested="-1" quantityItemRequested="20"/>
+				<trade itemOffered="19" quantityItemOffered="1" itemRequested="-1" quantityItemRequested="20"/>
+				
 			</trades>
 		</commerce>
 		

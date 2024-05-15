@@ -20,7 +20,7 @@
 			
 				<option1 text="¿Qué ofreces?">
 					<sentence text="Con los materiales necesarios podré forjar mejoras para tu equipo. ¡No dudes en venir cuando quieras mejorar tus herramientas de combate!"/>
-					<commerce id="1"/> 
+					<commerce id="3"/> 
 				</option1>
 			
 				<option2 text="¡Adiós!">
