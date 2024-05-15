@@ -742,28 +742,40 @@ void InventoryManager::UseItemSelected(int id)
 				break;
 			}
 			case InventityType::POCION_VIDA_1:
-				if (app->entityManager->GetPlayer()->currentStats.currentHealth < app->entityManager->GetPlayer()->currentStats.maxHealth + app->entityManager->GetPlayer()->armorPerLevel[app->entityManager->GetPlayer()->armorLevel]) {
-					app->entityManager->GetPlayer()->currentStats.currentHealth += std::min(20.0f, app->entityManager->GetPlayer()->currentStats.maxHealth + app->entityManager->GetPlayer()->armorPerLevel[app->entityManager->GetPlayer()->armorLevel] - app->entityManager->GetPlayer()->currentStats.currentHealth);
+				if (app->entityManager->GetPlayer()->currentStats.currentHealth <= app->entityManager->GetPlayer()->currentStats.maxHealth + app->entityManager->GetPlayer()->armorPerLevel[app->entityManager->GetPlayer()->armorLevel]) {
+					app->entityManager->GetPlayer()->currentStats.currentHealth += 20;
+					if (app->entityManager->GetPlayer()->currentStats.currentHealth >= app->entityManager->GetPlayer()->currentStats.maxHealth /*+ app->entityManager->GetPlayer()->armorPerLevel[app->entityManager->GetPlayer()->armorLevel]*/)
+					{
+						app->entityManager->GetPlayer()->currentStats.currentHealth = app->entityManager->GetPlayer()->currentStats.maxHealth;
+					}
 					printf("uso POCION_VIDA_1. Vida: %f \n", app->entityManager->GetPlayer()->currentStats.currentHealth);
 					DestroyItemById(id);
 				}
 				break;
 			case InventityType::POCION_VIDA_2:
-				if (app->entityManager->GetPlayer()->currentStats.currentHealth < app->entityManager->GetPlayer()->currentStats.maxHealth + app->entityManager->GetPlayer()->armorPerLevel[app->entityManager->GetPlayer()->armorLevel]) {
-					app->entityManager->GetPlayer()->currentStats.currentHealth += std::min(50.0f, app->entityManager->GetPlayer()->currentStats.maxHealth + app->entityManager->GetPlayer()->armorPerLevel[app->entityManager->GetPlayer()->armorLevel] - app->entityManager->GetPlayer()->currentStats.currentHealth);
+				if (app->entityManager->GetPlayer()->currentStats.currentHealth <= app->entityManager->GetPlayer()->currentStats.maxHealth + app->entityManager->GetPlayer()->armorPerLevel[app->entityManager->GetPlayer()->armorLevel]) {
+					app->entityManager->GetPlayer()->currentStats.currentHealth += 50;
+					if (app->entityManager->GetPlayer()->currentStats.currentHealth >= app->entityManager->GetPlayer()->currentStats.maxHealth /*+ app->entityManager->GetPlayer()->armorPerLevel[app->entityManager->GetPlayer()->armorLevel]*/)
+					{
+						app->entityManager->GetPlayer()->currentStats.currentHealth = app->entityManager->GetPlayer()->currentStats.maxHealth;
+					}
 					printf("uso POCION_VIDA_2. Vida: %f \n", app->entityManager->GetPlayer()->currentStats.currentHealth);
 					DestroyItemById(id);
 				}
 				break;
 			case InventityType::POCION_VIDA_3:
-				if (app->entityManager->GetPlayer()->currentStats.currentHealth < app->entityManager->GetPlayer()->currentStats.maxHealth + app->entityManager->GetPlayer()->armorPerLevel[app->entityManager->GetPlayer()->armorLevel]) {
-					app->entityManager->GetPlayer()->currentStats.currentHealth += std::min(150.0f, app->entityManager->GetPlayer()->maxHealth + app->entityManager->GetPlayer()->armorPerLevel[app->entityManager->GetPlayer()->armorLevel] - app->entityManager->GetPlayer()->currentStats.currentHealth);
+				if (app->entityManager->GetPlayer()->currentStats.currentHealth <= app->entityManager->GetPlayer()->currentStats.maxHealth + app->entityManager->GetPlayer()->armorPerLevel[app->entityManager->GetPlayer()->armorLevel]) {
+					app->entityManager->GetPlayer()->currentStats.currentHealth += 150;
+					if (app->entityManager->GetPlayer()->currentStats.currentHealth >= app->entityManager->GetPlayer()->currentStats.maxHealth /*+ app->entityManager->GetPlayer()->armorPerLevel[app->entityManager->GetPlayer()->armorLevel]*/)
+					{
+						app->entityManager->GetPlayer()->currentStats.currentHealth = app->entityManager->GetPlayer()->currentStats.maxHealth;
+					}
 					printf("uso POCION_VIDA_3. Vida: %f \n", app->entityManager->GetPlayer()->currentStats.currentHealth);
 					DestroyItemById(id);
 				}
 				break;
 			case InventityType::POCION_VIDA_MAX:
-				app->entityManager->GetPlayer()->currentStats.currentHealth = app->entityManager->GetPlayer()->currentStats.maxHealth + app->entityManager->GetPlayer()->armorPerLevel[app->entityManager->GetPlayer()->armorLevel];
+				app->entityManager->GetPlayer()->currentStats.currentHealth = app->entityManager->GetPlayer()->currentStats.maxHealth /*+ app->entityManager->GetPlayer()->armorPerLevel[app->entityManager->GetPlayer()->armorLevel]*/;
 				printf("uso POCION_VIDA_MAX. Vida: %f \n", app->entityManager->GetPlayer()->currentStats.currentHealth);
 				DestroyItemById(id);
 
@@ -771,6 +783,10 @@ void InventoryManager::UseItemSelected(int id)
 			case InventityType::POCION_REGENERACION:
 				app->entityManager->GetPlayer()->regenAmount = 50 / 25; //valor de regeneracion de la pocion dividido por la cantidad de veces que se regenerara durante la duración de la pocion
 				app->entityManager->GetPlayer()->regenTimer.Start();
+				if (app->entityManager->GetPlayer()->currentStats.currentHealth >= app->entityManager->GetPlayer()->currentStats.maxHealth /*+ app->entityManager->GetPlayer()->armorPerLevel[app->entityManager->GetPlayer()->armorLevel]*/)
+				{
+					app->entityManager->GetPlayer()->currentStats.currentHealth = app->entityManager->GetPlayer()->currentStats.maxHealth;
+				}
 				printf("uso POCION_REGENERACION. Vida: %f \n", app->entityManager->GetPlayer()->currentStats.currentHealth);
 				DestroyItemById(id);
 				break;
