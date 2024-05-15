@@ -1166,44 +1166,45 @@ bool TreeManager::Update(float dt)
 			numberRows += 1;
 		}
 
+		Player* player = app->entityManager->GetPlayer();
+		if (player != nullptr)
+		{
+			if (player->maskZeroPoints > 8)
+			{
+				player->maskZeroPoints = 8;
+			}
+			if (player->maskZeroPoints < 0)
+			{
+				player->maskZeroPoints = 0;
+			}
+			if (player->maskOnePoints > 8)
+			{
+				player->maskOnePoints = 8;
+			}
+			if (player->maskOnePoints < 0)
+			{
+				player->maskOnePoints = 0;
+			}
+			if (player->maskTwoPoints > 8)
+			{
+				player->maskTwoPoints = 8;
+			}
+			if (player->maskTwoPoints < 0)
+			{
+				player->maskTwoPoints = 0;
+			}
+			if (player->maskThreePoints > 8)
+			{
+				player->maskThreePoints = 8;
+			}
+			if (player->maskThreePoints < 0)
+			{
+				player->maskThreePoints = 0;
+			}
+		}
 
 	}
-	Player* player = app->entityManager->GetPlayer();
-	if (player != nullptr)
-	{
-		if (player->maskZeroPoints > 8)
-		{
-			player->maskZeroPoints = 8;
-		}
-		if (player->maskZeroPoints < 0)
-		{
-			player->maskZeroPoints = 0;
-		}
-		if (player->maskOnePoints > 8)
-		{
-			player->maskOnePoints = 8;
-		}
-		if (player->maskOnePoints < 0)
-		{
-			player->maskOnePoints = 0;
-		}
-		if (player->maskTwoPoints > 8)
-		{
-			player->maskTwoPoints = 8;
-		}
-		if (player->maskTwoPoints < 0)
-		{
-			player->maskTwoPoints = 0;
-		}
-		if (player->maskThreePoints > 8)
-		{
-			player->maskThreePoints = 8;
-		}
-		if (player->maskThreePoints < 0)
-		{
-			player->maskThreePoints = 0;
-		}
-	}
+	
 	
 	
 

@@ -290,7 +290,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 13:
 		app->savedGame = 1;
-		//app->LoadRequest();
+		/*app->LoadRequest();*/
 		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
 		app->menu->active = true;
 		app->guiManager->pointerId = 100;
