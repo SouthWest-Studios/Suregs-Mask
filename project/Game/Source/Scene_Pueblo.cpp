@@ -57,7 +57,7 @@ bool Scene_Pueblo::Start()
 	// Stop the music from previous scenes
 	app->audio->StopMusic();
 	// Timer for music
-	app->audio->timer.Start();
+	app->audio->musicTimer.Start();
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);

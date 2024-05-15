@@ -58,9 +58,8 @@ public:
 	// Play a WAV after the specified time
 	void PlayRunFx(unsigned int name, unsigned int name2, unsigned int name3);
 
-	void PlayAttackFx(unsigned int name);
-
-	void PlayHitFx(unsigned int name);
+	// Play a WAV after the specified time, time in milliseconds
+	void PlayTimedFx(unsigned int name, int time);
 
 public:
 
@@ -69,7 +68,7 @@ public:
 
 	bool playingMusic = false;
 	bool playingRunFx = false;
-	Timer timer;
+	Timer musicTimer;
 
 	map<unsigned int, int> activeChannels;
 
@@ -78,11 +77,7 @@ private:
 	int runTime = 840;
 	Timer runTimer;
 
-	int hitTime = 575;
-	Timer hitTimer;
-
-	int attackTime = 448;
-	Timer attackTimer;
+	Timer timer;
 
 	_Mix_Music* music;
 	List<Mix_Chunk *>	fx;

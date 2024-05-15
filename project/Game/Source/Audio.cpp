@@ -235,7 +235,7 @@ unsigned int Audio::LoadAudioFx(const char* name)
 void Audio::PlayMusicAfterDelay(const char* name, float delayInSeconds, float fadeTime)
 {
 	// Esperar el tiempo especificado
-	if (timer.ReadSec() >= delayInSeconds) {
+	if (musicTimer.ReadSec() >= delayInSeconds) {
 		// Una vez que haya pasado el tiempo especificado, reproducir la canción
 		LoadAudioMusic(name, fadeTime);
 		playingMusic = true;
@@ -297,20 +297,11 @@ void Audio::PlayRunFx(unsigned int name, unsigned int name2, unsigned int name3)
 	}
 }
 
-void Audio::PlayAttackFx(unsigned int name)
+void Audio::PlayTimedFx(unsigned int name, int time) 
 {
-	if (attackTimer.ReadMSec() > attackTime) {
+	if (timer.ReadMSec() > time) {
 
 		PlayFx(name);
-		attackTimer.Start();
-	}
-}
-
-void Audio::PlayHitFx(unsigned int name)
-{
-	if (hitTimer.ReadMSec() > hitTime) {
-
-		PlayFx(name);
-		hitTimer.Start();
+		timer.Start();
 	}
 }
