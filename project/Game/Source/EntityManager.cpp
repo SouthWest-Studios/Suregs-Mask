@@ -50,6 +50,7 @@
 #include "Item_Pocion_Vida_Max.h"
 
 
+
 #include "Defs.h"
 #include "Log.h"
 
@@ -397,6 +398,7 @@ Cofre* EntityManager::GetCofre()
 
 bool EntityManager::PreUpdate()
 {
+	//UpdateEnemyActivation();
 	//Ejemplo a�adir sprite en los Start():	app->render->objectsToDraw.push_back({ textura, posicion X, posicion Y, punto de anclaje en Y = (posY + num), ancho, largo});
 
 	for (DrawableObject& obj : objectsToDraw)
@@ -552,3 +554,26 @@ bool EntityManager::PostUpdate()
 
 	return ret;
 }
+
+// void EntityManager::UpdateEnemyActivation() {
+// 	// Obtén la sala actual del jugador
+// 	MapObject* currentRoom = GetPlayer()->GetCurrentRoom();
+
+// 	// Obtén todos los enemigos
+// 	std::vector<Entity*> enemies = GetEnemies();
+
+// 	// Recorre todos los enemigos
+// 	for (Entity* enemy : enemies) {
+// 		// Asegúrate de que el enemigo tiene una sala asignada
+// 		if (enemy->room != nullptr) {
+// 			// Si el enemigo está en la misma sala que el jugador, actívalo
+// 			if (enemy->room == currentRoom) {
+// 				enemy->Enable();
+// 			}
+// 			// Si no, desactívalo
+// 			else {
+// 				enemy->Disable();
+// 			}
+// 		}
+// 	}
+// }

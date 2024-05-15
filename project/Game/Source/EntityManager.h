@@ -68,6 +68,7 @@ public:
 	std::vector<Entity*> GetEnemiesOls();
 
 	Cofre* EntityManager::GetCofre();
+	//void UpdateEnemyActivation();
 	
 	
 public:
