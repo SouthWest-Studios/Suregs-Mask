@@ -901,7 +901,7 @@ void Player::Attack(float dt)
 		}
 	}
 
-	app->audio->PlayAttackFx(basic_combo_attack1_fx);
+	app->audio->PlayTimedFx(basic_combo_attack1_fx, 448);
 }
 
 void Player::UnequipMasks() {
@@ -1218,7 +1218,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 				
 			}
 		}
-		app->audio->PlayFx(get_item_fx);
+		app->audio->PlayTimedFx(get_item_fx, 201);
 		break;
 	case ColliderType::NOTA:
 		LOG("Collision NOTA");
@@ -2138,7 +2138,7 @@ void Player::TakeDamage(float damage) {
         if(dashCollision == nullptr && !isDashing){
             currentStats.currentHealth -= damage;
             isInvisible = false;
-			app->audio->PlayHitFx(player_get_damage_fx);
+			app->audio->PlayTimedFx(player_get_damage_fx, 575);
             printf("Player has received  %f damage\n", damage);
             damageTimer.Start();
 
