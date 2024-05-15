@@ -172,6 +172,13 @@ bool CommerceHerreria::LoadTextures()
 
 	npcTexture = app->tex->Load(npcPathTexture);
 
+
+
+	backgroundTradeHerreriaTexture = app->tex->Load(backgroundTradeHerreriaPathTexture);
+	backgroundTradeHerreriaHoverTexture = app->tex->Load(backgroundTradeHerreriaHoverPathTexture);
+	backgroundTradeHerreriaItemTexture = app->tex->Load(backgroundTradeHerreriaItemPathTexture);
+
+
 	pointerIndexF = 0;
 	pointerIndexC = 0;
 	scrollY = 0;
@@ -214,6 +221,10 @@ bool CommerceHerreria::CloseCommerce()
 	app->tex->UnLoad(backgroundMoneyTexture);
 	app->tex->UnLoad(backgroundDescriptionTexture);
 	app->tex->UnLoad(npcTexture);
+
+	app->tex->UnLoad(backgroundTradeHerreriaTexture);
+	app->tex->UnLoad(backgroundTradeHerreriaHoverTexture);
+	app->tex->UnLoad(backgroundTradeHerreriaItemTexture);
 
 
 	return ret;
@@ -285,7 +296,7 @@ bool CommerceHerreria::Update(float dt)
 		app->audio->PlayFx(button_fx);
 	}
 
-	if (app->input->GetButton(RIGHT) == KEY_DOWN) {
+	/*if (app->input->GetButton(RIGHT) == KEY_DOWN) {
 		pointerIndexC++;
 		if(pointerIndexC > 1) {
 			pointerIndexC = 0;
@@ -298,7 +309,7 @@ bool CommerceHerreria::Update(float dt)
 			pointerIndexC = 1;
 		}
 		app->audio->PlayFx(button_fx);
-	}
+	}*/
 
 
 	if (app->input->GetButton(SELECT) == KEY_DOWN) {
@@ -345,12 +356,12 @@ bool CommerceHerreria::PostUpdate()
 
 	//Trades
 	for (int i = 0; i < trades.size(); i++) {
-		int y = positionGeneral.y + positionList.y + (70 + tradeSpacing * i) - scrollY;
-		if (y >= viewport.y && y <= viewport.y + viewport.h) {
+			int y = positionGeneral.y + positionList.y + (70 + tradeSpacing * i) - scrollY;
+		
 
 
 			//Fondo
-			app->render->DrawTexture(backgroundTradeTexture, positionGeneral.x + positionList.x, y, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+			app->render->DrawTexture(backgroundTradeHerreriaTexture, positionGeneral.x + positionList.x, y, 1, SDL_FLIP_NONE, nullptr, 0, 0);
 
 			Trade* trade = trades.at(i);
 
@@ -358,10 +369,10 @@ bool CommerceHerreria::PostUpdate()
 			for (int j = 0; j < trade->itemsOffered.size(); j++) {
 				if (trade->itemsOffered.at(j) == NULL) { continue; };
 				//Items background
-				app->render->DrawTexture(backgroundTradeItemTexture, positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j), y + positionInList.y, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+				app->render->DrawTexture(backgroundTradeHerreriaItemTexture, positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j), y + positionInList.y + 7, 1, SDL_FLIP_NONE, nullptr, 0, 0);
 
 				//Primer item de oferta
-				app->render->DrawTexture(trade->itemsOffered.at(j)->icon, positionGeneral.x + positionList.x + positionInList.x - 10 + (itemSpacing * j), y + positionInList.y - 10, 0.65f, SDL_FLIP_NONE, nullptr, 0, 0);
+				app->render->DrawTexture(trade->itemsOffered.at(j)->icon, positionGeneral.x + positionList.x + positionInList.x - 10 + (itemSpacing * j), y + positionInList.y , 0.65f, SDL_FLIP_NONE, nullptr, 0, 0);
 
 				//Cantidad
 				app->render->DrawTextBound(std::to_string(trade->quantityOffered.at(j)).c_str(), positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j) + 60, y + positionInList.y, 20);
@@ -412,79 +423,38 @@ bool CommerceHerreria::PostUpdate()
 			}
 
 
-			//Select all
-			app->render->DrawTexture(backgroundSelectAllTexture, positionGeneral.x + positionList.x + 675, y, 1, SDL_FLIP_NONE, nullptr, 0, 0);
-			
-
 			//Punteros
 			if (pointerIndexF == i && pointerIndexC == 0) {
-				app->render->DrawTexture(backgroundTradeHoverTexture, positionGeneral.x + positionList.x -3, y -2, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+				app->render->DrawTexture(backgroundTradeHerreriaHoverTexture, positionGeneral.x + positionList.x + 6, y+5, 1, SDL_FLIP_NONE, nullptr, 0, 0);
 			}
-			else if (pointerIndexF == i && pointerIndexC == 1) {
-				app->render->DrawTexture(backgroundSelectAllHoverTexture, positionGeneral.x + positionList.x - 3 + 677, y - 1, 1, SDL_FLIP_NONE, nullptr, 0, 0);
-			}
-
-		}
-		else {
-			//Se sale del viewport, mover el scroll
-			
-			if (pointerIndexF == i) {
-
-				int targetY = positionGeneral.y + positionList.y + (57 + (tradeSpacing * (pointerIndexF - 4)));
-				if (scrollY - targetY == 400) {
-					scrollY -= 100;
-				}
-				else {
-					scrollY = targetY;
-				}
-				scrollY = std::max(0, scrollY);
-			}
-
-		}
-
-		
-
 	}
 
 	//Boton confirmar compra
 	if (GetTotalTradesSelected() > 0) {
-		app->render->DrawTexture(backgroundButtonTexture, positionGeneral.x + positionList.x + 485, positionGeneral.y + viewport.h + 80, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+		app->render->DrawTexture(backgroundButtonTexture, positionGeneral.x + positionList.x + 285, positionGeneral.y + viewport.h + 80, 1, SDL_FLIP_NONE, nullptr, 0, 0);
 	}
 	else {
-		app->render->DrawTexture(backgroundButtonDisabledTexture, positionGeneral.x + positionList.x + 485, positionGeneral.y + viewport.h + 80, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+		app->render->DrawTexture(backgroundButtonDisabledTexture, positionGeneral.x + positionList.x + 285, positionGeneral.y + viewport.h + 80, 1, SDL_FLIP_NONE, nullptr, 0, 0);
 	}
 
-	app->render->DrawTextBound("Confirmar compra", positionGeneral.x + positionList.x + 520, positionGeneral.y + viewport.h + 100, 300);
+	app->render->DrawTextBound("Confirmar compra", positionGeneral.x + positionList.x + 320, positionGeneral.y + viewport.h + 100, 300);
 
 	if (pointerIndexF == trades.size()) {
-		app->render->DrawTexture(backgroundButtonHoverTexture, positionGeneral.x + positionList.x + 480, positionGeneral.y + viewport.h + 74, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+		app->render->DrawTexture(backgroundButtonHoverTexture, positionGeneral.x + positionList.x + 280, positionGeneral.y + viewport.h + 74, 1, SDL_FLIP_NONE, nullptr, 0, 0);
 	}
 
 	//Boton cancelar compra
-	app->render->DrawTexture(backgroundButtonTexture, positionGeneral.x + positionList.x + 485, positionGeneral.y + viewport.h + 135, 1, SDL_FLIP_NONE, nullptr, 0, 0);
-	app->render->DrawTextBound("Cancelar compra", positionGeneral.x + positionList.x + 520, positionGeneral.y + viewport.h + 155, 300);
+	app->render->DrawTexture(backgroundButtonTexture, positionGeneral.x + positionList.x + 285, positionGeneral.y + viewport.h + 135, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+	app->render->DrawTextBound("Cancelar compra", positionGeneral.x + positionList.x + 320, positionGeneral.y + viewport.h + 155, 300);
 	if (pointerIndexF == trades.size()+1) {
-		app->render->DrawTexture(backgroundButtonHoverTexture, positionGeneral.x + positionList.x + 480, positionGeneral.y + viewport.h + 129, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+		app->render->DrawTexture(backgroundButtonHoverTexture, positionGeneral.x + positionList.x + 280, positionGeneral.y + viewport.h + 129, 1, SDL_FLIP_NONE, nullptr, 0, 0);
 	}
 
 	//Descripcion item seleccionado
-	app->render->DrawTexture(backgroundDescriptionTexture, positionGeneral.x + positionList.x , positionGeneral.y + viewport.h + 95, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+	app->render->DrawTexture(backgroundDescriptionTexture, positionGeneral.x + positionList.x - 200 , positionGeneral.y + viewport.h + 95, 1, SDL_FLIP_NONE, nullptr, 0, 0);
 	if (pointerIndexF < trades.size()) {
-		app->render->DrawTextBound(trades.at(pointerIndexF)->itemsOffered.at(0)->desc.c_str(), positionGeneral.x + positionList.x + 10, positionGeneral.y + viewport.h + 100, 500);
+		app->render->DrawTextBound(trades.at(pointerIndexF)->itemsOffered.at(0)->desc.c_str(), positionGeneral.x + positionList.x + 10 - 150, positionGeneral.y + viewport.h + 100, 400);
 	}
-
-
-	//Slider scroll texture
-	app->render->DrawTexture(backgroundSliderTexture, positionGeneral.x + positionList.x + 760, positionGeneral.y + positionList.y + 80, 1, SDL_FLIP_NONE, nullptr, 0, 0);
-	int calculoAltura;
-	if (pointerIndexF < trades.size()) {
-		calculoAltura = ((320 * pointerIndexF) / (trades.size()) + 80);
-	}
-	else {
-		calculoAltura = 400;
-	}
-	app->render->DrawTexture(knobSliderTexture, positionGeneral.x + positionList.x + 760, positionGeneral.y + positionList.y + calculoAltura, 1, SDL_FLIP_NONE, nullptr, 0, 0);
-
 
 	//Fondo Mondes
 	app->render->DrawTexture(backgroundMoneyTexture, positionGeneral.x + 970, positionGeneral.y + 30, 1, SDL_FLIP_NONE, 0, 0);

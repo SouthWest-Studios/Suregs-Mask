@@ -538,10 +538,14 @@
 		<backgroundMoneyPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_oro.png" />
 
 		<backgroundDescriptionPathTexture texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_descripcion.png" />
-		
-		
-		
-		
+
+		<backgroundTradeHerreriaPathTexture  texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_trade_herreria.png" />
+		<backgroundTradeHerreriaHoverPathTexture  texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_trade_herreria_hover.png"/>
+		<backgroundTradeHerreriaItemPathTexture  texturePath="Assets/Textures/Interfaz/Comercio/textura_fondo_icono_grande.png"/>
+
+
+
+
 		<!-- test -->
 		<commerce id="0" positionGeneralX="66" positionGeneralY="33" positionListX="280" positionListY="10" positionInListX="23" positionInListY="22" tradeSpacing="100" itemSpacing="150" itemsRequestedSpacing="350">
 			<trades>
@@ -599,8 +603,8 @@
 		</commerce>
 		
 		<!-- Herreria -->
-		<commerce id="3" type="1" positionGeneralX="66" positionGeneralY="33" positionListX="280" positionListY="10" positionInListX="23" positionInListY="22" tradeSpacing="100" itemSpacing="150" itemsRequestedSpacing="350"
-				  NPCTexturePath="Assets/Textures/Entidades/NPCs/Dialogo/texture_bruja.png" npcPositionX="0" npcPositionY="0"
+		<commerce id="3" type="1" positionGeneralX="66" positionGeneralY="33" positionListX="520" positionListY="60" positionInListX="23" positionInListY="22" tradeSpacing="150" itemSpacing="150" itemsRequestedSpacing="350"
+				  NPCTexturePath="Assets/Textures/Entidades/NPCs/Dialogo/texture_herrera.png" npcPositionX="0" npcPositionY="0"
 				  >
 			<trades>
 				<trade itemOffered="19" quantityItemOffered="1" itemRequested="-1" quantityItemRequested="20"/>

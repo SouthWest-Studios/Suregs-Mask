@@ -159,7 +159,18 @@ public:
 	// uint GetId();
 
 public:
+
+
+	char* backgroundTradeHerreriaPathTexture;
+	char* backgroundTradeHerreriaHoverPathTexture;
+	char* backgroundTradeHerreriaItemPathTexture;
+
 private:
+
+	SDL_Texture* backgroundTradeHerreriaTexture = nullptr;
+	SDL_Texture* backgroundTradeHerreriaHoverTexture = nullptr;
+	SDL_Texture* backgroundTradeHerreriaItemTexture = nullptr;
+
 
 };
 
