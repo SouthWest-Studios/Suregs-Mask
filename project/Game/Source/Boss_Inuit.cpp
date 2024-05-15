@@ -212,7 +212,7 @@ bool Boss_Inuit::PostUpdate() {
 
 	}
 
-	if (waveTimerColdDown(10)) {
+	if (waveTimerColdDown(10) && !ultDef) {
 		//printf("\ndelete-3");
 		shock_wave(originalWavePosition.x, originalWavePosition.y, 5, 520, 0);
 	}
@@ -305,7 +305,7 @@ void Boss_Inuit::stateMachine(float dt, iPoint playerPos)
 void Boss_Inuit::shock_wave(int posX, int posY, float shockSpeed, float maxSize, int tag)
 {
 
-	static std::unordered_map<int, float> shockSizes; // 用于存储每个标签对应的 shockSize
+	static std::unordered_map<int, float> shockSizes;
 
 	auto it = shockWaves.find(tag);
 	if (it != shockWaves.end()) {
@@ -313,7 +313,7 @@ void Boss_Inuit::shock_wave(int posX, int posY, float shockSpeed, float maxSize,
 		shockWaves.erase(it);
 	}
 
-	float& shockSize = shockSizes[tag]; // 获取当前标签对应的 shockSize 引用
+	float& shockSize = shockSizes[tag];
 
 	if (shockSize < maxSize) {
 		shockSize += shockSpeed;
