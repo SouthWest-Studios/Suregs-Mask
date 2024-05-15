@@ -33,7 +33,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 
 	//Sword damage
-	swordLevel = 0;
+	//swordLevel = 0;
 
     attackDamagePerLevel[0] = 100;  // Daño de ataque para el nivel 1
     attackDamagePerLevel[1] = 120;  // Daño de ataque para el nivel 2
@@ -47,7 +47,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	attackDamagePerLevel[9] = 500;  // Daño de ataque para el nivel 10
 
 	//Armor
-	armorLevel = 0;
+	//armorLevel = 0;
 
 	armorPerLevel[0] = 100;  // Armadura para el nivel 1
 	armorPerLevel[1] = 120;  // Armadura para el nivel 2
@@ -61,11 +61,11 @@ Player::Player() : Entity(EntityType::PLAYER)
 	armorPerLevel[9] = 600;  // Armadura para el nivel 10
 
 	// Inicializa las estadísticas base
-	baseStats.maxHealth = 100 + armorPerLevel[armorLevel];
-	baseStats.currentHealth = 100 + armorPerLevel[armorLevel];
+	baseStats.maxHealth = 100 + armorPerLevel[app->inventoryManager->armorLevel];
+	baseStats.currentHealth = 100 + armorPerLevel[app->inventoryManager->armorLevel];
 	baseStats.movementSpeed = 100;
 	baseStats.attackSpeed = 100;
-	baseStats.attackDamage = 100 + attackDamagePerLevel[swordLevel];
+	baseStats.attackDamage = 100 + attackDamagePerLevel[app->inventoryManager->swordLevel];
 
 	// Inicializa las estadísticas actuales a las estadísticas base
 	currentStats = baseStats;
@@ -583,7 +583,7 @@ bool Player::Start() {
 	player_Direction = Direction::UNKNOWN;
 
 
-	EquipPrimaryMask(Mask::MASK0);
+	EquipPrimaryMask(Mask::NOMASK);
 	EquipSecondaryMask(Mask::NOMASK);
 
 	/*	------------ALEIX------------
@@ -606,16 +606,16 @@ bool Player::Start() {
 	printf("Attack Damage: %f\n", currentStats.attackDamage);
 
 	maskLevels[primaryMask][Branches::Modifiers] = 0;
-	maskLevels[primaryMask][Branches::Rama1] = 1;
-	maskLevels[primaryMask][Branches::Rama2] = 2;
-	maskLevels[primaryMask][Branches::Rama3] = 3;
-	maskLevels[primaryMask][Branches::Rama4] = 4;
+	maskLevels[primaryMask][Branches::Rama1] = 0;
+	maskLevels[primaryMask][Branches::Rama2] = 0;
+	maskLevels[primaryMask][Branches::Rama3] = 0;
+	maskLevels[primaryMask][Branches::Rama4] = 0;
 
 	maskLevels[secondaryMask][Branches::Modifiers] = 0;
-	maskLevels[secondaryMask][Branches::Rama1] = 4;
-	maskLevels[secondaryMask][Branches::Rama2] = 3;
-	maskLevels[secondaryMask][Branches::Rama3] = 2;
-	maskLevels[secondaryMask][Branches::Rama4] = 1;
+	maskLevels[secondaryMask][Branches::Rama1] = 0;
+	maskLevels[secondaryMask][Branches::Rama2] = 0;
+	maskLevels[secondaryMask][Branches::Rama3] = 0;
+	maskLevels[secondaryMask][Branches::Rama4] = 0;
 
 	printf("Primary mask: %d, Level Rama1: %d, Level Rama2: %d, Level Rama3: %d, Level Rama4: %d\n", 
 		static_cast<int>(primaryMask) - 1, 
@@ -634,7 +634,7 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
-	
+	UpdateStats();
 	
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
@@ -2148,6 +2148,12 @@ void Player::TakeDamage(float damage) {
 			}
         }
     }
+}
+
+void Player::UpdateStats(){
+	baseStats.maxHealth = 100 + armorPerLevel[app->inventoryManager->armorLevel];
+	baseStats.currentHealth = 100 + armorPerLevel[app->inventoryManager->armorLevel];
+	baseStats.attackDamage = 100 + attackDamagePerLevel[app->inventoryManager->swordLevel];
 }
 
 

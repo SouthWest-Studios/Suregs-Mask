@@ -499,7 +499,7 @@ Inventity* InventoryManager::CreateItem(InventityType type, bool addInventory) {
 bool InventoryManager::IsFull()
 {
 
-	// Encontrar el ID más alto actualmente asignado
+	// Encontrar el ID mï¿½s alto actualmente asignado
 
 
 	// Verificar si el siguiente ID disponible es 9
@@ -750,7 +750,7 @@ void InventoryManager::DestroyItem(InventityType type, int cantidad)
 
 
 	}
-	// Reasignar los IDs después de la eliminación
+	// Reasignar los IDs despuï¿½s de la eliminaciï¿½n
 	int newId = 0;
 	for (item = inventities.start; item != nullptr; item = item->next)
 	{
@@ -790,12 +790,12 @@ void InventoryManager::DestroyItemById(int entityId, bool useStack)
 			}
 
 
-			break; // Termina el bucle después de eliminar la espada
+			break; // Termina el bucle despuï¿½s de eliminar la espada
 		}
 
 
 	}
-	// Reasignar los IDs después de la eliminación
+	// Reasignar los IDs despuï¿½s de la eliminaciï¿½n
 	int newId = 0;
 	for (item = inventities.start; item != nullptr; item = item->next)
 	{
@@ -875,7 +875,7 @@ void InventoryManager::UseItemSelected(int id)
 				break;
 			}
 			case InventityType::POCION_VIDA_1:
-				if (app->entityManager->GetPlayer()->currentStats.currentHealth <= app->entityManager->GetPlayer()->currentStats.maxHealth + app->entityManager->GetPlayer()->armorPerLevel[app->entityManager->GetPlayer()->armorLevel]) {
+				if (app->entityManager->GetPlayer()->currentStats.currentHealth <= app->entityManager->GetPlayer()->currentStats.maxHealth + app->entityManager->GetPlayer()->armorPerLevel[armorLevel]) {
 					app->entityManager->GetPlayer()->currentStats.currentHealth += 20;
 					if (app->entityManager->GetPlayer()->currentStats.currentHealth >= app->entityManager->GetPlayer()->currentStats.maxHealth /*+ app->entityManager->GetPlayer()->armorPerLevel[app->entityManager->GetPlayer()->armorLevel]*/)
 					{
@@ -886,7 +886,7 @@ void InventoryManager::UseItemSelected(int id)
 				}
 				break;
 			case InventityType::POCION_VIDA_2:
-				if (app->entityManager->GetPlayer()->currentStats.currentHealth <= app->entityManager->GetPlayer()->currentStats.maxHealth + app->entityManager->GetPlayer()->armorPerLevel[app->entityManager->GetPlayer()->armorLevel]) {
+				if (app->entityManager->GetPlayer()->currentStats.currentHealth <= app->entityManager->GetPlayer()->currentStats.maxHealth + app->entityManager->GetPlayer()->armorPerLevel[armorLevel]) {
 					app->entityManager->GetPlayer()->currentStats.currentHealth += 50;
 					if (app->entityManager->GetPlayer()->currentStats.currentHealth >= app->entityManager->GetPlayer()->currentStats.maxHealth /*+ app->entityManager->GetPlayer()->armorPerLevel[app->entityManager->GetPlayer()->armorLevel]*/)
 					{
@@ -897,7 +897,7 @@ void InventoryManager::UseItemSelected(int id)
 				}
 				break;
 			case InventityType::POCION_VIDA_3:
-				if (app->entityManager->GetPlayer()->currentStats.currentHealth <= app->entityManager->GetPlayer()->currentStats.maxHealth + app->entityManager->GetPlayer()->armorPerLevel[app->entityManager->GetPlayer()->armorLevel]) {
+				if (app->entityManager->GetPlayer()->currentStats.currentHealth <= app->entityManager->GetPlayer()->currentStats.maxHealth + app->entityManager->GetPlayer()->armorPerLevel[armorLevel]) {
 					app->entityManager->GetPlayer()->currentStats.currentHealth += 150;
 					if (app->entityManager->GetPlayer()->currentStats.currentHealth >= app->entityManager->GetPlayer()->currentStats.maxHealth /*+ app->entityManager->GetPlayer()->armorPerLevel[app->entityManager->GetPlayer()->armorLevel]*/)
 					{
@@ -914,7 +914,7 @@ void InventoryManager::UseItemSelected(int id)
 
 				break;
 			case InventityType::POCION_REGENERACION:
-				app->entityManager->GetPlayer()->regenAmount = 50 / 25; //valor de regeneracion de la pocion dividido por la cantidad de veces que se regenerara durante la duración de la pocion
+				app->entityManager->GetPlayer()->regenAmount = 50 / 25; //valor de regeneracion de la pocion dividido por la cantidad de veces que se regenerara durante la duraciï¿½n de la pocion
 				app->entityManager->GetPlayer()->regenTimer.Start();
 				if (app->entityManager->GetPlayer()->currentStats.currentHealth >= app->entityManager->GetPlayer()->currentStats.maxHealth /*+ app->entityManager->GetPlayer()->armorPerLevel[app->entityManager->GetPlayer()->armorLevel]*/)
 				{
@@ -924,12 +924,12 @@ void InventoryManager::UseItemSelected(int id)
 				DestroyItemById(id);
 				break;
 			case InventityType::POCION_DANO:
-				printf("antes uso POCION_DANO. Daño: %f \n", app->entityManager->GetPlayer()->currentStats.attackDamage + app->entityManager->GetPlayer()->attackDamagePerLevel[app->entityManager->GetPlayer()->swordLevel]);
-				app->entityManager->GetPlayer()->originalDamage = app->entityManager->GetPlayer()->attackDamage + app->entityManager->GetPlayer()->attackDamagePerLevel[app->entityManager->GetPlayer()->swordLevel];
-				app->entityManager->GetPlayer()->attackDamagePerLevel[app->entityManager->GetPlayer()->swordLevel] *= 1.2f;
+				printf("antes uso POCION_DANO. Daï¿½o: %f \n", app->entityManager->GetPlayer()->currentStats.attackDamage + app->entityManager->GetPlayer()->attackDamagePerLevel[swordLevel]);
+				app->entityManager->GetPlayer()->originalDamage = app->entityManager->GetPlayer()->attackDamage + app->entityManager->GetPlayer()->attackDamagePerLevel[swordLevel];
+				app->entityManager->GetPlayer()->attackDamagePerLevel[swordLevel] *= 1.2f;
 				app->entityManager->GetPlayer()->potiondamageTimer.Start();
 				app->entityManager->GetPlayer()->damagePotionActive = true;
-				printf("despues uso POCION_DANO. Daño: %f \n", app->entityManager->GetPlayer()->attackDamagePerLevel[app->entityManager->GetPlayer()->swordLevel]);
+				printf("despues uso POCION_DANO. Daï¿½o: %f \n", app->entityManager->GetPlayer()->attackDamagePerLevel[swordLevel]);
 				DestroyItemById(id);
 				break;
 			case InventityType::POCION_VELOCIDAD:
@@ -1181,18 +1181,18 @@ bool InventoryManager::PostUpdate()
 		for (item = inventities.start; item != nullptr; item = item->next)
 		{
 			pEntity = item->data;
-			int rowIndex = item->data->id / maxItemsPerRow; // Calcula el índice de la fila
-			int columnIndex = item->data->id % maxItemsPerRow; // Calcula el índice de la columna
-			int horizontalPosition = 320 + columnIndex * 105; // Calcula la posición horizontal
-			int verticalPosition = 230 + rowIndex * 103; // Calcula la posición vertical
+			int rowIndex = item->data->id / maxItemsPerRow; // Calcula el ï¿½ndice de la fila
+			int columnIndex = item->data->id % maxItemsPerRow; // Calcula el ï¿½ndice de la columna
+			int horizontalPosition = 320 + columnIndex * 105; // Calcula la posiciï¿½n horizontal
+			int verticalPosition = 230 + rowIndex * 103; // Calcula la posiciï¿½n vertical
 			if (pEntity->quantity > 0)
 			{
 				std::string quantityStr = std::to_string(pEntity->quantity);
 				app->render->DrawText(quantityStr.c_str(), horizontalPosition, verticalPosition, 20, 20, 0, 0, 0, 0);			
 				
 			}
-			horizontalPosition = 260 + columnIndex * 105; // Calcula la posición horizontal para pEntity
-			verticalPosition = 160 + rowIndex * 102; // Calcula la posición vertical para pEntity
+			horizontalPosition = 260 + columnIndex * 105; // Calcula la posiciï¿½n horizontal para pEntity
+			verticalPosition = 160 + rowIndex * 102; // Calcula la posiciï¿½n vertical para pEntity
 
 			app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
 
