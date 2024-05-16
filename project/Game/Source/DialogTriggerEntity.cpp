@@ -13,6 +13,7 @@
 #include "Hud.h"
 #include "CommerceManager.h"
 #include "TreeManager.h"
+#include "Menu.h"
 
 DialogTrigger::DialogTrigger() : Entity(EntityType::DIALOG_TRIGGER)
 {
@@ -176,7 +177,7 @@ void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
 				if (app->input->GetButton(CONFIRM) == KEY_DOWN)
 				{
 					app->treeManager->mostrar = true;
-					
+					app->menu->active = false;
 
 				}
 			}

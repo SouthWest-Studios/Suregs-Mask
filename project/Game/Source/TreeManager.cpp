@@ -14,6 +14,7 @@
 #include "DiamanteInv.h"
 #include "ItemInv.h"
 #include "OjoInv.h"
+#include "Menu.h"
 #include "Defs.h"
 #include "Log.h"
 #include "SString.h"
@@ -1142,6 +1143,7 @@ bool TreeManager::Update(float dt)
 			mostrar = false;
 			app->entityManager->active = true;
 			app->physics->active = true;
+			app->menu->active = true;
 		}
 		if (numMejoras0 > 8) {
 			numMejoras0 = 8; // Limitar a 8 si es mayor
