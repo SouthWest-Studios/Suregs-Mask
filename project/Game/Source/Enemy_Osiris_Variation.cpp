@@ -89,8 +89,8 @@ bool Enemy_Osiris_Variation::Start() {
 		position.x, // x
 		position.y, // y
 		position.y + 98, // anchorY
-		100, // width
-		100, // height
+		246, // width
+		200, // height
 		NULL, // currentFrame
 		isFacingLeft
 	});
@@ -165,10 +165,10 @@ bool Enemy_Osiris_Variation::PostUpdate() {
 
 
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 25, position.y - 65, 0.65, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x - 40, position.y - 75, 0.58, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 40, position.y - 65, 0.65, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 80, position.y - 75, 0.58, SDL_FLIP_NONE, &rect);
 	}
 
 
