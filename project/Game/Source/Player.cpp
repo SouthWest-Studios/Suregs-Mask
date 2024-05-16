@@ -643,9 +643,13 @@ bool Player::Start() {
 bool Player::Update(float dt)
 {
 	UpdateStats();
+
+	
 	
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
+
+	LOG("POSICION PLAYER x: %d, Y: %d", pbodyPos.p.x, pbodyPos.p.y);
 
 	if (!inAnimation) {
 		desiredState = EntityState::IDLE;
@@ -1776,6 +1780,7 @@ void Player::CameraMovement(float dt)
 
 MapObject* Player::GetCurrentRoom()
 {
+
 	//salas pequeñas
 	for (ListItem<MapObject*>* item = app->map->smallRoomsList.start; item != nullptr; item = item->next)
 	{
