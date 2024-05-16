@@ -52,6 +52,7 @@ enum class InventityType
 	 ARMADURA_NV7,
 	 ARMADURA_NV8,
 	 ARMADURA_NV9,
+	 ZAFIRO,
 
 	//De aqui para abajo no importa el orden
 	

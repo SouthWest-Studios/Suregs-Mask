@@ -237,7 +237,7 @@ Inventity* InventoryManager::CreateItem(EntityType type, std::string descripcioo
 		break;
 	case EntityType::ITEM_ZAFIRO:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_zafiro.png");
-		entity->type = InventityType::ORBE_MAGICO;
+		entity->type = InventityType::ZAFIRO;
 		break;
 	case EntityType::ITEM_ESPADA_NV2:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_espada_nv2.png");
@@ -645,7 +645,6 @@ bool InventoryManager::LoadState(pugi::xml_node node)
 			itemConfigurationNode = entitiesDataNode.child("item_pocion_orbe_magico");
 			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_ORBE_MAGICO, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""));
 			break;
-
 		case InventityType::UNKNOWN:
 			break;
 		default:

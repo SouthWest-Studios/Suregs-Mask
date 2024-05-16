@@ -266,6 +266,7 @@ public:
 
 	MapObject* room = nullptr;
 	bool isActive = true;
+	bool isOpened = false;
 
 };
 

@@ -17,6 +17,7 @@
 #include "ModuleFadeToBlack.h"
 #include "DebugConsole.h"
 #include "TreeManager.h"
+#include "DialogManager.h"
 
 
 #include "Fishing.h"
@@ -672,7 +673,13 @@ bool Player::Update(float dt)
 	}
 
 	if (godmode) { GodMode(dt); }
-	else PlayerMovement(dt);
+	else if (!app->dialogManager->isPlaying) { 
+		PlayerMovement(dt); 
+	
+	}
+	else {
+		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
+	}
 
 	CameraMovement(dt);
 
