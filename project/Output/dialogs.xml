@@ -384,7 +384,7 @@
 		<sentences>
 			<sentence name="Patzo"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzoFace.png"
-			text="¡Hola Jakhov! Estamos aquí tranquilos, ¿cómo te encuentras tú? Hoy estás muy animado..."/>
+			text="¡Hola Jakhov! Estamos aquí tranquilos, ¿cómo te encuentras tú? Hoy no estás muy animado..."/>
 
 			<sentence name="Patza"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzaFace.png"
@@ -817,7 +817,7 @@
 
 			<sentence name="Rapho"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
-			text="Aún recuerdo cuando yo mismo le comppraba y vendía lo que conseguía con los Sureg. Je, je, je...
+			text="Aún recuerdo cuando yo mismo le compraba y vendía lo que conseguía con los Sureg. Je, je, je...
 Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo que te interesa. je, je, je..."/>
 		</sentences>
 	</dialog>
