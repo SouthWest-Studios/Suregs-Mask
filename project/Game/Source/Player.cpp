@@ -649,8 +649,6 @@ bool Player::Update(float dt)
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
 
-	LOG("POSICION PLAYER x: %d, Y: %d", pbodyPos.p.x, pbodyPos.p.y);
-
 	if (!inAnimation) {
 		desiredState = EntityState::IDLE;
 	}
