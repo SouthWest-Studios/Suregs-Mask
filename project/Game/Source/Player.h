@@ -343,10 +343,18 @@ public:
 	void DetermineRoomTypel(MapObject* room);
 
 private:
-	Animation idleAnim;
-	Animation runAnim;
-	Animation dashiAnim;
-	Animation atackAnim_player;
+	Animation idle_player;
+	Animation run_player;
+	Animation dashi_player;
+	Animation atack1_player;
+	Animation atack2_player;
+	Animation atack3_player;
+	Animation dead_player;
+	Animation pocion_player;
+	Animation maskBola_player;
+	Animation maskRayo_player;
+	Animation takeDMG_player;
+
 
 	bool isDashing = false;
 
