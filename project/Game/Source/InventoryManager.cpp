@@ -645,7 +645,6 @@ bool InventoryManager::LoadState(pugi::xml_node node)
 			itemConfigurationNode = entitiesDataNode.child("item_pocion_orbe_magico");
 			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_ORBE_MAGICO, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""));
 			break;
-
 		case InventityType::UNKNOWN:
 			break;
 		default:
