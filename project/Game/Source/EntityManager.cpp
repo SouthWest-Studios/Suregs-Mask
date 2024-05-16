@@ -197,6 +197,7 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 		break;
 	case EntityType::ITEM_NOTA:
 		entity = new Item_Nota(type, id, 100, 300, 5, 2);
+		entity->id = id;
 		break;
 	case EntityType::ITEM_POCION_DANO:
 		entity = new Item_Pocion_Dano(type, id, 100, 300, 5, 2);

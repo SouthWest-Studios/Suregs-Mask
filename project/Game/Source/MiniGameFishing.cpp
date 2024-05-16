@@ -756,6 +756,8 @@ void MiniGameFishing::reward_pool(Fishlevel fishingType)
 	if (parseResult) {
 		configNode = configFile.child("config");
 	}
+	std::string descripcionBasura;
+	descripcionBasura = "basura";
 	std::string descripcionPequeno;
 	descripcionPequeno = "Un pez pequeño";
 	std::string descripcionMediano;
@@ -767,27 +769,59 @@ void MiniGameFishing::reward_pool(Fishlevel fishingType)
 	switch (fishingType)
 	{
 	case Fishlevel::NOTHING: fishLevel = 0; break;
-	case Fishlevel::TRASH: fishLevel = 1; break;
+	case Fishlevel::TRASH: 
+		fishLevel = 1;
+		if (app->inventoryManager->IsFull() == false)
+		{
+			app->inventoryManager->CreateItem(InventityType::BASURA, true);
+
+		}
+		else
+		{
+			Entity* entity = new Entity(EntityType::ITEM_BASURA);
+			app->inventoryManager->AddQuantity(entity);
+		}
+		break;
+		break;
 	case Fishlevel::SMALL: 
 		fishLevel = 2;
 		if (app->inventoryManager->IsFull() == false)
 		{
-			app->inventoryManager->CreateItem(EntityType::ITEM_PEZ_PEQUENO, descripcionPequeno, tipo, "Pez Pequeño");
+			app->inventoryManager->CreateItem(InventityType::PEZ_PEQUENO, true);
+
+
+		}
+		else
+		{
+			Entity* entity = new Entity(EntityType::ITEM_PEZ_PEQUENO);
+			app->inventoryManager->AddQuantity(entity);
 		}
 		break;
 	case Fishlevel::MEDIUM: 
 		fishLevel = 3;
 		if (app->inventoryManager->IsFull() == false)
 		{
-			app->inventoryManager->CreateItem(EntityType::ITEM_PEZ_MEDIANO, descripcionMediano, tipo, "Pez Mediano");
+			app->inventoryManager->CreateItem(InventityType::PEZ_MEDIANO, true);
 		}
+		else
+		{
+			Entity* entity = new Entity(EntityType::ITEM_PEZ_MEDIANO);
+			app->inventoryManager->AddQuantity(entity);
+		}
+		
 		break;
 	case Fishlevel::BIG: 
 		fishLevel = 4; 
 		if (app->inventoryManager->IsFull() == false)
 		{
-			app->inventoryManager->CreateItem(EntityType::ITEM_PEZ_GRANDE, descripcionGrande, tipo, "Pez Grande");
+			app->inventoryManager->CreateItem(InventityType::PEZ_GRANDE, true);
 		}
+		else
+		{
+			Entity* entity = new Entity(EntityType::ITEM_PEZ_GRANDE);
+			app->inventoryManager->AddQuantity(entity);
+		}
+		
 		break;
 	case Fishlevel::UNKNOWN:LOG("Collision UNKNOWN"); break;
 	}//Reaction upon knowing what is obtained

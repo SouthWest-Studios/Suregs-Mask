@@ -11,7 +11,7 @@
 #include "Window.h"
 
 Item_Nota::Item_Nota(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
-	: type(type), id(id), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_NOTA)
+	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_NOTA)
 {
 	name = ("item_nota");
 }
@@ -36,37 +36,45 @@ bool Item_Nota::Start() {
 	CloseTexture = app->tex->Load(config.attribute("closeTexturePath").as_string());
 	switch (id)
 	{
-	case 1:
+	case 0:
 		description = config.attribute("texto1").as_string();
 		titulo = config.attribute("titulo1").as_string();
 		break;
-	case 2:
+	case 1:
 		description = config.attribute("texto2").as_string();
 		titulo = config.attribute("titulo2").as_string();
 		break;
-	case 3:
+	case 2:
 		description = config.attribute("texto3").as_string();
 		titulo = config.attribute("titulo3").as_string();
 		break;
-	case 4:
+	case 3:
 		description = config.attribute("texto4").as_string();
 		titulo = config.attribute("titulo4").as_string();
 		break;
-	case 5:
+	case 4:
 		description = config.attribute("texto5").as_string();
 		titulo = config.attribute("titulo5").as_string();
 		break;
-	case 6:
+	case 5:
 		description = config.attribute("texto6").as_string();
 		titulo = config.attribute("titulo6").as_string();
 		break;
-	case 7:
+	case 6:
 		description = config.attribute("texto7").as_string();
 		titulo = config.attribute("titulo7").as_string();
 		break;
-	case 8:
+	case 7:
 		description = config.attribute("texto8").as_string();
 		titulo = config.attribute("titulo8").as_string();
+		break;
+	case 8:
+		description = config.attribute("texto9").as_string();
+		titulo = config.attribute("titulo9").as_string();
+		break;
+	case 9:
+		description = config.attribute("texto10").as_string();
+		titulo = config.attribute("titulo10").as_string();
 		break;
 	default:
 		break;

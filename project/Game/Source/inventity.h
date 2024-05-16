@@ -44,6 +44,7 @@ enum class InventityType
 	 ESPADA_NV7,
 	 ESPADA_NV8,
 	 ESPADA_NV9,
+	 ESPADA_NV10,
 	 ARMADURA_NV2,
 	 ARMADURA_NV3,
 	 ARMADURA_NV4,
@@ -52,7 +53,9 @@ enum class InventityType
 	 ARMADURA_NV7,
 	 ARMADURA_NV8,
 	 ARMADURA_NV9,
+	 ARMADURA_NV10,
 	 ZAFIRO,
+	 BASURA,
 
 	//De aqui para abajo no importa el orden
 	

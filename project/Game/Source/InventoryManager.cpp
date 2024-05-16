@@ -271,6 +271,10 @@ Inventity* InventoryManager::CreateItem(EntityType type, std::string descripcioo
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_espada_nv9.png");
 		entity->type = InventityType::ESPADA_NV9;
 		break;
+	case EntityType::ITEM_ESPADA_NV10:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_espada_nv10.png");
+		entity->type = InventityType::ESPADA_NV10;
+		break;
 	case EntityType::ITEM_ARMADURA_NV2:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_armadura_nv2.png");
 		entity->type = InventityType::ARMADURA_NV2;
@@ -302,6 +306,14 @@ Inventity* InventoryManager::CreateItem(EntityType type, std::string descripcioo
 	case EntityType::ITEM_ARMADURA_NV9:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_armadura_nv9.png");
 		entity->type = InventityType::ARMADURA_NV9;
+		break;
+	case EntityType::ITEM_ARMADURA_NV10:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_armadura_nv10.png");
+		entity->type = InventityType::ARMADURA_NV10;
+		break;
+	case EntityType::ITEM_BASURA:
+		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_basura.png");
+		entity->type = InventityType::BASURA;
 		break;
 	default:   
 		break;
@@ -455,6 +467,10 @@ Inventity* InventoryManager::CreateItem(InventityType type, bool addInventory) {
 			itemConfigurationNode = entitiesDataNode.child("item_espada_nv9");
 			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_ESPADA_NV9, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""), addInventory);
 			break;
+		case InventityType::ESPADA_NV10:
+			itemConfigurationNode = entitiesDataNode.child("item_espada_nv10");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_ESPADA_NV10, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""), addInventory);
+			break;
 		case InventityType::ARMADURA_NV2:
 			itemConfigurationNode = entitiesDataNode.child("item_armadura_nv2");
 			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_ARMADURA_NV2, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""), addInventory);
@@ -487,7 +503,16 @@ Inventity* InventoryManager::CreateItem(InventityType type, bool addInventory) {
 			itemConfigurationNode = entitiesDataNode.child("item_armadura_nv9");
 			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_ARMADURA_NV9, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""), addInventory);
 			break;
+		case InventityType::ARMADURA_NV10:
+			itemConfigurationNode = entitiesDataNode.child("item_armadura_nv10");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_ARMADURA_NV10, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""), addInventory);
+			break;
+		case InventityType::BASURA:
+			itemConfigurationNode = entitiesDataNode.child("item_basura");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_BASURA, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""), addInventory);
+			break;
 
+			
 	}
 
 
@@ -1209,8 +1234,8 @@ bool InventoryManager::PostUpdate()
 			if (PointerId == itum->data->id)
 			{
 				/*app->render->DrawText(itum->data->desc.c_str(), 680, 250, 270, 200, 0, 0, 0, 0, false);*/
-				app->render->DrawTextBound(itum->data->desc.c_str(), 680, 250, 270, { 0,0,0 });
-				app->render->DrawTextBound(itum->data->name.GetString(), 670, 320, 90, { 0,0,0 });
+				app->render->DrawTextBound(itum->data->desc.c_str(), 680, 430, 270, { 0,0,0 });
+				app->render->DrawTextBound(itum->data->name.GetString(), 670, 350, 90, { 0,0,0 });
 				app->render->DrawTexture(itum->data->icon, 780, 200, 1.8, SDL_FLIP_NONE, 0, 0);
 			} 
 

@@ -90,6 +90,7 @@ public:
 public:
 
 	int id;
+	int id2;
 	SString name;
 	SDL_Texture* icon;
 	char* iconPath;

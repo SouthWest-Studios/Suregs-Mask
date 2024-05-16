@@ -1241,7 +1241,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			if (physB->listener->active) {
 				if (app->notesManager->IsFull() == false)
 				{
-					app->notesManager->CreateItem(physB->listener->type, physB->listener->CloseTexture, physB->listener->description, physB->listener->titulo);
+					app->notesManager->CreateItem(physB->listener->type, physB->listener->CloseTexture, physB->listener->description, physB->listener->titulo, physB->listener->id);
 					physB->listener->active = false;
 					physB->body->SetActive(false);
 				}

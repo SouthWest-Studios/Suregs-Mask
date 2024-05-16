@@ -30,7 +30,7 @@ public:
 public:
 
 	bool isPicked = false;
-	int id;
+	
 	
 	EntityType type;
 	int ataque = 100;

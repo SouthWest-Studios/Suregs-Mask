@@ -59,6 +59,7 @@ enum class EntityType
 	ITEM_ESPADA_NV7,
 	ITEM_ESPADA_NV8,
 	ITEM_ESPADA_NV9,
+	ITEM_ESPADA_NV10,
 	ITEM_ARMADURA_NV2,
 	ITEM_ARMADURA_NV3,
 	ITEM_ARMADURA_NV4,
@@ -67,6 +68,8 @@ enum class EntityType
 	ITEM_ARMADURA_NV7,
 	ITEM_ARMADURA_NV8,
 	ITEM_ARMADURA_NV9,
+	ITEM_ARMADURA_NV10,
+	ITEM_BASURA,
 
 	NPC_VENDEDOR,
 	NPC_PESCADOR,
@@ -267,6 +270,7 @@ public:
 	MapObject* room = nullptr;
 	bool isActive = true;
 	bool isOpened = false;
+	int id;
 
 };
 

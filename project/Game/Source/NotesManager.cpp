@@ -101,7 +101,7 @@ bool NotesManager::CleanUp()
 	return ret;
 }
 int highesttId = -1;
-Note* NotesManager::CreateItem(EntityType type, SDL_Texture* CloseUp, std::string texto, std::string titulo)
+Note* NotesManager::CreateItem(EntityType type, SDL_Texture* CloseUp, std::string texto, std::string titulo, int id2)
 {
 	Note* entity = nullptr;
 
@@ -112,6 +112,7 @@ Note* NotesManager::CreateItem(EntityType type, SDL_Texture* CloseUp, std::strin
 	entity->closeUpNotes = CloseUp;
 	entity->desc = texto;
 	entity->title = titulo;
+	entity->id2 = id2;
 	/*entity->closeUpNotes = app->tex->Load("Assets/Textures/Entidades/Items/textura_NoteCloseUp.png"); */
 	switch (type)
 	{
@@ -138,12 +139,12 @@ bool NotesManager::IsFull()
 
 
 	// Verificar si el siguiente ID disponible es 9
-	if (notes.Count() == 8) {
+	/*if (notes.Count() == ) {
 		return true;
 	}
-	else {
+	*/
 		return false;
-	}
+	
 
 }
 
@@ -330,9 +331,27 @@ void NotesManager::AddNote(Note* entity)
 	if (entity != nullptr) {
 
 		notes.Add(entity);
-
+		// Ordenar la lista por entity->id2 después de agregar el elemento
+		BubbleSortByID();
 	}
 	
+}
+
+void NotesManager::BubbleSortByID()
+{ 
+	//bool swapped = true;
+	//while (swapped) {
+	//	swapped = false;
+	//	for (int i = 0; i < notes.Count() - 1; ++i) {
+	//		if (notes[i]->id2 > notes[i + 1]->id2) {
+	//			// Intercambiar los elementos si el ID es mayor
+	//			Note* temp = notes[i];
+	//			notes[i] = notes[i + 1];
+	//			notes[i + 1] = temp;
+	//			swapped = true;
+	//		}
+	//	}
+	//}
 }
 
 bool NotesManager::Update(float dt)
@@ -414,7 +433,7 @@ bool NotesManager::PostUpdate()
 			
 			
 			pEntity = item->data;
-			int rowIndex = item->data->id / maxItemsPerRow; // Calcula el índice de la fila
+			int rowIndex = item->data->id2 / maxItemsPerRow; // Calcula el índice de la fila
 			int columnIndex = item->data->id % maxItemsPerRow; // Calcula el índice de la columna
 			int horizontalPosition = 320 + columnIndex * 492; // Calcula la posición horizontal
 			int verticalPosition = 230 + rowIndex * 83; // Calcula la posición vertical
