@@ -154,7 +154,7 @@ bool Boss_Inuit::Update(float dt)
 		goUseUlt = true;
 	}
 
-	printf("\nHealth: %f", health);
+
 	switch (fase)
 	{
 	case FASE::FASE_ONE:
@@ -223,6 +223,7 @@ bool Boss_Inuit::PostUpdate() {
 
 	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
 		health -= 1000;
+		printf("\nHealth: %f", health);
 	}
 
 	if (goUseUlt) {

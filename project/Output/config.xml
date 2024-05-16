@@ -145,7 +145,7 @@
 	<entities_data>
 		<!-- <player x="1450" y="2500" texturePath="Assets/Textures/Entidades/Jugador/salamanda.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg" Posx="150" Posy="570" Tsprite="23" Pwidth="1000" sprite_x="100" sprite_y="160"/>
             -->
-		<player texturePath="Assets/Textures/Entidades/Jugador/textura_player.png" Tsprite="32" Pwidth="2352" sprite_x="294" sprite_y="237"/>
+		<player texturePath="Assets/Textures/Entidades/Jugador/textura_player.png" Tsprite="82" Pwidth="2400" sprite_x="300" sprite_y="240"/>
 
 		<osiris texturePath="Assets/Textures/Entidades/Osiris/textura_osiris.png" 
 				maxHealth="250.0f" speed="2.5f" attackDamage="50.0f" attackDistance="2" viewDistance="20"
@@ -370,10 +370,17 @@
 			
 		<player>
 			<!-- chibi 100-->
-			<idleAnim start="0" end="6" speed="0.15f" loop="true"/>
-			<runAnim start="17" end="24" speed="0.15f" loop="true"/>
-			<dashiAnim start="8" end="16" speed="0.25f" loop="false"/>
-			<atackAnim_player start="25" end="30" speed="0.25f" loop="false"/>
+			<run_player start="0" end="7" speed="0.15f" loop="true"/>
+			<dashi_player start="8" end="15" speed="0.25f" loop="false"/>
+			<maskBola_player start="16" end="23" speed="0.25f" loop="false"/>
+			<dead_player start="24" end="30" speed="0.25f" loop="false"/>
+			<atack1_player start="32" end="37" speed="0.25f" loop="false"/>
+			<atack3_player start="40" end="45" speed="0.25f" loop="false"/>
+			<pocion_player start="48" end="53" speed="0.25f" loop="false"/>
+			<idle_player start="56" end="61" speed="0.15f" loop="true"/>
+			<maskRayo_player start="64" end="68" speed="0.25f" loop="false"/>
+			<atack2_player start="72" end="74" speed="0.25f" loop="false"/>
+			<takeDMG_player start="80" end="81" speed="0.25f" loop="false"/>
 		</player>
 
 		<boss_inuit>

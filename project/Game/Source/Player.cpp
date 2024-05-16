@@ -538,10 +538,17 @@ bool Player::Start() {
 	Photowidth = config.attribute("Pwidth").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
-	idleAnim.LoadAnim("player", "idleAnim", spritePositions);
-	runAnim.LoadAnim("player", "runAnim", spritePositions);
-	dashiAnim.LoadAnim("player", "dashiAnim", spritePositions);
-	atackAnim_player.LoadAnim("player", "atackAnim_player", spritePositions);
+	idle_player.LoadAnim("player", "idle_player", spritePositions);
+	run_player.LoadAnim("player", "run_player", spritePositions);
+	dashi_player.LoadAnim("player", "dashi_player", spritePositions);
+	atack1_player.LoadAnim("player", "atack1_player", spritePositions);
+	atack2_player.LoadAnim("player", "atack2_player", spritePositions);
+	atack3_player.LoadAnim("player", "atack3_player", spritePositions);
+	dead_player.LoadAnim("player", "dead_player", spritePositions);
+	pocion_player.LoadAnim("player", "pocion_player", spritePositions);
+	maskBola_player.LoadAnim("player", "maskBola_player", spritePositions);
+	maskRayo_player.LoadAnim("player", "maskRayo_player", spritePositions);
+	takeDMG_player.LoadAnim("player", "takeDMG_player", spritePositions);
 
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
@@ -649,19 +656,19 @@ bool Player::Update(float dt)
 		pbodyFoot->body->GetFixtureList()[0].SetSensor(godmode);
 	}
 
-	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "dashiAnim") {
+	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "dashi_player") {
 		inAnimation = false;
-		dashiAnim.Reset();
+		dashi_player.Reset();
 	}
 
-	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atackAnim_player") {
+	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atack1_player") {
 		inAnimation = false;
 		atack_Anim = false;
 		desiredState = EntityState::IDLE;
-		atackAnim_player.Reset();
+		atack1_player.Reset();
 	}
 	if (atack_Anim) {
-		currentAnimation = &atackAnim_player;
+		currentAnimation = &atack1_player;
 	}
 
 	if (godmode) { GodMode(dt); }
@@ -754,7 +761,7 @@ bool Player::Update(float dt)
 
 bool Player::PostUpdate() {
 
-	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
+	if (currentAnimation == nullptr) { currentAnimation = &idle_player; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
 	//printf("Posición: (%d, %d)\n", position.x, position.y);
@@ -788,7 +795,7 @@ bool Player::CleanUp()
 
 void Player::DoNothing(float dt)
 {
-	currentAnimation = &idleAnim;
+	currentAnimation = &idle_player;
 	app->audio->StopFx(1);
 }
 
@@ -798,7 +805,7 @@ float Player::GetRealMovementSpeed() const {
 
 void Player::Run(float dt)
 {	
-	currentAnimation = &runAnim;
+	currentAnimation = &run_player;
 	app->audio->PlayRunFx(run_fx, runAlt_fx, runAlt2_fx);
 }
 
@@ -806,7 +813,7 @@ void Player::Dashi(float dt)
 {
 	
 	inAnimation = true;
-	currentAnimation = &dashiAnim;
+	currentAnimation = &dashi_player;
 	
 }
 
