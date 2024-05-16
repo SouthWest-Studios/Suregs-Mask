@@ -157,6 +157,7 @@ private:
 	Timer waveTime;
 	float waveTimeClodDown = 0;
 	int distance = 0;
+	bool goUseWave = false;
 	//ulti
 	bool ultDef = false;
 	bool saveOriginPos = true;
@@ -166,10 +167,13 @@ private:
 	bool ulti_fishing = false;
 	bool inWave = false;
 	bool waveTimeStart = false;
+	bool useUlt = false;
+	bool goUseUlt = false;
 
 	//fase
 	float lifeLow40;
 	float lifeLow5;
+	bool dontMove = false;
 
 	const float reviveTime = 5.0f;
 	bool isDead = false;
