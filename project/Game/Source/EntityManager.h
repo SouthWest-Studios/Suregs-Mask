@@ -69,6 +69,7 @@ public:
 
 	Cofre* EntityManager::GetCofre();
 	void UpdateEnemyActivation();
+	void UpdateRoomActivation();
 	
 	
 public:

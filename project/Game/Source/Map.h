@@ -112,6 +112,7 @@ struct MapObject {
     std::vector<int> points;
     MapObjectType type;
     Properties properties;
+    bool isCleared = false;
 };
 
 struct MapObjects

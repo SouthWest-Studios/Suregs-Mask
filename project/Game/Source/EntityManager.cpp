@@ -403,6 +403,7 @@ Cofre* EntityManager::GetCofre()
 bool EntityManager::PreUpdate()
 {
 	UpdateEnemyActivation();
+	UpdateRoomActivation();
 	//Ejemplo a�adir sprite en los Start():	app->render->objectsToDraw.push_back({ textura, posicion X, posicion Y, punto de anclaje en Y = (posY + num), ancho, largo});
 
 	for (DrawableObject& obj : objectsToDraw)
@@ -589,4 +590,33 @@ void EntityManager::UpdateEnemyActivation() {
 			}
 		}
 	}
+}
+
+void EntityManager::UpdateRoomActivation(){
+	MapObject* currentRoom = GetPlayer()->GetCurrentRoom();
+	std::vector<Entity*> enemies = GetEnemies();
+
+	bool enemyInRoom = false;
+
+
+    for (Entity* enemy : enemies) {
+        // Asegúrate de que el enemigo tiene una sala asignada
+        if (enemy->room != nullptr) {
+            // Si el enemigo está en la misma sala que el jugador, marca que hay un enemigo en la sala
+            if (enemy->room == currentRoom) {
+                enemyInRoom = true;
+                break;
+            }
+        }
+    }
+
+    // Si no hay enemigos en la sala, activa los tps de la sala
+    if (!enemyInRoom) {
+        for (ListItem<TPEntity*>* item = tpEntities.start; item != nullptr; item = item->next) {
+            if (item->data->room == currentRoom && !item->data->isOpened) {
+                item->data->isOpened = true;
+                //printf("TP activated\n");
+            }
+        }
+    }
 }

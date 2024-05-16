@@ -27,6 +27,8 @@ public:
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
+	MapObject* GetCurrentRoom();
+
 
 private:
 
