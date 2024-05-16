@@ -843,120 +843,37 @@ void InventoryManager::UseItemSelected(int id)
 				//		
 				//		break;
 				//	}
-			case InventityType::ESPADA2:
-			{
-				//app->scene->GetPlayer()->espadaHierro = true; //ponemos la textura de la correspondiente
-				//app->scene->GetPlayer()->espadaMadera = false;
-				//app->scene->GetPlayer()->armaduraPoner = false;
-				//Swordinv* espada = dynamic_cast<Swordinv*>(item->data); // Convierte a Espada si es posible
-
-				//app->scene->GetPlayer()->ataque = espada->damage;
-				//app->scene->GetPlayer()->durabilidadArma = espada->durability;
-				//app->scene->GetPlayer()->magia = espada->magic;
-				//app->scene->GetPlayer()->peso = espada->weight;
-
-
-				break;
-			}
-			case InventityType::ARMADURA:
-			{
-				//app->scene->GetPlayer()->armaduraPoner = true; //ponemos la textura de la correspondiente
-				//app->scene->GetPlayer()->espadaMadera = false;
-				//app->scene->GetPlayer()->espadaHierro = false;
-				//ArmaduraInv* armadura = dynamic_cast<ArmaduraInv*>(item->data); // Convierte a Espada si es posible
-
-				//app->scene->GetPlayer()->defensa = armadura->defense;
-				//app->scene->GetPlayer()->durabilidadArma = armadura->durability;
-				//app->scene->GetPlayer()->magia = armadura->magic;
-				//app->scene->GetPlayer()->peso = armadura->weight;
-
-
-				break;
-			}
-			case InventityType::POCION_VIDA_1:
-				if (app->entityManager->GetPlayer()->currentStats.currentHealth <= app->entityManager->GetPlayer()->currentStats.maxHealth + app->entityManager->GetPlayer()->armorPerLevel[armorLevel]) {
-					app->entityManager->GetPlayer()->currentStats.currentHealth += 20;
-					if (app->entityManager->GetPlayer()->currentStats.currentHealth >= app->entityManager->GetPlayer()->currentStats.maxHealth /*+ app->entityManager->GetPlayer()->armorPerLevel[app->entityManager->GetPlayer()->armorLevel]*/)
-					{
-						app->entityManager->GetPlayer()->currentStats.currentHealth = app->entityManager->GetPlayer()->currentStats.maxHealth;
-					}
-					printf("uso POCION_VIDA_1. Vida: %f \n", app->entityManager->GetPlayer()->currentStats.currentHealth);
-					DestroyItemById(id);
-				}
-				break;
-			case InventityType::POCION_VIDA_2:
-				if (app->entityManager->GetPlayer()->currentStats.currentHealth <= app->entityManager->GetPlayer()->currentStats.maxHealth + app->entityManager->GetPlayer()->armorPerLevel[armorLevel]) {
-					app->entityManager->GetPlayer()->currentStats.currentHealth += 50;
-					if (app->entityManager->GetPlayer()->currentStats.currentHealth >= app->entityManager->GetPlayer()->currentStats.maxHealth /*+ app->entityManager->GetPlayer()->armorPerLevel[app->entityManager->GetPlayer()->armorLevel]*/)
-					{
-						app->entityManager->GetPlayer()->currentStats.currentHealth = app->entityManager->GetPlayer()->currentStats.maxHealth;
-					}
-					printf("uso POCION_VIDA_2. Vida: %f \n", app->entityManager->GetPlayer()->currentStats.currentHealth);
-					DestroyItemById(id);
-				}
-				break;
-			case InventityType::POCION_VIDA_3:
-				if (app->entityManager->GetPlayer()->currentStats.currentHealth <= app->entityManager->GetPlayer()->currentStats.maxHealth + app->entityManager->GetPlayer()->armorPerLevel[armorLevel]) {
-					app->entityManager->GetPlayer()->currentStats.currentHealth += 150;
-					if (app->entityManager->GetPlayer()->currentStats.currentHealth >= app->entityManager->GetPlayer()->currentStats.maxHealth /*+ app->entityManager->GetPlayer()->armorPerLevel[app->entityManager->GetPlayer()->armorLevel]*/)
-					{
-						app->entityManager->GetPlayer()->currentStats.currentHealth = app->entityManager->GetPlayer()->currentStats.maxHealth;
-					}
-					printf("uso POCION_VIDA_3. Vida: %f \n", app->entityManager->GetPlayer()->currentStats.currentHealth);
-					DestroyItemById(id);
-				}
-				break;
-			case InventityType::POCION_VIDA_MAX:
-				app->entityManager->GetPlayer()->currentStats.currentHealth = app->entityManager->GetPlayer()->currentStats.maxHealth /*+ app->entityManager->GetPlayer()->armorPerLevel[app->entityManager->GetPlayer()->armorLevel]*/;
-				printf("uso POCION_VIDA_MAX. Vida: %f \n", app->entityManager->GetPlayer()->currentStats.currentHealth);
-				DestroyItemById(id);
-
-				break;
-			case InventityType::POCION_REGENERACION:
-				app->entityManager->GetPlayer()->regenAmount = 50 / 25; //valor de regeneracion de la pocion dividido por la cantidad de veces que se regenerara durante la duraci�n de la pocion
-				app->entityManager->GetPlayer()->regenTimer.Start();
-				if (app->entityManager->GetPlayer()->currentStats.currentHealth >= app->entityManager->GetPlayer()->currentStats.maxHealth /*+ app->entityManager->GetPlayer()->armorPerLevel[app->entityManager->GetPlayer()->armorLevel]*/)
+				case InventityType::ESPADA2:
 				{
-					app->entityManager->GetPlayer()->currentStats.currentHealth = app->entityManager->GetPlayer()->currentStats.maxHealth;
+					//app->scene->GetPlayer()->espadaHierro = true; //ponemos la textura de la correspondiente
+					//app->scene->GetPlayer()->espadaMadera = false;
+					//app->scene->GetPlayer()->armaduraPoner = false;
+					//Swordinv* espada = dynamic_cast<Swordinv*>(item->data); // Convierte a Espada si es posible
+
+					//app->scene->GetPlayer()->ataque = espada->damage;
+					//app->scene->GetPlayer()->durabilidadArma = espada->durability;
+					//app->scene->GetPlayer()->magia = espada->magic;
+					//app->scene->GetPlayer()->peso = espada->weight;
+
+
+					break;
 				}
-				printf("uso POCION_REGENERACION. Vida: %f \n", app->entityManager->GetPlayer()->currentStats.currentHealth);
-				DestroyItemById(id);
-				break;
-			case InventityType::POCION_DANO:
-				printf("antes uso POCION_DANO. Da�o: %f \n", app->entityManager->GetPlayer()->currentStats.attackDamage + app->entityManager->GetPlayer()->attackDamagePerLevel[swordLevel]);
-				app->entityManager->GetPlayer()->originalDamage = app->entityManager->GetPlayer()->attackDamage + app->entityManager->GetPlayer()->attackDamagePerLevel[swordLevel];
-				app->entityManager->GetPlayer()->attackDamagePerLevel[swordLevel] *= 1.2f;
-				app->entityManager->GetPlayer()->potiondamageTimer.Start();
-				app->entityManager->GetPlayer()->damagePotionActive = true;
-				printf("despues uso POCION_DANO. Da�o: %f \n", app->entityManager->GetPlayer()->attackDamagePerLevel[swordLevel]);
-				DestroyItemById(id);
-				break;
-			case InventityType::POCION_VELOCIDAD:
-				printf("antes uso POCION_VELOCIDAD. Velocidad: %f \n", app->entityManager->GetPlayer()->currentStats.movementSpeed);
-				app->entityManager->GetPlayer()->originalSpeed = app->entityManager->GetPlayer()->currentStats.movementSpeed;
-				app->entityManager->GetPlayer()->currentStats.movementSpeed *= 1.1f;
-				app->entityManager->GetPlayer()->potionspeedTimer.Start();
-				app->entityManager->GetPlayer()->speedPotionActive = true;
-				printf("despues uso POCION_VELOCIDAD. Velocidad: %f \n", app->entityManager->GetPlayer()->currentStats.movementSpeed);
-				DestroyItemById(id);
-				break;
-			case InventityType::ORBE_MAGICO:
-				for (auto& mask : app->entityManager->GetPlayer()->maskStats) {
-					for (auto& branch : mask.second) {
-						if (branch.first == Branches::Rama2) {
-							for (auto& level : branch.second) {
-								level.second.maskCoolDown = 0;
-							}
-						}
-					}
+				case InventityType::ARMADURA:
+				{
+					//app->scene->GetPlayer()->armaduraPoner = true; //ponemos la textura de la correspondiente
+					//app->scene->GetPlayer()->espadaMadera = false;
+					//app->scene->GetPlayer()->espadaHierro = false;
+					//ArmaduraInv* armadura = dynamic_cast<ArmaduraInv*>(item->data); // Convierte a Espada si es posible
+
+					//app->scene->GetPlayer()->defensa = armadura->defense;
+					//app->scene->GetPlayer()->durabilidadArma = armadura->durability;
+					//app->scene->GetPlayer()->magia = armadura->magic;
+					//app->scene->GetPlayer()->peso = armadura->weight;
+
+
+					break;
 				}
-				DestroyItemById(id);
-				printf("uso ORBE_MAGICO");
-				break;
-			
 			}
-
-
 		}
 
 
@@ -968,6 +885,91 @@ void InventoryManager::UseItemSelected(int id)
 		app->scene->GetPlayer()->armaduraPoner = false;*/
 	}
 }
+
+void InventoryManager::UsePotionSelected(ListItem<Inventity*>* it)
+{
+	if (it != NULL)
+	{
+		Inventity* inventity = it->data;
+		switch (it->data->type)
+		{
+			case InventityType::POCION_VIDA_1:
+				if (app->entityManager->GetPlayer()->currentStats.currentHealth <= app->entityManager->GetPlayer()->currentStats.maxHealth + app->entityManager->GetPlayer()->armorPerLevel[armorLevel]) {
+					app->entityManager->GetPlayer()->currentStats.currentHealth += 20;
+					if (app->entityManager->GetPlayer()->currentStats.currentHealth >= app->entityManager->GetPlayer()->currentStats.maxHealth)
+					{
+						app->entityManager->GetPlayer()->currentStats.currentHealth = app->entityManager->GetPlayer()->currentStats.maxHealth;
+					}
+					printf("uso POCION_VIDA_1. Vida: %f \n", app->entityManager->GetPlayer()->currentStats.currentHealth);
+				}
+				break;
+			case InventityType::POCION_VIDA_2:
+				if (app->entityManager->GetPlayer()->currentStats.currentHealth <= app->entityManager->GetPlayer()->currentStats.maxHealth + app->entityManager->GetPlayer()->armorPerLevel[armorLevel]) {
+					app->entityManager->GetPlayer()->currentStats.currentHealth += 50;
+					if (app->entityManager->GetPlayer()->currentStats.currentHealth >= app->entityManager->GetPlayer()->currentStats.maxHealth)
+					{
+						app->entityManager->GetPlayer()->currentStats.currentHealth = app->entityManager->GetPlayer()->currentStats.maxHealth;
+					}
+					printf("uso POCION_VIDA_2. Vida: %f \n", app->entityManager->GetPlayer()->currentStats.currentHealth);
+				}
+				break;
+			case InventityType::POCION_VIDA_3:
+				if (app->entityManager->GetPlayer()->currentStats.currentHealth <= app->entityManager->GetPlayer()->currentStats.maxHealth + app->entityManager->GetPlayer()->armorPerLevel[armorLevel]) {
+					app->entityManager->GetPlayer()->currentStats.currentHealth += 150;
+					if (app->entityManager->GetPlayer()->currentStats.currentHealth >= app->entityManager->GetPlayer()->currentStats.maxHealth)
+					{
+						app->entityManager->GetPlayer()->currentStats.currentHealth = app->entityManager->GetPlayer()->currentStats.maxHealth;
+					}
+					printf("uso POCION_VIDA_3. Vida: %f \n", app->entityManager->GetPlayer()->currentStats.currentHealth);
+				}
+				break;
+			case InventityType::POCION_VIDA_MAX:
+				app->entityManager->GetPlayer()->currentStats.currentHealth = app->entityManager->GetPlayer()->currentStats.maxHealth;
+				printf("uso POCION_VIDA_MAX. Vida: %f \n", app->entityManager->GetPlayer()->currentStats.currentHealth);
+
+				break;
+			case InventityType::POCION_REGENERACION:
+				app->entityManager->GetPlayer()->regenAmount = 50 / 25; //valor de regeneracion de la pocion dividido por la cantidad de veces que se regenerara durante la duraci�n de la pocion
+				app->entityManager->GetPlayer()->regenTimer.Start();
+				if (app->entityManager->GetPlayer()->currentStats.currentHealth >= app->entityManager->GetPlayer()->currentStats.maxHealth)
+				{
+					app->entityManager->GetPlayer()->currentStats.currentHealth = app->entityManager->GetPlayer()->currentStats.maxHealth;
+				}
+				printf("uso POCION_REGENERACION. Vida: %f \n", app->entityManager->GetPlayer()->currentStats.currentHealth);
+				break;
+			case InventityType::POCION_DANO:
+				printf("antes uso POCION_DANO. Da�o: %f \n", app->entityManager->GetPlayer()->currentStats.attackDamage + app->entityManager->GetPlayer()->attackDamagePerLevel[swordLevel]);
+				app->entityManager->GetPlayer()->originalDamage = app->entityManager->GetPlayer()->attackDamage + app->entityManager->GetPlayer()->attackDamagePerLevel[swordLevel];
+				app->entityManager->GetPlayer()->attackDamagePerLevel[swordLevel] *= 1.2f;
+				app->entityManager->GetPlayer()->potiondamageTimer.Start();
+				app->entityManager->GetPlayer()->damagePotionActive = true;
+				printf("despues uso POCION_DANO. Da�o: %f \n", app->entityManager->GetPlayer()->attackDamagePerLevel[swordLevel]);
+				break;
+			case InventityType::POCION_VELOCIDAD:
+				printf("antes uso POCION_VELOCIDAD. Velocidad: %f \n", app->entityManager->GetPlayer()->currentStats.movementSpeed);
+				app->entityManager->GetPlayer()->originalSpeed = app->entityManager->GetPlayer()->currentStats.movementSpeed;
+				app->entityManager->GetPlayer()->currentStats.movementSpeed *= 1.1f;
+				app->entityManager->GetPlayer()->potionspeedTimer.Start();
+				app->entityManager->GetPlayer()->speedPotionActive = true;
+				printf("despues uso POCION_VELOCIDAD. Velocidad: %f \n", app->entityManager->GetPlayer()->currentStats.movementSpeed);
+				break;
+			case InventityType::ORBE_MAGICO:
+				printf("uso ORBE_MAGICO");
+				for (auto& mask : app->entityManager->GetPlayer()->maskStats) {
+					for (auto& branch : mask.second) {
+						if (branch.first == Branches::Rama2) {
+							for (auto& level : branch.second) {
+								level.second.maskCoolDown = 0;
+							}
+						}
+					}
+				}
+				break;
+		}
+		inventities.Del(it);
+	}
+}
+
 
 void InventoryManager::OnMovePointer()
 {

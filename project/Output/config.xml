@@ -183,64 +183,68 @@
 					maxHealth="8200.0f" speed="200f" attackDamage="200.0f"  attackDistance="15" viewDistance="40"
 					Tsprite="16" Pwidth="752" sprite_x="188" sprite_y="175"/>
 
-		<item_rubi					texturePath="Assets/Textures/Entidades/Items/textura_rubi.png"					description="Mineral robusto con buenas propiedades para el combate."			type ="Material" name="Rubi"/>
+		<item_rubi					texturePath="Assets/Textures/Entidades/Items/textura_rubi.png"					description="Mineral robusto extremadamente resistente."			type ="Material" name="Rubí"/>
 		<item_diamante				texturePath="Assets/Textures/Entidades/Items/texture_diamond.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Diamante"/>
 		
-		<item_polvora				texturePath="Assets/Textures/Entidades/Items/textura_polvora.png"				description=" "		type ="material" name="Polvora"/>
-		<item_amatista				texturePath="Assets/Textures/Entidades/Items/textura_amatista.png"				description=" "		type ="material" name="Amatista"/>
+		<item_polvora				texturePath="Assets/Textures/Entidades/Items/textura_polvora.png"				description="Mezcla explosiva muy versátil."		type ="Material" name="Pólvora"/>
+		<item_amatista				texturePath="Assets/Textures/Entidades/Items/textura_amatista.png"				description="Piedra preciosa con gran valor."		type ="Material" name="Amatista"/>
 		
 		<item_carbon				texturePath="Assets/Textures/Entidades/Items/textura_carbon.png"				description="Mineral con valor medio en el mercado."							type ="Material" name="Carbón"/>
-		<item_saliva				texturePath="Assets/Textures/Entidades/Items/textura_saliva.png"				description="Mineral de lujo con alto valor en el mercado."						type ="Material"	name="Saliva"/>
+		<item_saliva				texturePath="Assets/Textures/Entidades/Items/textura_saliva.png"				description="Líquido biológico usado en las pócimas."						type ="Apéndice"	name="Saliva"/>
 		
-		<item_diente				texturePath="Assets/Textures/Entidades/Items/textura_diente.png"				description="Diente afilado sin propiedades especiales, puede valer dinero."	type ="Apéndice" name="Diente"/>
-		<item_garra					texturePath="Assets/Textures/Entidades/Items/item_Garra.png"					description="Afilada garra sin propiedades especiales, puede valer dinero."		type ="Apéndice" name="Garra"/>
-		<item_ojo					texturePath="Assets/Textures/Entidades/Items/texture_eye.png"					description="Globo ocular sin propiedades especiales, puede valer dinero."		type ="Apéndice" name="Ojo"/>
-		<item_hueso					texturePath="Assets/Textures/Entidades/Items/textura_hueso.png"					description="Hueso sin propiedades especiales, puede valer dinero."				type ="Apéndice" name="Hueso"/>
-		<item_viscera				texturePath="Assets/Textures/Entidades/Items/textura_visceras.png"				description="Vísceras sin propiedades especiales, puede valer dinero."			type ="Apéndice" name="Vísceras"/>
+		<item_diente				texturePath="Assets/Textures/Entidades/Items/textura_diente.png"				description="Colmillo con una resistencia sorprendente."						type ="Apéndice" name="Colmillo"/>
+		<item_garra					texturePath="Assets/Textures/Entidades/Items/item_Garra.png"					description="Afilada garra capacitada para rajar piedras."						type ="Apéndice" name="Garra"/>
+		<item_ojo					texturePath="Assets/Textures/Entidades/Items/texture_eye.png"					description="Globo ocular bastante asqueroso."									type ="Apéndice" name="Ojo"/>
+		<item_hueso					texturePath="Assets/Textures/Entidades/Items/textura_hueso.png"					description="Hueso de osiris, bastante resistente."								type ="Apéndice" name="Hueso"/>
+		<item_viscera				texturePath="Assets/Textures/Entidades/Items/textura_visceras.png"				description="Vísceras con propiedades en la alquimia."							type ="Apéndice" name="Vísceras"/>
 		<item_cola					texturePath="Assets/Textures/Entidades/Items/textura_cola.png"					description="Cola sin propiedades especiales, puede valer dinero."				type ="Apéndice" name="Cola"/>
 
-		<item_pocion_vida_1			texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_1.png"			description="Curiosa pócima que revitaliza tu salud levemente."				type ="Consumible"	name="Pócima curativa pequeña"/>
-		<item_pocion_vida_2			texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_2.png"			description="Curiosa pócima que revitaliza buena parte de tu salud."		type ="Consumible"	name="Pócima curativa mediana"/>
-		<item_pocion_vida_3			texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_3.png"			description="Curiosa pócima que revitaliza gran parte de tu salud."			type ="Consumible"	name="Pócima curativa grande"/>
-		<item_pocion_vida_max		texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_max.png"		description="Curiosa pócima que revitaliza tu salud por completo."			type ="Consumible"	name="Pócima curativa total"/>
+		<item_pocion_vida_1			texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_1.png"			description="Curiosa pócima que revitaliza la salud levemente."				type ="Consumible"	name="Pócima"/>
+		<item_pocion_vida_2			texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_2.png"			description="Curiosa pócima que revitaliza buena parte de la salud."		type ="Consumible"	name="Pócima"/>
+		<item_pocion_vida_3			texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_3.png"			description="Curiosa pócima que revitaliza gran parte de la salud."			type ="Consumible"	name="Pócima"/>
+		<item_pocion_vida_max		texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_max.png"		description="Curiosa pócima que revitaliza la salud por completo."			type ="Consumible"	name="Pócima"/>
 
-		<item_pocion_regeneracion	texturePath="Assets/Textures/Entidades/Items/textura_pocion_regeneracion.png"	description="Curiosa pócima que aumenta tu regeneración."					type ="Consumible"	name="Pócima regenerativa"/>
-		<item_pocion_dano			texturePath="Assets/Textures/Entidades/Items/textura_pocion_dano.png"			description="Curiosa pócima que aumenta tu fuerza de manera momentánea."	type ="Consumible"	name="Pócima de fuerza"/>
-		<item_pocion_velocidad		texturePath="Assets/Textures/Entidades/Items/textura_pocion_velocidad.png"		description="Curiosa pócima que aumenta tu velocidad de manera momentánea."	type ="Consumible"	name="Pócima de velocidad"/>
-		<item_pocion_orbe_magico	texturePath="Assets/Textures/Entidades/Items/textura_orbe_magico.png"			description=" "											type ="Consumible"	name="Orbe Magico"/>
-		<item_pocion_orbe_magico	texturePath="Assets/Textures/Entidades/Items/textura_orbe_magico.png"			description=" "											type ="Consumible"	name="Orbe Magico"/>
-		<item_zafiro				texturePath="Assets/Textures/Entidades/Items/textura_zafiro.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Zafiro"/>
-		<item_espada_nv2				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv2.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="espada_nv2"/>
-		<item_espada_nv3				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv3.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="espada_nv3"/>
-		<item_espada_nv4				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv4.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="espada_nv4"/>
-		<item_espada_nv4				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv4.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="espada_nv4"/>
-		<item_espada_nv5				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv3.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="espada_nv3"/>
-		<item_espada_nv6				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv6.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="espada_nv6"/>
-		<item_espada_nv7				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv7.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="espada_nv7"/>
-		<item_espada_nv8				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv8.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="espada_nv8"/>
-		<item_espada_nv9				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv9.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="espada_nv9"/>
-		<item_armadura_nv2				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv2.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="armadura_nv2"/>
-		<item_armadura_nv3				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv3.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="armadura_nv3"/>
-		<item_armadura_nv4				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv4.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="armadura_nv4"/>
-		<item_armadura_nv5				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv5.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="armadura_nv5"/>
-		<item_armadura_nv6				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv6.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="armadura_nv6"/>
-		<item_armadura_nv7				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv7.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="armadura_nv7"/>
-		<item_armadura_nv8				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv8.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="armadura_nv8"/>
-		<item_armadura_nv9				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv9.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="armadura_nv9"/>
+		<item_pocion_regeneracion	texturePath="Assets/Textures/Entidades/Items/textura_pocion_regeneracion.png"	description="Curiosa pócima que aumenta tu regeneración de manera momentánea."	type ="Consumible"	name="Pócima"/>
+		<item_pocion_dano			texturePath="Assets/Textures/Entidades/Items/textura_pocion_dano.png"			description="Curiosa pócima que aumenta tu fuerza de manera momentánea."		type ="Consumible"	name="Pócima"/>
+		<item_pocion_velocidad		texturePath="Assets/Textures/Entidades/Items/textura_pocion_velocidad.png"		description="Curiosa pócima que aumenta tu velocidad de manera momentánea."		type ="Consumible"	name="Pócima"/>
+		<item_pocion_orbe_magico	texturePath="Assets/Textures/Entidades/Items/textura_orbe_magico.png"			description="Objeto mágico con propiedades sorprendentes."						type ="Consumible"	name="Orbe Mágico"/>
+		<item_pocion_orbe_magico	texturePath="Assets/Textures/Entidades/Items/textura_orbe_magico.png"			description="Objeto mágico con propiedades sorprendentes."						type ="Consumible"	name="Orbe Mágico"/>
+		<item_zafiro				texturePath="Assets/Textures/Entidades/Items/textura_zafiro.png"				description="Mineral afilado con propiedades para el combate."					type ="Material" name="Zafiro"/>
+		<item_espada_nv2				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv2.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 2"/>
+		<item_espada_nv3				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv3.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 3"/>
+		<item_espada_nv4				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv4.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 4"/>
+		<item_espada_nv4				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv4.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 5"/>
+		<item_espada_nv5				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv3.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 6"/>
+		<item_espada_nv6				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv6.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 7"/>
+		<item_espada_nv7				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv7.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 8"/>
+		<item_espada_nv8				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv8.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 9"/>
+		<item_espada_nv9				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv9.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 10"/>
+		<item_armadura_nv2				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv2.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 2"/>
+		<item_armadura_nv3				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv3.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 3"/>
+		<item_armadura_nv4				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv4.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 4"/>
+		<item_armadura_nv5				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv5.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 5"/>
+		<item_armadura_nv6				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv6.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 6"/>
+		<item_armadura_nv7				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv7.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 7"/>
+		<item_armadura_nv8				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv8.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 8"/>
+		<item_armadura_nv9				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv9.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 9"/>
 
-		<item_pez_pequeno texturePath="---" description="aleix" type ="Pez" name="Pez pequeño"/>
-		<item_pez_mediano texturePath="---" description="es un pez pequeño" type ="Pez" name="Pez mediano"/>
-		<item_pez_grande texturePath="---" description="bobo que mezcla sistemas" type="Pez" name="Pez grande"/>
+		<item_pez_pequeno texturePath="---" description="Pez pequeño usado para crear pócimas." type ="Pez" name="Pez pequeño"/>
+		<item_pez_mediano texturePath="---" description="Pez mediano usado para crear pócimas." type ="Pez" name="Pez mediano"/>
+		<item_pez_grande texturePath="---" description="Pez grande usado para crear pócimas." type="Pez" name="Pez grande"/>
 		
 		<item_moneda texturePath="---" description="La moneda principal del juego, utilizada para comprar una variedad de bienes" type ="Miscelanea" name="Monedas"/>
 		
 		<item_nota					texturePath="Assets/Textures/Entidades/Items/textura_nota.png" closeTexturePath="Assets/Textures/Entidades/Items/textura_NoteCloseUp.png"  name="Nota"
-					texto1 ="bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla" titulo1 ="hola"
-					texto2 ="ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble ble blable" titulo2 ="buenas"
-					texto3 ="bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli bli" titulo3 ="adios"
-					texto4 ="blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO blO" titulo4 ="jeus"
-					texto5 ="blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blablu" titulo5 ="visual"
-					texto6 ="blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blu blablu" titulo6 ="visual"
+					texto1 ="“Día 2: Nos han vuelto a atacar los süregs, se han llevado a Alma… No me creo que algo así te haya pasado… Debe haber alguna manera de traerte de vuelta… Prometo que encontraré…”" titulo1 ="Día 2"
+					texto2 ="“Día 5: Hemos descubierto que estos seres vienen de las antiguas ruinas cerca del pueblo, aunque estaban abandonadas, ahora están llenas de… vida? Parece que los süreg se están multiplicando, no paran de salir.”" titulo2 ="Día 5"
+					texto3 ="“Día 7: Los guerreros más fuertes preparamos una expedición para adentrarnos en las ruinas. Antes de partir necesitaremos mejorar el equipo en la herrería y comprar las pociones en el alquimista”" titulo3 ="Día 7"
+					texto4 ="“Día 11: Casi una semana más tarde conseguimos volver a casa, después de un arduo camino encontramos un artefacto que guarda una magia poderosa, es posible que nos ayude contra los süreg.”" titulo4 ="Día 11"
+					texto5 ="“Día 16: Después de descansar unos días en el pueblo, y aprovechando el poder de nuestra nueva máscara, decidimos volver a las ruinas pero nos ha sorprendido un obstáculo inesperado, no sabemos qué es pero es demasiado fuerte.”" titulo5 ="Día 16"
+					texto6 ="“Día 20: Seguimos adentrándonos en las ruinas, notamos una presencia que nos sigue de cerca, aunque ninguno de nosotros ha sido capaz de verla, todo este sitio parece que vigila nuestros pasos”" titulo6 ="Día 20"
+					texto7 ="”Día 23- Huhan: “Esta noche he notado que alguien me tiraba del pie, al despertarme solo estaba Igorv con la espada desenvainada gritando hacia la oscuridad, cuando le pregunté me dijo que no podía describir lo que acababa de ver, parecía muy alterado”" titulo7 ="Día 23"
+					texto8 ="“Día 27: Hemos descubierto el poder detrás de los süreg, estas máscaras, llevamos días usándolas contra ellos y son eficaces, aunque Hemyl jura escuchar susurros al usarla.”" titulo8 ="Día 27"
+					texto9 ="“Día 28- Fukho: Cada día que pasa nos llevamos peor, hemos perdido el camino de vuelta… Igorv sigue empeñado en llegar al final de todo esto… está fuera de sí, nunca debimos entrar en estas malditas ruinas, daría lo que fuera por volver a ver la luz del sol.”" titulo9 ="Día 28"
+					texto10 ="“Día ???- Igorv: No sé cuántos días llevo aquí abajo, estoy perdiendo la cabeza, a veces no recuerdo lo que hago y no soy capaz de controlarme, he encontrado el cadáver de Fukho y de Hemyl, esa cosa los ha matado, es mi turno.”" titulo10 ="Día ???"
 		/>
 
 
