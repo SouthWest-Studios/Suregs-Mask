@@ -145,15 +145,29 @@ bool Boss_Inuit::Update(float dt)
 		}
 	}
 
-
+	if (health <= lifeLow40) {
+		fase = FASE::FASE_CHANGE;
+	}
 	
+	if (health <= lifeLow5 && !useUlt) {
+		useUlt = true;
+		goUseUlt = true;
+	}
+
+	printf("\nHealth: %f", health);
 	switch (fase)
 	{
 	case FASE::FASE_ONE:
+
 		break;
 	case FASE::FASE_CHANGE:
+		//printf("\n FaseCAHNEG");
 		break;
 	case FASE::FASE_TWO:
+		if (!goUseWave) {
+			waveTime.Start();
+		}
+		goUseWave = true;
 		break;
 	}
 
@@ -211,12 +225,12 @@ bool Boss_Inuit::PostUpdate() {
 		health -= 1000;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN) {
+	if (goUseUlt) {
 		ultDef = true;
 		if (!inWave) {
-			printf("1");
 		waveTime.Start();
 		waveTimeStart = true;
+		goUseUlt = false;
 		}
 	}
 	if (ultDef && !inWave && !waveTimeStart) {
@@ -229,7 +243,7 @@ bool Boss_Inuit::PostUpdate() {
 		ulti_Atack();
 	}
 	//Wave
-	if (waveTimerColdDown(10) && !waveTimeStart) {
+	if (waveTimerColdDown(10) && !waveTimeStart && goUseWave) {
 		//printf("\ndelete-3");
 		shock_wave(originalWavePosition.x, originalWavePosition.y, 5, 520, 0);
 	}
@@ -296,7 +310,7 @@ void Boss_Inuit::stateMachine(float dt, iPoint playerPos)
 			}
 		}
 
-		if (TimerColdDown(3) && inbmrAtack == false) {
+		if (TimerColdDown(2) && inbmrAtack == false) {
 			inAtack = false;
 		}
 
@@ -598,8 +612,22 @@ bool Boss_Inuit::Bossfinding(float dt, iPoint playerPosP)
 
 	//printf("\nBossArea:%f", dist(bossArea, enemyPos));
 	//printf("\nEmemyPosicion:%d", enemyPos);
+	
 
-	if (!inbmrAtack) {
+	if ( !inbmrAtack) {
+		dontMove = false;
+	}else
+	{
+		dontMove = true;
+	}
+
+	if (fase == FASE::FASE_CHANGE) {
+		printf("\nFalse");
+		dontMove = true;
+	}
+
+	if (!dontMove) {
+
 		if (playerInBossArea) {
 
 			app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
@@ -781,8 +809,10 @@ void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLAYER_ATTACK:
 		LOG("Collision Player_Attack");
-		health -= app->entityManager->GetPlayer()->attackDamage;
+		if (fase != FASE::FASE_CHANGE) {
+			health -= app->entityManager->GetPlayer()->currentStats.attackDamage;
 		printf("\n BossHeal %f", app->entityManager->GetPlayer()->attackDamage);
+		}
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
