@@ -36,7 +36,6 @@ enum class InventityType
 	POCION_DANO,
 	POCION_VELOCIDAD,
 	ORBE_MAGICO,
-	ZAFIRO,
 	 ESPADA_NV2,
 	 ESPADA_NV3,
 	 ESPADA_NV4,
@@ -53,6 +52,7 @@ enum class InventityType
 	 ARMADURA_NV7,
 	 ARMADURA_NV8,
 	 ARMADURA_NV9,
+	 ZAFIRO,
 
 	//De aqui para abajo no importa el orden
 	
