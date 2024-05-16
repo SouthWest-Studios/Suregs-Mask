@@ -1,4 +1,4 @@
-#include "App.h"
+﻿#include "App.h"
 #include "Input.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -10,7 +10,9 @@
 #include "GuiCheckBox.h"
 #include "GuiControlButton.h"
 #include "GuiManager.h"
+#include "EntityManager.h"
 #include "InventoryManager.h"
+#include "Player.h"
 #include "Hud.h"
 #include "Menu.h"
 #include "Scene_Menu.h"
@@ -42,15 +44,24 @@ bool Hud::Awake(pugi::xml_node config)
 	rectFondoMascara = new SDL_Rect{ 0,37,101,102 };
 	rectFondoMascaraSecundaria = new SDL_Rect{ 110,43,90,90 };
 
-	rectFondoPociones = new SDL_Rect{ 215,67,41,41 };
+	rectFondoPociones = new SDL_Rect{ 110,43,90,90 };
 	rectPocionVida1 = new SDL_Rect{ 1,686,60,56 };
-	rectPocionVida2 = new SDL_Rect{ 61,686,60,56 };
-	rectPocionVida3 = new SDL_Rect{ 121,686,60,56 };
-	rectPocionVidaMax = new SDL_Rect{ 181,686,60,56 };
-	rectPocionRegeneracion = new SDL_Rect{ 241,686,60,56 };
-	rectPocionDano = new SDL_Rect{ 301,686,60,56 };
-	rectPocionVelocidad = new SDL_Rect{ 361,686,60,56 };
-	rectPocionOrbe = new SDL_Rect{ 421,686,60,56 };
+	rectPocionVida2 = new SDL_Rect{ 66,686,60,56 };
+	rectPocionVida3 = new SDL_Rect{ 131,686,60,56 };
+	rectPocionVidaMax = new SDL_Rect{ 196,686,60,56 };
+	rectPocionRegeneracion = new SDL_Rect{ 261,686,60,56 };
+	rectPocionDano = new SDL_Rect{ 326,686,60,56 };
+	rectPocionVelocidad = new SDL_Rect{ 391,686,62,65 };
+	rectPocionOrbe = new SDL_Rect{ 456,686,62,65 };	
+
+	potionRectMap[InventityType::POCION_VIDA_1] = rectPocionVida1;
+	potionRectMap[InventityType::POCION_VIDA_2] = rectPocionVida2;
+	potionRectMap[InventityType::POCION_VIDA_3] = rectPocionVida3;
+	potionRectMap[InventityType::POCION_VIDA_MAX] = rectPocionVidaMax;
+	potionRectMap[InventityType::POCION_REGENERACION] = rectPocionRegeneracion;
+	potionRectMap[InventityType::POCION_DANO] = rectPocionDano;
+	potionRectMap[InventityType::POCION_VELOCIDAD] = rectPocionVelocidad;
+	potionRectMap[InventityType::ORBE_MAGICO] = rectPocionOrbe;
 
 	//rectFondoHabilidad1 = new SDL_Rect{ 1,149,60,60 };
 	//rectFondoHabilidad2 = new SDL_Rect{ 65,157,45,45 };
@@ -120,9 +131,10 @@ bool Hud::Update(float dt)
 		}
 		
 
-	}
+	}	
 
-	
+	Potions();
+
 	return true;
 }
 bool fade = false;
@@ -150,14 +162,15 @@ bool Hud::PostUpdate()
 	
 	app->render->DrawTexture(hudTexture, windowWidth - rectFondoMonedas->w - 35, 130, SDL_FLIP_NONE, rectFondoMonedas, 0);
 	app->render->DrawText(quantityStr.c_str(), windowWidth - rectFondoMonedas->w + 10, 140, 18, 18);
-
-
 	//Fondos
 
 	//Pociones
 
-	app->render->DrawTexture(hudTexture, 445, 32, SDL_FLIP_NONE, rectFondoPociones, 0);
-	app->render->DrawTexture(hudTexture, 445, 32, SDL_FLIP_NONE, rectPocionVida1, 0);
+	app->render->DrawTexture(hudTexture, 445, 10, SDL_FLIP_NONE, rectFondoPociones, 0);
+
+	if (!potionRects.empty()) {
+		app->render->DrawTexture(hudTexture, 458, 24, SDL_FLIP_NONE, potionRects[selectedPotionIndex], 0);
+	}
 
 	/*app->render->DrawTexture(hudTexture, 45, 150, SDL_FLIP_NONE, rectFondoHabilidad1, 0);
 	app->render->DrawTexture(hudTexture, 51, 220, SDL_FLIP_NONE, rectFondoHabilidad2, 0);
@@ -266,7 +279,19 @@ bool Hud::CleanUp()
 
 	 delete rectFondoMascara;
 	 delete rectFondoMascaraSecundaria;
+
 	 delete rectFondoPociones;
+	 delete rectPocionVida1;
+	 delete rectPocionVida2;
+	 delete rectPocionVida3;
+	 delete rectPocionVidaMax;
+	 delete rectPocionRegeneracion;
+	 delete rectPocionDano;
+	 delete rectPocionVelocidad;
+	 delete rectPocionOrbe;
+	 potionRects.clear();
+	 potionRectMap.clear();
+
 	 //delete rectFondoHabilidad1;
 	 //delete rectFondoHabilidad2;
 	 delete rectFondoInventario;
@@ -299,9 +324,41 @@ void Hud::AcquiredItemTrigger(SDL_Texture* texture, std::string text)
 	acquiredItem->lifeTimer.Start();
 
 	acquired_Items.push_back(acquiredItem);
-
-
-
 }
 
+void Hud::Potions()
+{
+
+	if (!potionRects.empty()) {
+		if (app->input->GetButton(STARTFISHING) == KEY_DOWN)
+		{
+			printf("Potion Used: %d\n", selectedPotionIndex);
+			ListItem<Inventity*>* item = app->inventoryManager->inventities.At(selectedPotionIndex);
+			app->inventoryManager->UsePotionSelected(item);
+		}
+		else if (app->input->GetButton(CAMBIAR_POCION_RIGHT) == KEY_DOWN && selectedPotionIndex < potionRects.size() - 1) 
+		{
+			printf("selectedPotionIndex: %d\n", selectedPotionIndex);
+			selectedPotionIndex++;
+		}
+		else if (app->input->GetButton(CAMBIAR_POCION_LEFT) == KEY_DOWN && selectedPotionIndex > 0) 
+		{
+			printf("selectedPotionIndex: %d\n", selectedPotionIndex);
+			selectedPotionIndex--;
+		}
+	}
+
+
+	potionRects.clear();
+
+	ListItem<Inventity*>* item;
+	for (item = app->inventoryManager->inventities.start; item != NULL; item = item->next) {
+		Inventity* inventity = item->data;
+		if (inventity->type == InventityType::POCION_VIDA_1 || inventity->type == InventityType::POCION_VIDA_2 || inventity->type == InventityType::POCION_VIDA_3 ||
+			inventity->type == InventityType::POCION_VIDA_MAX || inventity->type == InventityType::POCION_REGENERACION || inventity->type == InventityType::POCION_DANO ||
+			inventity->type == InventityType::POCION_VELOCIDAD || inventity->type == InventityType::ORBE_MAGICO) {
+			potionRects.push_back(potionRectMap[inventity->type]);
+		}
+	}
+}
 

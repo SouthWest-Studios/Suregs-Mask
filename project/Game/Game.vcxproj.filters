@@ -128,7 +128,7 @@
       <Filter>Entities\NPC</Filter>
     </ClCompile>
     <ClCompile Include="Source\MiniGameFishing.cpp">
-      <Filter>MiniGame</Filter>
+      <Filter>Misc\MiniGame</Filter>
     </ClCompile>
     <ClCompile Include="Source\DialogTriggerEntity.cpp">
       <Filter>Entities\Meta</Filter>
@@ -478,10 +478,10 @@
       <Filter>Entities\NPC</Filter>
     </ClInclude>
     <ClInclude Include="Source\Fishing.h">
-      <Filter>MiniGame</Filter>
+      <Filter>Misc\MiniGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\MiniGameFishing.h">
-      <Filter>MiniGame</Filter>
+      <Filter>Misc\MiniGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\DialogTriggerEntity.h">
       <Filter>Entities\Meta</Filter>
@@ -713,9 +713,6 @@
     <Filter Include="Entities\NPC">
       <UniqueIdentifier>{2142dd33-81d1-45e5-9822-3a15956c346a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MiniGame">
-      <UniqueIdentifier>{dc0edb71-7353-4634-b94c-b47ded8115ea}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Entities\Meta">
       <UniqueIdentifier>{e785cbf2-9afb-41aa-85bf-59da29eacc99}</UniqueIdentifier>
     </Filter>
@@ -757,6 +754,9 @@
     </Filter>
     <Filter Include="Modules\Equipo">
       <UniqueIdentifier>{ebbeaf97-951e-49fb-99a8-3d375e55d784}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc\MiniGame">
+      <UniqueIdentifier>{dc0edb71-7353-4634-b94c-b47ded8115ea}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -45,6 +45,8 @@ public:
 
 	void UseItemSelected(int id);
 
+	void UsePotionSelected(ListItem<Inventity*>* it);
+
 	void OnMovePointer();
 
 	bool IsFull();

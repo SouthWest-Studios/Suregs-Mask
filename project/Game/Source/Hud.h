@@ -7,7 +7,7 @@
 #include "GuiControlButton.h"
 #include "GuiCheckBox.h"
 #include "GuiControlSlider.h"
-
+#include "inventity.h"
 
 struct SDL_Texture;
 
@@ -48,7 +48,7 @@ public:
 
 	void AcquiredItemTrigger(SDL_Texture* texture, std::string text);
 
-	
+	void Potions();
 
 private:
 	char* hudTexturePath;
@@ -96,5 +96,10 @@ private:
 	std::vector<Acquired_Item*> acquired_Items;
 	int acuiredItemLifeTimeMS = 1500;
 
+public:
+
+	std::vector<SDL_Rect*> potionRects;
+	std::map<InventityType, SDL_Rect*> potionRectMap;
+	int selectedPotionIndex = 0;
 };
 #endif // __HUD_H__
