@@ -48,7 +48,7 @@
 #include "Item_Pocion_Vida_2.h"
 #include "Item_Pocion_Vida_3.h"
 #include "Item_Pocion_Vida_Max.h"
-#include "Item_Zafiro.h"
+#include "Item_Zafiro.h" 
 
 
 
@@ -412,11 +412,11 @@ bool EntityManager::PreUpdate()
 		if (obj.texture == app->entityManager->GetPlayer()->texture)
 		{
 			if (app->entityManager->GetPlayer()->isFacingLeft) {
-			obj.x = app->entityManager->GetPlayer()->position.x - 100;
+			obj.x = app->entityManager->GetPlayer()->position.x - 70;
 			}
 			else
 			{
-				obj.x = app->entityManager->GetPlayer()->position.x - 45;
+				obj.x = app->entityManager->GetPlayer()->position.x - 80;
 			}
 			obj.y = app->entityManager->GetPlayer()->position.y - 100;
 			obj.anchorY = app->entityManager->GetPlayer()->position.y + 218; //Seg�n el sprite, a�adir el valor que corresponda -> !0

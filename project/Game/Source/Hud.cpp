@@ -141,6 +141,9 @@ bool fade = false;
 // Called each loop iteration
 bool Hud::PostUpdate()
 {
+
+	if (app->entityManager->GetPlayer() == nullptr) return true;
+
 	app->win->GetWindowSize(windowWidth, windowHeight);
 	
 

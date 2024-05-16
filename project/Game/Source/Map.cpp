@@ -1002,6 +1002,8 @@ bool Map::LoadEntities(std::string layerName)
 
 						app->entityManager->SetPlayer((Player*)app->entityManager->CreateEntity(EntityType::PLAYER));
 						app->entityManager->GetPlayer()->config = configNode.child("entities_data").child("player");
+						
+						iPoint Npos = iPoint(pos.x + 16, pos.y + 16);
 						app->entityManager->GetPlayer()->position = iPoint(pos.x + 16, pos.y + 16);
 						app->entityManager->GetPlayer()->Start();
 

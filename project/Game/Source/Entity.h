@@ -147,6 +147,18 @@ enum class EntityState_Boss_Musri
 	NONE,
 	STATE_COUNT
 };
+enum class EntityState_Boss_Surma
+{
+	IDLE,
+	RUNNING,
+	ATTACKING_BASIC,
+	ATTACKING_DISTANCE,
+	DEAD,
+	DASHI,
+	FASE_CHANGE,
+	NONE,
+	STATE_COUNT
+};
 
 
 class Entity

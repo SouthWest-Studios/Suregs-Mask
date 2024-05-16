@@ -96,6 +96,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\BestiarioManager.cpp" />
+    <ClCompile Include="Source\Boss_Surma.cpp" />
     <ClCompile Include="Source\Cofre.cpp" />
     <ClCompile Include="Source\CommerceHerreria.cpp" />
     <ClCompile Include="Source\Emitter.cpp" />
@@ -199,6 +200,7 @@
     <ClInclude Include="Source\ArmaduraInv.h" />
     <ClInclude Include="Source\Bestiario.h" />
     <ClInclude Include="Source\BestiarioManager.h" />
+    <ClInclude Include="Source\Boss_Surma.h" />
     <ClInclude Include="Source\Cofre.h" />
     <ClInclude Include="Source\Emitter.h" />
     <ClInclude Include="Source\Enemy_Boorok.h" />
