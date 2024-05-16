@@ -30,6 +30,16 @@ bool TPEntity::Start() {
 
 	room = GetCurrentRoom();
 
+	for(MapObject* openRoom : app->entityManager->openRooms)
+	{
+		if(openRoom == room)
+		{
+			this->isOpened = true;
+			//printf("TP abierto\n");
+			break;
+		}
+	}
+
 	return true;
 }
 

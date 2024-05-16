@@ -78,7 +78,8 @@ public:
 	List<TPEntity*> tpEntities;
 
 	std::vector<DrawableObject> objectsToDraw;
-
+	
+  	std::vector<MapObject*> openRooms;
 
 private:
 

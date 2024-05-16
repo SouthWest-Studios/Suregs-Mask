@@ -615,6 +615,7 @@ void EntityManager::UpdateRoomActivation(){
         for (ListItem<TPEntity*>* item = tpEntities.start; item != nullptr; item = item->next) {
             if (item->data->room == currentRoom && !item->data->isOpened) {
                 item->data->isOpened = true;
+				openRooms.push_back(currentRoom);
                 //printf("TP activated\n");
             }
         }
