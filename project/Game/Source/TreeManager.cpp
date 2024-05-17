@@ -1158,6 +1158,66 @@ bool TreeManager::Update(float dt)
 			numMejoras3 = 8; // Limitar a 8 si es mayor
 		}
 
+		if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
+
+			selectPrimaryMask = true;
+
+		}
+
+		if (selectPrimaryMask)
+		{
+			if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+			{
+				app->entityManager->GetPlayer()->primaryMask = Mask::MASK0;
+				selectPrimaryMask = false;
+			}
+			if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+			{
+				app->entityManager->GetPlayer()->primaryMask = Mask::MASK1;
+				selectPrimaryMask = false;
+			}
+			if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+			{
+				app->entityManager->GetPlayer()->primaryMask = Mask::MASK2;
+				selectPrimaryMask = false;
+			}
+			if (app->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
+			{
+				app->entityManager->GetPlayer()->primaryMask = Mask::MASK3;
+				selectPrimaryMask = false;
+			}
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
+
+			selectPrimaryMask = true;
+
+		}
+
+		if (selectPrimaryMask)
+		{
+			if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+			{
+				app->entityManager->GetPlayer()->secondaryMask = Mask::MASK0;
+				selectPrimaryMask = false;
+			}
+			if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+			{
+				app->entityManager->GetPlayer()->secondaryMask = Mask::MASK1;
+				selectPrimaryMask = false;
+			}
+			if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+			{
+				app->entityManager->GetPlayer()->secondaryMask = Mask::MASK2;
+				selectPrimaryMask = false;
+			}
+			if (app->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
+			{
+				app->entityManager->GetPlayer()->secondaryMask = Mask::MASK3;
+				selectPrimaryMask = false;
+			}
+		}
+
 		int num;
 
 		num = numberRows + 1;

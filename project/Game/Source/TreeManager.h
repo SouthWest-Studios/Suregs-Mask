@@ -84,6 +84,9 @@ public:
 	int verticalPointerId = 0;
 	int horitzontalPointerId = 0;
 
+	bool selectPrimaryMask = false;
+	bool selectSecondaryMask = false;
+
 private:
 	pugi::xml_document configFile;
 	pugi::xml_node configNode;
