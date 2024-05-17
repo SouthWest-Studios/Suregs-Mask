@@ -285,6 +285,9 @@ public:
 	//Dead
 	bool DeadTP = false;
 
+	//TakeDMG
+	bool inTakeDMG = false;
+
 	Timer collisionAttackTimer;
 
 	//Espada & Armadura

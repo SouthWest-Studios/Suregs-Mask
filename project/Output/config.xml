@@ -386,7 +386,7 @@
 			<idle_player start="56" end="61" speed="0.15f" loop="true"/>
 			<maskRayo_player start="64" end="68" speed="0.25f" loop="false"/>
 			<atack2_player start="72" end="74" speed="0.25f" loop="false"/>
-			<takeDMG_player start="80" end="81" speed="0.25f" loop="false"/>
+			<takeDMG_player start="80" end="82" speed="0.15f" loop="false"/>
 		</player>
 
 		<boss_inuit>
