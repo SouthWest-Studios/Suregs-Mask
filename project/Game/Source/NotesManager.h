@@ -79,6 +79,8 @@ public:
 
 	bool vacio = true;
 
+	
+
 private:
 	pugi::xml_document configFile;
 	pugi::xml_node configNode;
