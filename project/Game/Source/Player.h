@@ -127,7 +127,10 @@ public:
 	void Run(float dt);
 	void Dashi(float dt);
 	void Attack(float dt);
+	void Dead();
 
+	//Animacion
+	void ResetAnimacion();
 	void TakeDamage(float damage);
 
 	float GetRealMovementSpeed() const;
@@ -160,12 +163,17 @@ public:
 	void SetPassiveInvisible();
 	void Mask3Statistics();
 
+
+
 	Mask* GetPrimaryMask();
 	Mask* GetSecondaryMask();
 	
 	MaskStats* GetMaskStats(Mask mask);
 
 	void UpdateStats();
+
+	bool PlayerTimerColdDown(float time);
+
 
 	//Estadísticas
 
@@ -240,6 +248,9 @@ public:
 	Animation* currentAnimation = nullptr;
 	EntityState state;
 
+	float TimeClodDown;
+	Timer TimerColdDown;
+
 	//Animation
 	Animation SPosition;
 	SDL_Rect* spritePositions;
@@ -269,6 +280,10 @@ public:
 	Timer damageTimer;
 	float damageCooldown = 0.2f;
 	bool hasAttacked = false;
+	int atackNum = 0;
+
+	//Dead
+	bool DeadTP = false;
 
 	Timer collisionAttackTimer;
 
@@ -388,7 +403,7 @@ public:
 	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::REVIVING}, {EntityState::MASK_ATTACK}, {EntityState::NONE}, {EntityState::IDLE}}, // IDLE
 	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::REVIVING}, {EntityState::MASK_ATTACK}, {EntityState::DASHI}, {EntityState::IDLE}}, // RUNNING
 	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::REVIVING}, {EntityState::MASK_ATTACK}, {EntityState::DASHI}, {EntityState::IDLE}}, // ATTACKING
-	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::REVIVING}, {EntityState::MASK_ATTACK}, {EntityState::DASHI}, {EntityState::IDLE}}, // DEAD
+	{ {EntityState::NONE}, {EntityState::NONE}, {EntityState::NONE}, {EntityState::DEAD}, {EntityState::REVIVING}, {EntityState::NONE}, {EntityState::NONE}, {EntityState::IDLE}}, // DEAD
 	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::REVIVING}, {EntityState::MASK_ATTACK}, {EntityState::DASHI}, {EntityState::IDLE}}, // REVIVING
 	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::REVIVING}, {EntityState::MASK_ATTACK}, {EntityState::DASHI}, {EntityState::IDLE}}, // MASK_ATTACK
 	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::REVIVING}, {EntityState::MASK_ATTACK}, {EntityState::DASHI}, {EntityState::IDLE}}, // DASHI

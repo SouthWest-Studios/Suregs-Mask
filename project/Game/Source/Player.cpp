@@ -659,19 +659,20 @@ bool Player::Update(float dt)
 		pbodyFoot->body->GetFixtureList()[0].SetSensor(godmode);
 	}
 
-	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "dashi_player") {
-		inAnimation = false;
-		dashi_player.Reset();
-	}
+	ResetAnimacion();
 
-	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atack1_player") {
-		inAnimation = false;
-		atack_Anim = false;
-		desiredState = EntityState::IDLE;
-		atack1_player.Reset();
-	}
+	
 	if (atack_Anim) {
+		if (atackNum == 1) {
 		currentAnimation = &atack1_player;
+		}
+		else if (atackNum == 2) {
+			currentAnimation = &atack2_player;
+		}
+		else if (atackNum == 3) {
+			currentAnimation = &atack3_player;
+			atackNum = 0;
+		}
 	}
 
 	if (godmode) { GodMode(dt); }
@@ -795,11 +796,52 @@ bool Player::CleanUp()
 	app->physics->GetWorld()->DestroyBody(pbodySensor->body);
 	/*app->tex->UnLoad(texture);*/
 	app->tex->UnLoad(texture);
+	DeadTP = false;
+	dead_player.Reset();
 
 	RELEASE(spritePositions);
 	delete spritePositions;
 
 	return true;
+}
+
+
+void Player::ResetAnimacion()
+{
+	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "dashi_player") {
+		inAnimation = false;
+		dashi_player.Reset();
+	}
+
+	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atack1_player") {
+		inAnimation = false;
+		atack_Anim = false;
+		desiredState = EntityState::IDLE;
+		atack1_player.Reset();
+	}
+	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atack2_player") {
+		inAnimation = false;
+		atack_Anim = false;
+		desiredState = EntityState::IDLE;
+		atack2_player.Reset();
+	}
+	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atack3_player") {
+		inAnimation = false;
+		atack_Anim = false;
+		desiredState = EntityState::IDLE;
+		atack3_player.Reset();
+	}
+
+	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "dead_player") {
+		
+		if (!DeadTP) {
+			TimerColdDown.Start();
+		}
+		DeadTP = true;
+		//desiredState = EntityState::IDLE;
+		//dead_player.Reset();
+	}
+
 }
 
 void Player::DoNothing(float dt)
@@ -886,6 +928,7 @@ void Player::Attack(float dt)
 	//printf("attack"); 
 	atack_Anim = true;
 	inAnimation = true;
+	
 	// Dirección del ataque
 	int attackX = position.x + lastMovementDirection.x * attackWidth;
 	int attackY = position.y + lastMovementDirection.y * attackHeight;
@@ -897,6 +940,7 @@ void Player::Attack(float dt)
         attackSensor->listener = this;
 		//printf("CREATE SENSOR\n");
 		hasAttacked = true;
+		atackNum++;
     } 
 	else if(attackSensor && hasAttacked) {
         // Si el sensor de ataque ya existe, actualizamos su posición
@@ -918,6 +962,15 @@ void Player::Attack(float dt)
 	}
 
 	app->audio->PlayTimedFx(basic_combo_attack1_fx, 448);
+}
+
+void Player::Dead()
+{
+	printf("dead");
+	currentAnimation = &dead_player;
+	if (DeadTP && PlayerTimerColdDown(3)) {
+	app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_pueblo);
+	}
 }
 
 void Player::UnequipMasks() {
@@ -1033,7 +1086,7 @@ void Player::stateMachine(float dt)
 		Attack(dt);
 		break;
 	case EntityState::DEAD:
-	
+		Dead();
 		break;
 	case EntityState::REVIVING:
 		break;
@@ -2150,6 +2203,8 @@ void Player::FishingDirecction(float verticalMovement, float horizontalMovement)
 
 }
 
+
+
 void Player::TakeDamage(float damage) {
     if (damageTimer.ReadSec() >= damageCooldown) {
         if(dashCollision == nullptr && !isDashing){
@@ -2160,8 +2215,13 @@ void Player::TakeDamage(float damage) {
             damageTimer.Start();
 
 			if (currentStats.currentHealth <= 0) {
+				//printf("Dead");
+				inAnimation = true;
+				desiredState = EntityState::DEAD;
+				
 				//app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_gameover);
-				app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_pueblo);
+				
+				
 			}
         }
     }
@@ -2173,6 +2233,19 @@ void Player::UpdateStats(){
 	baseStats.attackDamage = 100 + attackDamagePerLevel[app->inventoryManager->swordLevel];
 }
 
+
+bool Player::PlayerTimerColdDown(float time)
+{
+	//printf("\nataqueTimeClodDown%: %f", ataqueTimeClodDown);
+	TimeClodDown = TimerColdDown.CountDown(time);
+	if ((float)TimeClodDown == 0) {
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
 
 //
 //void Player::Rodar(float dt)
