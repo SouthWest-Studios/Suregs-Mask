@@ -49,9 +49,9 @@ bool NPCEnamorados::Start() {
 
 	app->entityManager->objectsToDraw.push_back({
 		texture,
-		position.x - 50, // x
-		position.y - 200, // y
-		position.y + 183, // anchorY
+		position.x, // x
+		position.y - 100, // y
+		position.y, // anchorY
 		101, // width
 		110, // height
 		true, // isFacingLeft

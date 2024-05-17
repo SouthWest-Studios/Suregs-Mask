@@ -50,7 +50,7 @@ bool NPCAbuelitas::Start() {
 	app->entityManager->objectsToDraw.push_back({
 		texture,
 		position.x - 50, // x
-		position.y - 200, // y
+		position.y - 100, // y
 		position.y + 183, // anchorY
 		185, // width
 		110, // height

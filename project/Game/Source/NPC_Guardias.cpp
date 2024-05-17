@@ -49,8 +49,8 @@ bool NPCGuardias::Start() {
 
 	app->entityManager->objectsToDraw.push_back({
 		texture,
-		position.x - 50, // x
-		position.y - 200, // y
+		position.x - 90, // x
+		position.y - 100, // y
 		position.y + 183, // anchorY
 		350, // width
 		130, // height
