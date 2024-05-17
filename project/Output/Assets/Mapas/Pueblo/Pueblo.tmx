@@ -150372,6 +150372,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="29"/>
    <tile/>
    <tile/>
    <tile/>
@@ -150383,7 +150384,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="26"/>
    <tile/>
    <tile/>
    <tile/>
@@ -150889,7 +150889,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="25"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -154119,6 +154119,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="28"/>
    <tile/>
    <tile/>
    <tile/>
@@ -154134,8 +154135,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="27"/>
    <tile/>
    <tile/>
    <tile/>
@@ -158878,7 +158878,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="30"/>
    <tile/>
    <tile/>
    <tile/>
@@ -176206,27 +176206,27 @@
     <property name="dialogID" type="int" value="1001"/>
    </properties>
   </object>
-  <object id="159" x="3141.33" y="3044" width="96" height="96">
+  <object id="159" x="3054.66" y="2738.67" width="137.333" height="120">
    <properties>
     <property name="dialogID" type="int" value="203"/>
    </properties>
   </object>
-  <object id="160" x="3265.33" y="3042.67" width="96" height="96">
+  <object id="160" x="2550.66" y="2738.67" width="122.667" height="122.667">
    <properties>
     <property name="dialogID" type="int" value="503"/>
    </properties>
   </object>
-  <object id="161" x="3138.67" y="3182.67" width="96" height="96">
+  <object id="161" x="2616" y="2254.67" width="182.667" height="126.667">
    <properties>
     <property name="dialogID" type="int" value="106"/>
    </properties>
   </object>
-  <object id="162" x="3268" y="3180" width="96" height="96">
+  <object id="162" x="2794.67" y="3342.67" width="209.333" height="129.333">
    <properties>
     <property name="dialogID" type="int" value="806"/>
    </properties>
   </object>
-  <object id="163" x="3137.33" y="3317.33" width="96" height="96">
+  <object id="163" x="3150.66" y="2150.66" width="144" height="138.667">
    <properties>
     <property name="dialogID" type="int" value="309"/>
    </properties>

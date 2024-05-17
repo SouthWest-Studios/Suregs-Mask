@@ -23,6 +23,10 @@
 #include "NPC_Vendedor.h"
 #include "NPC_Pescador.h"
 #include "NPC_Abuelo.h"
+#include "NPC_Enamorados.h"
+#include "NPC_Abuelito.h"
+#include "NPC_Abuelitas.h"
+#include "NPC_Guardias.h"
 #include "NPC_Bruja.h"
 #include "NPC_Bully1.h"
 #include "NPC_Bully2.h"
@@ -1108,8 +1112,49 @@ bool Map::LoadEntities(std::string layerName)
 
 					}
 
-					
+					//NPC_ENAMORADOS
+					if (gid == tileset->firstgid + 10) {
 
+
+						NPCVendedor* npc = (NPCVendedor*)app->entityManager->CreateEntity(EntityType::NPC_ENAMORADOS);
+						npc->config = configNode.child("entities_data").child("npc_enamorados");
+						npc->position = iPoint(pos.x + 16, pos.y + 16);
+						npc->Start();
+
+					}
+
+					//NPC_ABUELITO
+					if (gid == tileset->firstgid + 11) {
+
+
+						NPCVendedor* npc = (NPCVendedor*)app->entityManager->CreateEntity(EntityType::NPC_ABUELITO);
+						npc->config = configNode.child("entities_data").child("npc_abuelito");
+						npc->position = iPoint(pos.x + 16, pos.y + 16);
+						npc->Start();
+
+					}
+
+					//NPC_ABUELITAS
+					if (gid == tileset->firstgid + 12) {
+
+
+						NPCVendedor* npc = (NPCVendedor*)app->entityManager->CreateEntity(EntityType::NPC_ABUELITAS);
+						npc->config = configNode.child("entities_data").child("npc_abuelitas");
+						npc->position = iPoint(pos.x + 16, pos.y + 16);
+						npc->Start();
+
+					}
+
+					//NPC_GUARDIAS
+					if (gid == tileset->firstgid + 13) {
+
+
+						NPCVendedor* npc = (NPCVendedor*)app->entityManager->CreateEntity(EntityType::NPC_GUARDIAS);
+						npc->config = configNode.child("entities_data").child("npc_guardias");
+						npc->position = iPoint(pos.x + 16, pos.y + 16);
+						npc->Start();
+
+					}
 
 
 					//OSIRIS

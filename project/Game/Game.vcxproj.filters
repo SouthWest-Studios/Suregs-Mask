@@ -307,6 +307,18 @@
     <ClCompile Include="Source\Boss_Surma.cpp">
       <Filter>Entities\Boss</Filter>
     </ClCompile>
+    <ClCompile Include="Source\NPC_Enamorados.cpp">
+      <Filter>Entities\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\NPC_Abuelitas.cpp">
+      <Filter>Entities\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\NPC_Abuelito.cpp">
+      <Filter>Entities\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\NPC_Guardias.cpp">
+      <Filter>Entities\NPC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -677,6 +689,18 @@
     </ClInclude>
     <ClInclude Include="Source\Boss_Surma.h">
       <Filter>Entities\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NPC_Enamorados.h">
+      <Filter>Entities\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NPC_Abuelitas.h">
+      <Filter>Entities\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NPC_Abuelito.h">
+      <Filter>Entities\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NPC_Guardias.h">
+      <Filter>Entities\NPC</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

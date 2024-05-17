@@ -263,6 +263,10 @@
 		<npc_abuelo texturePath="Assets/Textures/Entidades/NPCs/textura_npc_abuelo.png" Tsprite="1" Pwidth="138" sprite_x="138" sprite_y="195"/>
 		<npc_mujer_preocupada texturePath="Assets/Textures/Entidades/NPCs/textura_npc_mujer_preocupada.png" Tsprite="1" Pwidth="138" sprite_x="138" sprite_y="194"/>     
 		<npc_mujer_enamorada texturePath="Assets/Textures/Entidades/NPCs/textura_npc_mujer_enamorada.png" Tsprite="1" Pwidth="138" sprite_x="138" sprite_y="194"/>
+		<npc_enamorados texturePath="Assets/Textures/Entidades/NPCs/textura_npc_enamorados.png" Tsprite="1" Pwidth="101" sprite_x="101" sprite_y="110"/>
+		<npc_enamorados texturePath="Assets/Textures/Entidades/NPCs/textura_npc_abuelito.png" Tsprite="1" Pwidth="49" sprite_x="49" sprite_y="105"/>
+		<npc_enamorados texturePath="Assets/Textures/Entidades/NPCs/textura_npc_abuelitas.png" Tsprite="1" Pwidth="185" sprite_x="185" sprite_y="110"/>
+		<npc_enamorados texturePath="Assets/Textures/Entidades/NPCs/textura_npc_guardias.png" Tsprite="1" Pwidth="350" sprite_x="350" sprite_y="130"/>
 		
 		
 		<cofre texturePath="Assets/Textures/Entidades/Cofre/textura_Cofre.png"
