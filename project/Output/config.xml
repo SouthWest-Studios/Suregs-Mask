@@ -65,6 +65,8 @@
       <basic_combo_attack1_fx path="Assets/Audio/Fx/Player/basic_combo_attack1_fx.wav"/>
       <basic_combo_attack2_fx path="Assets/Audio/Fx/Player/basic_combo_attack2_fx.wav"/>
       <basic_combo_attack3_fx path="Assets/Audio/Fx/Player/basic_combo_attack3_fx.wav"/>
+      <basic_combo_attack3Alt_fx path="Assets/Audio/Fx/Player/basic_combo_attack3Alt_fx.wav"/>
+      <basic_combo_attack3Alt2_fx path="Assets/Audio/Fx/Player/basic_combo_attack3Alt2_fx.wav"/>
       <mask_ability_fx path=""/>
       <switch_masks_fx path="Assets/Audio/Fx/Player/switch_masks_fx.wav"/>
       <use_potion_fx path="Assets/Audio/Fx/Player/use_potion_fx.wav"/>

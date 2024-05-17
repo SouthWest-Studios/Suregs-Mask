@@ -582,6 +582,10 @@ bool Player::Start() {
 	dash_fx = app->audio->LoadAudioFx("dash_fx");
 	switch_masks_fx = app->audio->LoadAudioFx("switch_masks_fx");
 	basic_combo_attack1_fx = app->audio->LoadAudioFx("basic_combo_attack1_fx");
+	basic_combo_attack2_fx = app->audio->LoadAudioFx("basic_combo_attack2_fx");
+	basic_combo_attack3_fx = app->audio->LoadAudioFx("basic_combo_attack3_fx");
+	basic_combo_attack3Alt_fx = app->audio->LoadAudioFx("basic_combo_attack3Alt_fx");
+	basic_combo_attack3Alt2_fx = app->audio->LoadAudioFx("basic_combo_attack3Alt2_fx");
 	player_get_damage_fx = app->audio->LoadAudioFx("player_get_damage_fx");
 	get_item_fx = app->audio->LoadAudioFx("get_item_fx");
 
@@ -972,7 +976,15 @@ void Player::Attack(float dt)
 		}
 	}
 
-	app->audio->PlayTimedFx(basic_combo_attack1_fx, 448);
+	if (atackNum == 1) {
+		app->audio->PlayTimedFx(basic_combo_attack1_fx, 473);
+	}
+	else if (atackNum == 2) {
+		app->audio->PlayTimedFx(basic_combo_attack2_fx, 473);
+	}
+	else if (atackNum == 3) {
+		app->audio->PlayRandomTimedFx(basic_combo_attack3_fx, basic_combo_attack3Alt_fx, basic_combo_attack3Alt2_fx, 473);
+	}
 }
 
 void Player::Dead()

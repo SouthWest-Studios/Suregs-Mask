@@ -61,6 +61,9 @@ public:
 	// Play a WAV after the specified time, time in milliseconds
 	void PlayTimedFx(unsigned int name, int time);
 
+	// Play a random WAV after the specified time, time in milliseconds
+	void PlayRandomTimedFx(unsigned int name, unsigned int name2, unsigned int name3, int time);
+
 public:
 
 	int volumeMusic;
@@ -78,6 +81,7 @@ private:
 	Timer runTimer;
 
 	Timer timer;
+	Timer altTimer;
 
 	_Mix_Music* music;
 	List<Mix_Chunk *>	fx;
