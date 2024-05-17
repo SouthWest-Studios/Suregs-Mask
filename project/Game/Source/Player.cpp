@@ -587,6 +587,7 @@ bool Player::Start() {
 	basic_combo_attack3Alt_fx = app->audio->LoadAudioFx("basic_combo_attack3Alt_fx");
 	basic_combo_attack3Alt2_fx = app->audio->LoadAudioFx("basic_combo_attack3Alt2_fx");
 	player_get_damage_fx = app->audio->LoadAudioFx("player_get_damage_fx");
+	player_death_fx = app->audio->LoadAudioFx("player_death_fx");
 	get_item_fx = app->audio->LoadAudioFx("get_item_fx");
 
 	cdTimerDashMS = 500;
@@ -989,10 +990,24 @@ void Player::Attack(float dt)
 
 void Player::Dead()
 {
+	/*
+	if (app->audio->playingMusic == true)
+	{
+		app->audio->StopMusic(2.0f);
+		app->audio->playingMusic = false;
+	}*/
+
+	if (app->audio->playingDeathFx == false)
+	{
+		app->audio->PlayFx(player_death_fx);
+		app->audio->playingDeathFx = true;
+	}
+
 	printf("dead");
 	currentAnimation = &dead_player;
 	if (DeadTP && PlayerTimerColdDown(3)) {
 		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_pueblo);
+		app->audio->playingDeathFx = false;
 	}
 }
 

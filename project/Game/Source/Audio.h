@@ -71,6 +71,7 @@ public:
 
 	bool playingMusic = false;
 	bool playingRunFx = false;
+	bool playingDeathFx = false;
 	Timer musicTimer;
 
 	map<unsigned int, int> activeChannels;

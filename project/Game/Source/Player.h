@@ -247,6 +247,7 @@ public:
 	int basic_combo_attack3Alt_fx;
 	int basic_combo_attack3Alt2_fx;
 	int player_get_damage_fx;
+	int player_death_fx;
 	int get_item_fx;
 
 	Animation* currentAnimation = nullptr;
