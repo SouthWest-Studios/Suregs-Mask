@@ -210,24 +210,24 @@
 		<item_pocion_orbe_magico	texturePath="Assets/Textures/Entidades/Items/textura_orbe_magico.png"			description="Objeto mágico con propiedades sorprendentes."						type ="Consumible"	name="Orbe Mágico"/>
 		<item_pocion_orbe_magico	texturePath="Assets/Textures/Entidades/Items/textura_orbe_magico.png"			description="Objeto mágico con propiedades sorprendentes."						type ="Consumible"	name="Orbe Mágico"/>
 		<item_zafiro				texturePath="Assets/Textures/Entidades/Items/textura_zafiro.png"				description="Mineral afilado con propiedades para el combate."					type ="Material" name="Zafiro"/>
-		<item_espada_nv2				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv2.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 2"/>
-		<item_espada_nv3				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv3.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 3"/>
-		<item_espada_nv4				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv4.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 4"/>
-		<item_espada_nv5				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv3.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 5"/>
-		<item_espada_nv6				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv6.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 6"/>
-		<item_espada_nv7				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv7.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 7"/>
-		<item_espada_nv8				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv8.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 8"/>
-		<item_espada_nv9				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv9.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 9"/>
-		<item_espada_nv10				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv10.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 10"/>
-		<item_armadura_nv2				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv2.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 2"/>
-		<item_armadura_nv3				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv3.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 3"/>
-		<item_armadura_nv4				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv4.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 4"/>
-		<item_armadura_nv5				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv5.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 5"/>
-		<item_armadura_nv6				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv6.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 6"/>
-		<item_armadura_nv7				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv7.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 7"/>
-		<item_armadura_nv8				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv8.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 8"/>
-		<item_armadura_nv9				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv9.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 9"/>
-		<item_armadura_nv10				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv10.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Nivel 9"/>
+		<item_espada_nv2				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv2.png"				description="Mejora la espada al nivel 2, otorgando 120 puntos de daño."				type ="Material" name="Nivel 2"/>
+		<item_espada_nv3				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv3.png"				description="Mejora la espada al nivel 3, otorgando 140 puntos de daño."				type ="Material" name="Nivel 3"/>
+		<item_espada_nv4				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv4.png"				description="Mejora la espada al nivel 4, otorgando 170 puntos de daño."				type ="Material" name="Nivel 4"/>
+		<item_espada_nv5				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv3.png"				description="Mejora la espada al nivel 5, otorgando 200 puntos de daño."				type ="Material" name="Nivel 5"/>
+		<item_espada_nv6				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv6.png"				description="Mejora la espada al nivel 6, otorgando 240 puntos de daño."				type ="Material" name="Nivel 6"/>
+		<item_espada_nv7				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv7.png"				description="Mejora la espada al nivel 7, otorgando 280 puntos de daño."				type ="Material" name="Nivel 7"/>
+		<item_espada_nv8				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv8.png"				description="Mejora la espada al nivel 8, otorgando 350 puntos de daño."				type ="Material" name="Nivel 8"/>
+		<item_espada_nv9				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv9.png"				description="Mejora la espada al nivel 9, otorgando 420 puntos de daño."				type ="Material" name="Nivel 9"/>
+		<item_espada_nv10				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv10.png"				description="Mejora la espada al nivel 10, otorgando 500 puntos de daño."				type ="Material" name="Nivel 10"/>
+		<item_armadura_nv2				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv2.png"				description="Mejora la armadura al nivel 2, otorgando 120 puntos de vida."				type ="Material" name="Nivel 2"/>
+		<item_armadura_nv3				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv3.png"				description="Mejora la armadura al nivel 3, otorgando 150 puntos de vida."				type ="Material" name="Nivel 3"/>
+		<item_armadura_nv4				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv4.png"				description="Mejora la armadura al nivel 4, otorgando 190 puntos de vida."				type ="Material" name="Nivel 4"/>
+		<item_armadura_nv5				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv5.png"				description="Mejora la armadura al nivel 5, otorgando 250 puntos de vida."				type ="Material" name="Nivel 5"/>
+		<item_armadura_nv6				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv6.png"				description="Mejora la armadura al nivel 6, otorgando 280 puntos de vida."				type ="Material" name="Nivel 6"/>
+		<item_armadura_nv7				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv7.png"				description="Mejora la armadura al nivel 7, otorgando 350 puntos de vida."				type ="Material" name="Nivel 7"/>
+		<item_armadura_nv8				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv8.png"				description="Mejora la armadura al nivel 8, otorgando 400 puntos de vida."				type ="Material" name="Nivel 8"/>
+		<item_armadura_nv9				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv9.png"				description="Mejora la armadura al nivel 9, otorgando 480 puntos de vida."				type ="Material" name="Nivel 9"/>
+		<item_armadura_nv10				texturePath="Assets/Textures/Entidades/Items/textura_armadura_nv10.png"				description="Mejora la armadura al nivel 10, otorgando 600 puntos de vida."				type ="Material" name="Nivel 10"/>
 
 		<item_pez_pequeno texturePath="---" description="Pez pequeño usado para crear pócimas." type ="Pez" name="Pez pequeño"/>
 		<item_pez_mediano texturePath="---" description="Pez mediano usado para crear pócimas." type ="Pez" name="Pez mediano"/>
