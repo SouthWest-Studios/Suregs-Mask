@@ -49,6 +49,18 @@ bool Boss_Surma::Start() {
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
 	idleAnim.LoadAnim((char*)name.c_str(), "idleAnim", spritePositions);
+	runAnim.LoadAnim((char*)name.c_str(), "runAnim", spritePositions);
+	combo1Anim.LoadAnim((char*)name.c_str(), "combo1Anim", spritePositions);
+	combo2Anim.LoadAnim((char*)name.c_str(), "combo2Anim", spritePositions);
+	combo3Anim.LoadAnim((char*)name.c_str(), "combo3Anim", spritePositions);
+	ataqueCargadoAnim.LoadAnim((char*)name.c_str(), "ataqueCargadoAnim", spritePositions);
+	ataqueCargadoEjecutarAnim.LoadAnim((char*)name.c_str(), "ataqueCargadoEjecutarAnim", spritePositions);
+	ataqueCargadoExplosionAnim.LoadAnim((char*)name.c_str(), "ataqueCargadoExplosionAnim", spritePositions);
+	cansadoAnim.LoadAnim((char*)name.c_str(), "cansadoAnim", spritePositions);
+	ataqueRapidoAnim.LoadAnim((char*)name.c_str(), "ataqueRapidoAnim", spritePositions);
+	muerteAnim.LoadAnim((char*)name.c_str(), "muerteAnim", spritePositions);
+	cambioFaseAnim.LoadAnim((char*)name.c_str(), "cambioFaseAnim", spritePositions);
+
 
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
@@ -60,7 +72,7 @@ bool Boss_Surma::Start() {
 	pbodyFoot->listener = this;
 	pbodyFoot->ctype = ColliderType::ENEMY;
 
-	pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 130, 110, bodyType::DYNAMIC);
+	pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 150, 140, bodyType::DYNAMIC);
 	pbodySensor->entity = this;
 	pbodySensor->listener = this;
 	pbodySensor->ctype = ColliderType::UNKNOWN;
@@ -72,7 +84,7 @@ bool Boss_Surma::Start() {
 
 	maxHealth = config.attribute("maxHealth").as_float();
 	health = maxHealth;
-	speed = config.attribute("speed").as_float() / 10;
+	speed = (config.attribute("speed").as_float() / 10) * 0.4;
 	attackDamage = config.attribute("attackDamage").as_float();
 	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();
@@ -136,7 +148,7 @@ bool Boss_Surma::Update(float dt)
 
 
 
-	stateMachine(dt, playerPos);
+	//stateMachine(dt, playerPos);
 
 
 
@@ -153,10 +165,10 @@ bool Boss_Surma::PostUpdate() {
 
 
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 70, position.y - 150, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x - 220, position.y - 200, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 70, position.y - 150, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 100, position.y - 200, SDL_FLIP_NONE, &rect);
 	}
 
 	if (app->physics->debug == true) {
@@ -324,7 +336,7 @@ bool Boss_Surma::Bossfinding(float dt, iPoint targetPosP)
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
 
 
-	if (dist(targetPos, enemyPos) < viewDistance * 100000) {
+	if (dist(targetPos, enemyPos) < viewDistance ) {
 		app->map->pathfinding->CreatePath(enemyPos, targetPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
 		lastPath = *app->map->pathfinding->GetLastPath();
 	}
@@ -348,7 +360,7 @@ bool Boss_Surma::Bossfinding(float dt, iPoint targetPosP)
 		velocity = b2Vec2(direction.x * speed, direction.y * speed);
 
 		// Determina si el enemigo est?mirando hacia la izquierda o hacia la derecha
-		isFacingLeft = (direction.x >= 0);
+		isFacingLeft = (direction.x < 0);
 
 
 		isAttacking = false;
@@ -428,8 +440,76 @@ void Boss_Surma::ApplyPoison(int poisonDamage, float poisonDuration, float poiso
 
 void Boss_Surma::Fase1(float dt, iPoint playerPos)
 {
-	
 
+	jugadorCerca = (dist(playerPos, position) < meleeAttackDistance * 32);
+
+	if (!jugadorCerca && !realizandoCombo) {
+		Bossfinding(dt, playerPos);
+		currentAnimation = &runAnim;
+	}
+	else {
+		realizandoCombo = true;
+		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
+
+		if (!combo1Anim.HasFinished()) {
+			currentAnimation = &combo1Anim;
+			//PARTICULA ATAQUE FLOJO
+		}
+		else if (!combo2Anim.HasFinished()) {
+			currentAnimation = &combo2Anim;
+			//PARTICULA ATAQUE FLOJO
+		}
+		else if (!combo3Anim.HasFinished()) {
+			currentAnimation = &combo3Anim;
+			//PARTICULA ATAQUE FLOJO
+			cargaAtaqueTimer.Start();
+		}
+		else {
+			if (jugadorCerca || currentAnimation == &cansadoAnim) {
+				if (cargaAtaqueTimer.ReadMSec() <= cargaAtaqueMS) {
+					currentAnimation = &ataqueCargadoAnim;
+				}
+				else {
+					currentAnimation = &ataqueCargadoEjecutarAnim;
+					
+
+					if (ataqueCargadoEjecutarAnim.HasFinished()) {
+						
+						currentAnimation = &cansadoAnim;
+						LOG("CANSADO TIMER: %f", cansadoTimer.ReadMSec());
+						if (cansadoTimer.ReadMSec() > cansadoMS) {
+							realizandoCombo = false;
+							combo1Anim.Reset();
+							combo2Anim.Reset();
+							combo3Anim.Reset();
+							ataqueCargadoEjecutarAnim.Reset();
+							ataqueCargadoAnim.Reset();
+							//Reset todas las anims
+						}
+					}
+					else {
+						cansadoTimer.Start();
+						//PARTICULA ATAQUE FUERTE
+					}
+
+
+				}
+			}
+			else {
+				realizandoCombo = false;
+				//Reset todas las anims
+				combo1Anim.Reset();
+				combo2Anim.Reset();
+				combo3Anim.Reset();
+				ataqueCargadoEjecutarAnim.Reset();
+				ataqueCargadoAnim.Reset();
+			}
+			
+		}
+
+
+	}
+	
 
 
 }

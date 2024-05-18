@@ -90,6 +90,7 @@ enum class EntityType
 
 	BOSS_INUIT,
 	BOSS_MUSRI,
+	BOSS_SURMA,
 
 	COFRE,
 	ASCENSOR,

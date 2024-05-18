@@ -120,13 +120,17 @@ private:
 	pugi::xml_node configNode;
 
 	Animation idleAnim;
-	Animation attackCombo1;
-	Animation attackCombo2;
-	Animation attackCombo3;
-	Animation attackCargado;
-	Animation attackExplosion;
-	Animation cambioFase;
-	Animation muerte;
+	Animation runAnim;
+	Animation combo1Anim;
+	Animation combo2Anim;
+	Animation combo3Anim;
+	Animation ataqueCargadoAnim;
+	Animation ataqueCargadoEjecutarAnim;
+	Animation ataqueCargadoExplosionAnim;
+	Animation cansadoAnim;
+	Animation ataqueRapidoAnim;
+	Animation cambioFaseAnim;
+	Animation muerteAnim;
 
 	int Surma_dash_fx;
 	
@@ -155,9 +159,13 @@ private:
 	Timer cansadoTimer;
 	Timer explosionEspadaTimer;
 
-	int meleeAttackDistance = 3;
+	int meleeAttackDistance = 4;
 
-	
+	int cargaAtaqueMS = 1000;
+	int cansadoMS = 4000;
+
+	bool realizandoCombo = false;
+	bool jugadorCerca = false;
 
 
 	//Veneno

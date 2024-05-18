@@ -48,6 +48,7 @@
 #include "Enemy_Khurt_Variation.h"
 #include "Cofre.h"
 #include "Dialog.h"
+#include "Boss_Surma.h"
 
 Map::Map(App* app, bool start_enabled) : Module(app, start_enabled), mapLoaded(false)
 {
@@ -1274,6 +1275,14 @@ bool Map::LoadEntities(std::string layerName)
 						boss_Musri->config = configNode.child("entities_data").child("boss_musri");
 						boss_Musri->position = iPoint(pos.x + 16, pos.y + 16);
 						boss_Musri->Start();
+					}
+
+					//Boss_Surma
+					if (gid == tileset->firstgid + 62) {
+						Boss_Surma* boss_Surma = (Boss_Surma*)app->entityManager->CreateEntity(EntityType::BOSS_SURMA);
+						boss_Surma->config = configNode.child("entities_data").child("boss_surma");
+						boss_Surma->position = iPoint(pos.x + 16, pos.y + 16);
+						boss_Surma->Start();
 					}
 
 					/*COFRE*/
