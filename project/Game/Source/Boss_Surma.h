@@ -29,26 +29,10 @@ enum class FASE_Surma
 };
 
 
-
-struct FlechaSurma {
-	fPoint direction;
+struct ExplosionAtaque
+{
 	PhysBody* pbody;
-	Timer lifeTimer;
-	
-};
-struct RastroFlechaCargadaSurma {
-	iPoint position;
-	PhysBody* pbody;
-	Timer lifeTimer;
-};
-struct FlechaCargadaSurma {
-	fPoint direction;
-	PhysBody* pbody;
-	std::vector<RastroFlechaCargadaSurma> rastroGenerado;
-	int maxRastro = 40;
-	Timer dejarRastroTimer;
-	bool flechaRastroTerminado = false;
-	
+	Timer lifeTime;
 };
 
 class Boss_Surma : public Entity
@@ -177,6 +161,18 @@ private:
 
 	SDL_Color actualColorTint{ 255, 255, 255 };
 	float actualScale = 1;
+
+	int cantidadCombosRealizados = 0;
+
+
+	ExplosionAtaque* explosionActual = nullptr;
+	float tamañoExplosionActual = 1;
+
+
+	float ataqueNormalDamage = 250;
+	float ataqueCargadoDamage = 300;
+	float ataqueExplosionDamage = 50;
+
 
 
 	//Veneno
