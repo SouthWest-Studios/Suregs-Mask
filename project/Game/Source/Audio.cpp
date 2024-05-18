@@ -139,6 +139,8 @@ bool Audio::PlayMusic(const char* path, float fadeTime)
 
 	Mix_VolumeMusic(volumeMusic);
 
+	playingMusic = true;
+
 	LOG("Successfully playing %s", path);
 	return ret;
 }
@@ -304,4 +306,48 @@ void Audio::PlayTimedFx(unsigned int name, int time)
 		PlayFx(name);
 		timer.Start();
 	}
+}
+
+void Audio::PlayRandomTimedFx(unsigned int name, unsigned int name2, unsigned int name3, int time) 
+{
+
+	if (altTimer.ReadMSec() > time) {
+
+		if (name3 == NULL) {
+			int fx = rand() % 2 + 1;
+
+			switch (fx)
+			{
+			case 1:
+				PlayFx(name);
+				altTimer.Start();
+				break;
+			case 2:
+				PlayFx(name2);
+				altTimer.Start();
+				break;
+			}
+		}
+		else {
+			int fx = rand() % 3 + 1;
+
+			switch (fx)
+			{
+			case 1:
+				PlayFx(name);
+				altTimer.Start();
+				break;
+			case 2:
+				PlayFx(name2);
+				altTimer.Start();
+				break;
+			case 3:
+				PlayFx(name3);
+				altTimer.Start();
+				break;
+			}
+		}
+
+	}
+
 }

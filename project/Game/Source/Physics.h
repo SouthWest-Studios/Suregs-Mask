@@ -50,6 +50,7 @@ enum class ColliderType {
 	BOSSAREA,
 	ATACKBMR,
 	AROMAGICA,
+	ASCENSOR,
 	UNKNOWN,
 	
 	// ..

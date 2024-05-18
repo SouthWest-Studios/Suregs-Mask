@@ -582,7 +582,12 @@ bool Player::Start() {
 	dash_fx = app->audio->LoadAudioFx("dash_fx");
 	switch_masks_fx = app->audio->LoadAudioFx("switch_masks_fx");
 	basic_combo_attack1_fx = app->audio->LoadAudioFx("basic_combo_attack1_fx");
+	basic_combo_attack2_fx = app->audio->LoadAudioFx("basic_combo_attack2_fx");
+	basic_combo_attack3_fx = app->audio->LoadAudioFx("basic_combo_attack3_fx");
+	basic_combo_attack3Alt_fx = app->audio->LoadAudioFx("basic_combo_attack3Alt_fx");
+	basic_combo_attack3Alt2_fx = app->audio->LoadAudioFx("basic_combo_attack3Alt2_fx");
 	player_get_damage_fx = app->audio->LoadAudioFx("player_get_damage_fx");
+	player_death_fx = app->audio->LoadAudioFx("player_death_fx");
 	get_item_fx = app->audio->LoadAudioFx("get_item_fx");
 
 	cdTimerDashMS = 500;
@@ -972,15 +977,37 @@ void Player::Attack(float dt)
 		}
 	}
 
-	app->audio->PlayTimedFx(basic_combo_attack1_fx, 448);
+	if (atackNum == 1) {
+		app->audio->PlayTimedFx(basic_combo_attack1_fx, 473);
+	}
+	else if (atackNum == 2) {
+		app->audio->PlayTimedFx(basic_combo_attack2_fx, 473);
+	}
+	else if (atackNum == 3) {
+		app->audio->PlayRandomTimedFx(basic_combo_attack3_fx, basic_combo_attack3Alt_fx, basic_combo_attack3Alt2_fx, 473);
+	}
 }
 
 void Player::Dead()
 {
+	/*
+	if (app->audio->playingMusic == true)
+	{
+		app->audio->StopMusic(2.0f);
+		app->audio->playingMusic = false;
+	}*/
+
+	if (app->audio->playingDeathFx == false)
+	{
+		app->audio->PlayFx(player_death_fx);
+		app->audio->playingDeathFx = true;
+	}
+
 	printf("dead");
 	currentAnimation = &dead_player;
 	if (DeadTP && PlayerTimerColdDown(3)) {
 		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_pueblo);
+		app->audio->playingDeathFx = false;
 	}
 }
 
@@ -1349,7 +1376,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			break;
 		case ColliderType::SALIDA_MAZMORRA0:
 			LOG("Collision SALIDA_MAZMORRA0");
-			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_gameover);
+			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_pueblo);
 			break;
 		}
 	}

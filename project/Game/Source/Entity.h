@@ -92,6 +92,7 @@ enum class EntityType
 	BOSS_MUSRI,
 
 	COFRE,
+	ASCENSOR,
 
 	UNKNOWN
 
