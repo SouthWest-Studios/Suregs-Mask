@@ -39,6 +39,8 @@ public:
 	bool CleanUp();
 
 	void ElevatorMenu::OnMovePointer();
+	
+	void ElevatorMenu::UseElevator(int id);
 
 
 

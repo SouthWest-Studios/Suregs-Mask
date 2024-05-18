@@ -17,7 +17,16 @@
 #include "Scene_Testing.h"
 #include "ModuleFadeToBlack.h"
 #include "Elevator.h"
-
+#include "Scene_Mazmorra0.h"
+#include "Scene_Mazmorra1.h"
+#include "Scene_Mazmorra2.h"
+#include "Scene_Mazmorra3.h"
+#include "Scene_Mazmorra4.h"
+#include "Scene_Mazmorra5.h"
+#include "Scene_Mazmorra6.h"
+#include "Scene_Mazmorra7.h"
+#include "Scene_Pueblo.h"
+#include "Menu.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 
 ElevatorMenu::ElevatorMenu(App* app, bool start_enabled) : Module(app, start_enabled)
@@ -60,16 +69,14 @@ bool ElevatorMenu::PreUpdate()
 // Called each loop iteration
 bool ElevatorMenu::Update(float dt)
 {
-	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
-	{
-		app->ascensor->abierto = !app->ascensor->abierto;
-		
-	}
 	if (app->ascensor->abierto == true)
 	{
 		app->entityManager->active = false;
 		app->physics->active = false;
 		OnMovePointer();
+		if (app->input->GetButton(SELECT) == KEY_DOWN) {
+			UseElevator(PointerId);
+		}
 
 		if (app->input->GetButton(APP_EXIT) == KEY_DOWN) {
 			
@@ -139,6 +146,57 @@ void ElevatorMenu::OnMovePointer()
 
 
 	}
+}
+
+void ElevatorMenu::UseElevator(int id)
+{
+	switch (id)
+	{
+	case 0:
+	{
+		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra0);		app->menu->active = true;
+		break;
+	}
+	case 1:
+	{
+		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra1);		app->menu->active = true;
+		break;
+	}
+	case 2:
+	{
+		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra2);		app->menu->active = true;
+		break;
+	}
+	case 3:
+	{
+		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra3);		app->menu->active = true;
+		break;
+	}
+	case 4:
+	{
+		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra4);		app->menu->active = true;
+		break;
+	}
+	case 5:
+	{
+		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra5);		app->menu->active = true;
+		break;
+	}
+	case 6:
+	{
+		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra6);		app->menu->active = true;
+		break;
+	}
+	case 7:
+	{
+		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra7);		app->menu->active = true;
+		break;
+	}
+	default:
+		break;
+	}
+	app->ascensor->active = false;
+
 }
 
 

@@ -49,6 +49,7 @@
 #include "Cofre.h"
 #include "Dialog.h"
 #include "Boss_Surma.h"
+#include "Elevator.h"
 
 Map::Map(App* app, bool start_enabled) : Module(app, start_enabled), mapLoaded(false)
 {
@@ -1292,6 +1293,13 @@ bool Map::LoadEntities(std::string layerName)
 							cofre->position = iPoint(pos.x + 16, pos.y + 16);
 							cofre->Start();
 						
+					}
+					if (gid == tileset->firstgid + 44) {
+						Elevator* elev = (Elevator*)app->entityManager->CreateEntity(EntityType::ASCENSOR);
+						elev->config = configNode.child("entities_data").child("ascensor");
+						elev->position = iPoint(pos.x + 16, pos.y + 16);
+						elev->Start();
+
 					}
 					/*NOTA*/
 					/*if (gid == tileset->firstgid + 42) {

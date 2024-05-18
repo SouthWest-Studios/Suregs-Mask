@@ -274,10 +274,7 @@ bool Scene_testing::Start()
 	zafiro->position = iPoint(1523, 2455);
 	zafiro->Start();
 
-	Elevator* elev = (Elevator*)app->entityManager->CreateEntity(EntityType::ASCENSOR);
-	elev->config = configNode.child("entities_data").child("ascensor");
-	elev->position = iPoint(1383, 2535);
-	elev->Start();
+
 	return true;
 }
 
