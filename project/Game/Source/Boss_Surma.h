@@ -81,8 +81,6 @@ public:
 	// L07 DONE 6: Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
-	void SetPlayer(Player* player);
-
 	float GetHealth() const;
 	void TakeDamage(float damage);
 	void stateMachine(float dt, iPoint playerPos);
@@ -96,30 +94,24 @@ public:
 	void Fase2(float dt, iPoint playerPos);
 	void FaseDying(float dt, iPoint playerPos);
 
-	iPoint GetRandomPosicion(iPoint actualPosition, int distanceLimitInf = 10, int distanceLimitSup = 15);
+	
 
 public:
 
 	//L02: DONE 2: Declare player parameters
 	SDL_Texture* texture = NULL;
-	SDL_Texture* arrowTexture = NULL;
-	SDL_Texture* arrowChargedTexture = NULL;
-	SDL_Texture* arrowChargedRastroTexture = NULL;
 	pugi::xml_node config;
 	uint texW, texH;
 
 	//Estadisticas
 	float speed;
 	b2Vec2 vel;
-	//float health;
-	//float maxHealth;
 	float attackDamage;
 	Timer invulnerabilityTimer;
 
 	float viewDistance;
 	float attackDistance;
 
-	//Revivir
 
 
 
@@ -128,9 +120,13 @@ private:
 	pugi::xml_node configNode;
 
 	Animation idleAnim;
-	Animation attackEmpujarAnim;
-	Animation attackFlechasRapidasAnim;
-	Animation attackFlechaCargadaAnim;
+	Animation attackCombo1;
+	Animation attackCombo2;
+	Animation attackCombo3;
+	Animation attackCargado;
+	Animation attackExplosion;
+	Animation cambioFase;
+	Animation muerte;
 
 	int Surma_dash_fx;
 	
@@ -155,45 +151,13 @@ private:
 	Animation SPosition;
 	SDL_Rect* spritePositions;
 
-	Timer cambiarPosicionTimer;
-	Timer dispararRafagasTimer;
-	Timer dispararFlechaRafagaTimer;
-	Timer cargaFlechaRafagaTimer;
-
-	Timer habilidadEmpujeTimer;
-	Timer habilidadFlechaCargadaTimer;
-	Timer habilidadDashInvisibleTimer;
-
-	Timer muriendoseTimer;
-
-
-	int habilidadEmpujeCD = 10000;
-	int habilidadRafagasCD = 1000;
-	int habilidadCargadaCD = 20000;
-	int habilidadDashInvisibleCD = 15000;
+	Timer cargaAtaqueTimer;
+	Timer cansadoTimer;
+	Timer explosionEspadaTimer;
 
 	int meleeAttackDistance = 3;
-	int cambiarPosicionTime = 15000;
-	int dispararRafagasTime;
-	int numeroRafagasAct = 0;
-	int numeroRafagas = 3;
-	float flechaRafagaDamage = 25;
-	float flechaCargadaDamage = 50;
-	float flechaCargadaRastroDamage = 15;
-	int numeroDashesAct = 0;
-	int numeroDashes = 3;
-	int opacidadQuitadaDashes = 70;
 
-	int alphaTexture = 255;
 	
-	SDL_Rect limitesSala = { 9900 , 2750, 2050, 1000 };
-	iPoint movePosition;
-
-	std::vector<FlechaSurma> flechasLanzadas;
-	float velocidadFlechas = 100;
-	int fuerzaHabilidadEmpuje = 500;
-
-	std::vector<FlechaCargadaSurma> flechasCargadas;
 
 
 	//Veneno

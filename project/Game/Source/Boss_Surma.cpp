@@ -49,9 +49,7 @@ bool Boss_Surma::Start() {
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
 	idleAnim.LoadAnim((char*)name.c_str(), "idleAnim", spritePositions);
-	attackEmpujarAnim.LoadAnim((char*)name.c_str(), "attackEmpujarAnim", spritePositions);;
-	attackFlechasRapidasAnim.LoadAnim((char*)name.c_str(), "attackFlechasRapidas", spritePositions);;
-	attackFlechaCargadaAnim.LoadAnim((char*)name.c_str(), "attackFlechaCargada", spritePositions);;
+
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
@@ -68,9 +66,7 @@ bool Boss_Surma::Start() {
 	pbodySensor->ctype = ColliderType::UNKNOWN;
 
 
-	arrowTexture = app->tex->Load(config.attribute("arrowTexturePath").as_string());
-	arrowChargedTexture = app->tex->Load(config.attribute("arrowChargedTexturePath").as_string());
-	arrowChargedRastroTexture = app->tex->Load(config.attribute("arrowChargedRastroTexturePath").as_string());
+
 
 	//originalPosition = app->map->WorldToMap(position.x, position.y);
 
@@ -81,20 +77,11 @@ bool Boss_Surma::Start() {
 	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();
 
-	movePosition = GetRandomPosicion(position, 10);
+
 
 	fase = FASE_Surma::FASE_ONE;
 	//fase = FASE_Surma::FASE_CHANGE;
 
-	cambiarPosicionTimer.Start(30000);
-	dispararRafagasTimer.Start(30000);
-	dispararFlechaRafagaTimer.Start(30000);
-
-	habilidadEmpujeTimer.Start(30000);
-	habilidadFlechaCargadaTimer.Start(30000);
-	habilidadDashInvisibleTimer.Start(30000);
-
-	numeroRafagasAct = 0;
 
 	return true;
 }
@@ -165,17 +152,6 @@ bool Boss_Surma::PostUpdate() {
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
 
-	if (timerRecibirDanioColor.ReadMSec() <= 100) {
-		float alpha = (100 - timerRecibirDanioColor.ReadMSec()) / 100;
-		SDL_SetTextureAlphaMod(texture, static_cast<Uint8>(alphaTexture * alpha)); // Ajusta la opacidad
-
-	}
-	else {
-		SDL_SetTextureAlphaMod(texture, alphaTexture);
-	}
-
-
-
 	if (isFacingLeft) {
 		app->render->DrawTexture(texture, position.x - 70, position.y - 150, SDL_FLIP_HORIZONTAL, &rect);
 	}
@@ -197,28 +173,10 @@ bool Boss_Surma::PostUpdate() {
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
 
-	
-	//Flechas
-	for (int i = 0; i < flechasLanzadas.size(); i++) {
-
-		b2Vec2 arrowPos = flechasLanzadas.at(i).pbody->body->GetTransform().p;
-		app->render->DrawTexture(arrowTexture, METERS_TO_PIXELS(arrowPos.x), METERS_TO_PIXELS(arrowPos.y), 1, SDL_FLIP_NONE, 0, 1, GetAngleFromDirection(flechasLanzadas.at(i).direction) + 180, 0, 0);
-	}
-
-	for (int i = 0; i < flechasCargadas.size(); i++) {
-		FlechaCargadaSurma flechaC = flechasCargadas.at(i);
-		b2Vec2 arrowPos = flechaC.pbody->body->GetTransform().p;
-		app->render->DrawTexture(arrowChargedTexture, METERS_TO_PIXELS(arrowPos.x), METERS_TO_PIXELS(arrowPos.y), 1, SDL_FLIP_NONE, 0, 1, GetAngleFromDirection(flechaC.direction) + 180, 0, 0);
-
-		for (int j = 0; j < flechaC.rastroGenerado.size(); j++) {
-			RastroFlechaCargadaSurma rastro = flechaC.rastroGenerado.at(j);
-			app->render->DrawTexture(arrowChargedRastroTexture, METERS_TO_PIXELS(rastro.position.x), METERS_TO_PIXELS(rastro.position.y), 1, SDL_FLIP_NONE, 0, 1, GetAngleFromDirection(flechaC.direction) + 180);
-		}
-	}
 
 
-	/*LIMITES SALA*/
-	//app->render->DrawRectangle(limitesSala, 255,255,255,200,true,true);
+
+
 
 
 
@@ -331,76 +289,31 @@ void Boss_Surma::Revive()
 void Boss_Surma::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 
-	if (physA->ctype == ColliderType::BOSS_MUSRI_ARROW) {
-		//Colisiones flecha
-		switch (physB->ctype) {
-		
-		case ColliderType::PLAYER:
-			app->entityManager->GetPlayer()->TakeDamage(flechaRafagaDamage);
-		case ColliderType::PLAYER_ATTACK:
-		case ColliderType::PLATFORM:
-			for (int i = 0; i < flechasLanzadas.size(); i++) {
-				if (flechasLanzadas.at(i).pbody->body->GetTransform().p == physA->body->GetTransform().p) {
-					app->physics->DestroyBody(flechasLanzadas.at(i).pbody);
-					flechasLanzadas.erase(flechasLanzadas.begin() + i);
-					break;
-				}
-			}
-			break;
 
-		}
-	}if (physA->ctype == ColliderType::BOSS_MUSRI_CHARGED_ARROW) {
-		//Colisiones flecha
-		switch (physB->ctype) {
-
-		case ColliderType::PLAYER:
-			app->entityManager->GetPlayer()->TakeDamage(flechaCargadaDamage);
-		case ColliderType::PLAYER_ATTACK:
-		case ColliderType::PLATFORM:
-			for (int i = 0; i < flechasCargadas.size(); i++) {
-				if (flechasCargadas.at(i).pbody->body->GetTransform().p == physA->body->GetTransform().p) {
-					app->physics->DestroyBody(flechasCargadas.at(i).pbody);
-					flechasCargadas.erase(flechasCargadas.begin() + i);
-					break;
-				}
-			}
-			break;
-
-		}
-	}if (physA->ctype == ColliderType::BOSS_MUSRI_CHARGED_RASTRO_ARROW) {
-		//Colisiones flecha
-		switch (physB->ctype) {
-
-		case ColliderType::PLAYER:
-			app->entityManager->GetPlayer()->TakeDamage(flechaCargadaRastroDamage);
-			break;
-		}
-	}
-	else {
-		//Colisiones al boss
-		switch (physB->ctype)
-		{
-		case ColliderType::PLATFORM:
-			LOG("Collision PLATFORM");
-			break;
-		case ColliderType::PLAYER:
-			LOG("Collision PLAYER");
-			//restar vida al player
-			break;
-		case ColliderType::PLAYER_ATTACK:
-			LOG("Collision Player_Attack");
-			timerRecibirDanioColor.Start();
-			TakeDamage(app->entityManager->GetPlayer()->currentStats.attackDamage);
-			break;
-		case ColliderType::UNKNOWN:
-			LOG("Collision UNKNOWN");
-			break;
-		default:
-			break;
-		}
+	//Colisiones al boss
+	switch (physB->ctype)
+	{
+	case ColliderType::PLATFORM:
+		LOG("Collision PLATFORM");
+		break;
+	case ColliderType::PLAYER:
+		LOG("Collision PLAYER");
+		//restar vida al player
+		break;
+	case ColliderType::PLAYER_ATTACK:
+		LOG("Collision Player_Attack");
+		timerRecibirDanioColor.Start();
+		TakeDamage(app->entityManager->GetPlayer()->currentStats.attackDamage);
+		break;
+	case ColliderType::UNKNOWN:
+		LOG("Collision UNKNOWN");
+		break;
+	default:
+		break;
 	}
 
-	
+
+
 }
 
 bool Boss_Surma::Bossfinding(float dt, iPoint targetPosP)
@@ -515,72 +428,7 @@ void Boss_Surma::ApplyPoison(int poisonDamage, float poisonDuration, float poiso
 
 void Boss_Surma::Fase1(float dt, iPoint playerPos)
 {
-	bool haLlegado = false;
-	if (cambiarPosicionTimer.ReadMSec() > cambiarPosicionTime) {
-		haLlegado = Bossfinding(dt, movePosition);
-		if (haLlegado) {
-			cambiarPosicionTimer.Start();
-			movePosition = GetRandomPosicion(movePosition, 10); //Para la proxima
-		}
-	}
-	else {
-		//AtaqueFlechas + lo otro
-		if (dist(playerPos, position) < meleeAttackDistance * 32 && habilidadEmpujeTimer.ReadMSec() >= habilidadEmpujeCD) {
-			//Realizar ataque empuje
-			habilidadEmpujeTimer.Start();
-			
-			fPoint dirToPlayer = getDirectionVector(position, playerPos);
-			pbodyFoot->body->ApplyForceToCenter(b2Vec2(-dirToPlayer.x * fuerzaHabilidadEmpuje, -dirToPlayer.y * fuerzaHabilidadEmpuje), true);
-			
-		}
-		else {
-
-			if (dispararRafagasTimer.ReadMSec() >= habilidadRafagasCD) {
-				
-				//Disparar rafagas
-				//flechasLanzadas
-				if (numeroRafagasAct < numeroRafagas) {
-					if (dispararFlechaRafagaTimer.ReadMSec() >= 100) {
-
-						dispararFlechaRafagaTimer.Start();
-						FlechaSurma flecha = { getDirectionVector(position, playerPos), app->physics->CreateCircle(position.x, position.y, 10, bodyType::DYNAMIC) };
-						flecha.pbody->listener = this;
-						flecha.pbody->ctype = ColliderType::BOSS_MUSRI_ARROW;
-						flecha.pbody->body->GetFixtureList()->SetSensor(true);
-						flecha.lifeTimer.Start();
-						flechasLanzadas.push_back(flecha);
-
-						flecha.pbody->body->ApplyForceToCenter(b2Vec2(flecha.direction.x* velocidadFlechas, flecha.direction.y * velocidadFlechas), true);
-						numeroRafagasAct++;
-					}
-				}
-				else {
-					dispararRafagasTimer.Start(); //Reset el timer de las 3 flechas
-					numeroRafagasAct = 0;
-				}
-			}
-		}
-	}
-
-	if (habilidadEmpujeTimer.ReadMSec() >= 400 && cambiarPosicionTimer.ReadMSec() < cambiarPosicionTime) {
-		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
-	}
-	else {
-		if (habilidadEmpujeTimer.ReadMSec() < 400) {
-			fPoint dirToPlayer = getDirectionVector(position, playerPos);
-			app->entityManager->GetPlayer()->pbodyFoot->body->ApplyForceToCenter(b2Vec2(dirToPlayer.x * fuerzaHabilidadEmpuje, dirToPlayer.y * fuerzaHabilidadEmpuje), true);
-		}
-	}
-
-	if (health <= 4200) {
-		fase = FASE_Surma::FASE_CHANGE;
-	}
-
 	
-	/*LOG("POSDX: %d, POSDY: %d, HA LLEGADO: %d, ", movePosition.x, movePosition.y, haLlegado);
-	LOG("Timer cambiarPosicion: %f", cambiarPosicionTimer.ReadMSec());*/
-
-
 
 
 
@@ -588,174 +436,12 @@ void Boss_Surma::Fase1(float dt, iPoint playerPos)
 void Boss_Surma::FaseC(float dt, iPoint playerPos)
 {
 
-	cambiarPosicionTime = 10000;
-	numeroRafagas = 5;
-	habilidadRafagasCD = 800;
-
-	movePosition = iPoint(limitesSala.x + (limitesSala.w/2), limitesSala.y + (limitesSala.h/2));
-	if (Bossfinding(dt, movePosition)) {
-		fase = FASE_Surma::FASE_TWO;
-	}
-
+	
 }
 void Boss_Surma::Fase2(float dt, iPoint playerPos)
 {
 	//Fase 2
-	bool haLlegado = false;
-	if (cambiarPosicionTimer.ReadMSec() > cambiarPosicionTime) {
-
-		//Si tiene la habilidad de dashear invisiblem dashea 3 veces (poca distancia) cada vez mas invisible; Al terminar el dash, la invisibilidad dura 4s
-		if (habilidadDashInvisibleTimer.ReadMSec() >= habilidadDashInvisibleCD) {
-			if (numeroDashesAct <= numeroDashes) {
-				haLlegado = Bossfinding(dt, movePosition);
-				if (haLlegado) {
-					movePosition = GetRandomPosicion(movePosition, 3, 7); //Para la proxima
-					numeroDashesAct++;
-					alphaTexture -= opacidadQuitadaDashes;
-				}
-			}
-			else {
-				habilidadDashInvisibleTimer.Start();
-				cambiarPosicionTimer.Start();
-				numeroDashesAct = 0;
-			}
-		}
-		else {
-			haLlegado = Bossfinding(dt, movePosition);
-			if (haLlegado) {
-				cambiarPosicionTimer.Start();
-				movePosition = GetRandomPosicion(movePosition, 5, 10); //Para la proxima
-			}
-		}
-
-
-		
-	}
-	else {
-		//AtaqueFlechas + lo otro
-		if (dist(playerPos, position) < meleeAttackDistance * 32 && habilidadEmpujeTimer.ReadMSec() >= habilidadEmpujeCD) {
-			//Realizar ataque empuje
-			habilidadEmpujeTimer.Start();
-
-			fPoint dirToPlayer = getDirectionVector(position, playerPos);
-			pbodyFoot->body->ApplyForceToCenter(b2Vec2(-dirToPlayer.x * fuerzaHabilidadEmpuje, -dirToPlayer.y * fuerzaHabilidadEmpuje), true);
-
-		}
-		else if (habilidadFlechaCargadaTimer.ReadMSec() >= habilidadCargadaCD) {
-			//Habilidad flecha cargada
-			if (cargaFlechaRafagaTimer.ReadMSec() > 2000) { //2S de carga
-				if (cargaFlechaRafagaTimer.ReadMSec() < 3000) {
-					//Disparar la flecha
-					fPoint dirToPlayer = getDirectionVector(position, playerPos);
-					FlechaCargadaSurma flechaCargada = { dirToPlayer, app->physics->CreateCircle(position.x, position.y, 10, bodyType::DYNAMIC) };
-					flechaCargada.pbody->listener = this;
-					flechaCargada.pbody->ctype = ColliderType::BOSS_MUSRI_ARROW;
-					flechaCargada.pbody->body->GetFixtureList()->SetSensor(true);
-					flechaCargada.pbody->body->ApplyForceToCenter(b2Vec2(flechaCargada.direction.x * velocidadFlechas * 1.2f, flechaCargada.direction.y * velocidadFlechas * 1.2f), true);
-					flechaCargada.dejarRastroTimer.Start();
-					flechasCargadas.push_back(flechaCargada);
-					//flechasCargadas
-					habilidadFlechaCargadaTimer.Start();
-					dispararRafagasTimer.Start(-5000);
-				}
-				else {
-					cargaFlechaRafagaTimer.Start();
-				}
-
-			}
-			
-		}
-		else {
-
-			if (dispararRafagasTimer.ReadMSec() >= habilidadRafagasCD) {
-
-				//Disparar rafagas
-				//flechasLanzadas
-				if (numeroRafagasAct < numeroRafagas) {
-					if (dispararFlechaRafagaTimer.ReadMSec() >= 100) {
-
-						dispararFlechaRafagaTimer.Start();
-						FlechaSurma flecha = { getDirectionVector(position, playerPos), app->physics->CreateCircle(position.x, position.y, 10, bodyType::DYNAMIC) };
-						flecha.pbody->listener = this;
-						flecha.pbody->ctype = ColliderType::BOSS_MUSRI_ARROW;
-						flecha.pbody->body->GetFixtureList()->SetSensor(true);
-						flecha.lifeTimer.Start();
-						flechasLanzadas.push_back(flecha);
-
-						flecha.pbody->body->ApplyForceToCenter(b2Vec2(flecha.direction.x * velocidadFlechas, flecha.direction.y * velocidadFlechas), true);
-						numeroRafagasAct++;
-					}
-				}
-				else {
-					dispararRafagasTimer.Start(); //Reset el timer de las 3 flechas
-					numeroRafagasAct = 0;
-				}
-			}
-		}
-	}
-
-	if (habilidadEmpujeTimer.ReadMSec() >= 400 && cambiarPosicionTimer.ReadMSec() < cambiarPosicionTime) {
-		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
-	}
-	else {
-		if (habilidadEmpujeTimer.ReadMSec() < 400) {
-			fPoint dirToPlayer = getDirectionVector(position, playerPos);
-			app->entityManager->GetPlayer()->pbodyFoot->body->ApplyForceToCenter(b2Vec2(dirToPlayer.x * fuerzaHabilidadEmpuje, dirToPlayer.y * fuerzaHabilidadEmpuje), true);
-		}
-	}
-
-	//Volver a ser visible
 	
-
-	if (habilidadDashInvisibleTimer.ReadMSec() <= 4000) {
-		alphaTexture = (255-(numeroDashes* opacidadQuitadaDashes)) + ((255 - (255 - (numeroDashes * opacidadQuitadaDashes))) * habilidadDashInvisibleTimer.ReadMSec() / 4000);
-	}
-	else {
-		if (habilidadDashInvisibleTimer.ReadMSec() <= 4500) {
-			alphaTexture = 255;
-		}
-	}
-
-
-
-
-	for (int i = 0; i < flechasCargadas.size(); i++) {
-		FlechaCargadaSurma* flechaC = &flechasCargadas.at(i);
-		if (flechaC->dejarRastroTimer.ReadMSec() > 50 &&  !flechaC->flechaRastroTerminado) {
-			//Spawn rastro
-			b2Vec2 flechaPos = flechaC->pbody->body->GetTransform().p;
-			RastroFlechaCargadaSurma rastro = { iPoint(flechaPos.x, flechaPos.y) };
-			rastro.pbody = app->physics->CreateCircle(METERS_TO_PIXELS(flechaPos.x), METERS_TO_PIXELS(flechaPos.y), 20, bodyType::DYNAMIC);
-					
-			rastro.pbody->listener = this;
-			rastro.pbody->ctype = ColliderType::BOSS_MUSRI_ARROW;
-			rastro.pbody->body->GetFixtureList()->SetSensor(true);
-			rastro.lifeTimer.Start();
-			flechaC->rastroGenerado.push_back(rastro);
-			flechaC->dejarRastroTimer.Start();
-		}
-
-		if (flechaC->rastroGenerado.size() >= flechaC->maxRastro) {
-			flechaC->flechaRastroTerminado = true;
-		}
-
-		for (int j = 0; j < flechaC->rastroGenerado.size(); j++) {
-
-			RastroFlechaCargadaSurma* rastro = &flechaC->rastroGenerado.at(j);
-
-			if (rastro->lifeTimer.ReadMSec() > 3000) {
-				app->physics->GetWorld()->DestroyBody(rastro->pbody->body);
-				flechaC->rastroGenerado.erase(flechaC->rastroGenerado.begin() + j);
-
-				if (flechaC->rastroGenerado.size() == 0) {
-					app->physics->GetWorld()->DestroyBody(flechaC->pbody->body);
-					flechasCargadas.clear();
-				}
-
-				break;
-			}
-		}
-	}
 
 	if (health <= 0) {
 		fase = FASE_Surma::FASE_DYNIG;
@@ -765,31 +451,6 @@ void Boss_Surma::Fase2(float dt, iPoint playerPos)
 
 void Boss_Surma::FaseDying(float dt, iPoint playerPos)
 {
-	movePosition = iPoint(limitesSala.x + (limitesSala.w / 2), limitesSala.y + (limitesSala.h / 2));
-	if (Bossfinding(dt, movePosition)) {
-		//C muere
-		if (muriendoseTimer.ReadMSec() >= 3000) {
-			app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
-			app->physics->GetWorld()->DestroyBody(pbodySensor->body);
-			app->entityManager->DestroyEntity(this);
-		}
-	}
-	else {
-		muriendoseTimer.Start();
-	}
+	
 
-}
-
-iPoint Boss_Surma::GetRandomPosicion(iPoint actualPosition, int distanceLimitInf, int distanceLimitSup)
-{
-	iPoint finalTarget;
-	int distT;
-
-	do {
-		finalTarget.x = limitesSala.x + rand() % limitesSala.w;
-		finalTarget.y = limitesSala.y + rand() % limitesSala.h;
-		distT = (dist(finalTarget, actualPosition) / 32);
-	} while (distT < distanceLimitInf && distT > distanceLimitSup);
-
-	return finalTarget;
 }
