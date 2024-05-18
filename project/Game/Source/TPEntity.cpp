@@ -45,6 +45,17 @@ bool TPEntity::Start() {
 
 bool TPEntity::Update(float dt)
 {
+	// if(isOpened) return true;
+	
+	// for(MapObject* openRoom : app->entityManager->openRooms)
+	// {
+	// 	if(openRoom == room)
+	// 	{
+	// 		this->isOpened = true;
+	// 		//printf("TP abierto\n");
+	// 		break;
+	// 	}
+	// }
 	return true;
 }
 
