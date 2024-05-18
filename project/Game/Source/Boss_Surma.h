@@ -105,6 +105,7 @@ public:
 
 	//Estadisticas
 	float speed;
+	float speedSecondFase;
 	b2Vec2 vel;
 	float attackDamage;
 	Timer invulnerabilityTimer;
@@ -159,13 +160,23 @@ private:
 	Timer cansadoTimer;
 	Timer explosionEspadaTimer;
 
+	Timer cambioFaseTimer;
+
 	int meleeAttackDistance = 4;
 
 	int cargaAtaqueMS = 1000;
 	int cansadoMS = 4000;
+	int cambioFaseMS = 2000;
 
 	bool realizandoCombo = false;
 	bool jugadorCerca = false;
+
+
+	fPoint sprieOffsetL = fPoint(-220, -200);
+	fPoint sprieOffsetR = fPoint(-100, -200);
+
+	SDL_Color actualColorTint{ 255, 255, 255 };
+	float actualScale = 1;
 
 
 	//Veneno

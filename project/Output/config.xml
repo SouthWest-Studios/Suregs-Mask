@@ -190,7 +190,7 @@
 					Tsprite="16" Pwidth="752" sprite_x="188" sprite_y="175"/>
 
 		<boss_surma texturePath="Assets/Textures/Entidades/Boss/Surma/texture_boss_surma.png"
-					maxHealth="13000.0f" speed="200f" attackDamage="250.0f"  attackDistance="3" viewDistance="40"
+					maxHealth="13000.0f" speed="180f" speedSecondFase="210f" attackDamage="250.0f"  attackDistance="3" viewDistance="40"
 					Tsprite="36" Pwidth="1388" sprite_x="347" sprite_y="231"/>
 
 		<item_rubi					texturePath="Assets/Textures/Entidades/Items/textura_rubi.png"					description="Mineral robusto extremadamente resistente."			type ="Material" name="Rubí"/>
@@ -429,10 +429,10 @@
 			<ataqueCargadoAnim start="12" end="14" speed="0.1f" loop="true"/>
 			<ataqueCargadoEjecutarAnim start="12" end="14" speed="1f" loop="false"/>
 			<ataqueCargadoExplosionAnim start="13" end="14" speed="0.1f" loop="false"/>
-			<cansadoAnim start="17" end="18" speed="0.1f" loop="true"/>
+			<cansadoAnim start="16" end="17" speed="0.1f" loop="true"/>
 			<ataqueRapidoAnim start="21" end="22" speed="0.1f" loop="false"/>
 			<muerteAnim start="25" end="26" speed="0.1f" loop="false"/>
-			<cambioFaseAnim start="29" end="31" speed="0.1f" loop="false"/>
+			<cambioFaseAnim start="28" end="30" speed="0.1f" loop="false"/>
 			
 		</boss_surma>
 		
