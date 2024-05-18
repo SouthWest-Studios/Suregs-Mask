@@ -14,6 +14,7 @@
 #include "Log.h"
 #include "GuiControl.h"
 #include "GuiManager.h"
+#include "Elevator.h"
 
 Scene_Pueblo::Scene_Pueblo(App* app, bool start_enabled) : Module(app, start_enabled)
 {

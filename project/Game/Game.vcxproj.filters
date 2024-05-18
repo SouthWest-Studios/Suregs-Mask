@@ -319,6 +319,9 @@
     <ClCompile Include="Source\NPC_Guardias.cpp">
       <Filter>Entities\NPC</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Elevator.cpp">
+      <Filter>Entities\Ascensor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -702,6 +705,9 @@
     <ClInclude Include="Source\NPC_Guardias.h">
       <Filter>Entities\NPC</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Elevator.h">
+      <Filter>Entities\Ascensor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -787,6 +793,9 @@
     </Filter>
     <Filter Include="Modules\Equipo">
       <UniqueIdentifier>{ebbeaf97-951e-49fb-99a8-3d375e55d784}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Ascensor">
+      <UniqueIdentifier>{af8844b5-2667-4ecc-915d-13f789352b6b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

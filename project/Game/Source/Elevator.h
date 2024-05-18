@@ -1,5 +1,5 @@
-#ifndef __COFRE_H__
-#define __COFRE_H__
+#ifndef __ELEVATOR_H__
+#define __ELEVATOR_H__
 
 #include "Entity.h"
 #include "Point.h"
@@ -8,13 +8,13 @@
 
 struct SDL_Texture;
 
-class Cofre : public Entity
+class Elevator : public Entity
 {
 public:
 	/*Espada() : Entity(EntityType::ESPADA, 0, 100, 0, 0, 0) {}*/
 
-	Cofre(); 
-	virtual ~Cofre();
+	Elevator(); 
+	virtual ~Elevator();
 
 	bool Awake();
 
@@ -25,8 +25,6 @@ public:
 	bool PostUpdate();
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
-
-	void CreateArbol();
 
 	bool CleanUp();
 
@@ -40,10 +38,12 @@ public:
 	PhysBody* pbody;
 	PhysBody* pbody2;
 	SDL_Texture* texture = NULL;
-	SDL_Texture* openTexture = NULL;
+	SDL_Texture* Menutexture = NULL;
+	SDL_Texture* listTexture = NULL;
+	SDL_Texture* PointerTexture = NULL;
 	
 	iPoint position;
-	int itemsToSpawn = 2;
+	iPoint PointerPosition = { 500, 230 };
 
 private:
 	bool abierto = false;
