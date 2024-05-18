@@ -333,7 +333,7 @@ void Hud::Potions()
 {
 
 	if (!potionRects.empty()) {
-		if (app->input->GetButton(UTILIZAR_POCION) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
 		{
 			/*printf("Potion Used: %d\n", selectedPotionIndex);*/
 			ListItem<Inventity*>* item = app->inventoryManager->inventities.At(selectedPotionIndex);

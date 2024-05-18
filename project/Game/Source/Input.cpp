@@ -114,7 +114,7 @@ bool Input::Awake(pugi::xml_node config)
 
 	bindings[UTILIZAR_POCION]
 		.SetAxis(SDL_CONTROLLER_AXIS_TRIGGERLEFT)
-		.SetPKey(SDL_SCANCODE_X);
+		.SetPKey(SDL_SCANCODE_Q);
 
 	bindings[CAMBIAR_POCION_LEFT]
 		.SetPKey(SDL_SCANCODE_R);
