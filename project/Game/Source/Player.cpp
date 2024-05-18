@@ -2078,6 +2078,8 @@ void Player::PlayerMovement(float dt)
 	float horizontalMovement = joystick.x;
 	float verticalMovement = joystick.y;
 
+	ResetSpeed();
+
 	// Actualizar velocidad
 	if (!isDashing) {
 		velocity.x = horizontalMovement * GetRealMovementSpeed() * speed * 10 * dt;
@@ -2249,7 +2251,6 @@ void Player::FishingDirecction(float verticalMovement, float horizontalMovement)
 			playermove = false;
 		}
 	}
-
 }
 
 
@@ -2277,8 +2278,6 @@ void Player::TakeDamage(float damage) {
 			}
 		}
 	}
-
-
 }
 
 void Player::UpdateStats() {
@@ -2299,6 +2298,19 @@ bool Player::PlayerTimerColdDown(float time)
 	{
 		return false;
 	}
+}
+
+void Player::SlowDown(float slowFactor){
+    speed *= slowFactor;
+    slowSpeedTimer.Start();
+    isSlowed = true;
+}
+
+void Player::ResetSpeed(){
+    if (isSlowed && slowSpeedTimer.ReadSec() >= 4.5) {
+        speed  = mainSpeed;
+        isSlowed = false;
+    }
 }
 
 //

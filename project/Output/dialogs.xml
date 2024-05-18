@@ -1,20 +1,8 @@
 <dialogues>
-	<dialog id="0" texturepath="Assets/Textures/group1.png" facetexturepath="Assets/Textures/group1.png" name="Dorothy, Hely y Pathy">
-		<sentences>
-			<sentence text="..."/>
-		</sentences>
-	</dialog>
 
-		<dialog id="1" texturepath="Assets/Textures/Interfaz/Dialogos/dorothyFace.png" facetexturepath="Assets/Textures/Interfaz/Dialogos/dorothyFace.png" name="Dorothy">
-		<sentences>
-			<sentence text="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
-			<sentence text="¿Vas al entrenamiento? Creo que ya te están esperando."/>
-			<sentence text="No te molestamos más, ¡cuando salgas podemos seguir hablando!"/>
-		</sentences>
-	</dialog>
+	<!--DIALOGOS HERRERO (911-919)-->
 
-
-	<dialog id="991" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phoska">
+	<dialog id="911" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phoska">
 		<sentences>
 			<sentence type="choose" text="¡Buenos días! Bienvenido a la herrería de Phoska.">
 			
@@ -30,9 +18,115 @@
 		</sentences>
 	</dialog>
 
-	<dialog id="992" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phrumo">
+	<dialog id="912" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phoska">
 		<sentences>
-			<sentence type="choose" text="“¡Qué sorpresa! Bienvenido a la tienda de Phrumo.">
+			<sentence type="choose" text="¡Buenos días! Bienvenido a la herrería de Phoska.">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Con los materiales necesarios podré forjar mejoras para tu equipo. ¡No dudes en venir cuando quieras mejorar tus herramientas de combate!"/>
+					<commerce id="3"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡No dudes en venir más por aquí!"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+	<!--Misión (913)-->
+	<dialog id="913" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phoska">
+		<sentences>
+			<sentence text="¡Buenos días! Hoy tengo cosas nuevas que pueden ser de tu interés."/>
+			<sentence text="Con los materiales necesarios podré forjar mejoras para tu equipo. ¡No dudes en venir cuando quieras mejorar tus herramientas de combate!"/>
+			<commerce id="3"/>
+		</sentences>
+	</dialog>
+
+	<dialog id="914" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phoska">
+		<sentences>
+			<sentence type="choose" text="¡Buenos días! Bienvenido a la herrería de Phoska.">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Con los materiales necesarios podré forjar mejoras para tu equipo. ¡No dudes en venir cuando quieras mejorar tus herramientas de combate!"/>
+					<commerce id="3"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡No dudes en venir más por aquí!"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="915" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phoska">
+		<sentences>
+			<sentence type="choose" text="¡Buenos días! Bienvenido a la herrería de Phoska.">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Con los materiales necesarios podré forjar mejoras para tu equipo. ¡No dudes en venir cuando quieras mejorar tus herramientas de combate!"/>
+					<commerce id="3"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡No dudes en venir más por aquí!"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+	<!--Mision (916)-->
+	<dialog id="916" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phoska">
+		<sentences>
+			<sentence text="¡Buenos días! Bienvenido a la herrería de Phoska."/>
+			<sentence text="No hay arma que se me resista, ¡soy capaz de mejorar y fabricar todo lo que me propongan!"/>
+			<commerce id="3"/>
+		</sentences>
+	</dialog>
+
+	<dialog id="917" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phoska">
+		<sentences>
+			<sentence type="choose" text="¡Buenos días! Bienvenido a la herrería de Phoska.">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Con los materiales necesarios podré forjar mejoras para tu equipo. ¡No dudes en venir cuando quieras mejorar tus herramientas de combate!"/>
+					<commerce id="3"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡No dudes en venir más por aquí!"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="918" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phoska">
+		<sentences>
+			<sentence type="choose" text="¡Buenos días! Bienvenido a la herrería de Phoska.">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Con los materiales necesarios podré forjar mejoras para tu equipo. ¡No dudes en venir cuando quieras mejorar tus herramientas de combate!"/>
+					<commerce id="3"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡No dudes en venir más por aquí!"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+	<!--Mision (919)-->
+	<dialog id="919" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phoska">
+		<sentences>
+			<sentence text="¡Hola Jakhov! Bienvenido a la herrería de Phoska."/>
+			<sentence text="Vaya situación más complicada... Echa un vistazo a mi tienda para estar lo mejor preparado ante calquier inconveniente."/>
+			<commerce id="3"/>
+		</sentences>
+	</dialog>
+
+	<!--DIALOGOS VENDEDOR (921-929)-->
+
+	<dialog id="921" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phrumo">
+		<sentences>
+			<sentence type="choose" text="¡Qué sorpresa! Bienvenido a la tienda de Phrumo.">
 
 				<option1 text="¿Qué ofreces?">
 					<sentence text="Aquí podrás vender todo tipo de materiales obtenidos al derrotar los Sureg que intenten entrar en la aldea."/>
@@ -46,7 +140,129 @@
 		</sentences>
 	</dialog>
 
-	<dialog id="993" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Zhyuka">
+	<dialog id="922" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phrumo">
+		<sentences>
+			<sentence type="choose" text="¡Qué sorpresa! Bienvenido a la tienda de Phrumo.">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Aquí podrás vender todo tipo de materiales obtenidos al derrotar los Sureg que intenten entrar en la aldea."/>
+					<commerce id="1"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡Estaré aquí para comprar tus objetos!"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+	<!--Mision (923)-->
+	<dialog id="923" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phrumo">
+		<sentences>
+			<sentence text="¡Qué sorpresa! Bienvenido de nuevo."/>
+			<sentence text="Hoy tengo todo tipo de cosas que podrian interesarte."/>
+			<commerce id="1"/>
+		</sentences>
+	</dialog>
+
+	<dialog id="924" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phrumo">
+		<sentences>
+			<sentence type="choose" text="¡Qué sorpresa! Bienvenido a la tienda de Phrumo.">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Aquí podrás vender todo tipo de materiales obtenidos al derrotar los Sureg que intenten entrar en la aldea."/>
+					<commerce id="1"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡Estaré aquí para comprar tus objetos!"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="925" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phrumo">
+		<sentences>
+			<sentence type="choose" text="¡Qué sorpresa! Bienvenido a la tienda de Phrumo.">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Aquí podrás vender todo tipo de materiales obtenidos al derrotar los Sureg que intenten entrar en la aldea."/>
+					<commerce id="1"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡Estaré aquí para comprar tus objetos!"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="926" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phrumo">
+		<sentences>
+			<sentence type="choose" text="¡Qué sorpresa! Bienvenido a la tienda de Phrumo.">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Aquí podrás vender todo tipo de materiales obtenidos al derrotar los Sureg que intenten entrar en la aldea."/>
+					<commerce id="1"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡Estaré aquí para comprar tus objetos!"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="927" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phrumo">
+		<sentences>
+			<sentence type="choose" text="¡Qué sorpresa! Bienvenido a la tienda de Phrumo.">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Aquí podrás vender todo tipo de materiales obtenidos al derrotar los Sureg que intenten entrar en la aldea."/>
+					<commerce id="1"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡Estaré aquí para comprar tus objetos!"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+	
+	<dialog id="928" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phrumo">
+		<sentences>
+			<sentence type="choose" text="¡Qué sorpresa! Bienvenido a la tienda de Phrumo.">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Aquí podrás vender todo tipo de materiales obtenidos al derrotar los Sureg que intenten entrar en la aldea."/>
+					<commerce id="1"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡Estaré aquí para comprar tus objetos!"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="929" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phrumo">
+		<sentences>
+			<sentence type="choose" text="¡Qué sorpresa! Bienvenido a la tienda de Phrumo.">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Aquí podrás vender todo tipo de materiales obtenidos al derrotar los Sureg que intenten entrar en la aldea."/>
+					<commerce id="1"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡Estaré aquí para comprar tus objetos!"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<!--DIALOGOS BRUJA (931-939)-->
+
+	<dialog id="931" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Zhyuka">
 		<sentences>
 			<sentence type="choose" text="¿Qué tenemos por aquí, un nuevo cliente? Jijiji…">
 
@@ -61,6 +277,128 @@
 			</sentence>
 		</sentences>
 	</dialog>
+
+	<dialog id="932" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Zhyuka">
+		<sentences>
+			<sentence type="choose" text="¿Qué tenemos por aquí, un nuevo cliente? Jijiji…">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Soy Zhyuka, la bruja de la aldea, si me das materiales te daré alguna poción a cambio, jijiji…"/>
+					<commerce id="2"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡Te estaré esperando! Jijiji…"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="933" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Zhyuka">
+		<sentences>
+			<sentence type="choose" text="¿Qué tenemos por aquí, un nuevo cliente? Jijiji…">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Soy Zhyuka, la bruja de la aldea, si me das materiales te daré alguna poción a cambio, jijiji…"/>
+					<commerce id="2"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡Te estaré esperando! Jijiji…"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="934" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Zhyuka">
+		<sentences>
+			<sentence type="choose" text="¿Qué tenemos por aquí, un nuevo cliente? Jijiji…">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Soy Zhyuka, la bruja de la aldea, si me das materiales te daré alguna poción a cambio, jijiji…"/>
+					<commerce id="2"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡Te estaré esperando! Jijiji…"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="935" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Zhyuka">
+		<sentences>
+			<sentence type="choose" text="¿Qué tenemos por aquí, un nuevo cliente? Jijiji…">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Soy Zhyuka, la bruja de la aldea, si me das materiales te daré alguna poción a cambio, jijiji…"/>
+					<commerce id="2"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡Te estaré esperando! Jijiji…"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+	<!--Mision (936)-->
+	<dialog id="936" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Zhyuka">
+		<sentences>
+			<sentence text="¡Hola de nuevo! Jijiji…"/>
+			<sentence text="Soy Zhyuka, la bruja de la aldea, parece que te has enterado de mis nuevas creaciones, jijiji…"/>
+			<commerce id="2"/>
+		</sentences>
+	</dialog>
+
+	<dialog id="937" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Zhyuka">
+		<sentences>
+			<sentence type="choose" text="¿Qué tenemos por aquí, un nuevo cliente? Jijiji…">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Soy Zhyuka, la bruja de la aldea, si me das materiales te daré alguna poción a cambio, jijiji…"/>
+					<commerce id="2"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡Te estaré esperando! Jijiji…"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="938" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Zhyuka">
+		<sentences>
+			<sentence type="choose" text="¿Qué tenemos por aquí, un nuevo cliente? Jijiji…">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Soy Zhyuka, la bruja de la aldea, si me das materiales te daré alguna poción a cambio, jijiji…"/>
+					<commerce id="2"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡Te estaré esperando! Jijiji…"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="939" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Zhyuka">
+		<sentences>
+			<sentence type="choose" text="¿Qué tenemos por aquí, un nuevo cliente? Jijiji…">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Soy Zhyuka, la bruja de la aldea, si me das materiales te daré alguna poción a cambio, jijiji…"/>
+					<commerce id="2"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡Te estaré esperando! Jijiji…"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+
+
 
 	<dialog id="994" texturepath="Assets/Textures/pescador.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Sphar">
 		<sentences>

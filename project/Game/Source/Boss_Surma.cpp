@@ -85,6 +85,7 @@ bool Boss_Surma::Start() {
 	maxHealth = config.attribute("maxHealth").as_float();
 	health = maxHealth;
 	speed = (config.attribute("speed").as_float() / 10) * 0.4;
+	speedSecondFase = (config.attribute("speedSecondFase").as_float() / 10) * 0.4;
 	attackDamage = config.attribute("attackDamage").as_float();
 	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();
@@ -110,24 +111,7 @@ bool Boss_Surma::Update(float dt)
 
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
 
-	//printf("\n %d : %d", playerPos.x, playerPos.y);
-
-	/*if (health <= 0)
-	{
-		desiredState = EntityState_Boss_Surma::DEAD;
-	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32)
-	{
-		desiredState = EntityState_Boss_Surma::ATTACKING_BASIC;
-	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance * 32 && currentState != EntityState_Boss_Surma::ATTACKING_BASIC)
-	{
-		desiredState = EntityState_Boss_Surma::RUNNING;
-	}
-	else
-	{
-		desiredState = EntityState_Boss_Surma::RUNNING;
-	}*/
+	
 
 	switch (fase)
 	{
@@ -146,7 +130,26 @@ bool Boss_Surma::Update(float dt)
 
 
 
+	if (explosionActual != nullptr) {
 
+		tamañoExplosionActual += dt * 0.8f;
+
+		app->physics->DestroyBody(explosionActual->pbody);
+
+		explosionActual->pbody = app->physics->CreateCircle(position.x, position.y, tamañoExplosionActual, bodyType::DYNAMIC);
+		explosionActual->pbody->body->GetFixtureList()->SetSensor(true);
+		explosionActual->lifeTime.Start();
+		explosionActual->pbody->ctype = ColliderType::BOSS_SURMA_EXPLOSION;
+		explosionActual->pbody->listener = this;
+
+		if (explosionActual->lifeTime.ReadMSec() > 100) {
+			app->physics->DestroyBody(explosionActual->pbody);
+			delete explosionActual;
+			explosionActual = nullptr;
+		}
+
+
+	}
 
 	//stateMachine(dt, playerPos);
 
@@ -164,11 +167,29 @@ bool Boss_Surma::PostUpdate() {
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
 
-	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 220, position.y - 200, SDL_FLIP_HORIZONTAL, &rect);
+	//Lo de recibir daño
+	if (timerRecibirDanioColor.ReadMSec() <= 100) {
+		float alpha = (100 - timerRecibirDanioColor.ReadMSec()) / 100;
+		SDL_SetTextureAlphaMod(texture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
+
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 100, position.y - 200, SDL_FLIP_NONE, &rect);
+		SDL_SetTextureAlphaMod(texture, 255);
+	}
+
+	SDL_SetTextureColorMod(texture, actualColorTint.r, actualColorTint.g, actualColorTint.b);
+
+
+
+
+
+
+	if (isFacingLeft) {
+
+		app->render->DrawTexture(texture, position.x + sprieOffsetL.x, position.y + sprieOffsetL.y, actualScale, SDL_FLIP_HORIZONTAL, &rect);
+	}
+	else {
+		app->render->DrawTexture(texture, position.x + sprieOffsetR.x, position.y + sprieOffsetR.y, actualScale, SDL_FLIP_NONE, &rect);
 	}
 
 	if (app->physics->debug == true) {
@@ -237,7 +258,7 @@ void Boss_Surma::Die() {
 
 	//Mask XP
 
-//Mask 0
+	//Mask 0
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
 	{
 		app->entityManager->GetPlayer()->maskZeroXP += 3500;
@@ -297,9 +318,18 @@ void Boss_Surma::Revive()
 }
 
 
-// L07 DONE 6: Define OnCollision function for the player. 
+// L07 DONE 6: Define OnCollision function for the player.
 void Boss_Surma::OnCollision(PhysBody* physA, PhysBody* physB) {
 
+	//Colision explosion
+	if (explosionActual != nullptr && physA == explosionActual->pbody) {
+		switch (physB->ctype)
+		{
+		case ColliderType::PLAYER:
+			physB->listener->TakeDamage(ataqueExplosionDamage);
+			break;
+		}
+	}
 
 
 	//Colisiones al boss
@@ -336,7 +366,7 @@ bool Boss_Surma::Bossfinding(float dt, iPoint targetPosP)
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
 
 
-	if (dist(targetPos, enemyPos) < viewDistance ) {
+	if (dist(targetPos, enemyPos) < viewDistance) {
 		app->map->pathfinding->CreatePath(enemyPos, targetPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
 		lastPath = *app->map->pathfinding->GetLastPath();
 	}
@@ -471,12 +501,11 @@ void Boss_Surma::Fase1(float dt, iPoint playerPos)
 				}
 				else {
 					currentAnimation = &ataqueCargadoEjecutarAnim;
-					
+
 
 					if (ataqueCargadoEjecutarAnim.HasFinished()) {
-						
+
 						currentAnimation = &cansadoAnim;
-						LOG("CANSADO TIMER: %f", cansadoTimer.ReadMSec());
 						if (cansadoTimer.ReadMSec() > cansadoMS) {
 							realizandoCombo = false;
 							combo1Anim.Reset();
@@ -504,24 +533,147 @@ void Boss_Surma::Fase1(float dt, iPoint playerPos)
 				ataqueCargadoEjecutarAnim.Reset();
 				ataqueCargadoAnim.Reset();
 			}
-			
+
 		}
 
 
 	}
-	
+
+	if (health <= 7000) {
+		fase = FASE_Surma::FASE_CHANGE;
+		cambioFaseTimer.Start();
+	}
+
 
 
 }
 void Boss_Surma::FaseC(float dt, iPoint playerPos)
 {
+	//Cambia color y se hace mas grandecito
+	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
+	currentAnimation = &cambioFaseAnim;
+	speed = speedSecondFase;
 
-	
+
+
+	if (cambioFaseTimer.ReadMSec() < cambioFaseMS) {
+		actualColorTint.r = lerp(actualColorTint.r, 200, 0.01);
+		actualColorTint.g = lerp(actualColorTint.g, 0, 0.01);
+		actualColorTint.b = lerp(actualColorTint.b, 200, 0.01);
+		actualScale = lerp(actualScale, 1.2, 0.01);
+		sprieOffsetR.x = lerp(sprieOffsetR.x, -120, 0.01);
+		sprieOffsetR.y = lerp(sprieOffsetR.y, -230, 0.01);
+		sprieOffsetL.x = lerp(sprieOffsetL.x, -250, 0.01);
+		sprieOffsetL.y = lerp(sprieOffsetL.y, -230, 0.01);
+
+		/*sprieOffsetR.x = -120;
+		sprieOffsetR.y = -230;
+		sprieOffsetL.x = -250;
+		sprieOffsetL.y = -230;*/
+	}
+	else {
+
+		app->physics->DestroyBody(pbodySensor);
+		pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 175, 160, bodyType::DYNAMIC);
+		pbodySensor->entity = this;
+		pbodySensor->listener = this;
+		pbodySensor->ctype = ColliderType::UNKNOWN;
+
+		fase = FASE_Surma::FASE_TWO;
+	}
+
+
+
+
 }
 void Boss_Surma::Fase2(float dt, iPoint playerPos)
 {
 	//Fase 2
-	
+
+
+	jugadorCerca = (dist(playerPos, position) < meleeAttackDistance * 32);
+
+	if (!jugadorCerca && !realizandoCombo) {
+		Bossfinding(dt, playerPos);
+		currentAnimation = &runAnim;
+		cargaAtaqueTimer.Start();
+	}
+	else {
+		realizandoCombo = true;
+		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
+
+		if (cantidadCombosRealizados >= 3) {
+			//ATAQUE CARGADO EXPLOSIVO
+			if (cargaAtaqueTimer.ReadMSec() <= cargaAtaqueMS) {
+				currentAnimation = &ataqueCargadoAnim;
+				explosionEspadaTimer.Start();
+			}
+			else {
+				currentAnimation = &ataqueCargadoEjecutarAnim;
+				if (explosionEspadaTimer.ReadMSec() >= 2000) {
+					//EXPLOSION
+					if (explosionActual == nullptr) {
+						tamañoExplosionActual = 1;
+						explosionActual = new ExplosionAtaque{ app->physics->CreateCircle(position.x, position.y, tamañoExplosionActual, bodyType::DYNAMIC) };
+						explosionActual->pbody->body->GetFixtureList()->SetSensor(true);
+						explosionActual->lifeTime.Start();
+						explosionActual->pbody->ctype = ColliderType::BOSS_SURMA_EXPLOSION;
+						explosionActual->pbody->listener = this;
+					}
+
+					//Cansado
+					currentAnimation = &cansadoAnim;
+					if (cansadoTimer.ReadMSec() > cansadoMS) {
+						realizandoCombo = false;
+						combo1Anim.Reset();
+						combo2Anim.Reset();
+						combo3Anim.Reset();
+						ataqueCargadoEjecutarAnim.Reset();
+						ataqueCargadoAnim.Reset();
+						cantidadCombosRealizados = 0;
+						//Reset todas las anims
+					}
+				}
+				else {
+					cansadoTimer.Start();
+				}
+				
+			}
+
+		
+		}
+		else {
+			
+			if (!combo1Anim.HasFinished()) {
+				currentAnimation = &combo1Anim;
+				//PARTICULA ATAQUE FLOJO
+			}
+			else if (!combo2Anim.HasFinished()) {
+				currentAnimation = &combo2Anim;
+				//PARTICULA ATAQUE FLOJO
+			}
+			else if (!combo3Anim.HasFinished()) {
+				currentAnimation = &combo3Anim;
+				//PARTICULA ATAQUE FLOJO
+			}
+			else if (!ataqueRapidoAnim.HasFinished()) {
+				currentAnimation = &ataqueRapidoAnim;
+				//PARTICULA ATAQUE RAPIDO
+			}
+			else {
+				cargaAtaqueTimer.Start();
+				cantidadCombosRealizados++;
+				realizandoCombo = false;
+				combo1Anim.Reset();
+				combo2Anim.Reset();
+				combo3Anim.Reset();
+				ataqueRapidoAnim.Reset();
+			}
+
+		}
+
+	}
+
 
 	if (health <= 0) {
 		fase = FASE_Surma::FASE_DYNIG;
@@ -531,6 +683,6 @@ void Boss_Surma::Fase2(float dt, iPoint playerPos)
 
 void Boss_Surma::FaseDying(float dt, iPoint playerPos)
 {
-	
+	currentAnimation = &muerteAnim;
 
 }

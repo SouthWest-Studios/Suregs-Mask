@@ -153,6 +153,10 @@ public:
 	void AreaAttack(float dt);
 	void DashAttack(float dt);
 
+	//Slow
+	void SlowDown(float slowFactor);
+	void ResetSpeed();
+
 	//Mascaras
 	void UnequipMasks();
 	void ChangeMask();
@@ -317,6 +321,11 @@ public:
 	Timer potionspeedTimer;
 	float originalSpeed;
 	bool speedPotionActive = false;
+
+	//Slow speed
+	float mainSpeed = 0.2f;
+	Timer slowSpeedTimer;
+	bool isSlowed = false;
 
 	//Orbe (mascaras)
 	Mask currentMask;

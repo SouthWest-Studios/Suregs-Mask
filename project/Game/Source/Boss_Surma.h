@@ -29,26 +29,10 @@ enum class FASE_Surma
 };
 
 
-
-struct FlechaSurma {
-	fPoint direction;
+struct ExplosionAtaque
+{
 	PhysBody* pbody;
-	Timer lifeTimer;
-	
-};
-struct RastroFlechaCargadaSurma {
-	iPoint position;
-	PhysBody* pbody;
-	Timer lifeTimer;
-};
-struct FlechaCargadaSurma {
-	fPoint direction;
-	PhysBody* pbody;
-	std::vector<RastroFlechaCargadaSurma> rastroGenerado;
-	int maxRastro = 40;
-	Timer dejarRastroTimer;
-	bool flechaRastroTerminado = false;
-	
+	Timer lifeTime;
 };
 
 class Boss_Surma : public Entity
@@ -105,6 +89,7 @@ public:
 
 	//Estadisticas
 	float speed;
+	float speedSecondFase;
 	b2Vec2 vel;
 	float attackDamage;
 	Timer invulnerabilityTimer;
@@ -159,13 +144,35 @@ private:
 	Timer cansadoTimer;
 	Timer explosionEspadaTimer;
 
+	Timer cambioFaseTimer;
+
 	int meleeAttackDistance = 4;
 
 	int cargaAtaqueMS = 1000;
 	int cansadoMS = 4000;
+	int cambioFaseMS = 2000;
 
 	bool realizandoCombo = false;
 	bool jugadorCerca = false;
+
+
+	fPoint sprieOffsetL = fPoint(-220, -200);
+	fPoint sprieOffsetR = fPoint(-100, -200);
+
+	SDL_Color actualColorTint{ 255, 255, 255 };
+	float actualScale = 1;
+
+	int cantidadCombosRealizados = 0;
+
+
+	ExplosionAtaque* explosionActual = nullptr;
+	float tamañoExplosionActual = 1;
+
+
+	float ataqueNormalDamage = 250;
+	float ataqueCargadoDamage = 300;
+	float ataqueExplosionDamage = 50;
+
 
 
 	//Veneno
