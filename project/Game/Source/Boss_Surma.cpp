@@ -85,6 +85,7 @@ bool Boss_Surma::Start() {
 	maxHealth = config.attribute("maxHealth").as_float();
 	health = maxHealth;
 	speed = (config.attribute("speed").as_float() / 10) * 0.4;
+	speedSecondFase = (config.attribute("speedSecondFase").as_float() / 10) * 0.4;
 	attackDamage = config.attribute("attackDamage").as_float();
 	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();
@@ -164,11 +165,29 @@ bool Boss_Surma::PostUpdate() {
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
 
-	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 220, position.y - 200, SDL_FLIP_HORIZONTAL, &rect);
+	//Lo de recibir daño
+	if (timerRecibirDanioColor.ReadMSec() <= 100) {
+		float alpha = (100 - timerRecibirDanioColor.ReadMSec()) / 100;
+		SDL_SetTextureAlphaMod(texture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
+
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 100, position.y - 200, SDL_FLIP_NONE, &rect);
+		SDL_SetTextureAlphaMod(texture, 255);
+	}
+
+	SDL_SetTextureColorMod(texture, actualColorTint.r, actualColorTint.g, actualColorTint.b);
+
+
+
+
+
+
+	if (isFacingLeft) {
+
+		app->render->DrawTexture(texture, position.x + sprieOffsetL.x, position.y + sprieOffsetL.y, actualScale, SDL_FLIP_HORIZONTAL, &rect);
+	}
+	else {
+		app->render->DrawTexture(texture, position.x + sprieOffsetR.x, position.y + sprieOffsetR.y, actualScale, SDL_FLIP_NONE, &rect);
 	}
 
 	if (app->physics->debug == true) {
@@ -336,7 +355,7 @@ bool Boss_Surma::Bossfinding(float dt, iPoint targetPosP)
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
 
 
-	if (dist(targetPos, enemyPos) < viewDistance ) {
+	if (dist(targetPos, enemyPos) < viewDistance) {
 		app->map->pathfinding->CreatePath(enemyPos, targetPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
 		lastPath = *app->map->pathfinding->GetLastPath();
 	}
@@ -471,12 +490,11 @@ void Boss_Surma::Fase1(float dt, iPoint playerPos)
 				}
 				else {
 					currentAnimation = &ataqueCargadoEjecutarAnim;
-					
+
 
 					if (ataqueCargadoEjecutarAnim.HasFinished()) {
-						
+
 						currentAnimation = &cansadoAnim;
-						LOG("CANSADO TIMER: %f", cansadoTimer.ReadMSec());
 						if (cansadoTimer.ReadMSec() > cansadoMS) {
 							realizandoCombo = false;
 							combo1Anim.Reset();
@@ -504,24 +522,63 @@ void Boss_Surma::Fase1(float dt, iPoint playerPos)
 				ataqueCargadoEjecutarAnim.Reset();
 				ataqueCargadoAnim.Reset();
 			}
-			
+
 		}
 
 
 	}
-	
+
+	if (health <= 7000) {
+		fase = FASE_Surma::FASE_CHANGE;
+		cambioFaseTimer.Start();
+	}
+
 
 
 }
 void Boss_Surma::FaseC(float dt, iPoint playerPos)
 {
+	//Cambia color y se hace mas grandecito
+	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
+	currentAnimation = &cambioFaseAnim;
+	speed = speedSecondFase;
 
-	
+
+
+	if (cambioFaseTimer.ReadMSec() < cambioFaseMS) {
+		actualColorTint.r = lerp(actualColorTint.r, 200, 0.01);
+		actualColorTint.g = lerp(actualColorTint.g, 0, 0.01);
+		actualColorTint.b = lerp(actualColorTint.b, 200, 0.01);
+		actualScale = lerp(actualScale, 1.2, 0.01);
+		sprieOffsetR.x = lerp(sprieOffsetR.x, -120, 0.01);
+		sprieOffsetR.y = lerp(sprieOffsetR.y, -230, 0.01);
+		sprieOffsetL.x = lerp(sprieOffsetL.x, -250, 0.01);
+		sprieOffsetL.y = lerp(sprieOffsetL.y, -230, 0.01);
+		
+		/*sprieOffsetR.x = -120;
+		sprieOffsetR.y = -230;
+		sprieOffsetL.x = -250;
+		sprieOffsetL.y = -230;*/
+	}
+	else {
+
+		app->physics->DestroyBody(pbodySensor);
+		pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 175, 160, bodyType::DYNAMIC);
+		pbodySensor->entity = this;
+		pbodySensor->listener = this;
+		pbodySensor->ctype = ColliderType::UNKNOWN;
+
+		fase = FASE_Surma::FASE_TWO;
+	}
+
+
+
+
 }
 void Boss_Surma::Fase2(float dt, iPoint playerPos)
 {
 	//Fase 2
-	
+
 
 	if (health <= 0) {
 		fase = FASE_Surma::FASE_DYNIG;
@@ -531,6 +588,6 @@ void Boss_Surma::Fase2(float dt, iPoint playerPos)
 
 void Boss_Surma::FaseDying(float dt, iPoint playerPos)
 {
-	
+
 
 }
