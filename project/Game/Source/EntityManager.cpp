@@ -7,6 +7,7 @@
 #include "Enemy_Muur.h"
 #include "Enemy_Boorok.h"
 #include "Enemy_Khurt.h"
+#include "Enemy_Khurt_Variation.h"
 #include "Item.h"
 #include "App.h"
 #include "Item_Garra.h"
@@ -160,6 +161,9 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 		break;
 	case EntityType::ENEMY_KHURT:
 		entity = new Enemy_Khurt();
+		break;
+	case EntityType::ENEMY_KHURT_VARIATION:
+		entity = new Enemy_Khurt_Variation();
 		break;
 	case EntityType::ENEMY_BOOROK:
 		entity = new Enemy_Boorok();
@@ -375,7 +379,7 @@ std::vector<Entity*> EntityManager::GetEnemies() {
     std::vector<Entity*> enemies;
     for (ListItem<Entity*>* item = entities.start; item != NULL; item = item->next) {
         Entity* entity = item->data;
-        if (entity->type == EntityType::ENEMY_OSIRIS || entity->type == EntityType::ENEMY_OLS || entity->type == EntityType::ENEMY_SHAR || entity->type == EntityType::ENEMY_KHURT) {
+        if (entity->type == EntityType::ENEMY_OSIRIS || entity->type == EntityType::ENEMY_OSIRIS_VARIATION || entity->type == EntityType::ENEMY_OLS || entity->type == EntityType::ENEMY_SHAR || entity->type == EntityType::ENEMY_KHURT) {
             enemies.push_back(entity);
         }
     }

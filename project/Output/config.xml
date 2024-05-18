@@ -168,6 +168,10 @@
 			   maxHealth="220.0f" speed="1.5f" attackDamage="90.0f" attackDistance="2" viewDistance="20" chargeAttackDistance= "10"
 			   Tsprite="6" Pwidth="40" sprite_x="20" sprite_y="20"/>
 
+		<khurt_variation texturePath="Assets/Textures/Entidades/Khurt/spritesheet_khurt.png"
+			   maxHealth="450.0f" speed="2.8f" attackDamage="240.0f" attackDistance="10" viewDistance="20"
+			   Tsprite="48" Pwidth="1270" sprite_x="160" sprite_y="215"/>
+
 		<boorok texturePath="Assets/Textures/Entidades/Boorok/Boorok_Spritesheet.png" 
 			   maxHealth="400.0f" speed="0.6f" attackDamage="180.0f" attackDistance="2" viewDistance="15" chargeattackDistance= "5" areaattackdamage= "50"
 			   Tsprite="36" Pwidth="1560" sprite_x="260" sprite_y="190"/>
@@ -440,6 +444,16 @@
 			<underAnim start="3" end="4" speed="0.05f" loop="true"/>
 			<dieAnim start="4" end="5" speed="0.05f" loop="true"/>
 		</khurt>
+
+		<khurt_variation>
+			<idleAnim start="32" end="37" speed="0.05f" loop="true"/>
+			<underAnim_start start="0" end="6" speed="0.05f" loop="true"/>
+			<underAnim_process start="8" end="16" speed="0.05f" loop="true"/>
+			<underAnim_finish start="16" end="22" speed="0.05f" loop="true"/>
+			<stunAnim start="48" end="55" speed="0.05f" loop="true"/>
+			<attack start="0" end="2" speed="0.05f" loop="true"/>
+			<dieAnim start="48" end="55" speed="0.05f" loop="true"/>
+		</khurt_variation>
 
 		<muur>
 			<idleAnim start="0" end="1" speed="0.05f" loop="true"/>

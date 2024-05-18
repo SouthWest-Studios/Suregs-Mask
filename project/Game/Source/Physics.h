@@ -49,6 +49,7 @@ enum class ColliderType {
 	PROJECTILE,
 	BOSSAREA,
 	ATACKBMR,
+	AROMAGICA,
 	UNKNOWN,
 	
 	// ..

@@ -45,6 +45,7 @@
 #include "Boss_Inuit.h"
 #include "Boss_Musri.h"
 #include "Enemy_Khurt.h"
+#include "Enemy_Khurt_Variation.h"
 #include "Cofre.h"
 #include "Dialog.h"
 
@@ -1209,6 +1210,16 @@ bool Map::LoadEntities(std::string layerName)
 						khurt->config = configNode.child("entities_data").child("khurt");
 						khurt->position = iPoint(pos.x + 16, pos.y + 16);
 						khurt->Start();
+
+					}
+
+					//KHURT VARIATION
+					if (gid == tileset->firstgid + 30) {
+
+						Enemy_Khurt_Variation* khurt_variation = (Enemy_Khurt_Variation*)app->entityManager->CreateEntity(EntityType::ENEMY_KHURT_VARIATION);
+						khurt_variation->config = configNode.child("entities_data").child("khurt_variation");
+						khurt_variation->position = iPoint(pos.x + 16, pos.y + 16);
+						khurt_variation->Start();
 
 					}
 
