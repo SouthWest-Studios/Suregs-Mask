@@ -55,7 +55,7 @@
 #include "Item_Pocion_Vida_3.h"
 #include "Item_Pocion_Vida_Max.h"
 #include "Item_Zafiro.h" 
-
+#include "Elevator.h"
 
 
 #include "Defs.h"
@@ -301,6 +301,9 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 	case EntityType::COFRE:
 		entity = new Cofre();
 		break;
+	case EntityType::ASCENSOR:
+		entity = new Elevator();
+		break;
 
 	default:
 		break;
@@ -423,6 +426,11 @@ std::vector<Entity*> EntityManager::GetEnemiesOls()
 Cofre* EntityManager::GetCofre()
 {
 	return cofre;
+}
+
+Elevator* EntityManager::GetAscensor()
+{
+	return ascensor;
 }
 
 bool EntityManager::PreUpdate()

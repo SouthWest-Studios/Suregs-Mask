@@ -19,7 +19,7 @@
 #include "Item_Pocion_Vida_2.h"
 #include "Item_Pocion_Vida_3.h"
 #include "Item_Pocion_Vida_Max.h"
-
+#include "ElevatorMenu.h"
 #include "Entity.h"
 
 Elevator::Elevator() : Entity(EntityType::ASCENSOR)
@@ -43,9 +43,9 @@ bool Elevator::Start() {
 	/*position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();*/
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
-	Menutexture = app->tex->Load(config.attribute("menutexturePath").as_string());
-	listTexture = app->tex->Load(config.attribute("textureList").as_string());
-	PointerTexture = app->tex->Load(config.attribute("PointerPath").as_string());
+	app->ascensor->Menutexture = app->tex->Load(config.attribute("menutexturePath").as_string());
+	app->ascensor->listTexture = app->tex->Load(config.attribute("textureList").as_string());
+	app->ascensor->PointerTexture = app->tex->Load(config.attribute("PointerPath").as_string());
 
 	/*texture = app->tex->Load("Assets/Textures/Entidades/Items/item_Garra.png");*/
 	// L07 DONE 4: Add a physics to an item - initialize the physics body
@@ -68,14 +68,8 @@ bool Elevator::Update(float dt)
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - 25;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 25;
 
-	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
-	{
-
-	}
-	if (abierto == true)
-	{
-		abierto = true;
-	}
+	
+	
 
 	
 	
@@ -84,10 +78,7 @@ bool Elevator::Update(float dt)
 
 bool Elevator::PostUpdate()
 {
-	if (abierto == true)
-	{
-		app->render->DrawTexture(Menutexture, 400, 100, 0.5f);
-	}
+	
 		app->render->DrawTexture(texture, position.x, position.y, 0.5f);
 	
 	
@@ -105,22 +96,23 @@ void Elevator::OnCollision(PhysBody* physA, PhysBody* physB)
     {
       case ColliderType::PLAYER:
       {
-          if (abierto == false)
-          {
+          
               if (app->input->GetButton(CONFIRM) == KEY_DOWN)
               {
                   
-				  abierto = true;
+				  app->ascensor->abierto = true;
 
                       
                  
               }
 
                
-          }
+          
       }
     }
 }
+
+
 
 
 

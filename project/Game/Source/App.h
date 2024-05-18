@@ -49,6 +49,7 @@ class Menu;
 class Hud;
 class TreeManager;
 class Menu_Equipo;
+class ElevatorMenu;
 
 
 class App
@@ -166,6 +167,7 @@ public:
 	Menu* menu;
 	Hud* hud;
 	Menu_Equipo* menuEquipo;
+	ElevatorMenu* ascensor;
 	
 
 	bool closeApplication = false;

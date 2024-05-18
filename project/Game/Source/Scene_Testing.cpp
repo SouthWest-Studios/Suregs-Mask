@@ -36,6 +36,7 @@
 #include "Item_Pocion_Vida_Max.h"
 #include "Item_Saliva.h"
 #include "Item_Zafiro.h"
+#include "Elevator.h"
 
 Scene_testing::Scene_testing(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -273,6 +274,10 @@ bool Scene_testing::Start()
 	zafiro->position = iPoint(1523, 2455);
 	zafiro->Start();
 
+	Elevator* elev = (Elevator*)app->entityManager->CreateEntity(EntityType::ASCENSOR);
+	elev->config = configNode.child("entities_data").child("ascensor");
+	elev->position = iPoint(1383, 2535);
+	elev->Start();
 	return true;
 }
 

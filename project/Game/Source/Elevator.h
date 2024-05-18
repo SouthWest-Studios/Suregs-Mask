@@ -26,6 +26,7 @@ public:
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
+
 	bool CleanUp();
 
 
@@ -38,15 +39,16 @@ public:
 	PhysBody* pbody;
 	PhysBody* pbody2;
 	SDL_Texture* texture = NULL;
-	SDL_Texture* Menutexture = NULL;
-	SDL_Texture* listTexture = NULL;
-	SDL_Texture* PointerTexture = NULL;
+	char* Menutexture = NULL;
+	char* listTexture = NULL;
+	char* PointerTexture = NULL;
 	
 	iPoint position;
-	iPoint PointerPosition = { 500, 230 };
+	iPoint PointerPosition = { 470, -130 };
+	int PointerId = 0;
 
 private:
-	bool abierto = false;
+	
 	
 	int chest_fx;
 

@@ -11,6 +11,7 @@
 #include "List.h"
 #include "MiniGameFishing.h"
 #include "Cofre.h"
+#include "Elevator.h"
 
 struct DrawableObject
 {
@@ -68,6 +69,9 @@ public:
 	std::vector<Entity*> GetEnemiesOls();
 
 	Cofre* EntityManager::GetCofre();
+
+	Elevator* EntityManager::GetAscensor();
+
 	void UpdateEnemyActivation();
 	void UpdateRoomActivation();
 	
@@ -87,6 +91,7 @@ private:
 	Item_Garra* garra = nullptr;
 	Player* actualPlayer = nullptr;
 	Cofre* cofre = nullptr;
+	Elevator* ascensor = nullptr;
 	MiniGameFishing* fishing = new MiniGameFishing;
 
 };

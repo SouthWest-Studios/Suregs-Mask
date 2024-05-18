@@ -34,6 +34,7 @@
 #include "TreeManager.h"
 #include "Menu.h"
 #include "Hud.h"
+#include "ElevatorMenu.h"
 #include "Optick/include/optick.h"
 
 #include "Defs.h"
@@ -95,6 +96,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	bestiarioManager = new BestiarioManager(this);
 	treeManager = new TreeManager(this);
 	menuEquipo = new Menu_Equipo(this);
+	ascensor = new ElevatorMenu(this, true);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -131,6 +133,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(notesManager);
 	AddModule(bestiarioManager);
 	AddModule(menuEquipo);
+	AddModule(ascensor);
 	AddModule(treeManager);
 	AddModule(guiManager);
 	AddModule(dialogManager);

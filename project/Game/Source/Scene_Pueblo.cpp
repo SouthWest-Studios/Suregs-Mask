@@ -34,6 +34,8 @@ bool Scene_Pueblo::Awake(pugi::xml_node config)
 		return ret;
 	}
 
+	
+
 	return ret;
 }
 
