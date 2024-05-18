@@ -1294,11 +1294,22 @@ bool Map::LoadEntities(std::string layerName)
 							cofre->Start();
 						
 					}
+					/*ASCENSOR INICIO*/
 					if (gid == tileset->firstgid + 44) {
 						Elevator* elev = (Elevator*)app->entityManager->CreateEntity(EntityType::ASCENSOR);
 						elev->config = configNode.child("entities_data").child("ascensor");
 						elev->position = iPoint(pos.x + 16, pos.y + 16);
 						elev->Start();
+						elev->final = false;
+
+					}
+					/*ASCENSOR FINAL*/
+					if (gid == tileset->firstgid + 45) {
+						Elevator* elev = (Elevator*)app->entityManager->CreateEntity(EntityType::ASCENSOR);
+						elev->config = configNode.child("entities_data").child("ascensor");
+						elev->position = iPoint(pos.x + 16, pos.y + 16);
+						elev->Start();
+						elev->final = true;
 
 					}
 					/*NOTA*/

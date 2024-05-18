@@ -40,7 +40,7 @@ public:
 
 	void ElevatorMenu::OnMovePointer();
 	
-	void ElevatorMenu::UseElevator(int id);
+	void ElevatorMenu::UseElevator(int id, int mazmorra);
 
 
 
@@ -54,6 +54,11 @@ public:
 	SDL_Texture* Menutexture = NULL;
 	SDL_Texture* listTexture = NULL;
 	SDL_Texture* PointerTexture = NULL;
+	SDL_Texture* textura_black = NULL;
+	int mazmorra = 0;
+	int mazmorraActual = 0;
+	int plus = 0;
+	bool final;
 
 private:
 	

@@ -285,7 +285,8 @@
 		<ascensor texturePath =" "
 				  menutexturePath="Assets/Textures/Interfaz/Ascensor/textura_ascensor.png"
 				  textureList ="Assets/Textures/Interfaz/Ascensor/textura_fondo_nota_lista.png"
-				  PointerPath ="Assets/Textures/Interfaz/Ascensor/textura_pointer.png"/>
+				  PointerPath ="Assets/Textures/Interfaz/Ascensor/textura_pointer.png"
+				  textura_blackPath ="Assets/Textures/Interfaz/Ascensor/textura_black.png"/>
 			   
 	
 	</entities_data>

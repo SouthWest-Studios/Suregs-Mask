@@ -46,6 +46,8 @@ bool Elevator::Start() {
 	app->ascensor->Menutexture = app->tex->Load(config.attribute("menutexturePath").as_string());
 	app->ascensor->listTexture = app->tex->Load(config.attribute("textureList").as_string());
 	app->ascensor->PointerTexture = app->tex->Load(config.attribute("PointerPath").as_string());
+	app->ascensor->textura_black = app->tex->Load(config.attribute("textura_blackPath").as_string());
+	
 
 	/*texture = app->tex->Load("Assets/Textures/Entidades/Items/item_Garra.png");*/
 	// L07 DONE 4: Add a physics to an item - initialize the physics body
@@ -99,9 +101,20 @@ void Elevator::OnCollision(PhysBody* physA, PhysBody* physB)
           
               if (app->input->GetButton(CONFIRM) == KEY_DOWN)
               {
-                  
-				  app->ascensor->abierto = true;
 
+				 
+				  if (app->ascensor->mazmorraActual < app->ascensor->mazmorra)
+				  {
+					  app->ascensor->final = true;
+				  }
+				  else
+				  {
+					  app->ascensor->mazmorraActual--;
+					  app->ascensor->final = final;
+				  }
+				  app->ascensor->abierto = true;
+				  
+				  
                       
                  
               }

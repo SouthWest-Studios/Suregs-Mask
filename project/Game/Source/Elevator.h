@@ -46,6 +46,7 @@ public:
 	iPoint position;
 	iPoint PointerPosition = { 470, -130 };
 	int PointerId = 0;
+	bool final;
 
 private:
 	

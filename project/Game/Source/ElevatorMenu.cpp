@@ -71,11 +71,19 @@ bool ElevatorMenu::Update(float dt)
 {
 	if (app->ascensor->abierto == true)
 	{
+		if (final == true)
+		{
+			plus = 1;
+		}
+		else
+		{
+			plus = 0;
+		}
 		app->entityManager->active = false;
 		app->physics->active = false;
 		OnMovePointer();
-		if (app->input->GetButton(SELECT) == KEY_DOWN) {
-			UseElevator(PointerId);
+		if (app->input->GetButton(SELECT) == KEY_DOWN && PointerId < mazmorra + plus + 1) {
+			UseElevator(PointerId, mazmorra);
 		}
 
 		if (app->input->GetButton(APP_EXIT) == KEY_DOWN) {
@@ -96,6 +104,13 @@ bool ElevatorMenu::PostUpdate()
 		app->render->DrawTexture(Menutexture, 400, 100, SDL_FLIP_NONE, 0, 0);
 
 		app->render->DrawTexture(PointerTexture, PointerPosition.x, PointerPosition.y, SDL_FLIP_NONE, 0, 0);
+
+		for (int i = (mazmorra + plus + 1); i < 8 ; i++)
+		{
+			app->render->DrawTexture(textura_black, PointerPosition.x, -90 + 48*i, SDL_FLIP_NONE, 0, 0);
+		}
+		
+		
 
 	}
 
@@ -148,54 +163,78 @@ void ElevatorMenu::OnMovePointer()
 	}
 }
 
-void ElevatorMenu::UseElevator(int id)
+void ElevatorMenu::UseElevator(int id, int mazmorraa)
 {
 	switch (id)
 	{
 	case 0:
 	{
-		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra0);		app->menu->active = true;
+		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra0);
+		app->menu->active = true;
+		mazmorra = 0;
 		break;
 	}
 	case 1:
 	{
-		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra1);		app->menu->active = true;
+		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra1);
+		app->menu->active = true;
+		mazmorra = 1;
 		break;
 	}
 	case 2:
 	{
-		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra2);		app->menu->active = true;
+		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra2);
+		app->menu->active = true;
+		mazmorra = 2;
 		break;
 	}
 	case 3:
 	{
-		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra3);		app->menu->active = true;
+		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra3);
+		app->menu->active = true;
+		mazmorra = 3;
 		break;
 	}
 	case 4:
 	{
-		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra4);		app->menu->active = true;
+		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra4);
+		app->menu->active = true; 
+		mazmorra = 4;
 		break;
 	}
 	case 5:
 	{
-		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra5);		app->menu->active = true;
+		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra5);
+		app->menu->active = true;
+		mazmorra = 5;
 		break;
 	}
 	case 6:
 	{
-		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra6);		app->menu->active = true;
+		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra6);
+		app->menu->active = true;
+		mazmorra = 6; 
 		break;
 	}
 	case 7:
 	{
-		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra7);		app->menu->active = true;
+		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra7);
+		app->menu->active = true;
+
+		mazmorra = 7;
 		break;
 	}
 	default:
 		break;
 	}
-	app->ascensor->active = false;
+
+	app->ascensor->abierto = false;
+	mazmorraActual = mazmorra;
+
+	if (mazmorra < mazmorraa)
+	{
+		mazmorra = mazmorraa;
+	}
 
 }
 
