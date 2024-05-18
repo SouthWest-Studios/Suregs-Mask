@@ -333,20 +333,20 @@ void Hud::Potions()
 {
 
 	if (!potionRects.empty()) {
-		if (app->input->GetButton(STARTFISHING) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
 		{
-			printf("Potion Used: %d\n", selectedPotionIndex);
+			/*printf("Potion Used: %d\n", selectedPotionIndex);*/
 			ListItem<Inventity*>* item = app->inventoryManager->inventities.At(selectedPotionIndex);
 			app->inventoryManager->UsePotionSelected(item);
 		}
 		else if (app->input->GetButton(CAMBIAR_POCION_RIGHT) == KEY_DOWN && selectedPotionIndex < potionRects.size() - 1) 
 		{
-			printf("selectedPotionIndex: %d\n", selectedPotionIndex);
+			/*printf("selectedPotionIndex: %d\n", selectedPotionIndex);*/
 			selectedPotionIndex++;
 		}
 		else if (app->input->GetButton(CAMBIAR_POCION_LEFT) == KEY_DOWN && selectedPotionIndex > 0) 
 		{
-			printf("selectedPotionIndex: %d\n", selectedPotionIndex);
+			/*printf("selectedPotionIndex: %d\n", selectedPotionIndex);*/
 			selectedPotionIndex--;
 		}
 	}

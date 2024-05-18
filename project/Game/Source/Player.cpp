@@ -996,7 +996,7 @@ void Player::Dead()
 		app->audio->StopMusic(2.0f);
 		app->audio->playingMusic = false;
 	}*/
-
+	
 	if (app->audio->playingDeathFx == false)
 	{
 		app->audio->PlayFx(player_death_fx);
@@ -1008,6 +1008,7 @@ void Player::Dead()
 	if (DeadTP && PlayerTimerColdDown(3)) {
 		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_pueblo);
 		app->audio->playingDeathFx = false;
+		app->audio->StopFx(-1);
 	}
 }
 
