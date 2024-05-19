@@ -624,7 +624,6 @@ bool Boss_Inuit::Bossfinding(float dt, iPoint playerPosP)
 	}
 
 	if (fase == FASE::FASE_CHANGE) {
-		printf("\nFalse");
 		dontMove = true;
 	}
 

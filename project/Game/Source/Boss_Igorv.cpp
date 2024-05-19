@@ -51,7 +51,7 @@ bool Boss_Igory::Start() {
 	attackAnim.LoadAnim("osiris", "attackAnim", spritePositions);
 	dieAnim.LoadAnim("osiris", "dieAnim", spritePositions);*/
 
-	
+
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
 
@@ -164,7 +164,7 @@ bool Boss_Igory::PostUpdate() {
 	//else {
 	//	SDL_SetTextureAlphaMod(texture, 255);
 	//}
-	
+
 
 	if (isFacingLeft) {
 		app->render->DrawTexture(texture, position.x - 70, position.y - 200, SDL_FLIP_HORIZONTAL, &rect);
@@ -186,9 +186,6 @@ bool Boss_Igory::PostUpdate() {
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
 
 
-	printf("\npositionX: %d", position.x);
-	printf("\npositionY: %d", position.y);
-	
 	return true;
 }
 
@@ -565,24 +562,21 @@ bool Boss_Igory::Bossfinding(float dt, iPoint playerPosP)
 	}
 
 	if (fase == FASE_Igory::FASE_CHANGE) {
-		printf("\nFalse");
 		dontMove = true;
 	}
 
 	if (!dontMove) {
 
-		if (playerInBossArea) {
-
-			app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
-			lastPath = *app->map->pathfinding->GetLastPath();
-			if (atackCube != nullptr) {
-				app->physics->GetWorld()->DestroyBody(atackCube->body);
-				atackCube = nullptr;
-			}
-			if (inbmrAtack == false) {
-				inAtack = false;
-			}
+		app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
+		lastPath = *app->map->pathfinding->GetLastPath();
+		if (atackCube != nullptr) {
+			app->physics->GetWorld()->DestroyBody(atackCube->body);
+			atackCube = nullptr;
 		}
+		if (inbmrAtack == false) {
+			inAtack = false;
+		}
+
 		else {
 			app->map->pathfinding->CreatePath(enemyPos, originalPosition); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
 			lastPath = *app->map->pathfinding->GetLastPath();
