@@ -51,7 +51,9 @@ bool Boss_Igory::Start() {
 	attackAnim.LoadAnim("osiris", "attackAnim", spritePositions);
 	dieAnim.LoadAnim("osiris", "dieAnim", spritePositions);*/
 
+	
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
+
 
 	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
 	pbodyFoot->entity = this;
@@ -154,7 +156,6 @@ bool Boss_Igory::PostUpdate() {
 	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
-
 	//if (timerRecibirDanioColor.ReadMSec() <= 100) {
 	//	float alpha = (100 - timerRecibirDanioColor.ReadMSec()) / 100;
 	//	SDL_SetTextureAlphaMod(texture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
@@ -163,7 +164,7 @@ bool Boss_Igory::PostUpdate() {
 	//else {
 	//	SDL_SetTextureAlphaMod(texture, 255);
 	//}
-
+	
 
 	if (isFacingLeft) {
 		app->render->DrawTexture(texture, position.x - 70, position.y - 200, SDL_FLIP_HORIZONTAL, &rect);
@@ -184,43 +185,10 @@ bool Boss_Igory::PostUpdate() {
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
 
-	if (saveOriginPos) {
-		originalWavePosition.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
-		originalWavePosition.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
-		saveOriginPos = false;
 
-	}
-
-	//printf("\n Heal: %f", health);
-
-
-	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
-		health -= 1000;
-		printf("\nHealth: %f", health);
-	}
-
-	if (goUseUlt) {
-		ultDef = true;
-		if (!inWave) {
-			waveTime.Start();
-			waveTimeStart = true;
-			goUseUlt = false;
-		}
-	}
-	if (ultDef && !inWave && !waveTimeStart) {
-		printf("2");
-		waveTime.Start();
-		waveTimeStart = true;
-	}
-	//Ulti
-	if (ultDef && waveTimeStart) {
-		ulti_Atack();
-	}
-	//Wave
-	if (waveTimerColdDown(10) && !waveTimeStart && goUseWave) {
-		//printf("\ndelete-3");
-		shock_wave(originalWavePosition.x, originalWavePosition.y, 5, 520, 0);
-	}
+	printf("\npositionX: %d", position.x);
+	printf("\npositionY: %d", position.y);
+	
 	return true;
 }
 
