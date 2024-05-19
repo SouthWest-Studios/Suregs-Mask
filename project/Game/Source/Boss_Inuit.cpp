@@ -119,7 +119,8 @@ bool Boss_Inuit::Update(float dt)
 
 	//Si jugador fuera de area, eliminar cubo de ataque
 	if (atackCube != nullptr && playerInBossArea == false) {
-		app->physics->GetWorld()->DestroyBody(atackCube->body);
+		//app->physics->GetWorld()->DestroyBody(atackCube->body);
+		app->physics->DestroyBody(atackCube);
 		atackCube = nullptr;
 	}
 	//BMR ATAQUE

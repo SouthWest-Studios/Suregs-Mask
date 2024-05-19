@@ -586,7 +586,7 @@ bool EntityManager::PostUpdate()
 				}
 
 				if (app->entityManager->GetPlayer() != nullptr && obj.texture != app->entityManager->GetPlayer()->texture && !obj.isDynamic) {
-					app->render->DrawTexture(obj.texture, obj.x, obj.y);
+					app->render->DrawTexture(obj.texture, obj.x, obj.y, 0.5f, SDL_FLIP_NONE, &obj.currentFrame);
 				}
 			}
 
