@@ -15,8 +15,8 @@ struct SDL_Texture;
 
 
 struct Branch {
-	enum EntityState const next_state;
-	Branch(EntityState next) : next_state(next) {}
+	enum EntityStatePlayer const next_state;
+	Branch(EntityStatePlayer next) : next_state(next) {}
 };
 
 enum RoomType {
@@ -43,11 +43,11 @@ enum class Mask {
 };
 
 enum class Branches {
-    Modifiers,
+	Modifiers,
 	Rama1,
-    Rama2,
-    Rama3,
-    Rama4
+	Rama2,
+	Rama3,
+	Rama4
 };
 
 struct Stats {
@@ -63,7 +63,7 @@ struct MaskStats {
 	//Modificadores
 	float maxHealthModifier;
 	float movementSpeedModifier;
-    float attackDamageModifier;
+	float attackDamageModifier;
 	float attackSpeedModifier;
 
 	//Habilidades
@@ -110,7 +110,7 @@ class Player : public Entity
 public:
 
 	Player();
-	
+
 	virtual ~Player();
 
 	bool Awake();
@@ -141,12 +141,12 @@ public:
 	void Speedpocion(float dt);
 	void Damagepocion(float dt);
 
-	//Branch transitionTable[static_cast<int>(EntityState::STATE_COUNT)][static_cast<int>(EntityState::STATE_COUNT)];
+	//Branch transitionTable[static_cast<int>(EntityStatePlayer::STATE_COUNT)][static_cast<int>(EntityStatePlayer::STATE_COUNT)];
 	// L07 DONE 6: Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
-    
-    Entity* GetEnemyWithHighestHealthWithinRadius(iPoint position, int radius);
-	
+
+	Entity* GetEnemyWithHighestHealthWithinRadius(iPoint position, int radius);
+
 	//Funciones ataques mascara
 	void CastLightning();
 	void CastMultipleLightnings();
@@ -171,7 +171,7 @@ public:
 
 	Mask* GetPrimaryMask();
 	Mask* GetSecondaryMask();
-	
+
 	MaskStats* GetMaskStats(Mask mask);
 
 	void UpdateStats();
@@ -181,10 +181,10 @@ public:
 
 	//Estadísticas
 
-    Stats baseStats;
-	
-    Stats currentStats;
-	
+	Stats baseStats;
+
+	Stats currentStats;
+
 	std::map<int, PassiveStats> branchPassiveStats;
 	std::map<Branches, decltype(branchPassiveStats)> maskBranchPassiveStats;
 	std::map<Mask, decltype(maskBranchPassiveStats)> passiveStats;
@@ -208,7 +208,7 @@ public:
 
 	int maxMaskLevel = 8;
 
-	int matrizLevelXP[8] = {0, 800, 1200, 600, 900, 1500, 600, 1400};
+	int matrizLevelXP[8] = { 0, 800, 1200, 600, 900, 1500, 600, 1400 };
 
 	int XPtoLevelUpZero = 1000;
 	int XPtoLevelUpOne = 1000;
@@ -219,7 +219,7 @@ public:
 	int maskOnePoints;
 	int maskTwoPoints;
 	int maskThreePoints;
-	
+
 
 private:
 	void CameraMovement(float dt);
@@ -236,7 +236,7 @@ public:
 	float speed = 0.2f;
 	float attackMovement = 25;
 	SDL_Texture* texture = NULL;
-	
+
 	uint texW, texH;
 
 	//Audio fx
@@ -255,7 +255,7 @@ public:
 	int get_item_fx;
 
 	Animation* currentAnimation = nullptr;
-	EntityState state;
+	EntityStatePlayer state;
 
 	float TimeClodDown;
 	Timer TimerColdDown;
@@ -278,12 +278,12 @@ public:
 	PhysBody* dashCollision = nullptr;
 	b2Vec2 velocity = b2Vec2(0, 0);
 	b2Vec2 velocityNormalized;
-	
+
 	float speedDash = 3;
 
 	//Ataque
-	int attackWidth = 50; 
-    int attackHeight = 50;
+	int attackWidth = 50;
+	int attackHeight = 50;
 	bool isAttacking = false;
 	PhysBody* attackSensor = nullptr;
 	Timer damageTimer;
@@ -300,15 +300,18 @@ public:
 	//Animacion Mascara ataque
 	bool inMaskAtack;
 
+	//pocion
+	bool inPocionAnim = false;
+
 	Timer collisionAttackTimer;
 
 	//Espada & Armadura
 	int attackDamagePerLevel[10];
 	int armorPerLevel[10];
-	
+
 	// int swordLevel = 1;
 	// int armorLevel = 1;
-	
+
 	//POCIONES
 	//Regen
 	Timer regenTimer;
@@ -332,7 +335,7 @@ public:
 
 	//Orbe (mascaras)
 	Mask currentMask;
-	bool maskPotionActive = false; 
+	bool maskPotionActive = false;
 
 	//Pasiva de la mascara 1
 	PhysBody* mask1PassiveSensor = nullptr;
@@ -344,15 +347,15 @@ public:
 
 	bool isAttackingMask = true;
 	PhysBody* mask1AttackSensor = nullptr;
-	int attackMask1Width = 300;  
-    int attackMask1Height = 300; 
-	
+	int attackMask1Width = 300;
+	int attackMask1Height = 300;
+
 	Timer collisionMask1Timer;
 
 	Timer timerChangeMask;
-	
+
 	const int changeMaskCooldown = 5000; //5s
-	
+
 	bool isInvisible = false;
 
 	Timer mask3Timer;
@@ -400,7 +403,7 @@ private:
 	int cdTimerDashMS;
 
 	Timer timerDash;
-	Timer cdTimerDash; 
+	Timer cdTimerDash;
 
 	int cdTimerAttackMS;
 	Timer timerAttack;
@@ -417,25 +420,26 @@ private:
 
 public:
 
-	Branch transitionTable[static_cast<int>(EntityState::STATE_COUNT)][static_cast<int>(EntityState::STATE_COUNT)] = {
+	Branch transitionTable[static_cast<int>(EntityStatePlayer::STATE_COUNT)][static_cast<int>(EntityStatePlayer::STATE_COUNT)] = {
 
-	//		IDLE					RUNNING					ATTACKING					DEAD				REVIVING				MASK_ATTACK					  DASHI				   NONE
-	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::REVIVING}, {EntityState::MASK_ATTACK}, {EntityState::NONE}, {EntityState::IDLE}}, // IDLE
-	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::REVIVING}, {EntityState::MASK_ATTACK}, {EntityState::DASHI}, {EntityState::IDLE}}, // RUNNING
-	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::REVIVING}, {EntityState::MASK_ATTACK}, {EntityState::DASHI}, {EntityState::IDLE}}, // ATTACKING
-	{ {EntityState::NONE}, {EntityState::NONE}, {EntityState::NONE}, {EntityState::DEAD}, {EntityState::REVIVING}, {EntityState::NONE}, {EntityState::NONE}, {EntityState::IDLE}}, // DEAD
-	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::REVIVING}, {EntityState::MASK_ATTACK}, {EntityState::DASHI}, {EntityState::IDLE}}, // REVIVING
-	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::REVIVING}, {EntityState::MASK_ATTACK}, {EntityState::DASHI}, {EntityState::IDLE}}, // MASK_ATTACK
-	{ {EntityState::IDLE}, {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD}, {EntityState::REVIVING}, {EntityState::MASK_ATTACK}, {EntityState::DASHI}, {EntityState::IDLE}}, // DASHI
-	{ {EntityState::IDLE}, {EntityState::NONE}, {EntityState::NONE}, {EntityState::NONE}, {EntityState::NONE}, {EntityState::NONE}, {EntityState::NONE}, {EntityState::IDLE}} // NONE
+		//		IDLE					RUNNING					ATTACKING					DEAD				REVIVING				MASK_ATTACK					  DASHI				   NONE
+		{ {EntityStatePlayer::IDLE}, {EntityStatePlayer::RUNNING}, {EntityStatePlayer::ATTACKING}, {EntityStatePlayer::DEAD}, {EntityStatePlayer::REVIVING}, {EntityStatePlayer::MASK_ATTACK}, {EntityStatePlayer::POCION},{EntityStatePlayer::NONE}, {EntityStatePlayer::IDLE}}, // IDLE
+		{ {EntityStatePlayer::IDLE}, {EntityStatePlayer::RUNNING}, {EntityStatePlayer::ATTACKING}, {EntityStatePlayer::DEAD}, {EntityStatePlayer::REVIVING}, {EntityStatePlayer::MASK_ATTACK}, {EntityStatePlayer::POCION},{EntityStatePlayer::DASHI}, {EntityStatePlayer::IDLE}}, // RUNNING
+		{ {EntityStatePlayer::IDLE}, {EntityStatePlayer::RUNNING}, {EntityStatePlayer::ATTACKING}, {EntityStatePlayer::DEAD}, {EntityStatePlayer::REVIVING}, {EntityStatePlayer::MASK_ATTACK}, {EntityStatePlayer::NONE},{EntityStatePlayer::DASHI}, {EntityStatePlayer::IDLE}}, // ATTACKING
+		{ {EntityStatePlayer::NONE}, {EntityStatePlayer::NONE}, {EntityStatePlayer::NONE}, {EntityStatePlayer::DEAD}, {EntityStatePlayer::REVIVING}, {EntityStatePlayer::NONE}, {EntityStatePlayer::NONE},{EntityStatePlayer::NONE}, {EntityStatePlayer::IDLE}}, // DEAD
+		{ {EntityStatePlayer::IDLE}, {EntityStatePlayer::RUNNING}, {EntityStatePlayer::ATTACKING}, {EntityStatePlayer::DEAD}, {EntityStatePlayer::REVIVING}, {EntityStatePlayer::MASK_ATTACK},{EntityStatePlayer::NONE}, {EntityStatePlayer::DASHI}, {EntityStatePlayer::IDLE}}, // REVIVING
+		{ {EntityStatePlayer::IDLE}, {EntityStatePlayer::RUNNING}, {EntityStatePlayer::ATTACKING}, {EntityStatePlayer::DEAD}, {EntityStatePlayer::REVIVING}, {EntityStatePlayer::MASK_ATTACK}, {EntityStatePlayer::NONE},{EntityStatePlayer::DASHI}, {EntityStatePlayer::IDLE}}, // MASK_ATTACK
+		{ {EntityStatePlayer::IDLE}, {EntityStatePlayer::RUNNING}, {EntityStatePlayer::ATTACKING}, {EntityStatePlayer::DEAD}, {EntityStatePlayer::REVIVING}, {EntityStatePlayer::MASK_ATTACK}, {EntityStatePlayer::POCION},{EntityStatePlayer::DASHI}, {EntityStatePlayer::IDLE}}, // POCION
+		{ {EntityStatePlayer::IDLE}, {EntityStatePlayer::RUNNING}, {EntityStatePlayer::ATTACKING}, {EntityStatePlayer::DEAD}, {EntityStatePlayer::REVIVING}, {EntityStatePlayer::MASK_ATTACK}, {EntityStatePlayer::NONE},{EntityStatePlayer::DASHI}, {EntityStatePlayer::IDLE}}, // DASHI
+		{ {EntityStatePlayer::IDLE}, {EntityStatePlayer::NONE}, {EntityStatePlayer::NONE}, {EntityStatePlayer::NONE}, {EntityStatePlayer::NONE}, {EntityStatePlayer::NONE},{EntityStatePlayer::NONE}, {EntityStatePlayer::NONE}, {EntityStatePlayer::IDLE}} // NONE
 	};
 
-	/*EntityState currentState = state;
-	EntityState desiredState = nextState; 
-	EntityState nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;*/
-	EntityState currentState;
-	EntityState desiredState;
-	EntityState nextState;
+	/*EntityStatePlayer currentState = state;
+	EntityStatePlayer desiredState = nextState;
+	EntityStatePlayer nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;*/
+	EntityStatePlayer currentState;
+	EntityStatePlayer desiredState;
+	EntityStatePlayer nextState;
 };
 
 

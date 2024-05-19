@@ -134,6 +134,7 @@ bool Menu::Update(float dt)
 
 			app->audio->PlayFx(change_inventory_fx);
 		}
+
 	}
 	else {
 		app->entityManager->active = true;

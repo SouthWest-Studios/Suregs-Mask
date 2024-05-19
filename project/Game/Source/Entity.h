@@ -108,6 +108,20 @@ class PhysBody;
 
 
 
+enum class EntityStatePlayer
+{
+	IDLE,
+	RUNNING,
+	ATTACKING,
+	DEAD,
+	REVIVING,
+	MASK_ATTACK,
+	POCION,
+	DASHI,
+	NONE,
+	STATE_COUNT
+};
+
 enum class EntityState
 {
 	IDLE,
