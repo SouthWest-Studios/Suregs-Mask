@@ -215,9 +215,11 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 	{
 
 	case 1:
-		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
-		app->menu->active = true;
-		app->guiManager->pointerId = 100;
+		showSavedGames = true;
+		control->selected = false;
+		app->guiManager->minId = 13;
+		app->guiManager->maxId = 16;
+		app->guiManager->pointerId = 13;
 		/*app->guiManager->DestroyGuiControl(NuevaPartida);
 		app->guiManager->DestroyGuiControl(Continuar);*/
 

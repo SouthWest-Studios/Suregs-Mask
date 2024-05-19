@@ -322,6 +322,8 @@
     <ClCompile Include="Source\Elevator.cpp">
       <Filter>Entities\Ascensor</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ElevatorMenu.cpp" />
+    <ClCompile Include="Source\Enemy_Khurt_Variation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -708,6 +710,8 @@
     <ClInclude Include="Source\Elevator.h">
       <Filter>Entities\Ascensor</Filter>
     </ClInclude>
+    <ClInclude Include="Source\ElevatorMenu.h" />
+    <ClInclude Include="Source\Enemy_Khurt_Variation.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -806,5 +810,7 @@
     <Xml Include="..\Output\psystem_config.xml">
       <Filter>Modules\ParticleSystem</Filter>
     </Xml>
+    <Xml Include="..\Output\save_game2.xml" />
+    <Xml Include="..\Output\save_game3.xml" />
   </ItemGroup>
 </Project>
