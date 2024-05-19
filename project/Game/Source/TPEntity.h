@@ -37,6 +37,7 @@ private:
 
 public:
 	int tpID;
+	int sceneLevel;
 	iPoint targetPosition;
 
 private:

@@ -101,6 +101,10 @@ public:
 		return true;
 	}
 
+	virtual int GetSceneNumber() {
+		return -10;
+	}
+
 public:
 
 	SString name;

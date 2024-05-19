@@ -38,9 +38,12 @@ public:
 	// Handles multiple Gui Event methods
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
-	
-private:
+	int GetSceneNumber();
 
+	
+
+private:
+int sceneLevel = 6;
 	float textPosX, textPosY = 0;
 	uint texW, texH;
 	uint windowW, windowH;

@@ -121,4 +121,9 @@ bool Scene_Mazmorra3::OnGuiMouseClickEvent(GuiControl* control)
 	return true;
 }
 
+int Scene_Mazmorra3::GetSceneNumber()
+{
+	return sceneLevel;
+}
+
 

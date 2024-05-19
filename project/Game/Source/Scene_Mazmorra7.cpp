@@ -121,4 +121,9 @@ bool Scene_Mazmorra7::OnGuiMouseClickEvent(GuiControl* control)
 	return true;
 }
 
+int Scene_Mazmorra7::GetSceneNumber()
+{
+	return sceneLevel;
+}
+
 
