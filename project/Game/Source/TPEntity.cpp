@@ -30,15 +30,15 @@ bool TPEntity::Start() {
 
 	room = GetCurrentRoom();
 
-	for(TPEntity* openDoor : app->entityManager->openDoors)
-	{
-		if(openDoor == this)
-		{
-			this->isOpened = true;
-			printf("TP abierto\n");
-			break;
-		}
-	}
+    for(TPDoor* openDoor : app->entityManager->openDoors)
+    {
+        if(openDoor->sceneLevel == this->sceneLevel && openDoor->tpID == this->tpID)
+        {
+            this->isOpened = true;
+            //printf("TP abierto\n");
+            break;
+        }
+    }
 
 	return true;
 }

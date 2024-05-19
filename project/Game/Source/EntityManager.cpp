@@ -649,7 +649,8 @@ void EntityManager::UpdateRoomActivation(){
         for (ListItem<TPEntity*>* item = tpEntities.start; item != nullptr; item = item->next) {
             if (item->data->room == currentRoom && !item->data->isOpened) {
                 item->data->isOpened = true;
-				openDoors.push_back(item->data);
+				TPDoor* tpdoor = new TPDoor{ item->data->sceneLevel, item->data->tpID };
+				openDoors.push_back(tpdoor);
                 //printf("TP activated\n");
             }
         }
@@ -665,6 +666,9 @@ bool EntityManager::LoadState(pugi::xml_node node) {
 
 
 	//Bucle limpiando el openDoors
+	for (int i = 0; i < openDoors.size(); i++) {
+		delete openDoors.at(i);
+	}
 
 
 

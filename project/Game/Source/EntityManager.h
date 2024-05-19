@@ -93,7 +93,7 @@ public:
 
 	std::vector<DrawableObject> objectsToDraw;
 	
-  	std::vector<TPEntity*> openDoors;
+  	std::vector<TPDoor*> openDoors;
 
 private:
 
