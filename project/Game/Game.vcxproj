@@ -161,6 +161,7 @@
     <ClCompile Include="Source\ModuleFadeToBlack.cpp" />
     <ClCompile Include="Source\Enemy_Ols.cpp" />
     <ClCompile Include="Source\Enemy_Osiris.cpp" />
+    <ClCompile Include="Source\ModuleParticles.cpp" />
     <ClCompile Include="Source\NotesManager.cpp" />
     <ClCompile Include="Source\NPC_Abuelitas.cpp" />
     <ClCompile Include="Source\NPC_Abuelito.cpp" />
@@ -177,6 +178,7 @@
     <ClCompile Include="Source\NPC_Vendedor.cpp" />
     <ClCompile Include="Source\Particle.cpp" />
     <ClCompile Include="Source\ParticlePool.cpp" />
+    <ClCompile Include="Source\Particles.cpp" />
     <ClCompile Include="Source\ParticleSystem.cpp" />
     <ClCompile Include="Source\Pathfinding.cpp" />
     <ClCompile Include="Source\PerfTimer.cpp" />
@@ -276,6 +278,7 @@
     <ClInclude Include="Source\ModuleFadeToBlack.h" />
     <ClInclude Include="Source\Enemy_Ols.h" />
     <ClInclude Include="Source\Enemy_Osiris.h" />
+    <ClInclude Include="Source\ModuleParticles.h" />
     <ClInclude Include="Source\Note.h" />
     <ClInclude Include="Source\NotesManager.h" />
     <ClInclude Include="Source\NPC_Abuelitas.h" />
@@ -294,6 +297,7 @@
     <ClInclude Include="Source\OjoInv.h" />
     <ClInclude Include="Source\Particle.h" />
     <ClInclude Include="Source\ParticlePool.h" />
+    <ClInclude Include="Source\Particles.h" />
     <ClInclude Include="Source\ParticleSystem.h" />
     <ClInclude Include="Source\Pathfinding.h" />
     <ClInclude Include="Source\PerfTimer.h" />
