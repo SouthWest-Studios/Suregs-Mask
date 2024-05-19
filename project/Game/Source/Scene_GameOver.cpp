@@ -63,7 +63,7 @@ bool Scene_GameOver::Start()
 
 	app->guiManager->minId = 201;
 	app->guiManager->maxId = 202;
-	app->guiManager->pointerId = 202;
+	app->guiManager->pointerId = 201;
 	app->guiManager->columnSize = 0;
 
 	app->render->camera.x = 0;
@@ -82,6 +82,7 @@ bool Scene_GameOver::PreUpdate()
 bool Scene_GameOver::Update(float dt)
 {
 	app->render->DrawTexture(gameOverBackground, 0, 0, 1);
+
 	
 	return true;
 }
@@ -100,8 +101,12 @@ bool Scene_GameOver::PostUpdate()
 // Called before quitting
 bool Scene_GameOver::CleanUp()
 {
+
+
 	LOG("Freeing Scene_GameOver");
 	app->tex->UnLoad(gameOverBackground);
+	app->guiManager->DestroyGuiControl(VolverAlMenu);
+	app->guiManager->DestroyGuiControl(Continuar);
 
 	return true;
 }
