@@ -401,13 +401,13 @@
 			<!-- chibi 100-->
 			<run_player start="0" end="7" speed="0.15f" loop="true"/>
 			<dashi_player start="8" end="15" speed="0.25f" loop="false"/>
-			<maskBola_player start="16" end="23" speed="0.25f" loop="false"/>
+			<maskBola_player start="16" end="23" speed="0.2f" loop="false"/>
 			<dead_player start="24" end="30" speed="0.25f" loop="false"/>
 			<atack1_player start="32" end="37" speed="0.25f" loop="false"/>
 			<atack3_player start="40" end="45" speed="0.25f" loop="false"/>
 			<pocion_player start="48" end="53" speed="0.25f" loop="false"/>
 			<idle_player start="56" end="61" speed="0.15f" loop="true"/>
-			<maskRayo_player start="64" end="68" speed="0.25f" loop="false"/>
+			<maskRayo_player start="64" end="68" speed="0.15f" loop="false"/>
 			<atack2_player start="72" end="74" speed="0.25f" loop="false"/>
 			<takeDMG_player start="80" end="82" speed="0.15f" loop="false"/>
 		</player>
