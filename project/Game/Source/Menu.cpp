@@ -18,6 +18,7 @@
 #include "Scene_Testing.h"
 #include "ModuleFadeToBlack.h"
 #include "Menu_Equipo.h"
+#include "ElevatorMenu.h"
 
 #include "SDL_mixer/include/SDL_mixer.h"
 
@@ -93,7 +94,7 @@ bool Menu::Update(float dt)
 
 		app->audio->PlayFx(inventory_fx);
 	}
-	if (app->input->GetButton(APP_EXIT) == KEY_DOWN && app->notesManager->zoomIn == false && app->bestiarioManager->zoomIn == false)
+	if (app->input->GetButton(APP_EXIT) == KEY_DOWN && app->notesManager->zoomIn == false && app->bestiarioManager->zoomIn == false && app->ascensor->abierto == false)
 	{
 		menuu = !menuu;
 		ventana = 4;
