@@ -26,8 +26,8 @@
 Player::Player() : Entity(EntityType::PLAYER)
 {
 	name = ("player");
-	state = EntityState::IDLE;
-	nextState = EntityState::IDLE;
+	state = EntityStatePlayer::IDLE;
+	nextState = EntityStatePlayer::IDLE;
 	currentState = state;
 	desiredState = nextState;
 	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
@@ -655,7 +655,7 @@ bool Player::Update(float dt)
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
 
 	if (!inAnimation) {
-		desiredState = EntityState::IDLE;
+		desiredState = EntityStatePlayer::IDLE;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
@@ -685,6 +685,10 @@ bool Player::Update(float dt)
 			atackNum = 0;
 		}
 	}
+
+	if (inPocionAnim) {
+		currentAnimation = &pocion_player;
+	}
 	//EndAnimacion
 
 	if (godmode) { GodMode(dt); }
@@ -697,6 +701,11 @@ bool Player::Update(float dt)
 	}
 
 	CameraMovement(dt);
+
+	
+	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN) {
+		desiredState = EntityStatePlayer::POCION;
+	}
 
 	//printf("\nposx:%d, posy: %d",position.x, position.y);
 
@@ -828,19 +837,19 @@ void Player::ResetAnimacion()
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atack1_player") {
 		inAnimation = false;
 		atack_Anim = false;
-		desiredState = EntityState::IDLE;
+		desiredState = EntityStatePlayer::IDLE;
 		atack1_player.Reset();
 	}
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atack2_player") {
 		inAnimation = false;
 		atack_Anim = false;
-		desiredState = EntityState::IDLE;
+		desiredState = EntityStatePlayer::IDLE;
 		atack2_player.Reset();
 	}
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atack3_player") {
 		inAnimation = false;
 		atack_Anim = false;
-		desiredState = EntityState::IDLE;
+		desiredState = EntityStatePlayer::IDLE;
 		atack3_player.Reset();
 	}
 
@@ -854,15 +863,15 @@ void Player::ResetAnimacion()
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "takeDMG_player") {
 		inAnimation = false;
 		inTakeDMG = false;
-		//desiredState = EntityState::IDLE;
+		//desiredState = EntityStatePlayer::IDLE;
 		takeDMG_player.Reset();
 	}
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "maskBola_player") {
 		printf("\maskBola_player");
 		inAnimation = false;
-		//desiredState = EntityState::IDLE;
+		//desiredState = EntityStatePlayer::IDLE;
 		takeDMG_player.Reset();
-		desiredState = EntityState::IDLE;
+		desiredState = EntityStatePlayer::IDLE;
 
 
 		if (mask1AttackSensor != nullptr) {
@@ -879,9 +888,17 @@ void Player::ResetAnimacion()
 		printf("\maskRayo_player");
 		inAnimation = false;
 		maskRayo_player.Reset();
-		desiredState = EntityState::IDLE;
+		desiredState = EntityStatePlayer::IDLE;
 	}
 
+	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "pocion_player") {
+		printf("\pocion_player");
+		inAnimation = false;
+		inPocionAnim = false;
+		pocion_player.Reset();
+		desiredState = EntityStatePlayer::IDLE;
+	}
+	
 }
 
 void Player::DoNothing(float dt)
@@ -1145,41 +1162,49 @@ void Player::stateMachine(float dt)
 	//printf("\ncurrentState: %d, desiredState: %d", static_cast<int>(currentState), static_cast<int>(desiredState));
 	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
 	switch (nextState) {
-	case EntityState::IDLE:
+	case EntityStatePlayer::IDLE:
 		if (!inTakeDMG) {
 			DoNothing(dt);
 		}
 		break;
-	case EntityState::RUNNING:
+	case EntityStatePlayer::RUNNING:
 		if (!inTakeDMG) {
 			Run(dt);
 		}
 		break;
-	case EntityState::ATTACKING:
+	case EntityStatePlayer::ATTACKING:
 		if (!inTakeDMG) {
 			Attack(dt);
 		}
 		break;
-	case EntityState::DEAD:
+	case EntityStatePlayer::DEAD:
 		Dead();
 		break;
-	case EntityState::REVIVING:
+	case EntityStatePlayer::REVIVING:
 		break;
-	case EntityState::MASK_ATTACK:
+	case EntityStatePlayer::MASK_ATTACK:
 		if (!inTakeDMG) {
 			MaskAttack(dt);
 		}
 		break;
-	case EntityState::DASHI:
+	case EntityStatePlayer::DASHI:
 		if (!inTakeDMG) {
 			if (isDashing) {
 				Dashi(dt);
 			}
 		}
 		break;
-	case EntityState::NONE:
 
-		desiredState = EntityState::IDLE;
+	case EntityStatePlayer::POCION:
+		if (!inTakeDMG) {
+			printf("Pocion");
+			inAnimation = true;
+			inPocionAnim = true;
+		}
+		break;
+	case EntityStatePlayer::NONE:
+
+		desiredState = EntityStatePlayer::IDLE;
 		break;
 
 	default:
@@ -2054,24 +2079,24 @@ void Player::GodMode(float dt)
 	//Moverse a la izquierda
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 		velocity.y += -speedFast * dt;
-		desiredState = EntityState::RUNNING;
+		desiredState = EntityStatePlayer::RUNNING;
 		isFacingLeft = false;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
 		velocity.y += speedFast * dt;
-		desiredState = EntityState::RUNNING;
+		desiredState = EntityStatePlayer::RUNNING;
 		isFacingLeft = true;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 		velocity.x = -speedFast * dt;
-		desiredState = EntityState::RUNNING;
+		desiredState = EntityStatePlayer::RUNNING;
 		isFacingLeft = true;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 		velocity.x = speedFast * dt;
-		desiredState = EntityState::RUNNING;
+		desiredState = EntityStatePlayer::RUNNING;
 		isFacingLeft = false;
 	}
 	pbodyFoot->body->SetLinearVelocity(velocity);
@@ -2118,7 +2143,7 @@ void Player::PlayerMovement(float dt)
 
 		if (horizontalMovement != 0 || verticalMovement != 0) {
 			if (!inAnimation) {
-				desiredState = EntityState::RUNNING;
+				desiredState = EntityStatePlayer::RUNNING;
 			}
 			isFacingLeft = (horizontalMovement < 0);
 			lastMovementDirection = fPoint(horizontalMovement, verticalMovement);
@@ -2135,7 +2160,7 @@ void Player::PlayerMovement(float dt)
 
 		isDashing = true;
 		timerDash.Start();
-		desiredState = EntityState::DASHI;
+		desiredState = EntityStatePlayer::DASHI;
 		pbodyFoot->body->ApplyForce(b2Vec2(velocityNormalized.x * 500, velocityNormalized.y * 500), pbodyFoot->body->GetWorldCenter(), false);
 
 		if (secondaryMask == Mask::MASK2)
@@ -2170,7 +2195,7 @@ void Player::PlayerMovement(float dt)
 		isAttacking = true;
 		timerAttack.Start();
 		collisionAttackTimer.Start();
-		desiredState = EntityState::ATTACKING;
+		desiredState = EntityStatePlayer::ATTACKING;
 	}
 
 	//Checkea según velocidad de ataque si puede atacar
@@ -2200,7 +2225,7 @@ void Player::PlayerMovement(float dt)
 		maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].firstTimeUsed = true;
 		isAttackingMask = true;
 		timerMaskAttack.Start(); 
-		desiredState = EntityState::MASK_ATTACK;
+		desiredState = EntityStatePlayer::MASK_ATTACK;
 
 		// Restablece el cooldown de la máscara a su valor original después de usar la habilidad
 		for (int i = 0; i < maskStats[primaryMask][Branches::Rama2].size(); i++) {
@@ -2299,7 +2324,7 @@ void Player::TakeDamage(float damage) {
 			if (currentStats.currentHealth <= 0) {
 				//printf("Dead");
 				inAnimation = true;
-				desiredState = EntityState::DEAD;
+				desiredState = EntityStatePlayer::DEAD;
 			}
 		}
 	}

@@ -245,10 +245,10 @@
       <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Source\Missions.cpp">
-      <Filter>Modules\SistemaMisiones</Filter>
+      <Filter>Modules\SistemaPociones\SistemaMisiones</Filter>
     </ClCompile>
     <ClCompile Include="Source\MissionManager.cpp">
-      <Filter>Modules\SistemaMisiones</Filter>
+      <Filter>Modules\SistemaPociones\SistemaMisiones</Filter>
     </ClCompile>
     <ClCompile Include="Source\Cofre.cpp">
       <Filter>Entities\Chest</Filter>
@@ -324,6 +324,13 @@
     </ClCompile>
     <ClCompile Include="Source\ElevatorMenu.cpp" />
     <ClCompile Include="Source\Enemy_Khurt_Variation.cpp" />
+    <ClCompile Include="Source\PuzzleButtonEntity.cpp" />
+    <ClCompile Include="Source\Particles.cpp">
+      <Filter>Modules\SistemaPartículas</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ModuleParticles.cpp">
+      <Filter>Modules\SistemaPartículas</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -630,10 +637,10 @@
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Source\Missions.h">
-      <Filter>Modules\SistemaMisiones</Filter>
+      <Filter>Modules\SistemaPociones\SistemaMisiones</Filter>
     </ClInclude>
     <ClInclude Include="Source\MissionManager.h">
-      <Filter>Modules\SistemaMisiones</Filter>
+      <Filter>Modules\SistemaPociones\SistemaMisiones</Filter>
     </ClInclude>
     <ClInclude Include="Source\Cofre.h">
       <Filter>Entities\Chest</Filter>
@@ -712,6 +719,13 @@
     </ClInclude>
     <ClInclude Include="Source\ElevatorMenu.h" />
     <ClInclude Include="Source\Enemy_Khurt_Variation.h" />
+    <ClInclude Include="Source\PuzzleButtonEntity.h" />
+    <ClInclude Include="Source\Particles.h">
+      <Filter>Modules\SistemaPartículas</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ModuleParticles.h">
+      <Filter>Modules\SistemaPartículas</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -780,9 +794,6 @@
     <Filter Include="Bestiario">
       <UniqueIdentifier>{8601526c-a76c-4528-970c-40493ea69d1f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Modules\SistemaMisiones">
-      <UniqueIdentifier>{0c0bec82-986a-4aef-bbd9-567b8b1ae92a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Entities\Chest">
       <UniqueIdentifier>{cf5f6a5d-42aa-4cba-a854-d5f3e8a6d10c}</UniqueIdentifier>
     </Filter>
@@ -800,6 +811,12 @@
     </Filter>
     <Filter Include="Entities\Ascensor">
       <UniqueIdentifier>{af8844b5-2667-4ecc-915d-13f789352b6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\SistemaPartículas">
+      <UniqueIdentifier>{437e8175-b579-4244-9d78-122080028d66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\SistemaPociones\SistemaMisiones">
+      <UniqueIdentifier>{0c0bec82-986a-4aef-bbd9-567b8b1ae92a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
