@@ -24,6 +24,12 @@ struct DrawableObject
 	bool isDynamic;
 };
 
+struct TPDoor {
+	int sceneLevel;
+	int tpID;
+	
+};
+
 class EntityManager : public Module
 {
 public:
@@ -74,6 +80,10 @@ public:
 
 	void UpdateEnemyActivation();
 	void UpdateRoomActivation();
+
+
+	bool LoadState(pugi::xml_node node);
+	bool SaveState(pugi::xml_node node);
 	
 	
 public:

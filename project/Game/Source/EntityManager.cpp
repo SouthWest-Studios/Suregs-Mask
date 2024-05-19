@@ -56,6 +56,7 @@
 #include "Item_Pocion_Vida_Max.h"
 #include "Item_Zafiro.h" 
 #include "Elevator.h"
+#include "ModuleFadeToBlack.h"
 
 
 #include "Defs.h"
@@ -653,4 +654,38 @@ void EntityManager::UpdateRoomActivation(){
             }
         }
     }
+
+
+
+
+
+}
+
+bool EntityManager::LoadState(pugi::xml_node node) {
+
+
+	//Bucle limpiando el openDoors
+
+
+
+	//Inventity* inventoryItem = app->inventoryManager->CreateItem(, 0, 0, 0, 0, 0, 0);
+	for (pugi::xml_node itemNode = node.child("entity_manager").child("doors").child("door"); itemNode; itemNode = itemNode.next_sibling("door")) {
+		TPDoor* tpdoor = new TPDoor{ itemNode.attribute("sceneLevel").as_int(), itemNode.attribute("tpID").as_int() };
+		//openDoors.push_back(tpdoor);
+	}
+	return true;
+}
+
+bool EntityManager::SaveState(pugi::xml_node node)
+{
+	pugi::xml_node entityManagerNode = node.append_child("entity_manager");
+	pugi::xml_node doorsNode = entityManagerNode.append_child("doors");
+
+	for (int i = 0; i < openDoors.size(); i++) {
+		pugi::xml_node doorNode = doorsNode.append_child("door");
+		doorNode.append_attribute("sceneLevel").set_value(openDoors.at(i)->sceneLevel);
+		doorNode.append_attribute("tpID").set_value(openDoors.at(i)->tpID);
+	}
+
+	return true;
 }

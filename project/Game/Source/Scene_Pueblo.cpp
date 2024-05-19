@@ -82,6 +82,8 @@ bool Scene_Pueblo::Start()
 
 	app->entityManager->Enable();
 
+	app->SaveRequest();
+
 	return true;
 }
 

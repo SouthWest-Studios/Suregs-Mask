@@ -50,6 +50,7 @@
 #include "Dialog.h"
 #include "Boss_Surma.h"
 #include "Elevator.h"
+#include "ModuleFadeToBlack.h"
 
 Map::Map(App* app, bool start_enabled) : Module(app, start_enabled), mapLoaded(false)
 {
@@ -800,6 +801,7 @@ bool Map::LoadTPEntities(std::string layerName)
 						int tpID = gid - tileset->firstgid;
 						TPEntity* tp = (TPEntity*)app->entityManager->CreateEntity(EntityType::TP_ENTITY);
 						tp->tpID = tpID;
+						tp->sceneLevel = app->fadeToBlack->activeScene->GetSceneNumber();
 						tp->position = iPoint(pos.x + 16, pos.y + 16);
 						//tp->Start();
 					}
