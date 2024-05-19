@@ -83,7 +83,7 @@ public:
 
 	std::vector<DrawableObject> objectsToDraw;
 	
-  	std::vector<MapObject*> openRooms;
+  	std::vector<TPEntity*> openDoors;
 
 private:
 
