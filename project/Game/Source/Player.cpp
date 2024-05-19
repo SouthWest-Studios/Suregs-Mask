@@ -672,6 +672,7 @@ bool Player::Update(float dt)
 		currentAnimation = &takeDMG_player;
 	}
 
+
 	if (atack_Anim) {
 		if (atackNum == 1) {
 			currentAnimation = &atack1_player;
@@ -851,11 +852,34 @@ void Player::ResetAnimacion()
 	}
 
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "takeDMG_player") {
-		printf("\nTakeDMGFINISHI");
 		inAnimation = false;
 		inTakeDMG = false;
 		//desiredState = EntityState::IDLE;
 		takeDMG_player.Reset();
+	}
+	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "maskBola_player") {
+		printf("\maskBola_player");
+		inAnimation = false;
+		//desiredState = EntityState::IDLE;
+		takeDMG_player.Reset();
+		desiredState = EntityState::IDLE;
+
+
+		if (mask1AttackSensor != nullptr) {
+			mask1AttackSensor->body->SetLinearVelocity(b2Vec2(0, 0));
+			mask1AttackSensor->body->GetWorld()->DestroyBody(mask1AttackSensor->body);
+			//app->physics->GetWorld()->DestroyBody(mask1AttackSensor->body);
+			mask1AttackSensor = nullptr;
+			printf("delete");
+		}
+
+	}
+
+	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "maskRayo_player") {
+		printf("\maskRayo_player");
+		inAnimation = false;
+		maskRayo_player.Reset();
+		desiredState = EntityState::IDLE;
 	}
 
 }
@@ -1003,7 +1027,7 @@ void Player::Dead()
 		app->audio->playingDeathFx = true;
 	}
 
-	printf("dead");
+	 //printf("dead");
 	currentAnimation = &dead_player;
 	if (DeadTP && PlayerTimerColdDown(3)) {
 		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_gameover);
@@ -1086,9 +1110,13 @@ void Player::MaskAttack(float dt)
 		//No hace nada
 		break;
 	case Mask::MASK0:
+		inAnimation = true;
+		currentAnimation = &maskRayo_player;
 		CastMultipleLightnings();
 		break;
 	case Mask::MASK1:
+		inAnimation = true;
+		currentAnimation = &maskBola_player;
 		AreaAttack(dt);
 		break;
 	case Mask::MASK2:
@@ -1099,6 +1127,8 @@ void Player::MaskAttack(float dt)
 		Mask3Statistics();
 		break;
 	}
+
+
 }
 void Player::ApplyPoison(Entity* entity) {
 	int poisonDamage = maskStats[Mask::MASK0][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].poisonDamage;
@@ -1202,9 +1232,13 @@ void Player::CastLightning() {
 //Ataque mascara 1
 
 void Player::AreaAttack(float dt) {
+
+	inMaskAtack = true;
+	if (mask1AttackSensor == nullptr) {
 	mask1AttackSensor = app->physics->CreateRectangleSensor(this->position.x, this->position.y, attackMask1Width + attackMask1Width * maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].rangeBallModifier, attackMask1Height + attackMask1Height * maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].rangeBallModifier, DYNAMIC);
 	mask1AttackSensor->ctype = ColliderType::MASK1_ATTACK;
 	mask1AttackSensor->listener = this;
+	}
 }
 
 //Ataque mascara 2
@@ -2165,7 +2199,7 @@ void Player::PlayerMovement(float dt)
 			!maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].firstTimeUsed)) {
 		maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].firstTimeUsed = true;
 		isAttackingMask = true;
-		timerMaskAttack.Start();
+		timerMaskAttack.Start(); 
 		desiredState = EntityState::MASK_ATTACK;
 
 		// Restablece el cooldown de la máscara a su valor original después de usar la habilidad

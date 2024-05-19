@@ -297,6 +297,9 @@ public:
 	//TakeDMG
 	bool inTakeDMG = false;
 
+	//Animacion Mascara ataque
+	bool inMaskAtack;
+
 	Timer collisionAttackTimer;
 
 	//Espada & Armadura
