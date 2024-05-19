@@ -104,13 +104,14 @@ int highesttId = -1;
 Note* NotesManager::CreateItem(EntityType type, SDL_Texture* CloseUp, std::string texto, std::string titulo, int id2)
 {
 	Note* entity = nullptr;
-
+	ListItem<Note*>* item;
 
 	highesttId = (notes.Count() > 0) ? notes.end->data->id : -1;
 	entity = new Note();
-	entity->id = highesttId + 1;
+	
 	entity->closeUpNotes = CloseUp;
 	entity->desc = texto;
+	entity->id = highestIde + 1;
 	entity->title = titulo;
 	entity->id2 = id2;
 	/*entity->closeUpNotes = app->tex->Load("Assets/Textures/Entidades/Items/textura_NoteCloseUp.png"); */
@@ -126,10 +127,45 @@ Note* NotesManager::CreateItem(EntityType type, SDL_Texture* CloseUp, std::strin
 		break;
 	}
 
+	
+
+		
 
 	AddNote(entity);
-
+	SortNotesById2();
 	return entity;
+}
+
+void NotesManager::SortNotesById2() {
+	if (notes.Count() < 2) return;  // No hay necesidad de ordenar si hay menos de 2 elementos
+
+	bool swapped;
+	ListItem<Note*>* current;
+
+	// Algoritmo de burbuja para ordenar los elementos en función de id2
+	do {
+		swapped = false;
+		current = notes.start;  // Supongo que `notes.start` es el primer elemento de la lista
+
+		while (current != nullptr && current->next != nullptr) {
+			if (current->data->id2 > current->next->data->id2) {
+				// Intercambiar los elementos
+				Note* temp = current->data;
+				current->data = current->next->data;
+				current->next->data = temp;
+				swapped = true;
+			}
+			current = current->next;
+		}
+	} while (swapped);
+
+	// Reasignar los IDs de las notas en el nuevo orden
+	current = notes.start;
+	int newId = 0;
+	while (current != nullptr) {
+		current->data->id = newId++;
+		current = current->next;
+	}
 }
 
 bool NotesManager::IsFull()
@@ -435,7 +471,7 @@ bool NotesManager::PostUpdate()
 			
 			
 			pEntity = item->data;
-			int rowIndex = item->data->id2 / maxItemsPerRow; // Calcula el índice de la fila
+			int rowIndex = item->data->id / maxItemsPerRow; // Calcula el índice de la fila
 			int columnIndex = item->data->id % maxItemsPerRow; // Calcula el índice de la columna
 			int horizontalPosition = 320 + columnIndex * 492; // Calcula la posición horizontal
 			int verticalPosition = 230 + rowIndex * 83; // Calcula la posición vertical

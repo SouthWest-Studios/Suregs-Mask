@@ -33,6 +33,8 @@ public:
 	// Additional methods
 	Note* CreateItem(EntityType type, SDL_Texture* CloseUp, std::string texto, std::string titulo, int id2);
 
+	void SortNotesById2();
+
 	void AddNote(Note* Inventity);
 
 	void NotesManager::BubbleSortByID();

@@ -189,37 +189,37 @@ bool Scene_testing::Start()
 
 	Item_Nota* nota4 = (Item_Nota*)app->entityManager->CreateEntity(EntityType::ITEM_NOTA, 3);
 	nota4->config = configNode.child("entities_data").child("item_nota");
-	nota4->position = iPoint(1803, 2555);
+	nota4->position = iPoint(1743, 2555);
 	nota4->Start();
 
 	Item_Nota* nota5 = (Item_Nota*)app->entityManager->CreateEntity(EntityType::ITEM_NOTA, 4);
 	nota5->config = configNode.child("entities_data").child("item_nota");
-	nota5->position = iPoint(1803, 2555);
+	nota5->position = iPoint(1723, 2555);
 	nota5->Start();
 
 	Item_Nota* nota6 = (Item_Nota*)app->entityManager->CreateEntity(EntityType::ITEM_NOTA, 5);
 	nota6->config = configNode.child("entities_data").child("item_nota");
-	nota6->position = iPoint(1803, 2555);
+	nota6->position = iPoint(1703, 2555);
 	nota6->Start();
 
 	Item_Nota* nota7 = (Item_Nota*)app->entityManager->CreateEntity(EntityType::ITEM_NOTA, 6);
 	nota7->config = configNode.child("entities_data").child("item_nota");
-	nota7->position = iPoint(1803, 2555);
+	nota7->position = iPoint(1683, 2555);
 	nota7->Start();
 
 	Item_Nota* nota8 = (Item_Nota*)app->entityManager->CreateEntity(EntityType::ITEM_NOTA, 7);
 	nota8->config = configNode.child("entities_data").child("item_nota");
-	nota8->position = iPoint(1803, 2555);
+	nota8->position = iPoint(1663, 2555);
 	nota8->Start();
 
 	Item_Nota* nota9 = (Item_Nota*)app->entityManager->CreateEntity(EntityType::ITEM_NOTA, 8);
 	nota9->config = configNode.child("entities_data").child("item_nota");
-	nota9->position = iPoint(1803, 2555);
+	nota9->position = iPoint(1643, 2555);
 	nota9->Start();
 
 	Item_Nota* nota10 = (Item_Nota*)app->entityManager->CreateEntity(EntityType::ITEM_NOTA, 9);
 	nota10->config = configNode.child("entities_data").child("item_nota");
-	nota10->position = iPoint(1803, 2555);
+	nota10->position = iPoint(1623, 2555);
 	nota10->Start();
 
 	app->bestiarioManager->CreateItem("osiris");
