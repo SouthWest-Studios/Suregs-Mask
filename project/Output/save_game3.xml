@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
 <game_state>
-	<save1>
 		<window />
 		<input />
 		<textures />
@@ -44,7 +43,4 @@
 		<fadeToBlack />
 		<debugConsole />
 		<renderer />
-	</save1>
-	<save2 />
-	<save3 />
 </game_state>
