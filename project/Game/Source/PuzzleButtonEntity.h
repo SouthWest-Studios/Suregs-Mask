@@ -23,6 +23,8 @@ public:
 
 	bool Update(float dt);
 
+	bool PostUpdate();
+
 	bool CleanUp();
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
@@ -36,13 +38,18 @@ private:
 public:
 	int buttonID = -1;
 	bool pressed = false;
+	bool playerOnHover = false;
 
 private:
 
 	//Cuerpo de fisicas, para detectar cuando el jugador esta cerca
 	//y activar el dialogo en caso de que el jugador asi lo quiera
-	PhysBody* pbody;
+	PhysBody* pbody = nullptr;
+	SDL_Texture* texture = nullptr;
 
+	SDL_Rect notPressedRect{ 98,0, 98, 79 };
+	SDL_Rect pressedRect{ 0, 0, 98, 79 };
+		
 };
 
 #endif // __PuzzleButtonEntityENTITY_H__

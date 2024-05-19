@@ -247,6 +247,10 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 		tpEntities.Add((TPEntity*)entity);
 		break;
 
+	case EntityType::PUZZLE_BUTTON:
+		entity = new PuzzleButtonEntity();
+		break;
+
 	case EntityType::NPC_VENDEDOR:
 		entity = new NPCVendedor();
 		break;
