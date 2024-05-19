@@ -50,24 +50,20 @@ bool Scene_GameOver::Start()
 	config = configFile.child("config").child(name.GetString());
 
 	gameOverBackground_tp= config.child("gameoverbackground").attribute("texturepath").as_string();
-	logo_tp = config.child("logo").attribute("texturepath").as_string();
 
 	gameOverBackground = app->tex->Load(gameOverBackground_tp);
-	logo = app->tex->Load(logo_tp);
-
-	//AQU?CARGAR TODAS LAS TEXTURAS DEL MEN?(cuando las tengamos xd)
 	
 
 	//Get window size
 	app->win->GetWindowSize(windowW, windowH);
 
 	
-	VolverAlMenu = (GuiControlButton*)(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 200, "VOLVER AL MENÚ", SDL_Rect{ 537, 360,	136,25 }, this));
-	Continuar = (GuiControlButton*)(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 201, "CONTINUAR", SDL_Rect{ 537, 460,	136,25 }, this));
+	VolverAlMenu = (GuiControlButton*)(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 201, "VOLVER AL MENÚ", SDL_Rect{ 570, 460,	136,25 }, this));
+	Continuar = (GuiControlButton*)(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 202, "CONTINUAR", SDL_Rect{ 570, 560,	136,25 }, this));
 
-	app->guiManager->minId = 200;
-	app->guiManager->maxId = 201;
-	app->guiManager->pointerId = 201;
+	app->guiManager->minId = 201;
+	app->guiManager->maxId = 202;
+	app->guiManager->pointerId = 202;
 	app->guiManager->columnSize = 0;
 
 	app->render->camera.x = 0;
@@ -86,7 +82,6 @@ bool Scene_GameOver::PreUpdate()
 bool Scene_GameOver::Update(float dt)
 {
 	app->render->DrawTexture(gameOverBackground, 0, 0, 1);
-	app->render->DrawTexture(logo, 200, 200, 1);
 	
 	return true;
 }
@@ -106,8 +101,6 @@ bool Scene_GameOver::PostUpdate()
 bool Scene_GameOver::CleanUp()
 {
 	LOG("Freeing Scene_GameOver");
-
-	app->tex->UnLoad(logo);
 	app->tex->UnLoad(gameOverBackground);
 
 	return true;
@@ -120,16 +113,16 @@ bool Scene_GameOver::OnGuiMouseClickEvent(GuiControl* control)
 	switch (control->id)
 	{
 
-	case 200:
+	case 201:
 		app->fadeToBlack->FadeToBlack(this, app->scene_menu, 90);
-		app->menu->active = true;
+		app->menu->active = false;
 		app->guiManager->pointerId = 1;
 		app->guiManager->DestroyGuiControl(VolverAlMenu);
 		app->guiManager->DestroyGuiControl(Continuar);
 
 		break;
 
-	case 201:
+	case 202:
 		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
 		app->menu->active = true;
 		app->guiManager->pointerId = 100;

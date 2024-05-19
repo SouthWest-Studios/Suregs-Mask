@@ -315,7 +315,6 @@
 
 	<scene_gameover>
 		<gameoverbackground texturepath ="Assets/Textures/Interfaz/TexturaGameOver.png"/>
-		<logo texturepath ="Assets/Textures/Interfaz/textura_logo.png"/>
 	</scene_gameover>
 	
 	<fadeToBlack>

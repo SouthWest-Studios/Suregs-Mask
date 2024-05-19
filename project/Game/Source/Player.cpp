@@ -1006,7 +1006,7 @@ void Player::Dead()
 	printf("dead");
 	currentAnimation = &dead_player;
 	if (DeadTP && PlayerTimerColdDown(3)) {
-		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_pueblo);
+		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_gameover);
 		app->audio->playingDeathFx = false;
 		app->audio->StopFx(-1);
 	}
@@ -1222,11 +1222,6 @@ void Player::DashAttack(float dt) {
 	float horizontalMovement = joystick.x;
 	float verticalMovement = joystick.y;
 
-	// Calcular la velocidad horizontal y vertical
-	//int horizontalMovement = pressingRight - pressingLeft;
-	//int verticalMovement = pressingDown - pressingUp;
-
-	//printf("%d", pressingUp);
 	// Actualizar velocidad
 	if (!isDashing) {
 		velocity.x = horizontalMovement * GetRealMovementSpeed() * speed * 10 * dt;
@@ -2271,10 +2266,6 @@ void Player::TakeDamage(float damage) {
 				//printf("Dead");
 				inAnimation = true;
 				desiredState = EntityState::DEAD;
-
-				//app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_gameover);
-
-
 			}
 		}
 	}
