@@ -17,6 +17,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <algorithm>
 #include "DialogTriggerEntity.h"
 #include "Item_Garra.h"
 #include "Item_Nota.h"
@@ -28,6 +29,7 @@
 #include "NPC_Abuelitas.h"
 #include "NPC_Guardias.h"
 #include "NPC_Bruja.h"
+#include "InventoryManager.h"
 #include "NPC_Bully1.h"
 #include "NPC_Bully2.h"
 #include "NPC_Herrera.h"
@@ -41,6 +43,7 @@
 #include "Enemy_Boorok.h"
 #include "Enemy_Osiris_Variation.h"
 #include "TPEntity.h"
+#include "PuzzleButtonEntity.h"
 #include "Window.h"
 #include "Boss_Inuit.h"
 #include "Boss_Musri.h"
@@ -106,6 +109,36 @@ bool Map::Start() {
 
 bool Map::Update(float dt)
 {
+
+	//Mirar el orden de los botones
+
+	if (!recompensaPuzzle) {
+
+		bool falta = false;
+		bool resetBotones = false;
+		for (int i = 0; i < puzzleButtonEntities.size(); i++) {
+
+			if (puzzleButtonEntities.at(i)->pressed && falta) {
+				resetBotones = true;
+				break;
+			}
+
+			if (!puzzleButtonEntities.at(i)->pressed) {
+				falta = true;
+			}
+		}
+		if (resetBotones) {
+			for (int i = 0; i < puzzleButtonEntities.size(); i++) {
+				puzzleButtonEntities.at(i)->pressed = false;
+			}
+		}
+		if (!falta) {
+			app->inventoryManager->monedasObtenidas += 100;
+			recompensaPuzzle = true;
+		}
+	}
+
+
 	return true;
 }
 
@@ -877,18 +910,29 @@ bool Map::LoadPuzzleEntities(std::string layerName)
 					iPoint pos = MapToWorld(x, y);
 
 
-					//if (gid != 0) {
-					//	int tpID = gid - tileset->firstgid;
-					//	TPEntity* tp = (TPEntity*)app->entityManager->CreateEntity(EntityType::TP_ENTITY);
-					//	tp->tpID = tpID;
-					//	tp->sceneLevel = app->fadeToBlack->activeScene->GetSceneNumber();
-					//	tp->position = iPoint(pos.x + 16, pos.y + 16);
-					//	//tp->Start();
-					//}
+					if (gid != 0) {
 
+						int elementID = gid - tileset->firstgid;
 
+						if (elementID < 15) { //Botones
+							PuzzleButtonEntity* button = (PuzzleButtonEntity*)app->entityManager->CreateEntity(EntityType::PUZZLE_BUTTON);
+							button->buttonID = elementID;
+							button->config = configNode.child("entities_data").child("puzzle_button");
+							button->position = iPoint(pos.x + 16, pos.y + 16);
+							puzzleButtonEntities.push_back(button);
+							button->Start();
+							
+							
+							BubbleSort(puzzleButtonEntities);
 
+						}
+						else if (elementID < 30) { //Palancas
+							//button->buttonID = elementID - 15;
+						}
+						else {
 
+						}
+					}
 				}
 			}
 
@@ -1415,6 +1459,21 @@ std::vector<int> Map::GetObjectGroupPoints(const std::string& points)
 
 	return puntos;
 }
+
+void Map::BubbleSort(std::vector<PuzzleButtonEntity*> entities)
+{
+	bool swapped;
+	do {
+		swapped = false;
+		for (size_t i = 1; i < entities.size(); ++i) {
+			if (entities[i - 1]->id > entities[i]->id) {
+				std::swap(entities[i - 1], entities[i]);
+				swapped = true;
+			}
+		}
+	} while (swapped);
+}
+
 
 // L13: Create navigationMap map for pathfinding
 void Map::CreateNavigationMap(int& width, int& height, uchar** buffer) const

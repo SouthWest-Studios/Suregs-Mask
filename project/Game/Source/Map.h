@@ -9,6 +9,7 @@
 #include "Pathfinding.h"
 #include "Physics.h"
 #include "Dialog.h"
+#include "PuzzleButtonEntity.h"
 
 #include "PugiXml\src\pugixml.hpp"
 
@@ -210,6 +211,8 @@ private:
 
     std::vector<int> GetObjectGroupPoints(const std::string& puntos);
 
+    void BubbleSort(std::vector<PuzzleButtonEntity*> entities);
+
 
 public: 
     SString name;
@@ -248,6 +251,10 @@ private:
     pugi::xml_node dialoguesNode;
 
     List<Dialog*> dialogues;
+
+    std::vector<PuzzleButtonEntity*> puzzleButtonEntities;
+    bool recompensaPuzzle = false;
+
  };
 
 #endif // __MAP_H__

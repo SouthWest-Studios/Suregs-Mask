@@ -27,7 +27,8 @@ bool PuzzleButtonEntity::Start() {
 	pbody = app->physics->CreateRectangleSensor(position.x+10, position.y, 32, 32, bodyType::DYNAMIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PUZZLE_BUTTON_ENTITY;
-
+	std::string path = config.attribute("texturePath").as_string();
+	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
 	return true;
 }
@@ -35,6 +36,21 @@ bool PuzzleButtonEntity::Start() {
 bool PuzzleButtonEntity::Update(float dt)
 {
 	
+	return true;
+}
+
+bool PuzzleButtonEntity::PostUpdate()
+{
+	if (!pressed && !playerOnHover) {
+		app->render->DrawTexture(texture, position.x - 35, position.y - 32, 1.0f, SDL_FLIP_NONE, &notPressedRect);
+	}
+	else {
+		//notPressed
+		app->render->DrawTexture(texture, position.x - 35, position.y - 32, 1.0f, SDL_FLIP_NONE, &pressedRect);
+	}
+
+	playerOnHover = false;
+
 	return true;
 }
 
@@ -50,7 +66,8 @@ void PuzzleButtonEntity::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 		case ColliderType::PLAYER:
-			LOG("COLISION CON PLAYER HOLIS");
+			pressed = true;
+			playerOnHover = true;
 			break;
 	}
 }
