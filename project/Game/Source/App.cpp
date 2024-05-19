@@ -605,6 +605,17 @@ bool App::LoadFromFile() {
 // check https://pugixml.org/docs/quickstart.html#modify
 bool App::SaveFromFile() {
 
+	//COMENTARIO PARA NURIA
+	//En las lineas gameState.child("saveX"). Esa parte no funciona, ya que gameState no tiene ningun hijo llamado saveX. Por eso no guarda nada.
+	//Al guardar, se vuelcan todos los datos nuevos en el archivo, borrando los anteriores, se complica para tener varios saves en el mismo archivo.
+	//Para hacerlo facil deberian de haber: save_game1.xml, save_game2.xml y save_game3.xml. Y hacer solo el switch al final en 
+	//"ret = saveFile.save_file("save_game.xml");" en vez de duplicar el mismo codigo para todo.
+	//Y en principio no tendria que haber ningun problema.
+	//Sigue faltando la seleccion de nueva partida para saber en que slot guardar...
+
+
+
+
 	bool ret = true;
 
 	pugi::xml_document saveFile;
