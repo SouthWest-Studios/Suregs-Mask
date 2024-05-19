@@ -339,7 +339,7 @@ bool Map::Load(SString mapFileName)
 	LoadCollisions("Collisions");
 	LoadEntities("Entities");
 	LoadTPEntities("TPLayers");
-
+	LoadPuzzleEntities("PuzzleLayer");
 
 
 
@@ -839,6 +839,63 @@ bool Map::LoadTPEntities(std::string layerName)
 
 	}
 	app->entityManager->LinkTPEntities();
+
+
+
+	return ret;
+}
+
+bool Map::LoadPuzzleEntities(std::string layerName)
+{
+	bool ret = true;
+
+	ListItem<MapLayer*>* mapLayerItem;
+	mapLayerItem = mapData.layers.start;
+
+	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
+	if (parseResult) {
+		configNode = configFile.child("config");
+	}
+	else {
+		LOG("Error in Map::LoadEPuzzleEntities(): %s", parseResult.description());
+		return false;
+	}
+	LOG("CARGA Puzzle ENTIDADES");
+	while (mapLayerItem != NULL) {
+
+		if (mapLayerItem->data->name.GetString() == layerName) {
+			for (int x = 0; x < mapLayerItem->data->width; x++)
+			{
+
+				for (int y = 0; y < mapLayerItem->data->height; y++)
+				{
+
+
+					int gid = mapLayerItem->data->Get(x, y);
+					TileSet* tileset = GetTilesetFromTileId(gid);
+					SDL_Rect r = tileset->GetRect(gid);
+					iPoint pos = MapToWorld(x, y);
+
+
+					//if (gid != 0) {
+					//	int tpID = gid - tileset->firstgid;
+					//	TPEntity* tp = (TPEntity*)app->entityManager->CreateEntity(EntityType::TP_ENTITY);
+					//	tp->tpID = tpID;
+					//	tp->sceneLevel = app->fadeToBlack->activeScene->GetSceneNumber();
+					//	tp->position = iPoint(pos.x + 16, pos.y + 16);
+					//	//tp->Start();
+					//}
+
+
+
+
+				}
+			}
+
+		}
+		mapLayerItem = mapLayerItem->next;
+
+	}
 
 
 

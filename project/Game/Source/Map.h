@@ -204,6 +204,7 @@ private:
 
     bool LoadCollisions(std::string layerName);
     bool LoadTPEntities(std::string layerName);
+    bool LoadPuzzleEntities(std::string layerName);
     bool LoadObjects();
     bool LoadEntities(std::string layerName);
 
