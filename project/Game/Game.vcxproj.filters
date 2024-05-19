@@ -324,6 +324,13 @@
     </ClCompile>
     <ClCompile Include="Source\ElevatorMenu.cpp" />
     <ClCompile Include="Source\Enemy_Khurt_Variation.cpp" />
+    <ClCompile Include="Source\PuzzleButtonEntity.cpp" />
+    <ClCompile Include="Source\Boss_Igorv.cpp">
+      <Filter>Entities\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene_Mazmorra8.cpp">
+      <Filter>Scenes\Mazmorras</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -712,6 +719,13 @@
     </ClInclude>
     <ClInclude Include="Source\ElevatorMenu.h" />
     <ClInclude Include="Source\Enemy_Khurt_Variation.h" />
+    <ClInclude Include="Source\PuzzleButtonEntity.h" />
+    <ClInclude Include="Source\Boss_Igory.h">
+      <Filter>Entities\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene_Mazmorra8.h">
+      <Filter>Scenes\Mazmorras</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

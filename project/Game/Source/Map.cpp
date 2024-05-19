@@ -46,6 +46,7 @@
 #include "PuzzleButtonEntity.h"
 #include "Window.h"
 #include "Boss_Inuit.h"
+#include "Boss_Igory.h"
 #include "Boss_Musri.h"
 #include "Enemy_Khurt.h"
 #include "Enemy_Khurt_Variation.h"
@@ -1373,6 +1374,7 @@ bool Map::LoadEntities(std::string layerName)
 						boss_Inuit->Start();
 					}
 
+
 					//Boss_Musri
 					if (gid == tileset->firstgid + 61) {
 						Boss_Musri* boss_Musri = (Boss_Musri*)app->entityManager->CreateEntity(EntityType::BOSS_MUSRI);
@@ -1387,6 +1389,14 @@ bool Map::LoadEntities(std::string layerName)
 						boss_Surma->config = configNode.child("entities_data").child("boss_surma");
 						boss_Surma->position = iPoint(pos.x + 16, pos.y + 16);
 						boss_Surma->Start();
+					}
+
+					//Boss_Igory
+					if (gid == tileset->firstgid + 63) {
+						Boss_Igory* boss_Igory = (Boss_Igory*)app->entityManager->CreateEntity(EntityType::BOSS_IGORY);
+						boss_Igory->config = configNode.child("entities_data").child("boss_igory");
+						boss_Igory->position = iPoint(pos.x + 16, pos.y + 16);
+						boss_Igory->Start();
 					}
 
 					/*COFRE*/

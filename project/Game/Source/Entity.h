@@ -95,6 +95,7 @@ enum class EntityType
 	BOSS_INUIT,
 	BOSS_MUSRI,
 	BOSS_SURMA,
+	BOSS_IGORY,
 
 	COFRE,
 	ASCENSOR,
@@ -149,6 +150,19 @@ enum class EntityState_Enemy
 };
 
 enum class EntityState_Boss_Inuit
+{
+	IDLE,
+	RUNNING,
+	ATTACKING_BASIC,
+	ATTACKING_DISTANCE,
+	DEAD,
+	DASHI,
+	FASE_CHANGE,
+	NONE,
+	STATE_COUNT
+};
+
+enum class EntityState_Boss_Igory
 {
 	IDLE,
 	RUNNING,

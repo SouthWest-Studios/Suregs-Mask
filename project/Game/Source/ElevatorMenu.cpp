@@ -25,6 +25,7 @@
 #include "Scene_Mazmorra5.h"
 #include "Scene_Mazmorra6.h"
 #include "Scene_Mazmorra7.h"
+#include "Scene_Mazmorra8.h"
 #include "Scene_Pueblo.h"
 #include "Menu.h"
 #include "SDL_mixer/include/SDL_mixer.h"
@@ -222,6 +223,14 @@ void ElevatorMenu::UseElevator(int id, int mazmorraa)
 		app->menu->active = true;
 
 		mazmorra = 7;
+		break;
+	}
+	case 8:
+	{
+		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra8);
+		app->menu->active = true;
+
+		mazmorra = 8;
 		break;
 	}
 	default:

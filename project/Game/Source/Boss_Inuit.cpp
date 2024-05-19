@@ -57,7 +57,7 @@ bool Boss_Inuit::Start() {
 	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
 	pbodyFoot->entity = this;
 	pbodyFoot->listener = this;
-	pbodyFoot->ctype = ColliderType::ENEMY_INUIT;
+	pbodyFoot->ctype = ColliderType::BOSS_INUIT;
 
 	pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 40, 60, bodyType::DYNAMIC);
 	pbodySensor->entity = this;
@@ -793,7 +793,7 @@ void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 		}
 
 		break;
-	case ColliderType::ENEMY_INUIT:
+	case ColliderType::BOSS_INUIT:
 		if (physA->ctype == ColliderType::ATACKBMR && bmrBack == true) {
 			printf("\n Enemyy");
 			atackTimeColdDown.Start();

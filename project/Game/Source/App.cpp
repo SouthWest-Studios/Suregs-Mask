@@ -19,6 +19,7 @@
 #include "Scene_Mazmorra5.h"
 #include "Scene_Mazmorra6.h"
 #include "Scene_Mazmorra7.h"
+#include "Scene_Mazmorra8.h"
 #include "Map.h"
 #include "Physics.h"
 #include "GuiManager.h"
@@ -81,6 +82,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	scene_mazmorra5 = new Scene_Mazmorra5(this, false);
 	scene_mazmorra6 = new Scene_Mazmorra6(this, false);
 	scene_mazmorra7 = new Scene_Mazmorra7(this, false);
+	scene_mazmorra8 = new Scene_Mazmorra8(this, false);
 
 	map = new Map(this, false);
 	entityManager = new EntityManager(this);
@@ -123,6 +125,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(scene_mazmorra5);
 	AddModule(scene_mazmorra6);
 	AddModule(scene_mazmorra7);
+	AddModule(scene_mazmorra8);
 	AddModule(scene_gameover);
 	AddModule(entityManager);
 	AddModule(missionManager);

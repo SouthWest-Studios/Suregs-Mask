@@ -124,6 +124,7 @@
     <ClCompile Include="Source\GuiControlSlider.cpp" />
     <ClCompile Include="Source\GuiManager.cpp" />
     <ClCompile Include="Source\Hud.cpp" />
+    <ClCompile Include="Source\Boss_Igorv.cpp" />
     <ClCompile Include="Source\InventoryManager.cpp" />
     <ClCompile Include="Source\Item.cpp" />
     <ClCompile Include="Source\Item_Amastita.cpp" />
@@ -194,6 +195,7 @@
     <ClCompile Include="Source\Scene_Mazmorra5.cpp" />
     <ClCompile Include="Source\Scene_Mazmorra6.cpp" />
     <ClCompile Include="Source\Scene_Mazmorra7.cpp" />
+    <ClCompile Include="Source\Scene_Mazmorra8.cpp" />
     <ClCompile Include="Source\Scene_Menu.cpp" />
     <ClCompile Include="Source\Enemy_Shar.cpp" />
     <ClCompile Include="Source\Scene_Pueblo.cpp" />
@@ -239,6 +241,7 @@
     <ClInclude Include="Source\GuiControlSlider.h" />
     <ClInclude Include="Source\GuiManager.h" />
     <ClInclude Include="Source\Hud.h" />
+    <ClInclude Include="Source\Boss_Igory.h" />
     <ClInclude Include="Source\inventity.h" />
     <ClInclude Include="Source\InventoryManager.h" />
     <ClInclude Include="Source\Item.h" />
@@ -316,6 +319,7 @@
     <ClInclude Include="Source\Scene_Mazmorra5.h" />
     <ClInclude Include="Source\Scene_Mazmorra6.h" />
     <ClInclude Include="Source\Scene_Mazmorra7.h" />
+    <ClInclude Include="Source\Scene_Mazmorra8.h" />
     <ClInclude Include="Source\Scene_Menu.h" />
     <ClInclude Include="Source\Enemy_Shar.h" />
     <ClInclude Include="Source\Scene_Pueblo.h" />

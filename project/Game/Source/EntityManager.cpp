@@ -46,6 +46,7 @@
 #include "Boss_Inuit.h"
 #include "Boss_Musri.h"
 #include "Boss_Surma.h"
+#include "Boss_Igory.h"
 #include "Cofre.h"
 #include "Item_Pocion_Dano.h"
 #include "Item_Pocion_Regeneracion.h"
@@ -299,6 +300,9 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 		break;
 	case EntityType::BOSS_SURMA:
 		entity = new Boss_Surma();
+		break;
+	case EntityType::BOSS_IGORY:
+		entity = new Boss_Igory();
 		break;
 	case EntityType::ROD:
 		entity = new MiniGameFishing();

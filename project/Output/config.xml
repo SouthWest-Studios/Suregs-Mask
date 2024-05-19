@@ -182,6 +182,10 @@
 					maxHealth="6500.0f" speed="5f" attackDamage="90.0f" attackDistance="4" viewDistance="20"
 					Tsprite="1" Pwidth="115" sprite_x="170" sprite_y="331"/>
 
+		<boss_igory texturePath="Assets/Textures/Entidades/Boss/Igory/Miniboss4.png"
+					maxHealth="6500.0f" speed="5f" attackDamage="90.0f" attackDistance="4" viewDistance="20"
+					Tsprite="1" Pwidth="202" sprite_x="202" sprite_y="229"/>
+
 		<boss_musri texturePath="Assets/Textures/Entidades/Boss/Musri/texture_boss_musri.png"
 					arrowTexturePath="Assets/Textures/Entidades/Boss/Musri/texture_musri_arrow.png"
 					arrowChargedTexturePath="Assets/Textures/Entidades/Boss/Musri/texture_musri_charged_arrow.png"
@@ -391,7 +395,9 @@
 	<scene_mazmorra7>
 		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Mazmorras/Mazmorra7.tmx"/>
 	</scene_mazmorra7>
-
+	<scene_mazmorra8>
+		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Mazmorras/Mazmorra8.tmx"/>
+	</scene_mazmorra8>
 	<!--Animation-->
 	<animations>
 		<scene_logos>
@@ -416,7 +422,10 @@
 		<boss_inuit>
 			<idleAnim_boss_inuit start="0" end="1" speed="0.2f" loop="true"/>
 		</boss_inuit>
-		
+
+		<boss_igory>
+			<idleAnim_boss_Igory start="0" end="1" speed="0.2f" loop="true"/>
+		</boss_igory>
 		<boss_musri>
 			<idleAnim start="0" end="4" speed="0.1f" loop="true"/>
 			<attackEmpujarAnim start="4" end="6" speed="0.1f" loop="true"/>

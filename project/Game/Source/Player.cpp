@@ -795,6 +795,9 @@ bool Player::PostUpdate() {
 	if (currentAnimation == nullptr) { currentAnimation = &idle_player; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
+
+
+
 	//printf("Posición: (%d, %d)\n", position.x, position.y);
 
 	if (isFacingLeft) {
