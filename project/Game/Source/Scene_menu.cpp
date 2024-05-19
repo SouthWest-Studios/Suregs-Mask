@@ -131,6 +131,7 @@ bool Scene_Menu::Update(float dt)
 	if (showSavedGames) {
 		ShowSavedGames();
 	}
+	if (showNewGames) { ShowNewGames(); };
 	if (showControls) { ShowControls(); };
 	/*if (showSettings && !_showSettings) {
 		SettingsInterface();
@@ -147,7 +148,7 @@ bool Scene_Menu::Update(float dt)
 		Fullscreen();
 	}
 
-	if (ajustes == false && showCredits == false && showSavedGames == false && showControls == false)
+	if (ajustes == false && showCredits == false && showSavedGames == false && showControls == false && showNewGames == false)
 	{
 
 		ListItem<GuiControl*>* control;
@@ -215,11 +216,11 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 	{
 
 	case 1:
-		showSavedGames = true;
+		showNewGames = true;
 		control->selected = false;
-		app->guiManager->minId = 13;
-		app->guiManager->maxId = 16;
-		app->guiManager->pointerId = 13;
+		app->guiManager->minId = 20;
+		app->guiManager->maxId = 23;
+		app->guiManager->pointerId = 20;
 		/*app->guiManager->DestroyGuiControl(NuevaPartida);
 		app->guiManager->DestroyGuiControl(Continuar);*/
 
@@ -376,6 +377,54 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 			((GuiCheckBox*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->click = false;
 			
 		}*/
+	case 20:
+		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo);
+		app->menu->active = true;
+		app->guiManager->pointerId = 100;
+		app->savedGame = 1;
+		app->guiManager->DestroyGuiControl(gcCloseNewGames);
+		app->guiManager->DestroyGuiControl(nuevaPartida1);
+		app->guiManager->DestroyGuiControl(nuevaPartida2);
+		app->guiManager->DestroyGuiControl(nuevaPartida3);
+		break;
+
+	case 21:
+		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo);
+		app->menu->active = true;
+		app->guiManager->pointerId = 100;
+		app->savedGame = 2;
+		app->guiManager->DestroyGuiControl(gcCloseNewGames);
+		app->guiManager->DestroyGuiControl(nuevaPartida1);
+		app->guiManager->DestroyGuiControl(nuevaPartida2);
+		app->guiManager->DestroyGuiControl(nuevaPartida3);
+		break;
+
+	case 22:
+		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo);
+		app->menu->active = true;
+		app->guiManager->pointerId = 100;
+		app->savedGame = 3;
+		app->guiManager->DestroyGuiControl(gcCloseNewGames);
+		app->guiManager->DestroyGuiControl(nuevaPartida1);
+		app->guiManager->DestroyGuiControl(nuevaPartida2);
+		app->guiManager->DestroyGuiControl(nuevaPartida3);
+		break;
+
+	case 23:
+		showNewGames = false;
+		_showNewGames = false;
+		ListItem<GuiControl*>* controlD;
+		for (controlD = controlsScene.start; controlD != NULL; controlD = controlD->next)
+		{
+			controlD->data->state = GuiControlState::NORMAL;
+		}
+		app->guiManager->DestroyGuiControl(gcCloseNewGames);
+		app->guiManager->DestroyGuiControl(nuevaPartida1);
+		app->guiManager->DestroyGuiControl(nuevaPartida2);
+		app->guiManager->DestroyGuiControl(nuevaPartida3);
+		app->guiManager->minId = 1;
+		app->guiManager->maxId = 6;
+		app->guiManager->pointerId = 1;
 
 	default:
 		break;
@@ -623,6 +672,23 @@ void Scene_Menu::ShowSavedGames()
 		partida3 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, "PARTIDA GUARDADA 3", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 300,	180,25 }, this);
 		gcCloseSavedGames = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 16, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 200,	60,25 }, this);
 		_showSavedGames = true;
+	}
+	app->render->DrawTexture(savedGames, 0, 0);
+}
+
+void Scene_Menu::ShowNewGames()
+{
+	ListItem<GuiControl*>* control;
+	for (control = controlsScene.start; control != NULL; control = control->next)
+	{
+		control->data->state = GuiControlState::DISABLED;
+	}
+	if (showNewGames && !_showNewGames) {
+		nuevaPartida1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 20, "NUEVA PARTIDA 1", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 485,	160,25 }, this);
+		nuevaPartida2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 21, "NUEVA PARTIDA 2", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 395,	160,25 }, this);
+		nuevaPartida3 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 22, "NUEVA PARTIDA 3", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 300,	160,25 }, this);
+		gcCloseNewGames = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 23, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 200,	60,25 }, this);
+		_showNewGames = true;
 	}
 	app->render->DrawTexture(savedGames, 0, 0);
 }

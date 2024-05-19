@@ -45,6 +45,7 @@ public:
 	void SettingsInterface();
 	void ShowCredits();
 	void ShowSavedGames();
+	void ShowNewGames();
 	void ShowControls();
 	void DestroySettingsInterface();
 
@@ -74,6 +75,7 @@ public:
 	List<GuiControl*> controlsSettings;
 	GuiControl* gcCloseCredits = nullptr;
 	GuiControl* gcCloseSavedGames = nullptr;
+	GuiControl* gcCloseNewGames = nullptr;
 	GuiControl* gcCloseControls = nullptr;
 	GuiCheckBox* fullscreen = nullptr;
 	GuiCheckBox* vsync = nullptr;
@@ -95,6 +97,10 @@ private:
 	GuiControlButton* partida2 = nullptr;
 	GuiControlButton* partida3 = nullptr;
 
+	GuiControlButton* nuevaPartida1 = nullptr;
+	GuiControlButton* nuevaPartida2 = nullptr;
+	GuiControlButton* nuevaPartida3 = nullptr;
+
 	
 
 	bool vsyncActive = false;
@@ -110,6 +116,9 @@ private:
 
 	bool showSavedGames = false;
 	bool _showSavedGames = false;
+
+	bool showNewGames = false;
+	bool _showNewGames = false;
 
 	bool showControls = false;
 	bool _showControls = false;
