@@ -100,9 +100,9 @@ private:
 	pugi::xml_node configNode;
 
 	//physi body
-	PhysBody* areaSensor;
-	PhysBody* atackCube;
-	PhysBody* atackBMR;
+	PhysBody* areaSensor = nullptr;
+	PhysBody* atackCube = nullptr;
+	PhysBody* atackBMR = nullptr;
 	//PhysBody* atackShockWave = nullptr;
 	std::unordered_map<int, PhysBody*> shockWaves;
 
@@ -126,7 +126,7 @@ private:
 
 	int currentPosX;
 
-	PathFinding* path;
+	PathFinding* path = nullptr;
 	DynArray<iPoint> lastPath;
 
 	Animation* currentAnimation = nullptr;
@@ -134,7 +134,7 @@ private:
 
 
 	Animation SPosition;
-	SDL_Rect* spritePositions;
+	SDL_Rect* spritePositions = nullptr;
 
 	FASE fase;
 
