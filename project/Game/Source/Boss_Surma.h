@@ -154,7 +154,8 @@ private:
 
 	bool realizandoCombo = false;
 	bool jugadorCerca = false;
-
+	bool explosionRealizada = false;
+	bool explosionAlcanzada = false;
 
 	fPoint sprieOffsetL = fPoint(-220, -200);
 	fPoint sprieOffsetR = fPoint(-100, -200);

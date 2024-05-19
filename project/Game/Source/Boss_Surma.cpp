@@ -138,11 +138,10 @@ bool Boss_Surma::Update(float dt)
 
 		explosionActual->pbody = app->physics->CreateCircle(position.x, position.y, tamañoExplosionActual, bodyType::DYNAMIC);
 		explosionActual->pbody->body->GetFixtureList()->SetSensor(true);
-		explosionActual->lifeTime.Start();
 		explosionActual->pbody->ctype = ColliderType::BOSS_SURMA_EXPLOSION;
 		explosionActual->pbody->listener = this;
 
-		if (explosionActual->lifeTime.ReadMSec() > 100) {
+		if (explosionActual->lifeTime.ReadMSec() > 300) {
 			app->physics->DestroyBody(explosionActual->pbody);
 			delete explosionActual;
 			explosionActual = nullptr;
@@ -326,7 +325,12 @@ void Boss_Surma::OnCollision(PhysBody* physA, PhysBody* physB) {
 		switch (physB->ctype)
 		{
 		case ColliderType::PLAYER:
-			physB->listener->TakeDamage(ataqueExplosionDamage);
+
+			if (!explosionAlcanzada) {
+				physB->listener->TakeDamage(ataqueExplosionDamage);
+				((Player*)physB->listener)->SlowDown(0.4);
+				explosionAlcanzada = true;
+			}
 			break;
 		}
 	}
@@ -612,19 +616,22 @@ void Boss_Surma::Fase2(float dt, iPoint playerPos)
 				currentAnimation = &ataqueCargadoEjecutarAnim;
 				if (explosionEspadaTimer.ReadMSec() >= 2000) {
 					//EXPLOSION
-					if (explosionActual == nullptr) {
+					if (explosionActual == nullptr && !explosionRealizada) {
 						tamañoExplosionActual = 1;
 						explosionActual = new ExplosionAtaque{ app->physics->CreateCircle(position.x, position.y, tamañoExplosionActual, bodyType::DYNAMIC) };
 						explosionActual->pbody->body->GetFixtureList()->SetSensor(true);
 						explosionActual->lifeTime.Start();
 						explosionActual->pbody->ctype = ColliderType::BOSS_SURMA_EXPLOSION;
 						explosionActual->pbody->listener = this;
+						explosionRealizada = true;
+						explosionAlcanzada = false;
 					}
 
 					//Cansado
 					currentAnimation = &cansadoAnim;
 					if (cansadoTimer.ReadMSec() > cansadoMS) {
 						realizandoCombo = false;
+						explosionRealizada = false;
 						combo1Anim.Reset();
 						combo2Anim.Reset();
 						combo3Anim.Reset();
