@@ -1,46 +1,39 @@
 <?xml version="1.0"?>
 <game_state>
-		<window />
-		<input />
-		<textures />
-		<pSystem />
-		<audio />
-		<:anonymous />
-		<:anonymous />
-		<scene_pueblo />
-		<entitymanager>
-			<entity_manager>
-				<doors>
-					<door sceneLevel="-10" tpID="4" />
-					<door sceneLevel="-10" tpID="0" />
-					<door sceneLevel="-10" tpID="2" />
-					<door sceneLevel="-10" tpID="5" />
-					<door sceneLevel="-10" tpID="1" />
-					<door sceneLevel="-10" tpID="3" />
-				</doors>
-			</entity_manager>
-		</entitymanager>
-		<missionmanager />
-		<hud />
-		<menu />
-		<iventorymanager>
-			<inventory>
-				<money quantity="0" />
-			</inventory>
-		</iventorymanager>
-		<commercemanager />
-		<notesmanager>
-			<Note />
-		</notesmanager>
-		<bestiariomanager>
-			<Bestiario />
-		</bestiariomanager>
-		<equipo />
-		<Ascensormenu />
-		<:anonymous />
-		<guiManager />
-		<dialogmanager />
-		<fadeToBlack />
-		<debugConsole />
-		<renderer />
+	<window />
+	<input />
+	<textures />
+	<pSystem />
+	<audio />
+	<:anonymous />
+	<:anonymous />
+	<scene_pueblo />
+	<entitymanager>
+		<entity_manager>
+			<doors />
+		</entity_manager>
+	</entitymanager>
+	<missionmanager />
+	<hud />
+	<menu />
+	<iventorymanager>
+		<inventory>
+			<money quantity="0" />
+		</inventory>
+	</iventorymanager>
+	<commercemanager />
+	<notesmanager>
+		<Note />
+	</notesmanager>
+	<bestiariomanager>
+		<Bestiario />
+	</bestiariomanager>
+	<equipo />
+	<Ascensormenu />
+	<:anonymous />
+	<guiManager />
+	<dialogmanager />
+	<fadeToBlack />
+	<debugConsole />
+	<renderer />
 </game_state>
