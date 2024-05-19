@@ -84,7 +84,7 @@ bool NPCAbuelito::PostUpdate() {
 
 	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-	//app->render->DrawTexture(texture, position.x - 50, position.y - 200, SDL_FLIP_NONE, &rect);
+	app->render->DrawTexture(texture, position.x - 50, position.y - 200, 0.5f, SDL_FLIP_NONE, &rect);
 	
 
 	return true;
