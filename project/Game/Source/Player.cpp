@@ -1052,12 +1052,12 @@ void Player::Attack(float dt)
 
 void Player::Dead()
 {
-	/*
+	
 	if (app->audio->playingMusic == true)
 	{
-		app->audio->StopMusic(2.0f);
+		app->audio->StopMusic(0.0f);
 		app->audio->playingMusic = false;
-	}*/
+	}
 	
 	if (app->audio->playingDeathFx == false)
 	{

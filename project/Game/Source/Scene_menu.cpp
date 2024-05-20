@@ -263,6 +263,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		app->guiManager->pointerId = 12;
 		/*app->guiManager->DestroyGuiControl(NuevaPartida);
 		app->guiManager->DestroyGuiControl(Continuar);*/
+		app->audio->LoadAudioMusic("credits", 1.0f);
 		break;
 
 	case 6:
@@ -290,6 +291,8 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		app->guiManager->minId = 1;
 		app->guiManager->maxId = 6;
 		app->guiManager->pointerId = 1;
+		app->audio->StopMusic(1.0);
+		app->audio->LoadAudioMusic("menu", 1.0f);
 		break;
 
 	case 13:
