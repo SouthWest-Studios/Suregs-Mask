@@ -68,6 +68,8 @@ void PuzzleButtonEntity::OnCollision(PhysBody* physA, PhysBody* physB) {
 		case ColliderType::PLAYER:
 			pressed = true;
 			playerOnHover = true;
+			LOG("PULSANDO BOTON ID: %d", buttonID);
+
 			break;
 	}
 }
