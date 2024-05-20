@@ -34,7 +34,8 @@ bool Menu_Equipo::Awake(pugi::xml_node config)
 	bool ret = true;
 
 
-	
+	swordTexturePath = (char*)config.child("props").attribute("espada").as_string();
+	armorTexturePath = (char*)config.child("props").attribute("armadura").as_string();
 	messageTexturePath = (char*)config.child("messageTexture").attribute("texturepath").as_string();
 	mask0TexturePath = (char*)config.child("props").attribute("mask0").as_string();
 	mask1TexturePath = (char*)config.child("props").attribute("mask1").as_string();
@@ -54,7 +55,8 @@ bool Menu_Equipo::Start()
 	mask1Texture = app->tex->Load(mask1TexturePath);
 	mask2Texture = app->tex->Load(mask2TexturePath);
 	mask3Texture = app->tex->Load(mask3TexturePath);
-
+	swordTexture = app->tex->Load(swordTexturePath);
+	armorTexture = app->tex->Load(armorTexturePath);
 
 	return true;
 }
@@ -86,7 +88,7 @@ bool Menu_Equipo::PostUpdate()
 	
 	if (mostrar)
 	{
-		int levelSword = static_cast<int>(app->inventoryManager->swordLevel);
+		int levelSword = static_cast<int>(app->inventoryManager->swordLevel + 1);
 		std::string levelSwordStr = "Nivel: " + std::to_string(levelSword);
 		app->render->DrawTextBound(levelSwordStr.c_str(), 280, 200, 200, { 0,0,0,0 });
 
@@ -94,7 +96,7 @@ bool Menu_Equipo::PostUpdate()
 		std::string AtaqueStr = "Ataque: " + std::to_string(attackDamage);
 		app->render->DrawTextBound(AtaqueStr.c_str(), 280, 250, 200, { 0,0,0,0 });
 
-		int levelArmour = static_cast<int>(app->inventoryManager->armorLevel);
+		int levelArmour = static_cast<int>(app->inventoryManager->armorLevel + 1);
 		std::string levelArmorStr = "Nivel: " + std::to_string(levelArmour);
 		app->render->DrawTextBound(levelArmorStr.c_str(), 670, 200, 200, { 0,0,0,0 });
 
@@ -110,6 +112,9 @@ bool Menu_Equipo::PostUpdate()
 		std::string MaskAtackStr2 = std::to_string(app->entityManager->GetPlayer()->maskStats[app->entityManager->GetPlayer()->primaryMask][Branches::Modifiers][app->entityManager->GetPlayer()->maskLevels[app->entityManager->GetPlayer()->primaryMask][Branches::Modifiers]].attackDamageModifier);
 
 		app->render->DrawTextBound(MaskAtackStr2.c_str(), 720, 430, 100, { 0,0,0,0 });*/
+
+		app->render->DrawTexture(swordTexture, 450, 200, SDL_FLIP_NONE, 0, 0);
+		app->render->DrawTexture(armorTexture, 850, 200, SDL_FLIP_NONE, 0, 0);
 
 		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
 		{

@@ -1491,7 +1491,15 @@ bool TreeManager::PostUpdate()
 
 		}
 		
-
+		if (selectPrimaryMask || selectSecondaryMask)
+		{
+			app->render->DrawTextBound("1", 100, 130, 100, { 0,0,0,0 });
+			app->render->DrawTextBound("2", 100, 250, 370, { 0, 0, 0, 0 });
+			app->render->DrawTextBound("3", 100, 350, 370, { 0, 0, 0, 0 });
+			app->render->DrawTextBound("4", 100, 450, 370, { 0, 0, 0, 0 });
+		}
+			
+		
 
 
 	}

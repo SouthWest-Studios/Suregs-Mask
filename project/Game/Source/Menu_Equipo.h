@@ -59,6 +59,12 @@ private:
 
 	std::string levelSwordStr;
 
+	char* swordTexturePath;
+	SDL_Texture* swordTexture;
+
+	char* armorTexturePath;
+	SDL_Texture* armorTexture;
+
 	char* mask0TexturePath;
 	SDL_Texture* mask0Texture;
 

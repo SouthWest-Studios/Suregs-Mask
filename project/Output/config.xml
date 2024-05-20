@@ -628,6 +628,8 @@ Vida: Alta		Daño: Alto	Tamaño: Medio 	Velocidad: Lenta"
 		<props mask0 = "Assets/Textures/Interfaz/Equipo/textura_mascara0.png"
 			   mask1 = "Assets/Textures/Interfaz/Equipo/textura_mascara1.png"
 			   mask2 = "Assets/Textures/Interfaz/Equipo/textura_mascara2.png"
+			   espada = "Assets/Textures/Interfaz/Equipo/textura_espada.png"
+			   armadura = "Assets/Textures/Interfaz/Equipo/textura_armadura.png"
 		       mask3 = "Assets/Textures/Interfaz/Equipo/textura_mascara3.png"/>
 
 	</equipo>
