@@ -642,6 +642,24 @@ bool Player::Start() {
 		maskLevels[secondaryMask][Branches::Rama2],
 		maskLevels[secondaryMask][Branches::Rama3],
 		maskLevels[secondaryMask][Branches::Rama4]);
+
+	baseStats.maxHealth = 100 + armorPerLevel[app->inventoryManager->armorLevel];
+	baseStats.currentHealth = 100 + armorPerLevel[app->inventoryManager->armorLevel];
+	baseStats.attackDamage = 100 + attackDamagePerLevel[app->inventoryManager->swordLevel];
+
+    if (primaryMask != Mask::NOMASK) {
+		currentStats.maxHealth = baseStats.maxHealth * (1 + maskStats[primaryMask][Branches::Modifiers][maskLevels[primaryMask][Branches::Modifiers]].maxHealthModifier / 100);
+		currentStats.movementSpeed = baseStats.movementSpeed * (1 + maskStats[primaryMask][Branches::Modifiers][maskLevels[primaryMask][Branches::Modifiers]].movementSpeedModifier / 100);
+		currentStats.attackSpeed = baseStats.attackSpeed * (1 + maskStats[primaryMask][Branches::Modifiers][maskLevels[primaryMask][Branches::Modifiers]].attackSpeedModifier / 100);
+		currentStats.attackDamage = baseStats.attackDamage * (1 + maskStats[primaryMask][Branches::Modifiers][maskLevels[primaryMask][Branches::Modifiers]].attackDamageModifier / 100);
+ 	}
+
+    if (secondaryMask == Mask::MASK0) {
+		currentStats.attackDamage *= (1 + passiveStats[secondaryMask][Branches::Modifiers][maskLevels[secondaryMask][Branches::Modifiers]].damageBoost / 100);
+    }
+
+	currentStats.currentHealth = currentStats.maxHealth;
+
 	return true;
 }
 
@@ -1064,21 +1082,21 @@ void Player::EquipPrimaryMask(Mask mask) {
 	primaryMask = mask;
 
 	// Si la máscara no es NOMASK, aplica las modificaciones de estadísticas
-	if (mask != Mask::NOMASK) {
-		currentStats.maxHealth = baseStats.maxHealth * (1 + maskStats[mask][Branches::Modifiers][maskLevels[mask][Branches::Modifiers]].maxHealthModifier / 100);
-		currentStats.movementSpeed = baseStats.movementSpeed * (1 + maskStats[mask][Branches::Modifiers][maskLevels[mask][Branches::Modifiers]].movementSpeedModifier / 100);
-		currentStats.attackSpeed = baseStats.attackSpeed * (1 + maskStats[mask][Branches::Modifiers][maskLevels[mask][Branches::Modifiers]].attackSpeedModifier / 100);
-		currentStats.attackDamage = baseStats.attackDamage * (1 + maskStats[mask][Branches::Modifiers][maskLevels[mask][Branches::Modifiers]].attackDamageModifier / 100);
-	}
+	// if (mask != Mask::NOMASK) {
+	// 	currentStats.maxHealth = baseStats.maxHealth * (1 + maskStats[mask][Branches::Modifiers][maskLevels[mask][Branches::Modifiers]].maxHealthModifier / 100);
+	// 	currentStats.movementSpeed = baseStats.movementSpeed * (1 + maskStats[mask][Branches::Modifiers][maskLevels[mask][Branches::Modifiers]].movementSpeedModifier / 100);
+	// 	currentStats.attackSpeed = baseStats.attackSpeed * (1 + maskStats[mask][Branches::Modifiers][maskLevels[mask][Branches::Modifiers]].attackSpeedModifier / 100);
+	// 	currentStats.attackDamage = baseStats.attackDamage * (1 + maskStats[mask][Branches::Modifiers][maskLevels[mask][Branches::Modifiers]].attackDamageModifier / 100);
+	// }
 }
 
 void Player::EquipSecondaryMask(Mask mask) {
 	secondaryMask = mask;
 
 	// Si la máscara no es NOMASK, aplica las modificaciones de estadísticas
-	if (mask != Mask::NOMASK) {
-		currentStats.attackDamage = baseStats.attackDamage * (1 + passiveStats[mask][Branches::Modifiers][maskLevels[mask][Branches::Modifiers]].damageBoost / 100);
-	}
+	// if (mask != Mask::NOMASK) {
+	// 	currentStats.attackDamage = baseStats.attackDamage * (1 + passiveStats[mask][Branches::Modifiers][maskLevels[mask][Branches::Modifiers]].damageBoost / 100);
+	// }
 }
 
 Mask* Player::GetPrimaryMask()
@@ -1104,10 +1122,17 @@ void Player::ChangeMask() {
 
 		app->audio->PlayFx(switch_masks_fx);
 
-		UnequipMasks();
+		//UnequipMasks();
 
 		EquipPrimaryMask(primaryMask);
 		EquipSecondaryMask(secondaryMask);
+
+        float oldMaxHealth = currentStats.maxHealth;
+
+		currentStats.maxHealth = baseStats.maxHealth * (1 + maskStats[primaryMask][Branches::Modifiers][maskLevels[primaryMask][Branches::Modifiers]].maxHealthModifier / 100);
+
+		currentStats.currentHealth = (currentStats.currentHealth / oldMaxHealth) * currentStats.maxHealth;
+
 
 		cdTimerAttackMS = 100000 / currentStats.attackSpeed;
 
@@ -2340,6 +2365,17 @@ void Player::UpdateStats() {
 	baseStats.maxHealth = 100 + armorPerLevel[app->inventoryManager->armorLevel];
 	baseStats.currentHealth = 100 + armorPerLevel[app->inventoryManager->armorLevel];
 	baseStats.attackDamage = 100 + attackDamagePerLevel[app->inventoryManager->swordLevel];
+
+    if (primaryMask != Mask::NOMASK) {
+		currentStats.maxHealth = baseStats.maxHealth * (1 + maskStats[primaryMask][Branches::Modifiers][maskLevels[primaryMask][Branches::Modifiers]].maxHealthModifier / 100);
+		currentStats.movementSpeed = baseStats.movementSpeed * (1 + maskStats[primaryMask][Branches::Modifiers][maskLevels[primaryMask][Branches::Modifiers]].movementSpeedModifier / 100);
+		currentStats.attackSpeed = baseStats.attackSpeed * (1 + maskStats[primaryMask][Branches::Modifiers][maskLevels[primaryMask][Branches::Modifiers]].attackSpeedModifier / 100);
+		currentStats.attackDamage = baseStats.attackDamage * (1 + maskStats[primaryMask][Branches::Modifiers][maskLevels[primaryMask][Branches::Modifiers]].attackDamageModifier / 100);
+ 	}
+
+    if (secondaryMask == Mask::MASK0) {
+		currentStats.attackDamage *= (1 + passiveStats[secondaryMask][Branches::Modifiers][maskLevels[secondaryMask][Branches::Modifiers]].damageBoost / 100);
+    }
 }
 
 
