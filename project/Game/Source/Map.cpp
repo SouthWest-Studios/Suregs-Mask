@@ -224,6 +224,86 @@ bool Map::PostUpdate()
 	return ret;
 }
 
+bool Map::PrintMapFront()
+{
+	OPTICK_CATEGORY("Map", Optick::Category::GameLogic)
+		bool ret = true;
+
+	if (mapLoaded == false)
+		return false;
+
+	ListItem<MapLayer*>* mapLayer;
+	mapLayer = mapData.layers.start;
+
+	// L06: DONE 5: Prepare the loop to draw all tiles in a layer + DrawTexture()
+
+	// iterates the layers in the map
+	while (mapLayer != NULL) {
+		//Check if the property Draw exist get the value, if it's true draw the lawyer
+		if (mapLayer->data->properties.GetProperty("DrawFront") != NULL && mapLayer->data->properties.GetProperty("DrawFront")->value == "true") {
+
+			//iPoint playerPos = app->entityManager->GetPlayer()->position;
+			iPoint playerPos = iPoint(-app->render->camera.x + (windowW / 2), -app->render->camera.y + (windowH / 2));
+			int xToTiledLeft = MAX((playerPos.x / 32) - TILES_TO_LOAD, 0);
+			int xToTiledRight = MIN((playerPos.x / 32) + TILES_TO_LOAD, mapLayer->data->width);
+
+			int yToTiledTop = MAX((playerPos.y / 32) - TILES_TO_LOAD, 0);
+			int yToTiledDown = MIN((playerPos.y / 32) + TILES_TO_LOAD, mapLayer->data->height);
+
+
+
+
+			//iterate all tiles in a layer
+			for (int x = xToTiledLeft; x < xToTiledRight; x++)
+			{
+				for (int y = yToTiledTop; y < yToTiledDown; y++)
+				{
+					//Get the gid from tile
+					unsigned int gid = mapLayer->data->Get(x, y);
+					TileSet* tileset = GetTilesetFromTileId(gid);
+					SDL_Rect r = tileset->GetRect(gid);
+					iPoint pos = MapToWorld(x, y);
+					int bits = 0;
+					SDL_RendererFlip flip = SDL_FLIP_NONE;
+					int angle = 0;
+
+					if (gid >= 100000) {
+						uint tiledID = static_cast<uint>(gid & ~0xE0000000);
+						bits = gid >> 29;
+						tileset = GetTilesetFromTileId(tiledID);
+						r = tileset->GetRect(tiledID);
+
+					}
+					//1 = hoz_flip -> True || 1 = vert_flip -> True  || 0 = anti-diag flip -> False
+					switch (bits) {
+					case 0b101: flip = SDL_FLIP_NONE;           angle = 90;         break;
+					case 0b110: flip = SDL_FLIP_NONE;           angle += 180;       break;
+					case 0b011: flip = SDL_FLIP_NONE;           angle += 270;       break;
+					case 0b100: flip = SDL_FLIP_HORIZONTAL;     angle = 0;          break;
+					case 0b111: flip = SDL_FLIP_HORIZONTAL;     angle += 90;        break;
+					case 0b010: flip = SDL_FLIP_HORIZONTAL;     angle += 180;       break;
+					case 0b001: flip = SDL_FLIP_HORIZONTAL;     angle += 270;       break;
+					}
+
+
+
+					//SDL_SetTextureColorMod(tileset->texture, 255 * mapLayer->data->opacity, 255 * mapLayer->data->opacity, 255 * mapLayerItem->data->opacity);
+
+
+					app->render->DrawTexture(tileset->texture,
+						pos.x,
+						pos.y, flip,
+						&r, 1, angle);
+
+				}
+			}
+		}
+		mapLayer = mapLayer->next;
+	}
+
+	return ret;
+}
+
 // L08: DONE 2: Implement function to the Tileset based on a tile id
 TileSet* Map::GetTilesetFromTileId(int gid) const
 {

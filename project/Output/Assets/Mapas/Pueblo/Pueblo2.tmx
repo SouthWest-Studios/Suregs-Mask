@@ -74437,7 +74437,7 @@
  </layer>
  <layer id="16" name="Delante" width="200" height="186">
   <properties>
-   <property name="Draw" type="bool" value="true"/>
+   <property name="DrawFront" type="bool" value="true"/>
   </properties>
   <data>
    <tile/>

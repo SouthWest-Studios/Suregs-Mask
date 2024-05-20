@@ -599,6 +599,8 @@ bool EntityManager::PostUpdate()
 	}
 	//app->map->UpdateFrontEntities();
 
+	app->map->PrintMapFront();
+
 	return ret;
 }
 
