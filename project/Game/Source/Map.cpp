@@ -329,6 +329,9 @@ bool Map::CleanUp()
 
 	pathfinding->CleanUp();
 
+	puzzleButtonEntities.clear(); //En teoria las entidades se borrar al desactivar el entity manager.
+	recompensaPuzzle = false;
+
 	return true;
 }
 
@@ -1476,7 +1479,7 @@ void Map::BubbleSort(std::vector<PuzzleButtonEntity*> entities)
 	do {
 		swapped = false;
 		for (size_t i = 1; i < entities.size(); ++i) {
-			if (entities[i - 1]->id > entities[i]->id) {
+			if (entities[i - 1]->buttonID > entities[i]->buttonID) {
 				std::swap(entities[i - 1], entities[i]);
 				swapped = true;
 			}
