@@ -15,6 +15,7 @@
 #include "Physics.h"
 #include "Item_Hueso.h"
 #include "Item_Garra.h"
+#include "BestiarioManager.h"
 #include <Optick/include/optick.h>
 #include "Utils.cpp"
 
@@ -298,7 +299,7 @@ void Enemy_Khurt::Die() {
 		garra->position = iPoint(position.x, position.y);
 		garra->Start();
 	}
-
+	app->bestiarioManager->CreateItem("khurt");
 	//Mask XP
 
 	//Mask 0

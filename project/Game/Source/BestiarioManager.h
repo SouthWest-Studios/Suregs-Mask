@@ -98,7 +98,38 @@ private:
 	char* CloseUpPath;
 	SDL_Texture* CloseUp;
 	char* textoOsiris;
+	char* pathOsiris;
+	SDL_Texture* textureOsiris;
 	char* textoMuur;
+	char* pathMuur;
+	SDL_Texture* textureMuur;
+	char* textoKhurt;
+	char* pathKhurt;
+	SDL_Texture* textureKhurt;
+	char* textoBoorok;
+	char* pathBoorok;
+	SDL_Texture* textureBoorok;
+	char* textoOls;
+	char* pathOls;
+	SDL_Texture* textureOls;
+
+
+	char* iconPathOsiris;
+	SDL_Texture* iconTextureOsiris;
+	char* iconPathMuur;
+	SDL_Texture* iconTextureMuur;
+	char* iconPathKhurt;
+	SDL_Texture* iconTextureKhurt;
+	char* iconPathBoorok;
+	SDL_Texture* iconTextureBoorok;
+	char* iconPathOls;
+	SDL_Texture* iconTextureOls;
+
+	int osiris = 0;
+	int muur = 0;
+	int khurt = 0;
+	int boorok = 0;
+	int ols = 0;
 };
 
 #endif // __INVENTORYMANAGER_H__

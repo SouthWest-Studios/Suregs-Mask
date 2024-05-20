@@ -14,6 +14,7 @@
 #include "Map.h"
 #include "Physics.h"
 #include "Item_Hueso.h"
+#include "BestiarioManager.h"
 #include <Optick/include/optick.h>
 #include "Utils.cpp"
 
@@ -259,6 +260,9 @@ void Enemy_Osiris::Die() {
 			hueso->position = iPoint(position.x, position.y);
 			hueso->Start();
 		}
+		
+			app->bestiarioManager->CreateItem("osiris");
+			
 		
 		//Mask 0
 		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)

@@ -15,6 +15,7 @@
 #include "Physics.h"
 #include "Item_Hueso.h"
 #include "Item_Cola.h"
+#include "BestiarioManager.h"
 #include <Optick/include/optick.h>
 #include "Utils.cpp"
 
@@ -268,6 +269,7 @@ void Enemy_Muur::Die() {
 		cola->Start();
 	}
 	
+	app->bestiarioManager->CreateItem("muur");
 	//Mask XP
 
 	//Mask 0

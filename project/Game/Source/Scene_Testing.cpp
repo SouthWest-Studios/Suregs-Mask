@@ -224,10 +224,10 @@ bool Scene_testing::Start()
 
 	app->bestiarioManager->CreateItem("osiris");
 	app->bestiarioManager->CreateItem("muur");
-	app->bestiarioManager->CreateItem("osiris");
-	app->bestiarioManager->CreateItem("muur");
-	app->bestiarioManager->CreateItem("osiris");
-	app->bestiarioManager->CreateItem("muur");
+	app->bestiarioManager->CreateItem("khurt");
+	app->bestiarioManager->CreateItem("ols");
+	app->bestiarioManager->CreateItem("boorok");
+
 
 	Item_Pocion_Dano* pocion_dano = (Item_Pocion_Dano*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_DANO);
 	pocion_dano->config = configNode.child("entities_data").child("item_pocion_dano");

@@ -51,9 +51,22 @@ bool BestiarioManager::Awake(pugi::xml_node config)
 	knobTexturePath = ((char*)config.child("bestiario").attribute("knob_texture").as_string());
 	PointerPath = ((char*)config.child("bestiario").attribute("pointer").as_string());
 	textoOsiris = ((char*)config.child("bestiario").attribute("text_osiris").as_string());
+	pathOsiris = ((char*)config.child("bestiario").attribute("texture_osiris").as_string());
 	textoMuur = ((char*)config.child("bestiario").attribute("text_muur").as_string());
+	pathMuur = ((char*)config.child("bestiario").attribute("texture_muur").as_string());
+	textoKhurt = ((char*)config.child("bestiario").attribute("text_khurt").as_string());
+	pathKhurt = ((char*)config.child("bestiario").attribute("texture_khurt").as_string());
+	textoBoorok = ((char*)config.child("bestiario").attribute("text_boorok").as_string());
+	pathBoorok = ((char*)config.child("bestiario").attribute("texture_boorok").as_string());
+	textoOls = ((char*)config.child("bestiario").attribute("text_ols").as_string());
+	pathOls = ((char*)config.child("bestiario").attribute("texture_ols").as_string());
 	CloseUpPath = ((char*)config.child("bestiario").attribute("closeUp").as_string());
-
+	
+	iconPathOsiris = ((char*)config.child("bestiario").attribute("texture_icono_osiris").as_string());
+	iconPathMuur = ((char*)config.child("bestiario").attribute("texture_icono_muur").as_string());
+	iconPathKhurt = ((char*)config.child("bestiario").attribute("texture_icono_khurt").as_string());
+	iconPathBoorok = ((char*)config.child("bestiario").attribute("texture_icono_boorok").as_string());
+	iconPathOls = ((char*)config.child("bestiario").attribute("texture_icono_ols").as_string());
 
 	return ret;
 
@@ -68,6 +81,15 @@ bool BestiarioManager::Start() {
 	sliderTexture = app->tex->Load(sliderTexturePath);
 	knobTexture = app->tex->Load(knobTexturePath);
 	PointerItemText = app->tex->Load(PointerPath);
+	textureOsiris = app->tex->Load(pathOsiris);
+	textureMuur = app->tex->Load(pathMuur);
+	textureKhurt = app->tex->Load(pathKhurt);
+	textureBoorok = app->tex->Load(pathBoorok);
+	textureOls = app->tex->Load(pathOls);iconTextureOsiris = app->tex->Load(iconPathOsiris);
+	iconTextureMuur = app->tex->Load(iconPathMuur);
+	iconTextureKhurt = app->tex->Load(iconPathKhurt);
+	iconTextureBoorok = app->tex->Load(iconPathBoorok);
+	iconTextureOls = app->tex->Load(iconPathOls);
 	PointerId = -2;
 	PointerItemText = nullptr;
 
@@ -115,36 +137,79 @@ Bestiario* BestiarioManager::CreateItem(char* name)
 {
 	Bestiario* entity = nullptr;
 
-
+	
 	highestttId = (bestiario.Count() > 0) ? bestiario.end->data->id : -1;
 	entity = new Bestiario();
 	entity->id = highestttId + 1;
 	entity->closeUpBestiarios = CloseUp;
+	entity->icon = app->tex->Load(iconoBestiarioTexturePath);
+
+	entity->type = BestiarioType::BEST;
 	if (strcmp(name, "osiris") == 0)
 	{
 		entity->name = name;
 		entity->desc = textoOsiris;
+		entity->texturaEnemigo = textureOsiris; 
+		entity->icon = iconTextureOsiris;
+		if(osiris == 0)
+		AddBestiario(entity);
+		osiris++;
+		
 	}
 	else if (strcmp(name, "muur") == 0)
 	{
 		entity->name = name;
-		entity->desc = textoMuur;
+		entity->desc = textoMuur; 
+		entity->texturaEnemigo = textureMuur;
+		entity->icon = iconTextureMuur;
+		if (muur == 0)
+			AddBestiario(entity);
+		muur++;
+	}
+	else if (strcmp(name, "khurt") == 0)
+	{
+		entity->name = name;
+		entity->desc = textoKhurt;
+		entity->texturaEnemigo = textureKhurt;
+		entity->icon = iconTextureKhurt;
+		if (khurt == 0)
+			AddBestiario(entity);
+		khurt++;
+	}
+	else if (strcmp(name, "boorok") == 0)
+	{
+		entity->name = name;
+		entity->desc = textoBoorok;
+		entity->texturaEnemigo = textureBoorok;
+		entity->icon = iconTextureBoorok;
+		if (boorok == 0)
+			AddBestiario(entity);
+		boorok++;
+	}
+	else if (strcmp(name, "ols") == 0)
+	{
+		entity->name = name;
+		entity->desc = textoOls;
+		entity->texturaEnemigo = textureOls;
+		entity->icon = iconTextureOls;
+		if (ols == 0)
+			AddBestiario(entity);
+		ols++;
 	}
 	else
 	{
 		// Default properties if name doesn't match
 	}
 
-	/*entity->closeUpBestiario = app->tex->Load("Assets/Textures/Entidades/Items/textura_BestiarioCloseUp.png"); */
-	entity->icon = app->tex->Load(iconoBestiarioTexturePath);
+	///*entity->closeUpBestiario = app->tex->Load("Assets/Textures/Entidades/Items/textura_BestiarioCloseUp.png"); */
+	
 
-	entity->type = BestiarioType::BEST;
+	
 
+	
+	
 
-
-
-	AddBestiario(entity);
-
+	
 	return entity;
 }
 
@@ -511,11 +576,13 @@ bool BestiarioManager::PostUpdate()
 				if (PointerId == itum->data->id)
 				{
 					app->render->DrawTexture(itum->data->closeUpBestiarios, 400, 100, SDL_FLIP_NONE, 0, 0);
-					app->render->DrawText(itum->data->desc.c_str(), 450, 200, 270, 400, 0, 0, 0, 0, false);
+					app->render->DrawText(itum->data->name.GetString(), 580, 120, 80, 80, 0, 0, 0, 0, true);
+					app->render->DrawTexture(itum->data->texturaEnemigo, 580, 190, 1, SDL_FLIP_NONE, 0, 0);
+					app->render->DrawTextBound(itum->data->desc.c_str(), 500, 300, 270, { 0,0,0 });
+					
 				}
 			}
 		}
-
 
 	}
 

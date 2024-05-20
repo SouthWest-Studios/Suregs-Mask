@@ -101,8 +101,9 @@ public:
 	BestiarioType type;
 	std::string desc;
 	std::string tipo;
+	SDL_Texture* texturaEnemigo;
 	bool zoom = false;
-
+	bool created = false;
 	
 };
 

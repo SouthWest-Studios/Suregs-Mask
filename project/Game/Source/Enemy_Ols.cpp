@@ -14,6 +14,7 @@
 #include "Map.h"
 #include "Item_Garra.h"
 #include "Item_Saliva.h"
+#include "BestiarioManager.h"
 #include "Physics.h"
 #include <Optick/include/optick.h>
 
@@ -262,6 +263,7 @@ void Enemy_Ols::Die() {
 		saliva->position = iPoint(position.x, position.y);
 		saliva->Start();
 	}
+	app->bestiarioManager->CreateItem("ols");
 
 	app->entityManager->DestroyEntity(this);
 	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);

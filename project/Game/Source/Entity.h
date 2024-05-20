@@ -323,7 +323,7 @@ public:
 	bool isActive = true;
 	bool isOpened = false;
 	int id;
-
+	bool primeraMuerte = false;
 };
 
 #endif // __ENTITY_H__

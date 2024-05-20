@@ -16,6 +16,7 @@
 #include "Item_Hueso.h"
 #include "Item_Viscera.h"
 #include "Item_Diente.h"
+#include "BestiarioManager.h"
 #include <Optick/include/optick.h>
 #include "Utils.cpp"
 
@@ -270,6 +271,7 @@ void Enemy_Boorok::Die() {
 			diente->position = iPoint(position.x, position.y);
 			diente->Start();
 		}
+		app->bestiarioManager->CreateItem("boorok");
 
 		//Mask 0
 		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)

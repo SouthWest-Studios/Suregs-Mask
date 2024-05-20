@@ -597,9 +597,30 @@
 			  slider_texture = "Assets/Textures/Interfaz/Bestiario/textura_fondo_slider.png"
 			  knob_texture="Assets/Textures/Interfaz/Bestiario/textura_knob_slider.png"
 			  pointer="Assets/Textures/Interfaz/Bestiario/bestiarioselect.png" 
-			  text_osiris ="osiris osiris osiris osiris osiris osiris osiris osiris osiris osiris osiris osiris osiris osiris osiris osiris"
-			  text_muur ="muur muur muur muur muur muur muur muur muur muur muur muur muur muur muur muur"
+			  text_osiris ="Los esqueletos de los guerreros que han muerto luchando en las mazmorras, son revividos gracias a una magia y utilizados como enemigos para atacar.
+Vida: Media		Daño: Medio 	Tamaño: Medio 	Velocidad: Media"
+			  texture_osiris ="Assets/Textures/Interfaz/Bestiario/textura_osiris.png"
+			  text_muur ="Unos bichos carnívoros que habitan en las mazmorras oscuras en pequeños grupos. Son ciegos pero se guían por el olor y atacan a su presa en grupo para morderla y comerla.
+Vida: Muy baja 	Daño: Débil 		Tamaño: Pequeño 	Velocidad: Rápida"
+			  texture_muur ="Assets/Textures/Interfaz/Bestiario/textura_muura.png"
+			  text_khurt ="Viven en sus pequeños agujeros hechos en el suelo de las mazmorras. Se desplazan por debajo del suelo dejando un rastro por donde pasan y salen con gran fuerza hacia la superficie.
+Vida: Alta		Daño: Medio 	Tamaño: Medio 	Velocidad: Rápida
+"
+			  texture_khurt ="Assets/Textures/Interfaz/Bestiario/textura_khurt.png"
+			  text_boorok ="Está dormido, y golpearlo o pasar cerca de él lo despertará. Usa una gran arma con la que golpea el suelo. 
+Vida: Alta		Daño: Muy alto	Tamaño: Grande	Velocidad: Muy lenta"
+				   
+			  texture_boorok ="Assets/Textures/Interfaz/Bestiario/textura_boorok.png"
+			  text_ols ="Su saliva es tóxica y la usa para defenderse a distancia, muy débiles en las distancias cortas.
+Vida: Alta		Daño: Alto	Tamaño: Medio 	Velocidad: Lenta"
+			  texture_ols ="Assets/Textures/Interfaz/Bestiario/textura_ols.png"
+			  texture_icono_osiris ="Assets/Textures/Interfaz/Bestiario/textura_icono_osiris.png"
+			  texture_icono_ols ="Assets/Textures/Interfaz/Bestiario/textura_icono_ols.png"
+			  texture_icono_khurt ="Assets/Textures/Interfaz/Bestiario/textura_icono_khurt.png"
+			  texture_icono_muur ="Assets/Textures/Interfaz/Bestiario/textura_icono_muur.png"
+			  texture_icono_boorok ="Assets/Textures/Interfaz/Bestiario/textura_icono_boorok.png"
 			  closeUp ="Assets/Textures/Interfaz/Bestiario/textura_NoteCloseUp.png"/>
+			  
 			  
 		
 	</bestiariomanager>
