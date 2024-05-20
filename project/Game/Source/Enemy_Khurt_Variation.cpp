@@ -126,6 +126,17 @@ bool Enemy_Khurt_Variation::Update(float dt) {
 	if (stunned)
 	{
 		Stunned(dt);
+
+	}
+
+	for (auto it = magicTrails.begin(); it != magicTrails.end();) {
+		if (it->durationTimer.ReadSec() >= 2.0) {
+			app->physics->DestroyBody(it->sensor);
+			it = magicTrails.erase(it);
+		}
+		else {
+			++it;
+		}
 	}
 
 	// VENENO <----------
@@ -141,17 +152,6 @@ bool Enemy_Khurt_Variation::Update(float dt) {
 bool Enemy_Khurt_Variation::PostUpdate() {
 	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-
-	// Eliminar las Aros de magia que ya no estén activas
-	for (auto it = magicTrails.begin(); it != magicTrails.end();) {
-		if (!(*it)->Update(0)) {
-			delete* it;
-			it = magicTrails.erase(it);
-		}
-		else {
-			++it;
-		}
-	}
 
 	if (timerRecibirDanioColor.ReadMSec() <= 100) {
 		float alpha = (100 - timerRecibirDanioColor.ReadMSec()) / 100;
@@ -351,7 +351,7 @@ void Enemy_Khurt_Variation::Charge(float dt, iPoint playerPos) {
 		/*printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");*/
 	}
 	chargeimpulse = true;
-	if (charging && chargeTimer.ReadSec() >= 0.7) {
+	if (charging && chargeTimer.ReadSec() >= 0.7 || app->map->pathfinding->GetDistance(playerPos, position) > 500) {
 		charging = false;
 		/*printf("Charge ended, transitioning to STUNNED\n");*/
 		Stunned(dt);
@@ -364,7 +364,7 @@ void Enemy_Khurt_Variation::Stunned(float dt) {
 		stunTimer.Start();
 	}
 	stunnedtimer = true;
-	if (stunTimer.ReadSec() <= 1) {
+	if (stunTimer.ReadSec() <= 1.5) {
 		stunned = true;
 		/*printf("Stunned\n");*/
 		currentAnimation = &stunAnim;
@@ -400,7 +400,7 @@ void Enemy_Khurt_Variation::HandleDigging(float dt, iPoint playerPos) {
 			pbodyFoot->body->SetLinearVelocity(b2Vec2(direction.x * speed * 2, direction.y * speed * 2));
 
 			currentAnimation = &underAnim_process;
-			/*CreateAroMagica();*/
+			CreateAroMagica();
 		}
 		else {
 			/*printf("Digging Phase 3\n");*/
@@ -417,27 +417,51 @@ void Enemy_Khurt_Variation::HandleDigging(float dt, iPoint playerPos) {
 				nextState = EntityState_Enemy::IDLE;
 				/*printf("IDLE despues de DIGGING fase 3\n");*/
 			}
-			pbodyFoot->body->SetLinearVelocity(b2Vec2_zero); // Detener el movimiento
+			//pbodyFoot->body->SetLinearVelocity(b2Vec2_zero); // Detener el movimiento
 
 		}
 	}
 }
 
-
 void Enemy_Khurt_Variation::CreateAroMagica() {
-	iPoint AroPosition = position; // La posición actual del khurt
-
-	AroMagica* newAro = new AroMagica(AroPosition, 10.0f, 5.0f, 1.0f); // el daño, duración y tickrate de la Aromagica
-	magicTrails.push_back(newAro);
-	app->entityManager->AddEntity(newAro);
-
-	// Si ya hay X AroMagica, elimina el primero
-	if (magicTrails.size() >= 25) {
-		delete magicTrails.front();
-		magicTrails.erase(magicTrails.begin());
+	if (stunned) {
+		ClearMagicTrails();
+		return;
 	}
 
+	iPoint AroPosition = position;
+
+	for (const auto& trail : magicTrails) {
+		if (trail.sensor != nullptr && trail.sensor->Contains(AroPosition.x, AroPosition.y)) {
+			return;
+		}
+	}
+
+	PhysBody* newMagicTrail = CreateMagicTrailSensor(AroPosition.x, AroPosition.y, 30, 30);
+	MagicTrail trail = { newMagicTrail };
+	trail.durationTimer.Start();
+	magicTrails.push_back(trail);
+
+	if (magicTrails.size() >= 20) {
+		app->physics->DestroyBody(magicTrails.front().sensor);
+		magicTrails.erase(magicTrails.begin());
+	}
 }
+
+PhysBody* Enemy_Khurt_Variation::CreateMagicTrailSensor(int x, int y, int width, int height) {
+	PhysBody* newMagicTrail = app->physics->CreateRectangleSensor(x, y, width, height, STATIC);
+	newMagicTrail->ctype = ColliderType::AROMAGICA;
+	newMagicTrail->listener = this;
+	return newMagicTrail;
+}
+
+void Enemy_Khurt_Variation::ClearMagicTrails() {
+	for (const auto& trail : magicTrails) {
+		app->physics->DestroyBody(trail.sensor);
+	}
+	magicTrails.clear();
+}
+
 
 void Enemy_Khurt_Variation::ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate) {
 	this->poisonDamage = poisonDamage;
