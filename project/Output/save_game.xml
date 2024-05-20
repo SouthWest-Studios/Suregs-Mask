@@ -18,7 +18,7 @@
 	<menu />
 	<iventorymanager>
 		<inventory>
-			<money quantity="0" />
+			<money quantity="100" />
 		</inventory>
 	</iventorymanager>
 	<commercemanager />
