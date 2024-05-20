@@ -33,12 +33,20 @@
 			</sentence>
 		</sentences>
 	</dialog>
-	<!--Misión (913)-->
+
 	<dialog id="913" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phoska">
 		<sentences>
-			<sentence text="¡Buenos días! Hoy tengo cosas nuevas que pueden ser de tu interés."/>
-			<sentence text="Con los materiales necesarios podré forjar mejoras para tu equipo. ¡No dudes en venir cuando quieras mejorar tus herramientas de combate!"/>
-			<commerce id="3"/>
+			<sentence type="choose" text="¡Buenos días! Bienvenido a la herrería de Phoska.">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Con los materiales necesarios podré forjar mejoras para tu equipo. ¡No dudes en venir cuando quieras mejorar tus herramientas de combate!"/>
+					<commerce id="3"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡No dudes en venir más por aquí!"/>
+				</option2>
+			</sentence>
 		</sentences>
 	</dialog>
 
@@ -73,12 +81,21 @@
 			</sentence>
 		</sentences>
 	</dialog>
+	
 	<!--Mision (916)-->
 	<dialog id="916" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phoska">
 		<sentences>
-			<sentence text="¡Buenos días! Bienvenido a la herrería de Phoska."/>
-			<sentence text="No hay arma que se me resista, ¡soy capaz de mejorar y fabricar todo lo que me propongan!"/>
-			<commerce id="3"/>
+			<sentence type="choose" text="¡Buenos días! Dame cualquier espada destrozada y la tendré afilada para mañana.">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Con los materiales necesarios podré forjar mejoras para tu equipo. ¡No dudes en venir cuando quieras mejorar tus herramientas de combate!"/>
+					<commerce id="3"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡No dudes en venir más por aquí!"/>
+				</option2>
+			</sentence>
 		</sentences>
 	</dialog>
 
@@ -113,12 +130,22 @@
 			</sentence>
 		</sentences>
 	</dialog>
+	
 	<!--Mision (919)-->
+	
 	<dialog id="919" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phoska">
 		<sentences>
-			<sentence text="¡Hola Jakhov! Bienvenido a la herrería de Phoska."/>
-			<sentence text="Vaya situación más complicada... Echa un vistazo a mi tienda para estar lo mejor preparado ante calquier inconveniente."/>
-			<commerce id="3"/>
+			<sentence type="choose" text="¡Buenos días! Parece que te estás armando de maravilla.">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Con los materiales necesarios podré forjar mejoras para tu equipo. ¡No dudes en venir cuando quieras mejorar tus herramientas de combate!"/>
+					<commerce id="3"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡No dudes en venir más por aquí!"/>
+				</option2>
+			</sentence>
 		</sentences>
 	</dialog>
 
