@@ -22,11 +22,21 @@ bool ParticleSystem::Awake(pugi::xml_node& config)
 {
 	bool ret = true;
 
-	pugi::xml_document	psystem_config;
-	pugi::xml_node* node = &app->LoadEmitters(psystem_config);
-	nameParticleAtlas = node->child("particleAtlas").attribute("name").as_string();
+	//pugi::xml_document	psystem_config;
+	//pugi::xml_node* node = &app->LoadEmitters(psystem_config);
+	//nameParticleAtlas = node->child("particleAtlas").attribute("name").as_string();
 
-	for (pugi::xml_node emitters = node->child("particleAtlas").child("emitter"); emitters && ret; emitters = emitters.next_sibling("emitter"))
+	pugi::xml_document	psystem_config;
+	pugi::xml_node particleAtlas;
+	pugi::xml_parse_result parseResult = psystem_config.load_file("psystem_config.xml");
+	particleAtlas = psystem_config.child("particleAtlas");
+
+
+	/*pugi::xml_node* node = &app->LoadEmitters(psystem_config);*/
+	nameParticleAtlas = particleAtlas.attribute("name").as_string();
+
+	for (pugi::xml_node emitters = particleAtlas.child("emitter"); emitters && ret; emitters = emitters.next_sibling("emitter"))
+	/*for (pugi::xml_node emitters = node->child("particleAtlas").child("emitter"); emitters && ret; emitters = emitters.next_sibling("emitter"))*/
 	{
 		std::string emitterType = emitters.attribute("type").as_string();
 

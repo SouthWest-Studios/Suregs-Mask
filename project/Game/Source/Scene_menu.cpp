@@ -120,8 +120,9 @@ bool Scene_Menu::Update(float dt)
 {
 	OPTICK_EVENT();
 
-	//fPoint pos(500.0f, 500.0f);
-	//app->psystem->AddEmiter(pos, EMITTER_TYPE_SPARK);
+	/*fPoint pos(500.0f, 500.0f);
+	app->psystem->AddEmiter(pos, EMITTER_TYPE_SPARK);*/
+
 	if (showSettings == false)
 	{
 		app->render->DrawTexture(menuMain, 0, 0);
