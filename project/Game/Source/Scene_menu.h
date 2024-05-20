@@ -106,7 +106,7 @@ private:
 	bool vsyncActive = false;
 
 	uint windowW, windowH;
-
+	
 	int menu_fx;
 	
 	bool fullScreenActive = false;
