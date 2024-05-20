@@ -338,88 +338,91 @@ void BestiarioManager::UseBestiarioSelected(int id)
 void BestiarioManager::OnMovePointer()
 {
 	bool pointer = false;
-	if (PointerId != -2)
+	if (zoomIn == false)
 	{
-		if (pointer == false)
+		if (PointerId != -2)
 		{
-			PointerItemText = app->tex->Load(PointerPath);
-			pointer = true;
-		}
-
-		if (app->input->GetButton(RIGHT) == KEY_DOWN) {
-			if (horitzontalPointerId + 1 > 3)
+			if (pointer == false)
 			{
-				horitzontalPointerId = 0;
-				PointerPosition.x = 660;
-				PointerId -= 3;
+				PointerItemText = app->tex->Load(PointerPath);
+				pointer = true;
 			}
-			else
-			{
-				if (PointerId != -1)
+
+			if (app->input->GetButton(RIGHT) == KEY_DOWN) {
+				if (horitzontalPointerId + 1 > 3)
 				{
-					horitzontalPointerId += 1;
-					PointerPosition.x += 83;
+					horitzontalPointerId = 0;
+					PointerPosition.x = 660;
+					PointerId -= 3;
 				}
-				PointerId += 1;
-			}
-
-		}
-		if (app->input->GetButton(LEFT) == KEY_DOWN) {
-			if (horitzontalPointerId - 1 < 0)
-			{
-				if (app->notesManager->vacio == false)
+				else
 				{
-					PointerId = -2;
-					PointerItemText = nullptr;
-					app->notesManager->PointerId = 0;
+					if (PointerId != -1)
+					{
+						horitzontalPointerId += 1;
+						PointerPosition.x += 83;
+					}
+					PointerId += 1;
 				}
 
 			}
-			else
-			{
-				horitzontalPointerId -= 1;
-				PointerPosition.x -= 83;
-				PointerId -= 1;
+			if (app->input->GetButton(LEFT) == KEY_DOWN) {
+				if (horitzontalPointerId - 1 < 0)
+				{
+					if (app->notesManager->vacio == false)
+					{
+						PointerId = -2;
+						PointerItemText = nullptr;
+						app->notesManager->PointerId = 0;
+					}
+
+				}
+				else
+				{
+					horitzontalPointerId -= 1;
+					PointerPosition.x -= 83;
+					PointerId -= 1;
+				}
+			}
+
+			if (app->input->GetButton(DOWN) == KEY_DOWN) {
+				if (verticalPointerId < numberRows)
+				{
+					PointerId += 4;
+					verticalPointerId += 1;
+					PointerPosition.y += 83;
+				}
+				else
+				{
+					verticalPointerId = 0;
+					PointerId -= numberRows * 4;
+					PointerPosition.y = 230;
+				}
+
+
+
+			}
+			if (app->input->GetButton(UP) == KEY_DOWN) {
+				if (verticalPointerId + 1 > numberRows)
+				{
+					PointerPosition.y -= 83;
+					PointerId -= 4;
+					verticalPointerId -= 1;
+				}
+				else
+				{
+					verticalPointerId = numberRows;
+					PointerId += numberRows * 4;
+					PointerPosition.y = 230 + 83 * (numberRows);
+				}
+
+
 			}
 		}
-
-		if (app->input->GetButton(DOWN) == KEY_DOWN) {
-			if (verticalPointerId < numberRows)
-			{
-				PointerId += 4;
-				verticalPointerId += 1;
-				PointerPosition.y += 83;
-			}
-			else
-			{
-				verticalPointerId = 0;
-				PointerId -= numberRows * 4;
-				PointerPosition.y = 230;
-			}
-
-
-
+		else
+		{
+			pointer = false;
 		}
-		if (app->input->GetButton(UP) == KEY_DOWN) {
-			if (verticalPointerId + 1 > numberRows)
-			{
-				PointerPosition.y -= 83;
-				PointerId -= 4;
-				verticalPointerId -= 1;
-			}
-			else
-			{
-				verticalPointerId = numberRows;
-				PointerId += numberRows * 4;
-				PointerPosition.y = 230 + 83 * (numberRows);
-			}
-
-
-		}
-	}
-	else
-	{
-		pointer = false;
 	}
 }
 
