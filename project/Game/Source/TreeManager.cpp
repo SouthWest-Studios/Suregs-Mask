@@ -1171,26 +1171,30 @@ bool TreeManager::Update(float dt)
 				app->entityManager->GetPlayer()->primaryMask = Mask::MASK0;
 				selectPrimaryMask = false;
 			}
-			if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+			else if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 			{
 				app->entityManager->GetPlayer()->primaryMask = Mask::MASK1;
 				selectPrimaryMask = false;
 			}
-			if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+			else if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
 			{
 				app->entityManager->GetPlayer()->primaryMask = Mask::MASK2;
 				selectPrimaryMask = false;
 			}
-			if (app->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
+			else if (app->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
 			{
 				app->entityManager->GetPlayer()->primaryMask = Mask::MASK3;
+				selectPrimaryMask = false;
+			}
+
+			if (app->input->GetButton(APP_EXIT) == KEY_DOWN) {
 				selectPrimaryMask = false;
 			}
 		}
 
 		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
 
-			selectPrimaryMask = true;
+			selectSecondaryMask = true;
 
 		}
 
@@ -1199,22 +1203,25 @@ bool TreeManager::Update(float dt)
 			if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 			{
 				app->entityManager->GetPlayer()->secondaryMask = Mask::MASK0;
-				selectPrimaryMask = false;
+				selectSecondaryMask = false;
 			}
 			if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 			{
 				app->entityManager->GetPlayer()->secondaryMask = Mask::MASK1;
-				selectPrimaryMask = false;
+				selectSecondaryMask = false;
 			}
 			if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
 			{
 				app->entityManager->GetPlayer()->secondaryMask = Mask::MASK2;
-				selectPrimaryMask = false;
+				selectSecondaryMask = false;
 			}
 			if (app->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
 			{
 				app->entityManager->GetPlayer()->secondaryMask = Mask::MASK3;
-				selectPrimaryMask = false;
+				selectSecondaryMask = false;
+			}
+			if (app->input->GetButton(APP_EXIT) == KEY_DOWN) {
+				selectSecondaryMask = false;
 			}
 		}
 

@@ -19,6 +19,7 @@
 #include "ModuleFadeToBlack.h"
 #include "Menu_Equipo.h"
 #include "ElevatorMenu.h"
+#include "Hud.h"
 
 #include "SDL_mixer/include/SDL_mixer.h"
 
@@ -100,9 +101,11 @@ bool Menu::Update(float dt)
 		ventana = 4;
 	}
 	if (menuu)
-	{
+	{/*
+		app->hud->active = false;*/
 		app->entityManager->active = false;
 		app->physics->active = false;
+		app->hud->active = false;
 		if (ventana == 0)
 		{
 			ventana++;
@@ -139,6 +142,7 @@ bool Menu::Update(float dt)
 	else {
 		app->entityManager->active = true;
 		app->physics->active = true;
+		app->hud->Enable();
 		ventana = 0;
 	}
 	
@@ -380,10 +384,11 @@ bool Menu::PostUpdate()
 	if (ventana == 1)
 	{
 		app->render->DrawTexture(fondoInventario, windowWidth / 8, windowHeight / 8 - 80, 0.8f, SDL_FLIP_NONE, 0, 0);
+		/*app->render->DrawTexture(fondoInventario, windowWidth / 8 + 100, windowHeight / 8,1.2, SDL_FLIP_NONE, 0, 0);*/
 	}
 	if (ventana == 2)
 	{
-		app->render->DrawTexture(fondoEquipo, windowWidth / 8, windowHeight / 8, SDL_FLIP_NONE, 0, 0);
+		app->render->DrawTexture(fondoEquipo, windowWidth / 8 + 40, windowHeight / 8 - 70, SDL_FLIP_NONE, 0, 0);
 	}
 	if (ventana == 3)
 	{

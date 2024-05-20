@@ -596,8 +596,8 @@ bool Player::Start() {
 	player_Direction = Direction::UNKNOWN;
 
 
-	EquipPrimaryMask(Mask::NOMASK);
-	EquipSecondaryMask(Mask::NOMASK);
+	EquipPrimaryMask(Mask::MASK0);
+	EquipSecondaryMask(Mask::MASK2);
 
 	/*	------------ALEIX------------
 	PARA MEJORAR X RAMA DE X MASCARA SERIA ASI
@@ -707,7 +707,7 @@ bool Player::Update(float dt)
 		desiredState = EntityStatePlayer::POCION;
 	}
 
-	//printf("\nposx:%d, posy: %d",position.x, position.y);
+	/*printf("\nposx:%d, posy: %d",position.x, position.y);*/
 
 	if (maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].invisibilityTimer.ReadSec() > maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].invisibilityDuration) {
 		SDL_SetTextureAlphaMod(texture, 255);

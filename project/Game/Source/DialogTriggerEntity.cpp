@@ -72,7 +72,7 @@ bool DialogTrigger::Start() {
 	pbody->listener = this;
 	pbody->ctype = ColliderType::DIALOG_TRIGGER;
 
-	pbody2 = app->physics->CreateRectangleSensor(4281, 1760, 100, 100, bodyType::KINEMATIC);
+	pbody2 = app->physics->CreateRectangleSensor(4979, 1162, 100, 100, bodyType::KINEMATIC);
 	pbody2->listener = this;
 	pbody2->ctype = ColliderType::ARBOL;
 

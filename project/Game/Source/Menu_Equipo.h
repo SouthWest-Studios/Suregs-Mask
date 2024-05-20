@@ -57,7 +57,22 @@ private:
 
 	int acuiredItemLifeTimeMS = 1500;
 
-	
+	std::string levelSwordStr;
+
+	char* mask0TexturePath;
+	SDL_Texture* mask0Texture;
+
+	char* mask1TexturePath;
+	SDL_Texture* mask1Texture;
+
+	char* mask2TexturePath;
+	SDL_Texture* mask2Texture;
+
+	char* mask3TexturePath;
+	SDL_Texture* mask3Texture;
+
+	char* mask4TexturePath;
+	SDL_Texture* mask4Texture;
 
 };
 #endif // __HUD_H__
