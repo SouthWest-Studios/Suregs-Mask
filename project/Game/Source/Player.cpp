@@ -1418,6 +1418,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 		}
 		break;
+	case ColliderType::AROMAGICA:
+		TakeDamage(20);
+		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;

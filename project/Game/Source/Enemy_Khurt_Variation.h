@@ -15,61 +15,15 @@
 
 struct SDL_Texture;
 
+struct MagicTrail {
+	PhysBody* sensor;
+	Timer durationTimer;
+};
 
 struct Branch_Khurt_variation {
 	enum EntityState_Enemy const next_state;
 	Branch_Khurt_variation(EntityState_Enemy next) : next_state(next) {}
 
-};
-
-class AroMagica : public Entity {
-
-public:
-	AroMagica(iPoint position, float damage, float duration, float tickRate) : Entity(EntityType::ARO_MAGICA), damage(damage), duration(duration), tickRate(tickRate), active(true) {
-		this->position = position;
-
-		lifeTimer.Start();
-		tickTimer.Start();
-
-		pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 32, 32, bodyType::STATIC);
-		pbodySensor->entity = this;
-		pbodySensor->listener = this;
-		pbodySensor->ctype = ColliderType::AROMAGICA;
-	}
-
-	~AroMagica() {
-		app->physics->GetWorld()->DestroyBody(pbodySensor->body);
-	}
-
-	bool Update(float dt) {
-		if (lifeTimer.ReadSec() >= duration) {
-			active = false;
-			return false;
-		}
-
-		if (tickTimer.ReadSec() >= tickRate) {
-			tickTimer.Start();
-			// Aplicar daño al jugador si está en el rastro
-		}
-
-		return true;
-	}
-	void OnCollision(PhysBody* physA, PhysBody* physB) {
-		if (physB->ctype == ColliderType::PLAYER) {
-			Player* player = (Player*)physB->entity;
-			player->TakeDamage(damage);
-		}
-	}
-
-private:
-	float damage;
-	float duration;
-	float tickRate;
-	Timer lifeTimer;
-	Timer tickTimer;
-	bool active;
-
-	SDL_Texture* texture;
 };
 
 class Enemy_Khurt_Variation : public Entity
@@ -100,6 +54,8 @@ public:
 
 	void HandleDigging(float dt, iPoint playerPos);
 	void CreateAroMagica();
+	void ClearMagicTrails();
+	PhysBody* CreateMagicTrailSensor(int x, int y, int width, int height);
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
@@ -163,10 +119,6 @@ private:
 	PathFinding* path;
 	DynArray<iPoint> lastPath;
 
-	std::vector<AroMagica*> magicTrails;
-	Timer AroTimer;
-	float aroInterval = 1.0f;
-
 	Animation* currentAnimation = nullptr;
 	EntityState_Enemy state;
 
@@ -200,6 +152,8 @@ private:
 	Timer digTimer;
 	bool digtimer = false;
 	bool digging = false;
+
+	std::vector<MagicTrail> magicTrails;
 
 public:
 
