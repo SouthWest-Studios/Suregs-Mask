@@ -1198,7 +1198,7 @@ bool TreeManager::Update(float dt)
 
 		}
 
-		if (selectPrimaryMask)
+		if (selectSecondaryMask)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 			{
