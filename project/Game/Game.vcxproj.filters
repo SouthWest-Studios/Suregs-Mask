@@ -322,7 +322,6 @@
     <ClCompile Include="Source\Elevator.cpp">
       <Filter>Entities\Ascensor</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Enemy_Khurt_Variation.cpp" />
     <ClCompile Include="Source\PuzzleButtonEntity.cpp" />
     <ClCompile Include="Source\Boss_Igorv.cpp">
       <Filter>Entities\Boss</Filter>
@@ -338,6 +337,9 @@
     </ClCompile>
     <ClCompile Include="Source\ElevatorMenu.cpp">
       <Filter>Entities\Ascensor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Enemy_Khurt_Variation.cpp">
+      <Filter>Entities\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -725,7 +727,6 @@
     <ClInclude Include="Source\Elevator.h">
       <Filter>Entities\Ascensor</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Enemy_Khurt_Variation.h" />
     <ClInclude Include="Source\PuzzleButtonEntity.h" />
     <ClInclude Include="Source\Boss_Igory.h">
       <Filter>Entities\Boss</Filter>
@@ -741,6 +742,9 @@
     </ClInclude>
     <ClInclude Include="Source\ElevatorMenu.h">
       <Filter>Entities\Ascensor</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy_Khurt_Variation.h">
+      <Filter>Entities\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

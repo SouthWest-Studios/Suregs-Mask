@@ -50,11 +50,13 @@ bool Enemy_Muur::Start() {
 	Photowidth = config.attribute("Pwidth").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
-	idleAnim.LoadAnim("muur", "idleAnim", spritePositions);
 	runAnim.LoadAnim("muur", "runAnim", spritePositions);
-	attackAnim.LoadAnim("muur", "attackAnim", spritePositions);
-	chargeAnim.LoadAnim("muur", "chargeAnim", spritePositions);
+	stoppingAnim.LoadAnim("muur", "stoppingAnim", spritePositions);
 	stunAnim.LoadAnim("muur", "stunAnim", spritePositions);
+	attackAnim.LoadAnim("muur", "attackAnim", spritePositions);
+	idleAnim.LoadAnim("muur", "idleAnim", spritePositions);
+	chargeAnim.LoadAnim("muur", "chargeAnim", spritePositions);
+	reciebeDamage.LoadAnim("muur", "reciebeDamage", spritePositions);
 	dieAnim.LoadAnim("muur", "dieAnim", spritePositions);
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
@@ -92,34 +94,31 @@ bool Enemy_Muur::Update(float dt)
 {
 	OPTICK_EVENT();
 
-
-	//Pone el sensor del cuerpo en su posicion
+	// Pone el sensor del cuerpo en su posicion
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
 
-
-
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
 
+	// Lógica de cambio de estado
 	if (health <= 0)
 	{
 		nextState = EntityState::DEAD;
-	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance * 32)
-	{
-		nextState = EntityState::RUNNING;
 	}
 	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32)
 	{
 		nextState = EntityState::ATTACKING;
 	}
-	else
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance * 32)
 	{
 		nextState = EntityState::RUNNING;
 	}
+	else
+	{
+		nextState = EntityState::IDLE;
+	}
 
-
-
+	// Manejo de estados
 	switch (nextState)
 	{
 	case EntityState::RUNNING:
@@ -151,29 +150,28 @@ bool Enemy_Muur::Update(float dt)
 
 	CheckPoison();
 
-
+	// Actualiza la animación actual
+	if (currentAnimation != nullptr) {
+		currentAnimation->Update();
+	}
 	currentState = nextState;
-	currentAnimation->Update();
+
 	return true;
 }
 
-
 bool Enemy_Muur::PostUpdate() {
-
-	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
+	if (currentAnimation == nullptr) {
+		currentAnimation = &idleAnim;
+	}
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-
 
 	if (timerRecibirDanioColor.ReadMSec() <= 100) {
 		float alpha = (100 - timerRecibirDanioColor.ReadMSec()) / 100;
 		SDL_SetTextureAlphaMod(texture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
-
 	}
 	else {
 		SDL_SetTextureAlphaMod(texture, 255);
 	}
-
-
 
 	if (isFacingLeft) {
 		app->render->DrawTexture(texture, position.x, position.y - 30, SDL_FLIP_HORIZONTAL, &rect);
@@ -181,7 +179,6 @@ bool Enemy_Muur::PostUpdate() {
 	else {
 		app->render->DrawTexture(texture, position.x - 25, position.y - 30, SDL_FLIP_NONE, &rect);
 	}
-
 
 	for (uint i = 0; i < lastPath.Count(); ++i)
 	{
@@ -196,6 +193,7 @@ bool Enemy_Muur::PostUpdate() {
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
 	return true;
 }
+
 
 
 bool Enemy_Muur::CleanUp()
@@ -249,82 +247,83 @@ void Enemy_Muur::Die() {
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	currentAnimation = &dieAnim;
 
-	app->entityManager->DestroyEntity(this);
-	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
-	app->physics->GetWorld()->DestroyBody(pbodySensor->body);
-	app->tex->UnLoad(texture);
-
-
-	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
-	if (parseResult) {
-		configNode = configFile.child("config");
-	}
-	float randomValue = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
-
-	// Determina si el item debe crearse basado en un 30% de probabilidad
-	if (randomValue <= 0.30f) {
-		Item_Cola* cola = (Item_Cola*)app->entityManager->CreateEntity(EntityType::ITEM_COLA);
-		cola->config = configNode.child("entities_data").child("item_cola");
-		cola->position = iPoint(position.x, position.y);
-		cola->Start();
-	}
-	
-	app->bestiarioManager->CreateItem("muur");
-	//Mask XP
-
-	//Mask 0
-	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
+	if (dieAnim.HasFinished())
 	{
-		app->entityManager->GetPlayer()->maskZeroXP += 20;
-		//printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
+		app->entityManager->DestroyEntity(this);
+		app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
+		app->physics->GetWorld()->DestroyBody(pbodySensor->body);
+		app->tex->UnLoad(texture);
+
+
+		pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
+		if (parseResult) {
+			configNode = configFile.child("config");
+		}
+		float randomValue = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+
+		// Determina si el item debe crearse basado en un 30% de probabilidad
+		if (randomValue <= 0.30f) {
+			Item_Cola* cola = (Item_Cola*)app->entityManager->CreateEntity(EntityType::ITEM_COLA);
+			cola->config = configNode.child("entities_data").child("item_cola");
+			cola->position = iPoint(position.x, position.y);
+			cola->Start();
+		}
+
+		app->bestiarioManager->CreateItem("muur");
+		//Mask XP
+
+		//Mask 0
+		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
+		{
+			app->entityManager->GetPlayer()->maskZeroXP += 20;
+			//printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
+		}
+
+		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK0)
+		{
+			app->entityManager->GetPlayer()->maskZeroXP += 20;
+			//printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
+		}
+
+		//Mask 1
+		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK1)
+		{
+			app->entityManager->GetPlayer()->maskOneXP += 20;
+			//printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
+		}
+
+		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK1)
+		{
+			app->entityManager->GetPlayer()->maskOneXP += 20;
+			//printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
+		}
+
+		//Mask 2
+		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK2)
+		{
+			app->entityManager->GetPlayer()->maskTwoXP += 20;
+			//printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
+		}
+
+		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK2)
+		{
+			app->entityManager->GetPlayer()->maskTwoXP += 20;
+			//printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
+		}
+
+		//Mask 3
+		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK3)
+		{
+			app->entityManager->GetPlayer()->maskThreeXP += 20;
+			//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
+		}
+
+		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK3)
+		{
+			app->entityManager->GetPlayer()->maskThreeXP += 20;
+			//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
+		}
 	}
-
-	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK0)
-	{
-		app->entityManager->GetPlayer()->maskZeroXP += 20;
-		//printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
-	}
-
-	//Mask 1
-	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK1)
-	{
-		app->entityManager->GetPlayer()->maskOneXP += 20;
-		//printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
-	}
-
-	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK1)
-	{
-		app->entityManager->GetPlayer()->maskOneXP += 20;
-		//printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
-	}
-
-	//Mask 2
-	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK2)
-	{
-		app->entityManager->GetPlayer()->maskTwoXP += 20;
-		//printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
-	}
-
-	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK2)
-	{
-		app->entityManager->GetPlayer()->maskTwoXP += 20;
-		//printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
-	}
-
-	//Mask 3
-	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK3)
-	{
-		app->entityManager->GetPlayer()->maskThreeXP += 20;
-		//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
-	}
-
-	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK3)
-	{
-		app->entityManager->GetPlayer()->maskThreeXP += 20;
-		//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
-	}
-
-
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 
@@ -409,6 +408,7 @@ void Enemy_Muur::TakeDamage(float damage) {
 		health -= damage;
 		invulnerabilityTimer.Start();
 		timerRecibirDanioColor.Start();
+		currentAnimation = &reciebeDamage;
 	}
 }
 
@@ -472,21 +472,21 @@ void Enemy_Muur::Charge(float dt, iPoint playerPos) {
 	chargeTimer.Start();
 }
 
-
 void Enemy_Muur::Stunned(float dt) {
-	if (stunTimer.ReadSec() <= 2) {
-		printf("stunned");
-		currentAnimation = &stunAnim;
-		pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
+	if (stunTimer.ReadSec() <= 1) {
+		currentAnimation = &stoppingAnim;
+		if (stunTimer.ReadSec() > 2) {
+			currentAnimation = &stunAnim;
+			pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
+		}
 	}
 	else {
-		stunTimer.Start(); 
-		nextState = EntityState::IDLE; 
-		isStunned = false;  
-		charging = false;  
+		stunTimer.Start();
+		nextState = EntityState::IDLE;
+		isStunned = false;
+		charging = false;
 	}
 }
-
 
 MapObject* Enemy_Muur::GetCurrentRoom()
 {

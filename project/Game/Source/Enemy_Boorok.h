@@ -87,12 +87,14 @@ private:
 	pugi::xml_node configNode;
 
 
-	Animation idleAnim;
 	Animation sleepAnim;
 	Animation runAnim;
 	Animation attackAnim;
-	Animation dieAnim;
+	Animation reciebeDamage;
+	Animation idleAnim;
+	Animation wakeupAnim;
 	Animation chargeAttackAnim;
+	Animation dieAnim;
 
 	int boorok_get_damage_fx;
 	int boorok_get_damageAlt_fx;
@@ -122,6 +124,8 @@ private:
 	Timer timerRecibirDanioColor;
 
 	//Sleeping
+	bool isSleeping = false;
+	bool isWakingUp = false;
 	Timer recoveryTimer;
 
 	//Charge Attack

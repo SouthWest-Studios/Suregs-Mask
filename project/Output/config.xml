@@ -162,9 +162,9 @@
 				maxHealth="230.0f" speed="1.1f" attackDamage="50.0f" attackDistance="10" viewDistance="20"  projectileSpeed="7" projectileDamage="20.0f" minDistance="7"
 				Tsprite="374" Pwidth="6336" sprite_x="288" sprite_y="128"/>
 				
-		<muur texturePath="Assets/Textures/Entidades/Muur/Muur.png" 
+		<muur texturePath="Assets/Textures/Entidades/Muur/spritesheet_muur.png" 
 				maxHealth="100.0f" speed="4f" attackDamage="20.0f" attackDistance="1" viewDistance="15"  chargeattackDistance= "10"
-				Tsprite="20" Pwidth="240" sprite_x="60" sprite_y="55"/>	
+				Tsprite="64" Pwidth="1688" sprite_x="211" sprite_y="27"/>	
 
 		<khurt texturePath="Assets/Textures/Entidades/Khurt/textura_khurt.png" 
 			   maxHealth="220.0f" speed="1.5f" attackDamage="90.0f" attackDistance="2" viewDistance="20" chargeAttackDistance= "10"
@@ -174,9 +174,9 @@
 			   maxHealth="450.0f" speed="2.8f" attackDamage="240.0f" attackDistance="10" viewDistance="20"
 			   Tsprite="48" Pwidth="1270" sprite_x="160" sprite_y="215"/>
 
-		<boorok texturePath="Assets/Textures/Entidades/Boorok/Boorok_Spritesheet.png" 
-			   maxHealth="400.0f" speed="0.6f" attackDamage="180.0f" attackDistance="2" viewDistance="15" chargeattackDistance= "5" areaattackdamage= "50"
-			   Tsprite="36" Pwidth="1560" sprite_x="260" sprite_y="190"/>
+		<boorok texturePath="Assets/Textures/Entidades/Boorok/spritesheet_boorok.png" 
+			   maxHealth="400.0f" speed="0.6f" attackDamage="180.0f" attackDistance="4" viewDistance="15" chargeattackDistance= "5" areaattackdamage= "50"
+			   Tsprite="70" Pwidth="5000" sprite_x="500" sprite_y="429"/>
 
 		<boss_inuit texturePath="Assets/Textures/Entidades/Boss/Inuit/Miniboss1.png" 
 					maxHealth="6500.0f" speed="5f" attackDamage="90.0f" attackDistance="4" viewDistance="20"
@@ -499,20 +499,25 @@
 		</khurt_variation>
 
 		<muur>
-			<idleAnim start="0" end="1" speed="0.05f" loop="true"/>
-			<runAnim start="4" end="8" speed="0.05f" loop="true"/>
-			<attackAnim start="8" end="11" speed="0.05f" loop="true"/>
-			<chargeAnim start="12" end="15" speed="0.05f" loop="false"/>
-			<stunAnim start="16" end="19" speed="0.05f" loop="false"/>
+			<runAnim start="0" end="8" speed="0.05f" loop="true"/>
+			<stoppingAnim start="8" end="16" speed="0.05f" loop="false"/>
+			<stunAnim start="16" end="24" speed="0.05f" loop="false"/>
+			<attackAnim start="24" end="31" speed="0.05f" loop="true"/>
+			<idleAnim start="32" end="38" speed="0.05f" loop="true"/>
+			<chargeAnim start="40" end="46" speed="0.05f" loop="false"/>
+			<reciebeDamage start="48" end="55" speed="0.05f" loop="true"/>
+			<dieAnim start="56" end="63" speed="0.05f" loop="true"/>
 		</muur>
 
 		<boorok>
-			<idleAnim start="0" end="1" speed="0.05f" loop="true"/>
-			<sleepAnim start="6" end="10" speed="0.05f" loop="true"/>
-			<runAnim start="12" end="16" speed="0.05f" loop="true"/>
-			<attackAnim start="18" end="23" speed="0.05f" loop="true"/>
-			<dieAnim start="24" end="30" speed="0.1f" loop="false"/>
-			<chargeAttackAnim start="30" end="35" speed="0.05f" loop="true"/>
+			<sleepAnim start="0" end="10" speed="0.05f" loop="true"/>
+			<runAnim start="10" end="19" speed="0.05f" loop="true"/>
+			<attackAnim start="20" end="27" speed="0.05f" loop="true"/>
+			<reciebeDamage start="30" end="37" speed="0.05f" loop="true"/>
+			<idleAnim start="40" end="46" speed="0.05f" loop="true"/>
+			<wakeupAnim start="50" end="56" speed="0.05f" loop="true"/>
+			<chargeAttackAnim start="60" end="64" speed="0.05f" loop="true"/>
+			<dieAnim start="0" end="10" speed="0.1f" loop="false"/>
 		</boorok>
 
 		<item>

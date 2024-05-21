@@ -84,11 +84,13 @@ private:
 	pugi::xml_node configNode;
 
 
-	Animation idleAnim;
 	Animation runAnim;
-	Animation attackAnim;
-	Animation chargeAnim;
+	Animation stoppingAnim;
 	Animation stunAnim;
+	Animation attackAnim;
+	Animation idleAnim;
+	Animation chargeAnim;
+	Animation reciebeDamage;
 	Animation dieAnim;
 
 	int muur_get_damage_fx;

@@ -48,12 +48,14 @@ bool Enemy_Boorok::Start() {
 	Photowidth = config.attribute("Pwidth").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
-	idleAnim.LoadAnim("boorok", "idleAnim", spritePositions);
 	sleepAnim.LoadAnim("boorok", "sleepAnim", spritePositions);
 	runAnim.LoadAnim("boorok", "runAnim", spritePositions);
 	attackAnim.LoadAnim("boorok", "attackAnim", spritePositions);
-	dieAnim.LoadAnim("boorok", "dieAnim", spritePositions);
+	reciebeDamage.LoadAnim("boorok", "reciebeDamage", spritePositions);
+	idleAnim.LoadAnim("boorok", "idleAnim", spritePositions);
+	wakeupAnim.LoadAnim("boorok", "wakeupAnim", spritePositions);
 	chargeAttackAnim.LoadAnim("boorok", "chargeAttackAnim", spritePositions);
+	dieAnim.LoadAnim("boorok", "dieAnim", spritePositions);
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
@@ -100,9 +102,8 @@ bool Enemy_Boorok::Update(float dt)
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
 
-
-
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
+
 
 	if (health <= 0)
 	{
@@ -189,7 +190,6 @@ bool Enemy_Boorok::PostUpdate() {
 	return true;
 }
 
-
 bool Enemy_Boorok::CleanUp()
 {
 	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
@@ -205,13 +205,34 @@ bool Enemy_Boorok::CleanUp()
 
 void Enemy_Boorok::DoNothing(float dt, iPoint playerPos)
 {
-	//printf("Boorok Do nothing \n");
 	if (dist(position, playerPos) > -1)
 	{
-		Sleeping();
+		Sleeping();  // Asegúrate de mantener la llamada a Sleeping()
+		if (isSleeping)
+		{
+			if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance * 32)
+			{
+				// El jugador está lo suficientemente cerca, despertamos al enemigo
+				currentAnimation = &wakeupAnim;
+				if (wakeupAnim.HasFinished())
+				{
+					// Una vez que la animación de despertar ha terminado, pasamos a IDLE
+					isSleeping = false;
+					currentAnimation = &idleAnim;
+				}
+			}
+			else
+			{
+				// El enemigo sigue durmiendo
+				currentAnimation = &sleepAnim;
+			}
+		}
+		else
+		{
+			chargeAttackTimer.Start();
+			currentAnimation = &idleAnim;
+		}
 	}
-	chargeAttackTimer.Start();
-	currentAnimation = &idleAnim;
 }
 
 void Enemy_Boorok::Chase(float dt, iPoint playerPos)
@@ -228,26 +249,27 @@ void Enemy_Boorok::Chase(float dt, iPoint playerPos)
 	}
 }
 
+
 void Enemy_Boorok::Attack(float dt)
 {
-	//printf("Muur attacking");
 	currentAnimation = &attackAnim;
+
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
+
 	//sonido ataque
 }
 
-void Enemy_Boorok::Die() {
-
+void Enemy_Boorok::Die()
+{
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	currentAnimation = &dieAnim;
 
-	if (currentAnimation->HasFinished())
+	if (dieAnim.HasFinished())
 	{
 		app->entityManager->DestroyEntity(this);
 		app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 		app->physics->GetWorld()->DestroyBody(pbodySensor->body);
 		app->tex->UnLoad(texture);
-
 
 		pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
 		if (parseResult) {
@@ -255,7 +277,6 @@ void Enemy_Boorok::Die() {
 		}
 		float randomValue = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
 
-		// Determina si el item debe crearse basado en un 30% de probabilidad
 		if (randomValue <= 0.35f) {
 			Item_Viscera* visceras = (Item_Viscera*)app->entityManager->CreateEntity(EntityType::ITEM_VISCERAS);
 			visceras->config = configNode.child("entities_data").child("item_viscera");
@@ -264,7 +285,6 @@ void Enemy_Boorok::Die() {
 		}
 		float randomValue2 = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
 
-		// Determina si el item debe crearse basado en un 30% de probabilidad
 		if (randomValue2 <= 0.30f) {
 			Item_Diente* diente = (Item_Diente*)app->entityManager->CreateEntity(EntityType::ITEM_DIENTE);
 			diente->config = configNode.child("entities_data").child("item_diente");
@@ -273,59 +293,34 @@ void Enemy_Boorok::Die() {
 		}
 		app->bestiarioManager->CreateItem("boorok");
 
-		//Mask 0
-		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
-		{
+		// Máscaras
+		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0) {
 			app->entityManager->GetPlayer()->maskZeroXP += 120;
-			//printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
 		}
-
-		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK0)
-		{
+		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK0) {
 			app->entityManager->GetPlayer()->maskZeroXP += 120;
-			//printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
 		}
-
-		//Mask 1
-		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK1)
-		{
+		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK1) {
 			app->entityManager->GetPlayer()->maskOneXP += 120;
-			//printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
 		}
-
-		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK1)
-		{
+		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK1) {
 			app->entityManager->GetPlayer()->maskOneXP += 120;
-			//printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
 		}
-
-		//Mask 2
-		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK2)
-		{
+		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK2) {
 			app->entityManager->GetPlayer()->maskTwoXP += 120;
-			//printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
 		}
-
-		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK2)
-		{
+		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK2) {
 			app->entityManager->GetPlayer()->maskTwoXP += 120;
-			//printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
 		}
-
-		//Mask 3
-		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK3)
-		{
+		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK3) {
 			app->entityManager->GetPlayer()->maskThreeXP += 120;
-			//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
 		}
-
-		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK3)
-		{
+		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK3) {
 			app->entityManager->GetPlayer()->maskThreeXP += 120;
-			//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
 		}
 	}
 }
+
 
 // L07 DONE 6: Define OnCollision function for the player. 
 void Enemy_Boorok::OnCollision(PhysBody* physA, PhysBody* physB) {
@@ -336,7 +331,7 @@ void Enemy_Boorok::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLAYER:
 		LOG("Collision PLAYER");
-		//restar vida al player
+		app->entityManager->GetPlayer()->TakeDamage(attackDamage);
 		break;
 	case ColliderType::PLAYER_ATTACK:
 		LOG("Collision Player_Attack");
@@ -406,12 +401,14 @@ float Enemy_Boorok::GetHealth() const {
 
 void Enemy_Boorok::TakeDamage(float damage) {
 	if (currentState != EntityState::DEAD && invulnerabilityTimer.ReadMSec() >= 500) {
+		currentAnimation = &reciebeDamage;
 		health -= damage;
 		invulnerabilityTimer.Start();
 		timerRecibirDanioColor.Start();
 		app->audio->PlayRandomFx(boorok_get_damage_fx, boorok_get_damageAlt_fx, NULL);
 	}
 }
+
 
 //VENENO <----------
 void Enemy_Boorok::ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate) {
@@ -459,10 +456,7 @@ void Enemy_Boorok::CheckPoison() {
 
 void Enemy_Boorok::Sleeping()
 {
-	//printf("Sleeping \n");
-
 	pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
-	currentAnimation = &sleepAnim;
 
 	if (recoveryTimer.ReadSec() >= 0.5) {
 		if (health < maxHealth) {
@@ -474,7 +468,10 @@ void Enemy_Boorok::Sleeping()
 		}
 		recoveryTimer.Start();
 	}
-	//printf("Health: %f \n", health);
+	if (sleepAnim.HasFinished())
+	{
+		isSleeping = false;
+	}
 }
 
 void Enemy_Boorok::chargeAttack(iPoint playerPos)
@@ -488,7 +485,6 @@ void Enemy_Boorok::chargeAttack(iPoint playerPos)
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 
 	chargeAttackTimer.Start();
-
 
 }
 
