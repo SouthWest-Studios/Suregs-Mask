@@ -383,7 +383,7 @@ bool Menu::PostUpdate()
 	app->win->GetWindowSize(windowWidth, windowHeight);
 	if (ventana == 1)
 	{
-		app->render->DrawTexture(fondoInventario, windowWidth / 8, windowHeight / 8 - 80, 0.8f, SDL_FLIP_NONE, 0, 0);
+		app->render->DrawTexture(fondoInventario, windowWidth / 8 + 40, windowHeight / 8 - 71, SDL_FLIP_NONE, 0, 0);
 		/*app->render->DrawTexture(fondoInventario, windowWidth / 8 + 100, windowHeight / 8,1.2, SDL_FLIP_NONE, 0, 0);*/
 	}
 	if (ventana == 2)
@@ -396,7 +396,7 @@ bool Menu::PostUpdate()
 	}
 	if (ventana == 4)
 	{
-		app->render->DrawTexture(fondoAjustes, windowWidth / 8, windowHeight / 8, SDL_FLIP_NONE, 0, 0);
+		app->render->DrawTexture(fondoAjustes, windowWidth / 8 + 40, windowHeight / 8 - 71, SDL_FLIP_NONE, 0, 0);
 	}
 	
 	

@@ -1217,8 +1217,8 @@ bool InventoryManager::PostUpdate()
 				app->render->DrawText(quantityStr.c_str(), horizontalPosition, verticalPosition, 20, 20, 0, 0, 0, 0);			
 				
 			}
-			horizontalPosition = 260 + columnIndex * 105; // Calcula la posici�n horizontal para pEntity
-			verticalPosition = 160 + rowIndex * 102; // Calcula la posici�n vertical para pEntity
+			horizontalPosition = 270 + columnIndex * 108; // Calcula la posici�n horizontal para pEntity
+			verticalPosition = 150 + rowIndex * 104; // Calcula la posici�n vertical para pEntity
 
 			app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
 
@@ -1234,9 +1234,9 @@ bool InventoryManager::PostUpdate()
 			if (PointerId == itum->data->id)
 			{
 				/*app->render->DrawText(itum->data->desc.c_str(), 680, 250, 270, 200, 0, 0, 0, 0, false);*/
-				app->render->DrawTextBound(itum->data->desc.c_str(), 680, 430, 270, { 0,0,0 });
-				app->render->DrawTextBound(itum->data->name.GetString(), 670, 350, 90, { 0,0,0 });
-				app->render->DrawTexture(itum->data->icon, 780, 200, 1.8, SDL_FLIP_NONE, 0, 0);
+				app->render->DrawTextBound(itum->data->desc.c_str(), 670, 430, 270, { 0,0,0 });
+				app->render->DrawTextBound(itum->data->name.GetString(), 670, 150, 90, { 0,0,0 });
+				app->render->DrawTexture(itum->data->icon, 680, 200, 1.8, SDL_FLIP_NONE, 0, 0);
 			} 
 
 		}

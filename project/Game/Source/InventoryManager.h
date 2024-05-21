@@ -63,7 +63,7 @@ public:
 	uint monedasObtenidas = 0;
 
 	List<Inventity*> inventities;
-	iPoint PointerPosition = { 176,-60 };
+	iPoint PointerPosition = { 188,-73 };
 	int PointerId = 0;
 	iPoint selected = { -1000,-1000 };
 	iPoint equiped = { -1000,-1000 };
