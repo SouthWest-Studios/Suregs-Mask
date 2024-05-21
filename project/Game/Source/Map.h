@@ -166,7 +166,6 @@ public:
     bool PostUpdate();
     bool PrintMapFront();
 
-    bool UpdateFrontEntities();
 
     
     bool CleanUp();
@@ -212,7 +211,7 @@ private:
 
     std::vector<int> GetObjectGroupPoints(const std::string& puntos);
 
-    void BubbleSort(std::vector<PuzzleButtonEntity*> entities);
+    void BubbleSort(std::vector<PuzzleButtonEntity*>* entities);
 
 
 public: 

@@ -1007,7 +1007,7 @@ bool Map::LoadPuzzleEntities(std::string layerName)
 							button->Start();
 							
 							
-							BubbleSort(puzzleButtonEntities);
+							BubbleSort(&puzzleButtonEntities);
 
 						}
 						else if (elementID < 30) { //Palancas
@@ -1553,14 +1553,14 @@ std::vector<int> Map::GetObjectGroupPoints(const std::string& points)
 	return puntos;
 }
 
-void Map::BubbleSort(std::vector<PuzzleButtonEntity*> entities)
-{
+void Map::BubbleSort(std::vector<PuzzleButtonEntity*>* entities) {
 	bool swapped;
 	do {
 		swapped = false;
-		for (size_t i = 1; i < entities.size(); ++i) {
-			if (entities[i - 1]->buttonID > entities[i]->buttonID) {
-				std::swap(entities[i - 1], entities[i]);
+		for (size_t i = 1; i < entities->size(); ++i) {
+			if (entities->at(i - 1)->buttonID > entities->at(i)->buttonID) {
+				// Correctly swap the elements
+				std::swap(entities->at(i - 1), entities->at(i));
 				swapped = true;
 			}
 		}
