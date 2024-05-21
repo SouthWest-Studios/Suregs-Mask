@@ -289,6 +289,7 @@ public:
 	Timer damageTimer;
 	float damageCooldown = 0.2f;
 	bool hasAttacked = false;
+	bool hasMaskAttacked = false;
 	int atackNum = 0;
 
 	//Dead
@@ -345,7 +346,7 @@ public:
 	Mask secondaryMask;
 
 
-	bool isAttackingMask = true;
+	bool isAttackingMask = false;
 	PhysBody* mask1AttackSensor = nullptr;
 	int attackMask1Width = 300;
 	int attackMask1Height = 300;

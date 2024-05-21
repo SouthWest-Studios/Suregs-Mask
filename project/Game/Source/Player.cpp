@@ -1211,7 +1211,8 @@ void Player::stateMachine(float dt)
 	case EntityStatePlayer::REVIVING:
 		break;
 	case EntityStatePlayer::MASK_ATTACK:
-		if (!inTakeDMG) {
+		if (!inTakeDMG && !hasMaskAttacked) {
+			hasMaskAttacked = true;
 			MaskAttack(dt);
 		}
 		break;
@@ -1261,9 +1262,9 @@ Entity* Player::GetEnemyWithHighestHealthWithinRadius(iPoint position, int radiu
 }
 
 void Player::CastMultipleLightnings() {
-	int numLightnings = maskLevels[Mask::MASK0][Branches::Rama3]; // Obtiene el número de rayos basado en el nivel de la máscara
-
-	for (int i = 0; i <= numLightnings; i++) {
+	int numLightnings = maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].numberLightning;
+	printf("numLightnings: %d\n", numLightnings);
+	for (int i = 0; i < numLightnings; i++) {
 		CastLightning();
 	}
 }
@@ -2266,6 +2267,7 @@ void Player::PlayerMovement(float dt)
 
 	if (!(timerMaskAttack.ReadMSec() < maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDown && isAttackingMask)) {
 		isAttackingMask = false;
+		hasMaskAttacked = false;
 		if (mask1AttackSensor) {
 			app->physics->DestroyBody(mask1AttackSensor);
 			mask1AttackSensor = nullptr;
@@ -2277,7 +2279,7 @@ void Player::PlayerMovement(float dt)
 		mask1AttackSensor = nullptr;
 	}
 
-	//Si pulsas Q para cambiar de mascara
+	//Si pulsas L para cambiar de mascara
 	if (app->input->GetButton(INTERCAMBIAR_MASCARAS) == KEY_DOWN && timerChangeMask.ReadMSec() > changeMaskCooldown) {
 		ChangeMask();
 	}
