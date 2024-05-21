@@ -95,6 +95,8 @@ public:
 	
   	std::vector<TPDoor*> openDoors;
 
+	
+
 private:
 
 	pugi::xml_node configNode;

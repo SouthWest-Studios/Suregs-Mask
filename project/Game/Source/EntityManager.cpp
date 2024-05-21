@@ -58,6 +58,7 @@
 #include "Item_Zafiro.h" 
 #include "Elevator.h"
 #include "ModuleFadeToBlack.h"
+#include "Menu.h";
 
 
 #include "Defs.h"
@@ -540,6 +541,11 @@ bool EntityManager::PreUpdate()
 bool EntityManager::Update(float dt)
 {
 	bool ret = true;
+
+	if (app->menu->menuu) {
+		return ret;
+	}
+
 	ListItem<Entity*>* item;
 	Entity* pEntity = NULL;
 

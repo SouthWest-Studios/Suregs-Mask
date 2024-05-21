@@ -834,8 +834,10 @@ bool Player::PostUpdate() {
 bool Player::CleanUp()
 {
 	app->entityManager->DestroyEntity(pbodyFoot->entity);
-	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
-	app->physics->GetWorld()->DestroyBody(pbodySensor->body);
+	/*app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
+	app->physics->GetWorld()->DestroyBody(pbodySensor->body);*/
+	app->physics->DestroyBody(pbodyFoot);
+	app->physics->DestroyBody(pbodySensor);
 	/*app->tex->UnLoad(texture);*/
 	app->tex->UnLoad(texture);
 	DeadTP = false;
