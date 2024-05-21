@@ -92,7 +92,7 @@ bool GuiCheckBox::PostUpdate()
 				app->render->DrawTexture(img, bounds.x, bounds.y, SDL_FLIP_NONE, 0, 0, true);				
 				break;
 			}
-			app->render->DrawText(text.GetString(), bounds.x + bounds2.x - 200, bounds.y + bounds2.y, bounds.w, bounds.h);
+			app->render->DrawTextBound(text.GetString(), bounds.x + bounds2.x - 200, bounds.y + bounds2.y, bounds.w, { 0,0,0,0 });
 		}
 		if (click)
 		{
@@ -111,7 +111,7 @@ bool GuiCheckBox::PostUpdate()
 				app->render->DrawTexture(img2, bounds.x, bounds.y, SDL_FLIP_NONE, 0, 0, 0, 0, true);
 				break;
 			}
-			app->render->DrawText(text.GetString(), bounds.x + bounds2.x - 200, bounds.y + bounds2.y, bounds.w, bounds.h);
+			app->render->DrawTextBound(text.GetString(), bounds.x + bounds2.x - 200, bounds.y + bounds2.y, bounds.w, { 0,0,0,0 });
 		}
 		//L15: DONE 4: Draw the button according the GuiControl State
 		

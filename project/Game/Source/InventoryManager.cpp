@@ -1003,7 +1003,7 @@ void InventoryManager::OnMovePointer()
 		PointerPosition.x += 106;
 		PointerId += 1;
 	}
-	if (app->input->GetButton(LEFT) == KEY_DOWN && PointerPosition.x > 176) {
+	if (app->input->GetButton(LEFT) == KEY_DOWN && PointerPosition.x > 196) {
 		PointerPosition.x -= 106;
 		PointerId -= 1;
 	}
