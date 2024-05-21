@@ -322,7 +322,6 @@
     <ClCompile Include="Source\Elevator.cpp">
       <Filter>Entities\Ascensor</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ElevatorMenu.cpp" />
     <ClCompile Include="Source\Enemy_Khurt_Variation.cpp" />
     <ClCompile Include="Source\PuzzleButtonEntity.cpp" />
     <ClCompile Include="Source\Boss_Igorv.cpp">
@@ -330,12 +329,15 @@
     </ClCompile>
     <ClCompile Include="Source\Scene_Mazmorra8.cpp">
       <Filter>Scenes\Mazmorras</Filter>
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="Source\Particles.cpp">
       <Filter>Modules\SistemaPartículas</Filter>
     </ClCompile>
     <ClCompile Include="Source\ModuleParticles.cpp">
       <Filter>Modules\SistemaPartículas</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ElevatorMenu.cpp">
+      <Filter>Entities\Ascensor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -723,7 +725,6 @@
     <ClInclude Include="Source\Elevator.h">
       <Filter>Entities\Ascensor</Filter>
     </ClInclude>
-    <ClInclude Include="Source\ElevatorMenu.h" />
     <ClInclude Include="Source\Enemy_Khurt_Variation.h" />
     <ClInclude Include="Source\PuzzleButtonEntity.h" />
     <ClInclude Include="Source\Boss_Igory.h">
@@ -731,12 +732,15 @@
     </ClInclude>
     <ClInclude Include="Source\Scene_Mazmorra8.h">
       <Filter>Scenes\Mazmorras</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="Source\Particles.h">
       <Filter>Modules\SistemaPartículas</Filter>
     </ClInclude>
     <ClInclude Include="Source\ModuleParticles.h">
       <Filter>Modules\SistemaPartículas</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ElevatorMenu.h">
+      <Filter>Entities\Ascensor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

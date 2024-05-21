@@ -109,7 +109,7 @@ void Elevator::OnCollision(PhysBody* physA, PhysBody* physB)
 				  }
 				  else
 				  {
-					  app->ascensor->mazmorraActual--;
+					  /*app->ascensor->mazmorraActual--;*/
 					  app->ascensor->final = final;
 				  }
 				  app->ascensor->abierto = true;
