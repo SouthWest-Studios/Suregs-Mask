@@ -596,8 +596,8 @@ bool Player::Start() {
 	player_Direction = Direction::UNKNOWN;
 
 
-	EquipPrimaryMask(Mask::MASK0);
-	EquipSecondaryMask(Mask::MASK2);
+	EquipPrimaryMask(Mask::NOMASK);
+	EquipSecondaryMask(Mask::NOMASK);
 
 	/*	------------ALEIX------------
 	PARA MEJORAR X RAMA DE X MASCARA SERIA ASI

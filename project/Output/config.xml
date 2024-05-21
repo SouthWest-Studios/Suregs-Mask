@@ -157,10 +157,10 @@
 				maxHealth="340.0f" speed="3.3f" attackDamage="200.0f" secondAttackDamage="230.0f" attackDistance="2" viewDistance="20"
 				Tsprite="65" Pwidth="2729" sprite_x="246" sprite_y="200"/>
 
-		<ols texturePath="Assets/Textures/Entidades/Ols/animations/spritesheets/Sprites.png" 
+		<ols texturePath="Assets/Textures/Entidades/Ols/animations/spritesheets/spritesheet_ols.png" 
 				texturePathProjectile="Assets/Textures/Entidades/Ols/Projectile.png"
 				maxHealth="230.0f" speed="1.1f" attackDamage="50.0f" attackDistance="10" viewDistance="20"  projectileSpeed="7" projectileDamage="20.0f" minDistance="7"
-				Tsprite="374" Pwidth="6336" sprite_x="288" sprite_y="128"/>
+				Tsprite="32" Pwidth="2024" sprite_x="253" sprite_y="240"/>
 				
 		<muur texturePath="Assets/Textures/Entidades/Muur/spritesheet_muur.png" 
 				maxHealth="100.0f" speed="4f" attackDamage="20.0f" attackDistance="1" viewDistance="15"  chargeattackDistance= "10"
@@ -468,10 +468,10 @@
 		</osiris_variation>
 
 		<ols>
-			<idleAnim_ols start="0" end="2" speed="0.05f" loop="true"/>
-			<runAnim_ols start="23" end="33" speed="0.07f" loop="true"/>
-			<attackAnim_ols start="49" end="56" speed="0.2f" loop="false"/>
-			<dieAnim_ols start="13" end="24" speed="0.2f" loop="false"/>
+			<idleAnim_ols start="25" end="29" speed="0.1f" loop="true"/>
+			<runAnim_ols start="0" end="8" speed="0.07f" loop="true"/>
+			<attackAnim_ols start="9" end="16" speed="0.2f" loop="false"/>
+			<dieAnim_ols start="17" end="23" speed="0.2f" loop="false"/>
 		</ols>
 
 		<shar>
