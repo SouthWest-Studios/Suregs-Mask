@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="200" height="186" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="240">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="200" height="186" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="244">
  <tileset firstgid="1" name="Colisiones" tilewidth="32" tileheight="32" tilecount="16" columns="4">
   <image source="../../Textures/Mapas/Metadatos/Collisions_32x32.png" width="128" height="128"/>
  </tileset>
@@ -223375,6 +223375,26 @@
   <object id="239" x="3581.94" y="1753.82" width="96" height="96">
    <properties>
     <property name="dialogID" type="int" value="801"/>
+   </properties>
+  </object>
+  <object id="240" x="2592" y="3744" width="96" height="96">
+   <properties>
+    <property name="dialogID" type="int" value="916"/>
+   </properties>
+  </object>
+  <object id="241" x="2721.33" y="3744" width="96" height="96">
+   <properties>
+    <property name="dialogID" type="int" value="919"/>
+   </properties>
+  </object>
+  <object id="242" x="2849.33" y="3742.67" width="96" height="96">
+   <properties>
+    <property name="dialogID" type="int" value="923"/>
+   </properties>
+  </object>
+  <object id="243" x="2976" y="3742.67" width="96" height="96">
+   <properties>
+    <property name="dialogID" type="int" value="401"/>
    </properties>
   </object>
  </objectgroup>

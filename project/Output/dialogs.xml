@@ -91,10 +91,11 @@
 					<sentence text="Con los materiales necesarios podré forjar mejoras para tu equipo. ¡No dudes en venir cuando quieras mejorar tus herramientas de combate!"/>
 					<commerce id="3"/>
 				</option1>
-
-				<option2 text="¡Adiós!">
+				
+				<option2 text="Tengo una espada para reparar.">
 					<sentence text="¡No dudes en venir más por aquí!"/>
 				</option2>
+				
 			</sentence>
 		</sentences>
 	</dialog>
@@ -182,12 +183,22 @@
 			</sentence>
 		</sentences>
 	</dialog>
+	
 	<!--Mision (923)-->
+	
 	<dialog id="923" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phrumo">
 		<sentences>
-			<sentence text="¡Qué sorpresa! Bienvenido de nuevo."/>
-			<sentence text="Hoy tengo todo tipo de cosas que podrian interesarte."/>
-			<commerce id="1"/>
+			<sentence type="choose" text="Bienvenido a la tienda de Phrumo. ¿Te ha molestado mi abuelo? Disculpas...">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Aquí podrás vender todo tipo de materiales obtenidos al derrotar los Sureg que intenten entrar en la aldea."/>
+					<commerce id="1"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡Estaré aquí para comprar tus objetos!"/>
+				</option2>
+			</sentence>
 		</sentences>
 	</dialog>
 
