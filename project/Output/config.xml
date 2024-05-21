@@ -271,17 +271,19 @@
 		
 		<npc_vendedor texturePath="Assets/Textures/Entidades/NPCs/Idle/comerciante.png"			Tsprite="6" Pwidth="837" sprite_x="140" sprite_y="250"/>
 		<npc_pescador texturePath="Assets/Textures/Entidades/NPCs/Idle/pescador.png"			Tsprite="6" Pwidth="779" sprite_x="130" sprite_y="270"/>
-		<npc_bruja texturePath="Assets/Textures/Entidades/NPCs/Idle/bruja.png"					Tsprite="6" Pwidth="785" sprite_x="130" sprite_y="260"/>
+		<npc_bruja texturePath="Assets/Textures/Entidades/NPCs/Idle/bruja.png"					Tsprite="6" Pwidth="785" sprite_x="131" sprite_y="260"/>
 		<npc_bully1 texturePath="Assets/Textures/Entidades/NPCs/Idle/bully_1.png"				Tsprite="6" Pwidth="1147" sprite_x="191" sprite_y="250"/>
 		<npc_bully2 texturePath="Assets/Textures/Entidades/NPCs/Idle/bully_2.png"				Tsprite="6" Pwidth="870" sprite_x="145" sprite_y="250"/>
 		<npc_herrera texturePath="Assets/Textures/Entidades/NPCs/Idle/herrera.png"				Tsprite="6" Pwidth="907" sprite_x="151" sprite_y="250"/>
-		<npc_abuelo texturePath="Assets/Textures/Entidades/NPCs/Idle/yayo_cliente.png"			Tsprite="6" Pwidth="850" sprite_x="142" sprite_y="260"/>
-		<npc_mujer_preocupada texturePath="Assets/Textures/Entidades/NPCs/Idle/preocupada.png"	Tsprite="6" Pwidth="819" sprite_x="136" sprite_y="250"/>     
+		<npc_abuelo texturePath="Assets/Textures/Entidades/NPCs/Idle/yayo.png"					Tsprite="6" Pwidth="738" sprite_x="123" sprite_y="250"/>
+		<npc_mujer_preocupada texturePath="Assets/Textures/Entidades/NPCs/Idle/preocupada.png"	Tsprite="6" Pwidth="819" sprite_x="136" sprite_y="250"/>
 		<npc_mujer_enamorada texturePath="Assets/Textures/Entidades/NPCs/Idle/enamorada.png"	Tsprite="6" Pwidth="787" sprite_x="131" sprite_y="250"/>
 		<npc_enamorados texturePath="Assets/Textures/Entidades/NPCs/Idle/enamorados.png"		Tsprite="6" Pwidth="1383" sprite_x="230" sprite_y="250"/>
-		<npc_abuelito texturePath="Assets/Textures/Entidades/NPCs/Idle/yayo.png"				Tsprite="6" Pwidth="738" sprite_x="123" sprite_y="250"/>
+		<npc_abuelito texturePath="Assets/Textures/Entidades/NPCs/Idle/yayo_cliente.png"		Tsprite="6" Pwidth="850" sprite_x="141" sprite_y="260"/>
+		
 		<npc_abuelitas texturePath="Assets/Textures/Entidades/NPCs/Idle/yayas.png"				Tsprite="6" Pwidth="2317" sprite_x="386" sprite_y="250"/>
-		<npc_guardias texturePath="Assets/Textures/Entidades/NPCs/textura_npc_guardias.png" Tsprite="1" Pwidth="350" sprite_x="350" sprite_y="130"/>
+		
+		<npc_guardias texturePath="Assets/Textures/Entidades/NPCs/Idle/guardias.png"					Tsprite="6" Pwidth="3000" sprite_x="500" sprite_y="314"/>
 		
 		
 		<cofre texturePath="Assets/Textures/Entidades/Cofre/textura_Cofre.png"
@@ -538,21 +540,37 @@
 		</npc_bully2>
 
 		<npc_herrera>
-			<idleAnim start="0" end="5" speed="0.1f" loop="true"/>
+			<idleAnim start="0" end="6" speed="0.1f" loop="true"/>
 		</npc_herrera>
 
 		<npc_abuelo>
-			<idleAnim start="0" end="5" speed="0.1f" loop="true"/>
+			<idleAnim start="0" end="6" speed="0.1f" loop="true"/>
 		</npc_abuelo>
 
+		<npc_abuelito>
+			<idleAnim start="0" end="6" speed="0.1f" loop="true"/>
+		</npc_abuelito>
+
 		<npc_mujer_preocupada>
-			<idleAnim start="0" end="5" speed="0.1f" loop="true"/>
+			<idleAnim start="0" end="6" speed="0.1f" loop="true"/>
 		</npc_mujer_preocupada>
 
 		<npc_mujer_enamorada>
-			<idleAnim start="0" end="5" speed="0.1f" loop="true"/>
+			<idleAnim start="0" end="6" speed="0.1f" loop="true"/>
 		</npc_mujer_enamorada>
+		
+		<npc_enamorados>
+			<idleAnim start="0" end="6" speed="0.1f" loop="true"/>
+		</npc_enamorados>
 
+		<npc_abuelitas>
+			<idleAnim start="0" end="6" speed="0.1f" loop="true"/>
+		</npc_abuelitas>
+
+		<npc_guardias>
+			<idleAnim start="0" end="6" speed="0.1f" loop="true"/>
+		</npc_guardias>
+		
 	</animations>
 
 	<dialogmanager>
