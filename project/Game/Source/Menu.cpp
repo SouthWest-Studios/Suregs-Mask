@@ -103,7 +103,7 @@ bool Menu::Update(float dt)
 	if (menuu)
 	{/*
 		app->hud->active = false;*/
-		app->entityManager->active = false;
+		//app->entityManager->active = false;
 		app->physics->active = false;
 		app->hud->active = false;
 		if (ventana == 0)
