@@ -546,14 +546,30 @@ void Boss_Inuit::Attack(float dt)
 		inAtack = true;
 		printf("\nataque1");
 		bmrBack = false;
-		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
+		if (isFacingLeft) {
+			atkDistancia = -150;
+		}
+		else
+		{
+			atkDistancia = 150;
+		}
+		atackCube = app->physics->CreateRectangleSensor(position.x - atkDistancia, position.y, 200, 300, STATIC);
+		atackCube->ctype = ColliderType::ATACK_INUIT;
 		atkTimeReset = false;
 		break;
 	case 2:
 		atk1_boss_inuit.Reset();
 		inAtack = true;
 		printf("\nataque2");
-		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
+		if (isFacingLeft) {
+			atkDistancia = -150;
+		}
+		else
+		{
+			atkDistancia = 150;
+		}
+		atackCube = app->physics->CreateRectangleSensor(position.x - atkDistancia, position.y, 200, 300, STATIC);
+		atackCube->ctype = ColliderType::ATACK_INUIT;
 		atkTimeReset = false;
 		break;
 	case 3:
@@ -981,6 +997,15 @@ void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 			health -= app->entityManager->GetPlayer()->currentStats.attackDamage;
 			printf("\n BossHeal %f", app->entityManager->GetPlayer()->attackDamage);
 		}
+		//app->entityManager->GetPlayer()->TakeDamage(flechaCargadaRastroDamage);
+		break;
+
+	case ColliderType::ATACK_INUIT:
+		LOG("Collision Player_Attack");
+		if (physA->ctype == ColliderType::PLAYER) {
+			app->entityManager->GetPlayer()->TakeDamage(attackDamage);
+		}
+		
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
