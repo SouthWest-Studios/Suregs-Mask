@@ -79,6 +79,7 @@ private:
 	SDL_Rect* rectFondoMonedas;
 	SDL_Rect* rectFondoObjetosConseguidos;
 
+	SDL_Rect* rectMascaraNoMask;
 	SDL_Rect* rectMascara0;
 	SDL_Rect* rectMascara1;
 	SDL_Rect* rectMascara2;
