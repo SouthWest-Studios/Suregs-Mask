@@ -153,6 +153,8 @@ bool Boss_Inuit::Update(float dt)
 		break;
 	case FASE::FASE_TWO:
 		//desiredState = EntityState_Boss_Inuit::IDLE;
+		atk2_boss_inuit.speed = 0.25;
+		atk1_boss_inuit.speed = 0.25;
 		if (!goUseWave) {
 			waveTime.Start();
 		}
@@ -238,7 +240,7 @@ bool Boss_Inuit::PostUpdate() {
 
 	//printf("\n Heal: %f", health);
 
-	if (atkAnimation) {
+	if (atkAnimation && fase != FASE::FASE_CHANGE) {
 		if (attackTime == 1) {
 			//atk1_boss_inuit.speed = 1;
 			currentAnimation = &atk1_boss_inuit;
@@ -247,6 +249,7 @@ bool Boss_Inuit::PostUpdate() {
 			currentAnimation = &atk2_boss_inuit;
 		}
 		if (attackTime == 0) {
+			
 			currentAnimation = &idleAnim_boss_inuit;
 		}
 	}
