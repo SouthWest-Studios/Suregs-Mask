@@ -97,8 +97,8 @@ bool Scene_Menu::Start()
 	app->guiManager->pointerId = 1;
 	app->guiManager->columnSize = 0;
 
-	/*fPoint pos(0.0f, 0.0f);
-	app->psystem->AddEmiter(pos, EMITTER_TYPE_SPARK);*/
+	fPoint pos(605.0f, 335.0f);
+	eMenu = app->psystem->AddEmiter(pos, EMITTER_TYPE_BURST);
 
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
@@ -122,13 +122,14 @@ bool Scene_Menu::PreUpdate()
 bool Scene_Menu::Update(float dt)
 {
 	OPTICK_EVENT();
-	int mx, my;
+	
+	//int mx, my;
 
-	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN) {
-		app->input->GetMousePosition(mx, my);
-		fPoint pos((float)mx, (float)my);
-		app->psystem->AddEmiter(pos, EMITTER_TYPE_BURST);
-	}
+	//if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN) {
+	//	app->input->GetMousePosition(mx, my);
+	//	fPoint pos((float)mx, (float)my);
+	//	app->psystem->AddEmiter(pos, EMITTER_TYPE_BURST);
+	//}
 
 	if (showSettings == false)
 	{
@@ -211,7 +212,7 @@ bool Scene_Menu::CleanUp()
 	app->tex->UnLoad(settings);
 	app->tex->UnLoad(credits);
 
-	/*eMenu = nullptr;*/
+	eMenu = nullptr;
 
 	return true;
 }
