@@ -234,6 +234,8 @@ public:
     List<MapObject*> lRoomsList;
     List<MapObject*> rRoomsList;
 
+    iPoint al = { 0,0 };
+
 private:
     
 
