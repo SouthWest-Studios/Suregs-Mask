@@ -175,7 +175,7 @@
 			   Tsprite="48" Pwidth="1270" sprite_x="160" sprite_y="215"/>
 
 		<boorok texturePath="Assets/Textures/Entidades/Boorok/spritesheet_boorok.png" 
-			   maxHealth="400.0f" speed="0.6f" attackDamage="180.0f" attackDistance="4" viewDistance="15" chargeattackDistance= "5" areaattackdamage= "50"
+			   maxHealth="400.0f" speed="0.6f" attackDamage="50.0f" attackDistance="2" viewDistance="15" chargeattackDistance= "10" areaattackdamage= "180.0f"
 			   Tsprite="70" Pwidth="5000" sprite_x="500" sprite_y="429"/>
 
 		<boss_inuit texturePath="Assets/Textures/Entidades/Boss/Inuit/Miniboss1.png" 
@@ -518,11 +518,11 @@
 		<boorok>
 			<sleepAnim start="0" end="10" speed="0.05f" loop="true"/>
 			<runAnim start="10" end="19" speed="0.05f" loop="true"/>
-			<attackAnim start="20" end="27" speed="0.05f" loop="true"/>
-			<reciebeDamage start="30" end="37" speed="0.05f" loop="true"/>
+			<attackAnim start="20" end="27" speed="0.05f" loop="false"/>
+			<reciebeDamage start="30" end="37" speed="0.05f" loop="false"/>
 			<idleAnim start="40" end="46" speed="0.05f" loop="true"/>
-			<wakeupAnim start="50" end="56" speed="0.05f" loop="true"/>
-			<chargeAttackAnim start="60" end="64" speed="0.05f" loop="true"/>
+			<wakeupAnim start="50" end="56" speed="0.05f" loop="false"/>
+			<chargeAttackAnim start="60" end="64" speed="0.05f" loop="false"/>
 			<dieAnim start="0" end="10" speed="0.1f" loop="false"/>
 		</boorok>
 
