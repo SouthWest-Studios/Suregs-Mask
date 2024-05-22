@@ -189,11 +189,13 @@ bool Boss_Inuit::PostUpdate() {
 		isFacingLeft = true;
 	}*/
 	//printf("\ninCenter: %d", isInCenter);
-	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 410, position.y - 300, SDL_FLIP_HORIZONTAL, &rect);
-	}
-	else {
-		app->render->DrawTexture(texture, position.x - 410, position.y - 300, SDL_FLIP_NONE, &rect);
+	if (!Dead) {
+		if (isFacingLeft) {
+			app->render->DrawTexture(texture, position.x - 410, position.y - 300, SDL_FLIP_HORIZONTAL, &rect);
+		}
+		else {
+			app->render->DrawTexture(texture, position.x - 410, position.y - 300, SDL_FLIP_NONE, &rect);
+		}
 	}
 
 
@@ -292,7 +294,7 @@ bool Boss_Inuit::PostUpdate() {
 		ulti_Atack();
 	}
 	//Wave
-	if (waveTimerColdDown(10) && !waveTimeStart && goUseWave) {
+	if (waveTimerColdDown(10) && !waveTimeStart && goUseWave && !Dead) {
 		//printf("\ndelete-3");
 		shock_wave(originalWavePosition.x, originalWavePosition.y, 5, 520, 0);
 	}
@@ -642,6 +644,25 @@ void Boss_Inuit::atackBoomerang(BTPDirection direccion)
 void Boss_Inuit::Die() {
 
 	//Mask XP
+	Dead = true;
+
+	/*if (pbodyFoot != nullptr) {
+		pbodyFoot->body->GetWorld()->DestroyBody(pbodyFoot->body);
+	}
+	if (pbodySensor != nullptr) {
+		pbodySensor->body->GetWorld()->DestroyBody(pbodySensor->body);
+	}*/
+	//phy->body->GetWorld()->DestroyBody(phy->body);
+
+
+	/*if (atackBMR != nullptr) {
+		app->physics->GetWorld()->DestroyBody(atackBMR->body);
+	}*/
+	/*
+	if (areaSensor != nullptr) {
+		app->physics->GetWorld()->DestroyBody(areaSensor->body);
+	}
+	*/
 
 	//Mask 0
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)

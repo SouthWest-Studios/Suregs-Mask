@@ -122,6 +122,7 @@ private:
 
 	bool isFacingLeft = false;
 	bool enemyMove = false;
+	bool Dead = false;
 
 	iPoint originalPosition;
 	iPoint originalWavePosition;
