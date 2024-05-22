@@ -322,7 +322,6 @@
     <ClCompile Include="Source\Elevator.cpp">
       <Filter>Entities\Ascensor</Filter>
     </ClCompile>
-    <ClCompile Include="Source\PuzzleButtonEntity.cpp" />
     <ClCompile Include="Source\Boss_Igorv.cpp">
       <Filter>Entities\Boss</Filter>
     </ClCompile>
@@ -340,6 +339,9 @@
     </ClCompile>
     <ClCompile Include="Source\Enemy_Khurt_Variation.cpp">
       <Filter>Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PuzzleButtonEntity.cpp">
+      <Filter>Entities\Puzzle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -727,7 +729,6 @@
     <ClInclude Include="Source\Elevator.h">
       <Filter>Entities\Ascensor</Filter>
     </ClInclude>
-    <ClInclude Include="Source\PuzzleButtonEntity.h" />
     <ClInclude Include="Source\Boss_Igory.h">
       <Filter>Entities\Boss</Filter>
     </ClInclude>
@@ -745,6 +746,9 @@
     </ClInclude>
     <ClInclude Include="Source\Enemy_Khurt_Variation.h">
       <Filter>Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PuzzleButtonEntity.h">
+      <Filter>Entities\Puzzle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -837,6 +841,9 @@
     </Filter>
     <Filter Include="Modules\SistemaPociones\SistemaMisiones">
       <UniqueIdentifier>{0c0bec82-986a-4aef-bbd9-567b8b1ae92a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Puzzle">
+      <UniqueIdentifier>{9f232ba4-1a34-482f-a603-e5e6c38e6b80}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

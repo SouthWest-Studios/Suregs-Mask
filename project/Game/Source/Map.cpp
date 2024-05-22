@@ -646,7 +646,7 @@ bool Map::LoadTileSet(pugi::xml_node mapFile)
 		tileset->tilecount = tilesetNode.attribute("tilecount").as_int();
 
 		//Load Tileset image
-		SString mapTex = pathTextures;
+		SString mapTex = "Assets/Textures/Mapas/";
 		mapTex += tilesetNode.child("image").attribute("source").as_string();
 		tileset->texture = app->tex->Load(mapTex.GetString());
 
