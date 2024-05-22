@@ -67,7 +67,7 @@ bool Item_Pocion_Velocidad::PostUpdate()
 
 bool Item_Pocion_Velocidad::CleanUp()
 {
-	app->physics->GetWorld()->DestroyBody(pbody->body);
+	app->physics->DestroyBody(pbody);app->entityManager->DestroyEntity(this);active = false;
 	app->tex->UnLoad(texture);
 	return true;
 }

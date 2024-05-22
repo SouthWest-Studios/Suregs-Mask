@@ -19,6 +19,8 @@ GuiControlSlider::GuiControlSlider(uint32 id, SDL_Rect bounds, int minValue, int
     slider = app->tex->Load("Assets/Textures/Interfaz/slider.png");
     slider2 = app->tex->Load("Assets/Textures/Interfaz/sliderSelected.png");
     knob = app->tex->Load("Assets/Textures/Interfaz/knob.png");
+
+    select_fx = app->audio->LoadAudioFx("get_item_fx");
 }
 
 GuiControlSlider::~GuiControlSlider()
@@ -54,11 +56,13 @@ bool GuiControlSlider::PostUpdate()
             if (app->input->GetButton(LEFT) == KEY_REPEAT && value >= 0)
             {
                 value--;
+                app->audio->PlayTimedFx(select_fx, 500);
 
             }
             if (app->input->GetButton(RIGHT) == KEY_REPEAT && value <= 100)
             {
                 value++;
+                app->audio->PlayTimedFx(select_fx, 500);
 
             }
         }else{

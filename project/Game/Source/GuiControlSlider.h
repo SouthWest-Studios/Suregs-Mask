@@ -31,6 +31,8 @@ private:
 
 	bool canClick = true;
 	bool drawBasic = false;
+
+	int select_fx;
 };
 
 #endif // __GUICONTROLSLIDER_H__

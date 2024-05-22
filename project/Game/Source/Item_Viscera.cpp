@@ -67,7 +67,7 @@ bool Item_Viscera::PostUpdate()
 
 bool Item_Viscera::CleanUp()
 {
-	app->physics->GetWorld()->DestroyBody(pbody->body);
+	app->physics->DestroyBody(pbody);app->entityManager->DestroyEntity(this);active = false;
 	app->tex->UnLoad(texture);
 	return true;
 }
