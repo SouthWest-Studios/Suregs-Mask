@@ -84,7 +84,6 @@ private:
 	SDL_Rect* rectMascara1;
 	SDL_Rect* rectMascara2;
 	SDL_Rect* rectMascara3;
-	SDL_Rect* rectMascara4;
 
 	SDL_Rect* rectBotonPlaceholder;
 	SDL_Rect* rectBotonTAB;

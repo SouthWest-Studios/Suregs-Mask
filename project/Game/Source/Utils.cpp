@@ -25,13 +25,13 @@ inline fPoint getDirectionVector(iPoint a, iPoint b) {
 }
 
 inline double GetAngleFromDirection(fPoint dir) {
-    // Calcula el ángulo en radianes usando la función atan2
+    // Calcula el angulo en radianes usando la funcion atan2
     double angle_rad = atan2(dir.y, dir.x);
 
-    // Convierte el ángulo de radianes a grados
+    // Convierte el angulo de radianes a grados
     double angle_deg = angle_rad * 180.0 / M_PI;
 
-    // Asegúrate de que el ángulo esté en el rango [0, 360)
+    // Aseguate de que el angulo est?en el rango [0, 360)
     if (angle_deg < 0) {
         angle_deg += 360.0;
     }

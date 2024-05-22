@@ -108,12 +108,19 @@ private:
 
 
 	//animacion
-	Animation idleAnim;
-	Animation runAnim;
-	Animation attackAnim;
-	Animation dieAnim;
+	Animation atk2_boss_inuit;
+	Animation atk1_boss_inuit;
+	Animation wave_boss_inuit;
+	Animation idleAnim_boss_inuit;
+	Animation boomerang_boss_inuit;
+	Animation changeFase_boss_inuit;
+	Animation move_inuit;
+
+
 
 	bool isFacingLeft = false;
+	bool isInCenter = false;
+	bool enemyMove = false;
 
 	iPoint originalPosition;
 	iPoint originalWavePosition;

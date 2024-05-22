@@ -47,19 +47,25 @@ bool Boss_Inuit::Start() {
 	Photowidth = config.attribute("Pwidth").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
-	idleAnim.LoadAnim("boss_inuit", "idleAnim_boss_inuit", spritePositions);
+	atk2_boss_inuit.LoadAnim("boss_inuit", "atk2_boss_inuit", spritePositions);
+	atk1_boss_inuit.LoadAnim("boss_inuit", "atk1_boss_inuit", spritePositions);
+	wave_boss_inuit.LoadAnim("boss_inuit", "wave_boss_inuit", spritePositions);
+	idleAnim_boss_inuit.LoadAnim("boss_inuit", "idleAnim_boss_inuit", spritePositions);
+	boomerang_boss_inuit.LoadAnim("boss_inuit", "boomerang_boss_inuit", spritePositions);
+	changeFase_boss_inuit.LoadAnim("boss_inuit", "changeFase_boss_inuit", spritePositions);
+	move_inuit.LoadAnim("boss_inuit", "move_inuit", spritePositions);
 	/*runAnim.LoadAnim("osiris", "runAnim", spritePositions);
 	attackAnim.LoadAnim("osiris", "attackAnim", spritePositions);
 	dieAnim.LoadAnim("osiris", "dieAnim", spritePositions);*/
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
-	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
+	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 60, bodyType::DYNAMIC);
 	pbodyFoot->entity = this;
 	pbodyFoot->listener = this;
 	pbodyFoot->ctype = ColliderType::BOSS_INUIT;
 
-	pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 40, 60, bodyType::DYNAMIC);
+	pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 120, 300, bodyType::DYNAMIC);
 	pbodySensor->entity = this;
 	pbodySensor->listener = this;
 	pbodySensor->ctype = ColliderType::UNKNOWN;
@@ -88,6 +94,7 @@ bool Boss_Inuit::Start() {
 
 	printf("\nlifeLow40: %f", lifeLow40);
 	printf("\nlifeLow5: %f", lifeLow5);
+	desiredState = EntityState_Boss_Inuit::IDLE;
 	return true;
 }
 
@@ -107,13 +114,14 @@ bool Boss_Inuit::Update(float dt)
 	{
 		desiredState = EntityState_Boss_Inuit::ATTACKING_BASIC;
 	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance * 32 && currentState != EntityState_Boss_Inuit::ATTACKING_BASIC)
+	else if (enemyMove && currentState != EntityState_Boss_Inuit::ATTACKING_BASIC)
 	{
+		//printf("Running");
 		desiredState = EntityState_Boss_Inuit::RUNNING;
 	}
 	else
 	{
-		desiredState = EntityState_Boss_Inuit::RUNNING;
+		desiredState = EntityState_Boss_Inuit::IDLE;
 	}
 	stateMachine(dt, playerPos);
 
@@ -149,7 +157,7 @@ bool Boss_Inuit::Update(float dt)
 	if (health <= lifeLow40) {
 		fase = FASE::FASE_CHANGE;
 	}
-	
+
 	if (health <= lifeLow5 && !useUlt) {
 		useUlt = true;
 		goUseUlt = true;
@@ -179,7 +187,7 @@ bool Boss_Inuit::Update(float dt)
 
 bool Boss_Inuit::PostUpdate() {
 
-	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
+	if (currentAnimation == nullptr) { currentAnimation = &idleAnim_boss_inuit; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
 
@@ -192,13 +200,19 @@ bool Boss_Inuit::PostUpdate() {
 	//	SDL_SetTextureAlphaMod(texture, 255);
 	//}
 
-
+	
+	/*if (isInCenter) {
+		isFacingLeft = true;
+	}*/
+	//printf("\ninCenter: %d", isInCenter);
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 70, position.y - 200, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x - 410, position.y - 300, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 70, position.y - 200, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 410, position.y - 300, SDL_FLIP_NONE, &rect);
 	}
+
+	
 
 	for (uint i = 0; i < lastPath.Count(); ++i)
 	{
@@ -230,9 +244,9 @@ bool Boss_Inuit::PostUpdate() {
 	if (goUseUlt) {
 		ultDef = true;
 		if (!inWave) {
-		waveTime.Start();
-		waveTimeStart = true;
-		goUseUlt = false;
+			waveTime.Start();
+			waveTimeStart = true;
+			goUseUlt = false;
 		}
 	}
 	if (ultDef && !inWave && !waveTimeStart) {
@@ -437,8 +451,7 @@ void Boss_Inuit::ulti_Atack()
 
 void Boss_Inuit::DoNothing(float dt)
 {
-	//currentAnimation = &idleAnim;
-	////printf("Osiris idle");
+	currentAnimation = &idleAnim_boss_inuit;
 	//pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 
 }
@@ -446,7 +459,7 @@ void Boss_Inuit::DoNothing(float dt)
 void Boss_Inuit::Chase(float dt, iPoint playerPos)
 {
 	////printf("Osiris chasing");
-	//currentAnimation = &runAnim;
+	currentAnimation = &move_inuit;
 	Bossfinding(dt, playerPos);
 
 }
@@ -472,12 +485,6 @@ void Boss_Inuit::Attack(float dt)
 		break;
 	case 3:
 		inAtack = true;
-		printf("\nataque3");
-		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
-		break;
-
-	case 4:
-		inAtack = true;
 		printf("\nataque4");
 		playerDireccion = calculate_direction();
 		printplayerDireccion = directionToString(playerDireccion);
@@ -490,7 +497,13 @@ void Boss_Inuit::Attack(float dt)
 		inbmrAtack = true;
 		attackTime = 0;
 
+	/*case 4:
+		inAtack = true;
+		printf("\nataque3");
+		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
 		break;
+
+		break;*/
 
 	default:
 		break;
@@ -614,11 +627,12 @@ bool Boss_Inuit::Bossfinding(float dt, iPoint playerPosP)
 
 	//printf("\nBossArea:%f", dist(bossArea, enemyPos));
 	//printf("\nEmemyPosicion:%d", enemyPos);
-	
 
-	if ( !inbmrAtack) {
+
+	if (!inbmrAtack) {
 		dontMove = false;
-	}else
+	}
+	else
 	{
 		dontMove = true;
 	}
@@ -644,6 +658,26 @@ bool Boss_Inuit::Bossfinding(float dt, iPoint playerPosP)
 		else {
 			app->map->pathfinding->CreatePath(enemyPos, originalPosition); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
 			lastPath = *app->map->pathfinding->GetLastPath();
+			iPoint inCenter = enemyPos - originalPosition;
+			if (inCenter.IsZero() == true) {
+				enemyMove = false;
+				}
+			
+
+			//iPoint inCenter = enemyPos - originalPosition;
+			////printf("\nbuscarX: %d", inCenter.IsZero());
+			////printf("\nbuscarY: %d", inCenter.y);
+
+			//if (inCenter.IsZero() == true) {
+			//	//printf("\n1");
+			//	desiredState = EntityState_Boss_Inuit::IDLE;
+			//	isInCenter = true;
+			//}
+			//else {
+			//	//printf("\n0");
+			//	
+			//}
+			////printf("\nbuscar%d", enemyPos - originalPosition);
 		}
 
 
@@ -666,7 +700,7 @@ bool Boss_Inuit::Bossfinding(float dt, iPoint playerPosP)
 
 
 			isAttacking = false;
-			attackAnim.Reset();
+			//attackAnim.Reset();
 
 		}
 		pbodyFoot->body->SetLinearVelocity(velocity);
@@ -804,6 +838,7 @@ void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (physA->ctype == ColliderType::BOSSAREA) {
 			//printf("\n entraBossArea");
 			playerInBossArea = true;
+			enemyMove = true;
 		}
 		LOG("Collision PLAYER");
 		//restar vida al player
@@ -812,7 +847,7 @@ void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision Player_Attack");
 		if (fase != FASE::FASE_CHANGE) {
 			health -= app->entityManager->GetPlayer()->currentStats.attackDamage;
-		printf("\n BossHeal %f", app->entityManager->GetPlayer()->attackDamage);
+			printf("\n BossHeal %f", app->entityManager->GetPlayer()->attackDamage);
 		}
 		break;
 	case ColliderType::UNKNOWN:
