@@ -197,14 +197,14 @@ bool Boss_Inuit::PostUpdate() {
 	//BMR ATAQUE
 	if (checkAtackBMR) {
 		if (bmrBack) {
+			//BMRfinding(BMRposition);
 			bmrSpeed = -80;
 		}
 		else
 		{
 			bmrSpeed = 80;
-
+			
 		}
-
 		atackBoomerang(playerDireccion);
 	}
 	else
@@ -607,7 +607,7 @@ void Boss_Inuit::atackBoomerang(BTPDirection direccion)
 	}
 
 	b2Transform pbodyPos = atackBMR->body->GetTransform();
-	iPoint BMRposition;
+	
 	BMRposition.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
 	BMRposition.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
 	currentAnimation1 = &boomerang_boss_inuit;
@@ -679,6 +679,41 @@ void Boss_Inuit::Revive()
 
 }
 
+
+bool Boss_Inuit::BMRfinding(iPoint BMR)
+{
+
+	iPoint BMRPos = app->map->WorldToMap(BMR.x, BMR.y);
+	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
+	app->map->pathfinding->CreatePath(BMRPos, enemyPos);
+	lastPath = *app->map->pathfinding->GetLastPath();
+
+		b2Vec2 velocity = b2Vec2(0, 0);
+
+		if (lastPath.Count() > 1) { // Asegate de que haya al menos una posicion en el camino
+
+			// Toma la primera posicion del camino como el objetivo al que el enemigo debe dirigirse
+			iPoint targetPos = app->map->MapToWorld(lastPath.At(1)->x, lastPath.At(1)->y);
+
+			// Calcula la direccion hacia el objetivo
+			b2Vec2 direction(targetPos.x - position.x, targetPos.y - position.y);
+			direction.Normalize();
+
+			// Calcula la velocidad del movimiento
+			velocity = b2Vec2(direction.x * speed, direction.y * speed);
+
+			// Determina si el enemigo est?mirando hacia la izquierda o hacia la derecha
+			isFacingLeft = (direction.x >= 0);
+
+
+			isAttacking = false;
+			//attackAnim.Reset();
+
+		}
+		pbodyFoot->body->SetLinearVelocity(velocity);
+
+	return true;
+}
 
 
 bool Boss_Inuit::Bossfinding(float dt, iPoint playerPosP)

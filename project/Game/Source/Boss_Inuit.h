@@ -54,6 +54,7 @@ public:
 	void Die();
 	void Revive();
 	bool Bossfinding(float dt, iPoint playerPos);
+	bool BMRfinding(iPoint playerPos);
 	void deleteCollision(PhysBody* phy);
 	void SetPlayer(Player* player);
 	float GetHealth() const;
@@ -125,6 +126,7 @@ private:
 	iPoint originalPosition;
 	iPoint originalWavePosition;
 	iPoint bossArea;
+	iPoint BMRposition;
 
 	int TSprite;
 	int SpriteX;
