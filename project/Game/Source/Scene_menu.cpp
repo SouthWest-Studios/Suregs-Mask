@@ -212,6 +212,12 @@ bool Scene_Menu::CleanUp()
 	app->tex->UnLoad(settings);
 	app->tex->UnLoad(credits);
 
+	showSettings = false;
+	showControls = false;
+	showCredits = false;
+	showNewGames = false;
+	showSavedGames = false;
+
 	eMenu = nullptr;
 	app->psystem->RemoveAllEmitters();
 
