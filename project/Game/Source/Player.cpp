@@ -844,6 +844,8 @@ bool Player::CleanUp()
 	app->tex->UnLoad(texture);
 	DeadTP = false;
 	dead_player.Reset();
+	/*blood = nullptr;
+	app->psystem->RemoveAllEmitters();*/
 
 	RELEASE(spritePositions);
 	delete spritePositions;
@@ -1069,6 +1071,9 @@ void Player::Dead()
 		app->audio->playingDeathFx = true;
 	}
 
+	/*fPoint pos((float)position.x, (float)position.y);
+	blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_SPARK);*/
+
 	 //printf("dead");
 	currentAnimation = &dead_player;
 	if (DeadTP && PlayerTimerColdDown(3)) {
@@ -1076,6 +1081,8 @@ void Player::Dead()
 		app->audio->playingDeathFx = false;
 		app->audio->StopFx(-1);
 	}
+
+	
 }
 
 void Player::UnequipMasks() {

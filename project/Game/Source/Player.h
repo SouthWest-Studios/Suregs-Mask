@@ -10,6 +10,9 @@
 #include "Physics.h"
 #include "Map.h"
 #include <map>
+#include "Particle.h"
+#include "ParticlePool.h"
+#include "Emitter.h"
 
 struct SDL_Texture;
 
@@ -418,6 +421,8 @@ private:
 
 	//Atack
 	bool atack_Anim = false;
+	
+	Emitter* blood = nullptr;
 
 public:
 
