@@ -665,6 +665,7 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
+	//LOG("Playerpos: x:%d y:%d", position.x, position.y);
 	UpdateStats();
 
 
