@@ -1407,9 +1407,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 				{
 					app->inventoryManager->CreateItem(physB->listener->type, physB->listener->description, physB->listener->tipo, physB->listener->name.c_str());
 
-					physB->listener->active = false;
-					physB->body->SetActive(false);
-
+					/*physB->listener->active = false;
+					physB->body->SetActive(false);*/
+					physB->listener->CleanUp();
 
 				}
 				else
@@ -1431,8 +1431,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 				if (app->notesManager->IsFull() == false)
 				{
 					app->notesManager->CreateItem(physB->listener->type, physB->listener->CloseTexture, physB->listener->description, physB->listener->titulo, physB->listener->id);
-					physB->listener->active = false;
-					physB->body->SetActive(false);
+					/*physB->listener->active = false;
+					physB->body->SetActive(false);*/
+					physB->listener->CleanUp();
 				}
 
 			}

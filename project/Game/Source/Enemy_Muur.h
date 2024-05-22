@@ -85,7 +85,6 @@ private:
 
 
 	Animation runAnim;
-	Animation stoppingAnim;
 	Animation stunAnim;
 	Animation attackAnim;
 	Animation idleAnim;
@@ -122,6 +121,7 @@ private:
 	//Charge Attack
 	Timer stunTimer;
 	Timer chargeTimer;
+	Timer timechargingTimer;
 	bool charging;
 	bool isStunned;
 	iPoint Antposition;
