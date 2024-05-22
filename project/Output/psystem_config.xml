@@ -59,6 +59,24 @@
 			<vortexSensitive state = "false"/>
 		</emitter>
 
+		<emitter type ="flame_green">
+			<angleRange min ="80" max ="110"/>
+			<rotSpeed value ="0" randMin = "-1" randMax ="1"/>
+			<startSpeed value ="0.05f" randMin = "0" randMax ="1"/>
+			<endSpeed value ="0.05f" randMin = "0" randMax ="1"/>
+			<startSize value ="0" randMin ="0" randMax ="1"/>
+			<endSize value =" 120" randMin ="1" randMax ="1"/>
+			<emitNumber value ="1"/>
+			<emitVariance value ="0" randMin ="0" randMax ="1"/>
+			<maxParticleLife value ="100"  randMin ="0" randMax ="1"/>
+			<textureRect x="0" y="0" w="128" h="128"/>
+			<startColor r ="0" g="255" b="90" a="255"/>
+			<endColor r ="0" g="255" b="120" a ="0"/>
+			<blendMode mode ="add"/>
+			<lifetime value ="-1"/>
+			<vortexSensitive state = "false"/>
+		</emitter>
+
 		<emitter type ="smoke">
 			<angleRange min ="60" max ="120"/>
 			<rotSpeed value ="5" randMin ="-1" randMax ="1"/>

@@ -800,6 +800,11 @@ bool Player::Update(float dt)
 		printf("Has subido la mask 3 a nivel %i y su experiencia actual es %i \n", maskThreeLevel, maskThreeXP);
 	}
 
+	//if (currentState == EntityStatePlayer::DEAD && !particulaBlood) {
+	//	fPoint pos((float)position.x, (float)position.y);
+	//	blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_SPARK);
+	//	particulaBlood = true;
+	//}
 	EfectoPociones(dt);
 
 	stateMachine(dt);
@@ -844,8 +849,9 @@ bool Player::CleanUp()
 	app->tex->UnLoad(texture);
 	DeadTP = false;
 	dead_player.Reset();
-	/*blood = nullptr;
-	app->psystem->RemoveAllEmitters();*/
+	//blood = nullptr;
+	//app->psystem->RemoveAllEmitters();
+	//particulaBlood = false;
 
 	RELEASE(spritePositions);
 	delete spritePositions;
@@ -1071,8 +1077,8 @@ void Player::Dead()
 		app->audio->playingDeathFx = true;
 	}
 
-	/*fPoint pos((float)position.x, (float)position.y);
-	blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_SPARK);*/
+	//fPoint pos((float)position.x, (float)position.y);
+	//blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_SPARK);
 
 	 //printf("dead");
 	currentAnimation = &dead_player;
@@ -1217,6 +1223,11 @@ void Player::stateMachine(float dt)
 		}
 		break;
 	case EntityStatePlayer::DEAD:
+		/*if (!particulaBlood) {
+			fPoint pos((float)position.x, (float)position.y);
+			blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_SPARK);
+			particulaBlood = true;
+		}*/
 		Dead();
 		break;
 	case EntityStatePlayer::REVIVING:

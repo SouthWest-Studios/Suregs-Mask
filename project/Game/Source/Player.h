@@ -423,6 +423,7 @@ private:
 	bool atack_Anim = false;
 	
 	Emitter* blood = nullptr;
+	bool particulaBlood = false;
 
 public:
 

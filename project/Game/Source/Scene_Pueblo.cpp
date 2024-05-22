@@ -79,6 +79,8 @@ bool Scene_Pueblo::Start()
 
 	/*SDL_Rect btPos = { windowW / 2 - 60,20, 120,20};
 	gcButtom = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);*/
+	/*fPoint pos(784.0, 218.0);
+	app->psystem->AddEmiter(pos, EMITTER_TYPE_PURPLE_FLAME);*/
 
 	app->entityManager->Enable();
 
@@ -96,6 +98,18 @@ bool Scene_Pueblo::PreUpdate()
 // Called each loop iteration
 bool Scene_Pueblo::Update(float dt)
 {
+	/*int mx, my;
+	app->input->GetMousePosition(mx, my);
+	if (mx != NULL && my != NULL) {
+		printf("MX: %f,  MY: %f", (float)mx, (float)my);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN) {
+		app->input->GetMousePosition(mx, my);
+		fPoint pos((float)mx, (float)my);
+		app->psystem->AddEmiter(pos, EMITTER_TYPE_PURPLE_FLAME);
+	}*/
+	
+
 
    	OPTICK_EVENT();
 

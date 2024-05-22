@@ -5,6 +5,10 @@
 #include "Player.h"
 #include "GuiControl.h"
 #include "GuiControlButton.h"
+#include "Particle.h"
+#include "ParticlePool.h"
+#include "Emitter.h"
+
 
 struct SDL_Texture;
 

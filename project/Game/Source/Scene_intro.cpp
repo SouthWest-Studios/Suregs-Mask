@@ -44,6 +44,9 @@ bool Scene_Intro::Start()
 	texturaIntro = app->tex->Load(texturaIntroPath);
 	timerIntro.Start();
 
+	fPoint pos(605.0f, 335.0f);
+	potionFlare = app->psystem->AddEmiter(pos, EMITTER_TYPE_GREEN_FLAME);
+
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
@@ -63,9 +66,16 @@ bool Scene_Intro::Update(float dt)
 {
 
 	OPTICK_EVENT();
-	
+
+	int mx, my;
+	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN) {
+		app->input->GetMousePosition(mx, my);
+		fPoint pos((float)mx, (float)my);
+		app->psystem->AddEmiter(pos, EMITTER_TYPE_GREEN_FLAME);
+	}
+
 	if (timerIntro.ReadSec() < 5 ) {
-		app->render->DrawTexture(texturaIntro, 0, 0);
+		/*app->render->DrawTexture(texturaIntro, 0, 0);*/
 	}
 	else {
 		app->fadeToBlack->FadeToBlack(this, app->scene_menu, 90);
@@ -91,5 +101,7 @@ bool Scene_Intro::CleanUp()
 {
 	LOG("Freeing Scene_intro");
 	app->tex->UnLoad(texturaIntro);
+	potionFlare = nullptr;
+	app->psystem->RemoveAllEmitters();
 	return true;
 }

@@ -39,6 +39,8 @@ private:
 	const char* texturaIntroPath;
 	SDL_Texture* texturaIntro;
 	Timer timerIntro;
+
+	Emitter* potionFlare = nullptr;
 };
 
 #endif // __SCENE_INTRO_H__
