@@ -10,9 +10,7 @@
 	<scene_pueblo />
 	<entitymanager>
 		<entity_manager>
-			<doors>
-				<door sceneLevel="-10" tpID="0" />
-			</doors>
+			<doors />
 		</entity_manager>
 	</entitymanager>
 	<missionmanager />

@@ -69,7 +69,7 @@ bool Scene_GameOver::Start()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
-	fPoint pos(605.0f, 335.0f);
+	fPoint pos(300.0f, 335.0f);
 	app->psystem->AddEmiter(pos, EMITTER_TYPE_FLAME);
 
 	return true;
