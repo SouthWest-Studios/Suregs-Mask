@@ -79,7 +79,7 @@ public:
 	virtual ~ParticleSystem();
 
 	// Called when before render is available
-	bool Awake(pugi::xml_node& config);
+	bool Awake(pugi::xml_node config);
 
 	// Call before first frame
 	bool Start();
