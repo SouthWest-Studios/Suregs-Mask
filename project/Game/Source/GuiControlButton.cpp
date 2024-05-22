@@ -14,7 +14,7 @@ GuiControlButton::GuiControlButton(uint32 id, SDL_Rect bounds, const char* text)
 	canClick = true;
 	drawBasic = false;
 
-	select_audio = app->audio->LoadAudioFx("select_fx");
+	select_fx = app->audio->LoadAudioFx("select_fx");
 }
 
 GuiControlButton::~GuiControlButton()
@@ -54,7 +54,7 @@ bool GuiControlButton::PostUpdate()
 				NotifyObserver();
 				click = true;
 
-				app->audio->PlayFx(select_audio);
+				app->audio->PlayFx(select_fx);
 			}
 		}
 		else {

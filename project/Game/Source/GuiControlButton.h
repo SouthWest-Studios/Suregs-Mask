@@ -31,7 +31,7 @@ private:
 	
 	bool drawBasic = false;
 
-	int select_audio;
+	int select_fx;
 };
 
 #endif // __GUICONTROLBUTTON_H__
