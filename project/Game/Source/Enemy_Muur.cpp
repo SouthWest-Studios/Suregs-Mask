@@ -51,7 +51,6 @@ bool Enemy_Muur::Start() {
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
 	runAnim.LoadAnim("muur", "runAnim", spritePositions);
-	stoppingAnim.LoadAnim("muur", "stoppingAnim", spritePositions);
 	stunAnim.LoadAnim("muur", "stunAnim", spritePositions);
 	attackAnim.LoadAnim("muur", "attackAnim", spritePositions);
 	idleAnim.LoadAnim("muur", "idleAnim", spritePositions);
@@ -68,7 +67,7 @@ bool Enemy_Muur::Start() {
 	pbodyFoot->listener = this;
 	pbodyFoot->ctype = ColliderType::ENEMY;
 
-	pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y + 10, 10, 15, bodyType::DYNAMIC);
+	pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 10, 15, bodyType::DYNAMIC);
 	pbodySensor->entity = this;
 	pbodySensor->listener = this;
 	pbodySensor->ctype = ColliderType::UNKNOWN;
@@ -96,7 +95,7 @@ bool Enemy_Muur::Update(float dt)
 
 	// Pone el sensor del cuerpo en su posicion
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
-	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
+	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 0.5), 0);
 
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
 
@@ -137,10 +136,10 @@ bool Enemy_Muur::Update(float dt)
 		break;
 	}
 
-	if (charging && dist(Antposition, position) > 350)
+	if (charging && dist(Antposition, position) > 350 || charging && timechargingTimer.ReadSec() > 0.8)
 	{
-		Stunned(dt);
 		isStunned = true;
+		Stunned(dt);
 	}
 
 	if (chargeTimer.ReadSec() >= 5)
@@ -174,10 +173,10 @@ bool Enemy_Muur::PostUpdate() {
 	}
 
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x, position.y - 30, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x - 50, position.y - 150, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 25, position.y - 30, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 50, position.y - 150, SDL_FLIP_NONE, &rect);
 	}
 
 	for (uint i = 0; i < lastPath.Count(); ++i)
@@ -458,35 +457,46 @@ void Enemy_Muur::CheckPoison() {
 //VENENO ---------->
 
 void Enemy_Muur::Charge(float dt, iPoint playerPos) {
-	printf("charge");
-	currentAnimation = &chargeAnim;
-	charging = true;
+	if (chargeTimer.ReadSec() >= 5)
+	{
+		/*printf("charge");*/
+		currentAnimation = &chargeAnim;
+		pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
+		if (chargeAnim.HasFinished())
+		{
+			timechargingTimer.Start();
+			charging = true;
 
-	b2Vec2 direction(playerPos.x - position.x, playerPos.y - position.y);
-	direction.Normalize();
+			b2Vec2 direction(playerPos.x - position.x, playerPos.y - position.y);
+			direction.Normalize();
 
-	b2Vec2 impulse = b2Vec2(direction.x * 5, direction.y * 5);
-	pbodyFoot->body->ApplyLinearImpulse(impulse, pbodyFoot->body->GetWorldCenter(), true);
+			b2Vec2 impulse = b2Vec2(direction.x * 5, direction.y * 5);
+			pbodyFoot->body->ApplyLinearImpulse(impulse, pbodyFoot->body->GetWorldCenter(), true);
 
-	stunTimer.Start();
-	chargeTimer.Start();
+			stunTimer.Start();
+			chargeTimer.Start();
+		}
+	}
 }
 
 void Enemy_Muur::Stunned(float dt) {
-	if (stunTimer.ReadSec() <= 1) {
-		currentAnimation = &stoppingAnim;
-		if (stunTimer.ReadSec() > 2) {
-			currentAnimation = &stunAnim;
-			pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
-		}
-	}
-	else {
-		stunTimer.Start();
+	pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
+
+	if (stunAnim.HasFinished() && stunTimer.ReadSec() >= 2)
+	{
+		pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
 		nextState = EntityState::IDLE;
 		isStunned = false;
 		charging = false;
+		chargeTimer.Start();
+		stunAnim.Reset();
+	}
+	else {
+		isStunned = true;
+		currentAnimation = &stunAnim;
 	}
 }
+
 
 MapObject* Enemy_Muur::GetCurrentRoom()
 {
