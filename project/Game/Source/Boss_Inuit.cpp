@@ -130,7 +130,7 @@ bool Boss_Inuit::Update(float dt)
 		app->physics->DestroyBody(atackCube);
 		atackCube = nullptr;
 	}
-	
+
 
 	if (health <= lifeLow40 && !faseTwo) {
 		fase = FASE::FASE_CHANGE;
@@ -182,7 +182,7 @@ bool Boss_Inuit::PostUpdate() {
 	//	SDL_SetTextureAlphaMod(texture, 255);
 	//}
 
-	
+
 	/*if (isInCenter) {
 		isFacingLeft = true;
 	}*/
@@ -194,10 +194,22 @@ bool Boss_Inuit::PostUpdate() {
 		app->render->DrawTexture(texture, position.x - 410, position.y - 300, SDL_FLIP_NONE, &rect);
 	}
 
+	
 	//BMR ATAQUE
+	if (startBMR) {
+		if (TimerColdDown(2)) {
+			printf("\n bmrBack");
+			bmrBack = true;
+			startBMR = false;
+		}
+	}
+
 	if (checkAtackBMR) {
 		if (bmrBack) {
 			//BMRfinding(BMRposition);
+			/*fPoint returnBMR = getDirectionVector(BMRposition,position);
+			atackBMR->body->ApplyForceToCenter(b2Vec2(returnBMR.x * 80, returnBMR.y * 80), true);
+			printf("\n %d", bmrBack);*/
 			bmrSpeed = -80;
 		}
 		else
@@ -217,7 +229,7 @@ bool Boss_Inuit::PostUpdate() {
 		}
 	}
 
-	
+
 
 	for (uint i = 0; i < lastPath.Count(); ++i)
 	{
@@ -249,7 +261,7 @@ bool Boss_Inuit::PostUpdate() {
 			currentAnimation = &atk2_boss_inuit;
 		}
 		if (attackTime == 0) {
-			
+
 			currentAnimation = &idleAnim_boss_inuit;
 		}
 	}
@@ -475,7 +487,7 @@ void Boss_Inuit::resetAnimation()
 		}
 		inAtack = false;
 	}
-	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atk2_boss_inuit" ) {
+	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atk2_boss_inuit") {
 		if (atackCube != nullptr) {
 			app->physics->GetWorld()->DestroyBody(atackCube->body);
 			atackCube = nullptr;
@@ -520,7 +532,7 @@ void Boss_Inuit::Attack(float dt)
 	switch (attackTime)
 	{
 	case 1:
-		
+
 		inAtack = true;
 		printf("\nataque1");
 		bmrBack = false;
@@ -550,13 +562,13 @@ void Boss_Inuit::Attack(float dt)
 		attackTime = 0;
 		atkTimeReset = false;
 		break;
-	/*case 4:
-		inAtack = true;
-		printf("\nataque3");
-		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
-		break;
+		/*case 4:
+			inAtack = true;
+			printf("\nataque3");
+			atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
+			break;
 
-		break;*/
+			break;*/
 
 	default:
 		break;
@@ -606,14 +618,16 @@ void Boss_Inuit::atackBoomerang(BTPDirection direccion)
 		atackBMR->body->ApplyForceToCenter(force, true);
 	}
 
-	b2Transform pbodyPos = atackBMR->body->GetTransform();
-	
-	BMRposition.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
-	BMRposition.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
+	b2Transform pbodyPosBMR = atackBMR->body->GetTransform();
+
+	BMRposition.x = METERS_TO_PIXELS(pbodyPosBMR.p.x) - 16;
+	BMRposition.y = METERS_TO_PIXELS(pbodyPosBMR.p.y) - 16;
 	currentAnimation1 = &boomerang_boss_inuit;
 	SDL_Rect rect = currentAnimation1->GetCurrentFrame();
 	app->render->DrawTexture(texture, BMRposition.x - 410, BMRposition.y - 300, SDL_FLIP_HORIZONTAL, &rect);
 	currentAnimation1->Update();
+
+	
 }
 
 void Boss_Inuit::Die() {
@@ -688,29 +702,29 @@ bool Boss_Inuit::BMRfinding(iPoint BMR)
 	app->map->pathfinding->CreatePath(BMRPos, enemyPos);
 	lastPath = *app->map->pathfinding->GetLastPath();
 
-		b2Vec2 velocity = b2Vec2(0, 0);
+	b2Vec2 velocity = b2Vec2(0, 0);
 
-		if (lastPath.Count() > 1) { // Asegate de que haya al menos una posicion en el camino
+	if (lastPath.Count() > 1) { // Asegate de que haya al menos una posicion en el camino
 
-			// Toma la primera posicion del camino como el objetivo al que el enemigo debe dirigirse
-			iPoint targetPos = app->map->MapToWorld(lastPath.At(1)->x, lastPath.At(1)->y);
+		// Toma la primera posicion del camino como el objetivo al que el enemigo debe dirigirse
+		iPoint targetPos = app->map->MapToWorld(lastPath.At(1)->x, lastPath.At(1)->y);
 
-			// Calcula la direccion hacia el objetivo
-			b2Vec2 direction(targetPos.x - position.x, targetPos.y - position.y);
-			direction.Normalize();
+		// Calcula la direccion hacia el objetivo
+		b2Vec2 direction(targetPos.x - position.x, targetPos.y - position.y);
+		direction.Normalize();
 
-			// Calcula la velocidad del movimiento
-			velocity = b2Vec2(direction.x * speed, direction.y * speed);
+		// Calcula la velocidad del movimiento
+		velocity = b2Vec2(direction.x * speed, direction.y * speed);
 
-			// Determina si el enemigo est?mirando hacia la izquierda o hacia la derecha
-			isFacingLeft = (direction.x >= 0);
+		// Determina si el enemigo est?mirando hacia la izquierda o hacia la derecha
+		isFacingLeft = (direction.x >= 0);
 
 
-			isAttacking = false;
-			//attackAnim.Reset();
+		isAttacking = false;
+		//attackAnim.Reset();
 
-		}
-		pbodyFoot->body->SetLinearVelocity(velocity);
+	}
+	pbodyFoot->body->SetLinearVelocity(velocity);
 
 	return true;
 }
@@ -756,7 +770,7 @@ bool Boss_Inuit::Bossfinding(float dt, iPoint playerPosP)
 			iPoint inCenter = enemyPos - originalPosition;
 			if (inCenter.IsZero() == true) {
 				enemyMove = false;
-				}
+			}
 		}
 
 
@@ -857,7 +871,7 @@ std::string Boss_Inuit::directionToString(BTPDirection direction) {
 
 bool Boss_Inuit::TimerColdDown(float time)
 {
-	printf("\nataqueTimeClodDown%: %f", ataqueTimeClodDown);
+	//printf("\nataqueTimeClodDown%: %f", ataqueTimeClodDown);
 	ataqueTimeClodDown = atackTimeColdDown.CountDown(time);
 	if ((float)ataqueTimeClodDown == 0) {
 		return true;
@@ -901,7 +915,13 @@ void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (physA->ctype == ColliderType::ATACKBMR) {
 			//checkAtackBMR = false;
 			//atackBMR->body->SetLinearVelocity(b2Vec2(0, 0));
-			bmrBack = true;
+			printf("\nONcolibmrBack");
+			startBMR = true;
+			if (!tocaPared) {
+				tocaPared = true;
+				atackTimeColdDown.Start();
+			}
+			
 		}
 
 		break;
@@ -912,6 +932,7 @@ void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 			checkAtackBMR = false;
 			inbmrAtack = false;
 			inAtack = false;
+			tocaPared = false;
 		}
 		break;
 	case ColliderType::PLAYER:
@@ -943,6 +964,16 @@ void Boss_Inuit::OnEndCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
+		if (physA->ctype == ColliderType::ATACKBMR) {
+			//checkAtackBMR = false;
+			//atackBMR->body->SetLinearVelocity(b2Vec2(0, 0));
+			//printf("\nENDcolibmrBack");
+			startBMR = true;
+			if (!tocaPared) {
+				tocaPared = true;
+				atackTimeColdDown.Start();
+			}
+		}
 		break;
 	case ColliderType::PLAYER:
 		if (physA->ctype == ColliderType::BOSSAREA) {

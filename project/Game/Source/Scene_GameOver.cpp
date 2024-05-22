@@ -58,8 +58,8 @@ bool Scene_GameOver::Start()
 	app->win->GetWindowSize(windowW, windowH);
 
 	
-	VolverAlMenu = (GuiControlButton*)(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 201, "VOLVER AL MENÚ", SDL_Rect{ 570, 460,	136,25 }, this));
-	Continuar = (GuiControlButton*)(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 202, "CONTINUAR", SDL_Rect{ 570, 560,	136,25 }, this));
+	VolverAlMenu = (GuiControlButton*)(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 201, "VOLVER AL MENÚ", SDL_Rect{ 560, 470,	156,27 }, this));
+	Continuar = (GuiControlButton*)(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 202, "CONTINUAR", SDL_Rect{ 570, 520,	136,25 }, this));
 
 	app->guiManager->minId = 201;
 	app->guiManager->maxId = 202;

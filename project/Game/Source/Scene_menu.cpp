@@ -98,7 +98,7 @@ bool Scene_Menu::Start()
 	app->guiManager->columnSize = 0;
 
 	fPoint pos(500.0f, 500.0f);
-	app->psystem->AddEmiter(pos, EMITTER_TYPE_SPARK);
+	//app->psystem->AddEmiter(pos, EMITTER_TYPE_SPARK);
 
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;

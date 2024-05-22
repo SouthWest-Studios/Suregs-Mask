@@ -6,6 +6,7 @@
 #include "GuiControlSlider.h"
 #include "Audio.h"
 #include "Scene_Menu.h"
+#include "Scene_GameOver.h"
 #include "Menu.h"
 
 GuiManager::GuiManager(App* app, bool start_enabled) : Module(app, start_enabled)
@@ -80,7 +81,7 @@ bool GuiManager::Update(float dt)
 		control1->selected = true;
 	}
 
-	if (app->scene_menu->active || app->menu->ventana == 4) {
+	if (app->scene_menu->active || app->menu->ventana == 4 || app->scene_gameover->active) {
 		if (app->menu->ventana == 4)
 		{
 			minId = 100;
