@@ -10,7 +10,11 @@
 	<scene_pueblo />
 	<entitymanager>
 		<entity_manager>
-			<doors />
+			<doors>
+				<door sceneLevel="-10" tpID="0" />
+				<door sceneLevel="-10" tpID="4" />
+				<door sceneLevel="-10" tpID="1" />
+			</doors>
 		</entity_manager>
 	</entitymanager>
 	<missionmanager />
@@ -18,7 +22,7 @@
 	<menu />
 	<iventorymanager>
 		<inventory>
-			<money quantity="0" />
+			<money quantity="300" />
 		</inventory>
 	</iventorymanager>
 	<commercemanager />

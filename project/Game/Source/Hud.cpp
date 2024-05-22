@@ -37,7 +37,7 @@ bool Hud::Awake(pugi::xml_node config)
 
 	hudTexturePath = (char*)config.child("mainTexture").attribute("texturepath").as_string();
 	messageTexturePath = (char*)config.child("messageTexture").attribute("texturepath").as_string();
-	
+
 	rectBarraVida = new SDL_Rect{ 269,6,259,16 };
 	rectFondoBarraVida = new SDL_Rect{ 0,2,267,23 };
 
@@ -52,7 +52,7 @@ bool Hud::Awake(pugi::xml_node config)
 	rectPocionRegeneracion = new SDL_Rect{ 261,686,60,56 };
 	rectPocionDano = new SDL_Rect{ 326,686,60,56 };
 	rectPocionVelocidad = new SDL_Rect{ 391,686,62,65 };
-	rectPocionOrbe = new SDL_Rect{ 456,686,62,65 };	
+	rectPocionOrbe = new SDL_Rect{ 456,686,62,65 };
 
 	potionRectMap[InventityType::POCION_VIDA_1] = rectPocionVida1;
 	potionRectMap[InventityType::POCION_VIDA_2] = rectPocionVida2;
@@ -103,8 +103,8 @@ bool Hud::Start()
 // Called each loop iteration
 bool Hud::PreUpdate()
 {
-	
-	
+
+
 	return true;
 }
 
@@ -123,15 +123,15 @@ bool Hud::Update(float dt)
 
 			acquired_Items.erase(iter);
 
-			
+
 			SDL_SetTextureAlphaMod(acquiredItem->texture, 255); // Ajusta la opacidad
 
 			delete acquiredItem;
 
 		}
-		
 
-	}	
+
+	}
 
 	Potions();
 
@@ -145,7 +145,7 @@ bool Hud::PostUpdate()
 	if (app->entityManager->GetPlayer() == nullptr) return true;
 
 	app->win->GetWindowSize(windowWidth, windowHeight);
-	
+
 
 
 	//Barra de vida
@@ -159,10 +159,10 @@ bool Hud::PostUpdate()
 	//LOG("Vida player: %d, max vida player: %d, rect: %d", app->entityManager->GetPlayer()->health, app->entityManager->GetPlayer()->maxHealth, rectW);
 
 	app->render->DrawTexture(hudTexture, 175, 44, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
-	
+
 	//Monedas
 	std::string quantityStr = std::to_string(app->inventoryManager->monedasObtenidas);
-	
+
 	app->render->DrawTexture(hudTexture, windowWidth - rectFondoMonedas->w - 35, 130, SDL_FLIP_NONE, rectFondoMonedas, 0);
 	app->render->DrawText(quantityStr.c_str(), windowWidth - rectFondoMonedas->w + 10, 140, 18, 18);
 	//Fondos
@@ -187,13 +187,17 @@ bool Hud::PostUpdate()
 
 
 	//Mascaras
-	Mask* primaryMask = app->entityManager->GetPlayer()->GetPrimaryMask();
-	Mask* secondaryMask = app->entityManager->GetPlayer()->GetSecondaryMask();
+	Mask primaryMask = app->entityManager->GetPlayer()->GetPrimaryMask();
+	Mask secondaryMask = app->entityManager->GetPlayer()->GetSecondaryMask();
+	//Mask primaryMask2 = *app->entityManager->GetPlayer()->GetPrimaryMask();
+
 
 	SDL_Rect rectPrimaryMask;
 	SDL_Rect rectSecondaryMask;
 
-	switch (*primaryMask)	
+
+	// Mensaje de depuración
+	switch (primaryMask)
 	{
 		case Mask::NOMASK: rectPrimaryMask = *rectMascaraNoMask; break;
 		case Mask::MASK0: rectPrimaryMask = *rectMascara0; break;
@@ -203,7 +207,9 @@ bool Hud::PostUpdate()
 		default: rectPrimaryMask = *rectMascaraNoMask; break;
 	}
 
-	switch (*secondaryMask)
+
+	
+	switch (secondaryMask)
 	{
 		case Mask::NOMASK: rectSecondaryMask = *rectMascaraNoMask; break;
 		case Mask::MASK0: rectSecondaryMask = *rectMascara0; break;
@@ -212,19 +218,17 @@ bool Hud::PostUpdate()
 		case Mask::MASK3: rectSecondaryMask = *rectMascara3; break;
 		default: rectSecondaryMask = *rectMascaraNoMask; break;
 	}
-
+	
 
 	app->render->DrawTexture(hudTexture, 75, 15, SDL_FLIP_NONE, rectFondoMascaraSecundaria, 0);
 	app->render->DrawTexture(hudTexture, 75, 15, 0.79f,SDL_FLIP_NONE, &rectSecondaryMask, 0);
-
 	app->render->DrawTexture(hudTexture, 25, 40, SDL_FLIP_NONE, rectFondoMascara, 0);
 	app->render->DrawTexture(hudTexture, 25, 40, SDL_FLIP_NONE, &rectPrimaryMask, 0);
-
 	//Fin mascaras
 
 
 
-	//Botones
+		//Botones
 	app->render->DrawTexture(hudTexture, windowWidth - rectFondoInventario->w + 10, 70, SDL_FLIP_NONE, rectBotonTAB, 0);
 	app->render->DrawTexture(hudTexture, 120, 85, SDL_FLIP_NONE, rectBotonQ, 0);
 
@@ -232,13 +236,13 @@ bool Hud::PostUpdate()
 	//Item Acquired
 	for (int i = 0; i < acquired_Items.size(); i++) {
 
-		
+
 
 		if (acquired_Items.at(i)->lifeTimer.ReadMSec() <= 200) {
 			//float alpha = (200 - acquired_Items.at(i)->lifeTimer.ReadMSec()) / 200;
 			//float alpha = (200 - acquired_Items.at(i)->lifeTimer.ReadMSec()) / 200;
 			float alpha = acquired_Items.at(i)->lifeTimer.ReadMSec() / 200;
-			
+
 
 			SDL_SetTextureAlphaMod(hudTexture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
 			SDL_SetTextureAlphaMod(acquired_Items.at(i)->texture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
@@ -246,10 +250,10 @@ bool Hud::PostUpdate()
 		}
 		else if (acquired_Items.at(i)->lifeTimer.ReadMSec() >= 1300) {
 			float alpha = 1.0f - (acquired_Items.at(i)->lifeTimer.ReadMSec() - 1300) / (acuiredItemLifeTimeMS - 1300);
-			
+
 			SDL_SetTextureAlphaMod(hudTexture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
 			SDL_SetTextureAlphaMod(acquired_Items.at(i)->texture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
-		
+
 		}
 		else {
 			SDL_SetTextureAlphaMod(hudTexture, 255);
@@ -267,7 +271,7 @@ bool Hud::PostUpdate()
 	SDL_SetTextureAlphaMod(hudTexture, 255);
 
 	//Me da miedo preguntar que es esto de aqui abajo, solo sabe dios que hace.
-	
+
 
 	return true;
 }
@@ -279,53 +283,53 @@ bool Hud::CleanUp()
 
 
 
-	 delete rectBarraVida;
-	 delete rectFondoBarraVida;
+	delete rectBarraVida;
+	delete rectFondoBarraVida;
 
-	 delete rectFondoMascara;
-	 delete rectFondoMascaraSecundaria;
+	delete rectFondoMascara;
+	delete rectFondoMascaraSecundaria;
 
-	 delete rectFondoPociones;
-	 delete rectPocionVida1;
-	 delete rectPocionVida2;
-	 delete rectPocionVida3;
-	 delete rectPocionVidaMax;
-	 delete rectPocionRegeneracion;
-	 delete rectPocionDano;
-	 delete rectPocionVelocidad;
-	 delete rectPocionOrbe;
-	 potionRects.clear();
-	 potionRectMap.clear();
+	delete rectFondoPociones;
+	delete rectPocionVida1;
+	delete rectPocionVida2;
+	delete rectPocionVida3;
+	delete rectPocionVidaMax;
+	delete rectPocionRegeneracion;
+	delete rectPocionDano;
+	delete rectPocionVelocidad;
+	delete rectPocionOrbe;
+	potionRects.clear();
+	potionRectMap.clear();
 
-	 //delete rectFondoHabilidad1;
-	 //delete rectFondoHabilidad2;
-	 delete rectFondoInventario;
-	 delete rectFondoMonedas;
-	 delete rectFondoObjetosConseguidos;
+	//delete rectFondoHabilidad1;
+	//delete rectFondoHabilidad2;
+	delete rectFondoInventario;
+	delete rectFondoMonedas;
+	delete rectFondoObjetosConseguidos;
 
-	 delete rectMascara0;
-	 delete rectMascara1;
-	 delete rectMascara2;
-	 delete rectMascara3;
-	 delete rectMascaraNoMask;
+	delete rectMascara0;
+	delete rectMascara1;
+	delete rectMascara2;
+	delete rectMascara3;
+	delete rectMascaraNoMask;
 
-	 delete rectBotonPlaceholder;
-	 delete rectBotonTAB;
-	 delete rectBotonQ;
+	delete rectBotonPlaceholder;
+	delete rectBotonTAB;
+	delete rectBotonQ;
 
-	 app->tex->UnLoad(hudTexture);
+	app->tex->UnLoad(hudTexture);
 
 	return true;
 }
 
 void Hud::PopUpMessage()
 {
-	 
+
 }
 
 void Hud::AcquiredItemTrigger(SDL_Texture* texture, std::string text)
 {
-	Acquired_Item* acquiredItem = new Acquired_Item{texture, text};
+	Acquired_Item* acquiredItem = new Acquired_Item{ texture, text };
 	acquiredItem->lifeTimer.Start();
 
 	acquired_Items.push_back(acquiredItem);
@@ -341,12 +345,12 @@ void Hud::Potions()
 			ListItem<Inventity*>* item = app->inventoryManager->inventities.At(selectedPotionIndex);
 			app->inventoryManager->UsePotionSelected(item);
 		}
-		else if (app->input->GetButton(CAMBIAR_POCION_RIGHT) == KEY_DOWN && selectedPotionIndex < potionRects.size() - 1) 
+		else if (app->input->GetButton(CAMBIAR_POCION_RIGHT) == KEY_DOWN && selectedPotionIndex < potionRects.size() - 1)
 		{
 			/*printf("selectedPotionIndex: %d\n", selectedPotionIndex);*/
 			selectedPotionIndex++;
 		}
-		else if (app->input->GetButton(CAMBIAR_POCION_LEFT) == KEY_DOWN && selectedPotionIndex > 0) 
+		else if (app->input->GetButton(CAMBIAR_POCION_LEFT) == KEY_DOWN && selectedPotionIndex > 0)
 		{
 			/*printf("selectedPotionIndex: %d\n", selectedPotionIndex);*/
 			selectedPotionIndex--;
