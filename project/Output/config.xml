@@ -164,7 +164,7 @@
 				
 		<muur texturePath="Assets/Textures/Entidades/Muur/spritesheet_muur.png" 
 				maxHealth="100.0f" speed="4f" attackDamage="20.0f" attackDistance="1" viewDistance="15"  chargeattackDistance= "10"
-				Tsprite="64" Pwidth="1688" sprite_x="211" sprite_y="27"/>	
+				Tsprite="64" Pwidth="1688" sprite_x="211" sprite_y="175"/>	
 
 		<khurt texturePath="Assets/Textures/Entidades/Khurt/textura_khurt.png" 
 			   maxHealth="220.0f" speed="1.5f" attackDamage="90.0f" attackDistance="2" viewDistance="20" chargeAttackDistance= "10"
@@ -506,13 +506,12 @@
 
 		<muur>
 			<runAnim start="0" end="8" speed="0.05f" loop="true"/>
-			<stoppingAnim start="8" end="16" speed="0.05f" loop="false"/>
-			<stunAnim start="16" end="24" speed="0.05f" loop="false"/>
-			<attackAnim start="24" end="31" speed="0.05f" loop="true"/>
+			<stunAnim start="16" end="24" speed="0.1f" loop="false"/>
+			<attackAnim start="24" end="31" speed="0.05f" loop="false"/>
 			<idleAnim start="32" end="38" speed="0.05f" loop="true"/>
-			<chargeAnim start="40" end="46" speed="0.05f" loop="false"/>
+			<chargeAnim start="40" end="46" speed="0.2f" loop="false"/>
 			<reciebeDamage start="48" end="55" speed="0.05f" loop="true"/>
-			<dieAnim start="56" end="63" speed="0.05f" loop="true"/>
+			<dieAnim start="56" end="63" speed="0.05f" loop="false"/>
 		</muur>
 
 		<boorok>
