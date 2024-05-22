@@ -69,11 +69,11 @@ bool Hud::Awake(pugi::xml_node config)
 	rectFondoMonedas = new SDL_Rect{ 0,341,96,30 };
 	rectFondoObjetosConseguidos = new SDL_Rect{ 0,422,357,41 };
 
+	rectMascaraNoMask = new SDL_Rect{ 0,0,1,1 };
 	rectMascara0 = new SDL_Rect{ 3,499,100,100 };
 	rectMascara1 = new SDL_Rect{ 105,499,100,100 };
 	rectMascara2 = new SDL_Rect{ 207,499,100,100 };
-	rectMascara3 = new SDL_Rect{ 309,499,0,0 };
-	rectMascara4 = new SDL_Rect{ 411,499,0,0 };
+	rectMascara3 = new SDL_Rect{ 309,499,100,100 };
 
 	rectBotonPlaceholder = new SDL_Rect{ 0,619,45,45 };
 	rectBotonTAB = new SDL_Rect{ 48,619,45,45 };
@@ -195,20 +195,22 @@ bool Hud::PostUpdate()
 
 	switch (*primaryMask)	
 	{
-		case Mask::NOMASK: rectPrimaryMask = *rectMascara0; break;
+		case Mask::NOMASK: rectPrimaryMask = *rectMascaraNoMask; break;
+		case Mask::MASK0: rectPrimaryMask = *rectMascara0; break;
 		case Mask::MASK1: rectPrimaryMask = *rectMascara1; break;
 		case Mask::MASK2: rectPrimaryMask = *rectMascara2; break;
 		case Mask::MASK3: rectPrimaryMask = *rectMascara3; break;
-		default: rectPrimaryMask = *rectMascara0; break;
+		default: rectPrimaryMask = *rectMascaraNoMask; break;
 	}
 
 	switch (*secondaryMask)
 	{
-		case Mask::NOMASK: rectSecondaryMask = *rectMascara0; break;
+		case Mask::NOMASK: rectSecondaryMask = *rectMascaraNoMask; break;
+		case Mask::MASK0: rectSecondaryMask = *rectMascara0; break;
 		case Mask::MASK1: rectSecondaryMask = *rectMascara1; break;
 		case Mask::MASK2: rectSecondaryMask = *rectMascara2; break;
 		case Mask::MASK3: rectSecondaryMask = *rectMascara3; break;
-		default: rectSecondaryMask = *rectMascara0; break;
+		default: rectSecondaryMask = *rectMascaraNoMask; break;
 	}
 
 
@@ -305,7 +307,7 @@ bool Hud::CleanUp()
 	 delete rectMascara1;
 	 delete rectMascara2;
 	 delete rectMascara3;
-	 delete rectMascara4;
+	 delete rectMascaraNoMask;
 
 	 delete rectBotonPlaceholder;
 	 delete rectBotonTAB;
