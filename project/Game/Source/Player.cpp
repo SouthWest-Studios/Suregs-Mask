@@ -660,6 +660,8 @@ bool Player::Start() {
 
 	currentStats.currentHealth = currentStats.maxHealth;
 
+	app->tex->GetSize(texture, texW, texH);
+
 	return true;
 }
 
@@ -682,7 +684,6 @@ bool Player::Update(float dt)
 		godmode = !godmode;
 		pbodyFoot->body->GetFixtureList()[0].SetSensor(godmode);
 	}
-
 	ResetAnimacion();
 
 	//Animacion
@@ -713,13 +714,14 @@ bool Player::Update(float dt)
 	if (godmode) { GodMode(dt); }
 	else if (!app->dialogManager->isPlaying) {
 		PlayerMovement(dt);
-
+		
 	}
 	else {
 		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	}
 
 	CameraMovement(dt);
+
 
 	
 	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN) {
@@ -755,7 +757,6 @@ bool Player::Update(float dt)
 		currentStats.attackDamage = baseStats.attackDamage * (1 + passiveStats[Mask::MASK3][Branches::Modifiers][maskLevels[Mask::MASK3][Branches::Modifiers]].damageBoost);
 		currentStats.movementSpeed = baseStats.movementSpeed * (1 + passiveStats[Mask::MASK3][Branches::Modifiers][maskLevels[Mask::MASK3][Branches::Modifiers]].velocityBoost);
 	}
-
 
 	//Mask XP System
 
@@ -803,7 +804,6 @@ bool Player::Update(float dt)
 
 	stateMachine(dt);
 	currentAnimation->Update();
-
 
 	return true;
 }
@@ -2289,10 +2289,9 @@ void Player::PlayerMovement(float dt)
 		ChangeMask();
 	}
 
-
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
-	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2;
-	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2;
+	position.x = METERS_TO_PIXELS(pbodyPos.p.x);
+	position.y = METERS_TO_PIXELS(pbodyPos.p.y);
 }
 void Player::FishingDirecction(float verticalMovement, float horizontalMovement)
 {
