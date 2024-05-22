@@ -68,7 +68,7 @@ bool Enemy_Boorok::Start() {
 	pbodyFoot->listener = this;
 	pbodyFoot->ctype = ColliderType::ENEMY;
 
-	pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 100, 200, bodyType::DYNAMIC);
+	pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 50, 100, bodyType::DYNAMIC);
 	pbodySensor->entity = this;
 	pbodySensor->listener = this;
 	pbodySensor->ctype = ColliderType::UNKNOWN;
@@ -87,6 +87,7 @@ bool Enemy_Boorok::Start() {
 
 	chargeAttackTimer.Start();
 	recoveryTimer.Start();
+	isabletosleepTimer.Start();
 
 	isSleeping = true;
 
@@ -102,10 +103,15 @@ bool Enemy_Boorok::Update(float dt)
 
 	//Pone el sensor del cuerpo en su posicion
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
-	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1.7), 0);
+	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
 
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
 
+	if (isabletosleepTimer.ReadSec() >= 5){}
+	else
+	{
+		isSleeping = false;
+	}
 
 	if (health <= 0)
 	{
@@ -124,8 +130,6 @@ bool Enemy_Boorok::Update(float dt)
 		nextState = EntityState::IDLE;
 		isSleeping = true;
 	}
-
-
 
 	switch (nextState)
 	{
@@ -159,12 +163,19 @@ bool Enemy_Boorok::Update(float dt)
 			isSleeping = false;
 			isWakingUp = false;
 			wakeupAnim.Reset();
+			isabletosleepTimer.Start();
 		}
 	}
 
 	if (chargeAttackTimer.ReadSec() >= 10 && app->map->pathfinding->GetDistance(playerPos, position) <= chargeattackDistance * 32 || isCharging)
 	{
 		chargeAttack(playerPos);
+	}
+
+	if (isabletosleepTimer.ReadSec() >= 5) {}
+	else
+	{
+		isSleeping = false;
 	}
 
 	currentState = nextState;
@@ -191,10 +202,10 @@ bool Enemy_Boorok::PostUpdate() {
 
 
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 250, position.y - 400, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x - 100, position.y - 200, 0.5f, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 250, position.y - 400, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 100, position.y - 200, 0.5f, SDL_FLIP_NONE, &rect);
 	}
 
 

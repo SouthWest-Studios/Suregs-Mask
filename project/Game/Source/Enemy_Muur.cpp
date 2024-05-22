@@ -173,10 +173,10 @@ bool Enemy_Muur::PostUpdate() {
 	}
 
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 50, position.y - 150, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x - 30, position.y - 50, 0.5f, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 50, position.y - 150, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 30, position.y - 50, 0.5f, SDL_FLIP_NONE, &rect);
 	}
 
 	for (uint i = 0; i < lastPath.Count(); ++i)

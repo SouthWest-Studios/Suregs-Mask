@@ -127,6 +127,7 @@ private:
 	bool isSleeping = false;
 	bool isWakingUp = false;
 	Timer recoveryTimer;
+	Timer isabletosleepTimer;
 
 	//Charge Attack
 	Timer chargeAttackTimer;

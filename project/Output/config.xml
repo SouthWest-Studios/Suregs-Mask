@@ -175,7 +175,7 @@
 			   Tsprite="48" Pwidth="1270" sprite_x="160" sprite_y="215"/>
 
 		<boorok texturePath="Assets/Textures/Entidades/Boorok/spritesheet_boorok.png" 
-			   maxHealth="400.0f" speed="0.6f" attackDamage="50.0f" attackDistance="2" viewDistance="15" chargeattackDistance= "10" areaattackdamage= "180.0f"
+			   maxHealth="400.0f" speed="0.6f" attackDamage="50.0f" attackDistance="2" viewDistance="20" chargeattackDistance= "10" areaattackdamage= "180.0f"
 			   Tsprite="70" Pwidth="5000" sprite_x="500" sprite_y="429"/>
 
 		<boss_inuit texturePath="Assets/Textures/Entidades/Boss/Inuit/Miniboss1.png" 
