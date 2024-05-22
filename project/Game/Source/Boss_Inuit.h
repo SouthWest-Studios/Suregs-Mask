@@ -122,6 +122,7 @@ private:
 
 	bool isFacingLeft = false;
 	bool enemyMove = false;
+	bool Dead = false;
 
 	iPoint originalPosition;
 	iPoint originalWavePosition;
@@ -162,6 +163,9 @@ private:
 	bool atkTimeReset = false;
 	bool startBMR = false;
 	bool tocaPared = false;
+	int BMRatkSpeed = 2;
+	int BMRatkF = 200;
+	bool changeNextAtk =  true;
 	BTPDirection playerDireccion;
 	std::string printplayerDireccion;
 
