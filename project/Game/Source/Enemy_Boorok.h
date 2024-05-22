@@ -40,7 +40,7 @@ public:
 
 	void DoNothing(float dt, iPoint playerPos);
 	void Chase(float dt, iPoint playerPos);
-	void Attack(float dt);
+	void Attack(float dt, iPoint playerPos);
 	void Die();
 	bool Boorokfinding(float dt, iPoint playerPos);
 
@@ -133,6 +133,7 @@ private:
 	iPoint Antposition;
 	float areaattackdamage;
 	float chargeAttackMaxRange;
+	bool isCharging = false;
 
 	//VENENO <----------
 	bool firstTimePoisonRecibed = false;

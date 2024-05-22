@@ -68,7 +68,7 @@ bool Enemy_Boorok::Start() {
 	pbodyFoot->listener = this;
 	pbodyFoot->ctype = ColliderType::ENEMY;
 
-	pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 60, 100, bodyType::DYNAMIC);
+	pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 100, 200, bodyType::DYNAMIC);
 	pbodySensor->entity = this;
 	pbodySensor->listener = this;
 	pbodySensor->ctype = ColliderType::UNKNOWN;
@@ -88,6 +88,8 @@ bool Enemy_Boorok::Start() {
 	chargeAttackTimer.Start();
 	recoveryTimer.Start();
 
+	isSleeping = true;
+
 	room = GetCurrentRoom();
 	
 	return true;
@@ -100,7 +102,7 @@ bool Enemy_Boorok::Update(float dt)
 
 	//Pone el sensor del cuerpo en su posicion
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
-	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
+	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1.7), 0);
 
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
 
@@ -109,17 +111,18 @@ bool Enemy_Boorok::Update(float dt)
 	{
 		nextState = EntityState::DEAD;
 	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance * 32)
-	{
-		nextState = EntityState::RUNNING;
-	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32)
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32 && !isCharging && !isWakingUp)
 	{
 		nextState = EntityState::ATTACKING;
+	}
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance * 32 && !isCharging && !isWakingUp)
+	{
+		nextState = EntityState::RUNNING;
 	}
 	else
 	{
 		nextState = EntityState::IDLE;
+		isSleeping = true;
 	}
 
 
@@ -130,7 +133,7 @@ bool Enemy_Boorok::Update(float dt)
 		Chase(dt, playerPos);
 		break;
 	case EntityState::ATTACKING:
-		Attack(dt);
+		Attack(dt, playerPos);
 		break;
 	case EntityState::DEAD:
 		Die();
@@ -144,6 +147,25 @@ bool Enemy_Boorok::Update(float dt)
 
 	CheckPoison();
 
+	if (isSleeping && app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance * 32)
+	{
+		isWakingUp = true;
+	}
+	if (isWakingUp)
+	{
+		currentAnimation = &wakeupAnim;
+		if (wakeupAnim.HasFinished())
+		{
+			isSleeping = false;
+			isWakingUp = false;
+			wakeupAnim.Reset();
+		}
+	}
+
+	if (chargeAttackTimer.ReadSec() >= 10 && app->map->pathfinding->GetDistance(playerPos, position) <= chargeattackDistance * 32 || isCharging)
+	{
+		chargeAttack(playerPos);
+	}
 
 	currentState = nextState;
 	currentAnimation->Update();
@@ -169,10 +191,10 @@ bool Enemy_Boorok::PostUpdate() {
 
 
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 25, position.y - 100, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x - 250, position.y - 400, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 120, position.y - 100, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 250, position.y - 400, SDL_FLIP_NONE, &rect);
 	}
 
 
@@ -205,56 +227,31 @@ bool Enemy_Boorok::CleanUp()
 
 void Enemy_Boorok::DoNothing(float dt, iPoint playerPos)
 {
-	if (dist(position, playerPos) > -1)
+	if (dist(position, playerPos) > -1 && !isCharging)
 	{
-		Sleeping();  // Asegúrate de mantener la llamada a Sleeping()
-		if (isSleeping)
-		{
-			if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance * 32)
-			{
-				// El jugador está lo suficientemente cerca, despertamos al enemigo
-				currentAnimation = &wakeupAnim;
-				if (wakeupAnim.HasFinished())
-				{
-					// Una vez que la animación de despertar ha terminado, pasamos a IDLE
-					isSleeping = false;
-					currentAnimation = &idleAnim;
-				}
-			}
-			else
-			{
-				// El enemigo sigue durmiendo
-				currentAnimation = &sleepAnim;
-			}
-		}
-		else
-		{
-			chargeAttackTimer.Start();
-			currentAnimation = &idleAnim;
-		}
+		Sleeping();
+
+		currentAnimation = &sleepAnim;
 	}
 }
 
 void Enemy_Boorok::Chase(float dt, iPoint playerPos)
 {
-	currentAnimation = &runAnim;
-	if (chargeAttackTimer.ReadSec() >= 5 && app->map->pathfinding->GetDistance(playerPos, position) <= chargeattackDistance * 32)
+	if (!isCharging && !isWakingUp)
 	{
-		chargeAttack(playerPos);
-		chargeAttackTimer.Start();
-	}
-	else
-	{
+		currentAnimation = &runAnim;
+
 		Boorokfinding(dt, playerPos);
 	}
 }
 
-
-void Enemy_Boorok::Attack(float dt)
+void Enemy_Boorok::Attack(float dt, iPoint playerPos)
 {
-	currentAnimation = &attackAnim;
-
-	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
+	if (!isCharging)
+	{
+		currentAnimation = &attackAnim;
+		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
+	}
 
 	//sonido ataque
 }
@@ -331,7 +328,6 @@ void Enemy_Boorok::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLAYER:
 		LOG("Collision PLAYER");
-		app->entityManager->GetPlayer()->TakeDamage(attackDamage);
 		break;
 	case ColliderType::PLAYER_ATTACK:
 		LOG("Collision Player_Attack");
@@ -402,10 +398,13 @@ float Enemy_Boorok::GetHealth() const {
 void Enemy_Boorok::TakeDamage(float damage) {
 	if (currentState != EntityState::DEAD && invulnerabilityTimer.ReadMSec() >= 500) {
 		currentAnimation = &reciebeDamage;
-		health -= damage;
-		invulnerabilityTimer.Start();
-		timerRecibirDanioColor.Start();
-		app->audio->PlayRandomFx(boorok_get_damage_fx, boorok_get_damageAlt_fx, NULL);
+		if (reciebeDamage.HasFinished())
+		{
+			health -= damage;
+			invulnerabilityTimer.Start();
+			timerRecibirDanioColor.Start();
+			app->audio->PlayRandomFx(boorok_get_damage_fx, boorok_get_damageAlt_fx, NULL);
+		}
 	}
 }
 
@@ -456,6 +455,7 @@ void Enemy_Boorok::CheckPoison() {
 
 void Enemy_Boorok::Sleeping()
 {
+	isSleeping = true;
 	pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
 
 	if (recoveryTimer.ReadSec() >= 0.5) {
@@ -468,24 +468,30 @@ void Enemy_Boorok::Sleeping()
 		}
 		recoveryTimer.Start();
 	}
-	if (sleepAnim.HasFinished())
-	{
-		isSleeping = false;
-	}
 }
 
 void Enemy_Boorok::chargeAttack(iPoint playerPos)
 {
-	currentAnimation = &chargeAttackAnim;
-
-	printf("Charge attack");
-
-	AreaAttack(playerPos);
-
+	isCharging = true;
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
+	printf("asas as\n");
+	currentAnimation = &chargeAttackAnim;
+	if (chargeAttackAnim.HasFinished())
+	{
+		currentAnimation = &attackAnim;
+		if (attackAnim.HasFinished())
+		{
+			printf("Charge attack");
 
-	chargeAttackTimer.Start();
+			AreaAttack(playerPos);
 
+			isCharging = false;
+
+			pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
+
+			chargeAttackTimer.Start();
+		}
+	}
 }
 
 void Enemy_Boorok::AreaAttack(iPoint playerPos) {
@@ -498,7 +504,6 @@ void Enemy_Boorok::AreaAttack(iPoint playerPos) {
 		printf("Area attack \n");
 	}
 }
-
 
 MapObject* Enemy_Boorok::GetCurrentRoom()
 {
