@@ -69,8 +69,11 @@ bool Scene_GameOver::Start()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
-	fPoint pos(300.0f, 335.0f);
-	app->psystem->AddEmiter(pos, EMITTER_TYPE_FLAME);
+	fPoint pos(320.0f, 335.0f);
+	flameLeft = app->psystem->AddEmiter(pos, EMITTER_TYPE_FLAME);
+
+	fPoint pos2(930.0f, 335.0f);
+	flameRight = app->psystem->AddEmiter(pos2, EMITTER_TYPE_FLAME);
 
 	return true;
 }
@@ -105,11 +108,14 @@ bool Scene_GameOver::PostUpdate()
 bool Scene_GameOver::CleanUp()
 {
 
-
 	LOG("Freeing Scene_GameOver");
 	app->tex->UnLoad(gameOverBackground);
 	app->guiManager->DestroyGuiControl(VolverAlMenu);
 	app->guiManager->DestroyGuiControl(Continuar);
+
+	flameLeft = nullptr;
+	flameRight = nullptr;
+	app->psystem->RemoveAllEmitters();
 
 	return true;
 }

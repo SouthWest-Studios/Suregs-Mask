@@ -213,6 +213,7 @@ bool Scene_Menu::CleanUp()
 	app->tex->UnLoad(credits);
 
 	eMenu = nullptr;
+	app->psystem->RemoveAllEmitters();
 
 	return true;
 }

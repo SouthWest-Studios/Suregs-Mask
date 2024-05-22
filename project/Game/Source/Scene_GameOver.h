@@ -5,6 +5,9 @@
 #include "Player.h"
 #include "GuiControl.h"
 #include "GuiControlButton.h"
+#include "Particle.h"
+#include "ParticlePool.h"
+#include "Emitter.h"
 
 struct SDL_Texture;
 
@@ -48,11 +51,15 @@ public:
 	const char* gameOverBackground_tp;
 	const char* logo_tp;
 
+	Emitter* flameRight = nullptr;
+	Emitter*flameLeft = nullptr;
+
 private:
 
 	GuiControlButton* VolverAlMenu;
 	GuiControlButton* Continuar;
 
+	
 	uint windowW, windowH;
 
 };
