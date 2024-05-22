@@ -54,12 +54,12 @@ bool Boss_Inuit::Start() {
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
-	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
+	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 60, bodyType::DYNAMIC);
 	pbodyFoot->entity = this;
 	pbodyFoot->listener = this;
 	pbodyFoot->ctype = ColliderType::BOSS_INUIT;
 
-	pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 40, 60, bodyType::DYNAMIC);
+	pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 120, 300, bodyType::DYNAMIC);
 	pbodySensor->entity = this;
 	pbodySensor->listener = this;
 	pbodySensor->ctype = ColliderType::UNKNOWN;
@@ -149,7 +149,7 @@ bool Boss_Inuit::Update(float dt)
 	if (health <= lifeLow40) {
 		fase = FASE::FASE_CHANGE;
 	}
-	
+
 	if (health <= lifeLow5 && !useUlt) {
 		useUlt = true;
 		goUseUlt = true;
@@ -194,10 +194,10 @@ bool Boss_Inuit::PostUpdate() {
 
 
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 70, position.y - 200, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x - 410, position.y - 300, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 70, position.y - 200, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 410, position.y - 300, SDL_FLIP_NONE, &rect);
 	}
 
 	for (uint i = 0; i < lastPath.Count(); ++i)
@@ -230,9 +230,9 @@ bool Boss_Inuit::PostUpdate() {
 	if (goUseUlt) {
 		ultDef = true;
 		if (!inWave) {
-		waveTime.Start();
-		waveTimeStart = true;
-		goUseUlt = false;
+			waveTime.Start();
+			waveTimeStart = true;
+			goUseUlt = false;
 		}
 	}
 	if (ultDef && !inWave && !waveTimeStart) {
@@ -614,11 +614,12 @@ bool Boss_Inuit::Bossfinding(float dt, iPoint playerPosP)
 
 	//printf("\nBossArea:%f", dist(bossArea, enemyPos));
 	//printf("\nEmemyPosicion:%d", enemyPos);
-	
 
-	if ( !inbmrAtack) {
+
+	if (!inbmrAtack) {
 		dontMove = false;
-	}else
+	}
+	else
 	{
 		dontMove = true;
 	}
@@ -812,7 +813,7 @@ void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision Player_Attack");
 		if (fase != FASE::FASE_CHANGE) {
 			health -= app->entityManager->GetPlayer()->currentStats.attackDamage;
-		printf("\n BossHeal %f", app->entityManager->GetPlayer()->attackDamage);
+			printf("\n BossHeal %f", app->entityManager->GetPlayer()->attackDamage);
 		}
 		break;
 	case ColliderType::UNKNOWN:
