@@ -665,6 +665,7 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
+	//LOG("Playerpos: x:%d y:%d", position.x, position.y);
 	UpdateStats();
 
 
@@ -833,7 +834,8 @@ bool Player::PostUpdate() {
 
 bool Player::CleanUp()
 {
-	app->entityManager->DestroyEntity(pbodyFoot->entity);
+	app->entityManager->DestroyEntity(this);
+	app->entityManager->SetPlayer(nullptr);
 	/*app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 	app->physics->GetWorld()->DestroyBody(pbodySensor->body);*/
 	app->physics->DestroyBody(pbodyFoot);
@@ -1101,14 +1103,14 @@ void Player::EquipSecondaryMask(Mask mask) {
 	// }
 }
 
-Mask* Player::GetPrimaryMask()
+Mask Player::GetPrimaryMask()
 {
-	return &primaryMask;
+	return primaryMask;
 }
 
-Mask* Player::GetSecondaryMask()
+Mask Player::GetSecondaryMask()
 {
-	return &secondaryMask;
+	return secondaryMask;
 }
 
 MaskStats* Player::GetMaskStats(Mask mask) {

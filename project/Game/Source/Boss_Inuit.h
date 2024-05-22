@@ -165,6 +165,7 @@ private:
 	bool tocaPared = false;
 	int BMRatkSpeed = 2;
 	int BMRatkF = 200;
+	int atkDistancia;
 	bool changeNextAtk =  true;
 	BTPDirection playerDireccion;
 	std::string printplayerDireccion;
