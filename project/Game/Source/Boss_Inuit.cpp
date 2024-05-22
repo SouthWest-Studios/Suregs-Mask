@@ -155,6 +155,8 @@ bool Boss_Inuit::Update(float dt)
 		//desiredState = EntityState_Boss_Inuit::IDLE;
 		atk2_boss_inuit.speed = 0.25;
 		atk1_boss_inuit.speed = 0.25;
+		BMRatkF = 400;
+		BMRatkSpeed = 1;
 		if (!goUseWave) {
 			waveTime.Start();
 		}
@@ -194,28 +196,28 @@ bool Boss_Inuit::PostUpdate() {
 		app->render->DrawTexture(texture, position.x - 410, position.y - 300, SDL_FLIP_NONE, &rect);
 	}
 
-	
-	//BMR ATAQUE
-	if (startBMR) {
-		if (TimerColdDown(2)) {
-			printf("\n bmrBack");
-			bmrBack = true;
-			startBMR = false;
-		}
-	}
 
+	//BMR ATAQUE
+	/*if (startBMR) {
+
+	}*/
+	if (TimerColdDown(BMRatkSpeed) && inbmrAtack) {
+		//printf("\n bmrBack");
+		bmrBack = true;
+		startBMR = false;
+	}
 	if (checkAtackBMR) {
 		if (bmrBack) {
 			//BMRfinding(BMRposition);
 			/*fPoint returnBMR = getDirectionVector(BMRposition,position);
 			atackBMR->body->ApplyForceToCenter(b2Vec2(returnBMR.x * 80, returnBMR.y * 80), true);
 			printf("\n %d", bmrBack);*/
-			bmrSpeed = -80;
+			bmrSpeed = -BMRatkF;
 		}
 		else
 		{
-			bmrSpeed = 80;
-			
+			bmrSpeed = BMRatkF;
+
 		}
 		atackBoomerang(playerDireccion);
 	}
@@ -485,6 +487,7 @@ void Boss_Inuit::resetAnimation()
 			app->physics->GetWorld()->DestroyBody(atackCube->body);
 			atackCube = nullptr;
 		}
+		changeNextAtk = true;
 		inAtack = false;
 	}
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atk2_boss_inuit") {
@@ -492,6 +495,7 @@ void Boss_Inuit::resetAnimation()
 			app->physics->GetWorld()->DestroyBody(atackCube->body);
 			atackCube = nullptr;
 		}
+		changeNextAtk = true;
 		inAtack = false;
 	}
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "changeFase_boss_inuit") {
@@ -527,7 +531,11 @@ void Boss_Inuit::Attack(float dt)
 	////printf("Osiris attacking");
 	//currentAnimation = &attackAnim;
 
-	attackTime++;
+	if (changeNextAtk) {
+		attackTime++;
+		changeNextAtk = false;
+	}
+
 	atkAnimation = true;
 	switch (attackTime)
 	{
@@ -561,6 +569,7 @@ void Boss_Inuit::Attack(float dt)
 		inbmrAtack = true;
 		attackTime = 0;
 		atkTimeReset = false;
+		atackTimeColdDown.Start();
 		break;
 		/*case 4:
 			inAtack = true;
@@ -627,7 +636,7 @@ void Boss_Inuit::atackBoomerang(BTPDirection direccion)
 	app->render->DrawTexture(texture, BMRposition.x - 410, BMRposition.y - 300, SDL_FLIP_HORIZONTAL, &rect);
 	currentAnimation1->Update();
 
-	
+
 }
 
 void Boss_Inuit::Die() {
@@ -912,17 +921,17 @@ void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
 
-		if (physA->ctype == ColliderType::ATACKBMR) {
-			//checkAtackBMR = false;
-			//atackBMR->body->SetLinearVelocity(b2Vec2(0, 0));
-			printf("\nONcolibmrBack");
-			startBMR = true;
-			if (!tocaPared) {
-				tocaPared = true;
-				atackTimeColdDown.Start();
-			}
-			
-		}
+		//if (physA->ctype == ColliderType::ATACKBMR) {
+		//	//checkAtackBMR = false;
+		//	//atackBMR->body->SetLinearVelocity(b2Vec2(0, 0));
+		//	printf("\nONcolibmrBack");
+		//	startBMR = true;
+		//	if (!tocaPared) {
+		//		tocaPared = true;
+		//		atackTimeColdDown.Start();
+		//	}
+		//	
+		//}
 
 		break;
 	case ColliderType::BOSS_INUIT:
@@ -933,6 +942,7 @@ void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 			inbmrAtack = false;
 			inAtack = false;
 			tocaPared = false;
+			changeNextAtk = true;
 		}
 		break;
 	case ColliderType::PLAYER:
@@ -964,16 +974,16 @@ void Boss_Inuit::OnEndCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
-		if (physA->ctype == ColliderType::ATACKBMR) {
-			//checkAtackBMR = false;
-			//atackBMR->body->SetLinearVelocity(b2Vec2(0, 0));
-			//printf("\nENDcolibmrBack");
-			startBMR = true;
-			if (!tocaPared) {
-				tocaPared = true;
-				atackTimeColdDown.Start();
-			}
-		}
+		//if (physA->ctype == ColliderType::ATACKBMR) {
+		//	//checkAtackBMR = false;
+		//	//atackBMR->body->SetLinearVelocity(b2Vec2(0, 0));
+		//	//printf("\nENDcolibmrBack");
+		//	startBMR = true;
+		//	if (!tocaPared) {
+		//		tocaPared = true;
+		//		atackTimeColdDown.Start();
+		//	}
+		//}
 		break;
 	case ColliderType::PLAYER:
 		if (physA->ctype == ColliderType::BOSSAREA) {
