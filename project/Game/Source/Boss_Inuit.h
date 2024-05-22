@@ -160,6 +160,8 @@ private:
 	bool inbmrAtack = false;
 	bool atkAnimation = false;
 	bool atkTimeReset = false;
+	bool startBMR = false;
+	bool tocaPared = false;
 	BTPDirection playerDireccion;
 	std::string printplayerDireccion;
 
