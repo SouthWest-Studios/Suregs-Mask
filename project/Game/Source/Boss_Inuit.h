@@ -64,6 +64,7 @@ public:
 	void stateMachine(float dt, iPoint playerPos);
 	void shock_wave(int posX, int posY, float shockSpeed, float size, int tag);
 	void ulti_Atack();
+	void resetAnimation();
 	bool TimerColdDown(float time);
 	bool waveTimerColdDown(float time);
 	void OnCollision(PhysBody* physA, PhysBody* physB);
@@ -119,7 +120,6 @@ private:
 
 
 	bool isFacingLeft = false;
-	bool isInCenter = false;
 	bool enemyMove = false;
 
 	iPoint originalPosition;
@@ -137,6 +137,7 @@ private:
 	DynArray<iPoint> lastPath;
 
 	Animation* currentAnimation = nullptr;
+	Animation* currentAnimation1 = nullptr;
 	EntityState_Boss_Inuit state;
 
 
@@ -144,6 +145,8 @@ private:
 	SDL_Rect* spritePositions = nullptr;
 
 	FASE fase;
+	bool faseTwo = false;
+	int faseCount;
 
 
 	//ataque
@@ -153,7 +156,8 @@ private:
 	float bmrSpeed;
 	bool bmrBack = false;
 	bool inbmrAtack = false;
-
+	bool atkAnimation = false;
+	bool atkTimeReset = false;
 	BTPDirection playerDireccion;
 	std::string printplayerDireccion;
 
