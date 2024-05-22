@@ -86,10 +86,12 @@ private:
 
 	Animation idleAnim;
 	Animation runAnim;
-	Animation underAnim;
-	Animation dieAnim;
+	Animation underAnim_start;
+	Animation underAnim_process;
+	Animation underAnim_end;
 	Animation chargeAnim;
 	Animation stunAnim;
+	Animation dieAnim;
 
 	bool isFacingLeft = false;
 
@@ -129,6 +131,8 @@ private:
 	Timer chargeTimer;
 	bool charging;
 	bool stunned;
+	bool underProcess = false;
+	bool underFinished = false;
 	iPoint Antposition;
 
 	//Dig underground

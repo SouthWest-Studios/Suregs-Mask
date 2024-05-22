@@ -52,10 +52,12 @@ bool Enemy_Khurt::Start() {
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
 	idleAnim.LoadAnim("khurt", "idleAnim", spritePositions);
-	chargeAnim.LoadAnim("khurt", "idleAnim", spritePositions);
-	stunAnim.LoadAnim("khurt", "idleAnim", spritePositions);
+	chargeAnim.LoadAnim("khurt", "chargeAnim", spritePositions);
+	stunAnim.LoadAnim("khurt", "stunAnim", spritePositions);
 	runAnim.LoadAnim("khurt", "runAnim", spritePositions);
-	underAnim.LoadAnim("khurt", "underAnim", spritePositions);
+	underAnim_start.LoadAnim("khurt", "underAnim_start", spritePositions);
+	underAnim_process.LoadAnim("khurt", "underAnim_process", spritePositions);
+	underAnim_end.LoadAnim("khurt", "underAnim_end", spritePositions);
 	dieAnim.LoadAnim("khurt", "dieAnim", spritePositions);
 	
 
@@ -207,10 +209,10 @@ bool Enemy_Khurt::PostUpdate() {
 
 
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 25, position.y - 65, 5,SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x - 25, position.y - 65, 0.5f,SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 40, position.y - 65, 5,SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 40, position.y - 65, 0.5f,SDL_FLIP_NONE, &rect);
 	}
 
 
@@ -253,7 +255,29 @@ void Enemy_Khurt::DoNothing(float dt)
 void Enemy_Khurt::Chase(float dt, iPoint playerPos)
 {
 	//printf("Khurt chasing");
-	currentAnimation = &runAnim;
+	if (!charging) {
+		currentAnimation = &underAnim_start;
+	}
+	if (underAnim_start.HasFinished()) {
+		underAnim_start.Reset();
+		underProcess = true;
+	}
+	if (underProcess) {
+		currentAnimation = &underAnim_process;
+	}
+	if (app->map->pathfinding->GetDistance(playerPos, position) <= (chargeAttackDistance + 1) * 32) {
+		underProcess = false;
+		currentAnimation = &underAnim_end;
+	}
+	if (underAnim_end.HasFinished()) {
+		underFinished = true;
+		underAnim_end.Reset();
+	}
+	if (underFinished) {
+		/*underFinished = false;*/
+		currentAnimation = &idleAnim;
+	}
+
 	if (chargeTimer.ReadSec() >= 5 && app->map->pathfinding->GetDistance(playerPos, position) <= chargeAttackDistance * 32 && app->map->pathfinding->GetDistance(playerPos, position) >= (attackDistance + 5) * 32)
 	{
 		Antposition = position;
