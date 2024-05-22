@@ -69,6 +69,8 @@ bool Scene_GameOver::Start()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
+
+
 	return true;
 }
 
