@@ -169,8 +169,8 @@ public:
 
 
 
-	Mask* GetPrimaryMask();
-	Mask* GetSecondaryMask();
+	Mask GetPrimaryMask();
+	Mask GetSecondaryMask();
 
 	MaskStats* GetMaskStats(Mask mask);
 
@@ -183,7 +183,7 @@ public:
 
 	Stats baseStats;
 
-	Stats currentStats;
+	Stats currentStats{10,10,10,10,10};
 
 	std::map<int, PassiveStats> branchPassiveStats;
 	std::map<Branches, decltype(branchPassiveStats)> maskBranchPassiveStats;
@@ -342,8 +342,8 @@ public:
 	PhysBody* mask1PassiveSensor = nullptr;
 
 	//Mascara
-	Mask primaryMask;
-	Mask secondaryMask;
+	Mask primaryMask = Mask::NOMASK;
+	Mask secondaryMask = Mask::NOMASK;
 
 
 	bool isAttackingMask = false;
