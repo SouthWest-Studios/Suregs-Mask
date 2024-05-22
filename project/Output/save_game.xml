@@ -18,42 +18,15 @@
 	<menu />
 	<iventorymanager>
 		<inventory>
-			<inventity type="45" quantity="1" />
-			<inventity type="1" quantity="2" />
-			<inventity type="8" quantity="1" />
-			<inventity type="6" quantity="1" />
-			<inventity type="10" quantity="1" />
-			<inventity type="11" quantity="1" />
-			<inventity type="4" quantity="1" />
-			<inventity type="5" quantity="1" />
-			<inventity type="9" quantity="1" />
-			<inventity type="12" quantity="1" />
-			<inventity type="3" quantity="2" />
-			<money quantity="100" />
+			<money quantity="0" />
 		</inventory>
 	</iventorymanager>
 	<commercemanager />
 	<notesmanager>
-		<Note>
-			<Note type="0" quantity="1" />
-			<Note type="0" quantity="1" />
-			<Note type="0" quantity="1" />
-			<Note type="0" quantity="1" />
-			<Note type="0" quantity="1" />
-			<Note type="0" quantity="1" />
-			<Note type="0" quantity="1" />
-			<Note type="0" quantity="1" />
-			<Note type="0" quantity="1" />
-		</Note>
+		<Note />
 	</notesmanager>
 	<bestiariomanager>
-		<Bestiario>
-			<Bestiario type="0" quantity="1" />
-			<Bestiario type="0" quantity="1" />
-			<Bestiario type="0" quantity="1" />
-			<Bestiario type="0" quantity="1" />
-			<Bestiario type="0" quantity="1" />
-		</Bestiario>
+		<Bestiario />
 	</bestiariomanager>
 	<equipo />
 	<Ascensormenu />
