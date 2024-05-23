@@ -447,6 +447,8 @@ public:
 	EntityStatePlayer currentState;
 	EntityStatePlayer desiredState;
 	EntityStatePlayer nextState;
+
+	bool die = false;
 };
 
 

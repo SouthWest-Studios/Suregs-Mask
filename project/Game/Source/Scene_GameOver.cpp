@@ -19,6 +19,7 @@
 #include "GuiManager.h"
 #include "GuiControlSlider.h"
 #include "GuiCheckBox.h"
+#include "Hud.h"
 
 
 Scene_GameOver::Scene_GameOver(App* app, bool start_enabled) : Module(app, start_enabled)
@@ -116,7 +117,7 @@ bool Scene_GameOver::CleanUp()
 	flameLeft = nullptr;
 	flameRight = nullptr;
 	app->psystem->RemoveAllEmitters();
-
+	
 	return true;
 }
 
@@ -130,6 +131,7 @@ bool Scene_GameOver::OnGuiMouseClickEvent(GuiControl* control)
 	case 201:
 		app->fadeToBlack->FadeToBlack(this, app->scene_menu, 90);
 		app->menu->active = false;
+		app->hud->active = true;
 		app->guiManager->pointerId = 1;
 		app->guiManager->DestroyGuiControl(VolverAlMenu);
 		app->guiManager->DestroyGuiControl(Continuar);
@@ -139,6 +141,7 @@ bool Scene_GameOver::OnGuiMouseClickEvent(GuiControl* control)
 	case 202:
 		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
 		app->menu->active = true;
+		app->hud->active = true;
 		app->guiManager->pointerId = 100;
 		app->guiManager->DestroyGuiControl(VolverAlMenu);
 		app->guiManager->DestroyGuiControl(Continuar);

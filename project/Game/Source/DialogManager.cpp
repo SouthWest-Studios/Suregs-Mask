@@ -10,6 +10,7 @@
 #include "Window.h"
 #include "Hud.h"
 #include "Audio.h"
+#include "Menu.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -300,7 +301,7 @@ bool DialogManager::PostUpdate() {
 	isPlaying = (dialogues.Count() > 0);
 
 	if (isPlaying) { //Entonces mostrar dialogos
-		
+		app->menu->active = false;
 		
 		Dialog* actualDialog = dialogues.At(0)->data;
 		bool dialogFinished = ShowDialog(actualDialog);

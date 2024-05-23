@@ -163,10 +163,10 @@ bool Enemy_Ols::PostUpdate() {
 	}
 
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 10, position.y - 40, 0.33f, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x - 40, position.y - 70, 0.5f, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 30, position.y - 40, 0.33f, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 70, position.y - 70, 0.5f, SDL_FLIP_NONE, &rect);
 	}
 
     if (attackSensor != nullptr)
