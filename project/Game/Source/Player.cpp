@@ -2374,7 +2374,7 @@ void Player::TakeDamage(float damage) {
 			isInvisible = false;
 			inAnimation = true;
 			inTakeDMG = true;
-			app->audio->PlayTimedFx(player_get_damage_fx, 575);
+			if(app->audio->playingDeathFx == false) app->audio->PlayTimedFx(player_get_damage_fx, 575);
 			printf("Player has received  %f damage\n", damage);
 			damageTimer.Start();
 
