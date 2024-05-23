@@ -105,7 +105,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(win);
 	AddModule(input);
 	AddModule(tex);
-	AddModule(psystem);
+	
 	AddModule(audio);
 	//L07 DONE 2: Add Physics module
 	AddModule(physics);
@@ -145,6 +145,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	// Render last to swap buffer
 	AddModule(debugConsole);
 	AddModule(render);
+	AddModule(psystem);
 
 	LOG("Timer App Constructor: %f", timer.ReadMSec());
 }

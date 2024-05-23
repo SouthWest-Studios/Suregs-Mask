@@ -3,7 +3,6 @@
 	<window />
 	<input />
 	<textures />
-	<pSystem />
 	<audio />
 	<:anonymous />
 	<:anonymous />
@@ -36,4 +35,5 @@
 	<fadeToBlack />
 	<debugConsole />
 	<renderer />
+	<pSystem />
 </game_state>

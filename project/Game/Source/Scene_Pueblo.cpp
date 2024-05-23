@@ -71,6 +71,8 @@ bool Scene_Pueblo::Start()
 
 	
 
+	/*fPoint pos(5728.0f, 416.0f);
+	app->psystem->AddEmiter(pos,EMITTER_TYPE_SMOKE);*/
 
 	// Texture to highligh mouse position 
 	//mouseTileTex = app->tex->Load("Assets/Mapas/tileSelection.png");

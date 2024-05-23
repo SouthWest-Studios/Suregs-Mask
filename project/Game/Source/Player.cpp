@@ -849,9 +849,9 @@ bool Player::CleanUp()
 	app->tex->UnLoad(texture);
 	DeadTP = false;
 	dead_player.Reset();
-	//blood = nullptr;
-	//app->psystem->RemoveAllEmitters();
-	//particulaBlood = false;
+	blood = nullptr;
+	app->psystem->RemoveAllEmitters();
+	particulaBlood = false;
 
 	RELEASE(spritePositions);
 	delete spritePositions;
@@ -1077,8 +1077,12 @@ void Player::Dead()
 		app->audio->playingDeathFx = true;
 	}
 
-	//fPoint pos((float)position.x, (float)position.y);
-	//blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_SPARK);
+	if (!particulaBlood) {
+		fPoint pos((float)position.x, (float)position.y);
+		blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_SPARK);
+		particulaBlood = true;
+	}
+	
 
 	 //printf("dead");
 	currentAnimation = &dead_player;
