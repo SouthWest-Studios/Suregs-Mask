@@ -10,9 +10,8 @@
 	<entitymanager>
 		<entity_manager>
 			<doors>
-				<door sceneLevel="-10" tpID="0" />
-				<door sceneLevel="-10" tpID="6" />
 				<door sceneLevel="-10" tpID="1" />
+				<door sceneLevel="-10" tpID="0" />
 			</doors>
 		</entity_manager>
 	</entitymanager>
@@ -21,7 +20,7 @@
 	<menu />
 	<iventorymanager>
 		<inventory>
-			<money quantity="400" />
+			<money quantity="100" />
 		</inventory>
 	</iventorymanager>
 	<commercemanager />

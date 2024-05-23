@@ -224,6 +224,12 @@ bool Scene_Menu::CleanUp()
 	showNewGames = false;
 	showSavedGames = false;
 
+	_showSettings = false;
+	_showControls = false;
+	_showCredits = false;
+	_showNewGames = false;
+	_showSavedGames = false;
+
 	eMenu = nullptr;
 	app->psystem->RemoveAllEmitters();
 
@@ -317,39 +323,47 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 
 	case 13:
-		app->savedGame = 1;
-		/*app->LoadRequest();*/
-		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
-		app->menu->active = true;
-		app->guiManager->pointerId = 100;
-		app->guiManager->DestroyGuiControl(gcCloseSavedGames);
-		app->guiManager->DestroyGuiControl(partida1);
-		app->guiManager->DestroyGuiControl(partida2);
-		app->guiManager->DestroyGuiControl(partida3);
+		if (app->fadeToBlack->currentStep == 0) {
+			app->savedGame = 1;
+			/*app->LoadRequest();*/
+			app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
+			app->menu->active = true;
+			app->guiManager->pointerId = 100;
+			app->guiManager->DestroyGuiControl(gcCloseSavedGames);
+			app->guiManager->DestroyGuiControl(partida1);
+			app->guiManager->DestroyGuiControl(partida2);
+			app->guiManager->DestroyGuiControl(partida3);
+		}
 		break;
 
 	case 14:
-		app->savedGame = 2;
-		//app->LoadRequest();
-		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
-		app->menu->active = true;
-		app->guiManager->pointerId = 100;
-		app->guiManager->DestroyGuiControl(gcCloseSavedGames);
-		app->guiManager->DestroyGuiControl(partida1);
-		app->guiManager->DestroyGuiControl(partida2);
-		app->guiManager->DestroyGuiControl(partida3);
+		if (app->fadeToBlack->currentStep == 0) {
+			app->savedGame = 2;
+			//app->LoadRequest();
+			app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
+			app->menu->active = true;
+			app->guiManager->pointerId = 100;
+			app->guiManager->DestroyGuiControl(gcCloseSavedGames);
+			app->guiManager->DestroyGuiControl(partida1);
+			app->guiManager->DestroyGuiControl(partida2);
+			app->guiManager->DestroyGuiControl(partida3);
+		}
+	
 		break;
 
 	case 15:
-		app->savedGame = 3;
-		//app->LoadRequest();
-		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
-		app->menu->active = true;
-		app->guiManager->pointerId = 100;
-		app->guiManager->DestroyGuiControl(gcCloseSavedGames);
-		app->guiManager->DestroyGuiControl(partida1);
-		app->guiManager->DestroyGuiControl(partida2);
-		app->guiManager->DestroyGuiControl(partida3);
+		if (app->fadeToBlack->currentStep == 0) {
+			app->savedGame = 3;
+			//app->LoadRequest();
+			app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
+			app->menu->active = true;
+			app->guiManager->pointerId = 100;
+			app->guiManager->DestroyGuiControl(gcCloseSavedGames);
+			app->guiManager->DestroyGuiControl(partida1);
+			app->guiManager->DestroyGuiControl(partida2);
+			app->guiManager->DestroyGuiControl(partida3);
+		}
+	
 		break;
 
 	case 16:
@@ -403,36 +417,42 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 			
 		}*/
 	case 20:
-		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo);
-		app->menu->active = true;
-		app->guiManager->pointerId = 100;
-		app->savedGame = 1;
-		app->guiManager->DestroyGuiControl(gcCloseNewGames);
-		app->guiManager->DestroyGuiControl(nuevaPartida1);
-		app->guiManager->DestroyGuiControl(nuevaPartida2);
-		app->guiManager->DestroyGuiControl(nuevaPartida3);
+		if (app->fadeToBlack->currentStep == 0) {
+			app->fadeToBlack->FadeToBlack(this, app->scene_pueblo);
+			app->menu->active = true;
+			app->guiManager->pointerId = 100;
+			app->savedGame = 1;
+			app->guiManager->DestroyGuiControl(gcCloseNewGames);
+			app->guiManager->DestroyGuiControl(nuevaPartida1);
+			app->guiManager->DestroyGuiControl(nuevaPartida2);
+			app->guiManager->DestroyGuiControl(nuevaPartida3);
+		}
 		break;
 
 	case 21:
-		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo);
-		app->menu->active = true;
-		app->guiManager->pointerId = 100;
-		app->savedGame = 2;
-		app->guiManager->DestroyGuiControl(gcCloseNewGames);
-		app->guiManager->DestroyGuiControl(nuevaPartida1);
-		app->guiManager->DestroyGuiControl(nuevaPartida2);
-		app->guiManager->DestroyGuiControl(nuevaPartida3);
+		if (app->fadeToBlack->currentStep == 0) {
+			app->fadeToBlack->FadeToBlack(this, app->scene_pueblo);
+			app->menu->active = true;
+			app->guiManager->pointerId = 100;
+			app->savedGame = 2;
+			app->guiManager->DestroyGuiControl(gcCloseNewGames);
+			app->guiManager->DestroyGuiControl(nuevaPartida1);
+			app->guiManager->DestroyGuiControl(nuevaPartida2);
+			app->guiManager->DestroyGuiControl(nuevaPartida3);
+		}
 		break;
 
 	case 22:
-		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo);
-		app->menu->active = true;
-		app->guiManager->pointerId = 100;
-		app->savedGame = 3;
-		app->guiManager->DestroyGuiControl(gcCloseNewGames);
-		app->guiManager->DestroyGuiControl(nuevaPartida1);
-		app->guiManager->DestroyGuiControl(nuevaPartida2);
-		app->guiManager->DestroyGuiControl(nuevaPartida3);
+		if (app->fadeToBlack->currentStep == 0) {
+			app->fadeToBlack->FadeToBlack(this, app->scene_pueblo);
+			app->menu->active = true;
+			app->guiManager->pointerId = 100;
+			app->savedGame = 3;
+			app->guiManager->DestroyGuiControl(gcCloseNewGames);
+			app->guiManager->DestroyGuiControl(nuevaPartida1);
+			app->guiManager->DestroyGuiControl(nuevaPartida2);
+			app->guiManager->DestroyGuiControl(nuevaPartida3);
+		}
 		break;
 
 	case 23:
