@@ -82,7 +82,6 @@ bool ElevatorMenu::Update(float dt)
 		}
 		app->entityManager->active = false;
 		app->physics->active = false;
-		app->menu->active = false;
 		OnMovePointer();
 		if (app->input->GetButton(SELECT) == KEY_DOWN && PointerId < mazmorra + plus + 1) {
 			UseElevator(PointerId, mazmorra);
@@ -92,10 +91,6 @@ bool ElevatorMenu::Update(float dt)
 			
 			abierto = false;
 		}
-	}
-	else
-	{
-		app->menu->active = true;
 	}
 	
 	return true;

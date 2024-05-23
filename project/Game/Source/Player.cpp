@@ -839,7 +839,6 @@ bool Player::PostUpdate() {
 
 bool Player::CleanUp()
 {
-	die = false;
 	app->entityManager->DestroyEntity(this);
 	app->entityManager->SetPlayer(nullptr);
 	/*app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
@@ -1065,7 +1064,7 @@ void Player::Attack(float dt)
 
 void Player::Dead()
 {
-	die = true;
+	
 	if (app->audio->playingMusic == true)
 	{
 		app->audio->StopMusic(0.0f);
@@ -2115,10 +2114,10 @@ void Player::GodMode(float dt)
 {
 	float speedFast;
 	if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
-		speedFast = speed * 4;
+		speedFast = speed * 2;
 	}
 	else {
-		speedFast = speed ;
+		speedFast = speed;
 	}
 
 
@@ -2157,160 +2156,156 @@ void Player::GodMode(float dt)
 	}
 	pbodyFoot->body->SetLinearVelocity(velocity);
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
-	position.x = METERS_TO_PIXELS(pbodyPos.p.x);
-	position.y = METERS_TO_PIXELS(pbodyPos.p.y);
+	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2;
+	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2;
 
 }
 
 void Player::PlayerMovement(float dt)
 {
-	if (!die)
-	{
-		b2Vec2 velocity = b2Vec2(0, 0);
+	b2Vec2 velocity = b2Vec2(0, 0);
 
-		// Obtener teclado
+	// Obtener teclado
 
 
 
 
 
-		//printf("\n%f",joystick.x);
+	//printf("\n%f",joystick.x);
 
-		//Controles antiguos
+	//Controles antiguos
 
-		//pressingUp = app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT;
-		//pressingDown = app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT;
-		//pressingLeft = app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT;
-		//pressingRight = app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT;
+	//pressingUp = app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT;
+	//pressingDown = app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT;
+	//pressingLeft = app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT;
+	//pressingRight = app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT;
 
 
-		// Calcular la velocidad horizontal y vertical
+	// Calcular la velocidad horizontal y vertical
 
-		fPoint joystick = app->input->GetAxis(MOVE_HORIZONTAL, MOVE_VERTICAL);
-		float horizontalMovement = joystick.x;
-		float verticalMovement = joystick.y;
+	fPoint joystick = app->input->GetAxis(MOVE_HORIZONTAL, MOVE_VERTICAL);
+	float horizontalMovement = joystick.x;
+	float verticalMovement = joystick.y;
 
-		ResetSpeed();
+	ResetSpeed();
 
-		// Actualizar velocidad
-		if (!isDashing) {
-			velocity.x = horizontalMovement * GetRealMovementSpeed() * speed * 10 * dt;
-			velocity.y = verticalMovement * GetRealMovementSpeed() * speed * 10 * dt;
+	// Actualizar velocidad
+	if (!isDashing) {
+		velocity.x = horizontalMovement * GetRealMovementSpeed() * speed * 10 * dt;
+		velocity.y = verticalMovement * GetRealMovementSpeed() * speed * 10 * dt;
 
-			// Si hay entrada de movimiento, actualizar estado y direcci��n.
+		// Si hay entrada de movimiento, actualizar estado y direcci��n.
 
-			if (horizontalMovement != 0 || verticalMovement != 0) {
-				if (!inAnimation) {
-					desiredState = EntityStatePlayer::RUNNING;
-				}
-				isFacingLeft = (horizontalMovement < 0);
-				lastMovementDirection = fPoint(horizontalMovement, verticalMovement);
+		if (horizontalMovement != 0 || verticalMovement != 0) {
+			if (!inAnimation) {
+				desiredState = EntityStatePlayer::RUNNING;
 			}
+			isFacingLeft = (horizontalMovement < 0);
+			lastMovementDirection = fPoint(horizontalMovement, verticalMovement);
+		}
+	}
+
+	FishingDirecction(verticalMovement, horizontalMovement);
+
+	//Si pulsas espacio
+	if (app->input->GetButton(DASH) == KEY_DOWN && timerDash.ReadMSec() > cdTimerDashMS) {
+
+		velocityNormalized = velocity;
+		velocityNormalized.Normalize();
+
+		isDashing = true;
+		timerDash.Start();
+		desiredState = EntityStatePlayer::DASHI;
+		pbodyFoot->body->ApplyForce(b2Vec2(velocityNormalized.x * 500, velocityNormalized.y * 500), pbodyFoot->body->GetWorldCenter(), false);
+
+		if (secondaryMask == Mask::MASK2)
+		{
+			SetPassiveInvisible();
+			passiveStats[secondaryMask][Branches::Modifiers][maskLevels[secondaryMask][Branches::Modifiers]].invisibilityTimer.Start();
 		}
 
-		FishingDirecction(verticalMovement, horizontalMovement);
+		app->audio->StopFx(-1);
+		app->audio->PlayFx(dash_fx);
+	}
 
-		//Si pulsas espacio
-		if (app->input->GetButton(DASH) == KEY_DOWN && timerDash.ReadMSec() > cdTimerDashMS) {
+	if (isDashing && dashCollision != nullptr) {
+		dashCollision->body->SetTransform(pbodyFoot->body->GetPosition(), 0);
+	}
 
-			velocityNormalized = velocity;
-			velocityNormalized.Normalize();
+	if (!(timerDash.ReadMSec() < speed * 1000 && isDashing)) {
+		isDashing = false;
+		pbodyFoot->body->SetLinearVelocity(velocity);
+	}
 
-			isDashing = true;
-			timerDash.Start();
-			desiredState = EntityStatePlayer::DASHI;
-			pbodyFoot->body->ApplyForce(b2Vec2(velocityNormalized.x * 500, velocityNormalized.y * 500), pbodyFoot->body->GetWorldCenter(), false);
+	if (!(timerDash.ReadMSec() < speed * 1000 && isDashing) && dashCollision != nullptr) {
+		isDashing = false;
+		pbodyFoot->body->SetLinearVelocity(velocity);
+		app->physics->DestroyBody(dashCollision);
+		dashCollision = nullptr;
+	}
 
-			if (secondaryMask == Mask::MASK2)
-			{
-				SetPassiveInvisible();
-				passiveStats[secondaryMask][Branches::Modifiers][maskLevels[secondaryMask][Branches::Modifiers]].invisibilityTimer.Start();
-			}
+	//Si pulsas J para atacar
+	if (app->input->GetButton(ATAQUE) == KEY_DOWN && !isAttacking) {
+		hasAttacked = false;
+		isAttacking = true;
+		timerAttack.Start();
+		collisionAttackTimer.Start();
+		desiredState = EntityStatePlayer::ATTACKING;
+	}
 
-			app->audio->StopFx(-1);
-			app->audio->PlayFx(dash_fx);
+	//Checkea según velocidad de ataque si puede atacar
+	if (timerAttack.ReadMSec() > cdTimerAttackMS) {
+		isAttacking = false;
+	}
+	//printf("%f\r",collisionAttackTimer.ReadMSec());
+	//Borra colisión pasados 50 milisegundos
+	if (collisionAttackTimer.ReadMSec() > 50) {
+		if (attackSensor) {
+			hasAttacked = true;
+			app->physics->DestroyBody(attackSensor);
+			attackSensor = nullptr;
 		}
-
-		if (isDashing && dashCollision != nullptr) {
-			dashCollision->body->SetTransform(pbodyFoot->body->GetPosition(), 0);
+		if (mask1PassiveSensor) {
+			app->physics->DestroyBody(mask1PassiveSensor);
+			mask1PassiveSensor = nullptr;
 		}
+	}
 
-		if (!(timerDash.ReadMSec() < speed * 1000 && isDashing)) {
-			isDashing = false;
-			pbodyFoot->body->SetLinearVelocity(velocity);
+
+	//Si pulsas K para mascara principal
+
+	if ((app->input->GetButton(ATAQUE_HABILIDAD) == KEY_DOWN || app->input->GetAxis(ATAQUE_HABILIDAD) != 0) &&
+		(timerMaskAttack.ReadMSec() > maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDown ||
+			!maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].firstTimeUsed)) {
+		maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].firstTimeUsed = true;
+		isAttackingMask = true;
+		timerMaskAttack.Start(); 
+		desiredState = EntityStatePlayer::MASK_ATTACK;
+
+		// Restablece el cooldown de la máscara a su valor original después de usar la habilidad
+		for (int i = 0; i < maskStats[primaryMask][Branches::Rama2].size(); i++) {
+			maskStats[primaryMask][Branches::Rama2][i].maskCoolDown = maskStats[primaryMask][Branches::Rama2][i].originalmaskCoolDown;
 		}
+	}
 
-		if (!(timerDash.ReadMSec() < speed * 1000 && isDashing) && dashCollision != nullptr) {
-			isDashing = false;
-			pbodyFoot->body->SetLinearVelocity(velocity);
-			app->physics->DestroyBody(dashCollision);
-			dashCollision = nullptr;
-		}
-
-		//Si pulsas J para atacar
-		if (app->input->GetButton(ATAQUE) == KEY_DOWN && !isAttacking) {
-			hasAttacked = false;
-			isAttacking = true;
-			timerAttack.Start();
-			collisionAttackTimer.Start();
-			desiredState = EntityStatePlayer::ATTACKING;
-		}
-
-		//Checkea según velocidad de ataque si puede atacar
-		if (timerAttack.ReadMSec() > cdTimerAttackMS) {
-			isAttacking = false;
-		}
-		//printf("%f\r",collisionAttackTimer.ReadMSec());
-		//Borra colisión pasados 50 milisegundos
-		if (collisionAttackTimer.ReadMSec() > 50) {
-			if (attackSensor) {
-				hasAttacked = true;
-				app->physics->DestroyBody(attackSensor);
-				attackSensor = nullptr;
-			}
-			if (mask1PassiveSensor) {
-				app->physics->DestroyBody(mask1PassiveSensor);
-				mask1PassiveSensor = nullptr;
-			}
-		}
-
-
-		//Si pulsas K para mascara principal
-
-		if ((app->input->GetButton(ATAQUE_HABILIDAD) == KEY_DOWN || app->input->GetAxis(ATAQUE_HABILIDAD) != 0) &&
-			(timerMaskAttack.ReadMSec() > maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDown ||
-				!maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].firstTimeUsed)) {
-			maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].firstTimeUsed = true;
-			isAttackingMask = true;
-			timerMaskAttack.Start();
-			desiredState = EntityStatePlayer::MASK_ATTACK;
-
-			// Restablece el cooldown de la máscara a su valor original después de usar la habilidad
-			for (int i = 0; i < maskStats[primaryMask][Branches::Rama2].size(); i++) {
-				maskStats[primaryMask][Branches::Rama2][i].maskCoolDown = maskStats[primaryMask][Branches::Rama2][i].originalmaskCoolDown;
-			}
-		}
-
-		if (!(timerMaskAttack.ReadMSec() < maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDown && isAttackingMask)) {
-			isAttackingMask = false;
-			hasMaskAttacked = false;
-			if (mask1AttackSensor) {
-				app->physics->DestroyBody(mask1AttackSensor);
-				mask1AttackSensor = nullptr;
-			}
-		}
-
-		if (collisionMask1Timer.ReadSec() > 0.25) {
+	if (!(timerMaskAttack.ReadMSec() < maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDown && isAttackingMask)) {
+		isAttackingMask = false;
+		hasMaskAttacked = false;
+		if (mask1AttackSensor) {
 			app->physics->DestroyBody(mask1AttackSensor);
 			mask1AttackSensor = nullptr;
 		}
-
-		//Si pulsas L para cambiar de mascara
-		if (app->input->GetButton(INTERCAMBIAR_MASCARAS) == KEY_DOWN && timerChangeMask.ReadMSec() > changeMaskCooldown) {
-			ChangeMask();
-		}
 	}
-	
+
+	if (collisionMask1Timer.ReadSec() > 0.25) {
+		app->physics->DestroyBody(mask1AttackSensor);
+		mask1AttackSensor = nullptr;
+	}
+
+	//Si pulsas L para cambiar de mascara
+	if (app->input->GetButton(INTERCAMBIAR_MASCARAS) == KEY_DOWN && timerChangeMask.ReadMSec() > changeMaskCooldown) {
+		ChangeMask();
+	}
 
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x);

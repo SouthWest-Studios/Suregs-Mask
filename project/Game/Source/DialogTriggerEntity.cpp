@@ -14,7 +14,6 @@
 #include "CommerceManager.h"
 #include "TreeManager.h"
 #include "Menu.h"
-#include "InventoryManager.h"
 
 DialogTrigger::DialogTrigger() : Entity(EntityType::DIALOG_TRIGGER)
 {
@@ -165,7 +164,6 @@ void DialogTrigger::PlayDialog()
 			}
 		}
 	}
-	
 }
 
 
@@ -262,9 +260,6 @@ void DialogTrigger::UpdateDialog() {
 			}
 		}
 	}
-
-	
-
 }
 
 
