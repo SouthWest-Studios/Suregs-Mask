@@ -182,9 +182,9 @@
 					maxHealth="6500.0f" speed="5f" attackDamage="90.0f" attackDistance="4" viewDistance="20"
 					Tsprite="61" Pwidth="6904" sprite_x="863" sprite_y="600"/>
 
-		<boss_igory texturePath="Assets/Textures/Entidades/Boss/Igory/Miniboss4.png"
-					maxHealth="6500.0f" speed="5f" attackDamage="90.0f" attackDistance="4" viewDistance="20"
-					Tsprite="1" Pwidth="240" sprite_x="240" sprite_y="386"/>
+		<boss_igory texturePath="Assets/Textures/Entidades/Boss/Igory/bossPapa.png"
+					maxHealth="8000.0f" speed="5f" attackDamage="250.0f" attackDistance="4" viewDistance="20"
+					Tsprite="128" Pwidth="4800" sprite_x="600" sprite_y="427"/>
 
 		<boss_musri texturePath="Assets/Textures/Entidades/Boss/Musri/texture_boss_musri.png"
 					arrowTexturePath="Assets/Textures/Entidades/Boss/Musri/texture_musri_arrow.png"
@@ -432,7 +432,18 @@
 		</boss_inuit>
 
 		<boss_igory>
-			<idleAnim_boss_Igory start="0" end="1" speed="0.2f" loop="true"/>
+			<atqCargado_fase2_boss_Igory start="0" end="13" speed="0.2f" loop="false"/>
+			<atqCargado_fase1_boss_Igory start="16" end="27" speed="0.2f" loop="false"/>
+			<walk_boss_Igory start="32" end="41" speed="0.2f" loop="true"/>
+			<cura_boss_Igory start="48" end="56" speed="0.2f" loop="false"/>
+			<dash_boss_Igory start="64" end="71" speed="0.2f" loop="false"/>
+			<atq1_boss_Igory start="72" end="79" speed="0.2f" loop="false"/>
+			<geneSure_boss_Igory start="80" end="85" speed="0.2f" loop="false"/>
+			<idle_boss_Igory start="88" end="93" speed="0.2f" loop="true"/>
+			<atq2_boss_Igory start="96" end="100" speed="0.2f" loop="false"/>
+			<atq3_boss_Igory start="104" end="108" speed="0.2f" loop="false"/>
+			<dead_boss_Igory start="112" end="116" speed="0.2f" loop="false"/>
+			<hit_boss_Igory start="120" end="121" speed="0.2f" loop="false"/>
 		</boss_igory>
 		<boss_musri>
 			<idleAnim start="0" end="4" speed="0.1f" loop="true"/>

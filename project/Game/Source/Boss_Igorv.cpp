@@ -46,10 +46,18 @@ bool Boss_Igory::Start() {
 	Photowidth = config.attribute("Pwidth").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
-	idleAnim.LoadAnim("boss_igory", "idleAnim_boss_Igory", spritePositions);
-	/*runAnim.LoadAnim("osiris", "runAnim", spritePositions);
-	attackAnim.LoadAnim("osiris", "attackAnim", spritePositions);
-	dieAnim.LoadAnim("osiris", "dieAnim", spritePositions);*/
+	atqCargado_fase2_boss_Igory.LoadAnim("boss_igory", "atqCargado_fase2_boss_Igory", spritePositions);
+	atqCargado_fase1_boss_Igory.LoadAnim("boss_igory", "atqCargado_fase1_boss_Igory", spritePositions);
+	walk_boss_Igory.LoadAnim("boss_igory", "walk_boss_Igory", spritePositions);
+	cura_boss_Igory.LoadAnim("boss_igory", "cura_boss_Igory", spritePositions);
+	dash_boss_Igory.LoadAnim("boss_igory", "dash_boss_Igory", spritePositions);
+	atq1_boss_Igory.LoadAnim("boss_igory", "atq1_boss_Igory", spritePositions);
+	geneSure_boss_Igory.LoadAnim("boss_igory", "geneSure_boss_Igory", spritePositions);
+	idle_boss_Igory.LoadAnim("boss_igory", "idle_boss_Igory", spritePositions);
+	atq2_boss_Igory.LoadAnim("boss_igory", "atq2_boss_Igory", spritePositions);
+	atq3_boss_Igory.LoadAnim("boss_igory", "atq3_boss_Igory", spritePositions);
+	dead_boss_Igory.LoadAnim("boss_igory", "dead_boss_Igory", spritePositions);
+	hit_boss_Igory.LoadAnim("boss_igory", "hit_boss_Igory", spritePositions);
 
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
@@ -65,12 +73,6 @@ bool Boss_Igory::Start() {
 	pbodySensor->listener = this;
 	pbodySensor->ctype = ColliderType::UNKNOWN;
 
-
-
-	//areaSensor = app->physics->CreateCircle(position.x, position.y, 500, bodyType::STATIC, true);
-	//areaSensor->entity = this;
-	//areaSensor->listener = this;
-	//areaSensor->ctype = ColliderType::BOSSAREA;
 
 
 	originalPosition = app->map->WorldToMap(position.x, position.y);
@@ -130,16 +132,10 @@ bool Boss_Igory::Update(float dt)
 	switch (fase)
 	{
 	case FASE_Igory::FASE_ONE:
-
 		break;
 	case FASE_Igory::FASE_CHANGE:
-		//printf("\n FASE_IgoryCAHNEG");
 		break;
 	case FASE_Igory::FASE_TWO:
-		if (!goUseWave) {
-			waveTime.Start();
-		}
-		goUseWave = true;
 		break;
 	case FASE_Igory::FASE_THREE:
 
@@ -153,7 +149,7 @@ bool Boss_Igory::Update(float dt)
 
 bool Boss_Igory::PostUpdate() {
 
-	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
+	if (currentAnimation == nullptr) { currentAnimation = &idle_boss_Igory; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
 	//if (timerRecibirDanioColor.ReadMSec() <= 100) {
@@ -167,10 +163,10 @@ bool Boss_Igory::PostUpdate() {
 
 
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 70, position.y - 200, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x - 200, position.y - 200, 0.8, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 70, position.y - 200, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 260, position.y - 200, 0.8, SDL_FLIP_NONE, &rect);
 	}
 
 	for (uint i = 0; i < lastPath.Count(); ++i)
@@ -383,7 +379,7 @@ void Boss_Igory::DoNothing(float dt)
 void Boss_Igory::Chase(float dt, iPoint playerPos)
 {
 	////printf("Osiris chasing");
-	//currentAnimation = &runAnim;
+	currentAnimation = &walk_boss_Igory;
 	Bossfinding(dt, playerPos);
 
 }
@@ -411,23 +407,24 @@ void Boss_Igory::Attack(float dt)
 		inAtack = true;
 		printf("\nataque3");
 		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
-		break;
-
-	case 4:
-		inAtack = true;
-		printf("\nataque4");
-		playerDireccion = calculate_direction();
-		printplayerDireccion = directionToString(playerDireccion);
-		printf("\n PlayerDireccion %s", printplayerDireccion.c_str());
-		atackBMR = app->physics->CreateCircle(position.x, position.y, 120, DYNAMIC, true);
-		atackBMR->entity = this;
-		atackBMR->listener = this;
-		atackBMR->ctype = ColliderType::ATACKBMR;
-		checkAtackBMR = true;
-		inbmrAtack = true;
 		attackTime = 0;
-
 		break;
+
+		/*case 4:
+			inAtack = true;
+			printf("\nataque4");
+			playerDireccion = calculate_direction();
+			printplayerDireccion = directionToString(playerDireccion);
+			printf("\n PlayerDireccion %s", printplayerDireccion.c_str());
+			atackBMR = app->physics->CreateCircle(position.x, position.y, 120, DYNAMIC, true);
+			atackBMR->entity = this;
+			atackBMR->listener = this;
+			atackBMR->ctype = ColliderType::ATACKBMR;
+			checkAtackBMR = true;
+			inbmrAtack = true;
+			attackTime = 0;
+
+			break;*/
 
 	default:
 		break;
@@ -602,7 +599,7 @@ bool Boss_Igory::Bossfinding(float dt, iPoint playerPosP)
 
 
 			isAttacking = false;
-			attackAnim.Reset();
+			//attackAnim.Reset();
 
 		}
 		pbodyFoot->body->SetLinearVelocity(velocity);
