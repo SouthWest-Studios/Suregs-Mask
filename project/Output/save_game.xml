@@ -18,7 +18,9 @@
 	<menu />
 	<iventorymanager>
 		<inventory>
-			<money quantity="0" />
+			<inventity type="45" quantity="1" />
+			<inventity type="3" quantity="2" />
+			<money quantity="100" />
 		</inventory>
 	</iventorymanager>
 	<commercemanager />
@@ -26,7 +28,13 @@
 		<Note />
 	</notesmanager>
 	<bestiariomanager>
-		<Bestiario />
+		<Bestiario>
+			<Bestiario type="0" quantity="1" />
+			<Bestiario type="0" quantity="1" />
+			<Bestiario type="0" quantity="1" />
+			<Bestiario type="0" quantity="1" />
+			<Bestiario type="0" quantity="1" />
+		</Bestiario>
 	</bestiariomanager>
 	<equipo />
 	<Ascensormenu />

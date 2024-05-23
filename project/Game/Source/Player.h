@@ -384,6 +384,8 @@ public:
 	void DetermineRoomType(MapObject* room);
 	void DetermineRoomTypel(MapObject* room);
 
+	bool die = false;
+
 private:
 	Animation idle_player;
 	Animation run_player;
