@@ -193,6 +193,9 @@ bool Enemy_Ols::CleanUp()
 	app->physics->DestroyBody(pbodyFoot);
 	app->tex->UnLoad(texture);
 
+	app->physics->DestroyBody(attackSensor); 
+	app->tex->UnLoad(projectileTexture);
+
 	RELEASE(spritePositions);
 	delete spritePositions;
 

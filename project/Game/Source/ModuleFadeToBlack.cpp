@@ -85,15 +85,15 @@ bool ModuleFadeToBlack::Update(float dt)
 			moduleToEnable->Awake(config);
 
 			if(moduleToEnable != (Module*)app->scene_intro && moduleToEnable != (Module*)app->scene_menu && moduleToEnable != (Module*)app->scene_gameover){
-				app->hud->Enable();
+				/*app->hud->Enable();*/
 				app->map->Enable();
 				//app->menu->Enable();
 				app->menu->active = true;
 			}
 			else
 			{
-				app->hud->Disable();
-				app->menu->active = false;
+				/*app->hud->Disable();*/
+				/*app->menu->active = false;*/
 			}
 			/*app->entityManager->Enable();*/
 			activeScene = moduleToEnable;
