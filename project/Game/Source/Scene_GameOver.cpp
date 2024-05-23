@@ -129,22 +129,25 @@ bool Scene_GameOver::OnGuiMouseClickEvent(GuiControl* control)
 	{
 
 	case 201:
-		app->fadeToBlack->FadeToBlack(this, app->scene_menu, 90);
-		app->menu->active = false;
-		app->hud->active = true;
-		app->guiManager->pointerId = 1;
-		app->guiManager->DestroyGuiControl(VolverAlMenu);
-		app->guiManager->DestroyGuiControl(Continuar);
-
+		if (app->fadeToBlack->currentStep == 0) {
+			app->fadeToBlack->FadeToBlack(this, app->scene_menu, 90);
+			app->menu->active = false;
+			app->hud->active = true;
+			app->guiManager->pointerId = 1;
+			app->guiManager->DestroyGuiControl(VolverAlMenu);
+			app->guiManager->DestroyGuiControl(Continuar);
+		}
 		break;
 
 	case 202:
-		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
-		app->menu->active = true;
-		app->hud->active = true;
-		app->guiManager->pointerId = 100;
-		app->guiManager->DestroyGuiControl(VolverAlMenu);
-		app->guiManager->DestroyGuiControl(Continuar);
+		if (app->fadeToBlack->currentStep == 0) {
+			app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
+			app->menu->active = true;
+			app->hud->active = true;
+			app->guiManager->pointerId = 100;
+			app->guiManager->DestroyGuiControl(VolverAlMenu);
+			app->guiManager->DestroyGuiControl(Continuar);
+		}
 		break;
 
 	default:
