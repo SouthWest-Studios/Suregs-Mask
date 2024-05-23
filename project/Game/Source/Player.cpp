@@ -2156,8 +2156,8 @@ void Player::GodMode(float dt)
 	}
 	pbodyFoot->body->SetLinearVelocity(velocity);
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
-	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2;
-	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2;
+	position.x = METERS_TO_PIXELS(pbodyPos.p.x);
+	position.y = METERS_TO_PIXELS(pbodyPos.p.y);
 
 }
 
