@@ -337,37 +337,65 @@ void Hud::AcquiredItemTrigger(SDL_Texture* texture, std::string text)
 
 void Hud::Potions()
 {
-
 	if (!potionRects.empty()) {
 		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
 		{
-			/*printf("Potion Used: %d\n", selectedPotionIndex);*/
-			ListItem<Inventity*>* item = app->inventoryManager->inventities.At(selectedPotionIndex);
-			app->inventoryManager->UsePotionSelected(item);
+			if (selectedPotionIndex >= 0 && selectedPotionIndex < potionRects.size()) {
+				ListItem<Inventity*>* item = GetSelectedPotionItem();
+				if (item) {
+					app->inventoryManager->UsePotionSelected(item);
+				}
+			}
 		}
 		else if (app->input->GetButton(CAMBIAR_POCION_RIGHT) == KEY_DOWN && selectedPotionIndex < potionRects.size() - 1)
 		{
-			/*printf("selectedPotionIndex: %d\n", selectedPotionIndex);*/
 			selectedPotionIndex++;
 		}
 		else if (app->input->GetButton(CAMBIAR_POCION_LEFT) == KEY_DOWN && selectedPotionIndex > 0)
 		{
-			/*printf("selectedPotionIndex: %d\n", selectedPotionIndex);*/
 			selectedPotionIndex--;
 		}
 	}
 
-
 	potionRects.clear();
 
 	ListItem<Inventity*>* item;
+	int potionIndex = 0;
 	for (item = app->inventoryManager->inventities.start; item != NULL; item = item->next) {
 		Inventity* inventity = item->data;
-		if (inventity->type == InventityType::POCION_VIDA_1 || inventity->type == InventityType::POCION_VIDA_2 || inventity->type == InventityType::POCION_VIDA_3 ||
-			inventity->type == InventityType::POCION_VIDA_MAX || inventity->type == InventityType::POCION_REGENERACION || inventity->type == InventityType::POCION_DANO ||
-			inventity->type == InventityType::POCION_VELOCIDAD || inventity->type == InventityType::ORBE_MAGICO) {
+		if (IsPotion(inventity->type)) {
 			potionRects.push_back(potionRectMap[inventity->type]);
+			potionIndex++;
 		}
+	}
+	if (selectedPotionIndex >= potionIndex) {
+		selectedPotionIndex = std::max(0, potionIndex - 1);
 	}
 }
 
+bool Hud::IsPotion(InventityType type) {
+	return (type == InventityType::POCION_VIDA_1 || type == InventityType::POCION_VIDA_2 || type == InventityType::POCION_VIDA_3 ||
+		type == InventityType::POCION_VIDA_MAX || type == InventityType::POCION_REGENERACION || type == InventityType::POCION_DANO ||
+		type == InventityType::POCION_VELOCIDAD || type == InventityType::ORBE_MAGICO);
+}
+
+ListItem<Inventity*>* Hud::GetSelectedPotionItem() {
+	ListItem<Inventity*>* item = app->inventoryManager->inventities.start;
+	int potionIndex = 0;
+	while (item != NULL) {
+		Inventity* inventity = item->data;
+		if (IsPotion(inventity->type)) {
+			if (potionIndex == selectedPotionIndex) {
+				return item;
+			}
+			potionIndex++;
+		}
+		item = item->next;
+	}
+	return nullptr;
+}
+
+
+bool Hud::HayPocionesDisponibles() {
+	return !potionRects.empty();
+}

@@ -18,7 +18,7 @@
 #include "DebugConsole.h"
 #include "TreeManager.h"
 #include "DialogManager.h"
-
+#include "Hud.h"
 
 #include "Fishing.h"
 
@@ -707,7 +707,13 @@ bool Player::Update(float dt)
 	}
 
 	if (inPocionAnim) {
-		currentAnimation = &pocion_player;
+		if (app->hud->HayPocionesDisponibles()) {
+			currentAnimation = &pocion_player;
+		}
+		else {
+			inPocionAnim = false;
+			desiredState = EntityStatePlayer::IDLE;
+		}
 	}
 	//EndAnimacion
 
@@ -724,7 +730,7 @@ bool Player::Update(float dt)
 
 
 	
-	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN && app->hud->HayPocionesDisponibles()) {
 		desiredState = EntityStatePlayer::POCION;
 	}
 
@@ -925,11 +931,16 @@ void Player::ResetAnimacion()
 	}
 
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "pocion_player") {
-		printf("\pocion_player");
-		inAnimation = false;
+		if (app->hud->HayPocionesDisponibles()) {
+			UsePotion();
+		}
 		inPocionAnim = false;
-		pocion_player.Reset();
-		desiredState = EntityStatePlayer::IDLE;
+		inAnimation = false;
+		if (pocion_player.HasFinished())
+		{
+			desiredState = EntityStatePlayer::IDLE;
+			pocion_player.Reset();
+		}
 	}
 	
 }
@@ -1009,6 +1020,22 @@ void Player::Speedpocion(float dt)
 		{
 			currentStats.movementSpeed = originalSpeed;
 			speedPotionActive = false;
+		}
+	}
+}
+
+void Player::UsePotion() {
+	if (app->hud->HayPocionesDisponibles()) {
+		currentAnimation = &pocion_player;
+		inAnimation = true;
+		inPocionAnim = true;
+	}
+	else {
+		inPocionAnim = false;
+		inAnimation = false;
+		if (pocion_player.HasFinished())
+		{
+			desiredState = EntityStatePlayer::IDLE;
 		}
 	}
 }
@@ -1252,9 +1279,9 @@ void Player::stateMachine(float dt)
 
 	case EntityStatePlayer::POCION:
 		if (!inTakeDMG) {
-			printf("Pocion");
 			inAnimation = true;
 			inPocionAnim = true;
+			currentAnimation = &pocion_player;
 		}
 		break;
 	case EntityStatePlayer::NONE:
@@ -2187,7 +2214,7 @@ void Player::PlayerMovement(float dt)
 
 	// Calcular la velocidad horizontal y vertical
 
-	if(die == false){
+	if(die == false && desiredState != EntityStatePlayer::POCION){
 		fPoint joystick = app->input->GetAxis(MOVE_HORIZONTAL, MOVE_VERTICAL);
 		float horizontalMovement = joystick.x;
 		float verticalMovement = joystick.y;

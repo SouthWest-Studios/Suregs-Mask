@@ -49,6 +49,9 @@ public:
 	void AcquiredItemTrigger(SDL_Texture* texture, std::string text);
 
 	void Potions();
+	bool HayPocionesDisponibles();
+	bool IsPotion(InventityType type);
+	ListItem<Inventity*>* GetSelectedPotionItem();
 
 private:
 	char* hudTexturePath;
@@ -101,5 +104,6 @@ public:
 	std::vector<SDL_Rect*> potionRects;
 	std::map<InventityType, SDL_Rect*> potionRectMap;
 	int selectedPotionIndex = 0;
+	int selectedPotionItemIndex = 0;
 };
 #endif // __HUD_H__
