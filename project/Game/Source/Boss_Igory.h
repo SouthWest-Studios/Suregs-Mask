@@ -110,10 +110,19 @@ private:
 
 
 	//animacion
-	Animation idleAnim;
-	Animation runAnim;
-	Animation attackAnim;
-	Animation dieAnim;
+	Animation atqCargado_fase2_boss_Igory;
+	Animation atqCargado_fase1_boss_Igory;
+	Animation walk_boss_Igory;
+	Animation cura_boss_Igory;
+	Animation dash_boss_Igory;
+	Animation atq1_boss_Igory;
+	Animation geneSure_boss_Igory;
+	Animation idle_boss_Igory;
+	Animation atq2_boss_Igory;
+	Animation atq3_boss_Igory;
+	Animation dead_boss_Igory;
+	Animation hit_boss_Igory;
+	
 
 	bool isFacingLeft = false;
 
