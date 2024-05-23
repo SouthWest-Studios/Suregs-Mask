@@ -532,7 +532,7 @@ bool Player::Awake() {
 bool Player::Start() {
 
 	//position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
-
+	 die = false;
 	TSprite = config.attribute("Tsprite").as_int();
 	SpriteX = config.attribute("sprite_x").as_int();
 	SpriteY = config.attribute("sprite_y").as_int();
@@ -1064,7 +1064,7 @@ void Player::Attack(float dt)
 
 void Player::Dead()
 {
-	
+	 die = true;
 	if (app->audio->playingMusic == true)
 	{
 		app->audio->StopMusic(0.0f);
@@ -2183,29 +2183,31 @@ void Player::PlayerMovement(float dt)
 
 	// Calcular la velocidad horizontal y vertical
 
-	fPoint joystick = app->input->GetAxis(MOVE_HORIZONTAL, MOVE_VERTICAL);
-	float horizontalMovement = joystick.x;
-	float verticalMovement = joystick.y;
+	if(die == false){
+		fPoint joystick = app->input->GetAxis(MOVE_HORIZONTAL, MOVE_VERTICAL);
+		float horizontalMovement = joystick.x;
+		float verticalMovement = joystick.y;
 
-	ResetSpeed();
+		ResetSpeed();
 
-	// Actualizar velocidad
-	if (!isDashing) {
-		velocity.x = horizontalMovement * GetRealMovementSpeed() * speed * 10 * dt;
-		velocity.y = verticalMovement * GetRealMovementSpeed() * speed * 10 * dt;
+		// Actualizar velocidad
+		if (!isDashing) {
+			velocity.x = horizontalMovement * GetRealMovementSpeed() * speed * 10 * dt;
+			velocity.y = verticalMovement * GetRealMovementSpeed() * speed * 10 * dt;
 
-		// Si hay entrada de movimiento, actualizar estado y direcci��n.
+			// Si hay entrada de movimiento, actualizar estado y direcci��n.
 
-		if (horizontalMovement != 0 || verticalMovement != 0) {
-			if (!inAnimation) {
-				desiredState = EntityStatePlayer::RUNNING;
+			if (horizontalMovement != 0 || verticalMovement != 0) {
+				if (!inAnimation) {
+					desiredState = EntityStatePlayer::RUNNING;
+				}
+				isFacingLeft = (horizontalMovement < 0);
+				lastMovementDirection = fPoint(horizontalMovement, verticalMovement);
 			}
-			isFacingLeft = (horizontalMovement < 0);
-			lastMovementDirection = fPoint(horizontalMovement, verticalMovement);
 		}
-	}
 
-	FishingDirecction(verticalMovement, horizontalMovement);
+		FishingDirecction(verticalMovement, horizontalMovement);
+	}
 
 	//Si pulsas espacio
 	if (app->input->GetButton(DASH) == KEY_DOWN && timerDash.ReadMSec() > cdTimerDashMS) {
