@@ -878,18 +878,21 @@ void Player::ResetAnimacion()
 		atack_Anim = false;
 		desiredState = EntityStatePlayer::IDLE;
 		atack1_player.Reset();
+		checkAtk = false;
 	}
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atack2_player") {
 		inAnimation = false;
 		atack_Anim = false;
 		desiredState = EntityStatePlayer::IDLE;
 		atack2_player.Reset();
+		checkAtk = false;
 	}
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atack3_player") {
 		inAnimation = false;
 		atack_Anim = false;
 		desiredState = EntityStatePlayer::IDLE;
 		atack3_player.Reset();
+		checkAtk = false;
 	}
 
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "dead_player") {
@@ -911,7 +914,7 @@ void Player::ResetAnimacion()
 		//desiredState = EntityStatePlayer::IDLE;
 		takeDMG_player.Reset();
 		desiredState = EntityStatePlayer::IDLE;
-
+		checkAtk = false;
 
 		if (mask1AttackSensor != nullptr) {
 			mask1AttackSensor->body->SetLinearVelocity(b2Vec2(0, 0));
@@ -928,6 +931,7 @@ void Player::ResetAnimacion()
 		inAnimation = false;
 		maskRayo_player.Reset();
 		desiredState = EntityStatePlayer::IDLE;
+		checkAtk = false;
 	}
 
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "pocion_player") {
@@ -1058,6 +1062,7 @@ void Player::Attack(float dt)
 		//printf("CREATE SENSOR\n");
 		hasAttacked = true;
 		atackNum++;
+		checkAtk = true;
 	}
 	else if (attackSensor && hasAttacked) {
 		// Si el sensor de ataque ya existe, actualizamos su posición

@@ -169,6 +169,7 @@ private:
 	bool changeNextAtk =  true;
 	BTPDirection playerDireccion;
 	std::string printplayerDireccion;
+	bool bossReciberDMG = false;
 
 
 	//shockWave

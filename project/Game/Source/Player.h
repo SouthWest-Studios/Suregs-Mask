@@ -295,7 +295,7 @@ public:
 	bool hasAttacked = false;
 	bool hasMaskAttacked = false;
 	int atackNum = 0;
-
+	bool checkAtk = false;
 	//Dead
 	bool DeadTP = false;
 

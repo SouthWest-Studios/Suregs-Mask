@@ -993,9 +993,10 @@ void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLAYER_ATTACK:
 		LOG("Collision Player_Attack");
-		if (fase != FASE::FASE_CHANGE) {
+		if (fase != FASE::FASE_CHANGE && app->entityManager->GetPlayer()->checkAtk == true) {
 			health -= app->entityManager->GetPlayer()->currentStats.attackDamage;
-			printf("\n BossHeal %f", app->entityManager->GetPlayer()->attackDamage);
+			printf("\n BossHeal %f", health);
+			app->entityManager->GetPlayer()->checkAtk = false;
 		}
 		//app->entityManager->GetPlayer()->TakeDamage(flechaCargadaRastroDamage);
 		break;
