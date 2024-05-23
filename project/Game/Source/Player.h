@@ -143,6 +143,7 @@ public:
 	void Regenpocion(float dt);
 	void Speedpocion(float dt);
 	void Damagepocion(float dt);
+	void UsePotion();
 
 	//Branch transitionTable[static_cast<int>(EntityStatePlayer::STATE_COUNT)][static_cast<int>(EntityStatePlayer::STATE_COUNT)];
 	// L07 DONE 6: Define OnCollision function for the player. 
