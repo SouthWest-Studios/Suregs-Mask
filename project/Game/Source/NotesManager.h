@@ -58,7 +58,7 @@ public:
 
 	List<Note*> notes;
 	
-	iPoint PointerPosition = { 250, 230 };
+	iPoint PointerPosition = { 250, 200 };
 	int PointerId = 0;
 	iPoint selected = { -1000,-1000 };
 	iPoint equiped = { -1000,-1000 };
@@ -90,9 +90,15 @@ private:
 
 	char* iconoNotaTexturePath;
 	char* listTexturePath;
+	char* listTexturePath2;
+	char* listTexturePath3;
+	char* listTexturePath4;
 	char* sliderTexturePath;
 	char* knobTexturePath;
 	SDL_Texture* listTexture;
+	SDL_Texture* listTexture2;
+	SDL_Texture* listTexture3;
+	SDL_Texture* listTexture4;
 	SDL_Texture* sliderTexture;
 	SDL_Texture* knobTexture;
 

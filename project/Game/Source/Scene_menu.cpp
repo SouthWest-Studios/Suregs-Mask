@@ -528,10 +528,23 @@ void Scene_Menu::SettingsInterface()
 			if (app->win->fullscreen)
 			{
 				fullscreen->click = true;
+				fullScreenActive = true;
 			}
+			else
+			{
+				fullscreen->click = false;
+				fullScreenActive = false;
+			}
+
 			if (vsyncActive)
 			{
 				vsync->click = true;
+				vsyncActive = true;
+			}
+			else
+			{
+				vsync->click = false;
+				vsyncActive = false;
 			}
 
 			//Cargar la barra de audio del save_game

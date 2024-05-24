@@ -187,10 +187,23 @@ bool Menu::Update(float dt)
 			if (app->win->fullscreen)
 			{
 				fullScreen->click = true;
+				fullScreenActive = true;
 			}
+			else
+			{
+				fullScreen->click = false;
+				fullScreenActive = false;
+			}
+
 			if (vsyncActive)
 			{
 				vsync->click = true;
+				vsyncActive = true;
+			}
+			else
+			{
+				vsync->click = false;
+				vsyncActive = false;
 			}
 
 			//Cargar la barra de audio del save_game
@@ -288,12 +301,12 @@ bool Menu::Update(float dt)
 		app->win->ToggleFullscreen();
 	}
 
-	if (vsync != nullptr && vsync->click == true)
+	if (vsync != nullptr && vsync->click == true && vsyncActive == false)
 	{
 		vsyncActive = true;
 	}
 
-	if (vsync != nullptr && vsync->click == false)
+	if (vsync != nullptr && vsync->click == false && vsyncActive == true)
 	{
 		vsyncActive = false;
 	}
@@ -392,7 +405,7 @@ bool Menu::PostUpdate()
 	}
 	if (ventana == 3)
 	{
-		app->render->DrawTexture(fondoDiario, windowWidth / 8, windowHeight / 8 - 80, 0.8f, SDL_FLIP_NONE, 0, 0);
+		app->render->DrawTexture(fondoDiario, windowWidth / 8 + 40, windowHeight / 8 - 70, SDL_FLIP_NONE, 0, 0);
 	}
 	if (ventana == 4)
 	{

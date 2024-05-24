@@ -629,6 +629,9 @@
 	<notesmanager>
 		<nota texturePath ="Assets/Textures/Entidades/Items/textura_nota.png"
 			  list_texture ="Assets/Textures/Interfaz/Diario/textura_fondo_nota_lista.png"
+			  list_texture2 ="Assets/Textures/Interfaz/Diario/textura_fondo_nota_lista2.png"
+			  list_texture3 ="Assets/Textures/Interfaz/Diario/textura_fondo_nota_lista3.png"
+			  list_texture4 ="Assets/Textures/Interfaz/Diario/textura_fondo_nota_lista4.png"
 			  slider_texture = "Assets/Textures/Interfaz/Diario/textura_fondo_slider.png"
 			  knob_texture="Assets/Textures/Interfaz/Diario/textura_knob_slider.png"
 			  pointer ="Assets/Textures/Interfaz/Diario/noteselect.png"/>

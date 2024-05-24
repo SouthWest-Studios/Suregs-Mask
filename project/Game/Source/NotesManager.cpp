@@ -47,6 +47,9 @@ bool NotesManager::Awake(pugi::xml_node config)
 
 	iconoNotaTexturePath = ((char*)config.child("nota").attribute("texturePath").as_string());
 	listTexturePath = ((char*)config.child("nota").attribute("list_texture").as_string());
+	listTexturePath2 = ((char*)config.child("nota").attribute("list_texture2").as_string());
+	listTexturePath3 = ((char*)config.child("nota").attribute("list_texture3").as_string());
+	listTexturePath4 = ((char*)config.child("nota").attribute("list_texture4").as_string());
 	sliderTexturePath = ((char*)config.child("nota").attribute("slider_texture").as_string());
 	knobTexturePath = ((char*)config.child("nota").attribute("knob_texture").as_string());
 	PointerPath = ((char*)config.child("nota").attribute("pointer").as_string());
@@ -58,6 +61,9 @@ bool NotesManager::Start() {
 
 	PointerItemText = app->tex->Load(PointerPath);
 	listTexture = app->tex->Load(listTexturePath);
+	listTexture2 = app->tex->Load(listTexturePath2);
+	listTexture3 = app->tex->Load(listTexturePath3);
+	listTexture4 = app->tex->Load(listTexturePath4);
 	sliderTexture = app->tex->Load(sliderTexturePath);
 	knobTexture = app->tex->Load(knobTexturePath);
 
@@ -101,6 +107,7 @@ bool NotesManager::CleanUp()
 	return ret;
 }
 int highesttId = -1;
+int listId = 0;
 Note* NotesManager::CreateItem(EntityType type, SDL_Texture* CloseUp, std::string texto, std::string titulo, int id2)
 {
 	Note* entity = nullptr;
@@ -114,6 +121,11 @@ Note* NotesManager::CreateItem(EntityType type, SDL_Texture* CloseUp, std::strin
 	entity->id = highestIde + 1;
 	entity->title = titulo;
 	entity->id2 = id2;
+	if (listId == 4)
+	{
+		listId = 0;
+	}
+	entity->listid = listId;
 	/*entity->closeUpNotes = app->tex->Load("Assets/Textures/Entidades/Items/textura_NoteCloseUp.png"); */
 	switch (type)
 	{
@@ -133,6 +145,7 @@ Note* NotesManager::CreateItem(EntityType type, SDL_Texture* CloseUp, std::strin
 
 	AddNote(entity);
 	SortNotesById2();
+	listId++;
 	return entity;
 }
 
@@ -311,7 +324,7 @@ void NotesManager::OnMovePointer()
 				{
 					PointerId = -2;
 					PointerItemText = nullptr;
-					PointerPosition.y = 230;
+					PointerPosition.y = 200;
 					if (vacio)
 						app->bestiarioManager->PointerId = 0;
 					else
@@ -331,7 +344,7 @@ void NotesManager::OnMovePointer()
 				else
 				{
 					PointerId = 0;
-					PointerPosition.y = 230;
+					PointerPosition.y = 200;
 				}
 
 
@@ -347,7 +360,7 @@ void NotesManager::OnMovePointer()
 				else
 				{
 					PointerId = notes.Count() - 1;
-					PointerPosition.y = 230 + 83 * (notes.Count() - 1);
+					PointerPosition.y = 200 + 83 * (notes.Count() - 1);
 				}
 
 
@@ -442,14 +455,14 @@ bool NotesManager::Update(float dt)
 
 	return ret;
 }
-
+int list = 0;
 bool NotesManager::PostUpdate()
 {
 	bool ret = true;
 
 	uint tradeSpacing = 83;
 
-	SDL_Rect viewport = { 220, 200, 400, 350 };
+	SDL_Rect viewport = { 220, 200, 400, 300 };
 	/*app->render->DrawRectangle(viewport, 0, 0, 0, 200, true, false);*/
 
 	if (mostrar == true)
@@ -474,7 +487,7 @@ bool NotesManager::PostUpdate()
 			int rowIndex = item->data->id / maxItemsPerRow; // Calcula el índice de la fila
 			int columnIndex = item->data->id % maxItemsPerRow; // Calcula el índice de la columna
 			int horizontalPosition = 320 + columnIndex * 492; // Calcula la posición horizontal
-			int verticalPosition = 230 + rowIndex * 83; // Calcula la posición vertical
+			int verticalPosition = 200 + rowIndex * 83; // Calcula la posición vertical
 
 			int y2 = PointerPosition.y - scrollY;
 
@@ -483,14 +496,34 @@ bool NotesManager::PostUpdate()
 			if (y2 >= viewport.y && y2 <= viewport.y + viewport.h)
 			{
 				if (y >= viewport.y && y <= viewport.y + viewport.h) {
-
-					app->render->DrawTexture(listTexture, 250, verticalPosition - scrollY, SDL_FLIP_NONE, 0, 0);
-
+					
+					
 					if (zoomIn == false)
 					{
-						app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition - scrollY, 0.8, SDL_FLIP_NONE, 0, 0);
+						if (pEntity->listid == 3)
+						{
+							app->render->DrawTexture(listTexture, 250, verticalPosition - scrollY - 15, SDL_FLIP_NONE, 0, 0);
+
+						}
+						if (pEntity->listid == 2)
+						{
+							app->render->DrawTexture(listTexture2, 250, verticalPosition - scrollY - 15, SDL_FLIP_NONE, 0, 0);
+
+						}
+						if (pEntity->listid == 1)
+						{
+							app->render->DrawTexture(listTexture3, 250, verticalPosition - scrollY - 15, SDL_FLIP_NONE, 0, 0);
+
+						}
+						if (pEntity->listid == 0)
+						{
+							app->render->DrawTexture(listTexture4, 250, verticalPosition - scrollY - 15, SDL_FLIP_NONE, 0, 0);
+
+						}
+						/*app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition - scrollY, 0.8, SDL_FLIP_NONE, 0, 0);*/
 						/*app->render->DrawText(pEntity->title.c_str(), horizontalPosition + 60, verticalPosition - scrollY, 100, 100, 0, 0, 0, 0, false);*/
 						app->render->DrawTextBound(pEntity->title.c_str(), horizontalPosition + 60, verticalPosition - scrollY, 100, { 0,0,0 });
+						
 					}
 					
 				}
@@ -505,7 +538,7 @@ bool NotesManager::PostUpdate()
 				
 				scrollY = std::max(0, scrollY);
 			}
-			app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y - scrollY, SDL_FLIP_NONE, 0, 0);
+			app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y - scrollY - 15, SDL_FLIP_NONE, 0, 0);
 		}
 
 
@@ -525,8 +558,8 @@ bool NotesManager::PostUpdate()
 
 	if (mostrar == true)
 	{
-		app->render->DrawTexture(sliderTexture, 530, 200, SDL_FLIP_NONE, 0, 0);
-		app->render->DrawTexture(knobTexture, 530, knobY, SDL_FLIP_NONE, 0, 0);
+		app->render->DrawTexture(sliderTexture, 550, 200, SDL_FLIP_NONE, 0, 0);
+		app->render->DrawTexture(knobTexture, 550, knobY, SDL_FLIP_NONE, 0, 0);
 
 		ListItem<Note*>* itum;
 		for (itum = notes.start; itum != nullptr; itum = itum->next)
@@ -540,7 +573,7 @@ bool NotesManager::PostUpdate()
 				{
 					app->render->DrawTexture(itum->data->closeUpNotes, 400, 100, SDL_FLIP_NONE, 0, 0);
 					/*app->render->DrawText(itum->data->desc.c_str(), 450, 200, 270, 400, 0, 0, 0, 0, false);*/
-					app->render->DrawTextBound(itum->data->desc.c_str(), 445, 200, 370, { 0,0,0 });
+					app->render->DrawTextBound(itum->data->desc.c_str(), 430, 200, 370, { 0,0,0 });
 				}
 			}
 		}
