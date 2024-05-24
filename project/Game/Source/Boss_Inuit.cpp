@@ -15,6 +15,7 @@
 #include "Map.h"
 #include "Physics.h"
 #include "Item_Hueso.h"
+#include "Item_Zafiro.h"
 #include <Optick/include/optick.h>
 #include "Utils.cpp"
 
@@ -662,6 +663,10 @@ void Boss_Inuit::Die() {
 	//Mask XP
 	Dead = true;
 
+	Item_Zafiro* zafiro = (Item_Zafiro*)app->entityManager->CreateEntity(EntityType::ITEM_ZAFIRO);
+	zafiro->config = configNode.child("entities_data").child("item_zafiro");
+	zafiro->position = iPoint(position.x, position.y);
+	zafiro->Start();
 	/*if (pbodyFoot != nullptr) {
 		pbodyFoot->body->GetWorld()->DestroyBody(pbodyFoot->body);
 	}

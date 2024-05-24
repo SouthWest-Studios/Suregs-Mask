@@ -16,6 +16,7 @@
 #include "Physics.h"
 #include "Player.h"
 #include "Item_Hueso.h"
+#include "Item_Diamante.h"
 #include <Optick/include/optick.h>
 #include "Utils.cpp"
 
@@ -254,6 +255,11 @@ void Boss_Surma::Attack(float dt)
 }
 
 void Boss_Surma::Die() {
+
+	Item_Diamante* diamante = (Item_Diamante*)app->entityManager->CreateEntity(EntityType::ITEM_DIAMANTE);
+	diamante->config = configNode.child("entities_data").child("item_diamante");
+	diamante->position = iPoint(position.x, position.y);
+	diamante->Start();
 
 	//Mask XP
 

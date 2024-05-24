@@ -16,6 +16,7 @@
 #include "Physics.h"
 #include "Player.h"
 #include "Item_Hueso.h"
+#include "Item_Rubi.h"
 #include <Optick/include/optick.h>
 #include "Utils.cpp"
 
@@ -264,6 +265,11 @@ void Boss_Musri::Attack(float dt)
 }
 
 void Boss_Musri::Die() {
+
+	Item_Rubi* rubi = (Item_Rubi*)app->entityManager->CreateEntity(EntityType::ITEM_RUBI);
+	rubi->config = configNode.child("entities_data").child("item_rubi");
+	rubi->position = iPoint(position.x, position.y);
+	rubi->Start();
 
 	//Mask XP
 
