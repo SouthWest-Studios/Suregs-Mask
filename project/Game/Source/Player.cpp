@@ -2438,6 +2438,12 @@ void Player::UpdateStats() {
 		currentStats.attackSpeed = baseStats.attackSpeed * (1 + maskStats[primaryMask][Branches::Modifiers][maskLevels[primaryMask][Branches::Modifiers]].attackSpeedModifier / 100);
 		currentStats.attackDamage = baseStats.attackDamage * (1 + maskStats[primaryMask][Branches::Modifiers][maskLevels[primaryMask][Branches::Modifiers]].attackDamageModifier / 100);
  	}
+	else {
+		currentStats.maxHealth = baseStats.maxHealth;
+		currentStats.movementSpeed = baseStats.movementSpeed;
+		currentStats.attackSpeed = baseStats.attackSpeed;
+		currentStats.attackDamage = baseStats.attackDamage;
+	}
 
     if (secondaryMask == Mask::MASK0) {
 		currentStats.attackDamage *= (1 + passiveStats[secondaryMask][Branches::Modifiers][maskLevels[secondaryMask][Branches::Modifiers]].damageBoost / 100);
