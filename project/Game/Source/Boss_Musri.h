@@ -97,6 +97,8 @@ public:
 	void FaseDying(float dt, iPoint playerPos);
 
 	iPoint GetRandomPosicion(iPoint actualPosition, int distanceLimitInf = 10, int distanceLimitSup = 15);
+	
+	MapObject* GetCurrentRoom();
 
 public:
 
@@ -118,6 +120,7 @@ public:
 
 	float viewDistance;
 	float attackDistance;
+
 
 	//Revivir
 

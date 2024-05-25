@@ -96,6 +96,8 @@ bool Boss_Inuit::Start() {
 	printf("\nlifeLow40: %f", lifeLow40);
 	printf("\nlifeLow5: %f", lifeLow5);
 	desiredState = EntityState_Boss_Inuit::IDLE;
+
+	room = GetCurrentRoom();
 	return true;
 }
 
@@ -1057,4 +1059,48 @@ void Boss_Inuit::OnEndCollision(PhysBody* physA, PhysBody* physB) {
 	default:
 		break;
 	}
+}
+
+MapObject* Boss_Inuit::GetCurrentRoom()
+{
+	//salas pequeñas
+	for (ListItem<MapObject*>* item = app->map->smallRoomsList.start; item != nullptr; item = item->next)
+	{
+		MapObject* room = item->data;
+
+		// el jugador está dentro de la sala
+		if (position.x >= room->x && position.x <= room->x + room->width &&
+			position.y >= room->y && position.y <= room->y + room->height)
+		{
+			return room;
+		}
+	}
+
+	//salas grandes
+	for (ListItem<MapObject*>* item = app->map->largeRoomsList.start; item != nullptr; item = item->next)
+	{
+		MapObject* room = item->data;
+
+		// el jugador está dentro de la sala
+		if (position.x >= room->x && position.x <= room->x + room->width &&
+			position.y >= room->y && position.y <= room->y + room->height)
+		{
+			return room;
+		}
+	}
+
+	//salas l
+	for (ListItem<MapObject*>* item = app->map->LRoomsList.start; item != nullptr; item = item->next)
+	{
+		MapObject* room = item->data;
+
+		// el jugador está dentro de la sala
+		if (position.x >= room->x && position.x <= room->x + room->width &&
+			position.y >= room->y && position.y <= room->y + room->height)
+		{
+			return room;
+		}
+	}
+
+	return nullptr;
 }

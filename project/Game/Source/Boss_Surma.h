@@ -78,7 +78,8 @@ public:
 	void Fase2(float dt, iPoint playerPos);
 	void FaseDying(float dt, iPoint playerPos);
 
-	
+	MapObject* GetCurrentRoom();
+
 
 public:
 

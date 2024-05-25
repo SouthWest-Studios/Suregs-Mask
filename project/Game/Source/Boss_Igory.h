@@ -73,6 +73,8 @@ public:
 	//Veneno
 	void ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate);
 
+	MapObject* GetCurrentRoom();
+
 public:
 
 	//L02: DONE 2: Declare player parameters
