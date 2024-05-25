@@ -5,6 +5,8 @@
 #include "Timer.h"
 
 #include <map>
+#include <string>
+#include <vector>
 
 #define DEFAULT_MUSIC_FADE_TIME 2.0f
 
@@ -12,6 +14,21 @@ using namespace std;
 
 struct _Mix_Music;
 struct Mix_Chunk;
+
+struct NPC {
+	string name;
+	int voice;
+};
+
+struct Songs {
+	string name;
+	int time;
+};
+
+struct SFX {
+	string name;
+	int time;
+};
 
 class Audio : public Module
 {
@@ -75,10 +92,17 @@ public:
 	bool playingMusic = false;
 	bool playingRunFx = false;
 	bool playingDeathFx = false;
+
+	int musicDuration;
+
 	Timer musicTimer;
+	Timer musicDurationTimer;
 	Timer musicTimerRand;
 
 	map<unsigned int, int> activeChannels;
+
+	vector<Songs> NPCs;
+	vector<Songs> songs;
 
 private:
 

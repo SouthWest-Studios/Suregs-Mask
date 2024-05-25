@@ -59,8 +59,6 @@ bool Scene_Pueblo::Start()
 	
 	// Stop the music from previous scenes
 	app->audio->StopMusic();
-	// Timer for music
-	//app->audio->musicTimer.Start();
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
@@ -121,6 +119,10 @@ bool Scene_Pueblo::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 
+	if (app->audio->playingMusic == true && app->audio->musicTimer.ReadMSec() >= app->audio->musicDuration)
+	{
+		app->audio->StopMusic(0.0f);
+	}
 	if (app->audio->playingMusic == false) 
 	{
 		app->audio->PlayMusicAfterRandomDelay("town");

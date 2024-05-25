@@ -16,6 +16,40 @@ Audio::Audio(App* app, bool start_enabled) : Module(app, start_enabled)
 {
 	music = NULL;
 	name = ("audio");
+
+	// Inicializar lista de NPCs
+	NPCs = {
+		{"Dorothy", 1},
+		{"Hely", 2},
+		{"Pathy", 3},
+		{"Habyg", 1},
+		{"Marthyn", 2},
+		{"Patzo", 3},
+		{"Patza", 1},
+		{"Hemyl", 2},
+		{"Huhan", 3},
+		{"Xiby", 1},
+		{"Ferny", 1},
+		{"Lixy", 2},
+		{"Phylippa", 3},
+		{"Rapho", 1},
+		{"Sukhy", 3},
+		{"Zupho", 1},
+		{"Zuphe", 1},
+		{"Fukho", 2},
+		{"Xinnoh", 3},
+		{"Phoska", 1},
+		{"Phrumo", 2},
+		{"Zhyuka", 3},
+		{"Sphar", 1}
+	};
+
+	songs = {
+		{"menu", 2},
+		{"town", 127000},
+		{"credits", 2},
+		{"dungeon", 2}
+	};
 }
 
 // Destructor
@@ -249,14 +283,28 @@ void Audio::PlayMusicAfterRandomDelay(const char* name, float fadeTime)
 	// Esperar el tiempo especificado
 	if (musicTimerRand.ReadSec() >= 5) {
 
-		int music = rand() % 30;
+		int music = rand() % 5;
 		printf("Music: %d\n", music);
 
 		switch (music)
 		{
-		case 20:
+		case 3:
 			LoadAudioMusic(name, fadeTime);
 			playingMusic = true;
+			musicTimer.Start();
+
+			// Buscar el nombre de la canción en la lista de canciones
+			musicDuration = -1; // Inicializar el tiempo de la canción como -1 (indicando que no se encontró la canción)
+			for (const auto& song : songs) {
+				if (song.name == name) {
+					musicDuration = song.time;
+					break;
+				}
+			}
+
+			if (musicDuration == -1) {
+				LOG("Error: La canción '%s' no se encontró en la lista de canciones.", name);
+			}
 			break;
 		}
 		musicTimerRand.Start();
