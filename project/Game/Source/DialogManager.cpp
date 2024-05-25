@@ -55,7 +55,10 @@ bool DialogManager::Start() {
 
 
 	background_tex = app->tex->Load(background_tex_path.c_str());
+
 	dialog_fx = app->audio->LoadAudioFx("dialog_fx");
+	dialogAlt_fx = app->audio->LoadAudioFx("dialogAlt_fx");
+	dialogAlt2_fx = app->audio->LoadAudioFx("dialogAlt2_fx");
 
 	return ret;
 }
@@ -239,16 +242,52 @@ bool DialogManager::ShowDialog(Dialog* dialog)
 	SDL_DestroyTexture(options2NameTexture);
 
 
-
+	for (const auto& NPCs : app->audio->NPCs) {
+		if (NPCs.name == dialog->name) {
+			voice = NPCs.voice;
+			break;
+		}
+	}
 
 	//Añadir caracter segun el tiempo
 	if (actualText.size() < dialog->sentence.size()) {
+		switch (voice) 
+		{
+		case 1:
+			if (charTimer.ReadMSec() >= charTimeMS) {
+				indexText++;
+				charTimer.Start();
+				app->audio->StopFx(-1);
+				app->audio->PlayFx(dialog_fx);
+			}
+			break;
 
-		if (charTimer.ReadMSec() >= charTimeMS) {
-			indexText++;
-			charTimer.Start();
-			app->audio->StopFx(-1);
-			app->audio->PlayFx(dialog_fx);
+		case 2:
+			if (charTimer.ReadMSec() >= charTimeMS) {
+				indexText++;
+				charTimer.Start();
+				app->audio->StopFx(-1);
+				app->audio->PlayFx(dialogAlt2_fx);
+			}
+			break;
+
+		case 3:
+			if (charTimer.ReadMSec() >= charTimeMS) {
+				indexText++;
+				charTimer.Start();
+				app->audio->StopFx(-1);
+				app->audio->PlayFx(dialogAlt_fx);
+			}
+			break;
+
+		default:
+			if (charTimer.ReadMSec() >= charTimeMS) {
+				indexText++;
+				charTimer.Start();
+				app->audio->StopFx(-1);
+				app->audio->PlayFx(dialog_fx);
+			}
+
 		}
 		
 		return false;

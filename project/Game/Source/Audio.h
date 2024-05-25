@@ -101,7 +101,7 @@ public:
 
 	map<unsigned int, int> activeChannels;
 
-	vector<Songs> NPCs;
+	vector<NPC> NPCs;
 	vector<Songs> songs;
 
 private:

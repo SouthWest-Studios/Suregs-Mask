@@ -19,29 +19,29 @@ Audio::Audio(App* app, bool start_enabled) : Module(app, start_enabled)
 
 	// Inicializar lista de NPCs
 	NPCs = {
-		{"Dorothy", 1},
+		{"Dorothy", 2},
 		{"Hely", 2},
-		{"Pathy", 3},
-		{"Habyg", 1},
-		{"Marthyn", 2},
-		{"Patzo", 3},
-		{"Patza", 1},
-		{"Hemyl", 2},
+		{"Pathy", 2},
+		{"Habyg", 3},
+		{"Marthyn", 3},
+		{"Patzo", 1},
+		{"Patza", 2},
+		{"Hemyl", 3},
 		{"Huhan", 3},
-		{"Xiby", 1},
-		{"Ferny", 1},
+		{"Xiby", 2},
+		{"Ferny", 3},
 		{"Lixy", 2},
-		{"Phylippa", 3},
+		{"Phylippa", 2},
 		{"Rapho", 1},
-		{"Sukhy", 3},
+		{"Sukhy", 2},
 		{"Zupho", 1},
 		{"Zuphe", 1},
-		{"Fukho", 2},
-		{"Xinnoh", 3},
-		{"Phoska", 1},
+		{"Fukho", 1},
+		{"Xinnoh", 1},
+		{"Phoska", 2},
 		{"Phrumo", 2},
-		{"Zhyuka", 3},
-		{"Sphar", 1}
+		{"Zhyuka", 2},
+		{"Sphar", 3}
 	};
 
 	songs = {

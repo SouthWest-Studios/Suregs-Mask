@@ -93,7 +93,10 @@ private:
 	Timer charTimer;
 	int optionSelected = 0;
 
+	int voice;
 	int dialog_fx;
+	int dialogAlt_fx;
+	int dialogAlt2_fx;
 };
 
 #endif // __DIALOGMANAGER_H__
