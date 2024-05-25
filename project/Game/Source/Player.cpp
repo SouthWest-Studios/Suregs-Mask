@@ -658,7 +658,10 @@ bool Player::Start() {
 		currentStats.attackDamage *= (1 + passiveStats[secondaryMask][Branches::Modifiers][maskLevels[secondaryMask][Branches::Modifiers]].damageBoost / 100);
     }
 
-	currentStats.currentHealth = currentStats.maxHealth;
+	if(app->inventoryManager->currentHealthInventoryManager == NULL) {
+		currentStats.currentHealth = currentStats.maxHealth;
+	}
+	else currentStats.currentHealth = app->inventoryManager->currentHealthInventoryManager;
 
 	app->tex->GetSize(texture, texW, texH);
 
@@ -845,6 +848,7 @@ bool Player::PostUpdate() {
 
 bool Player::CleanUp()
 {
+	app->inventoryManager->currentHealthInventoryManager = currentStats.currentHealth;
 	app->entityManager->DestroyEntity(this);
 	app->entityManager->SetPlayer(nullptr);
 	/*app->physics->GetWorld()->DestroyBody(pbodyFoot->body);

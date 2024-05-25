@@ -85,6 +85,8 @@ public:
 	int swordLevel = 0;
 	int armorLevel = 0;
 
+	int currentHealthInventoryManager = NULL;
+
 
 private:
 	pugi::xml_document configFile;
