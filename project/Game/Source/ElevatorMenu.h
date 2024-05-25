@@ -47,6 +47,7 @@ public:
 	pugi::xml_node config;
 
 	bool abierto = false;
+	bool open = false;
 
 	iPoint PointerPosition = { 400, -90 };
 	int PointerId = 0;
