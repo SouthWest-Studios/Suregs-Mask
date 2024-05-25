@@ -51,6 +51,8 @@ private:
 	uint texW, texH;
 	uint windowW, windowH;
 	SDL_Texture* mouseTileTex = nullptr;
+
+	int town_fx;
 	
 
 	//L03: DONE 3b: Declare a Player attribute

@@ -2271,7 +2271,7 @@ void Player::PlayerMovement(float dt)
 			passiveStats[secondaryMask][Branches::Modifiers][maskLevels[secondaryMask][Branches::Modifiers]].invisibilityTimer.Start();
 		}
 
-		app->audio->StopFx(-1);
+		//app->audio->StopFx(-1);
 		app->audio->PlayFx(dash_fx);
 	}
 

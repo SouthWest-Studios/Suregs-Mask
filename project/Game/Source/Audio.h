@@ -60,11 +60,16 @@ public:
 	// Stop playing a WAV
 	bool StopFx(int channel);
 
+	// Stop playing a group of WAVs
+	//bool StopGroupFx(int channel);
+
 	// Play a music from the config
 	bool LoadAudioMusic(const char* name, float fadeTime = DEFAULT_MUSIC_FADE_TIME);
 
 	// Play a WAV from the config
 	unsigned int LoadAudioFx(const char* name);
+
+	//void FxGroup(int tag, int channel);
 
 	// Play a music after the specified time
 	void PlayMusicAfterDelay(const char* name, float delayInSeconds, float fadeTime = DEFAULT_MUSIC_FADE_TIME);

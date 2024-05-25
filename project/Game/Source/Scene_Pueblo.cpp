@@ -60,6 +60,9 @@ bool Scene_Pueblo::Start()
 	// Stop the music from previous scenes
 	app->audio->StopMusic();
 
+	town_fx = app->audio->LoadAudioFx("town_fx");
+	app->audio->PlayFx(town_fx, -1, -1);
+
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 

@@ -39,6 +39,8 @@
 		</music>
 
 		<fx>
+      <town_fx path="Assets/Audio/Fx/town_fx.ogg"/>
+
       <!--ui-->
 			<intro_fx path="Assets/Audio/Fx/UI/intro_fx.wav"/>
       <menu_fx path="Assets/Audio/Fx/UI/menu_fx.wav"/>
