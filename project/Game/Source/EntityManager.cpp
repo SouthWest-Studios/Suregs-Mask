@@ -396,7 +396,9 @@ std::vector<Entity*> EntityManager::GetEnemies() {
     std::vector<Entity*> enemies;
     for (ListItem<Entity*>* item = entities.start; item != NULL; item = item->next) {
         Entity* entity = item->data;
-        if (entity->type == EntityType::ENEMY_OSIRIS || entity->type == EntityType::ENEMY_OSIRIS_VARIATION || entity->type == EntityType::ENEMY_OLS || entity->type == EntityType::ENEMY_SHAR || entity->type == EntityType::ENEMY_KHURT) {
+        if (entity->type == EntityType::ENEMY_OSIRIS || entity->type == EntityType::ENEMY_OSIRIS_VARIATION || entity->type == EntityType::ENEMY_OLS || entity->type == EntityType::ENEMY_SHAR || entity->type == EntityType::ENEMY_KHURT ||
+			entity->type == EntityType::BOSS_INUIT || entity->type == EntityType::BOSS_MUSRI || entity->type == EntityType::BOSS_SURMA || 
+			entity->type == EntityType::BOSS_IGORY) {
             enemies.push_back(entity);
         }
     }
