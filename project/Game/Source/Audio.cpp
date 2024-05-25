@@ -244,6 +244,25 @@ void Audio::PlayMusicAfterDelay(const char* name, float delayInSeconds, float fa
 	}
 }
 
+void Audio::PlayMusicAfterRandomDelay(const char* name, float fadeTime)
+{
+	// Esperar el tiempo especificado
+	if (musicTimerRand.ReadSec() >= 5) {
+
+		int music = rand() % 30;
+		printf("Music: %d\n", music);
+
+		switch (music)
+		{
+		case 20:
+			LoadAudioMusic(name, fadeTime);
+			playingMusic = true;
+			break;
+		}
+		musicTimerRand.Start();
+	}
+}
+
 void Audio::PlayRandomFx(unsigned int name, unsigned int name2, unsigned int name3)
 {
 	if (name3 == NULL) {

@@ -52,6 +52,9 @@ public:
 	// Play a music after the specified time
 	void PlayMusicAfterDelay(const char* name, float delayInSeconds, float fadeTime = DEFAULT_MUSIC_FADE_TIME);
 
+	// Play a music after a random time
+	void PlayMusicAfterRandomDelay(const char* name, float fadeTime = DEFAULT_MUSIC_FADE_TIME);
+
 	// Play a random WAV
 	void PlayRandomFx(unsigned int name, unsigned int name2, unsigned int name3);
 
@@ -73,6 +76,7 @@ public:
 	bool playingRunFx = false;
 	bool playingDeathFx = false;
 	Timer musicTimer;
+	Timer musicTimerRand;
 
 	map<unsigned int, int> activeChannels;
 
