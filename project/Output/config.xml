@@ -410,10 +410,7 @@
 	<pueblo_tutorial>
 		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Pueblo/puebloTutorial.tmx"/>
 	</pueblo_tutorial>
-	
-	<arena_tutorial_fight>
-		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Pueblo/arenaTutorialFight.tmx"/>
-	</arena_tutorial_fight>
+
 
 
 
