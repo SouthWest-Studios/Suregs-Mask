@@ -298,6 +298,7 @@ public:
 	bool checkAtk = false;
 	//Dead
 	bool DeadTP = false;
+	bool coinsRemoved = false;
 
 	//TakeDMG
 	bool inTakeDMG = false;

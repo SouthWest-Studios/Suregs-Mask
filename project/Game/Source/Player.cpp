@@ -1127,7 +1127,12 @@ void Player::Dead()
 		app->audio->playingDeathFx = false;
 		app->audio->StopFx(-1);
 	}
-
+	
+	if(!coinsRemoved){
+		coinsRemoved = true;
+		app->inventoryManager->monedasObtenidas *= 0.3;
+		printf("Monedas obtenidas: %d\n", app->inventoryManager->monedasObtenidas);
+	}
 	
 }
 
