@@ -55,6 +55,7 @@
 #include "Boss_Surma.h"
 #include "Elevator.h"
 #include "ModuleFadeToBlack.h"
+#include "Enemy_Spawner.h"
 
 Map::Map(App* app, bool start_enabled) : Module(app, start_enabled), mapLoaded(false)
 {
@@ -1509,6 +1510,26 @@ bool Map::LoadEntities(std::string layerName)
 						elev->final = true;
 
 					}
+
+					/*SPAWNER*/
+					if (gid == tileset->firstgid + 46) {
+
+						Enemy_Spawner* spawner = (Enemy_Spawner*)app->entityManager->CreateEntity(EntityType::ENEMY_SPAWNER);
+						spawner->config = configNode.child("entities_data").child("spawner");
+						//spawner->configEntities = configNode.child("entities_data");
+						spawner->position = iPoint(pos.x + 16, pos.y + 16);
+						spawner->Start();
+
+
+						/*Elevator* elev = (Elevator*)app->entityManager->CreateEntity(EntityType::ASCENSOR);
+						elev->config = configNode.child("entities_data").child("ascensor");
+						elev->position = iPoint(pos.x + 16, pos.y + 16);
+						elev->Start();
+						elev->final = true;*/
+
+					}
+
+
 					/*NOTA*/
 					/*if (gid == tileset->firstgid + 42) {
 						Item_Nota* nota = (Item_Nota*)app->entityManager->CreateEntity(EntityType::ITEM_NOTA);

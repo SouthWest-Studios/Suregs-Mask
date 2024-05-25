@@ -296,7 +296,8 @@
 				  textura_blackPath ="Assets/Textures/Interfaz/Ascensor/textura_black.png"/>
 
 		<puzzle_button texturePath="Assets/Textures/Entidades/Puzzles/textura_boton_naranja.png" />
-		
+
+		<spawner texturePath="Assets/Textures/Entidades/Spawner/textura_spawner.png" />
 			   
 	
 	</entities_data>

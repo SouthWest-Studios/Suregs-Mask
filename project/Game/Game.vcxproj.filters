@@ -343,6 +343,9 @@
     <ClCompile Include="Source\PuzzleButtonEntity.cpp">
       <Filter>Entities\Puzzle</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Enemy_Spawner.cpp">
+      <Filter>Entities\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -749,6 +752,9 @@
     </ClInclude>
     <ClInclude Include="Source\PuzzleButtonEntity.h">
       <Filter>Entities\Puzzle</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy_Spawner.h">
+      <Filter>Entities\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -8,6 +8,7 @@
 #include "Enemy_Boorok.h"
 #include "Enemy_Khurt.h"
 #include "Enemy_Khurt_Variation.h"
+#include "Enemy_Spawner.h"
 #include "Item.h"
 #include "App.h"
 #include "Item_Garra.h"
@@ -173,6 +174,9 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 		entity = new Enemy_Boorok();
 		break;
 
+	case EntityType::ENEMY_SPAWNER:
+		entity = new Enemy_Spawner();
+		break;
 
 	case EntityType::ITEM_GARRA:
 		entity = new Item_Garra(type, 1, 100, 300, 5, 2);
