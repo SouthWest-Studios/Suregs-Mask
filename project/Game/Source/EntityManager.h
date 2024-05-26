@@ -100,6 +100,7 @@ public:
 	std::vector<TPDoor*> openDoors;
 
 	bool playerVacio = false;
+	bool goAnimation = false;
 
 
 
@@ -117,6 +118,8 @@ private:
 	Animation* currentAnimation = nullptr;
 	Animation SPosition;
 	Animation eyeAnimation;
+	Animation eyeIdle;
+	Animation eyeEndIdle;
 	SDL_Texture* texture = NULL;
 	SDL_Rect* spritePositions = nullptr;
 
