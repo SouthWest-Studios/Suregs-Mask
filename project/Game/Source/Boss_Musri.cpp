@@ -220,13 +220,13 @@ bool Boss_Musri::PostUpdate() {
 	for (int i = 0; i < flechasLanzadas.size(); i++) {
 
 		b2Vec2 arrowPos = flechasLanzadas.at(i).pbody->body->GetTransform().p;
-		app->render->DrawTexture(arrowTexture, METERS_TO_PIXELS(arrowPos.x), METERS_TO_PIXELS(arrowPos.y), 1, SDL_FLIP_NONE, &currentFlechaNormalAnimation->GetCurrentFrame(), 1, GetAngleFromDirection(flechasLanzadas.at(i).direction) + 180, 0, 0);
+		app->render->DrawTexture(arrowTexture, METERS_TO_PIXELS(arrowPos.x), METERS_TO_PIXELS(arrowPos.y), 1, SDL_FLIP_NONE, &currentFlechaNormalAnimation->GetCurrentFrame(), 1, GetAngleFromDirection(flechasLanzadas.at(i).direction) , 0, 0);
 	}
 
 	for (int i = 0; i < flechasCargadas.size(); i++) {
 		FlechaCargadaMusri flechaC = flechasCargadas.at(i);
 		b2Vec2 arrowPos = flechaC.pbody->body->GetTransform().p;
-		app->render->DrawTexture(arrowTexture, METERS_TO_PIXELS(arrowPos.x), METERS_TO_PIXELS(arrowPos.y), 1, SDL_FLIP_NONE, &currentFlechaCargadaAnimation->GetCurrentFrame(), 1, GetAngleFromDirection(flechaC.direction) + 180, 0, 0);
+		app->render->DrawTexture(arrowTexture, METERS_TO_PIXELS(arrowPos.x), METERS_TO_PIXELS(arrowPos.y), 1, SDL_FLIP_NONE, &currentFlechaCargadaAnimation->GetCurrentFrame(), 1, GetAngleFromDirection(flechaC.direction), 0, 0);
 		
 
 		for (int j = 0; j < flechaC.rastroGenerado.size(); j++) {
