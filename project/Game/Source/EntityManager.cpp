@@ -62,6 +62,7 @@
 #include "ModuleFadeToBlack.h"
 #include "Menu.h";
 #include "Window.h";
+#include "Hud.h";
 
 
 #include "Defs.h"
@@ -127,11 +128,13 @@ bool EntityManager::Start() {
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
 	eyeAnimation.LoadAnim("entytiManager", "eyeAni", spritePositions);
+	eyeIdle.LoadAnim("entytiManager", "eyeIdle", spritePositions);
+	eyeEndIdle.LoadAnim("entytiManager", "eyeEndIdle", spritePositions);
 
 	texture = app->tex->Load(configNode.attribute("texturePath").as_string());
 	printf("\nEntyti Manager %d  ", Photowidth);
 	//eyeAnimation.LoadAnim("boorok", "sleepAnim", spritePositions);
-	currentAnimation = &eyeAnimation;
+	currentAnimation = &eyeIdle;
 
 	return ret;
 }
@@ -158,7 +161,8 @@ bool EntityManager::CleanUp()
 	objectsToDraw.clear();
 	
 	eyeAnimation.Clear();
-
+	eyeIdle.Clear();
+	eyeEndIdle.Clear();
 
 	return ret;
 }
@@ -575,10 +579,12 @@ bool EntityManager::Update(float dt)
 {
 	bool ret = true;
 
-	if (app->menu->menuu) {
+	if (app->menu->menuu || playerVacio) {
 		return ret;
 	}
 
+
+	
 	ListItem<Entity*>* item;
 	Entity* pEntity = NULL;
 
@@ -659,17 +665,31 @@ bool EntityManager::PostLateUpdate()
 		SDL_Rect overlayRect = { 0, 0, w , h };
 		SDL_RenderFillRect(app->render->renderer, &overlayRect);
 
-		//currentAnimation = &eyeAnimation;
 		SDL_Rect rect = currentAnimation->GetCurrentFrame();
 		app->render->DrawTexture(texture, 500, 90, SDL_FLIP_HORIZONTAL, &rect, 0, 0);
 		currentAnimation->Update();
+		app->physics->active = false;
+		//app->hud->active = false;
 	}
 
-	if (currentAnimation->HasFinished() ) {
-		printf("\nHola");
+	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "eyeAni") {
+		currentAnimation = &eyeEndIdle;
 		eyeAnimation.Reset();
+	}
+	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "eyeIdle") {
+		//goAnimation = true;
+		currentAnimation = &eyeAnimation;
+		eyeIdle.Reset();
+	}
+
+	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "eyeEndIdle") {
+		GetPlayer()->TakeDamage(10);
+		eyeEndIdle.Reset();
 		playerVacio = false;
 		GetPlayer()->vacio = true;
+		currentAnimation = &eyeIdle;
+		app->physics->active = true;
+		//app->hud->Enable();
 	}
 	
 	return true;
@@ -780,26 +800,3 @@ bool EntityManager::SaveState(pugi::xml_node node)
 	return true;
 }
 
-void EntityManager::printEfectVacio()
-{
-	if (playerVacio) {
-		uint w;
-		uint h;
-		app->win->GetWindowSize(w, h);
-		SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, 200);  // Black with 50% opacity
-		SDL_Rect overlayRect = { 0, 0,w , h };
-		SDL_RenderFillRect(app->render->renderer, &overlayRect);
-
-		//currentAnimation = &eyeAnimation;
-		SDL_Rect rect = currentAnimation->GetCurrentFrame();
-		app->render->DrawTexture(texture, 500, 90, SDL_FLIP_HORIZONTAL, &rect, 0, 0);
-		currentAnimation->Update();
-	}
-
-	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "eyeAni") {
-		printf("\nHola");
-		eyeAnimation.Reset();
-		playerVacio = false;
-		GetPlayer()->vacio = true;
-	}
-}
