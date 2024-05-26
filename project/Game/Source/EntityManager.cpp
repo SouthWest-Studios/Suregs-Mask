@@ -61,6 +61,7 @@
 #include "Elevator.h"
 #include "ModuleFadeToBlack.h"
 #include "Menu.h";
+#include "Window.h";
 
 
 #include "Defs.h"
@@ -113,6 +114,25 @@ bool EntityManager::Start() {
 		ret = item->data->Start();
 	}
 
+	pugi::xml_document configFile;
+	pugi::xml_node configNode;
+	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
+	configNode = configFile.child("config").child("entitymanager");
+
+
+	int TSprite = configNode.attribute("Tsprite").as_int();
+	int SpriteX = configNode.attribute("sprite_x").as_int();
+	int SpriteY = configNode.attribute("sprite_y").as_int();
+	int Photowidth = configNode.attribute("Pwidth").as_int();
+	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
+
+	eyeAnimation.LoadAnim("entytiManager", "eyeAni", spritePositions);
+
+	texture = app->tex->Load(configNode.attribute("texturePath").as_string());
+	printf("\nEntyti Manager %d  ", Photowidth);
+	//eyeAnimation.LoadAnim("boorok", "sleepAnim", spritePositions);
+	currentAnimation = &eyeAnimation;
+
 	return ret;
 }
 
@@ -127,7 +147,7 @@ bool EntityManager::CleanUp()
 	{
 		ret = item->data->CleanUp();
 		RELEASE(item->data);
-		
+
 		//delete item->data;
 		item = item->prev;
 	}
@@ -136,6 +156,9 @@ bool EntityManager::CleanUp()
 	tpEntities.Clear();
 
 	objectsToDraw.clear();
+	
+	eyeAnimation.Clear();
+
 
 	return ret;
 }
@@ -358,7 +381,7 @@ void EntityManager::DestroyEntity(Entity* entity)
 
 void EntityManager::AddEntity(Entity* entity)
 {
-	if ( entity != nullptr) entities.Add(entity);
+	if (entity != nullptr) entities.Add(entity);
 }
 
 void EntityManager::LinkTPEntities()
@@ -372,7 +395,7 @@ void EntityManager::LinkTPEntities()
 
 		for (itemMinor = tpEntities.start; itemMinor != NULL; itemMinor = itemMinor->next) {
 			//Se busca del in al out, es decir (0,1 - 2,3 - 4,5)
-			if ((itemMajor->data->tpID == 0 || itemMajor->data->tpID % 2 == 0) && itemMajor->data->tpID+1 == itemMinor->data->tpID) {
+			if ((itemMajor->data->tpID == 0 || itemMajor->data->tpID % 2 == 0) && itemMajor->data->tpID + 1 == itemMinor->data->tpID) {
 				itemMajor->data->targetPosition = itemMinor->data->position;
 				itemMinor->data->targetPosition = itemMajor->data->position;
 
@@ -401,16 +424,16 @@ MiniGameFishing* EntityManager::GetRod()
 }
 
 std::vector<Entity*> EntityManager::GetEnemies() {
-    std::vector<Entity*> enemies;
-    for (ListItem<Entity*>* item = entities.start; item != NULL; item = item->next) {
-        Entity* entity = item->data;
-        if (entity->type == EntityType::ENEMY_OSIRIS || entity->type == EntityType::ENEMY_OSIRIS_VARIATION || entity->type == EntityType::ENEMY_OLS || entity->type == EntityType::ENEMY_OLS_VARIATION || entity->type == EntityType::ENEMY_SHAR || entity->type == EntityType::ENEMY_KHURT ||
-			entity->type == EntityType::BOSS_INUIT || entity->type == EntityType::BOSS_MUSRI || entity->type == EntityType::BOSS_SURMA || 
+	std::vector<Entity*> enemies;
+	for (ListItem<Entity*>* item = entities.start; item != NULL; item = item->next) {
+		Entity* entity = item->data;
+		if (entity->type == EntityType::ENEMY_OSIRIS || entity->type == EntityType::ENEMY_OSIRIS_VARIATION || entity->type == EntityType::ENEMY_OLS || entity->type == EntityType::ENEMY_OLS_VARIATION || entity->type == EntityType::ENEMY_SHAR || entity->type == EntityType::ENEMY_KHURT ||
+			entity->type == EntityType::BOSS_INUIT || entity->type == EntityType::BOSS_MUSRI || entity->type == EntityType::BOSS_SURMA ||
 			entity->type == EntityType::BOSS_IGORY) {
-            enemies.push_back(entity);
-        }
-    }
-    return enemies;
+			enemies.push_back(entity);
+		}
+	}
+	return enemies;
 }
 
 std::vector<Entity*> EntityManager::GetEnemiesOsiris()
@@ -464,7 +487,7 @@ bool EntityManager::PreUpdate()
 		if (obj.texture == app->entityManager->GetPlayer()->texture)
 		{
 			if (app->entityManager->GetPlayer()->isFacingLeft) {
-			obj.x = app->entityManager->GetPlayer()->position.x - 70;
+				obj.x = app->entityManager->GetPlayer()->position.x - 70;
 			}
 			else
 			{
@@ -588,10 +611,10 @@ bool EntityManager::PostUpdate()
 	{
 		// Verifica si la posici�n del objeto est?dentro de los l�mites de la c�mara
 		if (obj.x + obj.width >= -app->render->camera.x && obj.x <= -app->render->camera.x + app->render->camera.w &&
-			obj.y + obj.height >= -app->render->camera.y && obj.y <= -app->render->camera.y + app->render->camera.h){
+			obj.y + obj.height >= -app->render->camera.y && obj.y <= -app->render->camera.y + app->render->camera.h) {
 
 			// PLAYER
-			if(obj.texture != nullptr){
+			if (obj.texture != nullptr) {
 				if (obj.texture == GetPlayer()->texture && obj.isFacingLeft) {
 					app->render->DrawTexture(obj.texture, obj.x, obj.y, 0.5f, SDL_FLIP_NONE, &obj.currentFrame);
 				}
@@ -617,7 +640,39 @@ bool EntityManager::PostUpdate()
 
 	app->map->PrintMapFront();
 
+
+	
+
+
 	return ret;
+}
+
+bool EntityManager::PostLateUpdate()
+{
+
+	//app->render->DrawTexture(texture, BMRposition.x - 410, BMRposition.y - 300, SDL_FLIP_HORIZONTAL, &rect);
+	if (playerVacio) {
+		uint w;
+		uint h;
+		app->win->GetWindowSize(w, h);
+		SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, 200);  // Black with 50% opacity
+		SDL_Rect overlayRect = { 0, 0, w , h };
+		SDL_RenderFillRect(app->render->renderer, &overlayRect);
+
+		//currentAnimation = &eyeAnimation;
+		SDL_Rect rect = currentAnimation->GetCurrentFrame();
+		app->render->DrawTexture(texture, 500, 90, SDL_FLIP_HORIZONTAL, &rect, 0, 0);
+		currentAnimation->Update();
+	}
+
+	if (currentAnimation->HasFinished() ) {
+		printf("\nHola");
+		eyeAnimation.Reset();
+		playerVacio = false;
+		GetPlayer()->vacio = true;
+	}
+	
+	return true;
 }
 
 void EntityManager::UpdateEnemyActivation() {
@@ -641,12 +696,12 @@ void EntityManager::UpdateEnemyActivation() {
 			else {
 				enemy->isActive = false;
 				enemy->pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
-				if(enemy->type == EntityType::ENEMY_OLS)
+				if (enemy->type == EntityType::ENEMY_OLS)
 				{
 					Enemy_Ols* olsEnemy = static_cast<Enemy_Ols*>(enemy);
 					olsEnemy->DestroyProjectile();
 				}
-				if(enemy->type == EntityType::ENEMY_OLS_VARIATION)
+				if (enemy->type == EntityType::ENEMY_OLS_VARIATION)
 				{
 					Enemy_Ols_Variation* olsEnemyVariation = static_cast<Enemy_Ols_Variation*>(enemy);
 					olsEnemyVariation->DestroyProjectile();
@@ -657,35 +712,35 @@ void EntityManager::UpdateEnemyActivation() {
 	}
 }
 
-void EntityManager::UpdateRoomActivation(){
+void EntityManager::UpdateRoomActivation() {
 	MapObject* currentRoom = GetPlayer()->GetCurrentRoom();
 	std::vector<Entity*> enemies = GetEnemies();
 
 	bool enemyInRoom = false;
 
 
-    for (Entity* enemy : enemies) {
-        // Asegúrate de que el enemigo tiene una sala asignada
-        if (enemy->room != nullptr) {
-            // Si el enemigo está en la misma sala que el jugador, marca que hay un enemigo en la sala
-            if (enemy->room == currentRoom) {
-                enemyInRoom = true;
-                break;
-            }
-        }
-    }
+	for (Entity* enemy : enemies) {
+		// Asegúrate de que el enemigo tiene una sala asignada
+		if (enemy->room != nullptr) {
+			// Si el enemigo está en la misma sala que el jugador, marca que hay un enemigo en la sala
+			if (enemy->room == currentRoom) {
+				enemyInRoom = true;
+				break;
+			}
+		}
+	}
 
-    // Si no hay enemigos en la sala, activa los tps de la sala
-    if (!enemyInRoom) {
-        for (ListItem<TPEntity*>* item = tpEntities.start; item != nullptr; item = item->next) {
-            if (item->data->room == currentRoom && !item->data->isOpened) {
-                item->data->isOpened = true;
+	// Si no hay enemigos en la sala, activa los tps de la sala
+	if (!enemyInRoom) {
+		for (ListItem<TPEntity*>* item = tpEntities.start; item != nullptr; item = item->next) {
+			if (item->data->room == currentRoom && !item->data->isOpened) {
+				item->data->isOpened = true;
 				TPDoor* tpdoor = new TPDoor{ item->data->sceneLevel, item->data->tpID };
 				openDoors.push_back(tpdoor);
-                //printf("TP activated\n");
-            }
-        }
-    }
+				//printf("TP activated\n");
+			}
+		}
+	}
 
 
 
@@ -723,4 +778,28 @@ bool EntityManager::SaveState(pugi::xml_node node)
 	}
 
 	return true;
+}
+
+void EntityManager::printEfectVacio()
+{
+	if (playerVacio) {
+		uint w;
+		uint h;
+		app->win->GetWindowSize(w, h);
+		SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, 200);  // Black with 50% opacity
+		SDL_Rect overlayRect = { 0, 0,w , h };
+		SDL_RenderFillRect(app->render->renderer, &overlayRect);
+
+		//currentAnimation = &eyeAnimation;
+		SDL_Rect rect = currentAnimation->GetCurrentFrame();
+		app->render->DrawTexture(texture, 500, 90, SDL_FLIP_HORIZONTAL, &rect, 0, 0);
+		currentAnimation->Update();
+	}
+
+	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "eyeAni") {
+		printf("\nHola");
+		eyeAnimation.Reset();
+		playerVacio = false;
+		GetPlayer()->vacio = true;
+	}
 }

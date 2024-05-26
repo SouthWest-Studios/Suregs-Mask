@@ -144,8 +144,11 @@
       <father_death_fx path=""/>
 		</fx>
 	</sounds>
-  
-  
+
+	<entitymanager texturePath="Assets/Textures/Entidades/mascaraAnim.png" Tsprite="8" Pwidth="2160" sprite_x="270" sprite_y="270"/>
+		
+
+	
 	<entities_data>
 		<!-- <player x="1450" y="2500" texturePath="Assets/Textures/Entidades/Jugador/salamanda.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg" Posx="150" Posy="570" Tsprite="23" Pwidth="1000" sprite_x="100" sprite_y="160"/>
             -->
@@ -426,6 +429,9 @@
 		<scene_logos>
 			<idleAnim start="0" end="50" speed="0.5f" loop="false"/>
 		</scene_logos>
+		<entytiManager>
+			<eyeAni start="0" end="7" speed="0.1f" loop="false"/>
+		</entytiManager>
 			
 		<player>
 			<!-- chibi 100-->

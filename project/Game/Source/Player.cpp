@@ -595,6 +595,7 @@ bool Player::Start() {
 
 	player_Direction = Direction::UNKNOWN;
 
+	
 
 	EquipPrimaryMask(Mask::NOMASK);
 	EquipSecondaryMask(Mask::NOMASK);
@@ -665,6 +666,11 @@ bool Player::Start() {
 
 	app->tex->GetSize(texture, texW, texH);
 
+
+	printf("\nPositionX: %d", position.x);
+	printf("\nPositionY: %d", position.y);
+	posInicioPlayer = b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y));
+
 	return true;
 }
 
@@ -673,7 +679,12 @@ bool Player::Update(float dt)
 	//LOG("Playerpos: x:%d y:%d", position.x, position.y);
 	UpdateStats();
 
+	
 
+	if (vacio) {
+		pbodyFoot->body->SetTransform(posInicioPlayer, 0);
+		vacio = false;
+	}
 
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
@@ -825,11 +836,7 @@ bool Player::Update(float dt)
 
 bool Player::PostUpdate() {
 
-	if (currentAnimation == nullptr) { currentAnimation = &idle_player; }
-	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-
-
-
+	
 
 	//printf("Posición: (%d, %d)\n", position.x, position.y);
 
@@ -842,6 +849,11 @@ bool Player::PostUpdate() {
 		//app->render->DrawTexture(texture, position.x - 75, position.y - 100, 0.5f, SDL_FLIP_HORIZONTAL, &rect);
 
 	}
+	if (currentAnimation == nullptr) { currentAnimation = &idle_player; }
+	SDL_Rect rect = currentAnimation->GetCurrentFrame();
+
+
+	
 	return true;
 }
 
@@ -1424,6 +1436,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision PLATFORM");
 		break;
 	case ColliderType::VACIOS:
+		app->entityManager->playerVacio = true;
 		printf("Lagoo");
 		break;
 	case ColliderType::ITEM:

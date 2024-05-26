@@ -236,6 +236,7 @@ private:
 
 public:
 
+	
 	//L02: DONE 2: Declare player parameters
 	float speed = 0.2f;
 	float attackMovement = 25;
@@ -308,6 +309,8 @@ public:
 
 	//pocion
 	bool inPocionAnim = false;
+	b2Vec2 posInicioPlayer = b2Vec2(0, 0);
+	bool vacio = false;
 
 	Timer collisionAttackTimer;
 

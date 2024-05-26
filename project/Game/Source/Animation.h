@@ -56,6 +56,9 @@ public:
 	{
 		return !loop && !pingpong && loopCount > 0;
 	}
+	void Clear() {
+		totalFrames = 0;		
+	}
 
 	void Update()
 	{
@@ -141,18 +144,7 @@ public:
 		pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
 		AniInfo = configFile.child("config").child("animations").child(Anipart).child(NombreAni);
 
-		//if (checkSDLRect(AniInfo, spritePositions)) {
-		//	/*printf("SDL_RectCorrecta£¡\n");*/
-		//}
-		//else {
-		//	/*printf("SDL_RectNoCorrecta£¡\n");*/
-		//}
-
-
-		/*for (int i = AniInfo.attribute("start").as_int(); i < AniInfo.attribute("end").as_int(); i++)
-		{
-			this->PushBack({ spritePositions[i] });
-		}*/
+		
 
 		if (AniInfo.attribute("start").as_int() > AniInfo.attribute("end").as_int()) {
 			for (int i = AniInfo.attribute("start").as_int(); i > AniInfo.attribute("end").as_int(); i--)
@@ -169,6 +161,7 @@ public:
 
 		this->speed = AniInfo.attribute("speed").as_float();
 		this->loop = AniInfo.attribute("loop").as_bool();
+
 	}
 
 
