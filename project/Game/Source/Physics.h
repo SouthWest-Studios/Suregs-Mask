@@ -33,6 +33,7 @@ enum class ColliderType {
 	FLOAT,
 	LAGO,
 	PLATFORM,
+	VACIOS,
 	ENEMY,
 	BOSS_INUIT,
 	BOSS_IGORY,

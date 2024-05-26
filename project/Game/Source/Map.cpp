@@ -1053,6 +1053,7 @@ bool Map::LoadObjects()
 		for (int i = 0; i < mapObjectsItem->data->objects.Count(); i++) {
 
 			MapObject* object = mapObjectsItem->data->objects[i];
+			SString objectName = mapObjectsItem->data->name;
 			
 			if (object->properties.GetProperty("dialogID") != NULL) {
 
@@ -1147,8 +1148,20 @@ bool Map::LoadObjects()
 					c1 = app->physics->CreateChain(object->x, object->y, object->points.data(), object->points.size(), STATIC);
 				}
 
-				c1->ctype = ColliderType::PLATFORM;
-				collisionsList.Add(c1);
+			
+
+				std::string obN = objectName.GetString();
+				if (obN.compare("Vacios") == false) {
+
+					c1->ctype = ColliderType::VACIOS;
+					collisionsList.Add(c1);
+				}
+				else
+				{
+					c1->ctype = ColliderType::PLATFORM;
+					collisionsList.Add(c1);
+				}
+
 			}
 
 			
