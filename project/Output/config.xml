@@ -151,9 +151,9 @@
             -->
 		<player texturePath="Assets/Textures/Entidades/Jugador/textura_player.png" Tsprite="82" Pwidth="2400" sprite_x="300" sprite_y="240"/>
 
-		<osiris texturePath="Assets/Textures/Entidades/Osiris/textura_osiris.png" 
+		<osiris texturePath="Assets/Textures/Entidades/Osiris/spritesheet_osiris.png" 
 				maxHealth="250.0f" speed="2.5f" attackDamage="50.0f" attackDistance="2" viewDistance="20"
-				Tsprite="16" Pwidth="400" sprite_x="100" sprite_y="100"/>
+				Tsprite="66" Pwidth="2728" sprite_x="248" sprite_y="200"/>
 
 		<osiris_variation texturePath="Assets/Textures/Entidades/Osiris/spritesheet_osiris.png"
 				maxHealth="340.0f" speed="3.3f" attackDamage="200.0f" secondAttackDamage="230.0f" attackDistance="2" viewDistance="20"
@@ -490,10 +490,12 @@
 		</boss_surma>
 		
 		<osiris>
-			<idleAnim start="0" end="1" speed="0.01f" loop="true"/>
-			<runAnim start="4" end="8" speed="0.1f" loop="true"/>
-			<attackAnim start="12" end="16" speed="0.1f" loop="true"/>
-			<dieAnim start="8" end="9" speed="0.01f" loop="true"/>
+			<idleAnim start="11" end="15" speed="0.01f" loop="true"/>
+			<runAnim start="0" end="10" speed="0.2f" loop="true"/>
+			<attackAnim start="22" end="28" speed="0.15f" loop="true"/>
+			<dieAnim start="44" end="52" speed="0.1f" loop="false"/>
+			<takeDamageAnim start="33" end="37" speed="0.15f" loop="false"/>
+			<reviveAnim start="55" end="65" speed="0.1f" loop="false"/>
 		</osiris>
 
 		<osiris_variation>

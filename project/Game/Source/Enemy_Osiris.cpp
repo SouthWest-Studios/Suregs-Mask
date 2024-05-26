@@ -57,6 +57,10 @@ bool Enemy_Osiris::Start() {
 	runAnim.LoadAnim("osiris", "runAnim", spritePositions);
 	attackAnim.LoadAnim("osiris", "attackAnim", spritePositions);
 	dieAnim.LoadAnim("osiris", "dieAnim", spritePositions);
+	takeDamageAnim.LoadAnim("osiris", "takeDamagekAnim", spritePositions);
+	reviveAnim.LoadAnim("osiris", "reviveAnim", spritePositions);
+
+
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
@@ -82,16 +86,16 @@ bool Enemy_Osiris::Start() {
 	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();
 
-	app->entityManager->objectsToDraw.push_back({
-		texture,
-		position.x, // x
-		position.y, // y
-		position.y + 98, // anchorY
-		100, // width
-		100, // height
-		NULL, // currentFrame
-		isFacingLeft
-	});
+	//app->entityManager->objectsToDraw.push_back({
+	//	texture,
+	//	position.x, // x
+	//	position.y, // y
+	//	position.y + 98, // anchorY
+	//	100, // width
+	//	100, // height
+	//	NULL, // currentFrame
+	//	isFacingLeft
+	//});
 
 	room = GetCurrentRoom();
 
@@ -164,10 +168,10 @@ bool Enemy_Osiris::PostUpdate() {
 
 
 	if (isFacingLeft) {
-		//app->render->DrawTexture(texture, position.x - 25, position.y - 65, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x - 50, position.y - 95, 0.7f, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		//app->render->DrawTexture(texture, position.x - 40, position.y - 65, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 85, position.y - 95, 0.7f, SDL_FLIP_NONE, &rect);
 	}
 
 

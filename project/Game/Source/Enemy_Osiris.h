@@ -94,6 +94,9 @@ private:
 	Animation runAnim;
 	Animation attackAnim;
 	Animation dieAnim;
+	Animation takeDamageAnim;
+	Animation reviveAnim;
+
 
 	int osiris_get_damage_fx;
 	int osiris_death_fx;
