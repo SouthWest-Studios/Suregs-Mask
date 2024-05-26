@@ -105,7 +105,7 @@ public:
 	//L02: DONE 2: Declare player parameters
 	SDL_Texture* texture = NULL;
 	SDL_Texture* arrowTexture = NULL;
-	SDL_Texture* arrowChargedTexture = NULL;
+	/*SDL_Texture* arrowChargedTexture = NULL;*/
 	SDL_Texture* arrowChargedRastroTexture = NULL;
 	pugi::xml_node config;
 	uint texW, texH;
@@ -130,10 +130,22 @@ private:
 	pugi::xml_document configFile;
 	pugi::xml_node configNode;
 
-	Animation idleAnim;
-	Animation attackEmpujarAnim;
+	
+	/*Animation attackEmpujarAnim;
 	Animation attackFlechasRapidasAnim;
-	Animation attackFlechaCargadaAnim;
+	Animation attackFlechaCargadaAnim;*/
+
+	Animation atqCargadoAnim;
+	Animation atqNormalAnim;
+	Animation idleAnim;
+	Animation cambioFaseAnim;
+	Animation runAnim;
+	Animation dashAnim;
+	Animation atqMeleeAnim;
+
+	Animation flechaNormalAnim;
+	Animation flechaCargadaAnim;
+
 
 	int musri_dash_fx;
 	
@@ -150,6 +162,8 @@ private:
 	DynArray<iPoint> lastPath;
 
 	Animation* currentAnimation = nullptr;
+	Animation* currentFlechaNormalAnimation = nullptr;
+	Animation* currentFlechaCargadaAnimation = nullptr;
 
 	EntityState_Boss_Musri state;
 	FASE_Musri fase;
@@ -157,6 +171,7 @@ private:
 
 	Animation SPosition;
 	SDL_Rect* spritePositions;
+	SDL_Rect* spriteArrowPositions;
 
 	Timer cambiarPosicionTimer;
 	Timer dispararRafagasTimer;
@@ -168,6 +183,9 @@ private:
 	Timer habilidadDashInvisibleTimer;
 
 	Timer muriendoseTimer;
+
+	Timer cambioFaseTimer;
+	int cambioFaseMS = 10000;
 
 
 	int habilidadEmpujeCD = 10000;

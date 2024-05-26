@@ -48,13 +48,26 @@ bool Boss_Musri::Start() {
 	SpriteY = config.attribute("sprite_y").as_int();
 	Photowidth = config.attribute("Pwidth").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
+	spriteArrowPositions = SPosition.SpritesPos(14, 863, 600, 6904);
 
+
+	atqCargadoAnim.LoadAnim((char*)name.c_str(), "atqCargadoAnim", spritePositions);
+	atqNormalAnim.LoadAnim((char*)name.c_str(), "atqNormalAnim", spritePositions);
 	idleAnim.LoadAnim((char*)name.c_str(), "idleAnim", spritePositions);
-	attackEmpujarAnim.LoadAnim((char*)name.c_str(), "attackEmpujarAnim", spritePositions);;
-	attackFlechasRapidasAnim.LoadAnim((char*)name.c_str(), "attackFlechasRapidas", spritePositions);;
-	attackFlechaCargadaAnim.LoadAnim((char*)name.c_str(), "attackFlechaCargada", spritePositions);;
+	cambioFaseAnim.LoadAnim((char*)name.c_str(), "cambioFaseAnim", spritePositions);
+	runAnim.LoadAnim((char*)name.c_str(), "runAnim", spritePositions);
+	dashAnim.LoadAnim((char*)name.c_str(), "dashAnim", spritePositions);
+	atqMeleeAnim.LoadAnim((char*)name.c_str(), "atqMeleeAnim", spritePositions);
+
+	flechaNormalAnim.LoadAnim((char*)name.c_str(), "flechaNormalAnim", spriteArrowPositions);
+	flechaCargadaAnim.LoadAnim((char*)name.c_str(), "flechaCargadaAnim", spriteArrowPositions);
+	
+	//attackEmpujarAnim.LoadAnim((char*)name.c_str(), "attackEmpujarAnim", spritePositions);;
+	//attackFlechasRapidasAnim.LoadAnim((char*)name.c_str(), "attackFlechasRapidas", spritePositions);;
+	//attackFlechaCargadaAnim.LoadAnim((char*)name.c_str(), "attackFlechaCargada", spritePositions);;
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
+	arrowTexture = app->tex->Load(config.attribute("arrowTexturePath").as_string());
 
 	musri_dash_fx = app->audio->LoadAudioFx("musri_dash_fx");
 
@@ -68,9 +81,7 @@ bool Boss_Musri::Start() {
 	pbodySensor->listener = this;
 	pbodySensor->ctype = ColliderType::UNKNOWN;
 
-
-	arrowTexture = app->tex->Load(config.attribute("arrowTexturePath").as_string());
-	arrowChargedTexture = app->tex->Load(config.attribute("arrowChargedTexturePath").as_string());
+	//arrowChargedTexture = app->tex->Load(config.attribute("arrowChargedTexturePath").as_string());
 	arrowChargedRastroTexture = app->tex->Load(config.attribute("arrowChargedRastroTexturePath").as_string());
 
 	//originalPosition = app->map->WorldToMap(position.x, position.y);
@@ -98,6 +109,9 @@ bool Boss_Musri::Start() {
 	room = GetCurrentRoom();
 	
 	numeroRafagasAct = 0;
+
+	currentFlechaNormalAnimation = &flechaNormalAnim;
+	currentFlechaCargadaAnimation = &flechaCargadaAnim;
 
 	return true;
 }
@@ -149,8 +163,9 @@ bool Boss_Musri::Update(float dt)
 	}
 
 
-
-
+	b2Vec2 direction(playerPos.x - position.x, playerPos.y - position.y);
+	direction.Normalize();
+	isFacingLeft = (direction.x <= 0);
 
 	stateMachine(dt, playerPos);
 
@@ -180,10 +195,10 @@ bool Boss_Musri::PostUpdate() {
 
 
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 70, position.y - 150, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x - 420, position.y - 400, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 70, position.y - 150, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 420, position.y - 400, SDL_FLIP_NONE, &rect);
 	}
 
 	if (app->physics->debug == true) {
@@ -205,13 +220,14 @@ bool Boss_Musri::PostUpdate() {
 	for (int i = 0; i < flechasLanzadas.size(); i++) {
 
 		b2Vec2 arrowPos = flechasLanzadas.at(i).pbody->body->GetTransform().p;
-		app->render->DrawTexture(arrowTexture, METERS_TO_PIXELS(arrowPos.x), METERS_TO_PIXELS(arrowPos.y), 1, SDL_FLIP_NONE, 0, 1, GetAngleFromDirection(flechasLanzadas.at(i).direction) + 180, 0, 0);
+		app->render->DrawTexture(arrowTexture, METERS_TO_PIXELS(arrowPos.x), METERS_TO_PIXELS(arrowPos.y), 1, SDL_FLIP_NONE, &currentFlechaNormalAnimation->GetCurrentFrame(), 1, GetAngleFromDirection(flechasLanzadas.at(i).direction) + 180, 0, 0);
 	}
 
 	for (int i = 0; i < flechasCargadas.size(); i++) {
 		FlechaCargadaMusri flechaC = flechasCargadas.at(i);
 		b2Vec2 arrowPos = flechaC.pbody->body->GetTransform().p;
-		app->render->DrawTexture(arrowChargedTexture, METERS_TO_PIXELS(arrowPos.x), METERS_TO_PIXELS(arrowPos.y), 1, SDL_FLIP_NONE, 0, 1, GetAngleFromDirection(flechaC.direction) + 180, 0, 0);
+		app->render->DrawTexture(arrowTexture, METERS_TO_PIXELS(arrowPos.x), METERS_TO_PIXELS(arrowPos.y), 1, SDL_FLIP_NONE, &currentFlechaCargadaAnimation->GetCurrentFrame(), 1, GetAngleFromDirection(flechaC.direction) + 180, 0, 0);
+		
 
 		for (int j = 0; j < flechaC.rastroGenerado.size(); j++) {
 			RastroFlechaCargadaMusri rastro = flechaC.rastroGenerado.at(j);
@@ -443,7 +459,7 @@ bool Boss_Musri::Bossfinding(float dt, iPoint targetPosP)
 		velocity = b2Vec2(direction.x * speed, direction.y * speed);
 
 		// Determina si el enemigo est?mirando hacia la izquierda o hacia la derecha
-		isFacingLeft = (direction.x >= 0);
+		
 
 
 		isAttacking = false;
@@ -526,6 +542,7 @@ void Boss_Musri::Fase1(float dt, iPoint playerPos)
 	bool haLlegado = false;
 	if (cambiarPosicionTimer.ReadMSec() > cambiarPosicionTime) {
 		haLlegado = Bossfinding(dt, movePosition);
+		currentAnimation = &runAnim;
 		if (haLlegado) {
 			cambiarPosicionTimer.Start();
 			movePosition = GetRandomPosicion(movePosition, 10); //Para la proxima
@@ -544,10 +561,13 @@ void Boss_Musri::Fase1(float dt, iPoint playerPos)
 		else {
 
 			if (dispararRafagasTimer.ReadMSec() >= habilidadRafagasCD) {
-				
+				currentAnimation = &atqNormalAnim;
 				//Disparar rafagas
 				//flechasLanzadas
 				if (numeroRafagasAct < numeroRafagas) {
+
+					if (numeroRafagasAct == 0) { currentFlechaNormalAnimation->Reset(); }
+
 					if (dispararFlechaRafagaTimer.ReadMSec() >= 100) {
 
 						dispararFlechaRafagaTimer.Start();
@@ -560,6 +580,7 @@ void Boss_Musri::Fase1(float dt, iPoint playerPos)
 
 						flecha.pbody->body->ApplyForceToCenter(b2Vec2(flecha.direction.x* velocidadFlechas, flecha.direction.y * velocidadFlechas), true);
 						numeroRafagasAct++;
+						atqNormalAnim.Reset();
 					}
 				}
 				else {
@@ -577,10 +598,12 @@ void Boss_Musri::Fase1(float dt, iPoint playerPos)
 		if (habilidadEmpujeTimer.ReadMSec() < 400) {
 			fPoint dirToPlayer = getDirectionVector(position, playerPos);
 			app->entityManager->GetPlayer()->pbodyFoot->body->ApplyForceToCenter(b2Vec2(dirToPlayer.x * fuerzaHabilidadEmpuje, dirToPlayer.y * fuerzaHabilidadEmpuje), true);
+			currentAnimation = &atqMeleeAnim;
 		}
 	}
 
 	if (health <= 4200) {
+		cambioFaseTimer.Start();
 		fase = FASE_Musri::FASE_CHANGE;
 	}
 
@@ -589,7 +612,7 @@ void Boss_Musri::Fase1(float dt, iPoint playerPos)
 	LOG("Timer cambiarPosicion: %f", cambiarPosicionTimer.ReadMSec());*/
 
 
-
+	currentFlechaNormalAnimation->Update();
 
 
 }
@@ -602,7 +625,16 @@ void Boss_Musri::FaseC(float dt, iPoint playerPos)
 
 	movePosition = iPoint(limitesSala.x + (limitesSala.w/2), limitesSala.y + (limitesSala.h/2));
 	if (Bossfinding(dt, movePosition)) {
-		fase = FASE_Musri::FASE_TWO;
+
+		currentAnimation = &cambioFaseAnim;
+		if (cambioFaseTimer.ReadMSec() > cambioFaseMS) {
+			fase = FASE_Musri::FASE_TWO;
+		}
+
+		
+	}
+	else {
+		cambioFaseTimer.Start();
 	}
 
 }
@@ -614,6 +646,7 @@ void Boss_Musri::Fase2(float dt, iPoint playerPos)
 
 		//Si tiene la habilidad de dashear invisiblem dashea 3 veces (poca distancia) cada vez mas invisible; Al terminar el dash, la invisibilidad dura 4s
 		if (habilidadDashInvisibleTimer.ReadMSec() >= habilidadDashInvisibleCD) {
+			currentAnimation = &dashAnim;
 			if (numeroDashesAct <= numeroDashes) {
 				haLlegado = Bossfinding(dt, movePosition);
 				if (haLlegado) {
@@ -629,6 +662,7 @@ void Boss_Musri::Fase2(float dt, iPoint playerPos)
 			}
 		}
 		else {
+			currentAnimation = &runAnim;
 			haLlegado = Bossfinding(dt, movePosition);
 			if (haLlegado) {
 				cambiarPosicionTimer.Start();
@@ -652,6 +686,7 @@ void Boss_Musri::Fase2(float dt, iPoint playerPos)
 		else if (habilidadFlechaCargadaTimer.ReadMSec() >= habilidadCargadaCD) {
 			//Habilidad flecha cargada
 			if (cargaFlechaRafagaTimer.ReadMSec() > 2000) { //2S de carga
+				currentAnimation = &atqCargadoAnim;
 				if (cargaFlechaRafagaTimer.ReadMSec() < 3000) {
 					//Disparar la flecha
 					fPoint dirToPlayer = getDirectionVector(position, playerPos);
@@ -665,6 +700,8 @@ void Boss_Musri::Fase2(float dt, iPoint playerPos)
 					//flechasCargadas
 					habilidadFlechaCargadaTimer.Start();
 					dispararRafagasTimer.Start(-5000);
+					atqCargadoAnim.Reset();
+					currentFlechaCargadaAnimation->Reset();
 				}
 				else {
 					cargaFlechaRafagaTimer.Start();
@@ -680,6 +717,11 @@ void Boss_Musri::Fase2(float dt, iPoint playerPos)
 				//Disparar rafagas
 				//flechasLanzadas
 				if (numeroRafagasAct < numeroRafagas) {
+
+					if (numeroRafagasAct == 0) { currentFlechaNormalAnimation->Reset(); }
+
+					currentAnimation = &atqNormalAnim;
+
 					if (dispararFlechaRafagaTimer.ReadMSec() >= 100) {
 
 						dispararFlechaRafagaTimer.Start();
@@ -692,11 +734,13 @@ void Boss_Musri::Fase2(float dt, iPoint playerPos)
 
 						flecha.pbody->body->ApplyForceToCenter(b2Vec2(flecha.direction.x * velocidadFlechas, flecha.direction.y * velocidadFlechas), true);
 						numeroRafagasAct++;
+						atqNormalAnim.Reset();
 					}
 				}
 				else {
 					dispararRafagasTimer.Start(); //Reset el timer de las 3 flechas
 					numeroRafagasAct = 0;
+					atqNormalAnim.Reset();
 				}
 			}
 		}
@@ -707,6 +751,7 @@ void Boss_Musri::Fase2(float dt, iPoint playerPos)
 	}
 	else {
 		if (habilidadEmpujeTimer.ReadMSec() < 400) {
+			currentAnimation = &atqMeleeAnim;
 			fPoint dirToPlayer = getDirectionVector(position, playerPos);
 			app->entityManager->GetPlayer()->pbodyFoot->body->ApplyForceToCenter(b2Vec2(dirToPlayer.x * fuerzaHabilidadEmpuje, dirToPlayer.y * fuerzaHabilidadEmpuje), true);
 		}
@@ -764,6 +809,9 @@ void Boss_Musri::Fase2(float dt, iPoint playerPos)
 			}
 		}
 	}
+
+	currentFlechaNormalAnimation->Update();
+	currentFlechaCargadaAnimation->Update();
 
 	if (health <= 0) {
 		fase = FASE_Musri::FASE_DYNIG;
