@@ -327,7 +327,7 @@ void Enemy_Osiris::Die() {
 void Enemy_Osiris::Revive()
 {
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
-
+	currentAnimation = &reviveAnim;
 	if (!tempo)
 	{
 		reviveTimer.Start();

@@ -495,7 +495,7 @@
 			<attackAnim start="22" end="28" speed="0.15f" loop="true"/>
 			<dieAnim start="44" end="52" speed="0.1f" loop="false"/>
 			<takeDamageAnim start="33" end="37" speed="0.15f" loop="false"/>
-			<reviveAnim start="55" end="65" speed="0.1f" loop="false"/>
+			<reviveAnim start="55" end="65" speed="0.04f" loop="false"/>
 		</osiris>
 
 		<osiris_variation>
