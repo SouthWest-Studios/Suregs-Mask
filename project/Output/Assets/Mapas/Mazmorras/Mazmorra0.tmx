@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="126" height="160" tilewidth="32" tileheight="32" infinite="0" nextlayerid="19" nextobjectid="182">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="126" height="160" tilewidth="32" tileheight="32" infinite="0" nextlayerid="19" nextobjectid="186">
  <tileset firstgid="1" name="Colisiones" tilewidth="32" tileheight="32" tilecount="16" columns="4">
   <image source="../../Textures/Mapas/Metadatos/Collisions_32x32.png" width="128" height="128"/>
  </tileset>
@@ -121095,6 +121095,8 @@
  <objectgroup color="#55ffff" id="18" name="Vacios" class="1">
   <object id="180" x="2256" y="3822" width="89" height="324"/>
   <object id="181" x="3026.67" y="3822.67" width="88" height="310.667"/>
+  <object id="182" x="2158.67" y="2265.33" width="413.333" height="132"/>
+  <object id="185" x="2834.67" y="2276" width="402.667" height="122.667"/>
  </objectgroup>
  <objectgroup color="#c8c8c8" id="12" name="Dialogos">
   <properties>
