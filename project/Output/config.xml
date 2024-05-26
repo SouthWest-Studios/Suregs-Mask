@@ -154,9 +154,9 @@
             -->
 		<player texturePath="Assets/Textures/Entidades/Jugador/textura_player.png" Tsprite="82" Pwidth="2400" sprite_x="300" sprite_y="240"/>
 
-		<osiris texturePath="Assets/Textures/Entidades/Osiris/textura_osiris.png" 
+		<osiris texturePath="Assets/Textures/Entidades/Osiris/spritesheet_osiris.png" 
 				maxHealth="250.0f" speed="2.5f" attackDamage="50.0f" attackDistance="2" viewDistance="20"
-				Tsprite="16" Pwidth="400" sprite_x="100" sprite_y="100"/>
+				Tsprite="66" Pwidth="2728" sprite_x="248" sprite_y="200"/>
 
 		<osiris_variation texturePath="Assets/Textures/Entidades/Osiris/spritesheet_osiris.png"
 				maxHealth="340.0f" speed="3.3f" attackDamage="200.0f" secondAttackDamage="230.0f" attackDistance="2" viewDistance="20"
@@ -196,12 +196,13 @@
 					maxHealth="8000.0f" speed="5f" attackDamage="250.0f" attackDistance="4" viewDistance="20"
 					Tsprite="128" Pwidth="4800" sprite_x="600" sprite_y="427"/>
 
+		<!-- <boss_musri texturePath="Assets/Textures/Entidades/Boss/Musri/texture_boss_musri.png" arrowTexturePath="Assets/Textures/Entidades/Boss/Musri/texture_musri_arrow.png" arrowChargedTexturePath="Assets/Textures/Entidades/Boss/Musri/texture_musri_charged_arrow.png" arrowChargedRastroTexturePath="Assets/Textures/Entidades/Boss/Musri/texture_musri_charged_arrow_rastro.png" maxHealth="8200.0f" speed="200f" attackDamage="200.0f"  attackDistance="15" viewDistance="40" Tsprite="16" Pwidth="752" sprite_x="188" sprite_y="175"/> -->
+
 		<boss_musri texturePath="Assets/Textures/Entidades/Boss/Musri/texture_boss_musri.png"
 					arrowTexturePath="Assets/Textures/Entidades/Boss/Musri/texture_musri_arrow.png"
-					arrowChargedTexturePath="Assets/Textures/Entidades/Boss/Musri/texture_musri_charged_arrow.png"
 					arrowChargedRastroTexturePath="Assets/Textures/Entidades/Boss/Musri/texture_musri_charged_arrow_rastro.png"
 					maxHealth="8200.0f" speed="200f" attackDamage="200.0f"  attackDistance="15" viewDistance="40"
-					Tsprite="16" Pwidth="752" sprite_x="188" sprite_y="175"/>
+					Tsprite="72" Pwidth="6904" sprite_x="863" sprite_y="600"/>
 
 		<boss_surma texturePath="Assets/Textures/Entidades/Boss/Surma/texture_boss_surma.png"
 					maxHealth="13000.0f" speed="180f" speedSecondFase="210f" attackDamage="250.0f"  attackDistance="3" viewDistance="40"
@@ -472,11 +473,25 @@
 			<dead_boss_Igory start="112" end="116" speed="0.2f" loop="false"/>
 			<hit_boss_Igory start="120" end="121" speed="0.2f" loop="false"/>
 		</boss_igory>
+		
 		<boss_musri>
-			<idleAnim start="0" end="4" speed="0.1f" loop="true"/>
-			<attackEmpujarAnim start="4" end="6" speed="0.1f" loop="true"/>
-			<attackFlechasRapidas start="8" end="10" speed="0.1f" loop="true"/>
-			<attackFlechaCargada start="12" end="14" speed="0.1f" loop="true"/>
+			<!--<idleAnim start="0" end="4" speed="0.1f" loop="true"/> -->
+			<!--<attackEmpujarAnim start="4" end="6" speed="0.1f" loop="true"/>-->
+			<!--<attackFlechasRapidas start="8" end="10" speed="0.1f" loop="true"/>-->
+			<!--<attackFlechaCargada start="12" end="14" speed="0.1f" loop="true"/>-->
+
+
+			<atqCargadoAnim start="0" end="11" speed="0.1f" loop="false" />
+			<atqNormalAnim  start="16" end="26" speed="0.1f" loop="false"/>
+			<idleAnim  start="32" end="39" speed="0.1f" loop="true"/>
+			<cambioFaseAnim start="40" end="47" speed="0.1f" loop="false"/>
+			<runAnim start="48" end="52" speed="0.1f" loop="true"/>
+			<dashAnim start="56" end="60" speed="0.1f" loop="false"/>
+			<atqMeleeAnim start="64" end="68" speed="0.1f" loop="false"/>
+
+			<flechaNormalAnim start="8" end="13" speed="0.1f" loop="true"/>
+			<flechaCargadaAnim start="0" end="7" speed="0.1f" loop="true"/>
+			
 		</boss_musri>
 
 		<boss_surma>
@@ -491,15 +506,17 @@
 			<cansadoAnim start="16" end="17" speed="0.1f" loop="true"/>
 			<ataqueRapidoAnim start="21" end="22" speed="0.1f" loop="false"/>
 			<muerteAnim start="25" end="26" speed="0.1f" loop="false"/>
-			<cambioFaseAnim start="28" end="30" speed="0.1f" loop="false"/>
+			<cambioFaseAnim start="28" end="30" speed="0.1f" loop="true"/>
 			
 		</boss_surma>
 		
 		<osiris>
-			<idleAnim start="0" end="1" speed="0.01f" loop="true"/>
-			<runAnim start="4" end="8" speed="0.1f" loop="true"/>
-			<attackAnim start="12" end="16" speed="0.1f" loop="true"/>
-			<dieAnim start="8" end="9" speed="0.01f" loop="true"/>
+			<idleAnim start="11" end="15" speed="0.01f" loop="true"/>
+			<runAnim start="0" end="10" speed="0.2f" loop="true"/>
+			<attackAnim start="22" end="28" speed="0.15f" loop="true"/>
+			<dieAnim start="44" end="52" speed="0.1f" loop="false"/>
+			<takeDamageAnim start="33" end="37" speed="0.15f" loop="false"/>
+			<reviveAnim start="55" end="65" speed="0.04f" loop="false"/>
 		</osiris>
 
 		<osiris_variation>
