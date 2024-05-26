@@ -39,6 +39,7 @@
 #include "Item_Ojo.h"
 #include "Item_Hueso.h"
 #include "Enemy_Ols.h"
+#include "Enemy_Ols_Variation.h"
 #include "Enemy_Muur.h"
 #include "Enemy_Boorok.h"
 #include "Enemy_Osiris_Variation.h"
@@ -1060,13 +1061,13 @@ bool Map::LoadObjects()
 
 				Dialog* dialog = new Dialog(dialogId);
 
-				// Añadir el Dialog a la lista de diálogos
+				// Aï¿½adir el Dialog a la lista de diï¿½logos
 				dialogues.Add(dialog);
 
 				pugi::xml_node dialogNode = dialoguesNode.find_child_by_attribute("dialog", "id", object->properties.GetProperty("dialogID")->value.c_str());
 
 				if (!dialogNode) {
-					std::cerr << "No se encontr?ningún diálogo con el id=" << object->properties.GetProperty("dialogID")->value << std::endl;
+					std::cerr << "No se encontr?ningï¿½n diï¿½logo con el id=" << object->properties.GetProperty("dialogID")->value << std::endl;
 					return false;
 				}
 				//Spawn dialogo con x id
@@ -1087,7 +1088,7 @@ bool Map::LoadObjects()
 				c1->ctype = ColliderType::UNKNOWN;*/
 			}
 
-			// el objeto es una sala pequeña
+			// el objeto es una sala pequeï¿½a
 			else if (object->properties.GetProperty("Type") != NULL && object->properties.GetProperty("Type")->value == "isSmallRoom")
 			{
 				smallRoomsList.Add(object);
@@ -1379,6 +1380,16 @@ bool Map::LoadEntities(std::string layerName)
 						ols->config = configNode.child("entities_data").child("ols");
 						ols->position = iPoint(pos.x + 16, pos.y + 16);
 						ols->Start();
+
+					}
+					//OLS VARIATION
+					if (gid == tileset->firstgid + 31) {
+
+						
+						Enemy_Ols_Variation* ols_variation = (Enemy_Ols_Variation*)app->entityManager->CreateEntity(EntityType::ENEMY_OLS_VARIATION);
+						ols_variation->config = configNode.child("entities_data").child("ols_variation");
+						ols_variation->position = iPoint(pos.x + 16, pos.y + 16);
+						ols_variation->Start();
 
 					}
 

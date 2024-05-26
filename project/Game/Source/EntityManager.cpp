@@ -1,6 +1,7 @@
 ﻿#include "EntityManager.h"
 #include "Player.h"
 #include "Enemy_Ols.h"
+#include "Enemy_Ols_Variation.h"
 #include "Enemy_Osiris.h"
 #include "Enemy_Osiris_Variation.h"
 #include "Enemy_Shar.h"
@@ -157,6 +158,9 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 		break;
 	case EntityType::ENEMY_OLS:
 		entity = new Enemy_Ols();
+		break;
+	case EntityType::ENEMY_OLS_VARIATION:
+		entity = new Enemy_Ols_Variation();
 		break;
 	case EntityType::ENEMY_SHAR:
 		entity = new Enemy_Shar();
@@ -400,7 +404,7 @@ std::vector<Entity*> EntityManager::GetEnemies() {
     std::vector<Entity*> enemies;
     for (ListItem<Entity*>* item = entities.start; item != NULL; item = item->next) {
         Entity* entity = item->data;
-        if (entity->type == EntityType::ENEMY_OSIRIS || entity->type == EntityType::ENEMY_OSIRIS_VARIATION || entity->type == EntityType::ENEMY_OLS || entity->type == EntityType::ENEMY_SHAR || entity->type == EntityType::ENEMY_KHURT ||
+        if (entity->type == EntityType::ENEMY_OSIRIS || entity->type == EntityType::ENEMY_OSIRIS_VARIATION || entity->type == EntityType::ENEMY_OLS || entity->type == EntityType::ENEMY_OLS_VARIATION || entity->type == EntityType::ENEMY_SHAR || entity->type == EntityType::ENEMY_KHURT ||
 			entity->type == EntityType::BOSS_INUIT || entity->type == EntityType::BOSS_MUSRI || entity->type == EntityType::BOSS_SURMA || 
 			entity->type == EntityType::BOSS_IGORY) {
             enemies.push_back(entity);
@@ -641,6 +645,11 @@ void EntityManager::UpdateEnemyActivation() {
 				{
 					Enemy_Ols* olsEnemy = static_cast<Enemy_Ols*>(enemy);
 					olsEnemy->DestroyProjectile();
+				}
+				if(enemy->type == EntityType::ENEMY_OLS_VARIATION)
+				{
+					Enemy_Ols_Variation* olsEnemyVariation = static_cast<Enemy_Ols_Variation*>(enemy);
+					olsEnemyVariation->DestroyProjectile();
 				}
 				//printf("Enemy deactivated\n");
 			}

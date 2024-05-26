@@ -161,7 +161,12 @@
 
 		<ols texturePath="Assets/Textures/Entidades/Ols/animations/spritesheets/spritesheet_ols.png" 
 				texturePathProjectile="Assets/Textures/Entidades/Ols/Projectile.png"
-				maxHealth="230.0f" speed="1.1f" attackDamage="50.0f" attackDistance="10" viewDistance="20"  projectileSpeed="7" projectileDamage="20.0f" minDistance="7"
+				maxHealth="230.0f" speed="1.1f" attackDamage="180.0f" attackDistance="10" viewDistance="20"  projectileSpeed="7" projectileDamage="180.0f" minDistance="7"
+				Tsprite="32" Pwidth="2024" sprite_x="253" sprite_y="240"/>
+
+		<ols_variation texturePath="Assets/Textures/Entidades/Ols/animations/spritesheets/spritesheet_ols.png" 
+				texturePathProjectile="Assets/Textures/Entidades/Ols/Projectile.png"
+				maxHealth="500.0f" speed="1.65f" attackDamage="320.0f" attackDistance="10" viewDistance="20"  projectileSpeed="7" projectileDamage="320.0f" minDistance="7"
 				Tsprite="32" Pwidth="2024" sprite_x="253" sprite_y="240"/>
 				
 		<muur texturePath="Assets/Textures/Entidades/Muur/spritesheet_muur.png" 
