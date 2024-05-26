@@ -27,7 +27,7 @@ struct DrawableObject
 struct TPDoor {
 	int sceneLevel;
 	int tpID;
-	
+
 };
 
 class EntityManager : public Module
@@ -51,6 +51,8 @@ public:
 	bool Update(float dt);
 
 	bool PostUpdate();
+
+	bool PostLateUpdate();
 
 	// Called before quitting
 	bool CleanUp();
@@ -84,27 +86,39 @@ public:
 
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
-	
-	
+
+	void printEfectVacio();
+
+
 public:
 
 	List<Entity*> entities;
 	List<TPEntity*> tpEntities;
 
 	std::vector<DrawableObject> objectsToDraw;
-	
-  	std::vector<TPDoor*> openDoors;
 
-	
+	std::vector<TPDoor*> openDoors;
+
+	bool playerVacio = false;
+
+
 
 private:
 
-	pugi::xml_node configNode;
+	//pugi::xml_node configNode;
 	Item_Garra* garra = nullptr;
 	Player* actualPlayer = nullptr;
 	Cofre* cofre = nullptr;
 	Elevator* ascensor = nullptr;
 	MiniGameFishing* fishing = new MiniGameFishing;
+
+	//pugi::xml_node config;
+	
+	Animation* currentAnimation = nullptr;
+	Animation SPosition;
+	Animation eyeAnimation;
+	SDL_Texture* texture = NULL;
+	SDL_Rect* spritePositions = nullptr;
 
 };
 
