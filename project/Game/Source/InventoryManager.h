@@ -66,6 +66,7 @@ public:
 	iPoint PointerPosition = { 188,-73 };
 	int PointerId = 0;
 	iPoint selected = { -1000,-1000 };
+	bool selectedd = false;
 	iPoint equiped = { -1000,-1000 };
 	int selectedId = -1;
 	int equipedId = -1;

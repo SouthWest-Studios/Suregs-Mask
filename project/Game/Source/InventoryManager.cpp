@@ -1164,23 +1164,32 @@ bool InventoryManager::Update(float dt)
 	if (mostrar == true)
 	{
 		OnMovePointer();
+		if (selectedd == true)
+		{
+			if (app->input->GetButton(RIGHT) == KEY_DOWN || app->input->GetButton(LEFT) == KEY_DOWN || app->input->GetButton(DOWN) == KEY_DOWN|| app->input->GetButton(UP) == KEY_DOWN)
+			{
+				selected = { -1000, -1000 };
+				selectedd = false;
+			}
 
+		}
 		if (app->input->GetButton(SELECT) == KEY_DOWN) {
 			options = true;
 			selected = { PointerPosition.x, PointerPosition.y };
 			selectedId = PointerId;
 			UseItemSelected(selectedId);
-
+			selectedd = true;
 		}
-
+		if (selectedd == true)
+		{
 			if (app->input->GetButton(BACK) == KEY_DOWN)
 			{
 				DestroyItemById(selectedId);
 				options = false;
 				selected = { -1000, -1000 };
-
+				selectedd = false;
 			}
-
+		}
 
 
 
@@ -1215,19 +1224,23 @@ bool InventoryManager::PostUpdate()
 			int columnIndex = item->data->id % maxItemsPerRow; // Calcula el �ndice de la columna
 			int horizontalPosition = 320 + columnIndex * 105; // Calcula la posici�n horizontal
 			int verticalPosition = 230 + rowIndex * 103; // Calcula la posici�n vertical
-			if (pEntity->quantity > 0)
-			{
-				std::string quantityStr = std::to_string(pEntity->quantity);
-				app->render->DrawText(quantityStr.c_str(), horizontalPosition, verticalPosition, 20, 20, 0, 0, 0, 0);			
-				
-			}
+			
 			horizontalPosition = 270 + columnIndex * 108; // Calcula la posici�n horizontal para pEntity
 			verticalPosition = 150 + rowIndex * 104; // Calcula la posici�n vertical para pEntity
 
 			app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
 
 		}
-
+		if (inventities.At(PointerId) != nullptr)
+		{
+			if (inventities.At(PointerId)->data->quantity > 0)
+			{
+				std::string quantityStr = "X  " + std::to_string(inventities.At(PointerId)->data->quantity);
+				/*app->render->DrawText(quantityStr.c_str(), 700, 400, 70, 70, 0, 0, 0, 0);	*/
+				app->render->DrawTextBound(quantityStr.c_str(), 830, 330, 270, { 0,0,0 });
+			}
+		}
+		
 
 	}
 	if (mostrar == true)
