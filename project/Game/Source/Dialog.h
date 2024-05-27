@@ -83,6 +83,8 @@ public:
 
 	int commerceId = -1;
 
+	int comer = -1;
+
 	TTF_Font* font;
 
 	DialogEvent* event_ = nullptr;

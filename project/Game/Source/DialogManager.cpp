@@ -113,6 +113,7 @@ Dialog* DialogManager::CreateDialog(pugi::xml_node itemNode, std::string name, c
 		for (pugi::xml_node optionNode = itemNode.child("option1").child("sentence"); optionNode; optionNode = optionNode.next_sibling("sentence")) {
 			Dialog* dialogOp1 = CreateDialog(optionNode, name, faceTexturePath, font);
 			dialogOp1->commerceId = itemNode.child("option1").child("commerce").attribute("id").as_int();
+			dialogOp1->comer = itemNode.child("option1").child("comer").attribute("id").as_int();
 			dialog->options1.Add(dialogOp1);
 
 		}
@@ -364,6 +365,11 @@ bool DialogManager::PostUpdate() {
 			if (dialogues.At(0)->data->commerceId != -1) {
 				app->commerceManager->PlayCommerce(dialogues.At(0)->data->commerceId);
 			}
+
+			if (dialogues.At(0)->data->comer != -1) {
+				app->entityManager->GetPlayer()->currentStats.currentHealth = app->entityManager->GetPlayer()->currentStats.maxHealth;
+			}
+
 			dialogues.Del(dialogues.At(0));
 			
 			
@@ -383,6 +389,10 @@ bool DialogManager::PostUpdate() {
 			
 			if (dialogues.At(0)->data->commerceId != -1) {
 				app->commerceManager->PlayCommerce(dialogues.At(0)->data->commerceId);
+			}
+
+			if (dialogues.At(0)->data->comer != -1) {
+				app->entityManager->GetPlayer()->currentStats.currentHealth = app->entityManager->GetPlayer()->currentStats.maxHealth;
 			}
 
 			//Reiniciar varialbes de dialogo y quitar el dialogo actual de su lista

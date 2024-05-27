@@ -1800,7 +1800,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 		</sentences>
 	</dialog>
 	
-	<dialog id="005" texturepath="Assets/Textures/Interfaz/Dialogos/Jakhov.png">
+	<dialog id="5" texturepath="Assets/Textures/Interfaz/Dialogos/Jakhov.png">
 		<sentences>
 			<sentence name="Jakhov"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
@@ -1813,12 +1813,13 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 	</dialog>
 
 
-	<dialog id="051" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/abuela.png" name="Vhea">
+	<dialog id="51" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/abuela.png" name="Vhea">
 		<sentences>
 			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
 
 				<option1 text="Si, por favor.">
 					<sentence text="Come tranquilo, está recién hecho."/>
+					<comer id ="1"/>
 				</option1>
 
 				<option2 text="No hace falta.">
