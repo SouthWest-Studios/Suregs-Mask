@@ -588,6 +588,7 @@ bool Player::Start() {
 	basic_combo_attack3Alt2_fx = app->audio->LoadAudioFx("basic_combo_attack3Alt2_fx");
 	player_get_damage_fx = app->audio->LoadAudioFx("player_get_damage_fx");
 	player_death_fx = app->audio->LoadAudioFx("player_death_fx");
+	use_potion_fx = app->audio->LoadAudioFx("use_potion_fx");
 	get_item_fx = app->audio->LoadAudioFx("get_item_fx");
 
 	cdTimerDashMS = 500;

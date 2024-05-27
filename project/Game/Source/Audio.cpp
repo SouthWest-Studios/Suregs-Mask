@@ -241,6 +241,23 @@ bool Audio::PlayFx(unsigned int id, int channel, int repeat)
 	return true;
 }
 
+bool Audio::PlayFxTimed(unsigned int id, int time, int channel, int repeat)
+{
+	if (!active) {
+		return false; // Audio no activo
+	}
+
+	if (id > 0 && id <= fx.Count())
+	{
+		Mix_PlayChannelTimed(channel, fx[id - 1], repeat, time);
+	}
+
+	// Asociar el ID del efecto de sonido con el canal de reproducción
+	activeChannels[id] = channel;
+
+	return true;
+}
+
 bool Audio::StopFx(int channel)
 {
 	Mix_HaltChannel(channel);
@@ -266,6 +283,11 @@ unsigned int Audio::LoadAudioFx(const char* name)
 
 
 	return LoadFx(audioNode.attribute("path").as_string());
+}
+
+void Audio::FxGroup(int tag, int channel) 
+{
+
 }
 
 void Audio::PlayMusicAfterDelay(const char* name, float delayInSeconds, float fadeTime)

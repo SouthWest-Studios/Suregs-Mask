@@ -57,6 +57,9 @@ public:
 	// Play a previously loaded WAV
 	bool PlayFx(unsigned int fx, int channel = -1, int repeat = 0);
 
+	// Play a WAV after the specified time, time in milliseconds
+	bool PlayFxTimed(unsigned int fx, int time = 0, int channel = -1, int repeat = 0);
+
 	// Stop playing a WAV
 	bool StopFx(int channel);
 
@@ -69,7 +72,7 @@ public:
 	// Play a WAV from the config
 	unsigned int LoadAudioFx(const char* name);
 
-	//void FxGroup(int tag, int channel);
+	void FxGroup(int tag, int channel);
 
 	// Play a music after the specified time
 	void PlayMusicAfterDelay(const char* name, float delayInSeconds, float fadeTime = DEFAULT_MUSIC_FADE_TIME);
@@ -97,6 +100,7 @@ public:
 	bool playingMusic = false;
 	bool playingRunFx = false;
 	bool playingDeathFx = false;
+	bool playingAmbienceFx = true;
 
 	int musicDuration;
 
