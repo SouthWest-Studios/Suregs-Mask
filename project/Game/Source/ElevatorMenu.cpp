@@ -115,13 +115,21 @@ bool ElevatorMenu::PostUpdate()
 	{
 		app->render->DrawTexture(Menutexture, 400, 100, SDL_FLIP_NONE, 0, 0);
 
-		app->render->DrawTexture(PointerTexture, PointerPosition.x, PointerPosition.y, SDL_FLIP_NONE, 0, 0);
+		
 
 		for (int i = (mazmorra + plus + 1); i < 8 ; i++)
 		{
-			app->render->DrawTexture(textura_black, PointerPosition.x, -90 + 48*i, SDL_FLIP_NONE, 0, 0);
+			if (i % 2 == 0)
+			{
+				app->render->DrawTexture(textura_black, 400, 100 + 45 * i, SDL_FLIP_NONE, 0, 0);
+			}
+			else
+			{
+				app->render->DrawTexture(textura_black, 400 + 99, 100 + 45 * (i -1), SDL_FLIP_NONE, 0, 0);
+			}
+			
 		}
-		
+		app->render->DrawTexture(PointerTexture, PointerPosition.x, PointerPosition.y, SDL_FLIP_NONE, 0, 0);
 		
 
 	}
@@ -143,35 +151,71 @@ bool ElevatorMenu::CleanUp()
 void ElevatorMenu::OnMovePointer()
 {
 	if (app->input->GetButton(DOWN) == KEY_DOWN) {
-		if (PointerId + 1 < 8)
+		if (verticalPointerId + 1 < 4)
 		{
-			PointerPosition.y += 48;
-			PointerId += 1;
-
+			PointerPosition.y += 90;
+			PointerId += 2;
+			verticalPointerId += 1;
 		}
 		else
 		{
-			PointerId = 0;
-			PointerPosition.y = -90;
+			PointerId -= 6;
+			PointerPosition.y = 100;
+			verticalPointerId = 0;
 		}
 
 
 
 	}
 	if (app->input->GetButton(UP) == KEY_DOWN) {
-		if (PointerId > 0)
+		if (verticalPointerId > 0)
 		{
-			PointerPosition.y -= 48;
+			PointerPosition.y -= 90;
+			PointerId -= 2;
+			verticalPointerId -= 1;
+		}
+		else
+		{
+			PointerId += 6;
+			PointerPosition.y = 100 + 90 * (3);
+			verticalPointerId = 3;
+		}
+
+
+	}
+	if (app->input->GetButton(RIGHT) == KEY_DOWN) {
+		if (horitzontalPointerId + 1 > 1)
+		{
+			horitzontalPointerId = 0;
+			PointerPosition.x = 400;
 			PointerId -= 1;
+		}
+		else
+		{
+			if (PointerId != -1)
+			{
+				horitzontalPointerId += 1;
+				PointerPosition.x += 99;
+			}
+			PointerId += 1;
+		}
+
+	}
+	if (app->input->GetButton(LEFT) == KEY_DOWN) {
+		if (horitzontalPointerId - 1 < 0)
+		{
+
+				PointerId += 1;
+				horitzontalPointerId = 1;
+				PointerPosition.x = 499;
 
 		}
 		else
 		{
-			PointerId = 7;
-			PointerPosition.y = -90 + 48 * (7);
+			horitzontalPointerId -= 1;
+			PointerPosition.x -= 99;
+			PointerId -= 1;
 		}
-
-
 	}
 }
 

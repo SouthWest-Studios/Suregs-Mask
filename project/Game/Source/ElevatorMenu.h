@@ -49,8 +49,10 @@ public:
 	bool abierto = false;
 	bool open = false;
 
-	iPoint PointerPosition = { 400, -90 };
+	iPoint PointerPosition = { 400, 100 };
 	int PointerId = 0;
+	int horitzontalPointerId = 0;
+	int verticalPointerId = 0;
 	SDL_Texture* texture = NULL;
 	SDL_Texture* Menutexture = NULL;
 	SDL_Texture* listTexture = NULL;
