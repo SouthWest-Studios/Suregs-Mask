@@ -828,6 +828,7 @@ bool Player::Update(float dt)
 	EfectoPociones(dt);
 
 	stateMachine(dt);
+
 	currentAnimation->Update();
 
 	return true;
@@ -851,8 +852,6 @@ bool Player::PostUpdate() {
 	}
 	if (currentAnimation == nullptr) { currentAnimation = &idle_player; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-
-
 	
 	return true;
 }
@@ -1436,8 +1435,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision PLATFORM");
 		break;
 	case ColliderType::VACIOS:
-		app->entityManager->playerVacio = true;
-		printf("Lagoo");
+		if(!isDashing){
+			app->entityManager->playerVacio = true;
+			printf("Lagoo");
+		}
 		break;
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");

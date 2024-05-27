@@ -1155,6 +1155,7 @@ bool Map::LoadObjects()
 
 					c1->ctype = ColliderType::VACIOS;
 					collisionsList.Add(c1);
+					c1->body->GetFixtureList()->SetSensor(true);
 				}
 				else
 				{
