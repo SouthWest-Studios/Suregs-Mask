@@ -1733,7 +1733,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 			text="Piensa en tu abuela, yo no me puedo ni imaginar que pasaría si dejo a mi Philyppa sola..."/>
 		</sentences>
 	</dialog>
-
+	
 	<dialog id="999" texturepath="Assets/Textures/guerreroTutorial.png" facetexturepath="Assets/Textures/guerreroTutorial.png" name="Kharmy">
 		<sentences>
 			<sentence type="choose" text="Hoy es día de combate, Jakhov. ¿Te acuerdas como se pelea?">
@@ -1754,6 +1754,80 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 			</sentence>
 		</sentences>
 	</dialog>
+
+	<dialog id="951" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/abuela.png" name="Vhea">
+		<sentences>
+			<sentence type="choose" text="Buenos días cariño, ¿otra vez la misma pesadilla?">
+
+				<option1 text="Si lo mismo de siempre, prefiero no hablar de ello...">
+					<sentence text="Vaya..."/>
+				</option1>
+
+			</sentence>
+
+			<sentence type="choose" text="Bueno... ¿Hoy tienes entrenamiento verdad?">
+
+				<option1 text="Sí, debo ir al campamento, supongo que estarán todos esperando">
+					<sentence text="Perfecto, recuerda que está al norte del pueblo."/>
+				</option1>
+
+
+				<option2 text="¿Cómo qué al entrenamiento?">
+					<sentence text="Sí, tienes que ir al campamento que está al norte del pueblo."/>
+				</option2>
+
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="952" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/abuela.png" name="Vhea">
+		<sentences>
+			<sentence type="choose" text="¿Qué tal ha ido el entrenamiento?">
+
+				<option1 text="Hola Abuela, otro entrenamiento nefasto, tendría que ser más fuerte, como padre...">
+					<sentence text="Eso fue justo lo que le mató, Jakov, no sabía cuando parar."/>
+				</option1>
+
+			</sentence>
+
+			<sentence type="choose" text="Y tú no tienes que parecerte a él, seguro que se te dan bien otros trabajos...">
+
+				<option1 text="Hmmmm, seguro que tenía algún secreto para ser tan fuerte... Abuela, ¿dónde guardas su equipo? Seguro que hay algo que me sirve…">
+					<sentence text="Ni se te ocurra, seguir sus pasos te va a llevar a un camino muy oscuro, no lo pienses más, come esto y descansa."/>
+				</option1>
+
+			</sentence>
+		</sentences>
+	</dialog>
 	
+	<dialog id="005" texturepath="Assets/Textures/Interfaz/Dialogos/Jakhov.png">
+		<sentences>
+			<sentence name="Jakhov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			text="Seguro que aquí hay algo interesante... ¡La espada de mi padre! ¿y este diario?"/>
+
+			<sentence name="Jakhov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			text="¿Un artefacto? ¿Qué clase de magia esconderá? Tengo que investigar más sobre esto."/>
+		</sentences>
+	</dialog>
+
+
+	<dialog id="051" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/abuela.png" name="Vhea">
+		<sentences>
+			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
+
+				<option1 text="Si, por favor.">
+					<sentence text="Come tranquilo, está recién hecho."/>
+				</option1>
+
+				<option2 text="No hace falta.">
+					<sentence text="Bueno... Estaré siempre aquí si necesitas algo de comer."/>
+				</option2>
+				
+			</sentence>
+		</sentences>
+	</dialog>
 </dialogues>
+
 
