@@ -18,6 +18,10 @@
 	<iventorymanager>
 		<inventory>
 			<money quantity="0" />
+			<SwordLevel quantity="0" />
+			<ArmorLevel quantity="0" />
+			<PrimaryMask quantity="-1" />
+			<SecondaryMask quantity="-1" />
 		</inventory>
 	</iventorymanager>
 	<commercemanager />
