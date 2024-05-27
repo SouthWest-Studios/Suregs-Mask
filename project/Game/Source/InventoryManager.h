@@ -87,7 +87,8 @@ public:
 	int armorLevel = 0;
 
 	int currentHealthInventoryManager = NULL;
-
+	int primaryMaskInventoryManager = -1;
+	int secondaryMaskInventoryManager = -1;
 
 private:
 	pugi::xml_document configFile;
