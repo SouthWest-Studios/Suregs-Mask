@@ -123,10 +123,10 @@ bool Scene_Pueblo::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 
-	if (app->audio->playingTown_fx == false)
+	if (app->audio->playingAmbienceFx == false)
 	{
 		app->audio->PlayFx(town_fx, -1, -1);
-		app->audio->playingTown_fx = true;
+		app->audio->playingAmbienceFx = true;
 	}
 	if (app->audio->playingMusic == true && app->audio->musicTimer.ReadMSec() >= app->audio->musicDuration)
 	{
