@@ -686,7 +686,8 @@ bool InventoryManager::LoadState(pugi::xml_node node)
 	//inventoryMoneyNode.append_attribute("quantity").set_value(monedasObtenidas);
 
 	monedasObtenidas = node.child("inventory").child("money").attribute("quantity").as_int(0);
-
+    swordLevel = node.child("inventory").child("swordLevel").attribute("quantity").as_int();
+    armorLevel = node.child("inventory").child("armorLevel").attribute("quantity").as_int();
 
 	return ret;
 }
@@ -707,6 +708,12 @@ bool InventoryManager::SaveState(pugi::xml_node node)
 
 	pugi::xml_node inventoryMoneyNode = inventoryNode.append_child("money");
 	inventoryMoneyNode.append_attribute("quantity").set_value(monedasObtenidas);
+
+	pugi::xml_node inventorySwordNode = inventoryNode.append_child("SwordLevel");
+    inventorySwordNode.append_attribute("quantity").set_value(swordLevel);
+
+	pugi::xml_node inventoryArmorNode = inventoryNode.append_child("ArmorLevel");
+    inventoryArmorNode.append_attribute("quantity").set_value(armorLevel);
 
 	/*playerNode.append_attribute("x").set_value(player->position.x);
 	playerNode.append_attribute("y").set_value(player->position.y);
