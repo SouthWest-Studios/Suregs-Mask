@@ -2,7 +2,7 @@
 <!-- L01: DONE 1: Create configuration file-->
 <config>
 	<app>
-		<title>My video game</title>
+		<title>Sureg's Mask</title>
 		<maxFrameDuration value="16"/>
 	</app>
 
