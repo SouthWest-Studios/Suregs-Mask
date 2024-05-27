@@ -688,6 +688,8 @@ bool InventoryManager::LoadState(pugi::xml_node node)
 	monedasObtenidas = node.child("inventory").child("money").attribute("quantity").as_int(0);
     swordLevel = node.child("inventory").child("swordLevel").attribute("quantity").as_int();
     armorLevel = node.child("inventory").child("armorLevel").attribute("quantity").as_int();
+	primaryMaskInventoryManager = node.child("inventory").child("primaryMask").attribute("quantity").as_int();
+	secondaryMaskInventoryManager = node.child("inventory").child("secondaryMask").attribute("quantity").as_int();
 
 	return ret;
 }
@@ -715,6 +717,11 @@ bool InventoryManager::SaveState(pugi::xml_node node)
 	pugi::xml_node inventoryArmorNode = inventoryNode.append_child("ArmorLevel");
     inventoryArmorNode.append_attribute("quantity").set_value(armorLevel);
 
+	pugi::xml_node primaryMaskNode = inventoryNode.append_child("PrimaryMask");
+    primaryMaskNode.append_attribute("quantity").set_value(primaryMaskInventoryManager);
+
+	pugi::xml_node secondaryMaskNode = inventoryNode.append_child("SecondaryMask");
+    secondaryMaskNode.append_attribute("quantity").set_value(secondaryMaskInventoryManager);
 	/*playerNode.append_attribute("x").set_value(player->position.x);
 	playerNode.append_attribute("y").set_value(player->position.y);
 	playerNode.append_attribute("sceneLevel").set_value(app->sceneLevel);

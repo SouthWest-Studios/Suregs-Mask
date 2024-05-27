@@ -596,10 +596,18 @@ bool Player::Start() {
 	player_Direction = Direction::UNKNOWN;
 
 	
+	if(app->inventoryManager->primaryMaskInventoryManager == -1)	EquipPrimaryMask(Mask::NOMASK);
+	else if(app->inventoryManager->primaryMaskInventoryManager == 0)	EquipPrimaryMask(Mask::MASK0);
+	else if(app->inventoryManager->primaryMaskInventoryManager == 1)	EquipPrimaryMask(Mask::MASK1);
+	else if(app->inventoryManager->primaryMaskInventoryManager == 2)	EquipPrimaryMask(Mask::MASK2);
+	else if(app->inventoryManager->primaryMaskInventoryManager == 3)	EquipPrimaryMask(Mask::MASK3);
 
-	EquipPrimaryMask(Mask::NOMASK);
-	EquipSecondaryMask(Mask::NOMASK);
-
+	if(app->inventoryManager->secondaryMaskInventoryManager == -1)	EquipSecondaryMask(Mask::NOMASK);
+	else if(app->inventoryManager->secondaryMaskInventoryManager == 0)	EquipSecondaryMask(Mask::MASK0);
+	else if(app->inventoryManager->secondaryMaskInventoryManager == 1)	EquipSecondaryMask(Mask::MASK1);
+	else if(app->inventoryManager->secondaryMaskInventoryManager == 2)	EquipSecondaryMask(Mask::MASK2);
+	else if(app->inventoryManager->secondaryMaskInventoryManager == 3)	EquipSecondaryMask(Mask::MASK3);
+	
 	/*	------------ALEIX------------
 	PARA MEJORAR X RAMA DE X MASCARA SERIA ASI
 
@@ -860,6 +868,19 @@ bool Player::PostUpdate() {
 bool Player::CleanUp()
 {
 	app->inventoryManager->currentHealthInventoryManager = currentStats.currentHealth;
+
+	if(primaryMask == Mask::NOMASK)	app->inventoryManager->primaryMaskInventoryManager = -1;
+	else if(primaryMask == Mask::MASK0) app->inventoryManager->primaryMaskInventoryManager = 0;
+	else if(primaryMask == Mask::MASK1) app->inventoryManager->primaryMaskInventoryManager = 1;
+	else if(primaryMask == Mask::MASK2) app->inventoryManager->primaryMaskInventoryManager = 2;
+	else if(primaryMask == Mask::MASK3) app->inventoryManager->primaryMaskInventoryManager = 3;
+
+	if(secondaryMask == Mask::NOMASK) app->inventoryManager->secondaryMaskInventoryManager = -1;
+	else if(secondaryMask == Mask::MASK0) app->inventoryManager->secondaryMaskInventoryManager = 0;
+	else if(secondaryMask == Mask::MASK1) app->inventoryManager->secondaryMaskInventoryManager = 1;
+	else if(secondaryMask == Mask::MASK2) app->inventoryManager->secondaryMaskInventoryManager = 2;
+	else if(secondaryMask == Mask::MASK3) app->inventoryManager->secondaryMaskInventoryManager = 3;
+
 	app->entityManager->DestroyEntity(this);
 	app->entityManager->SetPlayer(nullptr);
 	/*app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
