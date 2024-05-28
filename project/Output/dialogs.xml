@@ -1829,6 +1829,134 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 			</sentence>
 		</sentences>
 	</dialog>
+	<dialog id="52" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/abuela.png" name="Vhea">
+		<sentences>
+			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
+
+				<option1 text="Si, por favor.">
+					<sentence text="Come tranquilo, está recién hecho."/>
+					<comer id ="1"/>
+				</option1>
+
+				<option2 text="No hace falta.">
+					<sentence text="Bueno... Estaré siempre aquí si necesitas algo de comer."/>
+				</option2>
+				
+			</sentence>
+		</sentences>
+	</dialog>
+	<dialog id="53" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/abuela.png" name="Vhea">
+		<sentences>
+			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
+
+				<option1 text="Si, por favor.">
+					<sentence text="Come tranquilo, está recién hecho."/>
+					<comer id ="1"/>
+				</option1>
+
+				<option2 text="No hace falta.">
+					<sentence text="Bueno... Estaré siempre aquí si necesitas algo de comer."/>
+				</option2>
+				
+			</sentence>
+		</sentences>
+	</dialog>
+	<dialog id="54" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/abuela.png" name="Vhea">
+		<sentences>
+			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
+
+				<option1 text="Si, por favor.">
+					<sentence text="Come tranquilo, está recién hecho."/>
+					<comer id ="1"/>
+				</option1>
+
+				<option2 text="No hace falta.">
+					<sentence text="Bueno... Estaré siempre aquí si necesitas algo de comer."/>
+				</option2>
+				
+			</sentence>
+		</sentences>
+	</dialog>
+	<dialog id="55" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/abuela.png" name="Vhea">
+		<sentences>
+			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
+
+				<option1 text="Si, por favor.">
+					<sentence text="Come tranquilo, está recién hecho."/>
+					<comer id ="1"/>
+				</option1>
+
+				<option2 text="No hace falta.">
+					<sentence text="Bueno... Estaré siempre aquí si necesitas algo de comer."/>
+				</option2>
+				
+			</sentence>
+		</sentences>
+	</dialog>
+	<dialog id="56" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/abuela.png" name="Vhea">
+		<sentences>
+			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
+
+				<option1 text="Si, por favor.">
+					<sentence text="Come tranquilo, está recién hecho."/>
+					<comer id ="1"/>
+				</option1>
+
+				<option2 text="No hace falta.">
+					<sentence text="Bueno... Estaré siempre aquí si necesitas algo de comer."/>
+				</option2>
+				
+			</sentence>
+		</sentences>
+	</dialog>
+	<dialog id="57" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/abuela.png" name="Vhea">
+		<sentences>
+			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
+
+				<option1 text="Si, por favor.">
+					<sentence text="Come tranquilo, está recién hecho."/>
+					<comer id ="1"/>
+				</option1>
+
+				<option2 text="No hace falta.">
+					<sentence text="Bueno... Estaré siempre aquí si necesitas algo de comer."/>
+				</option2>
+				
+			</sentence>
+		</sentences>
+	</dialog>
+	<dialog id="58" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/abuela.png" name="Vhea">
+		<sentences>
+			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
+
+				<option1 text="Si, por favor.">
+					<sentence text="Come tranquilo, está recién hecho."/>
+					<comer id ="1"/>
+				</option1>
+
+				<option2 text="No hace falta.">
+					<sentence text="Bueno... Estaré siempre aquí si necesitas algo de comer."/>
+				</option2>
+				
+			</sentence>
+		</sentences>
+	</dialog>
+	<dialog id="59" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/abuela.png" name="Vhea">
+		<sentences>
+			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
+
+				<option1 text="Si, por favor.">
+					<sentence text="Come tranquilo, está recién hecho."/>
+					<comer id ="1"/>
+				</option1>
+
+				<option2 text="No hace falta.">
+					<sentence text="Bueno... Estaré siempre aquí si necesitas algo de comer."/>
+				</option2>
+				
+			</sentence>
+		</sentences>
+	</dialog>
 </dialogues>
 
 

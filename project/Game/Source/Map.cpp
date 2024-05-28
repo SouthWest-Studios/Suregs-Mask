@@ -1059,29 +1059,37 @@ bool Map::LoadObjects()
 
 			
 				uint dialogId = atoi(object->properties.GetProperty("dialogID")->value.c_str());
+				dialogId += app->inventoryManager->storyLevel - 1;
 
 				Dialog* dialog = new Dialog(dialogId);
 
 				// A�adir el Dialog a la lista de di�logos
 				dialogues.Add(dialog);
 
-				pugi::xml_node dialogNode = dialoguesNode.find_child_by_attribute("dialog", "id", object->properties.GetProperty("dialogID")->value.c_str());
+				//ANTIGUO 
+				//pugi::xml_node dialogNode = dialoguesNode.find_child_by_attribute("dialog", "id", object->properties.GetProperty("dialogID")->value.c_str());
 
+				//NUEVO - ALGUNOS NPCS NO VAN?
+				pugi::xml_node dialogNode = dialoguesNode.find_child_by_attribute("dialog", "id", std::to_string(dialogId).c_str());
+				
 				if (!dialogNode) {
-					std::cerr << "No se encontr?ning�n di�logo con el id=" << object->properties.GetProperty("dialogID")->value << std::endl;
-					return false;
+					//std::cerr << "No se encontr?ning�n di�logo con el id=" << object->properties.GetProperty("dialogID")->value << std::endl;
+					std::cerr << "No se encontr?ning�n di�logo con el id=" << std::to_string(dialogId).c_str() << std::endl;
+					//return false;
 				}
 				//Spawn dialogo con x id
-				
-				DialogTrigger* dialogTrigger = (DialogTrigger*)app->entityManager->CreateEntity(EntityType::DIALOG_TRIGGER);
-				dialogTrigger->parameters = dialogNode;
-				dialogTrigger->position = iPoint(object->x + object->width / 2, object->y + object->height / 2);
-				
+				else {
+					//printf("Dialogo con id %d\n", dialogId);
+					//printf(" %s\n", object->properties.GetProperty("dialogID")->value.c_str());
+					DialogTrigger* dialogTrigger = (DialogTrigger*)app->entityManager->CreateEntity(EntityType::DIALOG_TRIGGER);
+					dialogTrigger->parameters = dialogNode;
+					dialogTrigger->position = iPoint(object->x + object->width / 2, object->y + object->height / 2);
 
-				//dialogTriger
-				dialogTrigger->SetDialogId(dialogId);
-				dialogTrigger->Start();
 
+					//dialogTriger
+					dialogTrigger->SetDialogId(dialogId);
+					dialogTrigger->Start();
+				}
 
 
 				

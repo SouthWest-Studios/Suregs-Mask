@@ -60,6 +60,8 @@ bool BestiarioManager::Awake(pugi::xml_node config)
 	pathBoorok = ((char*)config.child("bestiario").attribute("texture_boorok").as_string());
 	textoOls = ((char*)config.child("bestiario").attribute("text_ols").as_string());
 	pathOls = ((char*)config.child("bestiario").attribute("texture_ols").as_string());
+	textoInuit = ((char*)config.child("bestiario").attribute("text_inuit").as_string());
+	pathInuit = ((char*)config.child("bestiario").attribute("texture_inuit").as_string());
 	CloseUpPath = ((char*)config.child("bestiario").attribute("closeUp").as_string());
 	
 	iconPathOsiris = ((char*)config.child("bestiario").attribute("texture_icono_osiris").as_string());
@@ -67,6 +69,10 @@ bool BestiarioManager::Awake(pugi::xml_node config)
 	iconPathKhurt = ((char*)config.child("bestiario").attribute("texture_icono_khurt").as_string());
 	iconPathBoorok = ((char*)config.child("bestiario").attribute("texture_icono_boorok").as_string());
 	iconPathOls = ((char*)config.child("bestiario").attribute("texture_icono_ols").as_string());
+
+	listTexturePath2 = ((char*)config.child("bestiario").attribute("list_texture2").as_string());
+	listTexturePath3 = ((char*)config.child("bestiario").attribute("list_texture3").as_string());
+
 
 	return ret;
 
@@ -78,6 +84,8 @@ bool BestiarioManager::Start() {
 
 	CloseUp = app->tex->Load(CloseUpPath);
 	listTexture = app->tex->Load(listTexturePath);
+	listTexture2 = app->tex->Load(listTexturePath2);
+	listTexture3 = app->tex->Load(listTexturePath3);
 	sliderTexture = app->tex->Load(sliderTexturePath);
 	knobTexture = app->tex->Load(knobTexturePath);
 	PointerItemText = app->tex->Load(PointerPath);
@@ -133,6 +141,7 @@ bool BestiarioManager::CleanUp()
 	return ret;
 }
 int highestttId = -1;
+int listIdd = 0;
 Bestiario* BestiarioManager::CreateItem(char* name)
 {
 	Bestiario* entity = nullptr;
@@ -143,7 +152,11 @@ Bestiario* BestiarioManager::CreateItem(char* name)
 	entity->id = highestttId + 1;
 	entity->closeUpBestiarios = CloseUp;
 	entity->icon = app->tex->Load(iconoBestiarioTexturePath);
-
+	if (listIdd == 3)
+	{
+		listIdd = 0;
+	}
+	entity->listid = listIdd;
 	entity->type = BestiarioType::BEST;
 	if (strcmp(name, "osiris") == 0)
 	{
@@ -196,6 +209,16 @@ Bestiario* BestiarioManager::CreateItem(char* name)
 			AddBestiario(entity);
 		ols++;
 	}
+	else if (strcmp(name, "inuit") == 0)
+	{
+		entity->name = name;
+		entity->desc = textoOls;
+		entity->texturaEnemigo = textureOls;
+		entity->icon = iconTextureOls;
+		if (inuit == 0)
+			AddBestiario(entity);
+		inuit++;
+	}
 	else
 	{
 		// Default properties if name doesn't match
@@ -209,7 +232,7 @@ Bestiario* BestiarioManager::CreateItem(char* name)
 	
 	
 
-	
+	listIdd++;
 	return entity;
 }
 
@@ -352,7 +375,7 @@ void BestiarioManager::OnMovePointer()
 				if (horitzontalPointerId + 1 > 3)
 				{
 					horitzontalPointerId = 0;
-					PointerPosition.x = 660;
+					PointerPosition.x = 630;
 					PointerId -= 3;
 				}
 				else
@@ -517,7 +540,7 @@ bool BestiarioManager::PostUpdate()
 			pEntity = item->data;
 			int rowIndex = item->data->id / maxItemsPerRow; // Calcula el índice de la fila
 			int columnIndex = item->data->id % maxItemsPerRow; // Calcula el índice de la columna
-			int horizontalPosition = 660 + columnIndex * 83; // Calcula la posición horizontal
+			int horizontalPosition = 630 + columnIndex * 83; // Calcula la posición horizontal
 			int verticalPosition = 230 + rowIndex * 83; // Calcula la posición vertical
 
 			int y2 = PointerPosition.y - scrollY;
@@ -529,8 +552,23 @@ bool BestiarioManager::PostUpdate()
 				if (y >= viewport.y && y <= viewport.y + viewport.h) {
 					if (zoomIn == false && app->notesManager->zoomIn == false)
 					{
-						app->render->DrawTexture(listTexture, horizontalPosition, verticalPosition, SDL_FLIP_NONE, 0, 0);
+						/*app->render->DrawTexture(listTexture, horizontalPosition, verticalPosition, SDL_FLIP_NONE, 0, 0);*/
+					
+					if (pEntity->listid == 2)
+					{
+						app->render->DrawTexture(listTexture, horizontalPosition, verticalPosition - scrollY, SDL_FLIP_NONE, 0, 0);
 
+					}
+					if (pEntity->listid == 1)
+					{
+						app->render->DrawTexture(listTexture2, horizontalPosition, verticalPosition - scrollY, SDL_FLIP_NONE, 0, 0);
+
+					}
+					if (pEntity->listid == 0)
+					{
+						app->render->DrawTexture(listTexture3, horizontalPosition, verticalPosition - scrollY, SDL_FLIP_NONE, 0, 0);
+
+					}
 						app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
 					}
 

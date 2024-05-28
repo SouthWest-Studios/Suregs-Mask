@@ -86,6 +86,8 @@ public:
 	int swordLevel = 0;
 	int armorLevel = 0;
 
+	int storyLevel = 1;
+
 	int currentHealthInventoryManager = NULL;
 	int primaryMaskInventoryManager = -1;
 	int secondaryMaskInventoryManager = -1;
