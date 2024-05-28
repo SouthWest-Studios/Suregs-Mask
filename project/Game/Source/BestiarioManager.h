@@ -54,7 +54,7 @@ public:
 
 	List<Bestiario*> bestiario;
 	
-	iPoint PointerPosition = { 660, 230 };
+	iPoint PointerPosition = { 630, 230 };
 	int PointerId = 0;
 	iPoint selected = { -1000,-1000 };
 	iPoint equiped = { -1000,-1000 };
@@ -90,6 +90,12 @@ private:
 	char* knobTexturePath;
 	SDL_Texture* iconoBestiarioTexture;
 	SDL_Texture* listTexture;
+	char* listTexturePath2;
+	char* listTexturePath3;
+	char* listTexturePath4;
+	SDL_Texture* listTexture2;
+	SDL_Texture* listTexture3;
+	SDL_Texture* listTexture4;
 	SDL_Texture* sliderTexture;
 	SDL_Texture* knobTexture;
 
@@ -112,6 +118,9 @@ private:
 	char* textoOls;
 	char* pathOls;
 	SDL_Texture* textureOls;
+	char* textoInuit;
+	char* pathInuit;
+	SDL_Texture* textureInuit;
 
 
 	char* iconPathOsiris;
@@ -130,6 +139,7 @@ private:
 	int khurt = 0;
 	int boorok = 0;
 	int ols = 0;
+	int inuit = 0;
 };
 
 #endif // __INVENTORYMANAGER_H__

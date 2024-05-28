@@ -104,7 +104,7 @@ public:
 	SDL_Texture* texturaEnemigo;
 	bool zoom = false;
 	bool created = false;
-	
+	int listid = 0;
 };
 
 #endif // __INVENTITY_H__
