@@ -2472,9 +2472,17 @@ void Player::TakeDamage(float damage) {
 }
 
 void Player::UpdateStats() {
+
+	float _maxHealthOld = baseStats.maxHealth;
+
 	baseStats.maxHealth = 100 + armorPerLevel[app->inventoryManager->armorLevel];
 	baseStats.currentHealth = 100 + armorPerLevel[app->inventoryManager->armorLevel];
 	baseStats.attackDamage = 100 + attackDamagePerLevel[app->inventoryManager->swordLevel];
+
+	if (changeLife) {
+		baseStats.currentHealth = baseStats.maxHealth;
+		changeLife = false;
+	}
 
     if (primaryMask != Mask::NOMASK) {
 		currentStats.maxHealth = baseStats.maxHealth * (1 + maskStats[primaryMask][Branches::Modifiers][maskLevels[primaryMask][Branches::Modifiers]].maxHealthModifier / 100);

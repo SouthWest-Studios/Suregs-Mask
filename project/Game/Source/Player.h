@@ -433,6 +433,8 @@ private:
 
 public:
 
+	bool changeLife = false;
+
 	Branch transitionTable[static_cast<int>(EntityStatePlayer::STATE_COUNT)][static_cast<int>(EntityStatePlayer::STATE_COUNT)] = {
 
 		//		IDLE					RUNNING					ATTACKING					DEAD				REVIVING				MASK_ATTACK					  DASHI				   NONE
