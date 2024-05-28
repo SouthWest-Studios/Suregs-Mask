@@ -108,6 +108,8 @@ bool CommerceHerreria::ApplyTrades()
 		}
 		if (trade->type == 1 && trade->quantityTraded >= 1) {
 			app->inventoryManager->armorLevel++;
+			app->entityManager->GetPlayer()->UpdateStats();
+			app->entityManager->GetPlayer()->currentStats.currentHealth = app->entityManager->GetPlayer()->currentStats.maxHealth;
 		}
 		
 
