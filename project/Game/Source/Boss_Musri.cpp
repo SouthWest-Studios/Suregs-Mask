@@ -17,6 +17,7 @@
 #include "Player.h"
 #include "Item_Hueso.h"
 #include "Item_Rubi.h"
+#include "BestiarioManager.h"
 #include <Optick/include/optick.h>
 #include "Utils.cpp"
 
@@ -288,7 +289,7 @@ void Boss_Musri::Die() {
 	rubi->config = configNode.child("entities_data").child("item_rubi");
 	rubi->position = iPoint(position.x, position.y);
 	rubi->Start();
-
+	app->bestiarioManager->CreateItem("musri");
 	//Mask XP
 
 //Mask 0

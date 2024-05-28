@@ -17,6 +17,7 @@
 #include "Player.h"
 #include "Item_Hueso.h"
 #include "Item_Diamante.h"
+#include "BestiarioManager.h"
 #include <Optick/include/optick.h>
 #include "Utils.cpp"
 
@@ -261,6 +262,7 @@ void Boss_Surma::Die() {
 	diamante->position = iPoint(position.x, position.y);
 	diamante->Start();
 
+	app->bestiarioManager->CreateItem("surma");
 	//Mask XP
 
 	//Mask 0

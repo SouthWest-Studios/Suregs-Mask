@@ -16,6 +16,7 @@
 #include "Physics.h"
 #include "Item_Hueso.h"
 #include "Item_Zafiro.h"
+#include "BestiarioManager.h"
 #include <Optick/include/optick.h>
 #include "Utils.cpp"
 
@@ -669,6 +670,7 @@ void Boss_Inuit::Die() {
 	zafiro->config = configNode.child("entities_data").child("item_zafiro");
 	zafiro->position = iPoint(position.x, position.y);
 	zafiro->Start();
+	app->bestiarioManager->CreateItem("inuit");
 	/*if (pbodyFoot != nullptr) {
 		pbodyFoot->body->GetWorld()->DestroyBody(pbodyFoot->body);
 	}
