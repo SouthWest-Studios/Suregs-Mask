@@ -304,7 +304,7 @@ SDL_Texture* DialogManager::CreateTextTexture(TTF_Font* font, const char* text, 
 
 	
 
-	textSurface = TTF_RenderUTF8_Blended_Wrapped(font, text, color, textBoundWidth);
+	textSurface = TTF_RenderUTF8_Blended_Wrapped(font, text, { 52,25,0 }, textBoundWidth);
 	textTexture = SDL_CreateTextureFromSurface(app->render->renderer, textSurface);
 
 	SDL_FreeSurface(textSurface);
@@ -320,7 +320,7 @@ TTF_Font* DialogManager::FontSelector(const char* font)
 
 	}
 	else if (std::strcmp(font, "secondary") == 0) {
-		return app->render->secondaryFont;
+		return app->render->titleFont;
 	}
 
 
