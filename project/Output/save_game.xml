@@ -9,7 +9,13 @@
 	<scene_pueblo />
 	<entitymanager>
 		<entity_manager>
-			<doors />
+			<doors>
+				<door sceneLevel="-10" tpID="0" />
+				<door sceneLevel="-10" tpID="2" />
+				<door sceneLevel="-10" tpID="4" />
+				<door sceneLevel="-10" tpID="1" />
+				<door sceneLevel="-10" tpID="3" />
+			</doors>
 		</entity_manager>
 	</entitymanager>
 	<missionmanager />
@@ -17,7 +23,7 @@
 	<menu />
 	<iventorymanager>
 		<inventory>
-			<money quantity="0" />
+			<money quantity="100" />
 			<SwordLevel quantity="0" />
 			<ArmorLevel quantity="0" />
 			<PrimaryMask quantity="-1" />

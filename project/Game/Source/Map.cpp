@@ -115,7 +115,7 @@ bool Map::Update(float dt)
 
 	//Mirar el orden de los botones
 
-	if (!recompensaPuzzle) {
+	if (!recompensaPuzzle && puzzleButtonEntities.size() > 0) {
 
 		bool falta = false;
 		bool resetBotones = false;
