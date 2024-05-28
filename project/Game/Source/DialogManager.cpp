@@ -216,7 +216,7 @@ bool DialogManager::ShowDialog(Dialog* dialog)
 
 
 	//Nombre personaje
-	textNameTexture = CreateTextTexture(app->render->primaryFont, dialog->name.c_str(), textColor, textNameBoundWidth);
+	textNameTexture = CreateTextTexture(app->render->titleFont, dialog->name.c_str(), textColor, textNameBoundWidth);
 	app->render->DrawTexture(textNameTexture, dialogMargin[3] + dialogPosition.x + namePosition.x, dialogMargin[0] + dialogPosition.y + namePosition.y, (int)app->win->GetScale(), SDL_FLIP_NONE, 0, 0);
 
 
@@ -304,7 +304,7 @@ SDL_Texture* DialogManager::CreateTextTexture(TTF_Font* font, const char* text, 
 
 	
 
-	textSurface = TTF_RenderUTF8_Blended_Wrapped(font, text, { 52,25,0 }, textBoundWidth);
+	textSurface = TTF_RenderUTF8_Blended_Wrapped(font, text, color, textBoundWidth);
 	textTexture = SDL_CreateTextureFromSurface(app->render->renderer, textSurface);
 
 	SDL_FreeSurface(textSurface);

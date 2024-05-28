@@ -344,7 +344,7 @@ bool Commerce::Update(float dt)
 	}
 
 
-	if (app->input->GetButton(SELECT) == KEY_DOWN) {
+	if (app->input->GetButton(SELECT) == KEY_DOWN || app->input->GetButton(CONFIRM) == KEY_DOWN) {
 
 		if (pointerIndexF < trades.size()) {
 			if (pointerIndexC == 0) SelectTrade(pointerIndexF);

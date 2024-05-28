@@ -307,7 +307,7 @@ bool CommerceHerreria::Update(float dt)
 		app->audio->PlayFx(button_fx);
 	}
 
-	if (app->input->GetButton(SELECT) == KEY_DOWN) {
+	if (app->input->GetButton(SELECT) == KEY_DOWN || app->input->GetButton(CONFIRM) == KEY_DOWN) {
 
 		if (pointerIndexF < actualTrades.size()) {
 			if (pointerIndexC == 0) SelectTrade(pointerIndexF);
