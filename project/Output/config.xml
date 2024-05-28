@@ -686,6 +686,8 @@
 	<bestiariomanager>
 		<bestiario texturePath ="Assets/Textures/Interfaz/Bestiario/textura_nota.png"
 			  list_texture ="Assets/Textures/Interfaz/Bestiario/textura_fondo_bestiario_lista.png"
+			  list_texture2 ="Assets/Textures/Interfaz/Bestiario/textura_fondo_bestiario_lista2.png"
+			  list_texture3 ="Assets/Textures/Interfaz/Bestiario/textura_fondo_bestiario_lista3.png"
 			  slider_texture = "Assets/Textures/Interfaz/Bestiario/textura_fondo_slider.png"
 			  knob_texture="Assets/Textures/Interfaz/Bestiario/textura_knob_slider.png"
 			  pointer="Assets/Textures/Interfaz/Bestiario/bestiarioselect.png" 
@@ -706,6 +708,9 @@ Vida: Alta		Daño: Muy alto	Tamaño: Grande	Velocidad: Muy lenta"
 			  text_ols ="Su saliva es tóxica y la usa para defenderse a distancia, muy débiles en las distancias cortas.
 Vida: Alta		Daño: Alto	Tamaño: Medio 	Velocidad: Lenta"
 			  texture_ols ="Assets/Textures/Interfaz/Bestiario/textura_ols.png"
+			  text_inuit ="Espectro con espada larga, puede atacar de distintas formas y cuenta con varios ataques mágicos. 
+Vida: Muy alta	Daño: Muy alto	Tamaño: Grande	Velocidad: Media"
+			  texture_inuit ="Assets/Textures/Interfaz/Bestiario/textura_ols.png"
 			  texture_icono_osiris ="Assets/Textures/Interfaz/Bestiario/textura_icono_osiris.png"
 			  texture_icono_ols ="Assets/Textures/Interfaz/Bestiario/textura_icono_ols.png"
 			  texture_icono_khurt ="Assets/Textures/Interfaz/Bestiario/textura_icono_khurt.png"
