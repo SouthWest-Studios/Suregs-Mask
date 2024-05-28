@@ -75,6 +75,7 @@ public:
 	TTF_Font* primaryFont;
 	TTF_Font* secondaryFont;
 	TTF_Font* buttonFont;
+	TTF_Font* titleFont;
 
 	bool vsync = false;
 
