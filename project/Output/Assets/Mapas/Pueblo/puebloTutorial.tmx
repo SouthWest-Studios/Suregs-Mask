@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="235" height="188" tilewidth="32" tileheight="32" infinite="0" nextlayerid="19" nextobjectid="359">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="235" height="188" tilewidth="32" tileheight="32" infinite="0" nextlayerid="19" nextobjectid="360">
  <tileset firstgid="1" name="Colisiones" tilewidth="32" tileheight="32" tilecount="16" columns="4">
   <image source="../../Textures/Mapas/Metadatos/Collisions_32x32.png" width="128" height="128"/>
  </tileset>
@@ -221039,6 +221039,7 @@
    <polygon points="0,0 1.33333,-126 -32,-127.333 -30.6667,-136.667 -64,-138 -64.6667,-268.667 -38.6667,-268 -35.3333,-295.333 160.667,-295.333 163.333,-274 194,-270 196,-140 167.333,-138 167.333,-106 141.333,-106.667 139.333,-2.66667 156.667,0.666667 156,-58.6667 205.333,-62 208.667,-316 -78,-314 -75.3333,-65.3333 -13.3333,-66.6667 -12.6667,-0.666667 -1.91667,-0.270833"/>
   </object>
   <object id="350" x="5454.67" y="814.667" width="684" height="46.6667"/>
+  <object id="359" x="4375.33" y="3130.5" width="268" height="29.6667"/>
  </objectgroup>
  <objectgroup id="18" name="CollisionCamera">
   <properties>

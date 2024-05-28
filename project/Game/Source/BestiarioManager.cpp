@@ -581,7 +581,7 @@ bool BestiarioManager::PostUpdate()
 					app->render->DrawTexture(itum->data->closeUpBestiarios, 400, 100, SDL_FLIP_NONE, 0, 0);
 					app->render->DrawText(itum->data->name.GetString(), 580, 120, 80, 80, 0, 0, 0, 0, true);
 					app->render->DrawTexture(itum->data->texturaEnemigo, 580, 190, 1, SDL_FLIP_NONE, 0, 0);
-					app->render->DrawTextBound(itum->data->desc.c_str(), 500, 300, 270, { 0,0,0 });
+					app->render->DrawTextBound(itum->data->desc.c_str(), 500, 300, 270, { 52,25,0 });
 					
 				}
 			}

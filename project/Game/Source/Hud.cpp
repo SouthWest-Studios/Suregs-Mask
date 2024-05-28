@@ -264,7 +264,7 @@ bool Hud::PostUpdate()
 
 		app->render->DrawTexture(hudTexture, 950, 600 - (i * 50), SDL_FLIP_NONE, rectFondoObjetosConseguidos, 0);
 		app->render->DrawTexture(acquired_Items.at(i)->texture, 1000, 575 - (i * 50), SDL_FLIP_NONE, 0, 0);
-		app->render->DrawTextBound(acquired_Items.at(i)->text.c_str(), 1080, 605 - (i * 50), 200);
+		app->render->DrawTextBound(acquired_Items.at(i)->text.c_str(), 1080, 605 - (i * 50), 200, { 52, 25, 0 },app->render->titleFont);
 
 	}
 
