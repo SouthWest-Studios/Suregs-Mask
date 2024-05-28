@@ -62,6 +62,7 @@ public:
 	int mazmorraActual = 0;
 	int plus = 0;
 	bool final;
+	int totalMazmorras = 1;
 
 private:
 	

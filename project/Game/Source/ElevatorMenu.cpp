@@ -90,6 +90,8 @@ bool ElevatorMenu::Update(float dt)
 				UseElevator(PointerId, mazmorra);
 			}
 		}
+
+		totalMazmorras = mazmorra + plus + 1;
 		
 		open = true;
 		if (app->input->GetButton(APP_EXIT) == KEY_DOWN) {
