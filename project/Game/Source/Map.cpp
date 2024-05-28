@@ -1075,21 +1075,21 @@ bool Map::LoadObjects()
 				if (!dialogNode) {
 					//std::cerr << "No se encontr?ning�n di�logo con el id=" << object->properties.GetProperty("dialogID")->value << std::endl;
 					std::cerr << "No se encontr?ning�n di�logo con el id=" << std::to_string(dialogId).c_str() << std::endl;
-					return false;
+					//return false;
 				}
 				//Spawn dialogo con x id
-				
-				//printf("Dialogo con id %d\n", dialogId);
-				//printf(" %s\n", object->properties.GetProperty("dialogID")->value.c_str());
-				DialogTrigger* dialogTrigger = (DialogTrigger*)app->entityManager->CreateEntity(EntityType::DIALOG_TRIGGER);
-				dialogTrigger->parameters = dialogNode;
-				dialogTrigger->position = iPoint(object->x + object->width / 2, object->y + object->height / 2);
-				
+				else {
+					//printf("Dialogo con id %d\n", dialogId);
+					//printf(" %s\n", object->properties.GetProperty("dialogID")->value.c_str());
+					DialogTrigger* dialogTrigger = (DialogTrigger*)app->entityManager->CreateEntity(EntityType::DIALOG_TRIGGER);
+					dialogTrigger->parameters = dialogNode;
+					dialogTrigger->position = iPoint(object->x + object->width / 2, object->y + object->height / 2);
 
-				//dialogTriger
-				dialogTrigger->SetDialogId(dialogId);
-				dialogTrigger->Start();
 
+					//dialogTriger
+					dialogTrigger->SetDialogId(dialogId);
+					dialogTrigger->Start();
+				}
 
 
 				
