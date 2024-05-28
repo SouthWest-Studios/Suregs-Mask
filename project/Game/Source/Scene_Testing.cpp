@@ -227,7 +227,9 @@ bool Scene_testing::Start()
 	app->bestiarioManager->CreateItem("khurt");
 	app->bestiarioManager->CreateItem("ols");
 	app->bestiarioManager->CreateItem("boorok");
-
+	app->bestiarioManager->CreateItem("inuit");
+	app->bestiarioManager->CreateItem("musri");
+	app->bestiarioManager->CreateItem("surma");
 
 	Item_Pocion_Dano* pocion_dano = (Item_Pocion_Dano*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_DANO);
 	pocion_dano->config = configNode.child("entities_data").child("item_pocion_dano");
