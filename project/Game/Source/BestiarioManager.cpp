@@ -62,6 +62,10 @@ bool BestiarioManager::Awake(pugi::xml_node config)
 	pathOls = ((char*)config.child("bestiario").attribute("texture_ols").as_string());
 	textoInuit = ((char*)config.child("bestiario").attribute("text_inuit").as_string());
 	pathInuit = ((char*)config.child("bestiario").attribute("texture_inuit").as_string());
+	textoMusri = ((char*)config.child("bestiario").attribute("text_musri").as_string());
+	pathMusri = ((char*)config.child("bestiario").attribute("texture_musri").as_string());
+	textoSurma = ((char*)config.child("bestiario").attribute("text_surma").as_string());
+	pathSurma = ((char*)config.child("bestiario").attribute("texture_surma").as_string());
 	CloseUpPath = ((char*)config.child("bestiario").attribute("closeUp").as_string());
 	
 	iconPathOsiris = ((char*)config.child("bestiario").attribute("texture_icono_osiris").as_string());
@@ -69,6 +73,9 @@ bool BestiarioManager::Awake(pugi::xml_node config)
 	iconPathKhurt = ((char*)config.child("bestiario").attribute("texture_icono_khurt").as_string());
 	iconPathBoorok = ((char*)config.child("bestiario").attribute("texture_icono_boorok").as_string());
 	iconPathOls = ((char*)config.child("bestiario").attribute("texture_icono_ols").as_string());
+	iconPathInuit = ((char*)config.child("bestiario").attribute("texture_icono_inuit").as_string());
+	iconPathMusri = ((char*)config.child("bestiario").attribute("texture_icono_musri").as_string());
+	iconPathSurma = ((char*)config.child("bestiario").attribute("texture_icono_surma").as_string());
 
 	listTexturePath2 = ((char*)config.child("bestiario").attribute("list_texture2").as_string());
 	listTexturePath3 = ((char*)config.child("bestiario").attribute("list_texture3").as_string());
@@ -93,11 +100,18 @@ bool BestiarioManager::Start() {
 	textureMuur = app->tex->Load(pathMuur);
 	textureKhurt = app->tex->Load(pathKhurt);
 	textureBoorok = app->tex->Load(pathBoorok);
-	textureOls = app->tex->Load(pathOls);iconTextureOsiris = app->tex->Load(iconPathOsiris);
+	textureOls = app->tex->Load(pathOls);
+	textureInuit = app->tex->Load(pathInuit);
+	textureMusri = app->tex->Load(pathMusri);
+	textureSurma = app->tex->Load(pathSurma);
+	iconTextureOsiris = app->tex->Load(iconPathOsiris);
 	iconTextureMuur = app->tex->Load(iconPathMuur);
 	iconTextureKhurt = app->tex->Load(iconPathKhurt);
 	iconTextureBoorok = app->tex->Load(iconPathBoorok);
 	iconTextureOls = app->tex->Load(iconPathOls);
+	iconTextureInuit = app->tex->Load(iconPathInuit);
+	iconTextureSurma = app->tex->Load(iconPathSurma);
+	iconTextureMusri = app->tex->Load(iconPathMusri);
 	PointerId = -2;
 	PointerItemText = nullptr;
 
@@ -212,12 +226,32 @@ Bestiario* BestiarioManager::CreateItem(char* name)
 	else if (strcmp(name, "inuit") == 0)
 	{
 		entity->name = name;
-		entity->desc = textoOls;
-		entity->texturaEnemigo = textureOls;
-		entity->icon = iconTextureOls;
+		entity->desc = textoInuit;
+		entity->texturaEnemigo = textureInuit;
+		entity->icon = iconTextureInuit;
 		if (inuit == 0)
 			AddBestiario(entity);
 		inuit++;
+	}
+	else if (strcmp(name, "musri") == 0)
+	{
+		entity->name = name;
+		entity->desc = textoMusri;
+		entity->texturaEnemigo = textureMusri;
+		entity->icon = iconTextureMusri;
+		if (musri == 0)
+			AddBestiario(entity);
+		musri++;
+	}
+	else if (strcmp(name, "surma") == 0)
+	{
+		entity->name = name;
+		entity->desc = textoSurma;
+		entity->texturaEnemigo = textureSurma;
+		entity->icon = iconTextureSurma;
+		if (surma == 0)
+			AddBestiario(entity);
+		surma++;
 	}
 	else
 	{
@@ -243,7 +277,7 @@ bool BestiarioManager::IsFull()
 
 
 	// Verificar si el siguiente ID disponible es 9
-	if (bestiario.Count() == 8) {
+	if (bestiario.Count() == 100) {
 		return true;
 	}
 	else {
@@ -495,11 +529,11 @@ bool BestiarioManager::Update(float dt)
 		num = numberRows + 1;
 
 
-		if (bestiario.Count() > 3 * num)
+		if (bestiario.Count() > 4 * num)
 		{
 			numberRows += 1;
 		}
-
+		bestiario.Count();
 	}
 
 

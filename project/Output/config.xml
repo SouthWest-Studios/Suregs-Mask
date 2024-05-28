@@ -710,12 +710,21 @@ Vida: Alta		Daño: Alto	Tamaño: Medio 	Velocidad: Lenta"
 			  texture_ols ="Assets/Textures/Interfaz/Bestiario/textura_ols.png"
 			  text_inuit ="Espectro con espada larga, puede atacar de distintas formas y cuenta con varios ataques mágicos. 
 Vida: Muy alta	Daño: Muy alto	Tamaño: Grande	Velocidad: Media"
-			  texture_inuit ="Assets/Textures/Interfaz/Bestiario/textura_ols.png"
+			  texture_inuit ="Assets/Textures/Interfaz/Bestiario/textura_inuit.png"
+			  texture_musri ="Assets/Textures/Interfaz/Bestiario/textura_musri.png"
+			  text_musri ="Espectro pequeño que lleva un arco, muy rápido y difícil de acercarse. Cuenta con habilidades especiales. 
+Vida: Muy alta	Daño: Muy alto	Tamaño: Normal	Velocidad: Muy alta"
+			  texture_surma ="Assets/Textures/Interfaz/Bestiario/textura_surma.png"
+			  text_surma ="Espectro muy grande y fuerte, lleva una gran espada con la que atacar. Puede invocar habilidades para defenderse.
+Vida: Muy alta	Daño: Muy alto	Tamaño: Muy grande Velocidad: Muy lenta"
 			  texture_icono_osiris ="Assets/Textures/Interfaz/Bestiario/textura_icono_osiris.png"
 			  texture_icono_ols ="Assets/Textures/Interfaz/Bestiario/textura_icono_ols.png"
 			  texture_icono_khurt ="Assets/Textures/Interfaz/Bestiario/textura_icono_khurt.png"
 			  texture_icono_muur ="Assets/Textures/Interfaz/Bestiario/textura_icono_muur.png"
 			  texture_icono_boorok ="Assets/Textures/Interfaz/Bestiario/textura_icono_boorok.png"
+			  texture_icono_inuit ="Assets/Textures/Interfaz/Bestiario/textura_icono_inuit.png"
+			  texture_icono_musri ="Assets/Textures/Interfaz/Bestiario/textura_icono_musri.png"
+			  texture_icono_surma ="Assets/Textures/Interfaz/Bestiario/textura_icono_surma.png"
 			  closeUp ="Assets/Textures/Interfaz/Bestiario/textura_NoteCloseUp.png"/>
 			  
 			  
