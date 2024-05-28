@@ -522,7 +522,7 @@ bool NotesManager::PostUpdate()
 						}
 						/*app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition - scrollY, 0.8, SDL_FLIP_NONE, 0, 0);*/
 						/*app->render->DrawText(pEntity->title.c_str(), horizontalPosition + 60, verticalPosition - scrollY, 100, 100, 0, 0, 0, 0, false);*/
-						app->render->DrawTextBound(pEntity->title.c_str(), horizontalPosition + 60, verticalPosition - scrollY, 100, { 0,0,0 });
+						app->render->DrawTextBound(pEntity->title.c_str(), horizontalPosition + 60, verticalPosition - scrollY, 100, { 52,25,0 }, app->render->titleFont);
 						
 					}
 					
@@ -573,7 +573,7 @@ bool NotesManager::PostUpdate()
 				{
 					app->render->DrawTexture(itum->data->closeUpNotes, 400, 100, SDL_FLIP_NONE, 0, 0);
 					/*app->render->DrawText(itum->data->desc.c_str(), 450, 200, 270, 400, 0, 0, 0, 0, false);*/
-					app->render->DrawTextBound(itum->data->desc.c_str(), 430, 200, 370, { 0,0,0 });
+					app->render->DrawTextBound(itum->data->desc.c_str(), 430, 200, 370, { 52,25,0 });
 				}
 			}
 		}

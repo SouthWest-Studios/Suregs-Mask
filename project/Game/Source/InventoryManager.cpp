@@ -1276,7 +1276,7 @@ bool InventoryManager::PostUpdate()
 			{
 				std::string quantityStr = "X  " + std::to_string(inventities.At(PointerId)->data->quantity);
 				/*app->render->DrawText(quantityStr.c_str(), 700, 400, 70, 70, 0, 0, 0, 0);	*/
-				app->render->DrawTextBound(quantityStr.c_str(), 830, 330, 270, { 0,0,0 });
+				app->render->DrawTextBound(quantityStr.c_str(), 830, 330, 270, { 52,25,0 });
 			}
 		}
 		
@@ -1290,8 +1290,8 @@ bool InventoryManager::PostUpdate()
 			if (PointerId == itum->data->id)
 			{
 				/*app->render->DrawText(itum->data->desc.c_str(), 680, 250, 270, 200, 0, 0, 0, 0, false);*/
-				app->render->DrawTextBound(itum->data->desc.c_str(), 670, 430, 270, { 0,0,0 });
-				app->render->DrawTextBound(itum->data->name.GetString(), 670, 150, 90, { 0,0,0 });
+				app->render->DrawTextBound(itum->data->desc.c_str(), 670, 430, 270, { 52,25,0 });
+				app->render->DrawTextBound(itum->data->name.GetString(), 670, 150, 90, { 52,25,0 },app->render->titleFont);
 				app->render->DrawTexture(itum->data->icon, 680, 200, 1.8, SDL_FLIP_NONE, 0, 0);
 			} 
 

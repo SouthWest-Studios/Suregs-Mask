@@ -90,20 +90,20 @@ bool Menu_Equipo::PostUpdate()
 	{
 		int levelSword = static_cast<int>(app->inventoryManager->swordLevel + 1);
 		std::string levelSwordStr = "Nivel: " + std::to_string(levelSword);
-		app->render->DrawTextBound(levelSwordStr.c_str(), 280, 200, 200, { 0,0,0,0 });
+		app->render->DrawTextBound(levelSwordStr.c_str(), 280, 200, 200, { 52,25,0 }, app->render->titleFont);
 
 		int attackDamage = static_cast<int>(app->entityManager->GetPlayer()->currentStats.attackDamage);
 		std::string AtaqueStr = "Ataque: " + std::to_string(attackDamage);
-		app->render->DrawTextBound(AtaqueStr.c_str(), 280, 250, 200, { 0,0,0,0 });
+		app->render->DrawTextBound(AtaqueStr.c_str(), 280, 250, 200, { 52,25,0}, app->render->titleFont);
 
 		int levelArmour = static_cast<int>(app->inventoryManager->armorLevel + 1);
 		std::string levelArmorStr = "Nivel: " + std::to_string(levelArmour);
-		app->render->DrawTextBound(levelArmorStr.c_str(), 670, 200, 200, { 0,0,0,0 });
+		app->render->DrawTextBound(levelArmorStr.c_str(), 670, 200, 200, { 52,25,0},app->render->titleFont);
 
 		int vida = static_cast<int>(app->entityManager->GetPlayer()->currentStats.currentHealth);
 		std::string VidaStr = "Vida: " + std::to_string(vida);
 
-		app->render->DrawTextBound(VidaStr.c_str(), 670, 250, 200, { 0,0,0,0 });
+		app->render->DrawTextBound(VidaStr.c_str(), 670, 250, 200, { 52,25,0},app->render->titleFont);
 
 	/*	std::string MaskAtackStr = std::to_string(app->entityManager->GetPlayer()->maskStats[app->entityManager->GetPlayer()->primaryMask][Branches::Rama1][app->entityManager->GetPlayer()->maskLevels[app->entityManager->GetPlayer()->primaryMask][Branches::Rama1]].maskDamage);
 
@@ -118,51 +118,51 @@ bool Menu_Equipo::PostUpdate()
 
 		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
 		{
-			app->render->DrawTextBound("Dinka", 280, 395, 200, { 0,0,0,0 });
-			app->render->DrawTextBound("Rayo Magico", 270, 450, 200, { 0,0,0,0 });
+			app->render->DrawTextBound("Dinka", 280, 395, 200, {52,25,0},app->render->titleFont);
+			app->render->DrawTextBound("Rayo Magico", 270, 450, 200, {52,25,0},app->render->titleFont);
 			app->render->DrawTexture(mask0Texture, 470, 420, SDL_FLIP_NONE, 0, 0);
 		}
 		else if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK1)
 		{
-			app->render->DrawTextBound("Inuit", 280, 395, 200, { 0,0,0,0 });
-			app->render->DrawTextBound("Esfera Expansiva", 270, 450, 200, { 0,0,0,0 });
+			app->render->DrawTextBound("Inuit", 280, 395, 200, {52,25,0},app->render->titleFont);
+			app->render->DrawTextBound("Esfera Expansiva", 270, 450, 200, {52,25,0},app->render->titleFont);
 			app->render->DrawTexture(mask1Texture, 470, 420, SDL_FLIP_NONE, 0, 0);
 		}
 		else if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK2)
 		{
-			app->render->DrawTextBound("Musri", 280, 395, 200, { 0,0,0,0 });
-			app->render->DrawTextBound("Dash Invisible", 270, 450, 200, { 0,0,0,0 });
+			app->render->DrawTextBound("Musri", 280, 395, 200, {52,25,0},app->render->titleFont);
+			app->render->DrawTextBound("Dash Invisible", 270, 450, 200, {52,25,0},app->render->titleFont);
 			app->render->DrawTexture(mask2Texture, 470, 420, SDL_FLIP_NONE, 0, 0);
 		}
 		else if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK3)
 		{
-			app->render->DrawTextBound("Surma", 280, 395, 200, { 0,0,0,0 });
-			app->render->DrawTextBound("Mejora Interna", 270, 450, 200, { 0,0,0,0 });
+			app->render->DrawTextBound("Surma", 280, 395, 200, {52,25,0},app->render->titleFont);
+			app->render->DrawTextBound("Mejora Interna", 270, 450, 200, {52,25,0},app->render->titleFont);
 			app->render->DrawTexture(mask3Texture, 470, 420, SDL_FLIP_NONE, 0, 0);
 		}
 
 		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK0)
 		{
-			app->render->DrawTextBound("Dinka", 678, 395, 200, { 0,0,0,0 });
-			app->render->DrawTextBound("Rayo Magico", 660, 450, 200, { 0,0,0,0 });
+			app->render->DrawTextBound("Dinka", 678, 395, 200, {52,25,0},app->render->titleFont);
+			app->render->DrawTextBound("Rayo Magico", 660, 450, 200, {52,25,0},app->render->titleFont);
 			app->render->DrawTexture(mask0Texture, 860, 420, SDL_FLIP_NONE, 0, 0);
 		}
 		else if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK1)
 		{
-			app->render->DrawTextBound("Inuit", 678, 395, 200, { 0,0,0,0 });
-			app->render->DrawTextBound("Esfera Expansiva", 660, 450, 200, { 0,0,0,0 });
+			app->render->DrawTextBound("Inuit", 678, 395, 200, {52,25,0},app->render->titleFont);
+			app->render->DrawTextBound("Esfera Expansiva", 660, 450, 200, {52,25,0},app->render->titleFont);
 			app->render->DrawTexture(mask1Texture, 860, 420, SDL_FLIP_NONE, 0, 0);
 		}
 		else if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK2)
 		{
-			app->render->DrawTextBound("Musri", 678, 395, 200, { 0,0,0,0 });
-			app->render->DrawTextBound("Dash Invisible", 660, 450, 200, { 0,0,0,0 });
+			app->render->DrawTextBound("Musri", 678, 395, 200, {52,25,0},app->render->titleFont);
+			app->render->DrawTextBound("Dash Invisible", 660, 450, 200, {52,25,0},app->render->titleFont);
 			app->render->DrawTexture(mask2Texture, 860, 420, SDL_FLIP_NONE, 0, 0);
 		}
 		else if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK3)
 		{
-			app->render->DrawTextBound("Surma", 678, 395, 200, { 0,0,0,0 });
-			app->render->DrawTextBound("Mejora Interna", 660, 450, 200, { 0,0,0,0 });
+			app->render->DrawTextBound("Surma", 678, 395, 200, {52,25,0},app->render->titleFont);
+			app->render->DrawTextBound("Mejora Interna", 660, 450, 200, {52,25,0},app->render->titleFont);
 			app->render->DrawTexture(mask3Texture, 860, 420, SDL_FLIP_NONE, 0, 0);
 		}
 	}
