@@ -22,6 +22,7 @@
 			<ArmorLevel quantity="0" />
 			<PrimaryMask quantity="-1" />
 			<SecondaryMask quantity="-1" />
+			<StoryLevel quantity="1" />
 		</inventory>
 	</iventorymanager>
 	<commercemanager />
