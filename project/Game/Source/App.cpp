@@ -12,6 +12,7 @@
 #include "Scene_GameOver.h"
 #include "Scene_Pueblo.h"
 #include "Scene_Pueblo_Tutorial.h"
+#include "Scene_Arena_Tutorial.h"
 #include "Scene_Mazmorra0.h"
 #include "Scene_Mazmorra1.h"
 #include "Scene_Mazmorra2.h"
@@ -73,6 +74,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	scene_menu = new Scene_Menu(this, false);
 	scene_gameover = new Scene_GameOver(this, false);
 	scene_testing = new Scene_testing(this, false);
+	scene_arena_tutorial = new Scene_Arena_Tutorial(this, false);
 	scene_pueblo_tutorial = new Scene_Pueblo_Tutorial(this, false);
 	scene_pueblo = new Scene_Pueblo(this, false);
 
@@ -119,6 +121,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(scene_menu);
 	AddModule(scene_testing);
 	AddModule(scene_pueblo_tutorial);
+	AddModule(scene_arena_tutorial);
 	AddModule(scene_pueblo);
 	AddModule(scene_mazmorra0);
 	AddModule(scene_mazmorra1);

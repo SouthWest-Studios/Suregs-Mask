@@ -1,5 +1,5 @@
-#ifndef __Scene_Arena_Tutorial_H__
-#define __Scene_Arena_Tutorial_H__
+#ifndef __SCENE_ARENA_TUTORIAL_H__
+#define __SCENE_ARENA_TUTORIAL_H__
 
 #include "Module.h"
 #include "Player.h"
@@ -63,4 +63,4 @@ public:
 	PhysBody* pbody;
 };
 
-#endif // __Scene_Arena_Tutorial_H__
+#endif // __SCENE_ARENA_TUTORIAL_H__
