@@ -262,7 +262,7 @@ bool Hud::PostUpdate()
 	
 
 	app->render->DrawTexture(hudTexture, 75, 15, SDL_FLIP_NONE, rectFondoMascaraSecundaria, 0);
-	app->render->DrawTexture(hudTexture, 75, 15, 0.79f,SDL_FLIP_NONE, &rectSecondaryMask, 0);
+	app->render->DrawTexture(hudTexture, 83, 18, 0.79f,SDL_FLIP_NONE, &rectSecondaryMask, 0);
 	app->render->DrawTexture(cdSecondaryMaskTexture, 75, 15, 0.79f, SDL_FLIP_NONE, rectCDMascaraSecundaria, 0);
 	app->render->DrawTexture(hudTexture, 25, 40, SDL_FLIP_NONE, rectFondoMascara, 0);
 	app->render->DrawTexture(hudTexture, 25, 40, SDL_FLIP_NONE, &rectPrimaryMask, 0);
