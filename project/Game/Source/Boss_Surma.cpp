@@ -18,6 +18,7 @@
 #include "Item_Hueso.h"
 #include "Item_Diamante.h"
 #include "BestiarioManager.h"
+#include "Item_Mascara_3.h"
 #include <Optick/include/optick.h>
 #include "Utils.cpp"
 
@@ -263,6 +264,11 @@ void Boss_Surma::Die() {
 	diamante->Start();
 
 	app->bestiarioManager->CreateItem("surma");
+
+	Item_mascara_3* mascara3 = (Item_mascara_3*)app->entityManager->CreateEntity(EntityType::ITEM_MASCARA3);
+	mascara3->config = configNode.child("entities_data").child("item_mascara_3");
+	mascara3->position = iPoint(position.x, position.y);
+	mascara3->Start();
 	//Mask XP
 
 	//Mask 0

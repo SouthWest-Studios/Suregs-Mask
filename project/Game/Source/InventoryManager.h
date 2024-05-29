@@ -93,7 +93,7 @@ public:
 	int secondaryMaskInventoryManager = -1;
 
 	int numMasks = 0;
-
+	bool mask = false;
 private:
 	pugi::xml_document configFile;
 	pugi::xml_node configNode;

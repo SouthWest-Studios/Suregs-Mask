@@ -18,6 +18,7 @@
 #include "Item_Hueso.h"
 #include "Item_Rubi.h"
 #include "BestiarioManager.h"
+#include "Item_Mascara_2.h"
 #include <Optick/include/optick.h>
 #include "Utils.cpp"
 
@@ -290,6 +291,11 @@ void Boss_Musri::Die() {
 	rubi->position = iPoint(position.x, position.y);
 	rubi->Start();
 	app->bestiarioManager->CreateItem("musri");
+
+	Item_mascara_2* mascara2 = (Item_mascara_2*)app->entityManager->CreateEntity(EntityType::ITEM_MASCARA2);
+	mascara2->config = configNode.child("entities_data").child("item_mascara_2");
+	mascara2->position = iPoint(position.x, position.y);
+	mascara2->Start();
 	//Mask XP
 
 //Mask 0

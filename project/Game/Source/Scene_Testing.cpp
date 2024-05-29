@@ -292,7 +292,7 @@ bool Scene_testing::Start()
 
 	Item_mascara_2* mascara2 = (Item_mascara_2*)app->entityManager->CreateEntity(EntityType::ITEM_MASCARA2);
 	mascara2->config = configNode.child("entities_data").child("item_mascara_2");
-	mascara2->position = iPoint(1323, 2455);
+	mascara2->position = iPoint(1323, 2355);
 	mascara2->Start();
 
 	Item_mascara_3* mascara3 = (Item_mascara_3*)app->entityManager->CreateEntity(EntityType::ITEM_MASCARA3);

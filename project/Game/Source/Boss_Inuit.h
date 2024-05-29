@@ -230,6 +230,8 @@ public:
 	EntityState_Boss_Inuit desiredState = nextState;
 	EntityState_Boss_Inuit nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
 
+	int count = 0;
+
 };
 
 

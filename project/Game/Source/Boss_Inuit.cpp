@@ -17,6 +17,7 @@
 #include "Item_Hueso.h"
 #include "Item_Zafiro.h"
 #include "BestiarioManager.h"
+#include "Item_Mascara_1.h"
 #include <Optick/include/optick.h>
 #include "Utils.cpp"
 
@@ -666,11 +667,22 @@ void Boss_Inuit::Die() {
 	//Mask XP
 	Dead = true;
 
-	Item_Zafiro* zafiro = (Item_Zafiro*)app->entityManager->CreateEntity(EntityType::ITEM_ZAFIRO);
-	zafiro->config = configNode.child("entities_data").child("item_zafiro");
-	zafiro->position = iPoint(position.x, position.y);
-	zafiro->Start();
-	app->bestiarioManager->CreateItem("inuit");
+	if (count == 0)
+	{
+		Item_Zafiro* zafiro = (Item_Zafiro*)app->entityManager->CreateEntity(EntityType::ITEM_ZAFIRO);
+		zafiro->config = configNode.child("entities_data").child("item_zafiro");
+		zafiro->position = iPoint(position.x, position.y);
+		zafiro->Start();
+		app->bestiarioManager->CreateItem("inuit");
+
+		Item_mascara_1* mascara1 = (Item_mascara_1*)app->entityManager->CreateEntity(EntityType::ITEM_MASCARA1);
+		mascara1->config = configNode.child("entities_data").child("item_mascara_1");
+		mascara1->position = iPoint(1423, 2455);
+		mascara1->Start();
+
+		count++;
+	}
+	
 	/*if (pbodyFoot != nullptr) {
 		pbodyFoot->body->GetWorld()->DestroyBody(pbodyFoot->body);
 	}

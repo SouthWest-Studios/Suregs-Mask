@@ -554,40 +554,36 @@ void TreeManager::UseTreeSelected(int id)
 
 					case TreeType::MASK0:
 					{
-						if (app->inventoryManager->numMasks >= 1)
-						{
+						
 							mask = 1;
-						}
+						
 						
 
 						break;
 					}
 					case TreeType::MASK1:
 					{
-						if (app->inventoryManager->numMasks >= 2)
-						{
+						
 							mask = 2;
-						}
+						
 						
 
 						break;
 					}
 					case TreeType::MASK2:
 					{
-						if (app->inventoryManager->numMasks >= 3)
-						{
+						
 							mask = 3;
-						}
+						
 						
 
 						break;
 					}
 					case TreeType::MASK3:
 					{
-						if (app->inventoryManager->numMasks >= 4)
-						{
+						
 							mask = 4;
-						}
+						
 						
 
 						break;
@@ -1185,23 +1181,35 @@ bool TreeManager::Update(float dt)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 			{
-				app->entityManager->GetPlayer()->primaryMask = Mask::MASK0;
-				selectPrimaryMask = false;
+				if (app->inventoryManager->numMasks >= 1)
+				{
+					app->entityManager->GetPlayer()->primaryMask = Mask::MASK0;
+					selectPrimaryMask = false;
+				}
 			}
 			else if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 			{
-				app->entityManager->GetPlayer()->primaryMask = Mask::MASK1;
-				selectPrimaryMask = false;
+				if (app->inventoryManager->numMasks >= 2)
+				{
+					app->entityManager->GetPlayer()->primaryMask = Mask::MASK1;
+					selectPrimaryMask = false;
+				}
 			}
 			else if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
 			{
-				app->entityManager->GetPlayer()->primaryMask = Mask::MASK2;
-				selectPrimaryMask = false;
+				if (app->inventoryManager->numMasks >= 3)
+				{
+					app->entityManager->GetPlayer()->primaryMask = Mask::MASK2;
+					selectPrimaryMask = false;
+				}
 			}
 			else if (app->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
 			{
-				app->entityManager->GetPlayer()->primaryMask = Mask::MASK3;
-				selectPrimaryMask = false;
+				if (app->inventoryManager->numMasks >= 4)
+				{
+					app->entityManager->GetPlayer()->primaryMask = Mask::MASK3;
+					selectPrimaryMask = false;
+				}
 			}
 
 			if (app->input->GetButton(APP_EXIT) == KEY_DOWN) {
@@ -1219,23 +1227,35 @@ bool TreeManager::Update(float dt)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 			{
-				app->entityManager->GetPlayer()->secondaryMask = Mask::MASK0;
-				selectSecondaryMask = false;
+				if (app->inventoryManager->numMasks >= 1)
+				{
+					app->entityManager->GetPlayer()->secondaryMask = Mask::MASK0;
+					selectSecondaryMask = false;
+				}
 			}
 			if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 			{
-				app->entityManager->GetPlayer()->secondaryMask = Mask::MASK1;
-				selectSecondaryMask = false;
+				if (app->inventoryManager->numMasks >= 2)
+				{
+					app->entityManager->GetPlayer()->secondaryMask = Mask::MASK1;
+					selectSecondaryMask = false;
+				}
 			}
 			if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
 			{
-				app->entityManager->GetPlayer()->secondaryMask = Mask::MASK2;
-				selectSecondaryMask = false;
+				if (app->inventoryManager->numMasks >= 3)
+				{
+					app->entityManager->GetPlayer()->secondaryMask = Mask::MASK2;
+					selectSecondaryMask = false;
+				}
 			}
 			if (app->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
 			{
-				app->entityManager->GetPlayer()->secondaryMask = Mask::MASK3;
-				selectSecondaryMask = false;
+				if (app->inventoryManager->numMasks >= 4)
+				{
+					app->entityManager->GetPlayer()->secondaryMask = Mask::MASK3;
+					selectSecondaryMask = false;
+				}
 			}
 			if (app->input->GetButton(APP_EXIT) == KEY_DOWN) {
 				selectSecondaryMask = false;
