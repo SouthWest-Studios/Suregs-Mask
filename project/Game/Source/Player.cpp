@@ -719,6 +719,8 @@ bool Player::Update(float dt)
 
 	if(insideVacio && !isDashing){
 		app->entityManager->playerVacio = true;
+		app->entityManager->vacioGameStop = true;
+		app->entityManager->playerCantMove = true;
 		insideVacio = false;
 	}
 

@@ -102,9 +102,14 @@ public:
 
 	bool playerVacio = false;
 	bool goAnimation = false;
+	bool vacioGameStop = false;
+	bool playerCantMove = false;
 
 	float vacioCount = 0;
+	int transparentNum;
 	bool vacioControl = false;
+	bool printLogo = false;
+	bool goTransparent = false;
 
 
 

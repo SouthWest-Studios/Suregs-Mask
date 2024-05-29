@@ -579,7 +579,7 @@ bool EntityManager::Update(float dt)
 {
 	bool ret = true;
 
-	if (app->menu->menuu || playerVacio) {
+	if (app->menu->menuu || vacioGameStop) {
 		return ret;
 	}
 
@@ -657,40 +657,87 @@ bool EntityManager::PostLateUpdate()
 {
 
 	//app->render->DrawTexture(texture, BMRposition.x - 410, BMRposition.y - 300, SDL_FLIP_HORIZONTAL, &rect);
+
+
 	if (playerVacio) {
 		uint w;
 		uint h;
 		app->win->GetWindowSize(w, h);
-		SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, 255);  // Black with 50% opacity
+		if (playerCantMove) {
+			app->physics->active = false;
+		}
+		
+		SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, transparentNum);
+		// Black with 50% opacity
+		if (!goTransparent) {
+			if (transparentNum >= 255) {
+				transparentNum = 255;
+				printLogo = true;
+			}
+			else
+			{
+				if (transparentNum >= 251) {
+					transparentNum = 255;
+				}
+				else
+				{
+					transparentNum += 4;
+				}
+
+			}
+		}
+		else {
+			if (transparentNum <= 0) {
+				transparentNum = 0;
+				playerVacio = false;
+				goTransparent = false;
+				transparentNum = 0;
+			}
+			else
+			{
+				if (transparentNum <= 4) {
+					transparentNum = 0;
+				}
+				else
+				{
+					transparentNum -= 4;
+				}
+			}
+		}
 		SDL_Rect overlayRect = { 0, 0, w , h };
 		SDL_RenderFillRect(app->render->renderer, &overlayRect);
 		SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
+		if (printLogo) {
+			int vacioW = 0;
+			int vacioH = 0;
+			float vacioS = 0;
+			if (!vacioControl) {
+				setVacioValue(vacioW, vacioH, vacioS, 20, 0);
+			}
+			app->render->DrawTexture(texture, (w / 2) + vacioW, (h / 2) + vacioH, vacioS, SDL_FLIP_HORIZONTAL, &rect, 0, 0);//1 = -250,  2 = -500, 3 = -750, 4 = -1000, 5 = -1250, 6 = -1500, 7 = -1750 ,8 = -2000, 9 = -2250, 10 = -2500,15 = -3750
+			currentAnimation->Update();
 
-		int vacioW = 0;
-		int vacioH = 0;
-		float vacioS = 0;
+		}
 
-		if (!vacioControl) {
-			setVacioValue(vacioW, vacioH, vacioS, 20, 0);
+		if (vacioControl) {
+			vacioGameStop = false;
+			playerCantMove = false;
+			GetPlayer()->TakeDamage(10);
+			GetPlayer()->vacio = true;
+			app->physics->active = true;
+			vacioControl = false;
+			vacioCount = 0;
+			printLogo = false;
+
 		}
 		/*printf("\nvacioW: %d", vacioW);
 		printf("\nvacioH: %d", vacioH);
 		printf("\nvacioS: %d", vacioS);*/
-		app->render->DrawTexture(texture, (w / 2) + vacioW, (h / 2) + vacioH, vacioS, SDL_FLIP_HORIZONTAL, &rect, 0, 0);//1 = -250,  2 = -500, 3 = -750, 4 = -1000, 5 = -1250, 6 = -1500, 7 = -1750 ,8 = -2000, 9 = -2250, 10 = -2500,15 = -3750
-		currentAnimation->Update();
-		app->physics->active = false;
 		//app->hud->active = false;
 	}
 
-	if (vacioControl) {
-		GetPlayer()->TakeDamage(10);
-		playerVacio = false;
-		GetPlayer()->vacio = true;
-		app->physics->active = true;
-		vacioControl = false;
-		vacioCount = 0;
-	}
+
 
 
 	//if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "eyeAni") {
@@ -834,10 +881,9 @@ void EntityManager::setVacioValue(int& weigh, int& height, float& size, float ma
 	else {
 		vacioControl = false;
 	}*/
-	float step = 0.2; // 每次递减的步长
+	float step = 0.2;
 	maxSize -= vacioCount * step;
 
-	// 使用线性插值，使 size 平滑变化
 	size = size * 0.9f + maxSize * 0.1f;
 
 	weigh = -(size * 250);
@@ -846,10 +892,9 @@ void EntityManager::setVacioValue(int& weigh, int& height, float& size, float ma
 	vacioCount += 1.5;
 
 	if (size <= minSize) {
+		printLogo = false;
+		goTransparent = true;
 		vacioControl = true;
-	}
-	else {
-		vacioControl = false;
 	}
 }
 
