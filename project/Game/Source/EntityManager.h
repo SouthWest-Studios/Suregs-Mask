@@ -87,7 +87,8 @@ public:
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
 
-	void printEfectVacio();
+	void setVacioValue(int& weigh, int& height, float& size, float maxSize, float minSize);
+
 
 
 public:
@@ -101,6 +102,11 @@ public:
 
 	bool playerVacio = false;
 	bool goAnimation = false;
+
+	float vacioCount = 0;
+	bool vacioControl = false;
+
+
 
 
 

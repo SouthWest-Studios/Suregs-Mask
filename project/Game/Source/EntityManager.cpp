@@ -127,12 +127,12 @@ bool EntityManager::Start() {
 	int Photowidth = configNode.attribute("Pwidth").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
-	eyeAnimation.LoadAnim("entytiManager", "eyeAni", spritePositions);
+	//eyeAnimation.LoadAnim("entytiManager", "eyeAni", spritePositions);
 	eyeIdle.LoadAnim("entytiManager", "eyeIdle", spritePositions);
-	eyeEndIdle.LoadAnim("entytiManager", "eyeEndIdle", spritePositions);
+	//eyeEndIdle.LoadAnim("entytiManager", "eyeEndIdle", spritePositions);
 
 	texture = app->tex->Load(configNode.attribute("texturePath").as_string());
-	printf("\nEntyti Manager %d  ", Photowidth);
+	//printf("\nEntyti Manager %s  ", texture);
 	//eyeAnimation.LoadAnim("boorok", "sleepAnim", spritePositions);
 	currentAnimation = &eyeIdle;
 
@@ -159,7 +159,7 @@ bool EntityManager::CleanUp()
 	tpEntities.Clear();
 
 	objectsToDraw.clear();
-	
+
 	eyeAnimation.Clear();
 	eyeIdle.Clear();
 	eyeEndIdle.Clear();
@@ -584,7 +584,7 @@ bool EntityManager::Update(float dt)
 	}
 
 
-	
+
 	ListItem<Entity*>* item;
 	Entity* pEntity = NULL;
 
@@ -647,7 +647,7 @@ bool EntityManager::PostUpdate()
 	app->map->PrintMapFront();
 
 
-	
+
 
 
 	return ret;
@@ -661,37 +661,57 @@ bool EntityManager::PostLateUpdate()
 		uint w;
 		uint h;
 		app->win->GetWindowSize(w, h);
-		SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, 200);  // Black with 50% opacity
+		SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, 255);  // Black with 50% opacity
 		SDL_Rect overlayRect = { 0, 0, w , h };
 		SDL_RenderFillRect(app->render->renderer, &overlayRect);
-
 		SDL_Rect rect = currentAnimation->GetCurrentFrame();
-		app->render->DrawTexture(texture, 500, 90, SDL_FLIP_HORIZONTAL, &rect, 0, 0);
+
+
+		int vacioW = 0;
+		int vacioH = 0;
+		float vacioS = 0;
+
+		if (!vacioControl) {
+			setVacioValue(vacioW, vacioH, vacioS, 20, 0);
+		}
+		/*printf("\nvacioW: %d", vacioW);
+		printf("\nvacioH: %d", vacioH);
+		printf("\nvacioS: %d", vacioS);*/
+		app->render->DrawTexture(texture, (w / 2) + vacioW, (h / 2) + vacioH, vacioS, SDL_FLIP_HORIZONTAL, &rect, 0, 0);//1 = -250,  2 = -500, 3 = -750, 4 = -1000, 5 = -1250, 6 = -1500, 7 = -1750 ,8 = -2000, 9 = -2250, 10 = -2500,15 = -3750
 		currentAnimation->Update();
 		app->physics->active = false;
 		//app->hud->active = false;
 	}
 
-	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "eyeAni") {
-		currentAnimation = &eyeEndIdle;
-		eyeAnimation.Reset();
-	}
-	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "eyeIdle") {
-		//goAnimation = true;
-		currentAnimation = &eyeAnimation;
-		eyeIdle.Reset();
-	}
-
-	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "eyeEndIdle") {
+	if (vacioControl) {
 		GetPlayer()->TakeDamage(10);
-		eyeEndIdle.Reset();
 		playerVacio = false;
 		GetPlayer()->vacio = true;
-		currentAnimation = &eyeIdle;
 		app->physics->active = true;
-		//app->hud->Enable();
+		vacioControl = false;
+		vacioCount = 0;
 	}
-	
+
+
+	//if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "eyeAni") {
+	//	currentAnimation = &eyeEndIdle;
+	//	eyeAnimation.Reset();
+	//}
+	//if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "eyeIdle") {
+	//	//goAnimation = true;
+	//	currentAnimation = &eyeAnimation;
+	//	eyeIdle.Reset();
+	//}
+
+	//if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "eyeEndIdle") {
+	//	GetPlayer()->TakeDamage(10);
+	//	eyeEndIdle.Reset();
+	//	playerVacio = false;
+	//	GetPlayer()->vacio = true;
+	//	currentAnimation = &eyeIdle;
+	//	app->physics->active = true;
+	//}
+
 	return true;
 }
 
@@ -798,5 +818,38 @@ bool EntityManager::SaveState(pugi::xml_node node)
 	}
 
 	return true;
+}
+
+void EntityManager::setVacioValue(int& weigh, int& height, float& size, float maxSize, float minSize)
+{
+
+	/*maxSize -= vacioCount;
+	size = maxSize;
+	weigh = -(maxSize * 250);
+	height = -(maxSize * 250);
+	vacioCount += 0.2;
+	if (maxSize <= minSize) {
+		vacioControl = true;
+	}
+	else {
+		vacioControl = false;
+	}*/
+	float step = 0.2; // 每次递减的步长
+	maxSize -= vacioCount * step;
+
+	// 使用线性插值，使 size 平滑变化
+	size = size * 0.9f + maxSize * 0.1f;
+
+	weigh = -(size * 250);
+	height = -(size * 250);
+
+	vacioCount += 1.5;
+
+	if (size <= minSize) {
+		vacioControl = true;
+	}
+	else {
+		vacioControl = false;
+	}
 }
 

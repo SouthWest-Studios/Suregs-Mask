@@ -145,7 +145,7 @@
 		</fx>
 	</sounds>
 
-	<entitymanager texturePath="Assets/Textures/Entidades/mascaraAnim.png" Tsprite="8" Pwidth="2160" sprite_x="270" sprite_y="270"/>
+	<entitymanager texturePath="Assets/Textures/Entidades/vacioLogo.png" Tsprite="1" Pwidth="500" sprite_x="500" sprite_y="500"/>
 		
 
 	
@@ -430,9 +430,10 @@
 		<scene_logos>
 			<idleAnim start="0" end="50" speed="0.5f" loop="false"/>
 		</scene_logos>
+		
 		<entytiManager>
 			<eyeAni start="0" end="7" speed="0.5f" loop="false"/>
-			<eyeIdle start="0" end="1" speed="0.01f" loop="false"/>
+			<eyeIdle start="0" end="1" speed="0.01f" loop="true"/>
 			<eyeEndIdle start="6" end="7º" speed="0.02f" loop="false"/>
 		</entytiManager>
 			
