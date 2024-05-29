@@ -111,6 +111,9 @@ bool Scene_Arena_Tutorial::Update(float dt)
 	{
 		app->audio->PlayMusicAfterRandomDelay("town");
 	}
+	if (app->entityManager->GetPlayer()->currentStats.currentHealth <= 0) {
+		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_pueblo_tutorial, 90);
+	}
 
 	return true;
 }
