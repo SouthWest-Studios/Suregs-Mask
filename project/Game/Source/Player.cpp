@@ -716,6 +716,11 @@ bool Player::Update(float dt)
 		vacio = false;
 	}
 
+	if(insideVacio && !isDashing){
+		app->entityManager->playerVacio = true;
+		insideVacio = false;
+	}
+
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
 
@@ -1478,9 +1483,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision PLATFORM");
 		break;
 	case ColliderType::VACIOS:
-		if(!isDashing){
-			app->entityManager->playerVacio = true;
-			printf("Lagoo");
+		if(!insideVacio){
+			insideVacio = true;
+			//printf("Vacio\n");
 		}
 		break;
 	case ColliderType::ITEM:
@@ -1596,6 +1601,21 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		}
 	}
 
+}
+
+void Player::OnEndCollision(PhysBody* physA, PhysBody* physB) {
+    //Colision general
+    switch (physB->ctype)
+    {
+    case ColliderType::PLATFORM:
+        LOG("Collision PLATFORM");
+        break;
+    case ColliderType::VACIOS:
+        insideVacio = false;
+		//printf("Exit_Vacio\n");
+        break;
+    /*...*/
+    }
 }
 
 void Player::CameraMovement(float dt)
@@ -2394,7 +2414,7 @@ void Player::PlayerMovement(float dt)
 			maskStats[primaryMask][Branches::Rama2][i].maskCoolDown = maskStats[primaryMask][Branches::Rama2][i].originalmaskCoolDown;
 		}
 	}
-	else printf("\rmaskCooldown: %f de cooldown total: %f", maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDownTimer.ReadMSec(), maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDown);
+	//else printf("\rmaskCooldown: %f de cooldown total: %f", maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDownTimer.ReadMSec(), maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDown);
 
 	if (!(maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDownTimer.ReadMSec() < maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDown && isAttackingMask)) {
 		isAttackingMask = false;

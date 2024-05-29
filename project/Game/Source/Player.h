@@ -149,6 +149,7 @@ public:
 	//Branch transitionTable[static_cast<int>(EntityStatePlayer::STATE_COUNT)][static_cast<int>(EntityStatePlayer::STATE_COUNT)];
 	// L07 DONE 6: Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
+	void OnEndCollision(PhysBody* physA, PhysBody* physB);
 
 	Entity* GetEnemyWithHighestHealthWithinRadius(iPoint position, int radius);
 
@@ -313,6 +314,7 @@ public:
 	bool inPocionAnim = false;
 	b2Vec2 posInicioPlayer = b2Vec2(0, 0);
 	bool vacio = false;
+	bool insideVacio = false;
 
 	Timer collisionAttackTimer;
 
