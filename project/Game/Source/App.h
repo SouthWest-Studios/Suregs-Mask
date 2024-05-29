@@ -175,7 +175,8 @@ public:
 	Menu_Equipo* menuEquipo;
 	ElevatorMenu* ascensor;
 	
-
+	bool tutorialHasStarted = false;
+	bool tutorialHasFinished = false;
 	bool closeApplication = false;
 	bool fullscreen = false;
 
