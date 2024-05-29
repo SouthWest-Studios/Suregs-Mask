@@ -56,8 +56,11 @@ public:
 private:
 	char* hudTexturePath;
 	char* messageTexturePath;
+	char* cdMaskTexturePath;
 	SDL_Texture* hudTexture;
 	SDL_Texture* messageTexture;
+	SDL_Texture* cdPrimaryMaskTexture;
+	SDL_Texture* cdSecondaryMaskTexture;
 	int cantidadMonedas = 0;
 
 	SDL_Rect* rectBarraVida;
@@ -65,6 +68,9 @@ private:
 
 	SDL_Rect* rectFondoMascara;
 	SDL_Rect* rectFondoMascaraSecundaria;
+
+	SDL_Rect* rectCDMascaraPrimaria;
+	SDL_Rect* rectCDMascaraSecundaria;
 
 	SDL_Rect* rectFondoPociones;
 	SDL_Rect* rectPocionVida1;

@@ -72,6 +72,7 @@ struct MaskStats {
 	//Habilidades
 	float maskDamage;
 	float maskCoolDown;
+	Timer maskCoolDownTimer;
 	float originalmaskCoolDown;
 	bool firstTimeUsed;
 
@@ -419,9 +420,6 @@ private:
 	Timer timerAttack;
 
 	fPoint lastMovementDirection;
-
-	int cdTimerMaskAttackMS = 1000;
-	Timer timerMaskAttack;
 
 	Timer timerBetweenLightnings;
 

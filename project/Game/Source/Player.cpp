@@ -81,6 +81,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	maskStats[Mask::MASK0][Branches::Rama2][0].maskCoolDown = 25000; //En Milisegundos
 	maskStats[Mask::MASK0][Branches::Rama2][0].originalmaskCoolDown = 25000; //En Milisegundos
+	maskStats[Mask::MASK0][Branches::Rama2][0].maskCoolDownTimer.Start(25000);
 
 	maskStats[Mask::MASK0][Branches::Rama3][0].firstTimeUsed = false;
 	maskStats[Mask::MASK0][Branches::Rama3][0].numberLightning = 1;
@@ -99,6 +100,8 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	maskStats[Mask::MASK0][Branches::Rama2][1].maskCoolDown = 23000; //En Milisegundos
 	maskStats[Mask::MASK0][Branches::Rama2][1].originalmaskCoolDown = 23000; //En Milisegundos
+	maskStats[Mask::MASK0][Branches::Rama2][1].maskCoolDownTimer.Start(23000);
+
 
 	maskStats[Mask::MASK0][Branches::Rama3][1].firstTimeUsed = false;
 	maskStats[Mask::MASK0][Branches::Rama3][1].numberLightning = 2;
@@ -117,6 +120,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	maskStats[Mask::MASK0][Branches::Rama2][2].maskCoolDown = 20000; //En Milisegundos
 	maskStats[Mask::MASK0][Branches::Rama2][2].originalmaskCoolDown = 20000; //En Milisegundos
+	maskStats[Mask::MASK0][Branches::Rama2][2].maskCoolDownTimer.Start(20000);
 
 	maskStats[Mask::MASK0][Branches::Rama3][2].firstTimeUsed = false;
 	maskStats[Mask::MASK0][Branches::Rama3][2].numberLightning = 3;
@@ -135,6 +139,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	maskStats[Mask::MASK0][Branches::Rama2][3].maskCoolDown = 17000; //En Milisegundos
 	maskStats[Mask::MASK0][Branches::Rama2][3].originalmaskCoolDown = 17000; //En Milisegundos
+	maskStats[Mask::MASK0][Branches::Rama2][3].maskCoolDownTimer.Start(17000);
 
 	maskStats[Mask::MASK0][Branches::Rama3][3].firstTimeUsed = false;
 	maskStats[Mask::MASK0][Branches::Rama3][3].numberLightning = 4;
@@ -153,6 +158,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	maskStats[Mask::MASK0][Branches::Rama2][4].maskCoolDown = 15000; //En Milisegundos
 	maskStats[Mask::MASK0][Branches::Rama2][4].originalmaskCoolDown = 15000; //En Milisegundos
+	maskStats[Mask::MASK0][Branches::Rama2][4].maskCoolDownTimer.Start(15000);
 
 	maskStats[Mask::MASK0][Branches::Rama3][4].firstTimeUsed = false;
 	maskStats[Mask::MASK0][Branches::Rama3][4].numberLightning = 5;
@@ -172,6 +178,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	maskStats[Mask::MASK1][Branches::Rama2][0].maskCoolDown = 30000; //En Milisegundos
 	maskStats[Mask::MASK1][Branches::Rama2][0].originalmaskCoolDown = 30000; //En Milisegundos
+	maskStats[Mask::MASK1][Branches::Rama2][0].maskCoolDownTimer.Start(30000);
 
 	maskStats[Mask::MASK1][Branches::Rama3][0].rangeBallModifier = 0.0f;
 	maskStats[Mask::MASK1][Branches::Rama3][0].firstTimeUsed = false;
@@ -190,6 +197,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	maskStats[Mask::MASK1][Branches::Rama2][1].maskCoolDown = 28000; //En Milisegundos
 	maskStats[Mask::MASK1][Branches::Rama2][1].originalmaskCoolDown = 28000; //En Milisegundos
+	maskStats[Mask::MASK1][Branches::Rama2][1].maskCoolDownTimer.Start(28000);
 
 	maskStats[Mask::MASK1][Branches::Rama3][1].rangeBallModifier = 0.05f;
 	maskStats[Mask::MASK1][Branches::Rama3][1].firstTimeUsed = false;
@@ -208,6 +216,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	maskStats[Mask::MASK1][Branches::Rama2][2].maskCoolDown = 25000; //En Milisegundos
 	maskStats[Mask::MASK1][Branches::Rama2][2].originalmaskCoolDown = 25000; //En Milisegundos
+	maskStats[Mask::MASK1][Branches::Rama2][2].maskCoolDownTimer.Start(25000);
 
 	maskStats[Mask::MASK1][Branches::Rama3][2].rangeBallModifier = 0.10f;
 	maskStats[Mask::MASK1][Branches::Rama3][2].firstTimeUsed = false;
@@ -226,6 +235,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	maskStats[Mask::MASK1][Branches::Rama2][3].maskCoolDown = 23000; //En Milisegundos
 	maskStats[Mask::MASK1][Branches::Rama2][3].originalmaskCoolDown = 23000; //En Milisegundos
+	maskStats[Mask::MASK1][Branches::Rama2][3].maskCoolDownTimer.Start(23000);
 
 	maskStats[Mask::MASK1][Branches::Rama3][3].rangeBallModifier = 0.15f;
 	maskStats[Mask::MASK1][Branches::Rama3][3].firstTimeUsed = false;
@@ -244,6 +254,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	maskStats[Mask::MASK1][Branches::Rama2][4].maskCoolDown = 20000; //En Milisegundos
 	maskStats[Mask::MASK1][Branches::Rama2][4].originalmaskCoolDown = 20000; //En Milisegundos
+	maskStats[Mask::MASK1][Branches::Rama2][4].maskCoolDownTimer.Start(20000);
 
 	maskStats[Mask::MASK1][Branches::Rama3][4].rangeBallModifier = 0.20f; // 20% de aumento en el rango
 	maskStats[Mask::MASK1][Branches::Rama3][4].firstTimeUsed = false;
@@ -263,6 +274,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	maskStats[Mask::MASK2][Branches::Rama2][0].maskCoolDown = 20000.0f;
 	maskStats[Mask::MASK2][Branches::Rama2][0].originalmaskCoolDown = 20000.0f;
+	maskStats[Mask::MASK2][Branches::Rama2][0].maskCoolDownTimer.Start(20000.0f);
 
 	maskStats[Mask::MASK2][Branches::Rama3][0].distanceDashModifier = 1.30f;
 
@@ -278,6 +290,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	maskStats[Mask::MASK2][Branches::Rama2][1].maskCoolDown = 18000.0f;
 	maskStats[Mask::MASK2][Branches::Rama2][1].originalmaskCoolDown = 18000.0f;
+	maskStats[Mask::MASK2][Branches::Rama2][1].maskCoolDownTimer.Start(18000.0f);
 
 	maskStats[Mask::MASK2][Branches::Rama3][1].distanceDashModifier = 1.35f;
 
@@ -293,6 +306,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	maskStats[Mask::MASK2][Branches::Rama2][2].maskCoolDown = 16000.0f;
 	maskStats[Mask::MASK2][Branches::Rama2][2].originalmaskCoolDown = 16000.0f;
+	maskStats[Mask::MASK2][Branches::Rama2][2].maskCoolDownTimer.Start(16000.0f);
 
 	maskStats[Mask::MASK2][Branches::Rama3][2].distanceDashModifier = 1.40f;
 
@@ -306,8 +320,9 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	maskStats[Mask::MASK2][Branches::Rama1][3].maskDamage = 100.0f;
 
-	maskStats[Mask::MASK2][Branches::Rama2][3].maskCoolDown = 18000.0f;
-	maskStats[Mask::MASK2][Branches::Rama2][3].originalmaskCoolDown = 18000.0f;
+	maskStats[Mask::MASK2][Branches::Rama2][3].maskCoolDown = 13000.0f;
+	maskStats[Mask::MASK2][Branches::Rama2][3].originalmaskCoolDown = 13000.0f;
+	maskStats[Mask::MASK2][Branches::Rama2][3].maskCoolDownTimer.Start(13000.0f);
 
 	maskStats[Mask::MASK2][Branches::Rama3][3].distanceDashModifier = 1.45f;
 
@@ -323,6 +338,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	maskStats[Mask::MASK2][Branches::Rama2][4].maskCoolDown = 10000.0f;
 	maskStats[Mask::MASK2][Branches::Rama2][4].originalmaskCoolDown = 10000.0f;
+	maskStats[Mask::MASK2][Branches::Rama2][4].maskCoolDownTimer.Start(10000.0f);
 
 	maskStats[Mask::MASK2][Branches::Rama3][4].distanceDashModifier = 1.50f;
 
@@ -339,6 +355,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	maskStats[Mask::MASK3][Branches::Rama2][0].maskCoolDown = 60000.0f;
 	maskStats[Mask::MASK3][Branches::Rama2][0].originalmaskCoolDown = 60000.0f;
+	maskStats[Mask::MASK3][Branches::Rama2][0].maskCoolDownTimer.Start(60000.0f);
 
 	maskStats[Mask::MASK3][Branches::Rama3][0].durationTime = 20000.0f;
 
@@ -355,6 +372,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	maskStats[Mask::MASK3][Branches::Rama2][1].maskCoolDown = 58000.0f;
 	maskStats[Mask::MASK3][Branches::Rama2][1].originalmaskCoolDown = 58000.0f;
+	maskStats[Mask::MASK3][Branches::Rama2][1].maskCoolDownTimer.Start(58000.0f);
 
 	maskStats[Mask::MASK3][Branches::Rama3][1].durationTime = 22000.0f;
 
@@ -371,6 +389,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	maskStats[Mask::MASK3][Branches::Rama2][2].maskCoolDown = 56000.0f;
 	maskStats[Mask::MASK3][Branches::Rama2][2].originalmaskCoolDown = 56000.0f;
+	maskStats[Mask::MASK3][Branches::Rama2][2].maskCoolDownTimer.Start(56000.0f);
 
 	maskStats[Mask::MASK3][Branches::Rama3][2].durationTime = 25000.0f;
 
@@ -387,6 +406,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	maskStats[Mask::MASK3][Branches::Rama2][3].maskCoolDown = 53000.0f;
 	maskStats[Mask::MASK3][Branches::Rama2][3].originalmaskCoolDown = 53000.0f;
+	maskStats[Mask::MASK3][Branches::Rama2][3].maskCoolDownTimer.Start(53000.0f);
 
 	maskStats[Mask::MASK3][Branches::Rama3][3].durationTime = 27000.0f;
 
@@ -403,6 +423,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	maskStats[Mask::MASK3][Branches::Rama2][4].maskCoolDown = 50000.0f;
 	maskStats[Mask::MASK3][Branches::Rama2][4].originalmaskCoolDown = 50000.0f;
+	maskStats[Mask::MASK3][Branches::Rama2][4].maskCoolDownTimer.Start(50000.0f);
 
 	maskStats[Mask::MASK3][Branches::Rama3][4].durationTime = 30000.0f;
 
@@ -2361,11 +2382,11 @@ void Player::PlayerMovement(float dt)
 	//Si pulsas K para mascara principal
 
 	if ((app->input->GetButton(ATAQUE_HABILIDAD) == KEY_DOWN || app->input->GetAxis(ATAQUE_HABILIDAD) != 0) &&
-		(timerMaskAttack.ReadMSec() > maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDown ||
+		(maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDownTimer.ReadMSec() > maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDown ||
 			!maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].firstTimeUsed)) {
 		maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].firstTimeUsed = true;
 		isAttackingMask = true;
-		timerMaskAttack.Start(); 
+		maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDownTimer.Start();
 		desiredState = EntityStatePlayer::MASK_ATTACK;
 
 		// Restablece el cooldown de la máscara a su valor original después de usar la habilidad
@@ -2373,8 +2394,9 @@ void Player::PlayerMovement(float dt)
 			maskStats[primaryMask][Branches::Rama2][i].maskCoolDown = maskStats[primaryMask][Branches::Rama2][i].originalmaskCoolDown;
 		}
 	}
+	else printf("\rmaskCooldown: %f de cooldown total: %f", maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDownTimer.ReadMSec(), maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDown);
 
-	if (!(timerMaskAttack.ReadMSec() < maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDown && isAttackingMask)) {
+	if (!(maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDownTimer.ReadMSec() < maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDown && isAttackingMask)) {
 		isAttackingMask = false;
 		hasMaskAttacked = false;
 		if (mask1AttackSensor) {

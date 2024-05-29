@@ -37,12 +37,16 @@ bool Hud::Awake(pugi::xml_node config)
 
 	hudTexturePath = (char*)config.child("mainTexture").attribute("texturepath").as_string();
 	messageTexturePath = (char*)config.child("messageTexture").attribute("texturepath").as_string();
+	cdMaskTexturePath = (char*)config.child("cdMaskTexture").attribute("texturepath").as_string();
 
 	rectBarraVida = new SDL_Rect{ 269,6,259,16 };
 	rectFondoBarraVida = new SDL_Rect{ 0,2,267,23 };
 
 	rectFondoMascara = new SDL_Rect{ 0,37,101,102 };
 	rectFondoMascaraSecundaria = new SDL_Rect{ 110,43,90,90 };
+
+	rectCDMascaraPrimaria = new SDL_Rect{ 0,0,100,100 };
+	rectCDMascaraSecundaria = new SDL_Rect{ 0,0,100,100 };
 
 	rectFondoPociones = new SDL_Rect{ 110,43,90,90 };
 	rectPocionVida1 = new SDL_Rect{ 1,686,60,56 };
@@ -86,7 +90,11 @@ bool Hud::Awake(pugi::xml_node config)
 bool Hud::Start()
 {
 	hudTexture = app->tex->Load(hudTexturePath);
+
 	messageTexture = app->tex->Load(messageTexturePath);
+
+	cdPrimaryMaskTexture = app->tex->Load(cdMaskTexturePath);
+	cdSecondaryMaskTexture = app->tex->Load(cdMaskTexturePath);
 
 	/*Acquired_Item ai;
 	ai.lifeTimer.Start();
@@ -111,7 +119,40 @@ bool Hud::PreUpdate()
 // Called each loop iteration
 bool Hud::Update(float dt)
 {
+	if(app->entityManager->GetPlayer() != nullptr) 
+	{
+		// Primary mask
+		float maskCoolDownPrimary = app->entityManager->GetPlayer()->maskStats[app->entityManager->GetPlayer()->primaryMask][Branches::Rama2][ app->entityManager->GetPlayer()->maskLevels[app->entityManager->GetPlayer()->primaryMask][Branches::Rama2]].maskCoolDown;
+		float elapsedTimePrimary = app->entityManager->GetPlayer()->maskStats[app->entityManager->GetPlayer()->primaryMask][Branches::Rama2][app->entityManager->GetPlayer()->maskLevels[app->entityManager->GetPlayer()->primaryMask][Branches::Rama2]].maskCoolDownTimer.ReadMSec();
+		int alphaModPrimary = 0;
 
+		if (elapsedTimePrimary < maskCoolDownPrimary) {
+			float percentageRemainingPrimary = (maskCoolDownPrimary - elapsedTimePrimary) / maskCoolDownPrimary;
+			alphaModPrimary = 100 + (int)(100 * percentageRemainingPrimary);
+
+			if (alphaModPrimary > 200) {
+				alphaModPrimary = 200;
+			}
+		}
+
+		SDL_SetTextureAlphaMod(cdPrimaryMaskTexture, alphaModPrimary);
+
+		// Secondary mask
+		float maskCoolDownSecondary = app->entityManager->GetPlayer()->maskStats[app->entityManager->GetPlayer()->secondaryMask][Branches::Rama2][ app->entityManager->GetPlayer()->maskLevels[app->entityManager->GetPlayer()->secondaryMask][Branches::Rama2]].maskCoolDown;
+		float elapsedTimeSecondary = app->entityManager->GetPlayer()->maskStats[app->entityManager->GetPlayer()->secondaryMask][Branches::Rama2][app->entityManager->GetPlayer()->maskLevels[app->entityManager->GetPlayer()->secondaryMask][Branches::Rama2]].maskCoolDownTimer.ReadMSec();
+		int alphaModSecondary = 0;
+
+		if (elapsedTimeSecondary < maskCoolDownSecondary) {
+			float percentageRemainingSecondary = (maskCoolDownSecondary - elapsedTimeSecondary) / maskCoolDownSecondary;
+			alphaModSecondary = 100 + (int)(100 * percentageRemainingSecondary);
+
+			if (alphaModSecondary > 200) {
+				alphaModSecondary = 200;
+			}
+		}
+
+		SDL_SetTextureAlphaMod(cdSecondaryMaskTexture, alphaModSecondary);
+	}
 
 	//Item Acquired
 	for (int i = 0; i < acquired_Items.size(); i++) {
@@ -222,9 +263,12 @@ bool Hud::PostUpdate()
 
 	app->render->DrawTexture(hudTexture, 75, 15, SDL_FLIP_NONE, rectFondoMascaraSecundaria, 0);
 	app->render->DrawTexture(hudTexture, 75, 15, 0.79f,SDL_FLIP_NONE, &rectSecondaryMask, 0);
+	app->render->DrawTexture(cdSecondaryMaskTexture, 75, 15, 0.79f, SDL_FLIP_NONE, rectCDMascaraSecundaria, 0);
 	app->render->DrawTexture(hudTexture, 25, 40, SDL_FLIP_NONE, rectFondoMascara, 0);
 	app->render->DrawTexture(hudTexture, 25, 40, SDL_FLIP_NONE, &rectPrimaryMask, 0);
+	app->render->DrawTexture(cdPrimaryMaskTexture, 25, 40, SDL_FLIP_NONE, rectCDMascaraPrimaria, 0);
 	//Fin mascaras
+ 
 
 
 
@@ -288,6 +332,9 @@ bool Hud::CleanUp()
 
 	delete rectFondoMascara;
 	delete rectFondoMascaraSecundaria;
+
+	delete rectCDMascaraPrimaria;
+	delete rectCDMascaraSecundaria;
 
 	delete rectFondoPociones;
 	delete rectPocionVida1;
