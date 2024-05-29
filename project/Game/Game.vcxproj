@@ -203,6 +203,7 @@
     <ClCompile Include="Source\Scene_Menu.cpp" />
     <ClCompile Include="Source\Enemy_Shar.cpp" />
     <ClCompile Include="Source\Scene_Pueblo.cpp" />
+    <ClCompile Include="Source\Scene_Pueblo_Tutorial.cpp" />
     <ClCompile Include="Source\Scene_Testing.cpp" />
     <ClCompile Include="Source\Textures.cpp" />
     <ClCompile Include="Source\Timer.cpp" />
@@ -331,6 +332,7 @@
     <ClInclude Include="Source\Scene_Menu.h" />
     <ClInclude Include="Source\Enemy_Shar.h" />
     <ClInclude Include="Source\Scene_Pueblo.h" />
+    <ClInclude Include="Source\Scene_Pueblo_Tutorial.h" />
     <ClInclude Include="Source\Scene_Testing.h" />
     <ClInclude Include="Source\SwordInv.h" />
     <ClInclude Include="Source\Textures.h" />
