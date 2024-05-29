@@ -131,7 +131,7 @@ bool Menu_Equipo::PostUpdate()
 		else if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK2)
 		{
 			app->render->DrawTextBound("Musri", 280, 395, 200, {52,25,0},app->render->titleFont);
-			app->render->DrawTextBound("Dash Invisible", 270, 450, 200, {52,25,0},app->render->titleFont);
+			app->render->DrawTextBound("Invulnerabilidad", 270, 450, 200, {52,25,0},app->render->titleFont);
 			app->render->DrawTexture(mask2Texture, 470, 420, SDL_FLIP_NONE, 0, 0);
 		}
 		else if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK3)
@@ -144,13 +144,13 @@ bool Menu_Equipo::PostUpdate()
 		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK0)
 		{
 			app->render->DrawTextBound("Dinka", 678, 395, 200, {52,25,0},app->render->titleFont);
-			app->render->DrawTextBound("Rayo Magico", 660, 450, 200, {52,25,0},app->render->titleFont);
+			app->render->DrawTextBound("Daño Basico", 660, 450, 200, {52,25,0},app->render->titleFont);
 			app->render->DrawTexture(mask0Texture, 860, 420, SDL_FLIP_NONE, 0, 0);
 		}
 		else if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK1)
 		{
 			app->render->DrawTextBound("Inuit", 678, 395, 200, {52,25,0},app->render->titleFont);
-			app->render->DrawTextBound("Esfera Expansiva", 660, 450, 200, {52,25,0},app->render->titleFont);
+			app->render->DrawTextBound("Onda Dañina", 660, 450, 200, {52,25,0},app->render->titleFont);
 			app->render->DrawTexture(mask1Texture, 860, 420, SDL_FLIP_NONE, 0, 0);
 		}
 		else if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK2)
@@ -162,7 +162,7 @@ bool Menu_Equipo::PostUpdate()
 		else if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK3)
 		{
 			app->render->DrawTextBound("Surma", 678, 395, 200, {52,25,0},app->render->titleFont);
-			app->render->DrawTextBound("Mejora Interna", 660, 450, 200, {52,25,0},app->render->titleFont);
+			app->render->DrawTextBound("Ultima Vida", 660, 450, 200, {52,25,0},app->render->titleFont);
 			app->render->DrawTexture(mask3Texture, 860, 420, SDL_FLIP_NONE, 0, 0);
 		}
 	}
