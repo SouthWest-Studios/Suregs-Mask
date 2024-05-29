@@ -72,11 +72,6 @@ bool Scene_Pueblo_Tutorial::Start()
 
 	// L15: DONE 2: Instantiate a new GuiControlButton in the Scene_Pueblo_Tutorial
 
-	/*SDL_Rect btPos = { windowW / 2 - 60,20, 120,20};
-	gcButtom = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);*/
-	/*fPoint pos(784.0, 218.0);
-	app->psystem->AddEmiter(pos, EMITTER_TYPE_PURPLE_FLAME);*/
-
 	app->entityManager->Enable();
 
 	app->SaveRequest();
