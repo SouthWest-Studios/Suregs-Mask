@@ -6,10 +6,14 @@
 	<audio />
 	<:anonymous />
 	<:anonymous />
-	<scene_pueblo />
+	<arena_tutorial />
 	<entitymanager>
 		<entity_manager>
-			<doors />
+			<doors>
+				<door sceneLevel="-10" tpID="0" />
+				<door sceneLevel="-10" tpID="8" />
+				<door sceneLevel="-10" tpID="1" />
+			</doors>
 		</entity_manager>
 	</entitymanager>
 	<missionmanager />

@@ -7,6 +7,7 @@
 #include "Scene_Testing.h"
 #include "Scene_Pueblo.h"
 #include "Scene_Pueblo_Tutorial.h"
+#include "Scene_Arena_Tutorial.h"
 #include "ModuleFadeToBlack.h"
 #include "CommerceManager.h"
 #include "Window.h"
@@ -374,7 +375,7 @@ bool DialogManager::PostUpdate() {
 			}
 
 			if (dialogues.At(0)->data->tutorial != -1) {
-				/*app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_arena_tutorial);*/
+				app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_arena_tutorial);
 			}
 
 			dialogues.Del(dialogues.At(0));
@@ -403,7 +404,7 @@ bool DialogManager::PostUpdate() {
 			}
 
 			if (dialogues.At(0)->data->tutorial != -1) {
-				/*app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_arena_tutorial);*/
+				app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_arena_tutorial);
 			}
 			//Reiniciar varialbes de dialogo y quitar el dialogo actual de su lista
 			optionSelected = 0;

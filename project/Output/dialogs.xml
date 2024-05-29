@@ -1753,6 +1753,8 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 		<sentences>
 			<sentence type="choose" text="¿Estás listo para el combate de práctica?">
 				<option1 text="Sí, que empiece el combate.">
+					<!--CAMBIAR FRASE-->
+					<sentence text="Pues empecemos."/>
 					<tutorial id = "1"/>
 				</option1>
 
