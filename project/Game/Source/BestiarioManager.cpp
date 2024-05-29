@@ -513,7 +513,7 @@ bool BestiarioManager::Update(float dt)
 
 		}
 
-		if (app->input->GetButton(APP_EXIT) == KEY_DOWN && zoomIn == true) {
+		if ((app->input->GetButton(APP_EXIT) == KEY_DOWN || app->input->GetButton(BACK) == KEY_DOWN) && zoomIn == true) {
 			ListItem<Bestiario*>* item;
 			for (item = bestiario.start; item != NULL; item = item->next)
 			{

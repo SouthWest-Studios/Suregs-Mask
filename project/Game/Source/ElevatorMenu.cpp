@@ -94,7 +94,7 @@ bool ElevatorMenu::Update(float dt)
 		totalMazmorras = mazmorra + plus + 1;
 		
 		open = true;
-		if (app->input->GetButton(APP_EXIT) == KEY_DOWN) {
+		if (app->input->GetButton(APP_EXIT) == KEY_DOWN || app->input->GetButton(BACK) == KEY_DOWN) {
 			
 			abierto = false;
 			open = false;
