@@ -107,13 +107,21 @@ bool Boss_Igory::Update(float dt)
 	{
 		desiredState = EntityState_Boss_Igory::DEAD;
 	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32)
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 64)
 	{
 		desiredState = EntityState_Boss_Igory::ATTACKING_BASIC;
 	}
 	else if (playerInFight && currentState != EntityState_Boss_Igory::ATTACKING_BASIC)
 	{
 		desiredState = EntityState_Boss_Igory::RUNNING;
+
+		if (inAtack) {
+			if (atackCube != nullptr) {
+				app->physics->GetWorld()->DestroyBody(atackCube->body);
+				atackCube = nullptr;
+			}
+			inAtack = false;
+		}
 	}
 	else if (!playerInFight)
 	{
@@ -144,6 +152,9 @@ bool Boss_Igory::Update(float dt)
 		break;
 	}
 
+
+	showAnimation();
+	resetAnimation();
 	currentAnimation->Update();
 	return true;
 }
@@ -210,6 +221,49 @@ bool Boss_Igory::CleanUp()
 }
 
 
+void Boss_Igory::resetAnimation()
+{
+	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atq1_boss_Igory") {
+		if (atackCube != nullptr) {
+			app->physics->GetWorld()->DestroyBody(atackCube->body);
+			atackCube = nullptr;
+		}
+		inAtack = false;
+	}
+	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atq2_boss_Igory") {
+		if (atackCube != nullptr) {
+			app->physics->GetWorld()->DestroyBody(atackCube->body);
+			atackCube = nullptr;
+		}
+		inAtack = false;
+	}
+	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atq3_boss_Igory") {
+
+		if (atackCube != nullptr) {
+			app->physics->GetWorld()->DestroyBody(atackCube->body);
+			atackCube = nullptr;
+		}
+		inAtack = false;
+	}
+}
+
+void Boss_Igory::showAnimation()
+{
+	if (inAtack) {
+		if (attackTime == 0) {
+			currentAnimation = &atq1_boss_Igory;
+		}
+		else if (attackTime == 1) {
+			currentAnimation = &atq2_boss_Igory;
+		}
+		else if (attackTime == 2) {
+			currentAnimation = &atq3_boss_Igory;
+		}
+
+	}
+}
+
+
 
 void Boss_Igory::stateMachine(float dt, iPoint playerPos)
 {
@@ -229,18 +283,6 @@ void Boss_Igory::stateMachine(float dt, iPoint playerPos)
 		if (!inAtack) {
 			Attack(dt);
 		}
-
-		if (TimerColdDown(1)) {
-			if (atackCube != nullptr) {
-				app->physics->GetWorld()->DestroyBody(atackCube->body);
-				atackCube = nullptr;
-			}
-		}
-
-		if (TimerColdDown(2)) {
-			inAtack = false;
-		}
-
 
 		break;
 	case EntityState_Boss_Igory::ATTACKING_CHARGE:
@@ -273,9 +315,9 @@ void Boss_Igory::stateMachine(float dt, iPoint playerPos)
 
 void Boss_Igory::DoNothing(float dt)
 {
-	//currentAnimation = &idleAnim;
-	////printf("Osiris idle");
-	//pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
+	currentAnimation = &idle_boss_Igory;
+	//printf("Osiris idle");
+	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 
 }
 
@@ -289,23 +331,23 @@ void Boss_Igory::Chase(float dt, iPoint playerPos)
 
 void Boss_Igory::Attack(float dt)
 {
-	////printf("Osiris attacking");
-	//currentAnimation = &attackAnim;
-
 	attackTime++;
 	switch (attackTime)
 	{
 	case 1:
+		atq3_boss_Igory.Reset();
 		inAtack = true;
 		printf("\nataque1");
 		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
 		break;
 	case 2:
+		atq1_boss_Igory.Reset();
 		inAtack = true;
 		printf("\nataque2");
 		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
 		break;
 	case 3:
+		atq2_boss_Igory.Reset();
 		inAtack = true;
 		printf("\nataque3");
 		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
@@ -316,6 +358,7 @@ void Boss_Igory::Attack(float dt)
 		break;
 	}
 
+	atackTimeColdDown.Start();
 }
 
 
@@ -529,6 +572,7 @@ void Boss_Igory::OnEndCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	}
 }
+
 
 MapObject* Boss_Igory::GetCurrentRoom()
 {

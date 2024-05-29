@@ -57,13 +57,15 @@ public:
 	void Revive();
 	bool Bossfinding(float dt, iPoint playerPos);
 	void deleteCollision(PhysBody* phy);
-
 	float GetHealth() const;
 	void TakeDamage(float damage);
 	void stateMachine(float dt, iPoint playerPos);
 	bool TimerColdDown(float time);
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 	void OnEndCollision(PhysBody* physA, PhysBody* physB);
+	void resetAnimation();
+	void showAnimation();
+
 	//Veneno
 	void ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate);
 
@@ -142,7 +144,7 @@ private:
 	FASE_Igory fase;
 
 	//Start
-	bool playerInFight = false; 
+	bool playerInFight = true; 
 
 
 	//ataque
