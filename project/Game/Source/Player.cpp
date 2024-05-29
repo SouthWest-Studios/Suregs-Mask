@@ -192,6 +192,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK1][Branches::Modifiers][1].movementSpeedModifier = 10;
 	maskStats[Mask::MASK1][Branches::Modifiers][1].attackDamageModifier = 10;
 	maskStats[Mask::MASK1][Branches::Modifiers][1].attackSpeedModifier = 0;
+	
 
 	maskStats[Mask::MASK1][Branches::Rama1][1].maskDamage = 120;
 
@@ -1255,7 +1256,7 @@ void Player::ChangeMask() {
 		currentStats.currentHealth = (currentStats.currentHealth / oldMaxHealth) * currentStats.maxHealth;
 
 
-		cdTimerAttackMS = 100000 / currentStats.attackSpeed;
+		cdTimerAttackMS = 30000 / currentStats.attackSpeed;
 
 		timerChangeMask.Start();
 
@@ -2520,6 +2521,7 @@ void Player::UpdateStats() {
 	baseStats.maxHealth = 100 + armorPerLevel[app->inventoryManager->armorLevel];
 	baseStats.currentHealth = 100 + armorPerLevel[app->inventoryManager->armorLevel];
 	baseStats.attackDamage = 100 + attackDamagePerLevel[app->inventoryManager->swordLevel];
+	
 
 	if (changeLife) {
 		baseStats.currentHealth = baseStats.maxHealth;
