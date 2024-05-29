@@ -26,6 +26,7 @@ class Scene_GameOver;
 class Scene_testing;
 class Scene_Pueblo;
 class Scene_Pueblo_Tutorial;
+class Scene_Arena_Tutorial;
 class Scene_Mazmorra0;
 class Scene_Mazmorra1;
 class Scene_Mazmorra2;
@@ -143,6 +144,7 @@ public:
 	Scene_testing* scene_testing;
 	Scene_Pueblo* scene_pueblo;
 	Scene_Pueblo_Tutorial* scene_pueblo_tutorial;
+	Scene_Arena_Tutorial* scene_arena_tutorial;
 
 	Scene_Mazmorra0* scene_mazmorra0;
 	Scene_Mazmorra1* scene_mazmorra1;

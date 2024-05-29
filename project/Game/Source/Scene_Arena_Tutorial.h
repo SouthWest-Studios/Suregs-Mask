@@ -1,5 +1,5 @@
-#ifndef __SCENE_PUEBLO_TUTORIAL_H__
-#define __SCENE_PUEBLO_TUTORIAL_H__
+#ifndef __SCENE_ARENA_TUTORIAL_H__
+#define __SCENE_ARENA_TUTORIAL_H__
 
 #include "Module.h"
 #include "Player.h"
@@ -12,14 +12,14 @@
 
 struct SDL_Texture;
 
-class Scene_Pueblo_Tutorial : public Module
+class Scene_Arena_Tutorial : public Module
 {
 public:
 
-	Scene_Pueblo_Tutorial(App* app, bool start_enabled = false);
+	Scene_Arena_Tutorial(App* app, bool start_enabled = false);
 
 	// Destructor
-	virtual ~Scene_Pueblo_Tutorial();
+	virtual ~Scene_Arena_Tutorial();
 
 	// Called before render is available
 	bool Awake(pugi::xml_node config);
@@ -63,4 +63,4 @@ public:
 	PhysBody* pbody;
 };
 
-#endif // __SCENE_PUEBLO_TUTORIAL_H__
+#endif // __SCENE_ARENA_TUTORIAL_H__

@@ -85,6 +85,8 @@ public:
 
 	int comer = -1;
 
+	int tutorial = -1;
+
 	TTF_Font* font;
 
 	DialogEvent* event_ = nullptr;

@@ -7,6 +7,7 @@
 #include "Scene_Menu.h"
 #include "Scene_Testing.h"
 #include "Scene_Pueblo.h"
+#include "Scene_Pueblo_Tutorial.h"
 #include "ModuleFadeToBlack.h"
 #include "Optick/include/optick.h"
 #include "Menu.h"
@@ -418,7 +419,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		}*/
 	case 20:
 		if (app->fadeToBlack->currentStep == 0) {
-			app->fadeToBlack->FadeToBlack(this, app->scene_pueblo);
+			app->fadeToBlack->FadeToBlack(this, app->scene_pueblo_tutorial);
 			app->menu->active = true;
 			app->guiManager->pointerId = 100;
 			app->savedGame = 1;
@@ -431,7 +432,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 21:
 		if (app->fadeToBlack->currentStep == 0) {
-			app->fadeToBlack->FadeToBlack(this, app->scene_pueblo);
+			app->fadeToBlack->FadeToBlack(this, app->scene_pueblo_tutorial);
 			app->menu->active = true;
 			app->guiManager->pointerId = 100;
 			app->savedGame = 2;
@@ -444,7 +445,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 22:
 		if (app->fadeToBlack->currentStep == 0) {
-			app->fadeToBlack->FadeToBlack(this, app->scene_pueblo);
+			app->fadeToBlack->FadeToBlack(this, app->scene_pueblo_tutorial);
 			app->menu->active = true;
 			app->guiManager->pointerId = 100;
 			app->savedGame = 3;

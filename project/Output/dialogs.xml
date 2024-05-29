@@ -1763,9 +1763,12 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 			</sentence>
 			
 			<sentence type="choose" text="¿Estás listo para el combate de práctica?">
-				<option1 text="Sí, que empiece el combate."/>
+				<option1 text="Sí, que empiece el combate.">
+					<tutorial id = "1"/>
+				</option1>
 
 				<option2 text="Todavía no."/>
+			
 			</sentence>
 		</sentences>
 	</dialog>
