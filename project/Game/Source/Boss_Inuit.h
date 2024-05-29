@@ -95,7 +95,6 @@ public:
 	int attackTime;
 	bool getBossArea = true;
 	//Revivir
-
 	Timer atackTimeColdDown;
 
 
@@ -149,7 +148,7 @@ private:
 	Animation SPosition;
 	SDL_Rect* spritePositions = nullptr;
 
-	FASE fase;
+	FASE fase = FASE::FASE_ONE;
 	bool faseTwo = false;
 	int faseCount;
 

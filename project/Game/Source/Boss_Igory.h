@@ -57,19 +57,17 @@ public:
 	void Revive();
 	bool Bossfinding(float dt, iPoint playerPos);
 	void deleteCollision(PhysBody* phy);
-	void SetPlayer(Player* player);
 	float GetHealth() const;
 	void TakeDamage(float damage);
-	void atackBoomerang(BTPDirection direccion);
-	BTPDirection calculate_direction();
-	std::string directionToString(BTPDirection direction);
 	void stateMachine(float dt, iPoint playerPos);
-	void shock_wave(int posX, int posY, float shockSpeed, float size, int tag);
-	void ulti_Atack();
 	bool TimerColdDown(float time);
-	bool waveTimerColdDown(float time);
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 	void OnEndCollision(PhysBody* physA, PhysBody* physB);
+	void resetAnimation();
+	void showAnimation();
+	bool AtqColdDown();
+
+	
 	//Veneno
 	void ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate);
 
@@ -88,15 +86,13 @@ public:
 	float health;
 	float maxHealth;
 	float attackDamage;
-	Timer invulnerabilityTimer;
+	
 
 	float viewDistance;
 	float attackDistance;
 	int attackTime;
 	bool getBossArea = true;
-	//Revivir
-
-	Timer atackTimeColdDown;
+	
 
 
 private:
@@ -106,9 +102,7 @@ private:
 	//physi body
 	PhysBody* areaSensor = nullptr;
 	PhysBody* atackCube = nullptr;
-	PhysBody* atackBMR = nullptr;
-	//PhysBody* atackShockWave = nullptr;
-	std::unordered_map<int, PhysBody*> shockWaves;
+
 
 
 	//animacion
@@ -151,49 +145,25 @@ private:
 
 	FASE_Igory fase;
 
+	//Start
+	bool playerInFight = true; 
+
 
 	//ataque
 	float ataqueTimeClodDown = 0;
 	bool inAtack = false;
-	bool checkAtackBMR = false;
-	float bmrSpeed;
-	bool bmrBack = false;
-	bool inbmrAtack = false;
-
-	BTPDirection playerDireccion;
-	std::string printplayerDireccion;
-
-
-	//shockWave
-	bool waveIsMax = false;
-	bool waveFinishi = true;
-	Timer waveTime;
-	float waveTimeClodDown = 0;
-	int distance = 0;
-	bool goUseWave = false;
-	//ulti
-	bool ultDef = false;
-	bool saveOriginPos = true;
-	bool wave0Finishing = false;
-	bool wave1Finishing = false;
-	bool wave2Finishing = false;
-	bool ulti_fishing = false;
-	bool inWave = false;
-	bool waveTimeStart = false;
-	bool useUlt = false;
-	bool goUseUlt = false;
+	bool ataqColdDown = false;
+	bool startColdDown = false;
+	bool checkColdDown = false;
+	bool atqGoNext = true;
+	Timer atackTimeColdDown;
 
 	//fase
+	float lifeLow80;
 	float lifeLow40;
-	float lifeLow5;
 	bool dontMove = false;
-
-	const float reviveTime = 5.0f;
 	bool isDead = false;
-	bool isReviving = false;
-	bool hasRevived = false;
-	bool tempo = false;
-	Timer reviveTimer;
+
 	//Veneno
 	float poisonTimer = 0.0f; // Tiempo desde que se aplic� el veneno
 	float poisonDuration = 0.0f; // Duraci�n total del veneno
@@ -205,16 +175,20 @@ private:
 public:
 
 	Branch_Igory transitionTable[static_cast<int>(EntityState_Boss_Igory::STATE_COUNT)][static_cast<int>(EntityState_Boss_Igory::STATE_COUNT)] = {
-		//				IDLE						RUNNING								ATTACKING_BASIC								ATTACKING_DISTANCE									DEAD							DASHI						FASE_CHANGE								NONE
-		{ {EntityState_Boss_Igory::IDLE}, {EntityState_Boss_Igory::RUNNING}, {EntityState_Boss_Igory::ATTACKING_BASIC},{EntityState_Boss_Igory::ATTACKING_DISTANCE}, {EntityState_Boss_Igory::DEAD}, {EntityState_Boss_Igory::DASHI}, {EntityState_Boss_Igory::FASE_CHANGE}, {EntityState_Boss_Igory::IDLE}}, // IDLE
-		{ {EntityState_Boss_Igory::IDLE}, {EntityState_Boss_Igory::RUNNING}, {EntityState_Boss_Igory::ATTACKING_BASIC},{EntityState_Boss_Igory::ATTACKING_DISTANCE}, {EntityState_Boss_Igory::DEAD}, {EntityState_Boss_Igory::DASHI}, {EntityState_Boss_Igory::FASE_CHANGE}, {EntityState_Boss_Igory::IDLE}}, // RUNNING
-		{ {EntityState_Boss_Igory::IDLE}, {EntityState_Boss_Igory::RUNNING}, {EntityState_Boss_Igory::ATTACKING_BASIC},{EntityState_Boss_Igory::ATTACKING_DISTANCE}, {EntityState_Boss_Igory::DEAD}, {EntityState_Boss_Igory::DASHI}, {EntityState_Boss_Igory::FASE_CHANGE}, {EntityState_Boss_Igory::IDLE}}, // ATTACKING_BASIC
-		{ {EntityState_Boss_Igory::IDLE}, {EntityState_Boss_Igory::RUNNING}, {EntityState_Boss_Igory::ATTACKING_BASIC},{EntityState_Boss_Igory::ATTACKING_DISTANCE}, {EntityState_Boss_Igory::DEAD}, {EntityState_Boss_Igory::DASHI}, {EntityState_Boss_Igory::FASE_CHANGE}, {EntityState_Boss_Igory::IDLE}}, // ATTACKING_DISTANCE
-		{ {EntityState_Boss_Igory::IDLE}, {EntityState_Boss_Igory::RUNNING}, {EntityState_Boss_Igory::ATTACKING_BASIC},{EntityState_Boss_Igory::ATTACKING_DISTANCE}, {EntityState_Boss_Igory::DEAD}, {EntityState_Boss_Igory::DASHI}, {EntityState_Boss_Igory::FASE_CHANGE}, {EntityState_Boss_Igory::IDLE}}, // DEAD
-		{ {EntityState_Boss_Igory::IDLE}, {EntityState_Boss_Igory::RUNNING}, {EntityState_Boss_Igory::ATTACKING_BASIC},{EntityState_Boss_Igory::ATTACKING_DISTANCE}, {EntityState_Boss_Igory::DEAD}, {EntityState_Boss_Igory::DASHI}, {EntityState_Boss_Igory::FASE_CHANGE}, {EntityState_Boss_Igory::IDLE}}, // DASHI
-		{ {EntityState_Boss_Igory::IDLE}, {EntityState_Boss_Igory::RUNNING}, {EntityState_Boss_Igory::ATTACKING_BASIC},{EntityState_Boss_Igory::ATTACKING_DISTANCE}, {EntityState_Boss_Igory::DEAD}, {EntityState_Boss_Igory::DASHI}, {EntityState_Boss_Igory::FASE_CHANGE}, {EntityState_Boss_Igory::IDLE}}, // FASE_CHANGE
-		{ {EntityState_Boss_Igory::IDLE}, {EntityState_Boss_Igory::NONE}, {EntityState_Boss_Igory::NONE},{EntityState_Boss_Igory::NONE}, {EntityState_Boss_Igory::NONE}, {EntityState_Boss_Igory::NONE}, {EntityState_Boss_Igory::NONE}, {EntityState_Boss_Igory::IDLE}} // NONE
+		//			IDLE,								RUNNING,							ATTACKING_BASIC,							ATTACKING_CHARGE,						ATTACKING_DASHI,							DEAD,							FASE_CHANGE,						TAKEHIT,							HEAL,							NONE,
+		{ {EntityState_Boss_Igory::IDLE}, {EntityState_Boss_Igory::RUNNING}, {EntityState_Boss_Igory::ATTACKING_BASIC},{EntityState_Boss_Igory::ATTACKING_CHARGE}, {EntityState_Boss_Igory::ATTACKING_DASHI}, {EntityState_Boss_Igory::DEAD}, {EntityState_Boss_Igory::FASE_CHANGE}, {EntityState_Boss_Igory::TAKEHIT}, {EntityState_Boss_Igory::HEAL}, {EntityState_Boss_Igory::IDLE}}, // IDLE
+		{ {EntityState_Boss_Igory::IDLE}, {EntityState_Boss_Igory::RUNNING}, {EntityState_Boss_Igory::ATTACKING_BASIC},{EntityState_Boss_Igory::ATTACKING_CHARGE}, {EntityState_Boss_Igory::ATTACKING_DASHI}, {EntityState_Boss_Igory::DEAD}, {EntityState_Boss_Igory::FASE_CHANGE}, {EntityState_Boss_Igory::TAKEHIT}, {EntityState_Boss_Igory::HEAL}, {EntityState_Boss_Igory::IDLE}}, // RUNNING
+		{ {EntityState_Boss_Igory::IDLE}, {EntityState_Boss_Igory::RUNNING}, {EntityState_Boss_Igory::ATTACKING_BASIC},{EntityState_Boss_Igory::ATTACKING_CHARGE}, {EntityState_Boss_Igory::ATTACKING_DASHI}, {EntityState_Boss_Igory::DEAD}, {EntityState_Boss_Igory::FASE_CHANGE}, {EntityState_Boss_Igory::TAKEHIT}, {EntityState_Boss_Igory::HEAL}, {EntityState_Boss_Igory::IDLE}}, // ATTACKING_BASIC
+		{ {EntityState_Boss_Igory::IDLE}, {EntityState_Boss_Igory::RUNNING}, {EntityState_Boss_Igory::ATTACKING_BASIC},{EntityState_Boss_Igory::ATTACKING_CHARGE}, {EntityState_Boss_Igory::ATTACKING_DASHI}, {EntityState_Boss_Igory::DEAD}, {EntityState_Boss_Igory::FASE_CHANGE}, {EntityState_Boss_Igory::TAKEHIT}, {EntityState_Boss_Igory::HEAL}, {EntityState_Boss_Igory::IDLE}}, // ATTACKING_CHARGE
+		{ {EntityState_Boss_Igory::IDLE}, {EntityState_Boss_Igory::RUNNING}, {EntityState_Boss_Igory::ATTACKING_BASIC},{EntityState_Boss_Igory::ATTACKING_CHARGE}, {EntityState_Boss_Igory::ATTACKING_DASHI}, {EntityState_Boss_Igory::DEAD}, {EntityState_Boss_Igory::FASE_CHANGE}, {EntityState_Boss_Igory::TAKEHIT}, {EntityState_Boss_Igory::HEAL}, {EntityState_Boss_Igory::IDLE}}, // ATTACKING_DASHI
+		{ {EntityState_Boss_Igory::IDLE}, {EntityState_Boss_Igory::RUNNING}, {EntityState_Boss_Igory::ATTACKING_BASIC},{EntityState_Boss_Igory::ATTACKING_CHARGE}, {EntityState_Boss_Igory::ATTACKING_DASHI}, {EntityState_Boss_Igory::DEAD}, {EntityState_Boss_Igory::FASE_CHANGE}, {EntityState_Boss_Igory::TAKEHIT}, {EntityState_Boss_Igory::HEAL}, {EntityState_Boss_Igory::IDLE}}, // DEAD
+		{ {EntityState_Boss_Igory::IDLE}, {EntityState_Boss_Igory::RUNNING}, {EntityState_Boss_Igory::ATTACKING_BASIC},{EntityState_Boss_Igory::ATTACKING_CHARGE}, {EntityState_Boss_Igory::ATTACKING_DASHI}, {EntityState_Boss_Igory::DEAD}, {EntityState_Boss_Igory::FASE_CHANGE}, {EntityState_Boss_Igory::TAKEHIT}, {EntityState_Boss_Igory::HEAL}, {EntityState_Boss_Igory::IDLE}}, // FASE_CHANGE
+		{ {EntityState_Boss_Igory::IDLE}, {EntityState_Boss_Igory::RUNNING}, {EntityState_Boss_Igory::ATTACKING_BASIC},{EntityState_Boss_Igory::ATTACKING_CHARGE}, {EntityState_Boss_Igory::ATTACKING_DASHI}, {EntityState_Boss_Igory::DEAD}, {EntityState_Boss_Igory::FASE_CHANGE}, {EntityState_Boss_Igory::TAKEHIT}, {EntityState_Boss_Igory::HEAL}, {EntityState_Boss_Igory::IDLE}}, // TAKEHIT
+		{ {EntityState_Boss_Igory::IDLE}, {EntityState_Boss_Igory::RUNNING}, {EntityState_Boss_Igory::ATTACKING_BASIC},{EntityState_Boss_Igory::ATTACKING_CHARGE}, {EntityState_Boss_Igory::ATTACKING_DASHI}, {EntityState_Boss_Igory::DEAD}, {EntityState_Boss_Igory::FASE_CHANGE}, {EntityState_Boss_Igory::TAKEHIT}, {EntityState_Boss_Igory::HEAL}, {EntityState_Boss_Igory::IDLE}}, // HEAL
+		{ {EntityState_Boss_Igory::IDLE}, {EntityState_Boss_Igory::RUNNING}, {EntityState_Boss_Igory::ATTACKING_BASIC},{EntityState_Boss_Igory::ATTACKING_CHARGE}, {EntityState_Boss_Igory::ATTACKING_DASHI}, {EntityState_Boss_Igory::DEAD}, {EntityState_Boss_Igory::FASE_CHANGE}, {EntityState_Boss_Igory::TAKEHIT}, {EntityState_Boss_Igory::HEAL}, {EntityState_Boss_Igory::IDLE}} // NONE
+		
 	};
+
 
 	EntityState_Boss_Igory currentState = state;
 	EntityState_Boss_Igory desiredState = nextState;

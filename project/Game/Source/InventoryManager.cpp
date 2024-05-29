@@ -1242,22 +1242,22 @@ bool InventoryManager::Update(float dt)
 	}
 	
 	//DESCOMENTAR CUANDO SE HAYA IMPLEMENTADO EL TUTORIAL CON SUS BOOLS
-	// if(/*entrenamiento acabado*/)
-	// {
-	// 	storyLevel = app->ascensor->totalMazmorras + 2;
-	// }
-	// else if(/*entrenamiento no acabado*/)
-	// {
-	// 	storyLevel = 2;
-	// }
-	// else if(/*Entrenamiento no empezado*/)
-	// {
-	// 	storyLevel = 1;
-	// }
+	 //if(app->tutorialHasFinished)
+	 //{
+	 //	storyLevel = app->ascensor->totalMazmorras + 2;
+	 //}
+	 //else if(app->tutorialHasFinished == false)
+	 //{
+	 //	storyLevel = 2;
+	 //}
+	 //else if(app->tutorialHasStarted == false)
+	 //{
+	 //	storyLevel = 1;
+	 //}
 	//DESCOMENTAR CUANDO SE HAYA IMPLEMENTADO EL TUTORIAL CON SUS BOOLS
 
 	//BORRAR LA LINEA DE ABAJO CUANDO SE HAYA IMPLEMENTADO EL TUTORIAL CON SUS BOOLS ARRIBA
-	storyLevel = app->ascensor->totalMazmorras;
+	/*storyLevel = app->ascensor->totalMazmorras;*/
 	//printf("storyLevel %d\n", storyLevel);
 	//BORRAR LA LINEA DE ARRIBA CUANDO SE HAYA IMPLEMENTADO EL TUTORIAL CON SUS BOOLS ARRIBA
 

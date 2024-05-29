@@ -83,11 +83,10 @@ bool Boss_Igory::Start() {
 	attackDamage = config.attribute("attackDamage").as_float();
 	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();
-	bmrSpeed = 80;
 	//FASE_Igory
 	fase = FASE_Igory::FASE_ONE;
+	lifeLow40 = maxHealth * 0.8;
 	lifeLow40 = maxHealth * 0.4;
-	lifeLow5 = maxHealth * 0.05;
 
 	room = GetCurrentRoom();
 
@@ -96,28 +95,46 @@ bool Boss_Igory::Start() {
 
 bool Boss_Igory::Update(float dt)
 {
-	//printf("Jefe444");
 	OPTICK_EVENT();
 	//Pone el sensor del cuerpo en su posicion
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
 
+
+
 	if (health <= 0)
 	{
 		desiredState = EntityState_Boss_Igory::DEAD;
 	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32)
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 64 && ataqColdDown)
+	{
+		desiredState = EntityState_Boss_Igory::IDLE;
+	}
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 64 && ataqColdDown == false)
 	{
 		desiredState = EntityState_Boss_Igory::ATTACKING_BASIC;
 	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance * 32 && currentState != EntityState_Boss_Igory::ATTACKING_BASIC)
+	else if (playerInFight && currentState != EntityState_Boss_Igory::ATTACKING_BASIC)
 	{
 		desiredState = EntityState_Boss_Igory::RUNNING;
+
+		if (inAtack) {
+			if (atackCube != nullptr) {
+				app->physics->GetWorld()->DestroyBody(atackCube->body);
+				atackCube = nullptr;
+			}
+			inAtack = false;
+			atqGoNext = true;
+		}
+	}
+	else if (!playerInFight)
+	{
+		desiredState = EntityState_Boss_Igory::IDLE;
 	}
 	else
 	{
-		desiredState = EntityState_Boss_Igory::RUNNING;
+		desiredState = EntityState_Boss_Igory::IDLE;
 	}
 	stateMachine(dt, playerPos);
 
@@ -125,9 +142,8 @@ bool Boss_Igory::Update(float dt)
 		fase = FASE_Igory::FASE_CHANGE;
 	}
 
-	if (health <= lifeLow5 && !useUlt) {
-		useUlt = true;
-		goUseUlt = true;
+	if (checkColdDown) {
+		AtqColdDown();
 	}
 
 
@@ -144,6 +160,9 @@ bool Boss_Igory::Update(float dt)
 		break;
 	}
 
+
+	showAnimation();
+	resetAnimation();
 	currentAnimation->Update();
 	return true;
 }
@@ -199,16 +218,7 @@ bool Boss_Igory::CleanUp()
 	if (areaSensor != nullptr) {
 		app->physics->GetWorld()->DestroyBody(areaSensor->body);
 	}
-	if (atackBMR != nullptr) {
-		app->physics->GetWorld()->DestroyBody(atackBMR->body);
-	}
 
-	if (!shockWaves.empty()) {
-		for (auto& pair : shockWaves) {
-			deleteCollision(pair.second);
-		}
-		shockWaves.clear();
-	}
 	app->tex->UnLoad(texture);
 	lastPath.Clear();
 
@@ -216,6 +226,82 @@ bool Boss_Igory::CleanUp()
 	delete spritePositions;
 
 	return true;
+}
+
+
+void Boss_Igory::resetAnimation()
+{
+	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atq1_boss_Igory") {
+		if (atackCube != nullptr) {
+			app->physics->GetWorld()->DestroyBody(atackCube->body);
+			atackCube = nullptr;
+		}
+		inAtack = false;
+		startColdDown = true;
+		checkColdDown = true;
+	}
+	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atq2_boss_Igory") {
+		if (atackCube != nullptr) {
+			app->physics->GetWorld()->DestroyBody(atackCube->body);
+			atackCube = nullptr;
+		}
+		inAtack = false;
+		startColdDown = true;
+		checkColdDown = true;
+	}
+	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atq3_boss_Igory") {
+
+		if (atackCube != nullptr) {
+			app->physics->GetWorld()->DestroyBody(atackCube->body);
+			atackCube = nullptr;
+		}
+		inAtack = false;
+		startColdDown = true;
+		checkColdDown = true;
+	}
+}
+
+void Boss_Igory::showAnimation()
+{
+	if (inAtack) {
+		if (attackTime == 0) {
+			currentAnimation = &atq1_boss_Igory;
+		}
+		else if (attackTime == 1) {
+			currentAnimation = &atq2_boss_Igory;
+		}
+		else if (attackTime == 2) {
+			currentAnimation = &atq3_boss_Igory;
+		}
+
+	}
+}
+
+bool Boss_Igory::AtqColdDown()
+{
+	if (startColdDown) {
+		printf("\nStart");
+		atackTimeColdDown.Start();
+		startColdDown = false;
+	}
+
+	if (atackTimeColdDown.ReadMSec() >= 500) {
+		printf("\nEnd");
+		ataqColdDown = false;
+		checkColdDown = false;
+		startColdDown = true;
+		atqGoNext = true;
+		return true;
+	}
+	else
+	{
+		//printf("\nColdDown");
+		ataqColdDown = true;
+		return false;
+	}
+
+	atackTimeColdDown.Start();
+
 }
 
 
@@ -235,36 +321,25 @@ void Boss_Igory::stateMachine(float dt, iPoint playerPos)
 
 		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero); //No se mueve mientras ataca
 
-
 		if (!inAtack) {
 			Attack(dt);
 		}
 
-		if (TimerColdDown(1)) {
-			if (atackCube != nullptr) {
-				app->physics->GetWorld()->DestroyBody(atackCube->body);
-				atackCube = nullptr;
-			}
-		}
-
-		if (TimerColdDown(2) && inbmrAtack == false) {
-			inAtack = false;
-		}
-
-
 		break;
-	case EntityState_Boss_Igory::ATTACKING_DISTANCE:
+	case EntityState_Boss_Igory::ATTACKING_CHARGE:
+		break;
+	case EntityState_Boss_Igory::ATTACKING_DASHI:
 		break;
 	case EntityState_Boss_Igory::DEAD:
 		Die();
 		break;
-	case EntityState_Boss_Igory::DASHI:
-		break;
-
 	case EntityState_Boss_Igory::FASE_CHANGE:
 		break;
+	case EntityState_Boss_Igory::TAKEHIT:
+		break;
+	case EntityState_Boss_Igory::HEAL:
+		break;
 	case EntityState_Boss_Igory::NONE:
-
 		desiredState = EntityState_Boss_Igory::IDLE;
 		break;
 
@@ -273,97 +348,6 @@ void Boss_Igory::stateMachine(float dt, iPoint playerPos)
 	}
 	currentState = nextState;
 
-}
-
-
-
-void Boss_Igory::shock_wave(int posX, int posY, float shockSpeed, float maxSize, int tag)
-{
-
-	static std::unordered_map<int, float> shockSizes;
-
-	auto it = shockWaves.find(tag);
-	if (it != shockWaves.end()) {
-		deleteCollision(it->second);
-		shockWaves.erase(it);
-	}
-
-	float& shockSize = shockSizes[tag];
-
-	if (shockSize < maxSize) {
-		shockSize += shockSpeed;
-	}
-	else {
-		waveIsMax = true;
-	}
-
-	if (!waveIsMax) {
-		PhysBody* newShockWave = app->physics->CreateCircle(posX, posY, shockSize, DYNAMIC, true);
-		newShockWave->entity = this;
-		newShockWave->listener = this;
-		newShockWave->ctype = ColliderType::UNKNOWN;
-		shockWaves[tag] = newShockWave;
-		inWave = true;
-	}
-	else {
-		//waveFinishi = true;
-		inWave = false;
-		if (tag == 0) {
-			if (!ultDef) {
-				printf("3");
-				waveTime.Start();
-			}
-		}
-
-		if (tag == 1 || tag == 2 || tag == 3 || tag == 4) {
-			wave0Finishing = true;
-		}
-		if (tag == 5 || tag == 6 || tag == 7 || tag == 9) {
-			wave1Finishing = true;
-		}
-		if (tag == 9 || tag == 10) {
-			wave2Finishing = true;
-		}
-		shockSize = 0;
-		waveIsMax = false;
-	}
-}
-
-
-void Boss_Igory::ulti_Atack()
-{
-	//TimerColdDown(10);
-	//TimerColdDown(5);
-
-	if (!wave0Finishing) {
-		shock_wave(originalWavePosition.x - 1000, originalWavePosition.y - 250, 3, 400, 1);
-		shock_wave(originalWavePosition.x - 1000, originalWavePosition.y + 250, 3, 400, 2);
-		shock_wave(originalWavePosition.x + 1000, originalWavePosition.y - 250, 3, 400, 3);
-		shock_wave(originalWavePosition.x + 1000, originalWavePosition.y + 250, 3, 400, 4);
-	}
-
-	if (waveTimerColdDown(1) && !wave1Finishing) {
-		shock_wave(originalWavePosition.x - 500, originalWavePosition.y - 250, 3, 400, 5);
-		shock_wave(originalWavePosition.x - 500, originalWavePosition.y + 250, 3, 400, 6);
-		shock_wave(originalWavePosition.x + 500, originalWavePosition.y - 250, 3, 400, 7);
-		shock_wave(originalWavePosition.x + 500, originalWavePosition.y + 250, 3, 400, 8);
-	}
-
-	if (waveTimerColdDown(2) && !wave2Finishing) {
-		shock_wave(originalWavePosition.x, originalWavePosition.y - 250, 3, 400, 9);
-		shock_wave(originalWavePosition.x, originalWavePosition.y + 250, 3, 400, 10);
-	}
-
-	if (wave0Finishing && wave1Finishing && wave2Finishing) {
-		printf("\nUltiFishing");
-		wave0Finishing = false;
-		wave1Finishing = false;
-		wave2Finishing = false;
-		waveTimeStart = false;
-		waveTime.Start();
-		ultDef = false;
-
-	}
 
 }
 
@@ -372,9 +356,9 @@ void Boss_Igory::ulti_Atack()
 
 void Boss_Igory::DoNothing(float dt)
 {
-	//currentAnimation = &idleAnim;
-	////printf("Osiris idle");
-	//pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
+	currentAnimation = &idle_boss_Igory;
+	//printf("Osiris idle");
+	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 
 }
 
@@ -388,94 +372,40 @@ void Boss_Igory::Chase(float dt, iPoint playerPos)
 
 void Boss_Igory::Attack(float dt)
 {
-	////printf("Osiris attacking");
-	//currentAnimation = &attackAnim;
-
-	attackTime++;
+	if (atqGoNext) {
+		attackTime++;
+		atqGoNext = false;
+	}
+	printf("\nattackTime: %d", attackTime);
 	switch (attackTime)
 	{
 	case 1:
+		atq3_boss_Igory.Reset();
 		inAtack = true;
 		printf("\nataque1");
-		bmrBack = false;
 		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
 		break;
 	case 2:
+		atq1_boss_Igory.Reset();
 		inAtack = true;
 		printf("\nataque2");
 		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
 		break;
 	case 3:
+		atq2_boss_Igory.Reset();
 		inAtack = true;
 		printf("\nataque3");
 		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
 		attackTime = 0;
 		break;
 
-		/*case 4:
-			inAtack = true;
-			printf("\nataque4");
-			playerDireccion = calculate_direction();
-			printplayerDireccion = directionToString(playerDireccion);
-			printf("\n PlayerDireccion %s", printplayerDireccion.c_str());
-			atackBMR = app->physics->CreateCircle(position.x, position.y, 120, DYNAMIC, true);
-			atackBMR->entity = this;
-			atackBMR->listener = this;
-			atackBMR->ctype = ColliderType::ATACKBMR;
-			checkAtackBMR = true;
-			inbmrAtack = true;
-			attackTime = 0;
-
-			break;*/
-
 	default:
 		break;
 	}
 
-	atackTimeColdDown.Start();
 
 }
 
-void Boss_Igory::atackBoomerang(BTPDirection direccion)
-{
-	b2Vec2 force(0.0f, 0.0f);
-
-	switch (direccion) {
-	case BTPDirection::LEFT:
-		force.x = -bmrSpeed;
-		break;
-	case BTPDirection::RIGHT:
-		force.x = bmrSpeed;
-		break;
-	case BTPDirection::UP:
-		force.y = -bmrSpeed;
-		break;
-	case BTPDirection::DOWN:
-		force.y = bmrSpeed;
-		break;
-	case BTPDirection::UPLEFT:
-		force.y = -bmrSpeed;
-		force.x = -bmrSpeed;
-		break;
-	case BTPDirection::UPRIGHT:
-		force.y = -bmrSpeed;
-		force.x = bmrSpeed;
-		break;
-	case BTPDirection::DOWNLEFT:
-		force.y = bmrSpeed;
-		force.x = -bmrSpeed;
-		break;
-	case BTPDirection::DOWNRIGHT:
-		force.y = bmrSpeed;
-		force.x = bmrSpeed;
-		break;
-	default:
-		force.y = bmrSpeed;
-	}
-	if (atackBMR != nullptr) {
-		atackBMR->body->ApplyForceToCenter(force, true);
-	}
-}
 
 void Boss_Igory::Die() {
 
@@ -548,64 +478,45 @@ bool Boss_Igory::Bossfinding(float dt, iPoint playerPosP)
 	iPoint playerPos = app->map->WorldToMap(playerPosP.x, playerPosP.y);
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
 
-	//printf("\nBossArea:%f", dist(bossArea, enemyPos));
-	//printf("\nEmemyPosicion:%d", enemyPos);
 
 
-	if (!inbmrAtack) {
-		dontMove = false;
-	}
-	else
-	{
-		dontMove = true;
-	}
 
-	if (fase == FASE_Igory::FASE_CHANGE) {
-		dontMove = true;
-	}
-
-	if (!dontMove) {
-
+	if (playerInFight) {
 		app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
 		lastPath = *app->map->pathfinding->GetLastPath();
-		if (atackCube != nullptr) {
-			app->physics->GetWorld()->DestroyBody(atackCube->body);
-			atackCube = nullptr;
-		}
-		if (inbmrAtack == false) {
-			inAtack = false;
-		}
-
-		else {
-			app->map->pathfinding->CreatePath(enemyPos, originalPosition); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
-			lastPath = *app->map->pathfinding->GetLastPath();
-		}
-
-
-		b2Vec2 velocity = b2Vec2(0, 0);
-
-		if (lastPath.Count() > 1) { // Asegate de que haya al menos una posicion en el camino
-
-			// Toma la primera posicion del camino como el objetivo al que el enemigo debe dirigirse
-			iPoint targetPos = app->map->MapToWorld(lastPath.At(1)->x, lastPath.At(1)->y);
-
-			// Calcula la direccion hacia el objetivo
-			b2Vec2 direction(targetPos.x - position.x, targetPos.y - position.y);
-			direction.Normalize();
-
-			// Calcula la velocidad del movimiento
-			velocity = b2Vec2(direction.x * speed, direction.y * speed);
-
-			// Determina si el enemigo est?mirando hacia la izquierda o hacia la derecha
-			isFacingLeft = (direction.x >= 0);
-
-
-			isAttacking = false;
-			//attackAnim.Reset();
-
-		}
-		pbodyFoot->body->SetLinearVelocity(velocity);
 	}
+
+
+	//else {
+	//	app->map->pathfinding->CreatePath(enemyPos, originalPosition); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
+	//	lastPath = *app->map->pathfinding->GetLastPath();
+	//}
+
+
+	b2Vec2 velocity = b2Vec2(0, 0);
+
+	if (lastPath.Count() > 1) { // Asegate de que haya al menos una posicion en el camino
+
+		// Toma la primera posicion del camino como el objetivo al que el enemigo debe dirigirse
+		iPoint targetPos = app->map->MapToWorld(lastPath.At(1)->x, lastPath.At(1)->y);
+
+		// Calcula la direccion hacia el objetivo
+		b2Vec2 direction(targetPos.x - position.x, targetPos.y - position.y);
+		direction.Normalize();
+
+		// Calcula la velocidad del movimiento
+		velocity = b2Vec2(direction.x * speed, direction.y * speed);
+
+		// Determina si el enemigo est?mirando hacia la izquierda o hacia la derecha
+		isFacingLeft = (direction.x >= 0);
+
+
+		isAttacking = false;
+		//attackAnim.Reset();
+
+	}
+	pbodyFoot->body->SetLinearVelocity(velocity);
+
 
 	return true;
 }
@@ -633,76 +544,22 @@ void Boss_Igory::TakeDamage(float damage) {
 }
 
 
-BTPDirection  Boss_Igory::calculate_direction() {
-	iPoint playerPos = app->entityManager->GetPlayer()->position;
-	playerPos = app->map->WorldToMap(playerPos.x, playerPos.y);
-	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
-
-	int dx = playerPos.x - enemyPos.x;
-	int dy = playerPos.y - enemyPos.y;
-
-	double angle_rad = atan2(dy, dx);
-
-	double angle_deg = angle_rad * 180 / M_PI;
-	if (angle_deg < 0) {
-		angle_deg += 360;
-	}
-	BTPDirection directions[] = { BTPDirection::RIGHT, BTPDirection::DOWNRIGHT, BTPDirection::DOWN, BTPDirection::DOWNLEFT, BTPDirection::LEFT, BTPDirection::UPLEFT, BTPDirection::UP, BTPDirection::UPRIGHT };
-	int index = static_cast<int>(round(angle_deg / 45)) % 8;
-	BTPDirection direction = directions[index];
-
-	return direction;
-}
-
-
-std::string Boss_Igory::directionToString(BTPDirection direction) {
-	switch (direction) {
-	case BTPDirection::LEFT:
-		return "LEFT";
-	case BTPDirection::RIGHT:
-		return "RIGHT";
-	case BTPDirection::UP:
-		return "UP";
-	case BTPDirection::DOWN:
-		return "DOWN";
-	case BTPDirection::UPLEFT:
-		return "UPLEFT";
-	case BTPDirection::UPRIGHT:
-		return "UPRIGHT";
-	case BTPDirection::DOWNLEFT:
-		return "DOWNLEFT";
-	case BTPDirection::DOWNRIGHT:
-		return "DOWNRIGHT";
-	}
-}
 
 
 bool Boss_Igory::TimerColdDown(float time)
 {
-	//printf("\nataqueTimeClodDown%: %f", ataqueTimeClodDown);
-	ataqueTimeClodDown = atackTimeColdDown.CountDown(time);
-	if ((float)ataqueTimeClodDown == 0) {
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	////printf("\nataqueTimeClodDown%: %f", ataqueTimeClodDown);
+	//ataqueTimeClodDown = atackTimeColdDown.CountDown(time);
+	//if ((float)ataqueTimeClodDown == 0) {
+	//	return true;
+	//}
+	//else
+	//{
+	//	return false;
+	//}
+	return false;
 }
 
-bool Boss_Igory::waveTimerColdDown(float time)
-{
-	waveTimeClodDown = waveTime.CountDown(time);
-	//printf("\n waveTimeClodDown%: %f", waveTimeClodDown);
-	if ((float)waveTimeClodDown == 0) {
-
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
 
 
 void Boss_Igory::ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate) {
@@ -719,27 +576,10 @@ void Boss_Igory::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
-
-		if (physA->ctype == ColliderType::ATACKBMR) {
-			//checkAtackBMR = false;
-			//atackBMR->body->SetLinearVelocity(b2Vec2(0, 0));
-			bmrBack = true;
-		}
-
 		break;
 	case ColliderType::BOSS_INUIT:
-		if (physA->ctype == ColliderType::ATACKBMR && bmrBack == true) {
-			printf("\n Enemyy");
-			atackTimeColdDown.Start();
-			checkAtackBMR = false;
-			inbmrAtack = false;
-		}
 		break;
 	case ColliderType::PLAYER:
-		if (physA->ctype == ColliderType::BOSSAREA) {
-			//printf("\n entraBossArea");
-			playerInBossArea = true;
-		}
 		LOG("Collision PLAYER");
 		//restar vida al player
 		break;
@@ -765,13 +605,6 @@ void Boss_Igory::OnEndCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision PLATFORM");
 		break;
 	case ColliderType::PLAYER:
-		if (physA->ctype == ColliderType::BOSSAREA) {
-			//printf("Out");
-			playerInBossArea = false;
-			if (inbmrAtack == false) {
-				inAtack = false;
-			}
-		}
 		LOG("Collision PLAYER");
 		//restar vida al player
 		break;
@@ -785,6 +618,7 @@ void Boss_Igory::OnEndCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	}
 }
+
 
 MapObject* Boss_Igory::GetCurrentRoom()
 {
