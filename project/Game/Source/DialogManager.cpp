@@ -6,6 +6,8 @@
 #include "Textures.h"
 #include "Scene_Testing.h"
 #include "Scene_Pueblo.h"
+#include "Scene_Pueblo_Tutorial.h"
+#include "ModuleFadeToBlack.h"
 #include "CommerceManager.h"
 #include "Window.h"
 #include "Hud.h"
@@ -114,6 +116,7 @@ Dialog* DialogManager::CreateDialog(pugi::xml_node itemNode, std::string name, c
 			Dialog* dialogOp1 = CreateDialog(optionNode, name, faceTexturePath, font);
 			dialogOp1->commerceId = itemNode.child("option1").child("commerce").attribute("id").as_int();
 			dialogOp1->comer = itemNode.child("option1").child("comer").attribute("id").as_int();
+			dialogOp1->tutorial = itemNode.child("option1").child("tutorial").attribute("id").as_int();
 			dialog->options1.Add(dialogOp1);
 
 		}
@@ -370,6 +373,10 @@ bool DialogManager::PostUpdate() {
 				app->entityManager->GetPlayer()->currentStats.currentHealth = app->entityManager->GetPlayer()->currentStats.maxHealth;
 			}
 
+			if (dialogues.At(0)->data->tutorial != -1) {
+				/*app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_arena_tutorial);*/
+			}
+
 			dialogues.Del(dialogues.At(0));
 			
 			
@@ -395,6 +402,9 @@ bool DialogManager::PostUpdate() {
 				app->entityManager->GetPlayer()->currentStats.currentHealth = app->entityManager->GetPlayer()->currentStats.maxHealth;
 			}
 
+			if (dialogues.At(0)->data->tutorial != -1) {
+				/*app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_arena_tutorial);*/
+			}
 			//Reiniciar varialbes de dialogo y quitar el dialogo actual de su lista
 			optionSelected = 0;
 			indexText = 1;
