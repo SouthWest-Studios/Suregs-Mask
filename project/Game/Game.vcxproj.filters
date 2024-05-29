@@ -352,6 +352,18 @@
     <ClCompile Include="Source\Scene_Pueblo_Tutorial.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Item_Mascara_0.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Item_Mascara_1.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Item_Mascara_2.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Item_Mascara_3.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -767,6 +779,18 @@
     </ClInclude>
     <ClInclude Include="Source\Scene_Pueblo_Tutorial.h">
       <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Item_Mascara_0.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Item_Mascara_1.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Item_Mascara_2.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Item_Mascara_3.h">
+      <Filter>Entities\Items</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

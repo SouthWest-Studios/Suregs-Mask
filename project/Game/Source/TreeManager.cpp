@@ -15,6 +15,7 @@
 #include "ItemInv.h"
 #include "OjoInv.h"
 #include "Menu.h"
+#include "InventoryManager.h"
 #include "Defs.h"
 #include "Log.h"
 #include "SString.h"
@@ -553,25 +554,41 @@ void TreeManager::UseTreeSelected(int id)
 
 					case TreeType::MASK0:
 					{
-						mask = 1;
+						if (app->inventoryManager->numMasks >= 1)
+						{
+							mask = 1;
+						}
+						
 
 						break;
 					}
 					case TreeType::MASK1:
 					{
-						mask = 2;
+						if (app->inventoryManager->numMasks >= 2)
+						{
+							mask = 2;
+						}
+						
 
 						break;
 					}
 					case TreeType::MASK2:
 					{
-						mask = 3;
+						if (app->inventoryManager->numMasks >= 3)
+						{
+							mask = 3;
+						}
+						
 
 						break;
 					}
 					case TreeType::MASK3:
 					{
-						mask = 4;
+						if (app->inventoryManager->numMasks >= 4)
+						{
+							mask = 4;
+						}
+						
 
 						break;
 					}

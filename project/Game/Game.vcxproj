@@ -136,6 +136,10 @@
     <ClCompile Include="Source\Item_Diente.cpp" />
     <ClCompile Include="Source\Item_Garra.cpp" />
     <ClCompile Include="Source\Item_Hueso.cpp" />
+    <ClCompile Include="Source\Item_Mascara_0.cpp" />
+    <ClCompile Include="Source\Item_Mascara_1.cpp" />
+    <ClCompile Include="Source\Item_Mascara_2.cpp" />
+    <ClCompile Include="Source\Item_Mascara_3.cpp" />
     <ClCompile Include="Source\Item_Nota.cpp" />
     <ClCompile Include="Source\Item_Ojo.cpp" />
     <ClCompile Include="Source\Item_Pocion_Dano.cpp" />
@@ -260,6 +264,10 @@
     <ClInclude Include="Source\Item_Diente.h" />
     <ClInclude Include="Source\Item_Garra.h" />
     <ClInclude Include="Source\Item_Hueso.h" />
+    <ClInclude Include="Source\Item_Mascara_0.h" />
+    <ClInclude Include="Source\Item_Mascara_1.h" />
+    <ClInclude Include="Source\Item_Mascara_2.h" />
+    <ClInclude Include="Source\Item_Mascara_3.h" />
     <ClInclude Include="Source\Item_Nota.h" />
     <ClInclude Include="Source\Item_Ojo.h" />
     <ClInclude Include="Source\Item_Pocion_Dano.h" />

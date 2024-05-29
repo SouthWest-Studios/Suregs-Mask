@@ -63,7 +63,10 @@
 #include "Menu.h";
 #include "Window.h";
 #include "Hud.h";
-
+#include "Item_Mascara_0.h"
+#include "Item_Mascara_1.h"
+#include "Item_Mascara_2.h"
+#include "Item_Mascara_3.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -349,7 +352,18 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 	case EntityType::ASCENSOR:
 		entity = new Elevator();
 		break;
-
+	case EntityType::ITEM_MASCARA0:
+		entity = new Item_mascara_0(type, 100, 100, 300, 5, 2);
+		break;
+	case EntityType::ITEM_MASCARA1:
+		entity = new Item_mascara_1(type, 100, 100, 300, 5, 2);
+		break;
+	case EntityType::ITEM_MASCARA2:
+		entity = new Item_mascara_2(type, 100, 100, 300, 5, 2);
+		break;
+	case EntityType::ITEM_MASCARA3:
+		entity = new Item_mascara_3(type, 100, 100, 300, 5, 2);
+		break;
 	default:
 		break;
 	}

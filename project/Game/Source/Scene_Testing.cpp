@@ -36,6 +36,10 @@
 #include "Item_Pocion_Vida_Max.h"
 #include "Item_Saliva.h"
 #include "Item_Zafiro.h"
+#include "Item_Mascara_0.h"
+#include "Item_Mascara_1.h"
+#include "Item_Mascara_2.h"
+#include "Item_Mascara_3.h"
 #include "Elevator.h"
 
 Scene_testing::Scene_testing(App* app, bool start_enabled) : Module(app, start_enabled)
@@ -275,6 +279,26 @@ bool Scene_testing::Start()
 	zafiro->config = configNode.child("entities_data").child("item_zafiro");
 	zafiro->position = iPoint(1523, 2455);
 	zafiro->Start();
+
+	Item_mascara_0* mascara0 = (Item_mascara_0*)app->entityManager->CreateEntity(EntityType::ITEM_MASCARA0);
+	mascara0->config = configNode.child("entities_data").child("item_mascara_0");
+	mascara0->position = iPoint(1503, 2455);
+	mascara0->Start();
+
+	Item_mascara_1* mascara1 = (Item_mascara_1*)app->entityManager->CreateEntity(EntityType::ITEM_MASCARA1);
+	mascara1->config = configNode.child("entities_data").child("item_mascara_1");
+	mascara1->position = iPoint(1423, 2455);
+	mascara1->Start();
+
+	Item_mascara_2* mascara2 = (Item_mascara_2*)app->entityManager->CreateEntity(EntityType::ITEM_MASCARA2);
+	mascara2->config = configNode.child("entities_data").child("item_mascara_2");
+	mascara2->position = iPoint(1323, 2455);
+	mascara2->Start();
+
+	Item_mascara_3* mascara3 = (Item_mascara_3*)app->entityManager->CreateEntity(EntityType::ITEM_MASCARA3);
+	mascara3->config = configNode.child("entities_data").child("item_mascara_3");
+	mascara3->position = iPoint(1223, 2455);
+	mascara3->Start();
 
 
 	return true;

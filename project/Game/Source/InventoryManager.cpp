@@ -321,7 +321,25 @@ Inventity* InventoryManager::CreateItem(EntityType type, std::string descripcioo
 		break;
 	}
 
-	if (addInventory) {
+	if (type == EntityType::ITEM_MASCARA0)
+	{
+		numMasks = 1;
+	}
+	else if (type == EntityType::ITEM_MASCARA1)
+	{
+		numMasks = 2;
+	}
+	else if (type == EntityType::ITEM_MASCARA3)
+	{
+		numMasks = 3;
+	}
+	else if (type == EntityType::ITEM_MASCARA3)
+	{
+		numMasks = 4;
+	}
+	else 
+	{
+		if((addInventory))
 		AddItem(entity);
 	}
 	

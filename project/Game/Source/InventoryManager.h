@@ -92,6 +92,8 @@ public:
 	int primaryMaskInventoryManager = -1;
 	int secondaryMaskInventoryManager = -1;
 
+	int numMasks = 0;
+
 private:
 	pugi::xml_document configFile;
 	pugi::xml_node configNode;

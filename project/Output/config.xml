@@ -223,7 +223,10 @@
 		<item_hueso					texturePath="Assets/Textures/Entidades/Items/textura_hueso.png"					description="Hueso de osiris, bastante resistente."								type ="Apéndice" name="Hueso"/>
 		<item_viscera				texturePath="Assets/Textures/Entidades/Items/textura_visceras.png"				description="Vísceras con propiedades en la alquimia."							type ="Apéndice" name="Vísceras"/>
 		<item_cola					texturePath="Assets/Textures/Entidades/Items/textura_cola.png"					description="Cola sin propiedades especiales, puede valer dinero."				type ="Apéndice" name="Cola"/>
-
+		<item_mascara_0				texturePath="Assets/Textures/Entidades/Items/textura_mascara0.png"					description="Cola sin propiedades especiales, puede valer dinero."				type ="Apéndice" name="Cola"/>
+		<item_mascara_1				texturePath="Assets/Textures/Entidades/Items/textura_mascara1.png"					description="Cola sin propiedades especiales, puede valer dinero."				type ="Apéndice" name="Cola"/>
+		<item_mascara_2				texturePath="Assets/Textures/Entidades/Items/textura_mascara2.png"					description="Cola sin propiedades especiales, puede valer dinero."				type ="Apéndice" name="Cola"/>
+		<item_mascara_3				texturePath="Assets/Textures/Entidades/Items/textura_mascara3.png"					description="Cola sin propiedades especiales, puede valer dinero."				type ="Apéndice" name="Cola"/>
 		<item_pocion_vida_1			texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_1.png"			description="Curiosa pócima que revitaliza la salud levemente."				type ="Consumible"	name="Pócima"/>
 		<item_pocion_vida_2			texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_2.png"			description="Curiosa pócima que revitaliza buena parte de la salud."		type ="Consumible"	name="Pócima"/>
 		<item_pocion_vida_3			texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_3.png"			description="Curiosa pócima que revitaliza gran parte de la salud."			type ="Consumible"	name="Pócima"/>
