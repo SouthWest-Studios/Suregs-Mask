@@ -352,6 +352,9 @@
     <ClCompile Include="Source\Scene_Pueblo_Tutorial.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Scene_Arena_Tutorial.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -766,6 +769,9 @@
       <Filter>Entities\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Source\Scene_Pueblo_Tutorial.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene_Arena_Tutorial.h">
       <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>

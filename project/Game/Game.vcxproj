@@ -188,6 +188,7 @@
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\PuzzleButtonEntity.cpp" />
     <ClCompile Include="Source\Render.cpp" />
+    <ClCompile Include="Source\Scene_Arena_Tutorial.cpp" />
     <ClCompile Include="Source\Scene_GameOver.cpp" />
     <ClCompile Include="Source\Scene_Intro.cpp" />
     <ClCompile Include="Source\Scene_Logos.cpp" />
@@ -317,6 +318,7 @@
     <ClInclude Include="Source\App.h" />
     <ClInclude Include="Source\Module.h" />
     <ClInclude Include="Source\Render.h" />
+    <ClInclude Include="Source\Scene_Arena_Tutorial.h" />
     <ClInclude Include="Source\Scene_GameOver.h" />
     <ClInclude Include="Source\Scene_Intro.h" />
     <ClInclude Include="Source\Scene_Logos.h" />
