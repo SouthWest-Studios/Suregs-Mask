@@ -1751,17 +1751,6 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 	
 	<dialog id="999" texturepath="Assets/Textures/guerreroTutorial.png" facetexturepath="Assets/Textures/guerreroTutorial.png" name="Kharmy">
 		<sentences>
-			<sentence type="choose" text="Hoy es día de combate, Jakhov. ¿Te acuerdas como se pelea?">
-
-				<option1 text="Por supuesto.">
-					<sentence text="Entonces no hay nada que te pueda decir, recuerda estar alerta en todo momento."/>
-				</option1>
-
-				<option2 text="¿Podrías recordármelo?">
-					<sentence text="Es sencillo, las ligeras espadas y armaduras que tenemos nos permiten rodar con la tecla ESPACIO. Mientras atacamos con la tecla J."/>
-				</option2>
-			</sentence>
-			
 			<sentence type="choose" text="¿Estás listo para el combate de práctica?">
 				<option1 text="Sí, que empiece el combate.">
 					<tutorial id = "1"/>
