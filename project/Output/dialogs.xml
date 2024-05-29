@@ -1755,7 +1755,6 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 
 				<option1 text="Por supuesto.">
 					<sentence text="Entonces no hay nada que te pueda decir, recuerda estar alerta en todo momento."/>
-					<tutorial id = "1"/>
 				</option1>
 
 				<option2 text="¿Podrías recordármelo?">
