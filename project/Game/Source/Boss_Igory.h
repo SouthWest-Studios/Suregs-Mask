@@ -65,7 +65,9 @@ public:
 	void OnEndCollision(PhysBody* physA, PhysBody* physB);
 	void resetAnimation();
 	void showAnimation();
+	bool AtqColdDown();
 
+	
 	//Veneno
 	void ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate);
 
@@ -90,7 +92,7 @@ public:
 	float attackDistance;
 	int attackTime;
 	bool getBossArea = true;
-
+	
 
 
 private:
@@ -150,6 +152,10 @@ private:
 	//ataque
 	float ataqueTimeClodDown = 0;
 	bool inAtack = false;
+	bool ataqColdDown = false;
+	bool startColdDown = false;
+	bool checkColdDown = false;
+	bool atqGoNext = true;
 	Timer atackTimeColdDown;
 
 	//fase

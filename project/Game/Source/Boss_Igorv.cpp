@@ -107,7 +107,11 @@ bool Boss_Igory::Update(float dt)
 	{
 		desiredState = EntityState_Boss_Igory::DEAD;
 	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 64)
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 64 && ataqColdDown)
+	{
+		desiredState = EntityState_Boss_Igory::IDLE;
+	}
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 64 && ataqColdDown == false)
 	{
 		desiredState = EntityState_Boss_Igory::ATTACKING_BASIC;
 	}
@@ -121,6 +125,7 @@ bool Boss_Igory::Update(float dt)
 				atackCube = nullptr;
 			}
 			inAtack = false;
+			atqGoNext = true;
 		}
 	}
 	else if (!playerInFight)
@@ -137,6 +142,9 @@ bool Boss_Igory::Update(float dt)
 		fase = FASE_Igory::FASE_CHANGE;
 	}
 
+	if (checkColdDown) {
+		AtqColdDown();
+	}
 
 
 	switch (fase)
@@ -229,6 +237,8 @@ void Boss_Igory::resetAnimation()
 			atackCube = nullptr;
 		}
 		inAtack = false;
+		startColdDown = true;
+		checkColdDown = true;
 	}
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atq2_boss_Igory") {
 		if (atackCube != nullptr) {
@@ -236,6 +246,8 @@ void Boss_Igory::resetAnimation()
 			atackCube = nullptr;
 		}
 		inAtack = false;
+		startColdDown = true;
+		checkColdDown = true;
 	}
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atq3_boss_Igory") {
 
@@ -244,6 +256,8 @@ void Boss_Igory::resetAnimation()
 			atackCube = nullptr;
 		}
 		inAtack = false;
+		startColdDown = true;
+		checkColdDown = true;
 	}
 }
 
@@ -261,6 +275,33 @@ void Boss_Igory::showAnimation()
 		}
 
 	}
+}
+
+bool Boss_Igory::AtqColdDown()
+{
+	if (startColdDown) {
+		printf("\nStart");
+		atackTimeColdDown.Start();
+		startColdDown = false;
+	}
+
+	if (atackTimeColdDown.ReadMSec() >= 500) {
+		printf("\nEnd");
+		ataqColdDown = false;
+		checkColdDown = false;
+		startColdDown = true;
+		atqGoNext = true;
+		return true;
+	}
+	else
+	{
+		//printf("\nColdDown");
+		ataqColdDown = true;
+		return false;
+	}
+
+	atackTimeColdDown.Start();
+
 }
 
 
@@ -331,7 +372,11 @@ void Boss_Igory::Chase(float dt, iPoint playerPos)
 
 void Boss_Igory::Attack(float dt)
 {
-	attackTime++;
+	if (atqGoNext) {
+		attackTime++;
+		atqGoNext = false;
+	}
+	printf("\nattackTime: %d", attackTime);
 	switch (attackTime)
 	{
 	case 1:
@@ -358,7 +403,7 @@ void Boss_Igory::Attack(float dt)
 		break;
 	}
 
-	atackTimeColdDown.Start();
+
 }
 
 
@@ -503,15 +548,16 @@ void Boss_Igory::TakeDamage(float damage) {
 
 bool Boss_Igory::TimerColdDown(float time)
 {
-	//printf("\nataqueTimeClodDown%: %f", ataqueTimeClodDown);
-	ataqueTimeClodDown = atackTimeColdDown.CountDown(time);
-	if ((float)ataqueTimeClodDown == 0) {
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	////printf("\nataqueTimeClodDown%: %f", ataqueTimeClodDown);
+	//ataqueTimeClodDown = atackTimeColdDown.CountDown(time);
+	//if ((float)ataqueTimeClodDown == 0) {
+	//	return true;
+	//}
+	//else
+	//{
+	//	return false;
+	//}
+	return false;
 }
 
 
