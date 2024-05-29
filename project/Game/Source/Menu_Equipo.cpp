@@ -144,13 +144,13 @@ bool Menu_Equipo::PostUpdate()
 		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK0)
 		{
 			app->render->DrawTextBound("Dinka", 678, 395, 200, {52,25,0},app->render->titleFont);
-			app->render->DrawTextBound("Daño Basico", 660, 450, 200, {52,25,0},app->render->titleFont);
+			app->render->DrawTextBound("Ataque Basico", 660, 450, 200, {52,25,0},app->render->titleFont);
 			app->render->DrawTexture(mask0Texture, 860, 420, SDL_FLIP_NONE, 0, 0);
 		}
 		else if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK1)
 		{
 			app->render->DrawTextBound("Inuit", 678, 395, 200, {52,25,0},app->render->titleFont);
-			app->render->DrawTextBound("Onda Dañina", 660, 450, 200, {52,25,0},app->render->titleFont);
+			app->render->DrawTextBound("Onda Expansiva", 660, 450, 200, {52,25,0},app->render->titleFont);
 			app->render->DrawTexture(mask1Texture, 860, 420, SDL_FLIP_NONE, 0, 0);
 		}
 		else if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK2)

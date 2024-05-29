@@ -1733,6 +1733,21 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 			text="Piensa en tu abuela, yo no me puedo ni imaginar que pasaría si dejo a mi Philyppa sola..."/>
 		</sentences>
 	</dialog>
+
+	<dialog id="998" texturepath="Assets/Textures/guerreroTutorial.png" facetexturepath="Assets/Textures/guerreroTutorial.png" name="Kharmy">
+		<sentences>
+			<sentence type="choose" text="Si quieres empezar el combate de entrenamiento deberías hablar con Trynmba">
+
+				<option1 text="¿Quién es Trynmba?">
+					<sentence text="¿Enserio? Jakhov, no eres el mejor guerrero, al menos podrías tener disciplina con las caras... Es el guerrero de pelo castaño y ropa verde."/>
+				</option1>
+
+				<option2 text="¿Dónde está?">
+					<sentence text="¿Enserio no lo ves? Está justo al lado del cubo de espadas."/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
 	
 	<dialog id="999" texturepath="Assets/Textures/guerreroTutorial.png" facetexturepath="Assets/Textures/guerreroTutorial.png" name="Kharmy">
 		<sentences>
