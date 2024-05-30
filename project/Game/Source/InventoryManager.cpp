@@ -53,7 +53,7 @@ bool InventoryManager::Awake(pugi::xml_node config)
 
 bool InventoryManager::Start() {
 
-	PointerItemText = app->tex->Load("Assets/Textures/Interfaz/select.png");
+	PointerItemText = app->tex->Load("Assets/Textures/Interfaz/selectAnimation.png");
 	SelectedItemText = app->tex->Load("Assets/Textures/Interfaz/selected.png");
 	EquipedItemText = app->tex->Load("Assets/Textures/Interfaz/equiped.png");
 
@@ -71,6 +71,12 @@ bool InventoryManager::Start() {
 		if (pEntity->active == false) continue;
 		ret = item->data->Start();
 	}
+
+	//"Assets/Textures/Interfaz/selectAnimation.png"
+	pointerSpritePosition = SPosition.SpritesPos(24, 150, 150, 750);
+	pointerAnim.LoadAnim("poinerInventory", "selectAnim", pointerSpritePosition);
+
+	currentPointerAnimation = &pointerAnim;
 
 	return ret;
 }
@@ -1052,19 +1058,23 @@ void InventoryManager::OnMovePointer()
 	if (app->input->GetButton(RIGHT) == KEY_DOWN && PointerPosition.x < 300) {
 		PointerPosition.x += 106;
 		PointerId += 1;
+		currentPointerAnimation->Reset();
 	}
 	if (app->input->GetButton(LEFT) == KEY_DOWN && PointerPosition.x > 196) {
 		PointerPosition.x -= 106;
 		PointerId -= 1;
+		currentPointerAnimation->Reset();
 	}
 
 	if (app->input->GetButton(DOWN) == KEY_DOWN && PointerPosition.y < 200) {
 		PointerPosition.y += 103;
 		PointerId += 3;
+		currentPointerAnimation->Reset();
 	}
 	if (app->input->GetButton(UP) == KEY_DOWN && PointerPosition.y > -60) {
 		PointerPosition.y -= 103;
 		PointerId -= 3;
+		currentPointerAnimation->Reset();
 	}
 }
 
@@ -1262,7 +1272,7 @@ bool InventoryManager::Update(float dt)
 	//BORRAR LA LINEA DE ARRIBA CUANDO SE HAYA IMPLEMENTADO EL TUTORIAL CON SUS BOOLS ARRIBA
 
 
-
+	 currentPointerAnimation->Update();
 
 	return ret;
 }
@@ -1278,7 +1288,11 @@ bool InventoryManager::PostUpdate()
 		Inventity* pEntity = NULL;
 
 		app->render->DrawTexture(EquipedItemText, equiped.x, equiped.y, 0.8, SDL_FLIP_NONE, 0, 0);
-		app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y, 0.8, SDL_FLIP_NONE, 0, 0);
+
+
+
+		///app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y, 0.8, SDL_FLIP_NONE, 0, 0);
+		app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y, 0.8, SDL_FLIP_NONE, &currentPointerAnimation->GetCurrentFrame(), 0);
 		app->render->DrawTexture(SelectedItemText, selected.x, selected.y, 0.8, SDL_FLIP_NONE, 0, 0);
 
 		for (item = inventities.start; item != nullptr; item = item->next)

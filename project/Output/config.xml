@@ -646,6 +646,11 @@
 		<npc_guardias>
 			<idleAnim start="0" end="6" speed="0.1f" loop="true"/>
 		</npc_guardias>
+
+		<poinerInventory>
+			<selectAnim start="0" end="24" speed="2.0f" loop="false"/>
+		</poinerInventory>
+		
 		
 	</animations>
 

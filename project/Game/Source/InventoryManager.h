@@ -63,7 +63,7 @@ public:
 	uint monedasObtenidas = 0;
 
 	List<Inventity*> inventities;
-	iPoint PointerPosition = { 188,-73 };
+	iPoint PointerPosition = { 268, 473 };
 	int PointerId = 0;
 	iPoint selected = { -1000,-1000 };
 	bool selectedd = false;
@@ -99,6 +99,14 @@ private:
 	pugi::xml_document configFile;
 	pugi::xml_node configNode;
 	int maxItemsPerRow = 3; // Define el n�mero m�ximo de elementos por fila
+
+
+	SDL_Rect* pointerSpritePosition;
+	Animation SPosition;
+
+	Animation* currentPointerAnimation = nullptr;
+	Animation pointerAnim;
+
 };
 
 #endif // __INVENTORYMANAGER_H__
