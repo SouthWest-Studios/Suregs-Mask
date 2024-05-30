@@ -98,7 +98,7 @@ bool Boss_Musri::Start() {
 	movePosition = GetRandomPosicion(position, 10);
 
 	fase = FASE_Musri::FASE_ONE;
-	fase = FASE_Musri::FASE_CHANGE;
+	//fase = FASE_Musri::FASE_CHANGE;
 
 	cambiarPosicionTimer.Start(30000);
 	dispararRafagasTimer.Start(30000);
@@ -889,7 +889,9 @@ void Boss_Musri::FaseDying(float dt, iPoint playerPos)
 	movePosition = iPoint(limitesSala.x + (limitesSala.w / 2), limitesSala.y + (limitesSala.h / 2));
 	if (Bossfinding(dt, movePosition)) {
 		//C muere
+		
 		if (muriendoseTimer.ReadMSec() >= 3000) {
+			Die();
 			app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 			app->physics->GetWorld()->DestroyBody(pbodySensor->body);
 			app->entityManager->DestroyEntity(this);

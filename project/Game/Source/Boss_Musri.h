@@ -187,7 +187,7 @@ private:
 	Timer muriendoseTimer;
 
 	Timer cambioFaseTimer;
-	int cambioFaseMS = 10000;
+	int cambioFaseMS = 5000;
 
 
 	int habilidadEmpujeCD = 10000;
