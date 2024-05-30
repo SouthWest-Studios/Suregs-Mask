@@ -1134,6 +1134,13 @@ bool TreeManager::Update(float dt)
 
 	bool ret = true;
 
+	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
+		/*options = true;
+		selected = { PointerPosition.x, PointerPosition.y };
+		selectedId = PointerId;*/
+		mostrar = !mostrar;
+
+	}
 	if (mostrar == true)
 	{
 		OnMovePointer();
