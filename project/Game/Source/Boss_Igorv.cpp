@@ -103,8 +103,6 @@ bool Boss_Igory::Update(float dt)
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
 
-
-
 	if (health <= 0)
 	{
 		desiredState = EntityState_Boss_Igory::DEAD;
@@ -113,11 +111,7 @@ bool Boss_Igory::Update(float dt)
 	{
 		desiredState = EntityState_Boss_Igory::TAKEHIT;
 	}
-	/*else if (GeneraColdDown(10))
-	{
-		desiredState = EntityState_Boss_Igory::GENERATESUREG;
-	}
-	if (goColdDown) {
+	else if (goColdDown) {
 		if (GeneraColdDown(5)) {
 			generaTimeColdDown.Start();
 			goColdDown = false;
@@ -127,17 +121,22 @@ bool Boss_Igory::Update(float dt)
 			desiredState = EntityState_Boss_Igory::IDLE;
 		}
 
-
-	}*/
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 64 && ataqColdDown && !inTakeHit)
+	}
+	else if (inSuregAni)
+	{
+		
+		desiredState = EntityState_Boss_Igory::GENERATESUREG;
+	}
+	
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32 && ataqColdDown && !inTakeHit)
 	{
 		desiredState = EntityState_Boss_Igory::IDLE;
 	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 64 && ataqColdDown == false && !inTakeHit && !inSuregAni)
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32 && ataqColdDown == false && !inTakeHit && !inSuregAni)
 	{
 		desiredState = EntityState_Boss_Igory::ATTACKING_BASIC;
 	}
-	else if (playerInFight && currentState != EntityState_Boss_Igory::ATTACKING_BASIC)
+	else if (playerInFight && currentState != EntityState_Boss_Igory::ATTACKING_BASIC && !inSuregAni)
 	{
 		desiredState = EntityState_Boss_Igory::RUNNING;
 
@@ -158,6 +157,7 @@ bool Boss_Igory::Update(float dt)
 	{
 		desiredState = EntityState_Boss_Igory::IDLE;
 	}
+
 	stateMachine(dt, playerPos);
 
 	if (health <= lifeLow40) {
@@ -168,6 +168,10 @@ bool Boss_Igory::Update(float dt)
 		AtqColdDown();
 	}
 
+
+	if (GeneraColdDown(10)) {
+		inSuregAni = true;
+	}
 
 	switch (fase)
 	{
@@ -285,7 +289,7 @@ void Boss_Igory::resetAnimation()
 	}
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "hit_boss_Igory") {
 		inTakeHit = false;
-d		hit_boss_Igory.Reset();
+		hit_boss_Igory.Reset();
 		if (atackCube != nullptr) {
 			app->physics->GetWorld()->DestroyBody(atackCube->body);
 			atackCube = nullptr;
@@ -300,13 +304,14 @@ d		hit_boss_Igory.Reset();
 		generaTimeColdDown.Start();
 		showSuregAni = false;
 		goColdDown = true;
+		app->map->generaSureg(fase, position);
 	}
 
 }
 
 void Boss_Igory::showAnimation()
 {
-	if (inAtack &&!inSuregAni) {
+	if (inAtack && !inSuregAni) {
 		if (attackTime == 0) {
 			currentAnimation = &atq1_boss_Igory;
 		}
@@ -320,6 +325,7 @@ void Boss_Igory::showAnimation()
 	}
 
 	if (showSuregAni) {
+		printf("genrasureg");
 		currentAnimation = &geneSure_boss_Igory;
 	}
 }
@@ -393,9 +399,9 @@ void Boss_Igory::stateMachine(float dt, iPoint playerPos)
 		takeHit();
 		break;
 	case EntityState_Boss_Igory::GENERATESUREG:
+		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero); //No se mueve mientras ataca
 		printf("\ngeneraSureg");
 		showSuregAni = true;
-		inSuregAni = true;
 		break;
 	case EntityState_Boss_Igory::HEAL:
 		break;
@@ -625,7 +631,7 @@ bool Boss_Igory::TimerColdDown(float time)
 bool Boss_Igory::GeneraColdDown(float time)
 {
 	float fgenraTimeColdDown = generaTimeColdDown.CountDown(time);
-	//printf("\nataqueTimeClodDown%: %f", fgenraTimeColdDown);
+	printf("\nataqueTimeClodDown%: %f", fgenraTimeColdDown);
 	if ((float)fgenraTimeColdDown == 0) {
 		return true;
 	}

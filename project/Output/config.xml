@@ -473,7 +473,7 @@
 			<cura_boss_Igory start="48" end="56" speed="0.2f" loop="false"/>
 			<dash_boss_Igory start="64" end="71" speed="0.2f" loop="false"/>
 			<atq1_boss_Igory start="72" end="79" speed="0.1f" loop="false"/>
-			<geneSure_boss_Igory start="80" end="85" speed="0.2f" loop="false"/>
+			<geneSure_boss_Igory start="80" end="85" speed="0.1f" loop="false"/>
 			<idle_boss_Igory start="88" end="93" speed="0.1f" loop="true"/>
 			<atq2_boss_Igory start="96" end="100" speed="0.1f" loop="false"/>
 			<atq3_boss_Igory start="104" end="108" speed="0.1f" loop="false"/>
