@@ -280,8 +280,8 @@ void Boss_Igory::resetAnimation()
 			atackCube = nullptr;
 		}
 		inAtack = false;
-		startColdDown = true;
-		checkColdDown = true;
+		/*startColdDown = true;
+		checkColdDown = true;*/
 	}
 
 }
