@@ -100,7 +100,7 @@ public:
 	bool playingMusic = false;
 	bool playingRunFx = false;
 	bool playingDeathFx = false;
-	bool playingAmbience = true;
+	bool playingAmbience = false;
 
 	int musicDuration;
 

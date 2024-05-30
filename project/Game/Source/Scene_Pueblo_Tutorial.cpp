@@ -92,12 +92,12 @@ bool Scene_Pueblo_Tutorial::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
-	
+	/*
 	if (app->audio->playingAmbience == false)
 	{
-		app->audio->LoadAudioMusic("menu");
 		app->audio->playingAmbience = true;
-	}
+		app->audio->LoadAudioMusic("town_fx");
+	}*/
 	if (app->audio->playingMusic == true && app->audio->musicTimer.ReadMSec() >= app->audio->musicDuration)
 	{
 		app->audio->StopMusic(0.0f);
