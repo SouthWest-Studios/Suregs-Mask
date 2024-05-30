@@ -179,6 +179,7 @@ enum class EntityState_Boss_Igory
 	DEAD,
 	FASE_CHANGE,
 	TAKEHIT,
+	GENERATESUREG,
 	HEAL,
 	NONE,
 	STATE_COUNT
