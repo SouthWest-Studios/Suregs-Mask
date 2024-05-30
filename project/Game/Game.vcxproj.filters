@@ -364,6 +364,10 @@
     <ClCompile Include="Source\Item_Mascara_3.cpp">
       <Filter>Entities\Items</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Scene_Arena_Tutorial.cpp" />
+    <ClCompile Include="Source\Estatua.cpp">
+      <Filter>Entities\Estatua</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -792,6 +796,10 @@
     <ClInclude Include="Source\Item_Mascara_3.h">
       <Filter>Entities\Items</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene_Arena_Tutorial.h" />
+    <ClInclude Include="Source\Estatua.h">
+      <Filter>Entities\Estatua</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -886,6 +894,9 @@
     </Filter>
     <Filter Include="Entities\Puzzle">
       <UniqueIdentifier>{9f232ba4-1a34-482f-a603-e5e6c38e6b80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Estatua">
+      <UniqueIdentifier>{0fca0de5-3d58-4d13-b87e-d04a0ac24e29}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

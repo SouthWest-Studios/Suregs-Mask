@@ -224,7 +224,7 @@ unsigned int Audio::LoadFx(const char* path)
 }
 
 // Play WAV
-bool Audio::PlayFx(unsigned int id, int channel, int repeat)
+bool Audio::PlayFx(unsigned int id, int repeat, int channel)
 {
 	if (!active) {
 		return false; // Audio no activo
@@ -375,13 +375,13 @@ void Audio::PlayRunFx(unsigned int name, unsigned int name2, unsigned int name3)
 		switch (run)
 		{
 		case 1:
-			PlayFx(name, 1);
+			PlayFx(name, 0, 1);
 			break;
 		case 2:
-			PlayFx(name2, 1);
+			PlayFx(name2, 0, 1);
 			break;
 		case 3:
-			PlayFx(name3, 1);
+			PlayFx(name3, 0, 1);
 			break;
 		}
 		runTimer.Start();

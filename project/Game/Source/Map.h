@@ -214,6 +214,11 @@ private:
     void BubbleSort(std::vector<PuzzleButtonEntity*>* entities);
 
 
+
+    bool LoadState(pugi::xml_node node);
+    bool SaveState(pugi::xml_node node);
+
+
 public: 
     SString name;
     SString path;
@@ -256,6 +261,9 @@ private:
 
     std::vector<PuzzleButtonEntity*> puzzleButtonEntities;
     bool recompensaPuzzle = false;
+
+
+    bool puzzleComplete[8] = { false };
 
  };
 

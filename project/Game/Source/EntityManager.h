@@ -12,6 +12,7 @@
 #include "MiniGameFishing.h"
 #include "Cofre.h"
 #include "Elevator.h"
+#include "Estatua.h"
 
 struct DrawableObject
 {
@@ -80,6 +81,8 @@ public:
 
 	Elevator* EntityManager::GetAscensor();
 
+	Estatua* EntityManager::GetEstatua();
+
 	void UpdateEnemyActivation();
 	void UpdateRoomActivation();
 
@@ -122,6 +125,7 @@ private:
 	Player* actualPlayer = nullptr;
 	Cofre* cofre = nullptr;
 	Elevator* ascensor = nullptr;
+	Estatua* estatua = nullptr;
 	MiniGameFishing* fishing = new MiniGameFishing;
 
 	//pugi::xml_node config;

@@ -32,15 +32,14 @@
 
 	<sounds>
 		<music>
-			<menu path="Assets/Audio/Music/o-herbologista.ogg"/>
+			<menu path="Assets/Audio/Music/menu.ogg"/>
       <town path="Assets/Audio/Music/town.ogg"/>
-      <dungeon path="Assets/Audio/Music/dungeon.ogg"/>
+      <town_fx path="Assets/Audio/Music/town_fx.ogg"/>
+      <dungeon path="Assets/Audio/Music/DIRTY LOVE.ogg"/>
       <credits path="Assets/Audio/Music/credits.ogg"/>
 		</music>
 
 		<fx>
-      <town_fx path="Assets/Audio/Fx/town_fx.ogg"/>
-
       <!--ui-->
 			<intro_fx path="Assets/Audio/Fx/UI/intro_fx.wav"/>
       <menu_fx path="Assets/Audio/Fx/UI/menu_fx.wav"/>
@@ -308,6 +307,8 @@
 				  textureList ="Assets/Textures/Interfaz/Ascensor/textura_fondo_nota_lista.png"
 				  PointerPath ="Assets/Textures/Interfaz/Ascensor/textura_pointer.png"
 				  textura_blackPath ="Assets/Textures/Interfaz/Ascensor/textura_black.png"/>
+
+		<estatua texturePath ="Assets/Textures/Entidades/Placa_estatua_padre.png"/>
 
 		<puzzle_button texturePath="Assets/Textures/Entidades/Puzzles/textura_boton_naranja.png" />
 
