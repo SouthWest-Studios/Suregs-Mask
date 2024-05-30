@@ -115,6 +115,11 @@ bool Boss_Musri::Start() {
 	currentFlechaNormalAnimation = &flechaNormalAnim;
 	currentFlechaCargadaAnimation = &flechaCargadaAnim;
 
+	pugi::xml_parse_result parseResult2 = configFile.load_file("config.xml");
+	if (parseResult2) {
+		configNode = configFile.child("config");
+	}
+
 	return true;
 }
 

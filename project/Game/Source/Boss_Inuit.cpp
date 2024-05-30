@@ -100,6 +100,12 @@ bool Boss_Inuit::Start() {
 	desiredState = EntityState_Boss_Inuit::IDLE;
 
 	room = GetCurrentRoom();
+
+	pugi::xml_parse_result parseResult2 = configFile.load_file("config.xml");
+	if (parseResult2) {
+		configNode = configFile.child("config");
+	}
+
 	return true;
 }
 
@@ -673,11 +679,13 @@ void Boss_Inuit::Die() {
 		zafiro->config = configNode.child("entities_data").child("item_zafiro");
 		zafiro->position = iPoint(position.x, position.y);
 		zafiro->Start();
+
 		app->bestiarioManager->CreateItem("inuit");
+
 
 		Item_mascara_1* mascara1 = (Item_mascara_1*)app->entityManager->CreateEntity(EntityType::ITEM_MASCARA1);
 		mascara1->config = configNode.child("entities_data").child("item_mascara_1");
-		mascara1->position = iPoint(1423, 2455);
+		mascara1->position = iPoint(position.x + 50, position.y);
 		mascara1->Start();
 
 		count++;
