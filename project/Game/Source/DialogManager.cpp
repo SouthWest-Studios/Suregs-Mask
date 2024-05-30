@@ -214,7 +214,7 @@ bool DialogManager::ShowDialog(Dialog* dialog)
 	
 	//Imagen del personaje
 	if (dialog->face_tex != nullptr) {
-		app->render->DrawTexture(dialog->face_tex, dialogMargin[3] + dialogPosition.x, dialogMargin[0] + dialogPosition.y, (int)app->win->GetScale(), SDL_FLIP_NONE, 0, 0);
+		app->render->DrawTexture(dialog->face_tex, dialogMargin[3] + dialogPosition.x, dialogMargin[0] + dialogPosition.y - 15, (int)app->win->GetScale(), SDL_FLIP_NONE, 0, 0);
 	}
 
 
@@ -227,13 +227,26 @@ bool DialogManager::ShowDialog(Dialog* dialog)
 	//Opciones
 	if (dialog->type == DialogType::CHOOSE) {
 
-		//Textura opcion1
-		options1NameTexture = CreateTextTexture(app->render->primaryFont, dialog->option1.c_str(), (optionSelected == 1) ? optionSelectedColor : optionColor, optionsBoundWidth);
-		app->render->DrawTexture(options1NameTexture, dialogMargin[3] + dialogPosition.x + optionsPosition.x, dialogMargin[0] + dialogPosition.y + optionsDistanceBetween, (int)app->win->GetScale(), SDL_FLIP_NONE, 0, 0);
+		if (dialog->face_tex != nullptr) {
+			//Textura opcion1
+			options1NameTexture = CreateTextTexture(app->render->primaryFont, dialog->option1.c_str(), (optionSelected == 1) ? optionSelectedColor : optionColor, optionsBoundWidth);
+			app->render->DrawTexture(options1NameTexture, dialogMargin[3] + dialogPosition.x + optionsPosition.x + 256, dialogMargin[0] + dialogPosition.y + optionsDistanceBetween, (int)app->win->GetScale(), SDL_FLIP_NONE, 0, 0);
 
-		//Textura opcion2
-		options2NameTexture = CreateTextTexture(app->render->primaryFont, dialog->option2.c_str(), (optionSelected == 2) ? optionSelectedColor : optionColor, optionsBoundWidth);
-		app->render->DrawTexture(options2NameTexture, dialogMargin[3] + dialogPosition.x + optionsPosition.x, dialogMargin[0] + dialogPosition.y + optionsDistanceBetween*2, (int)app->win->GetScale(), SDL_FLIP_NONE, 0, 0);
+			//Textura opcion2
+			options2NameTexture = CreateTextTexture(app->render->primaryFont, dialog->option2.c_str(), (optionSelected == 2) ? optionSelectedColor : optionColor, optionsBoundWidth);
+			app->render->DrawTexture(options2NameTexture, dialogMargin[3] + dialogPosition.x + optionsPosition.x + 256, dialogMargin[0] + dialogPosition.y + optionsDistanceBetween * 2, (int)app->win->GetScale(), SDL_FLIP_NONE, 0, 0);
+		}
+		else {
+			//Textura opcion1
+			options1NameTexture = CreateTextTexture(app->render->primaryFont, dialog->option1.c_str(), (optionSelected == 1) ? optionSelectedColor : optionColor, optionsBoundWidth);
+			app->render->DrawTexture(options1NameTexture, dialogMargin[3] + dialogPosition.x + optionsPosition.x, dialogMargin[0] + dialogPosition.y + optionsDistanceBetween, (int)app->win->GetScale(), SDL_FLIP_NONE, 0, 0);
+
+			//Textura opcion2
+			options2NameTexture = CreateTextTexture(app->render->primaryFont, dialog->option2.c_str(), (optionSelected == 2) ? optionSelectedColor : optionColor, optionsBoundWidth);
+			app->render->DrawTexture(options2NameTexture, dialogMargin[3] + dialogPosition.x + optionsPosition.x, dialogMargin[0] + dialogPosition.y + optionsDistanceBetween * 2, (int)app->win->GetScale(), SDL_FLIP_NONE, 0, 0);
+		}
+
+		
 
 	}
 

@@ -2,7 +2,7 @@
 
 	<!--DIALOGOS HERRERO (911-919)-->
 
-	<dialog id="911" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phoska">
+	<dialog id="911" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png" name="Phoska">
 		<sentences>
 			<sentence type="choose" text="¡Buenos días! Bienvenido a la herrería de Phoska.">
 			

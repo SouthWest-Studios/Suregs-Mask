@@ -5,7 +5,21 @@
 	<textures />
 	<audio />
 	<:anonymous />
-	<:anonymous />
+	<:anonymous>
+		<map />
+		<map>
+			<puzzles>
+				<puzzle level="0" complete="false" />
+				<puzzle level="1" complete="false" />
+				<puzzle level="2" complete="false" />
+				<puzzle level="3" complete="false" />
+				<puzzle level="4" complete="false" />
+				<puzzle level="5" complete="false" />
+				<puzzle level="6" complete="false" />
+				<puzzle level="7" complete="false" />
+			</puzzles>
+		</map>
+	</:anonymous>
 	<scene_pueblo />
 	<entitymanager>
 		<entity_manager>

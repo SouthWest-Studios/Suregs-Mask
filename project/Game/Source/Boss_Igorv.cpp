@@ -19,10 +19,7 @@
 #include <Optick/include/optick.h>
 #include "Boss_Igory.h"
 #include "Utils.cpp"
-
-
-
-
+#include "Item_Mascara_3.h"
 
 Boss_Igory::Boss_Igory() : Entity(EntityType::BOSS_IGORY) {
 	name = ("boss_igory");
@@ -92,7 +89,9 @@ bool Boss_Igory::Start() {
 	lifeLow40 = maxHealth * 0.4;
 
 	room = GetCurrentRoom();
+
 	generaTimeColdDown.Start();
+
 	return true;
 }
 
@@ -471,7 +470,10 @@ void Boss_Igory::Attack(float dt)
 void Boss_Igory::Die() {
 
 	//Mask XP
-
+	Item_mascara_3* mascara3 = (Item_mascara_3*)app->entityManager->CreateEntity(EntityType::ITEM_MASCARA3);
+	mascara3->config = configNode.child("entities_data").child("item_mascara_3");
+	mascara3->position = iPoint(position.x, position.y);
+	mascara3->Start();
 	//Mask 0
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
 	{

@@ -491,7 +491,7 @@
 			<atqCargadoAnim start="0" end="11" speed="0.1f" loop="false" />
 			<atqNormalAnim  start="16" end="26" speed="0.1f" loop="false"/>
 			<idleAnim  start="32" end="39" speed="0.1f" loop="true"/>
-			<cambioFaseAnim start="40" end="47" speed="0.1f" loop="false"/>
+			<cambioFaseAnim start="40" end="47" speed="0.1f" loop="true"/>
 			<runAnim start="48" end="52" speed="0.1f" loop="true"/>
 			<dashAnim start="56" end="60" speed="0.1f" loop="false"/>
 			<atqMeleeAnim start="64" end="68" speed="0.1f" loop="false"/>

@@ -115,6 +115,11 @@ bool Boss_Musri::Start() {
 	currentFlechaNormalAnimation = &flechaNormalAnim;
 	currentFlechaCargadaAnimation = &flechaCargadaAnim;
 
+	pugi::xml_parse_result parseResult2 = configFile.load_file("config.xml");
+	if (parseResult2) {
+		configNode = configFile.child("config");
+	}
+
 	return true;
 }
 
@@ -253,6 +258,12 @@ bool Boss_Musri::PostUpdate() {
 		b2Vec2 arrowPos = flechaC.pbody->body->GetTransform().p;
 		/*app->render->DrawTexture(arrowTexture, METERS_TO_PIXELS(arrowPos.x), METERS_TO_PIXELS(arrowPos.y), 1, SDL_FLIP_NONE, &currentFlechaCargadaAnimation->GetCurrentFrame(), 1, GetAngleFromDirection(flechaC.direction), 0, 0);*/
 		double arrowAngle = GetAngleFromDirection(flechasCargadas.at(i).direction);
+
+		for (int j = 0; j < flechaC.rastroGenerado.size(); j++) {
+			RastroFlechaCargadaMusri rastro = flechaC.rastroGenerado.at(j);
+			app->render->DrawTexture(arrowChargedRastroTexture, METERS_TO_PIXELS(rastro.position.x), METERS_TO_PIXELS(rastro.position.y), 1, SDL_FLIP_NONE, 0, 1, GetAngleFromDirection(flechaC.direction) + 180);
+		}
+
 		app->render->DrawTexture(
 			arrowTexture,
 			METERS_TO_PIXELS(arrowPos.x) - 269,
@@ -267,10 +278,7 @@ bool Boss_Musri::PostUpdate() {
 		);
 		
 
-		for (int j = 0; j < flechaC.rastroGenerado.size(); j++) {
-			RastroFlechaCargadaMusri rastro = flechaC.rastroGenerado.at(j);
-			app->render->DrawTexture(arrowChargedRastroTexture, METERS_TO_PIXELS(rastro.position.x), METERS_TO_PIXELS(rastro.position.y), 1, SDL_FLIP_NONE, 0, 1, GetAngleFromDirection(flechaC.direction) + 180);
-		}
+		
 	}
 
 

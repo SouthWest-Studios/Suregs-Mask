@@ -50,6 +50,8 @@ bool Commerce::SelectTrade(uint id, bool add)
 {
 	bool ret = true;
 
+	if (id >= trades.size()) return ret;
+
 	Trade* trade = trades.at(id);
 
 	if (add) {
