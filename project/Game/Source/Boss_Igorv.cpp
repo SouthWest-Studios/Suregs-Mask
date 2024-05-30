@@ -108,11 +108,10 @@ bool Boss_Igory::Update(float dt)
 		desiredState = EntityState_Boss_Igory::DEAD;
 	}
 	else if (health <= lifeLow80 && !faseTwo) {
-		fase = FASE_Igory::FASE_CHANGE;
+
 		desiredState = EntityState_Boss_Igory::FASE_CHANGE;
 	}
 	else if (health <= lifeLow40 && !faseThree) {
-		fase = FASE_Igory::FASE_CHANGE;
 		desiredState = EntityState_Boss_Igory::FASE_CHANGE;
 	}
 	else if (inTakeHit)
@@ -132,10 +131,10 @@ bool Boss_Igory::Update(float dt)
 	}
 	else if (inSuregAni)
 	{
-		
+
 		desiredState = EntityState_Boss_Igory::GENERATESUREG;
 	}
-	
+
 	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32 && ataqColdDown && !inTakeHit)
 	{
 		desiredState = EntityState_Boss_Igory::IDLE;
@@ -168,7 +167,7 @@ bool Boss_Igory::Update(float dt)
 
 	stateMachine(dt, playerPos);
 
-	
+
 
 	if (checkColdDown) {
 		AtqColdDown();
@@ -182,8 +181,6 @@ bool Boss_Igory::Update(float dt)
 	switch (fase)
 	{
 	case FASE_Igory::FASE_ONE:
-		break;
-	case FASE_Igory::FASE_CHANGE:
 		break;
 	case FASE_Igory::FASE_TWO:
 		break;
@@ -313,6 +310,32 @@ void Boss_Igory::resetAnimation()
 		app->map->generaSureg(fase, position);
 	}
 
+	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atqCargado_fase2_boss_Igory") {
+
+		atqCargado_fase2_boss_Igory.Reset();
+		generaTimeColdDown.Start();
+		faseAni = false;
+		if (fase == FASE_Igory::FASE_TWO) {
+			printf("\nFase3");
+			fase = FASE_Igory::FASE_THREE;
+			faseThree = true;
+		}
+
+		if (fase == FASE_Igory::FASE_ONE) {
+			printf("\nFase2");
+			fase = FASE_Igory::FASE_TWO;
+			faseTwo = true;
+		}
+
+
+	}
+
+	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atqCargado_fase1_boss_Igory") {
+		atqCargado_fase1_boss_Igory.Reset();
+		faseAni = true;
+
+	}
+
 }
 
 void Boss_Igory::showAnimation()
@@ -331,8 +354,12 @@ void Boss_Igory::showAnimation()
 	}
 
 	if (showSuregAni) {
-		printf("genrasureg");
+		//printf("genrasureg");
 		currentAnimation = &geneSure_boss_Igory;
+	}
+
+	if (faseAni) {
+		currentAnimation = &atqCargado_fase2_boss_Igory;
 	}
 }
 
@@ -400,21 +427,17 @@ void Boss_Igory::stateMachine(float dt, iPoint playerPos)
 		Die();
 		break;
 	case EntityState_Boss_Igory::FASE_CHANGE:
-		if (fase == FASE_Igory::FASE_ONE) {
-			fase == FASE_Igory::FASE_TWO;
-			faseTwo = true;
-		}
-		if (fase == FASE_Igory::FASE_TWO) {
-			fase == FASE_Igory::FASE_THREE;
-			faseThree = true;
-		}
+		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
+		currentAnimation = &atqCargado_fase1_boss_Igory;
 		break;
 	case EntityState_Boss_Igory::TAKEHIT:
+		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 		takeHit();
 		break;
 	case EntityState_Boss_Igory::GENERATESUREG:
+
 		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero); //No se mueve mientras ataca
-		printf("\ngeneraSureg");
+		//printf("\ngeneraSureg");
 		showSuregAni = true;
 		break;
 	case EntityState_Boss_Igory::HEAL:
@@ -564,7 +587,7 @@ bool Boss_Igory::Bossfinding(float dt, iPoint playerPosP)
 
 
 
-	if (playerInFight && !inSuregAni && fase != FASE_Igory::FASE_CHANGE) {
+	if (playerInFight && !inSuregAni && nextState != EntityState_Boss_Igory::FASE_CHANGE) {
 		app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
 		lastPath = *app->map->pathfinding->GetLastPath();
 	}
@@ -645,7 +668,7 @@ bool Boss_Igory::TimerColdDown(float time)
 bool Boss_Igory::GeneraColdDown(float time)
 {
 	float fgenraTimeColdDown = generaTimeColdDown.CountDown(time);
-	printf("\nataqueTimeClodDown%: %f", fgenraTimeColdDown);
+	//printf("\nataqueTimeClodDown%: %f", fgenraTimeColdDown);
 	if ((float)fgenraTimeColdDown == 0) {
 		return true;
 	}
@@ -680,7 +703,7 @@ void Boss_Igory::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLAYER_ATTACK:
 		LOG("Collision Player_Attack");
-		if (fase != FASE_Igory::FASE_CHANGE && app->entityManager->GetPlayer()->checkAtk == true) {
+		if (nextState != EntityState_Boss_Igory::FASE_CHANGE && app->entityManager->GetPlayer()->checkAtk == true) {
 			inTakeHit = true;
 			health -= app->entityManager->GetPlayer()->currentStats.attackDamage;
 			timerRecibirDanioColor.Start();

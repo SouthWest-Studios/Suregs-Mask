@@ -786,14 +786,14 @@ void Map::generaSureg(FASE_Igory fase, iPoint position)
 	position.y = position.y + 16;
 	int numX = 0;
 	int numY = 0;
-
+	int range = 50;
 	if (fase == FASE_Igory::FASE_ONE) {
 		for (int i = 0; i < 2; i++)
 		{
 			numX = 0;
 			numY = 0;
-			numX = app->entityManager->getRandomNumber(-100, 100);
-			numY = app->entityManager->getRandomNumber(-100, 100);
+			numX = app->entityManager->getRandomNumber(-range, range);
+			numY = app->entityManager->getRandomNumber(-range, range);
 			Enemy_Osiris* osiris = (Enemy_Osiris*)app->entityManager->CreateEntity(EntityType::ENEMY_OSIRIS);
 			osiris->config = configNode.child("entities_data").child("osiris");
 			osiris->position = iPoint(position.x+ numX, position.y+ numY);
@@ -802,14 +802,14 @@ void Map::generaSureg(FASE_Igory fase, iPoint position)
 
 		for (int i = 0; i < 3; i++)
 		{
-			numX = app->entityManager->getRandomNumber(-100, 100);
-			numY = app->entityManager->getRandomNumber(-100, 100);
+			numX = 0;
+			numY = 0;
+			numX = app->entityManager->getRandomNumber(-range, range);
+			numY = app->entityManager->getRandomNumber(-range, range);
 			Enemy_Muur* muur = (Enemy_Muur*)app->entityManager->CreateEntity(EntityType::ENEMY_MUUR);
 			muur->config = configNode.child("entities_data").child("muur");
 			muur->position = iPoint(position.x + numX, position.y + numY);
 			muur->Start();
-			numX = 0;
-			numY = 0;
 		}
 
 	}
@@ -819,8 +819,8 @@ void Map::generaSureg(FASE_Igory fase, iPoint position)
 		{
 			numX = 0;
 			numY = 0;
-			numX = app->entityManager->getRandomNumber(-100, 100);
-			numY = app->entityManager->getRandomNumber(-100, 100);
+			numX = app->entityManager->getRandomNumber(-range, range);
+			numY = app->entityManager->getRandomNumber(-range, range);
 			Enemy_Osiris* osiris = (Enemy_Osiris*)app->entityManager->CreateEntity(EntityType::ENEMY_OSIRIS);
 			osiris->config = configNode.child("entities_data").child("osiris");
 			osiris->position = iPoint(position.x + numX, position.y + numY);
@@ -828,8 +828,8 @@ void Map::generaSureg(FASE_Igory fase, iPoint position)
 
 			numX = 0;
 			numY = 0;
-			numX = app->entityManager->getRandomNumber(-100, 100);
-			numY = app->entityManager->getRandomNumber(-100, 100);
+			numX = app->entityManager->getRandomNumber(-range, range);
+			numY = app->entityManager->getRandomNumber(-range, range);
 			Enemy_Muur* muur = (Enemy_Muur*)app->entityManager->CreateEntity(EntityType::ENEMY_MUUR);
 			muur->config = configNode.child("entities_data").child("muur");
 			muur->position = iPoint(position.x + numX, position.y + numY);
@@ -837,8 +837,8 @@ void Map::generaSureg(FASE_Igory fase, iPoint position)
 
 			numX = 0;
 			numY = 0;
-			numX = app->entityManager->getRandomNumber(-100, 100);
-			numY = app->entityManager->getRandomNumber(-100, 100);
+			numX = app->entityManager->getRandomNumber(-range, range);
+			numY = app->entityManager->getRandomNumber(-range, range);
 			Enemy_Khurt* khurt = (Enemy_Khurt*)app->entityManager->CreateEntity(EntityType::ENEMY_KHURT);
 			khurt->config = configNode.child("entities_data").child("khurt");
 			khurt->position = iPoint(position.x + numX, position.y + numY);
@@ -846,8 +846,8 @@ void Map::generaSureg(FASE_Igory fase, iPoint position)
 
 			numX = 0;
 			numY = 0;
-			numX = app->entityManager->getRandomNumber(-100, 100);
-			numY = app->entityManager->getRandomNumber(-100, 100);
+			numX = app->entityManager->getRandomNumber(-range, range);
+			numY = app->entityManager->getRandomNumber(-range, range);
 			Enemy_Ols* ols = (Enemy_Ols*)app->entityManager->CreateEntity(EntityType::ENEMY_OLS);
 			ols->config = configNode.child("entities_data").child("ols");
 			ols->position = iPoint(position.x + numX, position.y + numY);
@@ -860,8 +860,8 @@ void Map::generaSureg(FASE_Igory fase, iPoint position)
 		{
 			numX = 0;
 			numY = 0;
-			numX = app->entityManager->getRandomNumber(-100, 100);
-			numY = app->entityManager->getRandomNumber(-100, 100);
+			numX = app->entityManager->getRandomNumber(-range, range);
+			numY = app->entityManager->getRandomNumber(-range, range);
 			Enemy_Osiris* osiris = (Enemy_Osiris*)app->entityManager->CreateEntity(EntityType::ENEMY_OSIRIS);
 			osiris->config = configNode.child("entities_data").child("osiris");
 			osiris->position = iPoint(position.x + numX, position.y + numY);
@@ -869,8 +869,8 @@ void Map::generaSureg(FASE_Igory fase, iPoint position)
 
 			numX = 0;
 			numY = 0;
-			numX = app->entityManager->getRandomNumber(-100, 100);
-			numY = app->entityManager->getRandomNumber(-100, 100);
+			numX = app->entityManager->getRandomNumber(-range, range);
+			numY = app->entityManager->getRandomNumber(-range, range);
 			Enemy_Muur* muur = (Enemy_Muur*)app->entityManager->CreateEntity(EntityType::ENEMY_MUUR);
 			muur->config = configNode.child("entities_data").child("muur");
 			muur->position = iPoint(position.x + numX, position.y + numY);
@@ -878,8 +878,8 @@ void Map::generaSureg(FASE_Igory fase, iPoint position)
 
 			numX = 0;
 			numY = 0;
-			numX = app->entityManager->getRandomNumber(-100, 100);
-			numY = app->entityManager->getRandomNumber(-100, 100);
+			numX = app->entityManager->getRandomNumber(-range, range);
+			numY = app->entityManager->getRandomNumber(-range, range);
 			Enemy_Khurt* khurt = (Enemy_Khurt*)app->entityManager->CreateEntity(EntityType::ENEMY_KHURT);
 			khurt->config = configNode.child("entities_data").child("khurt");
 			khurt->position = iPoint(position.x + numX, position.y + numY);
@@ -887,8 +887,8 @@ void Map::generaSureg(FASE_Igory fase, iPoint position)
 
 			numX = 0;
 			numY = 0;
-			numX = app->entityManager->getRandomNumber(-100, 100);
-			numY = app->entityManager->getRandomNumber(-100, 100);
+			numX = app->entityManager->getRandomNumber(-range, range);
+			numY = app->entityManager->getRandomNumber(-range, range);
 			Enemy_Ols* ols = (Enemy_Ols*)app->entityManager->CreateEntity(EntityType::ENEMY_OLS);
 			ols->config = configNode.child("entities_data").child("ols");
 			ols->position = iPoint(position.x + numX, position.y + numY);
@@ -896,8 +896,8 @@ void Map::generaSureg(FASE_Igory fase, iPoint position)
 
 			numX = 0;
 			numY = 0;
-			numX = app->entityManager->getRandomNumber(-100, 100);
-			numY = app->entityManager->getRandomNumber(-100, 100);
+			numX = app->entityManager->getRandomNumber(-range, range);
+			numY = app->entityManager->getRandomNumber(-range, range);
 			Enemy_Boorok* boorok = (Enemy_Boorok*)app->entityManager->CreateEntity(EntityType::ENEMY_BOOROK);
 			boorok->config = configNode.child("entities_data").child("boorok");
 			boorok->position = iPoint(position.x + numX, position.y + numY);

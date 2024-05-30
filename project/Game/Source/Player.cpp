@@ -1184,7 +1184,7 @@ void Player::Dead()
 
 	 //printf("dead");
 	currentAnimation = &dead_player;
-	if (DeadTP && PlayerTimerColdDown(3)) {
+	if (DeadTP && PlayerTimerColdDown(2)) {
 		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_gameover);
 		app->audio->playingDeathFx = false;
 		app->audio->StopFx(-1);
