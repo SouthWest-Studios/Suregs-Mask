@@ -776,7 +776,7 @@ bool Map::LoadObject(pugi::xml_node& node, MapObjects* mapObjects)
 	return ret;
 }
 
-void Map::generaOrish(FASE_Igory fase, iPoint position)
+void Map::generaSureg(FASE_Igory fase, iPoint position)
 {
 	position.x = position.x + 16;
 	position.y = position.y + 16;

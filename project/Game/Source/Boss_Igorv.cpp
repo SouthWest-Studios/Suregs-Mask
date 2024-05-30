@@ -92,7 +92,7 @@ bool Boss_Igory::Start() {
 	lifeLow40 = maxHealth * 0.4;
 
 	room = GetCurrentRoom();
-
+	generaTimeColdDown.Start();
 	return true;
 }
 
@@ -114,11 +114,27 @@ bool Boss_Igory::Update(float dt)
 	{
 		desiredState = EntityState_Boss_Igory::TAKEHIT;
 	}
+	/*else if (GeneraColdDown(10))
+	{
+		desiredState = EntityState_Boss_Igory::GENERATESUREG;
+	}
+	if (goColdDown) {
+		if (GeneraColdDown(5)) {
+			generaTimeColdDown.Start();
+			goColdDown = false;
+			inSuregAni = false;
+		}
+		else {
+			desiredState = EntityState_Boss_Igory::IDLE;
+		}
+
+
+	}*/
 	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 64 && ataqColdDown && !inTakeHit)
 	{
 		desiredState = EntityState_Boss_Igory::IDLE;
 	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 64 && ataqColdDown == false && !inTakeHit)
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 64 && ataqColdDown == false && !inTakeHit && !inSuregAni)
 	{
 		desiredState = EntityState_Boss_Igory::ATTACKING_BASIC;
 	}
@@ -189,12 +205,6 @@ bool Boss_Igory::PostUpdate() {
 		SDL_SetTextureAlphaMod(texture, 255);
 	}
 
-
-	
-
-	
-
-
 	if (isFacingLeft) {
 		app->render->DrawTexture(texture, position.x - 200, position.y - 200, 0.8, SDL_FLIP_HORIZONTAL, &rect);
 	}
@@ -215,8 +225,9 @@ bool Boss_Igory::PostUpdate() {
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
 
 	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
-		app->map->generaOrish(fase, position);
+		app->map->generaSureg(fase, position);
 	}
+
 	return true;
 }
 
@@ -275,7 +286,7 @@ void Boss_Igory::resetAnimation()
 	}
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "hit_boss_Igory") {
 		inTakeHit = false;
-		hit_boss_Igory.Reset();
+d		hit_boss_Igory.Reset();
 		if (atackCube != nullptr) {
 			app->physics->GetWorld()->DestroyBody(atackCube->body);
 			atackCube = nullptr;
@@ -285,11 +296,18 @@ void Boss_Igory::resetAnimation()
 		checkColdDown = true;*/
 	}
 
+	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "geneSure_boss_Igory") {
+		geneSure_boss_Igory.Reset();
+		generaTimeColdDown.Start();
+		showSuregAni = false;
+		goColdDown = true;
+	}
+
 }
 
 void Boss_Igory::showAnimation()
 {
-	if (inAtack) {
+	if (inAtack &&!inSuregAni) {
 		if (attackTime == 0) {
 			currentAnimation = &atq1_boss_Igory;
 		}
@@ -301,21 +319,13 @@ void Boss_Igory::showAnimation()
 		}
 
 	}
+
+	if (showSuregAni) {
+		currentAnimation = &geneSure_boss_Igory;
+	}
 }
 
-void Boss_Igory::generaOrish()
-{
-	/*Enemy_Osiris* osiris = (Enemy_Osiris*)app->entityManager->CreateEntity(EntityType::ENEMY_OSIRIS);
-	osiris->config = configNode.child("entities_data").child("osiris");
-	osiris->position = iPoint(position.x + 16, position.y + 16);
-	osiris->Start();*/
 
-	Enemy_Muur* muur = (Enemy_Muur*)app->entityManager->CreateEntity(EntityType::ENEMY_MUUR);
-	muur->config = configNode.child("entities_data").child("muur");
-	muur->position = iPoint(position.x + 16, position.y + 16);
-	muur->Start();
-
-}
 
 bool Boss_Igory::AtqColdDown()
 {
@@ -382,6 +392,11 @@ void Boss_Igory::stateMachine(float dt, iPoint playerPos)
 		break;
 	case EntityState_Boss_Igory::TAKEHIT:
 		takeHit();
+		break;
+	case EntityState_Boss_Igory::GENERATESUREG:
+		printf("\ngeneraSureg");
+		showSuregAni = true;
+		inSuregAni = true;
 		break;
 	case EntityState_Boss_Igory::HEAL:
 		break;
@@ -527,7 +542,7 @@ bool Boss_Igory::Bossfinding(float dt, iPoint playerPosP)
 
 
 
-	if (playerInFight) {
+	if (playerInFight && !inSuregAni) {
 		app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
 		lastPath = *app->map->pathfinding->GetLastPath();
 	}
@@ -594,16 +609,28 @@ void Boss_Igory::TakeDamage(float damage) {
 
 bool Boss_Igory::TimerColdDown(float time)
 {
-	////printf("\nataqueTimeClodDown%: %f", ataqueTimeClodDown);
-	//ataqueTimeClodDown = atackTimeColdDown.CountDown(time);
-	//if ((float)ataqueTimeClodDown == 0) {
-	//	return true;
-	//}
-	//else
-	//{
-	//	return false;
-	//}
-	return false;
+	//printf("\nataqueTimeClodDown%: %f", ataqueTimeClodDown);
+	ataqueTimeClodDown = atackTimeColdDown.CountDown(time);
+	if ((float)ataqueTimeClodDown == 0) {
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool Boss_Igory::GeneraColdDown(float time)
+{
+	float fgenraTimeColdDown = generaTimeColdDown.CountDown(time);
+	//printf("\nataqueTimeClodDown%: %f", fgenraTimeColdDown);
+	if ((float)fgenraTimeColdDown == 0) {
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 
