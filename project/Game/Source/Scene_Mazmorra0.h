@@ -57,7 +57,7 @@ private:
 
 	// L15: TODO 2: Declare a GUI Control Button 
 	GuiControlButton* gcButtom;
-
+	pugi::xml_node configNode;
 
 };
 

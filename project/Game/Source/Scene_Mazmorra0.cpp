@@ -14,6 +14,7 @@
 #include "Log.h"
 #include "GuiControl.h"
 #include "GuiManager.h"
+#include "Item_Mascara_0.h"
 
 Scene_Mazmorra0::Scene_Mazmorra0(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -48,7 +49,10 @@ bool Scene_Mazmorra0::Start()
 	/*player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);*/
 	////Assigns the XML node to a member in player
 	/*player->config = config.child("player");*/
-
+	pugi::xml_parse_result parseResult2 = configFile.load_file("config.xml");
+	if (parseResult2) {
+		configNode = configFile.child("config");
+	}
 	//Get the map name from the config file and assigns the value in the module
 	app->map->name = config.child("map").attribute("name").as_string();
 	app->map->path = config.child("map").attribute("path").as_string();
@@ -69,6 +73,12 @@ bool Scene_Mazmorra0::Start()
 	gcButtom = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);*/
 
 	app->entityManager->Enable();
+
+	Item_mascara_0* mascara0 = (Item_mascara_0*)app->entityManager->CreateEntity(EntityType::ITEM_MASCARA0);
+	mascara0->config = configNode.child("entities_data").child("item_mascara_0");
+	mascara0->position = iPoint(2704, 1693);
+	mascara0->Start();
+
 
 	return true;
 }

@@ -92,7 +92,7 @@ public:
 
 	float viewDistance;
 	float attackDistance;
-	int attackTime;
+	int attackTime = 0;
 	bool getBossArea = true;
 	//Revivir
 	Timer atackTimeColdDown;
