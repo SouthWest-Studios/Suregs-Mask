@@ -221135,11 +221135,6 @@
     <property name="dialogID" type="int" value="950"/>
    </properties>
   </object>
-  <object id="367" x="3298.67" y="4300" width="96" height="96">
-   <properties>
-    <property name="dialogID" type="int" value="51"/>
-   </properties>
-  </object>
  </objectgroup>
  <layer id="7" name="Navigation" width="235" height="188" visible="0">
   <properties>

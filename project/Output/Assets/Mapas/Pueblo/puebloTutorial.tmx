@@ -221090,11 +221090,6 @@
     <property name="dialogID" type="int" value="201"/>
    </properties>
   </object>
-  <object id="232" x="3294.12" y="4319.15" width="96" height="96">
-   <properties>
-    <property name="dialogID" type="int" value="51"/>
-   </properties>
-  </object>
   <object id="233" x="4972.06" y="3578.12" width="96" height="96">
    <properties>
     <property name="dialogID" type="int" value="401"/>
