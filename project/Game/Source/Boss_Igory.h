@@ -65,6 +65,7 @@ public:
 	void OnEndCollision(PhysBody* physA, PhysBody* physB);
 	void resetAnimation();
 	void showAnimation();
+	void generaOrish();
 	bool AtqColdDown();
 
 	

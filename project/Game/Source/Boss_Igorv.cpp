@@ -182,6 +182,9 @@ bool Boss_Igory::PostUpdate() {
 	//	SDL_SetTextureAlphaMod(texture, 255);
 	//}
 
+	
+	generaOrish();
+
 
 	if (isFacingLeft) {
 		app->render->DrawTexture(texture, position.x - 200, position.y - 200, 0.8, SDL_FLIP_HORIZONTAL, &rect);
@@ -275,6 +278,14 @@ void Boss_Igory::showAnimation()
 		}
 
 	}
+}
+
+void Boss_Igory::generaOrish()
+{
+	Enemy_Osiris* osiris = (Enemy_Osiris*)app->entityManager->CreateEntity(EntityType::ENEMY_OSIRIS);
+	osiris->config = configNode.child("entities_data").child("osiris");
+	osiris->position = iPoint(position.x + 16, position.y + 16);
+	osiris->Start();
 }
 
 bool Boss_Igory::AtqColdDown()
