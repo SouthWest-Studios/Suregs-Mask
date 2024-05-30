@@ -178,7 +178,7 @@ public:
     iPoint MapToWorld(int x, int y) const;
     iPoint WorldToMap(int x, int y);
 
-    void generaOrish(FASE_Igory fase, iPoint position);
+    void generaSureg(FASE_Igory fase, iPoint position);
   
 
     

@@ -460,7 +460,7 @@ void BestiarioManager::OnMovePointer()
 
 			}
 			if (app->input->GetButton(UP) == KEY_DOWN) {
-				if (verticalPointerId + 1 > numberRows)
+				if (verticalPointerId > 0)
 				{
 					PointerPosition.y -= 83;
 					PointerId -= 4;
@@ -493,7 +493,7 @@ void BestiarioManager::AddBestiario(Bestiario* entity)
 	}
 
 }
-
+int couuuunt = 0;
 bool BestiarioManager::Update(float dt)
 {
 
@@ -504,35 +504,46 @@ bool BestiarioManager::Update(float dt)
 	if (mostrar == true)
 	{
 		OnMovePointer();
+		
+		if (couuuunt == 2)
+		{
+			if ((app->input->GetButton(APP_EXIT) == KEY_DOWN || app->input->GetButton(BACK) == KEY_DOWN) && zoomIn == true || app->input->GetButton(SELECT) == KEY_DOWN) {
+				ListItem<Bestiario*>* item;
+				couuuunt = 1;
+				for (item = bestiario.start; item != NULL; item = item->next)
+				{
+					item->data->zoom = false;
 
-		if (app->input->GetButton(SELECT) == KEY_DOWN) {
-			/*options = true;
-			selected = { PointerPosition.x, PointerPosition.y };
-			selectedId = PointerId;*/
-			UseBestiarioSelected(PointerId);
-
-		}
-
-		if ((app->input->GetButton(APP_EXIT) == KEY_DOWN || app->input->GetButton(BACK) == KEY_DOWN) && zoomIn == true) {
-			ListItem<Bestiario*>* item;
-			for (item = bestiario.start; item != NULL; item = item->next)
-			{
-				item->data->zoom = false;
-
+				}
+				zoomIn = false;
 			}
-			zoomIn = false;
-
 		}
+			if (couuuunt < 1)
+			{
+				if (app->input->GetButton(SELECT) == KEY_DOWN) {
+					/*options = true;
+					selected = { PointerPosition.x, PointerPosition.y };
+					selectedId = PointerId;*/
+					UseBestiarioSelected(PointerId);
+					couuuunt = 2;
+				}
+			}
+		
+		
 
 		int num;
 
 		num = numberRows + 1;
-
+		if (couuuunt == 1)
+		{
+			couuuunt--;
+		}
 
 		if (bestiario.Count() > 4 * num)
 		{
 			numberRows += 1;
 		}
+		
 		bestiario.Count();
 	}
 
@@ -652,10 +663,10 @@ bool BestiarioManager::PostUpdate()
 				{
 					app->render->DrawTexture(itum->data->closeUpBestiarios, 400, 100, SDL_FLIP_NONE, 0, 0);
 					//app->render->DrawText(itum->data->name.GetString(), 580, 120, 80, 80, 0, 0, 0, 0, true);
-					app->render->DrawTextBound(itum->data->name.GetString(), 580, 120, 80, { 52,25,0 },app->render->titleFont);
+					app->render->DrawTextBound(itum->data->name.GetString(), 500, 120, 80, { 52,25,0 },app->render->titleFont);
 
 					app->render->DrawTexture(itum->data->texturaEnemigo, 580, 190, 1, SDL_FLIP_NONE, 0, 0);
-					app->render->DrawTextBound(itum->data->desc.c_str(), 500, 300, 270, { 52,25,0 });
+					app->render->DrawTextBound(itum->data->desc.c_str(), 500, 290, 270, { 52,25,0 });
 					
 				}
 			}

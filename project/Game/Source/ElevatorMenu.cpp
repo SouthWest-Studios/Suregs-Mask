@@ -107,6 +107,7 @@ bool ElevatorMenu::Update(float dt)
 		app->entityManager->active = true;
 		app->physics->active = true;
 		open = false;
+		cerrar = false;
 	}
 	return true;
 }
@@ -300,6 +301,7 @@ void ElevatorMenu::UseElevator(int id, int mazmorraa)
 
 	app->ascensor->abierto = false;
 	open = false;
+	cerrar = true;
 	mazmorraActual = mazmorra;
 
 	if (mazmorra < mazmorraa)

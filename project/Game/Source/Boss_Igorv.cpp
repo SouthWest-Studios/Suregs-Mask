@@ -19,10 +19,7 @@
 #include <Optick/include/optick.h>
 #include "Boss_Igory.h"
 #include "Utils.cpp"
-
-
-
-
+#include "Item_Mascara_3.h"
 
 Boss_Igory::Boss_Igory() : Entity(EntityType::BOSS_IGORY) {
 	name = ("boss_igory");
@@ -93,6 +90,8 @@ bool Boss_Igory::Start() {
 
 	room = GetCurrentRoom();
 
+	generaTimeColdDown.Start();
+
 	return true;
 }
 
@@ -104,8 +103,6 @@ bool Boss_Igory::Update(float dt)
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
 
-
-
 	if (health <= 0)
 	{
 		desiredState = EntityState_Boss_Igory::DEAD;
@@ -114,15 +111,32 @@ bool Boss_Igory::Update(float dt)
 	{
 		desiredState = EntityState_Boss_Igory::TAKEHIT;
 	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 64 && ataqColdDown && !inTakeHit)
+	else if (goColdDown) {
+		if (GeneraColdDown(5)) {
+			generaTimeColdDown.Start();
+			goColdDown = false;
+			inSuregAni = false;
+		}
+		else {
+			desiredState = EntityState_Boss_Igory::IDLE;
+		}
+
+	}
+	else if (inSuregAni)
+	{
+		
+		desiredState = EntityState_Boss_Igory::GENERATESUREG;
+	}
+	
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32 && ataqColdDown && !inTakeHit)
 	{
 		desiredState = EntityState_Boss_Igory::IDLE;
 	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 64 && ataqColdDown == false && !inTakeHit)
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32 && ataqColdDown == false && !inTakeHit && !inSuregAni)
 	{
 		desiredState = EntityState_Boss_Igory::ATTACKING_BASIC;
 	}
-	else if (playerInFight && currentState != EntityState_Boss_Igory::ATTACKING_BASIC)
+	else if (playerInFight && currentState != EntityState_Boss_Igory::ATTACKING_BASIC && !inSuregAni)
 	{
 		desiredState = EntityState_Boss_Igory::RUNNING;
 
@@ -143,6 +157,7 @@ bool Boss_Igory::Update(float dt)
 	{
 		desiredState = EntityState_Boss_Igory::IDLE;
 	}
+
 	stateMachine(dt, playerPos);
 
 	if (health <= lifeLow40) {
@@ -153,6 +168,10 @@ bool Boss_Igory::Update(float dt)
 		AtqColdDown();
 	}
 
+
+	if (GeneraColdDown(10)) {
+		inSuregAni = true;
+	}
 
 	switch (fase)
 	{
@@ -189,12 +208,6 @@ bool Boss_Igory::PostUpdate() {
 		SDL_SetTextureAlphaMod(texture, 255);
 	}
 
-
-	
-
-	
-
-
 	if (isFacingLeft) {
 		app->render->DrawTexture(texture, position.x - 200, position.y - 200, 0.8, SDL_FLIP_HORIZONTAL, &rect);
 	}
@@ -215,8 +228,9 @@ bool Boss_Igory::PostUpdate() {
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
 
 	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
-		app->map->generaOrish(fase, position);
+		app->map->generaSureg(fase, position);
 	}
+
 	return true;
 }
 
@@ -285,11 +299,19 @@ void Boss_Igory::resetAnimation()
 		checkColdDown = true;*/
 	}
 
+	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "geneSure_boss_Igory") {
+		geneSure_boss_Igory.Reset();
+		generaTimeColdDown.Start();
+		showSuregAni = false;
+		goColdDown = true;
+		app->map->generaSureg(fase, position);
+	}
+
 }
 
 void Boss_Igory::showAnimation()
 {
-	if (inAtack) {
+	if (inAtack && !inSuregAni) {
 		if (attackTime == 0) {
 			currentAnimation = &atq1_boss_Igory;
 		}
@@ -301,21 +323,14 @@ void Boss_Igory::showAnimation()
 		}
 
 	}
+
+	if (showSuregAni) {
+		printf("genrasureg");
+		currentAnimation = &geneSure_boss_Igory;
+	}
 }
 
-void Boss_Igory::generaOrish()
-{
-	/*Enemy_Osiris* osiris = (Enemy_Osiris*)app->entityManager->CreateEntity(EntityType::ENEMY_OSIRIS);
-	osiris->config = configNode.child("entities_data").child("osiris");
-	osiris->position = iPoint(position.x + 16, position.y + 16);
-	osiris->Start();*/
 
-	Enemy_Muur* muur = (Enemy_Muur*)app->entityManager->CreateEntity(EntityType::ENEMY_MUUR);
-	muur->config = configNode.child("entities_data").child("muur");
-	muur->position = iPoint(position.x + 16, position.y + 16);
-	muur->Start();
-
-}
 
 bool Boss_Igory::AtqColdDown()
 {
@@ -382,6 +397,11 @@ void Boss_Igory::stateMachine(float dt, iPoint playerPos)
 		break;
 	case EntityState_Boss_Igory::TAKEHIT:
 		takeHit();
+		break;
+	case EntityState_Boss_Igory::GENERATESUREG:
+		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero); //No se mueve mientras ataca
+		printf("\ngeneraSureg");
+		showSuregAni = true;
 		break;
 	case EntityState_Boss_Igory::HEAL:
 		break;
@@ -456,7 +476,10 @@ void Boss_Igory::Attack(float dt)
 void Boss_Igory::Die() {
 
 	//Mask XP
-
+	Item_mascara_3* mascara3 = (Item_mascara_3*)app->entityManager->CreateEntity(EntityType::ITEM_MASCARA3);
+	mascara3->config = configNode.child("entities_data").child("item_mascara_3");
+	mascara3->position = iPoint(position.x, position.y);
+	mascara3->Start();
 	//Mask 0
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
 	{
@@ -527,7 +550,7 @@ bool Boss_Igory::Bossfinding(float dt, iPoint playerPosP)
 
 
 
-	if (playerInFight) {
+	if (playerInFight && !inSuregAni) {
 		app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
 		lastPath = *app->map->pathfinding->GetLastPath();
 	}
@@ -594,16 +617,28 @@ void Boss_Igory::TakeDamage(float damage) {
 
 bool Boss_Igory::TimerColdDown(float time)
 {
-	////printf("\nataqueTimeClodDown%: %f", ataqueTimeClodDown);
-	//ataqueTimeClodDown = atackTimeColdDown.CountDown(time);
-	//if ((float)ataqueTimeClodDown == 0) {
-	//	return true;
-	//}
-	//else
-	//{
-	//	return false;
-	//}
-	return false;
+	//printf("\nataqueTimeClodDown%: %f", ataqueTimeClodDown);
+	ataqueTimeClodDown = atackTimeColdDown.CountDown(time);
+	if ((float)ataqueTimeClodDown == 0) {
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool Boss_Igory::GeneraColdDown(float time)
+{
+	float fgenraTimeColdDown = generaTimeColdDown.CountDown(time);
+	printf("\nataqueTimeClodDown%: %f", fgenraTimeColdDown);
+	if ((float)fgenraTimeColdDown == 0) {
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 

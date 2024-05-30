@@ -98,6 +98,10 @@ bool Boss_Surma::Start() {
 	fase = FASE_Surma::FASE_ONE;
 	//fase = FASE_Surma::FASE_CHANGE;
 
+	pugi::xml_parse_result parseResult2 = configFile.load_file("config.xml");
+	if (parseResult2) {
+		configNode = configFile.child("config");
+	}
 
 	return true;
 }
