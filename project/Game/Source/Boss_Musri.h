@@ -124,7 +124,9 @@ public:
 
 	//Revivir
 
-
+	//Borrar
+	int pivotX = 0;
+	int pivotY = 0;
 
 private:
 	pugi::xml_document configFile;
@@ -192,6 +194,7 @@ private:
 	int habilidadRafagasCD = 1000;
 	int habilidadCargadaCD = 20000;
 	int habilidadDashInvisibleCD = 15000;
+	int habilidadRafagasRafagaCD = 100;
 
 	int meleeAttackDistance = 3;
 	int cambiarPosicionTime = 15000;

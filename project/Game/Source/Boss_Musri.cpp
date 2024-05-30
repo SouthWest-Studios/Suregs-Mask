@@ -50,7 +50,7 @@ bool Boss_Musri::Start() {
 	SpriteY = config.attribute("sprite_y").as_int();
 	Photowidth = config.attribute("Pwidth").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
-	spriteArrowPositions = SPosition.SpritesPos(14, 863, 600, 6904);
+	spriteArrowPositions = SPosition.SpritesPos(14, 300, 115, 2400);
 
 
 	atqCargadoAnim.LoadAnim((char*)name.c_str(), "atqCargadoAnim", spritePositions);
@@ -98,7 +98,7 @@ bool Boss_Musri::Start() {
 	movePosition = GetRandomPosicion(position, 10);
 
 	fase = FASE_Musri::FASE_ONE;
-	//fase = FASE_Musri::FASE_CHANGE;
+	fase = FASE_Musri::FASE_CHANGE;
 
 	cambiarPosicionTimer.Start(30000);
 	dispararRafagasTimer.Start(30000);
@@ -222,13 +222,49 @@ bool Boss_Musri::PostUpdate() {
 	for (int i = 0; i < flechasLanzadas.size(); i++) {
 
 		b2Vec2 arrowPos = flechasLanzadas.at(i).pbody->body->GetTransform().p;
-		app->render->DrawTexture(arrowTexture, METERS_TO_PIXELS(arrowPos.x), METERS_TO_PIXELS(arrowPos.y), 1, SDL_FLIP_NONE, &currentFlechaNormalAnimation->GetCurrentFrame(), 1, GetAngleFromDirection(flechasLanzadas.at(i).direction) , 0, 0);
+		double arrowAngle = GetAngleFromDirection(flechasLanzadas.at(i).direction);
+	/*	app->render->DrawTexture(arrowTexture, METERS_TO_PIXELS(arrowPos.x) * (pivotX + cos(arrowAngle)), METERS_TO_PIXELS(arrowPos.y) * (pivotY +sin(arrowAngle)), 1, SDL_FLIP_NONE, &currentFlechaNormalAnimation->GetCurrentFrame(), 1, arrowAngle, 0, 0);*/
+
+		/*app->render->DrawTexture(arrowTexture, METERS_TO_PIXELS(arrowPos.x), METERS_TO_PIXELS(arrowPos.y), 1, SDL_FLIP_NONE, &currentFlechaNormalAnimation->GetCurrentFrame(), 1, arrowAngle, 269, 57);*/
+		app->render->DrawTexture(
+			arrowTexture,
+			METERS_TO_PIXELS(arrowPos.x) - 269,
+			METERS_TO_PIXELS(arrowPos.y) - 57,
+			1.0, // scale
+			SDL_FLIP_NONE,
+			&currentFlechaNormalAnimation->GetCurrentFrame(),
+			1.0, // speed
+			arrowAngle,	//angle
+			269, // pivotX
+			57   // pivotY
+		);
+		/*app->render->DrawRectangle(SDL_Rect{ METERS_TO_PIXELS(arrowPos.x),
+			METERS_TO_PIXELS(arrowPos.y), currentFlechaNormalAnimation->GetCurrentFrame().w, currentFlechaNormalAnimation->GetCurrentFrame().h }, 0, 0, 255);*/
+
+		LOG("Arrow angle: %f", arrowAngle);
+
+		////app->render->DrawCircle(METERS_TO_PIXELS(arrowPos.x) + pivotX, METERS_TO_PIXELS(arrowPos.y) + pivotY, 3, 255,0,0);
+		//LOG("Posicion flecha: x: %f, y:%f", (int)METERS_TO_PIXELS(arrowPos.x) * (pivotX + cos(arrowAngle)), METERS_TO_PIXELS(arrowPos.y) * (pivotY + sin(arrowAngle)));
+		//LOG("Posicion flecha antes: x: %d, y: %d", (int)METERS_TO_PIXELS(arrowPos.x), METERS_TO_PIXELS(arrowPos.y));
 	}
 
 	for (int i = 0; i < flechasCargadas.size(); i++) {
 		FlechaCargadaMusri flechaC = flechasCargadas.at(i);
 		b2Vec2 arrowPos = flechaC.pbody->body->GetTransform().p;
-		app->render->DrawTexture(arrowTexture, METERS_TO_PIXELS(arrowPos.x), METERS_TO_PIXELS(arrowPos.y), 1, SDL_FLIP_NONE, &currentFlechaCargadaAnimation->GetCurrentFrame(), 1, GetAngleFromDirection(flechaC.direction), 0, 0);
+		/*app->render->DrawTexture(arrowTexture, METERS_TO_PIXELS(arrowPos.x), METERS_TO_PIXELS(arrowPos.y), 1, SDL_FLIP_NONE, &currentFlechaCargadaAnimation->GetCurrentFrame(), 1, GetAngleFromDirection(flechaC.direction), 0, 0);*/
+		double arrowAngle = GetAngleFromDirection(flechasCargadas.at(i).direction);
+		app->render->DrawTexture(
+			arrowTexture,
+			METERS_TO_PIXELS(arrowPos.x) - 269,
+			METERS_TO_PIXELS(arrowPos.y) - 57,
+			1.0, // scale
+			SDL_FLIP_NONE,
+			&currentFlechaCargadaAnimation->GetCurrentFrame(),
+			1.0, // speed
+			arrowAngle,	//angle
+			269, // pivotX
+			57   // pivotY
+		);
 		
 
 		for (int j = 0; j < flechaC.rastroGenerado.size(); j++) {
@@ -237,6 +273,20 @@ bool Boss_Musri::PostUpdate() {
 		}
 	}
 
+
+	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT) {
+		pivotY += 1;
+	}
+	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) {
+		pivotY -= 1;
+	}
+	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
+		pivotX -= 1;
+	}
+	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) {
+		pivotX += 1;
+	}
+	LOG("Pivotx: %d, PivotY: %d", pivotX, pivotY);
 
 	/*LIMITES SALA*/
 	//app->render->DrawRectangle(limitesSala, 255,255,255,200,true,true);
@@ -575,7 +625,7 @@ void Boss_Musri::Fase1(float dt, iPoint playerPos)
 
 					if (numeroRafagasAct == 0) { currentFlechaNormalAnimation->Reset(); }
 
-					if (dispararFlechaRafagaTimer.ReadMSec() >= 100) {
+					if (dispararFlechaRafagaTimer.ReadMSec() >= habilidadRafagasRafagaCD) {
 
 						dispararFlechaRafagaTimer.Start();
 						FlechaMusri flecha = { getDirectionVector(position, playerPos), app->physics->CreateCircle(position.x, position.y, 10, bodyType::DYNAMIC) };
