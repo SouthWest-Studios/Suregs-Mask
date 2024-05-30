@@ -93,6 +93,7 @@ bool Enemy_Muur::Update(float dt)
 {
 	OPTICK_EVENT();
 
+	printf("\nheal: %f",health);
 	// Pone el sensor del cuerpo en su posicion
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 0.5), 0);

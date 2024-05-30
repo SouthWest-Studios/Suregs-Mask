@@ -698,8 +698,8 @@ bool Player::Start() {
 	app->tex->GetSize(texture, texW, texH);
 
 
-	printf("\nPositionX: %d", position.x);
-	printf("\nPositionY: %d", position.y);
+	/*printf("\nPositionX: %d", position.x);
+	printf("\nPositionY: %d", position.y);*/
 	posInicioPlayer = b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y));
 
 	return true;
@@ -786,7 +786,7 @@ bool Player::Update(float dt)
 		desiredState = EntityStatePlayer::POCION;
 	}
 
-	printf("\nposx:%d, posy: %d",position.x, position.y);
+	//printf("\nposx:%d, posy: %d",position.x, position.y);
 
 	if (maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].invisibilityTimer.ReadSec() > maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].invisibilityDuration) {
 		SDL_SetTextureAlphaMod(texture, 255);

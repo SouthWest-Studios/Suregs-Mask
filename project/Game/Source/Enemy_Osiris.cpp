@@ -105,7 +105,7 @@ bool Enemy_Osiris::Start() {
 bool Enemy_Osiris::Update(float dt)
 {
 	OPTICK_EVENT();
-
+	printf("\nEnemy_Osiris");
 	//Pone el sensor del cuerpo en su posicion
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);

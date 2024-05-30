@@ -276,10 +276,10 @@ bool Boss_Inuit::PostUpdate() {
 	}
 	resetAnimation();
 
-	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
+	/*if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
 		health -= 1000;
 		printf("\nHealth: %f", health);
-	}
+	}*/
 
 	if (goUseUlt) {
 		ultDef = true;

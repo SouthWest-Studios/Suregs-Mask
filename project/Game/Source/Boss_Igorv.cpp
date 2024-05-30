@@ -12,7 +12,10 @@
 #include "Pathfinding.h"
 #include "Map.h"
 #include "Physics.h"
+#include "Enemy_Osiris.h"
+#include "Enemy_Muur.h"
 #include "Item_Hueso.h"
+#include "EntityManager.h"
 #include <Optick/include/optick.h>
 #include "Boss_Igory.h"
 #include "Utils.cpp"
@@ -107,11 +110,15 @@ bool Boss_Igory::Update(float dt)
 	{
 		desiredState = EntityState_Boss_Igory::DEAD;
 	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 64 && ataqColdDown)
+	else if (inTakeHit)
+	{
+		desiredState = EntityState_Boss_Igory::TAKEHIT;
+	}
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 64 && ataqColdDown && !inTakeHit)
 	{
 		desiredState = EntityState_Boss_Igory::IDLE;
 	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 64 && ataqColdDown == false)
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 64 && ataqColdDown == false && !inTakeHit)
 	{
 		desiredState = EntityState_Boss_Igory::ATTACKING_BASIC;
 	}
@@ -173,17 +180,20 @@ bool Boss_Igory::PostUpdate() {
 	if (currentAnimation == nullptr) { currentAnimation = &idle_boss_Igory; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
-	//if (timerRecibirDanioColor.ReadMSec() <= 100) {
-	//	float alpha = (100 - timerRecibirDanioColor.ReadMSec()) / 100;
-	//	SDL_SetTextureAlphaMod(texture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
+	if (timerRecibirDanioColor.ReadMSec() <= 100) {
+		float alpha = (100 - timerRecibirDanioColor.ReadMSec()) / 100;
+		SDL_SetTextureAlphaMod(texture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
 
-	//}
-	//else {
-	//	SDL_SetTextureAlphaMod(texture, 255);
-	//}
+	}
+	else {
+		SDL_SetTextureAlphaMod(texture, 255);
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
+		generaOrish();
+	}
 
 	
-	generaOrish();
 
 
 	if (isFacingLeft) {
@@ -262,6 +272,18 @@ void Boss_Igory::resetAnimation()
 		startColdDown = true;
 		checkColdDown = true;
 	}
+	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "hit_boss_Igory") {
+		inTakeHit = false;
+		hit_boss_Igory.Reset();
+		if (atackCube != nullptr) {
+			app->physics->GetWorld()->DestroyBody(atackCube->body);
+			atackCube = nullptr;
+		}
+		inAtack = false;
+		startColdDown = true;
+		checkColdDown = true;
+	}
+
 }
 
 void Boss_Igory::showAnimation()
@@ -282,22 +304,29 @@ void Boss_Igory::showAnimation()
 
 void Boss_Igory::generaOrish()
 {
-	Enemy_Osiris* osiris = (Enemy_Osiris*)app->entityManager->CreateEntity(EntityType::ENEMY_OSIRIS);
+	/*Enemy_Osiris* osiris = (Enemy_Osiris*)app->entityManager->CreateEntity(EntityType::ENEMY_OSIRIS);
 	osiris->config = configNode.child("entities_data").child("osiris");
 	osiris->position = iPoint(position.x + 16, position.y + 16);
-	osiris->Start();
+	osiris->Start();*/
+
+	Enemy_Muur* muur = (Enemy_Muur*)app->entityManager->CreateEntity(EntityType::ENEMY_MUUR);
+	muur->config = configNode.child("entities_data").child("muur");
+	muur->position = iPoint(position.x + 16, position.y + 16);
+	muur->Start();
+
+
 }
 
 bool Boss_Igory::AtqColdDown()
 {
 	if (startColdDown) {
-		printf("\nStart");
+		//printf("\nStart");
 		atackTimeColdDown.Start();
 		startColdDown = false;
 	}
 
 	if (atackTimeColdDown.ReadMSec() >= 500) {
-		printf("\nEnd");
+		//printf("\nEnd");
 		ataqColdDown = false;
 		checkColdDown = false;
 		startColdDown = true;
@@ -313,6 +342,11 @@ bool Boss_Igory::AtqColdDown()
 
 	atackTimeColdDown.Start();
 
+}
+
+void Boss_Igory::takeHit()
+{
+	currentAnimation = &hit_boss_Igory;
 }
 
 
@@ -347,6 +381,7 @@ void Boss_Igory::stateMachine(float dt, iPoint playerPos)
 	case EntityState_Boss_Igory::FASE_CHANGE:
 		break;
 	case EntityState_Boss_Igory::TAKEHIT:
+		takeHit();
 		break;
 	case EntityState_Boss_Igory::HEAL:
 		break;
@@ -387,7 +422,7 @@ void Boss_Igory::Attack(float dt)
 		attackTime++;
 		atqGoNext = false;
 	}
-	printf("\nattackTime: %d", attackTime);
+	//printf("\nattackTime: %d", attackTime);
 	switch (attackTime)
 	{
 	case 1:
@@ -596,9 +631,12 @@ void Boss_Igory::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLAYER_ATTACK:
 		LOG("Collision Player_Attack");
-		if (fase != FASE_Igory::FASE_CHANGE) {
+		if (fase != FASE_Igory::FASE_CHANGE && app->entityManager->GetPlayer()->checkAtk == true) {
+			inTakeHit = true;
 			health -= app->entityManager->GetPlayer()->currentStats.attackDamage;
-			printf("\n BossHeal %f", app->entityManager->GetPlayer()->attackDamage);
+			timerRecibirDanioColor.Start();
+			printf("\n BossHeal %f", health);
+			app->entityManager->GetPlayer()->checkAtk = false;
 		}
 		break;
 	case ColliderType::UNKNOWN:
