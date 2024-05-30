@@ -167,8 +167,6 @@ bool Boss_Igory::Update(float dt)
 
 	stateMachine(dt, playerPos);
 
-
-
 	if (checkColdDown) {
 		AtqColdDown();
 	}
@@ -183,9 +181,14 @@ bool Boss_Igory::Update(float dt)
 	case FASE_Igory::FASE_ONE:
 		break;
 	case FASE_Igory::FASE_TWO:
+		atq1_boss_Igory.speed = 0.15;
+		atq2_boss_Igory.speed = 0.15;
+		atq3_boss_Igory.speed = 0.15;
 		break;
 	case FASE_Igory::FASE_THREE:
-
+		atq1_boss_Igory.speed = 0.25;
+		atq2_boss_Igory.speed = 0.25;
+		atq3_boss_Igory.speed = 0.25;
 		break;
 	}
 
@@ -212,10 +215,10 @@ bool Boss_Igory::PostUpdate() {
 	}
 
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 200, position.y - 200, 0.8, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x - 110, position.y - 160, 0.5, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 260, position.y - 200, 0.8, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 160, position.y - 160, 0.5, SDL_FLIP_NONE, &rect);
 	}
 
 	for (uint i = 0; i < lastPath.Count(); ++i)
@@ -311,7 +314,7 @@ void Boss_Igory::resetAnimation()
 	}
 
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atqCargado_fase2_boss_Igory") {
-
+		atqCargado_fase1_boss_Igory.Reset();
 		atqCargado_fase2_boss_Igory.Reset();
 		generaTimeColdDown.Start();
 		faseAni = false;
@@ -326,12 +329,11 @@ void Boss_Igory::resetAnimation()
 			fase = FASE_Igory::FASE_TWO;
 			faseTwo = true;
 		}
-
-
+		goColdDown = false;
+		inSuregAni = false;
 	}
 
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atqCargado_fase1_boss_Igory") {
-		atqCargado_fase1_boss_Igory.Reset();
 		faseAni = true;
 
 	}
