@@ -5,13 +5,30 @@
 	<textures />
 	<audio />
 	<:anonymous />
-	<:anonymous />
+	<:anonymous>
+		<map />
+		<map>
+			<puzzles>
+				<puzzle level="0" complete="true" />
+				<puzzle level="1" complete="false" />
+				<puzzle level="2" complete="false" />
+				<puzzle level="3" complete="false" />
+				<puzzle level="4" complete="false" />
+				<puzzle level="5" complete="false" />
+				<puzzle level="6" complete="false" />
+				<puzzle level="7" complete="false" />
+			</puzzles>
+		</map>
+	</:anonymous>
 	<scene_pueblo />
 	<entitymanager>
 		<entity_manager>
 			<doors>
-				<door sceneLevel="-10" tpID="70" />
 				<door sceneLevel="-10" tpID="0" />
+				<door sceneLevel="-10" tpID="2" />
+				<door sceneLevel="-10" tpID="4" />
+				<door sceneLevel="-10" tpID="1" />
+				<door sceneLevel="-10" tpID="3" />
 			</doors>
 		</entity_manager>
 	</entitymanager>
@@ -20,7 +37,7 @@
 	<menu />
 	<iventorymanager>
 		<inventory>
-			<money quantity="0" />
+			<money quantity="100" />
 			<SwordLevel quantity="0" />
 			<ArmorLevel quantity="0" />
 			<PrimaryMask quantity="-1" />
