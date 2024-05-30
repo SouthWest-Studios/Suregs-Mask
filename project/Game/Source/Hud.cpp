@@ -18,6 +18,7 @@
 #include "Scene_Menu.h"
 #include "Scene_Testing.h"
 #include "ModuleFadeToBlack.h"
+#include "ElevatorMenu.h"
 
 Hud::Hud(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -315,7 +316,18 @@ bool Hud::PostUpdate()
 	SDL_SetTextureAlphaMod(hudTexture, 255);
 
 	//Me da miedo preguntar que es esto de aqui abajo, solo sabe dios que hace.
-
+	if (estatua)
+	{
+		app->physics->active = false;
+		{
+			app->render->DrawTexture(EstatuaTexture, 0, 0, SDL_FLIP_NONE, 0, 0);
+		}
+	}
+	else
+	{
+		app->physics->active = true;
+	}
+	
 
 	return true;
 }

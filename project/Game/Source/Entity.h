@@ -105,6 +105,7 @@ enum class EntityType
 
 	COFRE,
 	ASCENSOR,
+	ESTATUA,
 
 	UNKNOWN
 

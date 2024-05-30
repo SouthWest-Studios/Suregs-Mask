@@ -67,7 +67,7 @@
 #include "Item_Mascara_1.h"
 #include "Item_Mascara_2.h"
 #include "Item_Mascara_3.h"
-
+#include "Estatua.h"
 #include "Defs.h"
 #include "Log.h"
 
@@ -364,6 +364,9 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 	case EntityType::ITEM_MASCARA3:
 		entity = new Item_mascara_3(type, 100, 100, 300, 5, 2);
 		break;
+	case EntityType::ESTATUA:
+		entity = new Estatua();
+		break;
 	default:
 		break;
 	}
@@ -494,6 +497,12 @@ Elevator* EntityManager::GetAscensor()
 	return ascensor;
 }
 
+Estatua* EntityManager::GetEstatua()
+{
+	return estatua;
+}
+
+
 bool EntityManager::PreUpdate()
 {
 	UpdateEnemyActivation();
@@ -593,7 +602,7 @@ bool EntityManager::Update(float dt)
 {
 	bool ret = true;
 
-	if (app->menu->menuu || vacioGameStop) {
+	if (app->menu->menuu || vacioGameStop || app->hud->estatua) {
 		return ret;
 	}
 

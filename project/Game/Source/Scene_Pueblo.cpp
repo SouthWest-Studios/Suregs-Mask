@@ -15,6 +15,7 @@
 #include "GuiControl.h"
 #include "GuiManager.h"
 #include "Elevator.h"
+#include "Estatua.h"
 
 Scene_Pueblo::Scene_Pueblo(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -51,7 +52,10 @@ bool Scene_Pueblo::Start()
 	/*player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);*/
 	////Assigns the XML node to a member in player
 	/*player->config = config.child("player");*/
-
+	pugi::xml_parse_result parseResult2 = configFile.load_file("config.xml");
+	if (parseResult2) {
+		configNode = configFile.child("config");
+	}
 	//Get the map name from the config file and assigns the value in the module
 	app->map->name = config.child("map").attribute("name").as_string();
 	app->map->path = config.child("map").attribute("path").as_string();
@@ -68,7 +72,10 @@ bool Scene_Pueblo::Start()
 	fishing = (MiniGameFishing*)app->entityManager->CreateEntity(EntityType::ROD);
 	fishing->parameters = config.child("minigamefishing");
 
-	
+	Estatua* estatua = (Estatua*)app->entityManager->CreateEntity(EntityType::ESTATUA);
+	estatua->config = configNode.child("entities_data").child("estatua");
+	estatua->position = iPoint(4501, 3178);
+	estatua->Start();
 
 	/*fPoint pos(5728.0f, 416.0f);
 	app->psystem->AddEmiter(pos,EMITTER_TYPE_SMOKE);*/
