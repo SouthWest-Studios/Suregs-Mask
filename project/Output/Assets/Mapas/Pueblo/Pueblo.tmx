@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="235" height="188" tilewidth="32" tileheight="32" infinite="0" nextlayerid="18" nextobjectid="369">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="235" height="188" tilewidth="32" tileheight="32" infinite="0" nextlayerid="18" nextobjectid="372">
  <tileset firstgid="1" name="Colisiones" tilewidth="32" tileheight="32" tilecount="16" columns="4">
   <image source="../../Textures/Mapas/Metadatos/Collisions_32x32.png" width="128" height="128"/>
  </tileset>
@@ -220983,7 +220983,6 @@
   <object id="282" x="3548" y="2948" width="244" height="149"/>
   <object id="283" x="5627.5" y="2626" width="319.5" height="121"/>
   <object id="284" x="5282" y="2721" width="363" height="91"/>
-  <object id="285" x="4376.33" y="3136.67" width="268" height="29.6667"/>
   <object id="286" x="5442" y="3198" width="200.5" height="128"/>
   <object id="287" x="5765" y="3241" width="324" height="199"/>
   <object id="288" x="6079" y="3240" width="109.5" height="170"/>
@@ -220994,12 +220993,6 @@
   <object id="293" x="5977" y="4631" width="18" height="84"/>
   <object id="294" x="5995" y="4671" width="248" height="49"/>
   <object id="295" x="6063" y="4612" width="195" height="66"/>
-  <object id="296" x="5892" y="4672" width="84" height="17"/>
-  <object id="297" x="5891" y="4545" width="25" height="74"/>
-  <object id="298" x="5920" y="4545" width="23" height="53"/>
-  <object id="299" x="5947" y="4536" width="26" height="47"/>
-  <object id="300" x="5926" y="4652" width="57" height="12"/>
-  <object id="301" x="5954" y="4632" width="41" height="12"/>
   <object id="302" x="3532.5" y="4599" width="425.5" height="113"/>
   <object id="303" x="3627" y="4688" width="247" height="68"/>
   <object id="304" x="3184" y="4134" width="322" height="79"/>
@@ -221044,7 +221037,14 @@
    <polygon points="0,0 1.33333,-126 -32,-127.333 -30.6667,-136.667 -64,-138 -64.6667,-268.667 -38.6667,-268 -35.3333,-295.333 160.667,-295.333 163.333,-274 194,-270 196,-140 167.333,-138 167.333,-106 141.333,-106.667 139.333,-2.66667 156.667,0.666667 156,-58.6667 205.333,-62 208.667,-316 -78,-314 -75.3333,-65.3333 -13.3333,-66.6667 -12.6667,-0.666667 -1.91667,-0.270833"/>
   </object>
   <object id="365" x="1513.21" y="3263.64" width="19.7576" height="1442.42"/>
-  <object id="368" x="5181.33" y="3140.5" width="248" height="239"/>
+  <object id="368" x="5224" y="3197.17" width="248" height="239"/>
+  <object id="369" x="4380.54" y="3090.12" width="260.25" height="62.417"/>
+  <object id="370" x="5893" y="4689.67">
+   <polygon points="0,0 84.6667,-59.3333 85.3333,0.333333"/>
+  </object>
+  <object id="371" x="5892.67" y="4622.67">
+   <polygon points="0,0 86,-52.3333 87.3333,-86.3333 -2.33333,-84"/>
+  </object>
  </objectgroup>
  <objectgroup id="17" name="CollisionCamera">
   <properties>
@@ -221133,11 +221133,6 @@
   <object id="362" x="1162.76" y="4470.53" width="96" height="96">
    <properties>
     <property name="dialogID" type="int" value="950"/>
-   </properties>
-  </object>
-  <object id="367" x="3298.67" y="4300" width="96" height="96">
-   <properties>
-    <property name="dialogID" type="int" value="51"/>
    </properties>
   </object>
  </objectgroup>
