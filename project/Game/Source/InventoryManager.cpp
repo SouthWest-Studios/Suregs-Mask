@@ -1055,23 +1055,23 @@ void InventoryManager::UsePotionSelected(ListItem<Inventity*>* it)
 void InventoryManager::OnMovePointer()
 {
 
-	if (app->input->GetButton(RIGHT) == KEY_DOWN && PointerPosition.x < 300) {
+	if (app->input->GetButton(RIGHT) == KEY_DOWN && PointerPosition.x < 460) {
 		PointerPosition.x += 106;
 		PointerId += 1;
 		currentPointerAnimation->Reset();
 	}
-	if (app->input->GetButton(LEFT) == KEY_DOWN && PointerPosition.x > 196) {
+	if (app->input->GetButton(LEFT) == KEY_DOWN && PointerPosition.x > 258) {
 		PointerPosition.x -= 106;
 		PointerId -= 1;
 		currentPointerAnimation->Reset();
 	}
 
-	if (app->input->GetButton(DOWN) == KEY_DOWN && PointerPosition.y < 200) {
+	if (app->input->GetButton(DOWN) == KEY_DOWN && PointerPosition.y < 436) {
 		PointerPosition.y += 103;
 		PointerId += 3;
 		currentPointerAnimation->Reset();
 	}
-	if (app->input->GetButton(UP) == KEY_DOWN && PointerPosition.y > -60) {
+	if (app->input->GetButton(UP) == KEY_DOWN && PointerPosition.y > 130 ) {
 		PointerPosition.y -= 103;
 		PointerId -= 3;
 		currentPointerAnimation->Reset();
@@ -1231,7 +1231,7 @@ bool InventoryManager::Update(float dt)
 		}
 		if (app->input->GetButton(SELECT) == KEY_DOWN) {
 			options = true;
-			selected = { PointerPosition.x, PointerPosition.y };
+			selected = { PointerPosition.x + 8, PointerPosition.y + 9 };
 			selectedId = PointerId;
 			UseItemSelected(selectedId);
 			selectedd = true;
