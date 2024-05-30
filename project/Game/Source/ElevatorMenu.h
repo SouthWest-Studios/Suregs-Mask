@@ -48,6 +48,7 @@ public:
 
 	bool abierto = false;
 	bool open = false;
+	bool cerrar = false;
 
 	iPoint PointerPosition = { 400, 100 };
 	int PointerId = 0;

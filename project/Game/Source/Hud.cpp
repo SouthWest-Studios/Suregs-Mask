@@ -180,6 +180,7 @@ bool Hud::Update(float dt)
 	return true;
 }
 bool fade = false;
+int couunt = 0;
 // Called each loop iteration
 bool Hud::PostUpdate()
 {
@@ -318,6 +319,14 @@ bool Hud::PostUpdate()
 	//Me da miedo preguntar que es esto de aqui abajo, solo sabe dios que hace.
 	if (estatua)
 	{
+		if (app->input->GetButton(APP_EXIT) == KEY_DOWN || app->input->GetButton(BACK) == KEY_DOWN || app->input->GetButton(CONFIRM) == KEY_DOWN || app->input->GetButton(SELECT) == KEY_DOWN) {
+			if (couunt > 0 )
+			{
+				estatua = false;
+			}
+			couunt++;
+
+		}
 		app->physics->active = false;
 		{
 			app->render->DrawTexture(EstatuaTexture, 0, 0, SDL_FLIP_NONE, 0, 0);
@@ -326,6 +335,7 @@ bool Hud::PostUpdate()
 	else
 	{
 		app->physics->active = true;
+		couunt = 0;
 	}
 	
 

@@ -97,12 +97,15 @@ bool ElevatorMenu::Update(float dt)
 			
 			abierto = false;
 			open = false;
+			cerrar = true;
 		}
 		
 	}
-	else
+	if(cerrar)
 	{
 		app->menu->active = true;
+		app->entityManager->active = true;
+		app->physics->active = true;
 		open = false;
 	}
 	return true;

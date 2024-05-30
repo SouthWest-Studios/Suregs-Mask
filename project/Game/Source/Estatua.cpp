@@ -66,19 +66,15 @@ bool Estatua::Update(float dt)
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - 25;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 25;
 
-	if (app->input->GetButton(APP_EXIT) == KEY_DOWN || app->input->GetButton(BACK) == KEY_DOWN) {
-
-		mostrar = false;
-
-	}
-	if (mostrar)
+	
+	/*if (mostrar)
 	{
 		app->hud->estatua = true;
 	}
-	if (!mostrar)
+	else if (mostrar == false)
 	{
 		app->hud->estatua = false;
-	}
+	}*/
 	
 	
 	return true;
@@ -110,7 +106,7 @@ void Estatua::OnCollision(PhysBody* physA, PhysBody* physB)
           
               if (app->input->GetButton(CONFIRM) == KEY_DOWN)
               {
-				  mostrar = true;
+				  app->hud->estatua = true;
 				  app->hud->EstatuaTexture = texture;
               }
 

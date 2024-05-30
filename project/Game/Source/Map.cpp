@@ -58,6 +58,7 @@
 #include "ModuleFadeToBlack.h"
 #include "Enemy_Spawner.h"
 #include "ElevatorMenu.h"
+#include "Item_Mascara_0.h"
 
 Map::Map(App* app, bool start_enabled) : Module(app, start_enabled), mapLoaded(false)
 {
@@ -145,7 +146,10 @@ bool Map::Update(float dt)
 		}
 		if (!falta) {
 			if (app->ascensor->mazmorraActual == 0) {
-
+				Item_mascara_0* mascara0 = (Item_mascara_0*)app->entityManager->CreateEntity(EntityType::ITEM_MASCARA0);
+				mascara0->config = configNode.child("entities_data").child("item_mascara_0");
+				mascara0->position = iPoint(1270, 2513);
+				mascara0->Start();
 			}
 			else {
 				app->inventoryManager->monedasObtenidas += 100;
