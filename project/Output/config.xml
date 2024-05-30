@@ -32,15 +32,14 @@
 
 	<sounds>
 		<music>
-			<menu path="Assets/Audio/Music/o-herbologista.ogg"/>
+			<menu path="Assets/Audio/Music/menu.ogg"/>
       <town path="Assets/Audio/Music/town.ogg"/>
-      <dungeon path="Assets/Audio/Music/dungeon.ogg"/>
+      <town_fx path="Assets/Audio/Music/town_fx.ogg"/>
+      <dungeon path="Assets/Audio/Music/DIRTY LOVE.ogg"/>
       <credits path="Assets/Audio/Music/credits.ogg"/>
 		</music>
 
 		<fx>
-      <town_fx path="Assets/Audio/Fx/town_fx.ogg"/>
-
       <!--ui-->
 			<intro_fx path="Assets/Audio/Fx/UI/intro_fx.wav"/>
       <menu_fx path="Assets/Audio/Fx/UI/menu_fx.wav"/>

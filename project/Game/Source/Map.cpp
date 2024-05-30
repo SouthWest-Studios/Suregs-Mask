@@ -57,6 +57,7 @@
 #include "Elevator.h"
 #include "ModuleFadeToBlack.h"
 #include "Enemy_Spawner.h"
+#include "ElevatorMenu.h"
 
 Map::Map(App* app, bool start_enabled) : Module(app, start_enabled), mapLoaded(false)
 {
@@ -106,6 +107,13 @@ bool Map::Start() {
 
 	app->win->GetWindowSize(windowW, windowH);
 
+	if (puzzleComplete[app->ascensor->mazmorraActual]) {
+		recompensaPuzzle = true;
+
+		for (int i = 0; i < puzzleButtonEntities.size(); i++) {
+			puzzleButtonEntities.at(i)->pressed = true;
+		}
+	}
 
 	return true;
 }
@@ -136,8 +144,15 @@ bool Map::Update(float dt)
 			}
 		}
 		if (!falta) {
-			app->inventoryManager->monedasObtenidas += 100;
+			if (app->ascensor->mazmorraActual == 0) {
+
+			}
+			else {
+				app->inventoryManager->monedasObtenidas += 100;
+			}
+			
 			recompensaPuzzle = true;
+			puzzleComplete[app->ascensor->mazmorraActual] = true;
 		}
 	}
 
@@ -1620,6 +1635,35 @@ void Map::BubbleSort(std::vector<PuzzleButtonEntity*>* entities) {
 			}
 		}
 	} while (swapped);
+}
+
+bool Map::LoadState(pugi::xml_node node)
+{
+	bool ret = true;
+	for (pugi::xml_node itemNode = node.child("map").child("puzzles").child("puzzle"); itemNode; itemNode = itemNode.next_sibling("puzzle")) {
+		if (itemNode.attribute("level").as_int(-1) != -1) {
+			puzzleComplete[itemNode.attribute("level").as_int()] = itemNode.attribute("complete").as_bool();
+		}
+			
+	}
+
+
+	return ret;
+}
+
+bool Map::SaveState(pugi::xml_node node)
+{
+	bool ret = true;
+	pugi::xml_node mapNode = node.append_child("map");
+	pugi::xml_node mapPuzzlesNode = node.append_child("map").append_child("puzzles");
+
+	for (int i = 0; i < 8; i++) {
+		pugi::xml_node mapPuzzleNode = mapPuzzlesNode.append_child("puzzle");
+		mapPuzzleNode.append_attribute("level").set_value(i);
+		mapPuzzleNode.append_attribute("complete").set_value(puzzleComplete[i]);
+	}
+
+	return ret;
 }
 
 

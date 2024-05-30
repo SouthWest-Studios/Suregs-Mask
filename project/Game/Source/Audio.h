@@ -55,7 +55,7 @@ public:
 	unsigned int LoadFx(const char* path);
 
 	// Play a previously loaded WAV
-	bool PlayFx(unsigned int fx, int channel = -1, int repeat = 0);
+	bool PlayFx(unsigned int fx, int repeat = 0, int channel = -1);
 
 	// Play a WAV after the specified time, time in milliseconds
 	bool PlayFxTimed(unsigned int fx, int time = 0, int channel = -1, int repeat = 0);
@@ -100,7 +100,7 @@ public:
 	bool playingMusic = false;
 	bool playingRunFx = false;
 	bool playingDeathFx = false;
-	bool playingAmbienceFx = true;
+	bool playingAmbience = false;
 
 	int musicDuration;
 

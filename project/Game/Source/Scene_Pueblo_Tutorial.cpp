@@ -59,10 +59,7 @@ bool Scene_Pueblo_Tutorial::Start()
 	
 	// Stop the music from previous scenes
 	app->audio->StopMusic();
-
-	town_fx = app->audio->LoadAudioFx("town_fx");
-	app->audio->PlayFx(town_fx, -1, -1);
-	//app->audio->LoadAudioMusic("town_fx");
+	app->audio->LoadAudioMusic("town_fx");
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
@@ -95,15 +92,16 @@ bool Scene_Pueblo_Tutorial::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
-
-	if (app->audio->playingAmbienceFx == false)
+	/*
+	if (app->audio->playingAmbience == false)
 	{
-		app->audio->PlayFx(town_fx, -1, -1);
-		app->audio->playingAmbienceFx = true;
-	}
+		app->audio->playingAmbience = true;
+		app->audio->LoadAudioMusic("town_fx");
+	}*/
 	if (app->audio->playingMusic == true && app->audio->musicTimer.ReadMSec() >= app->audio->musicDuration)
 	{
 		app->audio->StopMusic(0.0f);
+		app->audio->playingAmbience = false;
 	}
 	if (app->audio->playingMusic == false) 
 	{
