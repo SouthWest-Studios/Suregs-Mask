@@ -180,14 +180,14 @@ bool Boss_Inuit::PostUpdate() {
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
 
-	//if (timerRecibirDanioColor.ReadMSec() <= 100) {
-	//	float alpha = (100 - timerRecibirDanioColor.ReadMSec()) / 100;
-	//	SDL_SetTextureAlphaMod(texture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
+	if (timerRecibirDanioColor.ReadMSec() <= 100) {
+		float alpha = (100 - timerRecibirDanioColor.ReadMSec()) / 100;
+		SDL_SetTextureAlphaMod(texture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
 
-	//}
-	//else {
-	//	SDL_SetTextureAlphaMod(texture, 255);
-	//}
+	}
+	else {
+		SDL_SetTextureAlphaMod(texture, 255);
+	}
 
 
 	/*if (isInCenter) {
@@ -276,10 +276,10 @@ bool Boss_Inuit::PostUpdate() {
 	}
 	resetAnimation();
 
-	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
+	/*if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
 		health -= 1000;
 		printf("\nHealth: %f", health);
-	}
+	}*/
 
 	if (goUseUlt) {
 		ultDef = true;
@@ -1016,6 +1016,7 @@ void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision Player_Attack");
 		if (fase != FASE::FASE_CHANGE && app->entityManager->GetPlayer()->checkAtk == true) {
 			health -= app->entityManager->GetPlayer()->currentStats.attackDamage;
+			timerRecibirDanioColor.Start();
 			printf("\n BossHeal %f", health);
 			app->entityManager->GetPlayer()->checkAtk = false;
 		}

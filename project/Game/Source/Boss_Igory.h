@@ -65,7 +65,9 @@ public:
 	void OnEndCollision(PhysBody* physA, PhysBody* physB);
 	void resetAnimation();
 	void showAnimation();
+	void generaOrish();
 	bool AtqColdDown();
+	void takeHit();
 
 	
 	//Veneno
@@ -93,7 +95,7 @@ public:
 	int attackTime;
 	bool getBossArea = true;
 	
-
+	Timer timerRecibirDanioColor;
 
 private:
 	pugi::xml_document configFile;
@@ -163,6 +165,9 @@ private:
 	float lifeLow40;
 	bool dontMove = false;
 	bool isDead = false;
+
+	//Takehit
+	bool inTakeHit = false;
 
 	//Veneno
 	float poisonTimer = 0.0f; // Tiempo desde que se aplic� el veneno

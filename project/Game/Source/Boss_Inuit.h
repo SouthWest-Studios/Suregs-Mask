@@ -96,7 +96,7 @@ public:
 	bool getBossArea = true;
 	//Revivir
 	Timer atackTimeColdDown;
-
+	Timer timerRecibirDanioColor;
 
 private:
 	pugi::xml_document configFile;
