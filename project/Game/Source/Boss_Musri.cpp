@@ -887,9 +887,15 @@ void Boss_Musri::Fase2(float dt, iPoint playerPos)
 void Boss_Musri::FaseDying(float dt, iPoint playerPos)
 {
 	movePosition = iPoint(limitesSala.x + (limitesSala.w / 2), limitesSala.y + (limitesSala.h / 2));
+
+	currentAnimation = &cambioFaseAnim;
+
 	if (Bossfinding(dt, movePosition)) {
 		//C muere
 		
+		//Particulas de muerte
+
+
 		if (muriendoseTimer.ReadMSec() >= 3000) {
 			Die();
 			app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
