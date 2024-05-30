@@ -91,7 +91,6 @@ bool ElevatorMenu::Update(float dt)
 			}
 		}
 
-		totalMazmorras = mazmorra + plus + 1;
 		
 		open = true;
 		if (app->input->GetButton(APP_EXIT) == KEY_DOWN || app->input->GetButton(BACK) == KEY_DOWN) {
@@ -134,7 +133,9 @@ bool ElevatorMenu::PostUpdate()
 		app->render->DrawTexture(PointerTexture, PointerPosition.x, PointerPosition.y, SDL_FLIP_NONE, 0, 0);
 		
 
+		totalMazmorras = mazmorra + plus + 1;
 	}
+
 
 	bool ret = true;
 
