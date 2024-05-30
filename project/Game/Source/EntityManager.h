@@ -68,6 +68,7 @@ public:
 
 	void LinkTPEntities();
 
+	int getRandomNumber(int min, int max);
 
 	void SetPlayer(Player* player);
 	Player* GetPlayer();

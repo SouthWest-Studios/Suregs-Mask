@@ -178,6 +178,8 @@ public:
     iPoint MapToWorld(int x, int y) const;
     iPoint WorldToMap(int x, int y);
 
+    void SpawnEnemy(EntityType type, const char* configName, iPoint position);
+
     void generaSureg(FASE_Igory fase, iPoint position);
   
 
