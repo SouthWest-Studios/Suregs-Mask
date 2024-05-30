@@ -245,6 +245,9 @@ public:
 
     iPoint al = { 0,0 };
 
+    std::vector<Entity*> enemies;
+    const int maxEnemies = 6; 
+
 private:
     
 

@@ -787,9 +787,15 @@ void Map::generaSureg(FASE_Igory fase, iPoint position)
 	int numX = 0;
 	int numY = 0;
 	int range = 50;
+
+	if (enemies.size() >= maxEnemies) {
+		return;
+	}
+
 	if (fase == FASE_Igory::FASE_ONE) {
 		for (int i = 0; i < 2; i++)
 		{
+			if (enemies.size() >= maxEnemies) break;
 			numX = 0;
 			numY = 0;
 			numX = app->entityManager->getRandomNumber(-range, range);
@@ -798,10 +804,12 @@ void Map::generaSureg(FASE_Igory fase, iPoint position)
 			osiris->config = configNode.child("entities_data").child("osiris");
 			osiris->position = iPoint(position.x+ numX, position.y+ numY);
 			osiris->Start();
+			enemies.push_back(osiris);
 		}
 
 		for (int i = 0; i < 3; i++)
 		{
+			if (enemies.size() >= maxEnemies) break;
 			numX = 0;
 			numY = 0;
 			numX = app->entityManager->getRandomNumber(-range, range);
@@ -810,6 +818,7 @@ void Map::generaSureg(FASE_Igory fase, iPoint position)
 			muur->config = configNode.child("entities_data").child("muur");
 			muur->position = iPoint(position.x + numX, position.y + numY);
 			muur->Start();
+			enemies.push_back(muur);
 		}
 
 	}
@@ -817,6 +826,7 @@ void Map::generaSureg(FASE_Igory fase, iPoint position)
 	if (fase == FASE_Igory::FASE_TWO) {
 		for (int i = 0; i < 2; i++)
 		{
+			if (enemies.size() >= maxEnemies) break;
 			numX = 0;
 			numY = 0;
 			numX = app->entityManager->getRandomNumber(-range, range);
