@@ -58,6 +58,7 @@ enum class ColliderType {
 	ATACK_INUIT,
 	AROMAGICA,
 	ASCENSOR,
+	ESTATUA,
 	UNKNOWN,
 	
 	// ..

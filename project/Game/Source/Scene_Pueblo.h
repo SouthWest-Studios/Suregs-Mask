@@ -65,6 +65,8 @@ public:
 	MiniGameFishing* fishing = new MiniGameFishing;
 
 	PhysBody* pbody;
+
+	pugi::xml_node configNode;
 };
 
 #endif // __Scene_Pueblo_H__

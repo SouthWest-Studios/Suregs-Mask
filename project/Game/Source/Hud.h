@@ -111,5 +111,9 @@ public:
 	std::map<InventityType, SDL_Rect*> potionRectMap;
 	int selectedPotionIndex = 0;
 	int selectedPotionItemIndex = 0;
+
+	bool estatua = false;
+
+	SDL_Texture* EstatuaTexture = nullptr;
 };
 #endif // __HUD_H__

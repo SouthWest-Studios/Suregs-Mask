@@ -121,6 +121,7 @@
     <ClCompile Include="Source\Enemy_Osiris_Variation.cpp" />
     <ClCompile Include="Source\Enemy_Spawner.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
+    <ClCompile Include="Source\Estatua.cpp" />
     <ClCompile Include="Source\GuiCheckBox.cpp" />
     <ClCompile Include="Source\GuiControlButton.cpp" />
     <ClCompile Include="Source\GuiControlSlider.cpp" />
@@ -245,6 +246,7 @@
     <ClInclude Include="Source\Enemy_Spawner.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />
+    <ClInclude Include="Source\Estatua.h" />
     <ClInclude Include="Source\Fishing.h" />
     <ClInclude Include="Source\GarraInv.h" />
     <ClInclude Include="Source\GuiCheckBox.h" />
