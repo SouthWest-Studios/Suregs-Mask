@@ -9,6 +9,7 @@
 #include "Pathfinding.h"
 #include "Physics.h"
 #include "Dialog.h"
+#include "Boss_Igory.h"
 #include "PuzzleButtonEntity.h"
 
 #include "PugiXml\src\pugixml.hpp"
@@ -177,7 +178,7 @@ public:
     iPoint MapToWorld(int x, int y) const;
     iPoint WorldToMap(int x, int y);
 
-    
+    void generaOrish(FASE_Igory fase, iPoint position);
   
 
     
@@ -198,6 +199,7 @@ private:
     bool LoadLayer(pugi::xml_node& layerNode, MapLayer* mapLayer);
     bool LoadAllLayers(pugi::xml_node mapNode);
     bool LoadObject(pugi::xml_node& node, MapObjects* mapObjects);
+  
     bool LoadAllObjectGroups(pugi::xml_node mapNode);
     TileSet* GetTilesetFromTileId(int gid) const;
     bool LoadProperties(pugi::xml_node& node, Properties& properties);

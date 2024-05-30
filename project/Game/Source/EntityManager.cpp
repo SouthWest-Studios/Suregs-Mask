@@ -439,6 +439,11 @@ Player* EntityManager::GetPlayer()
 	return actualPlayer;
 }
 
+Boss_Igory* EntityManager::GetIgory()
+{
+	return bossIgory;
+}
+
 MiniGameFishing* EntityManager::GetRod()
 {
 	return fishing;
