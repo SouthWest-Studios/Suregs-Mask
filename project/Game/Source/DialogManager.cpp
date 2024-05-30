@@ -423,7 +423,6 @@ bool DialogManager::PostUpdate() {
 		//Reiniciar variables mientras no este algun dialogo en marcha
 		indexText = 1;
 		optionSelected = 0;
-		app->audio->playingAmbience = false;
 	}
 
 	return ret;
