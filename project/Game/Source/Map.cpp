@@ -144,7 +144,13 @@ bool Map::Update(float dt)
 			}
 		}
 		if (!falta) {
-			app->inventoryManager->monedasObtenidas += 100;
+			if (app->ascensor->mazmorraActual == 0) {
+
+			}
+			else {
+				app->inventoryManager->monedasObtenidas += 100;
+			}
+			
 			recompensaPuzzle = true;
 			puzzleComplete[app->ascensor->mazmorraActual] = true;
 		}
