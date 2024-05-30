@@ -70,6 +70,7 @@
 #include "Estatua.h"
 #include "Defs.h"
 #include "Log.h"
+#include <random>
 
 EntityManager::EntityManager(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -439,9 +440,12 @@ Player* EntityManager::GetPlayer()
 	return actualPlayer;
 }
 
-Boss_Igory* EntityManager::GetIgory()
-{
-	return bossIgory;
+int EntityManager::getRandomNumber(int min, int max) {
+	//random number generator
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> dis(min, max);
+	return dis(gen);
 }
 
 MiniGameFishing* EntityManager::GetRod()

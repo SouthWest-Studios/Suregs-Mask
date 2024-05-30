@@ -85,7 +85,7 @@ bool Boss_Igory::Start() {
 	viewDistance = config.attribute("viewDistance").as_float();
 	//FASE_Igory
 	fase = FASE_Igory::FASE_ONE;
-	lifeLow40 = maxHealth * 0.8;
+	lifeLow80 = maxHealth * 0.8;
 	lifeLow40 = maxHealth * 0.4;
 
 	room = GetCurrentRoom();
@@ -106,6 +106,14 @@ bool Boss_Igory::Update(float dt)
 	if (health <= 0)
 	{
 		desiredState = EntityState_Boss_Igory::DEAD;
+	}
+	else if (health <= lifeLow80 && !faseTwo) {
+		fase = FASE_Igory::FASE_CHANGE;
+		desiredState = EntityState_Boss_Igory::FASE_CHANGE;
+	}
+	else if (health <= lifeLow40 && !faseThree) {
+		fase = FASE_Igory::FASE_CHANGE;
+		desiredState = EntityState_Boss_Igory::FASE_CHANGE;
 	}
 	else if (inTakeHit)
 	{
@@ -160,9 +168,7 @@ bool Boss_Igory::Update(float dt)
 
 	stateMachine(dt, playerPos);
 
-	if (health <= lifeLow40) {
-		fase = FASE_Igory::FASE_CHANGE;
-	}
+	
 
 	if (checkColdDown) {
 		AtqColdDown();
@@ -394,6 +400,14 @@ void Boss_Igory::stateMachine(float dt, iPoint playerPos)
 		Die();
 		break;
 	case EntityState_Boss_Igory::FASE_CHANGE:
+		if (fase == FASE_Igory::FASE_ONE) {
+			fase == FASE_Igory::FASE_TWO;
+			faseTwo = true;
+		}
+		if (fase == FASE_Igory::FASE_TWO) {
+			fase == FASE_Igory::FASE_THREE;
+			faseThree = true;
+		}
 		break;
 	case EntityState_Boss_Igory::TAKEHIT:
 		takeHit();
@@ -550,7 +564,7 @@ bool Boss_Igory::Bossfinding(float dt, iPoint playerPosP)
 
 
 
-	if (playerInFight && !inSuregAni) {
+	if (playerInFight && !inSuregAni && fase != FASE_Igory::FASE_CHANGE) {
 		app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
 		lastPath = *app->map->pathfinding->GetLastPath();
 	}
