@@ -23,12 +23,7 @@
 	<scene_pueblo />
 	<entitymanager>
 		<entity_manager>
-			<doors>
-				<door sceneLevel="-10" tpID="0" />
-				<door sceneLevel="-10" tpID="9" />
-				<door sceneLevel="2" tpID="0" />
-				<door sceneLevel="-10" tpID="6" />
-			</doors>
+			<doors />
 		</entity_manager>
 	</entitymanager>
 	<missionmanager />
@@ -36,7 +31,6 @@
 	<menu />
 	<iventorymanager>
 		<inventory>
-			<inventity type="45" quantity="1" />
 			<money quantity="0" />
 			<SwordLevel quantity="0" />
 			<ArmorLevel quantity="0" />
@@ -50,10 +44,7 @@
 		<Note />
 	</notesmanager>
 	<bestiariomanager>
-		<Bestiario>
-			<Bestiario type="0" quantity="1" />
-			<Bestiario type="0" quantity="1" />
-		</Bestiario>
+		<Bestiario />
 	</bestiariomanager>
 	<equipo />
 	<Ascensormenu />
