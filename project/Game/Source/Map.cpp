@@ -826,6 +826,7 @@ void Map::generaSureg(FASE_Igory fase, iPoint position)
 	if (fase == FASE_Igory::FASE_TWO) {
 		for (int i = 0; i < 2; i++)
 		{
+			if (enemies.size() >= maxEnemies) break;
 			numX = 0;
 			numY = 0;
 			numX = app->entityManager->getRandomNumber(-range, range);
