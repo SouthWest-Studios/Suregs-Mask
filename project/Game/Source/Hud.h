@@ -60,6 +60,8 @@ private:
 	SDL_Texture* hudTexture;
 	SDL_Texture* messageTexture;
 	SDL_Texture* cdPrimaryMaskTexture;
+	int rectYPrimaryMask;
+	int rectYSecondaryMask;
 	SDL_Texture* cdSecondaryMaskTexture;
 	int cantidadMonedas = 0;
 
