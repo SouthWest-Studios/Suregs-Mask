@@ -110,7 +110,7 @@ bool DebugConsole::Awake(pugi::xml_node config)
 		case -3:				app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu);			app->menu->active = false;			break;
 		case -2:	case 1000:	app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_testing);		app->menu->active = true;			break;
 		case -1:	case 1001:	app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_pueblo);		app->menu->active = true;			break;
-		case 0:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra0);		app->menu->active = true;			break;
+		case 0:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra0);		app->menu->active = true; if(!app->inventoryManager->dungeon0Entered) app->inventoryManager->dungeon0Entered = true;			break;
 		case 1:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra1);		app->menu->active = true;			break;
 		case 2:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra2);		app->menu->active = true;			break;
 		case 3:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra3);		app->menu->active = true;			break;

@@ -87,6 +87,7 @@ public:
 	int armorLevel = 0;
 
 	int storyLevel = 1;
+	bool dungeon0Entered = false;
 
 	int currentHealthInventoryManager = NULL;
 	int primaryMaskInventoryManager = -1;

@@ -1242,18 +1242,18 @@ bool InventoryManager::Update(float dt)
 	}
 	
 	//DESCOMENTAR CUANDO SE HAYA IMPLEMENTADO EL TUTORIAL CON SUS BOOLS
-	 //if(app->tutorialHasFinished)
-	 //{
-	 //	storyLevel = app->ascensor->totalMazmorras + 2;
-	 //}
-	 //else if(app->tutorialHasFinished == false)
-	 //{
-	 //	storyLevel = 2;
-	 //}
-	 //else if(app->tutorialHasStarted == false)
-	 //{
-	 //	storyLevel = 1;
-	 //}
+	 if(app->tutorialHasFinished && dungeon0Entered)
+	 {
+	 	storyLevel = app->ascensor->totalMazmorras + 2;
+	 }
+	 else if(app->tutorialHasFinished == true && !dungeon0Entered)
+	 {
+	 	storyLevel = 2;
+	 }
+	 else if(app->tutorialHasStarted == false)
+	 {
+	 	storyLevel = 1;
+	 }
 	//DESCOMENTAR CUANDO SE HAYA IMPLEMENTADO EL TUTORIAL CON SUS BOOLS
 
 	//BORRAR LA LINEA DE ABAJO CUANDO SE HAYA IMPLEMENTADO EL TUTORIAL CON SUS BOOLS ARRIBA
