@@ -189,9 +189,8 @@ bool Boss_Igory::PostUpdate() {
 		SDL_SetTextureAlphaMod(texture, 255);
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
-		generaOrish();
-	}
+
+	
 
 	
 
@@ -215,7 +214,9 @@ bool Boss_Igory::PostUpdate() {
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
 
-
+	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
+		app->map->generaOrish(fase, position);
+	}
 	return true;
 }
 
@@ -313,7 +314,6 @@ void Boss_Igory::generaOrish()
 	muur->config = configNode.child("entities_data").child("muur");
 	muur->position = iPoint(position.x + 16, position.y + 16);
 	muur->Start();
-
 
 }
 

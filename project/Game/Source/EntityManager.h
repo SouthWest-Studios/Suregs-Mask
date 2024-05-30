@@ -4,6 +4,7 @@
 #include "Module.h"
 #include "Entity.h"
 #include "Player.h"
+#include "Boss_Igory.h"
 #include "Enemy_Osiris.h"
 #include "Item_garra.h"
 #include "Enemy_Shar.h"
@@ -70,6 +71,7 @@ public:
 
 	void SetPlayer(Player* player);
 	Player* GetPlayer();
+	Boss_Igory* GetIgory();
 
 	MiniGameFishing* GetRod();
 	std::vector<Entity*> GetEnemies();
@@ -123,6 +125,7 @@ private:
 	//pugi::xml_node configNode;
 	Item_Garra* garra = nullptr;
 	Player* actualPlayer = nullptr;
+	Boss_Igory* bossIgory = nullptr;
 	Cofre* cofre = nullptr;
 	Elevator* ascensor = nullptr;
 	Estatua* estatua = nullptr;

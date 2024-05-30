@@ -73,8 +73,8 @@ bool Map::Awake(pugi::xml_node config)
 {
 	LOG("Loading Map Parser");
 	bool ret = true;
-	
-	
+
+
 
 	return ret;
 }
@@ -99,11 +99,11 @@ bool Map::Start() {
 	pathfinding = new PathFinding();
 
 	//Initialize the navigation map
-    uchar* navigationMap = NULL;
-    CreateNavigationMap(mapData.width, mapData.height, &navigationMap);
-    pathfinding->SetNavigationMap((uint)mapData.width, (uint)mapData.height, navigationMap);
+	uchar* navigationMap = NULL;
+	CreateNavigationMap(mapData.width, mapData.height, &navigationMap);
+	pathfinding->SetNavigationMap((uint)mapData.width, (uint)mapData.height, navigationMap);
 	pathfinding->mouseTileTex = app->tex->Load(pathTextures.GetString());
-    RELEASE_ARRAY(navigationMap);
+	RELEASE_ARRAY(navigationMap);
 
 	app->win->GetWindowSize(windowW, windowH);
 
@@ -150,7 +150,7 @@ bool Map::Update(float dt)
 			else {
 				app->inventoryManager->monedasObtenidas += 100;
 			}
-			
+
 			recompensaPuzzle = true;
 			puzzleComplete[app->ascensor->mazmorraActual] = true;
 		}
@@ -180,7 +180,7 @@ bool Map::PostUpdate()
 		if (mapLayer->data->properties.GetProperty("Draw") != NULL && mapLayer->data->properties.GetProperty("Draw")->value == "true") {
 
 			//iPoint playerPos = app->entityManager->GetPlayer()->position;
-			iPoint playerPos = iPoint(-app->render->camera.x + (windowW/2), -app->render->camera.y + (windowH/2));
+			iPoint playerPos = iPoint(-app->render->camera.x + (windowW / 2), -app->render->camera.y + (windowH / 2));
 			int xToTiledLeft = MAX((playerPos.x / 32) - TILES_TO_LOAD, 0);
 			int xToTiledRight = MIN((playerPos.x / 32) + TILES_TO_LOAD, mapLayer->data->width);
 
@@ -395,7 +395,7 @@ bool Map::CleanUp()
 		objectsItem = objectsItem->next;
 	}
 	mapData.mapObjects.Clear();
-	
+
 	// El clean Up de la camara, no borrar
 	smallRoomsList.Clear();
 	largeRoomsList.Clear();
@@ -418,7 +418,7 @@ bool Map::CleanUp()
 		app->physics->GetWorld()->DestroyBody(collision->data->body);
 		RELEASE(collision->data);
 		delete collision->data;
-		
+
 		collision = collision->next;
 	}
 	collisionsList.Clear();
@@ -747,7 +747,7 @@ bool Map::LoadObject(pugi::xml_node& node, MapObjects* mapObjects)
 
 		LoadProperties(object, mapObject->properties);
 
-		
+
 
 		if (object.child("polygon")) {
 
@@ -774,6 +774,41 @@ bool Map::LoadObject(pugi::xml_node& node, MapObjects* mapObjects)
 	}
 
 	return ret;
+}
+
+void Map::generaOrish(FASE_Igory fase, iPoint position)
+{
+	position.x = position.x + 16;
+	position.y = position.y + 16;
+	if (fase == FASE_Igory::FASE_ONE) {
+		int osirisPosX = 128;
+		int osirisPosY = 0;
+
+		for (int i = 1; i < 3; i++)
+		{
+			Enemy_Osiris* osiris = (Enemy_Osiris*)app->entityManager->CreateEntity(EntityType::ENEMY_OSIRIS);
+			osiris->config = configNode.child("entities_data").child("osiris");
+			osiris->position = iPoint(position.x - osirisPosX, position.y - 64);
+			osiris->Start();
+			osirisPosX = osirisPosX - i * osirisPosX;
+		}
+
+
+		for (int i = 1; i < 4; i++)
+		{
+			Enemy_Muur* muur = (Enemy_Muur*)app->entityManager->CreateEntity(EntityType::ENEMY_MUUR);
+			muur->config = configNode.child("entities_data").child("muur");
+			muur->position = iPoint(position.x + 16, position.y + 16);
+			muur->Start();
+			osirisPosX = osirisPosX - i * osirisPosX;
+		}
+
+
+		
+	}
+
+
+
 }
 
 bool Map::LoadAllObjectGroups(pugi::xml_node mapNode)
@@ -826,7 +861,7 @@ bool Map::LoadCollisions(std::string layerName)
 					}
 
 
-					
+
 					if (gid == tileset->firstgid + 2) {
 						c1 = app->physics->CreateRectangleSensor(pos.x + 16, pos.y + 16, 32, 32, STATIC);
 						c1->ctype = ColliderType::LAGO;
@@ -930,7 +965,7 @@ bool Map::LoadTPEntities(std::string layerName)
 					SDL_Rect r = tileset->GetRect(gid);
 					iPoint pos = MapToWorld(x, y);
 
-					
+
 					if (gid != 0) {
 						int tpID = gid - tileset->firstgid;
 						TPEntity* tp = (TPEntity*)app->entityManager->CreateEntity(EntityType::TP_ENTITY);
@@ -939,8 +974,8 @@ bool Map::LoadTPEntities(std::string layerName)
 						tp->position = iPoint(pos.x + 16, pos.y + 16);
 						//tp->Start();
 					}
-					
-					
+
+
 
 
 					////PLAYER
@@ -964,7 +999,7 @@ bool Map::LoadTPEntities(std::string layerName)
 
 					//}
 
-					
+
 				}
 			}
 
@@ -1022,8 +1057,8 @@ bool Map::LoadPuzzleEntities(std::string layerName)
 							button->position = iPoint(pos.x + 16, pos.y + 16);
 							puzzleButtonEntities.push_back(button);
 							button->Start();
-							
-							
+
+
 							BubbleSort(&puzzleButtonEntities);
 
 						}
@@ -1069,10 +1104,10 @@ bool Map::LoadObjects()
 
 			MapObject* object = mapObjectsItem->data->objects[i];
 			SString objectName = mapObjectsItem->data->name;
-			
+
 			if (object->properties.GetProperty("dialogID") != NULL) {
 
-			
+
 				uint dialogId = atoi(object->properties.GetProperty("dialogID")->value.c_str());
 				dialogId += app->inventoryManager->storyLevel - 1;
 
@@ -1086,7 +1121,7 @@ bool Map::LoadObjects()
 
 				//NUEVO - ALGUNOS NPCS NO VAN?
 				pugi::xml_node dialogNode = dialoguesNode.find_child_by_attribute("dialog", "id", std::to_string(dialogId).c_str());
-				
+
 				if (!dialogNode) {
 					//std::cerr << "No se encontr?ning�n di�logo con el id=" << object->properties.GetProperty("dialogID")->value << std::endl;
 					std::cerr << "No se encontr?ning�n di�logo con el id=" << std::to_string(dialogId).c_str() << std::endl;
@@ -1107,7 +1142,7 @@ bool Map::LoadObjects()
 				}
 
 
-				
+
 				/*c1 = app->physics->CreateRectangleSensor(object->x + object->width / 2, object->y + object->height / 2, object->width, object->height, STATIC);
 				c1->ctype = ColliderType::UNKNOWN;*/
 			}
@@ -1120,7 +1155,7 @@ bool Map::LoadObjects()
 			// el objeto es una sala grande
 			else if (object->properties.GetProperty("Type") != NULL && object->properties.GetProperty("Type")->value == "isLargeRoom")
 			{
-				largeRoomsList.Add(object); 
+				largeRoomsList.Add(object);
 			}
 			// el objeto es una sala l
 			else if (object->properties.GetProperty("Type") != NULL && object->properties.GetProperty("Type")->value == "isLRoom")
@@ -1171,7 +1206,7 @@ bool Map::LoadObjects()
 					c1 = app->physics->CreateChain(object->x, object->y, object->points.data(), object->points.size(), STATIC);
 				}
 
-			
+
 
 				std::string obN = objectName.GetString();
 				if (obN.compare("Vacios") == false) {
@@ -1188,8 +1223,8 @@ bool Map::LoadObjects()
 
 			}
 
-			
-			
+
+
 			ret = true;
 		}
 		mapObjectsItem = mapObjectsItem->next;
@@ -1235,7 +1270,7 @@ bool Map::LoadEntities(std::string layerName)
 
 						app->entityManager->SetPlayer((Player*)app->entityManager->CreateEntity(EntityType::PLAYER));
 						app->entityManager->GetPlayer()->config = configNode.child("entities_data").child("player");
-						
+
 						iPoint Npos = iPoint(pos.x + 16, pos.y + 16);
 						LOG("POSX: %d, POSY: %d", pos.x, pos.y);
 						app->entityManager->GetPlayer()->position = iPoint(pos.x + 16, pos.y + 16);
@@ -1390,7 +1425,7 @@ bool Map::LoadEntities(std::string layerName)
 					//OSIRIS
 					if (gid == tileset->firstgid + 20) {
 
-						
+
 						Enemy_Osiris* osiris = (Enemy_Osiris*)app->entityManager->CreateEntity(EntityType::ENEMY_OSIRIS);
 						osiris->config = configNode.child("entities_data").child("osiris");
 						osiris->position = iPoint(pos.x + 16, pos.y + 16);
@@ -1412,7 +1447,7 @@ bool Map::LoadEntities(std::string layerName)
 					//OLS
 					if (gid == tileset->firstgid + 21) {
 
-						
+
 						Enemy_Ols* ols = (Enemy_Ols*)app->entityManager->CreateEntity(EntityType::ENEMY_OLS);
 						ols->config = configNode.child("entities_data").child("ols");
 						ols->position = iPoint(pos.x + 16, pos.y + 16);
@@ -1422,7 +1457,7 @@ bool Map::LoadEntities(std::string layerName)
 					//OLS VARIATION
 					if (gid == tileset->firstgid + 31) {
 
-						
+
 						Enemy_Ols_Variation* ols_variation = (Enemy_Ols_Variation*)app->entityManager->CreateEntity(EntityType::ENEMY_OLS_VARIATION);
 						ols_variation->config = configNode.child("entities_data").child("ols_variation");
 						ols_variation->position = iPoint(pos.x + 16, pos.y + 16);
@@ -1433,7 +1468,7 @@ bool Map::LoadEntities(std::string layerName)
 					//SHAR
 					if (gid == tileset->firstgid + 22) {
 
-						
+
 						Enemy_Shar* shar = (Enemy_Shar*)app->entityManager->CreateEntity(EntityType::ENEMY_SHAR);
 						shar->config = configNode.child("entities_data").child("shar");
 						shar->position = iPoint(pos.x + 16, pos.y + 16);
@@ -1488,7 +1523,7 @@ bool Map::LoadEntities(std::string layerName)
 						garra->config = configNode.child("entities_data").child("item_garra");
 						garra->position = iPoint(pos.x + 16, pos.y + 16);
 						garra->Start();
-						
+
 
 					}
 					//DIAMANTE
@@ -1533,12 +1568,12 @@ bool Map::LoadEntities(std::string layerName)
 					}
 
 					/*COFRE*/
-					if (gid == tileset->firstgid + 42) { 
-							Cofre* cofre = (Cofre*)app->entityManager->CreateEntity(EntityType::COFRE);
-							cofre->config = configNode.child("entities_data").child("cofre");
-							cofre->position = iPoint(pos.x + 16, pos.y + 16);
-							cofre->Start();
-						
+					if (gid == tileset->firstgid + 42) {
+						Cofre* cofre = (Cofre*)app->entityManager->CreateEntity(EntityType::COFRE);
+						cofre->config = configNode.child("entities_data").child("cofre");
+						cofre->position = iPoint(pos.x + 16, pos.y + 16);
+						cofre->Start();
+
 					}
 					/*ASCENSOR INICIO*/
 					if (gid == tileset->firstgid + 44) {
@@ -1644,7 +1679,7 @@ bool Map::LoadState(pugi::xml_node node)
 		if (itemNode.attribute("level").as_int(-1) != -1) {
 			puzzleComplete[itemNode.attribute("level").as_int()] = itemNode.attribute("complete").as_bool();
 		}
-			
+
 	}
 
 
