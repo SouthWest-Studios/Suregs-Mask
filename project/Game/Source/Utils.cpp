@@ -75,6 +75,7 @@ inline float easeOutElastic(float t) {
 
 inline float linear(float t) { return t; }
 inline float easeInQuad(float t) { return t * t; }
+inline float easeInCubic(float t) { return t * t * t;}
 inline float easeOutQuad(float t) { return t * (2 - t); }
 inline float easeOutCubic(float t) { t--; return t * t * t + 1;}
 inline float easeInOutQuad(float t) { return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; }
