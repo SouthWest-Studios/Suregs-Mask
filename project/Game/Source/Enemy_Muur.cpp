@@ -244,6 +244,8 @@ void Enemy_Muur::Attack(float dt)
 void Enemy_Muur::Die() {
 	app->audio->PlayFx(muur_get_damage_fx);
 
+	
+
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	currentAnimation = &dieAnim;
 
@@ -322,6 +324,9 @@ void Enemy_Muur::Die() {
 		{
 			app->entityManager->GetPlayer()->maskThreeXP += 20;
 			//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
+		}
+		if (app->entityManager->GetIgory()->playerInFight) {
+			app->map->DestroyEntity(this);
 		}
 	}
 }
