@@ -154,6 +154,10 @@
             -->
 		<player texturePath="Assets/Textures/Entidades/Jugador/textura_player.png" Tsprite="82" Pwidth="2400" sprite_x="300" sprite_y="240"/>
 
+		<guerrero texturePath="Assets/Textures/Entidades/Guerrero/spritesheet_guerrero.png"
+				maxHealth="999999999.0f" speed="2.5f" attackDamage="90.0f" attackDistance="2" viewDistance="30"
+				Tsprite="15" Pwidth="4500" sprite_x="500" sprite_y="296"/>
+
 		<osiris texturePath="Assets/Textures/Entidades/Osiris/spritesheet_osiris.png" 
 				maxHealth="250.0f" speed="2.5f" attackDamage="50.0f" attackDistance="2" viewDistance="20"
 				Tsprite="66" Pwidth="2728" sprite_x="248" sprite_y="200"/>
@@ -520,6 +524,11 @@
 			<cambioFaseAnim start="28" end="30" speed="0.1f" loop="true"/>
 			
 		</boss_surma>
+
+		<guerrero>
+			<runAnim start="0" end="8" speed="0.2f" loop="true"/>
+			<attackAnim start="9" end="15" speed="0.15f" loop="true"/>
+		</guerrero>
 		
 		<osiris>
 			<idleAnim start="11" end="15" speed="0.01f" loop="true"/>

@@ -1,5 +1,6 @@
 ﻿#include "EntityManager.h"
 #include "Player.h"
+#include "Enemy_Guerrero.h"
 #include "Enemy_Ols.h"
 #include "Enemy_Ols_Variation.h"
 #include "Enemy_Osiris.h"
@@ -184,6 +185,9 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 	{
 	case EntityType::PLAYER:
 		entity = new Player();
+		break;
+	case EntityType::ENEMY_GUERRERO:
+		entity = new Enemy_Guerrero();
 		break;
 	case EntityType::ENEMY_OSIRIS:
 		entity = new Enemy_Osiris();
