@@ -201,6 +201,8 @@ private:
 	bool stun = false;
 	Timer curaTimer;
 	Timer shieldTimer;
+	Timer healTimer;
+	Timer stunTimer;
 
 
 	//Veneno
