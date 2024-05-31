@@ -18,6 +18,7 @@
 #include "Defs.h"
 #include "Log.h"
 #include "SDL_ttf/include/SDL_ttf.h"
+#include "Utils.cpp"
 
 
 
@@ -62,6 +63,8 @@ bool DialogManager::Start() {
 	dialog_fx = app->audio->LoadAudioFx("dialog_fx");
 	dialogAlt_fx = app->audio->LoadAudioFx("dialogAlt_fx");
 	dialogAlt2_fx = app->audio->LoadAudioFx("dialogAlt2_fx");
+
+	actualDialogYPosition = -300;
 
 	return ret;
 }
@@ -177,8 +180,8 @@ bool DialogManager::AddDialog(Dialog* dialog)
 bool DialogManager::ShowDialog(Dialog* dialog)
 {
 	//Mostrar fondo
-	//app->render->DrawTexture(background_tex, dialogPosition.x, dialogPosition.y, (int)app->win->GetScale(), 0);
-	app->render->DrawTexture(background_tex, dialogPosition.x, dialogPosition.y, (int)app->win->GetScale(), SDL_FLIP_NONE, 0, 0);
+	//app->render->DrawTexture(background_tex, dialogPosition.x, dialogPosition.y - actualDialogYPosition, (int)app->win->GetScale(), 0);
+	app->render->DrawTexture(background_tex, dialogPosition.x, dialogPosition.y - actualDialogYPosition, (int)app->win->GetScale(), SDL_FLIP_NONE, 0, 0);
 
 	std::string actualText = dialog->sentence.substr(0, indexText);
 	
@@ -196,12 +199,12 @@ bool DialogManager::ShowDialog(Dialog* dialog)
 	if (dialog->face_tex != nullptr) {
 		_textBoundWidth = textBoundWidth - faceTextureSize.x;
 		_dialogPosition.x = dialogMargin[3] + dialogPosition.x + faceTextureSize.x;
-		_dialogPosition.y = dialogMargin[0] + dialogPosition.y;
+		_dialogPosition.y = dialogMargin[0] + dialogPosition.y - actualDialogYPosition;
 	}
 	else {
 		_textBoundWidth = textBoundWidth;
 		_dialogPosition.x = dialogMargin[3] + dialogPosition.x;
-		_dialogPosition.y = dialogMargin[0] + dialogPosition.y;
+		_dialogPosition.y = dialogMargin[0] + dialogPosition.y - actualDialogYPosition;
 	}
 
 	if (dialog->type == DialogType::CHOOSE) {
@@ -214,14 +217,14 @@ bool DialogManager::ShowDialog(Dialog* dialog)
 	
 	//Imagen del personaje
 	if (dialog->face_tex != nullptr) {
-		app->render->DrawTexture(dialog->face_tex, dialogMargin[3] + dialogPosition.x, dialogMargin[0] + dialogPosition.y - 15, (int)app->win->GetScale(), SDL_FLIP_NONE, 0, 0);
+		app->render->DrawTexture(dialog->face_tex, dialogMargin[3] + dialogPosition.x, dialogMargin[0] + dialogPosition.y - actualDialogYPosition - 15, (int)app->win->GetScale(), SDL_FLIP_NONE, 0, 0);
 	}
 
 
 
 	//Nombre personaje
 	textNameTexture = CreateTextTexture(app->render->titleFont, dialog->name.c_str(), textColor, textNameBoundWidth);
-	app->render->DrawTexture(textNameTexture, dialogMargin[3] + dialogPosition.x + namePosition.x, dialogMargin[0] + dialogPosition.y + namePosition.y, (int)app->win->GetScale(), SDL_FLIP_NONE, 0, 0);
+	app->render->DrawTexture(textNameTexture, dialogMargin[3] + dialogPosition.x + namePosition.x, dialogMargin[0] + dialogPosition.y - actualDialogYPosition + namePosition.y, (int)app->win->GetScale(), SDL_FLIP_NONE, 0, 0);
 
 
 	//Opciones
@@ -230,20 +233,20 @@ bool DialogManager::ShowDialog(Dialog* dialog)
 		if (dialog->face_tex != nullptr) {
 			//Textura opcion1
 			options1NameTexture = CreateTextTexture(app->render->primaryFont, dialog->option1.c_str(), (optionSelected == 1) ? optionSelectedColor : optionColor, optionsBoundWidth);
-			app->render->DrawTexture(options1NameTexture, dialogMargin[3] + dialogPosition.x + optionsPosition.x + 256, dialogMargin[0] + dialogPosition.y + optionsDistanceBetween, (int)app->win->GetScale(), SDL_FLIP_NONE, 0, 0);
+			app->render->DrawTexture(options1NameTexture, dialogMargin[3] + dialogPosition.x + optionsPosition.x + 256, dialogMargin[0] + dialogPosition.y - actualDialogYPosition + optionsDistanceBetween, (int)app->win->GetScale(), SDL_FLIP_NONE, 0, 0);
 
 			//Textura opcion2
 			options2NameTexture = CreateTextTexture(app->render->primaryFont, dialog->option2.c_str(), (optionSelected == 2) ? optionSelectedColor : optionColor, optionsBoundWidth);
-			app->render->DrawTexture(options2NameTexture, dialogMargin[3] + dialogPosition.x + optionsPosition.x + 256, dialogMargin[0] + dialogPosition.y + optionsDistanceBetween * 2, (int)app->win->GetScale(), SDL_FLIP_NONE, 0, 0);
+			app->render->DrawTexture(options2NameTexture, dialogMargin[3] + dialogPosition.x + optionsPosition.x + 256, dialogMargin[0] + dialogPosition.y - actualDialogYPosition + optionsDistanceBetween * 2, (int)app->win->GetScale(), SDL_FLIP_NONE, 0, 0);
 		}
 		else {
 			//Textura opcion1
 			options1NameTexture = CreateTextTexture(app->render->primaryFont, dialog->option1.c_str(), (optionSelected == 1) ? optionSelectedColor : optionColor, optionsBoundWidth);
-			app->render->DrawTexture(options1NameTexture, dialogMargin[3] + dialogPosition.x + optionsPosition.x, dialogMargin[0] + dialogPosition.y + optionsDistanceBetween, (int)app->win->GetScale(), SDL_FLIP_NONE, 0, 0);
+			app->render->DrawTexture(options1NameTexture, dialogMargin[3] + dialogPosition.x + optionsPosition.x, dialogMargin[0] + dialogPosition.y - actualDialogYPosition + optionsDistanceBetween, (int)app->win->GetScale(), SDL_FLIP_NONE, 0, 0);
 
 			//Textura opcion2
 			options2NameTexture = CreateTextTexture(app->render->primaryFont, dialog->option2.c_str(), (optionSelected == 2) ? optionSelectedColor : optionColor, optionsBoundWidth);
-			app->render->DrawTexture(options2NameTexture, dialogMargin[3] + dialogPosition.x + optionsPosition.x, dialogMargin[0] + dialogPosition.y + optionsDistanceBetween * 2, (int)app->win->GetScale(), SDL_FLIP_NONE, 0, 0);
+			app->render->DrawTexture(options2NameTexture, dialogMargin[3] + dialogPosition.x + optionsPosition.x, dialogMargin[0] + dialogPosition.y - actualDialogYPosition + optionsDistanceBetween * 2, (int)app->win->GetScale(), SDL_FLIP_NONE, 0, 0);
 		}
 
 		
@@ -353,6 +356,8 @@ bool DialogManager::Update(float dt)
 bool DialogManager::PostUpdate() {
 
 	bool ret = true;
+	uint windowW, windowH;
+	app->win->GetWindowSize(windowW, windowH);
 
 	//Para saber si hay algun dialogo en funcionamiento
 	isPlaying = (dialogues.Count() > 0);
@@ -362,7 +367,19 @@ bool DialogManager::PostUpdate() {
 		
 		Dialog* actualDialog = dialogues.At(0)->data;
 		bool dialogFinished = ShowDialog(actualDialog);
+		
+		if (actualDialogYPosition < 0) {
+			// Calcular el progreso normalizado
+			float duration = 500; // Duración de la animación en milisegundos
+			float progress = std::min(dialogueAnimation.ReadMSec() / duration, 1.0f); // Asegurarse de que no supera 1.0
+			float easedProgress = easeInOutCubic(progress);
 
+			// Calcular la nueva posición Y
+			actualDialogYPosition = -300 + easedProgress * 300;
+		}
+		else {
+			actualDialogYPosition = 0;
+		}
 
 
 		//Gestionar la opcion seleccionada
@@ -436,6 +453,8 @@ bool DialogManager::PostUpdate() {
 		//Reiniciar variables mientras no este algun dialogo en marcha
 		indexText = 1;
 		optionSelected = 0;
+		actualDialogYPosition = -300;
+		dialogueAnimation.Start();
 	}
 
 	return ret;

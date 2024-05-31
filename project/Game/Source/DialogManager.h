@@ -74,6 +74,10 @@ private:
 	iPoint optionsPosition = { 0 , 300 };
 	int optionsDistanceBetween = 50;
 
+	Timer dialogueAnimation;
+
+	int actualDialogYPosition = 0;
+
 	//Dimensiones
 	int textBoundWidth= 500;
 	int textNameBoundWidth = 200;
