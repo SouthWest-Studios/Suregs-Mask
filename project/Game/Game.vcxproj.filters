@@ -368,6 +368,9 @@
     <ClCompile Include="Source\Estatua.cpp">
       <Filter>Entities\Estatua</Filter>
     </ClCompile>
+    <ClCompile Include="Source\NPC_Abuela.cpp">
+      <Filter>Entities\NPC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -799,6 +802,9 @@
     <ClInclude Include="Source\Scene_Arena_Tutorial.h" />
     <ClInclude Include="Source\Estatua.h">
       <Filter>Entities\Estatua</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NPC_Abuela.h">
+      <Filter>Entities\NPC</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

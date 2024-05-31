@@ -29,6 +29,7 @@
 #include "NPC_Abuelitas.h"
 #include "NPC_Guardias.h"
 #include "NPC_Bruja.h"
+#include "NPC_Abuela.h"
 #include "InventoryManager.h"
 #include "NPC_Bully1.h"
 #include "NPC_Bully2.h"
@@ -1529,6 +1530,16 @@ bool Map::LoadEntities(std::string layerName)
 
 					}
 
+					//NPC_ABUELA
+					if (gid == tileset->firstgid + 14) {
+
+
+						NPCVendedor* npc = (NPCVendedor*)app->entityManager->CreateEntity(EntityType::NPC_ABUELA);
+						npc->config = configNode.child("entities_data").child("npc_abuela");
+						npc->position = iPoint(pos.x + 16, pos.y + 16);
+						npc->Start();
+
+					}
 
 					//OSIRIS
 					if (gid == tileset->firstgid + 20) {

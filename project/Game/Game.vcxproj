@@ -170,6 +170,7 @@
     <ClCompile Include="Source\Enemy_Osiris.cpp" />
     <ClCompile Include="Source\ModuleParticles.cpp" />
     <ClCompile Include="Source\NotesManager.cpp" />
+    <ClCompile Include="Source\NPC_Abuela.cpp" />
     <ClCompile Include="Source\NPC_Abuelitas.cpp" />
     <ClCompile Include="Source\NPC_Abuelito.cpp" />
     <ClCompile Include="Source\NPC_Abuelo.cpp" />
@@ -297,6 +298,7 @@
     <ClInclude Include="Source\ModuleParticles.h" />
     <ClInclude Include="Source\Note.h" />
     <ClInclude Include="Source\NotesManager.h" />
+    <ClInclude Include="Source\NPC_Abuela.h" />
     <ClInclude Include="Source\NPC_Abuelitas.h" />
     <ClInclude Include="Source\NPC_Abuelito.h" />
     <ClInclude Include="Source\NPC_Abuelo.h" />

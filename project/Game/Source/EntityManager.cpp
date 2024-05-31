@@ -23,6 +23,7 @@
 #include "NPC_Abuelo.h"
 #include "NPC_Enamorados.h"
 #include "NPC_Abuelito.h"
+#include "NPC_Abuela.h"
 #include "NPC_Abuelitas.h"
 #include "NPC_Guardias.h"
 #include "NPC_Bruja.h"
@@ -318,6 +319,9 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 		break;
 	case EntityType::NPC_ABUELITO:
 		entity = new NPCAbuelito();
+		break;
+	case EntityType::NPC_ABUELA:
+		entity = new NPCAbuela();
 		break;
 	case EntityType::NPC_ABUELITAS:
 		entity = new NPCAbuelitas();
