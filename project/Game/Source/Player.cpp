@@ -630,6 +630,29 @@ bool Player::Start() {
 	else if(app->inventoryManager->secondaryMaskInventoryManager == 1)	EquipSecondaryMask(Mask::MASK1);
 	else if(app->inventoryManager->secondaryMaskInventoryManager == 2)	EquipSecondaryMask(Mask::MASK2);
 	else if(app->inventoryManager->secondaryMaskInventoryManager == 3)	EquipSecondaryMask(Mask::MASK3);
+
+	//Cargar las estadísticas de las máscaras según sus mejoras por nivel
+	maskLevels[Mask::MASK0][Branches::Rama1] = app->inventoryManager->mask0_levelBranch1;
+	maskLevels[Mask::MASK0][Branches::Rama2] = app->inventoryManager->mask0_levelBranch2;
+	maskLevels[Mask::MASK0][Branches::Rama3] = app->inventoryManager->mask0_levelBranch3;
+	maskLevels[Mask::MASK0][Branches::Rama4] = app->inventoryManager->mask0_levelBranch4;
+
+	maskLevels[Mask::MASK1][Branches::Rama1] = app->inventoryManager->mask1_levelBranch1;
+	maskLevels[Mask::MASK1][Branches::Rama2] = app->inventoryManager->mask1_levelBranch2;
+	maskLevels[Mask::MASK1][Branches::Rama3] = app->inventoryManager->mask1_levelBranch3;
+	maskLevels[Mask::MASK1][Branches::Rama4] = app->inventoryManager->mask1_levelBranch4;
+
+	maskLevels[Mask::MASK2][Branches::Rama1] = app->inventoryManager->mask2_levelBranch1;
+	maskLevels[Mask::MASK2][Branches::Rama2] = app->inventoryManager->mask2_levelBranch2;
+	maskLevels[Mask::MASK2][Branches::Rama3] = app->inventoryManager->mask2_levelBranch3;
+	maskLevels[Mask::MASK2][Branches::Rama4] = app->inventoryManager->mask2_levelBranch4;
+
+	maskLevels[Mask::MASK3][Branches::Rama1] = app->inventoryManager->mask3_levelBranch1;
+	maskLevels[Mask::MASK3][Branches::Rama2] = app->inventoryManager->mask3_levelBranch2;
+	maskLevels[Mask::MASK3][Branches::Rama3] = app->inventoryManager->mask3_levelBranch3;
+	maskLevels[Mask::MASK3][Branches::Rama4] = app->inventoryManager->mask3_levelBranch4;
+
+
 	
 	/*	------------ALEIX------------
 	PARA MEJORAR X RAMA DE X MASCARA SERIA ASI
@@ -651,16 +674,16 @@ bool Player::Start() {
 	printf("Attack Damage: %f\n", currentStats.attackDamage);
 
 	maskLevels[primaryMask][Branches::Modifiers] = 0;
-	maskLevels[primaryMask][Branches::Rama1] = 0;
-	maskLevels[primaryMask][Branches::Rama2] = 0;
-	maskLevels[primaryMask][Branches::Rama3] = 0;
-	maskLevels[primaryMask][Branches::Rama4] = 0;
+	// maskLevels[primaryMask][Branches::Rama1] = 0;
+	// maskLevels[primaryMask][Branches::Rama2] = 0;
+	// maskLevels[primaryMask][Branches::Rama3] = 0;
+	// maskLevels[primaryMask][Branches::Rama4] = 0;
 
 	maskLevels[secondaryMask][Branches::Modifiers] = 0;
-	maskLevels[secondaryMask][Branches::Rama1] = 0;
-	maskLevels[secondaryMask][Branches::Rama2] = 0;
-	maskLevels[secondaryMask][Branches::Rama3] = 0;
-	maskLevels[secondaryMask][Branches::Rama4] = 0;
+	// maskLevels[secondaryMask][Branches::Rama1] = 0;
+	// maskLevels[secondaryMask][Branches::Rama2] = 0;
+	// maskLevels[secondaryMask][Branches::Rama3] = 0;
+	// maskLevels[secondaryMask][Branches::Rama4] = 0;
 
 	printf("Primary mask: %d, Level Rama1: %d, Level Rama2: %d, Level Rama3: %d, Level Rama4: %d\n",
 		static_cast<int>(primaryMask) - 1,
@@ -910,6 +933,26 @@ bool Player::CleanUp()
 	else if(secondaryMask == Mask::MASK1) app->inventoryManager->secondaryMaskInventoryManager = 1;
 	else if(secondaryMask == Mask::MASK2) app->inventoryManager->secondaryMaskInventoryManager = 2;
 	else if(secondaryMask == Mask::MASK3) app->inventoryManager->secondaryMaskInventoryManager = 3;
+
+	app->inventoryManager->mask0_levelBranch1 = maskLevels[Mask::MASK0][Branches::Rama1];
+	app->inventoryManager->mask0_levelBranch2 = maskLevels[Mask::MASK0][Branches::Rama2];
+	app->inventoryManager->mask0_levelBranch3 = maskLevels[Mask::MASK0][Branches::Rama3];
+	app->inventoryManager->mask0_levelBranch4 = maskLevels[Mask::MASK0][Branches::Rama4];
+
+	app->inventoryManager->mask1_levelBranch1 = maskLevels[Mask::MASK1][Branches::Rama1];
+	app->inventoryManager->mask1_levelBranch2 = maskLevels[Mask::MASK1][Branches::Rama2];
+	app->inventoryManager->mask1_levelBranch3 = maskLevels[Mask::MASK1][Branches::Rama3];
+	app->inventoryManager->mask1_levelBranch4 = maskLevels[Mask::MASK1][Branches::Rama4];
+
+	app->inventoryManager->mask2_levelBranch1 = maskLevels[Mask::MASK2][Branches::Rama1];
+	app->inventoryManager->mask2_levelBranch2 = maskLevels[Mask::MASK2][Branches::Rama2];
+	app->inventoryManager->mask2_levelBranch3 = maskLevels[Mask::MASK2][Branches::Rama3];
+	app->inventoryManager->mask2_levelBranch4 = maskLevels[Mask::MASK2][Branches::Rama4];
+
+	app->inventoryManager->mask3_levelBranch1 = maskLevels[Mask::MASK3][Branches::Rama1];
+	app->inventoryManager->mask3_levelBranch2 = maskLevels[Mask::MASK3][Branches::Rama2];
+	app->inventoryManager->mask3_levelBranch3 = maskLevels[Mask::MASK3][Branches::Rama3];
+	app->inventoryManager->mask3_levelBranch4 = maskLevels[Mask::MASK3][Branches::Rama4];
 
 	app->entityManager->DestroyEntity(this);
 	app->entityManager->SetPlayer(nullptr);
