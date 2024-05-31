@@ -725,6 +725,26 @@ bool InventoryManager::LoadState(pugi::xml_node node)
 	primaryMaskInventoryManager = node.child("inventory").child("primaryMask").attribute("quantity").as_int();
 	secondaryMaskInventoryManager = node.child("inventory").child("secondaryMask").attribute("quantity").as_int();
 
+	//Mascaras (nivel de rama de cada mascara)
+	mask0_levelBranch2 = node.child("inventory").child("Mask0").attribute("Branch2").as_int();
+	mask0_levelBranch3 = node.child("inventory").child("Mask0").attribute("Branch3").as_int();
+	mask0_levelBranch4 = node.child("inventory").child("Mask0").attribute("Branch4").as_int();
+	
+	mask1_levelBranch1 = node.child("inventory").child("Mask1").attribute("Branch1").as_int();
+	mask1_levelBranch2 = node.child("inventory").child("Mask1").attribute("Branch2").as_int();
+	mask1_levelBranch3 = node.child("inventory").child("Mask1").attribute("Branch3").as_int();
+	mask1_levelBranch4 = node.child("inventory").child("Mask1").attribute("Branch4").as_int();
+	
+	mask2_levelBranch1 = node.child("inventory").child("Mask2").attribute("Branch1").as_int();
+	mask2_levelBranch2 = node.child("inventory").child("Mask2").attribute("Branch2").as_int();
+	mask2_levelBranch3 = node.child("inventory").child("Mask2").attribute("Branch3").as_int();
+	mask2_levelBranch4 = node.child("inventory").child("Mask2").attribute("Branch4").as_int();
+	
+	mask3_levelBranch1 = node.child("inventory").child("Mask3").attribute("Branch1").as_int();
+	mask3_levelBranch2 = node.child("inventory").child("Mask3").attribute("Branch2").as_int();
+	mask3_levelBranch3 = node.child("inventory").child("Mask3").attribute("Branch3").as_int();
+	mask3_levelBranch4 = node.child("inventory").child("Mask3").attribute("Branch4").as_int();
+
 	return ret;
 }
 
@@ -759,6 +779,31 @@ bool InventoryManager::SaveState(pugi::xml_node node)
 
 	pugi::xml_node storyLevelNode = inventoryNode.append_child("StoryLevel");
 	storyLevelNode.append_attribute("quantity").set_value(storyLevel);
+
+	pugi::xml_node mask0Node = inventoryNode.append_child("Mask0");
+	mask0Node.append_attribute("Branch1").set_value(mask0_levelBranch1);
+	mask0Node.append_attribute("Branch2").set_value(mask0_levelBranch2);
+	mask0Node.append_attribute("Branch3").set_value(mask0_levelBranch3);
+	mask0Node.append_attribute("Branch4").set_value(mask0_levelBranch4);
+
+	pugi::xml_node mask1Node = inventoryNode.append_child("Mask1");
+	mask1Node.append_attribute("Branch1").set_value(mask1_levelBranch1);
+	mask1Node.append_attribute("Branch2").set_value(mask1_levelBranch2);
+	mask1Node.append_attribute("Branch3").set_value(mask1_levelBranch3);
+	mask1Node.append_attribute("Branch4").set_value(mask1_levelBranch4);
+
+	pugi::xml_node mask2Node = inventoryNode.append_child("Mask2");
+	mask2Node.append_attribute("Branch1").set_value(mask2_levelBranch1);
+	mask2Node.append_attribute("Branch2").set_value(mask2_levelBranch2);
+	mask2Node.append_attribute("Branch3").set_value(mask2_levelBranch3);
+	mask2Node.append_attribute("Branch4").set_value(mask2_levelBranch4);
+
+	pugi::xml_node mask3Node = inventoryNode.append_child("Mask3");
+	mask3Node.append_attribute("Branch1").set_value(mask3_levelBranch1);
+	mask3Node.append_attribute("Branch2").set_value(mask3_levelBranch2);
+	mask3Node.append_attribute("Branch3").set_value(mask3_levelBranch3);
+	mask3Node.append_attribute("Branch4").set_value(mask3_levelBranch4);
+
 
 	/*playerNode.append_attribute("x").set_value(player->position.x);
 	playerNode.append_attribute("y").set_value(player->position.y);
