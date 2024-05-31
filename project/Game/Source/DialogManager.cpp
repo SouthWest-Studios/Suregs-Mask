@@ -372,7 +372,7 @@ bool DialogManager::PostUpdate() {
 			// Calcular el progreso normalizado
 			float duration = 500; // Duración de la animación en milisegundos
 			float progress = std::min(dialogueAnimation.ReadMSec() / duration, 1.0f); // Asegurarse de que no supera 1.0
-			float easedProgress = easeInOutCubic(progress);
+			float easedProgress = easeOutCubic(progress);
 
 			// Calcular la nueva posición Y
 			actualDialogYPosition = -300 + easedProgress * 300;
