@@ -31,6 +31,16 @@
 	<menu />
 	<iventorymanager>
 		<inventory>
+			<inventity type="12" quantity="1" />
+			<inventity type="11" quantity="1" />
+			<inventity type="4" quantity="1" />
+			<inventity type="5" quantity="1" />
+			<inventity type="9" quantity="1" />
+			<inventity type="10" quantity="1" />
+			<inventity type="6" quantity="1" />
+			<inventity type="8" quantity="1" />
+			<inventity type="45" quantity="1" />
+			<inventity type="18" quantity="1" />
 			<money quantity="0" />
 			<SwordLevel quantity="0" />
 			<ArmorLevel quantity="0" />
@@ -45,10 +55,30 @@
 	</iventorymanager>
 	<commercemanager />
 	<notesmanager>
-		<Note />
+		<Note>
+			<Note type="0" quantity="1" />
+			<Note type="0" quantity="1" />
+			<Note type="0" quantity="1" />
+			<Note type="0" quantity="1" />
+			<Note type="0" quantity="1" />
+			<Note type="0" quantity="1" />
+			<Note type="0" quantity="1" />
+			<Note type="0" quantity="1" />
+			<Note type="0" quantity="1" />
+			<Note type="0" quantity="1" />
+		</Note>
 	</notesmanager>
 	<bestiariomanager>
-		<Bestiario />
+		<Bestiario>
+			<Bestiario type="0" quantity="1" />
+			<Bestiario type="0" quantity="1" />
+			<Bestiario type="0" quantity="1" />
+			<Bestiario type="0" quantity="1" />
+			<Bestiario type="0" quantity="1" />
+			<Bestiario type="0" quantity="1" />
+			<Bestiario type="0" quantity="1" />
+			<Bestiario type="0" quantity="1" />
+		</Bestiario>
 	</bestiariomanager>
 	<equipo />
 	<Ascensormenu />

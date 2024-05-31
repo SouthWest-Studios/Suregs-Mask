@@ -39,6 +39,7 @@
 #include "Item_Diamante.h"
 #include "Item_Ojo.h"
 #include "Item_Hueso.h"
+#include "Enemy_Guerrero.h"
 #include "Enemy_Ols.h"
 #include "Enemy_Ols_Variation.h"
 #include "Enemy_Muur.h"
@@ -1540,6 +1541,17 @@ bool Map::LoadEntities(std::string layerName)
 						npc->config = configNode.child("entities_data").child("npc_abuela");
 						npc->position = iPoint(pos.x + 16, pos.y + 16);
 						npc->Start();
+
+					}
+
+					//ENEMY_GUERRERO
+					if (gid == tileset->firstgid + 32) {
+
+
+						Enemy_Guerrero* guerrero = (Enemy_Guerrero*)app->entityManager->CreateEntity(EntityType::ENEMY_GUERRERO);
+						guerrero->config = configNode.child("entities_data").child("guerrero");
+						guerrero->position = iPoint(pos.x + 16, pos.y + 16);
+						guerrero->Start();
 
 					}
 

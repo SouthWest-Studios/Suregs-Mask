@@ -371,6 +371,9 @@
     <ClCompile Include="Source\NPC_Abuela.cpp">
       <Filter>Entities\NPC</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Enemy_Guerrero.cpp">
+      <Filter>Entities\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -805,6 +808,9 @@
     </ClInclude>
     <ClInclude Include="Source\NPC_Abuela.h">
       <Filter>Entities\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy_Guerrero.h">
+      <Filter>Entities\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
