@@ -1235,7 +1235,7 @@ void Player::Dead()
 	
 	if(!coinsRemoved){
 		coinsRemoved = true;
-		app->inventoryManager->monedasObtenidas *= 0.3;
+		app->inventoryManager->monedasObtenidas *= 0.7;
 		printf("Monedas obtenidas: %d\n", app->inventoryManager->monedasObtenidas);
 	}
 	
