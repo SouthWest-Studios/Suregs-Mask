@@ -129,6 +129,8 @@ private:
 	Animation* currentPointerAnimation = nullptr;
 	Animation pointerAnim;
 
+	int change_inventory_mark_fx;
+
 };
 
 #endif // __INVENTORYMANAGER_H__

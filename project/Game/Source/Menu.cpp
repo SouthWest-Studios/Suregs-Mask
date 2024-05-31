@@ -93,12 +93,16 @@ bool Menu::Update(float dt)
 		/*app->guiManager->columnSize = 2;*/
 		menuu = !menuu;
 
+		app->audio->StopFx(-1);
 		app->audio->PlayFx(inventory_fx);
 	}
 	if (app->input->GetButton(APP_EXIT) == KEY_DOWN && app->notesManager->zoomIn == false && app->bestiarioManager->zoomIn == false && app->ascensor->abierto == false)
 	{
 		menuu = !menuu;
 		ventana = 4;
+
+		app->audio->StopFx(-1);
+		app->audio->PlayFx(inventory_fx);
 	}
 	if (menuu)
 	{/*
@@ -457,12 +461,26 @@ void Menu::Fullscreen()
 
 bool Menu::LoadState(pugi::xml_node node)
 {
+	/*
+	pugi::xml_node musicNode = node.append_child("audio");
+	app->audio->volumeMusic = musicNode.child("music").attribute("volume").as_int();
 
+	pugi::xml_node fxNode = node.append_child("audio");
+	app->audio->volumeFx = fxNode.child("fx").attribute("volume").as_int();*/
 
 	return true;
 }
 
 bool Menu::SaveState(pugi::xml_node node)
 {
+	/*
+	pugi::xml_node audioNode = node.append_child("audio");
+
+	pugi::xml_node musicNode = audioNode.append_child("music");
+	musicNode.append_attribute("volume").set_value(newVolumeAudio);
+
+	pugi::xml_node fxNode = audioNode.append_child("fx");
+	musicNode.append_attribute("volume").set_value(newVolumeFx);*/
+
 	return true;
 }
