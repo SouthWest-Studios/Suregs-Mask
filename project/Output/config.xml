@@ -206,7 +206,7 @@
 
 		<boss_surma texturePath="Assets/Textures/Entidades/Boss/Surma/texture_boss_surma.png"
 					maxHealth="13000.0f" speed="180f" speedSecondFase="210f" attackDamage="250.0f"  attackDistance="3" viewDistance="40"
-					Tsprite="36" Pwidth="1388" sprite_x="347" sprite_y="231"/>
+					Tsprite="56" Pwidth="7432" sprite_x="347" sprite_y="231"/>
 
 		<item_rubi					texturePath="Assets/Textures/Entidades/Items/textura_rubi.png"					description="Mineral robusto extremadamente resistente."			type ="Material" name="Rubí"/>
 		<item_diamante				texturePath="Assets/Textures/Entidades/Items/texture_diamond.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Diamante"/>
