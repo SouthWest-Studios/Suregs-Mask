@@ -193,6 +193,16 @@ private:
 	Timer inDashiTime;
 	Timer habilidadEmpujeTimer;
 
+	//Curar
+	bool inCurar = false;
+	bool goCurar = false;
+	bool shieldBroken = false;
+	float shield = 500;
+	bool stun = false;
+	Timer curaTimer;
+	Timer shieldTimer;
+
+
 	//Veneno
 	float poisonTimer = 0.0f; // Tiempo desde que se aplic� el veneno
 	float poisonDuration = 0.0f; // Duraci�n total del veneno

@@ -93,6 +93,7 @@ bool Boss_Igory::Start() {
 	room = GetCurrentRoom();
 
 	generaTimeColdDown.Start();
+	curaTimer.Start();
 
 	return true;
 }
@@ -109,18 +110,22 @@ bool Boss_Igory::Update(float dt)
 	{
 		desiredState = EntityState_Boss_Igory::DEAD;
 	}
-	else if (health <= lifeLow80 && !faseTwo) {
+	else if (health <= lifeLow80 && !faseTwo && !isDead) {
 
 		desiredState = EntityState_Boss_Igory::FASE_CHANGE;
 	}
-	else if (health <= lifeLow40 && !faseThree) {
+	else if (health <= lifeLow40 && !faseThree && !isDead) {
 		desiredState = EntityState_Boss_Igory::FASE_CHANGE;
 	}
-	else if (inTakeHit)
+	else if (goCurar && !inCurar && !inAtack)
+	{
+		desiredState = EntityState_Boss_Igory::HEAL;
+	}
+	else if (inTakeHit && !isDead && !inCurar)
 	{
 		desiredState = EntityState_Boss_Igory::TAKEHIT;
 	}
-	else if (goColdDown  && !inAtqDashi) {
+	else if (goColdDown && !inAtqDashi && !isDead && !inCurar) {
 		if (GeneraColdDown(5)) {
 			generaTimeColdDown.Start();
 			goColdDown = false;
@@ -130,23 +135,23 @@ bool Boss_Igory::Update(float dt)
 			desiredState = EntityState_Boss_Igory::IDLE;
 		}
 	}
-	else if (inSuregAni && !inAtqDashi)
+	else if (inSuregAni && !inAtqDashi && !isDead && !inCurar && !inAtack)
 	{
 		desiredState = EntityState_Boss_Igory::GENERATESUREG;
 	}
-	else if (atqDashQuali >= 3 && app->map->pathfinding->GetDistance(playerPos, position) >= attackDistance * 64 && fase != FASE_Igory::FASE_ONE) {
+	else if (atqDashQuali >= 3 && app->map->pathfinding->GetDistance(playerPos, position) >= attackDistance * 64 && fase != FASE_Igory::FASE_ONE && !isDead && !inCurar && !inAtack) {
 
 		desiredState = EntityState_Boss_Igory::ATTACKING_DASHI;
 	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32 && ataqColdDown && !inTakeHit)
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32 && ataqColdDown && !inTakeHit && !isDead && !inCurar)
 	{
 		desiredState = EntityState_Boss_Igory::IDLE;
 	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32 && ataqColdDown == false && !inTakeHit && !inSuregAni && !inAtqDashi && !goColdDown)
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32 && ataqColdDown == false && !inTakeHit && !inSuregAni && !inAtqDashi && !goColdDown && !isDead && !inCurar)
 	{
 		desiredState = EntityState_Boss_Igory::ATTACKING_BASIC;
 	}
-	else if (playerInFight && currentState != EntityState_Boss_Igory::ATTACKING_BASIC && !inSuregAni)
+	else if (playerInFight && currentState != EntityState_Boss_Igory::ATTACKING_BASIC && !inSuregAni && !isDead && !inCurar)
 	{
 		desiredState = EntityState_Boss_Igory::RUNNING;
 
@@ -161,6 +166,8 @@ bool Boss_Igory::Update(float dt)
 	}
 	else if (!playerInFight)
 	{
+		generaTimeColdDown.Start();
+		curaTimer.Start();
 		desiredState = EntityState_Boss_Igory::IDLE;
 	}
 	else
@@ -174,6 +181,33 @@ bool Boss_Igory::Update(float dt)
 		AtqColdDown();
 	}
 
+	//Cura
+	if (shieldBroken) {
+		inCurar = false;
+		goCurar = false;
+		shieldBroken = false;
+		shield = 500;
+		stun = true;
+		curaTimer.Start();
+	}
+
+	if (shieldTimer.ReadMSec() >= 5000 && inCurar) {
+		inCurar = false;
+		goCurar = false;
+		shieldBroken = false;
+		shield = 1500;
+		health += 1000;
+		if (health >= maxHealth) {
+			health = maxHealth;
+		}
+		printf("\nhealth: %f", health);
+		curaTimer.Start();
+	}
+
+	if (curaTimer.ReadMSec() >= 7000) {
+		goCurar = true;
+	}
+	//EndCura
 
 	if (GeneraColdDown(10)) {
 		inSuregAni = true;
@@ -232,10 +266,24 @@ bool Boss_Igory::PostUpdate() {
 	}
 
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 110, position.y - 160, 0.5, SDL_FLIP_HORIZONTAL, &rect);
+		if (!inCurar) {
+			app->render->DrawTexture(texture, position.x - 110, position.y - 160, 0.5, SDL_FLIP_HORIZONTAL, &rect);
+		}
+		else
+		{
+			app->render->DrawTexture(texture, position.x - 130, position.y - 160, 0.5, SDL_FLIP_HORIZONTAL, &rect);
+		}
+
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 160, position.y - 160, 0.5, SDL_FLIP_NONE, &rect);
+		if (!inCurar) {
+			app->render->DrawTexture(texture, position.x - 160, position.y - 160, 0.5, SDL_FLIP_NONE, &rect);
+		}
+		else
+		{
+			app->render->DrawTexture(texture, position.x - 140, position.y - 160, 0.5, SDL_FLIP_NONE, &rect);
+		}
+
 	}
 
 	for (uint i = 0; i < lastPath.Count(); ++i)
@@ -438,6 +486,11 @@ void Boss_Igory::showAnimation()
 	if (inAtqDashi && inAtaqueDashi) {
 		currentAnimation = &dash_DashiAtq_boss_Igory;
 	}
+
+	if (inCurar) {
+		currentAnimation = &cura_boss_Igory;
+	}
+
 }
 
 
@@ -505,6 +558,7 @@ void Boss_Igory::stateMachine(float dt, iPoint playerPos)
 		}
 		break;
 	case EntityState_Boss_Igory::DEAD:
+		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 		Die();
 		break;
 	case EntityState_Boss_Igory::FASE_CHANGE:
@@ -522,6 +576,9 @@ void Boss_Igory::stateMachine(float dt, iPoint playerPos)
 		showSuregAni = true;
 		break;
 	case EntityState_Boss_Igory::HEAL:
+		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
+		shieldTimer.Start();
+		inCurar = true;
 		break;
 	case EntityState_Boss_Igory::NONE:
 		desiredState = EntityState_Boss_Igory::IDLE;
@@ -587,13 +644,15 @@ void Boss_Igory::Attack(float dt)
 	default:
 		break;
 	}
-	
+
 
 }
 
 
 void Boss_Igory::Die() {
 
+	isDead = true;
+	currentAnimation = &dead_boss_Igory;
 	//Mask XP
 	Item_mascara_3* mascara3 = (Item_mascara_3*)app->entityManager->CreateEntity(EntityType::ITEM_MASCARA3);
 	mascara3->config = configNode.child("entities_data").child("item_mascara_3");
@@ -792,11 +851,27 @@ void Boss_Igory::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::PLAYER_ATTACK:
 		LOG("Collision Player_Attack");
 		if (nextState != EntityState_Boss_Igory::FASE_CHANGE && app->entityManager->GetPlayer()->checkAtk == true) {
-			inTakeHit = true;
-			health -= app->entityManager->GetPlayer()->currentStats.attackDamage;
-			timerRecibirDanioColor.Start();
-			printf("\n BossHeal %f", health);
-			app->entityManager->GetPlayer()->checkAtk = false;
+			if (!inCurar) {
+				inTakeHit = true;
+				health -= app->entityManager->GetPlayer()->currentStats.attackDamage;
+				timerRecibirDanioColor.Start();
+				printf("\n BossHeal %f", health);
+				app->entityManager->GetPlayer()->checkAtk = false;
+			}
+			else
+			{
+				inTakeHit = true;
+				shield -= app->entityManager->GetPlayer()->currentStats.attackDamage;
+				timerRecibirDanioColor.Start();
+				app->entityManager->GetPlayer()->checkAtk = false;
+				if (shield <= 0) {
+					shieldBroken = true;
+					shield = 0;
+					printf("\n shieldBroken %f");
+				}
+				printf("\n shield %f", shield);
+			}
+
 		}
 		break;
 	case ColliderType::UNKNOWN:
