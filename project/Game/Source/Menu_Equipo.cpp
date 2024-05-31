@@ -58,14 +58,19 @@ bool Menu_Equipo::Start()
 	swordTexture = app->tex->Load(swordTexturePath);
 	armorTexture = app->tex->Load(armorTexturePath);
 
+	swordRect = new SDL_Rect { 0,0,154,156 };
+	armorRect = new SDL_Rect{ 0,0,100,94 };
+
 	return true;
 }
 
 // Called each loop iteration
 bool Menu_Equipo::PreUpdate()
 {
-	
-	
+	swordRect->x = 154 * app->inventoryManager->swordLevel;
+
+	armorRect->x = 100 * app->inventoryManager->armorLevel;
+
 	return true;
 }
 
@@ -113,8 +118,8 @@ bool Menu_Equipo::PostUpdate()
 
 		app->render->DrawTextBound(MaskAtackStr2.c_str(), 720, 430, 100, { 0,0,0,0 });*/
 
-		app->render->DrawTexture(swordTexture, 450, 200, SDL_FLIP_NONE, 0, 0);
-		app->render->DrawTexture(armorTexture, 850, 200, SDL_FLIP_NONE, 0, 0);
+		app->render->DrawTexture(swordTexture, 405, 180, SDL_FLIP_NONE, swordRect, 0, 0);
+		app->render->DrawTexture(armorTexture, 850, 200, SDL_FLIP_NONE, armorRect, 0, 0);
 
 		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
 		{
