@@ -19,6 +19,7 @@
 #include "SString.h"
 #include "Elevator.h"
 #include "ElevatorMenu.h"
+#include "Audio.h"
 
 InventoryManager::InventoryManager(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -56,6 +57,8 @@ bool InventoryManager::Start() {
 	PointerItemText = app->tex->Load("Assets/Textures/Interfaz/selectAnimation.png");
 	SelectedItemText = app->tex->Load("Assets/Textures/Interfaz/selected.png");
 	EquipedItemText = app->tex->Load("Assets/Textures/Interfaz/equiped.png");
+
+	change_inventory_mark_fx = app->audio->LoadAudioFx("change_inventory_mark_fx");
 
 
 	bool ret = true;
@@ -1101,22 +1104,34 @@ void InventoryManager::OnMovePointer()
 {
 
 	if (app->input->GetButton(RIGHT) == KEY_DOWN && PointerPosition.x < 460) {
+		app->audio->StopFx(-1);
+		app->audio->PlayFx(change_inventory_mark_fx);
+
 		PointerPosition.x += 106;
 		PointerId += 1;
 		currentPointerAnimation->Reset();
 	}
 	if (app->input->GetButton(LEFT) == KEY_DOWN && PointerPosition.x > 258) {
+		app->audio->StopFx(-1);
+		app->audio->PlayFx(change_inventory_mark_fx);
+
 		PointerPosition.x -= 106;
 		PointerId -= 1;
 		currentPointerAnimation->Reset();
 	}
 
 	if (app->input->GetButton(DOWN) == KEY_DOWN && PointerPosition.y < 436) {
+		app->audio->StopFx(-1);
+		app->audio->PlayFx(change_inventory_mark_fx);
+
 		PointerPosition.y += 103;
 		PointerId += 3;
 		currentPointerAnimation->Reset();
 	}
 	if (app->input->GetButton(UP) == KEY_DOWN && PointerPosition.y > 130 ) {
+		app->audio->StopFx(-1);
+		app->audio->PlayFx(change_inventory_mark_fx);
+
 		PointerPosition.y -= 103;
 		PointerId -= 3;
 		currentPointerAnimation->Reset();
