@@ -473,7 +473,9 @@
 			<atqCargado_fase1_boss_Igory start="16" end="27" speed="0.1f" loop="false"/>
 			<walk_boss_Igory start="32" end="41" speed="0.2f" loop="true"/>
 			<cura_boss_Igory start="48" end="56" speed="0.2f" loop="false"/>
-			<dash_boss_Igory start="64" end="71" speed="0.2f" loop="false"/>
+			<dash_idle_boss_Igory start="64" end="65" speed="0.1f" loop="false"/>
+			<dash_inDashi_boss_Igory start="66" end="68" speed="0.1f" loop="false"/>
+			<dash_DashiAtq_boss_Igory start="69" end="71" speed="0.1f" loop="false"/>
 			<atq1_boss_Igory start="72" end="79" speed="0.1f" loop="false"/>
 			<geneSure_boss_Igory start="80" end="85" speed="0.1f" loop="false"/>
 			<idle_boss_Igory start="88" end="93" speed="0.1f" loop="true"/>

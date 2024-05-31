@@ -114,7 +114,9 @@ private:
 	Animation atqCargado_fase1_boss_Igory;
 	Animation walk_boss_Igory;
 	Animation cura_boss_Igory;
-	Animation dash_boss_Igory;
+	Animation dash_idle_boss_Igory;
+	Animation dash_inDashi_boss_Igory;
+	Animation dash_DashiAtq_boss_Igory;
 	Animation atq1_boss_Igory;
 	Animation geneSure_boss_Igory;
 	Animation idle_boss_Igory;
@@ -178,6 +180,15 @@ private:
 
 	//Takehit
 	bool inTakeHit = false;
+
+	//ataqueDashi
+	int atqDashQuali = 0;
+	bool inAtqDashi = false;
+	bool inIdleDashi = false;
+	bool inDashDashi = false;
+	bool inAtaqueDashi = false;
+	iPoint getPlayerPosition;
+	Timer inDashiTime;
 
 	//Veneno
 	float poisonTimer = 0.0f; // Tiempo desde que se aplic� el veneno
