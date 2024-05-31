@@ -129,14 +129,12 @@ bool Boss_Igory::Update(float dt)
 		else {
 			desiredState = EntityState_Boss_Igory::IDLE;
 		}
-
 	}
 	else if (inSuregAni && !inAtqDashi)
 	{
-
 		desiredState = EntityState_Boss_Igory::GENERATESUREG;
 	}
-	else if (atqDashQuali >= 5 && app->map->pathfinding->GetDistance(playerPos, position) >= attackDistance * 64) {
+	else if (atqDashQuali >= 3 && app->map->pathfinding->GetDistance(playerPos, position) >= attackDistance * 64 && fase != FASE_Igory::FASE_ONE) {
 
 		desiredState = EntityState_Boss_Igory::ATTACKING_DASHI;
 	}
@@ -342,12 +340,14 @@ void Boss_Igory::resetAnimation()
 			printf("\nFase3");
 			fase = FASE_Igory::FASE_THREE;
 			faseThree = true;
+			atqDashQuali = 0;
 		}
 
 		if (fase == FASE_Igory::FASE_ONE) {
 			printf("\nFase2");
 			fase = FASE_Igory::FASE_TWO;
 			faseTwo = true;
+			atqDashQuali = 0;
 		}
 		goColdDown = false;
 		inSuregAni = false;
@@ -580,13 +580,14 @@ void Boss_Igory::Attack(float dt)
 		inAtack = true;
 		printf("\nataque3");
 		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
+		atqDashQuali++;
 		attackTime = 0;
 		break;
 
 	default:
 		break;
 	}
-	atqDashQuali++;
+	
 
 }
 
