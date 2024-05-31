@@ -107,6 +107,8 @@ private:
 	std::vector<Acquired_Item*> acquired_Items;
 	int acuiredItemLifeTimeMS = 1500;
 
+	int monedasObtenidasHud = 0;
+
 public:
 
 	std::vector<SDL_Rect*> potionRects;

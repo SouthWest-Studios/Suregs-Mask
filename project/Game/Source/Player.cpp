@@ -1673,8 +1673,15 @@ void Player::CameraMovement(float dt)
 	app->win->GetWindowSize(windowW, windowH);
 
 	int targetPosX = (-position.x * app->win->GetScale() + (windowW / 2) - 10);
-	int targetPosY = (-position.y * app->win->GetScale() + (windowH / 2) - 10) + 50;
+	//int targetPosY = (-position.y * app->win->GetScale() + (windowH / 2) - 10) + 50;
+	int targetPosY;
 
+	if (app->dialogManager->isPlaying) {
+		targetPosY = (-position.y * app->win->GetScale() + (windowH / 2) - 10) - 50;
+	}
+	else {
+		targetPosY = (-position.y * app->win->GetScale() + (windowH / 2) - 10) + 50;
+	}
 
 
 	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)

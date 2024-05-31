@@ -105,6 +105,7 @@ bool Hud::Start()
 	acquired_Items.push_back(ai);
 	acquired_Items.push_back(ai);*/
 
+	
 
 	return true;
 }
@@ -193,6 +194,13 @@ bool Hud::Update(float dt)
 
 	Potions();
 
+	if (monedasObtenidasHud < app->inventoryManager->monedasObtenidas) {
+		monedasObtenidasHud += 1;
+	}
+	else if (monedasObtenidasHud < app->inventoryManager->monedasObtenidas) {
+		monedasObtenidasHud -= 1;
+	}
+
 	return true;
 }
 bool fade = false;
@@ -220,10 +228,12 @@ bool Hud::PostUpdate()
 	app->render->DrawTexture(hudTexture, 175, 44, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
 
 	//Monedas
-	std::string quantityStr = std::to_string(app->inventoryManager->monedasObtenidas);
+	std::string quantityStr = std::to_string(monedasObtenidasHud);
+	//std::string quantityStr = std::to_string(app->inventoryManager->monedasObtenidas);
 
 	app->render->DrawTexture(hudTexture, windowWidth - rectFondoMonedas->w - 35, 130, SDL_FLIP_NONE, rectFondoMonedas, 0);
-	app->render->DrawText(quantityStr.c_str(), windowWidth - rectFondoMonedas->w + 10, 140, 18, 18);
+	//app->render->DrawText(quantityStr.c_str(), windowWidth - rectFondoMonedas->w + 10, 140, 18, 18);
+	app->render->DrawTextBound(quantityStr.c_str(), windowWidth - rectFondoMonedas->w - (quantityStr.size() * 10) + 30, 133, 100, SDL_Color{52, 25, 0}, app->render->goldFont);
 	//Fondos
 
 	//Pociones
