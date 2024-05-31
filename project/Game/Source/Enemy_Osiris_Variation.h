@@ -11,7 +11,7 @@
 #include "Physics.h"
 
 struct SDL_Texture;
- 
+
 
 struct Branch_Osiris_Variation {
 	enum EntityState_Enemy const next_state;
@@ -59,7 +59,9 @@ public:
 	void ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate);
 	void CheckPoison();
 	//VENENO ---------->
-	
+
+	MapObject* GetCurrentRoom();
+
 public:
 
 	//L02: DONE 2: Declare player parameters
@@ -81,19 +83,20 @@ public:
 	Animation* currentAnimation = nullptr;
 	//Revivir
 
-	
+
 
 private:
 	pugi::xml_document configFile;
 	pugi::xml_node configNode;
-	
+
 
 	Animation idleAnim;
 	Animation runAnim;
 	Animation attackAnim;
+	Animation dieAnim;
 	Animation takeDamageAnim;
 	Animation reviveAnim;
-	Animation dieAnim;
+
 
 	int osiris_get_damage_fx;
 	int osiris_death_fx;
@@ -126,7 +129,7 @@ private:
 	SDL_Rect* spritePositions;
 
 	Timer timerRecibirDanioColor;
-	
+
 	//VENENO <----------
 	bool firstTimePoisonRecibed = false;
 	Timer poisonTimer;
@@ -136,7 +139,7 @@ private:
 	float poisonDamage = 0.0f; // Da�o de veneno por tick
 	bool poisoned = false;
 	//VENENO ---------->
-	
+
 public:
 
 	Branch_Osiris_Variation transitionTable[static_cast<int>(EntityState_Enemy::STATE_COUNT)][static_cast<int>(EntityState_Enemy::STATE_COUNT)] = {
@@ -155,6 +158,7 @@ public:
 	EntityState_Enemy nextState;
 
 };
+
 
 
 
