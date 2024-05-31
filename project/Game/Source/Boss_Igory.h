@@ -96,6 +96,9 @@ public:
 
 	Timer timerRecibirDanioColor;
 
+	//Start
+	bool playerInFight = true;
+
 private:
 	pugi::xml_document configFile;
 	pugi::xml_node configNode;
@@ -146,8 +149,7 @@ private:
 
 	FASE_Igory fase;
 
-	//Start
-	bool playerInFight = true;
+	
 
 
 	//ataque

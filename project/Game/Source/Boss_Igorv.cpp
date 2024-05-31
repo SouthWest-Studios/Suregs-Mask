@@ -179,16 +179,19 @@ bool Boss_Igory::Update(float dt)
 	switch (fase)
 	{
 	case FASE_Igory::FASE_ONE:
+		app->map->maxEnemies = 6; 
 		break;
 	case FASE_Igory::FASE_TWO:
 		atq1_boss_Igory.speed = 0.15;
 		atq2_boss_Igory.speed = 0.15;
 		atq3_boss_Igory.speed = 0.15;
+		app->map->maxEnemies = 8;
 		break;
 	case FASE_Igory::FASE_THREE:
 		atq1_boss_Igory.speed = 0.25;
 		atq2_boss_Igory.speed = 0.25;
 		atq3_boss_Igory.speed = 0.25;
+		app->map->maxEnemies = 10;
 		break;
 	}
 

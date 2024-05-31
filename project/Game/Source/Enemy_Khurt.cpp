@@ -378,6 +378,9 @@ void Enemy_Khurt::Die() {
 		//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
 	}
 
+	if (app->entityManager->GetIgory()->playerInFight) {
+		app->map->DestroyEntity(this);
+	}
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 

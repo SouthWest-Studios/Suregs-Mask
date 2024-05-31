@@ -15,7 +15,6 @@
 #include "Item_Garra.h"
 #include "Textures.h"
 #include "Scene_Testing.h"
-#include "Player.h"
 #include "DialogTriggerEntity.h"
 #include "TPEntity.h"
 #include "NPC_Vendedor.h"
@@ -168,6 +167,10 @@ bool EntityManager::CleanUp()
 	eyeAnimation.Clear();
 	eyeIdle.Clear();
 	eyeEndIdle.Clear();
+
+	
+	//delete bossIgory;
+	
 
 	return ret;
 }
@@ -436,12 +439,18 @@ void EntityManager::LinkTPEntities()
 
 void EntityManager::SetPlayer(Player* player)
 {
+	printf("SetPlayer");
 	actualPlayer = player;
 }
 
 Player* EntityManager::GetPlayer()
 {
 	return actualPlayer;
+}
+
+Boss_Igory* EntityManager::GetIgory()
+{
+	return bossIgory;
 }
 
 int EntityManager::getRandomNumber(int min, int max) {

@@ -181,7 +181,8 @@ public:
     void SpawnEnemy(EntityType type, const char* configName, iPoint position);
 
     void generaSureg(FASE_Igory fase, iPoint position);
-  
+    void choseSureg(iPoint position,int suregType);
+    void DestroyEntity(Entity* entity);
 
     
  
@@ -246,7 +247,7 @@ public:
     iPoint al = { 0,0 };
 
     std::vector<Entity*> enemies;
-    const int maxEnemies = 6; 
+    int maxEnemies = 0; 
 
 private:
     
