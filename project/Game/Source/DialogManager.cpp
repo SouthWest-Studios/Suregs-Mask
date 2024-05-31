@@ -118,9 +118,9 @@ Dialog* DialogManager::CreateDialog(pugi::xml_node itemNode, std::string name, c
 		dialog->option1 = itemNode.child("option1").attribute("text").as_string();
 		for (pugi::xml_node optionNode = itemNode.child("option1").child("sentence"); optionNode; optionNode = optionNode.next_sibling("sentence")) {
 			Dialog* dialogOp1 = CreateDialog(optionNode, name, faceTexturePath, font);
-			dialogOp1->commerceId = itemNode.child("option1").child("commerce").attribute("id").as_int();
-			dialogOp1->comer = itemNode.child("option1").child("comer").attribute("id").as_int();
-			dialogOp1->tutorial = itemNode.child("option1").child("tutorial").attribute("id").as_int();
+			dialogOp1->commerceId = itemNode.child("option1").child("commerce").attribute("id").as_int(-1);
+			dialogOp1->comer = itemNode.child("option1").child("comer").attribute("id").as_int(-1);
+			dialogOp1->tutorial = itemNode.child("option1").child("tutorial").attribute("id").as_int(-1);
 			dialog->options1.Add(dialogOp1);
 
 		}
