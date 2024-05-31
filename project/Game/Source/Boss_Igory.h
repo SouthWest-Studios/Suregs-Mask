@@ -187,8 +187,11 @@ private:
 	bool inIdleDashi = false;
 	bool inDashDashi = false;
 	bool inAtaqueDashi = false;
+	bool empujaPlayer = false;
+	int fuerzaHabilidadEmpuje = 300;
 	iPoint getPlayerPosition;
 	Timer inDashiTime;
+	Timer habilidadEmpujeTimer;
 
 	//Veneno
 	float poisonTimer = 0.0f; // Tiempo desde que se aplic� el veneno

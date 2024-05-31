@@ -120,7 +120,7 @@ bool Boss_Igory::Update(float dt)
 	{
 		desiredState = EntityState_Boss_Igory::TAKEHIT;
 	}
-	else if (goColdDown != inAtqDashi) {
+	else if (goColdDown  && !inAtqDashi) {
 		if (GeneraColdDown(5)) {
 			generaTimeColdDown.Start();
 			goColdDown = false;
@@ -131,7 +131,7 @@ bool Boss_Igory::Update(float dt)
 		}
 
 	}
-	else if (inSuregAni != inAtqDashi)
+	else if (inSuregAni && !inAtqDashi)
 	{
 
 		desiredState = EntityState_Boss_Igory::GENERATESUREG;
@@ -144,7 +144,7 @@ bool Boss_Igory::Update(float dt)
 	{
 		desiredState = EntityState_Boss_Igory::IDLE;
 	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32 && ataqColdDown == false && !inTakeHit && !inSuregAni)
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32 && ataqColdDown == false && !inTakeHit && !inSuregAni && !inAtqDashi && !goColdDown)
 	{
 		desiredState = EntityState_Boss_Igory::ATTACKING_BASIC;
 	}
@@ -181,6 +181,17 @@ bool Boss_Igory::Update(float dt)
 		inSuregAni = true;
 	}
 
+
+	if (empujaPlayer) {
+		if (habilidadEmpujeTimer.ReadMSec() < 400) {
+			fPoint dirToPlayer = getDirectionVector(position, playerPos);
+			app->entityManager->GetPlayer()->pbodyFoot->body->ApplyForceToCenter(b2Vec2(dirToPlayer.x * fuerzaHabilidadEmpuje, dirToPlayer.y * fuerzaHabilidadEmpuje), true);
+		}
+		else
+		{
+			empujaPlayer = false;
+		}
+	}
 	switch (fase)
 	{
 	case FASE_Igory::FASE_ONE:
@@ -318,7 +329,7 @@ void Boss_Igory::resetAnimation()
 		generaTimeColdDown.Start();
 		showSuregAni = false;
 		goColdDown = true;
-		inDashiTime.Start();
+		atqDashQuali = 0;
 		app->map->generaSureg(fase, position);
 	}
 
@@ -348,6 +359,10 @@ void Boss_Igory::resetAnimation()
 
 
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "dash_idle_boss_Igory") {
+		if (atackCube != nullptr) {
+			app->physics->GetWorld()->DestroyBody(atackCube->body);
+			atackCube = nullptr;
+		}
 		if (!inDashDashi) {
 			inDashiTime.Start();
 			getPlayerPosition = app->entityManager->GetPlayer()->position;
@@ -358,8 +373,13 @@ void Boss_Igory::resetAnimation()
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "dash_inDashi_boss_Igory") {
 		inDashDashi = false;
 		inAtaqueDashi = true;
+		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 120, 120, STATIC);
 	}
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "dash_DashiAtq_boss_Igory") {
+		if (atackCube != nullptr) {
+			app->physics->GetWorld()->DestroyBody(atackCube->body);
+			atackCube = nullptr;
+		}
 		dash_idle_boss_Igory.Reset();
 		dash_inDashi_boss_Igory.Reset();
 		dash_DashiAtq_boss_Igory.Reset();
@@ -479,7 +499,6 @@ void Boss_Igory::stateMachine(float dt, iPoint playerPos)
 	case EntityState_Boss_Igory::ATTACKING_CHARGE:
 		break;
 	case EntityState_Boss_Igory::ATTACKING_DASHI:
-		printf("\nAqui estaaa!!!");
 		inAtqDashi = true;
 		if (!inDashDashi || !inAtaqueDashi) {
 			inIdleDashi = true;
@@ -762,6 +781,12 @@ void Boss_Igory::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::PLAYER:
 		LOG("Collision PLAYER");
 		//restar vida al player
+		if (inAtqDashi) {
+			app->entityManager->GetPlayer()->TakeDamage(10);
+			empujaPlayer = true;
+			habilidadEmpujeTimer.Start();
+			//app->entityManager->GetPlayer()->pbodyFoot
+		}
 		break;
 	case ColliderType::PLAYER_ATTACK:
 		LOG("Collision Player_Attack");
