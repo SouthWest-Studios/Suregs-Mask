@@ -326,6 +326,10 @@ void Enemy_Boorok::Die()
 		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK3) {
 			app->entityManager->GetPlayer()->maskThreeXP += 120;
 		}
+
+		if (app->entityManager->GetIgory()->playerInFight) {
+			app->map->DestroyEntity(this);
+		}
 	}
 }
 

@@ -237,6 +237,8 @@ void Enemy_Osiris::Die() {
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	currentAnimation = &dieAnim;
 	
+	
+
 	if (!hasRevived)
 	{
 		desiredState = EntityState_Enemy::REVIVING;
@@ -320,6 +322,10 @@ void Enemy_Osiris::Die() {
 			//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
 		}
 
+		if (app->entityManager->GetIgory()->playerInFight) {
+			app->map->DestroyEntity(this);
+		}
+		
 	}
 
 }
