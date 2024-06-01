@@ -59,7 +59,7 @@ bool Scene_Pueblo_Tutorial::Start()
 	
 	// Stop the music from previous scenes
 	app->audio->StopMusic();
-	app->audio->LoadAudioMusic("town_fx");
+	app->audio->LoadAudioAmbience("town_fx");
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
@@ -95,8 +95,7 @@ bool Scene_Pueblo_Tutorial::Update(float dt)
 	
 	if (app->audio->playingAmbience == false)
 	{
-		app->audio->playingAmbience = true;
-		app->audio->LoadAudioMusic("town_fx");
+		app->audio->LoadAudioAmbience("town_fx");
 	}
 	if (app->audio->playingMusic == true && app->audio->musicTimer.ReadMSec() >= app->audio->musicDuration)
 	{

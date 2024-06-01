@@ -9,6 +9,9 @@
 #include "Player.h"
 #include "Physics.h"
 #include "Item_Ojo.h"
+#include "Particle.h"
+#include "ParticlePool.h"
+#include "Emitter.h"
 
 struct SDL_Texture;
 
@@ -93,6 +96,8 @@ private:
 	Animation runAnim;
 	Animation attackAnim;
 	Animation dieAnim;
+
+	Emitter* blood = nullptr;
 
 	bool isFacingLeft = false;
 

@@ -1,4 +1,4 @@
-#include "Enemy_Osiris_Variation.h"
+#include "Enemy_Muur_Variation.h"
 #include "Player.h"
 #include "App.h"
 #include "Textures.h"
@@ -11,42 +11,35 @@
 #include "Physics.h"
 #include "Window.h"
 #include "Pathfinding.h"
-#include "ParticleSystem.h"
 #include "Map.h"
 #include "Physics.h"
 #include "Item_Hueso.h"
+#include "Item_Cola.h"
 #include "BestiarioManager.h"
 #include <Optick/include/optick.h>
 #include "Utils.cpp"
 
 
- 
-
-
-Enemy_Osiris_Variation::Enemy_Osiris_Variation() : Entity(EntityType::ENEMY_OSIRIS_VARIATION){
-	name = ("osiris_variation");
-
+Enemy_Muur_Variation::Enemy_Muur_Variation() : Entity(EntityType::ENEMY_MUUR_VARIATION) {
+	name = ("muur");
 	state = EntityState_Enemy::IDLE;
-	nextState = EntityState_Enemy::IDLE;
 	currentState = state;
-	desiredState = nextState;
-	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
+	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(currentState)].next_state;
 
 }
 
-Enemy_Osiris_Variation::~Enemy_Osiris_Variation() {
+Enemy_Muur_Variation::~Enemy_Muur_Variation() {
 
 }
 
-bool Enemy_Osiris_Variation::Awake() {
+bool Enemy_Muur_Variation::Awake() {
 
 	return true;
 }
 
-bool Enemy_Osiris_Variation::Start() {
+bool Enemy_Muur_Variation::Start() {
 
 	OPTICK_EVENT();
-	//position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
 
 	TSprite = config.attribute("Tsprite").as_int();
 	SpriteX = config.attribute("sprite_x").as_int();
@@ -54,26 +47,24 @@ bool Enemy_Osiris_Variation::Start() {
 	Photowidth = config.attribute("Pwidth").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
-	idleAnim.LoadAnim("osiris", "idleAnim", spritePositions);
-	runAnim.LoadAnim("osiris", "runAnim", spritePositions);
-	attackAnim.LoadAnim("osiris", "attackAnim", spritePositions);
-	dieAnim.LoadAnim("osiris", "dieAnim", spritePositions);
-	takeDamageAnim.LoadAnim("osiris", "takeDamagekAnim", spritePositions);
-	reviveAnim.LoadAnim("osiris", "reviveAnim", spritePositions);
-
-
+	runAnim.LoadAnim("muur", "runAnim", spritePositions);
+	stunAnim.LoadAnim("muur", "stunAnim", spritePositions);
+	attackAnim.LoadAnim("muur", "attackAnim", spritePositions);
+	idleAnim.LoadAnim("muur", "idleAnim", spritePositions);
+	chargeAnim.LoadAnim("muur", "chargeAnim", spritePositions);
+	reciebeDamage.LoadAnim("muur", "reciebeDamage", spritePositions);
+	dieAnim.LoadAnim("muur", "dieAnim", spritePositions);
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
-	osiris_get_damage_fx = app->audio->LoadAudioFx("osiris_get_damage_fx");
-	osiris_death_fx = app->audio->LoadAudioFx("osiris_death_fx");
+	muur_get_damage_fx = app->audio->LoadAudioFx("muur_get_damage_fx");
 
-	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
+	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 15, bodyType::DYNAMIC);
 	pbodyFoot->entity = this;
 	pbodyFoot->listener = this;
 	pbodyFoot->ctype = ColliderType::ENEMY;
 
-	pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 40, 60, bodyType::DYNAMIC);
+	pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 10, 15, bodyType::DYNAMIC);
 	pbodySensor->entity = this;
 	pbodySensor->listener = this;
 	pbodySensor->ctype = ColliderType::UNKNOWN;
@@ -84,104 +75,114 @@ bool Enemy_Osiris_Variation::Start() {
 	health = maxHealth;
 	speed = config.attribute("speed").as_float();
 	attackDamage = config.attribute("attackDamage").as_float();
-	secondAttackDamage = config.attribute("secondAttackDamage").as_float();
 	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();
+	chargeattackDistance = config.attribute("chargeattackDistance").as_float();
 
-	//app->entityManager->objectsToDraw.push_back({
-	//	texture,
-	//	position.x, // x
-	//	position.y, // y
-	//	position.y + 98, // anchorY
-	//	100, // width
-	//	100, // height
-	//	NULL, // currentFrame
-	//	isFacingLeft
-	//});
+	chargeTimer.Start();
 
 	room = GetCurrentRoom();
 
 	return true;
 }
 
-bool Enemy_Osiris_Variation::Update(float dt)
+bool Enemy_Muur_Variation::Update(float dt)
 {
 	OPTICK_EVENT();
-	//printf("\nEnemy_Osiris");
-	//Pone el sensor del cuerpo en su posicion
+
+	//printf("\nheal: %f",health);
+	// Pone el sensor del cuerpo en su posicion
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
-	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
+	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 0.5), 0);
 
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
 
-
+	// Lógica de cambio de estado
 	if (health <= 0)
 	{
-
-		if (currentState == EntityState_Enemy::DEAD) {
-			desiredState = EntityState_Enemy::REVIVING;
-		}
-		else
-		{
-			desiredState = EntityState_Enemy::DEAD;
-		}
-
+		nextState = EntityState_Enemy::DEAD;
 	}
 	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32)
 	{
-		desiredState = EntityState_Enemy::ATTACKING;
+		nextState = EntityState_Enemy::ATTACKING;
 	}
 	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance * 32)
 	{
-		desiredState = EntityState_Enemy::RUNNING;
+		nextState = EntityState_Enemy::RUNNING;
+	}
+	else if (app->map->pathfinding->GetDistance(playerPos, position) >= viewDistance * 32 && app->entityManager->GetIgory()->playerInFight)
+	{
+		nextState = EntityState_Enemy::RUNNING;
 	}
 	else
 	{
-		desiredState = EntityState_Enemy::RUNNING;
+		nextState = EntityState_Enemy::IDLE;
 	}
 
+	// Manejo de estados
+	switch (nextState)
+	{
+	case EntityState_Enemy::RUNNING:
+		Chase(dt, playerPos);
+		break;
+	case EntityState_Enemy::ATTACKING:
+		Attack(dt);
+		break;
+	case EntityState_Enemy::DEAD:
+		Die();
+		break;
+	case EntityState_Enemy::IDLE:
+		DoNothing(dt);
+		break;
+	default:
+		break;
+	}
 
-	stateMachine(dt, playerPos);
+	if (charging && dist(Antposition, position) > 350 || charging && timechargingTimer.ReadSec() > 0.8)
+	{
+		isStunned = true;
+		Stunned(dt);
+	}
 
-	//VENENO <----------
+	if (chargeTimer.ReadSec() >= 5)
+	{
+		charging = false;
+	}
+
 	CheckPoison();
-	//VENENO ---------->
 
-	currentAnimation->Update();
+	// Actualiza la animación actual
+	if (currentAnimation != nullptr) {
+		currentAnimation->Update();
+	}
+	currentState = nextState;
+
 	return true;
 }
 
-
-bool Enemy_Osiris_Variation::PostUpdate() {
+bool Enemy_Muur_Variation::PostUpdate() {
 
 	SDL_SetTextureColorMod(texture, 198, 115, 255);
 
-	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
+	if (currentAnimation == nullptr) {
+		currentAnimation = &idleAnim;
+	}
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-
 
 	if (timerRecibirDanioColor.ReadMSec() <= 100) {
 		float alpha = (100 - timerRecibirDanioColor.ReadMSec()) / 100;
 		SDL_SetTextureAlphaMod(texture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
-
 	}
 	else {
 		SDL_SetTextureAlphaMod(texture, 255);
 	}
 
-
-
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 50, position.y - 95, 0.7f, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x - 30, position.y - 50, 0.5f, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 85, position.y - 95, 0.7f, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 30, position.y - 50, 0.5f, SDL_FLIP_NONE, &rect);
 	}
-
-
-	//Efecto daï¿½o
-
-
 
 	for (uint i = 0; i < lastPath.Count(); ++i)
 	{
@@ -198,14 +199,13 @@ bool Enemy_Osiris_Variation::PostUpdate() {
 }
 
 
-bool Enemy_Osiris_Variation::CleanUp()
+
+bool Enemy_Muur_Variation::CleanUp()
 {
 	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 	app->physics->GetWorld()->DestroyBody(pbodySensor->body);
 	app->tex->UnLoad(texture);
 	lastPath.Clear();
-
-	blood = nullptr;
 
 	RELEASE(spritePositions);
 	delete spritePositions;
@@ -213,160 +213,130 @@ bool Enemy_Osiris_Variation::CleanUp()
 	return true;
 }
 
-void Enemy_Osiris_Variation::DoNothing(float dt)
+void Enemy_Muur_Variation::DoNothing(float dt)
 {
 	currentAnimation = &idleAnim;
-	//printf("Osiris idle");
+	//printf("Muur idle");
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 
 }
 
-void Enemy_Osiris_Variation::Chase(float dt, iPoint playerPos)
+void Enemy_Muur_Variation::Chase(float dt, iPoint playerPos)
 {
-	//printf("Osiris chasing");
+	//printf("Muur chasing");
 	currentAnimation = &runAnim;
-	Osirisfinding(dt, playerPos);
+	if (chargeTimer.ReadSec() >= 5 && app->map->pathfinding->GetDistance(playerPos, position) <= chargeattackDistance * 32 && app->map->pathfinding->GetDistance(playerPos, position) >= (attackDistance + 5) * 32)
+	{
+		Antposition = position;
+		Charge(dt, playerPos);
+	}
+	else if (!charging)
+	{
+		Muurfinding(dt, playerPos);
+	}
 
 }
 
-void Enemy_Osiris_Variation::Attack(float dt)
+void Enemy_Muur_Variation::Attack(float dt)
 {
-	//printf("Osiris attacking");
+	//printf("Muur attacking");
 	currentAnimation = &attackAnim;
-	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero); //No se mueve mientras ataca
-
+	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	//sonido ataque
 }
 
-void Enemy_Osiris_Variation::Die() {
+void Enemy_Muur_Variation::Die() {
+	app->audio->PlayFx(muur_get_damage_fx);
+
+
 
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	currentAnimation = &dieAnim;
 
-
-
-	if (!hasRevived)
+	if (dieAnim.HasFinished())
 	{
-		desiredState = EntityState_Enemy::REVIVING;
-		Revive();
-	}
-	else
-	{
-		app->audio->PlayFx(osiris_death_fx);
-
-		fPoint pos((float)position.x, (float)position.y);
-		blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_ENEMY_BLOOD);
-
 		app->entityManager->DestroyEntity(this);
 		app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 		app->physics->GetWorld()->DestroyBody(pbodySensor->body);
 		app->tex->UnLoad(texture);
-		//CleanUp();
+
+
 		pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
 		if (parseResult) {
 			configNode = configFile.child("config");
 		}
 		float randomValue = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
 
-		// Determina si el ï¿½tem debe crearse basado en un 30% de probabilidad
-		if (randomValue <= 0.25f) {
-			Item_Hueso* hueso = (Item_Hueso*)app->entityManager->CreateEntity(EntityType::ITEM_HUESO);
-			hueso->config = configNode.child("entities_data").child("item_hueso");
-			hueso->position = iPoint(position.x, position.y);
-			hueso->Start();
+		// Determina si el item debe crearse basado en un 30% de probabilidad
+		if (randomValue <= 0.30f) {
+			Item_Cola* cola = (Item_Cola*)app->entityManager->CreateEntity(EntityType::ITEM_COLA);
+			cola->config = configNode.child("entities_data").child("item_cola");
+			cola->position = iPoint(position.x, position.y);
+			cola->Start();
 		}
 
-		app->bestiarioManager->CreateItem("osiris");
-
+		app->bestiarioManager->CreateItem("muur");
+		//Mask XP
 
 		//Mask 0
 		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
 		{
-			app->entityManager->GetPlayer()->maskZeroXP += 40;
+			app->entityManager->GetPlayer()->maskZeroXP += 20;
 			//printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
 		}
 
 		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK0)
 		{
-			app->entityManager->GetPlayer()->maskZeroXP += 40;
+			app->entityManager->GetPlayer()->maskZeroXP += 20;
 			//printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
 		}
 
 		//Mask 1
 		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK1)
 		{
-			app->entityManager->GetPlayer()->maskOneXP += 40;
+			app->entityManager->GetPlayer()->maskOneXP += 20;
 			//printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
 		}
 
 		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK1)
 		{
-			app->entityManager->GetPlayer()->maskOneXP += 40;
+			app->entityManager->GetPlayer()->maskOneXP += 20;
 			//printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
 		}
 
 		//Mask 2
 		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK2)
 		{
-			app->entityManager->GetPlayer()->maskTwoXP += 40;
+			app->entityManager->GetPlayer()->maskTwoXP += 20;
 			//printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
 		}
 
 		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK2)
 		{
-			app->entityManager->GetPlayer()->maskTwoXP += 40;
+			app->entityManager->GetPlayer()->maskTwoXP += 20;
 			//printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
 		}
 
 		//Mask 3
 		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK3)
 		{
-			app->entityManager->GetPlayer()->maskThreeXP += 40;
+			app->entityManager->GetPlayer()->maskThreeXP += 20;
 			//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
 		}
 
 		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK3)
 		{
-			app->entityManager->GetPlayer()->maskThreeXP += 40;
+			app->entityManager->GetPlayer()->maskThreeXP += 20;
 			//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
 		}
-
 		if (app->entityManager->GetIgory()->playerInFight) {
 			app->map->DestroyEntity(this);
 		}
-
 	}
-
 }
-
-void Enemy_Osiris_Variation::Revive()
-{
-	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
-	currentAnimation = &reviveAnim;
-	if (!tempo)
-	{
-		reviveTimer.Start();
-		tempo = true;
-		isReviving = true;
-	}
-
-	if (reviveTimer.CountDown(4) <= 0)
-	{
-
-		health = maxHealth;
-		hasRevived = true;
-		isReviving = false;
-		//currentState = EntityState_Enemy::IDLE;
-		desiredState = EntityState_Enemy::IDLE;
-
-		return;
-	}
-	desiredState = EntityState_Enemy::REVIVING;
-}
-
 
 // L07 DONE 6: Define OnCollision function for the player. 
-void Enemy_Osiris_Variation::OnCollision(PhysBody* physA, PhysBody* physB) {
+void Enemy_Muur_Variation::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 	case ColliderType::PLATFORM:
@@ -387,7 +357,7 @@ void Enemy_Osiris_Variation::OnCollision(PhysBody* physA, PhysBody* physB) {
 	}
 }
 
-bool Enemy_Osiris_Variation::Osirisfinding(float dt, iPoint playerPosP)
+bool Enemy_Muur_Variation::Muurfinding(float dt, iPoint playerPosP)
 {
 	iPoint playerPos = app->map->WorldToMap(playerPosP.x, playerPosP.y);
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
@@ -398,9 +368,17 @@ bool Enemy_Osiris_Variation::Osirisfinding(float dt, iPoint playerPosP)
 		lastPath = *app->map->pathfinding->GetLastPath();
 	}
 	else {
-		app->map->pathfinding->CreatePath(enemyPos, originalPosition); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
-		lastPath = *app->map->pathfinding->GetLastPath();
+		if (app->entityManager->GetIgory()->playerInFight) {
+			app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
+			lastPath = *app->map->pathfinding->GetLastPath();
+		}
+		else
+		{
+			app->map->pathfinding->CreatePath(enemyPos, originalPosition); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
+			lastPath = *app->map->pathfinding->GetLastPath();
+		}
 	}
+
 
 	b2Vec2 velocity = b2Vec2(0, 0);
 
@@ -437,65 +415,21 @@ bool Enemy_Osiris_Variation::Osirisfinding(float dt, iPoint playerPosP)
 	return true;
 }
 
-float Enemy_Osiris_Variation::GetHealth() const {
+float Enemy_Muur_Variation::GetHealth() const {
 	return health;
 }
 
-void Enemy_Osiris_Variation::TakeDamage(float damage) {
-
+void Enemy_Muur_Variation::TakeDamage(float damage) {
 	if (currentState != EntityState_Enemy::DEAD && invulnerabilityTimer.ReadMSec() >= 500) {
 		health -= damage;
 		invulnerabilityTimer.Start();
 		timerRecibirDanioColor.Start();
-
-		printf("Enemy_Osiris has received  %f damage\n", damage);
-		if (currentState == EntityState_Enemy::REVIVING) {
-			if (!hasRevived) {
-				hasRevived = true;
-			}
-		}
-
+		currentAnimation = &reciebeDamage;
 	}
-	app->audio->PlayFx(osiris_get_damage_fx);
 }
-
-void Enemy_Osiris_Variation::stateMachine(float dt, iPoint playerPos)
-{
-	//printf("\ncurrentState: %d, desiredState: %d", static_cast<int>(currentState), static_cast<int>(desiredState));
-	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
-	switch (nextState) {
-	case EntityState_Enemy::IDLE:
-		DoNothing(dt);
-		break;
-	case EntityState_Enemy::RUNNING:
-		Chase(dt, playerPos);
-		break;
-	case EntityState_Enemy::ATTACKING:
-		Attack(dt);
-		break;
-	case EntityState_Enemy::DEAD:
-		Die();
-		break;
-	case EntityState_Enemy::REVIVING:
-		Revive();
-		break;
-	case EntityState_Enemy::DASHI:
-		break;
-	case EntityState_Enemy::NONE:
-
-		desiredState = EntityState_Enemy::IDLE;
-		break;
-
-	default:
-		break;
-	}
-	currentState = nextState;
-
-}
-
 
 //VENENO <----------
-void Enemy_Osiris_Variation::ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate) {
+void Enemy_Muur_Variation::ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate) {
 	this->poisonDamage = poisonDamage;
 	this->poisonDuration = poisonDuration;
 	this->poisonTickRate = poisonTickRate;
@@ -509,10 +443,10 @@ void Enemy_Osiris_Variation::ApplyPoison(int poisonDamage, float poisonDuration,
 
 }
 
-void Enemy_Osiris_Variation::CheckPoison() {
+void Enemy_Muur_Variation::CheckPoison() {
 	float epsilon = 0.1f; //Para margen de error
 
-	// Aplicar el primer tick de daÃ±o inmediatamente (si no, el primer tick no se aplica en el segundo 0.0)
+	// Aplicar el primer tick de daño inmediatamente (si no, el primer tick no se aplica en el segundo 0.0)
 	if (firstTimePoisonRecibed) {
 		if (currentState != EntityState_Enemy::DEAD) {
 			health -= poisonDamage;
@@ -539,14 +473,56 @@ void Enemy_Osiris_Variation::CheckPoison() {
 }
 //VENENO ---------->
 
-MapObject* Enemy_Osiris_Variation::GetCurrentRoom()
+void Enemy_Muur_Variation::Charge(float dt, iPoint playerPos) {
+	if (chargeTimer.ReadSec() >= 5)
+	{
+		/*printf("charge");*/
+		currentAnimation = &chargeAnim;
+		pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
+		if (chargeAnim.HasFinished())
+		{
+			timechargingTimer.Start();
+			charging = true;
+
+			b2Vec2 direction(playerPos.x - position.x, playerPos.y - position.y);
+			direction.Normalize();
+
+			b2Vec2 impulse = b2Vec2(direction.x * 5, direction.y * 5);
+			pbodyFoot->body->ApplyLinearImpulse(impulse, pbodyFoot->body->GetWorldCenter(), true);
+
+			stunTimer.Start();
+			chargeTimer.Start();
+		}
+	}
+}
+
+void Enemy_Muur_Variation::Stunned(float dt) {
+	pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
+
+	if (stunAnim.HasFinished() && stunTimer.ReadSec() >= 2)
+	{
+		pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
+		nextState = EntityState_Enemy::IDLE;
+		isStunned = false;
+		charging = false;
+		chargeTimer.Start();
+		stunAnim.Reset();
+	}
+	else {
+		isStunned = true;
+		currentAnimation = &stunAnim;
+	}
+}
+
+
+MapObject* Enemy_Muur_Variation::GetCurrentRoom()
 {
-	//salas pequeÃ±as
+	//salas pequeñas
 	for (ListItem<MapObject*>* item = app->map->smallRoomsList.start; item != nullptr; item = item->next)
 	{
 		MapObject* room = item->data;
 
-		// el jugador estÃ¡ dentro de la sala
+		// el jugador está dentro de la sala
 		if (position.x >= room->x && position.x <= room->x + room->width &&
 			position.y >= room->y && position.y <= room->y + room->height)
 		{
@@ -559,7 +535,7 @@ MapObject* Enemy_Osiris_Variation::GetCurrentRoom()
 	{
 		MapObject* room = item->data;
 
-		// el jugador estÃ¡ dentro de la sala
+		// el jugador está dentro de la sala
 		if (position.x >= room->x && position.x <= room->x + room->width &&
 			position.y >= room->y && position.y <= room->y + room->height)
 		{
@@ -572,7 +548,7 @@ MapObject* Enemy_Osiris_Variation::GetCurrentRoom()
 	{
 		MapObject* room = item->data;
 
-		// el jugador estÃ¡ dentro de la sala
+		// el jugador está dentro de la sala
 		if (position.x >= room->x && position.x <= room->x + room->width &&
 			position.y >= room->y && position.y <= room->y + room->height)
 		{

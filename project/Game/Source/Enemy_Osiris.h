@@ -9,6 +9,9 @@
 #include "Pathfinding.h"
 #include "Player.h"
 #include "Physics.h"
+#include "Particle.h"
+#include "ParticlePool.h"
+#include "Emitter.h"
 
 struct SDL_Texture;
  
@@ -89,6 +92,7 @@ private:
 	pugi::xml_document configFile;
 	pugi::xml_node configNode;
 	
+	Emitter* blood = nullptr;
 
 	Animation idleAnim;
 	Animation runAnim;

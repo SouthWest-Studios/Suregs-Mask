@@ -377,6 +377,12 @@
     <ClCompile Include="Source\NPC_Padre.cpp">
       <Filter>Entities\NPC</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Enemy_Boorok_Variation.cpp">
+      <Filter>Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Enemy_Muur_Variation.cpp">
+      <Filter>Entities\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -817,6 +823,12 @@
     </ClInclude>
     <ClInclude Include="Source\NPC_Padre.h">
       <Filter>Entities\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy_Boorok_Variation.h">
+      <Filter>Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy_Muur_Variation.h">
+      <Filter>Entities\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

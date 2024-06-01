@@ -179,6 +179,63 @@ bool Audio::PlayMusic(const char* path, float fadeTime)
 	return ret;
 }
 
+bool Audio::PlayAmbience(const char* path, float fadeTime)
+{
+	bool ret = true;
+
+	if (!active)
+		return false;
+
+	if (music != NULL)
+	{
+		if (fadeTime > 0.0f)
+		{
+			Mix_FadeOutMusic(int(fadeTime * 1000.0f));
+		}
+		else
+		{
+			Mix_HaltMusic();
+		}
+
+		// this call blocks until fade out is done
+		Mix_FreeMusic(music);
+	}
+
+	music = Mix_LoadMUS(path);
+
+	if (music == NULL)
+	{
+		LOG("Cannot load music %s. Mix_GetError(): %s\n", path, Mix_GetError());
+		ret = false;
+	}
+	else
+	{
+		if (fadeTime > 0.0f)
+		{
+			if (Mix_FadeInMusic(music, -1, (int)(fadeTime * 1000.0f)) < 0)
+			{
+				LOG("Cannot fade in music %s. Mix_GetError(): %s", path, Mix_GetError());
+				ret = false;
+			}
+		}
+		else
+		{
+			if (Mix_PlayMusic(music, -1) < 0)
+			{
+				LOG("Cannot play in music %s. Mix_GetError(): %s", path, Mix_GetError());
+				ret = false;
+			}
+		}
+	}
+
+	Mix_VolumeMusic(volumeMusic);
+
+	playingAmbience = true;
+
+	LOG("Successfully playing %s", path);
+	return ret;
+}
+
 bool Audio::StopMusic(float fadeTime)
 {
 	if (!active || music == NULL) {
@@ -272,6 +329,16 @@ bool Audio::LoadAudioMusic(const char* name, float fadeTime)
 	audioNode = config.child("config").child("sounds").child("music").child(name);
 
 	return PlayMusic(audioNode.attribute("path").as_string(), fadeTime);
+}
+
+bool Audio::LoadAudioAmbience(const char* name, float fadeTime)
+{
+	pugi::xml_document config;
+	pugi::xml_parse_result parseResult = config.load_file("config.xml");
+	pugi::xml_node audioNode;
+	audioNode = config.child("config").child("sounds").child("music").child(name);
+
+	return PlayAmbience(audioNode.attribute("path").as_string(), fadeTime);
 }
 
 unsigned int Audio::LoadAudioFx(const char* name)

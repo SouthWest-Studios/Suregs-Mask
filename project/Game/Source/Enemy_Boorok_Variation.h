@@ -1,5 +1,5 @@
-﻿#ifndef __ENEMY_BOOROK_H__
-#define __ENEMY_BOOROK_H__
+﻿#ifndef __ENEMY_BOOROK_VARIATION_H__
+#define __ENEMY_BOOROK_VARIATION_H__
 
 
 #include "Entity.h"
@@ -9,27 +9,24 @@
 #include "Pathfinding.h"
 #include "Player.h"
 #include "Physics.h"
-#include "Particle.h"
-#include "ParticlePool.h"
-#include "Emitter.h"
 
 struct SDL_Texture;
 
 
-struct Branch_Boorok {
+struct Branch_Boorok_Variation {
 	enum EntityState_Enemy const next_state;
-	Branch_Boorok(EntityState_Enemy next) : next_state(next) {}
+	Branch_Boorok_Variation(EntityState_Enemy next) : next_state(next) {}
 };
 
-class Enemy_Boorok : public Entity
+class Enemy_Boorok_Variation : public Entity
 {
 
 
 public:
 
-	Enemy_Boorok();
+	Enemy_Boorok_Variation();
 
-	virtual ~Enemy_Boorok();
+	virtual ~Enemy_Boorok_Variation();
 
 	bool Awake();
 
@@ -89,7 +86,6 @@ private:
 	pugi::xml_document configFile;
 	pugi::xml_node configNode;
 
-	Emitter* blood = nullptr;
 
 	Animation sleepAnim;
 	Animation runAnim;
@@ -152,7 +148,7 @@ private:
 
 public:
 
-	Branch_Boorok transitionTable[static_cast<int>(EntityState_Enemy::STATE_COUNT)][static_cast<int>(EntityState_Enemy::STATE_COUNT)] = {
+	Branch_Boorok_Variation transitionTable[static_cast<int>(EntityState_Enemy::STATE_COUNT)][static_cast<int>(EntityState_Enemy::STATE_COUNT)] = {
 		//		IDLE						RUNNING								ATTACKING					DEAD						REVIVING							DASHI						NONE
 	{ {EntityState_Enemy::IDLE}, {EntityState_Enemy::RUNNING}, {EntityState_Enemy::ATTACKING}, {EntityState_Enemy::DEAD}, {EntityState_Enemy::NONE}, {EntityState_Enemy::NONE}, {EntityState_Enemy::IDLE}}, // IDLE
 	{ {EntityState_Enemy::IDLE}, {EntityState_Enemy::RUNNING}, {EntityState_Enemy::ATTACKING}, {EntityState_Enemy::DEAD}, {EntityState_Enemy::NONE}, {EntityState_Enemy::NONE}, {EntityState_Enemy::IDLE}}, // RUNNING
@@ -171,4 +167,4 @@ public:
 
 
 
-#endif // __ENEMY_BOOROK_H__
+#endif // __ENEMY_BOOROK_VARIATION_H__

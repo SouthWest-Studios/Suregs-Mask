@@ -1,4 +1,4 @@
-﻿#include "Enemy_Muur.h"
+﻿#include "Enemy_Boorok_Variation.h"
 #include "Player.h"
 #include "App.h"
 #include "Textures.h"
@@ -11,37 +11,34 @@
 #include "Physics.h"
 #include "Window.h"
 #include "Pathfinding.h"
-#include "ParticleSystem.h"
 #include "Map.h"
 #include "Physics.h"
 #include "Item_Hueso.h"
-#include "Item_Cola.h"
+#include "Item_Viscera.h"
+#include "Item_Diente.h"
 #include "BestiarioManager.h"
 #include <Optick/include/optick.h>
 #include "Utils.cpp"
 
 
-
-
-
-Enemy_Muur::Enemy_Muur() : Entity(EntityType::ENEMY_MUUR) {
-	name = ("muur");
+Enemy_Boorok_Variation::Enemy_Boorok_Variation() : Entity(EntityType::ENEMY_BOOROK_VARIATION) {
+	name = ("boorok");
 	state = EntityState_Enemy::IDLE;
 	currentState = state;
 	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(currentState)].next_state;
 
 }
 
-Enemy_Muur::~Enemy_Muur() {
+Enemy_Boorok_Variation::~Enemy_Boorok_Variation() {
 
 }
 
-bool Enemy_Muur::Awake() {
+bool Enemy_Boorok_Variation::Awake() {
 
 	return true;
 }
 
-bool Enemy_Muur::Start() {
+bool Enemy_Boorok_Variation::Start() {
 
 	OPTICK_EVENT();
 
@@ -51,24 +48,27 @@ bool Enemy_Muur::Start() {
 	Photowidth = config.attribute("Pwidth").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
-	runAnim.LoadAnim("muur", "runAnim", spritePositions);
-	stunAnim.LoadAnim("muur", "stunAnim", spritePositions);
-	attackAnim.LoadAnim("muur", "attackAnim", spritePositions);
-	idleAnim.LoadAnim("muur", "idleAnim", spritePositions);
-	chargeAnim.LoadAnim("muur", "chargeAnim", spritePositions);
-	reciebeDamage.LoadAnim("muur", "reciebeDamage", spritePositions);
-	dieAnim.LoadAnim("muur", "dieAnim", spritePositions);
+	sleepAnim.LoadAnim("boorok", "sleepAnim", spritePositions);
+	runAnim.LoadAnim("boorok", "runAnim", spritePositions);
+	attackAnim.LoadAnim("boorok", "attackAnim", spritePositions);
+	reciebeDamage.LoadAnim("boorok", "reciebeDamage", spritePositions);
+	idleAnim.LoadAnim("boorok", "idleAnim", spritePositions);
+	wakeupAnim.LoadAnim("boorok", "wakeupAnim", spritePositions);
+	chargeAttackAnim.LoadAnim("boorok", "chargeAttackAnim", spritePositions);
+	dieAnim.LoadAnim("boorok", "dieAnim", spritePositions);
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
-	muur_get_damage_fx = app->audio->LoadAudioFx("muur_get_damage_fx");
+	boorok_get_damage_fx = app->audio->LoadAudioFx("boorok_get_damage_fx");
+	boorok_get_damageAlt_fx = app->audio->LoadAudioFx("boorok_get_damageAlt_fx");
+	boorok_death_fx = app->audio->LoadAudioFx("boorok_death_fx");
 
-	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 15, bodyType::DYNAMIC);
+	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 30, bodyType::DYNAMIC);
 	pbodyFoot->entity = this;
 	pbodyFoot->listener = this;
 	pbodyFoot->ctype = ColliderType::ENEMY;
 
-	pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 10, 15, bodyType::DYNAMIC);
+	pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 50, 100, bodyType::DYNAMIC);
 	pbodySensor->entity = this;
 	pbodySensor->listener = this;
 	pbodySensor->ctype = ColliderType::UNKNOWN;
@@ -77,40 +77,51 @@ bool Enemy_Muur::Start() {
 
 	maxHealth = config.attribute("maxHealth").as_float();
 	health = maxHealth;
+	healthIncrement = 0.05;
 	speed = config.attribute("speed").as_float();
 	attackDamage = config.attribute("attackDamage").as_float();
 	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();
 	chargeattackDistance = config.attribute("chargeattackDistance").as_float();
+	areaattackdamage = config.attribute("areaattackdamage").as_float();
 
-	chargeTimer.Start();
+	chargeAttackTimer.Start();
+	recoveryTimer.Start();
+	isabletosleepTimer.Start();
+
+	isSleeping = true;
 
 	room = GetCurrentRoom();
-	
+
 	return true;
 }
 
-bool Enemy_Muur::Update(float dt)
+bool Enemy_Boorok_Variation::Update(float dt)
 {
 	OPTICK_EVENT();
 
-	//printf("\nheal: %f",health);
-	// Pone el sensor del cuerpo en su posicion
+
+	//Pone el sensor del cuerpo en su posicion
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
-	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 0.5), 0);
+	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
 
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
 
-	// Lógica de cambio de estado
+	if (isabletosleepTimer.ReadSec() >= 5) {}
+	else
+	{
+		isSleeping = false;
+	}
+
 	if (health <= 0)
 	{
 		nextState = EntityState_Enemy::DEAD;
 	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32)
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32 && !isCharging && !isWakingUp)
 	{
 		nextState = EntityState_Enemy::ATTACKING;
 	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance * 32)
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance * 32 && !isCharging && !isWakingUp)
 	{
 		nextState = EntityState_Enemy::RUNNING;
 	}
@@ -121,69 +132,87 @@ bool Enemy_Muur::Update(float dt)
 	else
 	{
 		nextState = EntityState_Enemy::IDLE;
+		isSleeping = true;
 	}
 
-	// Manejo de estados
 	switch (nextState)
 	{
 	case EntityState_Enemy::RUNNING:
 		Chase(dt, playerPos);
 		break;
 	case EntityState_Enemy::ATTACKING:
-		Attack(dt);
+		Attack(dt, playerPos);
 		break;
 	case EntityState_Enemy::DEAD:
 		Die();
 		break;
 	case EntityState_Enemy::IDLE:
-		DoNothing(dt);
+		DoNothing(dt, playerPos);
 		break;
 	default:
 		break;
 	}
 
-	if (charging && dist(Antposition, position) > 350 || charging && timechargingTimer.ReadSec() > 0.8)
-	{
-		isStunned = true;
-		Stunned(dt);
-	}
-
-	if (chargeTimer.ReadSec() >= 5)
-	{
-		charging = false;
-	}
-
 	CheckPoison();
 
-	// Actualiza la animación actual
-	if (currentAnimation != nullptr) {
-		currentAnimation->Update();
+	if (isSleeping && app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance * 32)
+	{
+		isWakingUp = true;
 	}
-	currentState = nextState;
+	if (isWakingUp)
+	{
+		currentAnimation = &wakeupAnim;
+		if (wakeupAnim.HasFinished())
+		{
+			isSleeping = false;
+			isWakingUp = false;
+			wakeupAnim.Reset();
+			isabletosleepTimer.Start();
+		}
+	}
 
+	if (chargeAttackTimer.ReadSec() >= 10 && app->map->pathfinding->GetDistance(playerPos, position) <= chargeattackDistance * 32 || isCharging)
+	{
+		chargeAttack(playerPos);
+	}
+
+	if (isabletosleepTimer.ReadSec() >= 5) {}
+	else
+	{
+		isSleeping = false;
+	}
+
+	currentState = nextState;
+	currentAnimation->Update();
 	return true;
 }
 
-bool Enemy_Muur::PostUpdate() {
-	if (currentAnimation == nullptr) {
-		currentAnimation = &idleAnim;
-	}
+
+bool Enemy_Boorok_Variation::PostUpdate() {
+
+	SDL_SetTextureColorMod(texture, 198, 115, 255);
+	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
+
 
 	if (timerRecibirDanioColor.ReadMSec() <= 100) {
 		float alpha = (100 - timerRecibirDanioColor.ReadMSec()) / 100;
 		SDL_SetTextureAlphaMod(texture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
+
 	}
 	else {
 		SDL_SetTextureAlphaMod(texture, 255);
 	}
 
+
+
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 30, position.y - 50, 0.5f, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x - 100, position.y - 200, 0.5f, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 30, position.y - 50, 0.5f, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 100, position.y - 200, 0.5f, SDL_FLIP_NONE, &rect);
 	}
+
 
 	for (uint i = 0; i < lastPath.Count(); ++i)
 	{
@@ -199,16 +228,12 @@ bool Enemy_Muur::PostUpdate() {
 	return true;
 }
 
-
-
-bool Enemy_Muur::CleanUp()
+bool Enemy_Boorok_Variation::CleanUp()
 {
 	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 	app->physics->GetWorld()->DestroyBody(pbodySensor->body);
 	app->tex->UnLoad(texture);
 	lastPath.Clear();
-
-	blood = nullptr;
 
 	RELEASE(spritePositions);
 	delete spritePositions;
@@ -216,47 +241,41 @@ bool Enemy_Muur::CleanUp()
 	return true;
 }
 
-void Enemy_Muur::DoNothing(float dt)
+void Enemy_Boorok_Variation::DoNothing(float dt, iPoint playerPos)
 {
-	currentAnimation = &idleAnim;
-	//printf("Muur idle");
-	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
+	if (dist(position, playerPos) > -1 && !isCharging)
+	{
+		Sleeping();
 
+		currentAnimation = &sleepAnim;
+	}
 }
 
-void Enemy_Muur::Chase(float dt, iPoint playerPos)
+void Enemy_Boorok_Variation::Chase(float dt, iPoint playerPos)
 {
-	//printf("Muur chasing");
-	currentAnimation = &runAnim;
-	if(chargeTimer.ReadSec() >= 5 && app->map->pathfinding->GetDistance(playerPos, position) <= chargeattackDistance * 32 && app->map->pathfinding->GetDistance(playerPos, position) >= (attackDistance + 5) * 32)
+	if (!isCharging && !isWakingUp)
 	{
-		Antposition = position;
-		Charge(dt, playerPos);
-	}
-	else if(!charging)
-	{
-		Muurfinding(dt, playerPos);
-	}
+		currentAnimation = &runAnim;
 
+		Boorokfinding(dt, playerPos);
+	}
 }
 
-void Enemy_Muur::Attack(float dt)
+void Enemy_Boorok_Variation::Attack(float dt, iPoint playerPos)
 {
-	//printf("Muur attacking");
-	currentAnimation = &attackAnim;
-	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
+	if (!isCharging)
+	{
+		currentAnimation = &attackAnim;
+		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
+	}
+
 	//sonido ataque
 }
 
-void Enemy_Muur::Die() {
-	
-	app->audio->PlayFx(muur_get_damage_fx);
-
+void Enemy_Boorok_Variation::Die()
+{
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	currentAnimation = &dieAnim;
-
-	fPoint pos((float)position.x, (float)position.y);
-	blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_ENEMY_BLOOD);
 
 	if (dieAnim.HasFinished())
 	{
@@ -265,83 +284,63 @@ void Enemy_Muur::Die() {
 		app->physics->GetWorld()->DestroyBody(pbodySensor->body);
 		app->tex->UnLoad(texture);
 
-
 		pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
 		if (parseResult) {
 			configNode = configFile.child("config");
 		}
 		float randomValue = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
 
-		// Determina si el item debe crearse basado en un 30% de probabilidad
-		if (randomValue <= 0.30f) {
-			Item_Cola* cola = (Item_Cola*)app->entityManager->CreateEntity(EntityType::ITEM_COLA);
-			cola->config = configNode.child("entities_data").child("item_cola");
-			cola->position = iPoint(position.x, position.y);
-			cola->Start();
+		if (randomValue <= 0.35f) {
+			Item_Viscera* visceras = (Item_Viscera*)app->entityManager->CreateEntity(EntityType::ITEM_VISCERAS);
+			visceras->config = configNode.child("entities_data").child("item_viscera");
+			visceras->position = iPoint(position.x, position.y);
+			visceras->Start();
+		}
+		float randomValue2 = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+
+		if (randomValue2 <= 0.30f) {
+			Item_Diente* diente = (Item_Diente*)app->entityManager->CreateEntity(EntityType::ITEM_DIENTE);
+			diente->config = configNode.child("entities_data").child("item_diente");
+			diente->position = iPoint(position.x, position.y);
+			diente->Start();
+		}
+		app->bestiarioManager->CreateItem("boorok");
+
+		// Máscaras
+		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0) {
+			app->entityManager->GetPlayer()->maskZeroXP += 120;
+		}
+		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK0) {
+			app->entityManager->GetPlayer()->maskZeroXP += 120;
+		}
+		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK1) {
+			app->entityManager->GetPlayer()->maskOneXP += 120;
+		}
+		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK1) {
+			app->entityManager->GetPlayer()->maskOneXP += 120;
+		}
+		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK2) {
+			app->entityManager->GetPlayer()->maskTwoXP += 120;
+		}
+		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK2) {
+			app->entityManager->GetPlayer()->maskTwoXP += 120;
+		}
+		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK3) {
+			app->entityManager->GetPlayer()->maskThreeXP += 120;
+		}
+		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK3) {
+			app->entityManager->GetPlayer()->maskThreeXP += 120;
 		}
 
-		app->bestiarioManager->CreateItem("muur");
-		//Mask XP
-
-		//Mask 0
-		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
-		{
-			app->entityManager->GetPlayer()->maskZeroXP += 20;
-			//printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
-		}
-
-		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK0)
-		{
-			app->entityManager->GetPlayer()->maskZeroXP += 20;
-			//printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
-		}
-
-		//Mask 1
-		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK1)
-		{
-			app->entityManager->GetPlayer()->maskOneXP += 20;
-			//printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
-		}
-
-		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK1)
-		{
-			app->entityManager->GetPlayer()->maskOneXP += 20;
-			//printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
-		}
-
-		//Mask 2
-		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK2)
-		{
-			app->entityManager->GetPlayer()->maskTwoXP += 20;
-			//printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
-		}
-
-		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK2)
-		{
-			app->entityManager->GetPlayer()->maskTwoXP += 20;
-			//printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
-		}
-
-		//Mask 3
-		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK3)
-		{
-			app->entityManager->GetPlayer()->maskThreeXP += 20;
-			//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
-		}
-
-		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK3)
-		{
-			app->entityManager->GetPlayer()->maskThreeXP += 20;
-			//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
-		}
 		if (app->entityManager->GetIgory()->playerInFight) {
 			app->map->DestroyEntity(this);
 		}
 	}
 }
 
+
 // L07 DONE 6: Define OnCollision function for the player. 
-void Enemy_Muur::OnCollision(PhysBody* physA, PhysBody* physB) {
+void Enemy_Boorok_Variation::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 	case ColliderType::PLATFORM:
@@ -349,7 +348,6 @@ void Enemy_Muur::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLAYER:
 		LOG("Collision PLAYER");
-		//restar vida al player
 		break;
 	case ColliderType::PLAYER_ATTACK:
 		LOG("Collision Player_Attack");
@@ -362,7 +360,7 @@ void Enemy_Muur::OnCollision(PhysBody* physA, PhysBody* physB) {
 	}
 }
 
-bool Enemy_Muur::Muurfinding(float dt, iPoint playerPosP)
+bool Enemy_Boorok_Variation::Boorokfinding(float dt, iPoint playerPosP)
 {
 	iPoint playerPos = app->map->WorldToMap(playerPosP.x, playerPosP.y);
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
@@ -420,21 +418,26 @@ bool Enemy_Muur::Muurfinding(float dt, iPoint playerPosP)
 	return true;
 }
 
-float Enemy_Muur::GetHealth() const {
+float Enemy_Boorok_Variation::GetHealth() const {
 	return health;
 }
 
-void Enemy_Muur::TakeDamage(float damage) {
+void Enemy_Boorok_Variation::TakeDamage(float damage) {
 	if (currentState != EntityState_Enemy::DEAD && invulnerabilityTimer.ReadMSec() >= 500) {
-		health -= damage;
-		invulnerabilityTimer.Start();
-		timerRecibirDanioColor.Start();
 		currentAnimation = &reciebeDamage;
+		if (reciebeDamage.HasFinished())
+		{
+			health -= damage;
+			invulnerabilityTimer.Start();
+			timerRecibirDanioColor.Start();
+			app->audio->PlayRandomFx(boorok_get_damage_fx, boorok_get_damageAlt_fx, NULL);
+		}
 	}
 }
 
+
 //VENENO <----------
-void Enemy_Muur::ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate) {
+void Enemy_Boorok_Variation::ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate) {
 	this->poisonDamage = poisonDamage;
 	this->poisonDuration = poisonDuration;
 	this->poisonTickRate = poisonTickRate;
@@ -448,10 +451,10 @@ void Enemy_Muur::ApplyPoison(int poisonDamage, float poisonDuration, float poiso
 
 }
 
-void Enemy_Muur::CheckPoison() {
+void Enemy_Boorok_Variation::CheckPoison() {
 	float epsilon = 0.1f; //Para margen de error
 
-	// Aplicar el primer tick de daño inmediatamente (si no, el primer tick no se aplica en el segundo 0.0)
+	// Aplicar el primer tick de da�o inmediatamente (si no, el primer tick no se aplica en el segundo 0.0)
 	if (firstTimePoisonRecibed) {
 		if (currentState != EntityState_Enemy::DEAD) {
 			health -= poisonDamage;
@@ -476,51 +479,60 @@ void Enemy_Muur::CheckPoison() {
 		}
 	}
 }
-//VENENO ---------->
 
-void Enemy_Muur::Charge(float dt, iPoint playerPos) {
-	if (chargeTimer.ReadSec() >= 5)
+void Enemy_Boorok_Variation::Sleeping()
+{
+	isSleeping = true;
+	pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
+
+	if (recoveryTimer.ReadSec() >= 0.5) {
+		if (health < maxHealth) {
+			health += health * healthIncrement;
+
+			if (health > maxHealth) {
+				health = maxHealth;
+			}
+		}
+		recoveryTimer.Start();
+	}
+}
+
+void Enemy_Boorok_Variation::chargeAttack(iPoint playerPos)
+{
+	isCharging = true;
+	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
+	printf("asas as\n");
+	currentAnimation = &chargeAttackAnim;
+	if (chargeAttackAnim.HasFinished())
 	{
-		/*printf("charge");*/
-		currentAnimation = &chargeAnim;
-		pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
-		if (chargeAnim.HasFinished())
+		currentAnimation = &attackAnim;
+		if (attackAnim.HasFinished())
 		{
-			timechargingTimer.Start();
-			charging = true;
+			printf("Charge attack");
 
-			b2Vec2 direction(playerPos.x - position.x, playerPos.y - position.y);
-			direction.Normalize();
+			AreaAttack(playerPos);
 
-			b2Vec2 impulse = b2Vec2(direction.x * 5, direction.y * 5);
-			pbodyFoot->body->ApplyLinearImpulse(impulse, pbodyFoot->body->GetWorldCenter(), true);
+			isCharging = false;
 
-			stunTimer.Start();
-			chargeTimer.Start();
+			pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
+
+			chargeAttackTimer.Start();
 		}
 	}
 }
 
-void Enemy_Muur::Stunned(float dt) {
-	pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
+void Enemy_Boorok_Variation::AreaAttack(iPoint playerPos) {
 
-	if (stunAnim.HasFinished() && stunTimer.ReadSec() >= 2)
-	{
-		pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
-		nextState = EntityState_Enemy::IDLE;
-		isStunned = false;
-		charging = false;
-		chargeTimer.Start();
-		stunAnim.Reset();
-	}
-	else {
-		isStunned = true;
-		currentAnimation = &stunAnim;
+	float distance = dist(position, playerPos);
+
+	// Si el player esta dentro del radio del ataque
+	if (distance <= chargeattackDistance * 32) {
+		app->entityManager->GetPlayer()->TakeDamage(areaattackdamage);
+		printf("Area attack \n");
 	}
 }
 
-
-MapObject* Enemy_Muur::GetCurrentRoom()
+MapObject* Enemy_Boorok_Variation::GetCurrentRoom()
 {
 	//salas pequeñas
 	for (ListItem<MapObject*>* item = app->map->smallRoomsList.start; item != nullptr; item = item->next)
