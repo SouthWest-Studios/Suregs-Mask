@@ -41,8 +41,7 @@ bool Item_mascara_0::Start() {
 	pbody->ctype = ColliderType::RESOURCE;
 	pbody->listener = this;
 	pbody->body->GetFixtureList()->SetSensor(true);
-
-
+	//app->dialogManager->CreateDialog(pugi:::xml_node 1101,);
 	return true;
 }
 

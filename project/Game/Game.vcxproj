@@ -195,6 +195,7 @@
     <ClCompile Include="Source\Physics.cpp" />
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\PuzzleButtonEntity.cpp" />
+    <ClCompile Include="Source\QuestManager.cpp" />
     <ClCompile Include="Source\Render.cpp" />
     <ClCompile Include="Source\Scene_Arena_Tutorial.cpp" />
     <ClCompile Include="Source\Scene_GameOver.cpp" />
@@ -328,6 +329,7 @@
     <ClInclude Include="Source\Pociones.h" />
     <ClInclude Include="Source\PQueue.h" />
     <ClInclude Include="Source\PuzzleButtonEntity.h" />
+    <ClInclude Include="Source\QuestManager.h" />
     <ClInclude Include="Source\Queue.h" />
     <ClInclude Include="Source\Audio.h" />
     <ClInclude Include="Source\Input.h" />

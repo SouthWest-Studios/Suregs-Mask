@@ -106,11 +106,11 @@ bool Enemy_Guerrero::Update(float dt)
 
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
 
-	if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance*80)
+	if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance*32)
 	{
 		desiredState = EntityState_Enemy::ATTACKING;
 	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance*80)
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance*32)
 	{
 		desiredState = EntityState_Enemy::RUNNING;
 	}

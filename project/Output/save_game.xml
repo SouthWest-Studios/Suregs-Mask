@@ -49,19 +49,5 @@
 		</inventory>
 	</iventorymanager>
 	<commercemanager />
-	<notesmanager>
-		<Note />
-	</notesmanager>
-	<bestiariomanager>
-		<Bestiario />
-	</bestiariomanager>
-	<equipo />
-	<Ascensormenu />
-	<treemanager />
-	<guiManager />
-	<dialogmanager />
-	<fadeToBlack />
-	<debugConsole />
-	<renderer />
-	<pSystem />
+	<questmanager />
 </game_state>
