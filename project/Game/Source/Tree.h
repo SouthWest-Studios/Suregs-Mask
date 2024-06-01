@@ -118,7 +118,26 @@ public:
 	bool usable2 = false;
 	bool usable3 = false;
 	bool usable4 = false;
-	
+
+	bool used1 = false;
+	bool used2 = false;
+	bool used3 = false;
+	bool used4 = false;
+
+	SDL_Texture* icon0 = nullptr;
+	SDL_Texture* icon1 = nullptr;
+	SDL_Texture* icon2 = nullptr;
+	SDL_Texture* icon3 = nullptr;
+
+	SDL_Texture* iconSelected0 = nullptr;
+	SDL_Texture* iconSelected1 = nullptr;
+	SDL_Texture* iconSelected2 = nullptr;
+	SDL_Texture* iconSelected3 = nullptr;
+
+	SDL_Texture* iconLocked0 = nullptr;
+	SDL_Texture* iconLocked1 = nullptr;
+	SDL_Texture* iconLocked2 = nullptr;
+	SDL_Texture* iconLocked3 = nullptr;
 
 	
 };
