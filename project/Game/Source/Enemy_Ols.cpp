@@ -60,6 +60,7 @@ bool Enemy_Ols::Start() {
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
+	ols_attack_fx = app->audio->LoadAudioFx("ols_attack_fx");
 	ols_get_damage_fx = app->audio->LoadAudioFx("ols_get_damage_fx");
 	ols_get_damageAlt_fx = app->audio->LoadAudioFx("ols_get_damageAlt_fx");
 	ols_get_damageAlt2_fx = app->audio->LoadAudioFx("ols_get_damageAlt2_fx");
@@ -234,6 +235,7 @@ void Enemy_Ols::Attack(float dt, iPoint playerPos)
 {
     if (canAttack)
     {
+		app->audio->PlayFx(ols_attack_fx);
         attackSensor = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
         attackSensor->ctype = ColliderType::PROJECTILE;
         attackSensor->listener = this;

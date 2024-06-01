@@ -45,21 +45,21 @@ public:
 private:
 
 	//En caso de querer añadirle una textura a la entidad
-	SDL_Texture* texture;
+	SDL_Texture* texture = nullptr;
 
 	//La textura de la cara general para el dialogo
-	SDL_Texture* faceTexture;
+	SDL_Texture* faceTexture = nullptr;
 
 	//El path de la textura de la entidad
-	const char* texturePath;
+	const char* texturePath = nullptr;
 
 	//El path de la textura de la cara general
-	const char* faceTexturePath;
+	const char* faceTexturePath = nullptr;
 
 	//Cuerpo de fisicas, para detectar cuando el jugador esta cerca
 	//y activar el dialogo en caso de que el jugador asi lo quiera
-	PhysBody* pbody;
-	PhysBody* pbody2;
+	PhysBody* pbody = nullptr;
+	PhysBody* pbody2 = nullptr;
 	//Lista de los dialogos que puede decir este trigger
 	List<Dialog*> dialogues;
 

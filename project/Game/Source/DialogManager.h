@@ -32,10 +32,10 @@ public:
 
 	//Funcion para crear dialogos
 	Dialog* CreateDialog(pugi::xml_node itemNode, std::string name = "", const char* faceTexturePath = "", const char* font = "primary");
-	
+
 	//Funcion para añadir a la lista de dialogos
 	bool AddDialog(Dialog* dialog);
-	
+
 
 	//Fishing
 	void CreateDialogSinEntity(std::string Texto, std::string nombre, const char* texture);
@@ -53,7 +53,7 @@ public:
 
 	List<Dialog*> dialogues;
 
-	bool isPlaying;
+	bool isPlaying = false;
 
 	uint32 autoNextTime_show;
 	Timer autoNextTime_TimerDown;
@@ -64,26 +64,26 @@ private:
 	//Colores
 	SDL_Color textColor = { 52,25,0,255 };
 	SDL_Color optionSelectedColor = { 255, 255, 255, 255 };
-	SDL_Color optionColor = { 52, 25, 0, 255 };
-	
+	SDL_Color optionColor = { 150, 104, 62, 255 };
+
 
 	//Posiciones
 	std::vector<int> dialogMargin = { 120, 200, 0, 30 };
 	iPoint dialogPosition = { 59 , 318 }; //{ 0 , 375 }
 	iPoint namePosition = { 70 , -60 };
 	iPoint optionsPosition = { 0 , 300 };
-	int optionsDistanceBetween = 50;
+	int optionsDistanceBetween = 60;
 
 	Timer dialogueAnimation;
 
 	int actualDialogYPosition = 0;
 
 	//Dimensiones
-	int textBoundWidth= 500;
+	int textBoundWidth = 500;
 	int textNameBoundWidth = 200;
 	int optionsBoundWidth = 350;
 	iPoint faceTextureSize = { 256, 210 };
-	
+
 
 	//Config
 	int charTimeMS = 10;
@@ -93,7 +93,7 @@ private:
 
 	SDL_Texture* background_tex;
 	std::string background_tex_path;
-	int indexText;
+	int indexText = 1;
 	Timer charTimer;
 	int optionSelected = 0;
 

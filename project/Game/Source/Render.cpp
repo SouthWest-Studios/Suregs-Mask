@@ -63,6 +63,7 @@ bool Render::Awake(pugi::xml_node config)
 	primaryFont = TTF_OpenFont("Assets/Fuentes/BAHNSCHRIFT.ttf", 25);
 	titleFont = TTF_OpenFont("Assets/Fuentes/Timeless-Bold.ttf", 25);
 	goldFont = TTF_OpenFont("Assets/Fuentes/Timeless-Bold.ttf", 16);
+	questFont = TTF_OpenFont("Assets/Fuentes/Timeless-Bold.ttf", 20);
 	consoleFont = TTF_OpenFont("Assets/Fuentes/UbuntuMono-R.ttf", 25);
 	buttonFont = TTF_OpenFont("Assets/Fuentes/BAHNSCHRIFT.ttf", 25);
 

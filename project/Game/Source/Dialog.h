@@ -21,7 +21,9 @@ struct DialogEvent {
 enum class DialogType
 {
 	TEXT,
-	CHOOSE
+	CHOOSE,
+	QUEST_UPDATE,
+	SELECT_CHOOSE
 };
 
 class Dialog
@@ -71,7 +73,7 @@ public:
 
 	//Texturas
 	SDL_Texture* face_tex = nullptr;
-	const char* face_tex_path;
+	const char* face_tex_path = nullptr;
 
 	//El texto de las opciones
 	std::string option1;
@@ -87,9 +89,14 @@ public:
 
 	int tutorial = -1;
 
-	TTF_Font* font;
+	TTF_Font* font = nullptr;
 
 	DialogEvent* event_ = nullptr;
+
+	int questLine = -1;
+	int nextTargetID = -1;
+	int actualTargetID = -1;
+	int selectChoose = -1;
 
 	uint id;
 

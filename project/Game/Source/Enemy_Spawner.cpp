@@ -23,6 +23,7 @@
 #include "Enemy_Khurt.h"
 #include "Enemy_Muur.h"
 #include "Enemy_Boorok.h"
+#include "ParticleSystem.h"
 
 
 Enemy_Spawner::Enemy_Spawner() : Entity(EntityType::ENEMY_SPAWNER) {
@@ -76,19 +77,24 @@ bool Enemy_Spawner::Update(float dt)
 						Enemy_Osiris* osiris = (Enemy_Osiris*)app->entityManager->CreateEntity(EntityType::ENEMY_OSIRIS);
 						osiris->config = configEntities.child("osiris");
 						osiris->position = iPoint(position.x + 16, position.y + 16);
+						fPoint pos((float)osiris->position.x, (float)osiris->position.y);
+						app->psystem->AddEmiter(pos, EMITTER_TYPE_SMOKE);
 						osiris->Start();
-
 						break;}
 					case 2: {
 						Enemy_Ols* ols = (Enemy_Ols*)app->entityManager->CreateEntity(EntityType::ENEMY_OLS);
 						ols->config = configEntities.child("ols");
 						ols->position = iPoint(position.x + 16, position.y + 16);
+						fPoint pos((float)ols->position.x, (float)ols->position.y);
+						app->psystem->AddEmiter(pos, EMITTER_TYPE_SMOKE);
 						ols->Start();
 						break;}
 					case 3: {
 						Enemy_Khurt* khurt = (Enemy_Khurt*)app->entityManager->CreateEntity(EntityType::ENEMY_KHURT);
 						khurt->config = configEntities.child("khurt");
 						khurt->position = iPoint(position.x + 16, position.y + 16);
+						fPoint pos((float)khurt->position.x, (float)khurt->position.y);
+						app->psystem->AddEmiter(pos, EMITTER_TYPE_SMOKE);
 						khurt->Start();
 						break;
 					}
@@ -97,6 +103,8 @@ bool Enemy_Spawner::Update(float dt)
 						Enemy_Muur* muur = (Enemy_Muur*)app->entityManager->CreateEntity(EntityType::ENEMY_MUUR);
 						muur->config = configEntities.child("muur");
 						muur->position = iPoint(position.x + 16, position.y + 16);
+						fPoint pos((float)muur->position.x, (float)muur->position.y);
+						app->psystem->AddEmiter(pos, EMITTER_TYPE_SMOKE);
 						muur->Start();
 						break;
 					}
@@ -104,6 +112,8 @@ bool Enemy_Spawner::Update(float dt)
 						Enemy_Boorok* boorok = (Enemy_Boorok*)app->entityManager->CreateEntity(EntityType::ENEMY_BOOROK);
 						boorok->config = configEntities.child("boorok");
 						boorok->position = iPoint(position.x + 16, position.y + 16);
+						fPoint pos((float)boorok->position.x, (float)boorok->position.y);
+						app->psystem->AddEmiter(pos, EMITTER_TYPE_SMOKE);
 						boorok->Start();
 						break;
 					}
@@ -111,6 +121,8 @@ bool Enemy_Spawner::Update(float dt)
 						Enemy_Muur* muur = (Enemy_Muur*)app->entityManager->CreateEntity(EntityType::ENEMY_MUUR);
 						muur->config = configEntities.child("muur");
 						muur->position = iPoint(position.x + 16, position.y + 16);
+						fPoint pos((float)muur->position.x, (float)muur->position.y);
+						app->psystem->AddEmiter(pos, EMITTER_TYPE_SMOKE);
 						muur->Start();
 						break;
 					}

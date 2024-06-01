@@ -19,6 +19,10 @@
 #include "Scene_Testing.h"
 #include "ModuleFadeToBlack.h"
 #include "ElevatorMenu.h"
+#include "QuestManager.h"
+#include "Scene_Pueblo.h"
+#include "Scene_Pueblo_Tutorial.h"
+#include "Utils.cpp"
 
 Hud::Hud(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -39,6 +43,8 @@ bool Hud::Awake(pugi::xml_node config)
 	hudTexturePath = (char*)config.child("mainTexture").attribute("texturepath").as_string();
 	messageTexturePath = (char*)config.child("messageTexture").attribute("texturepath").as_string();
 	cdMaskTexturePath = (char*)config.child("cdMaskTexture").attribute("texturepath").as_string();
+
+	levelUpTexturePath = (char*)config.child("levelUpTexture").attribute("texturepath").as_string();
 
 	rectBarraVida = new SDL_Rect{ 269,6,259,16 };
 	rectFondoBarraVida = new SDL_Rect{ 0,2,267,23 };
@@ -97,6 +103,8 @@ bool Hud::Start()
 	cdPrimaryMaskTexture = app->tex->Load(cdMaskTexturePath);
 	cdSecondaryMaskTexture = app->tex->Load(cdMaskTexturePath);
 
+	levelUpTexture = app->tex->Load(levelUpTexturePath);
+
 	/*Acquired_Item ai;
 	ai.lifeTimer.Start();
 	ai.text = "holaaa";
@@ -123,6 +131,11 @@ bool Hud::Update(float dt)
 {
 	if(app->entityManager->GetPlayer() != nullptr) 
 	{
+
+		float currentHealth = app->entityManager->GetPlayer()->currentStats.currentHealth;
+		float maxHealth = app->entityManager->GetPlayer()->currentStats.maxHealth;
+		isLowHealth = (currentHealth / maxHealth) < 0.2f;
+
 		// Primary mask
 		float maskCoolDownPrimary = app->entityManager->GetPlayer()->maskStats[app->entityManager->GetPlayer()->primaryMask][Branches::Rama2][ app->entityManager->GetPlayer()->maskLevels[app->entityManager->GetPlayer()->primaryMask][Branches::Rama2]].maskCoolDown;
 		float elapsedTimePrimary = app->entityManager->GetPlayer()->maskStats[app->entityManager->GetPlayer()->primaryMask][Branches::Rama2][app->entityManager->GetPlayer()->maskLevels[app->entityManager->GetPlayer()->primaryMask][Branches::Rama2]].maskCoolDownTimer.ReadMSec();
@@ -214,18 +227,51 @@ bool Hud::PostUpdate()
 	app->win->GetWindowSize(windowWidth, windowHeight);
 
 
-
-	//Barra de vida
-	app->render->DrawTexture(hudTexture, 170, 40, SDL_FLIP_NONE, rectFondoBarraVida, 0);
-
+	// Barra de vida
 	int rectW = rectFondoBarraVida->w;
 	rectW = (rectFondoBarraVida->w * app->entityManager->GetPlayer()->currentStats.currentHealth) / app->entityManager->GetPlayer()->currentStats.maxHealth;
 
 	SDL_Rect* rectBarraVidaCalculado = new SDL_Rect{ rectBarraVida->x, rectBarraVida->y, rectW, rectBarraVida->h };
 
-	//LOG("Vida player: %d, max vida player: %d, rect: %d", app->entityManager->GetPlayer()->health, app->entityManager->GetPlayer()->maxHealth, rectW);
+	if (isLowHealth && !shrinking && !growing && app->entityManager->GetPlayer()->currentStats.currentHealth > 0) {
+		shrinking = true;
+		animationTimer.Start();
+	}
 
-	app->render->DrawTexture(hudTexture, 175, 44, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
+	if (shrinking) {
+
+		float progress = animationTimer.ReadMSec() / (animationDuration * 1000);
+		float easedProgress = easeOutCubic(progress);
+		float scale = 1 - easedProgress * 0.06;
+
+		app->render->DrawTexture(hudTexture, 173, 42, scale, SDL_FLIP_NONE, rectFondoBarraVida, 0);
+		app->render->DrawTexture(hudTexture, 177, 46, scale, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
+
+		if (animationTimer.ReadMSec() >= animationDuration * 1000) {
+			shrinking = false;
+			growing = true;
+			animationTimer.Start();
+		}
+	}
+	else if (growing) {
+
+		float progress = animationTimer.ReadMSec() / (animationDuration * 1000);
+		float easedProgress = easeOutCubic(progress);
+		float scale = 0.94 + easedProgress * 0.06;
+
+		app->render->DrawTexture(hudTexture, 173, 42, scale, SDL_FLIP_NONE, rectFondoBarraVida, 0);
+		app->render->DrawTexture(hudTexture, 177, 46, scale, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
+
+		if (animationTimer.ReadMSec() >= animationDuration * 1000) {
+			growing = false;
+		}
+	}
+	else {
+		app->render->DrawTexture(hudTexture, 173, 42, 1.0, SDL_FLIP_NONE, rectFondoBarraVida, 0);
+		app->render->DrawTexture(hudTexture, 177, 46, 1.0, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
+	}
+
+
 
 	//Monedas
 	std::string quantityStr = std::to_string(monedasObtenidasHud);
@@ -371,6 +417,20 @@ bool Hud::PostUpdate()
 	{
 		app->physics->active = true;
 		couunt = 0;
+	}
+
+
+
+	//Misiones
+
+	if (app->scene_pueblo->active || app->scene_pueblo_tutorial->active) {
+
+		std::vector<Quest*> quests = app->questManager->GetActiveQuest();
+		for (int i = 0; i < quests.size(); i++) {
+			app->render->DrawTexture(hudTexture, 925, 200 + (i * 50), SDL_FLIP_NONE, rectFondoObjetosConseguidos, 0);
+			app->render->DrawTextBound(quests.at(i)->questTitle.c_str(), 992, 207 + (i * 50), 300, { 52, 25, 0 }, app->render->questFont);
+		}
+
 	}
 
 

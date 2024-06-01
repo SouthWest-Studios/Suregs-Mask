@@ -158,11 +158,11 @@ private:
 	bool explosionRealizada = false;
 	bool explosionAlcanzada = false;
 
-	fPoint sprieOffsetL = fPoint(-220, -200);
-	fPoint sprieOffsetR = fPoint(-100, -200);
+	fPoint sprieOffsetL = fPoint(-340, -480);
+	fPoint sprieOffsetR = fPoint(-340, -480);
 
 	SDL_Color actualColorTint{ 255, 255, 255 };
-	float actualScale = 1;
+	float actualScale = 0.7;
 
 	int cantidadCombosRealizados = 0;
 

@@ -31,7 +31,7 @@
 	<menu />
 	<iventorymanager>
 		<inventory>
-			<money quantity="0" />
+			<money quantity="6543" />
 			<SwordLevel quantity="0" />
 			<ArmorLevel quantity="0" />
 			<PrimaryMask quantity="-1" />
@@ -46,9 +46,9 @@
 	<commercemanager />
 	<questmanager>
 		<questLines>
-			<questLine id="1" index="0" active="false" completed="false" />
-			<questLine id="2" index="0" active="false" completed="false" />
-			<questLine id="3" index="0" active="false" completed="false" />
+			<questLine id="1" index="1" active="true" completed="false" />
+			<questLine id="2" index="1" active="false" completed="false" />
+			<questLine id="3" index="1" active="false" completed="false" />
 		</questLines>
 	</questmanager>
 	<notesmanager>

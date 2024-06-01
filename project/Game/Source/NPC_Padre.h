@@ -31,30 +31,33 @@ public:
     // L07 DONE 6: Define OnCollision function for the player.
     void OnCollision(PhysBody* physA, PhysBody* physB);
 
-private:
+
 
 public:
-    SDL_Texture* texture = NULL;
+    SDL_Texture* texture = nullptr;
     uint texW, texH;
 
     pugi::xml_document dialogoFile;
-    pugi::xml_node dialogoPadre;
-    pugi::xml_parse_result parseResult;
     pugi::xml_node dialogNode;
 
-    List<Dialog*> dialogues;
 
+    bool PlayDialogo = false;
+    bool dialogoMostrado = false;
     Animation* currentAnimation = nullptr;
     EntityState state;
 
-    PhysBody* pbody = NULL;
+    PhysBody* pbody = nullptr;
     //Animation
     Animation SPosition;
     SDL_Rect* spritePositions;
     pugi::xml_node config;
 
+
+
 private:
     Animation idleAnim;
+
+   
 
 public:
 };
