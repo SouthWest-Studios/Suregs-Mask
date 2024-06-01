@@ -24,7 +24,7 @@
 
 Enemy_Boorok::Enemy_Boorok() : Entity(EntityType::ENEMY_BOOROK) {
 	name = ("boorok");
-	state = EntityState::IDLE;
+	state = EntityState_Enemy::IDLE;
 	currentState = state;
 	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(currentState)].next_state;
 
@@ -116,38 +116,38 @@ bool Enemy_Boorok::Update(float dt)
 
 	if (health <= 0)
 	{
-		nextState = EntityState::DEAD;
+		nextState = EntityState_Enemy::DEAD;
 	}
 	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32 && !isCharging && !isWakingUp)
 	{
-		nextState = EntityState::ATTACKING;
+		nextState = EntityState_Enemy::ATTACKING;
 	}
 	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance * 32 && !isCharging && !isWakingUp)
 	{
-		nextState = EntityState::RUNNING;
+		nextState = EntityState_Enemy::RUNNING;
 	}
 	else if (app->map->pathfinding->GetDistance(playerPos, position) >= viewDistance * 32 && app->entityManager->GetIgory()->playerInFight)
 	{
-		nextState = EntityState::RUNNING;
+		nextState = EntityState_Enemy::RUNNING;
 	}
 	else
 	{
-		nextState = EntityState::IDLE;
+		nextState = EntityState_Enemy::IDLE;
 		isSleeping = true;
 	}
 
 	switch (nextState)
 	{
-	case EntityState::RUNNING:
+	case EntityState_Enemy::RUNNING:
 		Chase(dt, playerPos);
 		break;
-	case EntityState::ATTACKING:
+	case EntityState_Enemy::ATTACKING:
 		Attack(dt, playerPos);
 		break;
-	case EntityState::DEAD:
+	case EntityState_Enemy::DEAD:
 		Die();
 		break;
-	case EntityState::IDLE:
+	case EntityState_Enemy::IDLE:
 		DoNothing(dt, playerPos);
 		break;
 	default:
@@ -428,7 +428,7 @@ float Enemy_Boorok::GetHealth() const {
 }
 
 void Enemy_Boorok::TakeDamage(float damage) {
-	if (currentState != EntityState::DEAD && invulnerabilityTimer.ReadMSec() >= 500) {
+	if (currentState != EntityState_Enemy::DEAD && invulnerabilityTimer.ReadMSec() >= 500) {
 		currentAnimation = &reciebeDamage;
 		if (reciebeDamage.HasFinished())
 		{
@@ -461,7 +461,7 @@ void Enemy_Boorok::CheckPoison() {
 
 	// Aplicar el primer tick de da�o inmediatamente (si no, el primer tick no se aplica en el segundo 0.0)
 	if (firstTimePoisonRecibed) {
-		if (currentState != EntityState::DEAD) {
+		if (currentState != EntityState_Enemy::DEAD) {
 			health -= poisonDamage;
 			invulnerabilityTimer.Start();
 			timerRecibirDanioColor.Start();
@@ -474,7 +474,7 @@ void Enemy_Boorok::CheckPoison() {
 	if (poisonTimer.ReadSec() <= poisonDuration + epsilon && poisoned) {
 		if (poisonTickTimer.ReadSec() >= poisonTickRate) {
 			poisonTickTimer.Start(); // Reiniciar el temporizador de ticks de veneno
-			if (currentState != EntityState::DEAD) {
+			if (currentState != EntityState_Enemy::DEAD) {
 				health -= poisonDamage;
 				invulnerabilityTimer.Start();
 				timerRecibirDanioColor.Start();

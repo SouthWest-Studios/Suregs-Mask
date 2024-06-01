@@ -1,5 +1,5 @@
-﻿#ifndef __ENEMY_BOOROK_H__
-#define __ENEMY_BOOROK_H__
+﻿#ifndef __ENEMY_MUUR_VARIATION_H__
+#define __ENEMY_MUUR_VARIATION_H__
 
 
 #include "Entity.h"
@@ -9,27 +9,24 @@
 #include "Pathfinding.h"
 #include "Player.h"
 #include "Physics.h"
-#include "Particle.h"
-#include "ParticlePool.h"
-#include "Emitter.h"
 
 struct SDL_Texture;
 
 
-struct Branch_Boorok {
+struct Branch_Muur_Variation {
 	enum EntityState_Enemy const next_state;
-	Branch_Boorok(EntityState_Enemy next) : next_state(next) {}
+	Branch_Muur_Variation(EntityState_Enemy next) : next_state(next) {}
 };
 
-class Enemy_Boorok : public Entity
+class Enemy_Muur_Variation : public Entity
 {
 
 
 public:
 
-	Enemy_Boorok();
+	Enemy_Muur_Variation();
 
-	virtual ~Enemy_Boorok();
+	virtual ~Enemy_Muur_Variation();
 
 	bool Awake();
 
@@ -41,22 +38,20 @@ public:
 
 	bool CleanUp();
 
-	void DoNothing(float dt, iPoint playerPos);
+	void DoNothing(float dt);
 	void Chase(float dt, iPoint playerPos);
-	void Attack(float dt, iPoint playerPos);
+	void Attack(float dt);
 	void Die();
-	bool Boorokfinding(float dt, iPoint playerPos);
+	bool Muurfinding(float dt, iPoint playerPos);
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
 	float GetHealth() const;
 	void TakeDamage(float damage);
 
-	void Sleeping();
-
-	//Ataque cargado
-	void chargeAttack(iPoint playerPos);
-	void AreaAttack(iPoint playerPos);
+	//Atque cargado
+	void Charge(float dt, iPoint playerPos);
+	void Stunned(float dt);
 
 	//VENENO <----------
 	void ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate);
@@ -77,8 +72,7 @@ public:
 	b2Vec2 vel;
 	float health;
 	float maxHealth;
-	float healthIncrement;
-	float attackDamage;
+	//float attackDamage;
 	Timer invulnerabilityTimer;
 
 	float viewDistance;
@@ -89,20 +83,16 @@ private:
 	pugi::xml_document configFile;
 	pugi::xml_node configNode;
 
-	Emitter* blood = nullptr;
 
-	Animation sleepAnim;
 	Animation runAnim;
+	Animation stunAnim;
 	Animation attackAnim;
-	Animation reciebeDamage;
 	Animation idleAnim;
-	Animation wakeupAnim;
-	Animation chargeAttackAnim;
+	Animation chargeAnim;
+	Animation reciebeDamage;
 	Animation dieAnim;
 
-	int boorok_get_damage_fx;
-	int boorok_get_damageAlt_fx;
-	int boorok_death_fx;
+	int muur_get_damage_fx;
 
 	bool isFacingLeft = false;
 
@@ -127,18 +117,14 @@ private:
 
 	Timer timerRecibirDanioColor;
 
-	//Sleeping
-	bool isSleeping = false;
-	bool isWakingUp = false;
-	Timer recoveryTimer;
-	Timer isabletosleepTimer;
 
 	//Charge Attack
-	Timer chargeAttackTimer;
+	Timer stunTimer;
+	Timer chargeTimer;
+	Timer timechargingTimer;
+	bool charging;
+	bool isStunned;
 	iPoint Antposition;
-	float areaattackdamage;
-	float chargeAttackMaxRange;
-	bool isCharging = false;
 
 	//VENENO <----------
 	bool firstTimePoisonRecibed = false;
@@ -152,7 +138,7 @@ private:
 
 public:
 
-	Branch_Boorok transitionTable[static_cast<int>(EntityState_Enemy::STATE_COUNT)][static_cast<int>(EntityState_Enemy::STATE_COUNT)] = {
+	Branch_Muur_Variation transitionTable[static_cast<int>(EntityState_Enemy::STATE_COUNT)][static_cast<int>(EntityState_Enemy::STATE_COUNT)] = {
 		//		IDLE						RUNNING								ATTACKING					DEAD						REVIVING							DASHI						NONE
 	{ {EntityState_Enemy::IDLE}, {EntityState_Enemy::RUNNING}, {EntityState_Enemy::ATTACKING}, {EntityState_Enemy::DEAD}, {EntityState_Enemy::NONE}, {EntityState_Enemy::NONE}, {EntityState_Enemy::IDLE}}, // IDLE
 	{ {EntityState_Enemy::IDLE}, {EntityState_Enemy::RUNNING}, {EntityState_Enemy::ATTACKING}, {EntityState_Enemy::DEAD}, {EntityState_Enemy::NONE}, {EntityState_Enemy::NONE}, {EntityState_Enemy::IDLE}}, // RUNNING
@@ -171,4 +157,4 @@ public:
 
 
 
-#endif // __ENEMY_BOOROK_H__
+#endif // __ENEMY_MUUR_VARIATION_H__
