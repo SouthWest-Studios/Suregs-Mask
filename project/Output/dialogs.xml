@@ -1929,6 +1929,9 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 				</option2>
 
 			</sentence>
+
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="2" actualTargetID="1" />
+			
 		</sentences>
 	</dialog>
 
@@ -2199,5 +2202,3 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 		</sentences>
 	</dialog>
 </dialogues>
-
-

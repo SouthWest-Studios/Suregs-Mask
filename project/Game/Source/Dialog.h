@@ -21,7 +21,8 @@ struct DialogEvent {
 enum class DialogType
 {
 	TEXT,
-	CHOOSE
+	CHOOSE,
+	QUEST_UPDATE
 };
 
 class Dialog
@@ -90,6 +91,11 @@ public:
 	TTF_Font* font;
 
 	DialogEvent* event_ = nullptr;
+
+	int questLine = -1;
+	int nextTargetID = -1;
+	int actualTargetID = -1;
+
 
 	uint id;
 

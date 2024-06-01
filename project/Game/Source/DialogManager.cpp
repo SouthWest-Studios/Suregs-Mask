@@ -14,6 +14,7 @@
 #include "Hud.h"
 #include "Audio.h"
 #include "Menu.h"
+#include "QuestManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -131,6 +132,13 @@ Dialog* DialogManager::CreateDialog(pugi::xml_node itemNode, std::string name, c
 			Dialog* dialogOp2 = CreateDialog(optionNode, name, faceTexturePath, font);
 			dialog->options2.Add(dialogOp2);
 		}
+	}
+
+	if (strcmp(type, "QuestUpdate") == 0) {
+		dialog->type = DialogType::QUEST_UPDATE;
+		dialog->questLine = itemNode.attribute("questLine").as_int();
+		dialog->nextTargetID = itemNode.attribute("nextTargetID").as_int();
+		dialog->actualTargetID = itemNode.attribute("actualTargetID").as_int();
 	}
 
 	return dialog;
@@ -366,6 +374,32 @@ bool DialogManager::PostUpdate() {
 		app->menu->active = false;
 		
 		Dialog* actualDialog = dialogues.At(0)->data;
+
+		//mirar el tipo
+		while (actualDialog->type != DialogType::TEXT && actualDialog->type != DialogType::CHOOSE) {
+
+			if (actualDialog->type == DialogType::QUEST_UPDATE) {
+
+				if (app->questManager->GetQuestLineIndex(actualDialog->questLine) == actualDialog->actualTargetID) {
+					app->questManager->UpdateQuestLine(actualDialog->questLine, actualDialog->nextTargetID);
+				}
+			}
+
+
+
+			dialogues.Del(dialogues.At(0));
+			if (dialogues.Count() > 0) {
+				actualDialog = dialogues.At(0)->data;
+			}
+			else {
+				break;
+			}
+			
+		}
+
+		if (dialogues.Count() <= 0) return true;
+
+
 		bool dialogFinished = ShowDialog(actualDialog);
 		
 		if (actualDialogYPosition < 0) {
