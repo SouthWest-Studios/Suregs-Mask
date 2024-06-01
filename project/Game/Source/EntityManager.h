@@ -71,6 +71,7 @@ public:
 	int getRandomNumber(int min, int max);
 
 	void SetPlayer(Player* player);
+	void SetIgory(Boss_Igory* igory);
 	Player* GetPlayer();
 	Boss_Igory* GetIgory();
 

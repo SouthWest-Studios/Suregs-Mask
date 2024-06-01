@@ -192,7 +192,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	maskStats[Mask::MASK1][Branches::Modifiers][1].movementSpeedModifier = 10;
 	maskStats[Mask::MASK1][Branches::Modifiers][1].attackDamageModifier = 10;
 	maskStats[Mask::MASK1][Branches::Modifiers][1].attackSpeedModifier = 0;
-	
+
 
 	maskStats[Mask::MASK1][Branches::Rama1][1].maskDamage = 120;
 
@@ -554,7 +554,7 @@ bool Player::Awake() {
 bool Player::Start() {
 
 	//position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
-	 die = false;
+	die = false;
 	TSprite = config.attribute("Tsprite").as_int();
 	SpriteX = config.attribute("sprite_x").as_int();
 	SpriteY = config.attribute("sprite_y").as_int();
@@ -618,18 +618,18 @@ bool Player::Start() {
 
 	player_Direction = Direction::UNKNOWN;
 
-	
-	if(app->inventoryManager->primaryMaskInventoryManager == -1)	EquipPrimaryMask(Mask::NOMASK);
-	else if(app->inventoryManager->primaryMaskInventoryManager == 0)	EquipPrimaryMask(Mask::MASK0);
-	else if(app->inventoryManager->primaryMaskInventoryManager == 1)	EquipPrimaryMask(Mask::MASK1);
-	else if(app->inventoryManager->primaryMaskInventoryManager == 2)	EquipPrimaryMask(Mask::MASK2);
-	else if(app->inventoryManager->primaryMaskInventoryManager == 3)	EquipPrimaryMask(Mask::MASK3);
 
-	if(app->inventoryManager->secondaryMaskInventoryManager == -1)	EquipSecondaryMask(Mask::NOMASK);
-	else if(app->inventoryManager->secondaryMaskInventoryManager == 0)	EquipSecondaryMask(Mask::MASK0);
-	else if(app->inventoryManager->secondaryMaskInventoryManager == 1)	EquipSecondaryMask(Mask::MASK1);
-	else if(app->inventoryManager->secondaryMaskInventoryManager == 2)	EquipSecondaryMask(Mask::MASK2);
-	else if(app->inventoryManager->secondaryMaskInventoryManager == 3)	EquipSecondaryMask(Mask::MASK3);
+	if (app->inventoryManager->primaryMaskInventoryManager == -1)	EquipPrimaryMask(Mask::NOMASK);
+	else if (app->inventoryManager->primaryMaskInventoryManager == 0)	EquipPrimaryMask(Mask::MASK0);
+	else if (app->inventoryManager->primaryMaskInventoryManager == 1)	EquipPrimaryMask(Mask::MASK1);
+	else if (app->inventoryManager->primaryMaskInventoryManager == 2)	EquipPrimaryMask(Mask::MASK2);
+	else if (app->inventoryManager->primaryMaskInventoryManager == 3)	EquipPrimaryMask(Mask::MASK3);
+
+	if (app->inventoryManager->secondaryMaskInventoryManager == -1)	EquipSecondaryMask(Mask::NOMASK);
+	else if (app->inventoryManager->secondaryMaskInventoryManager == 0)	EquipSecondaryMask(Mask::MASK0);
+	else if (app->inventoryManager->secondaryMaskInventoryManager == 1)	EquipSecondaryMask(Mask::MASK1);
+	else if (app->inventoryManager->secondaryMaskInventoryManager == 2)	EquipSecondaryMask(Mask::MASK2);
+	else if (app->inventoryManager->secondaryMaskInventoryManager == 3)	EquipSecondaryMask(Mask::MASK3);
 
 	//Cargar las estadísticas de las máscaras según sus mejoras por nivel
 	maskLevels[Mask::MASK0][Branches::Rama1] = app->inventoryManager->mask0_levelBranch1;
@@ -653,7 +653,7 @@ bool Player::Start() {
 	maskLevels[Mask::MASK3][Branches::Rama4] = app->inventoryManager->mask3_levelBranch4;
 
 
-	
+
 	/*	------------ALEIX------------
 	PARA MEJORAR X RAMA DE X MASCARA SERIA ASI
 
@@ -702,18 +702,18 @@ bool Player::Start() {
 	baseStats.currentHealth = 100 + armorPerLevel[app->inventoryManager->armorLevel];
 	baseStats.attackDamage = 100 + attackDamagePerLevel[app->inventoryManager->swordLevel];
 
-    if (primaryMask != Mask::NOMASK) {
+	if (primaryMask != Mask::NOMASK) {
 		currentStats.maxHealth = baseStats.maxHealth * (1 + maskStats[primaryMask][Branches::Modifiers][maskLevels[primaryMask][Branches::Modifiers]].maxHealthModifier / 100);
 		currentStats.movementSpeed = baseStats.movementSpeed * (1 + maskStats[primaryMask][Branches::Modifiers][maskLevels[primaryMask][Branches::Modifiers]].movementSpeedModifier / 100);
 		currentStats.attackSpeed = baseStats.attackSpeed * (1 + maskStats[primaryMask][Branches::Modifiers][maskLevels[primaryMask][Branches::Modifiers]].attackSpeedModifier / 100);
 		currentStats.attackDamage = baseStats.attackDamage * (1 + maskStats[primaryMask][Branches::Modifiers][maskLevels[primaryMask][Branches::Modifiers]].attackDamageModifier / 100);
- 	}
+	}
 
-    if (secondaryMask == Mask::MASK0) {
+	if (secondaryMask == Mask::MASK0) {
 		currentStats.attackDamage *= (1 + passiveStats[secondaryMask][Branches::Modifiers][maskLevels[secondaryMask][Branches::Modifiers]].damageBoost / 100);
-    }
+	}
 
-	if(app->inventoryManager->currentHealthInventoryManager == NULL) {
+	if (app->inventoryManager->currentHealthInventoryManager == NULL) {
 		currentStats.currentHealth = currentStats.maxHealth;
 	}
 	else currentStats.currentHealth = app->inventoryManager->currentHealthInventoryManager;
@@ -733,14 +733,14 @@ bool Player::Update(float dt)
 	//LOG("Playerpos: x:%d y:%d", position.x, position.y);
 	UpdateStats();
 
-	
+
 
 	if (vacio) {
 		pbodyFoot->body->SetTransform(posInicioPlayer, 0);
 		vacio = false;
 	}
 
-	if(insideVacio && !isDashing){
+	if (insideVacio && !isDashing) {
 		app->entityManager->playerVacio = true;
 		app->entityManager->vacioGameStop = true;
 		app->entityManager->playerCantMove = true;
@@ -795,7 +795,7 @@ bool Player::Update(float dt)
 	if (godmode) { GodMode(dt); }
 	else if (!app->dialogManager->isPlaying) {
 		PlayerMovement(dt);
-		
+
 	}
 	else {
 		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
@@ -804,7 +804,7 @@ bool Player::Update(float dt)
 	CameraMovement(dt);
 
 
-	
+
 	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN && app->hud->HayPocionesDisponibles()) {
 		desiredState = EntityStatePlayer::POCION;
 	}
@@ -898,7 +898,7 @@ bool Player::Update(float dt)
 
 bool Player::PostUpdate() {
 
-	
+
 
 	//printf("Posición: (%d, %d)\n", position.x, position.y);
 
@@ -913,7 +913,7 @@ bool Player::PostUpdate() {
 	}
 	if (currentAnimation == nullptr) { currentAnimation = &idle_player; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-	
+
 	return true;
 }
 
@@ -922,17 +922,17 @@ bool Player::CleanUp()
 {
 	app->inventoryManager->currentHealthInventoryManager = currentStats.currentHealth;
 
-	if(primaryMask == Mask::NOMASK)	app->inventoryManager->primaryMaskInventoryManager = -1;
-	else if(primaryMask == Mask::MASK0) app->inventoryManager->primaryMaskInventoryManager = 0;
-	else if(primaryMask == Mask::MASK1) app->inventoryManager->primaryMaskInventoryManager = 1;
-	else if(primaryMask == Mask::MASK2) app->inventoryManager->primaryMaskInventoryManager = 2;
-	else if(primaryMask == Mask::MASK3) app->inventoryManager->primaryMaskInventoryManager = 3;
+	if (primaryMask == Mask::NOMASK)	app->inventoryManager->primaryMaskInventoryManager = -1;
+	else if (primaryMask == Mask::MASK0) app->inventoryManager->primaryMaskInventoryManager = 0;
+	else if (primaryMask == Mask::MASK1) app->inventoryManager->primaryMaskInventoryManager = 1;
+	else if (primaryMask == Mask::MASK2) app->inventoryManager->primaryMaskInventoryManager = 2;
+	else if (primaryMask == Mask::MASK3) app->inventoryManager->primaryMaskInventoryManager = 3;
 
-	if(secondaryMask == Mask::NOMASK) app->inventoryManager->secondaryMaskInventoryManager = -1;
-	else if(secondaryMask == Mask::MASK0) app->inventoryManager->secondaryMaskInventoryManager = 0;
-	else if(secondaryMask == Mask::MASK1) app->inventoryManager->secondaryMaskInventoryManager = 1;
-	else if(secondaryMask == Mask::MASK2) app->inventoryManager->secondaryMaskInventoryManager = 2;
-	else if(secondaryMask == Mask::MASK3) app->inventoryManager->secondaryMaskInventoryManager = 3;
+	if (secondaryMask == Mask::NOMASK) app->inventoryManager->secondaryMaskInventoryManager = -1;
+	else if (secondaryMask == Mask::MASK0) app->inventoryManager->secondaryMaskInventoryManager = 0;
+	else if (secondaryMask == Mask::MASK1) app->inventoryManager->secondaryMaskInventoryManager = 1;
+	else if (secondaryMask == Mask::MASK2) app->inventoryManager->secondaryMaskInventoryManager = 2;
+	else if (secondaryMask == Mask::MASK3) app->inventoryManager->secondaryMaskInventoryManager = 3;
 
 	app->inventoryManager->mask0_levelBranch1 = maskLevels[Mask::MASK0][Branches::Rama1];
 	app->inventoryManager->mask0_levelBranch2 = maskLevels[Mask::MASK0][Branches::Rama2];
@@ -1055,7 +1055,7 @@ void Player::ResetAnimacion()
 			pocion_player.Reset();
 		}
 	}
-	
+
 }
 
 void Player::DoNothing(float dt)
@@ -1205,13 +1205,16 @@ void Player::Attack(float dt)
 
 void Player::Dead()
 {
-	 die = true;
+	die = true;
+	if (app->entityManager->GetIgory()->playerInFight) {
+		app->entityManager->GetIgory()->playerInFight = false;
+	}
 	if (app->audio->playingMusic == true)
 	{
 		app->audio->StopMusic(0.0f);
 		app->audio->playingMusic = false;
 	}
-	
+
 	if (app->audio->playingDeathFx == false)
 	{
 		app->audio->PlayFx(player_death_fx);
@@ -1223,22 +1226,22 @@ void Player::Dead()
 		blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_SPARK);
 		particulaBlood = true;
 	}
-	
 
-	 //printf("dead");
+
+	//printf("dead");
 	currentAnimation = &dead_player;
 	if (DeadTP && PlayerTimerColdDown(2)) {
 		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_gameover);
 		app->audio->playingDeathFx = false;
 		app->audio->StopFx(-1);
 	}
-	
-	if(!coinsRemoved){
+
+	if (!coinsRemoved) {
 		coinsRemoved = true;
 		app->inventoryManager->monedasObtenidas *= 0.7;
 		printf("Monedas obtenidas: %d\n", app->inventoryManager->monedasObtenidas);
 	}
-	
+
 }
 
 void Player::UnequipMasks() {
@@ -1294,7 +1297,7 @@ void Player::ChangeMask() {
 		EquipPrimaryMask(primaryMask);
 		EquipSecondaryMask(secondaryMask);
 
-        float oldMaxHealth = currentStats.maxHealth;
+		float oldMaxHealth = currentStats.maxHealth;
 
 		currentStats.maxHealth = baseStats.maxHealth * (1 + maskStats[primaryMask][Branches::Modifiers][maskLevels[primaryMask][Branches::Modifiers]].maxHealthModifier / 100);
 
@@ -1461,9 +1464,9 @@ void Player::AreaAttack(float dt) {
 
 	inMaskAtack = true;
 	if (mask1AttackSensor == nullptr) {
-	mask1AttackSensor = app->physics->CreateRectangleSensor(this->position.x, this->position.y, attackMask1Width + attackMask1Width * maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].rangeBallModifier, attackMask1Height + attackMask1Height * maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].rangeBallModifier, DYNAMIC);
-	mask1AttackSensor->ctype = ColliderType::MASK1_ATTACK;
-	mask1AttackSensor->listener = this;
+		mask1AttackSensor = app->physics->CreateRectangleSensor(this->position.x, this->position.y, attackMask1Width + attackMask1Width * maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].rangeBallModifier, attackMask1Height + attackMask1Height * maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].rangeBallModifier, DYNAMIC);
+		mask1AttackSensor->ctype = ColliderType::MASK1_ATTACK;
+		mask1AttackSensor->listener = this;
 	}
 }
 
@@ -1529,7 +1532,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision PLATFORM");
 		break;
 	case ColliderType::VACIOS:
-		if(!insideVacio){
+		if (!insideVacio) {
 			insideVacio = true;
 			//printf("Vacio\n");
 		}
@@ -1639,7 +1642,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		case ColliderType::ENTRADA_MAZMORRA0:
 			LOG("Collision ENTRADA_MAZMORRA0");
 			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra0);
-			if(!app->inventoryManager->dungeon0Entered)
+			if (!app->inventoryManager->dungeon0Entered)
 				app->inventoryManager->dungeon0Entered = true;
 			break;
 		case ColliderType::SALIDA_MAZMORRA0:
@@ -1652,18 +1655,18 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 }
 
 void Player::OnEndCollision(PhysBody* physA, PhysBody* physB) {
-    //Colision general
-    switch (physB->ctype)
-    {
-    case ColliderType::PLATFORM:
-        LOG("Collision PLATFORM");
-        break;
-    case ColliderType::VACIOS:
-        insideVacio = false;
+	//Colision general
+	switch (physB->ctype)
+	{
+	case ColliderType::PLATFORM:
+		LOG("Collision PLATFORM");
+		break;
+	case ColliderType::VACIOS:
+		insideVacio = false;
 		//printf("Exit_Vacio\n");
-        break;
-    /*...*/
-    }
+		break;
+		/*...*/
+	}
 }
 
 void Player::CameraMovement(float dt)
@@ -2363,7 +2366,7 @@ void Player::PlayerMovement(float dt)
 
 	// Calcular la velocidad horizontal y vertical
 
-	if(die == false && desiredState != EntityStatePlayer::POCION){
+	if (die == false && desiredState != EntityStatePlayer::POCION) {
 		fPoint joystick = app->input->GetAxis(MOVE_HORIZONTAL, MOVE_VERTICAL);
 		float horizontalMovement = joystick.x;
 		float verticalMovement = joystick.y;
@@ -2555,7 +2558,7 @@ void Player::TakeDamage(float damage) {
 			isInvisible = false;
 			inAnimation = true;
 			inTakeDMG = true;
-			if(app->audio->playingDeathFx == false) app->audio->PlayTimedFx(player_get_damage_fx, 575);
+			if (app->audio->playingDeathFx == false) app->audio->PlayTimedFx(player_get_damage_fx, 575);
 			printf("Player has received  %f damage\n", damage);
 			damageTimer.Start();
 
@@ -2575,19 +2578,19 @@ void Player::UpdateStats() {
 	baseStats.maxHealth = 100 + armorPerLevel[app->inventoryManager->armorLevel];
 	baseStats.currentHealth = 100 + armorPerLevel[app->inventoryManager->armorLevel];
 	baseStats.attackDamage = 100 + attackDamagePerLevel[app->inventoryManager->swordLevel];
-	
+
 
 	if (changeLife) {
 		baseStats.currentHealth = baseStats.maxHealth;
 		changeLife = false;
 	}
 
-    if (primaryMask != Mask::NOMASK) {
+	if (primaryMask != Mask::NOMASK) {
 		currentStats.maxHealth = baseStats.maxHealth * (1 + maskStats[primaryMask][Branches::Modifiers][maskLevels[primaryMask][Branches::Modifiers]].maxHealthModifier / 100);
 		currentStats.movementSpeed = baseStats.movementSpeed * (1 + maskStats[primaryMask][Branches::Modifiers][maskLevels[primaryMask][Branches::Modifiers]].movementSpeedModifier / 100);
 		currentStats.attackSpeed = baseStats.attackSpeed * (1 + maskStats[primaryMask][Branches::Modifiers][maskLevels[primaryMask][Branches::Modifiers]].attackSpeedModifier / 100);
 		currentStats.attackDamage = baseStats.attackDamage * (1 + maskStats[primaryMask][Branches::Modifiers][maskLevels[primaryMask][Branches::Modifiers]].attackDamageModifier / 100);
- 	}
+	}
 	else {
 		currentStats.maxHealth = baseStats.maxHealth;
 		currentStats.movementSpeed = baseStats.movementSpeed;
@@ -2595,9 +2598,9 @@ void Player::UpdateStats() {
 		currentStats.attackDamage = baseStats.attackDamage;
 	}
 
-    if (secondaryMask == Mask::MASK0) {
+	if (secondaryMask == Mask::MASK0) {
 		currentStats.attackDamage *= (1 + passiveStats[secondaryMask][Branches::Modifiers][maskLevels[secondaryMask][Branches::Modifiers]].damageBoost / 100);
-    }
+	}
 }
 
 
@@ -2614,17 +2617,17 @@ bool Player::PlayerTimerColdDown(float time)
 	}
 }
 
-void Player::SlowDown(float slowFactor){
-    speed *= slowFactor;
-    slowSpeedTimer.Start();
-    isSlowed = true;
+void Player::SlowDown(float slowFactor) {
+	speed *= slowFactor;
+	slowSpeedTimer.Start();
+	isSlowed = true;
 }
 
-void Player::ResetSpeed(){
-    if (isSlowed && slowSpeedTimer.ReadSec() >= 4.5) {
-        speed  = mainSpeed;
-        isSlowed = false;
-    }
+void Player::ResetSpeed() {
+	if (isSlowed && slowSpeedTimer.ReadSec() >= 4.5) {
+		speed = mainSpeed;
+		isSlowed = false;
+	}
 }
 
 //

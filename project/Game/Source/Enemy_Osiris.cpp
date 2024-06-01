@@ -15,6 +15,8 @@
 #include "Physics.h"
 #include "Item_Hueso.h"
 #include "BestiarioManager.h"
+#include "EntityManager.h"
+#include "Boss_Igory.h"
 #include <Optick/include/optick.h>
 #include "Utils.cpp"
 
@@ -190,6 +192,10 @@ bool Enemy_Osiris::PostUpdate() {
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
+
+
+	
+	
 	return true;
 }
 
@@ -321,7 +327,8 @@ void Enemy_Osiris::Die() {
 			app->entityManager->GetPlayer()->maskThreeXP += 40;
 			//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
 		}
-
+		
+		//printf("\n SSS: %d", app->entityManager->GetIgory()->position);
 		if (app->entityManager->GetIgory()->playerInFight) {
 			app->map->DestroyEntity(this);
 		}
@@ -382,6 +389,8 @@ bool Enemy_Osiris::Osirisfinding(float dt, iPoint playerPosP)
 {
 	iPoint playerPos = app->map->WorldToMap(playerPosP.x, playerPosP.y);
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
+	
+
 
 
 	if (dist(playerPos, enemyPos) < viewDistance) {
@@ -389,8 +398,15 @@ bool Enemy_Osiris::Osirisfinding(float dt, iPoint playerPosP)
 		lastPath = *app->map->pathfinding->GetLastPath();
 	}
 	else {
-		app->map->pathfinding->CreatePath(enemyPos, originalPosition); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
-		lastPath = *app->map->pathfinding->GetLastPath();
+		if (app->entityManager->GetIgory()->playerInFight) {
+			app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
+			lastPath = *app->map->pathfinding->GetLastPath();
+		}
+		else
+		{
+			app->map->pathfinding->CreatePath(enemyPos, originalPosition); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
+			lastPath = *app->map->pathfinding->GetLastPath();
+		}
 	}
 
 	b2Vec2 velocity = b2Vec2(0, 0);
