@@ -134,12 +134,52 @@ Quest* QuestManager::FindQuest(QuestLine* questLine, int questID)
 
 bool QuestManager::LoadState(pugi::xml_node node)
 {
-	return false;
+
+	for (pugi::xml_node questLineNode = node.child("questLines").child("questLine"); questLineNode; questLineNode = questLineNode.next_sibling("questLine"))
+	{
+		QuestLine* questLine = FindQuestLine(questLineNode.attribute("id").as_int());
+
+		if (questLine != nullptr) {
+			questLine->questIndex = questLineNode.attribute("index").as_int();
+			questLine->active = questLineNode.attribute("active").as_bool();
+			questLine->completed = questLineNode.attribute("completed").as_bool();
+		}
+
+	}
+
+
+
+	return true;
 }
 
 bool QuestManager::SaveState(pugi::xml_node node)
 {
-	return false;
+
+	pugi::xml_node questLinesNode = node.append_child("questLines");
+
+
+	for (int i = 0; i < questLines.size(); i++){
+		pugi::xml_node questLineNode = questLinesNode.append_child("questLine");
+		questLineNode.append_attribute("id").set_value(questLines.at(i)->questLineID);
+		questLineNode.append_attribute("index").set_value(questLines.at(i)->questIndex);
+		questLineNode.append_attribute("active").set_value(questLines.at(i)->active);
+		questLineNode.append_attribute("completed").set_value(questLines.at(i)->completed);
+
+
+		//for (int j = 0; j < questLines.at(i)->quests.size(); i++) {
+		//	pugi::xml_node questNode = questLineNode.append_child("quest");
+		//	questNode.append_attribute("id").set_value(questLines.at(i)->quests.at(j)->questID);
+		//	questNode.append_attribute("id").set_value(questLines.at(i)->quests.at(j)->questID);
+
+
+		//}
+
+
+	}
+
+
+
+	return true;
 }
 
 
