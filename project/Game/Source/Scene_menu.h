@@ -73,7 +73,9 @@ public:
 	const char* controls_tp = nullptr;
 	const char* coin_tp = nullptr;
 	
-	int coinQuantity;
+	int coinQuantityOne;
+	int coinQuantityTwo;
+	int coinQuantityThree;
 
 	List<GuiControl*> controlsScene;
 	List<GuiControl*> controlsSettings;

@@ -4,6 +4,8 @@
 	<input />
 	<textures />
 	<audio />
+	<:anonymous />
+	<:anonymous>
 		<map />
 		<map>
 			<puzzles>
@@ -17,6 +19,7 @@
 				<puzzle level="7" complete="false" />
 			</puzzles>
 		</map>
+	</:anonymous>
 	<pueblo_tutorial />
 	<entitymanager>
 		<entity_manager>
@@ -28,7 +31,7 @@
 	<menu />
 	<iventorymanager>
 		<inventory>
-			<money quantity="0" />
+			<money quantity="6543" />
 			<SwordLevel quantity="0" />
 			<ArmorLevel quantity="0" />
 			<PrimaryMask quantity="-1" />
