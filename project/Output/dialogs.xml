@@ -2096,6 +2096,9 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 		</sentences>
 	</dialog>
 
+	
+	
+	
 
 	<dialog id="1101" texturepath="Assets/Textures/Interfaz/Dialogos/Jakhov.png">
 		<sentences>
@@ -2105,35 +2108,11 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 
 			<sentence name="?????"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
-			text="¿Cómo que qué soy? Si me has cogido tú chaval."/>
+			text="Quién es el que osa despertarnos, hace décadas que nadie nos molesta, aún estás a tiempo de salir corriendo y volver a casa, pero si sigues adelante nadie sabe lo que puede pasar."/>
 
 			<sentence name="Jakhov"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
-			text="¿Tú eres el artefacto lleno de poder del que hablaba mi padre?"/>
-
-			<sentence name="Dinka"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
-			text="¿Artefacto lleno de poder? Un respeto, que me llamo Dinka. Pero sí, tu padre debía ser muy sabio, tengo mucho poder."/>
-
-			<sentence name="Jakhov"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
-			text="¿Y que clase de poder tienes?"/>
-
-			<sentence name="Dinka"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
-			text="Si pulsas la tecla J lo verás... Aunque... ¿Tú sabes que hago aquí? Lo último que recuerdo es entrar a las 'Mazmorras'..."/>
-
-			<sentence name="Jakhov"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
-			text="¿Que es eso de las mazmorras? ¿Te refieres a este lugar?"/>
-
-			<sentence name="Dinka"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
-			text="..."/>
-
-			<sentence name="Jakhov"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
-			text="¿Me oyes...? Parece que ya no contesta..."/>
+			text="¿Tú eres el artefacto lleno de poder del que hablaba mi padre? ¿Me oyes...? Parece que ya no contesta..."/>
 		</sentences>
 	</dialog>
 
@@ -2141,39 +2120,15 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 		<sentences>
 			<sentence name="Jakhov"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
-			text="¿H-hola? ¿Qué es esto?"/>
+			text="¿Otra máscara más?"/>
 
 			<sentence name="?????"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
-			text="¿Cómo que qué soy? Si me has cogido tú chaval."/>
+			text="Eres más fuerte de lo que pensaba, nadie había llegado solo hasta aquí. Únete a mí y juntos seremos más que ellos."/>
 
 			<sentence name="Jakhov"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
-			text="¿Tú eres el artefacto lleno de poder del que hablaba mi padre?"/>
-
-			<sentence name="Dinka"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
-			text="¿Artefacto lleno de poder? Un respeto, que me llamo Dinka. Pero sí, tu padre debía ser muy sabio, tengo mucho poder."/>
-
-			<sentence name="Jakhov"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
-			text="¿Y que clase de poder tienes?"/>
-
-			<sentence name="Dinka"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
-			text="Si pulsas la tecla J lo verás... Aunque... ¿Tú sabes que hago aquí? Lo último que recuerdo es entrar a las 'Mazmorras'..."/>
-
-			<sentence name="Jakhov"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
-			text="¿Que es eso de las mazmorras? ¿Te refieres a este lugar?"/>
-
-			<sentence name="Dinka"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
-			text="..."/>
-
-			<sentence name="Jakhov"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
-			text="¿Me oyes...? Parece que ya no contesta..."/>
+			text="¿Ellos? ¿Quiénes son ellos? ¿Me oyes? No contesta..."/>
 		</sentences>
 	</dialog>
 
@@ -2181,39 +2136,15 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 		<sentences>
 			<sentence name="Jakhov"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
-			text="¿H-hola? ¿Qué es esto?"/>
+			text="¿Otra máscara más? No sé si podré cargar con todas..."/>
 
 			<sentence name="?????"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
-			text="¿Cómo que qué soy? Si me has cogido tú chaval."/>
+			text="Carne fresca al fin, empezaba a estar cansado del otro cuerpo, seguro que tú me saciarás."/>
 
 			<sentence name="Jakhov"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
-			text="¿Tú eres el artefacto lleno de poder del que hablaba mi padre?"/>
-
-			<sentence name="Dinka"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
-			text="¿Artefacto lleno de poder? Un respeto, que me llamo Dinka. Pero sí, tu padre debía ser muy sabio, tengo mucho poder."/>
-
-			<sentence name="Jakhov"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
-			text="¿Y que clase de poder tienes?"/>
-
-			<sentence name="Dinka"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
-			text="Si pulsas la tecla J lo verás... Aunque... ¿Tú sabes que hago aquí? Lo último que recuerdo es entrar a las 'Mazmorras'..."/>
-
-			<sentence name="Jakhov"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
-			text="¿Que es eso de las mazmorras? ¿Te refieres a este lugar?"/>
-
-			<sentence name="Dinka"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
-			text="..."/>
-
-			<sentence name="Jakhov"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
-			text="¿Me oyes...? Parece que ya no contesta..."/>
+			text="¿Otro cuerpo? ¿Carne fresca? No entiendo nada... Y de nuevo no contesta..."/>
 		</sentences>
 	</dialog>
 
@@ -2221,43 +2152,18 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 		<sentences>
 			<sentence name="Jakhov"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
-			text="¿H-hola? ¿Qué es esto?"/>
+			text="¿Otra máscara más? Con esta van cuatro... ¿Cuándo terminará?"/>
 
 			<sentence name="?????"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
-			text="¿Cómo que qué soy? Si me has cogido tú chaval."/>
+			text="Gracias a nosotros te has vuelto más fuerte, recuerda que todas las acciones tienen sus consecuencias, esperamos que tomes la correcta."/>
 
 			<sentence name="Jakhov"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
-			text="¿Tú eres el artefacto lleno de poder del que hablaba mi padre?"/>
-
-			<sentence name="Dinka"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
-			text="¿Artefacto lleno de poder? Un respeto, que me llamo Dinka. Pero sí, tu padre debía ser muy sabio, tengo mucho poder."/>
-
-			<sentence name="Jakhov"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
-			text="¿Y que clase de poder tienes?"/>
-
-			<sentence name="Dinka"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
-			text="Si pulsas la tecla J lo verás... Aunque... ¿Tú sabes que hago aquí? Lo último que recuerdo es entrar a las 'Mazmorras'..."/>
-
-			<sentence name="Jakhov"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
-			text="¿Que es eso de las mazmorras? ¿Te refieres a este lugar?"/>
-
-			<sentence name="Dinka"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
-			text="..."/>
-
-			<sentence name="Jakhov"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
-			text="¿Me oyes...? Parece que ya no contesta..."/>
+			text="¿La decisión correcta? ¿Qué decisión será...?"/>
 		</sentences>
 	</dialog>
-
-
+	
 	<!--Padre-->
 	<dialog id="2001" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/abuela.png" name="Vhea">
 		<sentences>
