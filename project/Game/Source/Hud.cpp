@@ -223,8 +223,6 @@ bool Hud::PostUpdate()
 
 
 	// Barra de vida
-	app->render->DrawTexture(hudTexture, 170, 40, SDL_FLIP_NONE, rectFondoBarraVida, 0);
-
 	int rectW = rectFondoBarraVida->w;
 	rectW = (rectFondoBarraVida->w * app->entityManager->GetPlayer()->currentStats.currentHealth) / app->entityManager->GetPlayer()->currentStats.maxHealth;
 
@@ -234,11 +232,13 @@ bool Hud::PostUpdate()
 	if (isLowHealth) {
 		blinkCounter++;
 		if (blinkCounter % blinkSpeed < blinkSpeed / 2) {
-			app->render->DrawTexture(hudTexture, 175, 44, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
+			app->render->DrawTexture(hudTexture, 173, 42, 1.02, SDL_FLIP_NONE, rectFondoBarraVida, 0);
+			app->render->DrawTexture(hudTexture, 177, 46, 1.02, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
 		}
 	}
 	else {
-		app->render->DrawTexture(hudTexture, 175, 44, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
+		app->render->DrawTexture(hudTexture, 173, 42, SDL_FLIP_NONE, rectFondoBarraVida, 0);
+		app->render->DrawTexture(hudTexture, 177, 46, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
 	}
 
 	//Monedas
