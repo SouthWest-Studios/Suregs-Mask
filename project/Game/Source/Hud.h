@@ -60,6 +60,8 @@ private:
 	SDL_Texture* hudTexture;
 	SDL_Texture* messageTexture;
 	SDL_Texture* cdPrimaryMaskTexture;
+	int rectYPrimaryMask;
+	int rectYSecondaryMask;
 	SDL_Texture* cdSecondaryMaskTexture;
 	int cantidadMonedas = 0;
 
@@ -104,6 +106,8 @@ private:
 
 	std::vector<Acquired_Item*> acquired_Items;
 	int acuiredItemLifeTimeMS = 1500;
+
+	int monedasObtenidasHud = 0;
 
 public:
 

@@ -7,6 +7,7 @@
 #include "List.h"
 #include "Textures.h"
 
+
 class InventoryManager : public Module
 {
 public:
@@ -93,6 +94,27 @@ public:
 	int primaryMaskInventoryManager = -1;
 	int secondaryMaskInventoryManager = -1;
 
+	int mask0_levelBranch1 = 0;
+	int mask0_levelBranch2 = 0;
+	int mask0_levelBranch3 = 0;
+	int mask0_levelBranch4 = 0;
+
+	int mask1_levelBranch1 = 0;
+	int mask1_levelBranch2 = 0;
+	int mask1_levelBranch3 = 0;
+	int mask1_levelBranch4 = 0;
+
+	int mask2_levelBranch1 = 0;
+	int mask2_levelBranch2 = 0;
+	int mask2_levelBranch3 = 0;
+	int mask2_levelBranch4 = 0;
+
+	int mask3_levelBranch1 = 0;
+	int mask3_levelBranch2 = 0;
+	int mask3_levelBranch3 = 0;
+	int mask3_levelBranch4 = 0;
+
+
 	int numMasks = 0;
 	bool mask = false;
 private:
@@ -106,6 +128,8 @@ private:
 
 	Animation* currentPointerAnimation = nullptr;
 	Animation pointerAnim;
+
+	int change_inventory_mark_fx;
 
 };
 

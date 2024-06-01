@@ -48,3 +48,35 @@ inline std::vector<int> splitToInts(const std::string& s, char delimiter) {
     }
     return tokens;
 }
+
+
+inline float easeOutBounce(float t) {
+    if (t < 1 / 2.75) {
+        return 7.5625 * t * t;
+    }
+    else if (t < 2 / 2.75) {
+        t -= 1.5 / 2.75;
+        return 7.5625 * t * t + 0.75;
+    }
+    else if (t < 2.5 / 2.75) {
+        t -= 2.25 / 2.75;
+        return 7.5625 * t * t + 0.9375;
+    }
+    else {
+        t -= 2.625 / 2.75;
+        return 7.5625 * t * t + 0.984375;
+    }
+}
+
+inline float easeOutElastic(float t) {
+    float c4 = (2 * M_PI) / 3;
+    return t == 0 ? 0 : t == 1 ? 1 : pow(2, -10 * t) * sin((t * 10 - 0.75) * c4) + 1;
+}
+
+inline float linear(float t) { return t; }
+inline float easeInQuad(float t) { return t * t; }
+inline float easeInCubic(float t) { return t * t * t;}
+inline float easeOutQuad(float t) { return t * (2 - t); }
+inline float easeOutCubic(float t) { t--; return t * t * t + 1;}
+inline float easeInOutQuad(float t) { return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; }
+inline float easeInOutCubic(float t) { return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1; }

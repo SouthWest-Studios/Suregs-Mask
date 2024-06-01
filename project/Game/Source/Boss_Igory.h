@@ -96,6 +96,9 @@ public:
 
 	Timer timerRecibirDanioColor;
 
+	//Start
+	bool playerInFight = true;
+
 private:
 	pugi::xml_document configFile;
 	pugi::xml_node configNode;
@@ -111,7 +114,9 @@ private:
 	Animation atqCargado_fase1_boss_Igory;
 	Animation walk_boss_Igory;
 	Animation cura_boss_Igory;
-	Animation dash_boss_Igory;
+	Animation dash_idle_boss_Igory;
+	Animation dash_inDashi_boss_Igory;
+	Animation dash_DashiAtq_boss_Igory;
 	Animation atq1_boss_Igory;
 	Animation geneSure_boss_Igory;
 	Animation idle_boss_Igory;
@@ -146,8 +151,7 @@ private:
 
 	FASE_Igory fase;
 
-	//Start
-	bool playerInFight = true;
+	
 
 
 	//ataque
@@ -176,6 +180,30 @@ private:
 
 	//Takehit
 	bool inTakeHit = false;
+
+	//ataqueDashi
+	int atqDashQuali = 0;
+	bool inAtqDashi = false;
+	bool inIdleDashi = false;
+	bool inDashDashi = false;
+	bool inAtaqueDashi = false;
+	bool empujaPlayer = false;
+	int fuerzaHabilidadEmpuje = 300;
+	iPoint getPlayerPosition;
+	Timer inDashiTime;
+	Timer habilidadEmpujeTimer;
+
+	//Curar
+	bool inCurar = false;
+	bool goCurar = false;
+	bool shieldBroken = false;
+	float shield = 500;
+	bool stun = false;
+	Timer curaTimer;
+	Timer shieldTimer;
+	Timer healTimer;
+	Timer stunTimer;
+
 
 	//Veneno
 	float poisonTimer = 0.0f; // Tiempo desde que se aplic� el veneno

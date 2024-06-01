@@ -1,4 +1,4 @@
-#include "Enemy_Osiris.h"
+#include "Enemy_Guerrero.h"
 #include "Player.h"
 #include "App.h"
 #include "Textures.h"
@@ -22,8 +22,8 @@
  
 
 
-Enemy_Osiris::Enemy_Osiris() : Entity(EntityType::ENEMY_OSIRIS){
-	name = ("osiris");
+Enemy_Guerrero::Enemy_Guerrero() : Entity(EntityType::ENEMY_GUERRERO){
+	name = ("guerrero");
 
 	state = EntityState_Enemy::IDLE;
 	nextState = EntityState_Enemy::IDLE;
@@ -33,16 +33,16 @@ Enemy_Osiris::Enemy_Osiris() : Entity(EntityType::ENEMY_OSIRIS){
 
 }
 
-Enemy_Osiris::~Enemy_Osiris() {
+Enemy_Guerrero::~Enemy_Guerrero() {
 
 }
 
-bool Enemy_Osiris::Awake() {
+bool Enemy_Guerrero::Awake() {
 
 	return true;
 }
 
-bool Enemy_Osiris::Start() {
+bool Enemy_Guerrero::Start() {
 
 	OPTICK_EVENT();
 	//position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
@@ -53,14 +53,8 @@ bool Enemy_Osiris::Start() {
 	Photowidth = config.attribute("Pwidth").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
-	idleAnim.LoadAnim("osiris", "idleAnim", spritePositions);
-	runAnim.LoadAnim("osiris", "runAnim", spritePositions);
-	attackAnim.LoadAnim("osiris", "attackAnim", spritePositions);
-	dieAnim.LoadAnim("osiris", "dieAnim", spritePositions);
-	takeDamageAnim.LoadAnim("osiris", "takeDamagekAnim", spritePositions);
-	reviveAnim.LoadAnim("osiris", "reviveAnim", spritePositions);
-
-
+	runAnim.LoadAnim("guerrero", "runAnim", spritePositions);
+	attackAnim.LoadAnim("guerrero", "attackAnim", spritePositions);
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
@@ -102,34 +96,21 @@ bool Enemy_Osiris::Start() {
 	return true;
 }
 
-bool Enemy_Osiris::Update(float dt)
+bool Enemy_Guerrero::Update(float dt)
 {
 	OPTICK_EVENT();
-	//printf("\nEnemy_Osiris");
+	//printf("\nEnemy_Guerrero");
 	//Pone el sensor del cuerpo en su posicion
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
 
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
 
-
-	if (health <= 0)
-	{
-		
-		if (currentState == EntityState_Enemy::DEAD) {
-			desiredState = EntityState_Enemy::REVIVING;
-		}
-		else
-		{
-			desiredState = EntityState_Enemy::DEAD;
-		}
-		
-	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance*32)
+	if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance*80)
 	{
 		desiredState = EntityState_Enemy::ATTACKING;
 	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance*32)
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance*80)
 	{
 		desiredState = EntityState_Enemy::RUNNING;
 	}
@@ -141,18 +122,15 @@ bool Enemy_Osiris::Update(float dt)
 	
 	stateMachine(dt, playerPos);
 
-	//VENENO <----------
-	CheckPoison();
-	//VENENO ---------->
-
 	currentAnimation->Update();
 	return true;
 }
 
 
-bool Enemy_Osiris::PostUpdate() {
+bool Enemy_Guerrero::PostUpdate() {
 
-	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
+
+	if (currentAnimation == nullptr) { currentAnimation = &runAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
 
@@ -166,12 +144,11 @@ bool Enemy_Osiris::PostUpdate() {
 	}
 
 
-
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 50, position.y - 95, 0.7f, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x - 95, position.y - 85, 0.4f, SDL_FLIP_NONE, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 85, position.y - 95, 0.7f, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 75, position.y - 85, 0.4f, SDL_FLIP_HORIZONTAL, &rect);
 	}
 
 
@@ -194,7 +171,7 @@ bool Enemy_Osiris::PostUpdate() {
 }
 
 
-bool Enemy_Osiris::CleanUp()
+bool Enemy_Guerrero::CleanUp()
 {
 	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 	app->physics->GetWorld()->DestroyBody(pbodySensor->body);
@@ -207,23 +184,16 @@ bool Enemy_Osiris::CleanUp()
 	return true;
 }
 
-void Enemy_Osiris::DoNothing(float dt)
-{
-	currentAnimation = &idleAnim;
-	//printf("Osiris idle");
-	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 
-}
-
-void Enemy_Osiris::Chase(float dt, iPoint playerPos)
+void Enemy_Guerrero::Chase(float dt, iPoint playerPos)
 {
 	//printf("Osiris chasing");
 	currentAnimation = &runAnim;
-	Osirisfinding(dt, playerPos);
+	Guerrerofinding(dt, playerPos);
 
 }
 
-void Enemy_Osiris::Attack(float dt)
+void Enemy_Guerrero::Attack(float dt)
 {
 	//printf("Osiris attacking");
 	currentAnimation = &attackAnim;	
@@ -232,20 +202,8 @@ void Enemy_Osiris::Attack(float dt)
 	//sonido ataque
 }
 
-void Enemy_Osiris::Die() {
+void Enemy_Guerrero::Die() {
 
-	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
-	currentAnimation = &dieAnim;
-	
-	
-
-	if (!hasRevived)
-	{
-		desiredState = EntityState_Enemy::REVIVING;
-		Revive();
-	}
-	else
-	{
 		app->audio->PlayFx(osiris_death_fx);
 
 		app->entityManager->DestroyEntity(this);
@@ -257,107 +215,12 @@ void Enemy_Osiris::Die() {
 		if (parseResult) {
 			configNode = configFile.child("config");
 		}
-		float randomValue = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
 
-		// Determina si el �tem debe crearse basado en un 30% de probabilidad
-		if (randomValue <= 0.25f) {
-			Item_Hueso* hueso = (Item_Hueso*)app->entityManager->CreateEntity(EntityType::ITEM_HUESO);
-			hueso->config = configNode.child("entities_data").child("item_hueso");
-			hueso->position = iPoint(position.x, position.y);
-			hueso->Start();
-		}
-		
-			app->bestiarioManager->CreateItem("osiris");
-			
-		
-		//Mask 0
-		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
-		{
-			app->entityManager->GetPlayer()->maskZeroXP += 40;
-			//printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
-		}
-
-		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK0)
-		{
-			app->entityManager->GetPlayer()->maskZeroXP += 40;
-			//printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
-		}
-
-		//Mask 1
-		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK1)
-		{
-			app->entityManager->GetPlayer()->maskOneXP += 40;
-			//printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
-		}
-
-		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK1)
-		{
-			app->entityManager->GetPlayer()->maskOneXP += 40;
-			//printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
-		}
-
-		//Mask 2
-		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK2)
-		{
-			app->entityManager->GetPlayer()->maskTwoXP += 40;
-			//printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
-		}
-
-		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK2)
-		{
-			app->entityManager->GetPlayer()->maskTwoXP += 40;
-			//printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
-		}
-
-		//Mask 3
-		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK3)
-		{
-			app->entityManager->GetPlayer()->maskThreeXP += 40;
-			//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
-		}
-
-		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK3)
-		{
-			app->entityManager->GetPlayer()->maskThreeXP += 40;
-			//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
-		}
-
-		if (app->entityManager->GetIgory()->playerInFight) {
-			app->map->DestroyEntity(this);
-		}
-		
-	}
-
-}
-
-void Enemy_Osiris::Revive()
-{
-	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
-	currentAnimation = &reviveAnim;
-	if (!tempo)
-	{
-		reviveTimer.Start();
-		tempo = true;
-		isReviving = true;
-	}
-
-	if (reviveTimer.CountDown(4) <= 0)
-	{
-
-		health = maxHealth;
-		hasRevived = true;
-		isReviving = false;
-		//currentState = EntityState_Enemy::IDLE;
-		desiredState = EntityState_Enemy::IDLE;
-
-		return;
-	}
-	desiredState = EntityState_Enemy::REVIVING;
 }
 
 
 // L07 DONE 6: Define OnCollision function for the player. 
-void Enemy_Osiris::OnCollision(PhysBody* physA, PhysBody* physB) {
+void Enemy_Guerrero::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 	case ColliderType::PLATFORM:
@@ -378,7 +241,7 @@ void Enemy_Osiris::OnCollision(PhysBody* physA, PhysBody* physB) {
 	}
 }
 
-bool Enemy_Osiris::Osirisfinding(float dt, iPoint playerPosP)
+bool Enemy_Guerrero::Guerrerofinding(float dt, iPoint playerPosP)
 {
 	iPoint playerPos = app->map->WorldToMap(playerPosP.x, playerPosP.y);
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
@@ -428,36 +291,24 @@ bool Enemy_Osiris::Osirisfinding(float dt, iPoint playerPosP)
 	return true;
 }
 
-float Enemy_Osiris::GetHealth() const {
+float Enemy_Guerrero::GetHealth() const {
 	return health;
 }
 
-void Enemy_Osiris::TakeDamage(float damage) {
+void Enemy_Guerrero::TakeDamage(float damage) {
 
-	if (currentState != EntityState_Enemy::DEAD && invulnerabilityTimer.ReadMSec() >= 500) {
-		health -= damage;
-		invulnerabilityTimer.Start();
-		timerRecibirDanioColor.Start();
+	invulnerabilityTimer.Start();
+	timerRecibirDanioColor.Start();
 
-		printf("Enemy_Osiris has received  %f damage\n", damage);
-		if (currentState == EntityState_Enemy::REVIVING) {
-			if (!hasRevived) {
-				hasRevived = true;
-			}
-		}
 		
-	}
 	app->audio->PlayFx(osiris_get_damage_fx);
 }
 
-void Enemy_Osiris::stateMachine(float dt, iPoint playerPos)
+void Enemy_Guerrero::stateMachine(float dt, iPoint playerPos)
 {
 	//printf("\ncurrentState: %d, desiredState: %d", static_cast<int>(currentState), static_cast<int>(desiredState));
 	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
 	switch (nextState) {
-	case EntityState_Enemy::IDLE:
-		DoNothing(dt);
-		break;
 	case EntityState_Enemy::RUNNING:
 		Chase(dt, playerPos);
 		break;
@@ -466,9 +317,6 @@ void Enemy_Osiris::stateMachine(float dt, iPoint playerPos)
 		break;
 	case EntityState_Enemy::DEAD:
 		Die();
-		break;
-	case EntityState_Enemy::REVIVING:
-		Revive();
 		break;
 	case EntityState_Enemy::DASHI:
 		break;
@@ -484,53 +332,7 @@ void Enemy_Osiris::stateMachine(float dt, iPoint playerPos)
 
 }
 
-
-//VENENO <----------
-void Enemy_Osiris::ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate) {
-	this->poisonDamage = poisonDamage;
-	this->poisonDuration = poisonDuration;
-	this->poisonTickRate = poisonTickRate;
-	
-	this->poisoned = true;
-	this->firstTimePoisonRecibed = true;
-
-	poisonTimer.Start();
-	poisonTickTimer.Start();
-
-
-}
-
-void Enemy_Osiris::CheckPoison() {
-	float epsilon = 0.1f; //Para margen de error
-
-    // Aplicar el primer tick de daño inmediatamente (si no, el primer tick no se aplica en el segundo 0.0)
-	if(firstTimePoisonRecibed) {
-		if (currentState != EntityState_Enemy::DEAD) {
-			health -= poisonDamage;
-			invulnerabilityTimer.Start();
-			timerRecibirDanioColor.Start();
-
-			printf("Enemy_Osiris has received  %f damage of poison\n", poisonDamage);
-		}
-		firstTimePoisonRecibed = false;
-	}
-
-	if (poisonTimer.ReadSec() <= poisonDuration + epsilon && poisoned) {
-        if (poisonTickTimer.ReadSec() >= poisonTickRate) {
-            poisonTickTimer.Start(); // Reiniciar el temporizador de ticks de veneno
-            if (currentState != EntityState_Enemy::DEAD) {
-                health -= poisonDamage;
-                invulnerabilityTimer.Start();
-                timerRecibirDanioColor.Start();
-
-                printf("Enemy_Osiris has received  %f damage of poison\n", poisonDamage);
-            }
-        }
-    }
-}
-//VENENO ---------->
-
-MapObject* Enemy_Osiris::GetCurrentRoom()
+MapObject* Enemy_Guerrero::GetCurrentRoom()
 {
 	//salas pequeñas
 	for (ListItem<MapObject*>* item = app->map->smallRoomsList.start; item != nullptr; item = item->next)

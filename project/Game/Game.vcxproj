@@ -114,6 +114,7 @@
     <ClCompile Include="Source\DebugConsole.cpp" />
     <ClCompile Include="Source\DialogManager.cpp" />
     <ClCompile Include="Source\DialogTriggerEntity.cpp" />
+    <ClCompile Include="Source\Enemy_Guerrero.cpp" />
     <ClCompile Include="Source\Enemy_Khurt.cpp" />
     <ClCompile Include="Source\Enemy_Khurt_Variation.cpp" />
     <ClCompile Include="Source\Enemy_Muur.cpp" />
@@ -170,6 +171,7 @@
     <ClCompile Include="Source\Enemy_Osiris.cpp" />
     <ClCompile Include="Source\ModuleParticles.cpp" />
     <ClCompile Include="Source\NotesManager.cpp" />
+    <ClCompile Include="Source\NPC_Abuela.cpp" />
     <ClCompile Include="Source\NPC_Abuelitas.cpp" />
     <ClCompile Include="Source\NPC_Abuelito.cpp" />
     <ClCompile Include="Source\NPC_Abuelo.cpp" />
@@ -238,6 +240,7 @@
     <ClInclude Include="Source\DialogManager.h" />
     <ClInclude Include="Source\DialogTriggerEntity.h" />
     <ClInclude Include="Source\DiamanteInv.h" />
+    <ClInclude Include="Source\Enemy_Guerrero.h" />
     <ClInclude Include="Source\Enemy_Khurt.h" />
     <ClInclude Include="Source\Enemy_Khurt_Variation.h" />
     <ClInclude Include="Source\Enemy_Muur.h" />
@@ -297,6 +300,7 @@
     <ClInclude Include="Source\ModuleParticles.h" />
     <ClInclude Include="Source\Note.h" />
     <ClInclude Include="Source\NotesManager.h" />
+    <ClInclude Include="Source\NPC_Abuela.h" />
     <ClInclude Include="Source\NPC_Abuelitas.h" />
     <ClInclude Include="Source\NPC_Abuelito.h" />
     <ClInclude Include="Source\NPC_Abuelo.h" />

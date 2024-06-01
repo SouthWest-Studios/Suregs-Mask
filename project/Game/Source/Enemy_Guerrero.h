@@ -1,5 +1,5 @@
-#ifndef __ENEMY_OSIRIS_VARIATION_H__
-#define __ENEMY_OSIRIS_VARIATION_H__
+#ifndef __ENEMY_GUERRERO_H__
+#define __ENEMY_GUERRERO_H__
 
 
 #include "Entity.h"
@@ -11,23 +11,23 @@
 #include "Physics.h"
 
 struct SDL_Texture;
+ 
 
-
-struct Branch_Osiris_Variation {
+struct Branch_Guerrero {
 	enum EntityState_Enemy const next_state;
-	Branch_Osiris_Variation(EntityState_Enemy next) : next_state(next) {}
+	Branch_Guerrero(EntityState_Enemy next) : next_state(next) {}
 };
 
 
-class Enemy_Osiris_Variation : public Entity
+class Enemy_Guerrero : public Entity
 {
 
 
 public:
 
-	Enemy_Osiris_Variation();
+	Enemy_Guerrero();
 
-	virtual ~Enemy_Osiris_Variation();
+	virtual ~Enemy_Guerrero();
 
 	bool Awake();
 
@@ -39,12 +39,10 @@ public:
 
 	bool CleanUp();
 
-	void DoNothing(float dt);
 	void Chase(float dt, iPoint playerPos);
 	void Attack(float dt);
 	void Die();
-	void Revive();
-	bool Osirisfinding(float dt, iPoint playerPos);
+	bool Guerrerofinding(float dt, iPoint playerPos);
 
 	// L07 DONE 6: Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
@@ -54,11 +52,6 @@ public:
 	float GetHealth() const;
 	void TakeDamage(float damage);
 	void stateMachine(float dt, iPoint playerPos);
-
-	//VENENO <----------
-	void ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate);
-	void CheckPoison();
-	//VENENO ---------->
 
 	MapObject* GetCurrentRoom();
 
@@ -81,36 +74,20 @@ public:
 
 	bool isFacingLeft = false;
 	Animation* currentAnimation = nullptr;
-	//Revivir
 
-
+	
 
 private:
 	pugi::xml_document configFile;
 	pugi::xml_node configNode;
-
-
-	Animation idleAnim;
+	
 	Animation runAnim;
 	Animation attackAnim;
-	Animation dieAnim;
-	Animation takeDamageAnim;
-	Animation reviveAnim;
-
 
 	int osiris_get_damage_fx;
 	int osiris_death_fx;
 
-
 	iPoint originalPosition;
-
-	bool isDead = false;
-	bool isReviving = false;
-	bool hasRevived = false;
-	bool tempo = false;
-	Timer reviveTimer;
-
-	const float reviveTime = 5.0f;
 
 	int TSprite;
 	int SpriteX;
@@ -124,25 +101,14 @@ private:
 
 	EntityState_Enemy state;
 
+	Timer timerRecibirDanioColor;
 
 	Animation SPosition;
 	SDL_Rect* spritePositions;
 
-	Timer timerRecibirDanioColor;
-
-	//VENENO <----------
-	bool firstTimePoisonRecibed = false;
-	Timer poisonTimer;
-	Timer poisonTickTimer;
-	float poisonDuration = 0.0f; // Duraci�n total del veneno
-	float poisonTickRate = 0.0f; // Tiempo entre cada tick de da�o de veneno
-	float poisonDamage = 0.0f; // Da�o de veneno por tick
-	bool poisoned = false;
-	//VENENO ---------->
-
 public:
 
-	Branch_Osiris_Variation transitionTable[static_cast<int>(EntityState_Enemy::STATE_COUNT)][static_cast<int>(EntityState_Enemy::STATE_COUNT)] = {
+	Branch_Guerrero transitionTable[static_cast<int>(EntityState_Enemy::STATE_COUNT)][static_cast<int>(EntityState_Enemy::STATE_COUNT)] = {
 		//		IDLE						RUNNING								ATTACKING					DEAD						REVIVING							DASHI						NONE
 		{ {EntityState_Enemy::IDLE}, {EntityState_Enemy::RUNNING}, {EntityState_Enemy::ATTACKING}, {EntityState_Enemy::DEAD}, {EntityState_Enemy::NONE}, {EntityState_Enemy::NONE}, {EntityState_Enemy::IDLE}}, // IDLE
 		{ {EntityState_Enemy::IDLE}, {EntityState_Enemy::RUNNING}, {EntityState_Enemy::ATTACKING}, {EntityState_Enemy::DEAD}, {EntityState_Enemy::NONE}, {EntityState_Enemy::NONE}, {EntityState_Enemy::IDLE}}, // RUNNING
@@ -161,5 +127,4 @@ public:
 
 
 
-
-#endif // __ENEMY_OSIRIS_VARIATION_H__
+#endif // __ENEMY_GUERRERO_H__

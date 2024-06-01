@@ -47,6 +47,7 @@
       <select_fx path="Assets/Audio/Fx/UI/select_fx.wav"/>
       <inventory_fx path="Assets/Audio/Fx/UI/inventory_fx.wav"/>
       <change_inventory_fx path="Assets/Audio/Fx/UI/change_inventory_fx.wav"/>
+      <change_inventory_mark_fx path="Assets/Audio/Fx/UI/change_inventory_mark_fx.wav"/>
       <level_up_fx path=""/>
       <get_item_fx path="Assets/Audio/Fx/UI/get_item_fx.wav"/>
       <sell_item_fx path="Assets/Audio/Fx/UI/sell_item_fx.wav"/>
@@ -153,13 +154,17 @@
             -->
 		<player texturePath="Assets/Textures/Entidades/Jugador/textura_player.png" Tsprite="82" Pwidth="2400" sprite_x="300" sprite_y="240"/>
 
+		<guerrero texturePath="Assets/Textures/Entidades/Guerrero/spritesheet_guerrero.png"
+				maxHealth="999999999.0f" speed="2.5f" attackDamage="90.0f" attackDistance="2" viewDistance="30"
+				Tsprite="15" Pwidth="4500" sprite_x="500" sprite_y="296"/>
+
 		<osiris texturePath="Assets/Textures/Entidades/Osiris/spritesheet_osiris.png" 
 				maxHealth="250.0f" speed="2.5f" attackDamage="50.0f" attackDistance="2" viewDistance="20"
 				Tsprite="66" Pwidth="2728" sprite_x="248" sprite_y="200"/>
 
 		<osiris_variation texturePath="Assets/Textures/Entidades/Osiris/spritesheet_osiris.png"
 				maxHealth="340.0f" speed="3.3f" attackDamage="200.0f" secondAttackDamage="230.0f" attackDistance="2" viewDistance="20"
-				Tsprite="65" Pwidth="2729" sprite_x="246" sprite_y="200"/>
+				Tsprite="66" Pwidth="2728" sprite_x="248" sprite_y="200"/>
 
 		<ols texturePath="Assets/Textures/Entidades/Ols/animations/spritesheets/spritesheet_ols.png" 
 				texturePathProjectile="Assets/Textures/Entidades/Ols/Projectile.png"
@@ -205,7 +210,7 @@
 
 		<boss_surma texturePath="Assets/Textures/Entidades/Boss/Surma/texture_boss_surma.png"
 					maxHealth="13000.0f" speed="180f" speedSecondFase="210f" attackDamage="250.0f"  attackDistance="3" viewDistance="40"
-					Tsprite="36" Pwidth="1388" sprite_x="347" sprite_y="231"/>
+					Tsprite="56" Pwidth="7432" sprite_x="347" sprite_y="231"/>
 
 		<item_rubi					texturePath="Assets/Textures/Entidades/Items/textura_rubi.png"					description="Mineral robusto extremadamente resistente."			type ="Material" name="Rubí"/>
 		<item_diamante				texturePath="Assets/Textures/Entidades/Items/texture_diamond.png"				description="Mineral con increíbles propiedades para el combate."				type ="Material" name="Diamante"/>
@@ -293,6 +298,7 @@
 		<npc_mujer_enamorada texturePath="Assets/Textures/Entidades/NPCs/Idle/enamorada.png"	Tsprite="6" Pwidth="787" sprite_x="131" sprite_y="250"/>
 		<npc_enamorados texturePath="Assets/Textures/Entidades/NPCs/Idle/enamorados.png"		Tsprite="6" Pwidth="1383" sprite_x="230" sprite_y="250"/>
 		<npc_abuelito texturePath="Assets/Textures/Entidades/NPCs/Idle/yayo_cliente.png"		Tsprite="6" Pwidth="850" sprite_x="141" sprite_y="260"/>
+		<npc_abuela texturePath="Assets/Textures/Entidades/NPCs/Idle/vhea.png"					Tsprite="6" Pwidth="1440" sprite_x="240" sprite_y="240"/>
 		
 		<npc_abuelitas texturePath="Assets/Textures/Entidades/NPCs/Idle/yayas.png"				Tsprite="6" Pwidth="2317" sprite_x="386" sprite_y="250"/>
 		
@@ -470,8 +476,10 @@
 			<atqCargado_fase2_boss_Igory start="0" end="13" speed="0.1f" loop="false"/>
 			<atqCargado_fase1_boss_Igory start="16" end="27" speed="0.1f" loop="false"/>
 			<walk_boss_Igory start="32" end="41" speed="0.2f" loop="true"/>
-			<cura_boss_Igory start="48" end="56" speed="0.2f" loop="false"/>
-			<dash_boss_Igory start="64" end="71" speed="0.2f" loop="false"/>
+			<cura_boss_Igory start="48" end="56" speed="0.3f" loop="true"/>
+			<dash_idle_boss_Igory start="64" end="65" speed="0.1f" loop="false"/>
+			<dash_inDashi_boss_Igory start="66" end="68" speed="0.1f" loop="false"/>
+			<dash_DashiAtq_boss_Igory start="69" end="71" speed="0.1f" loop="false"/>
 			<atq1_boss_Igory start="72" end="79" speed="0.1f" loop="false"/>
 			<geneSure_boss_Igory start="80" end="85" speed="0.1f" loop="false"/>
 			<idle_boss_Igory start="88" end="93" speed="0.1f" loop="true"/>
@@ -516,6 +524,11 @@
 			<cambioFaseAnim start="28" end="30" speed="0.1f" loop="true"/>
 			
 		</boss_surma>
+
+		<guerrero>
+			<runAnim start="0" end="8" speed="0.2f" loop="true"/>
+			<attackAnim start="9" end="15" speed="0.15f" loop="true"/>
+		</guerrero>
 		
 		<osiris>
 			<idleAnim start="11" end="15" speed="0.01f" loop="true"/>
@@ -530,9 +543,9 @@
 			<idleAnim start="11" end="15" speed="0.01f" loop="true"/>
 			<runAnim start="0" end="10" speed="0.2f" loop="true"/>
 			<attackAnim start="22" end="28" speed="0.15f" loop="true"/>
-			<takeDamageAnim start="33" end="37" speed="0.15f" loop="false"/>
 			<dieAnim start="44" end="52" speed="0.1f" loop="false"/>
-			<reviveAnim start="55" end="65" speed="0.1f" loop="false"/>
+			<takeDamageAnim start="33" end="37" speed="0.15f" loop="false"/>
+			<reviveAnim start="55" end="65" speed="0.04f" loop="false"/>
 		</osiris_variation>
 
 		<ols>

@@ -61,9 +61,11 @@ private:
 
 	char* swordTexturePath;
 	SDL_Texture* swordTexture;
+	SDL_Rect* swordRect = nullptr;
 
 	char* armorTexturePath;
 	SDL_Texture* armorTexture;
+	SDL_Rect* armorRect = nullptr;
 
 	char* mask0TexturePath;
 	SDL_Texture* mask0Texture;

@@ -1,5 +1,6 @@
 ﻿#include "EntityManager.h"
 #include "Player.h"
+#include "Enemy_Guerrero.h"
 #include "Enemy_Ols.h"
 #include "Enemy_Ols_Variation.h"
 #include "Enemy_Osiris.h"
@@ -15,7 +16,6 @@
 #include "Item_Garra.h"
 #include "Textures.h"
 #include "Scene_Testing.h"
-#include "Player.h"
 #include "DialogTriggerEntity.h"
 #include "TPEntity.h"
 #include "NPC_Vendedor.h"
@@ -23,6 +23,7 @@
 #include "NPC_Abuelo.h"
 #include "NPC_Enamorados.h"
 #include "NPC_Abuelito.h"
+#include "NPC_Abuela.h"
 #include "NPC_Abuelitas.h"
 #include "NPC_Guardias.h"
 #include "NPC_Bruja.h"
@@ -168,6 +169,10 @@ bool EntityManager::CleanUp()
 	eyeIdle.Clear();
 	eyeEndIdle.Clear();
 
+	
+	//delete bossIgory;
+	
+
 	return ret;
 }
 
@@ -180,6 +185,9 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 	{
 	case EntityType::PLAYER:
 		entity = new Player();
+		break;
+	case EntityType::ENEMY_GUERRERO:
+		entity = new Enemy_Guerrero();
 		break;
 	case EntityType::ENEMY_OSIRIS:
 		entity = new Enemy_Osiris();
@@ -319,6 +327,9 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 	case EntityType::NPC_ABUELITO:
 		entity = new NPCAbuelito();
 		break;
+	case EntityType::NPC_ABUELA:
+		entity = new NPCAbuela();
+		break;
 	case EntityType::NPC_ABUELITAS:
 		entity = new NPCAbuelitas();
 		break;
@@ -432,12 +443,18 @@ void EntityManager::LinkTPEntities()
 
 void EntityManager::SetPlayer(Player* player)
 {
+	printf("SetPlayer");
 	actualPlayer = player;
 }
 
 Player* EntityManager::GetPlayer()
 {
 	return actualPlayer;
+}
+
+Boss_Igory* EntityManager::GetIgory()
+{
+	return bossIgory;
 }
 
 int EntityManager::getRandomNumber(int min, int max) {

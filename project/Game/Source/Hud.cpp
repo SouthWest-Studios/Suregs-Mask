@@ -105,6 +105,7 @@ bool Hud::Start()
 	acquired_Items.push_back(ai);
 	acquired_Items.push_back(ai);*/
 
+	
 
 	return true;
 }
@@ -129,11 +130,19 @@ bool Hud::Update(float dt)
 
 		if (elapsedTimePrimary < maskCoolDownPrimary) {
 			float percentageRemainingPrimary = (maskCoolDownPrimary - elapsedTimePrimary) / maskCoolDownPrimary;
-			alphaModPrimary = 100 + (int)(100 * percentageRemainingPrimary);
 
-			if (alphaModPrimary > 200) {
-				alphaModPrimary = 200;
-			}
+			//alphaModPrimary = 100 + (int)(100 * percentageRemainingPrimary);
+			// if (alphaModPrimary > 200) {
+			// 	alphaModPrimary = 200;
+			// }
+
+			alphaModPrimary = 200;
+			int rectHeightPrimary = static_cast<int>(percentageRemainingPrimary * 100);
+
+			rectYPrimaryMask = 100 - rectHeightPrimary;
+
+			rectCDMascaraPrimaria->h = rectHeightPrimary;
+			rectCDMascaraPrimaria->y = rectYPrimaryMask;
 		}
 
 		SDL_SetTextureAlphaMod(cdPrimaryMaskTexture, alphaModPrimary);
@@ -145,11 +154,19 @@ bool Hud::Update(float dt)
 
 		if (elapsedTimeSecondary < maskCoolDownSecondary) {
 			float percentageRemainingSecondary = (maskCoolDownSecondary - elapsedTimeSecondary) / maskCoolDownSecondary;
-			alphaModSecondary = 100 + (int)(100 * percentageRemainingSecondary);
+			
+			// alphaModSecondary = 100 + (int)(100 * percentageRemainingSecondary);
+			// if (alphaModSecondary > 200) {
+			// 	alphaModSecondary = 200;
+			// }
 
-			if (alphaModSecondary > 200) {
-				alphaModSecondary = 200;
-			}
+			alphaModSecondary = 200;
+			int rectHeightSecondary = static_cast<int>(percentageRemainingSecondary * 100);
+
+			rectYSecondaryMask = 100 - rectHeightSecondary;
+
+			rectCDMascaraSecundaria->h = rectHeightSecondary;
+			rectCDMascaraSecundaria->y = rectYSecondaryMask;
 		}
 
 		SDL_SetTextureAlphaMod(cdSecondaryMaskTexture, alphaModSecondary);
@@ -176,6 +193,13 @@ bool Hud::Update(float dt)
 	}
 
 	Potions();
+
+	if (monedasObtenidasHud < app->inventoryManager->monedasObtenidas) {
+		monedasObtenidasHud += 1;
+	}
+	else if (monedasObtenidasHud < app->inventoryManager->monedasObtenidas) {
+		monedasObtenidasHud -= 1;
+	}
 
 	return true;
 }
@@ -204,10 +228,12 @@ bool Hud::PostUpdate()
 	app->render->DrawTexture(hudTexture, 175, 44, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
 
 	//Monedas
-	std::string quantityStr = std::to_string(app->inventoryManager->monedasObtenidas);
+	std::string quantityStr = std::to_string(monedasObtenidasHud);
+	//std::string quantityStr = std::to_string(app->inventoryManager->monedasObtenidas);
 
 	app->render->DrawTexture(hudTexture, windowWidth - rectFondoMonedas->w - 35, 130, SDL_FLIP_NONE, rectFondoMonedas, 0);
-	app->render->DrawText(quantityStr.c_str(), windowWidth - rectFondoMonedas->w + 10, 140, 18, 18);
+	//app->render->DrawText(quantityStr.c_str(), windowWidth - rectFondoMonedas->w + 10, 140, 18, 18);
+	app->render->DrawTextBound(quantityStr.c_str(), windowWidth - rectFondoMonedas->w - (quantityStr.size() * 10) + 30, 133, 100, SDL_Color{52, 25, 0}, app->render->goldFont);
 	//Fondos
 
 	//Pociones
@@ -265,10 +291,10 @@ bool Hud::PostUpdate()
 
 	app->render->DrawTexture(hudTexture, 75, 15, SDL_FLIP_NONE, rectFondoMascaraSecundaria, 0);
 	app->render->DrawTexture(hudTexture, 83, 18, 0.79f,SDL_FLIP_NONE, &rectSecondaryMask, 0);
-	app->render->DrawTexture(cdSecondaryMaskTexture, 75, 15, 0.79f, SDL_FLIP_NONE, rectCDMascaraSecundaria, 0);
+	app->render->DrawTexture(cdSecondaryMaskTexture, 80, 18 + (rectYSecondaryMask * 0.79f), 0.79f, SDL_FLIP_NONE, rectCDMascaraSecundaria, 0);
 	app->render->DrawTexture(hudTexture, 25, 40, SDL_FLIP_NONE, rectFondoMascara, 0);
 	app->render->DrawTexture(hudTexture, 25, 40, SDL_FLIP_NONE, &rectPrimaryMask, 0);
-	app->render->DrawTexture(cdPrimaryMaskTexture, 25, 40, SDL_FLIP_NONE, rectCDMascaraPrimaria, 0);
+	app->render->DrawTexture(cdPrimaryMaskTexture, 25, 40 + rectYPrimaryMask, SDL_FLIP_NONE, rectCDMascaraPrimaria, 0);
 	//Fin mascaras
  
 
