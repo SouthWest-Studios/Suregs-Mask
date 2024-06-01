@@ -126,6 +126,11 @@ bool Hud::Update(float dt)
 {
 	if(app->entityManager->GetPlayer() != nullptr) 
 	{
+
+		float currentHealth = app->entityManager->GetPlayer()->currentStats.currentHealth;
+		float maxHealth = app->entityManager->GetPlayer()->currentStats.maxHealth;
+		isLowHealth = (currentHealth / maxHealth) < 0.2f;
+
 		// Primary mask
 		float maskCoolDownPrimary = app->entityManager->GetPlayer()->maskStats[app->entityManager->GetPlayer()->primaryMask][Branches::Rama2][ app->entityManager->GetPlayer()->maskLevels[app->entityManager->GetPlayer()->primaryMask][Branches::Rama2]].maskCoolDown;
 		float elapsedTimePrimary = app->entityManager->GetPlayer()->maskStats[app->entityManager->GetPlayer()->primaryMask][Branches::Rama2][app->entityManager->GetPlayer()->maskLevels[app->entityManager->GetPlayer()->primaryMask][Branches::Rama2]].maskCoolDownTimer.ReadMSec();
@@ -217,8 +222,7 @@ bool Hud::PostUpdate()
 	app->win->GetWindowSize(windowWidth, windowHeight);
 
 
-
-	//Barra de vida
+	// Barra de vida
 	app->render->DrawTexture(hudTexture, 170, 40, SDL_FLIP_NONE, rectFondoBarraVida, 0);
 
 	int rectW = rectFondoBarraVida->w;
@@ -226,9 +230,16 @@ bool Hud::PostUpdate()
 
 	SDL_Rect* rectBarraVidaCalculado = new SDL_Rect{ rectBarraVida->x, rectBarraVida->y, rectW, rectBarraVida->h };
 
-	//LOG("Vida player: %d, max vida player: %d, rect: %d", app->entityManager->GetPlayer()->health, app->entityManager->GetPlayer()->maxHealth, rectW);
-
-	app->render->DrawTexture(hudTexture, 175, 44, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
+	// Si la vida está baja, hacer que la barra de vida parpadee
+	if (isLowHealth) {
+		blinkCounter++;
+		if (blinkCounter % blinkSpeed < blinkSpeed / 2) {
+			app->render->DrawTexture(hudTexture, 175, 44, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
+		}
+	}
+	else {
+		app->render->DrawTexture(hudTexture, 175, 44, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
+	}
 
 	//Monedas
 	std::string quantityStr = std::to_string(monedasObtenidasHud);

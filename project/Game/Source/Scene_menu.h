@@ -61,6 +61,7 @@ public:
 	SDL_Texture* logo = nullptr;
 	SDL_Texture* savedGames = nullptr;
 	SDL_Texture* controls = nullptr;
+	SDL_Texture* coin = nullptr;
 
 
 	const char* menuMain_tp = nullptr;
@@ -70,6 +71,9 @@ public:
 	const char* logo_tp = nullptr;
 	const char* savedGames_tp = nullptr;
 	const char* controls_tp = nullptr;
+	const char* coin_tp = nullptr;
+	
+	const char* coinQuantity;
 
 	List<GuiControl*> controlsScene;
 	List<GuiControl*> controlsSettings;
@@ -130,6 +134,7 @@ private:
 
 	int newVolumeAudio;
 	int newVolumeFx;
+
 };
 
 #endif // __SCENE_MENU_H__
