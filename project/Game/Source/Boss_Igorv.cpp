@@ -75,7 +75,7 @@ bool Boss_Igory::Start() {
 	pbodySensor->listener = this;
 	pbodySensor->ctype = ColliderType::UNKNOWN;
 
-
+	app->entityManager->SetIgory(this);
 
 	originalPosition = app->map->WorldToMap(position.x, position.y);
 

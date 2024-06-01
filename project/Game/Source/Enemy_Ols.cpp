@@ -129,6 +129,10 @@ bool Enemy_Ols::Update(float dt)
 	 {
 	 	desiredState = EntityState_Enemy::RUNNING;
 	 }
+	 else if (app->map->pathfinding->GetDistance(playerPos, position) >= viewDistance * 32 && app->entityManager->GetIgory()->playerInFight)
+	{
+		desiredState = EntityState_Enemy::RUNNING;
+	}
 	else
 	{
 		desiredState = EntityState_Enemy::IDLE;
