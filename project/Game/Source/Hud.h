@@ -109,6 +109,11 @@ private:
 
 	int monedasObtenidasHud = 0;
 
+
+	bool isLowHealth = false;
+	int blinkCounter = 0;
+	int blinkSpeed = 20;
+
 public:
 
 	std::vector<SDL_Rect*> potionRects;
