@@ -55,6 +55,7 @@ bool Boss_Surma::Start() {
 	runAnim.LoadAnim((char*)name.c_str(), "runAnim", spritePositions);
 	combo1Anim.LoadAnim((char*)name.c_str(), "combo1Anim", spritePositions);
 	combo2Anim.LoadAnim((char*)name.c_str(), "combo2Anim", spritePositions);
+	combo2Anim.Reverse();
 	combo3Anim.LoadAnim((char*)name.c_str(), "combo3Anim", spritePositions);
 	ataqueCargadoAnim.LoadAnim((char*)name.c_str(), "ataqueCargadoAnim", spritePositions);
 	ataqueCargadoEjecutarAnim.LoadAnim((char*)name.c_str(), "ataqueCargadoEjecutarAnim", spritePositions);
@@ -584,9 +585,9 @@ void Boss_Surma::FaseC(float dt, iPoint playerPos)
 		actualColorTint.b = lerp(actualColorTint.b, 200, 0.01);
 		actualScale = lerp(actualScale, 0.9, 0.01);
 		sprieOffsetR.x = lerp(sprieOffsetR.x, -340, 0.01);
-		sprieOffsetR.y = lerp(sprieOffsetR.y, -480, 0.01);
+		sprieOffsetR.y = lerp(sprieOffsetR.y, -520, 0.01);
 		sprieOffsetL.x = lerp(sprieOffsetL.x, -340, 0.01);
-		sprieOffsetL.y = lerp(sprieOffsetL.y, -480, 0.01);
+		sprieOffsetL.y = lerp(sprieOffsetL.y, -520, 0.01);
 
 		/*sprieOffsetR.x = -120;
 		sprieOffsetR.y = -230;
