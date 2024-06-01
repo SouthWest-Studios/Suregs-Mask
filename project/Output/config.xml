@@ -951,7 +951,7 @@ Vida: Muy alta	Daño: Muy alto	Tamaño: Muy grande Velocidad: Muy lenta"
 			</questLine>
 
 			<questLine id="3" defaultActive="false">
-				<quest id="1" questTitle="Dale la carta de Sukhy a Zupho, el guardia." />
+				<quest id="1" questTitle="Termina el entrenamiento y lleva el paquete de Hemyl a Vhea." />
 			</questLine>
 			
 			

@@ -36,7 +36,22 @@ bool QuestManager::Awake(pugi::xml_node config)
 	bool ret = true;
 	//Crear todas las misiones vacias, y luego el load pondra indices y tal
 
+	pugi::xml_node questLineNode = config.child("questLines").child("questLine");
 
+	while (questLineNode != NULL) {
+		
+		int questLineId = questLineNode.attribute("id").as_int();
+
+		QuestLine* questLine = CreateQuestLine(questLineId);
+		
+		
+		pugi::xml_node questNode = questLineNode.child("quest");
+		while (questNode != NULL) {
+			CreateQuest(questLineId, questNode.attribute("id").as_int(), questNode.attribute("questTitle").as_string());
+			questNode = questNode.next_sibling("quest");
+		}
+		questLineNode = questLineNode.next_sibling("questLine");
+	}
 
 
 
@@ -60,31 +75,31 @@ bool QuestManager::CleanUp()
 	return ret;
 }
 
-bool QuestManager::CreateQuest(int questLineID, int questID, std::string questTitle)
+Quest* QuestManager::CreateQuest(int questLineID, int questID, std::string questTitle)
 {
-	bool ret = false;
+	Quest* quest = nullptr;
 
 	QuestLine* questLine = FindQuestLine(questLineID);
 
 	if (questLine != nullptr) {
-		ret = true;
-		Quest* quest = new Quest{ questID, questTitle };
+		quest = new Quest{ questID, questTitle };
 		questLine->quests.push_back(quest);
 		
 	}
 
-	return ret;
+	return quest;
 }
 
-bool QuestManager::CreateQuestLine(int questLineID)
+QuestLine* QuestManager::CreateQuestLine(int questLineID)
 {
-	bool ret = false;
+	QuestLine* questLine = nullptr;
 	if (FindQuestLine(questLineID) == nullptr) {
-		QuestLine* questLine = new QuestLine;
+		questLine = new QuestLine;
 		questLine->questLineID = questLineID;
-		ret = true;
+
+		questLines.push_back(questLine);
 	}
-	return ret;
+	return questLine;
 }
 
 std::string QuestManager::GetQuestTitle(int questLineID, int questID)

@@ -89,12 +89,6 @@ public:
 
 	int storyLevel = 1;
 
-	int mainQuestLevel = -1;
-	int quest1Level = -1;
-	int quest2Level = -1;
-	int quest3Level = -1;
-
-
 	bool dungeon0Entered = false;
 
 	int currentHealthInventoryManager = NULL;

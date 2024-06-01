@@ -44,8 +44,8 @@ public:
 	bool CleanUp();
 
 
-	bool CreateQuest(int questLineID, int questID, std::string questTitle);
-	bool CreateQuestLine(int questLineID);
+	Quest* CreateQuest(int questLineID, int questID, std::string questTitle);
+	QuestLine* CreateQuestLine(int questLineID);
 
 	std::string GetQuestTitle(int questLineID, int questID);
 	
