@@ -582,7 +582,7 @@ void Boss_Surma::FaseC(float dt, iPoint playerPos)
 		actualColorTint.r = lerp(actualColorTint.r, 200, 0.01);
 		actualColorTint.g = lerp(actualColorTint.g, 0, 0.01);
 		actualColorTint.b = lerp(actualColorTint.b, 200, 0.01);
-		actualScale = lerp(actualScale, 1.2, 0.01);
+		actualScale = lerp(actualScale, 0.8, 0.01);
 		sprieOffsetR.x = lerp(sprieOffsetR.x, -120, 0.01);
 		sprieOffsetR.y = lerp(sprieOffsetR.y, -230, 0.01);
 		sprieOffsetL.x = lerp(sprieOffsetL.x, -250, 0.01);
