@@ -156,7 +156,7 @@
 
 		<guerrero texturePath="Assets/Textures/Entidades/Guerrero/spritesheet_guerrero.png"
 				maxHealth="999999999.0f" speed="2.5f" attackDamage="90.0f" attackDistance="2" viewDistance="30"
-				Tsprite="15" Pwidth="4500" sprite_x="500" sprite_y="296"/>
+				Tsprite="15" Pwidth="4500" sprite_x="500" sprite_y="300"/>
 
 		<osiris texturePath="Assets/Textures/Entidades/Osiris/spritesheet_osiris.png" 
 				maxHealth="250.0f" speed="2.5f" attackDamage="50.0f" attackDistance="2" viewDistance="20"
