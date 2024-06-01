@@ -216,6 +216,7 @@ bool CommerceHerreria::CloseCommerce()
 	app->tex->UnLoad(backgroundTradeHerreriaHoverTexture);
 	app->tex->UnLoad(backgroundTradeHerreriaItemTexture);
 
+	app->entityManager->active = true;
 
 	return ret;
 }

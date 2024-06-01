@@ -797,7 +797,7 @@ Vida: Muy alta	Daño: Muy alto	Tamaño: Muy grande Velocidad: Muy lenta"
 		rayolocked ="Assets/Textures/Interfaz/Arbol/IconosLocked/rayo_locked.png"
 
 		alcanceselected ="Assets/Textures/Interfaz/Arbol/IconosSelected/alcance_selected.png"
-		aumentoselected ="Assets/Textures/Interfaz/Arbol/IconosSelected/umento_selected.png"
+		aumentoselected ="Assets/Textures/Interfaz/Arbol/IconosSelected/aumento_selected.png"
 		cooldownselected ="Assets/Textures/Interfaz/Arbol/IconosSelected/cooldown_selected.png"
 		danoselected ="Assets/Textures/Interfaz/Arbol/IconosSelected/dano_selected.png"
 		distanciaselected ="Assets/Textures/Interfaz/Arbol/IconosSelected/distancia_selected.png"

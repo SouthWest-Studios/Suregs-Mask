@@ -2,7 +2,7 @@
 
 	<!--DIALOGOS HERRERO (911-919)-->
 
-	<dialog id="911" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png" name="Phoska">
+	<dialog id="911" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/phoskaFace.png" name="Phoska">
 		<sentences>
 			<sentence type="choose" text="¡Buenos días! Bienvenido a la herrería de Phoska.">
 			
@@ -18,7 +18,7 @@
 		</sentences>
 	</dialog>
 
-	<dialog id="912" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phoska">
+	<dialog id="912" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/Dialogos/phoskaFace.png" name="Phoska">
 		<sentences>
 			<sentence type="choose" text="¡Buenos días! Bienvenido a la herrería de Phoska.">
 
@@ -34,7 +34,7 @@
 		</sentences>
 	</dialog>
 
-	<dialog id="913" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phoska">
+	<dialog id="913" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/Dialogos/phoskaFace.png" name="Phoska">
 		<sentences>
 			<sentence type="choose" text="¡Buenos días! Bienvenido a la herrería de Phoska.">
 
@@ -50,7 +50,7 @@
 		</sentences>
 	</dialog>
 
-	<dialog id="914" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phoska">
+	<dialog id="914" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/Dialogos/phoskaFace.png" name="Phoska">
 		<sentences>
 			<sentence type="choose" text="¡Buenos días! Bienvenido a la herrería de Phoska.">
 
@@ -66,7 +66,7 @@
 		</sentences>
 	</dialog>
 
-	<dialog id="915" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phoska">
+	<dialog id="915" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/Dialogos/phoskaFace.png" name="Phoska">
 		<sentences>
 			<sentence type="choose" text="¡Buenos días! Bienvenido a la herrería de Phoska.">
 
@@ -83,7 +83,7 @@
 	</dialog>
 	
 	<!--Mision (916)-->
-	<dialog id="916" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phoska">
+	<dialog id="916" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/Dialogos/phoskaFace.png" name="Phoska">
 		<sentences>
 			<sentence type="choose" text="¡Buenos días! Dame cualquier espada destrozada y la tendré afilada para mañana.">
 
@@ -100,7 +100,7 @@
 		</sentences>
 	</dialog>
 
-	<dialog id="917" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phoska">
+	<dialog id="917" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/Dialogos/phoskaFace.png" name="Phoska">
 		<sentences>
 			<sentence type="choose" text="¡Buenos días! Bienvenido a la herrería de Phoska.">
 
@@ -116,7 +116,7 @@
 		</sentences>
 	</dialog>
 
-	<dialog id="918" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phoska">
+	<dialog id="918" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/Dialogos/phoskaFace.png" name="Phoska">
 		<sentences>
 			<sentence type="choose" text="¡Buenos días! Bienvenido a la herrería de Phoska.">
 
@@ -134,7 +134,7 @@
 	
 	<!--Mision (919)-->
 	
-	<dialog id="919" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phoska">
+	<dialog id="919" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/Dialogos/phoskaFace.png" name="Phoska">
 		<sentences>
 			<sentence type="choose" text="¡Buenos días! Parece que te estás armando de maravilla.">
 
@@ -152,7 +152,7 @@
 
 	<!--DIALOGOS VENDEDOR (921-929)-->
 
-	<dialog id="921" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phrumo">
+	<dialog id="921" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/Dialogos/phrumoFace.png" name="Phrumo">
 		<sentences>
 			<sentence type="choose" text="¡Qué sorpresa! Bienvenido a la tienda de Phrumo.">
 
@@ -168,7 +168,7 @@
 		</sentences>
 	</dialog>
 
-	<dialog id="922" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phrumo">
+	<dialog id="922" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/Dialogos/phrumoFace.png" name="Phrumo">
 		<sentences>
 			<sentence type="choose" text="¡Qué sorpresa! Bienvenido a la tienda de Phrumo.">
 
@@ -186,7 +186,7 @@
 	
 	<!--Mision (923)-->
 	
-	<dialog id="923" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phrumo">
+	<dialog id="923" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/Dialogos/phrumoFace.png" name="Phrumo">
 		<sentences>
 			<sentence type="choose" text="Bienvenido a la tienda de Phrumo. ¿Te ha molestado mi abuelo? Disculpas...">
 
@@ -202,7 +202,7 @@
 		</sentences>
 	</dialog>
 
-	<dialog id="924" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phrumo">
+	<dialog id="924" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/Dialogos/phrumoFace.png" name="Phrumo">
 		<sentences>
 			<sentence type="choose" text="¡Qué sorpresa! Bienvenido a la tienda de Phrumo.">
 
@@ -218,7 +218,7 @@
 		</sentences>
 	</dialog>
 
-	<dialog id="925" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phrumo">
+	<dialog id="925" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/Dialogos/phrumoFace.png" name="Phrumo">
 		<sentences>
 			<sentence type="choose" text="¡Qué sorpresa! Bienvenido a la tienda de Phrumo.">
 
@@ -234,7 +234,7 @@
 		</sentences>
 	</dialog>
 
-	<dialog id="926" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phrumo">
+	<dialog id="926" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/Dialogos/phrumoFace.png" name="Phrumo">
 		<sentences>
 			<sentence type="choose" text="¡Qué sorpresa! Bienvenido a la tienda de Phrumo.">
 
@@ -250,7 +250,7 @@
 		</sentences>
 	</dialog>
 
-	<dialog id="927" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phrumo">
+	<dialog id="927" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/Dialogos/phrumoFace.png" name="Phrumo">
 		<sentences>
 			<sentence type="choose" text="¡Qué sorpresa! Bienvenido a la tienda de Phrumo.">
 
@@ -266,7 +266,7 @@
 		</sentences>
 	</dialog>
 	
-	<dialog id="928" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phrumo">
+	<dialog id="928" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/Dialogos/phrumoFace.png" name="Phrumo">
 		<sentences>
 			<sentence type="choose" text="¡Qué sorpresa! Bienvenido a la tienda de Phrumo.">
 
@@ -282,7 +282,7 @@
 		</sentences>
 	</dialog>
 
-	<dialog id="929" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Phrumo">
+	<dialog id="929" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/Dialogos/phrumoFace.png" name="Phrumo">
 		<sentences>
 			<sentence type="choose" text="¡Qué sorpresa! Bienvenido a la tienda de Phrumo.">
 
@@ -300,7 +300,7 @@
 
 	<!--DIALOGOS BRUJA (931-939)-->
 
-	<dialog id="931" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Zhyuka">
+	<dialog id="931" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/Dialogos/zhyukaFace.png" name="Zhyuka">
 		<sentences>
 			<sentence type="choose" text="¿Qué tenemos por aquí, un nuevo cliente? Jijiji…">
 
@@ -316,7 +316,7 @@
 		</sentences>
 	</dialog>
 
-	<dialog id="932" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Zhyuka">
+	<dialog id="932" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/Dialogos/zhyukaFace.png" name="Zhyuka">
 		<sentences>
 			<sentence type="choose" text="¿Qué tenemos por aquí, un nuevo cliente? Jijiji…">
 
@@ -332,7 +332,7 @@
 		</sentences>
 	</dialog>
 
-	<dialog id="933" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Zhyuka">
+	<dialog id="933" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/Dialogos/zhyukaFace.png" name="Zhyuka">
 		<sentences>
 			<sentence type="choose" text="¿Qué tenemos por aquí, un nuevo cliente? Jijiji…">
 
@@ -348,7 +348,7 @@
 		</sentences>
 	</dialog>
 
-	<dialog id="934" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Zhyuka">
+	<dialog id="934" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/Dialogos/zhyukaFace.png" name="Zhyuka">
 		<sentences>
 			<sentence type="choose" text="¿Qué tenemos por aquí, un nuevo cliente? Jijiji…">
 
@@ -364,7 +364,7 @@
 		</sentences>
 	</dialog>
 
-	<dialog id="935" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Zhyuka">
+	<dialog id="935" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/Dialogos/zhyukaFace.png" name="Zhyuka">
 		<sentences>
 			<sentence type="choose" text="¿Qué tenemos por aquí, un nuevo cliente? Jijiji…">
 
@@ -380,7 +380,7 @@
 		</sentences>
 	</dialog>
 	<!--Mision (936)-->
-	<dialog id="936" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Zhyuka">
+	<dialog id="936" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/Dialogos/zhyukaFace.png" name="Zhyuka">
 		<sentences>
 			<sentence text="¡Hola de nuevo! Jijiji…"/>
 			<sentence text="Soy Zhyuka, la bruja de la aldea, parece que te has enterado de mis nuevas creaciones, jijiji…"/>
@@ -388,7 +388,7 @@
 		</sentences>
 	</dialog>
 
-	<dialog id="937" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Zhyuka">
+	<dialog id="937" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/Dialogos/zhyukaFace.png" name="Zhyuka">
 		<sentences>
 			<sentence type="choose" text="¿Qué tenemos por aquí, un nuevo cliente? Jijiji…">
 
@@ -404,7 +404,7 @@
 		</sentences>
 	</dialog>
 
-	<dialog id="938" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Zhyuka">
+	<dialog id="938" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/Dialogos/zhyukaFace.png" name="Zhyuka">
 		<sentences>
 			<sentence type="choose" text="¿Qué tenemos por aquí, un nuevo cliente? Jijiji…">
 
@@ -420,7 +420,7 @@
 		</sentences>
 	</dialog>
 
-	<dialog id="939" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Zhyuka">
+	<dialog id="939" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/Dialogos/zhyukaFace.png" name="Zhyuka">
 		<sentences>
 			<sentence type="choose" text="¿Qué tenemos por aquí, un nuevo cliente? Jijiji…">
 
@@ -438,7 +438,135 @@
 
 
 
-	<dialog id="994" texturepath="Assets/Textures/pescador.jpg" facetexturepath="Assets/Textures/herrero.jpg" name="Sphar">
+	<dialog id="941" texturepath="Assets/Textures/pescador.jpg" facetexturepath="Assets/Textures/Dialogos/spharFace.png" name="Sphar">
+		<sentences>
+			<sentence type="choose" text="¿Un camarada? ¡Eres la primera persona que viene en mucho tiempo!">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Soy Sphar, el pescador. Me dedico a la compra y venta de productos marinos, también ofrezco mi puerto para pescar de manera gratuita."/>
+					<commerce id="1"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡Hasta la próxima grumete!"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="942" texturepath="Assets/Textures/pescador.jpg" facetexturepath="Assets/Textures/Dialogos/spharFace.png" name="Sphar">
+		<sentences>
+			<sentence type="choose" text="¿Un camarada? ¡Eres la primera persona que viene en mucho tiempo!">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Soy Sphar, el pescador. Me dedico a la compra y venta de productos marinos, también ofrezco mi puerto para pescar de manera gratuita."/>
+					<commerce id="1"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡Hasta la próxima grumete!"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="943" texturepath="Assets/Textures/pescador.jpg" facetexturepath="Assets/Textures/Dialogos/spharFace.png" name="Sphar">
+		<sentences>
+			<sentence type="choose" text="¿Un camarada? ¡Eres la primera persona que viene en mucho tiempo!">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Soy Sphar, el pescador. Me dedico a la compra y venta de productos marinos, también ofrezco mi puerto para pescar de manera gratuita."/>
+					<commerce id="1"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡Hasta la próxima grumete!"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="944" texturepath="Assets/Textures/pescador.jpg" facetexturepath="Assets/Textures/Dialogos/spharFace.png" name="Sphar">
+		<sentences>
+			<sentence type="choose" text="¿Un camarada? ¡Eres la primera persona que viene en mucho tiempo!">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Soy Sphar, el pescador. Me dedico a la compra y venta de productos marinos, también ofrezco mi puerto para pescar de manera gratuita."/>
+					<commerce id="1"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡Hasta la próxima grumete!"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="945" texturepath="Assets/Textures/pescador.jpg" facetexturepath="Assets/Textures/Dialogos/spharFace.png" name="Sphar">
+		<sentences>
+			<sentence type="choose" text="¿Un camarada? ¡Eres la primera persona que viene en mucho tiempo!">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Soy Sphar, el pescador. Me dedico a la compra y venta de productos marinos, también ofrezco mi puerto para pescar de manera gratuita."/>
+					<commerce id="1"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡Hasta la próxima grumete!"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="946" texturepath="Assets/Textures/pescador.jpg" facetexturepath="Assets/Textures/Dialogos/spharFace.png" name="Sphar">
+		<sentences>
+			<sentence type="choose" text="¿Un camarada? ¡Eres la primera persona que viene en mucho tiempo!">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Soy Sphar, el pescador. Me dedico a la compra y venta de productos marinos, también ofrezco mi puerto para pescar de manera gratuita."/>
+					<commerce id="1"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡Hasta la próxima grumete!"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="947" texturepath="Assets/Textures/pescador.jpg" facetexturepath="Assets/Textures/Dialogos/spharFace.png" name="Sphar">
+		<sentences>
+			<sentence type="choose" text="¿Un camarada? ¡Eres la primera persona que viene en mucho tiempo!">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Soy Sphar, el pescador. Me dedico a la compra y venta de productos marinos, también ofrezco mi puerto para pescar de manera gratuita."/>
+					<commerce id="1"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡Hasta la próxima grumete!"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="948" texturepath="Assets/Textures/pescador.jpg" facetexturepath="Assets/Textures/Dialogos/spharFace.png" name="Sphar">
+		<sentences>
+			<sentence type="choose" text="¿Un camarada? ¡Eres la primera persona que viene en mucho tiempo!">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Soy Sphar, el pescador. Me dedico a la compra y venta de productos marinos, también ofrezco mi puerto para pescar de manera gratuita."/>
+					<commerce id="1"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡Hasta la próxima grumete!"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="949" texturepath="Assets/Textures/pescador.jpg" facetexturepath="Assets/Textures/Dialogos/spharFace.png" name="Sphar">
 		<sentences>
 			<sentence type="choose" text="¿Un camarada? ¡Eres la primera persona que viene en mucho tiempo!">
 
@@ -494,7 +622,7 @@
 				</mission_event>
 			</sentence>
 		</sentences>
-	</dialog>
+	</dialog>	
 
 
 	<!--MUJER_ENAMORADA(1300-1400)-->
@@ -1734,7 +1862,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 		</sentences>
 	</dialog>
 
-	<dialog id="998" texturepath="Assets/Textures/guerreroTutorial.png" facetexturepath="Assets/Textures/guerreroTutorial.png" name="Kharmy">
+	<dialog id="901" texturepath="Assets/Textures/guerreroTutorial.png" facetexturepath="Assets/Textures/guerreroTutorial.png" name="Kharmy">
 		<sentences>
 			<sentence type="choose" text="Si quieres empezar el combate de entrenamiento deberías hablar con Trynmba">
 
@@ -1749,12 +1877,11 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 		</sentences>
 	</dialog>
 	
-	<dialog id="999" texturepath="Assets/Textures/guerreroTutorial.png" facetexturepath="Assets/Textures/guerreroTutorial.png" name="Kharmy">
+	<dialog id="902" texturepath="Assets/Textures/guerreroTutorial.png" facetexturepath="Assets/Textures/guerreroTutorial.png" name="Trynmba">
 		<sentences>
-			<sentence type="choose" text="¿Estás listo para el combate de práctica?">
+			<sentence type="choose" text="¿Estás listo para el combate de práctica? Si necesitas ayuda, habla con Kurvhy, que está a mi lado.">
 				<option1 text="Sí, que empiece el combate.">
-					<!--CAMBIAR FRASE-->
-					<sentence text="Pues empecemos."/>
+					<sentence text="Pues que empiece."/>
 					<tutorial id = "1"/>
 				</option1>
 
@@ -1764,7 +1891,23 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 		</sentences>
 	</dialog>
 
-	<dialog id="951" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/abuela.png" name="Vhea">
+	<dialog id="903" texturepath="Assets/Textures/guerreroTutorial.png" facetexturepath="Assets/Textures/guerreroTutorial.png" name="Kurvhy">
+		<sentences>
+			<sentence type="choose" text="¿No sabes como pelear aún?">
+				<option1 text="Por supuesto que sé.">
+					<sentence text="Entonces no me molestes chaval."/>
+				</option1>
+
+				<option2 text="¿Podrías recordármelo?">
+					<sentence text="Pero si es superfácil, con la J puedes golpear con la espada, y con el ESPACIO puedes evitar ataques de enemigos... ¿Lo pillas?"/>
+				</option2>
+			</sentence>
+		</sentences>
+	</dialog>
+			<sentence name="Dinka"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
+			text="¿Artefacto lleno de poder? Un respeto, que me llamo Dinka. Pero sí, tu padre debía ser muy sabio, tengo mucho poder."/>
+	<dialog id="951" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFace.png" name="Vhea">
 		<sentences>
 			<sentence type="choose" text="Buenos días cariño, ¿otra vez la misma pesadilla?">
 
@@ -1776,7 +1919,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 
 			<sentence type="choose" text="Bueno... ¿Hoy tienes entrenamiento verdad?">
 
-				<option1 text="Sí, debo ir al campamento, supongo que estarán todos esperando">
+				<option1 text="Sí, debo ir al campamento.">
 					<sentence text="Perfecto, recuerda que está al norte del pueblo."/>
 				</option1>
 
@@ -1789,26 +1932,158 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 		</sentences>
 	</dialog>
 
-	<dialog id="952" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/abuela.png" name="Vhea">
+	<dialog id="952" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFace.png" name="Vhea">
 		<sentences>
 			<sentence type="choose" text="¿Qué tal ha ido el entrenamiento?">
-
 				<option1 text="Hola Abuela, otro entrenamiento nefasto, tendría que ser más fuerte, como padre...">
 					<sentence text="Eso fue justo lo que le mató, Jakov, no sabía cuando parar."/>
 				</option1>
-
 			</sentence>
 
 			<sentence type="choose" text="Y tú no tienes que parecerte a él, seguro que se te dan bien otros trabajos...">
-
-				<option1 text="Hmmmm, seguro que tenía algún secreto para ser tan fuerte... Abuela, ¿dónde guardas su equipo? Seguro que hay algo que me sirve…">
-					<sentence text="Ni se te ocurra, seguir sus pasos te va a llevar a un camino muy oscuro, no lo pienses más, come esto y descansa."/>
+				<option1 text="Seguro que tenía algún secreto para ser tan fuerte... Abuela, ¿dónde guardas su equipo? Seguro que hay algo que me sirve...">
+					<sentence name="Vhea"
+					facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFoodFace.png"
+					text="Ni se te ocurra, seguir sus pasos te va a llevar a un camino muy oscuro, no lo pienses más, come esto y descansa."/>
+					<comer id ="1"/>
 				</option1>
+			</sentence>
+		</sentences>
+	</dialog>	
+	
+	<dialog id="953" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFace.png" name="Vhea">
+		<sentences>
+			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
+
+				<option1 text="Si, por favor.">
+					<sentence name="Vhea"
+					facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFoodFace.png"
+					text="Cómelo tranquilo, está recién hecho."/>
+					<comer id ="1"/>
+				</option1>
+
+				<option2 text="No hace falta.">
+					<sentence text="Bueno... Estaré siempre aquí si necesitas algo de comer."/>
+				</option2>
 
 			</sentence>
 		</sentences>
 	</dialog>
-	
+
+	<dialog id="954" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFace.png" name="Vhea">
+		<sentences>
+			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
+
+				<option1 text="Si, por favor.">
+					<sentence name="Vhea"
+					facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFoodFace.png"
+					text="Cómelo tranquilo, está recién hecho."/>
+					<comer id ="1"/>
+				</option1>
+
+				<option2 text="No hace falta.">
+					<sentence text="Bueno... Estaré siempre aquí si necesitas algo de comer."/>
+				</option2>
+
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="955" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFace.png" name="Vhea">
+		<sentences>
+			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
+
+				<option1 text="Si, por favor.">
+					<sentence name="Vhea"
+					facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFoodFace.png"
+					text="Cómelo tranquilo, está recién hecho."/>
+					<comer id ="1"/>
+				</option1>
+
+				<option2 text="No hace falta.">
+					<sentence text="Bueno... Estaré siempre aquí si necesitas algo de comer."/>
+				</option2>
+
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="956" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFace.png" name="Vhea">
+		<sentences>
+			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
+
+				<option1 text="Si, por favor.">
+					<sentence name="Vhea"
+					facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFoodFace.png"
+					text="Cómelo tranquilo, está recién hecho."/>
+					<comer id ="1"/>
+				</option1>
+
+				<option2 text="No hace falta.">
+					<sentence text="Bueno... Estaré siempre aquí si necesitas algo de comer."/>
+				</option2>
+
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="957" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFace.png" name="Vhea">
+		<sentences>
+			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
+
+				<option1 text="Si, por favor.">
+					<sentence name="Vhea"
+					facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFoodFace.png"
+					text="Cómelo tranquilo, está recién hecho."/>
+					<comer id ="1"/>
+				</option1>
+
+				<option2 text="No hace falta.">
+					<sentence text="Bueno... Estaré siempre aquí si necesitas algo de comer."/>
+				</option2>
+
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="958" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFace.png" name="Vhea">
+		<sentences>
+			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
+
+				<option1 text="Si, por favor.">
+					<sentence name="Vhea"
+					facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFoodFace.png"
+					text="Cómelo tranquilo, está recién hecho."/>
+					<comer id ="1"/>
+				</option1>
+
+				<option2 text="No hace falta.">
+					<sentence text="Bueno... Estaré siempre aquí si necesitas algo de comer."/>
+				</option2>
+
+			</sentence>
+		</sentences>
+	</dialog>
+
+	<dialog id="959" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFace.png" name="Vhea">
+		<sentences>
+			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
+
+				<option1 text="Si, por favor.">
+					<sentence name="Vhea"
+					facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFoodFace.png"
+					text="Cómelo tranquilo, está recién hecho."/>
+					<comer id ="1"/>
+				</option1>
+
+				<option2 text="No hace falta.">
+					<sentence text="Bueno... Estaré siempre aquí si necesitas algo de comer."/>
+				</option2>
+
+			</sentence>
+		</sentences>
+	</dialog>
+				
 	<dialog id="5" texturepath="Assets/Textures/Interfaz/Dialogos/Jakhov.png">
 		<sentences>
 			<sentence name="Jakhov"
@@ -1822,150 +2097,166 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 	</dialog>
 
 
-	<dialog id="51" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/abuela.png" name="Vhea">
+	<dialog id="1101" texturepath="Assets/Textures/Interfaz/Dialogos/Jakhov.png">
 		<sentences>
-			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
+			<sentence name="Jakhov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			text="¿H-hola? ¿Qué es esto?"/>
 
-				<option1 text="Si, por favor.">
-					<sentence text="Come tranquilo, está recién hecho."/>
-					<comer id ="1"/>
-				</option1>
+			<sentence name="?????"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
+			text="¿Cómo que qué soy? Si me has cogido tú chaval."/>
 
-				<option2 text="No hace falta.">
-					<sentence text="Bueno... Estaré siempre aquí si necesitas algo de comer."/>
-				</option2>
-				
-			</sentence>
+			<sentence name="Jakhov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			text="¿Tú eres el artefacto lleno de poder del que hablaba mi padre?"/>
+
+			<sentence name="Dinka"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
+			text="¿Artefacto lleno de poder? Un respeto, que me llamo Dinka. Pero sí, tu padre debía ser muy sabio, tengo mucho poder."/>
+
+			<sentence name="Jakhov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			text="¿Y que clase de poder tienes?"/>
+
+			<sentence name="Dinka"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
+			text="Si pulsas la tecla J lo verás... Aunque... ¿Tú sabes que hago aquí? Lo último que recuerdo es entrar a las 'Mazmorras'..."/>
+
+			<sentence name="Jakhov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			text="¿Que es eso de las mazmorras? ¿Te refieres a este lugar?"/>
+
+			<sentence name="Dinka"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
+			text="..."/>
+
+			<sentence name="Jakhov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			text="¿Me oyes...? Parece que ya no contesta..."/>
 		</sentences>
 	</dialog>
-	<dialog id="52" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/abuela.png" name="Vhea">
+
+	<dialog id="1102" texturepath="Assets/Textures/Interfaz/Dialogos/Jakhov.png">
 		<sentences>
-			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
+			<sentence name="Jakhov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			text="¿H-hola? ¿Qué es esto?"/>
 
-				<option1 text="Si, por favor.">
-					<sentence text="Come tranquilo, está recién hecho."/>
-					<comer id ="1"/>
-				</option1>
+			<sentence name="?????"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
+			text="¿Cómo que qué soy? Si me has cogido tú chaval."/>
 
-				<option2 text="No hace falta.">
-					<sentence text="Bueno... Estaré siempre aquí si necesitas algo de comer."/>
-				</option2>
-				
-			</sentence>
+			<sentence name="Jakhov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			text="¿Tú eres el artefacto lleno de poder del que hablaba mi padre?"/>
+
+			<sentence name="Dinka"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
+			text="¿Artefacto lleno de poder? Un respeto, que me llamo Dinka. Pero sí, tu padre debía ser muy sabio, tengo mucho poder."/>
+
+			<sentence name="Jakhov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			text="¿Y que clase de poder tienes?"/>
+
+			<sentence name="Dinka"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
+			text="Si pulsas la tecla J lo verás... Aunque... ¿Tú sabes que hago aquí? Lo último que recuerdo es entrar a las 'Mazmorras'..."/>
+
+			<sentence name="Jakhov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			text="¿Que es eso de las mazmorras? ¿Te refieres a este lugar?"/>
+
+			<sentence name="Dinka"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
+			text="..."/>
+
+			<sentence name="Jakhov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			text="¿Me oyes...? Parece que ya no contesta..."/>
 		</sentences>
 	</dialog>
-	<dialog id="53" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/abuela.png" name="Vhea">
+
+	<dialog id="1103" texturepath="Assets/Textures/Interfaz/Dialogos/Jakhov.png">
 		<sentences>
-			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
+			<sentence name="Jakhov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			text="¿H-hola? ¿Qué es esto?"/>
 
-				<option1 text="Si, por favor.">
-					<sentence text="Come tranquilo, está recién hecho."/>
-					<comer id ="1"/>
-				</option1>
+			<sentence name="?????"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
+			text="¿Cómo que qué soy? Si me has cogido tú chaval."/>
 
-				<option2 text="No hace falta.">
-					<sentence text="Bueno... Estaré siempre aquí si necesitas algo de comer."/>
-				</option2>
-				
-			</sentence>
+			<sentence name="Jakhov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			text="¿Tú eres el artefacto lleno de poder del que hablaba mi padre?"/>
+
+			<sentence name="Dinka"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
+			text="¿Artefacto lleno de poder? Un respeto, que me llamo Dinka. Pero sí, tu padre debía ser muy sabio, tengo mucho poder."/>
+
+			<sentence name="Jakhov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			text="¿Y que clase de poder tienes?"/>
+
+			<sentence name="Dinka"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
+			text="Si pulsas la tecla J lo verás... Aunque... ¿Tú sabes que hago aquí? Lo último que recuerdo es entrar a las 'Mazmorras'..."/>
+
+			<sentence name="Jakhov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			text="¿Que es eso de las mazmorras? ¿Te refieres a este lugar?"/>
+
+			<sentence name="Dinka"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
+			text="..."/>
+
+			<sentence name="Jakhov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			text="¿Me oyes...? Parece que ya no contesta..."/>
 		</sentences>
 	</dialog>
-	<dialog id="54" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/abuela.png" name="Vhea">
+
+	<dialog id="1104" texturepath="Assets/Textures/Interfaz/Dialogos/Jakhov.png">
 		<sentences>
-			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
+			<sentence name="Jakhov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			text="¿H-hola? ¿Qué es esto?"/>
 
-				<option1 text="Si, por favor.">
-					<sentence text="Come tranquilo, está recién hecho."/>
-					<comer id ="1"/>
-				</option1>
+			<sentence name="?????"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
+			text="¿Cómo que qué soy? Si me has cogido tú chaval."/>
 
-				<option2 text="No hace falta.">
-					<sentence text="Bueno... Estaré siempre aquí si necesitas algo de comer."/>
-				</option2>
-				
-			</sentence>
+			<sentence name="Jakhov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			text="¿Tú eres el artefacto lleno de poder del que hablaba mi padre?"/>
+
+			<sentence name="Dinka"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
+			text="¿Artefacto lleno de poder? Un respeto, que me llamo Dinka. Pero sí, tu padre debía ser muy sabio, tengo mucho poder."/>
+
+			<sentence name="Jakhov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			text="¿Y que clase de poder tienes?"/>
+
+			<sentence name="Dinka"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
+			text="Si pulsas la tecla J lo verás... Aunque... ¿Tú sabes que hago aquí? Lo último que recuerdo es entrar a las 'Mazmorras'..."/>
+
+			<sentence name="Jakhov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			text="¿Que es eso de las mazmorras? ¿Te refieres a este lugar?"/>
+
+			<sentence name="Dinka"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
+			text="..."/>
+
+			<sentence name="Jakhov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			text="¿Me oyes...? Parece que ya no contesta..."/>
 		</sentences>
 	</dialog>
-	<dialog id="55" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/abuela.png" name="Vhea">
-		<sentences>
-			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
 
-				<option1 text="Si, por favor.">
-					<sentence text="Come tranquilo, está recién hecho."/>
-					<comer id ="1"/>
-				</option1>
-
-				<option2 text="No hace falta.">
-					<sentence text="Bueno... Estaré siempre aquí si necesitas algo de comer."/>
-				</option2>
-				
-			</sentence>
-		</sentences>
-	</dialog>
-	<dialog id="56" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/abuela.png" name="Vhea">
-		<sentences>
-			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
-
-				<option1 text="Si, por favor.">
-					<sentence text="Come tranquilo, está recién hecho."/>
-					<comer id ="1"/>
-				</option1>
-
-				<option2 text="No hace falta.">
-					<sentence text="Bueno... Estaré siempre aquí si necesitas algo de comer."/>
-				</option2>
-				
-			</sentence>
-		</sentences>
-	</dialog>
-	<dialog id="57" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/abuela.png" name="Vhea">
-		<sentences>
-			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
-
-				<option1 text="Si, por favor.">
-					<sentence text="Come tranquilo, está recién hecho."/>
-					<comer id ="1"/>
-				</option1>
-
-				<option2 text="No hace falta.">
-					<sentence text="Bueno... Estaré siempre aquí si necesitas algo de comer."/>
-				</option2>
-				
-			</sentence>
-		</sentences>
-	</dialog>
-	<dialog id="58" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/abuela.png" name="Vhea">
-		<sentences>
-			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
-
-				<option1 text="Si, por favor.">
-					<sentence text="Come tranquilo, está recién hecho."/>
-					<comer id ="1"/>
-				</option1>
-
-				<option2 text="No hace falta.">
-					<sentence text="Bueno... Estaré siempre aquí si necesitas algo de comer."/>
-				</option2>
-				
-			</sentence>
-		</sentences>
-	</dialog>
-	<dialog id="59" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/abuela.png" name="Vhea">
-		<sentences>
-			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
-
-				<option1 text="Si, por favor.">
-					<sentence text="Come tranquilo, está recién hecho."/>
-					<comer id ="1"/>
-				</option1>
-
-				<option2 text="No hace falta.">
-					<sentence text="Bueno... Estaré siempre aquí si necesitas algo de comer."/>
-				</option2>
-				
-			</sentence>
-		</sentences>
-	</dialog>
 
 	<!--Padre-->
 	<dialog id="2001" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/abuela.png" name="Vhea">
