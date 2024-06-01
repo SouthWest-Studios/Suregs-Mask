@@ -255,11 +255,13 @@ void Enemy_Muur::Die() {
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	currentAnimation = &dieAnim;
 
-	fPoint pos((float)position.x, (float)position.y);
-	blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_ENEMY_BLOOD);
+
 
 	if (dieAnim.HasFinished())
 	{
+		fPoint pos((float)position.x, (float)position.y);
+		blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_ENEMY_BLOOD);
+
 		app->entityManager->DestroyEntity(this);
 		app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 		app->physics->GetWorld()->DestroyBody(pbodySensor->body);
