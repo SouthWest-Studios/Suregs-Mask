@@ -52,7 +52,7 @@
 	</bestiariomanager>
 	<equipo />
 	<Ascensormenu />
-	<:anonymous />
+	<treemanager />
 	<guiManager />
 	<dialogmanager />
 	<fadeToBlack />
