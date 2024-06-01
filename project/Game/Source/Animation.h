@@ -174,7 +174,7 @@ public:
 
 		for (int i = AniInfo.attribute("start").as_int(); i < AniInfo.attribute("end").as_int(); i++) {
 			try {
-				int check_access = rect[i].x; // 检查数组边界
+				int check_access = rect[i].x;
 				check_access = rect[i].y;
 				check_access = rect[i].w;
 				check_access = rect[i].h;
