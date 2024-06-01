@@ -60,6 +60,7 @@ bool Enemy_Boorok::Start() {
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
+	boorok_attack_fx = app->audio->LoadAudioFx("boorok_attack_fx");
 	boorok_get_damage_fx = app->audio->LoadAudioFx("boorok_get_damage_fx");
 	boorok_get_damageAlt_fx = app->audio->LoadAudioFx("boorok_get_damageAlt_fx");
 	boorok_death_fx = app->audio->LoadAudioFx("boorok_death_fx");
@@ -272,6 +273,7 @@ void Enemy_Boorok::Attack(float dt, iPoint playerPos)
 	}
 
 	//sonido ataque
+	app->audio->PlayFx(boorok_attack_fx);
 }
 
 void Enemy_Boorok::Die()
