@@ -113,6 +113,10 @@ bool Enemy_Muur::Update(float dt)
 	{
 		nextState = EntityState::RUNNING;
 	}
+	else if (app->map->pathfinding->GetDistance(playerPos, position) >= viewDistance * 32 && app->entityManager->GetIgory()->playerInFight)
+	{
+		nextState = EntityState::RUNNING;
+	}
 	else
 	{
 		nextState = EntityState::IDLE;
@@ -364,8 +368,15 @@ bool Enemy_Muur::Muurfinding(float dt, iPoint playerPosP)
 		lastPath = *app->map->pathfinding->GetLastPath();
 	}
 	else {
-		app->map->pathfinding->CreatePath(enemyPos, originalPosition); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
-		lastPath = *app->map->pathfinding->GetLastPath();
+		if (app->entityManager->GetIgory()->playerInFight) {
+			app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
+			lastPath = *app->map->pathfinding->GetLastPath();
+		}
+		else
+		{
+			app->map->pathfinding->CreatePath(enemyPos, originalPosition); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
+			lastPath = *app->map->pathfinding->GetLastPath();
+		}
 	}
 
 

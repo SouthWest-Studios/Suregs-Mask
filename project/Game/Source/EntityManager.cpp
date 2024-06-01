@@ -452,6 +452,12 @@ Player* EntityManager::GetPlayer()
 	return actualPlayer;
 }
 
+void EntityManager::SetIgory(Boss_Igory* igory)
+{
+	printf("SetIgory");
+	bossIgory = igory;
+}
+
 Boss_Igory* EntityManager::GetIgory()
 {
 	return bossIgory;
