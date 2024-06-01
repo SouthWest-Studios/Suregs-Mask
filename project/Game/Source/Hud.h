@@ -127,5 +127,8 @@ public:
 	bool estatua = false;
 
 	SDL_Texture* EstatuaTexture = nullptr;
+
+	const char* levelUpTexturePath;
+	SDL_Texture* levelUpTexture;
 };
 #endif // __HUD_H__

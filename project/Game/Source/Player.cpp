@@ -574,6 +574,7 @@ bool Player::Start() {
 	takeDMG_player.LoadAnim("player", "takeDMG_player", spritePositions);
 
 
+
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 	app->entityManager->objectsToDraw.push_back({
 		texture,
@@ -841,12 +842,19 @@ bool Player::Update(float dt)
 
 	//Mask XP System
 
+	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN) {
+		maskZeroXP += 500;
+	}
+
+
 	//MASK 0
 	if (maskZeroXP >= XPtoLevelUpZero && maskZeroLevel < maxMaskLevel) {
 		maskZeroXP -= XPtoLevelUpZero;
 		maskZeroPoints++;
 		maskZeroLevel++;
 		XPtoLevelUpZero += matrizLevelXP[maskZeroLevel];
+		
+		app->render->DrawTexture(app->hud->levelUpTexture, 900, 300, 4);
 
 		printf("Has subido la mask 0 a nivel %i y su experiencia actual es %i \n", maskZeroLevel, maskZeroXP);
 	}

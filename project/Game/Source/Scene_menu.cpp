@@ -57,6 +57,7 @@ bool Scene_Menu::Start()
 	savedGames_tp = config.child("savedGames").attribute("texturepath").as_string();
 	controls_tp = config.child("controls").attribute("texturepath").as_string();
 	coin_tp = config.child("coin").attribute("texturepath").as_string();
+	clock_tp = config.child("clock").attribute("texturepath").as_string();
 
 	menuMain = app->tex->Load(menuMain_tp);
 	menuMain2 = app->tex->Load(menuMain2_tp);
@@ -66,6 +67,7 @@ bool Scene_Menu::Start()
 	savedGames = app->tex->Load(savedGames_tp);
 	controls = app->tex->Load(controls_tp);
 	coin = app->tex->Load(coin_tp);
+	clock = app->tex->Load(clock_tp);
 	
 	pugi::xml_document saveOneFile;
 	pugi::xml_node game_stateOne;
@@ -757,6 +759,10 @@ void Scene_Menu::ShowSavedGames()
 	app->render->DrawTexture(coin, 770, 252, 0.35f);
 	app->render->DrawTexture(coin, 770, 346, 0.35f);
 	app->render->DrawTexture(coin, 770, 440, 0.35f);
+
+	app->render->DrawTexture(clock, 700, 257, 0.65f);
+	app->render->DrawTexture(clock, 700, 351, 0.65f);
+	app->render->DrawTexture(clock, 700, 445, 0.65f);
 
 	std::string quantityStrOne = std::to_string(coinQuantityOne);
 	app->render->DrawText(quantityStrOne.c_str(), 730, 255, 45, 27, 0, 0, 0, 0, true);

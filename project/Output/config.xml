@@ -354,6 +354,7 @@
 		<savedGames texturepath ="Assets/Textures/Interfaz/textura_saved_games.png"/>
 		<controls texturepath ="Assets/Textures/Interfaz/textura_menu_controles.png"/>
 		<coin texturepath ="Assets/Textures/Interfaz/Resources/textura_moneda.png"/>
+		<clock texturepath ="Assets/Textures/Interfaz/Arbol/IconosBase/duration.png"/>
 	</scene_menu>
 
 	<scene_gameover>
@@ -710,6 +711,7 @@
 		<mainTexture texturepath="Assets/Textures/Interfaz/HUD/texture_general_hud.png"/>
 		<messageTexture texturepath="Assets/Textures/Interfaz/HUD/texture_message.png"/>
 		<cdMaskTexture texturepath="Assets/Textures/Interfaz/HUD/texture_cd_mask.png"/>
+		<levelUpTexture texturepath="Assets/Textures/Interfaz/levelUp.png"/>
 	</hud>
 
 	<inventorymanager>
