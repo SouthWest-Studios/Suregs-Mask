@@ -11,6 +11,7 @@
 #include "Physics.h"
 #include "Window.h"
 #include "Pathfinding.h"
+#include "ParticleSystem.h"
 #include "Map.h"
 #include "Physics.h"
 #include "Item_Hueso.h"
@@ -204,6 +205,8 @@ bool Enemy_Osiris_Variation::CleanUp()
 	app->tex->UnLoad(texture);
 	lastPath.Clear();
 
+	blood = nullptr;
+
 	RELEASE(spritePositions);
 	delete spritePositions;
 
@@ -250,6 +253,9 @@ void Enemy_Osiris_Variation::Die() {
 	else
 	{
 		app->audio->PlayFx(osiris_death_fx);
+
+		fPoint pos((float)position.x, (float)position.y);
+		blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_ENEMY_BLOOD);
 
 		app->entityManager->DestroyEntity(this);
 		app->physics->GetWorld()->DestroyBody(pbodyFoot->body);

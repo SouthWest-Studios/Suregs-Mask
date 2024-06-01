@@ -11,6 +11,7 @@
 #include "Physics.h"
 #include "Window.h"
 #include "Pathfinding.h"
+#include "ParticleSystem.h"
 #include "Map.h"
 #include "Item_Hueso.h"
 #include "Item_Garra.h"
@@ -187,6 +188,8 @@ bool Enemy_Khurt_Variation::CleanUp() {
 	app->tex->UnLoad(texture);
 	lastPath.Clear();
 
+	blood = nullptr;
+
 	RELEASE(spritePositions);
 	delete spritePositions;
 
@@ -238,6 +241,9 @@ void Enemy_Khurt_Variation::Attack(float dt, iPoint playerPos) {
 void Enemy_Khurt_Variation::Die() {
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	currentAnimation = &dieAnim;
+
+	fPoint pos((float)position.x, (float)position.y);
+	blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_ENEMY_BLOOD);
 
 	app->entityManager->DestroyEntity(this);
 	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);

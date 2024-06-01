@@ -9,6 +9,9 @@
 #include "Player.h"
 #include "Physics.h"
 #include "Item_Garra.h"
+#include "Particle.h"
+#include "ParticlePool.h"
+#include "Emitter.h"
 
 struct SDL_Texture;
 
@@ -123,6 +126,7 @@ private:
 	int ols_get_damageAlt2_fx;
 	int ols_death_fx;
 
+	Emitter* blood;
 
 	Item_Garra* garra;
 	pugi::xml_document configFile;

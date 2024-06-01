@@ -45,6 +45,7 @@
 #include "Enemy_Ols_Variation.h"
 #include "Enemy_Muur.h"
 #include "Enemy_Boorok.h"
+#include "Enemy_Boorok_Variation.h"
 #include "Enemy_Osiris_Variation.h"
 #include "TPEntity.h"
 #include "PuzzleButtonEntity.h"
@@ -1652,11 +1653,31 @@ bool Map::LoadEntities(std::string layerName)
 
 					}
 
+					//MUUR_VARIATION
+					if (gid == tileset->firstgid + 34) {
+
+						Enemy_Muur* muur = (Enemy_Muur*)app->entityManager->CreateEntity(EntityType::ENEMY_MUUR_VARIATION);
+						muur->config = configNode.child("entities_data").child("muur_variation");
+						muur->position = iPoint(pos.x + 16, pos.y + 16);
+						muur->Start();
+
+					}
+
 					////BOOROK
 					if (gid == tileset->firstgid + 25) {
 
 						Enemy_Boorok* boorok = (Enemy_Boorok*)app->entityManager->CreateEntity(EntityType::ENEMY_BOOROK);
 						boorok->config = configNode.child("entities_data").child("boorok");
+						boorok->position = iPoint(pos.x + 16, pos.y + 16);
+						boorok->Start();
+
+					}
+
+					////BOOROK_VARIATION
+					if (gid == tileset->firstgid + 35) {
+
+						Enemy_Boorok* boorok = (Enemy_Boorok*)app->entityManager->CreateEntity(EntityType::ENEMY_BOOROK_VARIATION);
+						boorok->config = configNode.child("entities_data").child("boorok_variation");
 						boorok->position = iPoint(pos.x + 16, pos.y + 16);
 						boorok->Start();
 

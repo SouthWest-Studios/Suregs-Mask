@@ -11,6 +11,7 @@
 #include "Physics.h"
 #include "Window.h"
 #include "Pathfinding.h"
+#include "ParticleSystem.h"
 #include "Map.h"
 #include "Physics.h"
 #include "Log.h"
@@ -149,6 +150,8 @@ bool Enemy_Shar::CleanUp()
 	app->physics->DestroyBody(pbodyFoot);
 	app->tex->UnLoad(texture);
 
+	blood = nullptr;
+
 	RELEASE(spritePositions);
 	delete spritePositions;
 
@@ -182,6 +185,9 @@ void Enemy_Shar::Die(float dt) {
 	if (parseResult) {
 		configNode = configFile.child("config");
 	}
+
+	fPoint pos((float)position.x, (float)position.y);
+	blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_ENEMY_BLOOD);
 
 	ojo = (Item_Ojo*)app->entityManager->CreateEntity(EntityType::ITEM_OJO);
 	ojo->config = configNode.child("entities_data").child("item_ojo");

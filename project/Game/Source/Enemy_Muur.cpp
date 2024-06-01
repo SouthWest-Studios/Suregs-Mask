@@ -11,6 +11,7 @@
 #include "Physics.h"
 #include "Window.h"
 #include "Pathfinding.h"
+#include "ParticleSystem.h"
 #include "Map.h"
 #include "Physics.h"
 #include "Item_Hueso.h"
@@ -25,7 +26,7 @@
 
 Enemy_Muur::Enemy_Muur() : Entity(EntityType::ENEMY_MUUR) {
 	name = ("muur");
-	state = EntityState::IDLE;
+	state = EntityState_Enemy::IDLE;
 	currentState = state;
 	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(currentState)].next_state;
 
@@ -103,38 +104,38 @@ bool Enemy_Muur::Update(float dt)
 	// Lógica de cambio de estado
 	if (health <= 0)
 	{
-		nextState = EntityState::DEAD;
+		nextState = EntityState_Enemy::DEAD;
 	}
 	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32)
 	{
-		nextState = EntityState::ATTACKING;
+		nextState = EntityState_Enemy::ATTACKING;
 	}
 	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance * 32)
 	{
-		nextState = EntityState::RUNNING;
+		nextState = EntityState_Enemy::RUNNING;
 	}
 	else if (app->map->pathfinding->GetDistance(playerPos, position) >= viewDistance * 32 && app->entityManager->GetIgory()->playerInFight)
 	{
-		nextState = EntityState::RUNNING;
+		nextState = EntityState_Enemy::RUNNING;
 	}
 	else
 	{
-		nextState = EntityState::IDLE;
+		nextState = EntityState_Enemy::IDLE;
 	}
 
 	// Manejo de estados
 	switch (nextState)
 	{
-	case EntityState::RUNNING:
+	case EntityState_Enemy::RUNNING:
 		Chase(dt, playerPos);
 		break;
-	case EntityState::ATTACKING:
+	case EntityState_Enemy::ATTACKING:
 		Attack(dt);
 		break;
-	case EntityState::DEAD:
+	case EntityState_Enemy::DEAD:
 		Die();
 		break;
-	case EntityState::IDLE:
+	case EntityState_Enemy::IDLE:
 		DoNothing(dt);
 		break;
 	default:
@@ -207,6 +208,8 @@ bool Enemy_Muur::CleanUp()
 	app->tex->UnLoad(texture);
 	lastPath.Clear();
 
+	blood = nullptr;
+
 	RELEASE(spritePositions);
 	delete spritePositions;
 
@@ -246,12 +249,14 @@ void Enemy_Muur::Attack(float dt)
 }
 
 void Enemy_Muur::Die() {
-	app->audio->PlayFx(muur_get_damage_fx);
-
 	
+	app->audio->PlayFx(muur_get_damage_fx);
 
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	currentAnimation = &dieAnim;
+
+	fPoint pos((float)position.x, (float)position.y);
+	blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_ENEMY_BLOOD);
 
 	if (dieAnim.HasFinished())
 	{
@@ -420,7 +425,7 @@ float Enemy_Muur::GetHealth() const {
 }
 
 void Enemy_Muur::TakeDamage(float damage) {
-	if (currentState != EntityState::DEAD && invulnerabilityTimer.ReadMSec() >= 500) {
+	if (currentState != EntityState_Enemy::DEAD && invulnerabilityTimer.ReadMSec() >= 500) {
 		health -= damage;
 		invulnerabilityTimer.Start();
 		timerRecibirDanioColor.Start();
@@ -448,7 +453,7 @@ void Enemy_Muur::CheckPoison() {
 
 	// Aplicar el primer tick de daño inmediatamente (si no, el primer tick no se aplica en el segundo 0.0)
 	if (firstTimePoisonRecibed) {
-		if (currentState != EntityState::DEAD) {
+		if (currentState != EntityState_Enemy::DEAD) {
 			health -= poisonDamage;
 			invulnerabilityTimer.Start();
 			timerRecibirDanioColor.Start();
@@ -461,7 +466,7 @@ void Enemy_Muur::CheckPoison() {
 	if (poisonTimer.ReadSec() <= poisonDuration + epsilon && poisoned) {
 		if (poisonTickTimer.ReadSec() >= poisonTickRate) {
 			poisonTickTimer.Start(); // Reiniciar el temporizador de ticks de veneno
-			if (currentState != EntityState::DEAD) {
+			if (currentState != EntityState_Enemy::DEAD) {
 				health -= poisonDamage;
 				invulnerabilityTimer.Start();
 				timerRecibirDanioColor.Start();
@@ -502,7 +507,7 @@ void Enemy_Muur::Stunned(float dt) {
 	if (stunAnim.HasFinished() && stunTimer.ReadSec() >= 2)
 	{
 		pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
-		nextState = EntityState::IDLE;
+		nextState = EntityState_Enemy::IDLE;
 		isStunned = false;
 		charging = false;
 		chargeTimer.Start();

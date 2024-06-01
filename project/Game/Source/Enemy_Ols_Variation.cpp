@@ -11,6 +11,7 @@
 #include "Physics.h"
 #include "Window.h"
 #include "Pathfinding.h"
+#include "ParticleSystem.h"
 #include "Map.h"
 #include "Item_Garra.h"
 #include "Item_Saliva.h"
@@ -197,6 +198,8 @@ bool Enemy_Ols_Variation::CleanUp()
 	app->physics->DestroyBody(attackSensor); 
 	app->tex->UnLoad(projectileTexture);
 
+	blood = nullptr;
+
 	RELEASE(spritePositions);
 	delete spritePositions;
 
@@ -252,6 +255,9 @@ void Enemy_Ols_Variation::Attack(float dt, iPoint playerPos)
 
 void Enemy_Ols_Variation::Die() {
 	app->audio->PlayFx(ols_death_fx, 2);
+
+	fPoint pos((float)position.x, (float)position.y);
+	blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_ENEMY_BLOOD);
 
 	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
 	if (parseResult) {

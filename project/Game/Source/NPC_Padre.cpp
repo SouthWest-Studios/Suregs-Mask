@@ -11,8 +11,15 @@
 #include "Physics.h"
 #include "Window.h"
 #include "DialogManager.h"
+#include "Dialog.h"
 #include "DialogTriggerEntity.h"
 #include "ModuleFadeToBlack.h"
+#include "PugiXml\src\pugixml.hpp"
+#include <iostream>
+
+
+
+
 
 NPCPadre::NPCPadre() : Entity(EntityType::NPC_PADRE)
 {
@@ -50,12 +57,14 @@ bool NPCPadre::Start() {
 	    false // isDynamic
 	    });
 
-	//pbody = app->physics->CreateRectangleSensor(position.x, position.y, 100, 100, bodyType::STATIC);
-	//pbody->entity = this;
-	//pbody->listener = this;
-	//pbody->ctype = ColliderType::PLAYER;
+	pbody = app->physics->CreateRectangleSensor(position.x, position.y, 100, 100, bodyType::STATIC);
+	pbody->entity = this;
+	pbody->listener = this;
+	pbody->ctype = ColliderType::PLAYER;
 
-
+	parseResult = dialogoFile.load_file("dialogs.xml");
+	dialogoPadre = dialogoFile.child("dialogues");
+	dialogNode = find_child_by_attribute(dialogoPadre, "dialog", "id", "2001").child("sentences").child("sentence");
 	return true;
 }
 
@@ -64,20 +73,14 @@ bool NPCPadre::Update(float dt) {
 
 	currentAnimation->Update();
 
-	//app->dialogManager->CreateDialog();
-   /* for (size_t i = 0; i < length; i++)
+
+	/*for (pugi::xml_node itemNode = dialogNode; itemNode; itemNode = itemNode.next_sibling("sentence"))
 	{
-		if (dialogoPadre.attribute("id").as_int() == 2001) {
-			printf("\nHola");
-		}
+		app->dialogManager->AddDialog(app->dialogManager->CreateDialog(dialogNode, itemNode.attribute("name").as_string(), itemNode.attribute("facetexturepath").as_string()));
 	}*/
 
 
-
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
-
-
-		//if (dialogoPadre.)
 		CleanUp();
 	}
 	return true;
@@ -91,10 +94,17 @@ bool NPCPadre::PostUpdate() {
 	return true;
 }
 
+pugi::xml_node NPCPadre::find_child_by_attribute(pugi::xml_node parent, const char* name, const char* attr_name, const char* attr_value) {
+	for (pugi::xml_node node : parent.children(name)) {
+		if (std::strcmp(node.attribute(attr_name).value(), attr_value) == 0) {
+			return node;
+		}
+	}
+	return pugi::xml_node(); 
+}
 bool NPCPadre::CleanUp() {
-	//app->physics->GetWorld()->DestroyBody(pbody->body);
+	app->physics->GetWorld()->DestroyBody(pbody->body);
 	app->tex->UnLoad(texture);
-	//app->physics->GetWorld()->DestroyBody(pbody->body);
 	RELEASE(spritePositions);
 	delete spritePositions;
 
@@ -109,6 +119,12 @@ void NPCPadre::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");
+		break;
+	case ColliderType::PLAYER:
+		for (pugi::xml_node itemNode = dialogNode; itemNode; itemNode = itemNode.next_sibling("sentence"))
+		{
+			app->dialogManager->AddDialog(app->dialogManager->CreateDialog(dialogNode, itemNode.attribute("name").as_string(), itemNode.attribute("facetexturepath").as_string()));
+		}
 		break;
 	default:
 		break;
