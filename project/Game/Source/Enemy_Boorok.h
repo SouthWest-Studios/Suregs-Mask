@@ -100,6 +100,7 @@ private:
 	Animation chargeAttackAnim;
 	Animation dieAnim;
 
+	int boorok_attack_fx;
 	int boorok_get_damage_fx;
 	int boorok_get_damageAlt_fx;
 	int boorok_death_fx;
