@@ -51,7 +51,8 @@ public:
 	
 	std::vector<Quest*> GetActiveQuest();
 
-	void UpdateQuestLine(int questLineID);
+	void UpdateQuestLine(int questLineID, int newQuestTarget = -1);
+	int GetQuestLineIndex(int questLineID);
 
 	QuestLine* FindQuestLine(int questLineID);
 	Quest* FindQuest(QuestLine* questLine, int questID);

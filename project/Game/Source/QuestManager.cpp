@@ -128,7 +128,7 @@ std::vector<Quest*> QuestManager::GetActiveQuest()
 	return quests;
 }
 
-void QuestManager::UpdateQuestLine(int questLineID)
+void QuestManager::UpdateQuestLine(int questLineID, int newQuestTarget)
 {
 	QuestLine* questLine = FindQuestLine(questLineID);
 
@@ -137,12 +137,23 @@ void QuestManager::UpdateQuestLine(int questLineID)
 			questLine->active = true;
 		}
 		else {
-			questLine->questIndex++;
+			if (newQuestTarget == -1) {
+				questLine->questIndex++;
+			}
+			else {
+				questLine->questIndex = newQuestTarget;
+			}
+			
 			if (questLine->questIndex >= questLine->quests.size()) {
 				questLine->completed = true;
 			}
 		}
 	}
+}
+
+int QuestManager::GetQuestLineIndex(int questLineID)
+{
+	return FindQuestLine(questLineID)->questIndex;
 }
 
 QuestLine* QuestManager::FindQuestLine(int questLineID)

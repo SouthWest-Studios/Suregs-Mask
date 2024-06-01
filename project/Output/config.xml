@@ -967,6 +967,7 @@ Vida: Muy alta	Daño: Muy alto	Tamaño: Muy grande Velocidad: Muy lenta"
 
 	<questmanager>
 		<questLines>
+			<!-- MAIN QUEST -->
 			<questLine id="1" defaultActive="true">
 				<quest id="1" questTitle="Habla con Vhea." />
 				<quest id="2" questTitle="Ve al campo de entrenamiento." />
@@ -975,19 +976,16 @@ Vida: Muy alta	Daño: Muy alto	Tamaño: Muy grande Velocidad: Muy lenta"
 				<quest id="5" questTitle="Ve a las “ruinas” y descubre que es el “artefacto” del que hablaba tu padre." />
 			</questLine>
 
+			<!-- SECUNDARIA XXXX -->
 			<questLine id="2" defaultActive="false">
 				<quest id="1" questTitle="Dale la carta de Sukhy a Zupho, el guardia." />
 			</questLine>
 
+			<!-- SECUNDARIA XXXX -->
 			<questLine id="3" defaultActive="false">
 				<quest id="1" questTitle="Termina el entrenamiento y lleva el paquete de Hemyl a Vhea." />
 			</questLine>
-			
-			
 		</questLines>
-		
-		
-		
 	</questmanager>
 
 </config>
