@@ -854,7 +854,8 @@ bool Player::Update(float dt)
 		maskZeroLevel++;
 		XPtoLevelUpZero += matrizLevelXP[maskZeroLevel];
 		
-		app->render->DrawTexture(app->hud->levelUpTexture, 900, 300, 4);
+		levelUpOne = true;
+		
 
 		printf("Has subido la mask 0 a nivel %i y su experiencia actual es %i \n", maskZeroLevel, maskZeroXP);
 	}
@@ -921,6 +922,11 @@ bool Player::PostUpdate() {
 	}
 	if (currentAnimation == nullptr) { currentAnimation = &idle_player; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
+
+	app->hud->levelUpTexture = app->tex->Load(app->hud->levelUpTexturePath);
+	app->render->DrawTexture(app->hud->levelUpTexture, 700, 300);
+
+
 
 	return true;
 }

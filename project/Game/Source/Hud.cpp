@@ -271,6 +271,8 @@ bool Hud::PostUpdate()
 		app->render->DrawTexture(hudTexture, 177, 46, 1.0, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
 	}
 
+
+
 	//Monedas
 	std::string quantityStr = std::to_string(monedasObtenidasHud);
 	//std::string quantityStr = std::to_string(app->inventoryManager->monedasObtenidas);
@@ -421,9 +423,6 @@ bool Hud::PostUpdate()
 		}
 
 	}
-
-	
-
 
 
 	return true;
