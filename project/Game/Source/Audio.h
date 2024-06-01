@@ -48,6 +48,9 @@ public:
 	// Play a music file
 	bool PlayMusic(const char* path, float fadeTime = DEFAULT_MUSIC_FADE_TIME);
 
+	// Play an ambience sound file
+	bool PlayAmbience(const char* path, float fadeTime = DEFAULT_MUSIC_FADE_TIME);
+
 	// Stop playing a music
 	bool StopMusic(float fadeTime = DEFAULT_MUSIC_FADE_TIME);
 
@@ -68,6 +71,9 @@ public:
 
 	// Play a music from the config
 	bool LoadAudioMusic(const char* name, float fadeTime = DEFAULT_MUSIC_FADE_TIME);
+
+	// Play an ambience sound from the config
+	bool LoadAudioAmbience(const char* name, float fadeTime = DEFAULT_MUSIC_FADE_TIME);
 
 	// Play a WAV from the config
 	unsigned int LoadAudioFx(const char* name);

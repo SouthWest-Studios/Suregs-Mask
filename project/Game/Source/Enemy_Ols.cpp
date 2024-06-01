@@ -254,7 +254,7 @@ void Enemy_Ols::Attack(float dt, iPoint playerPos)
 }
 
 void Enemy_Ols::Die() {
-	app->audio->PlayFx(ols_death_fx, 2);
+	app->audio->PlayFx(ols_death_fx);
 
 	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
 	if (parseResult) {
