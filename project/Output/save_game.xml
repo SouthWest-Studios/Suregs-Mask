@@ -44,5 +44,26 @@
 		</inventory>
 	</iventorymanager>
 	<commercemanager />
-	<questmanager />
+	<questmanager>
+		<questLines>
+			<questLine id="1" index="0" active="false" completed="false" />
+			<questLine id="2" index="0" active="false" completed="false" />
+			<questLine id="3" index="0" active="false" completed="false" />
+		</questLines>
+	</questmanager>
+	<notesmanager>
+		<Note />
+	</notesmanager>
+	<bestiariomanager>
+		<Bestiario />
+	</bestiariomanager>
+	<equipo />
+	<Ascensormenu />
+	<treemanager />
+	<guiManager />
+	<dialogmanager />
+	<fadeToBlack />
+	<debugConsole />
+	<renderer />
+	<pSystem />
 </game_state>
