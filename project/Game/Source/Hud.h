@@ -109,10 +109,13 @@ private:
 
 	int monedasObtenidasHud = 0;
 
-
+	//BarraVida
 	bool isLowHealth = false;
-	int blinkCounter = 0;
-	int blinkSpeed = 20;
+	bool shrinking = false;
+	bool growing = false;
+	const float animationDuration = 0.09f; 
+	Timer animationTimer;
+	float scale;
 
 public:
 

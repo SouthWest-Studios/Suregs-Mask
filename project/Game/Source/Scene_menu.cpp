@@ -67,10 +67,26 @@ bool Scene_Menu::Start()
 	controls = app->tex->Load(controls_tp);
 	coin = app->tex->Load(coin_tp);
 	
-	pugi::xml_document saveFile;
-	pugi::xml_node gameState = saveFile.append_child("game_state");
+	pugi::xml_document saveOneFile;
+	pugi::xml_node game_stateOne;
+	pugi::xml_parse_result parseResultSaveOne = saveOneFile.load_file("save_game.xml");
+	game_stateOne = saveOneFile.child("game_state");
 
-	coinQuantity = gameState.child("iventorymanager").child("inventory").child("money").attribute("quantity").as_string();
+	coinQuantityOne = game_stateOne.child("iventorymanager").child("inventory").child("money").attribute("quantity").as_int();
+
+	pugi::xml_document saveTwoFile;
+	pugi::xml_node game_stateTwo;
+	pugi::xml_parse_result parseResultSaveTwo = saveTwoFile.load_file("save_game2.xml");
+	game_stateTwo = saveTwoFile.child("game_state");
+
+	coinQuantityTwo = game_stateTwo.child("iventorymanager").child("inventory").child("money").attribute("quantity").as_int();
+
+	pugi::xml_document saveThreeFile;
+	pugi::xml_node game_stateThree;
+	pugi::xml_parse_result parseResultSaveThree = saveThreeFile.load_file("save_game3.xml");
+	game_stateThree = saveThreeFile.child("game_state");
+
+	coinQuantityThree = game_stateThree.child("iventorymanager").child("inventory").child("money").attribute("quantity").as_int();
 
 	//Get window size
 	app->win->GetWindowSize(windowW, windowH);
@@ -742,7 +758,14 @@ void Scene_Menu::ShowSavedGames()
 	app->render->DrawTexture(coin, 770, 346, 0.35f);
 	app->render->DrawTexture(coin, 770, 440, 0.35f);
 
-	app->render->DrawText(coinQuantity, 740, 252, 50, 50);
+	std::string quantityStrOne = std::to_string(coinQuantityOne);
+	app->render->DrawText(quantityStrOne.c_str(), 730, 255, 45, 27, 0, 0, 0, 0, true);
+
+	std::string quantityStrTwo = std::to_string(coinQuantityTwo);
+	app->render->DrawText(quantityStrTwo.c_str(), 730, 349, 45, 27, 0, 0, 0, 0, true);
+
+	std::string quantityStrThree = std::to_string(coinQuantityThree);
+	app->render->DrawText(quantityStrThree.c_str(), 730, 443, 45, 27, 0, 0, 0, 0, true);
 }
 
 void Scene_Menu::ShowNewGames()

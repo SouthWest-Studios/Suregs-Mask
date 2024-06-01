@@ -55,6 +55,7 @@ bool Boss_Surma::Start() {
 	runAnim.LoadAnim((char*)name.c_str(), "runAnim", spritePositions);
 	combo1Anim.LoadAnim((char*)name.c_str(), "combo1Anim", spritePositions);
 	combo2Anim.LoadAnim((char*)name.c_str(), "combo2Anim", spritePositions);
+	combo2Anim.Reverse();
 	combo3Anim.LoadAnim((char*)name.c_str(), "combo3Anim", spritePositions);
 	ataqueCargadoAnim.LoadAnim((char*)name.c_str(), "ataqueCargadoAnim", spritePositions);
 	ataqueCargadoEjecutarAnim.LoadAnim((char*)name.c_str(), "ataqueCargadoEjecutarAnim", spritePositions);
@@ -95,8 +96,8 @@ bool Boss_Surma::Start() {
 
 	room = GetCurrentRoom();
 
-	fase = FASE_Surma::FASE_ONE;
-	//fase = FASE_Surma::FASE_CHANGE;
+	//fase = FASE_Surma::FASE_ONE;
+	fase = FASE_Surma::FASE_CHANGE;
 
 	pugi::xml_parse_result parseResult2 = configFile.load_file("config.xml");
 	if (parseResult2) {
@@ -582,11 +583,11 @@ void Boss_Surma::FaseC(float dt, iPoint playerPos)
 		actualColorTint.r = lerp(actualColorTint.r, 200, 0.01);
 		actualColorTint.g = lerp(actualColorTint.g, 0, 0.01);
 		actualColorTint.b = lerp(actualColorTint.b, 200, 0.01);
-		actualScale = lerp(actualScale, 0.8, 0.01);
-		sprieOffsetR.x = lerp(sprieOffsetR.x, -120, 0.01);
-		sprieOffsetR.y = lerp(sprieOffsetR.y, -230, 0.01);
-		sprieOffsetL.x = lerp(sprieOffsetL.x, -250, 0.01);
-		sprieOffsetL.y = lerp(sprieOffsetL.y, -230, 0.01);
+		actualScale = lerp(actualScale, 0.9, 0.01);
+		sprieOffsetR.x = lerp(sprieOffsetR.x, -340, 0.01);
+		sprieOffsetR.y = lerp(sprieOffsetR.y, -520, 0.01);
+		sprieOffsetL.x = lerp(sprieOffsetL.x, -340, 0.01);
+		sprieOffsetL.y = lerp(sprieOffsetL.y, -520, 0.01);
 
 		/*sprieOffsetR.x = -120;
 		sprieOffsetR.y = -230;

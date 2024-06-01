@@ -22,6 +22,7 @@
 #include "QuestManager.h"
 #include "Scene_Pueblo.h"
 #include "Scene_Pueblo_Tutorial.h"
+#include "Utils.cpp"
 
 Hud::Hud(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -228,17 +229,42 @@ bool Hud::PostUpdate()
 
 	SDL_Rect* rectBarraVidaCalculado = new SDL_Rect{ rectBarraVida->x, rectBarraVida->y, rectW, rectBarraVida->h };
 
-	// Si la vida está baja, hacer que la barra de vida parpadee
-	if (isLowHealth) {
-		blinkCounter++;
-		if (blinkCounter % blinkSpeed < blinkSpeed / 2) {
-			app->render->DrawTexture(hudTexture, 173, 42, 1.02, SDL_FLIP_NONE, rectFondoBarraVida, 0);
-			app->render->DrawTexture(hudTexture, 177, 46, 1.02, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
+	if (isLowHealth && !shrinking && !growing && app->entityManager->GetPlayer()->currentStats.currentHealth > 0) {
+		shrinking = true;
+		animationTimer.Start();
+	}
+
+	if (shrinking) {
+
+		float progress = animationTimer.ReadMSec() / (animationDuration * 1000);
+		float easedProgress = easeOutCubic(progress);
+		float scale = 1 - easedProgress * 0.06;
+
+		app->render->DrawTexture(hudTexture, 173, 42, scale, SDL_FLIP_NONE, rectFondoBarraVida, 0);
+		app->render->DrawTexture(hudTexture, 177, 46, scale, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
+
+		if (animationTimer.ReadMSec() >= animationDuration * 1000) {
+			shrinking = false;
+			growing = true;
+			animationTimer.Start();
+		}
+	}
+	else if (growing) {
+
+		float progress = animationTimer.ReadMSec() / (animationDuration * 1000);
+		float easedProgress = easeOutCubic(progress);
+		float scale = 0.94 + easedProgress * 0.06;
+
+		app->render->DrawTexture(hudTexture, 173, 42, scale, SDL_FLIP_NONE, rectFondoBarraVida, 0);
+		app->render->DrawTexture(hudTexture, 177, 46, scale, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
+
+		if (animationTimer.ReadMSec() >= animationDuration * 1000) {
+			growing = false;
 		}
 	}
 	else {
-		app->render->DrawTexture(hudTexture, 173, 42, SDL_FLIP_NONE, rectFondoBarraVida, 0);
-		app->render->DrawTexture(hudTexture, 177, 46, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
+		app->render->DrawTexture(hudTexture, 173, 42, 1.0, SDL_FLIP_NONE, rectFondoBarraVida, 0);
+		app->render->DrawTexture(hudTexture, 177, 46, 1.0, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
 	}
 
 	//Monedas
