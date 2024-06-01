@@ -72,7 +72,7 @@ private:
 	iPoint dialogPosition = { 59 , 318 }; //{ 0 , 375 }
 	iPoint namePosition = { 70 , -60 };
 	iPoint optionsPosition = { 0 , 300 };
-	int optionsDistanceBetween = 50;
+	int optionsDistanceBetween = 60;
 
 	Timer dialogueAnimation;
 

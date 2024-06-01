@@ -77,6 +77,7 @@ public:
 	TTF_Font* buttonFont;
 	TTF_Font* titleFont;
 	TTF_Font* goldFont;
+	TTF_Font* questFont;
 
 	bool vsync = false;
 
