@@ -1105,7 +1105,7 @@ void Player::Regenpocion(float dt)
 					regenAmount = 0;
 					totalRegen = 0;
 				}
-				regenTimer.Start();
+ 				regenTimer.Start();
 			}
 		}
 	}

@@ -234,6 +234,8 @@ bool Enemy_Boorok::CleanUp()
 	app->tex->UnLoad(texture);
 	lastPath.Clear();
 
+	blood = nullptr;
+
 	RELEASE(spritePositions);
 	delete spritePositions;
 
@@ -275,6 +277,9 @@ void Enemy_Boorok::Die()
 {
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	currentAnimation = &dieAnim;
+
+	fPoint pos(position.x, position.y);
+	blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_ENEMY_BLOOD);
 
 	if (dieAnim.HasFinished())
 	{
