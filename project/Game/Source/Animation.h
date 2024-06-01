@@ -73,6 +73,15 @@ public:
 		}
 	}
 
+	void Reverse() {
+		for (int i = 0; i < totalFrames / 2; ++i)
+		{
+			SDL_Rect temp = frames[i];
+			frames[i] = frames[totalFrames - i - 1];
+			frames[totalFrames - i - 1] = temp;
+		}
+	}
+
 	SDL_Rect& GetCurrentFrame()
 	{
 		int actualFrame = currentFrame;
