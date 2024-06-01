@@ -260,6 +260,7 @@ bool Commerce::CloseCommerce()
 	app->tex->UnLoad(backgroundDescriptionTexture);
 	app->tex->UnLoad(npcTexture);
 
+	app->entityManager->active = true;
 
 	return ret;
 }

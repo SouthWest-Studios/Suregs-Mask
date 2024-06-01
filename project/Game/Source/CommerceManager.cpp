@@ -224,13 +224,12 @@ bool CommerceManager::Update(float dt)
 {
 
 	bool ret = true;
-
-
 	for (int i = 0; i < commerces.size(); i++) {
 		if (commerces.at(i)->active) {
 			commerces.at(i)->Update(dt);
-			app->entityManager->active = false;
-			//app->hud->isAnyMenuShowing = true;
+			if (commerces.at(i)->active) {
+				app->entityManager->active = false;
+			}
 		}
 	}
 
