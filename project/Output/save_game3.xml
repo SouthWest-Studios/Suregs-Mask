@@ -5,8 +5,6 @@
 		<textures />
 		<pSystem />
 		<audio />
-		<:anonymous />
-		<:anonymous />
 		<scene_pueblo />
 		<entitymanager>
 			<entity_manager>
@@ -37,7 +35,6 @@
 		</bestiariomanager>
 		<equipo />
 		<Ascensormenu />
-		<:anonymous />
 		<guiManager />
 		<dialogmanager />
 		<fadeToBlack />

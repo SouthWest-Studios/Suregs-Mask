@@ -67,10 +67,12 @@ bool Scene_Menu::Start()
 	controls = app->tex->Load(controls_tp);
 	coin = app->tex->Load(coin_tp);
 	
-	pugi::xml_document saveFile;
-	pugi::xml_node gameState = saveFile.append_child("game_state");
+	pugi::xml_document saveOneFile;
+	pugi::xml_node game_state;
+	pugi::xml_parse_result parseResultSaveOne = saveOneFile.load_file("save_game.xml");
+	game_state = saveOneFile.append_child("game_state").child(name.GetString());
 
-	coinQuantity = gameState.child("iventorymanager").child("inventory").child("money").attribute("quantity").as_string();
+	coinQuantity = game_state.child("iventorymanager").child("inventory").child("money").attribute("quantity").as_int(0);
 
 	//Get window size
 	app->win->GetWindowSize(windowW, windowH);
@@ -742,7 +744,8 @@ void Scene_Menu::ShowSavedGames()
 	app->render->DrawTexture(coin, 770, 346, 0.35f);
 	app->render->DrawTexture(coin, 770, 440, 0.35f);
 
-	app->render->DrawText(coinQuantity, 740, 252, 50, 50);
+	std::string quantityStr = std::to_string(coinQuantity);
+	app->render->DrawText(quantityStr.c_str(), 740, 252, 50, 50, 0, 0, 0, 0, true);
 }
 
 void Scene_Menu::ShowNewGames()
