@@ -20,7 +20,7 @@
 			</puzzles>
 		</map>
 	</:anonymous>
-	<scene_pueblo />
+	<pueblo_tutorial />
 	<entitymanager>
 		<entity_manager>
 			<doors>
@@ -36,9 +36,9 @@
 	<menu />
 	<iventorymanager>
 		<inventory>
-			<money quantity="399" />
-			<SwordLevel quantity="2" />
-			<ArmorLevel quantity="2" />
+			<money quantity="0" />
+			<SwordLevel quantity="0" />
+			<ArmorLevel quantity="0" />
 			<PrimaryMask quantity="-1" />
 			<SecondaryMask quantity="-1" />
 			<StoryLevel quantity="2" />
