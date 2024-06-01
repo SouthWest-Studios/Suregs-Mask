@@ -19,6 +19,9 @@
 #include "Scene_Testing.h"
 #include "ModuleFadeToBlack.h"
 #include "ElevatorMenu.h"
+#include "QuestManager.h"
+#include "Scene_Pueblo.h"
+#include "Scene_Pueblo_Tutorial.h"
 
 Hud::Hud(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -363,6 +366,23 @@ bool Hud::PostUpdate()
 		app->physics->active = true;
 		couunt = 0;
 	}
+
+
+
+	//Misiones
+
+	if (app->scene_pueblo->active || app->scene_pueblo_tutorial->active) {
+
+		std::vector<Quest*> quests = app->questManager->GetActiveQuest();
+		for (int i = 0; i < quests.size(); i++) {
+			app->render->DrawTexture(hudTexture, 925, 200 + (i * 50), SDL_FLIP_NONE, rectFondoObjetosConseguidos, 0);
+			app->render->DrawTextBound(quests.at(i)->questTitle.c_str(), 992, 207 + (i * 50), 300, { 52, 25, 0 }, app->render->questFont);
+		}
+
+	}
+
+	
+
 
 
 	return true;

@@ -43,13 +43,16 @@ bool QuestManager::Awake(pugi::xml_node config)
 		int questLineId = questLineNode.attribute("id").as_int();
 
 		QuestLine* questLine = CreateQuestLine(questLineId);
-		
-		
-		pugi::xml_node questNode = questLineNode.child("quest");
-		while (questNode != NULL) {
-			CreateQuest(questLineId, questNode.attribute("id").as_int(), questNode.attribute("questTitle").as_string());
-			questNode = questNode.next_sibling("quest");
+		if (questLine != nullptr) {
+			questLine->active = questLineNode.attribute("defaultActive").as_bool(false);
+
+			pugi::xml_node questNode = questLineNode.child("quest");
+			while (questNode != NULL) {
+				CreateQuest(questLineId, questNode.attribute("id").as_int(), questNode.attribute("questTitle").as_string());
+				questNode = questNode.next_sibling("quest");
+			}
 		}
+		
 		questLineNode = questLineNode.next_sibling("questLine");
 	}
 
@@ -107,9 +110,39 @@ std::string QuestManager::GetQuestTitle(int questLineID, int questID)
 	return FindQuest(FindQuestLine(questLineID), questID)->questTitle;
 }
 
+std::vector<Quest*> QuestManager::GetActiveQuest()
+{
+	std::vector<Quest*> quests;
+
+
+	for (int i = 0; i < questLines.size(); i++) {
+
+		QuestLine* questLine = questLines.at(i);
+
+		if (questLine->active && !questLine->completed) {
+			quests.push_back(FindActualQuest(questLine));
+		}
+	}
+
+
+	return quests;
+}
+
 void QuestManager::UpdateQuestLine(int questLineID)
 {
-	FindQuestLine(questLineID)->questIndex++;
+	QuestLine* questLine = FindQuestLine(questLineID);
+
+	if (questLine != nullptr) {
+		if (!questLine->active && !questLine->completed) {
+			questLine->active = true;
+		}
+		else {
+			questLine->questIndex++;
+			if (questLine->questIndex >= questLine->quests.size()) {
+				questLine->completed = true;
+			}
+		}
+	}
 }
 
 QuestLine* QuestManager::FindQuestLine(int questLineID)
@@ -130,6 +163,12 @@ Quest* QuestManager::FindQuest(QuestLine* questLine, int questID)
 		}
 	}
 	return nullptr;
+}
+
+Quest* QuestManager::FindActualQuest(QuestLine* questLine)
+{
+
+	return FindQuest(questLine, questLine->questIndex);
 }
 
 bool QuestManager::LoadState(pugi::xml_node node)
