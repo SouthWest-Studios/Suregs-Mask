@@ -183,6 +183,7 @@
     <ClCompile Include="Source\NPC_Herrera.cpp" />
     <ClCompile Include="Source\NPC_MujerEnamorada.cpp" />
     <ClCompile Include="Source\NPC_MujerPreocupada.cpp" />
+    <ClCompile Include="Source\NPC_Padre.cpp" />
     <ClCompile Include="Source\NPC_Pescador.cpp" />
     <ClCompile Include="Source\NPC_Vendedor.cpp" />
     <ClCompile Include="Source\Particle.cpp" />
@@ -312,6 +313,7 @@
     <ClInclude Include="Source\NPC_Herrera.h" />
     <ClInclude Include="Source\NPC_MujerEnamorada.h" />
     <ClInclude Include="Source\NPC_MujerPreocupada.h" />
+    <ClInclude Include="Source\NPC_Padre.h" />
     <ClInclude Include="Source\NPC_Pescador.h" />
     <ClInclude Include="Source\NPC_Vendedor.h" />
     <ClInclude Include="Source\OjoInv.h" />

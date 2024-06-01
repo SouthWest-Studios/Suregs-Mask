@@ -19,6 +19,8 @@
 #include <Optick/include/optick.h>
 #include "Boss_Igory.h"
 #include "Utils.cpp"
+#include "DialogManager.h"
+
 #include "Item_Mascara_3.h"
 
 Boss_Igory::Boss_Igory() : Entity(EntityType::BOSS_IGORY) {
@@ -319,9 +321,9 @@ bool Boss_Igory::PostUpdate() {
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
 
-	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
+	/*if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
 		app->map->generaSureg(fase, position);
-	}
+	}*/
 
 	return true;
 }
@@ -684,6 +686,7 @@ void Boss_Igory::Die() {
 	currentAnimation = &dead_boss_Igory;
 	pbodyFoot->body->SetType(b2_staticBody);
 
+	//app->dialogManager->CreateDialog();
 	////Mask XP
 	//Item_mascara_3* mascara3 = (Item_mascara_3*)app->entityManager->CreateEntity(EntityType::ITEM_MASCARA3);
 	//mascara3->config = configNode.child("entities_data").child("item_mascara_3");
