@@ -82,7 +82,7 @@
       <water_fx path="Assets/Audio/Fx/Fishing/water_fx.wav"/>
 
       <!--enemies-->
-      <ols_attack_fx path=""/>
+      <ols_attack_fx path="Assets/Audio/Fx/Enemies/ols_attack_fx.wav"/>
       <ols_get_damage_fx path="Assets/Audio/Fx/Enemies/ols_get_damage_fx.wav"/>
       <ols_get_damageAlt_fx path="Assets/Audio/Fx/Enemies/ols_getAlt_damage_fx.wav"/>
       <ols_get_damageAlt2_fx path="Assets/Audio/Fx/Enemies/ols_getAlt2_damage_fx.wav"/>
@@ -178,7 +178,11 @@
 				
 		<muur texturePath="Assets/Textures/Entidades/Muur/spritesheet_muur.png" 
 				maxHealth="100.0f" speed="4f" attackDamage="20.0f" attackDistance="1" viewDistance="15"  chargeattackDistance= "10"
-				Tsprite="64" Pwidth="1688" sprite_x="211" sprite_y="175"/>	
+				Tsprite="64" Pwidth="1688" sprite_x="211" sprite_y="175"/>
+
+		<muur_variation texturePath="Assets/Textures/Entidades/Muur/spritesheet_muur.png"
+				maxHealth="200.0f" speed="4.5f" attackDamage="40.0f" attackDistance="1" viewDistance="15"  chargeattackDistance= "10"
+				Tsprite="64" Pwidth="1688" sprite_x="211" sprite_y="175"/>
 
 		<khurt texturePath="Assets/Textures/Entidades/Khurt/spritesheet_khurt.png" 
 			   maxHealth="220.0f" speed="1.5f" attackDamage="90.0f" attackDistance="2" viewDistance="20" chargeAttackDistance= "10"
@@ -191,6 +195,10 @@
 		<boorok texturePath="Assets/Textures/Entidades/Boorok/spritesheet_boorok.png" 
 			   maxHealth="400.0f" speed="0.6f" attackDamage="50.0f" attackDistance="2" viewDistance="20" chargeattackDistance= "10" areaattackdamage= "180.0f"
 			   Tsprite="70" Pwidth="5000" sprite_x="500" sprite_y="429"/>
+
+		<boorok_variation texturePath="Assets/Textures/Entidades/Boorok/spritesheet_boorok.png"
+				maxHealth="850.0f" speed="0.9f" attackDamage="150.0f" attackDistance="2" viewDistance="20" chargeattackDistance= "10" areaattackdamage= "450.0f"
+				Tsprite="70" Pwidth="5000" sprite_x="500" sprite_y="429"/>
 
 		<boss_inuit texturePath="Assets/Textures/Entidades/Boss/Inuit/Miniboss1.png" 
 					maxHealth="6500.0f" speed="5f" attackDamage="90.0f" attackDistance="4" viewDistance="20"
@@ -345,6 +353,7 @@
 		<logo texturepath ="Assets/Textures/Interfaz/textura_logo.png"/>
 		<savedGames texturepath ="Assets/Textures/Interfaz/textura_saved_games.png"/>
 		<controls texturepath ="Assets/Textures/Interfaz/textura_menu_controles.png"/>
+		<coin texturepath ="Assets/Textures/Interfaz/Resources/textura_moneda.png"/>
 	</scene_menu>
 
 	<scene_gameover>
@@ -592,8 +601,18 @@
 			<idleAnim start="32" end="38" speed="0.05f" loop="true"/>
 			<chargeAnim start="40" end="46" speed="0.2f" loop="false"/>
 			<reciebeDamage start="48" end="55" speed="0.05f" loop="true"/>
-			<dieAnim start="56" end="63" speed="0.05f" loop="false"/>
+			<dieAnim start="56" end="63" speed="0.15f" loop="false"/>
 		</muur>
+
+		<muur_variation>
+			<runAnim start="0" end="8" speed="0.05f" loop="true"/>
+			<stunAnim start="16" end="24" speed="0.1f" loop="false"/>
+			<attackAnim start="24" end="31" speed="0.05f" loop="false"/>
+			<idleAnim start="32" end="38" speed="0.05f" loop="true"/>
+			<chargeAnim start="40" end="46" speed="0.2f" loop="false"/>
+			<reciebeDamage start="48" end="55" speed="0.05f" loop="true"/>
+			<dieAnim start="56" end="63" speed="0.15f" loop="false"/>
+		</muur_variation>
 
 		<boorok>
 			<sleepAnim start="0" end="10" speed="0.05f" loop="true"/>
@@ -605,6 +624,17 @@
 			<chargeAttackAnim start="60" end="64" speed="0.05f" loop="false"/>
 			<dieAnim start="0" end="10" speed="0.1f" loop="false"/>
 		</boorok>
+
+		<boorok_variation>
+			<sleepAnim start="0" end="10" speed="0.05f" loop="true"/>
+			<runAnim start="10" end="19" speed="0.05f" loop="true"/>
+			<attackAnim start="20" end="27" speed="0.05f" loop="false"/>
+			<reciebeDamage start="30" end="37" speed="0.05f" loop="false"/>
+			<idleAnim start="40" end="46" speed="0.05f" loop="true"/>
+			<wakeupAnim start="50" end="56" speed="0.05f" loop="false"/>
+			<chargeAttackAnim start="60" end="64" speed="0.05f" loop="false"/>
+			<dieAnim start="0" end="10" speed="0.1f" loop="false"/>
+		</boorok_variation>
 
 		<item>
 			<idleAnim start="0" end="23" speed="0.2f" loop="true"/>
@@ -938,6 +968,7 @@ Vida: Muy alta	Daño: Muy alto	Tamaño: Muy grande Velocidad: Muy lenta"
 
 	<questmanager>
 		<questLines>
+			<!-- MAIN QUEST -->
 			<questLine id="1" defaultActive="true">
 				<quest id="1" questTitle="Habla con Vhea." />
 				<quest id="2" questTitle="Ve al campo de entrenamiento." />
@@ -946,19 +977,16 @@ Vida: Muy alta	Daño: Muy alto	Tamaño: Muy grande Velocidad: Muy lenta"
 				<quest id="5" questTitle="Ve a las “ruinas” y descubre que es el “artefacto” del que hablaba tu padre." />
 			</questLine>
 
+			<!-- SECUNDARIA XXXX -->
 			<questLine id="2" defaultActive="false">
 				<quest id="1" questTitle="Dale la carta de Sukhy a Zupho, el guardia." />
 			</questLine>
 
+			<!-- SECUNDARIA XXXX -->
 			<questLine id="3" defaultActive="false">
 				<quest id="1" questTitle="Termina el entrenamiento y lleva el paquete de Hemyl a Vhea." />
 			</questLine>
-			
-			
 		</questLines>
-		
-		
-		
 	</questmanager>
 
 </config>

@@ -56,6 +56,7 @@ bool Scene_Menu::Start()
 	logo_tp = config.child("logo").attribute("texturepath").as_string();
 	savedGames_tp = config.child("savedGames").attribute("texturepath").as_string();
 	controls_tp = config.child("controls").attribute("texturepath").as_string();
+	coin_tp = config.child("coin").attribute("texturepath").as_string();
 
 	menuMain = app->tex->Load(menuMain_tp);
 	menuMain2 = app->tex->Load(menuMain2_tp);
@@ -64,7 +65,12 @@ bool Scene_Menu::Start()
 	logo = app->tex->Load(logo_tp);
 	savedGames = app->tex->Load(savedGames_tp);
 	controls = app->tex->Load(controls_tp);
+	coin = app->tex->Load(coin_tp);
 	
+	pugi::xml_document saveFile;
+	pugi::xml_node gameState = saveFile.append_child("game_state");
+
+	coinQuantity = gameState.child("iventorymanager").child("inventory").child("money").attribute("quantity").as_string();
 
 	//Get window size
 	app->win->GetWindowSize(windowW, windowH);
@@ -724,13 +730,19 @@ void Scene_Menu::ShowSavedGames()
 		control->data->state = GuiControlState::DISABLED;
 	}
 	if (showSavedGames && !_showSavedGames) {
-		partida1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 13, "PARTIDA GUARDADA 1", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 485,	180,25 }, this);
-		partida2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, "PARTIDA GUARDADA 2", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 395,	180,25 }, this);
-		partida3 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, "PARTIDA GUARDADA 3", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 300,	180,25 }, this);
+		partida1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 13, "PARTIDA GUARDADA 1", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 505,	180,25 }, this);
+		partida2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, "PARTIDA GUARDADA 2", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 415,	180,25 }, this);
+		partida3 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, "PARTIDA GUARDADA 3", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 320,	180,25 }, this);
 		gcCloseSavedGames = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 16, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 200,	60,25 }, this);
 		_showSavedGames = true;
 	}
+
 	app->render->DrawTexture(savedGames, 0, 0);
+	app->render->DrawTexture(coin, 770, 252, 0.35f);
+	app->render->DrawTexture(coin, 770, 346, 0.35f);
+	app->render->DrawTexture(coin, 770, 440, 0.35f);
+
+	app->render->DrawText(coinQuantity, 740, 252, 50, 50);
 }
 
 void Scene_Menu::ShowNewGames()

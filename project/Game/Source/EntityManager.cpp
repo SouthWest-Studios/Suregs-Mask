@@ -7,7 +7,9 @@
 #include "Enemy_Osiris_Variation.h"
 #include "Enemy_Shar.h"
 #include "Enemy_Muur.h"
+#include "Enemy_Muur_Variation.h"
 #include "Enemy_Boorok.h"
+#include "Enemy_Boorok_Variation.h"
 #include "Enemy_Khurt.h"
 #include "Enemy_Khurt_Variation.h"
 #include "Enemy_Spawner.h"
@@ -208,6 +210,9 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 	case EntityType::ENEMY_MUUR:
 		entity = new Enemy_Muur();
 		break;
+	case EntityType::ENEMY_MUUR_VARIATION:
+		entity = new Enemy_Muur_Variation();
+		break;
 	case EntityType::ENEMY_KHURT:
 		entity = new Enemy_Khurt();
 		break;
@@ -216,6 +221,9 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 		break;
 	case EntityType::ENEMY_BOOROK:
 		entity = new Enemy_Boorok();
+		break;
+	case EntityType::ENEMY_BOOROK_VARIATION:
+		entity = new Enemy_Boorok_Variation();
 		break;
 
 	case EntityType::ENEMY_SPAWNER:

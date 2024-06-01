@@ -1,4 +1,4 @@
-ï»¿#include "Enemy_Muur.h"
+#include "Enemy_Muur_Variation.h"
 #include "Player.h"
 #include "App.h"
 #include "Textures.h"
@@ -11,7 +11,6 @@
 #include "Physics.h"
 #include "Window.h"
 #include "Pathfinding.h"
-#include "ParticleSystem.h"
 #include "Map.h"
 #include "Physics.h"
 #include "Item_Hueso.h"
@@ -21,10 +20,7 @@
 #include "Utils.cpp"
 
 
-
-
-
-Enemy_Muur::Enemy_Muur() : Entity(EntityType::ENEMY_MUUR) {
+Enemy_Muur_Variation::Enemy_Muur_Variation() : Entity(EntityType::ENEMY_MUUR_VARIATION) {
 	name = ("muur");
 	state = EntityState_Enemy::IDLE;
 	currentState = state;
@@ -32,16 +28,16 @@ Enemy_Muur::Enemy_Muur() : Entity(EntityType::ENEMY_MUUR) {
 
 }
 
-Enemy_Muur::~Enemy_Muur() {
+Enemy_Muur_Variation::~Enemy_Muur_Variation() {
 
 }
 
-bool Enemy_Muur::Awake() {
+bool Enemy_Muur_Variation::Awake() {
 
 	return true;
 }
 
-bool Enemy_Muur::Start() {
+bool Enemy_Muur_Variation::Start() {
 
 	OPTICK_EVENT();
 
@@ -86,11 +82,11 @@ bool Enemy_Muur::Start() {
 	chargeTimer.Start();
 
 	room = GetCurrentRoom();
-	
+
 	return true;
 }
 
-bool Enemy_Muur::Update(float dt)
+bool Enemy_Muur_Variation::Update(float dt)
 {
 	OPTICK_EVENT();
 
@@ -101,7 +97,7 @@ bool Enemy_Muur::Update(float dt)
 
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
 
-	// LÃ³gica de cambio de estado
+	// Lógica de cambio de estado
 	if (health <= 0)
 	{
 		nextState = EntityState_Enemy::DEAD;
@@ -155,7 +151,7 @@ bool Enemy_Muur::Update(float dt)
 
 	CheckPoison();
 
-	// Actualiza la animaciÃ³n actual
+	// Actualiza la animación actual
 	if (currentAnimation != nullptr) {
 		currentAnimation->Update();
 	}
@@ -164,7 +160,10 @@ bool Enemy_Muur::Update(float dt)
 	return true;
 }
 
-bool Enemy_Muur::PostUpdate() {
+bool Enemy_Muur_Variation::PostUpdate() {
+
+	SDL_SetTextureColorMod(texture, 198, 115, 255);
+
 	if (currentAnimation == nullptr) {
 		currentAnimation = &idleAnim;
 	}
@@ -201,14 +200,12 @@ bool Enemy_Muur::PostUpdate() {
 
 
 
-bool Enemy_Muur::CleanUp()
+bool Enemy_Muur_Variation::CleanUp()
 {
 	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 	app->physics->GetWorld()->DestroyBody(pbodySensor->body);
 	app->tex->UnLoad(texture);
 	lastPath.Clear();
-
-	blood = nullptr;
 
 	RELEASE(spritePositions);
 	delete spritePositions;
@@ -216,7 +213,7 @@ bool Enemy_Muur::CleanUp()
 	return true;
 }
 
-void Enemy_Muur::DoNothing(float dt)
+void Enemy_Muur_Variation::DoNothing(float dt)
 {
 	currentAnimation = &idleAnim;
 	//printf("Muur idle");
@@ -224,23 +221,23 @@ void Enemy_Muur::DoNothing(float dt)
 
 }
 
-void Enemy_Muur::Chase(float dt, iPoint playerPos)
+void Enemy_Muur_Variation::Chase(float dt, iPoint playerPos)
 {
 	//printf("Muur chasing");
 	currentAnimation = &runAnim;
-	if(chargeTimer.ReadSec() >= 5 && app->map->pathfinding->GetDistance(playerPos, position) <= chargeattackDistance * 32 && app->map->pathfinding->GetDistance(playerPos, position) >= (attackDistance + 5) * 32)
+	if (chargeTimer.ReadSec() >= 5 && app->map->pathfinding->GetDistance(playerPos, position) <= chargeattackDistance * 32 && app->map->pathfinding->GetDistance(playerPos, position) >= (attackDistance + 5) * 32)
 	{
 		Antposition = position;
 		Charge(dt, playerPos);
 	}
-	else if(!charging)
+	else if (!charging)
 	{
 		Muurfinding(dt, playerPos);
 	}
 
 }
 
-void Enemy_Muur::Attack(float dt)
+void Enemy_Muur_Variation::Attack(float dt)
 {
 	//printf("Muur attacking");
 	currentAnimation = &attackAnim;
@@ -248,20 +245,16 @@ void Enemy_Muur::Attack(float dt)
 	//sonido ataque
 }
 
-void Enemy_Muur::Die() {
-	
+void Enemy_Muur_Variation::Die() {
 	app->audio->PlayFx(muur_get_damage_fx);
+
+
 
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	currentAnimation = &dieAnim;
 
-
-
 	if (dieAnim.HasFinished())
 	{
-		fPoint pos((float)position.x, (float)position.y);
-		blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_ENEMY_BLOOD);
-
 		app->entityManager->DestroyEntity(this);
 		app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 		app->physics->GetWorld()->DestroyBody(pbodySensor->body);
@@ -343,7 +336,7 @@ void Enemy_Muur::Die() {
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 
-void Enemy_Muur::OnCollision(PhysBody* physA, PhysBody* physB) {
+void Enemy_Muur_Variation::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 	case ColliderType::PLATFORM:
@@ -364,7 +357,7 @@ void Enemy_Muur::OnCollision(PhysBody* physA, PhysBody* physB) {
 	}
 }
 
-bool Enemy_Muur::Muurfinding(float dt, iPoint playerPosP)
+bool Enemy_Muur_Variation::Muurfinding(float dt, iPoint playerPosP)
 {
 	iPoint playerPos = app->map->WorldToMap(playerPosP.x, playerPosP.y);
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
@@ -422,11 +415,11 @@ bool Enemy_Muur::Muurfinding(float dt, iPoint playerPosP)
 	return true;
 }
 
-float Enemy_Muur::GetHealth() const {
+float Enemy_Muur_Variation::GetHealth() const {
 	return health;
 }
 
-void Enemy_Muur::TakeDamage(float damage) {
+void Enemy_Muur_Variation::TakeDamage(float damage) {
 	if (currentState != EntityState_Enemy::DEAD && invulnerabilityTimer.ReadMSec() >= 500) {
 		health -= damage;
 		invulnerabilityTimer.Start();
@@ -436,7 +429,7 @@ void Enemy_Muur::TakeDamage(float damage) {
 }
 
 //VENENO <----------
-void Enemy_Muur::ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate) {
+void Enemy_Muur_Variation::ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate) {
 	this->poisonDamage = poisonDamage;
 	this->poisonDuration = poisonDuration;
 	this->poisonTickRate = poisonTickRate;
@@ -450,10 +443,10 @@ void Enemy_Muur::ApplyPoison(int poisonDamage, float poisonDuration, float poiso
 
 }
 
-void Enemy_Muur::CheckPoison() {
+void Enemy_Muur_Variation::CheckPoison() {
 	float epsilon = 0.1f; //Para margen de error
 
-	// Aplicar el primer tick de daÃ±o inmediatamente (si no, el primer tick no se aplica en el segundo 0.0)
+	// Aplicar el primer tick de daño inmediatamente (si no, el primer tick no se aplica en el segundo 0.0)
 	if (firstTimePoisonRecibed) {
 		if (currentState != EntityState_Enemy::DEAD) {
 			health -= poisonDamage;
@@ -480,7 +473,7 @@ void Enemy_Muur::CheckPoison() {
 }
 //VENENO ---------->
 
-void Enemy_Muur::Charge(float dt, iPoint playerPos) {
+void Enemy_Muur_Variation::Charge(float dt, iPoint playerPos) {
 	if (chargeTimer.ReadSec() >= 5)
 	{
 		/*printf("charge");*/
@@ -503,7 +496,7 @@ void Enemy_Muur::Charge(float dt, iPoint playerPos) {
 	}
 }
 
-void Enemy_Muur::Stunned(float dt) {
+void Enemy_Muur_Variation::Stunned(float dt) {
 	pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
 
 	if (stunAnim.HasFinished() && stunTimer.ReadSec() >= 2)
@@ -522,14 +515,14 @@ void Enemy_Muur::Stunned(float dt) {
 }
 
 
-MapObject* Enemy_Muur::GetCurrentRoom()
+MapObject* Enemy_Muur_Variation::GetCurrentRoom()
 {
-	//salas pequeÃ±as
+	//salas pequeñas
 	for (ListItem<MapObject*>* item = app->map->smallRoomsList.start; item != nullptr; item = item->next)
 	{
 		MapObject* room = item->data;
 
-		// el jugador estÃ¡ dentro de la sala
+		// el jugador está dentro de la sala
 		if (position.x >= room->x && position.x <= room->x + room->width &&
 			position.y >= room->y && position.y <= room->y + room->height)
 		{
@@ -542,7 +535,7 @@ MapObject* Enemy_Muur::GetCurrentRoom()
 	{
 		MapObject* room = item->data;
 
-		// el jugador estÃ¡ dentro de la sala
+		// el jugador está dentro de la sala
 		if (position.x >= room->x && position.x <= room->x + room->width &&
 			position.y >= room->y && position.y <= room->y + room->height)
 		{
@@ -555,7 +548,7 @@ MapObject* Enemy_Muur::GetCurrentRoom()
 	{
 		MapObject* room = item->data;
 
-		// el jugador estÃ¡ dentro de la sala
+		// el jugador está dentro de la sala
 		if (position.x >= room->x && position.x <= room->x + room->width &&
 			position.y >= room->y && position.y <= room->y + room->height)
 		{

@@ -20,7 +20,7 @@ struct QuestLine
 {
 	int questLineID;
 	std::vector<Quest*> quests;
-	int questIndex = 0;
+	int questIndex = 1;
 	bool completed = false;
 	bool active = false;
 };
@@ -49,12 +49,14 @@ public:
 
 	std::string GetQuestTitle(int questLineID, int questID);
 	
+	std::vector<Quest*> GetActiveQuest();
 
-
-	void UpdateQuestLine(int questLineID);
+	void UpdateQuestLine(int questLineID, int newQuestTarget = -1);
+	int GetQuestLineIndex(int questLineID);
 
 	QuestLine* FindQuestLine(int questLineID);
 	Quest* FindQuest(QuestLine* questLine, int questID);
+	Quest* FindActualQuest(QuestLine* questLine);
 
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
