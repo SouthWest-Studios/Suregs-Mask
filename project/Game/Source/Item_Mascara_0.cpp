@@ -8,6 +8,7 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "DialogManager.cpp"
 
 Item_mascara_0::Item_mascara_0(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
 	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_MASCARA0)
@@ -41,8 +42,7 @@ bool Item_mascara_0::Start() {
 	pbody->ctype = ColliderType::RESOURCE;
 	pbody->listener = this;
 	pbody->body->GetFixtureList()->SetSensor(true);
-
-
+	//app->dialogManager->CreateDialog(pugi:::xml_node 1101,);
 	return true;
 }
 
