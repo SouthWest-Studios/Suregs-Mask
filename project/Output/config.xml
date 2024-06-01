@@ -345,6 +345,7 @@
 		<logo texturepath ="Assets/Textures/Interfaz/textura_logo.png"/>
 		<savedGames texturepath ="Assets/Textures/Interfaz/textura_saved_games.png"/>
 		<controls texturepath ="Assets/Textures/Interfaz/textura_menu_controles.png"/>
+		<coin texturepath ="Assets/Textures/Interfaz/Resources/textura_moneda.png"/>
 	</scene_menu>
 
 	<scene_gameover>
