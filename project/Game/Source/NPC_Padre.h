@@ -31,6 +31,11 @@ public:
     SDL_Texture* texture = NULL;
     uint texW, texH;
 
+    pugi::xml_document dialogoFile;
+    pugi::xml_node dialogoPadre;
+    pugi::xml_parse_result parseResult;
+   
+
     Animation* currentAnimation = nullptr;
     EntityState state;
 

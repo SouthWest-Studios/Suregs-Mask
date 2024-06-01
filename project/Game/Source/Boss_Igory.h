@@ -97,7 +97,7 @@ public:
 	Timer timerRecibirDanioColor;
 
 	//Start
-	bool playerInFight = true;
+	bool playerInFight = false;
 
 private:
 	pugi::xml_document configFile;

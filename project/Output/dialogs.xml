@@ -2256,8 +2256,40 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 			text="¿Me oyes...? Parece que ya no contesta..."/>
 		</sentences>
 	</dialog>
-	
-	
+
+
+	<!--Padre-->
+	<dialog id="2001" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/abuela.png" name="Vhea">
+		<sentences>
+			<sentence name="Padre"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/dorothyFace.png"
+			text="¿Te has metido ahí dentro? No puedes hacer estas cosas, nos hemos preocupado mucho cuando nos lo han contado los trillizos..."/>
+			<sentence name="Hely"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/helyFace.png"
+			text="Ya sabes lo que le pasó a tu padre, no deberías entrar ahí ni por curiosidad, él era mucho más fuerte que tú..."/>
+
+			<sentence name="Pathy"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/pathyFace.png"
+			text="Ves a casa, ¿sí? La pobre Vhea debe estar super preocupada, vaya cara ha puesto cuando se lo hemos contado, ves a dormir y hablad..."/>
+		</sentences>
+	</dialog>
+
+	<dialog id="2002" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/abuela.png" name="Vhea">
+		<sentences>
+			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
+
+				<option1 text="Si, por favor.">
+					<sentence text="Come tranquilo, está recién hecho."/>
+					<comer id ="1"/>
+				</option1>
+
+				<option2 text="No hace falta.">
+					<sentence text="Bueno... Estaré siempre aquí si necesitas algo de comer."/>
+				</option2>
+
+			</sentence>
+		</sentences>
+	</dialog>
 </dialogues>
 
 

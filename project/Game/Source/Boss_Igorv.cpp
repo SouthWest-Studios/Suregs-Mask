@@ -112,29 +112,29 @@ bool Boss_Igory::Update(float dt)
 	{
 		desiredState = EntityState_Boss_Igory::DEAD;
 	}
-	else if (health <= lifeLow80 && !faseTwo && !isDead && !stun) {
+	else if (playerInFight && health <= lifeLow80 && !faseTwo && !isDead && !stun) {
 
 		desiredState = EntityState_Boss_Igory::FASE_CHANGE;
 	}
-	else if (health <= lifeLow40 && !faseThree && !isDead && !stun) {
+	else if (playerInFight && health <= lifeLow40 && !faseThree && !isDead && !stun) {
 		desiredState = EntityState_Boss_Igory::FASE_CHANGE;
 	}
-	else if (stun && !isDead && !inCurar && !inAtack && !inAtqDashi)
+	else if (playerInFight && stun && !isDead && !inCurar && !inAtack && !inAtqDashi)
 	{
 		if (stunTimer.ReadMSec() >= 2000) {
 			stun = false;
 		}
 		desiredState = EntityState_Boss_Igory::IDLE;
 	}
-	else if (goCurar && !inCurar && !inAtack && nextState != EntityState_Boss_Igory::FASE_CHANGE && fase == FASE_Igory::FASE_THREE)
+	else if (playerInFight && goCurar && !inCurar && !inAtack && nextState != EntityState_Boss_Igory::FASE_CHANGE && fase == FASE_Igory::FASE_THREE)
 	{
 		desiredState = EntityState_Boss_Igory::HEAL;
 	}
-	else if (inTakeHit && !isDead && !inCurar)
+	else if (playerInFight && inTakeHit && !isDead && !inCurar)
 	{
 		desiredState = EntityState_Boss_Igory::TAKEHIT;
 	}
-	else if (goColdDown && !inAtqDashi && !isDead && !inCurar && !inAtack) {
+	else if (playerInFight && goColdDown && !inAtqDashi && !isDead && !inCurar && !inAtack) {
 		if (GeneraColdDown(5)) {
 			generaTimeColdDown.Start();
 			goColdDown = false;
@@ -144,19 +144,19 @@ bool Boss_Igory::Update(float dt)
 			desiredState = EntityState_Boss_Igory::IDLE;
 		}
 	}
-	else if (inSuregAni && !inAtqDashi && !isDead && !inCurar && !inAtack && !stun)
+	else if (playerInFight && inSuregAni && !inAtqDashi && !isDead && !inCurar && !inAtack && !stun)
 	{
 		desiredState = EntityState_Boss_Igory::GENERATESUREG;
 	}
-	else if (atqDashQuali >= 3 && app->map->pathfinding->GetDistance(playerPos, position) >= attackDistance * 64 && fase != FASE_Igory::FASE_ONE && !isDead && !inCurar && !inAtack && !stun) {
+	else if (playerInFight && atqDashQuali >= 3 && app->map->pathfinding->GetDistance(playerPos, position) >= attackDistance * 64 && fase != FASE_Igory::FASE_ONE && !isDead && !inCurar && !inAtack && !stun) {
 
 		desiredState = EntityState_Boss_Igory::ATTACKING_DASHI;
 	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32 && ataqColdDown && !inTakeHit && !isDead && !inCurar && !stun)
+	else if (playerInFight && app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32 && ataqColdDown && !inTakeHit && !isDead && !inCurar && !stun)
 	{
 		desiredState = EntityState_Boss_Igory::IDLE;
 	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32 && ataqColdDown == false && !inTakeHit && !inSuregAni && !inAtqDashi && !goColdDown && !isDead && !inCurar && !stun)
+	else if (playerInFight && app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32 && ataqColdDown == false && !inTakeHit && !inSuregAni && !inAtqDashi && !goColdDown && !isDead && !inCurar && !stun)
 	{
 		desiredState = EntityState_Boss_Igory::ATTACKING_BASIC;
 	}
@@ -178,17 +178,24 @@ bool Boss_Igory::Update(float dt)
 		generaTimeColdDown.Start();
 		curaTimer.Start();
 		desiredState = EntityState_Boss_Igory::IDLE;
+		pbodyFoot->body->SetType(b2_staticBody);
 	}
 	else
 	{
 		desiredState = EntityState_Boss_Igory::IDLE;
 	}
 
+	if (playerInFight && !isDead) {
+		pbodyFoot->body->SetType(b2_dynamicBody);
+	}
+
+
 	stateMachine(dt, playerPos);
 
 	if (checkColdDown) {
 		AtqColdDown();
 	}
+
 
 	//Cura
 	if (shieldBroken) {
@@ -885,7 +892,7 @@ void Boss_Igory::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLAYER_ATTACK:
 		LOG("Collision Player_Attack");
-		if (nextState != EntityState_Boss_Igory::FASE_CHANGE && app->entityManager->GetPlayer()->checkAtk == true) {
+		if (playerInFight && nextState != EntityState_Boss_Igory::FASE_CHANGE && app->entityManager->GetPlayer()->checkAtk == true) {
 			if (!inCurar) {
 				inTakeHit = true;
 				health -= app->entityManager->GetPlayer()->currentStats.attackDamage;
