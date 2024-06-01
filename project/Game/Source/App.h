@@ -53,6 +53,7 @@ class Hud;
 class TreeManager;
 class Menu_Equipo;
 class ElevatorMenu;
+class QuestManager;
 
 
 class App
@@ -174,6 +175,7 @@ public:
 	Hud* hud;
 	Menu_Equipo* menuEquipo;
 	ElevatorMenu* ascensor;
+	QuestManager* questManager;
 	
 	bool tutorialHasStarted = false;
 	bool tutorialHasFinished = false;
