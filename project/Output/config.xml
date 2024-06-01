@@ -82,7 +82,7 @@
       <water_fx path="Assets/Audio/Fx/Fishing/water_fx.wav"/>
 
       <!--enemies-->
-      <ols_attack_fx path=""/>
+      <ols_attack_fx path="Assets/Audio/Fx/Enemies/ols_attack_fx.wav"/>
       <ols_get_damage_fx path="Assets/Audio/Fx/Enemies/ols_get_damage_fx.wav"/>
       <ols_get_damageAlt_fx path="Assets/Audio/Fx/Enemies/ols_getAlt_damage_fx.wav"/>
       <ols_get_damageAlt2_fx path="Assets/Audio/Fx/Enemies/ols_getAlt2_damage_fx.wav"/>
