@@ -61,7 +61,8 @@ public:
 	unsigned int numMejoras3 = 0;
 	unsigned int puntsRembolso = 0;
 
-	iPoint PointerPosition = { 350, 130 };
+	iPoint PointerPosition = { 156, 148 };
+	iPoint PointerPosition2 = { 174, 138 };
 	int PointerId = 0;
 	iPoint selected = { -1000,-1000 };
 	iPoint equiped = { -1000,-1000 };
@@ -72,6 +73,12 @@ public:
 	SDL_Texture* PointerItemText;
 	SDL_Texture* SelectedItemText;
 	SDL_Texture* EquipedItemText;
+
+	char* PointerPath2;
+	SDL_Texture* PointerItemText2;
+
+	char* PointerPath3;
+	SDL_Texture* PointerItemText3;
 
 	uint texW, texH;
 	bool mostrar = false;
@@ -99,6 +106,36 @@ private:
 	char* sliderTexturePath;
 	char* knobTexturePath;
 	char* BackGroundPath;
+
+	char* alcancePath;
+	char* aumentoPath;
+	char* cooldownPath;
+	char* danoPath;
+	char* distanciaPath;
+	char* durationPath;
+	char* invisiblePath;
+	char* poisonPath;
+	char* rayoPath;
+
+	char* alcanceLockedPath ;
+	char* aumentoLockedPath ;
+	char* cooldownLockedPath ;
+	char* danoLockedPath ;
+	char* distanciaLockedPath ;
+	char* durationLockedPath ;
+	char* invisibleLockedPath ;
+	char* poisonLockedPath ;
+	char* rayoLockedPath ;
+
+	char* alcanceSelectedPath ;
+	char* aumentoSelectedPath ;
+	char* cooldownSelectedPath ;
+	char* danoSelectedPath ;
+	char* distanciaSelectedPath ;
+	char* durationSelectedPath ;
+	char* invisibleSelectedPath ;
+	char* poisonSelectedPath ;
+	char* rayoSelectedPath ;
 	SDL_Texture* BackGroundTexture;
 	SDL_Texture* iconoTreeTexture;
 	SDL_Texture* listTexture;
@@ -110,9 +147,29 @@ private:
 	char* CloseUpPath;
 	SDL_Texture* CloseUp;
 
-	char* name = nullptr;
+	char* mascara0Path = nullptr;
+	char* mascara1Path = nullptr;
+	char* mascara2Path = nullptr;
+	char* mascara3Path = nullptr;
+
+	SDL_Texture* mascara0Texture;
+	SDL_Texture* mascara1Texture;
+	SDL_Texture* mascara2Texture;
+	SDL_Texture* mascara3Texture;
+
+	char* mascara0SelectedPath = nullptr;
+	char* mascara1SelectedPath = nullptr;
+	char* mascara2SelectedPath = nullptr;
+	char* mascara3SelectedPath = nullptr;
+
+	SDL_Texture* mascara0SelectedTexture = nullptr;
+	SDL_Texture* mascara1SelectedTexture = nullptr;
+	SDL_Texture* mascara2SelectedTexture = nullptr;
+	SDL_Texture* mascara3SelectedTexture = nullptr;
+
 	char* description;
+
 
 };
 
-#endif // __INVENTORYMANAGER_H__
+#endif 

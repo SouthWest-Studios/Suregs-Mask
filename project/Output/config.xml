@@ -753,10 +753,52 @@ Vida: Muy alta	Daño: Muy alto	Tamaño: Muy grande Velocidad: Muy lenta"
 
 	<treemanager>
 		<arbol texturePath ="Assets/Textures/Interfaz/Arbol/textura_nota.png"
-			  list_texture ="Assets/Textures/Interfaz/Arbol/textura_fondo_bestiario_lista.png"
-			  pointer="Assets/Textures/Interfaz/Arbol/bestiarioselect.png"
-			  closeUp ="Assets/Textures/Interfaz/Arbol/textura_NoteCloseUp.png"
-			  BackGround="Assets/Textures/Interfaz/Arbol/textura_NoteCloseUp.png"/>
+		list_texture ="Assets/Textures/Interfaz/Arbol/textura_fondo_bestiario_lista.png"
+		pointer="Assets/Textures/Interfaz/Arbol/bestiarioselect.png"
+		closeUp ="Assets/Textures/Interfaz/Arbol/textura_NoteCloseUp.png"
+		BackGround="Assets/Textures/Interfaz/Arbol/textura_NoteCloseUp.png"
+		Pointer2 ="Assets/Textures/Interfaz/Arbol/pointer_mascara.png"
+		Pointer3 ="Assets/Textures/Interfaz/Arbol/pointer3.png"
+			   
+
+		alcance ="Assets/Textures/Interfaz/Arbol/IconosBase/alcance.png"
+		aumento ="Assets/Textures/Interfaz/Arbol/IconosBase/aumento.png"
+		cooldown ="Assets/Textures/Interfaz/Arbol/IconosBase/cooldown.png"
+		dano ="Assets/Textures/Interfaz/Arbol/IconosBase/dano.png"
+		distancia ="Assets/Textures/Interfaz/Arbol/IconosBase/distancia.png"
+		duration ="Assets/Textures/Interfaz/Arbol/IconosBase/duration.png"
+		invisible ="Assets/Textures/Interfaz/Arbol/IconosBase/invisible.png"
+		poison ="Assets/Textures/Interfaz/Arbol/IconosBase/poison.png"
+		rayo ="Assets/Textures/Interfaz/Arbol/IconosBase/rayo.png"
+
+		alcancelocked ="Assets/Textures/Interfaz/Arbol/IconosLocked/alcance_locked.png"
+		aumentolocked ="Assets/Textures/Interfaz/Arbol/IconosLocked/aumento_locked.png"
+		cooldownlocked ="Assets/Textures/Interfaz/Arbol/IconosLocked/cooldown_locked.png"
+		danolocked ="Assets/Textures/Interfaz/Arbol/IconosLocked/dano_locked.png"
+		distancialocked ="Assets/Textures/Interfaz/Arbol/IconosLocked/distancia_locked.png"
+		durationlocked ="Assets/Textures/Interfaz/Arbol/IconosLocked/duration_locked.png"
+		invisiblelocked ="Assets/Textures/Interfaz/Arbol/IconosLocked/invisible_locked.png"
+		poisonlocked ="Assets/Textures/Interfaz/Arbol/IconosLocked/poison_locked.png"
+		rayolocked ="Assets/Textures/Interfaz/Arbol/IconosLocked/rayo_locked.png"
+
+		alcanceselected ="Assets/Textures/Interfaz/Arbol/IconosSelected/alcance_selected.png"
+		aumentoselected ="Assets/Textures/Interfaz/Arbol/IconosSelected/umento_selected.png"
+		cooldownselected ="Assets/Textures/Interfaz/Arbol/IconosSelected/cooldown_selected.png"
+		danoselected ="Assets/Textures/Interfaz/Arbol/IconosSelected/dano_selected.png"
+		distanciaselected ="Assets/Textures/Interfaz/Arbol/IconosSelected/distancia_selected.png"
+		durationselected ="Assets/Textures/Interfaz/Arbol/IconosSelected/duration_selected.png"
+		invisibleselected ="Assets/Textures/Interfaz/Arbol/IconosSelected/invisible_selected.png"
+		poisonselected ="Assets/Textures/Interfaz/Arbol/IconosSelected/poison_selected.png"
+		rayoselected ="Assets/Textures/Interfaz/Arbol/IconosSelected/rayo_selected.png"
+		mascara0Path="Assets/Textures/Interfaz/Arbol/IconosBase/textura_mascara0.png"
+		mascara1Path="Assets/Textures/Interfaz/Arbol/IconosBase/textura_mascara1.png"
+		mascara2Path="Assets/Textures/Interfaz/Arbol/IconosBase/textura_mascara2.png"
+		mascara3Path="Assets/Textures/Interfaz/Arbol/IconosBase/textura_mascara3.png"
+		mascaraselected0Path="Assets/Textures/Interfaz/Arbol/IconosSelected/textura_mascara0_selected.png"
+		mascaraselected1Path="Assets/Textures/Interfaz/Arbol/IconosSelected/textura_mascara1_selected.png"
+		mascaraselected2Path="Assets/Textures/Interfaz/Arbol/IconosSelected/textura_mascara2_selected.png"
+		mascaraselected3Path="Assets/Textures/Interfaz/Arbol/IconosSelected/textura_mascara3_selected.png"
+		/>
 
 
 	</treemanager>

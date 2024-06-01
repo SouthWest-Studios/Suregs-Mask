@@ -32,7 +32,7 @@ TreeManager::~TreeManager()
 // Called before render is available
 bool TreeManager::Awake(pugi::xml_node config)
 {
-	LOG("Loading Entity Manager");
+	LOG("Loading Tree Manager");
 	bool ret = true;
 
 	//Iterates over the entities and calls the Awake
@@ -51,9 +51,50 @@ bool TreeManager::Awake(pugi::xml_node config)
 	listTexturePath = ((char*)config.child("arbol").attribute("list_texture").as_string());
 	listTexturePathNot = ((char*)config.child("arbol").attribute("list_texture").as_string());
 	PointerPath = ((char*)config.child("arbol").attribute("pointer").as_string());
+	PointerPath2 = ((char*)config.child("arbol").attribute("Pointer2").as_string());
+	PointerPath3 = ((char*)config.child("arbol").attribute("Pointer3").as_string());
 	CloseUpPath = ((char*)config.child("arbol").attribute("closeUp").as_string());
 	BackGroundPath = ((char*)config.child("arbol").attribute("BackGround").as_string());
 
+	alcancePath= ((char*)config.child("arbol").attribute("alcance").as_string());
+	aumentoPath= ((char*)config.child("arbol").attribute("aumento").as_string());
+	cooldownPath= ((char*)config.child("arbol").attribute("cooldown").as_string());
+	danoPath= ((char*)config.child("arbol").attribute("dano").as_string());
+	distanciaPath= ((char*)config.child("arbol").attribute("distancia").as_string());
+	durationPath= ((char*)config.child("arbol").attribute("duration").as_string());
+	invisiblePath= ((char*)config.child("arbol").attribute("invisible").as_string());
+	poisonPath= ((char*)config.child("arbol").attribute("poison").as_string());
+	rayoPath= ((char*)config.child("arbol").attribute("rayo").as_string());
+
+	alcanceLockedPath = ((char*)config.child("arbol").attribute("alcancelocked").as_string());
+	aumentoLockedPath = ((char*)config.child("arbol").attribute("aumentolocked").as_string());
+	cooldownLockedPath = ((char*)config.child("arbol").attribute("cooldownlocked").as_string());
+	danoLockedPath = ((char*)config.child("arbol").attribute("danolocked").as_string());
+	distanciaLockedPath = ((char*)config.child("arbol").attribute("distancialocked").as_string());
+	durationLockedPath = ((char*)config.child("arbol").attribute("durationlocked").as_string());
+	invisibleLockedPath = ((char*)config.child("arbol").attribute("invisiblelocked").as_string());
+	poisonLockedPath = ((char*)config.child("arbol").attribute("poisonlocked").as_string());
+	rayoLockedPath = ((char*)config.child("arbol").attribute("rayolocked").as_string());
+
+	alcanceSelectedPath = ((char*)config.child("arbol").attribute("alcanceselected").as_string());
+	aumentoSelectedPath = ((char*)config.child("arbol").attribute("aumentoselected").as_string());
+	cooldownSelectedPath = ((char*)config.child("arbol").attribute("cooldownselected").as_string());
+	danoSelectedPath = ((char*)config.child("arbol").attribute("danoselected").as_string());
+	distanciaSelectedPath = ((char*)config.child("arbol").attribute("distanciaselected").as_string());
+	durationSelectedPath = ((char*)config.child("arbol").attribute("durationselected").as_string());
+	invisibleSelectedPath = ((char*)config.child("arbol").attribute("invisibleselected").as_string());
+	poisonSelectedPath = ((char*)config.child("arbol").attribute("poisonselected").as_string());
+	rayoSelectedPath = ((char*)config.child("arbol").attribute("rayoselected").as_string());
+
+	mascara0Path = ((char*)config.child("arbol").attribute("mascara0Path").as_string());
+	mascara1Path = ((char*)config.child("arbol").attribute("mascara1Path").as_string());
+	mascara2Path = ((char*)config.child("arbol").attribute("mascara2Path").as_string());
+	mascara3Path = ((char*)config.child("arbol").attribute("mascara3Path").as_string());
+
+	mascara0SelectedPath = ((char*)config.child("arbol").attribute("mascaraselected0Path").as_string());
+	mascara1SelectedPath = ((char*)config.child("arbol").attribute("mascaraselected1Path").as_string());
+	mascara2SelectedPath = ((char*)config.child("arbol").attribute("mascaraselected2Path").as_string());	
+	mascara3SelectedPath = ((char*)config.child("arbol").attribute("mascaraselected3Path").as_string());
 
 	return ret;
 
@@ -64,10 +105,24 @@ bool TreeManager::Start() {
 
 	BackGroundTexture = app->tex->Load("Assets/Textures/Interfaz/Arbol/ArbolFondo.png");
 	CloseUp = app->tex->Load(CloseUpPath);
-	listTexture = app->tex->Load("Assets/Textures/Interfaz/Arbol/textura_lista.png");
+	listTexture = app->tex->Load(listTexturePath);
 	PointerItemText = app->tex->Load("Assets/Textures/Interfaz/Arbol/noteselect.png");
-	listTextureNot = app->tex->Load("Assets/Textures/Interfaz/Arbol/textura_lista_not.png");
+	listTextureNot = app->tex->Load(listTexturePathNot);
+	PointerItemText2 = app->tex->Load(PointerPath2);
+	PointerItemText3 = app->tex->Load(PointerPath3);
 	PointerId = 0;
+
+	mascara0Texture = app->tex->Load(mascara0Path);
+	mascara1Texture = app->tex->Load(mascara1Path);
+	mascara2Texture = app->tex->Load(mascara2Path);
+	mascara3Texture = app->tex->Load(mascara3Path);
+
+	mascara0SelectedTexture = app->tex->Load(mascara0SelectedPath);
+	mascara1SelectedTexture = app->tex->Load(mascara1SelectedPath);
+	mascara2SelectedTexture = app->tex->Load(mascara2SelectedPath);
+	mascara3SelectedTexture = app->tex->Load(mascara3SelectedPath);
+
+
 
 	bool ret = true;
 
@@ -148,7 +203,7 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 	entity->id = highesttttId + 1;
 	entity->closeUpTrees = CloseUp;
 
-	entity->icon = app->tex->Load(iconoTreeTexturePath);
+	/*entity->icon = app->tex->Load(iconoTreeTexturePath);*/
 	entity->type = type;
 	entity->nivelArbol = nivelArbol;
 	entity->nivelMejora = nivelMejora;
@@ -189,6 +244,9 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->usable2 = true;
 			entity->usable3 = true;
 			entity->usable4 = true;
+			entity->icon0 = app->tex->Load(danoPath);
+			entity->iconLocked0 = app->tex->Load(danoLockedPath);
+			entity->iconSelected0 = app->tex->Load(danoSelectedPath);
 			break;
 		}
 		case 2:
@@ -198,7 +256,9 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
 			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
 			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
-
+			entity->icon0 = app->tex->Load(danoPath);
+			entity->iconLocked0 = app->tex->Load(danoLockedPath);
+			entity->iconSelected0 = app->tex->Load(danoSelectedPath);
 			break;
 		}
 		case 3:
@@ -208,7 +268,9 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
 			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
 			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
-
+			entity->icon0 = app->tex->Load(danoPath);
+			entity->iconLocked0 = app->tex->Load(danoLockedPath);
+			entity->iconSelected0 = app->tex->Load(danoSelectedPath);
 			break;
 		}
 		case 4:
@@ -218,7 +280,9 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
 			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
 			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
-
+			entity->icon0 = app->tex->Load(danoPath);
+			entity->iconLocked0 = app->tex->Load(danoLockedPath);
+			entity->iconSelected0 = app->tex->Load(danoSelectedPath);
 			break;
 		}
 		}
@@ -252,7 +316,9 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->usable2 = true;
 			entity->usable3 = true;
 			entity->usable4 = true;
-
+			entity->icon0 = app->tex->Load(cooldownPath);
+			entity->iconLocked0 = app->tex->Load(cooldownLockedPath);
+			entity->iconSelected0 = app->tex->Load(cooldownSelectedPath);
 			break;
 		}
 		case 2:
@@ -262,7 +328,9 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
 			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
 			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
-
+			entity->icon0 = app->tex->Load(cooldownPath);
+			entity->iconLocked0 = app->tex->Load(cooldownLockedPath);
+			entity->iconSelected0 = app->tex->Load(cooldownSelectedPath);
 			break;
 		}
 		case 3:
@@ -272,7 +340,9 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
 			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
 			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
-
+			entity->icon0 = app->tex->Load(cooldownPath);
+			entity->iconLocked0 = app->tex->Load(cooldownLockedPath);
+			entity->iconSelected0 = app->tex->Load(cooldownSelectedPath);
 			break;
 		}
 		case 4:
@@ -282,7 +352,9 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
 			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
 			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
-
+			entity->icon0 = app->tex->Load(cooldownPath);
+			entity->iconLocked0 = app->tex->Load(cooldownLockedPath);
+			entity->iconSelected0 = app->tex->Load(cooldownSelectedPath);
 			break;
 		}
 		}
@@ -319,6 +391,24 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->usable3 = true;
 			entity->usable4 = true;
 
+			entity->icon0 = app->tex->Load(rayoPath);
+			entity->iconLocked0 = app->tex->Load(rayoLockedPath);
+			entity->iconSelected0 = app->tex->Load(rayoSelectedPath);
+
+			entity->icon1 = app->tex->Load(alcancePath);
+			entity->iconLocked1 = app->tex->Load(alcanceLockedPath);
+			entity->iconSelected1 = app->tex->Load(alcanceSelectedPath);
+
+			entity->icon2 = app->tex->Load(distanciaPath);
+			entity->iconLocked2 = app->tex->Load(distanciaLockedPath);
+			entity->iconSelected2 = app->tex->Load(distanciaSelectedPath);
+
+			entity->icon3 = app->tex->Load(durationPath);
+			entity->iconLocked3 = app->tex->Load(durationLockedPath);
+			entity->iconSelected3 = app->tex->Load(durationSelectedPath);
+
+
+
 			break;
 		}
 		case 2:
@@ -331,7 +421,21 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
 			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
 			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
+			entity->icon0 = app->tex->Load(rayoPath);
+			entity->iconLocked0 = app->tex->Load(rayoLockedPath);
+			entity->iconSelected0 = app->tex->Load(rayoSelectedPath);
 
+			entity->icon1 = app->tex->Load(alcancePath);
+			entity->iconLocked1 = app->tex->Load(alcanceLockedPath);
+			entity->iconSelected1 = app->tex->Load(alcanceSelectedPath);
+
+			entity->icon2 = app->tex->Load(distanciaPath);
+			entity->iconLocked2 = app->tex->Load(distanciaLockedPath);
+			entity->iconSelected2 = app->tex->Load(distanciaSelectedPath);
+
+			entity->icon3 = app->tex->Load(durationPath);
+			entity->iconLocked3 = app->tex->Load(durationLockedPath);
+			entity->iconSelected3 = app->tex->Load(durationSelectedPath);
 			break;
 		}
 		case 3:
@@ -344,7 +448,21 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
 			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
 			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
+			entity->icon0 = app->tex->Load(rayoPath);
+			entity->iconLocked0 = app->tex->Load(rayoLockedPath);
+			entity->iconSelected0 = app->tex->Load(rayoSelectedPath);
 
+			entity->icon1 = app->tex->Load(alcancePath);
+			entity->iconLocked1 = app->tex->Load(alcanceLockedPath);
+			entity->iconSelected1 = app->tex->Load(alcanceSelectedPath);
+
+			entity->icon2 = app->tex->Load(distanciaPath);
+			entity->iconLocked2 = app->tex->Load(distanciaLockedPath);
+			entity->iconSelected2 = app->tex->Load(distanciaSelectedPath);
+
+			entity->icon3 = app->tex->Load(durationPath);
+			entity->iconLocked3 = app->tex->Load(durationLockedPath);
+			entity->iconSelected3 = app->tex->Load(durationSelectedPath);
 			break;
 		}
 		case 4:
@@ -357,7 +475,21 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
 			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
 			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
+			entity->icon0 = app->tex->Load(rayoPath);
+			entity->iconLocked0 = app->tex->Load(rayoLockedPath);
+			entity->iconSelected0 = app->tex->Load(rayoSelectedPath);
 
+			entity->icon1 = app->tex->Load(alcancePath);
+			entity->iconLocked1 = app->tex->Load(alcanceLockedPath);
+			entity->iconSelected1 = app->tex->Load(alcanceSelectedPath);
+
+			entity->icon2 = app->tex->Load(distanciaPath);
+			entity->iconLocked2 = app->tex->Load(distanciaLockedPath);
+			entity->iconSelected2 = app->tex->Load(distanciaSelectedPath);
+
+			entity->icon3 = app->tex->Load(durationPath);
+			entity->iconLocked3 = app->tex->Load(durationLockedPath);
+			entity->iconSelected3 = app->tex->Load(durationSelectedPath);
 			break;
 		}
 		}
@@ -393,6 +525,19 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->usable3 = true;
 			entity->usable4 = true;
 
+			entity->icon0 = app->tex->Load(poisonPath);
+			entity->iconLocked0 = app->tex->Load(poisonLockedPath);
+			entity->iconSelected0 = app->tex->Load(poisonSelectedPath);
+
+			entity->icon1 = app->tex->Load(invisiblePath);
+			entity->iconLocked1 = app->tex->Load(invisibleLockedPath);
+			entity->iconSelected1 = app->tex->Load(invisibleSelectedPath);
+
+			entity->icon2 = app->tex->Load(aumentoPath);
+			entity->iconLocked2 = app->tex->Load(aumentoLockedPath);
+			entity->iconSelected2 = app->tex->Load(aumentoSelectedPath);
+
+	
 			break;
 		}
 		case 2:
@@ -404,6 +549,18 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
 			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
 			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
+
+			entity->icon0 = app->tex->Load(poisonPath);
+			entity->iconLocked0 = app->tex->Load(poisonLockedPath);
+			entity->iconSelected0 = app->tex->Load(poisonSelectedPath);
+
+			entity->icon1 = app->tex->Load(invisiblePath);
+			entity->iconLocked1 = app->tex->Load(invisibleLockedPath);
+			entity->iconSelected1 = app->tex->Load(invisibleSelectedPath);
+
+			entity->icon2 = app->tex->Load(aumentoPath);
+			entity->iconLocked2 = app->tex->Load(aumentoLockedPath);
+			entity->iconSelected2 = app->tex->Load(aumentoSelectedPath);
 
 			break;
 		}
@@ -417,6 +574,18 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
 			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
 
+			entity->icon0 = app->tex->Load(poisonPath);
+			entity->iconLocked0 = app->tex->Load(poisonLockedPath);
+			entity->iconSelected0 = app->tex->Load(poisonSelectedPath);
+
+			entity->icon1 = app->tex->Load(invisiblePath);
+			entity->iconLocked1 = app->tex->Load(invisibleLockedPath);
+			entity->iconSelected1 = app->tex->Load(invisibleSelectedPath);
+
+			entity->icon2 = app->tex->Load(aumentoPath);
+			entity->iconLocked2 = app->tex->Load(aumentoLockedPath);
+			entity->iconSelected2 = app->tex->Load(aumentoSelectedPath);
+
 			break;
 		}
 		case 4:
@@ -428,6 +597,18 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->desc1 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
 			entity->desc2 = "ccccccccccccccccccccccccccccccccccccccccccccccccc";
 			entity->desc3 = "dddddddddddddddddddddddddddddddddddddddddddddddddd";
+
+			entity->icon0 = app->tex->Load(poisonPath);
+			entity->iconLocked0 = app->tex->Load(poisonLockedPath);
+			entity->iconSelected0 = app->tex->Load(poisonSelectedPath);
+
+			entity->icon1 = app->tex->Load(invisiblePath);
+			entity->iconLocked1 = app->tex->Load(invisibleLockedPath);
+			entity->iconSelected1 = app->tex->Load(invisibleSelectedPath);
+
+			entity->icon2 = app->tex->Load(aumentoPath);
+			entity->iconLocked2 = app->tex->Load(aumentoLockedPath);
+			entity->iconSelected2 = app->tex->Load(aumentoSelectedPath);
 
 			break;
 		}
@@ -539,8 +720,20 @@ void TreeManager::UseTreeSelected(int id)
 	}*/
 
 	Player* player = app->entityManager->GetPlayer();
+	if (id == 100)
+	{
+		selectPrimaryMask = true;
+	}
 
+	else if (id == 101)
+	{
+		selectSecondaryMask = true;
+	}
 	
+	else
+	{
+
+
 		for (item = arboles.start; item != NULL; item = item->next)
 		{
 			if (item->data->usable1 && mask == 1 || item->data->usable2 && mask == 2 || item->data->usable3 && mask == 3 || item->data->usable4 && mask == 4)
@@ -554,340 +747,356 @@ void TreeManager::UseTreeSelected(int id)
 
 					case TreeType::MASK0:
 					{
-						
-							mask = 1;
-						
-						
+
+						mask = 1;
+
+
 
 						break;
 					}
 					case TreeType::MASK1:
 					{
-						
-							mask = 2;
-						
-						
+
+						mask = 2;
+
+
 
 						break;
 					}
 					case TreeType::MASK2:
 					{
-						
-							mask = 3;
-						
-						
+
+						mask = 3;
+
+
 
 						break;
 					}
 					case TreeType::MASK3:
 					{
-						
-							mask = 4;
-						
-						
+
+						mask = 4;
+
+
 
 						break;
 					}
 					case TreeType::BUTTON:
 					{
-						
-							switch (item->data->nivelArbol)
-							{
 
-							case 0:
+						switch (item->data->nivelArbol)
+						{
+
+						case 0:
+						{
+							bool siguiente = false;
+							if (mask == 1 && numMejoras0 < 8 && player->maskZeroPoints > 0)
 							{
-								bool siguiente = false;
-								if (mask == 1 && numMejoras0 < 8 && player->maskZeroPoints > 0)
+								app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama1] += 1;
+								item->data->used1 = true;
+								item->data->usable1 = false;
+								siguiente = true;
+								player->maskZeroPoints -= 1;
+								numMejoras0 += 1;
+							}
+							else if (mask == 2 && numMejoras1 < 8 && player->maskOnePoints > 0)
+							{
+								player->maskLevels[Mask::MASK1][Branches::Rama1] += 1;
+								item->data->used2 = true;
+								item->data->usable2 = false;
+								siguiente = true;
+								player->maskOnePoints -= 1;
+								numMejoras1 += 1;
+							}
+							else if (mask == 3 && player->maskTwoPoints > 0)
+							{
+								player->maskLevels[Mask::MASK2][Branches::Rama1] += 1;
+								item->data->used3 = true;
+								item->data->usable3 = false;
+								siguiente = true;
+								player->maskTwoPoints -= 1;
+								numMejoras2 += 1;
+							}
+							else if (mask == 4 && numMejoras3 < 8 && player->maskThreePoints > 0)
+							{
+								player->maskLevels[Mask::MASK3][Branches::Rama1] += 1;
+								item->data->used4 = true;
+								item->data->usable4 = false;
+								siguiente = true;
+								player->maskThreePoints -= 1;
+								numMejoras3 += 1;
+							}
+							if (siguiente == true)
+							{
+								for (itum = arboles.start; itum != NULL; itum = itum->next)
 								{
-									app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama1] += 1;
-									item->data->usable1 = false;
-									siguiente = true;
-									player->maskZeroPoints -= 1;
-									numMejoras0 += 1;
-								}
-								else if (mask == 2 && numMejoras1 < 8 && player->maskOnePoints > 0)
-								{
-									player->maskLevels[Mask::MASK1][Branches::Rama1] += 1;
-									item->data->usable2 = false;
-									siguiente = true;
-									player->maskOnePoints -= 1;
-									numMejoras1 += 1;
-								}
-								else if (mask == 3 && player->maskTwoPoints > 0)
-								{
-									player->maskLevels[Mask::MASK2][Branches::Rama1] += 1;
-									item->data->usable3 = false;
-									siguiente = true;
-									player->maskTwoPoints -= 1;
-									numMejoras2 += 1;
-								}
-								else if (mask == 4 && numMejoras3 < 8 && player->maskThreePoints > 0)
-								{
-									player->maskLevels[Mask::MASK3][Branches::Rama1] += 1;
-									item->data->usable4 = false;
-									siguiente = true;
-									player->maskThreePoints -= 1;
-									numMejoras3 += 1;
-								}
-								if (siguiente == true)
-								{
-									for (itum = arboles.start; itum != NULL; itum = itum->next)
+									if (itum->data->nivelArbol == item->data->nivelArbol && itum->data->nivelMejora == item->data->nivelMejora + 1)
 									{
-										if (itum->data->nivelArbol == item->data->nivelArbol && itum->data->nivelMejora == item->data->nivelMejora + 1)
+										if (mask == 1)
 										{
-											if (mask == 1)
-											{
 
-												itum->data->usable1 = true;
+											itum->data->usable1 = true;
 
-											}
-											else if (mask == 2)
-											{
-
-												itum->data->usable2 = true;
-
-											}
-											else if (mask == 3)
-											{
-
-												itum->data->usable3 = true;
-
-											}
-											else if (mask == 4)
-											{
-
-												itum->data->usable4 = true;
-
-											}
 										}
+										else if (mask == 2)
+										{
 
+											itum->data->usable2 = true;
 
+										}
+										else if (mask == 3)
+										{
+
+											itum->data->usable3 = true;
+
+										}
+										else if (mask == 4)
+										{
+
+											itum->data->usable4 = true;
+
+										}
 									}
-									
+
+
 								}
-								break;
+
 							}
-							case 1:
+							break;
+						}
+						case 1:
+						{
+							bool siguiente = false;
+							if (mask == 1 && numMejoras0 < 8 && player->maskZeroPoints > 0)
 							{
-								bool siguiente = false;
-								if (mask == 1 && numMejoras0 < 8 && player->maskZeroPoints > 0)
-								{
-									player->maskLevels[Mask::MASK0][Branches::Rama2] += 1;
-									item->data->usable1 = false;
-									siguiente = true;
-									player->maskZeroPoints -= 1;
-									numMejoras0 += 1;
-								}
-								else if (mask == 2 && player->maskOnePoints > 0)
-								{
-									player->maskLevels[Mask::MASK1][Branches::Rama2] += 1;
-									item->data->usable2 = false;
-									siguiente = true;
-									player->maskOnePoints -= 1;
-									numMejoras1 += 1;
-								}
-								else if (mask == 3 && numMejoras2 < 8 && player->maskTwoPoints > 0)
-								{
-									player->maskLevels[Mask::MASK2][Branches::Rama2] += 1;
-									item->data->usable3 = false;
-									siguiente = true;
-									player->maskTwoPoints -= 1;
-									numMejoras2 += 1;
-								}
-								else if (mask == 4 && numMejoras3 < 8 && player->maskTwoPoints > 0)
-								{
-									player->maskLevels[Mask::MASK3][Branches::Rama2] += 1;
-									item->data->usable4 = false;
-									siguiente = true;
-									player->maskThreePoints -= 1;
-									numMejoras3 += 1;
-								}
-								if (siguiente == true)
-								{
-									for (itum = arboles.start; itum != NULL; itum = itum->next)
-									{
-										if (itum->data->nivelArbol == item->data->nivelArbol && itum->data->nivelMejora == item->data->nivelMejora + 1)
-										{
-											if (mask == 1)
-											{
-
-												itum->data->usable1 = true;
-
-											}
-											else if (mask == 2)
-											{
-
-												itum->data->usable2 = true;
-
-											}
-											else if (mask == 3)
-											{
-
-												itum->data->usable3 = true;
-
-											}
-											else if (mask == 4)
-											{
-
-												itum->data->usable4 = true;
-
-											}
-										}
-
-
-									}
-									
-								}
-								break;
+								player->maskLevels[Mask::MASK0][Branches::Rama2] += 1;
+								item->data->usable1 = false;
+								item->data->used1 = true;
+								siguiente = true;
+								player->maskZeroPoints -= 1;
+								numMejoras0 += 1;
 							}
-							case 2:
+							else if (mask == 2 && player->maskOnePoints > 0)
 							{
-								bool siguiente = false;
-								if (mask == 1 && numMejoras0 < 8 && player->maskZeroPoints > 0)
-								{
-									player->maskLevels[Mask::MASK0][Branches::Rama3] += 1;
-									item->data->usable1 = false;
-									siguiente = true;
-									player->maskZeroPoints -= 1;
-									numMejoras0 += 1;
-								}
-								else if (mask == 2 && numMejoras1 < 8 && player->maskOnePoints > 0)
-								{
-									player->maskLevels[Mask::MASK1][Branches::Rama3] += 1;
-									item->data->usable2 = false;
-									siguiente = true;
-									player->maskOnePoints -= 1;
-									numMejoras1 += 1;
-								}
-								else if (mask == 3 && numMejoras2 < 8 && player->maskTwoPoints > 0)
-								{
-									player->maskLevels[Mask::MASK2][Branches::Rama3] += 1;
-									item->data->usable3 = false;
-									siguiente = true;
-									player->maskTwoPoints -= 1;
-									numMejoras2 += 1;
-								}
-								else if (mask == 4 && numMejoras3 < 8 && player->maskThreePoints > 0)
-								{
-									player->maskLevels[Mask::MASK3][Branches::Rama3] += 1;
-									item->data->usable4 = false;
-									siguiente = true;
-									player->maskThreePoints -= 1;
-									numMejoras3 += 1;
-								}
-								if (siguiente == true)
-								{
-									for (itum = arboles.start; itum != NULL; itum = itum->next)
-									{
-										if (itum->data->nivelArbol == item->data->nivelArbol && itum->data->nivelMejora == item->data->nivelMejora + 1)
-										{
-											if (mask == 1)
-											{
-
-												itum->data->usable1 = true;
-
-											}
-											else if (mask == 2)
-											{
-
-												itum->data->usable2 = true;
-
-											}
-											else if (mask == 3)
-											{
-
-												itum->data->usable3 = true;
-
-											}
-											else if (mask == 4)
-											{
-
-												itum->data->usable4 = true;
-
-											}
-										}
-
-
-									}
-									
-								}
-								break;
+								player->maskLevels[Mask::MASK1][Branches::Rama2] += 1;
+								item->data->usable2 = false;
+								item->data->used2 = true;
+								siguiente = true;
+								player->maskOnePoints -= 1;
+								numMejoras1 += 1;
 							}
-							case 3:
+							else if (mask == 3 && numMejoras2 < 8 && player->maskTwoPoints > 0)
 							{
-								bool siguiente = false;
-								if (mask == 1 && numMejoras0 < 8 && player->maskZeroPoints > 0)
+								player->maskLevels[Mask::MASK2][Branches::Rama2] += 1;
+								item->data->usable3 = false;
+								item->data->used3 = true;
+								siguiente = true;
+								player->maskTwoPoints -= 1;
+								numMejoras2 += 1;
+							}
+							else if (mask == 4 && numMejoras3 < 8 && player->maskTwoPoints > 0)
+							{
+								player->maskLevels[Mask::MASK3][Branches::Rama2] += 1;
+								item->data->usable4 = false;
+								item->data->used4 = true;
+								siguiente = true;
+								player->maskThreePoints -= 1;
+								numMejoras3 += 1;
+							}
+							if (siguiente == true)
+							{
+								for (itum = arboles.start; itum != NULL; itum = itum->next)
 								{
-									player->maskLevels[Mask::MASK0][Branches::Rama4] += 1;
-									item->data->usable1 = false;
-									siguiente = true;
-									player->maskZeroPoints -= 1;
-									numMejoras0 += 1;
-								}
-								else if (mask == 2 && numMejoras1 < 8 && player->maskOnePoints > 0)
-								{
-									player->maskLevels[Mask::MASK1][Branches::Rama4] += 1;
-									item->data->usable2 = false;
-									player->maskOnePoints -= 1;
-									siguiente = true;
-									numMejoras1 += 1;
-								}
-								else if (mask == 3 && numMejoras2 < 8 && player->maskTwoPoints > 0)
-								{
-									player->maskLevels[Mask::MASK2][Branches::Rama4] += 1;
-									item->data->usable3 = false;
-									siguiente = true;
-									player->maskTwoPoints -= 1;
-									numMejoras2 += 1;
-								}
-								else if (mask == 4 && numMejoras3 < 8 && player->maskThreePoints > 0)
-								{
-									player->maskLevels[Mask::MASK3][Branches::Rama4] += 1;
-									item->data->usable4 = false;
-									siguiente = true;
-									player->maskThreePoints -= 1;
-									numMejoras3 += 1;
-								}
-								if (siguiente == true)
-								{
-									for (itum = arboles.start; itum != NULL; itum = itum->next)
+									if (itum->data->nivelArbol == item->data->nivelArbol && itum->data->nivelMejora == item->data->nivelMejora + 1)
 									{
-										if (itum->data->nivelArbol == item->data->nivelArbol && itum->data->nivelMejora == item->data->nivelMejora + 1)
+										if (mask == 1)
 										{
-											if (mask == 1)
-											{
 
-												itum->data->usable1 = true;
+											itum->data->usable1 = true;
 
-											}
-											else if (mask == 2)
-											{
-
-												itum->data->usable2 = true;
-
-											}
-											else if (mask == 3)
-											{
-
-												itum->data->usable3 = true;
-
-											}
-											else if (mask == 4)
-											{
-
-												itum->data->usable4 = true;
-
-											}
 										}
+										else if (mask == 2)
+										{
 
+											itum->data->usable2 = true;
 
+										}
+										else if (mask == 3)
+										{
+
+											itum->data->usable3 = true;
+
+										}
+										else if (mask == 4)
+										{
+
+											itum->data->usable4 = true;
+
+										}
 									}
-									
+
+
 								}
-								break;
+
 							}
+							break;
+						}
+						case 2:
+						{
+							bool siguiente = false;
+							if (mask == 1 && numMejoras0 < 8 && player->maskZeroPoints > 0)
+							{
+								player->maskLevels[Mask::MASK0][Branches::Rama3] += 1;
+								item->data->usable1 = false;
+								item->data->used1 = true;
+								siguiente = true;
+								player->maskZeroPoints -= 1;
+								numMejoras0 += 1;
 							}
-						
+							else if (mask == 2 && numMejoras1 < 8 && player->maskOnePoints > 0)
+							{
+								player->maskLevels[Mask::MASK1][Branches::Rama3] += 1;
+								item->data->usable2 = false;
+								item->data->used2 = true;
+								siguiente = true;
+								player->maskOnePoints -= 1;
+								numMejoras1 += 1;
+							}
+							else if (mask == 3 && numMejoras2 < 8 && player->maskTwoPoints > 0)
+							{
+								player->maskLevels[Mask::MASK2][Branches::Rama3] += 1;
+								item->data->usable3 = false;
+								item->data->used3 = true;
+								siguiente = true;
+								player->maskTwoPoints -= 1;
+								numMejoras2 += 1;
+							}
+							else if (mask == 4 && numMejoras3 < 8 && player->maskThreePoints > 0)
+							{
+								player->maskLevels[Mask::MASK3][Branches::Rama3] += 1;
+								item->data->usable4 = false;
+								item->data->used4 = true;
+								siguiente = true;
+								player->maskThreePoints -= 1;
+								numMejoras3 += 1;
+							}
+							if (siguiente == true)
+							{
+								for (itum = arboles.start; itum != NULL; itum = itum->next)
+								{
+									if (itum->data->nivelArbol == item->data->nivelArbol && itum->data->nivelMejora == item->data->nivelMejora + 1)
+									{
+										if (mask == 1)
+										{
+
+											itum->data->usable1 = true;
+
+										}
+										else if (mask == 2)
+										{
+
+											itum->data->usable2 = true;
+
+										}
+										else if (mask == 3)
+										{
+
+											itum->data->usable3 = true;
+
+										}
+										else if (mask == 4)
+										{
+
+											itum->data->usable4 = true;
+
+										}
+									}
+
+
+								}
+
+							}
+							break;
+						}
+						case 3:
+						{
+							bool siguiente = false;
+							if (mask == 1 && numMejoras0 < 8 && player->maskZeroPoints > 0)
+							{
+								player->maskLevels[Mask::MASK0][Branches::Rama4] += 1;
+								item->data->usable1 = false;
+								item->data->used1 = true;
+								siguiente = true;
+								player->maskZeroPoints -= 1;
+								numMejoras0 += 1;
+							}
+							else if (mask == 2 && numMejoras1 < 8 && player->maskOnePoints > 0)
+							{
+								player->maskLevels[Mask::MASK1][Branches::Rama4] += 1;
+								item->data->usable2 = false;
+								item->data->used2 = true;
+								player->maskOnePoints -= 1;
+								siguiente = true;
+								numMejoras1 += 1;
+							}
+							else if (mask == 3 && numMejoras2 < 8 && player->maskTwoPoints > 0)
+							{
+								player->maskLevels[Mask::MASK2][Branches::Rama4] += 1;
+								item->data->usable3 = false;
+								item->data->used3 = true;
+								siguiente = true;
+								player->maskTwoPoints -= 1;
+								numMejoras2 += 1;
+							}
+							else if (mask == 4 && numMejoras3 < 8 && player->maskThreePoints > 0)
+							{
+								player->maskLevels[Mask::MASK3][Branches::Rama4] += 1;
+								item->data->usable4 = false;
+								item->data->used4 = true;
+								siguiente = true;
+								player->maskThreePoints -= 1;
+								numMejoras3 += 1;
+							}
+							if (siguiente == true)
+							{
+								for (itum = arboles.start; itum != NULL; itum = itum->next)
+								{
+									if (itum->data->nivelArbol == item->data->nivelArbol && itum->data->nivelMejora == item->data->nivelMejora + 1)
+									{
+										if (mask == 1)
+										{
+
+											itum->data->usable1 = true;
+
+										}
+										else if (mask == 2)
+										{
+
+											itum->data->usable2 = true;
+
+										}
+										else if (mask == 3)
+										{
+
+											itum->data->usable3 = true;
+
+										}
+										else if (mask == 4)
+										{
+
+											itum->data->usable4 = true;
+
+										}
+									}
+
+
+								}
+
+							}
+							break;
+						}
+						}
+
 
 					}
 					}
@@ -899,7 +1108,7 @@ void TreeManager::UseTreeSelected(int id)
 
 
 		}
-	
+	}
 	
 
 
@@ -920,7 +1129,7 @@ void TreeManager::ReembolsarTreeSelected(int id)
 			{
 				for (itum = arboles.start; itum != NULL; itum = itum->next)
 				{
-					if ((itum->data->nivelArbol == item->data->nivelArbol && itum->data->nivelMejora == item->data->nivelMejora + 1) || item->data->nivelMejora + 1 == 5 && itum->data->type == TreeType::BUTTON)
+					if ((itum->data->nivelArbol == item->data->nivelArbol && itum->data->nivelMejora == item->data->nivelMejora + 1) || (item->data->nivelMejora + 1 == 5 && itum->data->nivelArbol == item->data->nivelArbol && itum->data->type == TreeType::BUTTON))
 					{
 						if ((mask == 1 && item->data->usable1 == false && itum->data->usable1 == true) || (mask == 1 && item->data->usable1 == false && item->data->nivelMejora + 1 == 5))
 						{
@@ -942,6 +1151,7 @@ void TreeManager::ReembolsarTreeSelected(int id)
 							}
 
 							item->data->usable1 = true;
+							item->data->used1 = false;
 							if (item->data->usable1 + 1 < 5)
 							{
 								itum->data->usable1 = false;
@@ -969,9 +1179,10 @@ void TreeManager::ReembolsarTreeSelected(int id)
 								app->entityManager->GetPlayer()->maskLevels[Mask::MASK1][Branches::Rama4] -= 1;
 							}
 							item->data->usable2 = true;
+							item->data->used2 = false;
 							if (item->data->usable2 + 1 < 5)
 							{
-								itum->data->usable2 = false;
+								/*itum->data->usable2 = false;*/
 							}
 							numMejoras1 -= 1;
 							puntsRembolso += 1;
@@ -996,9 +1207,10 @@ void TreeManager::ReembolsarTreeSelected(int id)
 								app->entityManager->GetPlayer()->maskLevels[Mask::MASK2][Branches::Rama4] -= 1;
 							}
 							item->data->usable3 = true;
+							item->data->used3 = false;
 							if (item->data->usable3 + 1 < 5)
 							{
-								itum->data->usable3 = false;
+								/*itum->data->usable3 = false;*/
 							}
 							numMejoras2 -= 1;
 							puntsRembolso += 1;
@@ -1023,9 +1235,10 @@ void TreeManager::ReembolsarTreeSelected(int id)
 								app->entityManager->GetPlayer()->maskLevels[Mask::MASK3][Branches::Rama4] -= 1;
 							}
 							item->data->usable4 = true;
+							item->data->used4 = false;
 							if (item->data->usable4 + 1 < 5)
 							{
-								itum->data->usable4 = false;
+								/*itum->data->usable4 = false;*/
 							}
 							numMejoras3 -= 1;
 							puntsRembolso += 1;
@@ -1049,37 +1262,102 @@ void TreeManager::OnMovePointer()
 {
 
 	if (app->input->GetButton(RIGHT) == KEY_DOWN) {
-		if (horitzontalPointerId + 1 == 5)
+		if (PointerId == 100)
 		{
-			horitzontalPointerId = 0;
-			PointerPosition.x = 350;
-			PointerId -= 4;
+			PointerId = 101;
+			PointerPosition.x += 281;
+			selectSecondaryMask = false;
+			selectPrimaryMask = false;
+		}
+		else if (PointerId == 101)
+		{
+			PointerId = 100;
+			PointerPosition.x -= 281;
+			selectSecondaryMask = false;
+			selectPrimaryMask = false;
 		}
 		else
 		{
-			if (PointerId != -1)
+			if (horitzontalPointerId + 1 == 5)
 			{
-				horitzontalPointerId += 1;
-				PointerPosition.x += 120;
+				horitzontalPointerId = 0;
+				verticalPointerId = 0;
+				PointerPosition.x = 156;
+				PointerPosition.y = 148;
+				PointerId = 0;
 			}
-			PointerId += 1;
-		}
+			else
+			{
 
+				if (horitzontalPointerId == 0)
+				{
+					PointerPosition.x = 317;
+					PointerPosition.y = 138;
+					PointerId = 1;
+					verticalPointerId = 0;
+					horitzontalPointerId = 1;
+				}
+				else
+				{
+					horitzontalPointerId += 1;
+					PointerPosition.x += 143;
+					PointerId += 1;
+				}
+
+			}
+		}
+		
+		selectSecondaryMask = false;
+		selectPrimaryMask = false;
 	}
 	if (app->input->GetButton(LEFT) == KEY_DOWN) {
-		if (horitzontalPointerId - 1 == -1)
+		if (PointerId == 100)
 		{
-
-			horitzontalPointerId += 4;
-			PointerPosition.x = 350 + 4 * 120;
-			PointerId += 4;
+			PointerId = 101;
+			PointerPosition.x += 281;
+		}
+		else if (PointerId == 101)
+		{
+			PointerId = 100;
+			PointerPosition.x -= 281;
 		}
 		else
 		{
-			horitzontalPointerId -= 1;
-			PointerPosition.x -= 120;
-			PointerId -= 1;
+			if (horitzontalPointerId == 0)
+			{
+
+			}
+			else
+			{
+				if (horitzontalPointerId - 1 == -1)
+				{
+
+					horitzontalPointerId += 4;
+					PointerPosition.x = 317 + 4 * 143;
+					PointerId += 4;
+				}
+				else
+				{
+					if (horitzontalPointerId - 1 == 0)
+					{
+						horitzontalPointerId = 0;
+						verticalPointerId = 0;
+						PointerPosition.x = 156;
+						PointerPosition.y = 148;
+						PointerId = 0;
+					}
+					else
+					{
+						horitzontalPointerId -= 1;
+						PointerPosition.x -= 143;
+						PointerId -= 1;
+					}
+
+				}
+			}
 		}
+		selectSecondaryMask = false;
+		selectPrimaryMask = false;
 	}
 
 	if (app->input->GetButton(DOWN) == KEY_DOWN) {
@@ -1087,35 +1365,90 @@ void TreeManager::OnMovePointer()
 		{
 			PointerId += 5;
 			verticalPointerId += 1;
-			PointerPosition.y += 100;
+			if (horitzontalPointerId == 0)
+			{
+				PointerPosition.y += 125;
+			}
+			else
+			{
+				PointerPosition.y += 100;
+			}
+			
 		}
 		else
 		{
-			verticalPointerId = 0;
-			PointerId -= 15;
-			PointerPosition.y = 130;
+			if (PointerId == 100 || PointerId == 101)
+			{
+				verticalPointerId = 0;
+				horitzontalPointerId = 1;
+				PointerId = 1;
+				{
+					PointerPosition.x = 317;
+					PointerPosition.y = 138;
+				}
+			}
+			else
+			{
+				verticalPointerId = 100;
+				PointerId = 100;
+				PointerPosition.x = 278;
+				PointerPosition.y = 520;
+			}
+			
+			
+			
 		}
 
-
+		selectSecondaryMask = false;
+		selectPrimaryMask = false;
 
 	}
 	if (app->input->GetButton(UP) == KEY_DOWN) {
-		if (verticalPointerId - 1 > -1)
+		if (verticalPointerId - 1 > -1 && verticalPointerId < 80)
 		{
-			PointerPosition.y -= 100;
+			
 			PointerId -= 5;
 			verticalPointerId -= 1;
+			if (horitzontalPointerId == 0)
+			{
+				PointerPosition.y -= 125;
+			}
+			else
+			{
+				PointerPosition.y -= 100;
+			}
 		}
 		else
 		{
-			verticalPointerId = 3;
-			PointerId += 15;
-			PointerPosition.y = 130 + 100 * (3);
+			if (PointerId == 100 || PointerId == 101)
+			{
+				/*if (horitzontalPointerId == 0)
+				{
+					PointerPosition.y = 148 + 125 * (3);
+				}
+				else*/
+				{
+					PointerPosition.x = 317;
+					PointerPosition.y = 138 + 100 * (3);
+					verticalPointerId = 3;
+					PointerId = 16;
+					horitzontalPointerId = 1;
+				}
+				
+			}
+			else
+			{
+				PointerId = 100;
+				PointerPosition.x = 278;
+				PointerPosition.y = 520;
+			}
+			
 		}
 
-
+		selectSecondaryMask = false;
+		selectPrimaryMask = false;
 	}
-
+	
 }
 
 void TreeManager::AddTree(Tree* entity)
@@ -1178,11 +1511,11 @@ bool TreeManager::Update(float dt)
 			numMejoras3 = 8; // Limitar a 8 si es mayor
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
+		/*if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
 
 			selectPrimaryMask = true;
 
-		}
+		}*/
 
 		if (selectPrimaryMask)
 		{
@@ -1224,11 +1557,11 @@ bool TreeManager::Update(float dt)
 			}
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
+		/*if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
 
 			selectSecondaryMask = true;
 
-		}
+		}*/
 
 		if (selectSecondaryMask)
 		{
@@ -1315,7 +1648,10 @@ bool TreeManager::Update(float dt)
 				player->maskThreePoints = 0;
 			}
 		}
-
+		player->maskZeroPoints = 8;
+		player->maskOnePoints = 8;
+		player->maskTwoPoints = 8;
+		player->maskThreePoints = 8;
 	}
 	
 	
@@ -1335,7 +1671,7 @@ bool TreeManager::PostUpdate()
 	uint tradeSpacing = 83;
 
 	SDL_Rect viewport = { 620, 200, 400, 350 };
-
+	
 
 	if (mostrar == true)
 	{
@@ -1358,44 +1694,89 @@ bool TreeManager::PostUpdate()
 			pEntity = item->data;
 			int rowIndex = item->data->id / maxItemsPerRow; // Calcula el índice de la fila
 			int columnIndex = item->data->id % maxItemsPerRow; // Calcula el índice de la columna
-			int horizontalPosition = 350 + columnIndex * 120; // Calcula la posición horizontal
-			int verticalPosition = 130 + rowIndex * 100; // Calcula la posición vertical
+			int horizontalPosition = 200 + columnIndex * 138; // Calcula la posición horizontal
+			int verticalPosition = 150 + rowIndex * 100; // Calcula la posición vertical
 
 
 
 			if (zoomIn == false && app->notesManager->zoomIn == false)
 			{
-				app->render->DrawTexture(listTexture, horizontalPosition, verticalPosition, 0.7, SDL_FLIP_NONE, 0, 0);
+				/*app->render->DrawTexture(listTexture, horizontalPosition, verticalPosition, 0.7, SDL_FLIP_NONE, 0, 0);*/
 				switch (mask)
 				{
 				case 1:
 				{
-
-					if (pEntity->usable1 == false)
+					if (pEntity->used1)
 					{
-						app->render->DrawTexture(listTextureNot, horizontalPosition, verticalPosition, 0.7, SDL_FLIP_NONE, 0, 0);
+						app->render->DrawTexture(pEntity->iconSelected0, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
 					}
-
-					app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });
-
+					else
+					{
+						if (pEntity->usable1 == false)
+						{
+							app->render->DrawTexture(pEntity->iconLocked0, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+						}
+						else
+						{
+							app->render->DrawTexture(pEntity->icon0, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+						}
+					}
+					
+					/*app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
+					
+					
 
 
 					break;
 				}
 				case 2:
 				{
-					if (pEntity->usable2 == false)
+					if (pEntity->used2)
 					{
-						app->render->DrawTexture(listTextureNot, horizontalPosition, verticalPosition, 0.7, SDL_FLIP_NONE, 0, 0);
-					}
-					if (pEntity->name2 == "")
-					{
-						app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });
+						
+						if (pEntity->name2 == "")
+						{
+							/*app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
+							app->render->DrawTexture(pEntity->iconSelected0, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+						}
+						else
+						{
+							/*app->render->DrawTextBound(pEntity->name2.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
+							app->render->DrawTexture(pEntity->iconSelected1, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+
+						}
 					}
 					else
 					{
-						app->render->DrawTextBound(pEntity->name2.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });
+						if (pEntity->usable2 == false)
+						{
+							if (pEntity->name2 == "")
+							{
+								/*app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
+								app->render->DrawTexture(pEntity->iconLocked0, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+							}
+							else
+							{
+								/*app->render->DrawTextBound(pEntity->name2.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
+								app->render->DrawTexture(pEntity->iconLocked1, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
 
+							}
+							/*app->render->DrawTexture(listTextureNot, horizontalPosition, verticalPosition, 0.7, SDL_FLIP_NONE, 0, 0);*/
+						}
+						else
+						{
+							if (pEntity->name2 == "")
+							{
+								/*app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
+								app->render->DrawTexture(pEntity->icon0, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+							}
+							else
+							{
+								/*app->render->DrawTextBound(pEntity->name2.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
+								app->render->DrawTexture(pEntity->icon1, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+
+							}
+						}
 					}
 
 
@@ -1403,21 +1784,50 @@ bool TreeManager::PostUpdate()
 				}
 				case 3:
 				{
-
-
-					if (pEntity->usable3 == false)
+					if (pEntity->used3)
 					{
-						app->render->DrawTexture(listTextureNot, horizontalPosition, verticalPosition, 0.7, SDL_FLIP_NONE, 0, 0);
-					}
+						if (pEntity->name3 == "")
+						{
+							/*app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
+							app->render->DrawTexture(pEntity->iconSelected0, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+						}
+						else
+						{
+							/*app->render->DrawTextBound(pEntity->name2.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
+							app->render->DrawTexture(pEntity->iconSelected2, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
 
-					if (pEntity->name3 == "")
-					{
-						app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });
+						}
 					}
 					else
 					{
-						app->render->DrawTextBound(pEntity->name3.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });
+						if (pEntity->usable3 == false)
+						{
+							if (pEntity->name3 == "")
+							{
+								/*app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
+								app->render->DrawTexture(pEntity->iconLocked0, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+							}
+							else
+							{
+								/*app->render->DrawTextBound(pEntity->name3.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
+								app->render->DrawTexture(pEntity->iconLocked2, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+							}
+							/*app->render->DrawTexture(listTextureNot, horizontalPosition, verticalPosition, 0.7, SDL_FLIP_NONE, 0, 0);*/
+						}
+						else
+						{
+							if (pEntity->name3 == "")
+							{
+								/*app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
+								app->render->DrawTexture(pEntity->icon0, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+							}
+							else
+							{
+								/*app->render->DrawTextBound(pEntity->name2.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
+								app->render->DrawTexture(pEntity->icon2, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
 
+							}
+						}
 					}
 
 
@@ -1425,18 +1835,51 @@ bool TreeManager::PostUpdate()
 				}
 				case 4:
 				{
-					if (pEntity->usable4 == false)
+					if (pEntity->used4)
 					{
-						app->render->DrawTexture(listTextureNot, horizontalPosition, verticalPosition, 0.7, SDL_FLIP_NONE, 0, 0);
-					}
-					if (pEntity->name4 == "")
-					{
-						app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });
+						if (pEntity->name4 == "")
+						{
+							/*app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
+							app->render->DrawTexture(pEntity->iconSelected0, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+						}
+						else
+						{
+							/*app->render->DrawTextBound(pEntity->name2.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
+							app->render->DrawTexture(pEntity->iconSelected3, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+
+						}
 					}
 					else
 					{
-						app->render->DrawTextBound(pEntity->name4.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });
+						if (pEntity->usable4 == false)
+						{
+							if (pEntity->name4 == "")
+							{
+								/*app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
+								app->render->DrawTexture(pEntity->iconLocked0, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+							}
+							else
+							{
+								/*app->render->DrawTextBound(pEntity->name4.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
+								app->render->DrawTexture(pEntity->iconLocked3, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
 
+							}
+							/*app->render->DrawTexture(listTextureNot, horizontalPosition, verticalPosition, 0.7, SDL_FLIP_NONE, 0, 0);*/
+						}
+						else
+						{
+							if (pEntity->name4 == "")
+							{
+								/*app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
+								app->render->DrawTexture(pEntity->icon0, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+							}
+							else
+							{
+								/*app->render->DrawTextBound(pEntity->name4.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
+								app->render->DrawTexture(pEntity->icon3, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+
+							}
+						}
 					}
 
 					break;
@@ -1448,9 +1891,60 @@ bool TreeManager::PostUpdate()
 				/*app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);*/
 			}
 
+			if (PointerId == 0 || PointerId == 5 || PointerId == 10 || PointerId == 15)
+			{
+				app->render->DrawTexture(PointerItemText2, PointerPosition.x, PointerPosition.y, SDL_FLIP_NONE, 0, 0);
+			}
+			else
+			{
+				if (PointerId == 100 || PointerId == 101)
+				{
+					app->render->DrawTexture(PointerItemText3, PointerPosition.x, PointerPosition.y, SDL_FLIP_NONE, 0, 0);
+				}
+				else
+				{
+					app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y, SDL_FLIP_NONE, 0, 0);
+				}
+				
+			}
 
-			app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y, 0.7, SDL_FLIP_NONE, 0, 0);
-			int a = 0;
+			
+			
+			if (mask == 1)
+			{
+				app->render->DrawTexture(mascara0SelectedTexture, 157, 145, SDL_FLIP_NONE, 0, 0);
+			}
+			else
+			{
+				app->render->DrawTexture(mascara0Texture, 157, 145, SDL_FLIP_NONE, 0, 0);
+			}
+
+			if (mask == 2)
+			{
+				app->render->DrawTexture(mascara1SelectedTexture, 157, 275, SDL_FLIP_NONE, 0, 0);
+			}
+			else
+			{
+				app->render->DrawTexture(mascara1Texture, 157, 275, SDL_FLIP_NONE, 0, 0);
+			}
+
+			if (mask == 3)
+			{
+				app->render->DrawTexture(mascara2SelectedTexture, 157, 400, SDL_FLIP_NONE, 0, 0);
+			}
+			else
+			{
+				app->render->DrawTexture(mascara2Texture, 157, 400, SDL_FLIP_NONE, 0, 0);
+			}
+
+			if (mask == 4)
+			{
+				app->render->DrawTexture(mascara3SelectedTexture, 157, 525, SDL_FLIP_NONE, 0, 0);
+			}
+			else
+			{
+				app->render->DrawTexture(mascara3Texture, 157, 525, SDL_FLIP_NONE, 0, 0);
+			}
 		}
 
 
@@ -1537,10 +2031,10 @@ bool TreeManager::PostUpdate()
 		
 		if (selectPrimaryMask || selectSecondaryMask)
 		{
-			app->render->DrawTextBound("1", 100, 130, 100, { 0,0,0,0 });
-			app->render->DrawTextBound("2", 100, 250, 370, { 0, 0, 0, 0 });
-			app->render->DrawTextBound("3", 100, 350, 370, { 0, 0, 0, 0 });
-			app->render->DrawTextBound("4", 100, 450, 370, { 0, 0, 0, 0 });
+			app->render->DrawTextBound("1", 120, 180, 100, { 255,0,0,0 }, app->render->titleFont);
+			app->render->DrawTextBound("2", 120, 310, 370, { 255,0,0,0 }, app->render->titleFont);
+			app->render->DrawTextBound("3", 120, 430, 370, { 255,0,0,0 }, app->render->titleFont);
+			app->render->DrawTextBound("4", 120, 550, 370, { 255,0,0,0 }, app->render->titleFont);
 		}
 			
 		
