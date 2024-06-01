@@ -36,6 +36,7 @@
 #include "NPC_Herrera.h"
 #include "NPC_MujerEnamorada.h"
 #include "NPC_MujerPreocupada.h"
+#include "NPC_Padre.h"
 #include "Item_Diamante.h"
 #include "Item_Ojo.h"
 #include "Item_Hueso.h"
@@ -1539,6 +1540,17 @@ bool Map::LoadEntities(std::string layerName)
 
 						NPCVendedor* npc = (NPCVendedor*)app->entityManager->CreateEntity(EntityType::NPC_ABUELA);
 						npc->config = configNode.child("entities_data").child("npc_abuela");
+						npc->position = iPoint(pos.x + 16, pos.y + 16);
+						npc->Start();
+
+					}
+
+					//NPC_PADRE
+					if (gid == tileset->firstgid + 15) {
+
+
+						NPCPadre* npc = (NPCPadre*)app->entityManager->CreateEntity(EntityType::NPC_PADRE);
+						npc->config = configNode.child("entities_data").child("npc_padre");
 						npc->position = iPoint(pos.x + 16, pos.y + 16);
 						npc->Start();
 

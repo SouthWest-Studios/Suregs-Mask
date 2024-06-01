@@ -32,6 +32,7 @@
 #include "NPC_Herrera.h"
 #include "NPC_MujerEnamorada.h"
 #include "NPC_MujerPreocupada.h"
+#include "NPC_Padre.h"
 #include "Item_diamante.h"
 #include "MiniGameFishing.h"
 #include "Fishing.h"
@@ -342,10 +343,13 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 	case EntityType::NPC_BULLY_2:
 		entity = new NPCBully2();
 		break;
+	case EntityType::NPC_PADRE:
+		entity = new NPCPadre();
+		break;
+
 	case EntityType::BOSS_INUIT:
 		entity = new Boss_Inuit();
 		break;
-
 	case EntityType::BOSS_MUSRI:
 		entity = new Boss_Musri();
 		break;

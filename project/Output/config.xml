@@ -299,7 +299,9 @@
 		<npc_enamorados texturePath="Assets/Textures/Entidades/NPCs/Idle/enamorados.png"		Tsprite="6" Pwidth="1383" sprite_x="230" sprite_y="250"/>
 		<npc_abuelito texturePath="Assets/Textures/Entidades/NPCs/Idle/yayo_cliente.png"		Tsprite="6" Pwidth="850" sprite_x="141" sprite_y="260"/>
 		<npc_abuela texturePath="Assets/Textures/Entidades/NPCs/Idle/vhea.png"					Tsprite="6" Pwidth="1440" sprite_x="240" sprite_y="240"/>
+		<npc_padre texturePath="Assets/Textures/Entidades/Boss/Igory/bossPapa.png"				Tsprite="128" Pwidth="4800" sprite_x="600" sprite_y="427"/>
 		
+
 		<npc_abuelitas texturePath="Assets/Textures/Entidades/NPCs/Idle/yayas.png"				Tsprite="6" Pwidth="2317" sprite_x="386" sprite_y="250"/>
 		
 		<npc_guardias texturePath="Assets/Textures/Entidades/NPCs/Idle/guardias.png"					Tsprite="6" Pwidth="3000" sprite_x="500" sprite_y="314"/>
