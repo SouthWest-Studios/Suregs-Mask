@@ -64,8 +64,6 @@ bool Scene_Menu::Start()
 	logo = app->tex->Load(logo_tp);
 	savedGames = app->tex->Load(savedGames_tp);
 	controls = app->tex->Load(controls_tp);
-
-	//AQU?CARGAR TODAS LAS TEXTURAS DEL MEN?(cuando las tengamos xd)
 	
 
 	//Get window size
@@ -126,17 +124,17 @@ bool Scene_Menu::Update(float dt)
 	
 	int mx, my;
 
-	//if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN) {
-	//	app->input->GetMousePosition(mx, my);
-	//	fPoint pos((float)mx, (float)my);
-	//	app->psystem->AddEmiter(pos, EMITTER_TYPE_BURST);
-	//}
-
 	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN) {
 		app->input->GetMousePosition(mx, my);
 		fPoint pos((float)mx, (float)my);
-		app->psystem->AddEmiter(pos, EMITTER_TYPE_SPARK);
+		app->psystem->AddEmiter(pos, EMITTER_TYPE_ENEMY_BLOOD);
 	}
+
+	//if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN) {
+	//	app->input->GetMousePosition(mx, my);
+	//	fPoint pos((float)mx, (float)my);
+	//	app->psystem->AddEmiter(pos, EMITTER_TYPE_SPARK);
+	//}
 
 	if (showSettings == false)
 	{

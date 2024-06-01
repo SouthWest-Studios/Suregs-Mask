@@ -300,9 +300,9 @@ bool Hud::PostUpdate()
 
 
 
-		//Botones
-	app->render->DrawTexture(hudTexture, windowWidth - rectFondoInventario->w + 10, 70, SDL_FLIP_NONE, rectBotonTAB, 0);
-	app->render->DrawTexture(hudTexture, 120, 85, SDL_FLIP_NONE, rectBotonQ, 0);
+	//Botones
+	/*app->render->DrawTexture(hudTexture, windowWidth - rectFondoInventario->w + 10, 70, SDL_FLIP_NONE, rectBotonTAB, 0);
+	app->render->DrawTexture(hudTexture, 120, 85, SDL_FLIP_NONE, rectBotonQ, 0);*/
 
 
 	//Item Acquired
@@ -363,7 +363,7 @@ bool Hud::PostUpdate()
 		app->physics->active = true;
 		couunt = 0;
 	}
-	
+
 
 	return true;
 }
@@ -489,6 +489,7 @@ ListItem<Inventity*>* Hud::GetSelectedPotionItem() {
 	}
 	return nullptr;
 }
+
 
 
 bool Hud::HayPocionesDisponibles() {

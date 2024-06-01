@@ -200,7 +200,25 @@
 			<endColor r ="255" g="0" b="0" a="255"/>
 			<blendMode mode ="add"/>
 			<lifetime value ="120"/>
-			<vortexSensitive state = "true"/>
+			<vortexSensitive state = "false"/>
+		</emitter>
+
+		<emitter type ="enemy_blood">
+			<angleRange min ="0" max ="360"/>
+			<rotSpeed value ="1" randMin ="-1" randMax ="1"/>
+			<startSpeed value ="0.05f" randMin ="0" randMax ="1"/>
+			<endSpeed value ="0.05f" randMin ="0" randMax ="1"/>
+			<startSize value ="50" randMin ="0" randMax ="1"/>
+			<endSize value =" 5" randMin ="1" randMax ="1"/>
+			<emitNumber value ="1"/>
+			<emitVariance value ="1" randMin ="0" randMax ="1"/>
+			<maxParticleLife value ="70" randMin ="0" randMax ="1"/>
+			<textureRect x="0" y="0" w="128" h="128"/>
+			<startColor r ="87" g="35" b="100" a="255"/>
+			<endColor r ="87" g="35" b="100" a="255"/>
+			<blendMode mode ="blend"/>
+			<lifetime value ="150"/>
+			<vortexSensitive state = "false"/>
 		</emitter>
 
 	</particleAtlas>
