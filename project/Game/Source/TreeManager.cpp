@@ -1653,10 +1653,10 @@ bool TreeManager::Update(float dt)
 				player->maskThreePoints = 0;
 			}
 		}
-		player->maskZeroPoints = 8;
+		/*player->maskZeroPoints = 8;
 		player->maskOnePoints = 8;
 		player->maskTwoPoints = 8;
-		player->maskThreePoints = 8;
+		player->maskThreePoints = 8;*/
 	}
 	
 	
