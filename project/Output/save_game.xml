@@ -20,14 +20,14 @@
 			</puzzles>
 		</map>
 	</:anonymous>
-	<pueblo_tutorial />
+	<scene_pueblo />
 	<entitymanager>
 		<entity_manager>
 			<doors>
 				<door sceneLevel="-10" tpID="0" />
-				<door sceneLevel="-10" tpID="9" />
 				<door sceneLevel="-10" tpID="8" />
 				<door sceneLevel="-10" tpID="1" />
+				<door sceneLevel="-10" tpID="9" />
 			</doors>
 		</entity_manager>
 	</entitymanager>
@@ -36,9 +36,9 @@
 	<menu />
 	<iventorymanager>
 		<inventory>
-			<money quantity="0" />
-			<SwordLevel quantity="0" />
-			<ArmorLevel quantity="0" />
+			<money quantity="399" />
+			<SwordLevel quantity="2" />
+			<ArmorLevel quantity="2" />
 			<PrimaryMask quantity="-1" />
 			<SecondaryMask quantity="-1" />
 			<StoryLevel quantity="2" />
