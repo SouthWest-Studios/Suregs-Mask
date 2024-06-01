@@ -935,4 +935,30 @@ Vida: Muy alta	Daño: Muy alto	Tamaño: Muy grande Velocidad: Muy lenta"
 		
 	</commercemanager>
 
+
+	<questmanager>
+		<questLines>
+			<questLine id="1" defaultActive="true">
+				<quest id="1" questTitle="Habla con Vhea." />
+				<quest id="2" questTitle="Ve al campo de entrenamiento." />
+				<quest id="3" questTitle="Ve a casa y habla con Vhea." />
+				<quest id="4" questTitle="Abre el cofre del dormitorio." />
+				<quest id="5" questTitle="Ve a las “ruinas” y descubre que es el “artefacto” del que hablaba tu padre." />
+			</questLine>
+
+			<questLine id="2" defaultActive="false">
+				<quest id="1" questTitle="Dale la carta de Sukhy a Zupho, el guardia." />
+			</questLine>
+
+			<questLine id="3" defaultActive="false">
+				<quest id="1" questTitle="Dale la carta de Sukhy a Zupho, el guardia." />
+			</questLine>
+			
+			
+		</questLines>
+		
+		
+		
+	</questmanager>
+
 </config>

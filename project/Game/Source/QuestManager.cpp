@@ -34,6 +34,10 @@ bool QuestManager::Awake(pugi::xml_node config)
 {
 	LOG("Loading Quest Manager");
 	bool ret = true;
+	//Crear todas las misiones vacias, y luego el load pondra indices y tal
+
+
+
 
 
 	return ret;
@@ -69,6 +73,17 @@ bool QuestManager::CreateQuest(int questLineID, int questID, std::string questTi
 		
 	}
 
+	return ret;
+}
+
+bool QuestManager::CreateQuestLine(int questLineID)
+{
+	bool ret = false;
+	if (FindQuestLine(questLineID) == nullptr) {
+		QuestLine* questLine = new QuestLine;
+		questLine->questLineID = questLineID;
+		ret = true;
+	}
 	return ret;
 }
 
