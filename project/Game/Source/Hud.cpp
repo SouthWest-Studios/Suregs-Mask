@@ -355,6 +355,15 @@ bool Hud::PostUpdate()
 		}
 		app->physics->active = false;
 		{
+			uint windowWidth, windowHeight;
+			app->win->GetWindowSize(windowWidth, windowHeight);
+			Uint8 alpha = 188;  // Valor de transparencia (0-255)
+			SDL_Texture* transparentTexture = app->menu->CreateTransparentTexture(app->render->renderer, windowWidth, windowHeight, alpha);
+			if (transparentTexture != nullptr) {
+				SDL_SetTextureBlendMode(transparentTexture, SDL_BLENDMODE_BLEND);
+				SDL_RenderCopy(app->render->renderer, transparentTexture, nullptr, nullptr);
+				SDL_DestroyTexture(transparentTexture);
+			}
 			app->render->DrawTexture(EstatuaTexture, 0, 0, SDL_FLIP_NONE, 0, 0);
 		}
 	}

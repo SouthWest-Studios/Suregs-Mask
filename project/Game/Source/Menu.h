@@ -7,7 +7,8 @@
 #include "GuiControlButton.h"
 #include "GuiCheckBox.h"
 #include "GuiControlSlider.h"
-
+#include "Render.h"
+#include "Textures.h"
 
 struct SDL_Texture;
 
@@ -49,6 +50,8 @@ public:
 
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
+
+	SDL_Texture* CreateTransparentTexture(SDL_Renderer* renderer, int width, int height, Uint8 alpha);
 
 	bool vsyncActive = false;
 	bool visible = true;

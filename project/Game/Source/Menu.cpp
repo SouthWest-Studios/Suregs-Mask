@@ -398,22 +398,35 @@ bool Menu::PostUpdate()
 {
 	uint windowWidth, windowHeight;
 	app->win->GetWindowSize(windowWidth, windowHeight);
-	if (ventana == 1)
+
+	if (menuu)
 	{
-		app->render->DrawTexture(fondoInventario, windowWidth / 8 + 40, windowHeight / 8 - 71, SDL_FLIP_NONE, 0, 0);
-		/*app->render->DrawTexture(fondoInventario, windowWidth / 8 + 100, windowHeight / 8,1.2, SDL_FLIP_NONE, 0, 0);*/
-	}
-	if (ventana == 2)
-	{
-		app->render->DrawTexture(fondoEquipo, windowWidth / 8 + 40, windowHeight / 8 - 70, SDL_FLIP_NONE, 0, 0);
-	}
-	if (ventana == 3)
-	{
-		app->render->DrawTexture(fondoDiario, windowWidth / 8 + 40, windowHeight / 8 - 70, SDL_FLIP_NONE, 0, 0);
-	}
-	if (ventana == 4)
-	{
-		app->render->DrawTexture(fondoAjustes, windowWidth / 8 + 40, windowHeight / 8 - 70, SDL_FLIP_NONE, 0, 0);
+		// Crear y renderizar la textura semitransparente
+		Uint8 alpha = 188;  // Valor de transparencia (0-255)
+		SDL_Texture* transparentTexture = CreateTransparentTexture(app->render->renderer, windowWidth, windowHeight, alpha);
+		if (transparentTexture != nullptr) {
+			SDL_SetTextureBlendMode(transparentTexture, SDL_BLENDMODE_BLEND);
+			SDL_RenderCopy(app->render->renderer, transparentTexture, nullptr, nullptr);
+			SDL_DestroyTexture(transparentTexture);
+		}
+
+		if (ventana == 1)
+		{
+			app->render->DrawTexture(fondoInventario, windowWidth / 8 + 40, windowHeight / 8 - 71, SDL_FLIP_NONE, 0, 0);
+			/*app->render->DrawTexture(fondoInventario, windowWidth / 8 + 100, windowHeight / 8,1.2, SDL_FLIP_NONE, 0, 0);*/
+		}
+		if (ventana == 2)
+		{
+			app->render->DrawTexture(fondoEquipo, windowWidth / 8 + 40, windowHeight / 8 - 70, SDL_FLIP_NONE, 0, 0);
+		}
+		if (ventana == 3)
+		{
+			app->render->DrawTexture(fondoDiario, windowWidth / 8 + 40, windowHeight / 8 - 70, SDL_FLIP_NONE, 0, 0);
+		}
+		if (ventana == 4)
+		{
+			app->render->DrawTexture(fondoAjustes, windowWidth / 8 + 40, windowHeight / 8 - 70, SDL_FLIP_NONE, 0, 0);
+		}
 	}
 	
 	
@@ -422,6 +435,36 @@ bool Menu::PostUpdate()
 	return ret;
 }
 
+//SDL_Texture* CreateGradientTexturee(SDL_Renderer* renderer, int width, int height) {
+//	SDL_Surface* surface = SDL_CreateRGBSurface(0, width, height, 32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
+//	if (surface == nullptr) {
+//		/*std::cerr << "Error creating surface: " << SDL_GetError() << std::endl;*/
+//		return nullptr;
+//	}
+//
+//	// Lock the surface to directly manipulate the pixels
+//	SDL_LockSurface(surface);
+//
+//	Uint32* pixels = (Uint32*)surface->pixels;
+//	for (int y = 0; y < height; ++y) {
+//		// Calculate the alpha value for this row
+//		Uint8 alpha = (Uint8)((float)y / height * 255);
+//
+//		for (int x = 0; x < width; ++x) {
+//			pixels[y * width + x] = SDL_MapRGBA(surface->format, 0, 0, 0, alpha);
+//		}
+//	}
+//
+//	SDL_UnlockSurface(surface);
+//
+//	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+//	if (texture == nullptr) {
+//		/*std::cerr << "Error creating texture: " << SDL_GetError() << std::endl;*/
+//	}
+//
+//	SDL_FreeSurface(surface);
+//	return texture;
+//}
 // Called before quitting
 bool Menu::CleanUp()
 {
@@ -484,3 +527,36 @@ bool Menu::SaveState(pugi::xml_node node)
 
 	return true;
 }
+
+SDL_Texture* Menu::CreateTransparentTexture(SDL_Renderer* renderer, int width, int height, Uint8 alpha)
+{
+	SDL_Surface* surface = SDL_CreateRGBSurface(0, width, height, 32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
+	if (surface == nullptr) {
+		/*std::cerr << "Error creating surface: " << SDL_GetError() << std::endl;*/
+		return nullptr;
+	}
+
+	// Lock the surface to directly manipulate the pixels
+	SDL_LockSurface(surface);
+
+	Uint32* pixels = (Uint32*)surface->pixels;
+	Uint32 color = SDL_MapRGBA(surface->format, 0, 0, 0, alpha);  // Black with the specified alpha
+
+	for (int y = 0; y < height; ++y) {
+		for (int x = 0; x < width; ++x) {
+			pixels[y * width + x] = color;
+		}
+	}
+
+	SDL_UnlockSurface(surface);
+
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+	if (texture == nullptr) {
+		/*std::cerr << "Error creating texture: " << SDL_GetError() << std::endl;*/
+	}
+
+	SDL_FreeSurface(surface);
+	return texture;
+}
+
+
