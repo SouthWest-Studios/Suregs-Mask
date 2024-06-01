@@ -332,22 +332,22 @@ Inventity* InventoryManager::CreateItem(EntityType type, std::string descripcioo
 
 	if (type == EntityType::ITEM_MASCARA0)
 	{
-		numMasks = 1;
+		numMasks++;
 		mask = true;
 	}
 	if (type == EntityType::ITEM_MASCARA1)
 	{
-		numMasks = 2;
+		numMasks++;
 		mask = true;
 	}
 	if (type == EntityType::ITEM_MASCARA2)
 	{
-		numMasks = 3;
+		numMasks++;
 		mask = true;
 	}
 	if (type == EntityType::ITEM_MASCARA3)
 	{
-		numMasks = 4;
+		numMasks++;
 		mask = true;
 	}
 

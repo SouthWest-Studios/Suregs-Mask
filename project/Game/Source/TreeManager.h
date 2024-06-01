@@ -53,7 +53,7 @@ public:
 	
 
 public:
-	int mask = 1;
+	int mask = 0;
 	List<Tree*> arboles; 
 	unsigned int numMejoras0 = 0;
 	unsigned int numMejoras1 = 0;

@@ -760,7 +760,7 @@ void Scene_Menu::ShowControls()
 		control->data->state = GuiControlState::DISABLED;
 	}
 	if (showControls && !_showControls) {
-		gcCloseControls = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 17, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 200,	60,25 }, this);
+		gcCloseControls = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 17, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 100,	60,25 }, this);
 		_showControls = true;
 	}
 	app->render->DrawTexture(controls, 0, 0);

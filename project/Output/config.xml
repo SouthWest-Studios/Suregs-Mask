@@ -344,7 +344,7 @@
 		<credits texturepath ="Assets/Textures/Interfaz/textura_creditos.png"/>
 		<logo texturepath ="Assets/Textures/Interfaz/textura_logo.png"/>
 		<savedGames texturepath ="Assets/Textures/Interfaz/textura_saved_games.png"/>
-		<controls texturepath ="Assets/Textures/Interfaz/textura_menu_controles.jpg"/>
+		<controls texturepath ="Assets/Textures/Interfaz/textura_menu_controles.png"/>
 	</scene_menu>
 
 	<scene_gameover>
