@@ -11,6 +11,7 @@
 #include "Physics.h"
 #include "Window.h"
 #include "Pathfinding.h"
+#include "ParticleSystem.h"
 #include "Map.h"
 #include "Physics.h"
 #include "Item_Hueso.h"
@@ -207,6 +208,8 @@ bool Enemy_Muur::CleanUp()
 	app->tex->UnLoad(texture);
 	lastPath.Clear();
 
+	blood = nullptr;
+
 	RELEASE(spritePositions);
 	delete spritePositions;
 
@@ -246,12 +249,14 @@ void Enemy_Muur::Attack(float dt)
 }
 
 void Enemy_Muur::Die() {
-	app->audio->PlayFx(muur_get_damage_fx);
-
 	
+	app->audio->PlayFx(muur_get_damage_fx);
 
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	currentAnimation = &dieAnim;
+
+	fPoint pos((float)position.x, (float)position.y);
+	blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_ENEMY_BLOOD);
 
 	if (dieAnim.HasFinished())
 	{
