@@ -250,7 +250,11 @@ void Enemy_Muur::Attack(float dt)
 
 void Enemy_Muur::Die() {
 	
-	app->audio->PlayFx(muur_get_damage_fx);
+	if (death_fx == false) 
+	{
+		app->audio->PlayFx(muur_get_damage_fx);
+		death_fx = true;
+	}
 
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	currentAnimation = &dieAnim;
