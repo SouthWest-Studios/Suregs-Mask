@@ -23,9 +23,7 @@
 	<scene_pueblo />
 	<entitymanager>
 		<entity_manager>
-			<doors>
-				<door sceneLevel="228924192" tpID="0" />
-			</doors>
+			<doors />
 		</entity_manager>
 	</entitymanager>
 	<missionmanager />
@@ -36,8 +34,8 @@
 			<money quantity="0" />
 			<SwordLevel quantity="0" />
 			<ArmorLevel quantity="0" />
-			<PrimaryMask quantity="0" />
-			<SecondaryMask quantity="0" />
+			<PrimaryMask quantity="-1" />
+			<SecondaryMask quantity="-1" />
 			<StoryLevel quantity="1" />
 			<Mask0 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
 			<Mask1 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />

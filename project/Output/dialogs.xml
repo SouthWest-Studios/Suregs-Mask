@@ -2124,12 +2124,12 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 
 	<dialog id="5" texturepath="Assets/Textures/Interfaz/Dialogos/Jakhov.png">
 		<sentences>
-			<sentence name="Jakhov"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			<sentence name="Jakov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
 			text="Seguro que aquí hay algo interesante... ¡La espada de mi padre! ¿y este diario?"/>
 
-			<sentence name="Jakhov"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			<sentence name="Jakov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
 			text="¿Un artefacto? ¿Qué clase de magia esconderá? Tengo que investigar más sobre esto."/>
 		</sentences>
 	</dialog>
@@ -2140,64 +2140,64 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 
 	<dialog id="1101" texturepath="Assets/Textures/Interfaz/Dialogos/Jakhov.png">
 		<sentences>
-			<sentence name="Jakhov"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			<sentence name="Jakov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
 			text="¿H-hola? ¿Qué es esto?"/>
 
 			<sentence name="Dinka"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/mascara0.png"
 			text="Quién es el que osa despertarnos, hace décadas que nadie nos molesta, aún estás a tiempo de salir corriendo y volver a casa, pero si sigues adelante nadie sabe lo que puede pasar."/>
 
-			<sentence name="Jakhov"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			<sentence name="Jakov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
 			text="¿Tú eres el artefacto lleno de poder del que hablaba mi padre? ¿Me oyes...? Parece que ya no contesta..."/>
 		</sentences>
 	</dialog>
 
 	<dialog id="1102" texturepath="Assets/Textures/Interfaz/Dialogos/Jakhov.png">
 		<sentences>
-			<sentence name="Jakhov"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			<sentence name="Jakov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
 			text="¿Otra máscara más?"/>
 
-			<sentence name="?????"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
+			<sentence name="Inuit"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/mascara1.png"
 			text="Eres más fuerte de lo que pensaba, nadie había llegado solo hasta aquí. Únete a mí y juntos seremos más que ellos."/>
 
-			<sentence name="Jakhov"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			<sentence name="Jakov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
 			text="¿Ellos? ¿Quiénes son ellos? ¿Me oyes? No contesta..."/>
 		</sentences>
 	</dialog>
 
 	<dialog id="1103" texturepath="Assets/Textures/Interfaz/Dialogos/Jakhov.png">
 		<sentences>
-			<sentence name="Jakhov"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			<sentence name="Jakov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
 			text="¿Otra máscara más? No sé si podré cargar con todas..."/>
 
-			<sentence name="?????"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
+			<sentence name="Musri"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/mascara2.png"
 			text="Carne fresca al fin, empezaba a estar cansado del otro cuerpo, seguro que tú me saciarás."/>
 
-			<sentence name="Jakhov"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			<sentence name="Jakov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
 			text="¿Otro cuerpo? ¿Carne fresca? No entiendo nada... Y de nuevo no contesta..."/>
 		</sentences>
 	</dialog>
 
 	<dialog id="1104" texturepath="Assets/Textures/Interfaz/Dialogos/Jakhov.png">
 		<sentences>
-			<sentence name="Jakhov"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			<sentence name="Jakov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
 			text="¿Otra máscara más? Con esta van cuatro... ¿Cuándo terminará?"/>
 
-			<sentence name="?????"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
+			<sentence name="Surma"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/mascara3.png"
 			text="Gracias a nosotros te has vuelto más fuerte, recuerda que todas las acciones tienen sus consecuencias, esperamos que tomes la correcta."/>
 
-			<sentence name="Jakhov"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
+			<sentence name="Jakov"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
 			text="¿La decisión correcta? ¿Qué decisión será...?"/>
 		</sentences>
 	</dialog>
@@ -2206,15 +2206,15 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 	<dialog id="2001">
 		<sentences>
 
-			<sentence name="Padre"
+			<sentence name="Igorv"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
 			text="Jakov?...¿Eres tú? Te has vuelto muy fuerte por el camino gracias a este poder, gracias a mí…"/>
 
-			<sentence name="Yo"
+			<sentence name="Jakov"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
 			text="Padre!? Pero!? Has sido tú todo este tiempo?? ¿Qué has hecho con madre!? Porque!??"/>
 
-			<sentence name="Padre"
+			<sentence name="Igorv"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
 			text="No importa Alma ahora, demuestra que estás preparado para llevar este poder."/>
 
@@ -2223,81 +2223,81 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 
 	<dialog id="2002">
 		<sentences>
-			<sentence name="Padre"
+			<sentence name="Igorv"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
 			text="Jakov?? Que haces aqui?? ¿Qué ha pasado?"/>
 
-			<sentence name="Yo"
+			<sentence name="Jakov"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
 			text="¿Padre… ¿Qué has hecho?... Todos estos años, solo, ha sido tu culpa, desapareciste cuando más te necesitaba, me abandonaste…"/>
 
-			<sentence name="Padre"
+			<sentence name="Igorv"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
 			text="Lo hice por nosotros, por recuperar nuestra familia, solo quería traer de vuelta a Alma."/>
 
-			<sentence name="Yo"
+			<sentence name="Jakov"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
 			text="¿Traerla de vuelta? Ha acabado muerta, por ti."/>
 
-			<sentence name="Padre"
+			<sentence name="Igorv"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
 			text="No es lo que te imaginas, madre no murió a mis manos, fue la negligencia del pueblo lo que acabó con ella, fue culpa suya."/>
 
-			<sentence name="Yo"
+			<sentence name="Jakov"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
 			text="¿Y qué hay de tus compañeros?, murieron a tus manos."/>
 
-			<sentence name="Padre(masc)"
+			<sentence name="Igorv(masc)"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
 			text="Eran demasiado débiles, no estaban preparados… murieron por un bien mayor…"/>
 
-			<sentence name="Padre"
+			<sentence name="Igorv"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
 			text="¿Cómo? Son mis más fieles guerreros, yo nunca les dejaría morir."/>
 
-			<sentence name="Yo"
+			<sentence name="Jakov"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
 			text="… Y qué hay de la abuela? Ni te imaginas lo que ha sufrido por ti."/>
 
-			<sentence name="Padre(masc)"
+			<sentence name="Igorv(masc)"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
 			text="Esa vieja entrometida… siempre metiendo su nariz en asuntos ajenos."/>
 
-			<sentence name="Yo"
+			<sentence name="Jakov"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
 			text="Serás…Sé que este no eres tú…"/>
 
-			<sentence name="Padre"
+			<sentence name="Igorv"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
 			text="“No sé que está pasando, todo esto nunca fue mi intención, daría lo que fuera por haberte visto crecer.”"/>
 
-			<sentence name="Yo"
+			<sentence name="Jakov"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
 			text="..."/>
 
-			<sentence name="Padre"
+			<sentence name="Igorv"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
 			text="La máscara me ha hablado, me ha prometido devolverle la vida a Alma…"/>
 
-			<sentence name="Padre(masc)"
+			<sentence name="Igorv(masc)"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
 			text="solo necesitamos el poder de todas las máscaras… "/>
 
-			<sentence name="Padre"
+			<sentence name="Igorv"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
 			text="así podríamos honrar la memoria de madre, "/>
 
-			<sentence name="Padre(masc)"
+			<sentence name="Igorv(masc)"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
 			text="acabemos con aquellos que nos la arrebataron, aquellos que nunca confiaron en ti…"/>
 
-			<sentence name="Padre"
+			<sentence name="Igorv"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
 			text="es tan solo un pequeño sacrificio,"/>
 
-			<sentence name="Padre"
+			<sentence name="Igorv(masc)"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
-			text="únete "/>
+			text="únete a nosotros."/>
 
 			<sentence type="choose" name="Padre(masc)" facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png" text="a mí!">
 
