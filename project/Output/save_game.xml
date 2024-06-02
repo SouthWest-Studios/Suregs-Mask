@@ -48,7 +48,6 @@
 		<questLines>
 			<questLine id="1" index="1" active="true" completed="false" />
 			<questLine id="2" index="1" active="false" completed="false" />
-			<questLine id="3" index="1" active="false" completed="false" />
 		</questLines>
 	</questmanager>
 	<notesmanager>

@@ -383,16 +383,16 @@ bool CommerceHerreria::PostUpdate()
 			for (int j = 0; j < trade->itemsOffered.size(); j++) {
 				if (trade->itemsOffered.at(j) == NULL) { continue; };
 				//Items background
-				app->render->DrawTexture(backgroundTradeHerreriaItemTexture, positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j), y + positionInList.y + 7, 1, SDL_FLIP_NONE, nullptr, 0, 0);
+				app->render->DrawTexture(backgroundTradeHerreriaItemTexture, positionGeneral.x + positionList.x + positionInList.x + (itemSpacing * j), y + positionInList.y , 1, SDL_FLIP_NONE, nullptr, 0, 0);
 
 				//Primer item de oferta
-				app->render->DrawTexture(trade->itemsOffered.at(j)->icon, positionGeneral.x + positionList.x + positionInList.x - 10 + (itemSpacing * j), y + positionInList.y , 1, SDL_FLIP_NONE, nullptr, 0, 0);
+				app->render->DrawTexture(trade->itemsOffered.at(j)->icon, positionGeneral.x + positionList.x + positionInList.x - 10 + (itemSpacing * j) + 18, y + positionInList.y + 5, 1, SDL_FLIP_NONE, nullptr, 0, 0);
 
 			}
 
 			//Si solo ofrece un item, poner el nombre de este al lado
 			if (trade->itemsOffered.size() == 1) {
-				app->render->DrawTextBound(trade->itemsOffered.at(0)->name.GetString(), positionGeneral.x + positionList.x + positionInList.x + 80, y + positionInList.y + 20, 200);
+				app->render->DrawTextBound(trade->itemsOffered.at(0)->name.GetString(), positionGeneral.x + positionList.x + positionInList.x + 100, y + positionInList.y + 20, 200);
 			}
 
 

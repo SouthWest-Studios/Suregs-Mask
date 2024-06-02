@@ -543,6 +543,10 @@ Inventity* InventoryManager::CreateItem(InventityType type, bool addInventory) {
 			itemConfigurationNode = entitiesDataNode.child("item_armadura_nv10");
 			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_ARMADURA_NV10, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""), addInventory);
 			break;
+		case InventityType::ZAFIRO:
+			itemConfigurationNode = entitiesDataNode.child("item_zafiro");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_ZAFIRO, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""), addInventory);
+			break;
 		case InventityType::BASURA:
 			itemConfigurationNode = entitiesDataNode.child("item_basura");
 			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_BASURA, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""), addInventory);
@@ -1261,6 +1265,7 @@ bool InventoryManager::Update(float dt)
 
 	bool ret = true;
 
+	//printf("\n selecion: %d", seleccionFinalPersonaje);
 
 	//Iterates over the entities and calls the Awake
 	/*ListItem<Inventity*>* item;

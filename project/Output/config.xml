@@ -943,7 +943,7 @@ Vida: Muy alta	Daño: Muy alto	Tamaño: Muy grande Velocidad: Muy lenta"
 				<!-- Espadas -->
 				<trade type="0" level="1" itemOffered="27" quantityItemOffered="1" itemRequested="-1" quantityItemRequested="100"/>
 				<trade type="0" level="2" itemOffered="28" quantityItemOffered="1" itemRequested="-1" quantityItemRequested="160"/>
-				<trade type="0" level="3" itemOffered="29" quantityItemOffered="1" itemRequested="-1,18" quantityItemRequested="210,1"/>
+				<trade type="0" level="3" itemOffered="29" quantityItemOffered="1" itemRequested="-1,45" quantityItemRequested="210,1"/>
 				<trade type="0" level="4" itemOffered="30" quantityItemOffered="1" itemRequested="-1" quantityItemRequested="270"/>
 				<trade type="0" level="5" itemOffered="31" quantityItemOffered="1" itemRequested="-1" quantityItemRequested="350"/>
 				<trade type="0" level="6" itemOffered="32" quantityItemOffered="1" itemRequested="-1,1" quantityItemRequested="400,7"/>

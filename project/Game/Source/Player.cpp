@@ -21,6 +21,7 @@
 #include "Hud.h"
 
 #include "Fishing.h"
+#include "NPC_Padre.h"
 
 
 Player::Player() : Entity(EntityType::PLAYER)
@@ -741,6 +742,10 @@ bool Player::Update(float dt)
 		vacio = false;
 	}
 
+	if (app->entityManager->GetIgory()->playerInFight && !playerTpBossPadre) {
+		pbodyFoot->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y-10)), 0);
+		playerTpBossPadre = true;
+	}
 	if (insideVacio && !isDashing) {
 		app->entityManager->playerVacio = true;
 		app->entityManager->vacioGameStop = true;
@@ -981,7 +986,7 @@ bool Player::CleanUp()
 	blood = nullptr;
 	app->psystem->RemoveAllEmitters();
 	particulaBlood = false;
-
+	playerTpBossPadre = false;
 	RELEASE(spritePositions);
 	delete spritePositions;
 
@@ -1613,6 +1618,27 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 
 			}
+
+			if (physB->listener->type == EntityType::ITEM_MASCARA0 && !dialogoMascara0) {
+				
+				pugi::xml_document configFile;
+				//pugi::xml_node dialogNode;
+				pugi::xml_parse_result parseResult = configFile.load_file("dialogs.xml");
+				/*dialogNode = configFile.child("config").child("dialogues");
+				*/
+				pugi::xml_node* dialogNodeF = nullptr;
+				pugi::xml_node dialogNode;
+				for (dialogNode = configFile.child("dialogues").child("dialog"); dialogNode; dialogNode = dialogNode.next_sibling("dialog")) {
+					if (dialogNode.attribute("id").as_int() == 1101) {
+						for (pugi::xml_node itemNode = dialogNode.child("sentences").child("sentence"); itemNode; itemNode = itemNode.next_sibling("sentence")) {
+							app->dialogManager->AddDialog(app->dialogManager->CreateDialog(itemNode));
+						}
+						dialogoMascara0 = true;
+						break;
+					}
+				}
+				
+			}
 		}
 		app->audio->PlayTimedFx(get_item_fx, 201);
 		break;
@@ -1643,6 +1669,8 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::AROMAGICA:
 		TakeDamage(20);
 		break;
+
+	
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;
@@ -1681,6 +1709,16 @@ void Player::OnEndCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 		/*...*/
 	}
+}
+
+pugi::xml_node Player::find_child_by_attribute(pugi::xml_node parent, const char* name, const char* attr_name, const char* attr_value)
+{
+	for (pugi::xml_node node : parent.children(name)) {
+		if (std::strcmp(node.attribute(attr_name).value(), attr_value) == 0) {
+			return node;
+		}
+	}
+	return pugi::xml_node();
 }
 
 void Player::CameraMovement(float dt)

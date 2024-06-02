@@ -55,7 +55,7 @@ public:
 
 	bool isPlaying = false;
 
-	uint32 autoNextTime_show;
+	uint32 autoNextTime_show = 0;
 	Timer autoNextTime_TimerDown;
 
 
@@ -81,7 +81,7 @@ private:
 	//Dimensiones
 	int textBoundWidth = 500;
 	int textNameBoundWidth = 200;
-	int optionsBoundWidth = 350;
+	int optionsBoundWidth = 650;
 	iPoint faceTextureSize = { 256, 210 };
 
 

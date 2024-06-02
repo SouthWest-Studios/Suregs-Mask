@@ -119,6 +119,9 @@ bool Enemy_Ols::Update(float dt)
 	{
 		desiredState = EntityState_Enemy::DEAD;
 	}
+	else if (app->entityManager->GetIgory()->isDead) {
+		health = 0;
+	}
 	else if (distanceToPlayer <= attackDistance * 32 && canAttack)
 	{
 		desiredState = EntityState_Enemy::ATTACKING;
