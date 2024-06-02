@@ -144,7 +144,8 @@ bool Enemy_Osiris::Update(float dt)
 		desiredState = EntityState_Enemy::RUNNING;
 	}
 
-	
+	UpdateAttackSensor(dt);
+
 	stateMachine(dt, playerPos);
 
 	//VENENO <----------
@@ -238,11 +239,50 @@ void Enemy_Osiris::Chase(float dt, iPoint playerPos)
 void Enemy_Osiris::Attack(float dt)
 {
 	//printf("Osiris attacking");
-	currentAnimation = &attackAnim;	
-	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero); //No se mueve mientras ataca
-	
+	if (canAttack) {
+
+		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);//No se mueve mientras ataca
+
+		if (isFacingLeft) {
+			sensor = app->physics->CreateRectangle(position.x, position.y, 20, 100, bodyType::DYNAMIC);
+			sensor->ctype = ColliderType::PROJECTILE;
+			sensor->listener = this;
+			sensor->body->GetFixtureList()->SetSensor(true);
+		}
+		else {
+			sensor = app->physics->CreateRectangle(position.x, position.y, 20, 100, bodyType::DYNAMIC);
+			sensor->ctype = ColliderType::PROJECTILE;
+			sensor->listener = this;
+			sensor->body->GetFixtureList()->SetSensor(true);
+		}
+
+		attackTimer.Start();
+		canAttack = false;
+
+		currentAnimation = &attackAnim;
+	}
+
 	//sonido ataque
 }
+
+
+void Enemy_Osiris::UpdateAttackSensor(float dt)
+{
+	if (!canAttack && attackTimer.ReadSec() >= 5.0f) {
+		canAttack = true;
+	}
+
+	if (sensor != nullptr && canAttack) {
+		canAttack = false;
+		attackTimer.Start();
+
+		if (attackTimer.ReadSec() >= 2.0f) {
+			app->physics->DestroyBody(sensor);
+			sensor = nullptr;
+		}
+	}
+}
+
 
 void Enemy_Osiris::Die() {
 
@@ -378,6 +418,9 @@ void Enemy_Osiris::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision PLATFORM");
 		break;
 	case ColliderType::PLAYER:
+		if (physA->ctype == ColliderType::PROJECTILE) {
+			app->entityManager->GetPlayer()->TakeDamage(attackDamage);
+		}
 		LOG("Collision PLAYER");
 		//restar vida al player
 		break;

@@ -1639,6 +1639,13 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			//printf("Vacio\n");
 		}
 		break;
+	case ColliderType::FISHZONE:
+		if (!getPlayerTouch) {
+		app->scene_pueblo->GetRod()->fishing.rodReady = !app->scene_pueblo->GetRod()->fishing.rodReady;
+		getPlayerTouch = true;
+		}
+		printf("\n fishizone: %d", app->scene_pueblo->GetRod()->fishing.rodReady);
+		break;
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");
 		break;
@@ -1852,6 +1859,9 @@ void Player::OnEndCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::VACIOS:
 		insideVacio = false;
 		//printf("Exit_Vacio\n");
+		break;
+	case ColliderType::FISHZONE:
+		getPlayerTouch = false;
 		break;
 		/*...*/
 	}
@@ -2591,7 +2601,7 @@ void Player::PlayerMovement(float dt)
 	}
 
 	//Si pulsas espacio
-	if (app->input->GetButton(DASH) == KEY_DOWN && timerDash.ReadMSec() > cdTimerDashMS) {
+	if (app->input->GetButton(DASH) == KEY_DOWN && timerDash.ReadMSec() > cdTimerDashMS && !app->scene_pueblo->GetRod()->fishing.rodReady ) {
 
 		velocityNormalized = velocity;
 		velocityNormalized.Normalize();
@@ -2628,7 +2638,7 @@ void Player::PlayerMovement(float dt)
 	}
 
 	//Si pulsas J para atacar
-	if (app->input->GetButton(ATAQUE) == KEY_DOWN && !isAttacking) {
+	if (app->input->GetButton(ATAQUE) == KEY_DOWN && !isAttacking && !app->scene_pueblo->GetRod()->fishing.rodReady) {
 		hasAttacked = false;
 		isAttacking = true;
 		timerAttack.Start();

@@ -988,6 +988,13 @@ bool Map::LoadCollisions(std::string layerName)
 						ret = true;
 					}
 
+					if (gid == tileset->firstgid + 4) {
+						c1 = app->physics->CreateRectangleSensor(pos.x + 16, pos.y + 16, 32, 32, STATIC);
+						c1->ctype = ColliderType::FISHZONE;
+						collisionsList.Add(c1);
+						ret = true;
+					}
+
 
 					//Salida mazmorra/Entrada pueblo
 					if (gid == tileset->firstgid + 14) {

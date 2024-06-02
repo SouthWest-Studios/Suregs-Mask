@@ -55,7 +55,7 @@ bool Enemy_Khurt::Start() {
 	idleAnim.LoadAnim("khurt", "idleAnim", spritePositions);
 	chargeAnim.LoadAnim("khurt", "chargeAnim", spritePositions);
 	stunAnim.LoadAnim("khurt", "stunAnim", spritePositions);
-	runAnim.LoadAnim("khurt", "runAnim", spritePositions);
+	/*runAnim.LoadAnim("khurt", "runAnim", spritePositions);*/
 	underAnim_start.LoadAnim("khurt", "underAnim_start", spritePositions);
 	underAnim_process.LoadAnim("khurt", "underAnim_process", spritePositions);
 	underAnim_end.LoadAnim("khurt", "underAnim_end", spritePositions);
@@ -117,7 +117,7 @@ bool Enemy_Khurt::Update(float dt)
 	{
 		desiredState = EntityState_Khurt::ATTACKING;
 	}*/
-	else if (app->map->pathfinding->GetDistance(playerPos, position) == viewDistance * 32 )
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance * 32 )
 	{
 	
 		desiredState = EntityState_Khurt::RUNNING;

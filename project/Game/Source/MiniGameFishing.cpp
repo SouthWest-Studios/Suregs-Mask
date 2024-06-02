@@ -218,7 +218,7 @@ void MiniGameFishing::playNormalFishing()
 
 
 
-		if (app->input->GetButton(FISHINGPLAY) == KEY_DOWN) {
+		if (app->input->GetButton(FISHINGPLAY) == KEY_DOWN || app->input->GetButton(BACK) == KEY_DOWN) {
 			player_click_count += 1;
 		}//end_if, player count
 
@@ -623,7 +623,7 @@ void MiniGameFishing::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::LAGO:
 
 		if (fishing.startFishing == false) {
-			app->dialogManager->CreateDialogSinEntity("Estas pescando.", "Fishing System", nullptr);
+			 app->dialogManager->CreateDialogSinEntity("Estas pescando.", "Fishing System", nullptr);
 		}//end_if, if the float collides with the " LAGO"collider, display the fishing dialog
 		fishing.startFishing = true;
 		dialogoPlayerMoving = true;
@@ -647,36 +647,36 @@ void MiniGameFishing::OnCollision(PhysBody* physA, PhysBody* physB) {
 bool MiniGameFishing::miniGameStart(float dt)
 {
 
-	if (fishing.playerGetRod && !fishing.isFishing) {
-		if (app->input->GetButton(SAVEROD) == KEY_DOWN) {
-			fishing.rodReady = !fishing.rodReady;
-		}
-	}//end_if, equip or stow the fishing rod
+	//if (fishing.playerGetRod && !fishing.isFishing) {
+	//	if (app->input->GetButton(SAVEROD) == KEY_DOWN || app->input->GetButton(CONFIRM) == KEY_DOWN) {
+	//		fishing.rodReady = !fishing.rodReady;
+	//	}
+	//}//end_if, equip or stow the fishing rod
 	return true;
 }
 
 bool MiniGameFishing::miniGameLoop(float dt)
 {
 	//Change Rod
-	if (!fishing.isFishing && fishing.rodReady) {
-		if (app->input->GetButton(CHANGEROD) == KEY_DOWN) {
-			if (fishing.fishingtype == FISHINGTYPE::LUREFISHING) {
-				printf("\nRod:FISHING");
-				fishing.fishingtype = FISHINGTYPE::FISHING;
-				lureDistanceGetRandom = false;//Disable irregular distance
-			}
-			else
-			{
-				printf("\nRod:LUREFISHING");
-				fishing.fishingtype = FISHINGTYPE::LUREFISHING;
-				lureDistanceGetRandom = true;// enable irregular distance
-			}//end_if for cheke is "LUREFISHING" o "FISHING"
-		}//end_if for press "C" key
-	}//end_if for check if fishing
+	//if (!fishing.isFishing && fishing.rodReady) {
+	//	if (app->input->GetButton(CHANGEROD) == KEY_DOWN) {
+	//		if (fishing.fishingtype == FISHINGTYPE::LUREFISHING) {
+	//			printf("\nRod:FISHING");
+	//			fishing.fishingtype = FISHINGTYPE::FISHING;
+	//			lureDistanceGetRandom = false;//Disable irregular distance
+	//		}
+	//		else
+	//		{
+	//			printf("\nRod:LUREFISHING");
+	//			fishing.fishingtype = FISHINGTYPE::LUREFISHING;
+	//			lureDistanceGetRandom = true;// enable irregular distance
+	//		}//end_if for cheke is "LUREFISHING" o "FISHING"
+	//	}//end_if for press "C" key
+	//}//end_if for check if fishing
 
 
 	//Cast the rod and StartFishing
-	if (app->input->GetButton(STARTFISHING) == KEY_DOWN && fishing.rodReady) {
+	if (app->input->GetButton(STARTFISHING) == KEY_DOWN && fishing.rodReady || app->input->GetButton(DASH) == KEY_DOWN && fishing.rodReady) {
 		fishing.isFishing = !fishing.isFishing;//Start fishing o Stop fishing
 		
 		/*if (fishing.isFishing == true && fishing.startFishing == false) {

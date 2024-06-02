@@ -30,7 +30,7 @@ public:
 	FISHINGTYPE fishingtype = FISHINGTYPE::FISHING;
 
 	bool rodReady = false;
-	bool playerGetRod = false;
+	bool playerGetRod = true;
 	bool isFishing = false;
 	bool startFishing = false;
 

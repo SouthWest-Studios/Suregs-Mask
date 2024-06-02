@@ -79,8 +79,8 @@ public:
 	int SpriteX;
 	int SpriteY;
 	int PhotoWeight;
-	const char* Path;
-	SDL_Texture* texture = NULL;
+	const char* Path = nullptr;;
+	SDL_Texture* texture = nullptr;;
 
 	Fishing fishing;
 
@@ -92,8 +92,8 @@ public:
 
 	
 	//fishingfloat
-	const char* fishingfloat_path;
-	SDL_Texture* fishingfloat_texture = NULL;
+	const char* fishingfloat_path = nullptr;;
+	SDL_Texture* fishingfloat_texture = nullptr;;
 	float fishingflota_position_x;
 	float fishingflota_position_y;
 	float testX;
@@ -109,7 +109,7 @@ public:
 	float lureDistance;
 	float floatChangeDistance = 200;
 	bool startFinishingLine = false;
-	bool lureDistanceGetRandom;
+	bool lureDistanceGetRandom = false;
 
 	//Lure
 	bool lureRandomTime = false;
@@ -135,7 +135,7 @@ public:
 	//GamePlay
 	Timer gamePlayTimeLimit;
 	uint32 gamePlayTimeLimit_show = 0;
-	bool gamePlayStart;
+	bool gamePlayStart = false;
 	int player_click_count;
 	int player_click_count_TimeOver;
 	bool dialogoautoclose = false;
@@ -148,8 +148,8 @@ public:
 private:
 	std::vector<std::vector<const char*>>chosefishing_path;
 	std::vector<std::vector<const char*>>choseName_path;
-	const char* fishing_path;
-	const char* name_path;
+	const char* fishing_path = nullptr;
+	const char* name_path = nullptr;
 	pugi::xml_document configFile;
 	pugi::xml_node configNode;
 	
