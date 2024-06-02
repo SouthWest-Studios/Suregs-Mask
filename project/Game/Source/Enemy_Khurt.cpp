@@ -26,7 +26,7 @@
 
 Enemy_Khurt::Enemy_Khurt() : Entity(EntityType::ENEMY_KHURT) {
 	name = ("khurt");
-	state = EntityState::IDLE;
+	state = EntityState_Khurt::IDLE;
 	currentState = state;
 	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(currentState)].next_state;
 
@@ -105,62 +105,26 @@ bool Enemy_Khurt::Update(float dt)
 
 	if (health <= 0)
 	{
-		nextState = EntityState::DEAD;
+		desiredState = EntityState_Khurt::DEAD;
 	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32)
+	/*else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32)
 	{
-		nextState = EntityState::ATTACKING;
-	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance * 32)
+		desiredState = EntityState_Khurt::ATTACKING;
+	}*/
+	else if (app->map->pathfinding->GetDistance(playerPos, position) == viewDistance * 32 )
 	{
 	
-		nextState = EntityState::RUNNING;
+		desiredState = EntityState_Khurt::RUNNING;
 	
 	}
 	else
 	{
-		nextState = EntityState::RUNNING;
+		desiredState = EntityState_Khurt::RUNNING;
 	}
-
-
-
-
-	switch (nextState)
+	if (charging && dist(Antposition, position) > 350 || charging && timechargingTimer.ReadSec() > 0.8)
 	{
-	case EntityState::RUNNING:
-		Chase(dt, playerPos);
-		break;
-	case EntityState::ATTACKING:
-		Attack(dt);
-		break;
-	case EntityState::DEAD:
-		Die();
-		break;
-	case EntityState::IDLE:
-		DoNothing(dt);
-		break;
-	default:
-		break;
-	}
-
-	//if (poisonTimer < poisonDuration) {
-	//	poisonTimer += 1 / dt;
-	//	timeSinceLastTick += 1 / dt;
-
-	//	if (timeSinceLastTick >= poisonTickRate && poisoned) {
-	//		if (currentState != EntityState::DEAD && invulnerabilityTimer.ReadMSec() >= 500) {
-	//			health -= poisonDamage;
-	//			invulnerabilityTimer.Start();
-	//			timerRecibirDanioColor.Start();
-	//		}
-	//		timeSinceLastTick -= poisonTickRate;
-	//	}
-	//}
-
-	if (charging && dist(Antposition, position) > 350)
-	{
-		Stunned(dt);
 		stunned = true;
+		Stunned(dt);
 	}
 
 	if (chargeTimer.ReadSec() >= 5)
@@ -168,23 +132,9 @@ bool Enemy_Khurt::Update(float dt)
 		charging = false;
 	}
 
-	//if (app->map->pathfinding->GetDistance(playerPos, position) == (attackDistance + 5) * 32) {
+	stateMachine(dt, playerPos);
 
-	//	digging = true;
-	//}
-	//if (digging = true) {
-	//	digTimer.Start();
-	//	currentAnimation = &underAnim;
-	//}
-
-	//if (digTimer.ReadSec() >= 2) {
-	//	nextState = EntityState::IDLE;
-	//	digging = false;
-	//}
-
-	//VENENO <----------
 	CheckPoison();
-	//VENENO ---------->
 
 	currentState = nextState;
 	currentAnimation->Update();
@@ -255,31 +205,19 @@ void Enemy_Khurt::DoNothing(float dt)
 
 }
 
-void Enemy_Khurt::Chase(float dt, iPoint playerPos)
+void Enemy_Khurt::DigUnderground()
+{
+	currentAnimation = &underAnim_start;
+	isUnderground = true;
+	if (underAnim_start.HasFinished()) {
+		desiredState = EntityState_Khurt::MOVING_UNDERGROUND;
+	}
+}
+
+void Enemy_Khurt::MoveUnderground(float dt, iPoint playerPos)
 {
 	//printf("Khurt chasing");
-	if (!charging) {
-		currentAnimation = &underAnim_start;
-	}
-	if (underAnim_start.HasFinished()) {
-		underAnim_start.Reset();
-		underProcess = true;
-	}
-	if (underProcess) {
-		currentAnimation = &underAnim_process;
-	}
-	if (app->map->pathfinding->GetDistance(playerPos, position) <= (chargeAttackDistance + 1) * 32) {
-		underProcess = false;
-		currentAnimation = &underAnim_end;
-	}
-	if (underAnim_end.HasFinished()) {
-		underFinished = true;
-		underAnim_end.Reset();
-	}
-	if (underFinished) {
-		/*underFinished = false;*/
-		currentAnimation = &idleAnim;
-	}
+	currentAnimation = &underAnim_process;
 
 	if (chargeTimer.ReadSec() >= 5 && app->map->pathfinding->GetDistance(playerPos, position) <= chargeAttackDistance * 32 && app->map->pathfinding->GetDistance(playerPos, position) >= (attackDistance + 5) * 32)
 	{
@@ -290,8 +228,69 @@ void Enemy_Khurt::Chase(float dt, iPoint playerPos)
 	{
 		Khurtfinding(dt, playerPos);
 	}
-
 }
+
+void Enemy_Khurt::DigOut(float dt, iPoint playerPos)
+{
+	currentAnimation = &underAnim_end;
+	isUnderground = false;
+	if (underAnim_end.HasFinished()) {
+		Charge(dt, playerPos);
+		desiredState = EntityState_Khurt::ATTACKING;
+	}
+}
+
+void Enemy_Khurt::Charge(float dt, iPoint playerPos)
+{
+	
+	if (chargeTimer.ReadSec() >= 5)
+	{
+		if (isUnderground) {
+			DigOut(dt, playerPos);
+		}
+		else{
+			/*printf("charge");*/
+			currentAnimation = &chargeAnim;
+			pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
+			if (chargeAnim.HasFinished())
+			{
+				timechargingTimer.Start();
+				charging = true;
+
+				b2Vec2 direction(playerPos.x - position.x, playerPos.y - position.y);
+				direction.Normalize();
+
+				b2Vec2 impulse = b2Vec2(direction.x * 5, direction.y * 5);
+				pbodyFoot->body->ApplyLinearImpulse(impulse, pbodyFoot->body->GetWorldCenter(), true);
+
+				stunTimer.Start();
+				chargeTimer.Start();
+			}
+		}
+	
+	}
+	
+}
+
+void Enemy_Khurt::Stunned(float dt)
+{
+	pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
+
+	if (stunAnim.HasFinished() && stunTimer.ReadSec() >= 2)
+	{
+		pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
+		desiredState = EntityState_Khurt::IDLE;
+		stunned = false;
+		charging = false;
+		chargeTimer.Start();
+		stunAnim.Reset();
+	}
+	else {
+		stunned = true;
+		currentAnimation = &stunAnim;
+	}
+}
+
 
 void Enemy_Khurt::Attack(float dt)
 {
@@ -301,6 +300,52 @@ void Enemy_Khurt::Attack(float dt)
 
 	//sonido ataque
 }
+
+void Enemy_Khurt::stateMachine(float dt, iPoint playerPos)
+{
+	//printf("\ncurrentState: %d, desiredState: %d", static_cast<int>(currentState), static_cast<int>(desiredState));
+	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
+	switch (nextState) {
+	case EntityState_Khurt::IDLE:
+		DoNothing(dt);
+		break;
+	case EntityState_Khurt::RUNNING:
+		if (!isUnderground) {
+			DigUnderground();
+		}
+		else {
+			MoveUnderground(dt, playerPos);
+		}
+		break;
+	case EntityState_Khurt::ATTACKING:
+		Charge(dt, playerPos);
+		break;
+	case EntityState_Khurt::DEAD:
+		Die();
+		break;
+	case EntityState_Khurt::STUNNED:
+		Stunned(dt);
+		break;
+	case EntityState_Khurt::DIGGING_UNDERGROUND:
+		DigUnderground();
+		break;
+	case EntityState_Khurt::MOVING_UNDERGROUND:
+		MoveUnderground(dt, playerPos);
+		break;
+	case EntityState_Khurt::DIGGING_OUT:
+		DigOut(dt, playerPos);
+		break;
+	case EntityState_Khurt::NONE:
+		desiredState = EntityState_Khurt::IDLE;
+		break;
+
+	default:
+		break;
+	}
+	currentState = nextState;
+
+}
+
 
 void Enemy_Khurt::Die() {
 
@@ -477,43 +522,13 @@ float Enemy_Khurt::GetHealth() const {
 }
 
 void Enemy_Khurt::TakeDamage(float damage) {
-	if (currentState != EntityState::DEAD && invulnerabilityTimer.ReadMSec() >= 500) {
+	if (currentState != EntityState_Khurt::DEAD && invulnerabilityTimer.ReadMSec() >= 500) {
 		health -= damage;
 		invulnerabilityTimer.Start();
 		timerRecibirDanioColor.Start();
 	}
 }
 
-void Enemy_Khurt::Charge(float dt, iPoint playerPos)
-{
-	printf("charging");
-	currentAnimation = &chargeAnim;
-	charging = true;
-
-	b2Vec2 direction(playerPos.x - position.x, playerPos.y - position.y);
-	direction.Normalize();
-
-	b2Vec2 impulse = b2Vec2(direction.x * 5, direction.y * 5);
-	pbodyFoot->body->ApplyLinearImpulse(impulse, pbodyFoot->body->GetWorldCenter(), true);
-
-	stunTimer.Start();
-	chargeTimer.Start();
-}
-
-void Enemy_Khurt::Stunned(float dt)
-{
-	if (stunTimer.ReadSec() <= 3) {
-		printf("stunned");
-		currentAnimation = &stunAnim;
-		pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
-	}
-	else {
-		stunTimer.Start();
-		nextState = EntityState::IDLE;
-		stunned = false;
-		charging = false;
-	}
-}
 
 void Enemy_Khurt::ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate) {
 	this->poisonDamage = poisonDamage;
@@ -534,7 +549,7 @@ void Enemy_Khurt::CheckPoison() {
 
 	// Aplicar el primer tick de daño inmediatamente (si no, el primer tick no se aplica en el segundo 0.0)
 	if (firstTimePoisonRecibed) {
-		if (currentState != EntityState::DEAD) {
+		if (currentState != EntityState_Khurt::DEAD) {
 			health -= poisonDamage;
 			invulnerabilityTimer.Start();
 			timerRecibirDanioColor.Start();
@@ -547,7 +562,7 @@ void Enemy_Khurt::CheckPoison() {
 	if (poisonTimer.ReadSec() <= poisonDuration + epsilon && poisoned) {
 		if (poisonTickTimer.ReadSec() >= poisonTickRate) {
 			poisonTickTimer.Start(); // Reiniciar el temporizador de ticks de veneno
-			if (currentState != EntityState::DEAD) {
+			if (currentState != EntityState_Khurt::DEAD) {
 				health -= poisonDamage;
 				invulnerabilityTimer.Start();
 				timerRecibirDanioColor.Start();

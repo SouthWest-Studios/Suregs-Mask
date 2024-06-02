@@ -27,7 +27,7 @@ Scene_Logos::~Scene_Logos()
 // Called before render is available
 bool Scene_Logos::Awake(pugi::xml_node config)
 {
-	LOG("Loading Scene_intro");
+	LOG("Loading Scene_logos");
 	bool ret = true;
 
 	return ret;
