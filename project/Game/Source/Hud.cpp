@@ -252,8 +252,12 @@ bool Hud::PostUpdate()
 		float easedProgress = easeOutCubic(progress);
 		float scale = 1 - easedProgress * 0.06;
 
-		app->render->DrawTexture(hudTexture, 173, 42, scale, SDL_FLIP_NONE, rectFondoBarraVida, 0);
-		app->render->DrawTexture(hudTexture, 177, 46, scale, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
+		// Calcular la nueva posición para que la textura se reduzca hacia el centro
+		int newX = rectFondoBarraVida->x + rectFondoBarraVida->w / 2 - (rectFondoBarraVida->w * scale) / 2;
+		int newY = rectFondoBarraVida->y + rectFondoBarraVida->h / 2 - (rectFondoBarraVida->h * scale) / 2;
+
+		app->render->DrawTexture(hudTexture, newX + 175, newY + 40, scale, SDL_FLIP_NONE, rectFondoBarraVida, 0);
+		app->render->DrawTexture(hudTexture, newX + 179, newY + 44, scale, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
 
 		if (animationTimer.ReadMSec() >= animationDuration * 1000) {
 			shrinking = false;
@@ -267,18 +271,21 @@ bool Hud::PostUpdate()
 		float easedProgress = easeOutCubic(progress);
 		float scale = 0.94 + easedProgress * 0.06;
 
-		app->render->DrawTexture(hudTexture, 173, 42, scale, SDL_FLIP_NONE, rectFondoBarraVida, 0);
-		app->render->DrawTexture(hudTexture, 177, 46, scale, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
+		// Calcular la nueva posición para que la textura crezca hacia el centro
+		int newX = rectFondoBarraVida->x + rectFondoBarraVida->w / 2 - (rectFondoBarraVida->w * scale) / 2;
+		int newY = rectFondoBarraVida->y + rectFondoBarraVida->h / 2 - (rectFondoBarraVida->h * scale) / 2;
+
+		app->render->DrawTexture(hudTexture, newX + 175, newY + 40, scale, SDL_FLIP_NONE, rectFondoBarraVida, 0);
+		app->render->DrawTexture(hudTexture, newX + 179, newY + 44, scale, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
 
 		if (animationTimer.ReadMSec() >= animationDuration * 1000) {
 			growing = false;
 		}
 	}
 	else {
-		app->render->DrawTexture(hudTexture, 173, 42, 1.0, SDL_FLIP_NONE, rectFondoBarraVida, 0);
-		app->render->DrawTexture(hudTexture, 177, 46, 1.0, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
+		app->render->DrawTexture(hudTexture, rectFondoBarraVida->x + 175, rectFondoBarraVida->y + 40, 1.0, SDL_FLIP_NONE, rectFondoBarraVida, 0);
+		app->render->DrawTexture(hudTexture, rectFondoBarraVida->x + 179, rectFondoBarraVida->y + 44, 1.0, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
 	}
-
 
 
 	//Monedas

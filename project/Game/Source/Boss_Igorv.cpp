@@ -20,6 +20,9 @@
 #include "Boss_Igory.h"
 #include "Utils.cpp"
 #include "DialogManager.h"
+#include "ModuleFadeToBlack.h"
+#include "Scene_menu.h"
+
 
 #include "Item_Mascara_3.h"
 
@@ -295,13 +298,28 @@ bool Boss_Igory::PostUpdate() {
 	if (currentAnimation == nullptr) { currentAnimation = &idle_boss_Igory; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
-	if (timerRecibirDanioColor.ReadMSec() <= 100) {
-		float alpha = (100 - timerRecibirDanioColor.ReadMSec()) / 100;
-		SDL_SetTextureAlphaMod(texture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
+	if (!killPadre) {
+		if (timerRecibirDanioColor.ReadMSec() <= 100 && !isDead) {
+			float alpha = (100 - timerRecibirDanioColor.ReadMSec()) / 100;
+			SDL_SetTextureAlphaMod(texture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
 
+		}
+		else {
+			SDL_SetTextureAlphaMod(texture, 255);
+		}
 	}
-	else {
-		SDL_SetTextureAlphaMod(texture, 255);
+	else
+	{
+		SDL_SetTextureAlphaMod(texture, padreTranparente);
+		padreTranparente -= 2;
+		if (padreTranparente <= 0 &&!deletePadre) {
+			CleanUp();
+			deletePadre = true;
+
+			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu);
+			app->scene_menu->showCredits = true;
+			closeFinalSelecion = false;
+		}
 	}
 
 	if (isFacingLeft) {
@@ -353,7 +371,9 @@ bool Boss_Igory::CleanUp()
 	if (pbodySensor != nullptr) {
 		app->physics->GetWorld()->DestroyBody(pbodySensor->body);
 	}
-	app->tex->UnLoad(texture);
+	if (texture != nullptr) {
+		app->tex->UnLoad(texture);
+	}
 	lastPath.Clear();
 
 	RELEASE(spritePositions);
@@ -533,6 +553,15 @@ void Boss_Igory::showAnimation()
 		currentAnimation = &cura_boss_Igory;
 	}
 
+	/*if (killPadre) {
+
+		SDL_SetTextureAlphaMod(texture, padreTranparente);
+		padreTranparente--;
+		if (padreTranparente <= 0) {
+			CleanUp();
+		}
+
+	}*/
 }
 
 
@@ -701,7 +730,8 @@ void Boss_Igory::Die() {
 
 	if (startSelecion && seleccionFinalPersonaje == 1 && !closeFinalSelecion) {
 		printf("Matar padre");
-		CleanUp();
+		//CleanUp();
+		cankillPadre = true;
 		closeFinalSelecion = true;
 	}
 
@@ -888,94 +918,97 @@ void Boss_Igory::ApplyPoison(int poisonDamage, float poisonDuration, float poiso
 }
 
 void Boss_Igory::OnCollision(PhysBody* physA, PhysBody* physB) {
-		switch (physB->ctype)
-		{
-		case ColliderType::PLATFORM:
-			LOG("Collision PLATFORM");
-			break;
-		case ColliderType::BOSS_INUIT:
-			break;
-		case ColliderType::PLAYER:
-			LOG("Collision PLAYER");
+	switch (physB->ctype)
+	{
+	case ColliderType::PLATFORM:
+		LOG("Collision PLATFORM");
+		break;
+	case ColliderType::BOSS_INUIT:
+		break;
+	case ColliderType::PLAYER:
+		LOG("Collision PLAYER");
 
-			if (dialogoMostrado && !app->dialogManager->isPlaying && startDialogo) {
-				startSelecion = true;
-			}
-
-			if (!app->dialogManager->isPlaying && (app->input->GetButton(CONFIRM) == KEY_DOWN) && startDialogo) {
-				if (!dialogoMostrado) {
-					int num = 0;
-					for (pugi::xml_node itemNode = dialogNode; itemNode; itemNode = itemNode.next_sibling("sentence"))
-					{
-						app->dialogManager->AddDialog(app->dialogManager->CreateDialog(itemNode, itemNode.attribute("name").as_string(), itemNode.attribute("facetexturepath").as_string()));
-						num++;
-					}
-					printf("\nnum: %d", num);
-					dialogoMostrado = true;
-				}
-			}
-
-			if (inAtqDashi) {
-				app->entityManager->GetPlayer()->TakeDamage(10);
-				empujaPlayer = true;
-				habilidadEmpujeTimer.Start();
-				//app->entityManager->GetPlayer()->pbodyFoot
-			}
-			break;
-		case ColliderType::PLAYER_ATTACK:
-			LOG("Collision Player_Attack");
-			if (playerInFight && nextState != EntityState_Boss_Igory::FASE_CHANGE && app->entityManager->GetPlayer()->checkAtk == true) {
-				if (!inCurar) {
-					inTakeHit = true;
-					health -= app->entityManager->GetPlayer()->currentStats.attackDamage;
-					timerRecibirDanioColor.Start();
-					printf("\n BossHeal %f", health);
-					app->entityManager->GetPlayer()->checkAtk = false;
-				}
-				else
-				{
-					inTakeHit = true;
-					shield -= app->entityManager->GetPlayer()->currentStats.attackDamage;
-					timerRecibirDanioColor.Start();
-					app->entityManager->GetPlayer()->checkAtk = false;
-					if (shield <= 0) {
-						shieldBroken = true;
-						shield = 0;
-						printf("\n shieldBroken %f");
-					}
-					printf("\n shield %f", shield);
-				}
-
-			}
-			break;
-		case ColliderType::UNKNOWN:
-			LOG("Collision UNKNOWN");
-			break;
-		default:
-			break;
+		if (dialogoMostrado && !app->dialogManager->isPlaying && startDialogo) {
+			startSelecion = true;
 		}
+
+		if (!app->dialogManager->isPlaying && (app->input->GetButton(CONFIRM) == KEY_DOWN) && startDialogo) {
+			if (!dialogoMostrado) {
+				int num = 0;
+				for (pugi::xml_node itemNode = dialogNode; itemNode; itemNode = itemNode.next_sibling("sentence"))
+				{
+					app->dialogManager->AddDialog(app->dialogManager->CreateDialog(itemNode, itemNode.attribute("name").as_string(), itemNode.attribute("facetexturepath").as_string()));
+					num++;
+				}
+				printf("\nnum: %d", num);
+				dialogoMostrado = true;
+			}
+		}
+
+		if (inAtqDashi) {
+			app->entityManager->GetPlayer()->TakeDamage(10);
+			empujaPlayer = true;
+			habilidadEmpujeTimer.Start();
+			//app->entityManager->GetPlayer()->pbodyFoot
+		}
+		break;
+	case ColliderType::PLAYER_ATTACK:
+		LOG("Collision Player_Attack");
+		if (playerInFight && nextState != EntityState_Boss_Igory::FASE_CHANGE && app->entityManager->GetPlayer()->checkAtk == true) {
+			if (!inCurar) {
+				inTakeHit = true;
+				health -= app->entityManager->GetPlayer()->currentStats.attackDamage;
+				timerRecibirDanioColor.Start();
+				printf("\n BossHeal %f", health);
+				app->entityManager->GetPlayer()->checkAtk = false;
+			}
+			else
+			{
+				inTakeHit = true;
+				shield -= app->entityManager->GetPlayer()->currentStats.attackDamage;
+				timerRecibirDanioColor.Start();
+				app->entityManager->GetPlayer()->checkAtk = false;
+				if (shield <= 0) {
+					shieldBroken = true;
+					shield = 0;
+					printf("\n shieldBroken %f");
+				}
+				printf("\n shield %f", shield);
+			}
+
+		}
+		if (cankillPadre) {
+			killPadre = true;
+		}
+		break;
+	case ColliderType::UNKNOWN:
+		LOG("Collision UNKNOWN");
+		break;
+	default:
+		break;
+	}
 }
 
 void Boss_Igory::OnEndCollision(PhysBody* physA, PhysBody* physB) {
-		switch (physB->ctype)
-		{
-		case ColliderType::PLATFORM:
-			LOG("Collision PLATFORM");
-			break;
-		case ColliderType::PLAYER:
-			LOG("Collision PLAYER");
-			//restar vida al player
-			break;
-		case ColliderType::PLAYER_ATTACK:
-			LOG("Collision Player_Attack");
-			break;
-		case ColliderType::UNKNOWN:
-			LOG("Collision UNKNOWN");
-			break;
-		default:
-			break;
-		}
-	
+	switch (physB->ctype)
+	{
+	case ColliderType::PLATFORM:
+		LOG("Collision PLATFORM");
+		break;
+	case ColliderType::PLAYER:
+		LOG("Collision PLAYER");
+		//restar vida al player
+		break;
+	case ColliderType::PLAYER_ATTACK:
+		LOG("Collision Player_Attack");
+		break;
+	case ColliderType::UNKNOWN:
+		LOG("Collision UNKNOWN");
+		break;
+	default:
+		break;
+	}
+
 }
 
 

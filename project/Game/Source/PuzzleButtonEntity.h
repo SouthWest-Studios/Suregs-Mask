@@ -49,6 +49,8 @@ private:
 
 	SDL_Rect notPressedRect{ 98,0, 98, 79 };
 	SDL_Rect pressedRect{ 0, 0, 98, 79 };
+
+	int puzzle_button_fx;
 		
 };
 
