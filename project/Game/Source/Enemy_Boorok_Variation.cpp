@@ -88,6 +88,7 @@ bool Enemy_Boorok_Variation::Start() {
 	chargeAttackTimer.Start();
 	recoveryTimer.Start();
 	isabletosleepTimer.Start();
+	invulnerabilityTimer.Start();
 
 	isSleeping = true;
 
@@ -341,16 +342,17 @@ void Enemy_Boorok_Variation::Die()
 
 // L07 DONE 6: Define OnCollision function for the player. 
 void Enemy_Boorok_Variation::OnCollision(PhysBody* physA, PhysBody* physB) {
-	switch (physB->ctype)
-	{
+	switch (physB->ctype){
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
 		break;
 	case ColliderType::PLAYER:
 		LOG("Collision PLAYER");
+		//restar vida al player
 		break;
 	case ColliderType::PLAYER_ATTACK:
 		LOG("Collision Player_Attack");
+		TakeDamage(app->entityManager->GetPlayer()->currentStats.attackDamage);
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
@@ -424,17 +426,12 @@ float Enemy_Boorok_Variation::GetHealth() const {
 
 void Enemy_Boorok_Variation::TakeDamage(float damage) {
 	if (currentState != EntityState_Enemy::DEAD && invulnerabilityTimer.ReadMSec() >= 500) {
-		currentAnimation = &reciebeDamage;
-		if (reciebeDamage.HasFinished())
-		{
-			health -= damage;
-			invulnerabilityTimer.Start();
-			timerRecibirDanioColor.Start();
-			app->audio->PlayRandomFx(boorok_get_damage_fx, boorok_get_damageAlt_fx, NULL);
-		}
+		health -= damage;
+		invulnerabilityTimer.Start();
+		timerRecibirDanioColor.Start();
+		app->audio->PlayRandomFx(boorok_get_damage_fx, boorok_get_damageAlt_fx, NULL);
 	}
 }
-
 
 //VENENO <----------
 void Enemy_Boorok_Variation::ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate) {
