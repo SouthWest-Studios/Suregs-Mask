@@ -66,8 +66,11 @@ bool Boss_Surma::Start() {
 	cambioFaseAnim.LoadAnim((char*)name.c_str(), "cambioFaseAnim", spritePositions);
 
 
+	spritePositionsExplosion = SPositionExplosion.SpritesPos(10, 863, 600, 6904);
+	explosionAnim.LoadAnim((char*)name.c_str(), "explosionAnim", spritePositionsExplosion);
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
+	textureExplosion  = app->tex->Load(config.attribute("texturePathExplosion").as_string());
 
 	Surma_dash_fx = app->audio->LoadAudioFx("surma_dash_fx");
 
@@ -144,10 +147,11 @@ bool Boss_Surma::Update(float dt)
 
 		app->physics->DestroyBody(explosionActual->pbody);
 
-		explosionActual->pbody = app->physics->CreateCircle(position.x, position.y, tamañoExplosionActual, bodyType::DYNAMIC);
+		explosionActual->pbody = app->physics->CreateCircle(position.x, position.y + 50, tamañoExplosionActual, bodyType::DYNAMIC);
 		explosionActual->pbody->body->GetFixtureList()->SetSensor(true);
 		explosionActual->pbody->ctype = ColliderType::BOSS_SURMA_EXPLOSION;
 		explosionActual->pbody->listener = this;
+		explosionActual->currentAnimation->Update();
 
 		if (explosionActual->lifeTime.ReadMSec() > 300) {
 			app->physics->DestroyBody(explosionActual->pbody);
@@ -208,6 +212,13 @@ bool Boss_Surma::PostUpdate() {
 
 		}
 	}
+
+
+	if (explosionActual != nullptr) {
+		SDL_Rect rectExp = explosionActual->currentAnimation->GetCurrentFrame();
+		app->render->DrawTexture(textureExplosion, position.x - 350, position.y - 250, 1, SDL_FLIP_HORIZONTAL, &rectExp);
+	}
+
 
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
@@ -350,6 +361,28 @@ void Boss_Surma::OnCollision(PhysBody* physA, PhysBody* physB) {
 				((Player*)physB->listener)->SlowDown(0.4);
 				explosionAlcanzada = true;
 			}
+			break;
+		}
+	}
+
+	if ((attackSensor != nullptr && physA == attackSensor) || (attackSensor2 != nullptr && physA == attackSensor2)) {
+		switch (physB->ctype)
+		{
+		case ColliderType::PLAYER:
+
+			physB->listener->TakeDamage(ataqueNormalDamage);
+
+			break;
+		}
+	}
+
+	if ((attackBigSensor != nullptr && physA == attackBigSensor)) {
+		switch (physB->ctype)
+		{
+		case ColliderType::PLAYER:
+
+			physB->listener->TakeDamage(ataqueCargadoDamage);
+
 			break;
 		}
 	}
@@ -507,27 +540,84 @@ void Boss_Surma::Fase1(float dt, iPoint playerPos)
 		if (!combo1Anim.HasFinished()) {
 			currentAnimation = &combo1Anim;
 			//PARTICULA ATAQUE FLOJO
+			if (attackSensor == nullptr && combo1Anim.GetCurretFrameNumber() >= 3) {
+				if (isFacingLeft) {
+					attackSensor = app->physics->CreateRectangleSensor(position.x - 90, position.y - 25, 60, 150, bodyType::KINEMATIC);
+				}
+				else {
+					attackSensor = app->physics->CreateRectangleSensor(position.x + 120, position.y - 25, 60, 150, bodyType::KINEMATIC);
+				}
+				attackSensor->listener = this;
+			}
+			
+			
+			
 		}
 		else if (!combo2Anim.HasFinished()) {
 			currentAnimation = &combo2Anim;
 			//PARTICULA ATAQUE FLOJO
+			if (attackSensor != nullptr) {
+				app->physics->DestroyBody(attackSensor);
+				attackSensor = nullptr;
+			}
+			
+			if (attackSensor2 == nullptr && combo2Anim.GetCurretFrameNumber() >= 3) {
+				if (isFacingLeft) {
+					attackSensor2 = app->physics->CreateRectangleSensor(position.x + 120, position.y - 25, 60, 150, bodyType::KINEMATIC);
+				}
+				else {
+					attackSensor2 = app->physics->CreateRectangleSensor(position.x - 90, position.y - 25, 60, 150, bodyType::KINEMATIC);
+				}
+				attackSensor2->listener = this;
+			}
+			
+			
+			
 		}
 		else if (!combo3Anim.HasFinished()) {
 			currentAnimation = &combo3Anim;
 			//PARTICULA ATAQUE FLOJO
+
+			if (attackSensor2 != nullptr) {
+				app->physics->DestroyBody(attackSensor2);
+				attackSensor2 = nullptr;
+			}
+
+
+			if (attackSensor == nullptr && combo3Anim.GetCurretFrameNumber() >= 3) {
+				if (isFacingLeft) {
+					attackSensor = app->physics->CreateRectangleSensor(position.x - 90, position.y - 25, 60, 150, bodyType::KINEMATIC);
+				}
+				else {
+					attackSensor = app->physics->CreateRectangleSensor(position.x + 120, position.y - 25, 60, 150, bodyType::KINEMATIC);
+				}
+				attackSensor->listener = this;
+			}
+			
+
 			cargaAtaqueTimer.Start();
 		}
 		else {
+			if (attackSensor != nullptr) {
+				app->physics->DestroyBody(attackSensor);
+				attackSensor = nullptr;
+			}
 			if (jugadorCerca || currentAnimation == &cansadoAnim) {
 				if (cargaAtaqueTimer.ReadMSec() <= cargaAtaqueMS) {
 					currentAnimation = &ataqueCargadoAnim;
 				}
 				else {
 					currentAnimation = &ataqueCargadoEjecutarAnim;
-
+					if (attackBigSensor == nullptr && ataqueCargadoEjecutarAnim.GetCurretFrameNumber() >= 2 && !ataqueCargadoEjecutarAnim.HasFinished()) {
+						attackBigSensor = app->physics->CreateRectangleSensor(position.x + 16, position.y + 50, 180, 100, bodyType::KINEMATIC);
+						attackBigSensor->listener = this;
+					}
 
 					if (ataqueCargadoEjecutarAnim.HasFinished()) {
-
+						if (attackBigSensor != nullptr) {
+							app->physics->DestroyBody(attackBigSensor);
+							attackBigSensor = nullptr;
+						}
 						currentAnimation = &cansadoAnim;
 						if (cansadoTimer.ReadMSec() > cansadoMS) {
 							realizandoCombo = false;
@@ -538,10 +628,15 @@ void Boss_Surma::Fase1(float dt, iPoint playerPos)
 							ataqueCargadoAnim.Reset();
 							//Reset todas las anims
 						}
+						else {
+							if (attackBigSensor != nullptr) {
+								app->physics->DestroyBody(attackBigSensor);
+								attackBigSensor = nullptr;
+							}
+						}
 					}
 					else {
 						cansadoTimer.Start();
-						//PARTICULA ATAQUE FUERTE
 					}
 
 
@@ -633,7 +728,15 @@ void Boss_Surma::Fase2(float dt, iPoint playerPos)
 			}
 			else {
 				currentAnimation = &ataqueCargadoEjecutarAnim;
+				if (attackBigSensor == nullptr && ataqueCargadoEjecutarAnim.GetCurretFrameNumber() >= 2 && !ataqueCargadoEjecutarAnim.HasFinished()) {
+					attackBigSensor = app->physics->CreateRectangleSensor(position.x + 16, position.y + 50, 180, 100, bodyType::KINEMATIC);
+					attackBigSensor->listener = this;
+				}
 				if (explosionEspadaTimer.ReadMSec() >= 2000) {
+					if (attackBigSensor != nullptr) {
+						app->physics->DestroyBody(attackBigSensor);
+						attackBigSensor = nullptr;
+					}
 					//EXPLOSION
 					if (explosionActual == nullptr && !explosionRealizada) {
 						tamañoExplosionActual = 1;
@@ -644,6 +747,8 @@ void Boss_Surma::Fase2(float dt, iPoint playerPos)
 						explosionActual->pbody->listener = this;
 						explosionRealizada = true;
 						explosionAlcanzada = false;
+						explosionAnim.Reset();
+						explosionActual->currentAnimation = &explosionAnim;
 					}
 
 					//Cansado
@@ -659,6 +764,12 @@ void Boss_Surma::Fase2(float dt, iPoint playerPos)
 						cantidadCombosRealizados = 0;
 						//Reset todas las anims
 					}
+					else {
+						if (attackBigSensor != nullptr) {
+							app->physics->DestroyBody(attackBigSensor);
+							attackBigSensor = nullptr;
+						}
+					}
 				}
 				else {
 					cansadoTimer.Start();
@@ -673,20 +784,77 @@ void Boss_Surma::Fase2(float dt, iPoint playerPos)
 			if (!combo1Anim.HasFinished()) {
 				currentAnimation = &combo1Anim;
 				//PARTICULA ATAQUE FLOJO
+				if (attackSensor == nullptr && combo1Anim.GetCurretFrameNumber() >= 3) {
+					if (isFacingLeft) {
+						attackSensor = app->physics->CreateRectangleSensor(position.x - 90, position.y - 25, 60, 150, bodyType::KINEMATIC);
+					}
+					else {
+						attackSensor = app->physics->CreateRectangleSensor(position.x + 120, position.y - 25, 60, 150, bodyType::KINEMATIC);
+					}
+					attackSensor->listener = this;
+				}
 			}
 			else if (!combo2Anim.HasFinished()) {
 				currentAnimation = &combo2Anim;
 				//PARTICULA ATAQUE FLOJO
+				if (attackSensor != nullptr) {
+					app->physics->DestroyBody(attackSensor);
+					attackSensor = nullptr;
+				}
+
+				if (attackSensor2 == nullptr && combo2Anim.GetCurretFrameNumber() >= 3) {
+					if (isFacingLeft) {
+						attackSensor2 = app->physics->CreateRectangleSensor(position.x + 120, position.y - 25, 60, 150, bodyType::KINEMATIC);
+					}
+					else {
+						attackSensor2 = app->physics->CreateRectangleSensor(position.x - 90, position.y - 25, 60, 150, bodyType::KINEMATIC);
+					}
+					attackSensor2->listener = this;
+				}
 			}
 			else if (!combo3Anim.HasFinished()) {
 				currentAnimation = &combo3Anim;
 				//PARTICULA ATAQUE FLOJO
+				if (attackSensor2 != nullptr) {
+					app->physics->DestroyBody(attackSensor2);
+					attackSensor2 = nullptr;
+				}
+
+
+				if (attackSensor == nullptr && combo3Anim.GetCurretFrameNumber() >= 3) {
+					if (isFacingLeft) {
+						attackSensor = app->physics->CreateRectangleSensor(position.x - 90, position.y - 25, 60, 150, bodyType::KINEMATIC);
+					}
+					else {
+						attackSensor = app->physics->CreateRectangleSensor(position.x + 120, position.y - 25, 60, 150, bodyType::KINEMATIC);
+					}
+					attackSensor->listener = this;
+				}
 			}
 			else if (!ataqueRapidoAnim.HasFinished()) {
 				currentAnimation = &ataqueRapidoAnim;
 				//PARTICULA ATAQUE RAPIDO
+				if (attackSensor != nullptr) {
+					app->physics->DestroyBody(attackSensor);
+					attackSensor = nullptr;
+				}
+
+
+				if (attackSensor2 == nullptr && combo2Anim.GetCurretFrameNumber() >= 3) {
+					if (isFacingLeft) {
+						attackSensor2 = app->physics->CreateRectangleSensor(position.x - 90, position.y - 25, 160, 50, bodyType::KINEMATIC);
+					}
+					else {
+						attackSensor2 = app->physics->CreateRectangleSensor(position.x +120, position.y - 25, 160, 50, bodyType::KINEMATIC);
+					}
+					attackSensor2->listener = this;
+				}
 			}
 			else {
+				if (attackSensor2 != nullptr) {
+					app->physics->DestroyBody(attackSensor2);
+					attackSensor2 = nullptr;
+				}
 				cargaAtaqueTimer.Start();
 				cantidadCombosRealizados++;
 				realizandoCombo = false;

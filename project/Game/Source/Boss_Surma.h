@@ -33,6 +33,7 @@ struct ExplosionAtaque
 {
 	PhysBody* pbody;
 	Timer lifeTime;
+	Animation* currentAnimation;
 };
 
 class Boss_Surma : public Entity
@@ -85,6 +86,7 @@ public:
 
 	//L02: DONE 2: Declare player parameters
 	SDL_Texture* texture = NULL;
+	SDL_Texture* textureExplosion = NULL;
 	pugi::xml_node config;
 	uint texW, texH;
 
@@ -102,6 +104,11 @@ public:
 
 
 private:
+
+	PhysBody* attackSensor = nullptr;
+	PhysBody* attackSensor2 = nullptr;
+	PhysBody* attackBigSensor = nullptr;
+
 	pugi::xml_document configFile;
 	pugi::xml_node configNode;
 
@@ -117,6 +124,8 @@ private:
 	Animation ataqueRapidoAnim;
 	Animation cambioFaseAnim;
 	Animation muerteAnim;
+
+	Animation explosionAnim;
 
 	int Surma_dash_fx;
 	
@@ -139,7 +148,9 @@ private:
 
 
 	Animation SPosition;
+	Animation SPositionExplosion;
 	SDL_Rect* spritePositions;
+	SDL_Rect* spritePositionsExplosion;
 
 	Timer cargaAtaqueTimer;
 	Timer cansadoTimer;

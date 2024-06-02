@@ -82,6 +82,14 @@ public:
 		}
 	}
 
+	int GetCurretFrameNumber() {
+		int actualFrame = currentFrame;
+		if (pingpongDirection == -1)
+			actualFrame = totalFrames - currentFrame;
+
+		return actualFrame;
+	}
+
 	SDL_Rect& GetCurrentFrame()
 	{
 		int actualFrame = currentFrame;
