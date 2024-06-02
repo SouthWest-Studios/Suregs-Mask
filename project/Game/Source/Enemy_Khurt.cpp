@@ -64,6 +64,9 @@ bool Enemy_Khurt::Start() {
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
+	khurt_get_damage_fx = app->audio->LoadAudioFx("khurt_get_damage_fx");
+	khurt_get_damageAlt_fx = app->audio->LoadAudioFx("khurt_get_damageAlt_fx");
+
 	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
 	pbodyFoot->entity = this;
 	pbodyFoot->listener = this;
@@ -529,6 +532,7 @@ void Enemy_Khurt::TakeDamage(float damage) {
 		health -= damage;
 		invulnerabilityTimer.Start();
 		timerRecibirDanioColor.Start();
+		app->audio->PlayRandomFx(khurt_get_damage_fx, khurt_get_damageAlt_fx, NULL);
 	}
 }
 

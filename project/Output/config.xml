@@ -102,7 +102,8 @@
       <khurt_dig_end_fx path=""/>
       <khurt_attack_fx path=""/>
       <khurt_stun_fx path=""/>
-      <khurt_get_damage_fx path=""/>
+      <khurt_get_damage_fx path="Assets/Audio/Fx/Enemies/khurt_get_damage_fx.wav"/>
+      <khurt_get_damageAlt_fx path="Assets/Audio/Fx/Enemies/khurt_get_damageAlt_fx.wav"/>
       <khurt_death_fx path=""/>
       
       <boorok_attack_fx path="Assets/Audio/Fx/Enemies/boorok_attack_fx.wav"/>
