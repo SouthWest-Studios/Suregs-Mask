@@ -26,7 +26,7 @@
 
   <!--Audio-->
 	<audio>
-		<music volume="0"/>
+		<music volume="64"/>
 		<fx volume="64"/>
 	</audio>
 

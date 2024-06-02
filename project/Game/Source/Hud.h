@@ -147,5 +147,6 @@ public:
 	// Audios
 	int low_health_fx;
 	int level_up_fx;
+	int use_potion_fx;
 };
 #endif // __HUD_H__

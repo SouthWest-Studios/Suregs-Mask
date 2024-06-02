@@ -115,6 +115,7 @@ bool Hud::Start()
 
 	low_health_fx = app->audio->LoadAudioFx("low_health_fx");
 	level_up_fx = app->audio->LoadAudioFx("level_up_fx");
+	use_potion_fx = app->audio->LoadAudioFx("use_potion_fx");
 
 	/*Acquired_Item ai;
 	ai.lifeTimer.Start();
@@ -526,6 +527,7 @@ void Hud::Potions()
 				ListItem<Inventity*>* item = GetSelectedPotionItem();
 				if (item) {
 					app->inventoryManager->UsePotionSelected(item);
+					app->audio->PlayTimedFx(use_potion_fx, 175);
 				}
 			}
 		}
