@@ -95,6 +95,8 @@ public:
 	bool showCredits = false;
 	bool _showCredits = false;
 
+	Timer closeshowCredits;
+
 private:
 
 	Emitter* eMenu = nullptr;

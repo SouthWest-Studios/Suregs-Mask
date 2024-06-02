@@ -144,6 +144,7 @@ bool EntityManager::Start() {
 	texture = app->tex->Load(configNode.attribute("texturePath").as_string());
 	textureKillPadre = app->tex->Load(configNode.attribute("textureKillPath").as_string());
 	textureUnirPadre = app->tex->Load(configNode.attribute("textureUnirPath").as_string());
+	textureCredit = app->tex->Load(configNode.attribute("textureCredit").as_string());
 	//printf("\nEntyti Manager %s  ", texture);
 	//eyeAnimation.LoadAnim("boorok", "sleepAnim", spritePositions);
 	currentAnimation = &eyeIdle;
@@ -733,8 +734,10 @@ bool EntityManager::PostUpdate()
 
 bool EntityManager::PostLateUpdate()
 {
-	if (bossIgory->deletePadre) {
-		showFinalkillPadre();
+	if (canShowFinal) {
+		if (bossIgory->deletePadre) {
+			showFinalkillPadre();
+		}
 	}
 	//app->render->DrawTexture(texture, BMRposition.x - 410, BMRposition.y - 300, SDL_FLIP_HORIZONTAL, &rect);
 	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
@@ -926,7 +929,13 @@ void EntityManager::showFinalkillPadre()
 
 	if (showPhoto) {
 		if (bossIgory->seleccionFinalPersonaje == 1) {
-		app->render->DrawTexture(textureKillPadre, 0, 0, SDL_FLIP_NONE, &overlayRect, 0, 0);
+			app->render->DrawTexture(textureKillPadre, 0, 0, SDL_FLIP_NONE, &overlayRect, 0, 0);
+			/*if (!goPadreCleanUp) {
+				bossIgory->CleanUp();
+				bossIgory->closeFinalSelecion = false;
+				goPadreCleanUp = true;
+			}*/
+			
 		}
 		else
 		{
@@ -934,21 +943,30 @@ void EntityManager::showFinalkillPadre()
 		}
 	}
 
+	if (showCredi) {
+		app->render->DrawTexture(textureCredit, 0, 0, SDL_FLIP_NONE, &overlayRect, 0, 0);
+	}
 
 	if (increasing) {
 		photoTransparent += 1;
 		if (photoTransparent >= 255) {
 			photoTransparent = 255;
-			if (goCredit) {
+			if (goScene) {
 				app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu);
-				//app->scene_menu->showCredits = true;
-				//bossIgory->deletePadre = false;
 			}
 			else
 			{
 				increasing = false;
-				showPhoto = true;
-				stayTime.Start();
+				if (showPhoto) {
+					showCredi = true;
+					stayTime.Start();
+				}
+				else
+				{
+					showPhoto = true;
+					stayTime.Start();
+				}
+				
 			}
 		}
 	}
@@ -957,10 +975,14 @@ void EntityManager::showFinalkillPadre()
 		if (photoTransparent <= 0) {
 			photoTransparent = 0;
 
+			if (showCredi && stayTime.ReadMSec() >= 5000) {
+				increasing = true;
+				goScene = true;
+			}
 			if (stayTime.ReadMSec() >= 5000) {
 				increasing = true;
-				goCredit = true;
 			}
+			
 		}
 	}
 
