@@ -1997,7 +1997,7 @@ bool TreeManager::PostUpdate()
 				if (mask == 1)
 				{
 
-					app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, {0,0,0});
+					app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, {0,0,0}, app->render->titleFont);
 					app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
 					app->render->DrawTextBound(itum->data->desc.c_str(), 870, 300, 150, { 0,0,0 });
 
@@ -2006,11 +2006,11 @@ bool TreeManager::PostUpdate()
 				{
 					if (itum->data->name2 == "")
 					{
-						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, { 0,0,0 });
+						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
 					}
 					else
 					{
-						app->render->DrawTextBound(itum->data->name2.GetString(), 870, 150, 150, { 0,0,0 });
+						app->render->DrawTextBound(itum->data->name2.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
 					}
 					
 					app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
@@ -2021,13 +2021,13 @@ bool TreeManager::PostUpdate()
 				{
 					if (itum->data->name3 == "")
 					{
-						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, { 0,0,0 });
+						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
 					}
 					else
 					{
-						app->render->DrawTextBound(itum->data->name3.GetString(), 870, 150, 150, { 0,0,0 });
+						app->render->DrawTextBound(itum->data->name3.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
 					}
-					app->render->DrawTextBound(itum->data->name3.GetString(), 870, 150, 150, { 0,0,0 });
+					/*app->render->DrawTextBound(itum->data->name3.GetString(), 870, 150, 150, { 0,0,0 });*/
 					app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
 					app->render->DrawTextBound(itum->data->desc2.c_str(), 870, 300, 150, { 0,0,0 });
 
@@ -2036,13 +2036,13 @@ bool TreeManager::PostUpdate()
 				{
 					if (itum->data->name4 == "")
 					{
-						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, { 0,0,0 });
+						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
 					}
 					else
 					{
-						app->render->DrawTextBound(itum->data->name4.GetString(), 870, 150, 150, { 0,0,0 });
+						app->render->DrawTextBound(itum->data->name4.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
 					}
-					app->render->DrawTextBound(itum->data->name4.GetString(), 870, 150, 150, { 0,0,0 });
+					/*app->render->DrawTextBound(itum->data->name4.GetString(), 870, 150, 150, { 0,0,0 });*/
 					app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
 					app->render->DrawTextBound(itum->data->desc3.c_str(), 870, 300, 150, { 0,0,0 });
 

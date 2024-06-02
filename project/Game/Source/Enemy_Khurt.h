@@ -16,7 +16,8 @@ struct SDL_Texture;
 
 
 struct Branch_Khurt {
-	enum EntityState const next_state;
+	enum EntityState_Khurt const next_state;
+	Branch_Khurt(EntityState_Khurt next) : next_state(next) {}
 
 };
 
@@ -43,6 +44,11 @@ public:
 	void DoNothing(float dt);
 	void Chase(float dt, iPoint playerPos);
 	void Attack(float dt);
+	void Charge(float dt, iPoint playerPos);
+	void Stunned(float dt);
+	void DigUnderground();
+	void MoveUnderground(float dt, iPoint playerPos);
+	void DigOut(float dt, iPoint playerPos);
 	void Die();
 	bool Khurtfinding(float dt, iPoint playerPos);
 
@@ -51,9 +57,7 @@ public:
 	float GetHealth() const;
 	void TakeDamage(float damage);
 
-	//Attack
-	void Charge(float dt, iPoint playerPos);
-	void Stunned(float dt);
+	void stateMachine(float dt, iPoint playerPos);
 
 	//VENENO <----------
 	void ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate);
@@ -111,7 +115,7 @@ private:
 	DynArray<iPoint> lastPath;
 
 	Animation* currentAnimation = nullptr;
-	EntityState state;
+	EntityState_Khurt state;
 
 
 	Animation SPosition;
@@ -132,10 +136,10 @@ private:
 	//Charge Attack
 	Timer stunTimer;
 	Timer chargeTimer;
+	Timer timechargingTimer;
 	bool charging;
 	bool stunned;
-	bool underProcess = false;
-	bool underFinished = false;
+	bool isUnderground = false;
 	iPoint Antposition;
 
 	//Dig underground
@@ -144,20 +148,23 @@ private:
 
 public:
 
-	Branch_Khurt transitionTable[static_cast<int>(EntityState::STATE_COUNT)][static_cast<int>(EntityState::STATE_COUNT)] = {
-		// isMoving               isAttacking			 isDead                isReviving					else					MASK_ATTACK
-		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD},	 {EntityState::IDLE},	  {EntityState::IDLE},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK}}, // IDLE
-		{ {EntityState::RUNNING}, {EntityState::ATTACKING}, {EntityState::DEAD},	 {EntityState::IDLE},	  {EntityState::IDLE},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK}}, // RUNNING
-		{ {EntityState::IDLE},	  {EntityState::IDLE},		{EntityState::DEAD},	 {EntityState::IDLE},	  {EntityState::IDLE},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK}}, // ATTACKING
-		{ {EntityState::DEAD},	  {EntityState::DEAD},		{EntityState::DEAD},	 {EntityState::IDLE},	  {EntityState::IDLE},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK}}, // DEAD
-		{ {EntityState::REVIVING},{EntityState::REVIVING},	{EntityState::DEAD},	 {EntityState::REVIVING}, {EntityState::REVIVING}, {EntityState::REVIVING},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK}}, // REVIVING
-		{ {EntityState::IDLE},	  {EntityState::IDLE},	    {EntityState::DEAD},	 {EntityState::IDLE},	  {EntityState::IDLE},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK}}, // MASK_ATTACK
-		{ {EntityState::IDLE},	  {EntityState::IDLE},	    {EntityState::DEAD},	 {EntityState::IDLE},	  {EntityState::IDLE},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK}}, // MASK_ATTACK
-		{ {EntityState::IDLE},	  {EntityState::IDLE},	    {EntityState::DEAD},	 {EntityState::IDLE},	  {EntityState::IDLE},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK},	   {EntityState::MASK_ATTACK}} // MASK_ATTACK
+	Branch_Khurt transitionTable[static_cast<int>(EntityState_Khurt::STATE_COUNT)][static_cast<int>(EntityState_Khurt::STATE_COUNT)] = {
+		
+		{ {EntityState_Khurt::IDLE}, {EntityState_Khurt::RUNNING}, {EntityState_Khurt::ATTACKING},	 {EntityState_Khurt::DEAD},	  {EntityState_Khurt::STUNNED},	   {EntityState_Khurt::DIGGING_UNDERGROUND},	   {EntityState_Khurt::MOVING_UNDERGROUND},	   {EntityState_Khurt::DIGGING_OUT},        {EntityState_Khurt::IDLE}},  // IDLE
+		{ {EntityState_Khurt::IDLE}, {EntityState_Khurt::RUNNING}, {EntityState_Khurt::ATTACKING},	 {EntityState_Khurt::DEAD},	  {EntityState_Khurt::STUNNED},	   {EntityState_Khurt::DIGGING_UNDERGROUND},	   {EntityState_Khurt::NONE},	               {EntityState_Khurt::DIGGING_OUT},        {EntityState_Khurt::IDLE}},  // RUNNING
+		{ {EntityState_Khurt::IDLE}, {EntityState_Khurt::RUNNING}, {EntityState_Khurt::ATTACKING},	 {EntityState_Khurt::DEAD},	  {EntityState_Khurt::STUNNED},	   {EntityState_Khurt::DIGGING_UNDERGROUND},	   {EntityState_Khurt::MOVING_UNDERGROUND},	   {EntityState_Khurt::DIGGING_OUT},        {EntityState_Khurt::IDLE}},  // ATTACKING
+		{ {EntityState_Khurt::IDLE}, {EntityState_Khurt::RUNNING}, {EntityState_Khurt::ATTACKING},	 {EntityState_Khurt::DEAD},	  {EntityState_Khurt::STUNNED},	   {EntityState_Khurt::DIGGING_UNDERGROUND},	   {EntityState_Khurt::MOVING_UNDERGROUND},	   {EntityState_Khurt::DIGGING_OUT},        {EntityState_Khurt::IDLE}},  // DEAD
+		{ {EntityState_Khurt::IDLE}, {EntityState_Khurt::RUNNING}, {EntityState_Khurt::ATTACKING},	 {EntityState_Khurt::DEAD},	  {EntityState_Khurt::STUNNED},	   {EntityState_Khurt::DIGGING_UNDERGROUND},	   {EntityState_Khurt::MOVING_UNDERGROUND},	   {EntityState_Khurt::DIGGING_OUT},        {EntityState_Khurt::IDLE}},  // STUNNED
+		{ {EntityState_Khurt::IDLE}, {EntityState_Khurt::RUNNING}, {EntityState_Khurt::ATTACKING},	 {EntityState_Khurt::DEAD},	  {EntityState_Khurt::STUNNED},	   {EntityState_Khurt::DIGGING_UNDERGROUND},	   {EntityState_Khurt::MOVING_UNDERGROUND},	   {EntityState_Khurt::DIGGING_OUT},        {EntityState_Khurt::IDLE}},  // DIGGING_UNDERGROUND
+		{ {EntityState_Khurt::IDLE}, {EntityState_Khurt::RUNNING}, {EntityState_Khurt::ATTACKING},	 {EntityState_Khurt::DEAD},	  {EntityState_Khurt::STUNNED},	   {EntityState_Khurt::DIGGING_UNDERGROUND},	   {EntityState_Khurt::MOVING_UNDERGROUND},	   {EntityState_Khurt::DIGGING_OUT},        {EntityState_Khurt::IDLE}},  // MOVING_UNDERGROUND
+		{ {EntityState_Khurt::IDLE}, {EntityState_Khurt::RUNNING}, {EntityState_Khurt::ATTACKING},	 {EntityState_Khurt::DEAD},	  {EntityState_Khurt::STUNNED},	   {EntityState_Khurt::DIGGING_UNDERGROUND},	   {EntityState_Khurt::MOVING_UNDERGROUND},	   {EntityState_Khurt::DIGGING_OUT},        {EntityState_Khurt::IDLE}},  // DIGGING_OUT
+		{ {EntityState_Khurt::IDLE}, {EntityState_Khurt::NONE},    {EntityState_Khurt::NONE},	     {EntityState_Khurt::NONE},	  {EntityState_Khurt::NONE},	   {EntityState_Khurt::NONE},	                   {EntityState_Khurt::NONE},	               {EntityState_Khurt::NONE},               {EntityState_Khurt::IDLE}},  // NONE
 	};
 
-	EntityState currentState;
-	EntityState nextState;
+	EntityState_Khurt currentState;
+	EntityState_Khurt desiredState;
+	EntityState_Khurt nextState;
+
 
 };
 
