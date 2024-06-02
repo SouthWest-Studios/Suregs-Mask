@@ -101,7 +101,7 @@ void GuiControlSlider::Draw()
     }
     if (state == GuiControlState::FOCUSED)
     {
-        app->render->DrawTexture(slider2, bounds.x + 50, bounds.y, SDL_FLIP_NONE, 0, 0, true);
+        /*app->render->DrawTexture(slider2, bounds.x + 50, bounds.y, SDL_FLIP_NONE, 0, 0, true);*/
     }
 
     // Calculate the position of the slider knob based on the current value
@@ -113,7 +113,15 @@ void GuiControlSlider::Draw()
     SDL_Rect knobRect = { knobX , bounds.y - 5, 10, bounds.h + 10 };
     //app->render->DrawRectangle(knobRect, 255, 255, 0, 255, true, false);
    
-    app->render->DrawTexture(knob, knobRect.x, knobRect.y, SDL_FLIP_NONE, 0, 0, true);
+    if (state == GuiControlState::FOCUSED)
+    {
+        app->render->DrawTexture(slider2, knobRect.x, knobRect.y, SDL_FLIP_NONE, 0, 0, true);
+    }
+    else
+    {
+        app->render->DrawTexture(knob, knobRect.x, knobRect.y, SDL_FLIP_NONE, 0, 0, true);
+    }
+   
 
     // Draw the text label
     /*app->render->DrawTextBound(text.GetString(), bounds.x, bounds.y - 40, 70, { 0,0,0,0});*/

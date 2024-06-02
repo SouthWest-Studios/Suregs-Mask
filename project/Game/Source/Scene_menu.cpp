@@ -504,7 +504,7 @@ void Scene_Menu::SettingsInterface()
 	app->win->GetWindowSize(windowWidth, windowHeight);
 
 	app->render->DrawTexture(menuMain, 0, 0);
-	app->render->DrawTexture(settings, 400, 100);
+	app->render->DrawTexture(settings, 450, 150, 1.2);
 
 	ListItem<GuiControl*>* control;
 	for (control = controlsScene.start; control != NULL; control = control->next)
@@ -528,19 +528,19 @@ void Scene_Menu::SettingsInterface()
 		else
 		{
 
-			SDL_Rect MusicPos = { windowWidth / 2 - 110 ,windowHeight / 2 - 40, 200, 50 };
+			SDL_Rect MusicPos = { windowWidth / 2 - 178 ,windowHeight / 2 - 101, 230, 50 };
 			music = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 7, "MUSIC", MusicPos, this, { 0, 0,20, 20 }, { 0,0,0,0 }, 0, 100);
 
-			SDL_Rect SfxPos = { windowWidth / 2 - 110 ,windowHeight / 2 + 20, 200, 50 };
+			SDL_Rect SfxPos = { windowWidth / 2 - 178 ,windowHeight / 2 - 20, 230, 50 };
 			sfx = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 8, "SFX", SfxPos, this, { 0, 0, 20, 20 }, { 0,0,0,0 }, 0, 100);
 
-			SDL_Rect FullScreen = { windowWidth / 2 + 100 ,windowHeight / 2 + 60, 230,50 };
+			SDL_Rect FullScreen = { windowWidth / 2 - 85 ,windowHeight / 2 + 80, 230,50 };
 			fullscreen = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 9, "FULLSCREEN", FullScreen, this, { 0,0,0,0 }, { -50,0,0,0 });
 
-			SDL_Rect vSyncpos = { windowWidth / 2 + 100 ,windowHeight / 2 + 130, 200, 50 };
+			SDL_Rect vSyncpos = { windowWidth / 2 + 47 ,windowHeight / 2 + 79, 200, 50 };
 			vsync = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 10, "VSYNC", vSyncpos, this, { 0, 0, 20, 20 });
 
-			SDL_Rect TitlePos = { 600, 550,	60,25 };
+			SDL_Rect TitlePos = { 600, 480,	60,25 };
 			atras = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "ATRÁS", TitlePos, this, { 0,0,0,0 });
 
 			/*controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "ATR�S", SDL_Rect{ 550, 600,	136,46 }, this));*/
