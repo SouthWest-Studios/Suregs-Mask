@@ -218,7 +218,7 @@ void MiniGameFishing::playNormalFishing()
 
 
 
-		if (app->input->GetButton(FISHINGPLAY) == KEY_DOWN) {
+		if (app->input->GetButton(FISHINGPLAY) == KEY_DOWN || app->input->GetButton(BACK) == KEY_DOWN) {
 			player_click_count += 1;
 		}//end_if, player count
 
@@ -647,11 +647,11 @@ void MiniGameFishing::OnCollision(PhysBody* physA, PhysBody* physB) {
 bool MiniGameFishing::miniGameStart(float dt)
 {
 
-	if (fishing.playerGetRod && !fishing.isFishing) {
-		if (app->input->GetButton(SAVEROD) == KEY_DOWN) {
-			fishing.rodReady = !fishing.rodReady;
-		}
-	}//end_if, equip or stow the fishing rod
+	//if (fishing.playerGetRod && !fishing.isFishing) {
+	//	if (app->input->GetButton(SAVEROD) == KEY_DOWN || app->input->GetButton(CONFIRM) == KEY_DOWN) {
+	//		fishing.rodReady = !fishing.rodReady;
+	//	}
+	//}//end_if, equip or stow the fishing rod
 	return true;
 }
 
@@ -676,7 +676,7 @@ bool MiniGameFishing::miniGameLoop(float dt)
 
 
 	//Cast the rod and StartFishing
-	if (app->input->GetButton(STARTFISHING) == KEY_DOWN && fishing.rodReady) {
+	if (app->input->GetButton(STARTFISHING) == KEY_DOWN && fishing.rodReady || app->input->GetButton(DASH) == KEY_DOWN && fishing.rodReady) {
 		fishing.isFishing = !fishing.isFishing;//Start fishing o Stop fishing
 		
 		/*if (fishing.isFishing == true && fishing.startFishing == false) {

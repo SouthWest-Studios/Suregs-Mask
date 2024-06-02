@@ -155,7 +155,9 @@ bool Boss_Inuit::Update(float dt)
 		useUlt = true;
 		goUseUlt = true;
 	}
-
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
+		health -= 1000;
+	}
 
 	switch (fase)
 	{
@@ -434,7 +436,7 @@ void Boss_Inuit::shock_wave(int posX, int posY, float shockSpeed, float maxSize,
 		PhysBody* newShockWave = app->physics->CreateCircle(posX, posY, shockSize, DYNAMIC, true);
 		newShockWave->entity = this;
 		newShockWave->listener = this;
-		newShockWave->ctype = ColliderType::UNKNOWN;
+		newShockWave->ctype = ColliderType::WAVE;
 		shockWaves[tag] = newShockWave;
 		inWave = true;
 	}
@@ -573,6 +575,8 @@ void Boss_Inuit::Attack(float dt)
 			atkDistancia = 150;
 		}
 		atackCube = app->physics->CreateRectangleSensor(position.x - atkDistancia, position.y, 200, 300, STATIC);
+		atackCube->entity = this;
+		atackCube->listener = this;
 		atackCube->ctype = ColliderType::ATACK_INUIT;
 		atkTimeReset = false;
 		break;
@@ -589,8 +593,12 @@ void Boss_Inuit::Attack(float dt)
 			atkDistancia = 150;
 		}
 		atackCube = app->physics->CreateRectangleSensor(position.x - atkDistancia, position.y, 200, 300, STATIC);
+
+		atackCube->entity = this;
+		atackCube->listener = this;
 		atackCube->ctype = ColliderType::ATACK_INUIT;
 		atkTimeReset = false;
+		
 		break;
 	case 3:
 		atk2_boss_inuit.Reset();
@@ -1027,6 +1035,18 @@ void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 		}
 		break;
 	case ColliderType::PLAYER:
+		if (physA->ctype == ColliderType::ATACK_INUIT) {
+			app->entityManager->GetPlayer()->TakeDamage(attackDamage);
+		}
+		if (physA->ctype == ColliderType::WAVE) {
+			app->entityManager->GetPlayer()->TakeDamage(200);
+		}
+
+		if (physA->ctype == ColliderType::ATACKBMR) {
+
+			app->entityManager->GetPlayer()->TakeDamage(50);
+		}
+
 		if (physA->ctype == ColliderType::BOSSAREA) {
 			//printf("\n entraBossArea");
 			playerInBossArea = true;
@@ -1049,9 +1069,7 @@ void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	case ColliderType::ATACK_INUIT:
 		LOG("Collision Player_Attack");
-		if (physA->ctype == ColliderType::PLAYER) {
-			app->entityManager->GetPlayer()->TakeDamage(attackDamage);
-		}
+		
 		
 		break;
 	case ColliderType::UNKNOWN:

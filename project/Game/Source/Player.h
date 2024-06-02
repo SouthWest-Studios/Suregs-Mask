@@ -394,6 +394,7 @@ public:
 	//Fishing
 	//New//
 	bool playermove = false;
+	bool getPlayerTouch = false;
 	Direction player_Direction;
 
 	//Player move

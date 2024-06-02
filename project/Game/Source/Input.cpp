@@ -123,13 +123,13 @@ bool Input::Awake(pugi::xml_node config)
 		.SetPButton(SDL_CONTROLLER_BUTTON_LEFTSHOULDER)
 		.SetPKey(SDL_SCANCODE_T);
 	
-	bindings[SAVEROD]
-		.SetPButton(SDL_CONTROLLER_BUTTON_GUIDE)
-		.SetPKey(SDL_SCANCODE_Z);
-
-	bindings[RETURNLINE]
+	/*bindings[SAVEROD]
 		.SetPButton(SDL_CONTROLLER_BUTTON_A)
-		.SetPKey(SDL_SCANCODE_V);
+		.SetPKey(SDL_SCANCODE_Z);*/
+
+	/*bindings[RETURNLINE]
+		.SetPButton(SDL_CONTROLLER_BUTTON_A)
+		.SetPKey(SDL_SCANCODE_V);*/
 
 	bindings[FISHINGPLAY]
 		.SetPButton(SDL_CONTROLLER_BUTTON_B)
@@ -139,9 +139,9 @@ bool Input::Awake(pugi::xml_node config)
 		.SetPButton(SDL_CONTROLLER_BUTTON_X)
 		.SetPKey(SDL_SCANCODE_F);
 
-	bindings[CHANGEROD]
+	/*bindings[CHANGEROD]
 		.SetPButton(SDL_CONTROLLER_BUTTON_Y)
-		.SetPKey(SDL_SCANCODE_C);
+		.SetPKey(SDL_SCANCODE_C);*/
 
 
 
