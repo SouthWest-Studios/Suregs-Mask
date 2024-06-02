@@ -19,6 +19,7 @@
 #include "SString.h"
 #include "Utils.cpp"
 #include "Hud.h"
+#include "Audio.h"
 
 QuestManager::QuestManager(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -215,17 +216,15 @@ bool QuestManager::SaveState(pugi::xml_node node)
 		questLineNode.append_attribute("active").set_value(questLines.at(i)->active);
 		questLineNode.append_attribute("completed").set_value(questLines.at(i)->completed);
 
-
-		//for (int j = 0; j < questLines.at(i)->quests.size(); i++) {
-		//	pugi::xml_node questNode = questLineNode.append_child("quest");
-		//	questNode.append_attribute("id").set_value(questLines.at(i)->quests.at(j)->questID);
-		//	questNode.append_attribute("id").set_value(questLines.at(i)->quests.at(j)->questID);
-
-
-		//}
-
-
 	}
+
+
+	//SAVE AUDIO
+	pugi::xml_node audioNode = node.append_child("saved_audio");
+
+	audioNode.append_child("music").append_attribute("volume").set_value(app->audio->volumeMusic);
+	audioNode.append_child("fx").append_attribute("volume").set_value(app->audio->volumeFx);
+
 
 
 

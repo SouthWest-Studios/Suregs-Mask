@@ -97,6 +97,9 @@ public:
 
 	// Play a random WAV after the specified time, time in milliseconds
 	void PlayRandomTimedFx(unsigned int name, unsigned int name2, unsigned int name3, int time);
+	
+	bool LoadState(pugi::xml_node node);
+	bool SaveState(pugi::xml_node node);
 
 public:
 
