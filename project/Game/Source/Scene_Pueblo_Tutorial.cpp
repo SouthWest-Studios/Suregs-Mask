@@ -7,6 +7,7 @@
 #include "Scene_Pueblo_Tutorial.h"
 #include "Map.h"
 #include "Item.h"
+#include "Cofre.h"
 #include "ModuleFadeToBlack.h"
 #include "Optick/include/optick.h"
 
@@ -106,6 +107,9 @@ bool Scene_Pueblo_Tutorial::Update(float dt)
 	{
 		app->audio->PlayMusicAfterRandomDelay("town");
 	}
+
+	//if (app->tutorialHasFinished) {
+	//}
 
 	return true;
 }

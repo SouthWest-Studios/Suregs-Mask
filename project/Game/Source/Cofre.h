@@ -45,6 +45,8 @@ public:
 	iPoint position;
 	int itemsToSpawn = 2;
 
+	
+
 private:
 	bool abierto = false;
 	

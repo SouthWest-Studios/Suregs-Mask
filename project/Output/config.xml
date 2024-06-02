@@ -147,7 +147,7 @@
 		</fx>
 	</sounds>
 
-	<entitymanager texturePath="Assets/Textures/Entidades/vacioLogo.png" Tsprite="1" Pwidth="500" sprite_x="500" sprite_y="500"/>
+	<entitymanager texturePath="Assets/Textures/Entidades/vacioLogo.png" Tsprite="1" Pwidth="500" sprite_x="500" sprite_y="500" textureKillPath="Assets/Textures/final/killPadre.png" textureUnirPath="Assets/Textures/final/unirPadre.png"/>
 		
 
 	
