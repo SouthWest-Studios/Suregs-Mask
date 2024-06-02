@@ -199,6 +199,9 @@
 					<sentence text="¡Estaré aquí para comprar tus objetos!"/>
 				</option2>
 			</sentence>
+
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="7" actualTargetID="6" />
+
 		</sentences>
 	</dialog>
 
@@ -345,6 +348,9 @@
 					<sentence text="¡Te estaré esperando! Jijiji…"/>
 				</option2>
 			</sentence>
+
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="8" actualTargetID="7" />
+
 		</sentences>
 	</dialog>
 
@@ -383,9 +389,12 @@
 	<dialog id="936" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/zhyukaFace.png" name="Zhyuka">
 		<sentences>
 			<sentence text="¡Hola de nuevo! Jijiji…"/>
-			<sentence text="Soy Zhyuka, la bruja de la aldea, parece que te has enterado de mis nuevas creaciones, jijiji…"/>
+			<sentence text="¿Esta gema es para mi? ¡Con esto podré mejorar mis pociones! jijiji…"/>
 			<commerce id="2"/>
 		</sentences>
+
+		<sentence type="QuestUpdate" questLine="1" nextTargetID="15" actualTargetID="14" />
+
 	</dialog>
 
 	<dialog id="937" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/zhyukaFace.png" name="Zhyuka">
@@ -1603,6 +1612,9 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
 			text="P-pe-pero... No le d-di-digas que la he escrito yo..."/>
 		</sentences>
+
+		<sentence type="QuestUpdate" questLine="2" nextTargetID="2" actualTargetID="1" />
+
 	</dialog>
 
 	<dialog id="704" texturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png">
@@ -1904,9 +1916,8 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 			</sentence>
 		</sentences>
 	</dialog>
-	<sentence name="Dinka"
-	facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
-	text="¿Artefacto lleno de poder? Un respeto, que me llamo Dinka. Pero sí, tu padre debía ser muy sabio, tengo mucho poder."/>
+	
+	
 	<dialog id="951" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFace.png" name="Vhea">
 		<sentences>
 			<sentence type="choose" text="Buenos días cariño, ¿otra vez la misma pesadilla?">
@@ -1951,6 +1962,9 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 					<comer id ="1"/>
 				</option1>
 			</sentence>
+
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="4" actualTargetID="3" />
+
 		</sentences>
 	</dialog>
 
@@ -1970,6 +1984,9 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 				</option2>
 
 			</sentence>
+
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="9" actualTargetID="8" />
+
 		</sentences>
 	</dialog>
 
@@ -1989,6 +2006,9 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 				</option2>
 
 			</sentence>
+
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="11" actualTargetID="10" />
+
 		</sentences>
 	</dialog>
 
@@ -2008,6 +2028,9 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 				</option2>
 
 			</sentence>
+
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="13" actualTargetID="12" />
+
 		</sentences>
 	</dialog>
 
@@ -2027,6 +2050,9 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 				</option2>
 
 			</sentence>
+
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="16" actualTargetID="15" />
+			
 		</sentences>
 	</dialog>
 
@@ -2046,6 +2072,9 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 				</option2>
 
 			</sentence>
+
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="18" actualTargetID="17" />
+
 		</sentences>
 	</dialog>
 
@@ -2065,6 +2094,9 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 				</option2>
 
 			</sentence>
+
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="20" actualTargetID="19" />
+
 		</sentences>
 	</dialog>
 
@@ -2084,6 +2116,9 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 				</option2>
 
 			</sentence>
+
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="23" actualTargetID="22" />
+
 		</sentences>
 	</dialog>
 
