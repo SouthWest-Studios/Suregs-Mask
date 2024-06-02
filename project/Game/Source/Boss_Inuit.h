@@ -148,6 +148,14 @@ private:
 	Animation SPosition;
 	SDL_Rect* spritePositions = nullptr;
 
+	// Audio
+	int inuit_get_damage_fx;
+	int inuit_melee_attack_fx;
+	int inuit_melee_attackAlt_fx;
+	int inuit_melee_attackAlt2_fx;
+	int inuit_ranged_attack_fx;
+	bool inuit_ranged_attack = false;
+
 	FASE fase = FASE::FASE_ONE;
 	bool faseTwo = false;
 	int faseCount;

@@ -91,6 +91,9 @@ bool Audio::Awake(pugi::xml_node config)
 		ret = true;
 	}
 
+	volumeMusic = config.child("music").attribute("volume").as_int();
+	volumeFx = config.child("fx").attribute("volume").as_int();
+
 	return ret;
 }
 

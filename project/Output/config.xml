@@ -26,7 +26,7 @@
 
   <!--Audio-->
 	<audio>
-		<music volume="64"/>
+		<music volume="0"/>
 		<fx volume="64"/>
 	</audio>
 
@@ -117,11 +117,13 @@
       <muur_death_fx path=""/>
 
       <!--bosses-->
-      <inuit_melee_attack_fx path=""/>
-      <inuit_ranged_attack_fx path=""/>
+      <inuit_melee_attack_fx path="Assets/Audio/Fx/Bosses/inuit_melee_attack_fx.wav"/>
+      <inuit_melee_attackAlt_fx path="Assets/Audio/Fx/Bosses/inuit_melee_attackAlt_fx.wav"/>
+      <inuit_melee_attackAlt2_fx path="Assets/Audio/Fx/Bosses/inuit_melee_attackAlt2_fx.wav"/>
+      <inuit_ranged_attack_fx path="Assets/Audio/Fx/Bosses/inuit_ranged_attack_fx.wav"/>
       <inuit_charged_attack_fx path=""/>
       <inuit_magic_attack_fx path=""/>
-      <inuit_get_damage_fx path=""/>
+      <inuit_get_damage_fx path="Assets/Audio/Fx/Bosses/inuit_get_damage_fx.wav"/>
       <inuit_death_fx path=""/>
       
       <musri_melee_attack_fx path=""/>
@@ -135,7 +137,7 @@
       <surma_charged_melee_attack_fx path=""/>
       <surma_explosion_attack_fx path=""/>
       <surma_ranged_attack_fx path=""/>
-      <surma_get_damage_fx path=""/>
+      <surma_get_damage_fx path="Assets/Audio/Fx/Bosses/surma_get_damage_fx.wav"/>
       <surma_death_fx path=""/>
       
       <father_melee_attack_fx path="Assets/Audio/Fx/Bosses/father_melee_attack_fx.wav"/>
