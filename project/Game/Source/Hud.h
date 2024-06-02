@@ -113,7 +113,7 @@ private:
 	bool isLowHealth = false;
 	bool shrinking = false;
 	bool growing = false;
-	const float animationDuration = 0.09f; 
+	const float animationDuration = 0.2f; 
 	Timer animationTimer;
 	float scale;
 
