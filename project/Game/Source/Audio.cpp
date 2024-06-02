@@ -517,6 +517,8 @@ bool Audio::LoadState(pugi::xml_node node)
 	volumeMusic = saveFile.child("game_state").child("audio").child("music").attribute("volume").as_int(64);
 	volumeFx = saveFile.child("game_state").child("audio").child("fx").attribute("volume").as_int(64);
 
+	Mix_VolumeMusic(volumeMusic);
+	
 
 	return true;
 }
