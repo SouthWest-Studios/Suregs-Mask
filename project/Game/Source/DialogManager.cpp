@@ -392,8 +392,7 @@ bool DialogManager::PostUpdate() {
 				}
 			}
 			if (actualDialog->type == DialogType::SELECT_CHOOSE) {
-
-				app->inventoryManager->seleccionFinalPersonaje = actualDialog->selectChoose;
+				app->entityManager->GetIgory()->seleccionFinalPersonaje = actualDialog->selectChoose;
 			}
 
 

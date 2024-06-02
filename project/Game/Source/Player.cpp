@@ -741,6 +741,10 @@ bool Player::Update(float dt)
 		vacio = false;
 	}
 
+	if (app->entityManager->GetIgory()->playerInFight && !playerTpBossPadre) {
+		pbodyFoot->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y-20)), 0);
+		playerTpBossPadre = true;
+	}
 	if (insideVacio && !isDashing) {
 		app->entityManager->playerVacio = true;
 		app->entityManager->vacioGameStop = true;
@@ -981,7 +985,7 @@ bool Player::CleanUp()
 	blood = nullptr;
 	app->psystem->RemoveAllEmitters();
 	particulaBlood = false;
-
+	playerTpBossPadre = false;
 	RELEASE(spritePositions);
 	delete spritePositions;
 

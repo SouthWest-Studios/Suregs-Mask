@@ -1261,6 +1261,7 @@ bool InventoryManager::Update(float dt)
 
 	bool ret = true;
 
+	//printf("\n selecion: %d", seleccionFinalPersonaje);
 
 	//Iterates over the entities and calls the Awake
 	/*ListItem<Inventity*>* item;
