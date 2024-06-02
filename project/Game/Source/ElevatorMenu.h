@@ -66,6 +66,9 @@ public:
 	int totalMazmorras = 1;
 
 private:
+
+	int button_fx;
+	int select_fx;
 	
 };
 
