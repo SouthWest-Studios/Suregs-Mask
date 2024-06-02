@@ -62,7 +62,7 @@ public:
 	bool TimerColdDown(float time);
 	bool GeneraColdDown(float time);
 	void OnCollision(PhysBody* physA, PhysBody* physB);
-	void OnEndCollision(PhysBody* physA, PhysBody* physB);
+	//void OnEndCollision(PhysBody* physA, PhysBody* physB);
 	void resetAnimation();
 	void showAnimation();
 	bool AtqColdDown();
@@ -227,7 +227,7 @@ private:
 	bool inCurar = false;
 	bool goCurar = false;
 	bool shieldBroken = false;
-	float shield = 500;
+	float shield = 1500;
 	bool stun = false;
 	
 	Timer shieldTimer;
