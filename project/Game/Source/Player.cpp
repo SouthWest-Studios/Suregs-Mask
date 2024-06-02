@@ -788,11 +788,12 @@ bool Player::Update(float dt)
 	}
 
 	if (inPocionAnim) {
-		if (app->hud->HayPocionesDisponibles()) {
-			currentAnimation = &pocion_player;
-		}
-		else {
+		currentAnimation = &pocion_player;
+
+		if (pocion_player.HasFinished())
+		{
 			inPocionAnim = false;
+			inAnimation = false;
 			desiredState = EntityStatePlayer::IDLE;
 		}
 	}
@@ -1504,7 +1505,6 @@ void Player::stateMachine(float dt)
 		if (!inTakeDMG) {
 			inAnimation = true;
 			inPocionAnim = true;
-			currentAnimation = &pocion_player;
 		}
 		break;
 	case EntityStatePlayer::NONE:
@@ -1700,7 +1700,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 
 			}
-
+			//Item Mascara0
 			if (physB->listener->type == EntityType::ITEM_MASCARA0 && !dialogoMascara0) {
 				
 				pugi::xml_document configFile;
@@ -1720,6 +1720,69 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 					}
 				}
 				
+			}
+			//Item Mascara1
+			if (physB->listener->type == EntityType::ITEM_MASCARA1 && !dialogoMascara1) {
+
+				pugi::xml_document configFile;
+				//pugi::xml_node dialogNode;
+				pugi::xml_parse_result parseResult = configFile.load_file("dialogs.xml");
+				/*dialogNode = configFile.child("config").child("dialogues");
+				*/
+				pugi::xml_node* dialogNodeF = nullptr;
+				pugi::xml_node dialogNode;
+				for (dialogNode = configFile.child("dialogues").child("dialog"); dialogNode; dialogNode = dialogNode.next_sibling("dialog")) {
+					if (dialogNode.attribute("id").as_int() == 1102) {
+						for (pugi::xml_node itemNode = dialogNode.child("sentences").child("sentence"); itemNode; itemNode = itemNode.next_sibling("sentence")) {
+							app->dialogManager->AddDialog(app->dialogManager->CreateDialog(itemNode));
+						}
+						dialogoMascara1 = true;
+						break;
+					}
+				}
+
+			}
+			//Item Mascara2
+			if (physB->listener->type == EntityType::ITEM_MASCARA2 && !dialogoMascara2) {
+
+				pugi::xml_document configFile;
+				//pugi::xml_node dialogNode;
+				pugi::xml_parse_result parseResult = configFile.load_file("dialogs.xml");
+				/*dialogNode = configFile.child("config").child("dialogues");
+				*/
+				pugi::xml_node* dialogNodeF = nullptr;
+				pugi::xml_node dialogNode;
+				for (dialogNode = configFile.child("dialogues").child("dialog"); dialogNode; dialogNode = dialogNode.next_sibling("dialog")) {
+					if (dialogNode.attribute("id").as_int() == 1103) {
+						for (pugi::xml_node itemNode = dialogNode.child("sentences").child("sentence"); itemNode; itemNode = itemNode.next_sibling("sentence")) {
+							app->dialogManager->AddDialog(app->dialogManager->CreateDialog(itemNode));
+						}
+						dialogoMascara2 = true;
+						break;
+					}
+				}
+
+			}
+			//Item Mascara3
+			if (physB->listener->type == EntityType::ITEM_MASCARA3 && !dialogoMascara3) {
+
+				pugi::xml_document configFile;
+				//pugi::xml_node dialogNode;
+				pugi::xml_parse_result parseResult = configFile.load_file("dialogs.xml");
+				/*dialogNode = configFile.child("config").child("dialogues");
+				*/
+				pugi::xml_node* dialogNodeF = nullptr;
+				pugi::xml_node dialogNode;
+				for (dialogNode = configFile.child("dialogues").child("dialog"); dialogNode; dialogNode = dialogNode.next_sibling("dialog")) {
+					if (dialogNode.attribute("id").as_int() == 1104) {
+						for (pugi::xml_node itemNode = dialogNode.child("sentences").child("sentence"); itemNode; itemNode = itemNode.next_sibling("sentence")) {
+							app->dialogManager->AddDialog(app->dialogManager->CreateDialog(itemNode));
+						}
+						dialogoMascara3 = true;
+						break;
+					}
+				}
+
 			}
 		}
 		app->audio->PlayTimedFx(get_item_fx, 201);

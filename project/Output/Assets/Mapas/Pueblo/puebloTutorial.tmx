@@ -221126,7 +221126,7 @@
   </object>
   <object id="358" x="3968" y="4114" width="96" height="96">
    <properties>
-    <property name="dialogID" type="int" value="51"/>
+    <property name="dialogID" type="int" value="301"/>
    </properties>
   </object>
   <object id="362" x="3940.67" y="1160" width="176" height="96">

@@ -339,6 +339,8 @@ public:
 	float attackDamage;
 	float secondAttackDamage;
 
+	bool tutorial = false;
+
 	bool playerInBossArea = false;
 	std::string description;
 	std::string titulo;

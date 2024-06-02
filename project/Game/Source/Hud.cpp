@@ -113,6 +113,9 @@ bool Hud::Start()
 	maskTwoTexture = app->tex->Load(maskTwoTexturePath);
 	maskThreeTexture = app->tex->Load(maskThreeTexturePath);
 
+	low_health_fx = app->audio->LoadAudioFx("low_health_fx");
+	level_up_fx = app->audio->LoadAudioFx("level_up_fx");
+
 	/*Acquired_Item ai;
 	ai.lifeTimer.Start();
 	ai.text = "holaaa";
@@ -242,6 +245,7 @@ bool Hud::PostUpdate()
 	SDL_Rect* rectBarraVidaCalculado = new SDL_Rect{ rectBarraVida->x, rectBarraVida->y, rectW, rectBarraVida->h };
 
 	if (isLowHealth && !shrinking && !growing && app->entityManager->GetPlayer()->currentStats.currentHealth > 0) {
+		app->audio->PlayTimedFx(low_health_fx, 696);
 		shrinking = true;
 		animationTimer.Start();
 	}
@@ -249,7 +253,7 @@ bool Hud::PostUpdate()
 	if (shrinking) {
 
 		float progress = animationTimer.ReadMSec() / (animationDuration * 1000);
-		float easedProgress = easeOutCubic(progress);
+		float easedProgress = easeInOutCubic(progress);
 		float scale = 1 - easedProgress * 0.06;
 
 		// Calcular la nueva posición para que la textura se reduzca hacia el centro
@@ -268,7 +272,7 @@ bool Hud::PostUpdate()
 	else if (growing) {
 
 		float progress = animationTimer.ReadMSec() / (animationDuration * 1000);
-		float easedProgress = easeOutCubic(progress);
+		float easedProgress = easeInOutCubic(progress);
 		float scale = 0.94 + easedProgress * 0.06;
 
 		// Calcular la nueva posición para que la textura crezca hacia el centro
@@ -278,7 +282,7 @@ bool Hud::PostUpdate()
 		app->render->DrawTexture(hudTexture, newX + 175, newY + 40, scale, SDL_FLIP_NONE, rectFondoBarraVida, 0);
 		app->render->DrawTexture(hudTexture, newX + 179, newY + 44, scale, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
 
-		if (animationTimer.ReadMSec() >= animationDuration * 1000) {
+		if (animationTimer.ReadMSec() >= animationDuration * 10000) {
 			growing = false;
 		}
 	}
@@ -517,8 +521,7 @@ void Hud::AcquiredItemTrigger(SDL_Texture* texture, std::string text)
 void Hud::Potions()
 {
 	if (!potionRects.empty()) {
-		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
-		{
+		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN) {
 			if (selectedPotionIndex >= 0 && selectedPotionIndex < potionRects.size()) {
 				ListItem<Inventity*>* item = GetSelectedPotionItem();
 				if (item) {
@@ -526,12 +529,10 @@ void Hud::Potions()
 				}
 			}
 		}
-		else if (app->input->GetButton(CAMBIAR_POCION_RIGHT) == KEY_DOWN && selectedPotionIndex < potionRects.size() - 1)
-		{
+		else if (app->input->GetButton(CAMBIAR_POCION_RIGHT) == KEY_DOWN && selectedPotionIndex < potionRects.size() - 1) {
 			selectedPotionIndex++;
 		}
-		else if (app->input->GetButton(CAMBIAR_POCION_LEFT) == KEY_DOWN && selectedPotionIndex > 0)
-		{
+		else if (app->input->GetButton(CAMBIAR_POCION_LEFT) == KEY_DOWN && selectedPotionIndex > 0) {
 			selectedPotionIndex--;
 		}
 	}

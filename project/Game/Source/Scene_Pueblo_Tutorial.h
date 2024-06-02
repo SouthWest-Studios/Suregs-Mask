@@ -49,6 +49,8 @@ private:
 	uint windowW, windowH;
 	SDL_Texture* mouseTileTex = nullptr;
 
+	Cofre* cofreTutorial = nullptr;
+
 	int town_fx;
 	
 

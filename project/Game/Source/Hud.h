@@ -113,7 +113,7 @@ private:
 	bool isLowHealth = false;
 	bool shrinking = false;
 	bool growing = false;
-	const float animationDuration = 0.09f; 
+	const float animationDuration = 0.2f; 
 	Timer animationTimer;
 	float scale;
 
@@ -143,5 +143,9 @@ public:
 	SDL_Texture* maskOneTexture;
 	SDL_Texture* maskTwoTexture;
 	SDL_Texture* maskThreeTexture;
+
+	// Audios
+	int low_health_fx;
+	int level_up_fx;
 };
 #endif // __HUD_H__
