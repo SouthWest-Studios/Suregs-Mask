@@ -788,11 +788,12 @@ bool Player::Update(float dt)
 	}
 
 	if (inPocionAnim) {
-		if (app->hud->HayPocionesDisponibles()) {
-			currentAnimation = &pocion_player;
-		}
-		else {
+		currentAnimation = &pocion_player;
+
+		if (pocion_player.HasFinished())
+		{
 			inPocionAnim = false;
+			inAnimation = false;
 			desiredState = EntityStatePlayer::IDLE;
 		}
 	}
@@ -1504,7 +1505,6 @@ void Player::stateMachine(float dt)
 		if (!inTakeDMG) {
 			inAnimation = true;
 			inPocionAnim = true;
-			currentAnimation = &pocion_player;
 		}
 		break;
 	case EntityStatePlayer::NONE:

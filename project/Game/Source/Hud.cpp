@@ -249,7 +249,7 @@ bool Hud::PostUpdate()
 	if (shrinking) {
 
 		float progress = animationTimer.ReadMSec() / (animationDuration * 1000);
-		float easedProgress = easeOutCubic(progress);
+		float easedProgress = easeInOutCubic(progress);
 		float scale = 1 - easedProgress * 0.06;
 
 		// Calcular la nueva posición para que la textura se reduzca hacia el centro
@@ -268,7 +268,7 @@ bool Hud::PostUpdate()
 	else if (growing) {
 
 		float progress = animationTimer.ReadMSec() / (animationDuration * 1000);
-		float easedProgress = easeOutCubic(progress);
+		float easedProgress = easeInOutCubic(progress);
 		float scale = 0.94 + easedProgress * 0.06;
 
 		// Calcular la nueva posición para que la textura crezca hacia el centro
@@ -517,8 +517,7 @@ void Hud::AcquiredItemTrigger(SDL_Texture* texture, std::string text)
 void Hud::Potions()
 {
 	if (!potionRects.empty()) {
-		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
-		{
+		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN) {
 			if (selectedPotionIndex >= 0 && selectedPotionIndex < potionRects.size()) {
 				ListItem<Inventity*>* item = GetSelectedPotionItem();
 				if (item) {
@@ -526,12 +525,10 @@ void Hud::Potions()
 				}
 			}
 		}
-		else if (app->input->GetButton(CAMBIAR_POCION_RIGHT) == KEY_DOWN && selectedPotionIndex < potionRects.size() - 1)
-		{
+		else if (app->input->GetButton(CAMBIAR_POCION_RIGHT) == KEY_DOWN && selectedPotionIndex < potionRects.size() - 1) {
 			selectedPotionIndex++;
 		}
-		else if (app->input->GetButton(CAMBIAR_POCION_LEFT) == KEY_DOWN && selectedPotionIndex > 0)
-		{
+		else if (app->input->GetButton(CAMBIAR_POCION_LEFT) == KEY_DOWN && selectedPotionIndex > 0) {
 			selectedPotionIndex--;
 		}
 	}
