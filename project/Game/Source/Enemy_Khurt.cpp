@@ -107,6 +107,9 @@ bool Enemy_Khurt::Update(float dt)
 	{
 		desiredState = EntityState_Khurt::DEAD;
 	}
+	else if (app->entityManager->GetIgory()->isDead) {
+		health = 0;
+	}
 	/*else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32)
 	{
 		desiredState = EntityState_Khurt::ATTACKING;

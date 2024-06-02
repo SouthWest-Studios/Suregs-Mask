@@ -106,6 +106,9 @@ bool Enemy_Muur::Update(float dt)
 	{
 		nextState = EntityState_Enemy::DEAD;
 	}
+	else if (app->entityManager->GetIgory()->isDead) {
+		health = 0;
+	}
 	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32)
 	{
 		nextState = EntityState_Enemy::ATTACKING;

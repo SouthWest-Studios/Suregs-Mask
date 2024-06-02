@@ -273,8 +273,9 @@ bool Boss_Igory::Update(float dt)
 		app->map->maxEnemies = 10;
 		break;
 	}
+
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
-	app->map->enemies.at(0)->health = 0;
+		health -= 1000;
 	}
 	
 

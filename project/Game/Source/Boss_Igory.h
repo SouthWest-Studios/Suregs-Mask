@@ -99,6 +99,8 @@ public:
 	int seleccionFinalPersonaje = -1;
 	//Start
 	bool playerInFight = false;
+	bool isDead = false;
+
 
 	//tiempo de genera enemigo
 	Timer generaTimeColdDown;
@@ -171,7 +173,6 @@ private:
 	float lifeLow80;
 	float lifeLow40;
 	bool dontMove = false;
-	bool isDead = false;
 	bool faseTwo = false;
 	bool faseThree = false;
 	bool faseAni = false;

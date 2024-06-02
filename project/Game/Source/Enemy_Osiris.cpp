@@ -128,6 +128,9 @@ bool Enemy_Osiris::Update(float dt)
 		}
 		
 	}
+	else if (app->entityManager->GetIgory()->isDead) {
+		health = 0;
+	}
 	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance*32)
 	{
 		desiredState = EntityState_Enemy::ATTACKING;
