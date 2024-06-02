@@ -741,10 +741,11 @@ bool Player::Update(float dt)
 		pbodyFoot->body->SetTransform(posInicioPlayer, 0);
 		vacio = false;
 	}
-
-	if (app->entityManager->GetIgory()->playerInFight && !playerTpBossPadre) {
-		pbodyFoot->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y-10)), 0);
-		playerTpBossPadre = true;
+	if (app->entityManager->canShowFinal) {
+		if (app->entityManager->GetIgory()->playerInFight && !playerTpBossPadre) {
+			pbodyFoot->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y - 10)), 0);
+			playerTpBossPadre = true;
+		}
 	}
 	if (insideVacio && !isDashing) {
 		app->entityManager->playerVacio = true;
@@ -862,7 +863,7 @@ bool Player::Update(float dt)
 		maskZeroPoints++;
 		maskZeroLevel++;
 		XPtoLevelUpZero += matrizLevelXP[maskZeroLevel];
-		
+
 		levelUpZero = true;
 
 		printf("Has subido la mask 0 a nivel %i y su experiencia actual es %i \n", maskZeroLevel, maskZeroXP);
@@ -1207,7 +1208,7 @@ void Player::Regenpocion(float dt)
 					regenAmount = 0;
 					totalRegen = 0;
 				}
- 				regenTimer.Start();
+				regenTimer.Start();
 			}
 		}
 	}
@@ -1702,7 +1703,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			}
 			//Item Mascara0
 			if (physB->listener->type == EntityType::ITEM_MASCARA0 && !dialogoMascara0) {
-				
+
 				pugi::xml_document configFile;
 				//pugi::xml_node dialogNode;
 				pugi::xml_parse_result parseResult = configFile.load_file("dialogs.xml");
@@ -1719,7 +1720,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 						break;
 					}
 				}
-				
+
 			}
 			//Item Mascara1
 			if (physB->listener->type == EntityType::ITEM_MASCARA1 && !dialogoMascara1) {
@@ -1815,7 +1816,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		TakeDamage(20);
 		break;
 
-	
+
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;
@@ -2563,7 +2564,7 @@ void Player::PlayerMovement(float dt)
 
 	// Calcular la velocidad horizontal y vertical
 
-	if (die == false && desiredState != EntityStatePlayer::POCION &&!app->entityManager->GetIgory()->killPadre) {
+	if (die == false && desiredState != EntityStatePlayer::POCION && !app->entityManager->GetIgory()->killPadre) {
 		fPoint joystick = app->input->GetAxis(MOVE_HORIZONTAL, MOVE_VERTICAL);
 		float horizontalMovement = joystick.x;
 		float verticalMovement = joystick.y;

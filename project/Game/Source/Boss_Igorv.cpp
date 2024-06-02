@@ -321,7 +321,7 @@ bool Boss_Igory::PostUpdate() {
 	{
 		SDL_SetTextureAlphaMod(texture, padreTranparente);
 		padreTranparente -= 2;
-		if (padreTranparente <= 0 &&!deletePadre) {
+		if (padreTranparente <= 0 && !deletePadre) {
 			CleanUp();
 			deletePadre = true;
 			closeFinalSelecion = false;
@@ -510,8 +510,9 @@ void Boss_Igory::resetAnimation()
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "reviver_boss_Igory") {
 		if (!deletePadre) {
 			CleanUp();
-			deletePadre = true;
 			closeFinalSelecion = false;
+			deletePadre = true;
+			
 		}
 	}
 

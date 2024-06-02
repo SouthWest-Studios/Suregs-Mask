@@ -49,7 +49,7 @@ bool Scene_Menu::Start()
 	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
 	config = configFile.child("config").child(name.GetString());
 
-	menuMain_tp= config.child("menuMain").attribute("texturepath").as_string(); 
+	menuMain_tp = config.child("menuMain").attribute("texturepath").as_string();
 	menuMain2_tp = config.child("menuMain2").attribute("texturepath").as_string();
 	settings_tp = config.child("settings").attribute("texturepath").as_string();
 	credits_tp = config.child("credits").attribute("texturepath").as_string();
@@ -68,7 +68,7 @@ bool Scene_Menu::Start()
 	controls = app->tex->Load(controls_tp);
 	coin = app->tex->Load(coin_tp);
 	clock = app->tex->Load(clock_tp);
-	
+
 	pugi::xml_document saveOneFile;
 	pugi::xml_node game_stateOne;
 	pugi::xml_parse_result parseResultSaveOne = saveOneFile.load_file("save_game.xml");
@@ -142,7 +142,7 @@ bool Scene_Menu::PreUpdate()
 bool Scene_Menu::Update(float dt)
 {
 	OPTICK_EVENT();
-	
+
 	int mx, my;
 
 	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN) {
@@ -162,7 +162,7 @@ bool Scene_Menu::Update(float dt)
 		app->render->DrawTexture(menuMain, 0, 0);
 		app->render->DrawTexture(logo, 500, 100);
 	}
-	
+
 	if (showSavedGames) {
 		ShowSavedGames();
 	}
@@ -192,7 +192,7 @@ bool Scene_Menu::Update(float dt)
 			control->data->state = GuiControlState::NORMAL;
 		}
 	}
-	
+
 
 	if (ajustes)
 	{
@@ -208,14 +208,14 @@ bool Scene_Menu::Update(float dt)
 	{
 		ajustes = true;
 	}
-	
+
 	return true;
 }
 
 // Called each loop iteration
 bool Scene_Menu::PostUpdate()
 {
-	
+
 	bool ret = true;
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
@@ -227,7 +227,7 @@ bool Scene_Menu::PostUpdate()
 bool Scene_Menu::CleanUp()
 {
 	LOG("Freeing Scene_Menu");
-	
+
 	ListItem<GuiControl*>* control;
 	for (control = controlsScene.start; control != NULL; control = control->next) {
 		app->guiManager->DestroyGuiControl(control->data);
@@ -290,8 +290,8 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		app->guiManager->minId = 7;
 		app->guiManager->maxId = 11;
 		app->guiManager->pointerId = 7;
-	/*	app->guiManager->DestroyGuiControl(NuevaPartida);
-		app->guiManager->DestroyGuiControl(Continuar);*/
+		/*	app->guiManager->DestroyGuiControl(NuevaPartida);
+			app->guiManager->DestroyGuiControl(Continuar);*/
 		break;
 
 	case 4:
@@ -368,7 +368,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 			app->guiManager->DestroyGuiControl(partida2);
 			app->guiManager->DestroyGuiControl(partida3);
 		}
-	
+
 		break;
 
 	case 15:
@@ -383,7 +383,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 			app->guiManager->DestroyGuiControl(partida2);
 			app->guiManager->DestroyGuiControl(partida3);
 		}
-	
+
 		break;
 
 	case 16:
@@ -434,7 +434,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		{
 
 			((GuiCheckBox*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->click = false;
-			
+
 		}*/
 	case 20:
 		if (app->fadeToBlack->currentStep == 0) {
@@ -515,7 +515,7 @@ void Scene_Menu::SettingsInterface()
 	//SETTINGS
 	if (showSettings)
 	{
-		
+
 		if (music != nullptr)
 		{
 
@@ -572,20 +572,20 @@ void Scene_Menu::SettingsInterface()
 			((GuiControlSlider*)sfx)->value = app->audio->volumeFx;
 		}
 
-		
+
 	}
 	else
 	{
-		
+
 
 		if (music != nullptr)
 		{
-			
+
 			/*title->state = GuiControlState::DISABLED;
 			title = nullptr;*/
 			app->guiManager->DestroyGuiControl(fullscreen);
 			/*fullScreen->state = GuiControlState::DISABLED;*/
-			
+
 			app->guiManager->DestroyGuiControl(vsync);
 			/*vsync->state = GuiControlState::DISABLED;
 			vsync = nullptr;*/
@@ -597,32 +597,32 @@ void Scene_Menu::SettingsInterface()
 			sfx = nullptr;*/
 			app->guiManager->DestroyGuiControl(atras);
 
-			
+
 		}
 
 
 	}
 	if (atras->click == true)
 	{
-		
-
-			/*title->state = GuiControlState::DISABLED;
-			title = nullptr;*/
-			app->guiManager->DestroyGuiControl(fullscreen);
-			/*fullScreen->state = GuiControlState::DISABLED;*/
-
-			app->guiManager->DestroyGuiControl(vsync);
-			/*vsync->state = GuiControlState::DISABLED;
-			vsync = nullptr;*/
-			app->guiManager->DestroyGuiControl(music);
-			/*music->state = GuiControlState::DISABLED;*/
-			music = nullptr;
-			app->guiManager->DestroyGuiControl(sfx);
-			/*sfx->state = GuiControlState::DISABLED;
-			sfx = nullptr;*/
 
 
-			
+		/*title->state = GuiControlState::DISABLED;
+		title = nullptr;*/
+		app->guiManager->DestroyGuiControl(fullscreen);
+		/*fullScreen->state = GuiControlState::DISABLED;*/
+
+		app->guiManager->DestroyGuiControl(vsync);
+		/*vsync->state = GuiControlState::DISABLED;
+		vsync = nullptr;*/
+		app->guiManager->DestroyGuiControl(music);
+		/*music->state = GuiControlState::DISABLED;*/
+		music = nullptr;
+		app->guiManager->DestroyGuiControl(sfx);
+		/*sfx->state = GuiControlState::DISABLED;
+		sfx = nullptr;*/
+
+
+
 
 	}
 	if (showSettings)
@@ -661,7 +661,7 @@ void Scene_Menu::SettingsInterface()
 		{
 			vsync->click = !vsync->click;
 		}
-		
+
 		if (fullscreen != nullptr && fullscreen->click == true && fullScreenActive == false)
 		{
 			fullScreenActive = true;
@@ -714,7 +714,7 @@ void Scene_Menu::SettingsInterface()
 	/*if (fullscreen->selected && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && fullscreen != nullptr) {
 		fullscreen->click = !fullscreen->click;
 	}*/
-	
+
 
 	/*_showSettings = true;*/
 }
@@ -725,14 +725,18 @@ void Scene_Menu::ShowCredits()
 		ListItem<GuiControl*>* control;
 		for (control = controlsScene.start; control != NULL; control = control->next)
 		{
-			control->data->state = GuiControlState::DISABLED; 
+			control->data->state = GuiControlState::DISABLED;
 		}
 
 		gcCloseCredits = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 500,	(int)windowH - 50,	60,25 }, this);
 		_showCredits = true;
 	}
 
-	showCredits = false;
+	/*if (app->entityManager->isFinishi && closeshowCredits.ReadMSec() >= 10000) {
+		showCredits = false;
+		app->entityManager->canShowFinal = false;
+		app->entityManager->isFinishi = false;
+	}*/
 	app->render->DrawTexture(credits, 0, 0);
 }
 
