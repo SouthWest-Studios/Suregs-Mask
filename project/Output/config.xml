@@ -76,6 +76,7 @@
       <switch_potion_fx path=""/>
       <player_get_damage_fx path="Assets/Audio/Fx/Player/player_get_damage_fx.wav"/>
       <player_death_fx path="Assets/Audio/Fx/Player/player_death_fx.wav"/>
+      <low_health_fx path="Assets/Audio/Fx/Player/low_health_fx.wav"/>
 
       <!--fishing-->
       <fishingrod_fx path="Assets/Audio/Fx/Fishing/fishingrod_fx.wav"/>
