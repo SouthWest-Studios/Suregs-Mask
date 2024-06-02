@@ -63,6 +63,12 @@ bool Boss_Inuit::Start() {
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
+	inuit_get_damage_fx = app->audio->LoadAudioFx("inuit_get_damage_fx");
+	inuit_melee_attack_fx = app->audio->LoadAudioFx("inuit_melee_attack_fx");
+	inuit_melee_attackAlt_fx = app->audio->LoadAudioFx("inuit_melee_attackAlt_fx");
+	inuit_melee_attackAlt2_fx = app->audio->LoadAudioFx("inuit_melee_attackAlt2_fx");
+	inuit_ranged_attack_fx = app->audio->LoadAudioFx("inuit_ranged_attack_fx");
+
 	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 60, bodyType::DYNAMIC);
 	pbodyFoot->entity = this;
 	pbodyFoot->listener = this;
@@ -241,6 +247,7 @@ bool Boss_Inuit::PostUpdate() {
 			atackBMR->body->GetWorld()->DestroyBody(atackBMR->body);
 			atackBMR = nullptr;
 			printf("delete");
+			inuit_ranged_attack = false;
 		}
 	}
 
@@ -553,6 +560,7 @@ void Boss_Inuit::Attack(float dt)
 	switch (attackTime)
 	{
 	case 1:
+		app->audio->PlayFx(inuit_melee_attack_fx);
 
 		inAtack = true;
 		printf("\nataque1");
@@ -569,6 +577,7 @@ void Boss_Inuit::Attack(float dt)
 		atkTimeReset = false;
 		break;
 	case 2:
+		app->audio->PlayFx(inuit_melee_attack_fx); // No funciona (por algun motivo extraño)
 		atk1_boss_inuit.Reset();
 		inAtack = true;
 		printf("\nataque2");
@@ -654,6 +663,12 @@ void Boss_Inuit::atackBoomerang(BTPDirection direccion)
 	}
 	if (atackBMR != nullptr) {
 		atackBMR->body->ApplyForceToCenter(force, true);
+	}
+
+	if (inuit_ranged_attack == false) 
+	{
+		app->audio->PlayFx(inuit_ranged_attack_fx);
+		inuit_ranged_attack = true;
 	}
 
 	b2Transform pbodyPosBMR = atackBMR->body->GetTransform();
@@ -1027,6 +1042,7 @@ void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 			timerRecibirDanioColor.Start();
 			printf("\n BossHeal %f", health);
 			app->entityManager->GetPlayer()->checkAtk = false;
+			app->audio->PlayFx(inuit_get_damage_fx);
 		}
 		//app->entityManager->GetPlayer()->TakeDamage(flechaCargadaRastroDamage);
 		break;

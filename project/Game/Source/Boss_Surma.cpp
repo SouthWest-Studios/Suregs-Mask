@@ -72,7 +72,7 @@ bool Boss_Surma::Start() {
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 	textureExplosion  = app->tex->Load(config.attribute("texturePathExplosion").as_string());
 
-	Surma_dash_fx = app->audio->LoadAudioFx("surma_dash_fx");
+	surma_get_damage_fx = app->audio->LoadAudioFx("surma_get_damage_fx");
 
 	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
 	pbodyFoot->entity = this;
@@ -472,6 +472,7 @@ void Boss_Surma::TakeDamage(float damage) {
 	if (invulnerabilityTimer.ReadMSec() >= 100) {
 		health -= damage;
 		LOG("Surma health: %f / %f", health, maxHealth);
+		app->audio->PlayFx(surma_get_damage_fx);
 		invulnerabilityTimer.Start();
 	}
 

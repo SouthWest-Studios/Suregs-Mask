@@ -115,6 +115,7 @@ bool Hud::Start()
 
 	low_health_fx = app->audio->LoadAudioFx("low_health_fx");
 	level_up_fx = app->audio->LoadAudioFx("level_up_fx");
+	use_potion_fx = app->audio->LoadAudioFx("use_potion_fx");
 
 	/*Acquired_Item ai;
 	ai.lifeTimer.Start();
@@ -271,7 +272,7 @@ bool Hud::PostUpdate()
 	}
 	else if (growing) {
 
-		float progress = animationTimer.ReadMSec() / (animationDuration * 1000);
+		float progress = animationTimer.ReadMSec() / (animationDuration * 10000);
 		float easedProgress = easeInOutCubic(progress);
 		float scale = 0.94 + easedProgress * 0.06;
 
@@ -282,7 +283,7 @@ bool Hud::PostUpdate()
 		app->render->DrawTexture(hudTexture, newX + 175, newY + 40, scale, SDL_FLIP_NONE, rectFondoBarraVida, 0);
 		app->render->DrawTexture(hudTexture, newX + 179, newY + 44, scale, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
 
-		if (animationTimer.ReadMSec() >= animationDuration * 1000) {
+		if (animationTimer.ReadMSec() >= animationDuration * 10000) {
 			growing = false;
 		}
 	}
@@ -526,6 +527,7 @@ void Hud::Potions()
 				ListItem<Inventity*>* item = GetSelectedPotionItem();
 				if (item) {
 					app->inventoryManager->UsePotionSelected(item);
+					app->audio->PlayTimedFx(use_potion_fx, 175);
 				}
 			}
 		}

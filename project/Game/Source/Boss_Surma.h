@@ -127,7 +127,7 @@ private:
 
 	Animation explosionAnim;
 
-	int Surma_dash_fx;
+	int surma_get_damage_fx;
 	
 	bool isFacingLeft = false;
 
