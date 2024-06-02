@@ -96,11 +96,19 @@ public:
 
 	Timer timerRecibirDanioColor;
 
-	int seleccionFinalPersonaje = -1;
+	
 	//Start
 	bool playerInFight = false;
 	bool isDead = false;
 
+	//Dialogo
+	pugi::xml_document dialogoFile;
+	pugi::xml_node dialogNode;
+	bool dialogoMostrado = false;
+	bool startDialogo = false;
+	bool startSelecion = false;
+	bool closeFinalSelecion = false;
+	int seleccionFinalPersonaje = -1;
 
 	//tiempo de genera enemigo
 	Timer generaTimeColdDown;
