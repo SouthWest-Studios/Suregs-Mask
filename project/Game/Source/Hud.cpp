@@ -282,7 +282,7 @@ bool Hud::PostUpdate()
 		app->render->DrawTexture(hudTexture, newX + 175, newY + 40, scale, SDL_FLIP_NONE, rectFondoBarraVida, 0);
 		app->render->DrawTexture(hudTexture, newX + 179, newY + 44, scale, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
 
-		if (animationTimer.ReadMSec() >= animationDuration * 10000) {
+		if (animationTimer.ReadMSec() >= animationDuration * 1000) {
 			growing = false;
 		}
 	}
