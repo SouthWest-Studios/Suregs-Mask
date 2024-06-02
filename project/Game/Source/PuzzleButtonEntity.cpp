@@ -30,6 +30,8 @@ bool PuzzleButtonEntity::Start() {
 	std::string path = config.attribute("texturePath").as_string();
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
+	puzzle_button_fx = app->audio->LoadAudioFx("puzzle_button_fx");
+
 	return true;
 }
 
@@ -66,6 +68,7 @@ void PuzzleButtonEntity::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 		case ColliderType::PLAYER:
+			if(pressed == false) app->audio->PlayFx(puzzle_button_fx);
 			pressed = true;
 			playerOnHover = true;
 			LOG("PULSANDO BOTON ID: %d", buttonID);
