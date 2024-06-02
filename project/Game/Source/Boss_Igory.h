@@ -110,6 +110,14 @@ public:
 	bool closeFinalSelecion = false;
 	int seleccionFinalPersonaje = -1;
 
+	//Kill padre
+	bool cankillPadre = false;
+	bool killPadre = false;
+	bool deletePadre = false;
+	int padreTranparente = 255;
+	//GuiControl* control = nullptr;
+	//unirPadre
+
 	//tiempo de genera enemigo
 	Timer generaTimeColdDown;
 	Timer curaTimer;

@@ -58,6 +58,7 @@
       <dialogAlt2_fx path="Assets/Audio/Fx/UI/dialogAlt2_fx.wav"/>
       <chest_fx path="Assets/Audio/Fx/UI/chest_fx.wav"/>
       <chestAlt_fx path="Assets/Audio/Fx/UI/chestAlt_fx.wav"/>
+      <puzzle_button_fx path="Assets/Audio/Fx/UI/puzzle_button_fx.wav"/>
 
       <!--player-->
       <run_fx path="Assets/Audio/Fx/Player/run_fx.wav"/>
@@ -75,6 +76,7 @@
       <switch_potion_fx path=""/>
       <player_get_damage_fx path="Assets/Audio/Fx/Player/player_get_damage_fx.wav"/>
       <player_death_fx path="Assets/Audio/Fx/Player/player_death_fx.wav"/>
+      <low_health_fx path="Assets/Audio/Fx/Player/low_health_fx.wav"/>
 
       <!--fishing-->
       <fishingrod_fx path="Assets/Audio/Fx/Fishing/fishingrod_fx.wav"/>

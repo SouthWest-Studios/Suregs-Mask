@@ -92,6 +92,9 @@ public:
 	GuiCheckBox* fullscreen = nullptr;
 	GuiCheckBox* vsync = nullptr;
 
+	bool showCredits = false;
+	bool _showCredits = false;
+
 private:
 
 	Emitter* eMenu = nullptr;
@@ -137,8 +140,7 @@ private:
 
 	bool ajustes = false;
 
-	bool showCredits = false;
-	bool _showCredits = false;
+	
 
 };
 

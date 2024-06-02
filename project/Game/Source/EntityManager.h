@@ -89,6 +89,7 @@ public:
 
 	void UpdateEnemyActivation();
 	void UpdateRoomActivation();
+	void showFinalkillPadre();
 
 
 	bool LoadState(pugi::xml_node node);
