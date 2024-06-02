@@ -123,10 +123,15 @@ public:
 	int photoTransparent = 0;
 	bool increasing = true;
 	bool showPhoto = false;
-	bool goCredit = false;
+	bool showCredi = false;
+	bool goScene = false;
+	bool canShowFinal = true;
+	bool isFinishi = false;
+	bool goPadreCleanUp = false;
 	Timer stayTime;
 	SDL_Texture* textureKillPadre = NULL;
 	SDL_Texture* textureUnirPadre = NULL;
+	SDL_Texture* textureCredit = NULL;
 
 private:
 
