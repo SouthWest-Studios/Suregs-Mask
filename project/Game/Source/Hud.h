@@ -128,7 +128,20 @@ public:
 
 	SDL_Texture* EstatuaTexture = nullptr;
 
+
+	//Hud subir de nivel
+
 	const char* levelUpTexturePath;
 	SDL_Texture* levelUpTexture;
+
+	const char* maskZeroTexturePath;
+	const char* maskOneTexturePath;
+	const char* maskTwoTexturePath;
+	const char* maskThreeTexturePath;
+
+	SDL_Texture* maskZeroTexture;
+	SDL_Texture* maskOneTexture;
+	SDL_Texture* maskTwoTexture;
+	SDL_Texture* maskThreeTexture;
 };
 #endif // __HUD_H__

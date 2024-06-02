@@ -45,6 +45,10 @@ bool Hud::Awake(pugi::xml_node config)
 	cdMaskTexturePath = (char*)config.child("cdMaskTexture").attribute("texturepath").as_string();
 
 	levelUpTexturePath = (char*)config.child("levelUpTexture").attribute("texturepath").as_string();
+	maskZeroTexturePath = (char*)config.child("maskZeroTexture").attribute("texturepath").as_string();
+	maskOneTexturePath = (char*)config.child("maskOneTexture").attribute("texturepath").as_string();
+	maskTwoTexturePath = (char*)config.child("maskTwoTexture").attribute("texturepath").as_string();
+	maskThreeTexturePath = (char*)config.child("maskThreeTexture").attribute("texturepath").as_string();
 
 	rectBarraVida = new SDL_Rect{ 269,6,259,16 };
 	rectFondoBarraVida = new SDL_Rect{ 0,2,267,23 };
@@ -104,6 +108,10 @@ bool Hud::Start()
 	cdSecondaryMaskTexture = app->tex->Load(cdMaskTexturePath);
 
 	levelUpTexture = app->tex->Load(levelUpTexturePath);
+	maskZeroTexture = app->tex->Load(maskZeroTexturePath);
+	maskOneTexture = app->tex->Load(maskOneTexturePath);
+	maskTwoTexture = app->tex->Load(maskTwoTexturePath);
+	maskThreeTexture = app->tex->Load(maskThreeTexturePath);
 
 	/*Acquired_Item ai;
 	ai.lifeTimer.Start();

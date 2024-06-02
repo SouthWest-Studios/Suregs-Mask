@@ -842,10 +842,13 @@ bool Player::Update(float dt)
 
 	//Mask XP System
 
-	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN) {
+	//para probarlo
+	/*if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN) {
+		maskOneXP += 500;
 		maskZeroXP += 500;
-	}
-
+		maskTwoXP += 500;
+		maskThreeXP += 500;
+	}*/
 
 	//MASK 0
 	if (maskZeroXP >= XPtoLevelUpZero && maskZeroLevel < maxMaskLevel) {
@@ -854,8 +857,7 @@ bool Player::Update(float dt)
 		maskZeroLevel++;
 		XPtoLevelUpZero += matrizLevelXP[maskZeroLevel];
 		
-		levelUpOne = true;
-		
+		levelUpZero = true;
 
 		printf("Has subido la mask 0 a nivel %i y su experiencia actual es %i \n", maskZeroLevel, maskZeroXP);
 	}
@@ -867,6 +869,8 @@ bool Player::Update(float dt)
 		maskOneLevel++;
 		XPtoLevelUpOne += matrizLevelXP[maskOneLevel];
 
+		levelUpOne = true;
+
 		printf("Has subido la mask 1 a nivel %i y su experiencia actual es %i \n", maskOneLevel, maskOneXP);
 	}
 
@@ -877,6 +881,8 @@ bool Player::Update(float dt)
 		maskTwoLevel++;
 		XPtoLevelUpTwo += matrizLevelXP[maskTwoLevel];
 
+		levelUpTwo = true;
+
 		printf("Has subido la mask 2 a nivel %i y su experiencia actual es %i \n", maskTwoLevel, maskTwoXP);
 	}
 
@@ -886,6 +892,8 @@ bool Player::Update(float dt)
 		maskThreePoints++;
 		maskThreeLevel++;
 		XPtoLevelUpThree += matrizLevelXP[maskThreeLevel];
+
+		levelUpThree = true;
 
 		printf("Has subido la mask 3 a nivel %i y su experiencia actual es %i \n", maskThreeLevel, maskThreeXP);
 	}
@@ -907,10 +915,6 @@ bool Player::Update(float dt)
 
 bool Player::PostUpdate() {
 
-
-
-	//printf("Posición: (%d, %d)\n", position.x, position.y);
-
 	if (isFacingLeft) {
 		//app->render->DrawTexture(texture, position.x - 50, position.y - 200, SDL_FLIP_HORIZONTAL, &rect);
 		//app->render->DrawTexture(texture, position.x - 75, position.y - 100, 0.5f, SDL_FLIP_NONE, &rect);
@@ -923,10 +927,88 @@ bool Player::PostUpdate() {
 	if (currentAnimation == nullptr) { currentAnimation = &idle_player; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
-	app->hud->levelUpTexture = app->tex->Load(app->hud->levelUpTexturePath);
-	app->render->DrawTexture(app->hud->levelUpTexture, 700, 300);
+
+	//Visual LevelUp
+
+	if (levelUpZero == true || levelUpOne == true || levelUpTwo == true || levelUpThree == true)
+	{
+		app->render->DrawTexture(app->hud->levelUpTexture, 550, 25, 1.3f, SDL_FLIP_NONE, 0, 0);
+	}
 
 
+	if (levelUpZero)
+	{
+		if (!timerLevelUpZeroStarted) {
+			timerLevelUpZero.Start();
+			timerLevelUpZeroStarted = true;
+		}
+
+		if (timerLevelUpZero.ReadSec() <= 3)
+		{
+			app->render->DrawTexture(app->hud->maskZeroTexture, 755, 25, 1.3f, SDL_FLIP_NONE, 0, 0);
+		}
+		else
+		{
+			levelUpZero = false;
+			timerLevelUpZero.Stop();
+			timerLevelUpZeroStarted = false;
+		}
+	}
+
+	if (levelUpOne)
+	{
+		if (!timerLevelUpOneStarted) {
+			timerLevelUpOne.Start();
+			timerLevelUpOneStarted = true;
+		}
+
+		if (timerLevelUpOne.ReadSec() <= 3)
+		{
+			app->render->DrawTexture(app->hud->maskOneTexture, 812, 25, 1.3f, SDL_FLIP_NONE, 0, 0);
+		}
+		else
+		{
+			levelUpOne = false;
+			timerLevelUpOneStarted = false;
+		}
+	}
+
+
+	if (levelUpTwo)
+	{
+		if (!timerLevelUpTwoStarted) {
+			timerLevelUpTwo.Start();
+			timerLevelUpTwoStarted = true;
+		}
+
+		if (timerLevelUpTwo.ReadSec() <= 3)
+		{
+			app->render->DrawTexture(app->hud->maskTwoTexture, 867, 20, 1.3f, SDL_FLIP_NONE, 0, 0);
+		}
+		else
+		{
+			levelUpTwo = false;
+			timerLevelUpTwoStarted = false;
+		}
+	}
+
+	if (levelUpThree)
+	{
+		if (!timerLevelUpThreeStarted) {
+			timerLevelUpThree.Start();
+			timerLevelUpThreeStarted = true;
+		}
+
+		if (timerLevelUpThree.ReadSec() <= 3)
+		{
+			app->render->DrawTexture(app->hud->maskThreeTexture, 924, 25, 1.3f, SDL_FLIP_NONE, 0, 0);
+		}
+		else
+		{
+			levelUpThree = false;
+			timerLevelUpThreeStarted = false;
+		}
+	}
 
 	return true;
 }

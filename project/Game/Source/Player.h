@@ -226,8 +226,20 @@ public:
 	int maskTwoPoints;
 	int maskThreePoints;
 
+	bool levelUpZero= false;
 	bool levelUpOne = false;
+	bool levelUpTwo = false;
+	bool levelUpThree = false;
 
+	Timer timerLevelUpZero;
+	Timer timerLevelUpOne;
+	Timer timerLevelUpTwo;
+	Timer timerLevelUpThree;
+
+	bool timerLevelUpZeroStarted = false;
+	bool timerLevelUpOneStarted = false;
+	bool timerLevelUpTwoStarted = false;
+	bool timerLevelUpThreeStarted = false;
 
 private:
 	void CameraMovement(float dt);

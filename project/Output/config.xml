@@ -712,6 +712,10 @@
 		<messageTexture texturepath="Assets/Textures/Interfaz/HUD/texture_message.png"/>
 		<cdMaskTexture texturepath="Assets/Textures/Interfaz/HUD/texture_cd_mask.png"/>
 		<levelUpTexture texturepath="Assets/Textures/Interfaz/levelUp.png"/>
+		<maskZeroTexture texturepath="Assets/Textures/Interfaz/Equipo/textura_mascara0.png"/>
+		<maskOneTexture texturepath="Assets/Textures/Interfaz/Equipo/textura_mascara1.png"/>
+		<maskTwoTexture texturepath="Assets/Textures/Interfaz/Equipo/textura_mascara2.png"/>
+		<maskThreeTexture texturepath="Assets/Textures/Interfaz/Equipo/textura_mascara3.png"/>
 	</hud>
 
 	<inventorymanager>
