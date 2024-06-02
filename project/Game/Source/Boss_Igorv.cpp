@@ -102,6 +102,7 @@ bool Boss_Igory::Start() {
 
 bool Boss_Igory::Update(float dt)
 {
+	
 	OPTICK_EVENT();
 	//Pone el sensor del cuerpo en su posicion
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
@@ -272,7 +273,10 @@ bool Boss_Igory::Update(float dt)
 		app->map->maxEnemies = 10;
 		break;
 	}
-
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
+	app->map->enemies.at(0)->health = 0;
+	}
+	
 
 	showAnimation();
 	resetAnimation();

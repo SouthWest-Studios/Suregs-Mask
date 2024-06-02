@@ -55,7 +55,7 @@ public:
 
 	bool isPlaying = false;
 
-	uint32 autoNextTime_show;
+	uint32 autoNextTime_show = 0;
 	Timer autoNextTime_TimerDown;
 
 

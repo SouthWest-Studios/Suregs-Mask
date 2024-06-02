@@ -96,9 +96,13 @@ public:
 
 	Timer timerRecibirDanioColor;
 
+	int seleccionFinalPersonaje = -1;
 	//Start
 	bool playerInFight = false;
 
+	//tiempo de genera enemigo
+	Timer generaTimeColdDown;
+	Timer curaTimer;
 private:
 	pugi::xml_document configFile;
 	pugi::xml_node configNode;
@@ -176,7 +180,7 @@ private:
 	bool showSuregAni = false;
 	bool inSuregAni = false;
 	bool goColdDown = false;
-	Timer generaTimeColdDown;
+
 
 	//Takehit
 	bool inTakeHit = false;
@@ -199,7 +203,7 @@ private:
 	bool shieldBroken = false;
 	float shield = 500;
 	bool stun = false;
-	Timer curaTimer;
+	
 	Timer shieldTimer;
 	Timer healTimer;
 	Timer stunTimer;

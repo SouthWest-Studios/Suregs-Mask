@@ -229,6 +229,7 @@ public:
 
 	bool levelUpOne = false;
 
+	bool playerTpBossPadre = false;
 
 private:
 	void CameraMovement(float dt);
