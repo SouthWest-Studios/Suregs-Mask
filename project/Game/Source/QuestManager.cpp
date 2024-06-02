@@ -219,13 +219,6 @@ bool QuestManager::SaveState(pugi::xml_node node)
 	}
 
 
-	//SAVE AUDIO
-	pugi::xml_node audioNode = node.append_child("saved_audio");
-
-	audioNode.append_child("music").append_attribute("volume").set_value(app->audio->volumeMusic);
-	audioNode.append_child("fx").append_attribute("volume").set_value(app->audio->volumeFx);
-
-
 
 
 	return true;
