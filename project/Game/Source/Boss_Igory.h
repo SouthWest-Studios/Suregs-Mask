@@ -178,6 +178,9 @@ private:
 	int father_get_damage_fx;
 	int father_get_damageAlt_fx;
 	int father_get_damageAlt2_fx;
+	int father_melee_attack_fx;
+	int father_melee_attackAlt_fx; 
+	int father_generate_sureg_fx;
 
 	
 
