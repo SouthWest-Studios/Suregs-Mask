@@ -91,7 +91,7 @@ bool Boss_Inuit::Start() {
 
 	maxHealth = config.attribute("maxHealth").as_float();
 	health = maxHealth;
-	speed = config.attribute("speed").as_float();
+	speed = (config.attribute("speed").as_float() / 10) * 0.4;
 	attackDamage = config.attribute("attackDamage").as_float();
 	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();
@@ -101,8 +101,6 @@ bool Boss_Inuit::Start() {
 	lifeLow40 = maxHealth * 0.4;
 	lifeLow5 = maxHealth * 0.05;
 
-	printf("\nlifeLow40: %f", lifeLow40);
-	printf("\nlifeLow5: %f", lifeLow5);
 	desiredState = EntityState_Boss_Inuit::IDLE;
 
 	room = GetCurrentRoom();
@@ -178,6 +176,8 @@ bool Boss_Inuit::Update(float dt)
 			waveTime.Start();
 		}
 		goUseWave = true;
+		speed = (120 / 10) * 0.4;
+		attackDamage = 240;
 		break;
 	}
 
