@@ -20,7 +20,7 @@
 			</puzzles>
 		</map>
 	</:anonymous>
-	<scene_pueblo />
+	<pueblo_tutorial />
 	<entitymanager>
 		<entity_manager>
 			<doors />
