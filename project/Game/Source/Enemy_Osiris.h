@@ -57,6 +57,7 @@ public:
 	float GetHealth() const;
 	void TakeDamage(float damage);
 	void stateMachine(float dt, iPoint playerPos);
+	void UpdateAttackSensor(float dt);
 
 	//VENENO <----------
 	void ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate);
@@ -112,7 +113,11 @@ private:
 	bool isReviving = false;
 	bool hasRevived = false;
 	bool tempo = false;
+	bool canAttack = true;
+	PhysBody* sensor = nullptr;
+	Timer attackTimer;
 	Timer reviveTimer;
+
 
 	const float reviveTime = 5.0f;
 

@@ -590,12 +590,11 @@
 
 		<khurt>
 			<idleAnim start="24" end="28" speed="0.2f" loop="true"/>
-			<runAnim start="24" end="28" speed="0.2f" loop="true"/>
 			<underAnim_start start="0" end="5" speed="0.2f" loop="false"/>
 			<underAnim_process start="8" end="15" speed="0.2f" loop="true"/>
 			<underAnim_end start="16" end="21" speed="0.2f" loop="false"/>
-			<stunAnim start="40" end="46" speed="0.1f" loop="true"/>
 			<chargeAnim start="32" end="36" speed="0.2f" loop="false"/>
+			<stunAnim start="40" end="46" speed="0.1f" loop="true"/>
 			<dieAnim start="32" end="36" speed="0.2f" loop="true"/>
 		</khurt>
 
