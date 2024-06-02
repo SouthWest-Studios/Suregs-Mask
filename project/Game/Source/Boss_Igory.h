@@ -174,6 +174,11 @@ private:
 
 	FASE_Igory fase;
 
+	// Audio
+	int father_get_damage_fx;
+	int father_get_damageAlt_fx;
+	int father_get_damageAlt2_fx;
+
 	
 
 

@@ -70,6 +70,10 @@ bool Boss_Igory::Start() {
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
+	father_get_damage_fx = app->audio->LoadAudioFx("father_get_damage_fx");
+	father_get_damageAlt_fx = app->audio->LoadAudioFx("father_get_damageAlt_fx");
+	father_get_damageAlt2_fx = app->audio->LoadAudioFx("father_get_damageAlt2_fx");
+
 
 	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
 	pbodyFoot->entity = this;
@@ -303,6 +307,7 @@ bool Boss_Igory::PostUpdate() {
 		if (timerRecibirDanioColor.ReadMSec() <= 100 && !isDead) {
 			float alpha = (100 - timerRecibirDanioColor.ReadMSec()) / 100;
 			SDL_SetTextureAlphaMod(texture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
+			app->audio->PlayRandomTimedFx(father_get_damage_fx, father_get_damageAlt_fx, father_get_damageAlt2_fx, 50);
 
 		}
 		else {
