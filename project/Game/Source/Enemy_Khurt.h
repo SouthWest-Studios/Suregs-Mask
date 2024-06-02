@@ -123,6 +123,10 @@ private:
 
 	Timer timerRecibirDanioColor;
 
+	// Audio
+	int khurt_get_damage_fx;
+	int khurt_get_damageAlt_fx;
+
 	//VENENO <----------
 	bool firstTimePoisonRecibed = false;
 	Timer poisonTimer;

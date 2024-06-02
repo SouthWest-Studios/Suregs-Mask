@@ -472,8 +472,8 @@ void Boss_Surma::TakeDamage(float damage) {
 	if (invulnerabilityTimer.ReadMSec() >= 100) {
 		health -= damage;
 		LOG("Surma health: %f / %f", health, maxHealth);
-		app->audio->PlayFx(surma_get_damage_fx);
 		invulnerabilityTimer.Start();
+		app->audio->PlayFx(surma_get_damage_fx);
 	}
 
 
