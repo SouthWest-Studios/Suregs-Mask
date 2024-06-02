@@ -48,8 +48,6 @@ public:
     Animation SPosition;
     SDL_Rect* spritePositions = nullptr;
 
-    int dialogoCount = 0;
-
 
 private:
     Animation idleAnim;
