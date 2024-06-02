@@ -97,7 +97,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	guiManager = new GuiManager(this);
 	debugConsole = new DebugConsole(this);
 	dialogManager = new DialogManager(this);
-	menu = new Menu(this,false);
+	menu = new Menu(this, false);
 	hud = new Hud(this, false);
 	notesManager = new NotesManager(this);
 	bestiarioManager = new BestiarioManager(this);
@@ -111,7 +111,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(win);
 	AddModule(input);
 	AddModule(tex);
-	
+
 	AddModule(audio);
 	//L07 DONE 2: Add Physics module
 	AddModule(physics);
@@ -165,7 +165,7 @@ App::~App()
 	// Release modules
 	ListItem<Module*>* item = modules.end;
 
-	while(item != NULL)
+	while (item != NULL)
 	{
 		RELEASE(item->data);
 		item = item->prev;
@@ -188,7 +188,7 @@ bool App::Awake()
 
 	bool ret = LoadConfig();
 
-	if(ret == true)
+	if (ret == true)
 	{
 		// L04: DONE 3: Read the title from the config file and set the windows title 
 		// substitute "Video Game Template" string from the value of the title in the config file
@@ -200,7 +200,7 @@ bool App::Awake()
 		ListItem<Module*>* item;
 		item = modules.start;
 
-		while(item != NULL && ret == true)
+		while (item != NULL && ret == true)
 		{
 			// L04: DONE 4: Add a new argument to the Awake method to receive a pointer to an xml node.
 			// If the section with the module name exists in config.xml, fill the pointer with the valid xml_node
@@ -229,10 +229,10 @@ bool App::Start()
 	ListItem<Module*>* item;
 	item = modules.start;
 
-	while(item != NULL && ret == true)
+	while (item != NULL && ret == true)
 	{
 		if (item->data->active) {
-			ret = item->data->Start();	
+			ret = item->data->Start();
 		}
 		item = item->next;
 	}
@@ -247,7 +247,7 @@ bool App::Update()
 {
 	//L16 TODO 2: Add the Optick macro to mark the beginning of the main loop
 	OPTICK_FRAME("Main Loop");
-	
+
 	bool ret = true;
 	PrepareUpdate();
 
@@ -256,16 +256,16 @@ bool App::Update()
 
 	if (ret == true)
 		ret = PreUpdate();
-	
+
 
 	if (ret == true)
 		ret = DoUpdate();
-	
+
 
 	if (ret == true)
 		ret = PostUpdate();
 
-	
+
 
 	if (ret == true)
 		ret = PostLateUpdate();
@@ -274,8 +274,8 @@ bool App::Update()
 	if (!ret) return ret;
 	return !closeApplication;
 	return ret;
-	
-	
+
+
 }
 
 // Load config from XML file
@@ -295,7 +295,7 @@ bool App::LoadConfig()
 	}
 	else
 	{
-		LOG("Error loading config.xml: %s",result.description());
+		LOG("Error loading config.xml: %s", result.description());
 	}
 
 	return ret;
@@ -319,26 +319,26 @@ void App::FinishUpdate()
 
 	// L02: DONE 1: Cap the framerate of the gameloop
 	// L02: DONE 2: Measure accurately the amount of time SDL_Delay() actually waits compared to what was expected
-	
+
 	double currentDt = frameTime.ReadMs();
 	if (maxFrameDuration > 0 && currentDt < maxFrameDuration) {
-		uint32 delay = (uint32) (maxFrameDuration - currentDt);
+		uint32 delay = (uint32)(maxFrameDuration - currentDt);
 
 		PerfTimer delayTimer = PerfTimer();
 		SDL_Delay(delay);
 		//LOG("We waited for %I32u ms and got back in %f ms",delay,delayTimer.ReadMs());
 	}
-	
 
-    // L1: DONE 4: Calculate:
+
+	// L1: DONE 4: Calculate:
 	// Amount of frames since startup
 	frameCount++;
 
 	// Amount of time since game start (use a low resolution timer)
 	secondsSinceStartup = startupTime.ReadSec();
-	
+
 	// Amount of ms took the last update (dt)
-	dt = (float) frameTime.ReadMs();
+	dt = (float)frameTime.ReadMs();
 
 	// Amount of frames during the last second
 	lastSecFrameCount++;
@@ -347,7 +347,7 @@ void App::FinishUpdate()
 	if (lastSecFrameTime.ReadMs() > 1000) {
 		lastSecFrameTime.Start();
 		averageFps = (averageFps + lastSecFrameCount) / 2;
-		framesPerSecond = lastSecFrameCount; 
+		framesPerSecond = lastSecFrameCount;
 		lastSecFrameCount = 0;
 	}
 
@@ -355,7 +355,7 @@ void App::FinishUpdate()
 	// Shows the time measurements in the window title
 	// check sprintf formats here https://cplusplus.com/reference/cstdio/printf/
 	static char title[256];
-	sprintf_s(title, 256, "%s: Av.FPS: %.2f Last sec frames: %i Last dt: %.3f Time since startup: %I32u Frame Count: %I64u ", 
+	sprintf_s(title, 256, "%s: Av.FPS: %.2f Last sec frames: %i Last dt: %.3f Time since startup: %I32u Frame Count: %I64u ",
 		gameTitle.GetString(), averageFps, framesPerSecond, dt, secondsSinceStartup, frameCount);
 
 	app->win->SetTitle(title);
@@ -382,7 +382,7 @@ bool App::PreUpdate()
 	ListItem<Module*>* item;
 	Module* pModule = NULL;
 	item = modules.start;
-	
+
 	for (item = modules.start; item != NULL && ret == true; item = item->next)
 	{
 		pModule = item->data;
@@ -393,7 +393,7 @@ bool App::PreUpdate()
 
 		ret = item->data->PreUpdate();
 	}
-	
+
 
 	return ret;
 }
@@ -409,7 +409,7 @@ bool App::DoUpdate()
 	item = modules.start;
 	Module* pModule = NULL;
 
-	
+
 	for (item = modules.start; item != NULL && ret == true; item = item->next)
 	{
 		pModule = item->data;
@@ -434,7 +434,7 @@ bool App::PostUpdate()
 	ListItem<Module*>* item;
 	Module* pModule = NULL;
 	item = modules.start;
-	
+
 	for (item = modules.start; item != NULL && ret == true; item = item->next)
 	{
 		pModule = item->data;
@@ -445,7 +445,7 @@ bool App::PostUpdate()
 
 		ret = item->data->PostUpdate();
 	}
-	
+
 	return ret;
 }
 
@@ -455,7 +455,7 @@ bool App::PostLateUpdate()
 	ListItem<Module*>* item;
 	Module* pModule = NULL;
 	item = modules.start;
-	
+
 	for (item = modules.start; item != NULL && ret == true; item = item->next)
 	{
 		pModule = item->data;
@@ -466,7 +466,7 @@ bool App::PostLateUpdate()
 
 		ret = item->data->PostLateUpdate();
 	}
-	
+
 
 
 
@@ -488,7 +488,7 @@ bool App::CleanUp()
 		ret = item->data->CleanUp();
 		item = item->prev;
 	}
-	
+
 
 	LOG("Timer App CleanUp(): %f", timer.ReadMSec());
 
@@ -504,7 +504,7 @@ int App::GetArgc() const
 // ---------------------------------------
 const char* App::GetArgv(int index) const
 {
-	if(index < argc)
+	if (index < argc)
 		return args[index];
 	else
 		return NULL;
@@ -572,7 +572,7 @@ bool App::LoadFromFile() {
 	if (savedGame == 3) {
 		result = saveFile.load_file("save_game3.xml");
 	}
-	
+
 
 	if (result)
 	{
@@ -581,15 +581,15 @@ bool App::LoadFromFile() {
 		// Iterates all modules and call the load of each with the part of the XML node that corresponds to the module
 		ListItem<Module*>* item;
 		item = modules.start;
-	
-			while (item != NULL && ret == true)
-			{
-				if (item->data->active) {
-					ret = item->data->LoadState(saveFile.child("game_state").child(item->data->name.GetString()));
-				}
-				item = item->next;
+
+		while (item != NULL && ret == true)
+		{
+			if (item->data->active) {
+				ret = item->data->LoadState(saveFile.child("game_state").child(item->data->name.GetString()));
 			}
-		
+			item = item->next;
+		}
+
 	}
 	else
 	{
@@ -617,26 +617,27 @@ bool App::SaveFromFile() {
 
 	bool ret = true;
 
+
 	pugi::xml_document saveFile;
 	pugi::xml_node gameState = saveFile.append_child("game_state");
 
 	// Iterates all modules and call the save of each with the part of the XML node that corresponds to the module
 	ListItem<Module*>* item;
 	item = modules.start;
-	
-		while (item != NULL && ret == true)
-		{
-			if (item->data->active) {
-				pugi::xml_node module = gameState.append_child(item->data->name.GetString());
-				ret = item->data->SaveState(module);
-			}
-			item = item->next;
+
+	while (item != NULL && ret == true)
+	{
+		if (item->data->active) {
+			pugi::xml_node module = gameState.append_child(item->data->name.GetString());
+			ret = item->data->SaveState(module);
 		}
-	
+		item = item->next;
+	}
+
 	if (savedGame == 1) {
 		ret = saveFile.save_file("save_game.xml");
 	}
-	
+
 	if (savedGame == 2) {
 		ret = saveFile.save_file("save_game2.xml");
 	}

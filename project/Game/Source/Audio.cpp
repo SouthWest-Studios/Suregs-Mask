@@ -8,6 +8,8 @@
 // instead of 'hardcoding' library location path in code logic
 #include "SDL/include/SDL.h"
 #include "SDL_mixer/include/SDL_mixer.h"
+#include <iostream>
+#include <fstream>
 
 // NOTE: Library linkage is configured in Linker Options
 //#pragma comment(lib, "../Game/Source/External/SDL_mixer/libx86/SDL2_mixer.lib")
@@ -506,4 +508,40 @@ void Audio::PlayRandomTimedFx(unsigned int name, unsigned int name2, unsigned in
 
 	}
 
+}
+
+bool Audio::LoadState(pugi::xml_node node)
+{
+	/*pugi::xml_document config;
+	pugi::xml_parse_result parseResult = config.load_file("config.xml");
+
+	volumeMusic = config.child("config").child("audio").child("music").attribute("volume").as_int();
+	volumeFx = config.child("config").child("audio").child("fx").attribute("volume").as_int();*/
+
+	pugi::xml_document saveFile;
+	pugi::xml_parse_result result;
+	result = saveFile.load_file("save_general.xml");
+
+	volumeMusic = saveFile.child("game_state").child("audio").child("music").attribute("volume").as_int(64);
+	volumeFx = saveFile.child("game_state").child("audio").child("fx").attribute("volume").as_int(64);
+
+
+	return true;
+}
+
+bool Audio::SaveState(pugi::xml_node node)
+{
+
+	pugi::xml_document saveFile;
+	pugi::xml_node gameState = saveFile.append_child("game_state");
+	
+
+	pugi::xml_node audio = gameState.append_child("audio");
+
+	audio.append_child("music").append_attribute("volume").set_value(volumeMusic);
+	audio.append_child("fx").append_attribute("volume").set_value(volumeFx);
+
+	saveFile.save_file("save_general.xml");
+
+	return true;
 }

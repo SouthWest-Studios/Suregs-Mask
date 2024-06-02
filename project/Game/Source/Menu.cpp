@@ -504,26 +504,12 @@ void Menu::Fullscreen()
 
 bool Menu::LoadState(pugi::xml_node node)
 {
-	/*
-	pugi::xml_node musicNode = node.append_child("audio");
-	app->audio->volumeMusic = musicNode.child("music").attribute("volume").as_int();
-
-	pugi::xml_node fxNode = node.append_child("audio");
-	app->audio->volumeFx = fxNode.child("fx").attribute("volume").as_int();*/
 
 	return true;
 }
 
 bool Menu::SaveState(pugi::xml_node node)
 {
-	/*
-	pugi::xml_node audioNode = node.append_child("audio");
-
-	pugi::xml_node musicNode = audioNode.append_child("music");
-	musicNode.append_attribute("volume").set_value(newVolumeAudio);
-
-	pugi::xml_node fxNode = audioNode.append_child("fx");
-	musicNode.append_attribute("volume").set_value(newVolumeFx);*/
 
 	return true;
 }
