@@ -215,6 +215,20 @@ enum class EntityState_Boss_Surma
 	STATE_COUNT
 };
 
+enum class EntityState_Khurt
+{
+	IDLE,
+	RUNNING,
+	ATTACKING,
+	DEAD,
+	STUNNED,
+	DIGGING_UNDERGROUND,
+	MOVING_UNDERGROUND,
+	DIGGING_OUT,
+	NONE,
+	STATE_COUNT
+};
+
 
 class Entity
 {
