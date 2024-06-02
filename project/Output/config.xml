@@ -208,11 +208,11 @@
 				Tsprite="70" Pwidth="5000" sprite_x="500" sprite_y="429"/>
 
 		<boss_inuit texturePath="Assets/Textures/Entidades/Boss/Inuit/Miniboss1.png" 
-					maxHealth="6500.0f" speed="5f" attackDamage="90.0f" attackDistance="4" viewDistance="20"
+					maxHealth="6500.0f" speed="100f" attackDamage="220.0f" attackDistance="4" viewDistance="20"
 					Tsprite="61" Pwidth="6904" sprite_x="863" sprite_y="600"/>
 
 		<boss_igory texturePath="Assets/Textures/Entidades/Boss/Igory/bossPapa.png"
-					maxHealth="8000.0f" speed="5f" attackDamage="250.0f" attackDistance="4" viewDistance="20"
+					maxHealth="25500.0f" speed="100f" attackDamage="250.0f" attackDistance="4" viewDistance="20"
 					Tsprite="128" Pwidth="4800" sprite_x="600" sprite_y="427"/>
 
 		<!-- <boss_musri texturePath="Assets/Textures/Entidades/Boss/Musri/texture_boss_musri.png" arrowTexturePath="Assets/Textures/Entidades/Boss/Musri/texture_musri_arrow.png" arrowChargedTexturePath="Assets/Textures/Entidades/Boss/Musri/texture_musri_charged_arrow.png" arrowChargedRastroTexturePath="Assets/Textures/Entidades/Boss/Musri/texture_musri_charged_arrow_rastro.png" maxHealth="8200.0f" speed="200f" attackDamage="200.0f"  attackDistance="15" viewDistance="40" Tsprite="16" Pwidth="752" sprite_x="188" sprite_y="175"/> -->

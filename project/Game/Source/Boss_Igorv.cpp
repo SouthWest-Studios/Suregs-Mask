@@ -94,7 +94,7 @@ bool Boss_Igory::Start() {
 
 	maxHealth = config.attribute("maxHealth").as_float();
 	health = maxHealth;
-	speed = config.attribute("speed").as_float();
+	speed = (config.attribute("speed").as_float() / 10) * 0.4;
 	attackDamage = config.attribute("attackDamage").as_float();
 	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();
@@ -280,12 +280,16 @@ bool Boss_Igory::Update(float dt)
 		atq2_boss_Igory.speed = 0.15;
 		atq3_boss_Igory.speed = 0.15;
 		app->map->maxEnemies = 8;
+		speed = (120/ 10) * 0.4;
+		attackDamage = 280;
 		break;
 	case FASE_Igory::FASE_THREE:
 		atq1_boss_Igory.speed = 0.25;
 		atq2_boss_Igory.speed = 0.25;
 		atq3_boss_Igory.speed = 0.25;
 		app->map->maxEnemies = 10;
+		speed = (150 / 10) * 0.4;
+		attackDamage = 300;
 		break;
 	}
 
@@ -490,7 +494,13 @@ void Boss_Igory::resetAnimation()
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "dash_inDashi_boss_Igory") {
 		inDashDashi = false;
 		inAtaqueDashi = true;
-		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 120, 120, STATIC);
+		if (isFacingLeft) {
+			atackCube = app->physics->CreateRectangleSensor(position.x + 100, position.y - 60, 180, 180, STATIC);
+		}
+		else
+		{
+			atackCube = app->physics->CreateRectangleSensor(position.x - 80, position.y - 60, 180, 180, STATIC);
+		}
 	}
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "dash_DashiAtq_boss_Igory") {
 		if (atackCube != nullptr) {
@@ -512,11 +522,11 @@ void Boss_Igory::resetAnimation()
 			CleanUp();
 			closeFinalSelecion = false;
 			deletePadre = true;
-			
+
 		}
 	}
 
-	
+
 }
 
 void Boss_Igory::showAnimation()
@@ -715,21 +725,39 @@ void Boss_Igory::Attack(float dt)
 		atq3_boss_Igory.Reset();
 		inAtack = true;
 		printf("\nataque1");
-		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
+		if (isFacingLeft) {
+			atackCube = app->physics->CreateRectangleSensor(position.x + 100, position.y - 60, 180, 180, STATIC);
+		}
+		else
+		{
+			atackCube = app->physics->CreateRectangleSensor(position.x - 80, position.y - 60, 180, 180, STATIC);
+		}
 		break;
 	case 2:
 		app->audio->PlayFx(father_melee_attackAlt_fx);
 		atq1_boss_Igory.Reset();
 		inAtack = true;
 		printf("\nataque2");
-		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
+		if (isFacingLeft) {
+			atackCube = app->physics->CreateRectangleSensor(position.x + 60, position.y - 50, 180, 100, STATIC);
+		}
+		else
+		{
+			atackCube = app->physics->CreateRectangleSensor(position.x - 40, position.y - 50, 180, 100, STATIC);
+		}
 		break;
 	case 3:
 		app->audio->PlayFx(father_melee_attack_fx);
 		atq2_boss_Igory.Reset();
 		inAtack = true;
 		printf("\nataque3");
-		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
+		if (isFacingLeft) {
+			atackCube = app->physics->CreateRectangleSensor(position.x + 60, position.y - 40, 180, 180, STATIC);
+		}
+		else
+		{
+			atackCube = app->physics->CreateRectangleSensor(position.x - 40, position.y - 40, 180, 180, STATIC);
+		}
 		atqDashQuali++;
 		attackTime = 0;
 		break;
@@ -737,7 +765,11 @@ void Boss_Igory::Attack(float dt)
 	default:
 		break;
 	}
-
+	if (atackCube != nullptr) {
+		atackCube->entity = this;
+		atackCube->listener = this;
+		atackCube->ctype = ColliderType::ATACK_IGORY;
+	}
 
 }
 
@@ -758,14 +790,14 @@ void Boss_Igory::Die() {
 	}
 
 	if (startSelecion && seleccionFinalPersonaje == 1 && !closeFinalSelecion) {
-		printf("Matar padre");
+		//printf("Matar padre");
 		//CleanUp();
 		cankillPadre = true;
 		closeFinalSelecion = true;
 	}
 
 	if (startSelecion && seleccionFinalPersonaje == 2 && !closeFinalSelecion) {
-		printf("Unir padre");
+		//printf("Unir padre");
 		closeFinalSelecion = true;
 		unirPadre = true;
 	}
@@ -974,9 +1006,13 @@ void Boss_Igory::OnCollision(PhysBody* physA, PhysBody* physB) {
 				dialogoMostrado = true;
 			}
 		}
+		if (physA->ctype == ColliderType::ATACK_IGORY) {
+			app->entityManager->GetPlayer()->TakeDamage(attackDamage);
+			//printf("JEFEATAKE");
+		}
 
 		if (inAtqDashi) {
-			app->entityManager->GetPlayer()->TakeDamage(10);
+			app->entityManager->GetPlayer()->TakeDamage(220);
 			empujaPlayer = true;
 			habilidadEmpujeTimer.Start();
 			//app->entityManager->GetPlayer()->pbodyFoot
@@ -1017,28 +1053,6 @@ void Boss_Igory::OnCollision(PhysBody* physA, PhysBody* physB) {
 	default:
 		break;
 	}
-}
-
-void Boss_Igory::OnEndCollision(PhysBody* physA, PhysBody* physB) {
-	switch (physB->ctype)
-	{
-	case ColliderType::PLATFORM:
-		LOG("Collision PLATFORM");
-		break;
-	case ColliderType::PLAYER:
-		LOG("Collision PLAYER");
-		//restar vida al player
-		break;
-	case ColliderType::PLAYER_ATTACK:
-		LOG("Collision Player_Attack");
-		break;
-	case ColliderType::UNKNOWN:
-		LOG("Collision UNKNOWN");
-		break;
-	default:
-		break;
-	}
-
 }
 
 
