@@ -2,7 +2,8 @@
 #define __TEXTURES_H__
 
 #include "Module.h"
-
+#include <unordered_map>
+#include <string>
 #include "List.h"
 
 struct SDL_Texture;
@@ -35,6 +36,7 @@ public:
 public:
 
 	List<SDL_Texture*> textures;
+	std::unordered_map<SDL_Texture*, std::string> texturePathMap;
 };
 
 

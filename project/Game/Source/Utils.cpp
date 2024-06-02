@@ -4,6 +4,7 @@
 #include <vector>
 #include <sstream> // Asegúrate de incluir esta biblioteca
 #include <SDL/include/SDL_stdinc.h>
+#include <PugiXml/src/pugixml.hpp>
 
 inline float dist(int ax, int ay, int bx, int by) {
     return sqrt(pow(ax - bx, 2) + pow(ay - by, 2));
@@ -47,6 +48,15 @@ inline std::vector<int> splitToInts(const std::string& s, char delimiter) {
         tokens.push_back(std::stoi(token));
     }
     return tokens;
+}
+
+inline pugi::xml_node find_child_by_attribute(pugi::xml_node parent, const char* name, const char* attr_name, const char* attr_value) {
+    for (pugi::xml_node node : parent.children(name)) {
+        if (std::strcmp(node.attribute(attr_name).value(), attr_value) == 0) {
+            return node;
+        }
+    }
+    return pugi::xml_node();
 }
 
 

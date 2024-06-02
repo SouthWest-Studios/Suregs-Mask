@@ -81,7 +81,7 @@ private:
 	//Dimensiones
 	int textBoundWidth = 500;
 	int textNameBoundWidth = 200;
-	int optionsBoundWidth = 350;
+	int optionsBoundWidth = 650;
 	iPoint faceTextureSize = { 256, 210 };
 
 
