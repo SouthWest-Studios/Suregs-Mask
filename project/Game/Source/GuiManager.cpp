@@ -118,7 +118,10 @@ bool GuiManager::PostUpdate()
 
 	while (control != nullptr)
 	{
-		control->data->PostUpdate();
+		if (control->data != nullptr) // Check if control->data is not null
+		{
+			control->data->PostUpdate();
+		}
 		control = control->next;
 	}
 	return true;

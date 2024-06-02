@@ -106,6 +106,9 @@ bool Enemy_Muur::Update(float dt)
 	{
 		nextState = EntityState_Enemy::DEAD;
 	}
+	else if (app->entityManager->GetIgory()->isDead) {
+		health = 0;
+	}
 	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32)
 	{
 		nextState = EntityState_Enemy::ATTACKING;
@@ -250,7 +253,11 @@ void Enemy_Muur::Attack(float dt)
 
 void Enemy_Muur::Die() {
 	
-	app->audio->PlayFx(muur_get_damage_fx);
+	if (death_fx == false) 
+	{
+		app->audio->PlayFx(muur_get_damage_fx);
+		death_fx = true;
+	}
 
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	currentAnimation = &dieAnim;

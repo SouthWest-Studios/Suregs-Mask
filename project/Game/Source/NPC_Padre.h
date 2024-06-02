@@ -27,7 +27,7 @@ public:
     bool Update(float dt);
     bool PostUpdate();
     bool CleanUp();
-    pugi::xml_node find_child_by_attribute(pugi::xml_node parent, const char* name, const char* attr_name, const char* attr_value);
+  
     // L07 DONE 6: Define OnCollision function for the player.
     void OnCollision(PhysBody* physA, PhysBody* physB);
 
@@ -40,18 +40,13 @@ public:
     pugi::xml_document dialogoFile;
     pugi::xml_node dialogNode;
 
-
-    bool PlayDialogo = false;
     bool dialogoMostrado = false;
     Animation* currentAnimation = nullptr;
-    EntityState state;
 
     PhysBody* pbody = nullptr;
     //Animation
     Animation SPosition;
-    SDL_Rect* spritePositions;
-    pugi::xml_node config;
-
+    SDL_Rect* spritePositions = nullptr;
 
 
 private:

@@ -150,6 +150,7 @@ public:
 	// L07 DONE 6: Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 	void OnEndCollision(PhysBody* physA, PhysBody* physB);
+	pugi::xml_node find_child_by_attribute(pugi::xml_node parent, const char* name, const char* attr_name, const char* attr_value);
 
 	Entity* GetEnemyWithHighestHealthWithinRadius(iPoint position, int radius);
 
@@ -240,6 +241,8 @@ public:
 	bool timerLevelUpOneStarted = false;
 	bool timerLevelUpTwoStarted = false;
 	bool timerLevelUpThreeStarted = false;
+
+	bool playerTpBossPadre = false;
 
 private:
 	void CameraMovement(float dt);
@@ -444,6 +447,12 @@ private:
 	
 	Emitter* blood = nullptr;
 	bool particulaBlood = false;
+
+
+	bool dialogoMascara0 = false;
+	bool dialogoMascara1 = false;
+	bool dialogoMascara2 = false;
+	bool dialogoMascara3 = false;
 
 public:
 

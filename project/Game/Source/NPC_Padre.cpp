@@ -66,7 +66,8 @@ bool NPCPadre::Start() {
 
 	pugi::xml_parse_result  parseResult = dialogoFile.load_file("dialogs.xml");
 	pugi::xml_node dialogoPadre = dialogoFile.child("dialogues");
-	dialogNode = find_child_by_attribute(dialogoPadre, "dialog", "id", "2001").child("sentences");
+	dialogNode = dialogoPadre.find_child_by_attribute("dialog", "id", "2001").child("sentences").child("sentence");
+
 	return true;
 }
 
@@ -75,7 +76,7 @@ bool NPCPadre::Update(float dt) {
 
 	currentAnimation->Update();
 
-
+	//printf("\n selecion: %d", app->entityManager->GetIgory()->seleccionFinalPersonaje);
 
 	return true;
 }
@@ -103,14 +104,6 @@ bool NPCPadre::PostUpdate() {
 	return true;
 }
 
-pugi::xml_node NPCPadre::find_child_by_attribute(pugi::xml_node parent, const char* name, const char* attr_name, const char* attr_value) {
-	for (pugi::xml_node node : parent.children(name)) {
-		if (std::strcmp(node.attribute(attr_name).value(), attr_value) == 0) {
-			return node;
-		}
-	}
-	return pugi::xml_node();
-}
 bool NPCPadre::CleanUp() {
 	app->physics->GetWorld()->DestroyBody(pbody->body);
 	app->tex->UnLoad(texture);
@@ -131,12 +124,17 @@ void NPCPadre::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLAYER:
 		//app->dialogManager->CreateDialogSinEntity("sss","sss","sss");
-		if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
-
-
+		if (dialogoMostrado && !app->dialogManager->isPlaying) {
+			//printf("\nTerminado");
+			app->entityManager->GetIgory()->playerInFight = true;
+			app->entityManager->GetIgory()->generaTimeColdDown.Start();
+			app->entityManager->GetIgory()->curaTimer.Start();
+			CleanUp();
+		}
+		if (!app->dialogManager->isPlaying && (app->input->GetButton(CONFIRM) == KEY_DOWN)) {
 			if (!dialogoMostrado) {
 				int num = 0;
-				for (pugi::xml_node itemNode = dialogNode.child("sentence"); itemNode; itemNode = itemNode.next_sibling("sentence"))
+				for (pugi::xml_node itemNode = dialogNode; itemNode; itemNode = itemNode.next_sibling("sentence"))
 				{
 					app->dialogManager->AddDialog(app->dialogManager->CreateDialog(itemNode, itemNode.attribute("name").as_string(), itemNode.attribute("facetexturepath").as_string()));
 					num++;
@@ -144,9 +142,6 @@ void NPCPadre::OnCollision(PhysBody* physA, PhysBody* physB) {
 				printf("\nnum: %d", num);
 				dialogoMostrado = true;
 			}
-		}
-		if (dialogoMostrado && !app->dialogManager->isPlaying) {
-			printf("\nTerminado");
 		}
 		break;
 	default:

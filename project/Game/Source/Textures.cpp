@@ -66,13 +66,17 @@ SDL_Texture* const Textures::Load(const char* path)
 	SDL_Texture* texture = NULL;
 	SDL_Surface* surface = IMG_Load(path);
 
-	if(surface == NULL)
+	if (surface == NULL)
 	{
 		LOG("Could not load surface with path: %s. IMG_Load: %s", path, IMG_GetError());
 	}
 	else
 	{
 		texture = LoadSurface(surface);
+		if (texture != NULL)
+		{
+			texturePathMap[texture] = path;  // Store the texture path
+		}
 		SDL_FreeSurface(surface);
 	}
 

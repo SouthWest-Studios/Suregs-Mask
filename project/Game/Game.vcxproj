@@ -384,6 +384,7 @@
     <Xml Include="..\Output\save_game.xml" />
     <Xml Include="..\Output\save_game2.xml" />
     <Xml Include="..\Output\save_game3.xml" />
+    <Xml Include="..\Output\save_general.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

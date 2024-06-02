@@ -59,12 +59,6 @@ bool Menu::Start()
 
 	change_inventory_fx = app->audio->LoadAudioFx("change_inventory_fx");
 	inventory_fx = app->audio->LoadAudioFx("inventory_fx");
-	
-
-	newVolumeAudio = app->audio->volumeMusic;
-	newVolumeFx = app->audio->volumeFx;
-	
-	
 
 	return true;
 }
@@ -179,13 +173,13 @@ bool Menu::Update(float dt)
 			SDL_Rect SfxPos = { windowWidth / 2 - 350 ,windowHeight / 2 - 20, 200, 50 };
 			sfx = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 101, "SFX", SfxPos, this, { 0, 0, 20, 20 }, { 0,0,0,0 }, 0, 100);
 	
-			SDL_Rect FullScreen = { windowWidth / 2 - 100 ,windowHeight / 2, 230,50 };
+			SDL_Rect FullScreen = { windowWidth / 2 - 298 ,windowHeight / 2 + 136, 230,50 };
 			fullScreen = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 102, "FULLSCREEN", FullScreen, this, { 0,0,0,0 }, { -50,0,0,0 });
 			
-			SDL_Rect vSyncpos = { windowWidth / 2 -150 ,windowHeight / 2 + 50, 200, 50 };
+			SDL_Rect vSyncpos = { windowWidth / 2 -165 ,windowHeight / 2 + 135, 200, 50 };
 			vsync = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 103, "VSYNC", vSyncpos, this, { 0, 0, 20, 20 } );
 
-			SDL_Rect TitlePos = { windowWidth / 2 - 350 ,windowHeight / 2 +  110, 230,50 };
+			SDL_Rect TitlePos = { windowWidth / 2 - 330 ,windowHeight / 2 +  170, 230,50 };
 			title = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 104, "VOLVER AL MENU", TitlePos, this, { 0,0,0,0 });
 
 			if (app->win->fullscreen)
@@ -211,8 +205,8 @@ bool Menu::Update(float dt)
 			}
 
 			//Cargar la barra de audio del save_game
-			((GuiControlSlider*)music)->value = newVolumeAudio;
-			((GuiControlSlider*)sfx)->value = newVolumeFx;
+			((GuiControlSlider*)music)->value = app->audio->volumeMusic;
+			((GuiControlSlider*)sfx)->value = app->audio->volumeFx;
 		}
 
 		
@@ -253,11 +247,10 @@ bool Menu::Update(float dt)
 		if (music != nullptr)
 		{
 			int newVolume = ((GuiControlSlider*)music)->value;
-			// Asegurarse de que el nuevo volumen est� dentro de los l�mites v�lidos (0-128 para SDL Mixer)
+			// Asegurarse de que el nuevo volumen esta dentro de los l�mites v�lidos (0-128 para SDL Mixer)
 			newVolume = std::max(0, std::min(128, newVolume));
-			// Establecer el volumen de la m�sica
+			// Establecer el volumen de la musica
 			Mix_VolumeMusic(newVolume);
-			newVolumeAudio = newVolume;
 			app->audio->volumeMusic = newVolume;
 		}
 
@@ -273,7 +266,6 @@ bool Menu::Update(float dt)
 				Mix_Volume(channel, newSFXVolume);
 			}
 
-			newVolumeFx = newSFXVolume;
 			app->audio->volumeFx = newSFXVolume;
 		}
 
@@ -425,7 +417,7 @@ bool Menu::PostUpdate()
 		}
 		if (ventana == 4)
 		{
-			app->render->DrawTexture(fondoAjustes, windowWidth / 8 + 40, windowHeight / 8 - 70, SDL_FLIP_NONE, 0, 0);
+			app->render->DrawTexture(fondoAjustes, windowWidth / 8 + 40, windowHeight / 8 - 69, SDL_FLIP_NONE, 0, 0);
 		}
 	}
 	
@@ -504,26 +496,12 @@ void Menu::Fullscreen()
 
 bool Menu::LoadState(pugi::xml_node node)
 {
-	/*
-	pugi::xml_node musicNode = node.append_child("audio");
-	app->audio->volumeMusic = musicNode.child("music").attribute("volume").as_int();
-
-	pugi::xml_node fxNode = node.append_child("audio");
-	app->audio->volumeFx = fxNode.child("fx").attribute("volume").as_int();*/
 
 	return true;
 }
 
 bool Menu::SaveState(pugi::xml_node node)
 {
-	/*
-	pugi::xml_node audioNode = node.append_child("audio");
-
-	pugi::xml_node musicNode = audioNode.append_child("music");
-	musicNode.append_attribute("volume").set_value(newVolumeAudio);
-
-	pugi::xml_node fxNode = audioNode.append_child("fx");
-	musicNode.append_attribute("volume").set_value(newVolumeFx);*/
 
 	return true;
 }

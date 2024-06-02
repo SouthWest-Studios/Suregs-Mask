@@ -96,9 +96,23 @@ public:
 
 	Timer timerRecibirDanioColor;
 
+	
 	//Start
 	bool playerInFight = false;
+	bool isDead = false;
 
+	//Dialogo
+	pugi::xml_document dialogoFile;
+	pugi::xml_node dialogNode;
+	bool dialogoMostrado = false;
+	bool startDialogo = false;
+	bool startSelecion = false;
+	bool closeFinalSelecion = false;
+	int seleccionFinalPersonaje = -1;
+
+	//tiempo de genera enemigo
+	Timer generaTimeColdDown;
+	Timer curaTimer;
 private:
 	pugi::xml_document configFile;
 	pugi::xml_node configNode;
@@ -167,7 +181,6 @@ private:
 	float lifeLow80;
 	float lifeLow40;
 	bool dontMove = false;
-	bool isDead = false;
 	bool faseTwo = false;
 	bool faseThree = false;
 	bool faseAni = false;
@@ -176,7 +189,7 @@ private:
 	bool showSuregAni = false;
 	bool inSuregAni = false;
 	bool goColdDown = false;
-	Timer generaTimeColdDown;
+
 
 	//Takehit
 	bool inTakeHit = false;
@@ -199,7 +212,7 @@ private:
 	bool shieldBroken = false;
 	float shield = 500;
 	bool stun = false;
-	Timer curaTimer;
+	
 	Timer shieldTimer;
 	Timer healTimer;
 	Timer stunTimer;

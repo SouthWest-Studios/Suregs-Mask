@@ -1916,8 +1916,8 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 			</sentence>
 		</sentences>
 	</dialog>
-	
-	
+
+
 	<dialog id="951" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFace.png" name="Vhea">
 		<sentences>
 			<sentence type="choose" text="Buenos días cariño, ¿otra vez la misma pesadilla?">
@@ -2052,7 +2052,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 			</sentence>
 
 			<sentence type="QuestUpdate" questLine="1" nextTargetID="16" actualTargetID="15" />
-			
+
 		</sentences>
 	</dialog>
 
@@ -2144,7 +2144,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakhovFace.png"
 			text="¿H-hola? ¿Qué es esto?"/>
 
-			<sentence name="?????"
+			<sentence name="Dinka"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
 			text="Quién es el que osa despertarnos, hace décadas que nadie nos molesta, aún estás a tiempo de salir corriendo y volver a casa, pero si sigues adelante nadie sabe lo que puede pasar."/>
 
@@ -2213,29 +2213,101 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 			<sentence name="Yo"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
 			text="Padre!? Pero!? Has sido tú todo este tiempo?? ¿Qué has hecho con madre!? Porque!??"/>
-			
+
 			<sentence name="Padre"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
 			text="No importa Alma ahora, demuestra que estás preparado para llevar este poder."/>
-			
+
 		</sentences>
 	</dialog>
 
 	<dialog id="2002">
 		<sentences>
-			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
+			<sentence name="Padre"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
+			text="Jakov?? Que haces aqui?? ¿Qué ha pasado?"/>
 
-				<option1 text="Si, por favor.">
-					<sentence text="Come tranquilo, está recién hecho."/>
-					<comer id ="1"/>
+			<sentence name="Yo"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
+			text="¿Padre… ¿Qué has hecho?... Todos estos años, solo, ha sido tu culpa, desapareciste cuando más te necesitaba, me abandonaste…"/>
+
+			<sentence name="Padre"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
+			text="Lo hice por nosotros, por recuperar nuestra familia, solo quería traer de vuelta a Alma."/>
+
+			<sentence name="Yo"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
+			text="¿Traerla de vuelta? Ha acabado muerta, por ti."/>
+
+			<sentence name="Padre"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
+			text="No es lo que te imaginas, madre no murió a mis manos, fue la negligencia del pueblo lo que acabó con ella, fue culpa suya."/>
+
+			<sentence name="Yo"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
+			text="¿Y qué hay de tus compañeros?, murieron a tus manos."/>
+
+			<sentence name="Padre(masc)"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
+			text="Eran demasiado débiles, no estaban preparados… murieron por un bien mayor…"/>
+
+			<sentence name="Padre"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
+			text="¿Cómo? Son mis más fieles guerreros, yo nunca les dejaría morir."/>
+
+			<sentence name="Yo"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
+			text="… Y qué hay de la abuela? Ni te imaginas lo que ha sufrido por ti."/>
+
+			<sentence name="Padre(masc)"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
+			text="Esa vieja entrometida… siempre metiendo su nariz en asuntos ajenos."/>
+
+			<sentence name="Yo"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
+			text="Serás…Sé que este no eres tú…"/>
+
+			<sentence name="Padre"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
+			text="“No sé que está pasando, todo esto nunca fue mi intención, daría lo que fuera por haberte visto crecer.”"/>
+
+			<sentence name="Yo"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
+			text="..."/>
+
+			<sentence name="Padre"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
+			text="La máscara me ha hablado, me ha prometido devolverle la vida a Alma…"/>
+
+			<sentence name="Padre(masc)"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
+			text="solo necesitamos el poder de todas las máscaras… "/>
+
+			<sentence name="Padre"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
+			text="así podríamos honrar la memoria de madre, "/>
+
+			<sentence name="Padre(masc)"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
+			text="acabemos con aquellos que nos la arrebataron, aquellos que nunca confiaron en ti…"/>
+
+			<sentence name="Padre"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
+			text="es tan solo un pequeño sacrificio,"/>
+
+			<sentence name="Padre"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
+			text="únete "/>
+
+			<sentence type="choose" name="Padre(masc)" facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png" text="a mí!">
+
+				<option1 text="Matar a padre.">
 					<sentence type="SelectChoose" selection="1" />
 				</option1>
 
-				<option2 text="No hace falta.">
-					<sentence text="Bueno... Estaré siempre aquí si necesitas algo de comer."/>
+				<option2 text="Unirme a padre.">
 					<sentence type="SelectChoose" selection="2" />
 				</option2>
-
 			</sentence>
 		</sentences>
 	</dialog>

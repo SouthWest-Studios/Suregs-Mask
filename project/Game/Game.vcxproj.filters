@@ -364,7 +364,6 @@
     <ClCompile Include="Source\Item_Mascara_3.cpp">
       <Filter>Entities\Items</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Scene_Arena_Tutorial.cpp" />
     <ClCompile Include="Source\Estatua.cpp">
       <Filter>Entities\Estatua</Filter>
     </ClCompile>
@@ -382,6 +381,12 @@
     </ClCompile>
     <ClCompile Include="Source\Enemy_Muur_Variation.cpp">
       <Filter>Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\QuestManager.cpp">
+      <Filter>Modules\SistemaMisiones</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene_Arena_Tutorial.cpp">
+      <Filter>Scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -811,7 +816,6 @@
     <ClInclude Include="Source\Item_Mascara_3.h">
       <Filter>Entities\Items</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Scene_Arena_Tutorial.h" />
     <ClInclude Include="Source\Estatua.h">
       <Filter>Entities\Estatua</Filter>
     </ClInclude>
@@ -829,6 +833,12 @@
     </ClInclude>
     <ClInclude Include="Source\Enemy_Muur_Variation.h">
       <Filter>Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\QuestManager.h">
+      <Filter>Modules\SistemaMisiones</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene_Arena_Tutorial.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -928,6 +938,9 @@
     <Filter Include="Entities\Estatua">
       <UniqueIdentifier>{0fca0de5-3d58-4d13-b87e-d04a0ac24e29}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\SistemaMisiones">
+      <UniqueIdentifier>{54f3c5b6-a05c-4852-8661-ffdf5d8aa6e8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Output\config.xml" />
@@ -939,5 +952,6 @@
     </Xml>
     <Xml Include="..\Output\save_game2.xml" />
     <Xml Include="..\Output\save_game3.xml" />
+    <Xml Include="..\Output\save_general.xml" />
   </ItemGroup>
 </Project>
