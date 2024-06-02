@@ -934,7 +934,7 @@ void EntityManager::showFinalkillPadre()
 	}
 
 
-	if (increasing) {//无到黑 1黑屏
+	if (increasing) {
 		photoTransparent += 1;
 		if (photoTransparent >= 255) {
 			photoTransparent = 255;
@@ -950,7 +950,7 @@ void EntityManager::showFinalkillPadre()
 			}
 		}
 	}
-	else {//黑到无 2显示图片
+	else {
 		photoTransparent -= 1;
 		if (photoTransparent <= 0) {
 			photoTransparent = 0;
