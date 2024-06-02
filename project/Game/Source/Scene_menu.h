@@ -142,9 +142,6 @@ private:
 
 	
 
-	int newVolumeAudio;
-	int newVolumeFx;
-
 };
 
 #endif // __SCENE_MENU_H__

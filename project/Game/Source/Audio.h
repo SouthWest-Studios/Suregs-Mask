@@ -103,8 +103,8 @@ public:
 
 public:
 
-	int volumeMusic;
-	int volumeFx;
+	int volumeMusic = 64;
+	int volumeFx = 64;
 
 	bool playingMusic = false;
 	bool playingRunFx = false;

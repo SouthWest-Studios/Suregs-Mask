@@ -7,32 +7,48 @@
 
 // L1: DONE 1: Fill Start(), Read(), ReadSec() methods
 // they are simple, one line each!
-	
-Timer::Timer()
+
+Timer::Timer() : started(false) // Inicializa el indicador started
 {
-	Start();
+    Start();
 }
 
 void Timer::Start(uint32 startingMS)
 {
-	startTime = SDL_GetTicks() - startingMS;
+    started = true;
+    startTime = SDL_GetTicks() - startingMS;
+}
+
+void Timer::Stop()
+{
+    started = false;
 }
 
 uint32 Timer::ReadSec() const
 {
-	return (SDL_GetTicks() - startTime) / 1000;
+    return started ? (SDL_GetTicks() - startTime) / 1000 : 0;
 }
 
 float Timer::ReadMSec() const
 {
-	return (float)(SDL_GetTicks() - startTime);
+    return started ? (float)(SDL_GetTicks() - startTime) : 0.0f;
 }
 
 uint32 Timer::CountDown(int total) const
 {
-	total = total - (SDL_GetTicks() - startTime) / 1000;
-	if (total <= 0) {
-		total = 0;
-	}
-	return total;
+    if (started) {
+        total = total - (SDL_GetTicks() - startTime) / 1000;
+        if (total <= 0) {
+            total = 0;
+        }
+        return total;
+    }
+    else {
+        return total;
+    }
+}
+
+bool Timer::IsStarted() const
+{
+    return started;
 }

@@ -58,6 +58,7 @@
       <dialogAlt2_fx path="Assets/Audio/Fx/UI/dialogAlt2_fx.wav"/>
       <chest_fx path="Assets/Audio/Fx/UI/chest_fx.wav"/>
       <chestAlt_fx path="Assets/Audio/Fx/UI/chestAlt_fx.wav"/>
+      <puzzle_button_fx path="Assets/Audio/Fx/UI/puzzle_button_fx.wav"/>
 
       <!--player-->
       <run_fx path="Assets/Audio/Fx/Player/run_fx.wav"/>
@@ -712,6 +713,10 @@
 		<messageTexture texturepath="Assets/Textures/Interfaz/HUD/texture_message.png"/>
 		<cdMaskTexture texturepath="Assets/Textures/Interfaz/HUD/texture_cd_mask.png"/>
 		<levelUpTexture texturepath="Assets/Textures/Interfaz/levelUp.png"/>
+		<maskZeroTexture texturepath="Assets/Textures/Interfaz/Equipo/textura_mascara0.png"/>
+		<maskOneTexture texturepath="Assets/Textures/Interfaz/Equipo/textura_mascara1.png"/>
+		<maskTwoTexture texturepath="Assets/Textures/Interfaz/Equipo/textura_mascara2.png"/>
+		<maskThreeTexture texturepath="Assets/Textures/Interfaz/Equipo/textura_mascara3.png"/>
 	</hud>
 
 	<inventorymanager>
