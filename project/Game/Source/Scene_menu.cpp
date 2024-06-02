@@ -112,9 +112,6 @@ bool Scene_Menu::Start()
 	menu_fx = app->audio->LoadAudioFx("menu_fx");
 	app->audio->PlayFx(menu_fx);
 
-	newVolumeAudio = app->audio->volumeMusic;
-	newVolumeFx = app->audio->volumeFx;
-
 	app->guiManager->minId = 1;
 	app->guiManager->maxId = 6;
 	app->guiManager->pointerId = 1;
@@ -571,8 +568,8 @@ void Scene_Menu::SettingsInterface()
 			}
 
 			//Cargar la barra de audio del save_game
-			((GuiControlSlider*)music)->value = newVolumeAudio;
-			((GuiControlSlider*)sfx)->value = newVolumeFx;
+			((GuiControlSlider*)music)->value = app->audio->volumeMusic;
+			((GuiControlSlider*)sfx)->value = app->audio->volumeFx;
 		}
 
 		
@@ -637,7 +634,6 @@ void Scene_Menu::SettingsInterface()
 			newVolume = std::max(0, std::min(128, newVolume));
 			// Establecer el volumen de la m�sica
 			Mix_VolumeMusic(newVolume);
-			newVolumeAudio = newVolume;
 			app->audio->volumeMusic = newVolume;
 		}
 
@@ -653,7 +649,6 @@ void Scene_Menu::SettingsInterface()
 				Mix_Volume(channel, newSFXVolume);
 			}
 
-			newVolumeFx = newSFXVolume;
 			app->audio->volumeFx = newSFXVolume;
 		}
 

@@ -91,9 +91,6 @@ bool Audio::Awake(pugi::xml_node config)
 		ret = true;
 	}
 
-	volumeMusic = config.child("music").attribute("volume").as_int();
-	volumeFx = config.child("fx").attribute("volume").as_int();
-
 	return ret;
 }
 
@@ -512,14 +509,9 @@ void Audio::PlayRandomTimedFx(unsigned int name, unsigned int name2, unsigned in
 
 bool Audio::LoadState(pugi::xml_node node)
 {
-	/*pugi::xml_document config;
-	pugi::xml_parse_result parseResult = config.load_file("config.xml");
-
-	volumeMusic = config.child("config").child("audio").child("music").attribute("volume").as_int();
-	volumeFx = config.child("config").child("audio").child("fx").attribute("volume").as_int();*/
-
 	pugi::xml_document saveFile;
 	pugi::xml_parse_result result;
+
 	result = saveFile.load_file("save_general.xml");
 
 	volumeMusic = saveFile.child("game_state").child("audio").child("music").attribute("volume").as_int(64);
@@ -534,8 +526,6 @@ bool Audio::SaveState(pugi::xml_node node)
 
 	pugi::xml_document saveFile;
 	pugi::xml_node gameState = saveFile.append_child("game_state");
-	
-
 	pugi::xml_node audio = gameState.append_child("audio");
 
 	audio.append_child("music").append_attribute("volume").set_value(volumeMusic);

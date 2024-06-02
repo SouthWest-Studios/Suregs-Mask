@@ -59,12 +59,6 @@ bool Menu::Start()
 
 	change_inventory_fx = app->audio->LoadAudioFx("change_inventory_fx");
 	inventory_fx = app->audio->LoadAudioFx("inventory_fx");
-	
-
-	newVolumeAudio = app->audio->volumeMusic;
-	newVolumeFx = app->audio->volumeFx;
-	
-	
 
 	return true;
 }
@@ -211,8 +205,8 @@ bool Menu::Update(float dt)
 			}
 
 			//Cargar la barra de audio del save_game
-			((GuiControlSlider*)music)->value = newVolumeAudio;
-			((GuiControlSlider*)sfx)->value = newVolumeFx;
+			((GuiControlSlider*)music)->value = app->audio->volumeMusic;
+			((GuiControlSlider*)sfx)->value = app->audio->volumeFx;
 		}
 
 		
@@ -253,11 +247,10 @@ bool Menu::Update(float dt)
 		if (music != nullptr)
 		{
 			int newVolume = ((GuiControlSlider*)music)->value;
-			// Asegurarse de que el nuevo volumen est� dentro de los l�mites v�lidos (0-128 para SDL Mixer)
+			// Asegurarse de que el nuevo volumen esta dentro de los l�mites v�lidos (0-128 para SDL Mixer)
 			newVolume = std::max(0, std::min(128, newVolume));
-			// Establecer el volumen de la m�sica
+			// Establecer el volumen de la musica
 			Mix_VolumeMusic(newVolume);
-			newVolumeAudio = newVolume;
 			app->audio->volumeMusic = newVolume;
 		}
 
@@ -273,7 +266,6 @@ bool Menu::Update(float dt)
 				Mix_Volume(channel, newSFXVolume);
 			}
 
-			newVolumeFx = newSFXVolume;
 			app->audio->volumeFx = newSFXVolume;
 		}
 
