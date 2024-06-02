@@ -179,13 +179,13 @@ bool Menu::Update(float dt)
 			SDL_Rect SfxPos = { windowWidth / 2 - 350 ,windowHeight / 2 - 20, 200, 50 };
 			sfx = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 101, "SFX", SfxPos, this, { 0, 0, 20, 20 }, { 0,0,0,0 }, 0, 100);
 	
-			SDL_Rect FullScreen = { windowWidth / 2 - 100 ,windowHeight / 2, 230,50 };
+			SDL_Rect FullScreen = { windowWidth / 2 - 298 ,windowHeight / 2 + 136, 230,50 };
 			fullScreen = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 102, "FULLSCREEN", FullScreen, this, { 0,0,0,0 }, { -50,0,0,0 });
 			
-			SDL_Rect vSyncpos = { windowWidth / 2 -150 ,windowHeight / 2 + 50, 200, 50 };
+			SDL_Rect vSyncpos = { windowWidth / 2 -165 ,windowHeight / 2 + 135, 200, 50 };
 			vsync = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 103, "VSYNC", vSyncpos, this, { 0, 0, 20, 20 } );
 
-			SDL_Rect TitlePos = { windowWidth / 2 - 350 ,windowHeight / 2 +  110, 230,50 };
+			SDL_Rect TitlePos = { windowWidth / 2 - 330 ,windowHeight / 2 +  170, 230,50 };
 			title = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 104, "VOLVER AL MENU", TitlePos, this, { 0,0,0,0 });
 
 			if (app->win->fullscreen)
@@ -425,7 +425,7 @@ bool Menu::PostUpdate()
 		}
 		if (ventana == 4)
 		{
-			app->render->DrawTexture(fondoAjustes, windowWidth / 8 + 40, windowHeight / 8 - 70, SDL_FLIP_NONE, 0, 0);
+			app->render->DrawTexture(fondoAjustes, windowWidth / 8 + 40, windowHeight / 8 - 69, SDL_FLIP_NONE, 0, 0);
 		}
 	}
 	

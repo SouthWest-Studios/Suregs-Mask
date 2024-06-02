@@ -97,7 +97,7 @@ void GuiControlSlider::Draw()
     //app->render->DrawRectangle(bounds, 150, 150, 150, 255, true, false);
     if (state == GuiControlState::NORMAL)
     {
-        app->render->DrawTexture(slider, bounds.x + 50, bounds.y, SDL_FLIP_NONE, 0, 0, true);
+        /*app->render->DrawTexture(slider, bounds.x + 50, bounds.y, SDL_FLIP_NONE, 0, 0, true);*/
     }
     if (state == GuiControlState::FOCUSED)
     {
@@ -116,6 +116,6 @@ void GuiControlSlider::Draw()
     app->render->DrawTexture(knob, knobRect.x, knobRect.y, SDL_FLIP_NONE, 0, 0, true);
 
     // Draw the text label
-    app->render->DrawTextBound(text.GetString(), bounds.x, bounds.y - 40, 70, { 0,0,0,0});
+    /*app->render->DrawTextBound(text.GetString(), bounds.x, bounds.y - 40, 70, { 0,0,0,0});*/
 
 }
