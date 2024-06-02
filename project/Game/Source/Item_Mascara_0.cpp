@@ -8,7 +8,6 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
-#include "DialogManager.h"
 
 Item_mascara_0::Item_mascara_0(EntityType type, int id, int ataque, int durabilidad, int magia, float peso)
 	: type(type), ataque(ataque), durabilidad(durabilidad), magia(magia), peso(peso), Entity(EntityType::ITEM_MASCARA0)
