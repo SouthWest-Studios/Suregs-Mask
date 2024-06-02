@@ -185,6 +185,11 @@ bool Map::PostUpdate()
 	// iterates the layers in the map
 	while (mapLayer != NULL) {
 		//Check if the property Draw exist get the value, if it's true draw the lawyer
+		if (mapLayer->data->tiles == 0) {
+			mapLayer = mapLayer->next;
+			continue;
+		}
+
 		if (mapLayer->data->properties.GetProperty("Draw") != NULL && mapLayer->data->properties.GetProperty("Draw")->value == "true") {
 
 			//iPoint playerPos = app->entityManager->GetPlayer()->position;

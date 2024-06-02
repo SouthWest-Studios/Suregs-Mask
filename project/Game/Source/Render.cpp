@@ -210,7 +210,11 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, SDL_RendererFlip fl
 
 	if (SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, flip) != 0)
 	{
-		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
+		/*LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
+		ret = false;*/
+		auto it = app->tex->texturePathMap.find(texture);
+		std::string texturePath = (it != app->tex->texturePathMap.end()) ? it->second : "Unknown";
+		LOG("Cannot blit to screen. Texture path: %s, SDL_RenderCopy error: %s", texturePath.c_str(), SDL_GetError());
 		ret = false;
 	}
 
@@ -253,7 +257,11 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, double scale, SDL_R
 
 	if (SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, flip) != 0)
 	{
-		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
+		/*LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
+		ret = false;*/
+		auto it = app->tex->texturePathMap.find(texture);
+		std::string texturePath = (it != app->tex->texturePathMap.end()) ? it->second : "Unknown";
+		LOG("Cannot blit to screen. Texture path: %s, SDL_RenderCopy error: %s", texturePath.c_str(), SDL_GetError());
 		ret = false;
 	}
 
