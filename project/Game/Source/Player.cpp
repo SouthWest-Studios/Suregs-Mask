@@ -2500,7 +2500,7 @@ void Player::PlayerMovement(float dt)
 
 	// Calcular la velocidad horizontal y vertical
 
-	if (die == false && desiredState != EntityStatePlayer::POCION &&!app->entityManager->GetIgory()->closeFinalSelecion) {
+	if (die == false && desiredState != EntityStatePlayer::POCION &&!app->entityManager->GetIgory()->killPadre) {
 		fPoint joystick = app->input->GetAxis(MOVE_HORIZONTAL, MOVE_VERTICAL);
 		float horizontalMovement = joystick.x;
 		float verticalMovement = joystick.y;
