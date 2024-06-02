@@ -143,5 +143,9 @@ public:
 	SDL_Texture* maskOneTexture;
 	SDL_Texture* maskTwoTexture;
 	SDL_Texture* maskThreeTexture;
+
+	// Audios
+	int low_health_fx;
+	int level_up_fx;
 };
 #endif // __HUD_H__

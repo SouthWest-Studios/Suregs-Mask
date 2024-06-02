@@ -76,6 +76,7 @@
       <switch_potion_fx path=""/>
       <player_get_damage_fx path="Assets/Audio/Fx/Player/player_get_damage_fx.wav"/>
       <player_death_fx path="Assets/Audio/Fx/Player/player_death_fx.wav"/>
+      <low_health_fx path="Assets/Audio/Fx/Player/low_health_fx.wav"/>
 
       <!--fishing-->
       <fishingrod_fx path="Assets/Audio/Fx/Fishing/fishingrod_fx.wav"/>
@@ -218,6 +219,7 @@
 					Tsprite="72" Pwidth="6904" sprite_x="863" sprite_y="600"/>
 
 		<boss_surma texturePath="Assets/Textures/Entidades/Boss/Surma/texture_boss_surma.png"
+					texturePathExplosion="Assets/Textures/Entidades/Boss/Surma/texture_boss_surma_explosion.png"
 					maxHealth="13000.0f" speed="180f" speedSecondFase="210f" attackDamage="250.0f"  attackDistance="3" viewDistance="40"
 					Tsprite="63" Pwidth="9126" sprite_x="1014" sprite_y="979"/>
 
@@ -536,6 +538,7 @@
 			<ataqueRapidoAnim start="53" end="58" speed="0.1f" loop="false"/>
 			<muerteAnim start="0" end="1" speed="0.1f" loop="false"/>
 			<cambioFaseAnim start="27" end="34" speed="0.1f" loop="true"/>
+			<explosionAnim start="0" end="9" speed="0.3f" loop="true"/>
 			
 		</boss_surma>
 

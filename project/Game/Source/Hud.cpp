@@ -113,6 +113,9 @@ bool Hud::Start()
 	maskTwoTexture = app->tex->Load(maskTwoTexturePath);
 	maskThreeTexture = app->tex->Load(maskThreeTexturePath);
 
+	low_health_fx = app->audio->LoadAudioFx("low_health_fx");
+	level_up_fx = app->audio->LoadAudioFx("level_up_fx");
+
 	/*Acquired_Item ai;
 	ai.lifeTimer.Start();
 	ai.text = "holaaa";
@@ -242,6 +245,7 @@ bool Hud::PostUpdate()
 	SDL_Rect* rectBarraVidaCalculado = new SDL_Rect{ rectBarraVida->x, rectBarraVida->y, rectW, rectBarraVida->h };
 
 	if (isLowHealth && !shrinking && !growing && app->entityManager->GetPlayer()->currentStats.currentHealth > 0) {
+		app->audio->PlayTimedFx(low_health_fx, 696);
 		shrinking = true;
 		animationTimer.Start();
 	}
@@ -278,7 +282,7 @@ bool Hud::PostUpdate()
 		app->render->DrawTexture(hudTexture, newX + 175, newY + 40, scale, SDL_FLIP_NONE, rectFondoBarraVida, 0);
 		app->render->DrawTexture(hudTexture, newX + 179, newY + 44, scale, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
 
-		if (animationTimer.ReadMSec() >= animationDuration * 1000) {
+		if (animationTimer.ReadMSec() >= animationDuration * 10000) {
 			growing = false;
 		}
 	}

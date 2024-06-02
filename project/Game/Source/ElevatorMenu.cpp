@@ -53,9 +53,8 @@ bool ElevatorMenu::Awake(pugi::xml_node config)
 // Called before the first frame
 bool ElevatorMenu::Start()
 {
-
-	
-	
+	button_fx = app->audio->LoadAudioFx("button_fx");
+	select_fx = app->audio->LoadAudioFx("select_fx");
 
 	return true;
 }
@@ -87,6 +86,7 @@ bool ElevatorMenu::Update(float dt)
 		if (open)
 		{
 			if ((app->input->GetButton(SELECT) == KEY_DOWN && PointerId < mazmorra + plus + 1) || (app->input->GetButton(CONFIRM) == KEY_DOWN && PointerId < mazmorra + plus + 1)) {
+				app->audio->PlayFx(select_fx);
 				UseElevator(PointerId, mazmorra);
 			}
 		}
@@ -173,12 +173,16 @@ void ElevatorMenu::OnMovePointer()
 			PointerPosition.y += 90;
 			PointerId += 2;
 			verticalPointerId += 1;
+
+			app->audio->PlayFx(button_fx);
 		}
 		else
 		{
 			PointerId -= 6;
 			PointerPosition.y = 100;
 			verticalPointerId = 0;
+
+			app->audio->PlayFx(button_fx);
 		}
 
 
@@ -190,12 +194,16 @@ void ElevatorMenu::OnMovePointer()
 			PointerPosition.y -= 90;
 			PointerId -= 2;
 			verticalPointerId -= 1;
+
+			app->audio->PlayFx(button_fx);
 		}
 		else
 		{
 			PointerId += 6;
 			PointerPosition.y = 100 + 90 * (3);
 			verticalPointerId = 3;
+
+			app->audio->PlayFx(button_fx);
 		}
 
 
@@ -206,6 +214,8 @@ void ElevatorMenu::OnMovePointer()
 			horitzontalPointerId = 0;
 			PointerPosition.x = 400;
 			PointerId -= 1;
+
+			app->audio->PlayFx(button_fx);
 		}
 		else
 		{
@@ -215,6 +225,8 @@ void ElevatorMenu::OnMovePointer()
 				PointerPosition.x += 99;
 			}
 			PointerId += 1;
+
+			app->audio->PlayFx(button_fx);
 		}
 
 	}
@@ -226,12 +238,15 @@ void ElevatorMenu::OnMovePointer()
 				horitzontalPointerId = 1;
 				PointerPosition.x = 499;
 
+				app->audio->PlayFx(button_fx);
 		}
 		else
 		{
 			horitzontalPointerId -= 1;
 			PointerPosition.x -= 99;
 			PointerId -= 1;
+
+			app->audio->PlayFx(button_fx);
 		}
 	}
 }

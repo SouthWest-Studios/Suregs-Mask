@@ -724,7 +724,8 @@ bool EntityManager::PostLateUpdate()
 {
 
 	//app->render->DrawTexture(texture, BMRposition.x - 410, BMRposition.y - 300, SDL_FLIP_HORIZONTAL, &rect);
-
+	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
+	}
 
 	if (playerVacio) {
 		uint w;
@@ -900,6 +901,13 @@ void EntityManager::UpdateRoomActivation() {
 
 
 
+}
+
+void EntityManager::showFinalkillPadre()
+{
+
+	/*app->render->DrawTexture(texture, position.x - 110, position.y - 160, 0.5, SDL_FLIP_HORIZONTAL, &rect);
+	SDL_SetTextureAlphaMod(texture, 255);*/
 }
 
 bool EntityManager::LoadState(pugi::xml_node node) {
