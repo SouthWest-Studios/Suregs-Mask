@@ -274,13 +274,16 @@ void Enemy_Boorok::Attack(float dt, iPoint playerPos)
 		currentAnimation = &attackAnim;
 		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	}
-
-	//sonido ataque
-	app->audio->PlayFx(boorok_attack_fx);
 }
 
 void Enemy_Boorok::Die()
 {
+	if (death_fx == false)
+	{
+		app->audio->PlayFx(boorok_death_fx);
+		death_fx = true;
+	}
+
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	currentAnimation = &dieAnim;
 
@@ -440,7 +443,7 @@ void Enemy_Boorok::TakeDamage(float damage) {
 			health -= damage;
 			invulnerabilityTimer.Start();
 			timerRecibirDanioColor.Start();
-			app->audio->PlayRandomFx(boorok_get_damage_fx, boorok_get_damageAlt_fx, NULL);
+			app->audio->PlayRandomTimedFx(boorok_get_damage_fx, boorok_get_damageAlt_fx, NULL, 1604);
 		}
 	}
 }
@@ -509,6 +512,8 @@ void Enemy_Boorok::Sleeping()
 
 void Enemy_Boorok::chargeAttack(iPoint playerPos)
 {
+	//app->audio->PlayFx(boorok_attack_fx);
+
 	isCharging = true;
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	printf("asas as\n");

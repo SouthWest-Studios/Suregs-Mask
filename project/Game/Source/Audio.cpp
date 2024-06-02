@@ -377,6 +377,7 @@ void Audio::PlayMusicAfterRandomDelay(const char* name, float fadeTime)
 		switch (music)
 		{
 		case 3:
+			StopMusic(0.0f);
 			LoadAudioMusic(name, fadeTime);
 			playingMusic = true;
 			musicTimer.Start();

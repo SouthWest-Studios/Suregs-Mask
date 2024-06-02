@@ -35,8 +35,10 @@
 			<menu path="Assets/Audio/Music/menu.ogg"/>
       <town path="Assets/Audio/Music/town.ogg"/>
       <town_fx path="Assets/Audio/Music/town_fx.ogg"/>
-      <dungeon path="Assets/Audio/Music/DIRTY LOVE.ogg"/>
+      <dungeon path="Assets/Audio/Music/dungeon.ogg"/>
       <credits path="Assets/Audio/Music/credits.ogg"/>
+      <good_ending path="Assets/Audio/Music/good_ending.ogg"/>
+      <bad_ending path="Assets/Audio/Music/bad_ending.ogg"/>
 		</music>
 
 		<fx>
@@ -103,7 +105,7 @@
       <khurt_get_damage_fx path=""/>
       <khurt_death_fx path=""/>
       
-      <boorok_attack_fx path=""/>
+      <boorok_attack_fx path="Assets/Audio/Fx/Enemies/boorok_attack_fx.wav"/>
       <boorok_sleep_fx path=""/>
       <boorok_get_damage_fx path="Assets/Audio/Fx/Enemies/boorok_get_damage_fx.wav"/>
       <boorok_get_damageAlt_fx path="Assets/Audio/Fx/Enemies/boorok_get_damageAlt_fx.wav"/>
@@ -142,7 +144,9 @@
       <father_shield_fx path=""/>
       <father_shield_broken_fx path=""/>
       <father_magic_attack_fx path=""/>
-      <father_get_damage_fx path=""/>
+      <father_get_damage_fx path="Assets/Audio/Fx/Bosses/father_get_damage_fx.wav"/>
+      <father_get_damageAlt_fx path="Assets/Audio/Fx/Bosses/father_get_damageAlt_fx.wav"/>
+      <father_get_damageAlt2_fx path="Assets/Audio/Fx/Bosses/father_get_damageAlt2_fx.wav"/>
       <father_death_fx path=""/>
 		</fx>
 	</sounds>
