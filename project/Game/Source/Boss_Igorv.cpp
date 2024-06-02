@@ -315,9 +315,6 @@ bool Boss_Igory::PostUpdate() {
 		if (padreTranparente <= 0 &&!deletePadre) {
 			CleanUp();
 			deletePadre = true;
-
-			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu);
-			app->scene_menu->showCredits = true;
 			closeFinalSelecion = false;
 		}
 	}

@@ -120,8 +120,13 @@ public:
 	bool goTransparent = false;
 
 
-
-
+	int photoTransparent = 0;
+	bool increasing = true;
+	bool showPhoto = false;
+	bool goCredit = false;
+	Timer stayTime;
+	SDL_Texture* textureKillPadre = NULL;
+	SDL_Texture* textureUnirPadre = NULL;
 
 private:
 
@@ -142,6 +147,7 @@ private:
 	Animation eyeIdle;
 	Animation eyeEndIdle;
 	SDL_Texture* texture = NULL;
+	
 	SDL_Rect* spritePositions = nullptr;
 
 };

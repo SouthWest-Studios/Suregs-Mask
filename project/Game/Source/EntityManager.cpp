@@ -67,6 +67,7 @@
 #include "Menu.h";
 #include "Window.h";
 #include "Hud.h";
+#include "Scene_menu.h";
 #include "Item_Mascara_0.h"
 #include "Item_Mascara_1.h"
 #include "Item_Mascara_2.h"
@@ -140,6 +141,8 @@ bool EntityManager::Start() {
 	//eyeEndIdle.LoadAnim("entytiManager", "eyeEndIdle", spritePositions);
 
 	texture = app->tex->Load(configNode.attribute("texturePath").as_string());
+	textureKillPadre = app->tex->Load(configNode.attribute("textureKillPath").as_string());
+	textureUnirPadre = app->tex->Load(configNode.attribute("textureUnirPath").as_string());
 	//printf("\nEntyti Manager %s  ", texture);
 	//eyeAnimation.LoadAnim("boorok", "sleepAnim", spritePositions);
 	currentAnimation = &eyeIdle;
@@ -163,6 +166,13 @@ bool EntityManager::CleanUp()
 		item = item->prev;
 	}
 
+	if (textureKillPadre != nullptr) {
+		app->tex->UnLoad(textureKillPadre);
+	}
+	if (textureUnirPadre != nullptr) {
+		app->tex->UnLoad(textureUnirPadre);
+	}
+
 	entities.Clear();
 	tpEntities.Clear();
 
@@ -172,9 +182,9 @@ bool EntityManager::CleanUp()
 	eyeIdle.Clear();
 	eyeEndIdle.Clear();
 
-	
+
 	//delete bossIgory;
-	
+
 
 	return ret;
 }
@@ -668,6 +678,10 @@ bool EntityManager::Update(float dt)
 
 bool EntityManager::PostUpdate()
 {
+
+
+
+
 	bool ret = true;
 	ListItem<Entity*>* item;
 	Entity* pEntity = NULL;
@@ -713,16 +727,14 @@ bool EntityManager::PostUpdate()
 
 	app->map->PrintMapFront();
 
-
-
-
-
 	return ret;
 }
 
 bool EntityManager::PostLateUpdate()
 {
-
+	if (bossIgory->deletePadre) {
+		showFinalkillPadre();
+	}
 	//app->render->DrawTexture(texture, BMRposition.x - 410, BMRposition.y - 300, SDL_FLIP_HORIZONTAL, &rect);
 	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
 	}
@@ -734,7 +746,7 @@ bool EntityManager::PostLateUpdate()
 		if (playerCantMove) {
 			app->physics->active = false;
 		}
-		
+
 		SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, transparentNum);
 		// Black with 50% opacity
 		if (!goTransparent) {
@@ -906,8 +918,56 @@ void EntityManager::UpdateRoomActivation() {
 void EntityManager::showFinalkillPadre()
 {
 
-	/*app->render->DrawTexture(texture, position.x - 110, position.y - 160, 0.5, SDL_FLIP_HORIZONTAL, &rect);
-	SDL_SetTextureAlphaMod(texture, 255);*/
+	uint w;
+	uint h;
+	app->win->GetWindowSize(w, h);
+	SDL_Rect overlayRect = { 0, 0, w , h };
+
+	if (showPhoto) {
+		if (bossIgory->seleccionFinalPersonaje == 1) {
+		app->render->DrawTexture(textureKillPadre, 0, 0, SDL_FLIP_NONE, &overlayRect, 0, 0);
+		}
+		else
+		{
+			app->render->DrawTexture(textureUnirPadre, 0, 0, SDL_FLIP_NONE, &overlayRect, 0, 0);
+		}
+	}
+
+
+	if (increasing) {//无到黑 1黑屏
+		photoTransparent += 1;
+		if (photoTransparent >= 255) {
+			photoTransparent = 255;
+			if (goCredit) {
+				app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu);
+				app->scene_menu->showCredits = true;
+			}
+			else
+			{
+				increasing = false;
+				showPhoto = true;
+				stayTime.Start();
+			}
+		}
+	}
+	else {//黑到无 2显示图片
+		photoTransparent -= 1;
+		if (photoTransparent <= 0) {
+			photoTransparent = 0;
+
+			if (stayTime.ReadMSec() >= 15000) {
+				increasing = true;
+				goCredit = true;
+			}
+		}
+	}
+
+	SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, photoTransparent);
+	SDL_RenderFillRect(app->render->renderer, &overlayRect);
+	//printf("\n photoTransparent %d", photoTransparent);
+
+
+
 }
 
 bool EntityManager::LoadState(pugi::xml_node node) {
