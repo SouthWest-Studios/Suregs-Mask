@@ -19,6 +19,7 @@
 #include "Defs.h"
 #include "Log.h"
 #include "SString.h"
+#include "Window.h"
 
 TreeManager::TreeManager(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -235,7 +236,7 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		}
 		case 1:
 		{
-			entity->name = "Dano 1";
+			entity->name = "Poder I";
 			entity->desc = "Aumenta el poder de la habilidad principal a 80 puntos";
 			entity->desc1 = "Aumenta el poder de la habilidad principal a 120 puntos";
 			entity->desc2 = "Aumenta el poder de la habilidad principal a 50 puntos";
@@ -251,7 +252,7 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		}
 		case 2:
 		{
-			entity->name = "Dano 2";
+			entity->name = "Poder II";
 			entity->desc = "Aumenta el poder de la habilidad principal a 130 puntos";
 			entity->desc1 = "Aumenta el poder de la habilidad principal a 180 puntos";
 			entity->desc2 = "Aumenta el poder de la habilidad principal a 70 puntos";
@@ -263,7 +264,7 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		}
 		case 3:
 		{
-			entity->name = "Dano 3";
+			entity->name = "Poder III";
 			entity->desc = "Aumenta el poder de la habilidad principal a 200 puntos";
 			entity->desc1 = "Aumenta el poder de la habilidad principal a 250 puntos";
 			entity->desc2 = "Aumenta el poder de la habilidad principal a 100 puntos";
@@ -275,7 +276,7 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		}
 		case 4:
 		{
-			entity->name = "Dano 4";
+			entity->name = "Poder IV";
 			entity->desc = "Aumenta el poder de la habilidad principal a 300 puntos";
 			entity->desc1 = "Aumenta el poder de la habilidad principal a 400 puntos";
 			entity->desc2 = "Aumenta el poder de la habilidad principal a 150 puntos";
@@ -307,7 +308,7 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		}
 		case 1:
 		{
-			entity->name = "CoolDown 1";
+			entity->name = "CoolDown I";
 			entity->desc = "Reduce el cooldown  de la habilidad principal a 23 segundos";
 			entity->desc1 = "Reduce el cooldown  de la habilidad principal a 28 segundos";
 			entity->desc2 = "Reduce el cooldown de la habilidad principal a 18 segundos";
@@ -323,7 +324,7 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		}
 		case 2:
 		{
-			entity->name = "CoolDown 2";
+			entity->name = "CoolDown II";
 			entity->desc = "Reduce el cooldown de la habilidad principal a 20 segundos";
 			entity->desc1 = "Reduce el cooldown de la habilidad principal a 25 segundos";
 			entity->desc2 = "Reduce el cooldown de la habilidad principal a 16 segundos";
@@ -335,7 +336,7 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		}
 		case 3:
 		{
-			entity->name = "CoolDown 3";
+			entity->name = "CoolDown III";
 			entity->desc = "Reduce el cooldown de la habilidad principal a 17 segundos";
 			entity->desc1 = "Reduce el cooldown de la habilidad principal a 23 segundos";
 			entity->desc2 = "Reduce el cooldown de la habilidad principal a 13 segundos";
@@ -347,7 +348,7 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		}
 		case 4:
 		{
-			entity->name = "CoolDown 4";
+			entity->name = "CoolDown IV";
 			entity->desc = "Reduce el cooldown de la habilidad principal a 15 segundos";
 			entity->desc1 = "Reduce el cooldown de la habilidad principal a 20 segundos";
 			entity->desc2 = "Reduce el cooldown de la habilidad principal a 10 segundos";
@@ -378,10 +379,10 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		}
 		case 1:
 		{
-			entity->name = "Rayos 1";
-			entity->name2 = "Alcance 1";
-			entity->name3 = "Distancia 1";
-			entity->name4 = "Duracion 1";
+			entity->name = "Rayos I";
+			entity->name2 = "Alcance I";
+			entity->name3 = "Distancia I";
+			entity->name4 = "Duracion I";
 			entity->desc = "Aumenta el número de rayos de la habilidad principal a 2";
 			entity->desc1 = "Aumenta el alcance de la habilidad principal un 5%";
 			entity->desc2 = "Aumenta la distancia de la habilidad principal un 5%";
@@ -413,10 +414,10 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		}
 		case 2:
 		{
-			entity->name = "Rayos 2";
-			entity->name2 = "Alcance 2";
-			entity->name3 = "Distancia 2";
-			entity->name4 = "Duracion 2";
+			entity->name = "Rayos II";
+			entity->name2 = "Alcance II";
+			entity->name3 = "Distancia II";
+			entity->name4 = "Duracion II";
 			entity->desc = "Aumenta el número de rayos de la habilidad principal a 3";
 			entity->desc1 = "Aumenta el alcance de la habilidad principal un 5%";
 			entity->desc2 = "Aumenta la distancia de la habilidad principal un 5%";
@@ -440,10 +441,10 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		}
 		case 3:
 		{
-			entity->name = "Rayos 3";
-			entity->name2 = "Alcance 3";
-			entity->name3 = "Distancia 3";
-			entity->name4 = "Duracion 3";
+			entity->name = "Rayos III";
+			entity->name2 = "Alcance III";
+			entity->name3 = "Distancia III";
+			entity->name4 = "Duracion III";
 			entity->desc = "Aumenta el número de rayos de la habilidad principal a 4";
 			entity->desc1 = "Aumenta el alcance de la habilidad principal un 5%";
 			entity->desc2 = "Aumenta la distancia de la habilidad principal un 5%";
@@ -467,10 +468,10 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		}
 		case 4:
 		{
-			entity->name = "Rayos 4";
-			entity->name2 = "Alcance 4";
-			entity->name3 = "Distancia 4";
-			entity->name4 = "Duracion 4";
+			entity->name = "Rayos IV";
+			entity->name2 = "Alcance IV";
+			entity->name3 = "Distancia IV";
+			entity->name4 = "Duracion IV";
 			entity->desc = "Aumenta el número de rayos de la habilidad principal a 5";
 			entity->desc1 = "Aumenta el alcance de la habilidad principal un 5%";
 			entity->desc2 = "Aumenta la distancia de la habilidad principal un 5%";
@@ -513,9 +514,9 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		}
 		case 1:
 		{
-			entity->name = "Veneno 1";
-			entity->name2 = "Invisible 1";
-			entity->name3 = "Aumento 1";
+			entity->name = "Veneno I";
+			entity->name2 = "Invisible I";
+			entity->name3 = "Aumento I";
 			entity->desc = "Activa la capacidad de veneno al usar la habilidad principal";
 			entity->desc1 = "Aumenta la duración de la habilidad principal a 6 segundos";
 			entity->desc2 = "Aumenta la vida que otorga la habilidad principal un 5%";
@@ -542,9 +543,9 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		}
 		case 2:
 		{
-			entity->name = "Veneno 2";
-			entity->name2 = "Invisible 2";
-			entity->name3 = "Aumento 2";
+			entity->name = "Veneno II";
+			entity->name2 = "Invisible II";
+			entity->name3 = "Aumento II";
 			entity->desc = "Aumenta el poder del veneno a 10 puntos";
 			entity->desc1 = "Aumenta la duración de la habilidad principal a 7,3 segundos";
 			entity->desc2 = "Aumenta la vida que otorga la habilidad principal un 5%";
@@ -566,9 +567,9 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		}
 		case 3:
 		{
-			entity->name = "Veneno 3";
-			entity->name2 = "Invisible 3";
-			entity->name3 = "Aumento 3";
+			entity->name = "Veneno III";
+			entity->name2 = "Invisible III";
+			entity->name3 = "Aumento III";
 			entity->desc = "Aumenta la duración del veneno a 10 segundos";
 			entity->desc1 = "Aumenta la duración de la habilidad principal a 8,6 segundos";
 			entity->desc2 = "Aumenta la vida que otorga la habilidad principal un 5%";
@@ -590,9 +591,9 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		}
 		case 4:
 		{
-			entity->name = "Veneno 4";
-			entity->name2 = "Invisible 4";
-			entity->name3 = "Aumento 4";
+			entity->name = "Veneno IV";
+			entity->name2 = "Invisible IV";
+			entity->name3 = "Aumento IV";
 			entity->desc = "Aumenta el poder del veneno a 15 puntos y la duración a 15 segundos";
 			entity->desc1 = "Aumenta la duración de la habilidad principal a 10 segundos";
 			entity->desc2 = "Aumenta la vida que otorga la habilidad principal un 10%";
@@ -1680,6 +1681,16 @@ bool TreeManager::PostUpdate()
 
 	if (mostrar == true)
 	{
+		uint windowWidth, windowHeight;
+		app->win->GetWindowSize(windowWidth, windowHeight);
+		Uint8 alpha = 188;  // Valor de transparencia (0-255)
+		SDL_Texture* transparentTexture = app->menu->CreateTransparentTexture(app->render->renderer, windowWidth, windowHeight, alpha);
+		if (transparentTexture != nullptr) {
+			SDL_SetTextureBlendMode(transparentTexture, SDL_BLENDMODE_BLEND);
+			SDL_RenderCopy(app->render->renderer, transparentTexture, nullptr, nullptr);
+			SDL_DestroyTexture(transparentTexture);
+		}
+
 		app->render->DrawTexture(BackGroundTexture, 100, 100, SDL_FLIP_NONE, 0, 0);
 		ListItem<Tree*>* item;
 		Tree* pEntity = NULL;
@@ -1986,7 +1997,7 @@ bool TreeManager::PostUpdate()
 				if (mask == 1)
 				{
 
-					app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, {0,0,0});
+					app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, {0,0,0}, app->render->titleFont);
 					app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
 					app->render->DrawTextBound(itum->data->desc.c_str(), 870, 300, 150, { 0,0,0 });
 
@@ -1995,11 +2006,11 @@ bool TreeManager::PostUpdate()
 				{
 					if (itum->data->name2 == "")
 					{
-						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, { 0,0,0 });
+						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
 					}
 					else
 					{
-						app->render->DrawTextBound(itum->data->name2.GetString(), 870, 150, 150, { 0,0,0 });
+						app->render->DrawTextBound(itum->data->name2.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
 					}
 					
 					app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
@@ -2010,13 +2021,13 @@ bool TreeManager::PostUpdate()
 				{
 					if (itum->data->name3 == "")
 					{
-						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, { 0,0,0 });
+						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
 					}
 					else
 					{
-						app->render->DrawTextBound(itum->data->name3.GetString(), 870, 150, 150, { 0,0,0 });
+						app->render->DrawTextBound(itum->data->name3.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
 					}
-					app->render->DrawTextBound(itum->data->name3.GetString(), 870, 150, 150, { 0,0,0 });
+					/*app->render->DrawTextBound(itum->data->name3.GetString(), 870, 150, 150, { 0,0,0 });*/
 					app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
 					app->render->DrawTextBound(itum->data->desc2.c_str(), 870, 300, 150, { 0,0,0 });
 
@@ -2025,13 +2036,13 @@ bool TreeManager::PostUpdate()
 				{
 					if (itum->data->name4 == "")
 					{
-						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, { 0,0,0 });
+						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
 					}
 					else
 					{
-						app->render->DrawTextBound(itum->data->name4.GetString(), 870, 150, 150, { 0,0,0 });
+						app->render->DrawTextBound(itum->data->name4.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
 					}
-					app->render->DrawTextBound(itum->data->name4.GetString(), 870, 150, 150, { 0,0,0 });
+					/*app->render->DrawTextBound(itum->data->name4.GetString(), 870, 150, 150, { 0,0,0 });*/
 					app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
 					app->render->DrawTextBound(itum->data->desc3.c_str(), 870, 300, 150, { 0,0,0 });
 

@@ -62,6 +62,7 @@ public:
 	SDL_Texture* savedGames = nullptr;
 	SDL_Texture* controls = nullptr;
 	SDL_Texture* coin = nullptr;
+	SDL_Texture* clock = nullptr;
 
 
 	const char* menuMain_tp = nullptr;
@@ -72,8 +73,15 @@ public:
 	const char* savedGames_tp = nullptr;
 	const char* controls_tp = nullptr;
 	const char* coin_tp = nullptr;
+	const char* clock_tp = nullptr;
 	
-	int coinQuantity;
+	int coinQuantityOne;
+	int coinQuantityTwo;
+	int coinQuantityThree;
+
+	float timeOne;
+	float timeTwo;
+	float timeThree;
 
 	List<GuiControl*> controlsScene;
 	List<GuiControl*> controlsSettings;

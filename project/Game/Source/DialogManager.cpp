@@ -15,6 +15,7 @@
 #include "Audio.h"
 #include "Menu.h"
 #include "QuestManager.h"
+#include "InventoryManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -139,6 +140,12 @@ Dialog* DialogManager::CreateDialog(pugi::xml_node itemNode, std::string name, c
 		dialog->questLine = itemNode.attribute("questLine").as_int();
 		dialog->nextTargetID = itemNode.attribute("nextTargetID").as_int();
 		dialog->actualTargetID = itemNode.attribute("actualTargetID").as_int();
+	}
+
+	if (strcmp(type, "SelectChoose") == 0) {
+		dialog->type = DialogType::SELECT_CHOOSE;
+		dialog->selectChoose = itemNode.attribute("selection").as_int();
+		
 	}
 
 	return dialog;
@@ -383,6 +390,10 @@ bool DialogManager::PostUpdate() {
 				if (app->questManager->GetQuestLineIndex(actualDialog->questLine) == actualDialog->actualTargetID) {
 					app->questManager->UpdateQuestLine(actualDialog->questLine, actualDialog->nextTargetID);
 				}
+			}
+			if (actualDialog->type == DialogType::SELECT_CHOOSE) {
+
+				app->inventoryManager->seleccionFinalPersonaje = actualDialog->selectChoose;
 			}
 
 

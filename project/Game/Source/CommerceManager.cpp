@@ -242,6 +242,7 @@ bool CommerceManager::PostUpdate()
 {
 	bool ret = true;
 
+
 	for (int i = 0; i < commerces.size(); i++) {
 		if (commerces.at(i)->active) {
 			commerces.at(i)->PostUpdate();

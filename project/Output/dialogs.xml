@@ -5,12 +5,12 @@
 	<dialog id="911" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/phoskaFace.png" name="Phoska">
 		<sentences>
 			<sentence type="choose" text="¡Buenos días! Bienvenido a la herrería de Phoska.">
-			
+
 				<option1 text="¿Qué ofreces?">
 					<sentence text="Con los materiales necesarios podré forjar mejoras para tu equipo. ¡No dudes en venir cuando quieras mejorar tus herramientas de combate!"/>
-					<commerce id="3"/> 
+					<commerce id="3"/>
 				</option1>
-			
+
 				<option2 text="¡Adiós!">
 					<sentence text="¡No dudes en venir más por aquí!"/>
 				</option2>
@@ -81,7 +81,7 @@
 			</sentence>
 		</sentences>
 	</dialog>
-	
+
 	<!--Mision (916)-->
 	<dialog id="916" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/phoskaFace.png" name="Phoska">
 		<sentences>
@@ -91,11 +91,11 @@
 					<sentence text="Con los materiales necesarios podré forjar mejoras para tu equipo. ¡No dudes en venir cuando quieras mejorar tus herramientas de combate!"/>
 					<commerce id="3"/>
 				</option1>
-				
+
 				<option2 text="Tengo una espada para reparar.">
 					<sentence text="¡No dudes en venir más por aquí!"/>
 				</option2>
-				
+
 			</sentence>
 		</sentences>
 	</dialog>
@@ -131,9 +131,9 @@
 			</sentence>
 		</sentences>
 	</dialog>
-	
+
 	<!--Mision (919)-->
-	
+
 	<dialog id="919" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/phoskaFace.png" name="Phoska">
 		<sentences>
 			<sentence type="choose" text="¡Buenos días! Parece que te estás armando de maravilla.">
@@ -183,9 +183,9 @@
 			</sentence>
 		</sentences>
 	</dialog>
-	
+
 	<!--Mision (923)-->
-	
+
 	<dialog id="923" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/phrumoFace.png" name="Phrumo">
 		<sentences>
 			<sentence type="choose" text="Bienvenido a la tienda de Phrumo. ¿Te ha molestado mi abuelo? Disculpas...">
@@ -199,6 +199,9 @@
 					<sentence text="¡Estaré aquí para comprar tus objetos!"/>
 				</option2>
 			</sentence>
+
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="7" actualTargetID="6" />
+
 		</sentences>
 	</dialog>
 
@@ -265,7 +268,7 @@
 			</sentence>
 		</sentences>
 	</dialog>
-	
+
 	<dialog id="928" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/phrumoFace.png" name="Phrumo">
 		<sentences>
 			<sentence type="choose" text="¡Qué sorpresa! Bienvenido a la tienda de Phrumo.">
@@ -345,6 +348,9 @@
 					<sentence text="¡Te estaré esperando! Jijiji…"/>
 				</option2>
 			</sentence>
+
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="8" actualTargetID="7" />
+
 		</sentences>
 	</dialog>
 
@@ -383,9 +389,12 @@
 	<dialog id="936" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/zhyukaFace.png" name="Zhyuka">
 		<sentences>
 			<sentence text="¡Hola de nuevo! Jijiji…"/>
-			<sentence text="Soy Zhyuka, la bruja de la aldea, parece que te has enterado de mis nuevas creaciones, jijiji…"/>
+			<sentence text="¿Esta gema es para mi? ¡Con esto podré mejorar mis pociones! jijiji…"/>
 			<commerce id="2"/>
 		</sentences>
+
+		<sentence type="QuestUpdate" questLine="1" nextTargetID="15" actualTargetID="14" />
+
 	</dialog>
 
 	<dialog id="937" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/zhyukaFace.png" name="Zhyuka">
@@ -622,16 +631,16 @@
 				</mission_event>
 			</sentence>
 		</sentences>
-	</dialog>	
+	</dialog>
 
 
 	<!--MUJER_ENAMORADA(1300-1400)-->
 	<dialog id="1300" texturepath="Assets/Textures/npc_enamorada.jpg" facetexturepath="Assets/Textures/npc_enamorada.jpg" name="npc_enamorada">
 		<sentences>
 			<sentence text="Hola, ¿podrías hacerme un favor?" />
-			
+
 			<sentence type="choose" text="¿Qué necesitas?">
-				
+
 				<!-- Opción 1: Aceptar la misión -->
 				<option1 text="Claro, ¿qué puedo hacer por ti?">
 					<mission_event type="activation" mission_id="1">
@@ -650,9 +659,9 @@
 	<dialog id="1301" texturepath="Assets/Textures/npc_enamorado.jpg" facetexturepath="Assets/Textures/npc_enamorado.jpg" name="npc_enamorado">
 		<sentences>
 			<sentence text="Hola, ¿qué tal?" />
-			
+
 			<sentence type="choose" text="¿Qué deseas?">
-				
+
 				<!-- Opción 1: Informar sobre el mensaje -->
 				<option1 text="Hola, tu querida te echa mucho de menos.">
 					<mission_event type="progress" mission_id="1">
@@ -660,7 +669,7 @@
 					</mission_event>
 				</option1>
 
-				
+
 				<!-- Opción 2: Respuesta alternativa -->
 				<option2 text="Hola, tenemos algo en común, nadie nos quiere.">
 					<!-- Respuesta alternativa del NPC -->
@@ -690,17 +699,17 @@
 
 
 	<!--DIALOGOS ABUELAS (101-109)-->
-	
+
 	<dialog id="101" texturepath="Assets/Textures/Interfaz/Dialogos/Dorothy.png">
 		<sentences>
 			<sentence name="Dorothy"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/dorothyFace.png"
 			text="Hola Jakhov, ¡hay que ver cómo creces! Hace nada eras aún un niño..."/>
-			
+
 			<sentence name="Hely"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/helyFace.png"
 			text="¿Vas al entrenamiento? Creo que ya te están esperando. Deberías darte prisa cariño..."/>
-			
+
 			<sentence name="Pathy"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/pathyFace.png"
 			text="No te molestamos más, ¡cuando salgas podemos seguir hablando! Ya sabes que siempre estamos aquí..."/>
@@ -847,18 +856,18 @@
 		</sentences>
 	</dialog>
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-<!--DIALOGOS PAREJA (201-209)-->
+
+
+
+
+
+
+
+
+
+
+
+	<!--DIALOGOS PAREJA (201-209)-->
 
 	<dialog id="201" texturepath="Assets/Textures/Interfaz/Dialogos/Patzo.png">
 		<sentences>
@@ -967,19 +976,19 @@
 			text="Hemos decidido que la boda será en tan solo 3 meses, después nos iremos a la ciudad..."/>
 		</sentences>
 	</dialog>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-<!--DIALOGOS VECINO (301-309)-->
+
+
+
+
+
+
+
+
+
+
+
+
+	<!--DIALOGOS VECINO (301-309)-->
 
 	<dialog id="301" texturepath="Assets/Textures/Interfaz/Dialogos/Hemyl.png">
 		<sentences>
@@ -1106,19 +1115,19 @@
 					  text="Visita las tiendas del pueblo para comprar mejores opciones de combate, por favor..."/>
 		</sentences>
 	</dialog>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-<!--DIALOGOS BULLIES (401-409)-->
+
+
+
+
+
+
+
+
+
+
+
+
+	<!--DIALOGOS BULLIES (401-409)-->
 
 	<dialog id="401" texturepath="Assets/Textures/Interfaz/Dialogos/Huhan.png">
 		<sentences>
@@ -1263,19 +1272,19 @@
 			text="Como os pasáis, seguro que se cree invencible, como el 'Legendario Hérore de la Aldea'..."/>
 		</sentences>
 	</dialog>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-<!--DIALOGOS ABUELO TIENDA (501-509)-->
+
+
+
+
+
+
+
+
+
+
+
+
+	<!--DIALOGOS ABUELO TIENDA (501-509)-->
 
 	<dialog id="501" texturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png">
 		<sentences>
@@ -1390,17 +1399,17 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 		</sentences>
 	</dialog>
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-<!--DIALOGOS PREOCUPADA (601-609)-->
+
+
+
+
+
+
+
+
+
+
+	<!--DIALOGOS PREOCUPADA (601-609)-->
 
 	<dialog id="601" texturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png">
 		<sentences>
@@ -1545,17 +1554,17 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 			text="Que recuerdos me trae, ¡ay Dios mío! Que ilusión..."/>
 		</sentences>
 	</dialog>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-<!--DIALOGOS ENAMORADA (701-709)-->
+
+
+
+
+
+
+
+
+
+
+	<!--DIALOGOS ENAMORADA (701-709)-->
 
 	<dialog id="701" texturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png">
 		<sentences>
@@ -1603,6 +1612,9 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
 			text="P-pe-pero... No le d-di-digas que la he escrito yo..."/>
 		</sentences>
+
+		<sentence type="QuestUpdate" questLine="2" nextTargetID="2" actualTargetID="1" />
+
 	</dialog>
 
 	<dialog id="704" texturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png">
@@ -1692,19 +1704,19 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 			text="¿Te acuerdas que te pregunté si me podías acompañar a la boda de Patzo y Patza? He decidido ir sola... ¡PORQUE NO HAY NADA MALO EN ESTAR SOLA! Perdón de nuevo... Je, je..."/>
 		</sentences>
 	</dialog>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-<!--DIALOGOS TRILLIZOS (801-809)-->
+
+
+
+
+
+
+
+
+
+
+
+
+	<!--DIALOGOS TRILLIZOS (801-809)-->
 
 	<dialog id="801" texturepath="Assets/Textures/Interfaz/Dialogos/zuphoFace.png">
 		<sentences>
@@ -1876,7 +1888,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 			</sentence>
 		</sentences>
 	</dialog>
-	
+
 	<dialog id="902" texturepath="Assets/Textures/guerreroTutorial.png" facetexturepath="Assets/Textures/guerreroTutorial.png" name="Trynmba">
 		<sentences>
 			<sentence type="choose" text="¿Estás listo para el combate de práctica? Si necesitas ayuda, habla con Kurvhy, que está a mi lado.">
@@ -1886,7 +1898,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 				</option1>
 
 				<option2 text="Todavía no."/>
-			
+
 			</sentence>
 		</sentences>
 	</dialog>
@@ -1904,9 +1916,8 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 			</sentence>
 		</sentences>
 	</dialog>
-			<sentence name="Dinka"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/dinkaFace.png"
-			text="¿Artefacto lleno de poder? Un respeto, que me llamo Dinka. Pero sí, tu padre debía ser muy sabio, tengo mucho poder."/>
+	
+	
 	<dialog id="951" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFace.png" name="Vhea">
 		<sentences>
 			<sentence type="choose" text="Buenos días cariño, ¿otra vez la misma pesadilla?">
@@ -1931,7 +1942,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 			</sentence>
 
 			<sentence type="QuestUpdate" questLine="1" nextTargetID="2" actualTargetID="1" />
-			
+
 		</sentences>
 	</dialog>
 
@@ -1951,9 +1962,12 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 					<comer id ="1"/>
 				</option1>
 			</sentence>
+
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="4" actualTargetID="3" />
+
 		</sentences>
-	</dialog>	
-	
+	</dialog>
+
 	<dialog id="953" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFace.png" name="Vhea">
 		<sentences>
 			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
@@ -1970,6 +1984,9 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 				</option2>
 
 			</sentence>
+
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="9" actualTargetID="8" />
+
 		</sentences>
 	</dialog>
 
@@ -1989,6 +2006,9 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 				</option2>
 
 			</sentence>
+
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="11" actualTargetID="10" />
+
 		</sentences>
 	</dialog>
 
@@ -2008,6 +2028,9 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 				</option2>
 
 			</sentence>
+
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="13" actualTargetID="12" />
+
 		</sentences>
 	</dialog>
 
@@ -2027,6 +2050,9 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 				</option2>
 
 			</sentence>
+
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="16" actualTargetID="15" />
+			
 		</sentences>
 	</dialog>
 
@@ -2046,6 +2072,9 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 				</option2>
 
 			</sentence>
+
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="18" actualTargetID="17" />
+
 		</sentences>
 	</dialog>
 
@@ -2065,6 +2094,9 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 				</option2>
 
 			</sentence>
+
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="20" actualTargetID="19" />
+
 		</sentences>
 	</dialog>
 
@@ -2084,9 +2116,12 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 				</option2>
 
 			</sentence>
+
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="23" actualTargetID="22" />
+
 		</sentences>
 	</dialog>
-				
+
 	<dialog id="5" texturepath="Assets/Textures/Interfaz/Dialogos/Jakhov.png">
 		<sentences>
 			<sentence name="Jakhov"
@@ -2099,9 +2134,9 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 		</sentences>
 	</dialog>
 
-	
-	
-	
+
+
+
 
 	<dialog id="1101" texturepath="Assets/Textures/Interfaz/Dialogos/Jakhov.png">
 		<sentences>
@@ -2166,22 +2201,23 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 			text="¿La decisión correcta? ¿Qué decisión será...?"/>
 		</sentences>
 	</dialog>
-	
+
 	<!--Padre-->
 	<dialog id="2001">
 		<sentences>
-			
-			<sentence name="Padre"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
-			text="Jakov?...¿Eres tú? Te has vuelto muy fuerte por el camino gracias a este poder, gracias a mí…"/>
-			
-			<sentence name="Yo"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
-			text="Padre!? Pero!? Has sido tú todo este tiempo?? ¿Qué has hecho con madre!? Porque!??"/>
 
 			<sentence name="Padre"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
+			text="Jakov?...¿Eres tú? Te has vuelto muy fuerte por el camino gracias a este poder, gracias a mí…"/>
+
+			<sentence name="Yo"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
+			text="Padre!? Pero!? Has sido tú todo este tiempo?? ¿Qué has hecho con madre!? Porque!??"/>
+			
+			<sentence name="Padre"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
 			text="No importa Alma ahora, demuestra que estás preparado para llevar este poder."/>
+			
 		</sentences>
 	</dialog>
 
@@ -2192,10 +2228,12 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 				<option1 text="Si, por favor.">
 					<sentence text="Come tranquilo, está recién hecho."/>
 					<comer id ="1"/>
+					<sentence type="SelectChoose" selection="1" />
 				</option1>
 
 				<option2 text="No hace falta.">
 					<sentence text="Bueno... Estaré siempre aquí si necesitas algo de comer."/>
+					<sentence type="SelectChoose" selection="2" />
 				</option2>
 
 			</sentence>

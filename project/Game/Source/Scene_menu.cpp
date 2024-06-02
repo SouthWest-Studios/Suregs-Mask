@@ -57,6 +57,7 @@ bool Scene_Menu::Start()
 	savedGames_tp = config.child("savedGames").attribute("texturepath").as_string();
 	controls_tp = config.child("controls").attribute("texturepath").as_string();
 	coin_tp = config.child("coin").attribute("texturepath").as_string();
+	clock_tp = config.child("clock").attribute("texturepath").as_string();
 
 	menuMain = app->tex->Load(menuMain_tp);
 	menuMain2 = app->tex->Load(menuMain2_tp);
@@ -66,13 +67,28 @@ bool Scene_Menu::Start()
 	savedGames = app->tex->Load(savedGames_tp);
 	controls = app->tex->Load(controls_tp);
 	coin = app->tex->Load(coin_tp);
+	clock = app->tex->Load(clock_tp);
 	
 	pugi::xml_document saveOneFile;
-	pugi::xml_node game_state;
+	pugi::xml_node game_stateOne;
 	pugi::xml_parse_result parseResultSaveOne = saveOneFile.load_file("save_game.xml");
-	game_state = saveOneFile.append_child("game_state").child(name.GetString());
+	game_stateOne = saveOneFile.child("game_state");
 
-	coinQuantity = game_state.child("iventorymanager").child("inventory").child("money").attribute("quantity").as_int(0);
+	coinQuantityOne = game_stateOne.child("iventorymanager").child("inventory").child("money").attribute("quantity").as_int();
+
+	pugi::xml_document saveTwoFile;
+	pugi::xml_node game_stateTwo;
+	pugi::xml_parse_result parseResultSaveTwo = saveTwoFile.load_file("save_game2.xml");
+	game_stateTwo = saveTwoFile.child("game_state");
+
+	coinQuantityTwo = game_stateTwo.child("iventorymanager").child("inventory").child("money").attribute("quantity").as_int();
+
+	pugi::xml_document saveThreeFile;
+	pugi::xml_node game_stateThree;
+	pugi::xml_parse_result parseResultSaveThree = saveThreeFile.load_file("save_game3.xml");
+	game_stateThree = saveThreeFile.child("game_state");
+
+	coinQuantityThree = game_stateThree.child("iventorymanager").child("inventory").child("money").attribute("quantity").as_int();
 
 	//Get window size
 	app->win->GetWindowSize(windowW, windowH);
@@ -744,8 +760,18 @@ void Scene_Menu::ShowSavedGames()
 	app->render->DrawTexture(coin, 770, 346, 0.35f);
 	app->render->DrawTexture(coin, 770, 440, 0.35f);
 
-	std::string quantityStr = std::to_string(coinQuantity);
-	app->render->DrawText(quantityStr.c_str(), 740, 252, 50, 50, 0, 0, 0, 0, true);
+	app->render->DrawTexture(clock, 700, 257, 0.65f);
+	app->render->DrawTexture(clock, 700, 351, 0.65f);
+	app->render->DrawTexture(clock, 700, 445, 0.65f);
+
+	std::string quantityStrOne = std::to_string(coinQuantityOne);
+	app->render->DrawText(quantityStrOne.c_str(), 730, 255, 45, 27, 0, 0, 0, 0, true);
+
+	std::string quantityStrTwo = std::to_string(coinQuantityTwo);
+	app->render->DrawText(quantityStrTwo.c_str(), 730, 349, 45, 27, 0, 0, 0, 0, true);
+
+	std::string quantityStrThree = std::to_string(coinQuantityThree);
+	app->render->DrawText(quantityStrThree.c_str(), 730, 443, 45, 27, 0, 0, 0, 0, true);
 }
 
 void Scene_Menu::ShowNewGames()

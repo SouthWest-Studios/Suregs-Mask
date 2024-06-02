@@ -15,6 +15,7 @@
 #include "DialogTriggerEntity.h"
 #include "ModuleFadeToBlack.h"
 #include "PugiXml\src\pugixml.hpp"
+#include "MiniGameFishing.h"
 #include <iostream>
 
 
@@ -46,25 +47,26 @@ bool NPCPadre::Start() {
 	std::string texturePath = config.attribute("texturePath").as_string();
 	texture = app->tex->Load(texturePath.c_str());
 
-	app->entityManager->objectsToDraw.push_back({
-	    texture,
-	    position.x + 200, // x
-	    position.y - 400, // y
-	    position.y + 183, // anchorY
-	    185, // width
-	    110, // height
-	    true, // isFacingLeft
-	    false // isDynamic
-	    });
+	//app->entityManager->objectsToDraw.push_back({
+	//	texture,
+	//	position.x + 200, // x
+	//	position.y - 400, // y
+	//	position.y + 183, // anchorY
+	//	185, // width
+	//	110, // height
+	//	true, // isFacingLeft
+	//	false // isDynamic
+	//	});
 
-	pbody = app->physics->CreateRectangleSensor(position.x, position.y, 100, 100, bodyType::STATIC);
-	pbody->entity = this;
+	pbody = app->physics->CreateRectangle(position.x, position.y, 100, 100, bodyType::STATIC);
 	pbody->listener = this;
-	pbody->ctype = ColliderType::PLAYER;
+	pbody->ctype = ColliderType::BOSS_INUIT;
 
-	parseResult = dialogoFile.load_file("dialogs.xml");
-	dialogoPadre = dialogoFile.child("dialogues");
-	dialogNode = find_child_by_attribute(dialogoPadre, "dialog", "id", "2001").child("sentences").child("sentence");
+
+
+	pugi::xml_parse_result  parseResult = dialogoFile.load_file("dialogs.xml");
+	pugi::xml_node dialogoPadre = dialogoFile.child("dialogues");
+	dialogNode = find_child_by_attribute(dialogoPadre, "dialog", "id", "2001").child("sentences");
 	return true;
 }
 
@@ -74,15 +76,7 @@ bool NPCPadre::Update(float dt) {
 	currentAnimation->Update();
 
 
-	/*for (pugi::xml_node itemNode = dialogNode; itemNode; itemNode = itemNode.next_sibling("sentence"))
-	{
-		app->dialogManager->AddDialog(app->dialogManager->CreateDialog(dialogNode, itemNode.attribute("name").as_string(), itemNode.attribute("facetexturepath").as_string()));
-	}*/
 
-
-	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
-		CleanUp();
-	}
 	return true;
 }
 
@@ -91,6 +85,21 @@ bool NPCPadre::PostUpdate() {
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	app->render->DrawTexture(texture, position.x - 170, position.y - 135, 0.5f, SDL_FLIP_NONE, &rect);
 
+
+
+	/*if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
+		int num = 0;
+		for (pugi::xml_node itemNode = dialogNode.child("sentence"); itemNode; itemNode = itemNode.next_sibling("sentence"))
+		{
+			app->dialogManager->AddDialog(app->dialogManager->CreateDialog(itemNode, itemNode.attribute("name").as_string(), itemNode.attribute("facetexturepath").as_string()));
+			num++;
+		}
+		printf("\nnum: %d", num);
+		dialogoMostrado = true;
+		if (!app->dialogManager->isPlaying) {
+			printf("Terminado");
+		}
+	}*/
 	return true;
 }
 
@@ -100,7 +109,7 @@ pugi::xml_node NPCPadre::find_child_by_attribute(pugi::xml_node parent, const ch
 			return node;
 		}
 	}
-	return pugi::xml_node(); 
+	return pugi::xml_node();
 }
 bool NPCPadre::CleanUp() {
 	app->physics->GetWorld()->DestroyBody(pbody->body);
@@ -121,9 +130,23 @@ void NPCPadre::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision ITEM");
 		break;
 	case ColliderType::PLAYER:
-		for (pugi::xml_node itemNode = dialogNode; itemNode; itemNode = itemNode.next_sibling("sentence"))
-		{
-			app->dialogManager->AddDialog(app->dialogManager->CreateDialog(dialogNode, itemNode.attribute("name").as_string(), itemNode.attribute("facetexturepath").as_string()));
+		//app->dialogManager->CreateDialogSinEntity("sss","sss","sss");
+		if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
+
+
+			if (!dialogoMostrado) {
+				int num = 0;
+				for (pugi::xml_node itemNode = dialogNode.child("sentence"); itemNode; itemNode = itemNode.next_sibling("sentence"))
+				{
+					app->dialogManager->AddDialog(app->dialogManager->CreateDialog(itemNode, itemNode.attribute("name").as_string(), itemNode.attribute("facetexturepath").as_string()));
+					num++;
+				}
+				printf("\nnum: %d", num);
+				dialogoMostrado = true;
+			}
+		}
+		if (dialogoMostrado && !app->dialogManager->isPlaying) {
+			printf("\nTerminado");
 		}
 		break;
 	default:

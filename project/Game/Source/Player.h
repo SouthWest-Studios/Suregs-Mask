@@ -226,6 +226,8 @@ public:
 	int maskTwoPoints;
 	int maskThreePoints;
 
+	bool levelUpOne = false;
+
 
 private:
 	void CameraMovement(float dt);

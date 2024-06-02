@@ -97,6 +97,7 @@ private:
 	Animation dieAnim;
 
 	int muur_get_damage_fx;
+	bool death_fx = false;
 
 	bool isFacingLeft = false;
 

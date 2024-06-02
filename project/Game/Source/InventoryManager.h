@@ -118,6 +118,9 @@ public:
 
 	int numMasks = 0;
 	bool mask = false;
+
+	int seleccionFinalPersonaje = -1;
+
 private:
 	pugi::xml_document configFile;
 	pugi::xml_node configNode;

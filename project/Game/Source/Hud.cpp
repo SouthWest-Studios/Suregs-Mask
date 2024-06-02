@@ -22,6 +22,7 @@
 #include "QuestManager.h"
 #include "Scene_Pueblo.h"
 #include "Scene_Pueblo_Tutorial.h"
+#include "Utils.cpp"
 
 Hud::Hud(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -42,6 +43,8 @@ bool Hud::Awake(pugi::xml_node config)
 	hudTexturePath = (char*)config.child("mainTexture").attribute("texturepath").as_string();
 	messageTexturePath = (char*)config.child("messageTexture").attribute("texturepath").as_string();
 	cdMaskTexturePath = (char*)config.child("cdMaskTexture").attribute("texturepath").as_string();
+
+	levelUpTexturePath = (char*)config.child("levelUpTexture").attribute("texturepath").as_string();
 
 	rectBarraVida = new SDL_Rect{ 269,6,259,16 };
 	rectFondoBarraVida = new SDL_Rect{ 0,2,267,23 };
@@ -99,6 +102,8 @@ bool Hud::Start()
 
 	cdPrimaryMaskTexture = app->tex->Load(cdMaskTexturePath);
 	cdSecondaryMaskTexture = app->tex->Load(cdMaskTexturePath);
+
+	levelUpTexture = app->tex->Load(levelUpTexturePath);
 
 	/*Acquired_Item ai;
 	ai.lifeTimer.Start();
@@ -228,18 +233,45 @@ bool Hud::PostUpdate()
 
 	SDL_Rect* rectBarraVidaCalculado = new SDL_Rect{ rectBarraVida->x, rectBarraVida->y, rectW, rectBarraVida->h };
 
-	// Si la vida está baja, hacer que la barra de vida parpadee
-	if (isLowHealth) {
-		blinkCounter++;
-		if (blinkCounter % blinkSpeed < blinkSpeed / 2) {
-			app->render->DrawTexture(hudTexture, 173, 42, 1.02, SDL_FLIP_NONE, rectFondoBarraVida, 0);
-			app->render->DrawTexture(hudTexture, 177, 46, 1.02, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
+	if (isLowHealth && !shrinking && !growing && app->entityManager->GetPlayer()->currentStats.currentHealth > 0) {
+		shrinking = true;
+		animationTimer.Start();
+	}
+
+	if (shrinking) {
+
+		float progress = animationTimer.ReadMSec() / (animationDuration * 1000);
+		float easedProgress = easeOutCubic(progress);
+		float scale = 1 - easedProgress * 0.06;
+
+		app->render->DrawTexture(hudTexture, 173, 42, scale, SDL_FLIP_NONE, rectFondoBarraVida, 0);
+		app->render->DrawTexture(hudTexture, 177, 46, scale, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
+
+		if (animationTimer.ReadMSec() >= animationDuration * 1000) {
+			shrinking = false;
+			growing = true;
+			animationTimer.Start();
+		}
+	}
+	else if (growing) {
+
+		float progress = animationTimer.ReadMSec() / (animationDuration * 1000);
+		float easedProgress = easeOutCubic(progress);
+		float scale = 0.94 + easedProgress * 0.06;
+
+		app->render->DrawTexture(hudTexture, 173, 42, scale, SDL_FLIP_NONE, rectFondoBarraVida, 0);
+		app->render->DrawTexture(hudTexture, 177, 46, scale, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
+
+		if (animationTimer.ReadMSec() >= animationDuration * 1000) {
+			growing = false;
 		}
 	}
 	else {
-		app->render->DrawTexture(hudTexture, 173, 42, SDL_FLIP_NONE, rectFondoBarraVida, 0);
-		app->render->DrawTexture(hudTexture, 177, 46, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
+		app->render->DrawTexture(hudTexture, 173, 42, 1.0, SDL_FLIP_NONE, rectFondoBarraVida, 0);
+		app->render->DrawTexture(hudTexture, 177, 46, 1.0, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
 	}
+
+
 
 	//Monedas
 	std::string quantityStr = std::to_string(monedasObtenidasHud);
@@ -369,6 +401,15 @@ bool Hud::PostUpdate()
 		}
 		app->physics->active = false;
 		{
+			uint windowWidth, windowHeight;
+			app->win->GetWindowSize(windowWidth, windowHeight);
+			Uint8 alpha = 188;  // Valor de transparencia (0-255)
+			SDL_Texture* transparentTexture = app->menu->CreateTransparentTexture(app->render->renderer, windowWidth, windowHeight, alpha);
+			if (transparentTexture != nullptr) {
+				SDL_SetTextureBlendMode(transparentTexture, SDL_BLENDMODE_BLEND);
+				SDL_RenderCopy(app->render->renderer, transparentTexture, nullptr, nullptr);
+				SDL_DestroyTexture(transparentTexture);
+			}
 			app->render->DrawTexture(EstatuaTexture, 0, 0, SDL_FLIP_NONE, 0, 0);
 		}
 	}
@@ -391,9 +432,6 @@ bool Hud::PostUpdate()
 		}
 
 	}
-
-	
-
 
 
 	return true;
