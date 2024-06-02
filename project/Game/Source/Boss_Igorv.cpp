@@ -73,6 +73,9 @@ bool Boss_Igory::Start() {
 	father_get_damage_fx = app->audio->LoadAudioFx("father_get_damage_fx");
 	father_get_damageAlt_fx = app->audio->LoadAudioFx("father_get_damageAlt_fx");
 	father_get_damageAlt2_fx = app->audio->LoadAudioFx("father_get_damageAlt2_fx");
+	father_melee_attack_fx = app->audio->LoadAudioFx("father_melee_attack_fx");
+	father_melee_attackAlt_fx = app->audio->LoadAudioFx("father_melee_attackAlt_fx");
+	father_generate_sureg_fx = app->audio->LoadAudioFx("father_generate_sureg_fx");
 
 
 	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
@@ -534,6 +537,7 @@ void Boss_Igory::showAnimation()
 	if (showSuregAni) {
 		//printf("genrasureg");
 		currentAnimation = &geneSure_boss_Igory;
+		app->audio->PlayFx(father_generate_sureg_fx);
 	}
 
 	if (faseAni) {
@@ -707,18 +711,21 @@ void Boss_Igory::Attack(float dt)
 	switch (attackTime)
 	{
 	case 1:
+		app->audio->PlayFx(father_melee_attack_fx);
 		atq3_boss_Igory.Reset();
 		inAtack = true;
 		printf("\nataque1");
 		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
 		break;
 	case 2:
+		app->audio->PlayFx(father_melee_attackAlt_fx);
 		atq1_boss_Igory.Reset();
 		inAtack = true;
 		printf("\nataque2");
 		atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
 		break;
 	case 3:
+		app->audio->PlayFx(father_melee_attack_fx);
 		atq2_boss_Igory.Reset();
 		inAtack = true;
 		printf("\nataque3");
