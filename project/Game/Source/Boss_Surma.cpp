@@ -99,8 +99,8 @@ bool Boss_Surma::Start() {
 
 	room = GetCurrentRoom();
 
-	//fase = FASE_Surma::FASE_ONE;
-	fase = FASE_Surma::FASE_CHANGE;
+	fase = FASE_Surma::FASE_ONE;
+	//fase = FASE_Surma::FASE_CHANGE;
 
 	pugi::xml_parse_result parseResult2 = configFile.load_file("config.xml");
 	if (parseResult2) {
@@ -870,7 +870,11 @@ void Boss_Surma::Fase2(float dt, iPoint playerPos)
 
 
 	if (health <= 0) {
+
 		fase = FASE_Surma::FASE_DYNIG;
+
+		Die();
+
 	}
 
 }
