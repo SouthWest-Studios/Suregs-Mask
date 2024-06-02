@@ -363,12 +363,14 @@ bool Boss_Igory::PostUpdate() {
 
 bool Boss_Igory::CleanUp()
 {
+	printf("\n CleanUp");
 	if (pbodyFoot != nullptr) {
 		app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 	}
 	if (pbodySensor != nullptr) {
 		app->physics->GetWorld()->DestroyBody(pbodySensor->body);
 	}
+
 	if (texture != nullptr) {
 		app->tex->UnLoad(texture);
 	}
@@ -498,7 +500,11 @@ void Boss_Igory::resetAnimation()
 		//desiredState = EntityState_Boss_Igory::RUNNING;
 	}
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "reviver_boss_Igory") {
-		deletePadre = true;
+		if (!deletePadre) {
+			CleanUp();
+			deletePadre = true;
+			closeFinalSelecion = false;
+		}
 	}
 
 	

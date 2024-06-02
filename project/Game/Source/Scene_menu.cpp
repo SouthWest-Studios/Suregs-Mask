@@ -732,6 +732,7 @@ void Scene_Menu::ShowCredits()
 		_showCredits = true;
 	}
 
+	showCredits = false;
 	app->render->DrawTexture(credits, 0, 0);
 }
 

@@ -64,6 +64,7 @@
 #include "Item_Zafiro.h" 
 #include "Elevator.h"
 #include "ModuleFadeToBlack.h"
+#include "GuiManager.h"
 #include "Menu.h";
 #include "Window.h";
 #include "Hud.h";
@@ -940,7 +941,8 @@ void EntityManager::showFinalkillPadre()
 			photoTransparent = 255;
 			if (goCredit) {
 				app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu);
-				app->scene_menu->showCredits = true;
+				//app->scene_menu->showCredits = true;
+				//bossIgory->deletePadre = false;
 			}
 			else
 			{
@@ -955,7 +957,7 @@ void EntityManager::showFinalkillPadre()
 		if (photoTransparent <= 0) {
 			photoTransparent = 0;
 
-			if (stayTime.ReadMSec() >= 15000) {
+			if (stayTime.ReadMSec() >= 5000) {
 				increasing = true;
 				goCredit = true;
 			}

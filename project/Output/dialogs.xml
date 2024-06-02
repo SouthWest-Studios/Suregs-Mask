@@ -2247,8 +2247,8 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
 			text="¿Y qué hay de tus compañeros?, murieron a tus manos."/>
 
-			<sentence name="Igorv(masc)"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
+			<sentence name="Igorv(msk)"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFaceMasck.png"
 			text="Eran demasiado débiles, no estaban preparados… murieron por un bien mayor…"/>
 
 			<sentence name="Igorv"
@@ -2259,8 +2259,8 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
 			text="… Y qué hay de la abuela? Ni te imaginas lo que ha sufrido por ti."/>
 
-			<sentence name="Igorv(masc)"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
+			<sentence name="Igorv(msk)"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFaceMasck.png"
 			text="Esa vieja entrometida… siempre metiendo su nariz en asuntos ajenos."/>
 
 			<sentence name="Jakov"
@@ -2279,27 +2279,27 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
 			text="La máscara me ha hablado, me ha prometido devolverle la vida a Alma…"/>
 
-			<sentence name="Igorv(masc)"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
+			<sentence name="Igorv(msk)"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFaceMasck.png"
 			text="solo necesitamos el poder de todas las máscaras… "/>
 
 			<sentence name="Igorv"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
 			text="así podríamos honrar la memoria de madre, "/>
 
-			<sentence name="Igorv(masc)"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
+			<sentence name="Igorv(msk)"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFaceMasck.png"
 			text="acabemos con aquellos que nos la arrebataron, aquellos que nunca confiaron en ti…"/>
 
 			<sentence name="Igorv"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
 			text="es tan solo un pequeño sacrificio,"/>
 
-			<sentence name="Igorv(masc)"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
+			<sentence name="Igorv(msk)"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFaceMasck.png"
 			text="únete a nosotros."/>
 
-			<sentence type="choose" name="Padre(masc)" facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png" text="a mí!">
+			<sentence type="choose" name="Padre(msk)" facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFaceMasck.png" text="a mí!">
 
 				<option1 text="Matar a padre.">
 					<sentence type="SelectChoose" selection="1" />
