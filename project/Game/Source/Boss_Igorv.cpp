@@ -64,6 +64,7 @@ bool Boss_Igory::Start() {
 	atq2_boss_Igory.LoadAnim("boss_igory", "atq2_boss_Igory", spritePositions);
 	atq3_boss_Igory.LoadAnim("boss_igory", "atq3_boss_Igory", spritePositions);
 	dead_boss_Igory.LoadAnim("boss_igory", "dead_boss_Igory", spritePositions);
+	reviver_boss_Igory.LoadAnim("boss_igory", "reviver_boss_Igory", spritePositions);
 	hit_boss_Igory.LoadAnim("boss_igory", "hit_boss_Igory", spritePositions);
 
 
@@ -496,7 +497,11 @@ void Boss_Igory::resetAnimation()
 		atqDashQuali = 0;
 		//desiredState = EntityState_Boss_Igory::RUNNING;
 	}
+	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "reviver_boss_Igory") {
+		deletePadre = true;
+	}
 
+	
 }
 
 void Boss_Igory::showAnimation()
@@ -725,6 +730,14 @@ void Boss_Igory::Die() {
 	pbodyFoot->body->SetType(b2_staticBody);
 	startDialogo = true;
 
+	if (!unirPadre) {
+		currentAnimation = &dead_boss_Igory;
+	}
+	else
+	{
+		currentAnimation = &reviver_boss_Igory;
+	}
+
 	if (startSelecion && seleccionFinalPersonaje == 1 && !closeFinalSelecion) {
 		printf("Matar padre");
 		//CleanUp();
@@ -735,6 +748,7 @@ void Boss_Igory::Die() {
 	if (startSelecion && seleccionFinalPersonaje == 2 && !closeFinalSelecion) {
 		printf("Unir padre");
 		closeFinalSelecion = true;
+		unirPadre = true;
 	}
 	////Mask XP
 	//Item_mascara_3* mascara3 = (Item_mascara_3*)app->entityManager->CreateEntity(EntityType::ITEM_MASCARA3);

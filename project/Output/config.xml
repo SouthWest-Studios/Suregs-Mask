@@ -502,6 +502,7 @@
 			<atq3_boss_Igory start="104" end="108" speed="0.1f" loop="false"/>
 			<dead_boss_Igory start="112" end="116" speed="0.2f" loop="false"/>
 			<hit_boss_Igory start="120" end="121" speed="0.1f" loop="false"/>
+			<reviver_boss_Igory start="116" end="111" speed="0.08f" loop="false"/>
 		</boss_igory>
 		
 		<boss_musri>

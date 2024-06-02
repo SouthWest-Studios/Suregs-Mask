@@ -117,7 +117,7 @@ public:
 	int padreTranparente = 255;
 	//GuiControl* control = nullptr;
 	//unirPadre
-
+	bool unirPadre = false;
 	//tiempo de genera enemigo
 	Timer generaTimeColdDown;
 	Timer curaTimer;
@@ -146,6 +146,7 @@ private:
 	Animation atq3_boss_Igory;
 	Animation dead_boss_Igory;
 	Animation hit_boss_Igory;
+	Animation reviver_boss_Igory;
 
 
 	bool isFacingLeft = false;
