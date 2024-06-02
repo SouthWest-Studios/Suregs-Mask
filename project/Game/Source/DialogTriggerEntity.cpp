@@ -204,7 +204,7 @@ void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
 				}*/
 
 
-				if (parameters.attribute("id").as_int() == 1001) {
+				if (parameters.attribute("id").as_int() == 941) {
 					printf("REEL TRUE");
 					app->scene_pueblo->GetRod()->fishing.rodReady = true;
 					app->scene_pueblo->GetRod()->fishing.playerGetRod = true;

@@ -623,7 +623,7 @@ void MiniGameFishing::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::LAGO:
 
 		if (fishing.startFishing == false) {
-			app->dialogManager->CreateDialogSinEntity("Estas pescando.", "Fishing System", nullptr);
+			 app->dialogManager->CreateDialogSinEntity("Estas pescando.", "Fishing System", nullptr);
 		}//end_if, if the float collides with the " LAGO"collider, display the fishing dialog
 		fishing.startFishing = true;
 		dialogoPlayerMoving = true;
@@ -658,21 +658,21 @@ bool MiniGameFishing::miniGameStart(float dt)
 bool MiniGameFishing::miniGameLoop(float dt)
 {
 	//Change Rod
-	if (!fishing.isFishing && fishing.rodReady) {
-		if (app->input->GetButton(CHANGEROD) == KEY_DOWN) {
-			if (fishing.fishingtype == FISHINGTYPE::LUREFISHING) {
-				printf("\nRod:FISHING");
-				fishing.fishingtype = FISHINGTYPE::FISHING;
-				lureDistanceGetRandom = false;//Disable irregular distance
-			}
-			else
-			{
-				printf("\nRod:LUREFISHING");
-				fishing.fishingtype = FISHINGTYPE::LUREFISHING;
-				lureDistanceGetRandom = true;// enable irregular distance
-			}//end_if for cheke is "LUREFISHING" o "FISHING"
-		}//end_if for press "C" key
-	}//end_if for check if fishing
+	//if (!fishing.isFishing && fishing.rodReady) {
+	//	if (app->input->GetButton(CHANGEROD) == KEY_DOWN) {
+	//		if (fishing.fishingtype == FISHINGTYPE::LUREFISHING) {
+	//			printf("\nRod:FISHING");
+	//			fishing.fishingtype = FISHINGTYPE::FISHING;
+	//			lureDistanceGetRandom = false;//Disable irregular distance
+	//		}
+	//		else
+	//		{
+	//			printf("\nRod:LUREFISHING");
+	//			fishing.fishingtype = FISHINGTYPE::LUREFISHING;
+	//			lureDistanceGetRandom = true;// enable irregular distance
+	//		}//end_if for cheke is "LUREFISHING" o "FISHING"
+	//	}//end_if for press "C" key
+	//}//end_if for check if fishing
 
 
 	//Cast the rod and StartFishing
