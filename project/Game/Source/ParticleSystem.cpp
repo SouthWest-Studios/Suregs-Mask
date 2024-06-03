@@ -64,6 +64,10 @@ bool ParticleSystem::Awake(pugi::xml_node config)
 			LoadEmitterData(emitters, EmitterType::EMITTER_TYPE_GREEN_FLAME);
 		else if (emitterType.compare("enemy_blood") == 0)
 			LoadEmitterData(emitters, EmitterType::EMITTER_TYPE_ENEMY_BLOOD);
+		else if (emitterType.compare("rayo") == 0)
+			LoadEmitterData(emitters, EmitterType::EMITTER_TYPE_RAYO);
+		else if (emitterType.compare("explosion_rayo") == 0)
+			LoadEmitterData(emitters, EmitterType::EMITTER_TYPE_EXPLOSION_RAYO);
 	}
 	return ret;
 }
