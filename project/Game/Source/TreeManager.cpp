@@ -1994,16 +1994,48 @@ bool TreeManager::PostUpdate()
 
 			if (PointerId == itum->data->id)
 			{
+				
+				
 				if (mask == 1)
 				{
+					if ((PointerId == 0 && app->inventoryManager->numMasks >= 1) || (PointerId == 5  && app->inventoryManager->numMasks >= 2) || (PointerId == 10 && app->inventoryManager->numMasks >= 3) || (PointerId == 15 && app->inventoryManager->numMasks >= 4))
+					{
+							app->render->DrawTextBound(itum->data->desc.c_str(), 865, 200, 180, { 0,0,0 }, app->render->goldFont);
+					}
+					else
+					{
+						if ((PointerId == 0) || (PointerId == 5) || (PointerId == 10) || (PointerId == 15))
+						{
 
+						}
+						else
+						{
+							app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
+							app->render->DrawTextBound(itum->data->desc.c_str(), 870, 300, 150, { 0,0,0 }, app->render->primaryFont);
+						}
+					}
 					app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, {0,0,0}, app->render->titleFont);
-					app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
-					app->render->DrawTextBound(itum->data->desc.c_str(), 870, 300, 150, { 0,0,0 });
+					
 
 				}
 				else if (mask == 2)
 				{
+					if ((PointerId == 0 && app->inventoryManager->numMasks >= 1) || (PointerId == 5 && app->inventoryManager->numMasks >= 2) || (PointerId == 10 && app->inventoryManager->numMasks >= 3) || (PointerId == 15 && app->inventoryManager->numMasks >= 4))
+					{
+						app->render->DrawTextBound(itum->data->desc.c_str(), 865, 200, 180, { 0,0,0 }, app->render->goldFont);
+					}
+					else
+					{
+						if ((PointerId == 0) || (PointerId == 5) || (PointerId == 10) || (PointerId == 15))
+						{
+
+						}
+						else
+						{
+							app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
+							app->render->DrawTextBound(itum->data->desc1.c_str(), 870, 300, 150, { 0,0,0 }, app->render->primaryFont);
+						}
+					}
 					if (itum->data->name2 == "")
 					{
 						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
@@ -2013,12 +2045,27 @@ bool TreeManager::PostUpdate()
 						app->render->DrawTextBound(itum->data->name2.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
 					}
 					
-					app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
-					app->render->DrawTextBound(itum->data->desc1.c_str(), 870, 300, 150, { 0,0,0 });
+					
 
 				}
 				else if (mask == 3)
 				{
+					if ((PointerId == 0 && app->inventoryManager->numMasks >= 1) || (PointerId == 5 && app->inventoryManager->numMasks >= 2) || (PointerId == 10 && app->inventoryManager->numMasks >= 3) || (PointerId == 15 && app->inventoryManager->numMasks >= 4))
+					{
+						app->render->DrawTextBound(itum->data->desc.c_str(), 865, 200, 180, { 0,0,0 }, app->render->goldFont);
+					}
+					else
+					{
+						if ((PointerId == 0) || (PointerId == 5) || (PointerId == 10) || (PointerId == 15))
+						{
+
+						}
+						else
+						{
+							app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
+							app->render->DrawTextBound(itum->data->desc2.c_str(), 870, 300, 150, { 0,0,0 }, app->render->primaryFont);
+						}
+					}
 					if (itum->data->name3 == "")
 					{
 						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
@@ -2028,12 +2075,28 @@ bool TreeManager::PostUpdate()
 						app->render->DrawTextBound(itum->data->name3.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
 					}
 					/*app->render->DrawTextBound(itum->data->name3.GetString(), 870, 150, 150, { 0,0,0 });*/
-					app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
-					app->render->DrawTextBound(itum->data->desc2.c_str(), 870, 300, 150, { 0,0,0 });
+					
 
 				}
 				else if (mask == 4)
 				{
+					if ((PointerId == 0 && app->inventoryManager->numMasks >= 1) || (PointerId == 5 && app->inventoryManager->numMasks >= 2) || (PointerId == 10 && app->inventoryManager->numMasks >= 3) || (PointerId == 15 && app->inventoryManager->numMasks >= 4))
+					{
+						app->render->DrawTextBound(itum->data->desc.c_str(), 865, 200, 180, { 0,0,0 }, app->render->goldFont);
+					}
+					else
+					{
+						if ((PointerId == 0)  || (PointerId == 5)  || (PointerId == 10 ) || (PointerId == 15 ))
+						{
+
+						}
+						else
+						{
+							app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
+							app->render->DrawTextBound(itum->data->desc3.c_str(), 870, 300, 150, { 0,0,0 }, app->render->primaryFont);
+						}
+						
+					}
 					if (itum->data->name4 == "")
 					{
 						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
@@ -2043,8 +2106,7 @@ bool TreeManager::PostUpdate()
 						app->render->DrawTextBound(itum->data->name4.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
 					}
 					/*app->render->DrawTextBound(itum->data->name4.GetString(), 870, 150, 150, { 0,0,0 });*/
-					app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
-					app->render->DrawTextBound(itum->data->desc3.c_str(), 870, 300, 150, { 0,0,0 });
+				
 
 				}
 
