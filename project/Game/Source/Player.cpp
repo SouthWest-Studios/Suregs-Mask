@@ -840,6 +840,8 @@ bool Player::Update(float dt)
 		currentStats.attackDamage = baseStats.attackDamage * (1 + maskStats[Mask::MASK3][Branches::Rama4][maskLevels[Mask::MASK3][Branches::Rama4]].maxActiveDamageModifier / 100);
 		currentStats.maxHealth = baseStats.maxHealth * (1 + maskStats[Mask::MASK3][Branches::Rama4][maskLevels[Mask::MASK3][Branches::Rama4]].maxActiveHealthModifier / 100);
 		mask3Active = false;
+		mask3Particle = nullptr;
+		mask3ParticleCreated = false;
 	}
 
 	if (secondaryMask == Mask::MASK3) {
@@ -910,6 +912,17 @@ bool Player::Update(float dt)
 	//	blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_SPARK);
 	//	particulaBlood = true;
 	//}
+
+	
+	//posMask3Particle.x += position.x;
+	//posMask3Particle.y += position.y;
+
+	//if (mask3Active) {
+	//	mask3Particle = app->psystem->AddEmiter(posMask3Particle, EMITTER_TYPE_FIRE_MASK3);
+	//	mask3ParticleCreated = true;
+	//}
+
+
 	EfectoPociones(dt);
 
 	stateMachine(dt);
@@ -1630,6 +1643,7 @@ void Player::Mask3Statistics() {
 	currentStats.maxHealth = baseStats.maxHealth * (1 + maskStats[Mask::MASK3][Branches::Rama4][maskLevels[Mask::MASK3][Branches::Rama4]].maxActiveHealthModifier);
 	printf("current stats attack damage: %f\n", currentStats.attackDamage);
 	mask3Active = true;
+	/*app->psystem->AddEmiter(posMask3Particle, EMITTER_TYPE_FIRE_MASK3);*/
 	mask3Timer.Start();
 }
 
