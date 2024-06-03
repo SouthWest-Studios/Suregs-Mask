@@ -314,7 +314,6 @@ bool Boss_Igory::PostUpdate() {
 		if (timerRecibirDanioColor.ReadMSec() <= 100 && !isDead) {
 			float alpha = (100 - timerRecibirDanioColor.ReadMSec()) / 100;
 			SDL_SetTextureAlphaMod(texture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
-			app->audio->PlayRandomTimedFx(father_get_damage_fx, father_get_damageAlt_fx, father_get_damageAlt2_fx, 50);
 
 		}
 		else {
@@ -368,6 +367,8 @@ bool Boss_Igory::PostUpdate() {
 	/*if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
 		app->map->generaSureg(fase, position);
 	}*/
+
+	if (father_get_hit == true && getHitTimer.ReadMSec() >= 900) father_get_hit = false;
 
 	return true;
 }
@@ -624,6 +625,13 @@ bool Boss_Igory::AtqColdDown()
 void Boss_Igory::takeHit()
 {
 	currentAnimation = &hit_boss_Igory;
+
+	if (father_get_hit == false)
+	{
+		app->audio->PlayRandomFx(father_get_damage_fx, father_get_damageAlt_fx, father_get_damageAlt2_fx);
+		father_get_hit = true;
+		getHitTimer.Start();
+	}
 }
 
 
