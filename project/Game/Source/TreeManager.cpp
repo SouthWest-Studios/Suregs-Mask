@@ -2000,7 +2000,7 @@ bool TreeManager::PostUpdate()
 				{
 					if ((PointerId == 0 && app->inventoryManager->numMasks >= 1) || (PointerId == 5  && app->inventoryManager->numMasks >= 2) || (PointerId == 10 && app->inventoryManager->numMasks >= 3) || (PointerId == 15 && app->inventoryManager->numMasks >= 4))
 					{
-							app->render->DrawTextBound(itum->data->desc.c_str(), 865, 200, 180, { 0,0,0 }, app->render->goldFont);
+							app->render->DrawTextBound(itum->data->desc.c_str(), 865, 200, 180, {150,104,62,255}, app->render->goldFont);
 					}
 					else
 					{
@@ -2011,7 +2011,7 @@ bool TreeManager::PostUpdate()
 						else
 						{
 							app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
-							app->render->DrawTextBound(itum->data->desc.c_str(), 870, 300, 150, { 0,0,0 }, app->render->primaryFont);
+							app->render->DrawTextBound(itum->data->desc.c_str(), 870, 300, 150, {150,104,62,255}, app->render->primaryFont);
 						}
 					}
 					app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, {0,0,0}, app->render->titleFont);
@@ -2022,7 +2022,7 @@ bool TreeManager::PostUpdate()
 				{
 					if ((PointerId == 0 && app->inventoryManager->numMasks >= 1) || (PointerId == 5 && app->inventoryManager->numMasks >= 2) || (PointerId == 10 && app->inventoryManager->numMasks >= 3) || (PointerId == 15 && app->inventoryManager->numMasks >= 4))
 					{
-						app->render->DrawTextBound(itum->data->desc.c_str(), 865, 200, 180, { 0,0,0 }, app->render->goldFont);
+						app->render->DrawTextBound(itum->data->desc.c_str(), 865, 200, 180, {150,104,62,255}, app->render->goldFont);
 					}
 					else
 					{
@@ -2033,16 +2033,16 @@ bool TreeManager::PostUpdate()
 						else
 						{
 							app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
-							app->render->DrawTextBound(itum->data->desc1.c_str(), 870, 300, 150, { 0,0,0 }, app->render->primaryFont);
+							app->render->DrawTextBound(itum->data->desc1.c_str(), 870, 300, 150, {150,104,62,255}, app->render->primaryFont);
 						}
 					}
 					if (itum->data->name2 == "")
 					{
-						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
+						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, {150,104,62,255}, app->render->titleFont);
 					}
 					else
 					{
-						app->render->DrawTextBound(itum->data->name2.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
+						app->render->DrawTextBound(itum->data->name2.GetString(), 870, 150, 150, {150,104,62,255}, app->render->titleFont);
 					}
 					
 					
@@ -2052,7 +2052,7 @@ bool TreeManager::PostUpdate()
 				{
 					if ((PointerId == 0 && app->inventoryManager->numMasks >= 1) || (PointerId == 5 && app->inventoryManager->numMasks >= 2) || (PointerId == 10 && app->inventoryManager->numMasks >= 3) || (PointerId == 15 && app->inventoryManager->numMasks >= 4))
 					{
-						app->render->DrawTextBound(itum->data->desc.c_str(), 865, 200, 180, { 0,0,0 }, app->render->goldFont);
+						app->render->DrawTextBound(itum->data->desc.c_str(), 865, 200, 180, {150,104,62,255}, app->render->goldFont);
 					}
 					else
 					{
@@ -2063,18 +2063,18 @@ bool TreeManager::PostUpdate()
 						else
 						{
 							app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
-							app->render->DrawTextBound(itum->data->desc2.c_str(), 870, 300, 150, { 0,0,0 }, app->render->primaryFont);
+							app->render->DrawTextBound(itum->data->desc2.c_str(), 870, 300, 150, {150,104,62,255}, app->render->primaryFont);
 						}
 					}
 					if (itum->data->name3 == "")
 					{
-						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
+						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, {150,104,62,255}, app->render->titleFont);
 					}
 					else
 					{
-						app->render->DrawTextBound(itum->data->name3.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
+						app->render->DrawTextBound(itum->data->name3.GetString(), 870, 150, 150, {150,104,62,255}, app->render->titleFont);
 					}
-					/*app->render->DrawTextBound(itum->data->name3.GetString(), 870, 150, 150, { 0,0,0 });*/
+					/*app->render->DrawTextBound(itum->data->name3.GetString(), 870, 150, 150, {150,104,62,255});*/
 					
 
 				}
@@ -2082,7 +2082,7 @@ bool TreeManager::PostUpdate()
 				{
 					if ((PointerId == 0 && app->inventoryManager->numMasks >= 1) || (PointerId == 5 && app->inventoryManager->numMasks >= 2) || (PointerId == 10 && app->inventoryManager->numMasks >= 3) || (PointerId == 15 && app->inventoryManager->numMasks >= 4))
 					{
-						app->render->DrawTextBound(itum->data->desc.c_str(), 865, 200, 180, { 0,0,0 }, app->render->goldFont);
+						app->render->DrawTextBound(itum->data->desc.c_str(), 865, 200, 180, {150,104,62,255}, app->render->goldFont);
 					}
 					else
 					{
@@ -2093,19 +2093,19 @@ bool TreeManager::PostUpdate()
 						else
 						{
 							app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
-							app->render->DrawTextBound(itum->data->desc3.c_str(), 870, 300, 150, { 0,0,0 }, app->render->primaryFont);
+							app->render->DrawTextBound(itum->data->desc3.c_str(), 870, 300, 150, {150,104,62,255}, app->render->primaryFont);
 						}
 						
 					}
 					if (itum->data->name4 == "")
 					{
-						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
+						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, {150,104,62,255}, app->render->titleFont);
 					}
 					else
 					{
-						app->render->DrawTextBound(itum->data->name4.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
+						app->render->DrawTextBound(itum->data->name4.GetString(), 870, 150, 150, {150,104,62,255}, app->render->titleFont);
 					}
-					/*app->render->DrawTextBound(itum->data->name4.GetString(), 870, 150, 150, { 0,0,0 });*/
+					/*app->render->DrawTextBound(itum->data->name4.GetString(), 870, 150, 150, {150,104,62,255});*/
 				
 
 				}
@@ -2119,36 +2119,36 @@ bool TreeManager::PostUpdate()
 		{
 
 			std::string texto = std::to_string(app->entityManager->GetPlayer()->maskZeroPoints) + "/8 Mask Points";
-			app->render->DrawTextBound(texto.c_str(), 885, 550, 370, { 0,0,0 });
+			app->render->DrawTextBound(texto.c_str(), 885, 550, 370, {0,0,0});
 			std::string texto1 = std::to_string(numMejoras0) + "/8 Mejoras";
-			app->render->DrawTextBound(texto1.c_str(), 885, 600, 370, { 0,0,0 });
+			app->render->DrawTextBound(texto1.c_str(), 885, 600, 370, {0,0,0});
 
 		}
 		else if (mask == 2)
 		{
 
 			std::string texto = std::to_string(app->entityManager->GetPlayer()->maskZeroPoints) + "/8 Mask Points";
-			app->render->DrawTextBound(texto.c_str(), 885, 550, 370, { 0,0,0 });
+			app->render->DrawTextBound(texto.c_str(), 885, 550, 370, {0,0,0});
 			std::string texto1 = std::to_string(numMejoras0) + "/8 Mejoras";
-			app->render->DrawTextBound(texto1.c_str(), 885, 600, 370, { 0,0,0 });
+			app->render->DrawTextBound(texto1.c_str(), 885, 600, 370, {0,0,0});
 
 		}
 		else if (mask == 3)
 		{
 
 			std::string texto = std::to_string(app->entityManager->GetPlayer()->maskZeroPoints) + "/8 Mask Points";
-			app->render->DrawTextBound(texto.c_str(), 885, 550, 370, { 0,0,0 });
+			app->render->DrawTextBound(texto.c_str(), 885, 550, 370, {0,0,0});
 			std::string texto1 = std::to_string(numMejoras0) + "/8 Mejoras";
-			app->render->DrawTextBound(texto1.c_str(), 885, 600, 370, { 0,0,0 });
+			app->render->DrawTextBound(texto1.c_str(), 885, 600, 370, {0,0,0});
 
 		}
 		else if (mask == 4)
 		{
 
 			std::string texto = std::to_string(app->entityManager->GetPlayer()->maskZeroPoints) + "/8 Mask Points";
-			app->render->DrawTextBound(texto.c_str(), 885, 550, 370, { 0,0,0 });
+			app->render->DrawTextBound(texto.c_str(), 885, 550, 370, {0,0,0});
 			std::string texto1 = std::to_string(numMejoras0) + "/8 Mejoras";
-			app->render->DrawTextBound(texto1.c_str(), 885, 600, 370, { 0,0,0 });
+			app->render->DrawTextBound(texto1.c_str(), 885, 600, 370, {0,0,0});
 
 		}
 		

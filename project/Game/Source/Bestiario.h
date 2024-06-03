@@ -105,6 +105,7 @@ public:
 	bool zoom = false;
 	bool created = false;
 	int listid = 0;
+	bool variacion = false;
 };
 
 #endif // __INVENTITY_H__

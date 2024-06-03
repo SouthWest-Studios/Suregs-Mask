@@ -188,7 +188,6 @@ bool Enemy_Boorok_Variation::Update(float dt)
 	return true;
 }
 
-
 bool Enemy_Boorok_Variation::PostUpdate() {
 
 	SDL_SetTextureColorMod(texture, 198, 115, 255);
