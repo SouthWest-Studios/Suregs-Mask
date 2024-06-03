@@ -4,8 +4,6 @@
 	<input />
 	<textures />
 	<audio />
-	<:anonymous />
-	<:anonymous>
 		<map />
 		<map>
 			<puzzles>
@@ -19,7 +17,6 @@
 				<puzzle level="7" complete="false" />
 			</puzzles>
 		</map>
-	</:anonymous>
 	<scene_pueblo />
 	<entitymanager>
 		<entity_manager>

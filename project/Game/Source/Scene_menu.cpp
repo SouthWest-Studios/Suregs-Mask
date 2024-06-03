@@ -43,6 +43,10 @@ bool Scene_Menu::Awake(pugi::xml_node config)
 // Called before the first frame
 bool Scene_Menu::Start()
 {
+	//chapuza
+	pugi::xml_node ignorar;
+	app->audio->LoadState(ignorar);
+
 	app->entityManager->active = false;
 	app->physics->active = false;
 	pugi::xml_document configFile;
@@ -70,6 +74,7 @@ bool Scene_Menu::Start()
 	coin = app->tex->Load(coin_tp);
 	clock = app->tex->Load(clock_tp);
 
+	//SAVE 1
 	pugi::xml_document saveOneFile;
 	pugi::xml_node game_stateOne;
 	pugi::xml_parse_result parseResultSaveOne = saveOneFile.load_file("save_game.xml");
@@ -77,6 +82,7 @@ bool Scene_Menu::Start()
 
 	coinQuantityOne = game_stateOne.child("iventorymanager").child("inventory").child("money").attribute("quantity").as_int();
 
+	//SAVE 2
 	pugi::xml_document saveTwoFile;
 	pugi::xml_node game_stateTwo;
 	pugi::xml_parse_result parseResultSaveTwo = saveTwoFile.load_file("save_game2.xml");
@@ -84,12 +90,24 @@ bool Scene_Menu::Start()
 
 	coinQuantityTwo = game_stateTwo.child("iventorymanager").child("inventory").child("money").attribute("quantity").as_int();
 
+	//SAVE 3
 	pugi::xml_document saveThreeFile;
 	pugi::xml_node game_stateThree;
 	pugi::xml_parse_result parseResultSaveThree = saveThreeFile.load_file("save_game3.xml");
 	game_stateThree = saveThreeFile.child("game_state");
 
 	coinQuantityThree = game_stateThree.child("iventorymanager").child("inventory").child("money").attribute("quantity").as_int();
+
+	//SAVE GENERAL
+	pugi::xml_document saveGeneralFile;
+	pugi::xml_node game_stateGeneral;
+	pugi::xml_parse_result parseResultSaveGeneral = saveGeneralFile.load_file("save_general.xml");
+	game_stateGeneral = saveGeneralFile.child("game_state");
+
+	app->tiempoDeJuegoMostrarSlot1 = game_stateGeneral.child("tiempoDeJuego").child("slot1").attribute("tiempo").as_llong();
+	app->tiempoDeJuegoMostrarSlot2 = game_stateGeneral.child("tiempoDeJuego").child("slot2").attribute("tiempo").as_llong();
+	app->tiempoDeJuegoMostrarSlot3 = game_stateGeneral.child("tiempoDeJuego").child("slot2").attribute("tiempo").as_llong();
+
 
 	//Get window size
 	app->win->GetWindowSize(windowW, windowH);
@@ -766,6 +784,12 @@ void Scene_Menu::ShowSavedGames()
 
 	std::string quantityStrThree = std::to_string(coinQuantityThree);
 	app->render->DrawText(quantityStrThree.c_str(), 730, 443, 45, 27, 0, 0, 0, 0, true);
+
+	timeOne = app->convertirTiempo(app->tiempoDeJuegoMostrarSlot1);
+	timeTwo = app->convertirTiempo(app->tiempoDeJuegoMostrarSlot2);
+	timeThree = app->convertirTiempo(app->tiempoDeJuegoMostrarSlot3);
+
+	app->render->DrawText(timeOne.c_str(), 500, 349, 45, 27, 0, 0, 0, 0, true);
 }
 
 void Scene_Menu::ShowNewGames()

@@ -501,13 +501,18 @@ bool App::CleanUp()
 	return ret;
 }
 
-void App::convertirTiempo(long long milisegundos)
+std::string App::convertirTiempo(long long milisegundos)
 {
 	long long totalSegundos = milisegundos / 1000; // Convertir milisegundos a segundos
 	int horas = totalSegundos / 3600;              // 1 hora = 3600 segundos
 	int minutos = (totalSegundos % 3600) / 60;     // 1 minuto = 60 segundos
 	int segundos = totalSegundos % 60;             // Segundos restantes
 
+
+	char buffer[9]; // hh:mm:ss + null terminator
+	sprintf_s(buffer, "%02d:%02d:%02d", horas, minutos, segundos);
+
+	return std::string(buffer);
 	// Imprimir en formato hh:mm:ss
 	//printf("%02d:%02d:%02d\n", horas, minutos, segundos);
 }

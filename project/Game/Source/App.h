@@ -97,6 +97,8 @@ public:
 	// Request to load data from XML file 
 	bool SaveRequest();
 
+	std::string convertirTiempo(long long milisegundos);
+
 private:
 
 	// Load config file
@@ -123,8 +125,6 @@ private:
 
 	// Sace XML file with modules data
 	bool SaveFromFile();
-
-	void convertirTiempo(long long milisegundos);
 
 public:
 

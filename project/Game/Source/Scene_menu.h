@@ -79,9 +79,9 @@ public:
 	int coinQuantityTwo;
 	int coinQuantityThree;
 
-	float timeOne;
-	float timeTwo;
-	float timeThree;
+	std::string timeOne;
+	std::string timeTwo;
+	std::string timeThree;
 
 	List<GuiControl*> controlsScene;
 	List<GuiControl*> controlsSettings;
