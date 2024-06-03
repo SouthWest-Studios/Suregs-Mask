@@ -227,10 +227,15 @@ bool Scene_testing::Start()
 	nota10->Start();
 
 	app->bestiarioManager->CreateItem("osiris");
+	app->bestiarioManager->CreateItem("osirisV");
 	app->bestiarioManager->CreateItem("muur");
+	app->bestiarioManager->CreateItem("muurV");
 	app->bestiarioManager->CreateItem("khurt");
+	app->bestiarioManager->CreateItem("khurtV");
 	app->bestiarioManager->CreateItem("ols");
+	app->bestiarioManager->CreateItem("olsV");
 	app->bestiarioManager->CreateItem("boorok");
+	app->bestiarioManager->CreateItem("boorokV");
 	app->bestiarioManager->CreateItem("inuit");
 	app->bestiarioManager->CreateItem("musri");
 	app->bestiarioManager->CreateItem("surma");

@@ -106,25 +106,35 @@ private:
 	char* textoOsiris;
 	char* pathOsiris;
 	SDL_Texture* textureOsiris;
+	char* textoOsirisV;
+	char* pathOsirisV;
+	SDL_Texture* textureOsirisV;
 	char* textoMuur;
+	char* textoMuurV;
 	char* pathMuur;
 	SDL_Texture* textureMuur;
 	char* textoKhurt;
+	char* textoKhurtV;
 	char* pathKhurt;
 	SDL_Texture* textureKhurt;
 	char* textoBoorok;
+	char* textoBoorokV;
 	char* pathBoorok;
 	SDL_Texture* textureBoorok;
 	char* textoOls;
+	char* textoOlsV;
 	char* pathOls;
 	SDL_Texture* textureOls;
 	char* textoInuit;
+	char* textoInuitV;
 	char* pathInuit;
 	SDL_Texture* textureInuit;
 	char* textoSurma;
+	char* textoSurmaV;
 	char* pathSurma;
 	SDL_Texture* textureSurma;
 	char* textoMusri;
+	char* textoMusriV;
 	char* pathMusri;
 	SDL_Texture* textureMusri;
 	char* iconPathOsiris;
@@ -145,13 +155,21 @@ private:
 	SDL_Texture* iconTextureSurma;
 
 	int osiris = 0;
+	int osirisV = 0;
 	int muur = 0;
+	int muurV = 0;
 	int khurt = 0;
+	int khurtV = 0;
 	int boorok = 0;
+	int boorokV = 0;
 	int ols = 0;
+	int olsV = 0;
 	int inuit = 0;
+	int inuitV = 0;
 	int musri = 0;
+	int musriV = 0;
 	int surma = 0;
+	int surmaV = 0;
 };
 
 #endif // __INVENTORYMANAGER_H__
