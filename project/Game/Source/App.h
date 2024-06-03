@@ -124,6 +124,7 @@ private:
 	// Sace XML file with modules data
 	bool SaveFromFile();
 
+	void convertirTiempo(long long milisegundos);
 
 public:
 
@@ -183,6 +184,9 @@ public:
 	bool fullscreen = false;
 
 	int savedGame = 1;
+
+	long long tiempoDeJuego = 0;
+	long long milisegundos;
 
 	float dt;
 

@@ -52,6 +52,8 @@ public:
 	float GetHealth() const;
 	void TakeDamage(float damage);
 	void stateMachine(float dt, iPoint playerPos);
+	void UpdateAttackSensor(float dt);
+
 
 	MapObject* GetCurrentRoom();
 
@@ -88,6 +90,11 @@ private:
 	int osiris_death_fx;
 
 	iPoint originalPosition;
+
+	bool canAttack = true;
+	PhysBody* sensor = nullptr;
+	Timer attackSensorTimer;
+	Timer attackCooldownTimer;
 
 	int TSprite;
 	int SpriteX;

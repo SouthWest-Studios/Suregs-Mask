@@ -20,10 +20,14 @@
 			</puzzles>
 		</map>
 	</:anonymous>
-	<scene_pueblo />
+	<pueblo_tutorial />
 	<entitymanager>
 		<entity_manager>
-			<doors />
+			<doors>
+				<door sceneLevel="-10" tpID="0" />
+				<door sceneLevel="-10" tpID="8" />
+				<door sceneLevel="-10" tpID="1" />
+			</doors>
 		</entity_manager>
 	</entitymanager>
 	<missionmanager />
@@ -36,7 +40,7 @@
 			<ArmorLevel quantity="0" />
 			<PrimaryMask quantity="-1" />
 			<SecondaryMask quantity="-1" />
-			<StoryLevel quantity="1" />
+			<StoryLevel quantity="2" />
 			<Mask0 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
 			<Mask1 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
 			<Mask2 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />

@@ -351,6 +351,12 @@ void App::FinishUpdate()
 		lastSecFrameCount = 0;
 	}
 
+	tiempoDeJuego += dt;
+
+	convertirTiempo(tiempoDeJuego);
+
+	//printf("tiempo de juego: %f\n", tiempoDeJuego);
+
 
 	// Shows the time measurements in the window title
 	// check sprintf formats here https://cplusplus.com/reference/cstdio/printf/
@@ -493,6 +499,17 @@ bool App::CleanUp()
 	LOG("Timer App CleanUp(): %f", timer.ReadMSec());
 
 	return ret;
+}
+
+void App::convertirTiempo(long long milisegundos)
+{
+	long long totalSegundos = milisegundos / 1000; // Convertir milisegundos a segundos
+	int horas = totalSegundos / 3600;              // 1 hora = 3600 segundos
+	int minutos = (totalSegundos % 3600) / 60;     // 1 minuto = 60 segundos
+	int segundos = totalSegundos % 60;             // Segundos restantes
+
+	// Imprimir en formato hh:mm:ss
+	//printf("%02d:%02d:%02d\n", horas, minutos, segundos);
 }
 
 // ---------------------------------------

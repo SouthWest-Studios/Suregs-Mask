@@ -119,7 +119,8 @@ bool Enemy_Guerrero::Update(float dt)
 		desiredState = EntityState_Enemy::RUNNING;
 	}
 
-	
+	UpdateAttackSensor(dt);
+
 	stateMachine(dt, playerPos);
 
 	currentAnimation->Update();
@@ -196,10 +197,48 @@ void Enemy_Guerrero::Chase(float dt, iPoint playerPos)
 void Enemy_Guerrero::Attack(float dt)
 {
 	//printf("Osiris attacking");
-	currentAnimation = &attackAnim;	
-	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero); //No se mueve mientras ataca
-	
+	if (canAttack) {
+
+		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);//No se mueve mientras ataca
+
+		if (isFacingLeft) {
+			sensor = app->physics->CreateRectangle(position.x + 65, position.y - 15, 40, 70, bodyType::DYNAMIC);
+			sensor->ctype = ColliderType::PROJECTILE;
+			sensor->listener = this;
+			sensor->body->GetFixtureList()->SetSensor(true);
+		}
+		else {
+			sensor = app->physics->CreateRectangle(position.x - 35, position.y - 15, 40, 70, bodyType::DYNAMIC);
+			sensor->ctype = ColliderType::PROJECTILE;
+			sensor->listener = this;
+			sensor->body->GetFixtureList()->SetSensor(true);
+		}
+
+		attackCooldownTimer.Start();
+		canAttack = false;
+
+		currentAnimation = &attackAnim;
+	}
+
 	//sonido ataque
+}
+
+
+void Enemy_Guerrero::UpdateAttackSensor(float dt)
+{
+	if (!canAttack && attackCooldownTimer.ReadMSec() >= 350.0f) {
+		canAttack = true;
+	}
+
+	if (sensor != nullptr && canAttack) {
+		canAttack = false;
+		attackCooldownTimer.Start();
+
+		if (attackSensorTimer.ReadMSec() >= 350.0f) {
+			app->physics->DestroyBody(sensor);
+			sensor = nullptr;
+		}
+	}
 }
 
 void Enemy_Guerrero::Die() {
@@ -228,7 +267,9 @@ void Enemy_Guerrero::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLAYER:
 		LOG("Collision PLAYER");
-		//restar vida al player
+		if (physA->ctype == ColliderType::PROJECTILE) {
+			app->entityManager->GetPlayer()->TakeDamage(attackDamage);
+		}
 		break;
 	case ColliderType::PLAYER_ATTACK:
 		LOG("Collision Player_Attack");
