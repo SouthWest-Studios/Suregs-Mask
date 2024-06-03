@@ -2138,14 +2138,14 @@ bool TreeManager::PostUpdate()
 			app->render->DrawTexture(mascara3Texture, 745, 535, SDL_FLIP_NONE, 0, 0);
 		}
 
-		if (app->inventoryManager->numMasks == 0) //quitar
-		{
-			app->inventoryManager->numMasks = 1;
-		}
+		//if (app->inventoryManager->numMasks == 0) //quitar
+		//{
+		//	app->inventoryManager->numMasks = 1;
+		//}
 		if (app->inventoryManager->numMasks == 1)
 		{
 			mask = 1;
-			app->inventoryManager->numMasks = 4; //quitar
+			/*app->inventoryManager->numMasks = 4;*/ //quitar
 		}
 	}
 	
