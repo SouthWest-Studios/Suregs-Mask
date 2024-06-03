@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="126" height="107" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="46">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="126" height="107" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="48">
  <tileset firstgid="1" name="Testing" tilewidth="32" tileheight="32" tilecount="13250" columns="125">
   <image source="../../Textures/Mapas/Testing/background.png" width="4015" height="3423"/>
  </tileset>
@@ -8157,7 +8157,7 @@
    <tile gid="8077"/>
    <tile gid="8078"/>
    <tile gid="8079"/>
-   <tile/>
+   <tile gid="7448"/>
    <tile gid="8081"/>
    <tile gid="8082"/>
    <tile gid="8083"/>
@@ -22618,13 +22618,11 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="13251"/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="13251"/>
    <tile/>
    <tile/>
    <tile/>
@@ -22744,13 +22742,15 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="13251"/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="13251"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -36977,7 +36977,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="13287"/>
    <tile/>
    <tile/>
    <tile/>
@@ -40478,8 +40478,8 @@
   </data>
  </layer>
  <objectgroup color="#ff0000" id="11" name="CollisionWalls">
-  <object id="12" x="1185.33" y="2305.33">
-   <polygon points="-2,-44 542.667,-1.33333 542.667,-97.3333 572,-126.667 612.667,-142 667.333,-137.333 706.667,-126.667 752.667,-107.333 808.667,-101.333 871.333,-126 893.333,-158.667 944,-210.667 985.333,-256.667 996.667,-296 989.333,-390 968.667,-451.333 939.333,-492 920,-531.333 948.667,-549.333 1028.67,-556.667 1079.33,-589.333 1134,-646 1154.67,-692 1154,-815.333 1118,-888 832.848,-862.909 420.727,-178.061 -264.121,-132.606 -269.333,416.667 88.6667,446.667 364.667,718.667 542.667,680.667 940.667,634.667 1592.67,628.667 1580.67,-37.3333 2030.67,-213.333 2188.67,-439.333 2172.67,-731.333 2075.33,-481.333 2012.67,-480.667 1948.67,-374.667 1842,-383.333 1760,-318.667 1742,-189.333 1468,-66.6667 1465.33,168 1488.67,197.333 1491.33,364.667 1511.33,434.667 1552.67,522 1559.33,603.333 1488.67,600 1407.33,475.333 1321.33,478 1256,379.333 1175.33,512 1123.33,620 947.333,616 914.667,448 740.667,528 443.333,679.333 316,638 300,574.667 222.667,538 157.333,494 78,424 -8,393.333 -122.667,379.334 -176,325.333 -251.333,194 -230.667,115.333 -173.333,-25.3333 -87.3333,-32.6667"/>
+  <object id="47" x="2064" y="1652">
+   <polygon points="0,0 -1268,24 -1316,1524 1116,1516 1120,-104 804,-72 816,1268 -1220,1292 -1196,180 20,136"/>
   </object>
  </objectgroup>
  <objectgroup color="#c8c8c8" id="12" name="Dialogos">
