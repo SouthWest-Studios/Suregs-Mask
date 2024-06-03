@@ -109,7 +109,7 @@ bool Scene_Menu::Start()
 	/*fPoint ePos(500.0f, 500.0f);*/
 	/*eMenu = app->psystem->AddEmiter(ePos, EmitterType::EMITTER_TYPE_SPARK);*/
 
-	app->audio->LoadAudioMusic("menu", 10.0f);
+	app->audio->LoadAudioMusic("menu", 0.0f);
 	menu_fx = app->audio->LoadAudioFx("menu_fx");
 	app->audio->PlayFx(menu_fx);
 
@@ -325,7 +325,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		app->guiManager->pointerId = 12;
 		/*app->guiManager->DestroyGuiControl(NuevaPartida);
 		app->guiManager->DestroyGuiControl(Continuar);*/
-		app->audio->LoadAudioMusic("credits", 1.0f);
+		app->audio->LoadAudioMusic("credits", 0.0f);
 		break;
 
 	case 6:
@@ -347,7 +347,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 			exitAnimationTime = 0.0f;
 		}
 		app->audio->StopMusic(1.0);
-		app->audio->LoadAudioMusic("menu", 1.0f);
+		app->audio->LoadAudioMusic("menu", 0.0f);
 		break;
 
 	case 13:
