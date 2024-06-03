@@ -346,7 +346,6 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 			animatingExit = true;
 			exitAnimationTime = 0.0f;
 		}
-		app->audio->StopMusic(1.0);
 		app->audio->LoadAudioMusic("menu", 0.0f);
 		break;
 
