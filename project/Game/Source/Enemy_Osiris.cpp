@@ -131,7 +131,7 @@ bool Enemy_Osiris::Update(float dt)
 	else if (app->entityManager->GetIgory()->isDead) {
 		health = 0;
 	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance*32)
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32)
 	{
 		desiredState = EntityState_Enemy::ATTACKING;
 	}
@@ -244,13 +244,13 @@ void Enemy_Osiris::Attack(float dt)
 		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);//No se mueve mientras ataca
 
 		if (isFacingLeft) {
-			sensor = app->physics->CreateRectangle(position.x, position.y, 20, 100, bodyType::DYNAMIC);
+			sensor = app->physics->CreateRectangle(position.x + 50, position.y, 40, 70, bodyType::DYNAMIC);
 			sensor->ctype = ColliderType::PROJECTILE;
 			sensor->listener = this;
 			sensor->body->GetFixtureList()->SetSensor(true);
 		}
 		else {
-			sensor = app->physics->CreateRectangle(position.x, position.y, 20, 100, bodyType::DYNAMIC);
+			sensor = app->physics->CreateRectangle(position.x - 50, position.y, 40, 70, bodyType::DYNAMIC);
 			sensor->ctype = ColliderType::PROJECTILE;
 			sensor->listener = this;
 			sensor->body->GetFixtureList()->SetSensor(true);
@@ -268,7 +268,7 @@ void Enemy_Osiris::Attack(float dt)
 
 void Enemy_Osiris::UpdateAttackSensor(float dt)
 {
-	if (!canAttack && attackCooldownTimer.ReadSec() >= 1.0f) {
+	if (!canAttack && attackCooldownTimer.ReadMSec() >= 500.0f) {
 		canAttack = true;
 	}
 
@@ -276,7 +276,7 @@ void Enemy_Osiris::UpdateAttackSensor(float dt)
 		canAttack = false;
 		attackCooldownTimer.Start();
 
-		if (attackSensorTimer.ReadSec() >= 1.0f) {
+		if (attackSensorTimer.ReadMSec() >= 500.0f) {
 			app->physics->DestroyBody(sensor);
 			sensor = nullptr;
 		}
