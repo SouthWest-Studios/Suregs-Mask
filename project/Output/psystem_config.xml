@@ -95,6 +95,43 @@
 			<vortexSensitive state = "false"/>
 		</emitter>
 
+		<emitter type ="rayo">
+			<angleRange min ="269" max ="271"/>
+			<rotSpeed value ="10" randMin ="-1" randMax ="1"/>
+			<startSpeed value ="1.0f" randMin ="0" randMax ="1"/>
+			<endSpeed value ="1.0f" randMin ="0" randMax ="1"/>
+			<startSize value ="30" randMin ="0" randMax ="1"/>
+			<endSize value =" 70" randMin ="1" randMax ="1"/>
+			<emitNumber value ="30"/>
+			<emitVariance value ="0" randMin ="0" randMax ="1"/>
+			<maxParticleLife value ="20" randMin ="0" randMax ="1"/>
+			<textureRect x="0" y="0" w="128" h="128"/>
+			<startColor r ="0" g="0" b="255" a ="255"/>
+			<endColor r ="0" g="150" b="255" a ="255"/>
+			<blendMode mode ="blend"/>
+			<lifetime value ="200"/>
+			<vortexSensitive state = "false"/>
+		</emitter>
+
+
+		<emitter type ="explosion_rayo">
+			<angleRange min ="50" max ="130"/>
+			<rotSpeed value ="0" randMin ="-1" randMax ="1"/>
+			<startSpeed value ="0" randMin ="0" randMax ="1"/>
+			<endSpeed value ="0" randMin ="0" randMax ="1"/>
+			<startSize value ="0" randMin ="0" randMax ="1"/>
+			<endSize value ="130" randMin ="1" randMax ="1"/>
+			<emitNumber value ="1"/>
+			<emitVariance value ="0" randMin ="0" randMax ="1"/>
+			<maxParticleLife value ="50" randMin ="0" randMax ="1"/>
+			<textureRect x="384" y="256" w="256" h="256"/>
+			<startColor r ="0" g="150" b="255" a ="200"/>
+			<endColor r ="0" g="150" b="255" a ="0"/>
+			<blendMode mode ="add"/>
+			<lifetime value ="10"/>
+			<vortexSensitive state = "false"/>
+		</emitter>
+
 		<emitter type ="pixel_smoke">
 			<angleRange min ="0" max ="80"/>
 			<rotSpeed value ="0" randMin ="-1" randMax ="1"/>

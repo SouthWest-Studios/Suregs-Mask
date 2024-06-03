@@ -146,7 +146,10 @@ private:
 	float exitAnimationTime = 0.0f; // Tiempo de animación para la salida
 	bool animating = false;
 	bool animatingExit = false;
+	bool logoAnimating = false;
+	bool showLogo = true;
 
+	bool eMenuGenerated = false;
 	
 
 };

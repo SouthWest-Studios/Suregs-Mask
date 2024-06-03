@@ -226,10 +226,10 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		case 0:
 		{
 			entity->name = "Dinka";
-			entity->desc = "Lanza un rayo mágico al enemigo más poderoso quitándole 50 puntos de vida, cuenta con 25 segundos de cooldown y puede producir veneno.Su pasiva aumenta el poder físico un 20 % .";
-			entity->desc1 = "Lanza un rayo mágico al enemigo más poderoso quitándole 50 puntos de vida, cuenta con 25 segundos de cooldown y puede producir veneno.Su pasiva aumenta el poder físico un 20 % .";
-			entity->desc2 = "Lanza un rayo mágico al enemigo más poderoso quitándole 50 puntos de vida, cuenta con 25 segundos de cooldown y puede producir veneno.Su pasiva aumenta el poder físico un 20 % .";
-			entity->desc3 = "Lanza un rayo mágico al enemigo más poderoso quitándole 50 puntos de vida, cuenta con 25 segundos de cooldown y puede producir veneno.Su pasiva aumenta el poder físico un 20 % .";
+			entity->desc = "Lanza un rayo que resta 50 puntos de vida a un enemigo, cuenta con 25 segundos de cooldown y puede producir veneno.Su pasiva aumenta el poder de ataque un 20%.";
+			entity->desc1 = "Lanza un rayo que resta 50 puntos de vida a un enemigo, cuenta con 25 segundos de cooldown y puede producir veneno.Su pasiva aumenta el poder de ataque un 20%.";
+			entity->desc2 = "Lanza un rayo que resta 50 puntos de vida a un enemigo, cuenta con 25 segundos de cooldown y puede producir veneno.Su pasiva aumenta el poder de ataque un 20%.";
+			entity->desc3 = "Lanza un rayo que resta 50 puntos de vida a un enemigo, cuenta con 25 segundos de cooldown y puede producir veneno.Su pasiva aumenta el poder de ataque un 20%.";
 
 
 			break;
@@ -299,18 +299,18 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		case 0:
 		{
 			entity->name = "Inuit";
-			entity->desc = "Lanza una bola mágica contra el suelo generando una zona muy poderosa contra enemigos, les provoca una pérdida de 100 puntos de vida, cuenta con 30 segundos de cooldown y puede producir veneno.Su pasiva aumenta genera que el ataque básico cuente con más alcance.";
-			entity->desc1 = "Lanza una bola mágica contra el suelo generando una zona muy poderosa contra enemigos, les provoca una pérdida de 100 puntos de vida, cuenta con 30 segundos de cooldown y puede producir veneno.Su pasiva aumenta genera que el ataque básico cuente con más alcance.";
-			entity->desc2 = "Lanza una bola mágica contra el suelo generando una zona muy poderosa contra enemigos, les provoca una pérdida de 100 puntos de vida, cuenta con 30 segundos de cooldown y puede producir veneno.Su pasiva aumenta genera que el ataque básico cuente con más alcance.";
-			entity->desc3 = "Lanza una bola mágica contra el suelo generando una zona muy poderosa contra enemigos, les provoca una pérdida de 100 puntos de vida, cuenta con 30 segundos de cooldown y puede producir veneno.Su pasiva aumenta genera que el ataque básico cuente con más alcance.";
+			entity->desc = "Lanza una bola contra el suelo generando una zona muy poderosa contra enemigos, les resta 100 puntos de vida, cuenta con 30 segundos de cooldown y puede producir veneno.Su pasiva aumenta el alcance del ataque normal.";
+			entity->desc1 = "Lanza una bola contra el suelo generando una zona muy poderosa contra enemigos, les resta 100 puntos de vida, cuenta con 30 segundos de cooldown y puede producir veneno.Su pasiva aumenta el alcance del ataque normal.";
+			entity->desc2 = "Lanza una bola contra el suelo generando una zona muy poderosa contra enemigos, les resta 100 puntos de vida, cuenta con 30 segundos de cooldown y puede producir veneno.Su pasiva aumenta el alcance del ataque normal.";
+			entity->desc3 = "Lanza una bola contra el suelo generando una zona muy poderosa contra enemigos, les resta 100 puntos de vida, cuenta con 30 segundos de cooldown y puede producir veneno.Su pasiva aumenta el alcance del ataque normal.";
 
 			break;
 		}
 		case 1:
 		{
 			entity->name = "CoolDown I";
-			entity->desc = "Reduce el cooldown  de la habilidad principal a 23 segundos";
-			entity->desc1 = "Reduce el cooldown  de la habilidad principal a 28 segundos";
+			entity->desc = "Reduce el cooldown de la habilidad principal a 23 segundos";
+			entity->desc1 = "Reduce el cooldown de la habilidad principal a 28 segundos";
 			entity->desc2 = "Reduce el cooldown de la habilidad principal a 18 segundos";
 			entity->desc3 = "Reduce el cooldown de la habilidad principal a 58 segundos";
 			entity->usable1 = true;
@@ -370,10 +370,10 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		case 0:
 		{
 			entity->name = "Musri";
-			entity->desc = "Lanza un dash más poderoso, con un alcance mayor, provoca a los enemigos una pérdida de 40 puntos de vida y le otorga invulnerabilidad Jakov durante 5 segundos, cuenta con 20 segundos de cooldown.Su pasiva provoca que el dash básico cuente con 2 segundos de invisibilidad.";
-			entity->desc1 = "Lanza un dash más poderoso, con un alcance mayor, provoca a los enemigos una pérdida de 40 puntos de vida y le otorga invulnerabilidad Jakov durante 5 segundos, cuenta con 20 segundos de cooldown.Su pasiva provoca que el dash básico cuente con 2 segundos de invisibilidad.";
-			entity->desc2 = "Lanza un dash más poderoso, con un alcance mayor, provoca a los enemigos una pérdida de 40 puntos de vida y le otorga invulnerabilidad Jakov durante 5 segundos, cuenta con 20 segundos de cooldown.Su pasiva provoca que el dash básico cuente con 2 segundos de invisibilidad.";
-			entity->desc3 = "Lanza un dash más poderoso, con un alcance mayor, provoca a los enemigos una pérdida de 40 puntos de vida y le otorga invulnerabilidad Jakov durante 5 segundos, cuenta con 20 segundos de cooldown.Su pasiva provoca que el dash básico cuente con 2 segundos de invisibilidad.";
+			entity->desc = "Lanza un dash poderoso, con un alcance mayor, provoca a los enemigos una resta de 40 puntos de vida y le otorga invulnerabilidad a Jakov durante 5 segundos, cuenta con 20 segundos de cooldown.Su pasiva provoca que el dash simple cuente con 2 segundos de invisibilidad.";
+			entity->desc1 = "Lanza un dash poderoso, con un alcance mayor, provoca a los enemigos una resta de 40 puntos de vida y le otorga invulnerabilidad a Jakov durante 5 segundos, cuenta con 20 segundos de cooldown.Su pasiva provoca que el dash simple cuente con 2 segundos de invisibilidad.";
+			entity->desc2 = "Lanza un dash poderoso, con un alcance mayor, provoca a los enemigos una resta de 40 puntos de vida y le otorga invulnerabilidad a Jakov durante 5 segundos, cuenta con 20 segundos de cooldown.Su pasiva provoca que el dash simple cuente con 2 segundos de invisibilidad.";
+			entity->desc3 = "Lanza un dash poderoso, con un alcance mayor, provoca a los enemigos una resta de 40 puntos de vida y le otorga invulnerabilidad a Jakov durante 5 segundos, cuenta con 20 segundos de cooldown.Su pasiva provoca que el dash simple cuente con 2 segundos de invisibilidad.";
 
 			break;
 		}
@@ -383,10 +383,10 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->name2 = "Alcance I";
 			entity->name3 = "Distancia I";
 			entity->name4 = "Duracion I";
-			entity->desc = "Aumenta el número de rayos de la habilidad principal a 2";
+			entity->desc = "Aumenta la cantidad de rayos de la habilidad principal a 2";
 			entity->desc1 = "Aumenta el alcance de la habilidad principal un 5%";
 			entity->desc2 = "Aumenta la distancia de la habilidad principal un 5%";
-			entity->desc3 = "Aumenta el tiempo de duración a 22 segundos";
+			entity->desc3 = "Aumenta el tiempo de uso a 22 segundos";
 			entity->usable1 = true;
 			entity->usable2 = true;
 			entity->usable3 = true;
@@ -418,10 +418,10 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->name2 = "Alcance II";
 			entity->name3 = "Distancia II";
 			entity->name4 = "Duracion II";
-			entity->desc = "Aumenta el número de rayos de la habilidad principal a 3";
+			entity->desc = "Aumenta la cantidad de rayos de la habilidad principal a 3";
 			entity->desc1 = "Aumenta el alcance de la habilidad principal un 5%";
 			entity->desc2 = "Aumenta la distancia de la habilidad principal un 5%";
-			entity->desc3 = "Aumenta el tiempo de duración a 25 segundos";
+			entity->desc3 = "Aumenta el tiempo de uso a 25 segundos";
 			entity->icon0 = app->tex->Load(rayoPath);
 			entity->iconLocked0 = app->tex->Load(rayoLockedPath);
 			entity->iconSelected0 = app->tex->Load(rayoSelectedPath);
@@ -445,10 +445,10 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->name2 = "Alcance III";
 			entity->name3 = "Distancia III";
 			entity->name4 = "Duracion III";
-			entity->desc = "Aumenta el número de rayos de la habilidad principal a 4";
+			entity->desc = "Aumenta la cantidad de rayos de la habilidad principal a 4";
 			entity->desc1 = "Aumenta el alcance de la habilidad principal un 5%";
 			entity->desc2 = "Aumenta la distancia de la habilidad principal un 5%";
-			entity->desc3 = "Aumenta el tiempo de duración a 27 segundos";
+			entity->desc3 = "Aumenta el tiempo de uso a 27 segundos";
 			entity->icon0 = app->tex->Load(rayoPath);
 			entity->iconLocked0 = app->tex->Load(rayoLockedPath);
 			entity->iconSelected0 = app->tex->Load(rayoSelectedPath);
@@ -472,10 +472,10 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->name2 = "Alcance IV";
 			entity->name3 = "Distancia IV";
 			entity->name4 = "Duracion IV";
-			entity->desc = "Aumenta el número de rayos de la habilidad principal a 5";
+			entity->desc = "Aumenta la cantidad de rayos de la habilidad principal a 5";
 			entity->desc1 = "Aumenta el alcance de la habilidad principal un 5%";
 			entity->desc2 = "Aumenta la distancia de la habilidad principal un 5%";
-			entity->desc3 = "Aumenta el tiempo de duración a 30 segundos";
+			entity->desc3 = "Aumenta el tiempo de uso a 30 segundos";
 			entity->icon0 = app->tex->Load(rayoPath);
 			entity->iconLocked0 = app->tex->Load(rayoLockedPath);
 			entity->iconSelected0 = app->tex->Load(rayoSelectedPath);
@@ -505,10 +505,10 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		case 0:
 		{
 			entity->name = "Surma";
-			entity->desc = "Su magia genera que el poder y la vida de Jakov aumente un 10% durante 20 segundos, cuenta con un cooldown de 60 segundos.Su pasiva genera, si Jakov tiene menos del 30 % de vida, un aumento del poder en un 20 % y la velocidad de movimiento un 10 %.";
-			entity->desc1 = "Su magia genera que el poder y la vida de Jakov aumente un 10% durante 20 segundos, cuenta con un cooldown de 60 segundos.Su pasiva genera, si Jakov tiene menos del 30 % de vida, un aumento del poder en un 20 % y la velocidad de movimiento un 10 %.";
-			entity->desc2 = "Su magia genera que el poder y la vida de Jakov aumente un 10% durante 20 segundos, cuenta con un cooldown de 60 segundos.Su pasiva genera, si Jakov tiene menos del 30 % de vida, un aumento del poder en un 20 % y la velocidad de movimiento un 10 %.";
-			entity->desc3 = "Su magia genera que el poder y la vida de Jakov aumente un 10% durante 20 segundos, cuenta con un cooldown de 60 segundos.Su pasiva genera, si Jakov tiene menos del 30 % de vida, un aumento del poder en un 20 % y la velocidad de movimiento un 10 %.";
+			entity->desc = "Su poder genera que la fuerza y la vida de Jakov aumente un 10% durante 20 segundos, cuenta con un cooldown de 60 segundos.Su pasiva genera, si Jakov tiene menos del 30 % de vida, un aumento del poder en un 20 % y la velocidad de movimiento un 10 %.";
+			entity->desc1 = "Su poder genera que la fuerza y la vida de Jakov aumente un 10% durante 20 segundos, cuenta con un cooldown de 60 segundos.Su pasiva genera, si Jakov tiene menos del 30 % de vida, un aumento del poder en un 20 % y la velocidad de movimiento un 10 %.";
+			entity->desc2 = "Su poder genera que la fuerza y la vida de Jakov aumente un 10% durante 20 segundos, cuenta con un cooldown de 60 segundos.Su pasiva genera, si Jakov tiene menos del 30 % de vida, un aumento del poder en un 20 % y la velocidad de movimiento un 10 %.";
+			entity->desc3 = "Su poder genera que la fuerza y la vida de Jakov aumente un 10% durante 20 segundos, cuenta con un cooldown de 60 segundos.Su pasiva genera, si Jakov tiene menos del 30 % de vida, un aumento del poder en un 20 % y la velocidad de movimiento un 10 %.";
 
 			break;
 		}
@@ -518,7 +518,7 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->name2 = "Invisible I";
 			entity->name3 = "Aumento I";
 			entity->desc = "Activa la capacidad de veneno al usar la habilidad principal";
-			entity->desc1 = "Aumenta la duración de la habilidad principal a 6 segundos";
+			entity->desc1 = "Aumenta el uso de la habilidad principal a 6 segundos";
 			entity->desc2 = "Aumenta la vida que otorga la habilidad principal un 5%";
 			entity->desc3 = "Activa la capacidad de veneno al usar la habilidad principal";
 			entity->usable1 = true;
@@ -547,7 +547,7 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->name2 = "Invisible II";
 			entity->name3 = "Aumento II";
 			entity->desc = "Aumenta el poder del veneno a 10 puntos";
-			entity->desc1 = "Aumenta la duración de la habilidad principal a 7,3 segundos";
+			entity->desc1 = "Aumenta el uso de la habilidad principal a 7,3 segundos";
 			entity->desc2 = "Aumenta la vida que otorga la habilidad principal un 5%";
 			entity->desc3 = "Aumenta el poder del veneno a 10 puntos";
 
@@ -571,7 +571,7 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->name2 = "Invisible III";
 			entity->name3 = "Aumento III";
 			entity->desc = "Aumenta la duración del veneno a 10 segundos";
-			entity->desc1 = "Aumenta la duración de la habilidad principal a 8,6 segundos";
+			entity->desc1 = "Aumenta el uso de la habilidad principal a 8,6 segundos";
 			entity->desc2 = "Aumenta la vida que otorga la habilidad principal un 5%";
 			entity->desc3 = "Aumenta la duración del veneno a 10 segundos";
 
@@ -595,7 +595,7 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->name2 = "Invisible IV";
 			entity->name3 = "Aumento IV";
 			entity->desc = "Aumenta el poder del veneno a 15 puntos y la duración a 15 segundos";
-			entity->desc1 = "Aumenta la duración de la habilidad principal a 10 segundos";
+			entity->desc1 = "Aumenta el uso de la habilidad principal a 10 segundos";
 			entity->desc2 = "Aumenta la vida que otorga la habilidad principal un 10%";
 			entity->desc3 = "Aumenta el poder del veneno a 15 puntos y la duración a 15 segundos";
 
@@ -2000,7 +2000,7 @@ bool TreeManager::PostUpdate()
 				{
 					if ((PointerId == 0 && app->inventoryManager->numMasks >= 1) || (PointerId == 5  && app->inventoryManager->numMasks >= 2) || (PointerId == 10 && app->inventoryManager->numMasks >= 3) || (PointerId == 15 && app->inventoryManager->numMasks >= 4))
 					{
-							app->render->DrawTextBound(itum->data->desc.c_str(), 865, 200, 180, { 0,0,0 }, app->render->goldFont);
+							app->render->DrawTextBound(itum->data->desc.c_str(), 865, 200, 180, {223,188,156,255}, app->render->goldFont);
 					}
 					else
 					{
@@ -2011,7 +2011,7 @@ bool TreeManager::PostUpdate()
 						else
 						{
 							app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
-							app->render->DrawTextBound(itum->data->desc.c_str(), 870, 300, 150, { 0,0,0 }, app->render->primaryFont);
+							app->render->DrawTextBound(itum->data->desc.c_str(), 870, 300, 150, {223,188,156,255}, app->render->primaryFont);
 						}
 					}
 					app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, {0,0,0}, app->render->titleFont);
@@ -2022,7 +2022,7 @@ bool TreeManager::PostUpdate()
 				{
 					if ((PointerId == 0 && app->inventoryManager->numMasks >= 1) || (PointerId == 5 && app->inventoryManager->numMasks >= 2) || (PointerId == 10 && app->inventoryManager->numMasks >= 3) || (PointerId == 15 && app->inventoryManager->numMasks >= 4))
 					{
-						app->render->DrawTextBound(itum->data->desc.c_str(), 865, 200, 180, { 0,0,0 }, app->render->goldFont);
+						app->render->DrawTextBound(itum->data->desc.c_str(), 865, 200, 180, {223,188,156,255}, app->render->goldFont);
 					}
 					else
 					{
@@ -2033,16 +2033,16 @@ bool TreeManager::PostUpdate()
 						else
 						{
 							app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
-							app->render->DrawTextBound(itum->data->desc1.c_str(), 870, 300, 150, { 0,0,0 }, app->render->primaryFont);
+							app->render->DrawTextBound(itum->data->desc1.c_str(), 870, 300, 150, {223,188,156,255}, app->render->primaryFont);
 						}
 					}
 					if (itum->data->name2 == "")
 					{
-						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
+						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, {223,188,156,255}, app->render->titleFont);
 					}
 					else
 					{
-						app->render->DrawTextBound(itum->data->name2.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
+						app->render->DrawTextBound(itum->data->name2.GetString(), 870, 150, 150, {223,188,156,255}, app->render->titleFont);
 					}
 					
 					
@@ -2052,7 +2052,7 @@ bool TreeManager::PostUpdate()
 				{
 					if ((PointerId == 0 && app->inventoryManager->numMasks >= 1) || (PointerId == 5 && app->inventoryManager->numMasks >= 2) || (PointerId == 10 && app->inventoryManager->numMasks >= 3) || (PointerId == 15 && app->inventoryManager->numMasks >= 4))
 					{
-						app->render->DrawTextBound(itum->data->desc.c_str(), 865, 200, 180, { 0,0,0 }, app->render->goldFont);
+						app->render->DrawTextBound(itum->data->desc.c_str(), 865, 200, 180, {223,188,156,255}, app->render->goldFont);
 					}
 					else
 					{
@@ -2063,18 +2063,18 @@ bool TreeManager::PostUpdate()
 						else
 						{
 							app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
-							app->render->DrawTextBound(itum->data->desc2.c_str(), 870, 300, 150, { 0,0,0 }, app->render->primaryFont);
+							app->render->DrawTextBound(itum->data->desc2.c_str(), 870, 300, 150, {223,188,156,255}, app->render->primaryFont);
 						}
 					}
 					if (itum->data->name3 == "")
 					{
-						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
+						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, {223,188,156,255}, app->render->titleFont);
 					}
 					else
 					{
-						app->render->DrawTextBound(itum->data->name3.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
+						app->render->DrawTextBound(itum->data->name3.GetString(), 870, 150, 150, {223,188,156,255}, app->render->titleFont);
 					}
-					/*app->render->DrawTextBound(itum->data->name3.GetString(), 870, 150, 150, { 0,0,0 });*/
+					/*app->render->DrawTextBound(itum->data->name3.GetString(), 870, 150, 150, {223,188,156,255});*/
 					
 
 				}
@@ -2082,7 +2082,7 @@ bool TreeManager::PostUpdate()
 				{
 					if ((PointerId == 0 && app->inventoryManager->numMasks >= 1) || (PointerId == 5 && app->inventoryManager->numMasks >= 2) || (PointerId == 10 && app->inventoryManager->numMasks >= 3) || (PointerId == 15 && app->inventoryManager->numMasks >= 4))
 					{
-						app->render->DrawTextBound(itum->data->desc.c_str(), 865, 200, 180, { 0,0,0 }, app->render->goldFont);
+						app->render->DrawTextBound(itum->data->desc.c_str(), 865, 200, 180, {223,188,156,255}, app->render->goldFont);
 					}
 					else
 					{
@@ -2093,19 +2093,19 @@ bool TreeManager::PostUpdate()
 						else
 						{
 							app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
-							app->render->DrawTextBound(itum->data->desc3.c_str(), 870, 300, 150, { 0,0,0 }, app->render->primaryFont);
+							app->render->DrawTextBound(itum->data->desc3.c_str(), 870, 300, 150, {223,188,156,255}, app->render->primaryFont);
 						}
 						
 					}
 					if (itum->data->name4 == "")
 					{
-						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
+						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, {223,188,156,255}, app->render->titleFont);
 					}
 					else
 					{
-						app->render->DrawTextBound(itum->data->name4.GetString(), 870, 150, 150, { 0,0,0 }, app->render->titleFont);
+						app->render->DrawTextBound(itum->data->name4.GetString(), 870, 150, 150, {223,188,156,255}, app->render->titleFont);
 					}
-					/*app->render->DrawTextBound(itum->data->name4.GetString(), 870, 150, 150, { 0,0,0 });*/
+					/*app->render->DrawTextBound(itum->data->name4.GetString(), 870, 150, 150, {223,188,156,255});*/
 				
 
 				}
@@ -2119,36 +2119,36 @@ bool TreeManager::PostUpdate()
 		{
 
 			std::string texto = std::to_string(app->entityManager->GetPlayer()->maskZeroPoints) + "/8 Mask Points";
-			app->render->DrawTextBound(texto.c_str(), 885, 550, 370, { 0,0,0 });
+			app->render->DrawTextBound(texto.c_str(), 885, 550, 370, {0,0,0});
 			std::string texto1 = std::to_string(numMejoras0) + "/8 Mejoras";
-			app->render->DrawTextBound(texto1.c_str(), 885, 600, 370, { 0,0,0 });
+			app->render->DrawTextBound(texto1.c_str(), 885, 600, 370, {0,0,0});
 
 		}
 		else if (mask == 2)
 		{
 
 			std::string texto = std::to_string(app->entityManager->GetPlayer()->maskZeroPoints) + "/8 Mask Points";
-			app->render->DrawTextBound(texto.c_str(), 885, 550, 370, { 0,0,0 });
+			app->render->DrawTextBound(texto.c_str(), 885, 550, 370, {0,0,0});
 			std::string texto1 = std::to_string(numMejoras0) + "/8 Mejoras";
-			app->render->DrawTextBound(texto1.c_str(), 885, 600, 370, { 0,0,0 });
+			app->render->DrawTextBound(texto1.c_str(), 885, 600, 370, {0,0,0});
 
 		}
 		else if (mask == 3)
 		{
 
 			std::string texto = std::to_string(app->entityManager->GetPlayer()->maskZeroPoints) + "/8 Mask Points";
-			app->render->DrawTextBound(texto.c_str(), 885, 550, 370, { 0,0,0 });
+			app->render->DrawTextBound(texto.c_str(), 885, 550, 370, {0,0,0});
 			std::string texto1 = std::to_string(numMejoras0) + "/8 Mejoras";
-			app->render->DrawTextBound(texto1.c_str(), 885, 600, 370, { 0,0,0 });
+			app->render->DrawTextBound(texto1.c_str(), 885, 600, 370, {0,0,0});
 
 		}
 		else if (mask == 4)
 		{
 
 			std::string texto = std::to_string(app->entityManager->GetPlayer()->maskZeroPoints) + "/8 Mask Points";
-			app->render->DrawTextBound(texto.c_str(), 885, 550, 370, { 0,0,0 });
+			app->render->DrawTextBound(texto.c_str(), 885, 550, 370, {0,0,0});
 			std::string texto1 = std::to_string(numMejoras0) + "/8 Mejoras";
-			app->render->DrawTextBound(texto1.c_str(), 885, 600, 370, { 0,0,0 });
+			app->render->DrawTextBound(texto1.c_str(), 885, 600, 370, {0,0,0});
 
 		}
 		
@@ -2161,10 +2161,10 @@ bool TreeManager::PostUpdate()
 		}
 			
 		std::string texto = "Primary Mask";
-		app->render->DrawTextBound(texto.c_str(), 295, 560, 370, { 0,0,0 });
+		app->render->DrawTextBound(texto.c_str(), 295, 560, 370, {223,188,156,255});
 
 		std::string textoo = "Secondary Mask";
-		app->render->DrawTextBound(textoo.c_str(), 565, 560, 370, { 0,0,0 });
+		app->render->DrawTextBound(textoo.c_str(), 565, 560, 370, {223,188,156,255});
 
 		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
 		{

@@ -51,23 +51,30 @@ bool BestiarioManager::Awake(pugi::xml_node config)
 	knobTexturePath = ((char*)config.child("bestiario").attribute("knob_texture").as_string());
 	PointerPath = ((char*)config.child("bestiario").attribute("pointer").as_string());
 	textoOsiris = ((char*)config.child("bestiario").attribute("text_osiris").as_string());
+	textoOsirisV = ((char*)config.child("bestiario").attribute("text_osirisV").as_string());
 	pathOsiris = ((char*)config.child("bestiario").attribute("texture_osiris").as_string());
 	textoMuur = ((char*)config.child("bestiario").attribute("text_muur").as_string());
+	textoMuurV = ((char*)config.child("bestiario").attribute("text_muurV").as_string());
 	pathMuur = ((char*)config.child("bestiario").attribute("texture_muur").as_string());
 	textoKhurt = ((char*)config.child("bestiario").attribute("text_khurt").as_string());
+	textoKhurtV = ((char*)config.child("bestiario").attribute("text_khurtV").as_string());
 	pathKhurt = ((char*)config.child("bestiario").attribute("texture_khurt").as_string());
 	textoBoorok = ((char*)config.child("bestiario").attribute("text_boorok").as_string());
+	textoBoorokV = ((char*)config.child("bestiario").attribute("text_boorokV").as_string());
 	pathBoorok = ((char*)config.child("bestiario").attribute("texture_boorok").as_string());
 	textoOls = ((char*)config.child("bestiario").attribute("text_ols").as_string());
+	textoOlsV = ((char*)config.child("bestiario").attribute("text_olsV").as_string());
 	pathOls = ((char*)config.child("bestiario").attribute("texture_ols").as_string());
 	textoInuit = ((char*)config.child("bestiario").attribute("text_inuit").as_string());
+	textoInuitV = ((char*)config.child("bestiario").attribute("text_inuitV").as_string());
 	pathInuit = ((char*)config.child("bestiario").attribute("texture_inuit").as_string());
 	textoMusri = ((char*)config.child("bestiario").attribute("text_musri").as_string());
+	textoMusriV = ((char*)config.child("bestiario").attribute("text_musriV").as_string());
 	pathMusri = ((char*)config.child("bestiario").attribute("texture_musri").as_string());
 	textoSurma = ((char*)config.child("bestiario").attribute("text_surma").as_string());
+	textoSurmaV = ((char*)config.child("bestiario").attribute("text_surmaV").as_string());
 	pathSurma = ((char*)config.child("bestiario").attribute("texture_surma").as_string());
 	CloseUpPath = ((char*)config.child("bestiario").attribute("closeUp").as_string());
-	
 	iconPathOsiris = ((char*)config.child("bestiario").attribute("texture_icono_osiris").as_string());
 	iconPathMuur = ((char*)config.child("bestiario").attribute("texture_icono_muur").as_string());
 	iconPathKhurt = ((char*)config.child("bestiario").attribute("texture_icono_khurt").as_string());
@@ -183,15 +190,38 @@ Bestiario* BestiarioManager::CreateItem(char* name)
 		osiris++;
 		
 	}
+	else if (strcmp(name, "osirisV") == 0)
+	{
+		entity->name = name;
+		entity->desc = textoOsirisV;
+		entity->texturaEnemigo = textureOsiris;
+		entity->icon = iconTextureOsiris;
+		entity->variacion = true;
+		if(osirisV == 0)
+			AddBestiario(entity);
+		osirisV++;
+
+	}
 	else if (strcmp(name, "muur") == 0)
 	{
 		entity->name = name;
-		entity->desc = textoMuur; 
+		entity->desc = textoMuur;
 		entity->texturaEnemigo = textureMuur;
 		entity->icon = iconTextureMuur;
 		if (muur == 0)
 			AddBestiario(entity);
 		muur++;
+	}
+	else if (strcmp(name, "muurV") == 0)
+	{
+		entity->name = name;
+		entity->desc = textoMuurV;
+		entity->texturaEnemigo = textureMuur;
+		entity->icon = iconTextureMuur;
+		entity->variacion = true;
+		if (muurV == 0)
+			AddBestiario(entity);
+		muurV++;
 	}
 	else if (strcmp(name, "khurt") == 0)
 	{
@@ -203,6 +233,17 @@ Bestiario* BestiarioManager::CreateItem(char* name)
 			AddBestiario(entity);
 		khurt++;
 	}
+	else if (strcmp(name, "khurtV") == 0)
+	{
+		entity->name = name;
+		entity->desc = textoKhurtV;
+		entity->texturaEnemigo = textureKhurt;
+		entity->icon = iconTextureKhurt;
+		entity->variacion = true;
+		if (khurtV == 0)
+			AddBestiario(entity);
+		khurtV++;
+	}
 	else if (strcmp(name, "boorok") == 0)
 	{
 		entity->name = name;
@@ -212,6 +253,17 @@ Bestiario* BestiarioManager::CreateItem(char* name)
 		if (boorok == 0)
 			AddBestiario(entity);
 		boorok++;
+	}
+	else if (strcmp(name, "boorokV") == 0)
+	{
+		entity->name = name;
+		entity->desc = textoBoorokV;
+		entity->texturaEnemigo = textureBoorok;
+		entity->icon = iconTextureBoorok;
+		entity->variacion = true;
+		if (boorokV == 0)
+			AddBestiario(entity);
+		boorokV++;
 	}
 	else if (strcmp(name, "ols") == 0)
 	{
@@ -223,6 +275,38 @@ Bestiario* BestiarioManager::CreateItem(char* name)
 			AddBestiario(entity);
 		ols++;
 	}
+	else if (strcmp(name, "olsV") == 0)
+	{
+		entity->name = name;
+		entity->desc = textoOlsV;
+		entity->texturaEnemigo = textureOls;
+		entity->icon = iconTextureOls;
+		entity->variacion = true;
+		if (olsV == 0)
+			AddBestiario(entity);
+		olsV++;
+	}
+	else if (strcmp(name, "khurt") == 0)
+	{
+		entity->name = name;
+		entity->desc = textoKhurt;
+		entity->texturaEnemigo = textureKhurt;
+		entity->icon = iconTextureKhurt;
+		if (khurt == 0)
+			AddBestiario(entity);
+		khurt++;
+	}
+	else if (strcmp(name, "khurtV") == 0)
+	{
+		entity->name = name;
+		entity->desc = textoKhurtV;
+		entity->texturaEnemigo = textureKhurt;
+		entity->icon = iconTextureKhurt;
+		entity->variacion = true;
+		if (khurtV == 0)
+			AddBestiario(entity);
+		khurtV++;
+		}
 	else if (strcmp(name, "inuit") == 0)
 	{
 		entity->name = name;
@@ -598,28 +682,39 @@ bool BestiarioManager::PostUpdate()
 					if (zoomIn == false && app->notesManager->zoomIn == false)
 					{
 						/*app->render->DrawTexture(listTexture, horizontalPosition, verticalPosition, SDL_FLIP_NONE, 0, 0);*/
-					
-					if (pEntity->listid == 2)
-					{
-						app->render->DrawTexture(listTexture, horizontalPosition, verticalPosition - scrollY, SDL_FLIP_NONE, 0, 0);
 
-					}
-					if (pEntity->listid == 1)
-					{
-						app->render->DrawTexture(listTexture2, horizontalPosition, verticalPosition - scrollY, SDL_FLIP_NONE, 0, 0);
+						if (pEntity->listid == 2)
+						{
+							app->render->DrawTexture(listTexture, horizontalPosition, verticalPosition - scrollY, SDL_FLIP_NONE, 0, 0);
 
-					}
-					if (pEntity->listid == 0)
-					{
-						app->render->DrawTexture(listTexture3, horizontalPosition, verticalPosition - scrollY, SDL_FLIP_NONE, 0, 0);
+						}
+						if (pEntity->listid == 1)
+						{
+							app->render->DrawTexture(listTexture2, horizontalPosition, verticalPosition - scrollY, SDL_FLIP_NONE, 0, 0);
 
-					}
-						app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
+						}
+						if (pEntity->listid == 0)
+						{
+							app->render->DrawTexture(listTexture3, horizontalPosition, verticalPosition - scrollY, SDL_FLIP_NONE, 0, 0);
+
+						}
+
+						if (pEntity->variacion == true)
+						{
+							SDL_SetTextureColorMod(pEntity->icon, 198, 115, 255);
+							SDL_SetTextureAlphaMod(pEntity->icon, 255);
+							app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
+						}
+						else
+						{
+							SDL_SetTextureColorMod(pEntity->icon, 255, 255, 255);
+							SDL_SetTextureAlphaMod(pEntity->icon, 255);
+							app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
+						}
 					}
 
 				}
 			}
-
 			else
 			{
 				int targetY = PointerId / 4 * 83;
@@ -656,18 +751,27 @@ bool BestiarioManager::PostUpdate()
 		{
 			if (itum->data->zoom)
 			{
-
-
-
 				if (PointerId == itum->data->id)
 				{
 					app->render->DrawTexture(itum->data->closeUpBestiarios, 400, 100, SDL_FLIP_NONE, 0, 0);
 					//app->render->DrawText(itum->data->name.GetString(), 580, 120, 80, 80, 0, 0, 0, 0, true);
 					app->render->DrawTextBound(itum->data->name.GetString(), 500, 120, 80, { 52,25,0 },app->render->titleFont);
 
-					app->render->DrawTexture(itum->data->texturaEnemigo, 580, 190, 1, SDL_FLIP_NONE, 0, 0);
-					app->render->DrawTextBound(itum->data->desc.c_str(), 500, 290, 270, { 52,25,0 });
+					if (itum->data->variacion == true)
+					{
+						SDL_SetTextureColorMod(itum->data->texturaEnemigo, 198, 115, 255);
+						SDL_SetTextureAlphaMod(itum->data->texturaEnemigo, 255);
+						app->render->DrawTexture(itum->data->texturaEnemigo, 580, 190, 1, SDL_FLIP_NONE, 0, 0);
+
+					}
+					else
+					{
+						SDL_SetTextureColorMod(itum->data->texturaEnemigo, 255, 255, 255);
+						SDL_SetTextureAlphaMod(itum->data->texturaEnemigo, 255);
+						app->render->DrawTexture(itum->data->texturaEnemigo, 580, 190, 1, SDL_FLIP_NONE, 0, 0);
+					}
 					
+					app->render->DrawTextBound(itum->data->desc.c_str(), 500, 290, 270, { 52,25,0 });
 				}
 			}
 		}
