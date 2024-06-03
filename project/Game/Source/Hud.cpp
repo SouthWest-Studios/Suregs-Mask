@@ -60,13 +60,13 @@ bool Hud::Awake(pugi::xml_node config)
 	rectCDMascaraSecundaria = new SDL_Rect{ 0,0,100,100 };
 
 	rectFondoPociones = new SDL_Rect{ 110,43,90,90 };
-	rectPocionVida1 = new SDL_Rect{ 1,686,60,56 };
-	rectPocionVida2 = new SDL_Rect{ 66,686,60,56 };
-	rectPocionVida3 = new SDL_Rect{ 131,686,60,56 };
-	rectPocionVidaMax = new SDL_Rect{ 196,686,60,56 };
-	rectPocionRegeneracion = new SDL_Rect{ 261,686,60,56 };
-	rectPocionDano = new SDL_Rect{ 326,686,60,56 };
-	rectPocionVelocidad = new SDL_Rect{ 391,686,62,65 };
+	rectPocionVida1 = new SDL_Rect{ 0,686,60,56 };
+	rectPocionVida2 = new SDL_Rect{ 63,686,60,56 };
+	rectPocionVida3 = new SDL_Rect{ 126,686,60,56 };
+	rectPocionVidaMax = new SDL_Rect{ 190,684,60,58 };
+	rectPocionRegeneracion = new SDL_Rect{ 255,686,60,56 };
+	rectPocionDano = new SDL_Rect{ 324,686,60,100 };
+	rectPocionVelocidad = new SDL_Rect{ 387,686,62,65 };
 	rectPocionOrbe = new SDL_Rect{ 456,686,62,65 };
 
 	potionRectMap[InventityType::POCION_VIDA_1] = rectPocionVida1;
