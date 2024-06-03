@@ -1554,7 +1554,7 @@ void Player::CastLightning() {
 		target->TakeDamage(maskStats[primaryMask][Branches::Rama1][maskLevels[primaryMask][Branches::Rama1]].maskDamage);
 		target->ApplyPoison(maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].poisonDamage, maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].poisonDuration, maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].poisonTickRate);
 		//ApplyPoison(target);
-		fPoint pos((float)target->position.x, (float)target->position.y - 280.0f);
+		fPoint pos((float)target->position.x, (float)target->position.y - 300.0f);
 		app->psystem->AddEmiter(pos, EMITTER_TYPE_RAYO);
 		fPoint pos2((float)target->position.x, (float)target->position.y);
 		app->psystem->AddEmiter(pos2, EMITTER_TYPE_EXPLOSION_RAYO);
@@ -1573,6 +1573,8 @@ void Player::AreaAttack(float dt) {
 		mask1AttackSensor = app->physics->CreateRectangleSensor(this->position.x, this->position.y, attackMask1Width + attackMask1Width * maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].rangeBallModifier, attackMask1Height + attackMask1Height * maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].rangeBallModifier, DYNAMIC);
 		mask1AttackSensor->ctype = ColliderType::MASK1_ATTACK;
 		mask1AttackSensor->listener = this;
+		fPoint pos((float)this->position.x, (float)this->position.y);
+		app->psystem->AddEmiter(pos, EMITTER_TYPE_EXPLOSION_MASK1);
 	}
 }
 

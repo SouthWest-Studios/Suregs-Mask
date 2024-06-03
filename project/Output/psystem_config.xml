@@ -132,6 +132,24 @@
 			<vortexSensitive state = "false"/>
 		</emitter>
 
+		<emitter type ="explosion_mask1">
+			<angleRange min ="50" max ="130"/>
+			<rotSpeed value ="0" randMin ="-1" randMax ="1"/>
+			<startSpeed value ="0" randMin ="0" randMax ="1"/>
+			<endSpeed value ="0" randMin ="0" randMax ="1"/>
+			<startSize value ="0" randMin ="0" randMax ="1"/>
+			<endSize value ="500" randMin ="1" randMax ="1"/>
+			<emitNumber value ="1"/>
+			<emitVariance value ="0" randMin ="0" randMax ="1"/>
+			<maxParticleLife value ="50" randMin ="0" randMax ="1"/>
+			<textureRect x="384" y="256" w="256" h="256"/>
+			<startColor r ="255" g="50" b="0" a ="200"/>
+			<endColor r ="255" g="180" b="0" a ="0"/>
+			<blendMode mode ="add"/>
+			<lifetime value ="10"/>
+			<vortexSensitive state = "false"/>
+		</emitter>
+
 		<emitter type ="pixel_smoke">
 			<angleRange min ="0" max ="80"/>
 			<rotSpeed value ="0" randMin ="-1" randMax ="1"/>
