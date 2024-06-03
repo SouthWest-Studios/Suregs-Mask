@@ -4,4 +4,9 @@
 		<music volume="64" />
 		<fx volume="64" />
 	</audio>
+	<tiempoDeJuego>
+		<slot1 tiempo="36863" />
+		<slot2 tiempo="0" />
+		<slot3 tiempo="0" />
+	</tiempoDeJuego>
 </game_state>

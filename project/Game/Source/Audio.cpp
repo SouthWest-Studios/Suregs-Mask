@@ -523,6 +523,23 @@ bool Audio::LoadState(pugi::xml_node node)
 
 	Mix_VolumeMusic(volumeMusic);
 	Mix_Volume(-1, volumeFx);
+
+
+	if (app->savedGame == 1) {
+		app->tiempoDeJuego = saveFile.child("game_state").child("tiempoDeJuego").child("slot1").attribute("tiempo").as_llong();
+	}
+	else if (app->savedGame == 2) {
+		app->tiempoDeJuego = saveFile.child("game_state").child("tiempoDeJuego").child("slot2").attribute("tiempo").as_llong();
+	}
+	else  if (app->savedGame == 3) {
+		app->tiempoDeJuego = saveFile.child("game_state").child("tiempoDeJuego").child("slot3").attribute("tiempo").as_llong();
+	}
+
+	app->tiempoDeJuegoMostrarSlot1 = saveFile.child("game_state").child("tiempoDeJuego").child("slot1").attribute("tiempo").as_llong();
+	app->tiempoDeJuegoMostrarSlot2 = saveFile.child("game_state").child("tiempoDeJuego").child("slot2").attribute("tiempo").as_llong();
+	app->tiempoDeJuegoMostrarSlot3 = saveFile.child("game_state").child("tiempoDeJuego").child("slot3").attribute("tiempo").as_llong();
+
+
 	
 
 	return true;
@@ -535,8 +552,28 @@ bool Audio::SaveState(pugi::xml_node node)
 	pugi::xml_node gameState = saveFile.append_child("game_state");
 	pugi::xml_node audio = gameState.append_child("audio");
 
+	pugi::xml_node tiempoDeJuego = gameState.append_child("tiempoDeJuego");
+
 	audio.append_child("music").append_attribute("volume").set_value(volumeMusic);
 	audio.append_child("fx").append_attribute("volume").set_value(volumeFx);
+
+	if (app->savedGame == 1) {
+		tiempoDeJuego.append_child("slot1").append_attribute("tiempo").set_value(app->tiempoDeJuego);
+		tiempoDeJuego.append_child("slot2").append_attribute("tiempo").set_value(app->tiempoDeJuegoMostrarSlot2);
+		tiempoDeJuego.append_child("slot3").append_attribute("tiempo").set_value(app->tiempoDeJuegoMostrarSlot3);
+	}
+	else if (app->savedGame == 2) {
+		tiempoDeJuego.append_child("slot1").append_attribute("tiempo").set_value(app->tiempoDeJuegoMostrarSlot1);
+		tiempoDeJuego.append_child("slot2").append_attribute("tiempo").set_value(app->tiempoDeJuego);
+		tiempoDeJuego.append_child("slot3").append_attribute("tiempo").set_value(app->tiempoDeJuegoMostrarSlot3);
+	}
+	else  if (app->savedGame == 3) {
+		tiempoDeJuego.append_child("slot1").append_attribute("tiempo").set_value(app->tiempoDeJuegoMostrarSlot1);
+		tiempoDeJuego.append_child("slot2").append_attribute("tiempo").set_value(app->tiempoDeJuegoMostrarSlot2);
+		tiempoDeJuego.append_child("slot3").append_attribute("tiempo").set_value(app->tiempoDeJuego);
+	}
+	
+
 
 	saveFile.save_file("save_general.xml");
 

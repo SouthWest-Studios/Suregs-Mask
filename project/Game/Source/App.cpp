@@ -635,6 +635,7 @@ bool App::SaveFromFile() {
 	bool ret = true;
 
 
+
 	pugi::xml_document saveFile;
 	pugi::xml_node gameState = saveFile.append_child("game_state");
 

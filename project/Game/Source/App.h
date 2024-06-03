@@ -186,6 +186,13 @@ public:
 	int savedGame = 1;
 
 	long long tiempoDeJuego = 0;
+
+	long long tiempoDeJuegoMostrarSlot1 = 0;
+	long long tiempoDeJuegoMostrarSlot2 = 0;
+	long long tiempoDeJuegoMostrarSlot3 = 0;
+
+
+
 	long long milisegundos;
 
 	float dt;
