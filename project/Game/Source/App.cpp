@@ -155,7 +155,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(debugConsole);
 	AddModule(render);
 	AddModule(psystem);
-
+	
 	LOG("Timer App Constructor: %f", timer.ReadMSec());
 }
 
