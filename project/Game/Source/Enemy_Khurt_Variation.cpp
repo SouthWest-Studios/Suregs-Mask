@@ -17,6 +17,7 @@
 #include "Item_Garra.h"
 #include <Optick/include/optick.h>
 #include "Utils.cpp"
+#include "BestiarioManager.h"
 
 Enemy_Khurt_Variation::Enemy_Khurt_Variation() : Entity(EntityType::ENEMY_KHURT) {
 	name = ("khurt_variation");
@@ -266,7 +267,7 @@ void Enemy_Khurt_Variation::Die() {
 		garra->position = iPoint(position.x, position.y);
 		garra->Start();
 	}
-
+	app->bestiarioManager->CreateItem("khurtV");
 	// Mask XP
 
 	// Mask 0

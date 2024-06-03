@@ -83,18 +83,32 @@ bool Menu::Update(float dt)
 		app->guiManager->minId = 100;
 		app->guiManager->maxId = 104;
 		app->guiManager->pointerId = 100;
-		
+
 		/*app->guiManager->columnSize = 2;*/
-		menuu = !menuu;
+		
+		if (menuu) {
+			// Si el menú está abierto, inicia la animación de salida
+			StartExitAnimation();
+		}
+		else {
+			// Si el menú está cerrado, alterna entre abrir y cerrar el menú
+			ToggleMenu();
+		}
 
 		app->audio->StopFx(-1);
 		app->audio->PlayFx(inventory_fx);
 	}
+
 	if (app->input->GetButton(APP_EXIT) == KEY_DOWN && app->notesManager->zoomIn == false && app->bestiarioManager->zoomIn == false && app->ascensor->abierto == false)
 	{
-		menuu = !menuu;
-		ventana = 4;
-
+		if (!menuu)
+		{
+			ventana = 4;
+		}
+		
+		if (menuu) {
+			StartExitAnimation();
+		}
 		app->audio->StopFx(-1);
 		app->audio->PlayFx(inventory_fx);
 	}
@@ -385,14 +399,56 @@ bool Menu::Update(float dt)
 	return true;
 }
 
-// Called each loop iteration
+
+
+
+
+// Función de easing (easeOutBounce ya definida)
+
+
+
 bool Menu::PostUpdate()
 {
 	uint windowWidth, windowHeight;
 	app->win->GetWindowSize(windowWidth, windowHeight);
 
-	if (menuu)
+	// Inicializar currentY a una posición predeterminada
+	int currentY = windowHeight / 8 - 71;
+
+	if (menuu || animating || animatingExit)
 	{
+		if (animating) {
+			animationTime += app->dt;
+
+			float progress = animationTime / 1000.0f; // Duración de la animación de 1 segundo (1000 ms)
+			if (progress >= 1.0f) {
+				progress = 1.0f;
+				animating = false;
+			}
+			float easedProgress = easeOutCubic(progress);
+
+			// Calcular la nueva posición Y usando easedProgress para la entrada
+			int startY = windowHeight; // Comienza desde fuera de la pantalla (parte inferior)
+			int endY = windowHeight / 8 - 71; // Posición final
+			currentY = startY + (endY - startY) * easedProgress;
+		}
+		else if (animatingExit) {
+			animationTime += app->dt;
+			animatingExit2 = true;
+			float progress = animationTime / 1000.0f; // Duración de la animación de 1 segundo (1000 ms)
+			if (progress >= 1.0f) {
+				progress = 1.0f;
+				animatingExit = false;
+				menuu = false; // Ocultar el menú al finalizar la animación de salida
+			}
+			float easedProgress = easeOutCubic(progress);
+
+			// Calcular la nueva posición Y usando easedProgress para la salida
+			int startY = windowHeight / 8 - 71; // Posición inicial
+			int endY = windowHeight; // Posición final fuera de la pantalla
+			currentY = startY + (endY - startY) * easedProgress;
+		}
+
 		// Crear y renderizar la textura semitransparente
 		Uint8 alpha = 188;  // Valor de transparencia (0-255)
 		SDL_Texture* transparentTexture = CreateTransparentTexture(app->render->renderer, windowWidth, windowHeight, alpha);
@@ -402,32 +458,29 @@ bool Menu::PostUpdate()
 			SDL_DestroyTexture(transparentTexture);
 		}
 
-		if (ventana == 1)
-		{
-			app->render->DrawTexture(fondoInventario, windowWidth / 8 + 40, windowHeight / 8 - 71, SDL_FLIP_NONE, 0, 0);
-			/*app->render->DrawTexture(fondoInventario, windowWidth / 8 + 100, windowHeight / 8,1.2, SDL_FLIP_NONE, 0, 0);*/
+		// Dibujar las texturas del inventario en la posición calculada o final
+		if (ventana == 1) {
+			app->render->DrawTexture(fondoInventario, windowWidth / 8 + 40, currentY, SDL_FLIP_NONE, 0, 0);
 		}
-		if (ventana == 2)
-		{
-			app->render->DrawTexture(fondoEquipo, windowWidth / 8 + 40, windowHeight / 8 - 70, SDL_FLIP_NONE, 0, 0);
+		if (ventana == 2) {
+			app->render->DrawTexture(fondoEquipo, windowWidth / 8 + 40, currentY, SDL_FLIP_NONE, 0, 0);
 		}
-		if (ventana == 3)
-		{
-			app->render->DrawTexture(fondoDiario, windowWidth / 8 + 40, windowHeight / 8 - 70, SDL_FLIP_NONE, 0, 0);
+		if (ventana == 3) {
+			app->render->DrawTexture(fondoDiario, windowWidth / 8 + 40, currentY, SDL_FLIP_NONE, 0, 0);
 		}
-		if (ventana == 4)
-		{
-			app->render->DrawTexture(fondoAjustes, windowWidth / 8 + 40, windowHeight / 8 - 69, SDL_FLIP_NONE, 0, 0);
+		if (ventana == 4) {
+			app->render->DrawTexture(fondoAjustes, windowWidth / 8 + 40, currentY, SDL_FLIP_NONE, 0, 0);
 		}
-		if (ventana == 5)
+		if (ventana == 5) {
+			app->render->DrawTexture(fondoAjustesMando, windowWidth / 8 + 40, currentY, SDL_FLIP_NONE, 0, 0);
+		}
+		if (!animatingExit)
 		{
-			app->render->DrawTexture(fondoAjustesMando, windowWidth / 8 + 40, windowHeight / 8 - 69, SDL_FLIP_NONE, 0, 0);
+			animatingExit2 = false;
 		}
 	}
-	
-	
-	bool ret = true;
 
+	bool ret = true;
 	return ret;
 }
 
@@ -540,6 +593,56 @@ SDL_Texture* Menu::CreateTransparentTexture(SDL_Renderer* renderer, int width, i
 
 	SDL_FreeSurface(surface);
 	return texture;
+}
+
+void Menu::StartAnimation()
+{
+	animationTime = 0.0f;
+	animating = true;
+	animatingExit = false;
+}
+
+void Menu::StartExitAnimation()
+{
+	animationTime = 0.0f;
+	animating = false;
+	animatingExit = true;
+}
+
+inline float Menu::easeOutBounce(float t)
+{
+	if (t < 1 / 2.75) {
+		return 7.5625 * t * t;
+	}
+	else if (t < 2 / 2.75) {
+		t -= 1.5 / 2.75;
+		return 7.5625 * t * t + 0.75;
+	}
+	else if (t < 2.5 / 2.75) {
+		t -= 2.25 / 2.75;
+		return 7.5625 * t * t + 0.9375;
+	}
+	else {
+		t -= 2.625 / 2.75;
+		return 7.5625 * t * t + 0.984375;
+	}
+}
+
+inline float Menu::easeOutCubic(float t)
+{
+	t--;
+	return t * t * t + 1;
+}
+
+void Menu::ToggleMenu()
+{
+	if (menuu) {
+		StartExitAnimation();
+	}
+	else {
+		StartAnimation();
+	}
+	menuu = !menuu;
 }
 
 

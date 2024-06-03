@@ -20,7 +20,7 @@
 #include "Utils.cpp"
 
 
- 
+
 
 
 Enemy_Osiris_Variation::Enemy_Osiris_Variation() : Entity(EntityType::ENEMY_OSIRIS_VARIATION){
@@ -314,7 +314,7 @@ void Enemy_Osiris_Variation::Die() {
 			hueso->Start();
 		}
 
-		app->bestiarioManager->CreateItem("osiris");
+		app->bestiarioManager->CreateItem("osirisV");
 
 
 		//Mask 0

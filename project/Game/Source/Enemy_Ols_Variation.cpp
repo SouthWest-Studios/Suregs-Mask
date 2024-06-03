@@ -273,7 +273,7 @@ void Enemy_Ols_Variation::Die() {
 		saliva->position = iPoint(position.x, position.y);
 		saliva->Start();
 	}
-	app->bestiarioManager->CreateItem("ols");
+	app->bestiarioManager->CreateItem("olsV");
 
 	app->entityManager->DestroyEntity(this);
 	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);

@@ -53,15 +53,32 @@ public:
 
 	SDL_Texture* CreateTransparentTexture(SDL_Renderer* renderer, int width, int height, Uint8 alpha);
 
+	void StartAnimation();
+
+	void StartExitAnimation();
+
+	inline float easeOutBounce(float t);
+
+	inline float easeOutCubic(float t);
+
+	void Menu::ToggleMenu();
+
 	bool vsyncActive = false;
 	bool visible = true;
 	bool menuu = false;
+	bool quitar = false;
 
 	GuiControlSlider* music = nullptr;
 	GuiControlSlider* sfx = nullptr;
 	int ventana = 1;
 
 	pugi::xml_node config;
+
+	// Declaraciones globales para la animación
+	float animationTime = 0.0f; // Tiempo de animación
+	bool animating = false; // Indicador de animación
+	bool animatingExit = false; // Indicador de animación de salida
+	bool animatingExit2 = false;
 
 private:
 	SDL_Texture* fondoInventario = nullptr;

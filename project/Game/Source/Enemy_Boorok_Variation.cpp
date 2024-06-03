@@ -304,7 +304,7 @@ void Enemy_Boorok_Variation::Die()
 			diente->position = iPoint(position.x, position.y);
 			diente->Start();
 		}
-		app->bestiarioManager->CreateItem("boorok");
+		app->bestiarioManager->CreateItem("boorokV");
 
 		// Máscaras
 		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0) {

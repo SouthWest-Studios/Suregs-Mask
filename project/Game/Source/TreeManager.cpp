@@ -2014,7 +2014,7 @@ bool TreeManager::PostUpdate()
 							app->render->DrawTextBound(itum->data->desc.c_str(), 870, 300, 150, {223,188,156,255}, app->render->primaryFont);
 						}
 					}
-					app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, {0,0,0}, app->render->titleFont);
+					app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, { 223,188,156,255 }, app->render->titleFont);
 					
 
 				}

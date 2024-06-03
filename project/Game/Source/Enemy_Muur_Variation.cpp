@@ -275,7 +275,7 @@ void Enemy_Muur_Variation::Die() {
 			cola->Start();
 		}
 
-		app->bestiarioManager->CreateItem("muur");
+		app->bestiarioManager->CreateItem("muurV");
 		//Mask XP
 
 		//Mask 0

@@ -20,6 +20,7 @@
 #include "Elevator.h"
 #include "ElevatorMenu.h"
 #include "Audio.h"
+#include "Menu.h"
 
 InventoryManager::InventoryManager(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -1357,8 +1358,12 @@ bool InventoryManager::PostUpdate()
 
 
 		///app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y, 0.8, SDL_FLIP_NONE, 0, 0);
-		app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y, 0.8, SDL_FLIP_NONE, &currentPointerAnimation->GetCurrentFrame(), 0);
-		app->render->DrawTexture(SelectedItemText, selected.x, selected.y, 0.8, SDL_FLIP_NONE, 0, 0);
+		if (app->menu->animating == false && app->menu->animatingExit2 == false && app->menu->menuu == true)
+		{
+			app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y, 0.8, SDL_FLIP_NONE, &currentPointerAnimation->GetCurrentFrame(), 0);
+			app->render->DrawTexture(SelectedItemText, selected.x, selected.y, 0.8, SDL_FLIP_NONE, 0, 0);
+		}
+		
 
 		for (item = inventities.start; item != nullptr; item = item->next)
 		{
