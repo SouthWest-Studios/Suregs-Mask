@@ -526,18 +526,18 @@ bool Audio::LoadState(pugi::xml_node node)
 
 
 	if (app->savedGame == 1) {
-		app->tiempoDeJuego = saveFile.child("game_state").child("tiempoDeJuego").child("slot1").attribute("tiempo").as_llong();
+		app->tiempoDeJuego = saveFile.child("game_state").child("tiempoDeJuego").child("slot1").attribute("tiempo").as_llong(0);
 	}
 	else if (app->savedGame == 2) {
-		app->tiempoDeJuego = saveFile.child("game_state").child("tiempoDeJuego").child("slot2").attribute("tiempo").as_llong();
+		app->tiempoDeJuego = saveFile.child("game_state").child("tiempoDeJuego").child("slot2").attribute("tiempo").as_llong(0);
 	}
 	else  if (app->savedGame == 3) {
-		app->tiempoDeJuego = saveFile.child("game_state").child("tiempoDeJuego").child("slot3").attribute("tiempo").as_llong();
+		app->tiempoDeJuego = saveFile.child("game_state").child("tiempoDeJuego").child("slot3").attribute("tiempo").as_llong(0);
 	}
 
-	app->tiempoDeJuegoMostrarSlot1 = saveFile.child("game_state").child("tiempoDeJuego").child("slot1").attribute("tiempo").as_llong();
-	app->tiempoDeJuegoMostrarSlot2 = saveFile.child("game_state").child("tiempoDeJuego").child("slot2").attribute("tiempo").as_llong();
-	app->tiempoDeJuegoMostrarSlot3 = saveFile.child("game_state").child("tiempoDeJuego").child("slot3").attribute("tiempo").as_llong();
+	app->tiempoDeJuegoMostrarSlot1 = saveFile.child("game_state").child("tiempoDeJuego").child("slot1").attribute("tiempo").as_llong(0);
+	app->tiempoDeJuegoMostrarSlot2 = saveFile.child("game_state").child("tiempoDeJuego").child("slot2").attribute("tiempo").as_llong(0);
+	app->tiempoDeJuegoMostrarSlot3 = saveFile.child("game_state").child("tiempoDeJuego").child("slot3").attribute("tiempo").as_llong(0);
 
 
 	
