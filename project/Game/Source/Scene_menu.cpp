@@ -106,7 +106,7 @@ bool Scene_Menu::Start()
 
 	app->tiempoDeJuegoMostrarSlot1 = game_stateGeneral.child("tiempoDeJuego").child("slot1").attribute("tiempo").as_llong();
 	app->tiempoDeJuegoMostrarSlot2 = game_stateGeneral.child("tiempoDeJuego").child("slot2").attribute("tiempo").as_llong();
-	app->tiempoDeJuegoMostrarSlot3 = game_stateGeneral.child("tiempoDeJuego").child("slot2").attribute("tiempo").as_llong();
+	app->tiempoDeJuegoMostrarSlot3 = game_stateGeneral.child("tiempoDeJuego").child("slot3").attribute("tiempo").as_llong();
 
 
 	//Get window size
@@ -840,9 +840,9 @@ void Scene_Menu::ShowSavedGames()
 	app->render->DrawTexture(coin, 770, 346, 0.35f);
 	app->render->DrawTexture(coin, 770, 440, 0.35f);
 
-	app->render->DrawTexture(clock, 700, 257, 0.65f);
-	app->render->DrawTexture(clock, 700, 351, 0.65f);
-	app->render->DrawTexture(clock, 700, 445, 0.65f);
+	app->render->DrawTexture(clock, 700, 255, 0.65f);
+	app->render->DrawTexture(clock, 700, 349, 0.65f);
+	app->render->DrawTexture(clock, 700, 443, 0.65f);
 
 	std::string quantityStrOne = std::to_string(coinQuantityOne);
 	app->render->DrawText(quantityStrOne.c_str(), 730, 255, 45, 27, 0, 0, 0, 0, true);
@@ -857,7 +857,9 @@ void Scene_Menu::ShowSavedGames()
 	timeTwo = app->convertirTiempo(app->tiempoDeJuegoMostrarSlot2);
 	timeThree = app->convertirTiempo(app->tiempoDeJuegoMostrarSlot3);
 
-	app->render->DrawText(timeOne.c_str(), 500, 349, 45, 27, 0, 0, 0, 0, true);
+	app->render->DrawText(timeOne.c_str(), 610, 255, 90, 27, 0, 0, 0, 0, true);
+	app->render->DrawText(timeTwo.c_str(), 610, 349, 90, 27, 0, 0, 0, 0, true);
+	app->render->DrawText(timeThree.c_str(), 610, 443, 90, 27, 0, 0, 0, 0, true);
 }
 
 void Scene_Menu::ShowNewGames()
