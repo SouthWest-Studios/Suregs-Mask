@@ -244,13 +244,13 @@ void Enemy_Osiris::Attack(float dt)
 		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);//No se mueve mientras ataca
 
 		if (isFacingLeft) {
-			sensor = app->physics->CreateRectangle(position.x + 50, position.y, 40, 70, bodyType::DYNAMIC);
+			sensor = app->physics->CreateRectangle(position.x + 65, position.y -15, 40, 70, bodyType::DYNAMIC);
 			sensor->ctype = ColliderType::PROJECTILE;
 			sensor->listener = this;
 			sensor->body->GetFixtureList()->SetSensor(true);
 		}
 		else {
-			sensor = app->physics->CreateRectangle(position.x - 50, position.y, 40, 70, bodyType::DYNAMIC);
+			sensor = app->physics->CreateRectangle(position.x - 35, position.y - 15, 40, 70, bodyType::DYNAMIC);
 			sensor->ctype = ColliderType::PROJECTILE;
 			sensor->listener = this;
 			sensor->body->GetFixtureList()->SetSensor(true);
@@ -268,7 +268,7 @@ void Enemy_Osiris::Attack(float dt)
 
 void Enemy_Osiris::UpdateAttackSensor(float dt)
 {
-	if (!canAttack && attackCooldownTimer.ReadMSec() >= 500.0f) {
+	if (!canAttack && attackCooldownTimer.ReadMSec() >= 350.0f) {
 		canAttack = true;
 	}
 
@@ -276,7 +276,7 @@ void Enemy_Osiris::UpdateAttackSensor(float dt)
 		canAttack = false;
 		attackCooldownTimer.Start();
 
-		if (attackSensorTimer.ReadMSec() >= 500.0f) {
+		if (attackSensorTimer.ReadMSec() >= 350.0f) {
 			app->physics->DestroyBody(sensor);
 			sensor = nullptr;
 		}
