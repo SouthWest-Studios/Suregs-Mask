@@ -68,6 +68,7 @@ private:
 	SDL_Texture* fondoEquipo = nullptr;
 	SDL_Texture* fondoDiario = nullptr;
 	SDL_Texture* fondoAjustes = nullptr;
+	SDL_Texture* fondoAjustesMando = nullptr;
 	
 	int a = 0;
 	
