@@ -14,6 +14,7 @@
 #include "SDL_mixer/include/SDL_mixer.h"
 
 #include "Defs.h"
+#include "Utils.cpp"
 #include "Log.h"
 #include "GuiControl.h"
 #include "GuiManager.h"
@@ -793,16 +794,42 @@ void Scene_Menu::ShowNewGames()
 
 void Scene_Menu::ShowControls()
 {
+	static float animationTime = 0.0f; // Tiempo de animación
+	static bool animating = false;
+
 	ListItem<GuiControl*>* control;
 	for (control = controlsScene.start; control != NULL; control = control->next)
 	{
 		control->data->state = GuiControlState::DISABLED;
 	}
 	if (showControls && !_showControls) {
-		gcCloseControls = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 17, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 100,	60,25 }, this);
+		gcCloseControls = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 17, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68, (int)windowH - 100, 60, 25 }, this);
 		_showControls = true;
+		animationTime = 0.0f; // Reiniciar el tiempo de animación
+		animating = true;
 	}
-	app->render->DrawTexture(controls, 0, 0);
+
+	if (animating) {
+		animationTime += app->dt;
+
+		float progress = animationTime / 1000.0f; // Duración de la animación de 1 segundo (1000 ms)
+		if (progress >= 1.0f) {
+			progress = 1.0f;
+			animating = false;
+		}
+		float easedProgress = easeOutCubic(progress);
+
+		// Calcular la nueva posición Y usando easedProgress
+		int startY = windowH; // Comienza desde fuera de la pantalla (parte inferior)
+		int endY = 0; // Posición final
+		int currentY = startY + (endY - startY) * easedProgress;
+
+		// Dibujar la textura en la posición calculada
+		app->render->DrawTexture(controls, 0, currentY);
+	}
+	else {
+		app->render->DrawTexture(controls, 0, 0); // Renderizar en la posición final
+	}
 }
 
 void Scene_Menu::DestroySettingsInterface()
