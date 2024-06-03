@@ -682,28 +682,39 @@ bool BestiarioManager::PostUpdate()
 					if (zoomIn == false && app->notesManager->zoomIn == false)
 					{
 						/*app->render->DrawTexture(listTexture, horizontalPosition, verticalPosition, SDL_FLIP_NONE, 0, 0);*/
-					
-					if (pEntity->listid == 2)
-					{
-						app->render->DrawTexture(listTexture, horizontalPosition, verticalPosition - scrollY, SDL_FLIP_NONE, 0, 0);
 
-					}
-					if (pEntity->listid == 1)
-					{
-						app->render->DrawTexture(listTexture2, horizontalPosition, verticalPosition - scrollY, SDL_FLIP_NONE, 0, 0);
+						if (pEntity->listid == 2)
+						{
+							app->render->DrawTexture(listTexture, horizontalPosition, verticalPosition - scrollY, SDL_FLIP_NONE, 0, 0);
 
-					}
-					if (pEntity->listid == 0)
-					{
-						app->render->DrawTexture(listTexture3, horizontalPosition, verticalPosition - scrollY, SDL_FLIP_NONE, 0, 0);
+						}
+						if (pEntity->listid == 1)
+						{
+							app->render->DrawTexture(listTexture2, horizontalPosition, verticalPosition - scrollY, SDL_FLIP_NONE, 0, 0);
 
-					}
-						app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
+						}
+						if (pEntity->listid == 0)
+						{
+							app->render->DrawTexture(listTexture3, horizontalPosition, verticalPosition - scrollY, SDL_FLIP_NONE, 0, 0);
+
+						}
+
+						if (pEntity->variacion == true)
+						{
+							SDL_SetTextureColorMod(pEntity->icon, 198, 115, 255);
+							SDL_SetTextureAlphaMod(pEntity->icon, 255);
+							app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
+						}
+						else
+						{
+							SDL_SetTextureColorMod(pEntity->icon, 255, 255, 255);
+							SDL_SetTextureAlphaMod(pEntity->icon, 255);
+							app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
+						}
 					}
 
 				}
 			}
-
 			else
 			{
 				int targetY = PointerId / 4 * 83;
