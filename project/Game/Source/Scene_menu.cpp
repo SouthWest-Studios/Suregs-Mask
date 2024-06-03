@@ -290,7 +290,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		control->selected = false;
 		app->guiManager->minId = 7;
 		app->guiManager->maxId = 11;
-		app->guiManager->pointerId = 7;
+		app->guiManager->pointerId = 11;
 		/*	app->guiManager->DestroyGuiControl(NuevaPartida);
 			app->guiManager->DestroyGuiControl(Continuar);*/
 		break;
@@ -404,17 +404,10 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		app->guiManager->pointerId = 1;
 
 	case 17:
-		showControls = false;
-		_showControls = false;
-		ListItem<GuiControl*>* controlC;
-		for (controlC = controlsScene.start; controlC != NULL; controlC = controlC->next)
-		{
-			controlC->data->state = GuiControlState::NORMAL;
+		if (!animatingExit) {
+			animatingExit = true;
+			exitAnimationTime = 0.0f;
 		}
-		app->guiManager->DestroyGuiControl(gcCloseControls);
-		app->guiManager->minId = 1;
-		app->guiManager->maxId = 6;
-		app->guiManager->pointerId = 1;
 
 	case 1011:
 
@@ -794,19 +787,16 @@ void Scene_Menu::ShowNewGames()
 
 void Scene_Menu::ShowControls()
 {
-	static float animationTime = 0.0f; // Tiempo de animación
-	static bool animating = false;
-
 	ListItem<GuiControl*>* control;
 	for (control = controlsScene.start; control != NULL; control = control->next)
 	{
 		control->data->state = GuiControlState::DISABLED;
 	}
 	if (showControls && !_showControls) {
-		gcCloseControls = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 17, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68, (int)windowH - 100, 60, 25 }, this);
-		_showControls = true;
 		animationTime = 0.0f; // Reiniciar el tiempo de animación
 		animating = true;
+		animatingExit = false;
+		_showControls = true;
 	}
 
 	if (animating) {
@@ -816,19 +806,59 @@ void Scene_Menu::ShowControls()
 		if (progress >= 1.0f) {
 			progress = 1.0f;
 			animating = false;
+			gcCloseControls = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 17, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68, (int)windowH - 100, 60, 25 }, this);
 		}
 		float easedProgress = easeOutCubic(progress);
 
-		// Calcular la nueva posición Y usando easedProgress
+		// Calcular la nueva posición Y usando easedProgress para la entrada
 		int startY = windowH; // Comienza desde fuera de la pantalla (parte inferior)
 		int endY = 0; // Posición final
 		int currentY = startY + (endY - startY) * easedProgress;
 
+		// Dibujar la textura y el botón en la posición calculada
+		app->render->DrawTexture(controls, 0, currentY);
+		// Dibujar el botón en la posición calculada
+		if (!animating) {
+			gcCloseControls->bounds.y = currentY + (int)windowH - 100;
+		}
+	}
+	else if (animatingExit) {
+		exitAnimationTime += app->dt;
+
+		float progress = exitAnimationTime / 1000.0f; // Duración de la animación de 1 segundo (1000 ms)
+		if (progress >= 1.0f) {
+			progress = 1.0f;
+			animatingExit = false;
+			// Ahora eliminamos los controles y restauramos el menú principal
+			showControls = false;
+			_showControls = false;
+			ListItem<GuiControl*>* controlC;
+			for (controlC = controlsScene.start; controlC != NULL; controlC = controlC->next)
+			{
+				controlC->data->state = GuiControlState::NORMAL;
+			}
+			app->guiManager->DestroyGuiControl(gcCloseControls);
+			app->guiManager->minId = 1;
+			app->guiManager->maxId = 6;
+			app->guiManager->pointerId = 1;
+		}
+		float easedProgress = easeOutCubic(progress);
+
+		// Calcular la nueva posición Y usando easedProgress para la salida
+		int startY = 0; // Posición inicial
+		int endY = windowH; // Final en la parte inferior de la pantalla
+		int currentY = startY + (endY - startY) * easedProgress;
+
 		// Dibujar la textura en la posición calculada
 		app->render->DrawTexture(controls, 0, currentY);
+		// Dibujar el botón en la posición calculada
+		gcCloseControls->bounds.y = currentY + (int)windowH - 100;
 	}
 	else {
 		app->render->DrawTexture(controls, 0, 0); // Renderizar en la posición final
+		if (gcCloseControls != NULL) {
+			gcCloseControls->bounds.y = (int)windowH - 100; // Posición final del botón
+		}
 	}
 }
 

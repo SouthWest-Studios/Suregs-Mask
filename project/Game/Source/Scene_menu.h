@@ -142,6 +142,11 @@ private:
 
 	bool ajustes = false;
 
+	float animationTime = 0.0f; // Tiempo de animación para la entrada
+	float exitAnimationTime = 0.0f; // Tiempo de animación para la salida
+	bool animating = false;
+	bool animatingExit = false;
+
 	
 
 };
