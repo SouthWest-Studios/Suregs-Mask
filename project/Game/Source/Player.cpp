@@ -1263,8 +1263,8 @@ void Player::Attack(float dt)
 	inAnimation = true;
 
 	// Dirección del ataque
-	int attackX = position.x + lastMovementDirection.x * attackWidth;
-	int attackY = position.y + lastMovementDirection.y * attackHeight;
+	int attackX = position.x + lastMovementDirection.x * (attackWidth/2);
+	int attackY = position.y + lastMovementDirection.y * (attackHeight/2);
 
 	//Sensor
 	if (!attackSensor && !hasAttacked) {
