@@ -256,7 +256,7 @@ void Enemy_Osiris::Attack(float dt)
 			sensor->body->GetFixtureList()->SetSensor(true);
 		}
 
-		attackTimer.Start();
+		attackCooldownTimer.Start();
 		canAttack = false;
 
 		currentAnimation = &attackAnim;
@@ -268,15 +268,15 @@ void Enemy_Osiris::Attack(float dt)
 
 void Enemy_Osiris::UpdateAttackSensor(float dt)
 {
-	if (!canAttack && attackTimer.ReadSec() >= 5.0f) {
+	if (!canAttack && attackCooldownTimer.ReadSec() >= 1.0f) {
 		canAttack = true;
 	}
 
 	if (sensor != nullptr && canAttack) {
 		canAttack = false;
-		attackTimer.Start();
+		attackCooldownTimer.Start();
 
-		if (attackTimer.ReadSec() >= 2.0f) {
+		if (attackSensorTimer.ReadSec() >= 1.0f) {
 			app->physics->DestroyBody(sensor);
 			sensor = nullptr;
 		}

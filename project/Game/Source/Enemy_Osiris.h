@@ -115,7 +115,8 @@ private:
 	bool tempo = false;
 	bool canAttack = true;
 	PhysBody* sensor = nullptr;
-	Timer attackTimer;
+	Timer attackSensorTimer;
+	Timer attackCooldownTimer;
 	Timer reviveTimer;
 
 
