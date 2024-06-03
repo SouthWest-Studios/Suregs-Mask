@@ -1710,7 +1710,7 @@ bool TreeManager::PostUpdate()
 			pEntity = item->data;
 			int rowIndex = item->data->id / maxItemsPerRow; // Calcula el índice de la fila
 			int columnIndex = item->data->id % maxItemsPerRow; // Calcula el índice de la columna
-			int horizontalPosition = 200 + columnIndex * 138; // Calcula la posición horizontal
+			int horizontalPosition = 186 + columnIndex * 142; // Calcula la posición horizontal
 			int verticalPosition = 150 + rowIndex * 100; // Calcula la posición vertical
 
 
@@ -1724,17 +1724,17 @@ bool TreeManager::PostUpdate()
 				{
 					if (pEntity->used1)
 					{
-						app->render->DrawTexture(pEntity->iconSelected0, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+						app->render->DrawTexture(pEntity->iconSelected0, horizontalPosition, verticalPosition, 0.9, SDL_FLIP_NONE, 0, 0);
 					}
 					else
 					{
 						if (pEntity->usable1 == false)
 						{
-							app->render->DrawTexture(pEntity->iconLocked0, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+							app->render->DrawTexture(pEntity->iconLocked0, horizontalPosition, verticalPosition, 0.9, SDL_FLIP_NONE, 0, 0);
 						}
 						else
 						{
-							app->render->DrawTexture(pEntity->icon0, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+							app->render->DrawTexture(pEntity->icon0, horizontalPosition, verticalPosition, 0.9, SDL_FLIP_NONE, 0, 0);
 						}
 					}
 					
@@ -1753,12 +1753,12 @@ bool TreeManager::PostUpdate()
 						if (pEntity->name2 == "")
 						{
 							/*app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
-							app->render->DrawTexture(pEntity->iconSelected0, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+							app->render->DrawTexture(pEntity->iconSelected0, horizontalPosition, verticalPosition, 0.9, SDL_FLIP_NONE, 0, 0);
 						}
 						else
 						{
 							/*app->render->DrawTextBound(pEntity->name2.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
-							app->render->DrawTexture(pEntity->iconSelected1, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+							app->render->DrawTexture(pEntity->iconSelected1, horizontalPosition, verticalPosition, 0.9, SDL_FLIP_NONE, 0, 0);
 
 						}
 					}
@@ -1769,12 +1769,12 @@ bool TreeManager::PostUpdate()
 							if (pEntity->name2 == "")
 							{
 								/*app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
-								app->render->DrawTexture(pEntity->iconLocked0, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+								app->render->DrawTexture(pEntity->iconLocked0, horizontalPosition, verticalPosition, 0.9, SDL_FLIP_NONE, 0, 0);
 							}
 							else
 							{
 								/*app->render->DrawTextBound(pEntity->name2.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
-								app->render->DrawTexture(pEntity->iconLocked1, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+								app->render->DrawTexture(pEntity->iconLocked1, horizontalPosition, verticalPosition, 0.9, SDL_FLIP_NONE, 0, 0);
 
 							}
 							/*app->render->DrawTexture(listTextureNot, horizontalPosition, verticalPosition, 0.7, SDL_FLIP_NONE, 0, 0);*/
@@ -1784,12 +1784,12 @@ bool TreeManager::PostUpdate()
 							if (pEntity->name2 == "")
 							{
 								/*app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
-								app->render->DrawTexture(pEntity->icon0, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+								app->render->DrawTexture(pEntity->icon0, horizontalPosition, verticalPosition, 0.9, SDL_FLIP_NONE, 0, 0);
 							}
 							else
 							{
 								/*app->render->DrawTextBound(pEntity->name2.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
-								app->render->DrawTexture(pEntity->icon1, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+								app->render->DrawTexture(pEntity->icon1, horizontalPosition, verticalPosition, 0.9, SDL_FLIP_NONE, 0, 0);
 
 							}
 						}
@@ -1805,12 +1805,12 @@ bool TreeManager::PostUpdate()
 						if (pEntity->name3 == "")
 						{
 							/*app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
-							app->render->DrawTexture(pEntity->iconSelected0, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+							app->render->DrawTexture(pEntity->iconSelected0, horizontalPosition, verticalPosition, 0.9, SDL_FLIP_NONE, 0, 0);
 						}
 						else
 						{
 							/*app->render->DrawTextBound(pEntity->name2.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
-							app->render->DrawTexture(pEntity->iconSelected2, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+							app->render->DrawTexture(pEntity->iconSelected2, horizontalPosition, verticalPosition, 0.9, SDL_FLIP_NONE, 0, 0);
 
 						}
 					}
@@ -1821,12 +1821,12 @@ bool TreeManager::PostUpdate()
 							if (pEntity->name3 == "")
 							{
 								/*app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
-								app->render->DrawTexture(pEntity->iconLocked0, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+								app->render->DrawTexture(pEntity->iconLocked0, horizontalPosition, verticalPosition, 0.9, SDL_FLIP_NONE, 0, 0);
 							}
 							else
 							{
 								/*app->render->DrawTextBound(pEntity->name3.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
-								app->render->DrawTexture(pEntity->iconLocked2, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+								app->render->DrawTexture(pEntity->iconLocked2, horizontalPosition, verticalPosition, 0.9, SDL_FLIP_NONE, 0, 0);
 							}
 							/*app->render->DrawTexture(listTextureNot, horizontalPosition, verticalPosition, 0.7, SDL_FLIP_NONE, 0, 0);*/
 						}
@@ -1835,12 +1835,12 @@ bool TreeManager::PostUpdate()
 							if (pEntity->name3 == "")
 							{
 								/*app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
-								app->render->DrawTexture(pEntity->icon0, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+								app->render->DrawTexture(pEntity->icon0, horizontalPosition, verticalPosition, 0.9, SDL_FLIP_NONE, 0, 0);
 							}
 							else
 							{
 								/*app->render->DrawTextBound(pEntity->name2.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
-								app->render->DrawTexture(pEntity->icon2, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+								app->render->DrawTexture(pEntity->icon2, horizontalPosition, verticalPosition, 0.9, SDL_FLIP_NONE, 0, 0);
 
 							}
 						}
@@ -1856,12 +1856,12 @@ bool TreeManager::PostUpdate()
 						if (pEntity->name4 == "")
 						{
 							/*app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
-							app->render->DrawTexture(pEntity->iconSelected0, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+							app->render->DrawTexture(pEntity->iconSelected0, horizontalPosition, verticalPosition, 0.9, SDL_FLIP_NONE, 0, 0);
 						}
 						else
 						{
 							/*app->render->DrawTextBound(pEntity->name2.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
-							app->render->DrawTexture(pEntity->iconSelected3, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+							app->render->DrawTexture(pEntity->iconSelected3, horizontalPosition, verticalPosition, 0.9, SDL_FLIP_NONE, 0, 0);
 
 						}
 					}
@@ -1872,12 +1872,12 @@ bool TreeManager::PostUpdate()
 							if (pEntity->name4 == "")
 							{
 								/*app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
-								app->render->DrawTexture(pEntity->iconLocked0, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+								app->render->DrawTexture(pEntity->iconLocked0, horizontalPosition, verticalPosition, 0.9, SDL_FLIP_NONE, 0, 0);
 							}
 							else
 							{
 								/*app->render->DrawTextBound(pEntity->name4.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
-								app->render->DrawTexture(pEntity->iconLocked3, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+								app->render->DrawTexture(pEntity->iconLocked3, horizontalPosition, verticalPosition, 0.9, SDL_FLIP_NONE, 0, 0);
 
 							}
 							/*app->render->DrawTexture(listTextureNot, horizontalPosition, verticalPosition, 0.7, SDL_FLIP_NONE, 0, 0);*/
@@ -1887,12 +1887,12 @@ bool TreeManager::PostUpdate()
 							if (pEntity->name4 == "")
 							{
 								/*app->render->DrawTextBound(pEntity->name.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
-								app->render->DrawTexture(pEntity->icon0, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+								app->render->DrawTexture(pEntity->icon0, horizontalPosition, verticalPosition, 0.9, SDL_FLIP_NONE, 0, 0);
 							}
 							else
 							{
 								/*app->render->DrawTextBound(pEntity->name4.GetString(), horizontalPosition, verticalPosition, 130, { 0,0,0 });*/
-								app->render->DrawTexture(pEntity->icon3, horizontalPosition, verticalPosition, 1, SDL_FLIP_NONE, 0, 0);
+								app->render->DrawTexture(pEntity->icon3, horizontalPosition, verticalPosition, 0.9, SDL_FLIP_NONE, 0, 0);
 
 							}
 						}
@@ -2138,12 +2138,17 @@ bool TreeManager::PostUpdate()
 			app->render->DrawTexture(mascara3Texture, 745, 535, SDL_FLIP_NONE, 0, 0);
 		}
 
+		if (app->inventoryManager->numMasks == 0) //quitar
+		{
+			app->inventoryManager->numMasks = 1;
+		}
 		if (app->inventoryManager->numMasks == 1)
 		{
 			mask = 1;
+			app->inventoryManager->numMasks = 4; //quitar
 		}
 	}
-
+	
 	return ret;
 }
 
