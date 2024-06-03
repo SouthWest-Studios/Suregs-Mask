@@ -106,6 +106,11 @@ void Cofre::OnCollision(PhysBody* physA, PhysBody* physB)
               {
                   if (tutorial) {
                       abierto = true;
+
+                      pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
+                      if (parseResult) {
+                          configNode = configFile.child("config");
+                      }
                       Item_Nota* nota = (Item_Nota*)app->entityManager->CreateEntity(EntityType::ITEM_NOTA, 0);
                       nota->config = configNode.child("entities_data").child("item_nota");
                       nota->position = iPoint(384, 3616);

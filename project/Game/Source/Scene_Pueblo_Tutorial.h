@@ -51,6 +51,11 @@ private:
 
 	Cofre* cofreTutorial = nullptr;
 
+	pugi::xml_document configFile;
+	pugi::xml_node configNode;
+
+	bool chestCreated;
+
 	int town_fx;
 	
 

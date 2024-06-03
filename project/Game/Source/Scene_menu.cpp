@@ -118,9 +118,6 @@ bool Scene_Menu::Start()
 	app->guiManager->pointerId = 1;
 	app->guiManager->columnSize = 0;
 
-	fPoint pos(605.0f, 335.0f);
-	eMenu = app->psystem->AddEmiter(pos, EMITTER_TYPE_BURST);
-
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 

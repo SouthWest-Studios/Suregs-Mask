@@ -70,6 +70,7 @@ bool Scene_Pueblo_Tutorial::Start()
 
 	// L15: DONE 2: Instantiate a new GuiControlButton in the Scene_Pueblo_Tutorial
 
+
 	app->entityManager->Enable();
 
 	app->SaveRequest();
@@ -108,8 +109,20 @@ bool Scene_Pueblo_Tutorial::Update(float dt)
 		app->audio->PlayMusicAfterRandomDelay("town");
 	}
 
-	//if (app->tutorialHasFinished) {
-	//}
+	if (app->tutorialHasFinished) {
+		if(!chestCreated){
+			pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
+			if (parseResult) {
+				configNode = configFile.child("config");
+			}
+			cofreTutorial = (Cofre*)app->entityManager->CreateEntity(EntityType::COFRE);
+			cofreTutorial->config = configNode.child("entities_data").child("cofre");
+			cofreTutorial->position = iPoint(500, 3700);
+			cofreTutorial->tutorial = true;
+			cofreTutorial->Start();
+			chestCreated = true;
+		}
+	}
 
 	return true;
 }
