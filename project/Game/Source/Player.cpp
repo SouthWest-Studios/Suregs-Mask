@@ -1554,6 +1554,10 @@ void Player::CastLightning() {
 		target->TakeDamage(maskStats[primaryMask][Branches::Rama1][maskLevels[primaryMask][Branches::Rama1]].maskDamage);
 		target->ApplyPoison(maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].poisonDamage, maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].poisonDuration, maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].poisonTickRate);
 		//ApplyPoison(target);
+		fPoint pos((float)target->position.x, (float)target->position.y - 200.0f);
+		app->psystem->AddEmiter(pos, EMITTER_TYPE_RAYO);
+		fPoint pos2((float)target->position.x, (float)target->position.y);
+		app->psystem->AddEmiter(pos, EMITTER_TYPE_EXPLOSION_RAYO);
 	}
 	else {
 		printf("No enemy alive in range to attack\n");
