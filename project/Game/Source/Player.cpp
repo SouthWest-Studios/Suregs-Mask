@@ -1605,6 +1605,9 @@ void Player::DashAttack(float dt) {
 		dashCollision->ctype = ColliderType::MASK2_ATTACK;
 		dashCollision->listener = this;
 
+		/*fPoint pos((float)position.x, (float)position.y);
+		app->psystem->AddEmiter(pos, EMITTER_TYPE_EXPLOSION_MASK2);*/
+
 		pbodyFoot->body->ApplyForce(b2Vec2(velocity.x * 100 * maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].distanceDashModifier, velocity.y * 100 * maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].distanceDashModifier), pbodyFoot->body->GetWorldCenter(), false);
 	}
 }

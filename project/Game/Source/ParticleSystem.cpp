@@ -48,8 +48,8 @@ bool ParticleSystem::Awake(pugi::xml_node config)
 			LoadEmitterData(emitters, EmitterType::EMITTER_TYPE_FLAME);
 		else if (emitterType.compare("smoke") == 0)
 			LoadEmitterData(emitters, EmitterType::EMITTER_TYPE_SMOKE);
-		else if (emitterType.compare("pixel_smoke") == 0)
-			LoadEmitterData(emitters, EmitterType::EMITTER_TYPE_PIXEL_SMOKE);
+		else if (emitterType.compare("explosion_mask2") == 0)
+			LoadEmitterData(emitters, EmitterType::EMITTER_TYPE_EXPLOSION_MASK2);
 		else if (emitterType.compare("burst") == 0)
 			LoadEmitterData(emitters, EmitterType::EMITTER_TYPE_BURST);
 		else if (emitterType.compare("wave_1") == 0)
