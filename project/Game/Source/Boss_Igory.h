@@ -181,6 +181,9 @@ private:
 	int father_melee_attack_fx;
 	int father_melee_attackAlt_fx; 
 	int father_generate_sureg_fx;
+	bool father_get_hit = false;
+
+	Timer getHitTimer;
 
 	
 
