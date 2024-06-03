@@ -186,6 +186,16 @@ bool Scene_Menu::Update(float dt)
 
 	if (ajustes == false && showCredits == false && showSavedGames == false && showControls == false && showNewGames == false)
 	{
+		app->render->DrawTexture(menuMain, 0, 0);
+
+		// Generar el emisor solo si no ha sido generado aún
+		if (!eMenuGenerated) {
+			fPoint pos(605.0f, 335.0f);
+			eMenu = app->psystem->AddEmiter(pos, EMITTER_TYPE_BURST);
+			eMenuGenerated = true; // Marcar el emisor como generado
+		}
+
+		app->render->DrawTexture(logo, 500, 100);
 
 		ListItem<GuiControl*>* control;
 		for (control = controlsScene.start; control != NULL; control = control->next)
@@ -193,7 +203,11 @@ bool Scene_Menu::Update(float dt)
 			control->data->state = GuiControlState::NORMAL;
 		}
 	}
-
+	else {
+		// Resetear la bandera cuando salga del if
+		eMenuGenerated = false;
+		app->psystem->RemoveAllEmitters();
+	}
 
 	if (ajustes)
 	{
@@ -792,11 +806,14 @@ void Scene_Menu::ShowControls()
 	{
 		control->data->state = GuiControlState::DISABLED;
 	}
+	app->render->DrawTexture(menuMain, 0, 0);
+
 	if (showControls && !_showControls) {
 		animationTime = 0.0f; // Reiniciar el tiempo de animación
 		animating = true;
 		animatingExit = false;
 		_showControls = true;
+		showLogo = false; // Ocultar el logo durante la animación de bajada
 	}
 
 	if (animating) {
@@ -815,8 +832,13 @@ void Scene_Menu::ShowControls()
 		int endY = 0; // Posición final
 		int currentY = startY + (endY - startY) * easedProgress;
 
-		// Dibujar la textura y el botón en la posición calculada
+		// Dibujar el logo y la textura en la posición calculada
+		int logoStartY = 100; // Posición inicial del logo
+		int logoEndY = windowH; // Posición final fuera de la pantalla
+		int logoCurrentY = logoStartY + (logoEndY - logoStartY) * easedProgress;
+		app->render->DrawTexture(logo, 500, logoCurrentY);
 		app->render->DrawTexture(controls, 0, currentY);
+
 		// Dibujar el botón en la posición calculada
 		if (!animating) {
 			gcCloseControls->bounds.y = currentY + (int)windowH - 100;
@@ -829,6 +851,7 @@ void Scene_Menu::ShowControls()
 		if (progress >= 1.0f) {
 			progress = 1.0f;
 			animatingExit = false;
+			showLogo = true; // Mostrar el logo después de la animación de subida
 			// Ahora eliminamos los controles y restauramos el menú principal
 			showControls = false;
 			_showControls = false;
@@ -849,8 +872,13 @@ void Scene_Menu::ShowControls()
 		int endY = windowH; // Final en la parte inferior de la pantalla
 		int currentY = startY + (endY - startY) * easedProgress;
 
-		// Dibujar la textura en la posición calculada
+		// Dibujar el logo y la textura en la posición calculada
+		int logoStartY = windowH; // Posición inicial fuera de la pantalla
+		int logoEndY = 100; // Posición final del logo
+		int logoCurrentY = logoStartY + (logoEndY - logoStartY) * easedProgress;
+		app->render->DrawTexture(logo, 500, logoCurrentY);
 		app->render->DrawTexture(controls, 0, currentY);
+
 		// Dibujar el botón en la posición calculada
 		gcCloseControls->bounds.y = currentY + (int)windowH - 100;
 	}
@@ -858,6 +886,9 @@ void Scene_Menu::ShowControls()
 		app->render->DrawTexture(controls, 0, 0); // Renderizar en la posición final
 		if (gcCloseControls != NULL) {
 			gcCloseControls->bounds.y = (int)windowH - 100; // Posición final del botón
+		}
+		if (showLogo) {
+			app->render->DrawTexture(logo, 500, 100); // Posición final del logo
 		}
 	}
 }
