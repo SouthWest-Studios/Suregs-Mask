@@ -465,16 +465,16 @@ bool Menu::PostUpdate()
 			app->render->DrawTexture(fondoInventario, windowWidth / 8 + 40, currentY, SDL_FLIP_NONE, 0, 0);
 		}
 		if (ventana == 2) {
-			app->render->DrawTexture(fondoEquipo, windowWidth / 8 + 40, currentY, SDL_FLIP_NONE, 0, 0);
+			app->render->DrawTexture(fondoEquipo, windowWidth / 8 + 40, currentY+1, SDL_FLIP_NONE, 0, 0);
 		}
 		if (ventana == 3) {
-			app->render->DrawTexture(fondoDiario, windowWidth / 8 + 40, currentY, SDL_FLIP_NONE, 0, 0);
+			app->render->DrawTexture(fondoDiario, windowWidth / 8 + 40, currentY+1, SDL_FLIP_NONE, 0, 0);
 		}
 		if (ventana == 4) {
-			app->render->DrawTexture(fondoAjustes, windowWidth / 8 + 40, currentY, SDL_FLIP_NONE, 0, 0);
+			app->render->DrawTexture(fondoAjustes, windowWidth / 8 + 40, currentY+2, SDL_FLIP_NONE, 0, 0);
 		}
 		if (ventana == 5) {
-			app->render->DrawTexture(fondoAjustesMando, windowWidth / 8 + 40, currentY, SDL_FLIP_NONE, 0, 0);
+			app->render->DrawTexture(fondoAjustesMando, windowWidth / 8 + 40, currentY+2, SDL_FLIP_NONE, 0, 0);
 		}
 		if (!animatingExit)
 		{
