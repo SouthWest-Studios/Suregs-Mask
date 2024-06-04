@@ -99,7 +99,7 @@ bool Enemy_Guerrero::Start() {
 bool Enemy_Guerrero::Update(float dt)
 {
 	OPTICK_EVENT();
-	//printf("\nEnemy_Guerrero");
+	////printf("\nEnemy_Guerrero");
 	//Pone el sensor del cuerpo en su posicion
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
@@ -188,7 +188,7 @@ bool Enemy_Guerrero::CleanUp()
 
 void Enemy_Guerrero::Chase(float dt, iPoint playerPos)
 {
-	//printf("Osiris chasing");
+	////printf("Osiris chasing");
 	currentAnimation = &runAnim;
 	Guerrerofinding(dt, playerPos);
 
@@ -196,7 +196,7 @@ void Enemy_Guerrero::Chase(float dt, iPoint playerPos)
 
 void Enemy_Guerrero::Attack(float dt)
 {
-	//printf("Osiris attacking");
+	////printf("Osiris attacking");
 	if (canAttack) {
 
 		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);//No se mueve mientras ataca
@@ -347,7 +347,7 @@ void Enemy_Guerrero::TakeDamage(float damage) {
 
 void Enemy_Guerrero::stateMachine(float dt, iPoint playerPos)
 {
-	//printf("\ncurrentState: %d, desiredState: %d", static_cast<int>(currentState), static_cast<int>(desiredState));
+	////printf("\ncurrentState: %d, desiredState: %d", static_cast<int>(currentState), static_cast<int>(desiredState));
 	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
 	switch (nextState) {
 	case EntityState_Enemy::RUNNING:

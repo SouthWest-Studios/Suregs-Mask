@@ -109,7 +109,7 @@ Dialog* DialogManager::CreateDialog(pugi::xml_node itemNode, std::string name, c
 		event->type = missionEventNode.attribute("type").as_string();
 		event->mission_id = missionEventNode.attribute("mission_id").as_uint();
 		dialog->event_ = event;
-		printf("Se ha creado un DialogEvent con tipo: %s y mission_id: %d\n", event->type.c_str(), event->mission_id);
+		//printf("Se ha creado un DialogEvent con tipo: %s y mission_id: %d\n", event->type.c_str(), event->mission_id);
 	}
 
 	if (strcmp(type, "choose") == 0) {

@@ -94,19 +94,19 @@ bool Enemy_Khurt_Variation::Update(float dt) {
 
 	if (health <= 0) {
 		nextState = EntityState_Enemy::DEAD;
-		//printf("DEAD\n");
+		////printf("DEAD\n");
 	}
 	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32 && !digging && !stunned) {
 		nextState = EntityState_Enemy::ATTACKING;
-		/*printf("ATTACKING\n")*/;
+		/*//printf("ATTACKING\n")*/;
 	}
 	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance * 32 && app->map->pathfinding->GetDistance(playerPos, position) >= attackDistance * 32 && !charging && !stunned) {
 		nextState = EntityState_Enemy::RUNNING;
-		//printf("RUNNING\n");
+		////printf("RUNNING\n");
 	}
 	else if (!stunned && !digging && !charging) {
 		nextState = EntityState_Enemy::IDLE;
-		//printf("IDLE\n");
+		////printf("IDLE\n");
 	}
 
 
@@ -202,12 +202,12 @@ bool Enemy_Khurt_Variation::CleanUp() {
 
 void Enemy_Khurt_Variation::DoNothing(float dt) {
 	currentAnimation = &idleAnim;
-	/*printf("Khurt idle\n");*/
+	/*//printf("Khurt idle\n");*/
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 }
 
 void Enemy_Khurt_Variation::Chase(float dt, iPoint playerPos) {
-	//printf("Khurt chasing\n");
+	////printf("Khurt chasing\n");
 	currentAnimation = &runAnim;
 	stunned = false;
 	chargetimer = false;
@@ -224,19 +224,19 @@ void Enemy_Khurt_Variation::Chase(float dt, iPoint playerPos) {
 
 void Enemy_Khurt_Variation::Attack(float dt, iPoint playerPos) {
 
-	//printf("Khurt attacking\n");
+	////printf("Khurt attacking\n");
 	currentAnimation = &attack;
 
 	if (!chargetimer)
 	{
-		/*printf("WWWWWWW");*/
+		/*//printf("WWWWWWW");*/
 		chargeTimer.Start();
 	}
 	chargetimer = true;
 	Antposition = position;
 	if (!stunned)
 	{
-		/*printf("NNNNNNNN");*/
+		/*//printf("NNNNNNNN");*/
 		charging = true;
 		Charge(dt, playerPos);
 	}
@@ -273,45 +273,45 @@ void Enemy_Khurt_Variation::Die() {
 	// Mask 0
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0) {
 		app->entityManager->GetPlayer()->maskZeroXP += 80;
-		// printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
+		// //printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
 	}
 
 	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK0) {
 		app->entityManager->GetPlayer()->maskZeroXP += 80;
-		// printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
+		// //printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
 	}
 
 	// Mask 1
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK1) {
 		app->entityManager->GetPlayer()->maskOneXP += 80;
-		// printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
+		// //printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
 	}
 
 	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK1) {
 		app->entityManager->GetPlayer()->maskOneXP += 80;
-		// printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
+		// //printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
 	}
 
 	// Mask 2
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK2) {
 		app->entityManager->GetPlayer()->maskTwoXP += 80;
-		// printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
+		// //printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
 	}
 
 	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK2) {
 		app->entityManager->GetPlayer()->maskTwoXP += 80;
-		// printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
+		// //printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
 	}
 
 	// Mask 3
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK3) {
 		app->entityManager->GetPlayer()->maskThreeXP += 80;
-		// printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
+		// //printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
 	}
 
 	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK3) {
 		app->entityManager->GetPlayer()->maskThreeXP += 80;
-		// printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
+		// //printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
 	}
 }
 
@@ -350,7 +350,7 @@ void Enemy_Khurt_Variation::TakeDamage(float damage) {
 }
 
 void Enemy_Khurt_Variation::Charge(float dt, iPoint playerPos) {
-	//printf("Charge\n");
+	////printf("Charge\n");
 	currentAnimation = &attack;
 	if (!chargeimpulse)
 	{
@@ -359,12 +359,12 @@ void Enemy_Khurt_Variation::Charge(float dt, iPoint playerPos) {
 
 		b2Vec2 impulse = b2Vec2(direction.x * speed * 3, direction.y * speed * 3);
 		pbodyFoot->body->ApplyLinearImpulse(impulse, pbodyFoot->body->GetWorldCenter(), true);
-		/*printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");*/
+		/*//printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");*/
 	}
 	chargeimpulse = true;
 	if (charging && chargeTimer.ReadSec() >= 0.7 || app->map->pathfinding->GetDistance(playerPos, position) > 500) {
 		charging = false;
-		/*printf("Charge ended, transitioning to STUNNED\n");*/
+		/*//printf("Charge ended, transitioning to STUNNED\n");*/
 		Stunned(dt);
 	}
 }
@@ -377,7 +377,7 @@ void Enemy_Khurt_Variation::Stunned(float dt) {
 	stunnedtimer = true;
 	if (stunTimer.ReadSec() <= 1.5) {
 		stunned = true;
-		/*printf("Stunned\n");*/
+		/*//printf("Stunned\n");*/
 		currentAnimation = &stunAnim;
 		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	}
@@ -390,7 +390,7 @@ void Enemy_Khurt_Variation::Stunned(float dt) {
 		chargetimer = false;
 		stunnedtimer = false;
 		nextState = EntityState_Enemy::RUNNING;
-		/*printf("Transition to %d after stun\n", nextState);*/
+		/*//printf("Transition to %d after stun\n", nextState);*/
 	}
 }
 
@@ -399,12 +399,12 @@ void Enemy_Khurt_Variation::HandleDigging(float dt, iPoint playerPos) {
 	if (!digtimer)
 	{
 		if (elapsedTime < 0.2f) {
-			/*printf("Digging Phase 1\n");*/
+			/*//printf("Digging Phase 1\n");*/
 			// Fase de inicio de la dig
 			currentAnimation = &underAnim_start;
 		}
 		else if (elapsedTime < 2.0f) {
-			/*printf("Digging Phase 2\n");*/
+			/*//printf("Digging Phase 2\n");*/
 			// Fase de desplazamiento bajo tierra
 			b2Vec2 direction(playerPos.x - position.x, playerPos.y - position.y);
 			direction.Normalize();
@@ -414,7 +414,7 @@ void Enemy_Khurt_Variation::HandleDigging(float dt, iPoint playerPos) {
 			CreateAroMagica();
 		}
 		else {
-			/*printf("Digging Phase 3\n");*/
+			/*//printf("Digging Phase 3\n");*/
 			// Fase de emergencia
 			digging = false;
 			digTimer.Start();
@@ -422,11 +422,11 @@ void Enemy_Khurt_Variation::HandleDigging(float dt, iPoint playerPos) {
 			currentAnimation = &underAnim_finish;
 			if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32) {
 				nextState = EntityState_Enemy::ATTACKING;
-				/*printf("ATTACKING despues de DIGGING fase 3\n");*/
+				/*//printf("ATTACKING despues de DIGGING fase 3\n");*/
 			}
 			else {
 				nextState = EntityState_Enemy::IDLE;
-				/*printf("IDLE despues de DIGGING fase 3\n");*/
+				/*//printf("IDLE despues de DIGGING fase 3\n");*/
 			}
 			//pbodyFoot->body->SetLinearVelocity(b2Vec2_zero); // Detener el movimiento
 
@@ -496,7 +496,7 @@ void Enemy_Khurt_Variation::CheckPoison() {
 			invulnerabilityTimer.Start();
 			timerRecibirDanioColor.Start();
 
-			/*printf("Enemy_Khurt has received %f damage of poison\n", poisonDamage);*/
+			/*//printf("Enemy_Khurt has received %f damage of poison\n", poisonDamage);*/
 		}
 		firstTimePoisonRecibed = false;
 	}
@@ -509,7 +509,7 @@ void Enemy_Khurt_Variation::CheckPoison() {
 				invulnerabilityTimer.Start();
 				timerRecibirDanioColor.Start();
 
-				/*printf("Enemy_Khurt has received %f damage of poison\n", poisonDamage);*/
+				/*//printf("Enemy_Khurt has received %f damage of poison\n", poisonDamage);*/
 			}
 		}
 	}

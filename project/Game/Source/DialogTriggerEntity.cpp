@@ -184,14 +184,14 @@ void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
 			else if (!app->dialogManager->isPlaying && (app->input->GetButton(CONFIRM) == KEY_DOWN)) {
 				PlayDialog();
 
-				printf("COLISSION TRIGGERDIALOG");
+				//printf("COLISSION TRIGGERDIALOG");
 
 				//// Manejo de la etiqueta <mission_event>
 				//pugi::xml_node option1Node = itemNode.child("option1");
 				//pugi::xml_node missionEventNode = option1Node.child("mission_event");
 
 
-				//	printf("ASDASDASD");
+				//	//printf("ASDASDASD");
 				//	DialogEvent* dialogEvent = new DialogEvent();
 				//	dialogEvent->type = missionEventNode.attribute("type").as_string();
 				//	dialogEvent->mission_id = missionEventNode.attribute("mission_id").as_uint();
@@ -205,7 +205,7 @@ void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 
 				/*if (parameters.attribute("id").as_int() == 941) {
-					printf("REEL TRUE");
+					//printf("REEL TRUE");
 					app->scene_pueblo->GetRod()->fishing.rodReady = true;
 					app->scene_pueblo->GetRod()->fishing.playerGetRod = true;
 				}*/

@@ -375,7 +375,7 @@ void Audio::PlayMusicAfterRandomDelay(const char* name, float fadeTime)
 	if (musicTimerRand.ReadSec() >= 5) {
 
 		int music = rand() % 5;
-		printf("Music: %d\n", music);
+		//printf("Music: %d\n", music);
 
 		switch (music)
 		{

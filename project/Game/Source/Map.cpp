@@ -845,7 +845,7 @@ void Map::generaSureg(FASE_Igory fase, iPoint position)
 			newPosition.x = position.x + numX;
 			newPosition.y = position.x + numY;
 			suregType = app->entityManager->getRandomNumber(1, 4);
-			printf("\nsuregType: %d", suregType);
+			//printf("\nsuregType: %d", suregType);
 			choseSureg(position, suregType);
 		}
 	}
@@ -863,7 +863,7 @@ void Map::generaSureg(FASE_Igory fase, iPoint position)
 			newPosition.x = position.x + numX;
 			newPosition.y = position.x + numY;
 			suregType = app->entityManager->getRandomNumber(1, 5);
-			printf("\nsuregType: %d", suregType);
+			//printf("\nsuregType: %d", suregType);
 			choseSureg(position, suregType);
 			
 		}
@@ -877,7 +877,7 @@ void Map::choseSureg(iPoint position, int suregType)
 	switch (suregType)
 	{
 	case 1: {
-		printf("\nEnemy_Osiris");
+		//printf("\nEnemy_Osiris");
 		Enemy_Osiris* osiris = (Enemy_Osiris*)app->entityManager->CreateEntity(EntityType::ENEMY_OSIRIS);
 		osiris->config = configNode.child("entities_data").child("osiris");
 		osiris->position = iPoint(position.x, position.y);
@@ -886,7 +886,7 @@ void Map::choseSureg(iPoint position, int suregType)
 		break;
 	}
 	case 2: {
-		printf("\nEnemy_Muur");
+		//printf("\nEnemy_Muur");
 		Enemy_Muur* muur = (Enemy_Muur*)app->entityManager->CreateEntity(EntityType::ENEMY_MUUR);
 		muur->config = configNode.child("entities_data").child("muur");
 		muur->position = iPoint(position.x, position.y);
@@ -1255,8 +1255,8 @@ bool Map::LoadObjects()
 				}
 				//Spawn dialogo con x id
 				else {
-					//printf("Dialogo con id %d\n", dialogId);
-					//printf(" %s\n", object->properties.GetProperty("dialogID")->value.c_str());
+					////printf("Dialogo con id %d\n", dialogId);
+					////printf(" %s\n", object->properties.GetProperty("dialogID")->value.c_str());
 					DialogTrigger* dialogTrigger = (DialogTrigger*)app->entityManager->CreateEntity(EntityType::DIALOG_TRIGGER);
 					dialogTrigger->parameters = dialogNode;
 					dialogTrigger->position = iPoint(object->x + object->width / 2, object->y + object->height / 2);

@@ -86,11 +86,11 @@ bool Scene_Logos::Update(float dt)
 	//app->fadeToBlack->FadeToBlack(this, app->scene_testing, 10); /*BORRAR AL TERMINAR*/
 	//SDL_Rect currentFrameRect = sceneLogos.GetCurrentFrame();
 	//app->render->DrawTexture(sceneLogosTexture, currentFrameRect.x, currentFrameRect.y);
-	//printf("holal");
+	////printf("holal");
 
 
 	if (currentAnimation->HasFinished()) {
-		//printf("ScenaAcabado");
+		////printf("ScenaAcabado");
 		//app->render->DrawTexture(lastFrame, 0, 0);
 
 	}

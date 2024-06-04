@@ -145,7 +145,7 @@ bool EntityManager::Start() {
 	textureKillPadre = app->tex->Load(configNode.attribute("textureKillPath").as_string());
 	textureUnirPadre = app->tex->Load(configNode.attribute("textureUnirPath").as_string());
 	textureCredit = app->tex->Load(configNode.attribute("textureCredit").as_string());
-	//printf("\nEntyti Manager %s  ", texture);
+	////printf("\nEntyti Manager %s  ", texture);
 	//eyeAnimation.LoadAnim("boorok", "sleepAnim", spritePositions);
 	currentAnimation = &eyeIdle;
 
@@ -467,7 +467,7 @@ void EntityManager::LinkTPEntities()
 
 void EntityManager::SetPlayer(Player* player)
 {
-	printf("SetPlayer");
+	//printf("SetPlayer");
 	actualPlayer = player;
 }
 
@@ -478,7 +478,7 @@ Player* EntityManager::GetPlayer()
 
 void EntityManager::SetIgory(Boss_Igory* igory)
 {
-	printf("SetIgory");
+	//printf("SetIgory");
 	bossIgory = igory;
 }
 
@@ -815,9 +815,9 @@ bool EntityManager::PostLateUpdate()
 			printLogo = false;
 
 		}
-		/*printf("\nvacioW: %d", vacioW);
-		printf("\nvacioH: %d", vacioH);
-		printf("\nvacioS: %d", vacioS);*/
+		/*//printf("\nvacioW: %d", vacioW);
+		//printf("\nvacioH: %d", vacioH);
+		//printf("\nvacioS: %d", vacioS);*/
 		//app->hud->active = false;
 	}
 
@@ -849,7 +849,7 @@ bool EntityManager::PostLateUpdate()
 void EntityManager::UpdateEnemyActivation() {
 	// Obtén la sala actual del jugador
 	MapObject* currentRoom = GetPlayer()->GetCurrentRoom();
-	//if(currentRoom != nullptr)	printf("current room: %d\n", currentRoom->id); //TESTING
+	//if(currentRoom != nullptr)	//printf("current room: %d\n", currentRoom->id); //TESTING
 
 	// Obtén todos los enemigos
 	std::vector<Entity*> enemies = GetEnemies();
@@ -861,7 +861,7 @@ void EntityManager::UpdateEnemyActivation() {
 			// Si el enemigo está en la misma sala que el jugador, actívalo
 			if (enemy->room == currentRoom) {
 				enemy->isActive = true;
-				//printf("Enemy activated\n");
+				////printf("Enemy activated\n");
 			}
 			// Si no, desactívalo
 			else {
@@ -877,7 +877,7 @@ void EntityManager::UpdateEnemyActivation() {
 					Enemy_Ols_Variation* olsEnemyVariation = static_cast<Enemy_Ols_Variation*>(enemy);
 					olsEnemyVariation->DestroyProjectile();
 				}
-				//printf("Enemy deactivated\n");
+				////printf("Enemy deactivated\n");
 			}
 		}
 	}
@@ -908,7 +908,7 @@ void EntityManager::UpdateRoomActivation() {
 				item->data->isOpened = true;
 				TPDoor* tpdoor = new TPDoor{ item->data->sceneLevel, item->data->tpID };
 				openDoors.push_back(tpdoor);
-				//printf("TP activated\n");
+				////printf("TP activated\n");
 			}
 		}
 	}
@@ -988,7 +988,7 @@ void EntityManager::showFinalkillPadre()
 
 	SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, photoTransparent);
 	SDL_RenderFillRect(app->render->renderer, &overlayRect);
-	//printf("\n photoTransparent %d", photoTransparent);
+	////printf("\n photoTransparent %d", photoTransparent);
 
 
 

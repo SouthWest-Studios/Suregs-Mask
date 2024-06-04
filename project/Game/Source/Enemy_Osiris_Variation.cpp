@@ -107,7 +107,7 @@ bool Enemy_Osiris_Variation::Start() {
 bool Enemy_Osiris_Variation::Update(float dt)
 {
 	OPTICK_EVENT();
-	//printf("\nEnemy_Osiris");
+	////printf("\nEnemy_Osiris");
 	//Pone el sensor del cuerpo en su posicion
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
@@ -217,14 +217,14 @@ bool Enemy_Osiris_Variation::CleanUp()
 void Enemy_Osiris_Variation::DoNothing(float dt)
 {
 	currentAnimation = &idleAnim;
-	//printf("Osiris idle");
+	////printf("Osiris idle");
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 
 }
 
 void Enemy_Osiris_Variation::Chase(float dt, iPoint playerPos)
 {
-	//printf("Osiris chasing");
+	////printf("Osiris chasing");
 	currentAnimation = &runAnim;
 	Osirisfinding(dt, playerPos);
 
@@ -232,7 +232,7 @@ void Enemy_Osiris_Variation::Chase(float dt, iPoint playerPos)
 
 void Enemy_Osiris_Variation::Attack(float dt)
 {
-	//printf("Osiris attacking");
+	////printf("Osiris attacking");
 	if (canAttack) {
 
 		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);//No se mueve mientras ataca
@@ -321,52 +321,52 @@ void Enemy_Osiris_Variation::Die() {
 		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
 		{
 			app->entityManager->GetPlayer()->maskZeroXP += 40;
-			//printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
+			////printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
 		}
 
 		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK0)
 		{
 			app->entityManager->GetPlayer()->maskZeroXP += 40;
-			//printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
+			////printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
 		}
 
 		//Mask 1
 		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK1)
 		{
 			app->entityManager->GetPlayer()->maskOneXP += 40;
-			//printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
+			////printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
 		}
 
 		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK1)
 		{
 			app->entityManager->GetPlayer()->maskOneXP += 40;
-			//printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
+			////printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
 		}
 
 		//Mask 2
 		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK2)
 		{
 			app->entityManager->GetPlayer()->maskTwoXP += 40;
-			//printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
+			////printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
 		}
 
 		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK2)
 		{
 			app->entityManager->GetPlayer()->maskTwoXP += 40;
-			//printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
+			////printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
 		}
 
 		//Mask 3
 		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK3)
 		{
 			app->entityManager->GetPlayer()->maskThreeXP += 40;
-			//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
+			////printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
 		}
 
 		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK3)
 		{
 			app->entityManager->GetPlayer()->maskThreeXP += 40;
-			//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
+			////printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
 		}
 
 		if (app->entityManager->GetIgory()->playerInFight) {
@@ -488,7 +488,7 @@ void Enemy_Osiris_Variation::TakeDamage(float damage) {
 		invulnerabilityTimer.Start();
 		timerRecibirDanioColor.Start();
 
-		printf("Enemy_Osiris has received  %f damage\n", damage);
+		//printf("Enemy_Osiris has received  %f damage\n", damage);
 		if (currentState == EntityState_Enemy::REVIVING) {
 			if (!hasRevived) {
 				hasRevived = true;
@@ -501,7 +501,7 @@ void Enemy_Osiris_Variation::TakeDamage(float damage) {
 
 void Enemy_Osiris_Variation::stateMachine(float dt, iPoint playerPos)
 {
-	//printf("\ncurrentState: %d, desiredState: %d", static_cast<int>(currentState), static_cast<int>(desiredState));
+	////printf("\ncurrentState: %d, desiredState: %d", static_cast<int>(currentState), static_cast<int>(desiredState));
 	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
 	switch (nextState) {
 	case EntityState_Enemy::IDLE:
@@ -559,7 +559,7 @@ void Enemy_Osiris_Variation::CheckPoison() {
 			invulnerabilityTimer.Start();
 			timerRecibirDanioColor.Start();
 
-			printf("Enemy_Osiris has received  %f damage of poison\n", poisonDamage);
+			//printf("Enemy_Osiris has received  %f damage of poison\n", poisonDamage);
 		}
 		firstTimePoisonRecibed = false;
 	}
@@ -572,7 +572,7 @@ void Enemy_Osiris_Variation::CheckPoison() {
 				invulnerabilityTimer.Start();
 				timerRecibirDanioColor.Start();
 
-				printf("Enemy_Osiris has received  %f damage of poison\n", poisonDamage);
+				//printf("Enemy_Osiris has received  %f damage of poison\n", poisonDamage);
 			}
 		}
 	}

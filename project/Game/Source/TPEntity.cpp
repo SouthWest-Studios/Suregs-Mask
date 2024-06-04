@@ -35,7 +35,7 @@ bool TPEntity::Start() {
         if(openDoor->sceneLevel == this->sceneLevel && openDoor->tpID == this->tpID)
         {
             this->isOpened = true;
-            //printf("TP abierto\n");
+            ////printf("TP abierto\n");
             break;
         }
     }
@@ -52,7 +52,7 @@ bool TPEntity::Update(float dt)
 	// 	if(openRoom == room)
 	// 	{
 	// 		this->isOpened = true;
-	// 		//printf("TP abierto\n");
+	// 		////printf("TP abierto\n");
 	// 		break;
 	// 	}
 	// }
