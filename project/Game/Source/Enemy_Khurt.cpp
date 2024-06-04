@@ -252,42 +252,6 @@ void Enemy_Khurt::DigOut(float dt, iPoint playerPos)
 
 void Enemy_Khurt::Charge(float dt, iPoint playerPos)
 {
-	
-	if (chargeTimer.ReadSec() >= 5)
-	{
-	
-		/*printf("charge");*/
-		currentAnimation = &chargeAnim;
-		pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
-		
-		
-		timechargingTimer.Start();
-		charging = true;
-		if (isUnderground) {
-			DigOut(dt, playerPos);
-		}
-		else{
-			/*//printf("charge");*/
-			currentAnimation = &chargeAnim;
-			pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
-			if (chargeAnim.HasFinished())
-			{
-				timechargingTimer.Start();
-				charging = true;
-
-		b2Vec2 direction(playerPos.x - position.x, playerPos.y - position.y);
-		direction.Normalize();
-
-		b2Vec2 impulse = b2Vec2(direction.x * 5, direction.y * 5);
-		pbodyFoot->body->ApplyLinearImpulse(impulse, pbodyFoot->body->GetWorldCenter(), true);
-
-		stunTimer.Start();
-		chargeTimer.Start();
-
-		desiredState = EntityState_Khurt::RUNNING;
-	
-	}
-	
 }
 
 void Enemy_Khurt::Stunned(float dt)
