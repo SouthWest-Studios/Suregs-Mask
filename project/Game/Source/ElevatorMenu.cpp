@@ -71,6 +71,10 @@ bool ElevatorMenu::Update(float dt)
 {
 	if (app->ascensor->abierto == true)
 	{
+		if (mazmorra > mazmorraActual)
+		{
+			final = false;
+		}
 		if (final == true)
 		{
 			plus = 1;
@@ -87,7 +91,16 @@ bool ElevatorMenu::Update(float dt)
 		{
 			if ((app->input->GetButton(SELECT) == KEY_DOWN && PointerId < mazmorra + plus + 1) || (app->input->GetButton(CONFIRM) == KEY_DOWN && PointerId < mazmorra + plus + 1)) {
 				app->audio->PlayFx(select_fx);
-				UseElevator(PointerId, mazmorra);
+				int num;
+				if (PointerId != mazmorraActual)
+				{
+					UseElevator(PointerId, mazmorra);
+				}
+				else
+				{
+
+				}
+				
 			}
 		}
 
