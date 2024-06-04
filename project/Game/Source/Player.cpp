@@ -694,12 +694,12 @@ bool Player::Start() {
 		maskLevels[primaryMask][Branches::Rama2],
 		maskLevels[primaryMask][Branches::Rama3],
 		maskLevels[primaryMask][Branches::Rama4]);*/
-	//printf("Secondary mask: %d, Level Rama1: %d, Level Rama2: %d, Level Rama3: %d, Level Rama4: %d\n",
-		/*static_cast<int>(secondaryMask) - 1,
-		maskLevels[secondaryMask][Branches::Rama1],
-		maskLevels[secondaryMask][Branches::Rama2],
-		maskLevels[secondaryMask][Branches::Rama3],
-		maskLevels[secondaryMask][Branches::Rama4]);*/
+		//printf("Secondary mask: %d, Level Rama1: %d, Level Rama2: %d, Level Rama3: %d, Level Rama4: %d\n",
+			/*static_cast<int>(secondaryMask) - 1,
+			maskLevels[secondaryMask][Branches::Rama1],
+			maskLevels[secondaryMask][Branches::Rama2],
+			maskLevels[secondaryMask][Branches::Rama3],
+			maskLevels[secondaryMask][Branches::Rama4]);*/
 
 	baseStats.maxHealth = 100 + armorPerLevel[app->inventoryManager->armorLevel];
 	baseStats.currentHealth = 100 + armorPerLevel[app->inventoryManager->armorLevel];
@@ -742,6 +742,7 @@ bool Player::Update(float dt)
 		pbodyFoot->body->SetTransform(posInicioPlayer, 0);
 		vacio = false;
 	}
+
 	if (app->entityManager->canShowFinal) {
 		if (app->entityManager->GetIgory()->playerInFight && !playerTpBossPadre) {
 			pbodyFoot->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y - 10)), 0);
@@ -924,7 +925,7 @@ bool Player::Update(float dt)
 	//	particulaBlood = true;
 	//}
 
-	
+
 
 
 	EfectoPociones(dt);
@@ -1134,7 +1135,7 @@ void Player::ResetAnimacion()
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "takeDMG_player") {
 		inAnimation = false;
 		inTakeDMG = false;
-		//desiredState = EntityStatePlayer::IDLE;
+		desiredState = EntityStatePlayer::IDLE;
 		takeDMG_player.Reset();
 	}
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "maskBola_player") {
@@ -1280,8 +1281,8 @@ void Player::Attack(float dt)
 	inAnimation = true;
 
 	// Dirección del ataque
-	int attackX = position.x + lastMovementDirection.x * (attackWidth/2);
-	int attackY = position.y + lastMovementDirection.y * (attackHeight/2);
+	int attackX = position.x + lastMovementDirection.x * (attackWidth / 2);
+	int attackY = position.y + lastMovementDirection.y * (attackHeight / 2);
 
 	//Sensor
 	if (!attackSensor && !hasAttacked) {
@@ -1663,17 +1664,19 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision PLATFORM");
 		break;
 	case ColliderType::VACIOS:
-		if (!insideVacio) {
-			insideVacio = true;
-			////printf("Vacio\n");
+		if (physA->ctype == ColliderType::PLAYER) {
+			if (!insideVacio && nextState != EntityStatePlayer::DEAD) {
+				insideVacio = true;
+				////printf("Vacio\n");
+			}
 		}
 		break;
-	case ColliderType::FISHZONE:
-		if (!getPlayerTouch) {
-		app->scene_pueblo->GetRod()->fishing.rodReady = !app->scene_pueblo->GetRod()->fishing.rodReady;
-		getPlayerTouch = true;
-		}
-		//printf("\n fishizone: %d", app->scene_pueblo->GetRod()->fishing.rodReady);
+		/*case ColliderType::FISHZONE:
+			if (!getPlayerTouch) {
+			app->scene_pueblo->GetRod()->fishing.rodReady = !app->scene_pueblo->GetRod()->fishing.rodReady;
+			getPlayerTouch = true;
+			}*/
+			//printf("\n fishizone: %d", app->scene_pueblo->GetRod()->fishing.rodReady);
 		break;
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");
@@ -1682,8 +1685,8 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (physA == attackSensor) {
 			LOG("Collision ENEMY");
 			if (physB->entity != nullptr) {
-				if(!physB->listener->isUnderground)
-				physB->entity->TakeDamage(currentStats.attackDamage);
+				if (!physB->listener->isUnderground)
+					physB->entity->TakeDamage(currentStats.attackDamage);
 			}
 			//collisionAttackTimer.Start();
 		}
@@ -1907,8 +1910,13 @@ void Player::OnEndCollision(PhysBody* physA, PhysBody* physB) {
 		insideVacio = false;
 		////printf("Exit_Vacio\n");
 		break;
-	case ColliderType::FISHZONE:
-		getPlayerTouch = false;
+	case ColliderType::FISHZONEIN:
+		app->scene_pueblo->GetRod()->fishing.rodReady = true;
+		//printf("\ngetPlayerTouch: %d", app->scene_pueblo->GetRod()->fishing.rodReady);
+		break;
+	case ColliderType::FISHZONEOUT:
+		app->scene_pueblo->GetRod()->fishing.rodReady = false;
+		//printf("\ngetPlayerTouch: %d", app->scene_pueblo->GetRod()->fishing.rodReady);
 		break;
 		/*...*/
 	}
@@ -2648,7 +2656,7 @@ void Player::PlayerMovement(float dt)
 	}
 
 	//Si pulsas espacio
-	if (app->input->GetButton(DASH) == KEY_DOWN && timerDash.ReadMSec() > cdTimerDashMS && !app->scene_pueblo->GetRod()->fishing.rodReady ) {
+	if (app->input->GetButton(DASH) == KEY_DOWN && timerDash.ReadMSec() > cdTimerDashMS && !app->scene_pueblo->GetRod()->fishing.rodReady) {
 
 		velocityNormalized = velocity;
 		velocityNormalized.Normalize();

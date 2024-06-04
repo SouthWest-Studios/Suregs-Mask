@@ -227,7 +227,7 @@ private:
 
 
 public: 
-    SString name;
+    SString nameMazmorra;
     SString path;
     SString pathTextures;
     PathFinding* pathfinding;
@@ -255,9 +255,6 @@ public:
     bool boss2_defeated = false;
     bool boss3_defeated = false;
     bool boss4_defeated = false;
-    bool LoadBoss();
-    bool SaveBoss();
-
 private:
     
 

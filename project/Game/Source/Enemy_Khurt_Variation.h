@@ -9,23 +9,15 @@
 #include "Pathfinding.h"
 #include "Player.h"
 #include "Physics.h"
-#include "App.h"
 #include "Particle.h"
 #include "ParticlePool.h"
 #include "Emitter.h"
-
-#include <vector>
-
 struct SDL_Texture;
 
-struct MagicTrail {
-	PhysBody* sensor;
-	Timer durationTimer;
-};
 
-struct Branch_Khurt_variation {
-	enum EntityState_Enemy const next_state;
-	Branch_Khurt_variation(EntityState_Enemy next) : next_state(next) {}
+struct Branch_Khurt_Variation {
+	enum EntityState_Khurt const next_state;
+	Branch_Khurt_Variation(EntityState_Khurt next) : next_state(next) {}
 
 };
 
@@ -51,23 +43,21 @@ public:
 
 	void DoNothing(float dt);
 	void Chase(float dt, iPoint playerPos);
-	void Attack(float dt, iPoint playerPos);
+	void Attack(float dt);
+	void Charge(float dt, iPoint playerPos);
+	void Stunned(float dt);
+	void DigUnderground();
+	void MoveUnderground(float dt, iPoint playerPos);
+	void DigOut(float dt, iPoint playerPos);
 	void Die();
-	//bool Khurtfinding(float dt, iPoint playerPos);
-
-	void HandleDigging(float dt, iPoint playerPos);
-	void CreateAroMagica();
-	void ClearMagicTrails();
-	PhysBody* CreateMagicTrailSensor(int x, int y, int width, int height);
+	bool Khurtfinding(float dt, iPoint playerPos);
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
 	float GetHealth() const;
 	void TakeDamage(float damage);
 
-	//Attack
-	void Charge(float dt, iPoint playerPos);
-	void Stunned(float dt);
+	void stateMachine(float dt, iPoint playerPos);
 
 	//VENENO <----------
 	void ApplyPoison(int poisonDamage, float poisonDuration, float poisonTickRate);
@@ -93,6 +83,7 @@ public:
 
 	float viewDistance;
 	float attackDistance;
+	float chargeAttackDistance;
 
 private:
 	pugi::xml_document configFile;
@@ -104,9 +95,9 @@ private:
 	Animation runAnim;
 	Animation underAnim_start;
 	Animation underAnim_process;
-	Animation underAnim_finish;
+	Animation underAnim_end;
+	Animation chargeAnim;
 	Animation stunAnim;
-	Animation attack;
 	Animation dieAnim;
 
 	bool isFacingLeft = false;
@@ -124,7 +115,7 @@ private:
 	DynArray<iPoint> lastPath;
 
 	Animation* currentAnimation = nullptr;
-	EntityState_Enemy state;
+	EntityState_Khurt state;
 
 
 	Animation SPosition;
@@ -149,39 +140,36 @@ private:
 	//Charge Attack
 	Timer stunTimer;
 	Timer chargeTimer;
-	bool charging = false;
-	bool chargetimer = false;
-	bool chargeimpulse = false;
-	bool stunned = false;
-	bool stunnedtimer = false;
+	Timer timechargingTimer;
+	bool charging;
+	bool stunned;
 	iPoint Antposition;
 
 	//Dig underground
 	Timer digTimer;
-	bool digtimer = false;
 	bool digging = false;
-
-	std::vector<MagicTrail> magicTrails;
 
 public:
 
-	Branch_Khurt_variation transitionTable[static_cast<int>(EntityState_Enemy::STATE_COUNT)][static_cast<int>(EntityState_Enemy::STATE_COUNT)] = {
-		// isMoving               isAttacking			 isDead                isReviving					else					MASK_ATTACK
-		{ {EntityState_Enemy::IDLE}, {EntityState_Enemy::RUNNING}, {EntityState_Enemy::ATTACKING}, {EntityState_Enemy::DEAD}, {EntityState_Enemy::NONE}, {EntityState_Enemy::NONE}, {EntityState_Enemy::IDLE}}, // IDLE
-		{ {EntityState_Enemy::IDLE}, {EntityState_Enemy::RUNNING}, {EntityState_Enemy::ATTACKING}, {EntityState_Enemy::DEAD}, {EntityState_Enemy::NONE}, {EntityState_Enemy::NONE}, {EntityState_Enemy::IDLE}}, // RUNNING
-		{ {EntityState_Enemy::IDLE}, {EntityState_Enemy::RUNNING}, {EntityState_Enemy::ATTACKING}, {EntityState_Enemy::DEAD}, {EntityState_Enemy::NONE}, {EntityState_Enemy::NONE}, {EntityState_Enemy::IDLE}}, // ATTACKING
-		{ {EntityState_Enemy::IDLE}, {EntityState_Enemy::RUNNING}, {EntityState_Enemy::ATTACKING}, {EntityState_Enemy::DEAD}, {EntityState_Enemy::REVIVING}, {EntityState_Enemy::NONE}, {EntityState_Enemy::IDLE}}, // DEAD
-		{ {EntityState_Enemy::IDLE}, {EntityState_Enemy::RUNNING}, {EntityState_Enemy::ATTACKING}, {EntityState_Enemy::DEAD}, {EntityState_Enemy::NONE}, {EntityState_Enemy::NONE}, {EntityState_Enemy::IDLE}}, // REVIVING
-		{ {EntityState_Enemy::IDLE}, {EntityState_Enemy::RUNNING}, {EntityState_Enemy::ATTACKING}, {EntityState_Enemy::DEAD}, {EntityState_Enemy::NONE}, {EntityState_Enemy::NONE}, {EntityState_Enemy::IDLE}}, // DASHI
-		{ {EntityState_Enemy::IDLE}, {EntityState_Enemy::NONE}, {EntityState_Enemy::NONE}, {EntityState_Enemy::NONE}, {EntityState_Enemy::NONE}, {EntityState_Enemy::NONE},  {EntityState_Enemy::IDLE}} // NONE
+	Branch_Khurt_Variation transitionTable[static_cast<int>(EntityState_Khurt::STATE_COUNT)][static_cast<int>(EntityState_Khurt::STATE_COUNT)] = {
+
+		{ {EntityState_Khurt::IDLE}, {EntityState_Khurt::RUNNING}, {EntityState_Khurt::ATTACKING},	 {EntityState_Khurt::DEAD},	  {EntityState_Khurt::STUNNED},	   {EntityState_Khurt::DIGGING_UNDERGROUND},	   {EntityState_Khurt::MOVING_UNDERGROUND},	   {EntityState_Khurt::DIGGING_OUT},        {EntityState_Khurt::IDLE}},  // IDLE
+		{ {EntityState_Khurt::IDLE}, {EntityState_Khurt::RUNNING}, {EntityState_Khurt::ATTACKING},	 {EntityState_Khurt::DEAD},	  {EntityState_Khurt::STUNNED},	   {EntityState_Khurt::DIGGING_UNDERGROUND},	   {EntityState_Khurt::NONE},	               {EntityState_Khurt::DIGGING_OUT},        {EntityState_Khurt::IDLE}},  // RUNNING
+		{ {EntityState_Khurt::IDLE}, {EntityState_Khurt::RUNNING}, {EntityState_Khurt::ATTACKING},	 {EntityState_Khurt::DEAD},	  {EntityState_Khurt::STUNNED},	   {EntityState_Khurt::DIGGING_UNDERGROUND},	   {EntityState_Khurt::MOVING_UNDERGROUND},	   {EntityState_Khurt::DIGGING_OUT},        {EntityState_Khurt::IDLE}},  // ATTACKING
+		{ {EntityState_Khurt::IDLE}, {EntityState_Khurt::RUNNING}, {EntityState_Khurt::ATTACKING},	 {EntityState_Khurt::DEAD},	  {EntityState_Khurt::STUNNED},	   {EntityState_Khurt::DIGGING_UNDERGROUND},	   {EntityState_Khurt::MOVING_UNDERGROUND},	   {EntityState_Khurt::DIGGING_OUT},        {EntityState_Khurt::IDLE}},  // DEAD
+		{ {EntityState_Khurt::IDLE}, {EntityState_Khurt::RUNNING}, {EntityState_Khurt::ATTACKING},	 {EntityState_Khurt::DEAD},	  {EntityState_Khurt::STUNNED},	   {EntityState_Khurt::DIGGING_UNDERGROUND},	   {EntityState_Khurt::MOVING_UNDERGROUND},	   {EntityState_Khurt::DIGGING_OUT},        {EntityState_Khurt::IDLE}},  // STUNNED
+		{ {EntityState_Khurt::IDLE}, {EntityState_Khurt::RUNNING}, {EntityState_Khurt::ATTACKING},	 {EntityState_Khurt::DEAD},	  {EntityState_Khurt::STUNNED},	   {EntityState_Khurt::DIGGING_UNDERGROUND},	   {EntityState_Khurt::MOVING_UNDERGROUND},	   {EntityState_Khurt::DIGGING_OUT},        {EntityState_Khurt::IDLE}},  // DIGGING_UNDERGROUND
+		{ {EntityState_Khurt::IDLE}, {EntityState_Khurt::RUNNING}, {EntityState_Khurt::ATTACKING},	 {EntityState_Khurt::DEAD},	  {EntityState_Khurt::STUNNED},	   {EntityState_Khurt::DIGGING_UNDERGROUND},	   {EntityState_Khurt::MOVING_UNDERGROUND},	   {EntityState_Khurt::DIGGING_OUT},        {EntityState_Khurt::IDLE}},  // MOVING_UNDERGROUND
+		{ {EntityState_Khurt::IDLE}, {EntityState_Khurt::RUNNING}, {EntityState_Khurt::ATTACKING},	 {EntityState_Khurt::DEAD},	  {EntityState_Khurt::STUNNED},	   {EntityState_Khurt::DIGGING_UNDERGROUND},	   {EntityState_Khurt::MOVING_UNDERGROUND},	   {EntityState_Khurt::DIGGING_OUT},        {EntityState_Khurt::IDLE}},  // DIGGING_OUT
+		{ {EntityState_Khurt::IDLE}, {EntityState_Khurt::NONE},    {EntityState_Khurt::NONE},	     {EntityState_Khurt::NONE},	  {EntityState_Khurt::NONE},	   {EntityState_Khurt::NONE},	                   {EntityState_Khurt::NONE},	               {EntityState_Khurt::NONE},               {EntityState_Khurt::IDLE}},  // NONE
 	};
 
-	EntityState_Enemy currentState;
-	EntityState_Enemy desiredState;
-	EntityState_Enemy nextState;
+	EntityState_Khurt currentState;
+	EntityState_Khurt desiredState;
+	EntityState_Khurt nextState;
+
 
 };
-
 
 
 
