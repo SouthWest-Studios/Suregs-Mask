@@ -470,7 +470,7 @@ void Enemy_Boorok::CheckPoison() {
 			invulnerabilityTimer.Start();
 			timerRecibirDanioColor.Start();
 
-			printf("Enemy_Osiris has received  %f damage of poison\n", poisonDamage);
+			//printf("Enemy_Osiris has received  %f damage of poison\n", poisonDamage);
 		}
 		firstTimePoisonRecibed = false;
 	}
@@ -483,7 +483,7 @@ void Enemy_Boorok::CheckPoison() {
 				invulnerabilityTimer.Start();
 				timerRecibirDanioColor.Start();
 
-				printf("Enemy_Osiris has received  %f damage of poison\n", poisonDamage);
+				//printf("Enemy_Osiris has received  %f damage of poison\n", poisonDamage);
 			}
 		}
 	}
@@ -512,14 +512,14 @@ void Enemy_Boorok::chargeAttack(iPoint playerPos)
 
 	isCharging = true;
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
-	printf("asas as\n");
+	//printf("asas as\n");
 	currentAnimation = &chargeAttackAnim;
 	if (chargeAttackAnim.HasFinished())
 	{
 		currentAnimation = &attackAnim;
 		if (attackAnim.HasFinished())
 		{
-			printf("Charge attack");
+			//printf("Charge attack");
 
 			AreaAttack(playerPos);
 
@@ -539,7 +539,7 @@ void Enemy_Boorok::AreaAttack(iPoint playerPos) {
 	// Si el player esta dentro del radio del ataque
 	if (distance <= chargeattackDistance * 32) {
 		app->entityManager->GetPlayer()->TakeDamage(areaattackdamage);
-		printf("Area attack \n");
+		//printf("Area attack \n");
 	}
 }
 

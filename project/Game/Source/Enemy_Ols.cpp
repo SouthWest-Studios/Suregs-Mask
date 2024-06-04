@@ -216,7 +216,7 @@ bool Enemy_Ols::CleanUp()
 void Enemy_Ols::DoNothing(float dt)
 {
 	currentAnimation = &idleAnim;
-	//printf("Osiris idle");
+	////printf("Osiris idle");
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 }
 
@@ -291,52 +291,52 @@ void Enemy_Ols::Die() {
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
 	{
 		app->entityManager->GetPlayer()->maskZeroXP += 80;
-		//printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
+		////printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
 	}
 
 	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK0)
 	{
 		app->entityManager->GetPlayer()->maskZeroXP += 80;
-		//printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
+		////printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
 	}
 
 	//Mask 1
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK1)
 	{
 		app->entityManager->GetPlayer()->maskOneXP += 80;
-		//printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
+		////printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
 	}
 
 	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK1)
 	{
 		app->entityManager->GetPlayer()->maskOneXP += 80;
-		//printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
+		////printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
 	}
 
 	//Mask 2
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK2)
 	{
 		app->entityManager->GetPlayer()->maskTwoXP += 80;
-		//printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
+		////printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
 	}
 
 	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK2)
 	{
 		app->entityManager->GetPlayer()->maskTwoXP += 80;
-		//printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
+		////printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
 	}
 
 	//Mask 3
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK3)
 	{
 		app->entityManager->GetPlayer()->maskThreeXP += 80;
-		//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
+		////printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
 	}
 
 	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK3)
 	{
 		app->entityManager->GetPlayer()->maskThreeXP += 80;
-		//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
+		////printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
 	}
 
 	if (app->entityManager->GetIgory()->playerInFight) {
@@ -426,7 +426,7 @@ bool Enemy_Ols::Olsfinding(float dt)
 }
 
 float Enemy_Ols::GetHealth() const {
-	printf("Initial health: %f\n", health);
+	//printf("Initial health: %f\n", health);
 	return health;
 
 }
@@ -440,14 +440,14 @@ void Enemy_Ols::TakeDamage(float damage) {
 
  		app->audio->PlayRandomFx(ols_get_damage_fx, ols_get_damageAlt_fx, ols_get_damageAlt2_fx);
 
-		printf("Enemy_Ols has received  %f damage\n", damage);
+		//printf("Enemy_Ols has received  %f damage\n", damage);
 		
 	}
 }
 
 void Enemy_Ols::stateMachine(float dt, iPoint playerPos)
 {
-	//printf("\ncurrentState: %d, desiredState: %d", static_cast<int>(currentState), static_cast<int>(desiredState));
+	////printf("\ncurrentState: %d, desiredState: %d", static_cast<int>(currentState), static_cast<int>(desiredState));
 	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
 	switch (nextState) {
 	case EntityState_Enemy::IDLE:
@@ -501,7 +501,7 @@ void Enemy_Ols::CheckPoison() {
 			invulnerabilityTimer.Start();
 			timerRecibirDanioColor.Start();
 
-			printf("Enemy_Osiris has received  %f damage of poison\n", poisonDamage);
+			//printf("Enemy_Osiris has received  %f damage of poison\n", poisonDamage);
 		}
 		firstTimePoisonRecibed = false;
 	}
@@ -514,7 +514,7 @@ void Enemy_Ols::CheckPoison() {
                 invulnerabilityTimer.Start();
                 timerRecibirDanioColor.Start();
 
-                printf("Enemy_Osiris has received  %f damage of poison\n", poisonDamage);
+                //printf("Enemy_Osiris has received  %f damage of poison\n", poisonDamage);
             }
         }
     }

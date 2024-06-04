@@ -47,10 +47,10 @@ bool Item::Start() {
 
 bool Item::Update(float dt)
 {
-	/*printf("\n%s", testNombre.getNameAnimation());
+	/*//printf("\n%s", testNombre.getNameAnimation());
 	
 	if (testNombre.HasFinished() && testNombre.getNameAnimation() == "idleAnim") {
-		printf("Este Animation esta terminado");
+		//printf("Este Animation esta terminado");
 	}*/
 	
 	return true;

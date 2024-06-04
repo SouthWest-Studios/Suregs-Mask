@@ -161,20 +161,20 @@ bool Enemy_Shar::CleanUp()
 void Enemy_Shar::DoNothing(float dt)
 {
 	currentAnimation = &idleAnim;
-	//printf("Osiris idle");
+	////printf("Osiris idle");
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 }
 
 void Enemy_Shar::Chase(float dt)
 {
-	//printf("Osiris chasing");
+	////printf("Osiris chasing");
 	currentAnimation = &runAnim;
 	Sharfinding(dt);
 }
 
 void Enemy_Shar::Attack(float dt)
 {
-	//printf("Osiris attacking");
+	////printf("Osiris attacking");
 	currentAnimation = &attackAnim;
 	//sonido ataque
 }
@@ -204,52 +204,52 @@ void Enemy_Shar::Die(float dt) {
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
 	{
 		app->entityManager->GetPlayer()->maskZeroXP += 20;
-		//printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
+		////printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
 	}
 
 	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK0)
 	{
 		app->entityManager->GetPlayer()->maskZeroXP += 20;
-		//printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
+		////printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
 	}
 
 	//Mask 1
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK1)
 	{
 		app->entityManager->GetPlayer()->maskOneXP += 20;
-		//printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
+		////printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
 	}
 
 	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK1)
 	{
 		app->entityManager->GetPlayer()->maskOneXP += 20;
-		//printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
+		////printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
 	}
 
 	//Mask 2
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK2)
 	{
 		app->entityManager->GetPlayer()->maskTwoXP += 20;
-		//printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
+		////printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
 	}
 
 	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK2)
 	{
 		app->entityManager->GetPlayer()->maskTwoXP += 20;
-		//printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
+		////printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
 	}
 
 	//Mask 3
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK3)
 	{
 		app->entityManager->GetPlayer()->maskThreeXP += 20;
-		//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
+		////printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
 	}
 
 	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK3)
 	{
 		app->entityManager->GetPlayer()->maskThreeXP += 20;
-		//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
+		////printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
 	}
 }
 
@@ -337,6 +337,6 @@ float Enemy_Shar::GetHealth() const {
 void Enemy_Shar::TakeDamage(float damage) {
 
 	health -= damage;
-	printf("Enemy_Shar has received  %f damage\n", damage);
+	//printf("Enemy_Shar has received  %f damage\n", damage);
 }
 

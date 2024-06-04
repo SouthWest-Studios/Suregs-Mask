@@ -76,7 +76,7 @@ bool NPCPadre::Update(float dt) {
 
 	currentAnimation->Update();
 
-	//printf("\n selecion: %d", app->entityManager->GetIgory()->seleccionFinalPersonaje);
+	////printf("\n selecion: %d", app->entityManager->GetIgory()->seleccionFinalPersonaje);
 
 	return true;
 }
@@ -95,10 +95,10 @@ bool NPCPadre::PostUpdate() {
 			app->dialogManager->AddDialog(app->dialogManager->CreateDialog(itemNode, itemNode.attribute("name").as_string(), itemNode.attribute("facetexturepath").as_string()));
 			num++;
 		}
-		printf("\nnum: %d", num);
+		//printf("\nnum: %d", num);
 		dialogoMostrado = true;
 		if (!app->dialogManager->isPlaying) {
-			printf("Terminado");
+			//printf("Terminado");
 		}
 	}*/
 	return true;
@@ -125,7 +125,7 @@ void NPCPadre::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::PLAYER:
 		//app->dialogManager->CreateDialogSinEntity("sss","sss","sss");
 		if (dialogoMostrado && !app->dialogManager->isPlaying) {
-			//printf("\nTerminado");
+			////printf("\nTerminado");
 			app->entityManager->GetIgory()->playerInFight = true;
 			app->entityManager->GetIgory()->generaTimeColdDown.Start();
 			app->entityManager->GetIgory()->curaTimer.Start();
@@ -139,7 +139,7 @@ void NPCPadre::OnCollision(PhysBody* physA, PhysBody* physB) {
 					app->dialogManager->AddDialog(app->dialogManager->CreateDialog(itemNode, itemNode.attribute("name").as_string(), itemNode.attribute("facetexturepath").as_string()));
 					num++;
 				}
-				printf("\nnum: %d", num);
+				//printf("\nnum: %d", num);
 				dialogoMostrado = true;
 			}
 		}

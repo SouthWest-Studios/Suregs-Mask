@@ -109,7 +109,7 @@ bool Scene_Pueblo::Update(float dt)
 	/*int mx, my;
 	app->input->GetMousePosition(mx, my);
 	if (mx != NULL && my != NULL) {
-		printf("MX: %f,  MY: %f", (float)mx, (float)my);
+		//printf("MX: %f,  MY: %f", (float)mx, (float)my);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN) {
 		app->input->GetMousePosition(mx, my);

@@ -55,22 +55,22 @@ bool MissionManager::CleanUp()
 
 bool MissionManager::Update(float dt)
 {
-    /*printf("AAA");*/
+    /*//printf("AAA");*/
     // Recorrer todas las misiones activas
     for (Mission* mission : activeMissions) {
         switch (mission->state) {
         case Mission::State::NotStarted:
-            printf("Mision NotStarted: %d", mission->GetId());
+            //printf("Mision NotStarted: %d", mission->GetId());
             // Si la misión no ha comenzado, el id del diálogo debería ser 1001
             ChangeDialogTriggerId(mission->GetId(), 1001);
             break;
         case Mission::State::InProgress:
-            printf("Mision InProgress: %d", mission->GetId());
+            //printf("Mision InProgress: %d", mission->GetId());
             // Si la misión está en progreso, el id del diálogo debería ser 1002
             ChangeDialogTriggerId(mission->GetId(), 1002);
             break;
         case Mission::State::Completed:
-            printf("Mision Completed: %d", mission->GetId());
+            //printf("Mision Completed: %d", mission->GetId());
             // Si la misión está completada, el id del diálogo debería ser 1003
             ChangeDialogTriggerId(mission->GetId(), 1003);
             break;
@@ -91,35 +91,35 @@ void MissionManager::StartMission(Mission* mission) {
     // Verificar si la misión ya está en curso
     if (!IsMissionActive(mission)) {
         // Si no está en curso, agregarla a la lista de misiones activas
-        printf("Start Mision\n");
+        //printf("Start Mision\n");
         activeMissions.push_back(mission);
-        printf("Mision añadida a la lista de misiones activas\n");
+        //printf("Mision añadida a la lista de misiones activas\n");
         // Cambiar el estado de la misión a InProgress
         mission->state = Mission::State::InProgress;
-        printf("Estado de la mision cambiado a InProgress\n");
+        //printf("Estado de la mision cambiado a InProgress\n");
     }
     else {
-        printf("La mision ya está en curso\n");
+        //printf("La mision ya está en curso\n");
     }
 }
 
 
 void MissionManager::UpdateMissionProgress(Mission* mission) {
-    printf("Actualizando el progreso de la misión\n");
+    //printf("Actualizando el progreso de la misión\n");
     // Completar la lógica de UpdateMissionProgress
 }
 
 void MissionManager::CompleteMission(Mission* mission) {
-    printf("Completando la misión\n");
+    //printf("Completando la misión\n");
     // Aquí podrías agregar lógica adicional, como recompensas, actualización de estadísticas, etc.
     // Por ahora, simplemente eliminaremos la misión de la lista de misiones activas
     auto it = std::find(activeMissions.begin(), activeMissions.end(), mission);
     if (it != activeMissions.end()) {
-        printf("Misión completada\n");
+        //printf("Misión completada\n");
         activeMissions.erase(it);
     }
     else {
-        printf("La misión no se encontró en la lista de misiones activas\n");
+        //printf("La misión no se encontró en la lista de misiones activas\n");
     }
 }
 
@@ -138,38 +138,38 @@ void MissionManager::LoadMissionsFromXML(const char* filename) {
 }
 
 void MissionManager::HandleMissionEvent(const std::string& event_type, Mission* mission, int newId) {
-    printf("Manejando el evento de misión: %s\n", event_type.c_str());
+    //printf("Manejando el evento de misión: %s\n", event_type.c_str());
     // Cambiar el id del DialogTrigger
     ChangeDialogTriggerId(mission->GetId(), newId);
 
     // Verificar el tipo de evento de misión
     if (event_type == "activation") {
         // Activar la misión con la mision específica
-        printf("Llamando a StartMission\n");
+        //printf("Llamando a StartMission\n");
         StartMission(mission);
     }
     else if (event_type == "progress") {
         // Actualizar el progreso de la misión con la mision específica
-        printf("Llamando a UpdateMissionProgress\n");
+        //printf("Llamando a UpdateMissionProgress\n");
         UpdateMissionProgress(mission);
     }
     else if (event_type == "completion") {
         // Completar la misión con la mision específica
-        printf("Llamando a CompleteMission\n");
+        //printf("Llamando a CompleteMission\n");
         CompleteMission(mission);
     }
 }
 
 
 void MissionManager::HandleDialogEvent(const DialogEvent& dialog_event) {
-    printf("Llamando a HandleDialogEvent");
+    //printf("Llamando a HandleDialogEvent");
     // Verificar si el evento tiene un evento de misión asociado
     if (dialog_event.mission_event != nullptr) {
         const MissionEvent& mission_event = *(dialog_event.mission_event);
         // Obtener el tipo y el ID de la misión del evento
         std::string event_type = mission_event.type;
         uint mission_id = mission_event.mission_id;
-        printf("Evento de misión: %s, ID de misión: %d\n", event_type.c_str(), mission_id);
+        //printf("Evento de misión: %s, ID de misión: %d\n", event_type.c_str(), mission_id);
         // Buscar la misión por su ID
         Mission* mission = FindMissionById(mission_id);
         if (mission != nullptr) {
