@@ -239,7 +239,7 @@
       <Filter>Entities\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Source\BestiarioManager.cpp">
-      <Filter>Bestiario</Filter>
+      <Filter>Modules\Bestiario</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene_GameOver.cpp">
       <Filter>Scenes</Filter>
@@ -685,10 +685,10 @@
       <Filter>Entities\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Source\Bestiario.h">
-      <Filter>Bestiario</Filter>
+      <Filter>Modules\Bestiario</Filter>
     </ClInclude>
     <ClInclude Include="Source\BestiarioManager.h">
-      <Filter>Bestiario</Filter>
+      <Filter>Modules\Bestiario</Filter>
     </ClInclude>
     <ClInclude Include="Source\Scene_GameOver.h">
       <Filter>Scenes</Filter>
@@ -905,9 +905,6 @@
     <Filter Include="Entities\Boss">
       <UniqueIdentifier>{02da5046-0df8-4942-bd9f-56acabcad68a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Bestiario">
-      <UniqueIdentifier>{8601526c-a76c-4528-970c-40493ea69d1f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Entities\Chest">
       <UniqueIdentifier>{cf5f6a5d-42aa-4cba-a854-d5f3e8a6d10c}</UniqueIdentifier>
     </Filter>
@@ -940,6 +937,9 @@
     </Filter>
     <Filter Include="Modules\SistemaMisiones">
       <UniqueIdentifier>{54f3c5b6-a05c-4852-8661-ffdf5d8aa6e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Bestiario">
+      <UniqueIdentifier>{8601526c-a76c-4528-970c-40493ea69d1f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
