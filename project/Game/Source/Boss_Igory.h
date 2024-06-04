@@ -11,6 +11,9 @@
 #include "Pathfinding.h"
 #include "Player.h"
 #include "Physics.h"
+#include "Particle.h"
+#include "ParticlePool.h"
+#include "Emitter.h"
 #include <unordered_map>
 
 struct SDL_Texture;
@@ -130,7 +133,10 @@ private:
 	PhysBody* areaSensor = nullptr;
 	PhysBody* atackCube = nullptr;
 
-
+	Emitter* particulaFase2 = nullptr;
+	Emitter* particulaFase3 = nullptr;
+	bool partFase2Created = false;
+	bool partFase3Created = false;
 
 	//animacion
 	Animation atqCargado_fase2_boss_Igory;
