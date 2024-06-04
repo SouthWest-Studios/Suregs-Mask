@@ -422,7 +422,7 @@ bool Menu::PostUpdate()
 		if (animating) {
 			animationTime += app->dt;
 
-			float progress = animationTime / 1000.0f; // Duración de la animación de 1 segundo (1000 ms)
+			float progress = animationTime / 400.0f; // Duración de la animación de 1 segundo (1000 ms)
 			if (progress >= 1.0f) {
 				progress = 1.0f;
 				animating = false;
@@ -437,7 +437,7 @@ bool Menu::PostUpdate()
 		else if (animatingExit) {
 			animationTime += app->dt;
 			animatingExit2 = true;
-			float progress = animationTime / 1000.0f; // Duración de la animación de 1 segundo (1000 ms)
+			float progress = animationTime / 400.0f; // Duración de la animación de 1 segundo (1000 ms)
 			if (progress >= 1.0f) {
 				progress = 1.0f;
 				animatingExit = false;

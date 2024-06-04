@@ -20,15 +20,11 @@
 			</puzzles>
 		</map>
 	</:anonymous>
-	<scene_pueblo />
+	<pueblo_tutorial />
 	<entitymanager>
 		<entity_manager>
 			<doors>
 				<door sceneLevel="-10" tpID="0" />
-				<door sceneLevel="-10" tpID="2" />
-				<door sceneLevel="-10" tpID="4" />
-				<door sceneLevel="-10" tpID="1" />
-				<door sceneLevel="-10" tpID="5" />
 			</doors>
 		</entity_manager>
 	</entitymanager>
@@ -47,7 +43,7 @@
 			<Mask1 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
 			<Mask2 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
 			<Mask3 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
-			<maskNum n="1" info="Esta variable son las mascaras que tienes desbloqueadas" />
+			<maskNum n="0" info="Esta variable son las mascaras que tienes desbloqueadas" />
 			<maskPoints>
 				<maskPointZero points="0" />
 				<maskPointOne points="0" />
