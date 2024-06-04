@@ -177,7 +177,9 @@ bool Boss_Musri::Update(float dt)
 	stateMachine(dt, playerPos);
 
 
-
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
+		health -= 3000;
+	}
 
 	currentAnimation->Update();
 	return true;
@@ -343,6 +345,12 @@ void Boss_Musri::Attack(float dt)
 }
 
 void Boss_Musri::Die() {
+
+	if (!saveXml) {
+	app->map->boss2_defeated = true;
+	app->map->SaveBoss();
+	saveXml = true;
+	}
 
 	Item_Rubi* rubi = (Item_Rubi*)app->entityManager->CreateEntity(EntityType::ITEM_RUBI);
 	rubi->config = configNode.child("entities_data").child("item_rubi");

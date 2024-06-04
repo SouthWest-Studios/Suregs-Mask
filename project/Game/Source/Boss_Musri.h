@@ -123,6 +123,7 @@ public:
 
 
 	//Revivir
+	bool saveXml = false;
 
 	//Borrar
 	int pivotX = 0;

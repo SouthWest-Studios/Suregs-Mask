@@ -280,7 +280,7 @@ bool Boss_Igory::Update(float dt)
 		atq2_boss_Igory.speed = 0.15;
 		atq3_boss_Igory.speed = 0.15;
 		app->map->maxEnemies = 8;
-		speed = (120/ 10) * 0.4;
+		speed = (120 / 10) * 0.4;
 		attackDamage = 280;
 		break;
 	case FASE_Igory::FASE_THREE:
@@ -788,6 +788,11 @@ void Boss_Igory::Die() {
 	currentAnimation = &dead_boss_Igory;
 	pbodyFoot->body->SetType(b2_staticBody);
 	startDialogo = true;
+	if (!saveXml) {
+		app->map->boss4_defeated = true;
+		app->map->SaveBoss();
+		saveXml = true;
+	}
 
 	if (!unirPadre) {
 		currentAnimation = &dead_boss_Igory;
