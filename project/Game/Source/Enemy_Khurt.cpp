@@ -21,9 +21,6 @@
 #include "Utils.cpp"
 
 
-
-
-
 Enemy_Khurt::Enemy_Khurt() : Entity(EntityType::ENEMY_KHURT) {
 	name = ("khurt");
 	state = EntityState_Khurt::IDLE;
