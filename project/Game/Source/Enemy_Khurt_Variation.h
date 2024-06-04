@@ -173,4 +173,4 @@ public:
 
 
 
-#endif // __ENEMY_KHURT_H__
+#endif // __ENEMY_KHURT_VARIATION_H__
