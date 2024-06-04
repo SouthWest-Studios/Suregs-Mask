@@ -22,6 +22,7 @@
 #include "DialogManager.h"
 #include "ModuleFadeToBlack.h"
 #include "Scene_menu.h"
+#include "ParticleSystem.h"
 
 
 #include "Item_Mascara_3.h"
@@ -126,13 +127,30 @@ bool Boss_Igory::Update(float dt)
 
 	if (health <= 0)
 	{
+		particulaFase3 = nullptr;
+		app->psystem->RemoveEmitter(particulaFase3);
 		desiredState = EntityState_Boss_Igory::DEAD;
 	}
 	else if (playerInFight && health <= lifeLow80 && !faseTwo && !isDead && !stun) {
-
+		
+		if (!partFase2Created) {
+			fPoint pos1((float)position.x, (float)position.y);
+			particulaFase2 = app->psystem->AddEmiter(pos1, EMITTER_TYPE_FLAME);
+			partFase2Created = true;
+		}
+	
 		desiredState = EntityState_Boss_Igory::FASE_CHANGE;
 	}
 	else if (playerInFight && health <= lifeLow40 && !faseThree && !isDead && !stun) {
+		if (!partFase3Created) {
+			particulaFase2 = nullptr;
+			app->psystem->RemoveAllEmitters();
+			fPoint pos2((float)position.x, (float)position.y);
+			particulaFase3 = app->psystem->AddEmiter(pos2, EMITTER_TYPE_FIRE_MASK3);
+			partFase3Created = true;
+		}
+		
+
 		desiredState = EntityState_Boss_Igory::FASE_CHANGE;
 	}
 	else if (playerInFight && stun && !isDead && !inCurar && !inAtack && !inAtqDashi)
@@ -282,6 +300,7 @@ bool Boss_Igory::Update(float dt)
 		app->map->maxEnemies = 8;
 		speed = (120 / 10) * 0.4;
 		attackDamage = 280;
+	
 		break;
 	case FASE_Igory::FASE_THREE:
 		atq1_boss_Igory.speed = 0.25;
@@ -290,8 +309,23 @@ bool Boss_Igory::Update(float dt)
 		app->map->maxEnemies = 10;
 		speed = (150 / 10) * 0.4;
 		attackDamage = 300;
+		
 		break;
 	}
+
+	
+
+	
+
+	if (particulaFase2 != nullptr) {
+		fPoint pos((float)position.x, (float)position.y);
+		particulaFase2->MoveEmitter(pos);
+	}
+	if (particulaFase3 != nullptr) {
+		fPoint pos((float)position.x, (float)position.y);
+		particulaFase3->MoveEmitter(pos);
+	}
+
 
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
 		health -= 1000;
