@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<game_state>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<:anonymous />
+	<:anonymous>
+		<map>
+			<bosses>
+				<boss1 muerto="false" />
+				<boss2 muerto="true" />
+				<boss3 muerto="false" />
+				<boss4 muerto="false" />
+			</bosses>
+		</map>
+		<map>
+			<puzzles>
+				<puzzle level="0" complete="false" />
+				<puzzle level="1" complete="false" />
+				<puzzle level="2" complete="false" />
+				<puzzle level="3" complete="false" />
+				<puzzle level="4" complete="false" />
+				<puzzle level="5" complete="false" />
+				<puzzle level="6" complete="false" />
+				<puzzle level="7" complete="false" />
+			</puzzles>
+		</map>
+		<map>
+			<bosses />
+		</map>
+	</:anonymous>
+	<pueblo_tutorial />
+	<entitymanager>
+		<entity_manager>
+			<doors>
+				<door sceneLevel="-10" tpID="60" />
+				<door sceneLevel="-10" tpID="0" />
+<<<<<<< HEAD
+				<door sceneLevel="-10" tpID="61" />
+				<door sceneLevel="-10" tpID="23" />
+				<door sceneLevel="-10" tpID="21" />
+				<door sceneLevel="-10" tpID="22" />
+=======
+>>>>>>> 98bd083642709ef8708f439c89acbd06e8d4333b
+			</doors>
+		</entity_manager>
+	</entitymanager>
+	<missionmanager />
+	<hud />
+	<menu />
+	<iventorymanager>
+		<inventory>
+			<inventity type="5" quantity="1" />
+			<money quantity="0" />
+			<SwordLevel quantity="0" />
+			<ArmorLevel quantity="0" />
+			<PrimaryMask quantity="-1" />
+			<SecondaryMask quantity="-1" />
+			<StoryLevel quantity="1" />
+			<Mask0 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
+			<Mask1 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
+			<Mask2 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
+			<Mask3 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
+			<maskNum n="0" info="Esta variable son las mascaras que tienes desbloqueadas" />
+			<maskPoints>
+				<maskPointZero points="0" />
+				<maskPointOne points="0" />
+				<maskPointTwo points="0" />
+				<maskPointThree points="0" />
+			</maskPoints>
+			<elevator mazmorra="0" mazmorraActual="0" />
+		</inventory>
+	</iventorymanager>
+	<commercemanager />
+	<questmanager>
+		<questLines>
+			<questLine id="1" index="1" active="true" completed="false" />
+			<questLine id="2" index="1" active="false" completed="false" />
+		</questLines>
+	</questmanager>
+	<notesmanager>
+		<notes />
+	</notesmanager>
+	<bestiariomanager>
+		<bestiario>
+			<bestia name="musri" />
+		</bestiario>
+	</bestiariomanager>
+	<equipo />
+	<Ascensormenu />
+	<treemanager>
+		<skillTree>
+			<node id="0" nivelArbol="0" nivelMejora="0" type="0" used1="false" used2="false" used3="false" used4="false" usable1="true" usable2="true" usable3="true" usable4="true" />
+			<node id="1" nivelArbol="0" nivelMejora="1" type="4" used1="false" used2="false" used3="false" used4="false" usable1="true" usable2="true" usable3="true" usable4="true" />
+			<node id="2" nivelArbol="0" nivelMejora="2" type="4" used1="false" used2="false" used3="false" used4="false" usable1="false" usable2="false" usable3="false" usable4="false" />
+			<node id="3" nivelArbol="0" nivelMejora="3" type="4" used1="false" used2="false" used3="false" used4="false" usable1="false" usable2="false" usable3="false" usable4="false" />
+			<node id="4" nivelArbol="0" nivelMejora="4" type="4" used1="false" used2="false" used3="false" used4="false" usable1="false" usable2="false" usable3="false" usable4="false" />
+			<node id="5" nivelArbol="1" nivelMejora="0" type="1" used1="false" used2="false" used3="false" used4="false" usable1="true" usable2="true" usable3="true" usable4="true" />
+			<node id="6" nivelArbol="1" nivelMejora="1" type="4" used1="false" used2="false" used3="false" used4="false" usable1="true" usable2="true" usable3="true" usable4="true" />
+			<node id="7" nivelArbol="1" nivelMejora="2" type="4" used1="false" used2="false" used3="false" used4="false" usable1="false" usable2="false" usable3="false" usable4="false" />
+			<node id="8" nivelArbol="1" nivelMejora="3" type="4" used1="false" used2="false" used3="false" used4="false" usable1="false" usable2="false" usable3="false" usable4="false" />
+			<node id="9" nivelArbol="1" nivelMejora="4" type="4" used1="false" used2="false" used3="false" used4="false" usable1="false" usable2="false" usable3="false" usable4="false" />
+			<node id="10" nivelArbol="2" nivelMejora="0" type="2" used1="false" used2="false" used3="false" used4="false" usable1="true" usable2="true" usable3="true" usable4="true" />
+			<node id="11" nivelArbol="2" nivelMejora="1" type="4" used1="false" used2="false" used3="false" used4="false" usable1="true" usable2="true" usable3="true" usable4="true" />
+			<node id="12" nivelArbol="2" nivelMejora="2" type="4" used1="false" used2="false" used3="false" used4="false" usable1="false" usable2="false" usable3="false" usable4="false" />
+			<node id="13" nivelArbol="2" nivelMejora="3" type="4" used1="false" used2="false" used3="false" used4="false" usable1="false" usable2="false" usable3="false" usable4="false" />
+			<node id="14" nivelArbol="2" nivelMejora="4" type="4" used1="false" used2="false" used3="false" used4="false" usable1="false" usable2="false" usable3="false" usable4="false" />
+			<node id="15" nivelArbol="3" nivelMejora="0" type="3" used1="false" used2="false" used3="false" used4="false" usable1="true" usable2="true" usable3="true" usable4="true" />
+			<node id="16" nivelArbol="3" nivelMejora="1" type="4" used1="false" used2="false" used3="false" used4="false" usable1="true" usable2="true" usable3="true" usable4="true" />
+			<node id="17" nivelArbol="3" nivelMejora="2" type="4" used1="false" used2="false" used3="false" used4="false" usable1="false" usable2="false" usable3="false" usable4="false" />
+			<node id="18" nivelArbol="3" nivelMejora="3" type="4" used1="false" used2="false" used3="false" used4="false" usable1="false" usable2="false" usable3="false" usable4="false" />
+			<node id="19" nivelArbol="3" nivelMejora="4" type="4" used1="false" used2="false" used3="false" used4="false" usable1="false" usable2="false" usable3="false" usable4="false" />
+		</skillTree>
+	</treemanager>
+	<guiManager />
+	<dialogmanager />
+	<fadeToBlack />
+	<debugConsole />
+	<renderer />
+	<pSystem />
+</game_state>
