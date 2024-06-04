@@ -8,7 +8,7 @@
 #include <string>
 #include "SDL/include/SDL.h"
 
-#define MAX_NUM_EMITTERS_TYPE 11
+#define MAX_NUM_EMITTERS_TYPE 20
 
 class Emitter;
 struct SDL_Texture;
@@ -33,6 +33,7 @@ enum EmitterType
 	EMITTER_TYPE_RAYO,
 	EMITTER_TYPE_EXPLOSION_RAYO,
 	EMITTER_TYPE_EXPLOSION_MASK1,
+	EMITTER_TYPE_TEST,
 };
 
 struct EmitterData

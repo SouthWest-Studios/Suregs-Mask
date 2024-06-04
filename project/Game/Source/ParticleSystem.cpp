@@ -70,6 +70,8 @@ bool ParticleSystem::Awake(pugi::xml_node config)
 			LoadEmitterData(emitters, EmitterType::EMITTER_TYPE_EXPLOSION_RAYO);
 		else if (emitterType.compare("explosion_mask1") == 0)
 			LoadEmitterData(emitters, EmitterType::EMITTER_TYPE_EXPLOSION_MASK1);
+		else if (emitterType.compare("test") == 0)
+			LoadEmitterData(emitters, EmitterType::EMITTER_TYPE_TEST);
 	}
 	return ret;
 }
@@ -196,8 +198,9 @@ SDL_Texture* ParticleSystem::GetParticleAtlas() const
 
 void ParticleSystem::LoadEmitterData(pugi::xml_node& emitter, EmitterType type)
 {
+	
 	EmitterData tmp;
-
+	
 	// Angle range
 	tmp.angleRange.x = emitter.child("angleRange").attribute("min").as_float();
 	tmp.angleRange.y = emitter.child("angleRange").attribute("max").as_float();
@@ -232,7 +235,6 @@ void ParticleSystem::LoadEmitterData(pugi::xml_node& emitter, EmitterType type)
 	// Particle size
 	tmp.startSize = emitter.child("startSize").attribute("value").as_float();
 	tmp.endSize = emitter.child("endSize").attribute("value").as_float();
-
 	// Emission properties
 	tmp.emitNumber = emitter.child("emitNumber").attribute("value").as_uint();
 	tmp.emitVariance = emitter.child("emitVariance").attribute("value").as_uint();
@@ -260,10 +262,10 @@ void ParticleSystem::LoadEmitterData(pugi::xml_node& emitter, EmitterType type)
 	tmp.endColor.g = emitter.child("endColor").attribute("g").as_uint();
 	tmp.endColor.b = emitter.child("endColor").attribute("b").as_uint();
 	tmp.endColor.a = emitter.child("endColor").attribute("a").as_uint();
-
+	
 	// Blend mode
 	std::string blendModeString = emitter.child("blendMode").attribute("mode").as_string();
-
+	
 	if (blendModeString == "add")
 		tmp.blendMode = SDL_BlendMode::SDL_BLENDMODE_ADD;
 	else if (blendModeString == "blend")
@@ -272,7 +274,6 @@ void ParticleSystem::LoadEmitterData(pugi::xml_node& emitter, EmitterType type)
 		tmp.blendMode = SDL_BlendMode::SDL_BLENDMODE_MOD;
 	else if (blendModeString == "none")
 		tmp.blendMode = SDL_BlendMode::SDL_BLENDMODE_NONE;
-
 	// Vortex
 	tmp.vortexSensitive = emitter.child("vortexSensitive").attribute("state").as_bool();
 

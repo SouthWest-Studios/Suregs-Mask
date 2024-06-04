@@ -188,7 +188,7 @@ bool Scene_Menu::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN) {
 		app->input->GetMousePosition(mx, my);
 		fPoint pos((float)mx, (float)my);
-		app->psystem->AddEmiter(pos, EMITTER_TYPE_FIRE_MASK3);
+		app->psystem->AddEmiter(pos, EMITTER_TYPE_TEST);
 	}
 
 	//if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN) {

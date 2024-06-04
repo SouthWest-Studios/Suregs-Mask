@@ -113,30 +113,31 @@ bool Enemy_Khurt::Update(float dt)
 	else if (app->entityManager->GetIgory()->isDead) {
 		health = 0;
 	}
-	/*else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32)
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32)
 	{
+		printf("ATTACKING \n");
 		desiredState = EntityState_Khurt::ATTACKING;
-	}*/
+	}
 	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance * 32 )
 	{
-	
+		printf("RUNNING \n");
 		desiredState = EntityState_Khurt::RUNNING;
 	
 	}
-	else
-	{
-		desiredState = EntityState_Khurt::RUNNING;
-	}
-	if (charging && dist(Antposition, position) > 350 || charging && timechargingTimer.ReadSec() > 0.8)
-	{
-		stunned = true;
-		Stunned(dt);
-	}
+	//else
+	//{
+	//	desiredState = EntityState_Khurt::RUNNING;
+	//}
+	//if (charging && dist(Antposition, position) > 350 || charging && timechargingTimer.ReadSec() > 0.8)
+	//{
+	//	stunned = true;
+	//	Stunned(dt);
+	//}
 
-	if (chargeTimer.ReadSec() >= 5)
-	{
-		charging = false;
-	}
+	//if (chargeTimer.ReadSec() >= 5)
+	//{
+	//	charging = false;
+	//}
 
 	stateMachine(dt, playerPos);
 
@@ -217,6 +218,7 @@ void Enemy_Khurt::DigUnderground()
 	isUnderground = true;
 	if (underAnim_start.HasFinished()) {
 		desiredState = EntityState_Khurt::MOVING_UNDERGROUND;
+		printf("MOVING UNDERGROUND \n");
 	}
 }
 
@@ -228,7 +230,8 @@ void Enemy_Khurt::MoveUnderground(float dt, iPoint playerPos)
 	if (chargeTimer.ReadSec() >= 5 && app->map->pathfinding->GetDistance(playerPos, position) <= chargeAttackDistance * 32 && app->map->pathfinding->GetDistance(playerPos, position) >= (attackDistance + 5) * 32)
 	{
 		Antposition = position;
-		Charge(dt, playerPos);
+		desiredState = EntityState_Khurt::DIGGING_OUT;
+		/*DigOut(dt, playerPos);*/
 	}
 	else if (!charging)
 	{
@@ -241,41 +244,14 @@ void Enemy_Khurt::DigOut(float dt, iPoint playerPos)
 	currentAnimation = &underAnim_end;
 	isUnderground = false;
 	if (underAnim_end.HasFinished()) {
-		Charge(dt, playerPos);
+		/*Charge(dt, playerPos);*/
 		desiredState = EntityState_Khurt::ATTACKING;
+		printf("ATTACKING \n");
 	}
 }
 
 void Enemy_Khurt::Charge(float dt, iPoint playerPos)
 {
-	
-	if (chargeTimer.ReadSec() >= 5)
-	{
-		if (isUnderground) {
-			DigOut(dt, playerPos);
-		}
-		else{
-			/*//printf("charge");*/
-			currentAnimation = &chargeAnim;
-			pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
-			if (chargeAnim.HasFinished())
-			{
-				timechargingTimer.Start();
-				charging = true;
-
-				b2Vec2 direction(playerPos.x - position.x, playerPos.y - position.y);
-				direction.Normalize();
-
-				b2Vec2 impulse = b2Vec2(direction.x * 5, direction.y * 5);
-				pbodyFoot->body->ApplyLinearImpulse(impulse, pbodyFoot->body->GetWorldCenter(), true);
-
-				stunTimer.Start();
-				chargeTimer.Start();
-			}
-		}
-	
-	}
-	
 }
 
 void Enemy_Khurt::Stunned(float dt)
@@ -300,10 +276,14 @@ void Enemy_Khurt::Stunned(float dt)
 
 void Enemy_Khurt::Attack(float dt)
 {
-	////printf("Khurt attacking");
-	currentAnimation = &runAnim;
+	//printf("Khurt attacking");
+	currentAnimation = &chargeAnim;
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero); //No se mueve mientras ataca
 
+	if (chargeAnim.HasFinished()) {
+		app->entityManager->GetPlayer()->TakeDamage(attackDamage);
+		desiredState = EntityState_Khurt::RUNNING;
+	}
 	//sonido ataque
 }
 
@@ -324,7 +304,7 @@ void Enemy_Khurt::stateMachine(float dt, iPoint playerPos)
 		}
 		break;
 	case EntityState_Khurt::ATTACKING:
-		Charge(dt, playerPos);
+		Attack(dt);
 		break;
 	case EntityState_Khurt::DEAD:
 		Die();
