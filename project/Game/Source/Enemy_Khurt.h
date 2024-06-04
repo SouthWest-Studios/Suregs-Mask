@@ -143,7 +143,6 @@ private:
 	Timer timechargingTimer;
 	bool charging;
 	bool stunned;
-	bool isUnderground = false;
 	iPoint Antposition;
 
 	//Dig underground

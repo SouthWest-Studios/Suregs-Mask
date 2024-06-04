@@ -1678,6 +1678,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (physA == attackSensor) {
 			LOG("Collision ENEMY");
 			if (physB->entity != nullptr) {
+				if(!physB->listener->isUnderground)
 				physB->entity->TakeDamage(currentStats.attackDamage);
 			}
 			//collisionAttackTimer.Start();

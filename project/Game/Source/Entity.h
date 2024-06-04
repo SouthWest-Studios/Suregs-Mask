@@ -341,6 +341,8 @@ public:
 
 	bool tutorial = false;
 
+	bool isUnderground = false;
+
 	bool playerInBossArea = false;
 	std::string description;
 	std::string titulo;
