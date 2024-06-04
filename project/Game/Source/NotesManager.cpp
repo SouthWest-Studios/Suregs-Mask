@@ -220,25 +220,60 @@ bool NotesManager::LoadState(pugi::xml_node node)
 	entitiesDataNode = configFile.child("config").child("entities_data");
 
 	//Note* NoteItem = app->NotesManager->CreateItem(, 0, 0, 0, 0, 0, 0);
-	for (pugi::xml_node itemNode = node.child("Note").child("Note"); itemNode; itemNode = itemNode.next_sibling("Note"))
+	for (pugi::xml_node itemNode = node.child("notes").child("note"); itemNode; itemNode = itemNode.next_sibling("note"))
 	{
+		std::string textoNota;
+		std::string tituloNota;
 
-		Note* itemLoaded = nullptr;
-		pugi::xml_node itemConfigurationNode;
-		switch ((NoteType)itemNode.attribute("type").as_int())
+		switch (itemNode.attribute("id").as_int(0))
 		{
-		case NoteType::NOTE:
-			/*itemConfigurationNode = entitiesDataNode.child("item_garra");
-			itemLoaded = app->notesManager->CreateItem(EntityType::ITEM_NOTA, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());*/
+		case 0:
+			textoNota = entitiesDataNode.child("item_nota").attribute("texto1").as_string();
+			tituloNota = entitiesDataNode.child("item_nota").attribute("titulo1").as_string();
 			break;
-
-		case NoteType::UNKNOWN:
+		case 1:
+			textoNota = entitiesDataNode.child("item_nota").attribute("texto2").as_string();
+			tituloNota = entitiesDataNode.child("item_nota").attribute("titulo2").as_string();
+			break;
+		case 2:
+			textoNota = entitiesDataNode.child("item_nota").attribute("texto3").as_string();
+			tituloNota = entitiesDataNode.child("item_nota").attribute("titulo3").as_string();
+			break;
+		case 3:
+			textoNota = entitiesDataNode.child("item_nota").attribute("texto4").as_string();
+			tituloNota = entitiesDataNode.child("item_nota").attribute("titulo4").as_string();
+			break;
+		case 4:
+			textoNota = entitiesDataNode.child("item_nota").attribute("texto5").as_string();
+			tituloNota = entitiesDataNode.child("item_nota").attribute("titulo5").as_string();
+			break;
+		case 5:
+			textoNota = entitiesDataNode.child("item_nota").attribute("texto6").as_string();
+			tituloNota = entitiesDataNode.child("item_nota").attribute("titulo6").as_string();
+			break;
+		case 6:
+			textoNota = entitiesDataNode.child("item_nota").attribute("texto7").as_string();
+			tituloNota = entitiesDataNode.child("item_nota").attribute("titulo7").as_string();
+			break;
+		case 7:
+			textoNota = entitiesDataNode.child("item_nota").attribute("texto8").as_string();
+			tituloNota = entitiesDataNode.child("item_nota").attribute("titulo8").as_string();
+			break;
+		case 8:
+			textoNota = entitiesDataNode.child("item_nota").attribute("texto9").as_string();
+			tituloNota = entitiesDataNode.child("item_nota").attribute("titulo9").as_string();
+			break;
+		case 9:
+			textoNota = entitiesDataNode.child("item_nota").attribute("texto10").as_string();
+			tituloNota = entitiesDataNode.child("item_nota").attribute("titulo10").as_string();
 			break;
 		default:
+			textoNota = entitiesDataNode.child("item_nota").attribute("texto1").as_string();
+			tituloNota = entitiesDataNode.child("item_nota").attribute("titulo1").as_string();
 			break;
 		}
-		
 
+		CreateItem(EntityType::ITEM_NOTA, app->tex->Load("Assets/Textures/Entidades/Items/textura_NoteCloseUp.png"), textoNota, tituloNota, itemNode.attribute("id").as_int(0));
 	}
 
 
@@ -250,15 +285,15 @@ bool NotesManager::LoadState(pugi::xml_node node)
 bool NotesManager::SaveState(pugi::xml_node node)
 {
 	bool ret = true;
-	pugi::xml_node NoteNode = node.append_child("Note");
+	pugi::xml_node notesNode = node.append_child("notes");
 
 	for (int i = 0; i < notes.Count(); i++) {
 
-		Note* NoteItem = notes.At(i)->data;
+		Note* noteItem = notes.At(i)->data;
 
-		pugi::xml_node NoteItemNode = NoteNode.append_child("Note");
-		NoteItemNode.append_attribute("type").set_value((int)NoteItem->type);
-		NoteItemNode.append_attribute("quantity").set_value(NoteItem->quantity);
+		pugi::xml_node noteNode = notesNode.append_child("note");
+
+		noteNode.append_attribute("id").set_value(noteItem->id);
 	}
 
 	
