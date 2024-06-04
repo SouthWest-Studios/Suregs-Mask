@@ -391,9 +391,8 @@ public:
 	Timer mask3Timer;
 	bool mask3Active = false;
 
-	fPoint posMask3Particle;
+	Emitter* mask2Particle = nullptr;
 	Emitter* mask3Particle = nullptr;
-	bool mask3ParticleCreated = false;
 
 	//Fishing
 	//New//
