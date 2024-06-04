@@ -169,7 +169,7 @@ private:
 
 	char* description;
 
-
+	bool setMask = false;
 };
 
 #endif 

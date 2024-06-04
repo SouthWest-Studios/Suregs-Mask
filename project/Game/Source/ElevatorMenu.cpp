@@ -83,7 +83,7 @@ bool ElevatorMenu::Update(float dt)
 		{
 			plus = 0;
 		}
-		app->entityManager->active = false;
+		/*app->entityManager->active = false;*/
 		app->physics->active = false;
 		app->menu->active = false;
 		OnMovePointer();
