@@ -346,11 +346,7 @@ void Boss_Musri::Attack(float dt)
 
 void Boss_Musri::Die() {
 
-	if (!saveXml) {
 	app->map->boss2_defeated = true;
-	app->map->SaveBoss();
-	saveXml = true;
-	}
 
 	Item_Rubi* rubi = (Item_Rubi*)app->entityManager->CreateEntity(EntityType::ITEM_RUBI);
 	rubi->config = configNode.child("entities_data").child("item_rubi");

@@ -695,11 +695,7 @@ void Boss_Inuit::Die() {
 
 	//Mask XP
 	Dead = true;
-	if (!saveXml) {
-		app->map->boss1_defeated = true;
-		app->map->SaveBoss();
-		saveXml = true;
-	}
+	app->map->boss1_defeated = true;
 
 	if (count == 0)
 	{

@@ -787,12 +787,7 @@ void Boss_Igory::Die() {
 	isDead = true;
 	currentAnimation = &dead_boss_Igory;
 	pbodyFoot->body->SetType(b2_staticBody);
-	startDialogo = true;
-	if (!saveXml) {
-		app->map->boss4_defeated = true;
-		app->map->SaveBoss();
-		saveXml = true;
-	}
+	app->map->boss4_defeated = true;
 
 	if (!unirPadre) {
 		currentAnimation = &dead_boss_Igory;
