@@ -9,7 +9,7 @@
 		<map>
 			<bosses>
 				<boss1 muerto="false" />
-				<boss2 muerto="true" />
+				<boss2 muerto="false" />
 				<boss3 muerto="false" />
 				<boss4 muerto="false" />
 			</bosses>
@@ -34,12 +34,7 @@
 	<entitymanager>
 		<entity_manager>
 			<doors>
-				<door sceneLevel="-10" tpID="60" />
 				<door sceneLevel="-10" tpID="0" />
-				<door sceneLevel="-10" tpID="61" />
-				<door sceneLevel="-10" tpID="23" />
-				<door sceneLevel="-10" tpID="21" />
-				<door sceneLevel="-10" tpID="22" />
 			</doors>
 		</entity_manager>
 	</entitymanager>
@@ -48,7 +43,6 @@
 	<menu />
 	<iventorymanager>
 		<inventory>
-			<inventity type="5" quantity="1" />
 			<money quantity="0" />
 			<SwordLevel quantity="0" />
 			<ArmorLevel quantity="0" />
@@ -80,9 +74,7 @@
 		<notes />
 	</notesmanager>
 	<bestiariomanager>
-		<bestiario>
-			<bestia name="musri" />
-		</bestiario>
+		<bestiario />
 	</bestiariomanager>
 	<equipo />
 	<Ascensormenu />

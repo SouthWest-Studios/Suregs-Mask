@@ -80,6 +80,11 @@ public:
 	bool animatingExit = false; // Indicador de animación de salida
 	bool animatingExit2 = false;
 
+	bool audio = false;
+
+	int musicNum;
+	int sfxNum;
+
 private:
 	SDL_Texture* fondoInventario = nullptr;
 	SDL_Texture* fondoEquipo = nullptr;
