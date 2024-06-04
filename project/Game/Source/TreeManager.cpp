@@ -793,6 +793,8 @@ void TreeManager::UseTreeSelected(int id)
 					item->data->active = true;
 					switch (item->data->type)
 					{
+					
+					
 
 					case TreeType::MASK0:
 					{
@@ -1539,7 +1541,7 @@ bool TreeManager::Update(float dt)
 		OnMovePointer();
 		app->entityManager->active = false;
 		app->physics->active = false;
-		if (app->input->GetButton(CONFIRM) == KEY_DOWN || app->input->GetButton(CONFIRM) == KEY_DOWN) {
+		if (app->input->GetButton(CONFIRM) == KEY_DOWN || app->input->GetButton(SELECT) == KEY_DOWN) {
 			/*options = true;
 			selected = { PointerPosition.x, PointerPosition.y };
 			selectedId = PointerId;*/
@@ -1549,6 +1551,13 @@ bool TreeManager::Update(float dt)
 		if (app->input->GetButton(BACK) == KEY_DOWN)
 		{
 			ReembolsarTreeSelected(PointerId);
+
+			if (PointerId == 100) {
+				app->entityManager->GetPlayer()->primaryMask = Mask::NOMASK;
+			}
+			else if(PointerId == 101) {
+				app->entityManager->GetPlayer()->secondaryMask = Mask::NOMASK;
+			}
 
 		}
 
