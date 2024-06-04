@@ -5,15 +5,6 @@
 	<textures />
 	<audio />
 	<:anonymous />
-	<:anonymous>
-		<map>
-			<bosses>
-				<boss1 muerto="false" />
-				<boss2 muerto="false" />
-				<boss3 muerto="false" />
-				<boss4 muerto="false" />
-			</bosses>
-		</map>
 	<map>
 		<map>
 			<puzzles>
@@ -28,27 +19,16 @@
 			</puzzles>
 			<bosses>
 				<boss1 muerto="false" />
-				<boss2 muerto="true" />
+				<boss2 muerto="false" />
 				<boss3 muerto="false" />
 				<boss4 muerto="false" />
 			</bosses>
 		</map>
-
-		<map>
-			<bosses />
-		</map>
-	</:anonymous>
+	</map>
 	<scene_pueblo />
 	<entitymanager>
 		<entity_manager>
 			<doors />
-	</map>
-	<scene_mazmorra0 />
-	<entitymanager>
-		<entity_manager>
-			<doors>
-				<door sceneLevel="-10" tpID="0" />
-			</doors>
 		</entity_manager>
 	</entitymanager>
 	<missionmanager />

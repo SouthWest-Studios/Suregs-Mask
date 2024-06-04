@@ -133,19 +133,17 @@ Dialog* DialogManager::CreateDialog(pugi::xml_node itemNode, std::string name, c
 			Dialog* dialogOp2 = CreateDialog(optionNode, name, faceTexturePath, font);
 			dialog->options2.Add(dialogOp2);
 		}
-	}
-
-	if (strcmp(type, "QuestUpdate") == 0) {
+	}else if (strcmp(type, "QuestUpdate") == 0) {
 		dialog->type = DialogType::QUEST_UPDATE;
 		dialog->questLine = itemNode.attribute("questLine").as_int();
 		dialog->nextTargetID = itemNode.attribute("nextTargetID").as_int();
 		dialog->actualTargetID = itemNode.attribute("actualTargetID").as_int();
-	}
-
-	if (strcmp(type, "SelectChoose") == 0) {
+	}else if (strcmp(type, "SelectChoose") == 0) {
 		dialog->type = DialogType::SELECT_CHOOSE;
 		dialog->selectChoose = itemNode.attribute("selection").as_int();
-		
+	}
+	else {
+		dialog->type = DialogType::TEXT;
 	}
 
 	return dialog;
@@ -157,6 +155,7 @@ void DialogManager::CreateDialogSinEntity(std::string Texto, std::string nombre,
 	Dialog* dialogoPesca = new Dialog(Texto);
 	dialogoPesca->name = nombre;
 	dialogoPesca->font = app->render->primaryFont;
+	dialogoPesca->type = DialogType::TEXT;
 	if (texture != nullptr) {
 		dialogoPesca->face_tex = app->tex->Load(texture);
 	}

@@ -210,7 +210,7 @@ void MiniGameFishing::playNormalFishing()
 			//Close dialogo
 			dialogoClose(0);
 			//Crear new dialogo
-			app->dialogManager->CreateDialogSinEntity("Ostia, te ha pillado algo!", "Fishing System", nullptr);
+			app->dialogManager->CreateDialogSinEntity("Ostia, está picando algo!", "Jakov", nullptr);
 			playerGoplay = true;//Start game play
 			gamePlayTime = getRandomNumber(3, 6);// Get play time
 			gamePlayTimeLimit.Start();// reset play time
@@ -233,7 +233,7 @@ void MiniGameFishing::playNormalFishing()
 			//Close dialogo
 			dialogoClose(0);
 			//Crear new dialogo
-			app->dialogManager->CreateDialogSinEntity("Que lastima, el pez se escapo.", "Fishing System", nullptr);
+			app->dialogManager->CreateDialogSinEntity("Qué lástima, el pez se ha escapado...", "Jakov", nullptr);
 			fishingOver();
 		}//end_if player no play, end fishing
 	}//end_if, if fish is caught
@@ -251,7 +251,7 @@ void MiniGameFishing::playLureFishing()
 		//Close dialogo
 		dialogoClose(0);
 		//Crear new dialogo
-		app->dialogManager->CreateDialogSinEntity("Ostia, te ha pillado algo!", "Fishing System", nullptr);
+		app->dialogManager->CreateDialogSinEntity("Ostia, está picando algo!", "Jakov", nullptr);
 		isFishCaught_result = false;
 		playerGoplay = true;
 		gamePlayTime = getRandomNumber(3, 6);
@@ -273,7 +273,7 @@ void MiniGameFishing::playLureFishing()
 		//Close dialogo
 		dialogoClose(0);
 		//Crear new dialogo
-		app->dialogManager->CreateDialogSinEntity("Que lastima, el pez se escapo.", "Fishing System", nullptr);
+		app->dialogManager->CreateDialogSinEntity("Que lastima, se me ha escapado el pez... Jolín", "Jakov", nullptr);
 		fishingOver();
 	}//end_if, player no play, end fishing
 
@@ -623,7 +623,7 @@ void MiniGameFishing::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::LAGO:
 
 		if (fishing.startFishing == false) {
-			 app->dialogManager->CreateDialogSinEntity("Estas pescando.", "Fishing System", nullptr);
+			 app->dialogManager->CreateDialogSinEntity("A ver si pican...", "Jakov", nullptr);
 		}//end_if, if the float collides with the " LAGO"collider, display the fishing dialog
 		fishing.startFishing = true;
 		dialogoPlayerMoving = true;
@@ -831,8 +831,10 @@ void MiniGameFishing::reward_pool(Fishlevel fishingType)
 	fishing_path = chosefishing_path[fishLevel][num];
 	name_path = choseName_path[fishLevel][num];
 	std::string strNumber = std::to_string(player_click_count);
+	std::string frase = "He conseguido: ";
 	dialogoClose(0);
-	app->dialogManager->CreateDialogSinEntity("you click " + strNumber + " veces " + " tu obtenido " + name_path, "Fishing System", fishing_path);
+	//app->dialogManager->CreateDialogSinEntity("you click " + strNumber + " veces " + " tu obtenido " + name_path, "Jakov", fishing_path);
+	app->dialogManager->CreateDialogSinEntity(frase + name_path, "Jakov", fishing_path);
 	//app->dialogManager->CreateDialogSinEntity("you click " + strNumber + " veces " + " tu obtenido " , "Fishing System", nullptr);
 	fishingOver();
 	resetProbability();
