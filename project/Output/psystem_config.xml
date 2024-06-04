@@ -5,22 +5,22 @@
 <emitters>
 	<particleAtlas name="Assets/Textures/Particulas/particles.png">
 
-		<emitter type ="fire">
-			<angleRange min ="80" max ="110"/>
+		<emitter type ="fire_mask3">
+			<angleRange min ="70" max ="110"/>
 			<rotSpeed value ="0" randMin = "-1" randMax ="1"/>
-			<startSpeed value ="200" randMin = "0" randMax ="1"/>
-			<endSpeed value ="200" randMin = "0" randMax ="1"/>
-			<startSize value ="200" randMin ="0" randMax ="1"/>
-			<endSize value =" 80" randMin ="1" randMax ="1"/>
+			<startSpeed value ="0.05f" randMin = "0" randMax ="1"/>
+			<endSpeed value ="0.05f" randMin = "0" randMax ="1"/>
+			<startSize value ="100" randMin ="0" randMax ="1"/>
+			<endSize value ="50" randMin ="1" randMax ="1"/>
 			<emitNumber value ="1"/>
 			<emitVariance value ="0" randMin = "0" randMax ="1"/>
 			<maxParticleLife value ="100" randMin = "0" randMax ="1"/>
 			<textureRect x="0" y="0" w="128" h="128"/>
-			<startColor r ="255" g="100" b="0" a="255"/>
+			<startColor r ="255" g="100" b="0" a="20"/>
 			<endColor r ="210" g="210" b="210" a ="0"/>
-			<blendMode mode ="add"/>
+			<blendMode mode ="blend"/>
 			<lifetime value ="-1"/>
-			<vortexSensitive state = "true"/>
+			<vortexSensitive state = "false"/>
 		</emitter>
 
 		<emitter type ="fire_purple">
@@ -275,6 +275,8 @@
 			<lifetime value ="150"/>
 			<vortexSensitive state = "false"/>
 		</emitter>
+
+
 
 	</particleAtlas>
 </emitters>

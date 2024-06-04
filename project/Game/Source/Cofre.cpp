@@ -113,22 +113,26 @@ void Cofre::OnCollision(PhysBody* physA, PhysBody* physB)
                       }
                       Item_Nota* nota = (Item_Nota*)app->entityManager->CreateEntity(EntityType::ITEM_NOTA, 0);
                       nota->config = configNode.child("entities_data").child("item_nota");
-                      nota->position = iPoint(384, 3616);
+                      nota->position = iPoint(500, 3700);
+                      nota->pbody->ctype = ColliderType::NOTA_TUTORIAL;
                       nota->Start();
 
                       Item_Nota* nota2 = (Item_Nota*)app->entityManager->CreateEntity(EntityType::ITEM_NOTA, 1);
                       nota2->config = configNode.child("entities_data").child("item_nota");
-                      nota2->position = iPoint(384, 3616);
+                      nota2->position = iPoint(500, 3700);
+                      nota->pbody->ctype = ColliderType::NOTA_TUTORIAL;
                       nota2->Start();
 
                       Item_Nota* nota3 = (Item_Nota*)app->entityManager->CreateEntity(EntityType::ITEM_NOTA, 2);
                       nota3->config = configNode.child("entities_data").child("item_nota");
-                      nota3->position = iPoint(384, 3616);
+                      nota3->position = iPoint(500, 3700);
+                      nota->pbody->ctype = ColliderType::NOTA_TUTORIAL;
                       nota3->Start();
 
                       Item_Nota* nota4 = (Item_Nota*)app->entityManager->CreateEntity(EntityType::ITEM_NOTA, 3);
                       nota4->config = configNode.child("entities_data").child("item_nota");
-                      nota4->position = iPoint(384, 3616);
+                      nota4->position = iPoint(500, 3700);
+                      nota->pbody->ctype = ColliderType::NOTA_TUTORIAL;
                       nota4->Start();
                   }
                   else {

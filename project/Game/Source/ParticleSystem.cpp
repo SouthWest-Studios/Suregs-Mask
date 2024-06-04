@@ -40,8 +40,8 @@ bool ParticleSystem::Awake(pugi::xml_node config)
 	{
 		std::string emitterType = emitters.attribute("type").as_string();
 
-		if (emitterType.compare("fire") == 0)
-			LoadEmitterData(emitters, EmitterType::EMITTER_TYPE_FIRE);
+		if (emitterType.compare("fire_mask3") == 0)
+			LoadEmitterData(emitters, EmitterType::EMITTER_TYPE_FIRE_MASK3);
 		if (emitterType.compare("fire_purple") == 0)
 			LoadEmitterData(emitters, EmitterType::EMITTER_TYPE_FIRE_PURPLE);
 		if (emitterType.compare("flame") == 0)
