@@ -70,8 +70,6 @@ bool ParticleSystem::Awake(pugi::xml_node config)
 			LoadEmitterData(emitters, EmitterType::EMITTER_TYPE_EXPLOSION_RAYO);
 		else if (emitterType.compare("explosion_mask1") == 0)
 			LoadEmitterData(emitters, EmitterType::EMITTER_TYPE_EXPLOSION_MASK1);
-		else if (emitterType.compare("test") == 0)
-			LoadEmitterData(emitters, EmitterType::EMITTER_TYPE_TEST);
 	}
 	return ret;
 }

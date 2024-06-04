@@ -841,13 +841,23 @@ bool Player::Update(float dt)
 		currentStats.attackDamage = baseStats.attackDamage * (1 + maskStats[Mask::MASK3][Branches::Rama4][maskLevels[Mask::MASK3][Branches::Rama4]].maxActiveDamageModifier / 100);
 		currentStats.maxHealth = baseStats.maxHealth * (1 + maskStats[Mask::MASK3][Branches::Rama4][maskLevels[Mask::MASK3][Branches::Rama4]].maxActiveHealthModifier / 100);
 		mask3Active = false;
+		app->psystem->RemoveEmitter(mask3Particle);
 		mask3Particle = nullptr;
-		mask3ParticleCreated = false;
 	}
 
 	if (secondaryMask == Mask::MASK3) {
 		currentStats.attackDamage = baseStats.attackDamage * (1 + passiveStats[Mask::MASK3][Branches::Modifiers][maskLevels[Mask::MASK3][Branches::Modifiers]].damageBoost);
 		currentStats.movementSpeed = baseStats.movementSpeed * (1 + passiveStats[Mask::MASK3][Branches::Modifiers][maskLevels[Mask::MASK3][Branches::Modifiers]].velocityBoost);
+	}
+
+	if (mask2Particle != nullptr) {
+		fPoint pos((float)position.x, (float)position.y);
+		mask2Particle->MoveEmitter(pos);
+	}
+
+	if (mask3Particle != nullptr) {
+		fPoint pos((float)position.x, (float)position.y);
+		mask3Particle->MoveEmitter(pos);
 	}
 
 	//Mask XP System
@@ -915,13 +925,6 @@ bool Player::Update(float dt)
 	//}
 
 	
-	posMask3Particle.x += position.x;
-	posMask3Particle.y += position.y;
-
-	if (mask3Active) {
-		mask3Particle = app->psystem->AddEmiter(posMask3Particle, EMITTER_TYPE_FIRE_MASK3);
-		mask3ParticleCreated = true;
-	}
 
 
 	EfectoPociones(dt);
@@ -1620,8 +1623,8 @@ void Player::DashAttack(float dt) {
 		dashCollision->ctype = ColliderType::MASK2_ATTACK;
 		dashCollision->listener = this;
 
-		/*fPoint pos((float)position.x, (float)position.y);
-		app->psystem->AddEmiter(pos, EMITTER_TYPE_EXPLOSION_MASK2);*/
+		fPoint pos((float)position.x, (float)position.y);
+		mask2Particle = app->psystem->AddEmiter(pos, EMITTER_TYPE_EXPLOSION_MASK2);
 
 		pbodyFoot->body->ApplyForce(b2Vec2(velocity.x * 100 * maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].distanceDashModifier, velocity.y * 100 * maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].distanceDashModifier), pbodyFoot->body->GetWorldCenter(), false);
 	}
@@ -1645,7 +1648,8 @@ void Player::Mask3Statistics() {
 	currentStats.maxHealth = baseStats.maxHealth * (1 + maskStats[Mask::MASK3][Branches::Rama4][maskLevels[Mask::MASK3][Branches::Rama4]].maxActiveHealthModifier);
 	//printf("current stats attack damage: %f\n", currentStats.attackDamage);
 	mask3Active = true;
-	/*app->psystem->AddEmiter(posMask3Particle, EMITTER_TYPE_FIRE_MASK3);*/
+	fPoint pos((float)position.x, (float)position.y);
+	mask3Particle = app->psystem->AddEmiter(pos, EMITTER_TYPE_FIRE_MASK3);
 	mask3Timer.Start();
 }
 
