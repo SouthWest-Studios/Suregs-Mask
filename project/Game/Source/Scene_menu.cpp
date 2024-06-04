@@ -855,31 +855,53 @@ void Scene_Menu::ShowSavedGames()
 	}
 
 	app->render->DrawTexture(savedGames, 0, 0);
-	app->render->DrawTexture(coin, 655, 256, 0.35f);
-	app->render->DrawTexture(coin, 655, 348, 0.35f);
-	app->render->DrawTexture(coin, 655, 442, 0.35f);
 
-	app->render->DrawTexture(clock, 485, 259, 0.65f);
-	app->render->DrawTexture(clock, 485, 349, 0.65f);
-	app->render->DrawTexture(clock, 485, 443, 0.65f);
+	//TIEMPO
+	if (app->tiempoDeJuegoMostrarSlot1 != NULL)
+	{
+		app->render->DrawTexture(clock, 485, 259, 0.65f);
+		timeOne = app->convertirTiempo(app->tiempoDeJuegoMostrarSlot1);
+		app->render->DrawTextBound(timeOne.c_str(), 510, 257, 90);
+	}
+	
+	if (app->tiempoDeJuegoMostrarSlot2 != NULL)
+	{
+		app->render->DrawTexture(clock, 485, 349, 0.65f);
+		timeTwo = app->convertirTiempo(app->tiempoDeJuegoMostrarSlot2);
+		app->render->DrawTextBound(timeTwo.c_str(), 510, 349, 90);
+	}
+	
+	if (app->tiempoDeJuegoMostrarSlot3 != NULL)
+	{
+		app->render->DrawTexture(clock, 485, 443, 0.65f);
+		timeThree = app->convertirTiempo(app->tiempoDeJuegoMostrarSlot3);
+		app->render->DrawTextBound(timeThree.c_str(), 510, 443, 90);
+	}
 
-	std::string quantityStrOne = std::to_string(coinQuantityOne);
-	app->render->DrawTextBound(quantityStrOne.c_str(), 685, 257, 45);
+	//MONEDAS
+	if (coinQuantityOne != NULL)
+	{
+		app->render->DrawTexture(coin, 655, 256, 0.35f);
+		std::string quantityStrOne = std::to_string(coinQuantityOne);
+		app->render->DrawTextBound(quantityStrOne.c_str(), 685, 257, 45);
+	}
 
-	std::string quantityStrTwo = std::to_string(coinQuantityTwo);
-	app->render->DrawTextBound(quantityStrTwo.c_str(), 685, 349, 45);
+	if (coinQuantityTwo != NULL)
+	{
+		app->render->DrawTexture(coin, 655, 348, 0.35f);
+		std::string quantityStrTwo = std::to_string(coinQuantityTwo);
+		app->render->DrawTextBound(quantityStrTwo.c_str(), 685, 349, 45);
+	}
 
-	std::string quantityStrThree = std::to_string(coinQuantityThree);
-	app->render->DrawTextBound(quantityStrThree.c_str(), 685, 443, 45);
 
-	timeOne = app->convertirTiempo(app->tiempoDeJuegoMostrarSlot1);
-	timeTwo = app->convertirTiempo(app->tiempoDeJuegoMostrarSlot2);
-	timeThree = app->convertirTiempo(app->tiempoDeJuegoMostrarSlot3);
+	if (coinQuantityThree != NULL)
+	{
+		app->render->DrawTexture(coin, 655, 442, 0.35f);
+		std::string quantityStrThree = std::to_string(coinQuantityThree);
+		app->render->DrawTextBound(quantityStrThree.c_str(), 685, 443, 45);
+	}
 
-	app->render->DrawTextBound(timeOne.c_str(), 510, 257, 90);
-	app->render->DrawTextBound(timeTwo.c_str(), 510, 349, 90);
-	app->render->DrawTextBound(timeThree.c_str(), 510, 443, 90);
-
+	//QUESTS
 	if (actualQuestIndexOne != NULL)
 	{
 		titleOne = app->questManager->GetQuestTitle(1, actualQuestIndexOne);
