@@ -127,7 +127,8 @@ private:
 	int ols_get_damageAlt2_fx;
 	int ols_death_fx;
 
-	Emitter* blood;
+	Emitter* blood = nullptr;
+	Emitter* particulaAtaque = nullptr;
 
 	Item_Garra* garra;
 	pugi::xml_document configFile;
