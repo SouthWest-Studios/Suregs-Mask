@@ -17,6 +17,8 @@
 #include "Defs.h"
 #include "Log.h"
 #include "SString.h"
+#include "Menu.h"
+#include "Window.h"
 
 BestiarioManager::BestiarioManager(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -438,6 +440,31 @@ bool BestiarioManager::SaveState(pugi::xml_node node)
 	return ret;
 }
 
+void BestiarioManager::StartAnimation()
+{
+	animationTime = 0.0f;
+	animating = true;
+	animatingExit = false;
+}
+
+void BestiarioManager::StartExitAnimation()
+{
+	animationTime = 0.0f;
+	animating = false;
+	animatingExit = true;
+}
+
+inline float BestiarioManager::easeOutBounce(float t)
+{
+	return 0.0f;
+}
+
+inline float BestiarioManager::easeOutCubic(float t)
+{
+	t--;
+	return t * t * t + 1;
+}
+
 
 void BestiarioManager::UseBestiarioSelected(int id)
 {
@@ -462,6 +489,7 @@ void BestiarioManager::UseBestiarioSelected(int id)
 			case BestiarioType::BEST:
 			{
 				item->data->zoom = true;
+				StartAnimation();
 				zoomIn = true;
 
 				break;
@@ -596,8 +624,8 @@ bool BestiarioManager::Update(float dt)
 				couuuunt = 1;
 				for (item = bestiario.start; item != NULL; item = item->next)
 				{
-					item->data->zoom = false;
-
+					/*item->data->zoom = false;*/
+					StartExitAnimation();
 				}
 				zoomIn = false;
 			}
@@ -681,35 +709,38 @@ bool BestiarioManager::PostUpdate()
 				if (y >= viewport.y && y <= viewport.y + viewport.h) {
 					if (zoomIn == false && app->notesManager->zoomIn == false)
 					{
-						/*app->render->DrawTexture(listTexture, horizontalPosition, verticalPosition, SDL_FLIP_NONE, 0, 0);*/
-
-						if (pEntity->listid == 2)
+						if (app->menu->animating == false && app->menu->animatingExit2 == false && app->menu->menuu == true)
 						{
-							app->render->DrawTexture(listTexture, horizontalPosition, verticalPosition - scrollY, SDL_FLIP_NONE, 0, 0);
+							/*app->render->DrawTexture(listTexture, horizontalPosition, verticalPosition, SDL_FLIP_NONE, 0, 0);*/
 
-						}
-						if (pEntity->listid == 1)
-						{
-							app->render->DrawTexture(listTexture2, horizontalPosition, verticalPosition - scrollY, SDL_FLIP_NONE, 0, 0);
+							if (pEntity->listid == 2)
+							{
+								app->render->DrawTexture(listTexture, horizontalPosition, verticalPosition - scrollY, SDL_FLIP_NONE, 0, 0);
 
-						}
-						if (pEntity->listid == 0)
-						{
-							app->render->DrawTexture(listTexture3, horizontalPosition, verticalPosition - scrollY, SDL_FLIP_NONE, 0, 0);
+							}
+							if (pEntity->listid == 1)
+							{
+								app->render->DrawTexture(listTexture2, horizontalPosition, verticalPosition - scrollY, SDL_FLIP_NONE, 0, 0);
 
-						}
+							}
+							if (pEntity->listid == 0)
+							{
+								app->render->DrawTexture(listTexture3, horizontalPosition, verticalPosition - scrollY, SDL_FLIP_NONE, 0, 0);
 
-						if (pEntity->variacion == true)
-						{
-							SDL_SetTextureColorMod(pEntity->icon, 198, 115, 255);
-							SDL_SetTextureAlphaMod(pEntity->icon, 255);
-							app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
-						}
-						else
-						{
-							SDL_SetTextureColorMod(pEntity->icon, 255, 255, 255);
-							SDL_SetTextureAlphaMod(pEntity->icon, 255);
-							app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
+							}
+
+							if (pEntity->variacion == true)
+							{
+								SDL_SetTextureColorMod(pEntity->icon, 198, 115, 255);
+								SDL_SetTextureAlphaMod(pEntity->icon, 255);
+								app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
+							}
+							else
+							{
+								SDL_SetTextureColorMod(pEntity->icon, 255, 255, 255);
+								SDL_SetTextureAlphaMod(pEntity->icon, 255);
+								app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition, 0.8, SDL_FLIP_NONE, 0, 0);
+							}
 						}
 					}
 
@@ -724,7 +755,10 @@ bool BestiarioManager::PostUpdate()
 
 				scrollY = std::max(0, scrollY);
 			}
-			app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y, SDL_FLIP_NONE, 0, 0);
+			if (app->menu->animating == false && app->menu->animatingExit2 == false && app->menu->menuu == true)
+			{
+				app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y, SDL_FLIP_NONE, 0, 0);
+			}
 		}
 
 
@@ -743,35 +777,76 @@ bool BestiarioManager::PostUpdate()
 
 	if (mostrar == true)
 	{
-		app->render->DrawTexture(sliderTexture, 960, 200, SDL_FLIP_NONE, 0, 0);
-		app->render->DrawTexture(knobTexture, 960, knobY, SDL_FLIP_NONE, 0, 0);
-
-		ListItem<Bestiario*>* itum;
-		for (itum = bestiario.start; itum != nullptr; itum = itum->next)
+		if (app->menu->animating == false && app->menu->animatingExit2 == false && app->menu->menuu == true)
 		{
-			if (itum->data->zoom)
+			app->render->DrawTexture(sliderTexture, 960, 200, SDL_FLIP_NONE, 0, 0);
+			app->render->DrawTexture(knobTexture, 960, knobY, SDL_FLIP_NONE, 0, 0);
+
+			uint windowWidth, windowHeight;
+			app->win->GetWindowSize(windowWidth, windowHeight);
+
+			ListItem<Bestiario*>* itum;
+			for (itum = bestiario.start; itum != nullptr; itum = itum->next)
 			{
-				if (PointerId == itum->data->id)
+				if (itum->data->zoom)
 				{
-					app->render->DrawTexture(itum->data->closeUpBestiarios, 400, 100, SDL_FLIP_NONE, 0, 0);
-					//app->render->DrawText(itum->data->name.GetString(), 580, 120, 80, 80, 0, 0, 0, 0, true);
-					app->render->DrawTextBound(itum->data->name.GetString(), 500, 120, 80, { 52,25,0 },app->render->titleFont);
-
-					if (itum->data->variacion == true)
+					if (PointerId == itum->data->id)
 					{
-						SDL_SetTextureColorMod(itum->data->texturaEnemigo, 198, 115, 255);
-						SDL_SetTextureAlphaMod(itum->data->texturaEnemigo, 255);
-						app->render->DrawTexture(itum->data->texturaEnemigo, 580, 190, 1, SDL_FLIP_NONE, 0, 0);
+						int currentX = 400; // Posición final predeterminada
 
+						if (animating || animatingExit) {
+							if (animating) {
+								animationTime += app->dt;
+
+								float progress = animationTime / 1000.0f; // Duración de la animación de 1 segundo (1000 ms)
+								if (progress >= 1.0f) {
+									progress = 1.0f;
+									animating = false;
+								}
+								float easedProgress = easeOutCubic(progress);
+
+								// Calcular la nueva posición X usando easedProgress para la entrada
+								int startX = static_cast<int>(windowWidth); // Comienza fuera de la pantalla a la derecha
+								int endX = 400; // Posición final
+								currentX = startX + (endX - startX) * easedProgress;
+							}
+							else if (animatingExit) {
+								animationTime += app->dt;
+
+								float progress = animationTime / 1000.0f; // Duración de la animación de 1 segundo (1000 ms)
+								if (progress >= 1.0f) {
+									progress = 1.0f;
+									animatingExit = false;
+									itum->data->zoom = false; // Ocultar el menú al finalizar la animación de salida
+								}
+								float easedProgress = easeOutCubic(progress);
+
+								// Calcular la nueva posición X usando easedProgress para la salida
+								int startX = 400; // Posición inicial
+								int endX = static_cast<int>(windowWidth); // Posición final fuera de la pantalla a la derecha
+								currentX = startX + (endX - startX) * easedProgress;
+							}
+						}
+
+						// Renderizado de la textura del bestiario con la animación aplicada
+						app->render->DrawTexture(itum->data->closeUpBestiarios, currentX, 100, SDL_FLIP_NONE, 0, 0);
+						app->render->DrawTextBound(itum->data->name.GetString(), currentX + 100, 120, 80, { 52,25,0 }, app->render->titleFont);
+
+						if (itum->data->variacion == true)
+						{
+							SDL_SetTextureColorMod(itum->data->texturaEnemigo, 198, 115, 255);
+							SDL_SetTextureAlphaMod(itum->data->texturaEnemigo, 255);
+							app->render->DrawTexture(itum->data->texturaEnemigo, currentX + 180, 190, 1, SDL_FLIP_NONE, 0, 0);
+						}
+						else
+						{
+							SDL_SetTextureColorMod(itum->data->texturaEnemigo, 255, 255, 255);
+							SDL_SetTextureAlphaMod(itum->data->texturaEnemigo, 255);
+							app->render->DrawTexture(itum->data->texturaEnemigo, currentX + 180, 190, 1, SDL_FLIP_NONE, 0, 0);
+						}
+
+						app->render->DrawTextBound(itum->data->desc.c_str(), currentX + 100, 290, 270, { 52,25,0 });
 					}
-					else
-					{
-						SDL_SetTextureColorMod(itum->data->texturaEnemigo, 255, 255, 255);
-						SDL_SetTextureAlphaMod(itum->data->texturaEnemigo, 255);
-						app->render->DrawTexture(itum->data->texturaEnemigo, 580, 190, 1, SDL_FLIP_NONE, 0, 0);
-					}
-					
-					app->render->DrawTextBound(itum->data->desc.c_str(), 500, 290, 270, { 52,25,0 });
 				}
 			}
 		}

@@ -6,6 +6,7 @@
 #include "Window.h"
 #include "Textures.h"
 #include "Audio.h"
+#include "Menu.h"
 
 GuiControlSlider::GuiControlSlider(uint32 id, SDL_Rect bounds, int minValue, int maxValue, const char* text)
     : GuiControl(GuiControlType::SLIDER, id), minValue(minValue), maxValue(maxValue), value(minValue)
@@ -112,16 +113,17 @@ void GuiControlSlider::Draw()
     
     SDL_Rect knobRect = { knobX , bounds.y - 5, 10, bounds.h + 10 };
     //app->render->DrawRectangle(knobRect, 255, 255, 0, 255, true, false);
-   
-    if (state == GuiControlState::FOCUSED)
+    if (app->menu->animating == false && app->menu->animatingExit2 == false)
     {
-        app->render->DrawTexture(slider2, knobRect.x, knobRect.y, SDL_FLIP_NONE, 0, 0, true);
+        if (state == GuiControlState::FOCUSED)
+        {
+            app->render->DrawTexture(slider2, knobRect.x, knobRect.y, SDL_FLIP_NONE, 0, 0, true);
+        }
+        else
+        {
+            app->render->DrawTexture(knob, knobRect.x, knobRect.y, SDL_FLIP_NONE, 0, 0, true);
+        }
     }
-    else
-    {
-        app->render->DrawTexture(knob, knobRect.x, knobRect.y, SDL_FLIP_NONE, 0, 0, true);
-    }
-   
 
     // Draw the text label
     /*app->render->DrawTextBound(text.GetString(), bounds.x, bounds.y - 40, 70, { 0,0,0,0});*/

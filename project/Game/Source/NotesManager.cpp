@@ -17,6 +17,8 @@
 #include "Defs.h"
 #include "Log.h"
 #include "SString.h"
+#include "Window.h"
+#include "Menu.h"
 
 NotesManager::NotesManager(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -265,6 +267,31 @@ bool NotesManager::SaveState(pugi::xml_node node)
 	return ret;
 }
 
+void NotesManager::StartAnimation()
+{
+	animationTime = 0.0f;
+	animating = true;
+	animatingExit = false;
+}
+
+void NotesManager::StartExitAnimation()
+{
+	animationTime = 0.0f;
+	animating = false;
+	animatingExit = true;
+}
+
+inline float NotesManager::easeOutBounce(float t)
+{
+	return 0.0f;
+}
+
+inline float NotesManager::easeOutCubic(float t)
+{
+	t--;
+	return t * t * t + 1;
+}
+
 
 void NotesManager::UseNoteSelected(int id)
 {
@@ -289,6 +316,7 @@ void NotesManager::UseNoteSelected(int id)
 			case NoteType::NOTE:
 			{
 				item->data->zoom = true;
+				StartAnimation();
 				zoomIn = true;
 
 				break;
@@ -328,7 +356,13 @@ void NotesManager::OnMovePointer()
 					if (vacio)
 						app->bestiarioManager->PointerId = 0;
 					else
+					{
+						app->bestiarioManager->PointerPosition = { 630, 230 };
 						app->bestiarioManager->PointerId = -1;
+						app->bestiarioManager->verticalPointerId = 0;
+						app->bestiarioManager->horitzontalPointerId = -1;
+					}
+						
 				}
 
 
@@ -434,8 +468,8 @@ bool NotesManager::Update(float dt)
 			ListItem<Note*>* item;
 			for (item = notes.start; item != NULL; item = item->next)
 			{
-				item->data->zoom = false;
-
+				/*item->data->zoom = false;*/
+				StartExitAnimation();
 			}
 			zoomIn = false;
 
@@ -496,36 +530,37 @@ bool NotesManager::PostUpdate()
 			if (y2 >= viewport.y && y2 <= viewport.y + viewport.h)
 			{
 				if (y >= viewport.y && y <= viewport.y + viewport.h) {
-					
-					
-					if (zoomIn == false)
+					if (app->menu->animating == false && app->menu->animatingExit2 == false && app->menu->menuu == true)
 					{
-						if (pEntity->listid == 3)
+
+						if (zoomIn == false)
 						{
-							app->render->DrawTexture(listTexture, 250, verticalPosition - scrollY - 15, SDL_FLIP_NONE, 0, 0);
+							if (pEntity->listid == 3)
+							{
+								app->render->DrawTexture(listTexture, 250, verticalPosition - scrollY - 15, SDL_FLIP_NONE, 0, 0);
+
+							}
+							if (pEntity->listid == 2)
+							{
+								app->render->DrawTexture(listTexture2, 250, verticalPosition - scrollY - 15, SDL_FLIP_NONE, 0, 0);
+
+							}
+							if (pEntity->listid == 1)
+							{
+								app->render->DrawTexture(listTexture3, 250, verticalPosition - scrollY - 15, SDL_FLIP_NONE, 0, 0);
+
+							}
+							if (pEntity->listid == 0)
+							{
+								app->render->DrawTexture(listTexture4, 250, verticalPosition - scrollY - 15, SDL_FLIP_NONE, 0, 0);
+
+							}
+							/*app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition - scrollY, 0.8, SDL_FLIP_NONE, 0, 0);*/
+							/*app->render->DrawText(pEntity->title.c_str(), horizontalPosition + 60, verticalPosition - scrollY, 100, 100, 0, 0, 0, 0, false);*/
+							app->render->DrawTextBound(pEntity->title.c_str(), horizontalPosition + 60, verticalPosition - scrollY, 100, { 52,25,0 }, app->render->titleFont);
 
 						}
-						if (pEntity->listid == 2)
-						{
-							app->render->DrawTexture(listTexture2, 250, verticalPosition - scrollY - 15, SDL_FLIP_NONE, 0, 0);
-
-						}
-						if (pEntity->listid == 1)
-						{
-							app->render->DrawTexture(listTexture3, 250, verticalPosition - scrollY - 15, SDL_FLIP_NONE, 0, 0);
-
-						}
-						if (pEntity->listid == 0)
-						{
-							app->render->DrawTexture(listTexture4, 250, verticalPosition - scrollY - 15, SDL_FLIP_NONE, 0, 0);
-
-						}
-						/*app->render->DrawTexture(pEntity->icon, horizontalPosition, verticalPosition - scrollY, 0.8, SDL_FLIP_NONE, 0, 0);*/
-						/*app->render->DrawText(pEntity->title.c_str(), horizontalPosition + 60, verticalPosition - scrollY, 100, 100, 0, 0, 0, 0, false);*/
-						app->render->DrawTextBound(pEntity->title.c_str(), horizontalPosition + 60, verticalPosition - scrollY, 100, { 52,25,0 }, app->render->titleFont);
-						
 					}
-					
 				}
 			}
 			
@@ -538,7 +573,10 @@ bool NotesManager::PostUpdate()
 				
 				scrollY = std::max(0, scrollY);
 			}
-			app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y - scrollY - 15, SDL_FLIP_NONE, 0, 0);
+			if (app->menu->animating == false && app->menu->animatingExit2 == false && app->menu->menuu == true)
+			{
+				app->render->DrawTexture(PointerItemText, PointerPosition.x, PointerPosition.y - scrollY - 15, SDL_FLIP_NONE, 0, 0);
+			}
 		}
 
 
@@ -558,22 +596,60 @@ bool NotesManager::PostUpdate()
 
 	if (mostrar == true)
 	{
-		app->render->DrawTexture(sliderTexture, 550, 200, SDL_FLIP_NONE, 0, 0);
-		app->render->DrawTexture(knobTexture, 550, knobY, SDL_FLIP_NONE, 0, 0);
+		if (app->menu->animating == false && app->menu->animatingExit2 == false && app->menu->menuu == true)
+		{
+			app->render->DrawTexture(sliderTexture, 550, 200, SDL_FLIP_NONE, 0, 0);
+			app->render->DrawTexture(knobTexture, 550, knobY, SDL_FLIP_NONE, 0, 0);
+		}
+		uint windowWidth, windowHeight;
+		app->win->GetWindowSize(windowWidth, windowHeight);
+
+		int currentX = 400; // Posición final predeterminada
 
 		ListItem<Note*>* itum;
 		for (itum = notes.start; itum != nullptr; itum = itum->next)
 		{
 			if (itum->data->zoom)
 			{
-				
-					
-				
 				if (PointerId == itum->data->id)
 				{
-					app->render->DrawTexture(itum->data->closeUpNotes, 400, 100, SDL_FLIP_NONE, 0, 0);
-					/*app->render->DrawText(itum->data->desc.c_str(), 450, 200, 270, 400, 0, 0, 0, 0, false);*/
-					app->render->DrawTextBound(itum->data->desc.c_str(), 430, 200, 370, { 52,25,0 });
+					if (animating || animatingExit) {
+						if (animating) {
+							animationTime += app->dt;
+
+							float progress = animationTime / 1000.0f; // Duración de la animación de 1 segundo (1000 ms)
+							if (progress >= 1.0f) {
+								progress = 1.0f;
+								animating = false;
+							}
+							float easedProgress = easeOutCubic(progress);
+
+							// Calcular la nueva posición X usando easedProgress para la entrada
+							int startX = static_cast<int>(windowWidth) / -2; // Comienza fuera de la pantalla a la izquierda
+							int endX = 400; // Posición final
+							currentX = startX + (endX - startX) * easedProgress;
+						}
+						else if (animatingExit) {
+							animationTime += app->dt;
+
+							float progress = animationTime / 1000.0f; // Duración de la animación de 1 segundo (1000 ms)
+							if (progress >= 1.0f) {
+								progress = 1.0f;
+								animatingExit = false;
+								itum->data->zoom = false; // Ocultar el menú al finalizar la animación de salida
+							}
+							float easedProgress = easeOutCubic(progress);
+
+							// Calcular la nueva posición X usando easedProgress para la salida
+							int startX = 400; // Posición inicial
+							int endX = static_cast<int>(windowWidth) / -2; // Posición final fuera de la pantalla a la izquierda
+							currentX = startX + (endX - startX) * easedProgress;
+						}
+					}
+
+					// Renderizado de la textura de la nota con la animación aplicada
+					app->render->DrawTexture(itum->data->closeUpNotes, currentX, 100, SDL_FLIP_NONE, 0, 0);
+					app->render->DrawTextBound(itum->data->desc.c_str(), currentX + 30, 200, 370, { 52,25,0 });
 				}
 			}
 		}
@@ -581,7 +657,7 @@ bool NotesManager::PostUpdate()
 		
 	}
 	
-	return ret;
+	return true;
 }
 
 

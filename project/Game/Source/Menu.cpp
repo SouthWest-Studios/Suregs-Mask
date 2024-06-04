@@ -167,6 +167,7 @@ bool Menu::Update(float dt)
 
 	if (ventana == 4)
 	{
+
 		contadormenu++;
 		if (title != nullptr )
 		{
@@ -258,6 +259,7 @@ bool Menu::Update(float dt)
 	}
 	if (ventana == 4)
 	{
+
 		if (music != nullptr)
 		{
 			int newVolume = ((GuiControlSlider*)music)->value;

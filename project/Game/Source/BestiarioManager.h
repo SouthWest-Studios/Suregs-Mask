@@ -48,6 +48,19 @@ public:
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
 
+	void StartAnimation();
+
+	void StartExitAnimation();
+
+	inline float easeOutBounce(float t);
+
+	inline float easeOutCubic(float t);
+
+	// Declaraciones globales para la animación
+	float animationTime = 0.0f; // Tiempo de animación
+	bool animating = false; // Indicador de animación
+	bool animatingExit = false; // Indicador de animación de salida
+	bool animatingExit2 = false;
 	
 
 public:
