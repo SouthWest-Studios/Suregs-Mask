@@ -998,8 +998,14 @@ bool Map::LoadCollisions(std::string layerName)
 					}
 
 					if (gid == tileset->firstgid + 4) {
-						c1 = app->physics->CreateRectangleSensor(pos.x + 16, pos.y + 16, 32, 32, STATIC);
-						c1->ctype = ColliderType::FISHZONE;
+						c1 = app->physics->CreateRectangleSensor(pos.x + 16, pos.y + 16, 320, 32, STATIC);
+						c1->ctype = ColliderType::FISHZONEIN;
+						collisionsList.Add(c1);
+						ret = true;
+					}
+					if (gid == tileset->firstgid + 5) {
+						c1 = app->physics->CreateRectangleSensor(pos.x + 16, pos.y + 16, 320, 32, STATIC);
+						c1->ctype = ColliderType::FISHZONEOUT;
 						collisionsList.Add(c1);
 						ret = true;
 					}

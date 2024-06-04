@@ -1668,11 +1668,11 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			////printf("Vacio\n");
 		}
 		break;
-	case ColliderType::FISHZONE:
+	/*case ColliderType::FISHZONE:
 		if (!getPlayerTouch) {
 		app->scene_pueblo->GetRod()->fishing.rodReady = !app->scene_pueblo->GetRod()->fishing.rodReady;
 		getPlayerTouch = true;
-		}
+		}*/
 		//printf("\n fishizone: %d", app->scene_pueblo->GetRod()->fishing.rodReady);
 		break;
 	case ColliderType::ITEM:
@@ -1907,8 +1907,13 @@ void Player::OnEndCollision(PhysBody* physA, PhysBody* physB) {
 		insideVacio = false;
 		////printf("Exit_Vacio\n");
 		break;
-	case ColliderType::FISHZONE:
-		getPlayerTouch = false;
+	case ColliderType::FISHZONEIN:
+		app->scene_pueblo->GetRod()->fishing.rodReady = true;
+		//printf("\ngetPlayerTouch: %d", app->scene_pueblo->GetRod()->fishing.rodReady);
+		break;
+	case ColliderType::FISHZONEOUT:
+		app->scene_pueblo->GetRod()->fishing.rodReady = false;
+		//printf("\ngetPlayerTouch: %d", app->scene_pueblo->GetRod()->fishing.rodReady);
 		break;
 		/*...*/
 	}
