@@ -138,8 +138,9 @@ void NPCPadre::OnCollision(PhysBody* physA, PhysBody* physB) {
 				{
 					app->dialogManager->AddDialog(app->dialogManager->CreateDialog(itemNode, itemNode.attribute("name").as_string(), itemNode.attribute("facetexturepath").as_string()));
 					num++;
+					printf("\nnum: %d", num);
 				}
-				//printf("\nnum: %d", num);
+				
 				dialogoMostrado = true;
 			}
 		}

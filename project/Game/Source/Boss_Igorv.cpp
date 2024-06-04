@@ -379,16 +379,21 @@ bool Boss_Igory::CleanUp()
 	//printf("\n CleanUp");
 	if (pbodyFoot != nullptr) {
 		app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
+		pbodyFoot = nullptr;
 	}
 	if (pbodySensor != nullptr) {
 		app->physics->GetWorld()->DestroyBody(pbodySensor->body);
+		pbodySensor = nullptr;
 	}
 
 	if (texture != nullptr) {
 		app->tex->UnLoad(texture);
+		texture = nullptr;
 	}
 	lastPath.Clear();
 
+	app->entityManager->canShowFinal = false;
+	killPadre = false;
 	RELEASE(spritePositions);
 	delete spritePositions;
 

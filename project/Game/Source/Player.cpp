@@ -742,6 +742,7 @@ bool Player::Update(float dt)
 		pbodyFoot->body->SetTransform(posInicioPlayer, 0);
 		vacio = false;
 	}
+
 	if (app->entityManager->canShowFinal) {
 		if (app->entityManager->GetIgory()->playerInFight && !playerTpBossPadre) {
 			pbodyFoot->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y - 10)), 0);
