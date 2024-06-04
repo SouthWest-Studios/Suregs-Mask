@@ -880,15 +880,23 @@ void Scene_Menu::ShowSavedGames()
 	app->render->DrawTextBound(timeTwo.c_str(), 510, 349, 90);
 	app->render->DrawTextBound(timeThree.c_str(), 510, 443, 90);
 
-	titleOne = app->questManager->GetQuestTitle(1, actualQuestIndexOne);
-	app->render->DrawTextBound(titleOne.c_str(), 455, 230, 700);
+	if (actualQuestIndexOne != NULL)
+	{
+		titleOne = app->questManager->GetQuestTitle(1, actualQuestIndexOne);
+		app->render->DrawTextBound(titleOne.c_str(), 455, 230, 700);
+	}
 
-	titleTwo = app->questManager->GetQuestTitle(1, actualQuestIndexTwo);
-	app->render->DrawTextBound(titleTwo.c_str(), 455, 322, 700);
-
-	titleThree = app->questManager->GetQuestTitle(1, actualQuestIndexThree);
-	app->render->DrawTextBound(titleThree.c_str(), 455, 414, 700);
-
+	if (actualQuestIndexTwo != NULL)
+	{
+		titleTwo = app->questManager->GetQuestTitle(1, actualQuestIndexTwo);
+		app->render->DrawTextBound(titleTwo.c_str(), 455, 322, 700);
+	}
+	
+	if (actualQuestIndexThree != NULL)
+	{
+		titleThree = app->questManager->GetQuestTitle(1, actualQuestIndexThree);
+		app->render->DrawTextBound(titleThree.c_str(), 455, 414, 700);
+	}
 }
 
 
