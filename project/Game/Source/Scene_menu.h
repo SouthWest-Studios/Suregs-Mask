@@ -54,6 +54,9 @@ public:
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
 
+	pugi::xml_document saveOneFile;
+
+
 	SDL_Texture* menuMain = nullptr;
 	SDL_Texture* menuMain2 = nullptr;
 	SDL_Texture* settings = nullptr;
@@ -78,6 +81,18 @@ public:
 	int coinQuantityOne;
 	int coinQuantityTwo;
 	int coinQuantityThree;
+
+	int questLineIdOne;
+	int questLineIdTwo;
+	int questLineIdThree;
+
+	int actualQuestIndexOne;
+	int actualQuestIndexTwo;
+	int actualQuestIndexThree;
+
+	std::string titleOne;
+	std::string titleTwo;
+	std::string titleThree;
 
 	std::string timeOne;
 	std::string timeTwo;

@@ -11,6 +11,7 @@
 #include "ModuleFadeToBlack.h"
 #include "Optick/include/optick.h"
 #include "Menu.h"
+#include "QuestManager.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 
 #include "Defs.h"
@@ -75,12 +76,19 @@ bool Scene_Menu::Start()
 	clock = app->tex->Load(clock_tp);
 
 	//SAVE 1
-	pugi::xml_document saveOneFile;
 	pugi::xml_node game_stateOne;
 	pugi::xml_parse_result parseResultSaveOne = saveOneFile.load_file("save_game.xml");
 	game_stateOne = saveOneFile.child("game_state");
 
 	coinQuantityOne = game_stateOne.child("iventorymanager").child("inventory").child("money").attribute("quantity").as_int();
+
+	// Obtener el atributo index de questLine con id="1 save one"
+	for (pugi::xml_node questLineIdOne = saveOneFile.child("game_state").child("questmanager").child("questLines").child("questLine"); questLineIdOne; questLineIdOne = questLineIdOne.next_sibling("questLine")) {
+		if (std::string(questLineIdOne.attribute("id").value()) == "1") {
+			actualQuestIndexOne = questLineIdOne.attribute("index").as_int();
+			break;
+		}
+	}
 
 	//SAVE 2
 	pugi::xml_document saveTwoFile;
@@ -90,6 +98,14 @@ bool Scene_Menu::Start()
 
 	coinQuantityTwo = game_stateTwo.child("iventorymanager").child("inventory").child("money").attribute("quantity").as_int();
 
+	// Obtener el atributo index de questLine con id="1 save two"
+	for (pugi::xml_node questLineIdTwo = saveTwoFile.child("game_state").child("questmanager").child("questLines").child("questLine"); questLineIdTwo; questLineIdTwo = questLineIdTwo.next_sibling("questLine")) {
+		if (std::string(questLineIdTwo.attribute("id").value()) == "1") {
+			actualQuestIndexTwo = questLineIdTwo.attribute("index").as_int();
+			break;
+		}
+	}
+
 	//SAVE 3
 	pugi::xml_document saveThreeFile;
 	pugi::xml_node game_stateThree;
@@ -97,6 +113,14 @@ bool Scene_Menu::Start()
 	game_stateThree = saveThreeFile.child("game_state");
 
 	coinQuantityThree = game_stateThree.child("iventorymanager").child("inventory").child("money").attribute("quantity").as_int();
+
+	// Obtener el atributo index de questLine con id="1 save three"
+	for (pugi::xml_node questLineIdThree = saveThreeFile.child("game_state").child("questmanager").child("questLines").child("questLine"); questLineIdThree; questLineIdThree = questLineIdThree.next_sibling("questLine")) {
+		if (std::string(questLineIdThree.attribute("id").value()) == "1") {
+			actualQuestIndexThree = questLineIdThree.attribute("index").as_int();
+			break;
+		}
+	}
 
 	//SAVE GENERAL
 	pugi::xml_document saveGeneralFile;
@@ -823,39 +847,50 @@ void Scene_Menu::ShowSavedGames()
 		control->data->state = GuiControlState::DISABLED;
 	}
 	if (showSavedGames && !_showSavedGames) {
-		partida1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 13, "PARTIDA GUARDADA 1", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 505,	180,25 }, this);
-		partida2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, "PARTIDA GUARDADA 2", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 415,	180,25 }, this);
-		partida3 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, "PARTIDA GUARDADA 3", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 320,	180,25 }, this);
+		partida1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 13, "PARTIDA GUARDADA 1", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 510,	180,25 }, this);
+		partida2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, "PARTIDA GUARDADA 2", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 420,	180,25 }, this);
+		partida3 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, "PARTIDA GUARDADA 3", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 325,	180,25 }, this);
 		gcCloseSavedGames = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 16, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 200,	60,25 }, this);
 		_showSavedGames = true;
 	}
 
 	app->render->DrawTexture(savedGames, 0, 0);
-	app->render->DrawTexture(coin, 770, 252, 0.35f);
-	app->render->DrawTexture(coin, 770, 346, 0.35f);
-	app->render->DrawTexture(coin, 770, 440, 0.35f);
+	app->render->DrawTexture(coin, 655, 256, 0.35f);
+	app->render->DrawTexture(coin, 655, 348, 0.35f);
+	app->render->DrawTexture(coin, 655, 442, 0.35f);
 
-	app->render->DrawTexture(clock, 700, 255, 0.65f);
-	app->render->DrawTexture(clock, 700, 349, 0.65f);
-	app->render->DrawTexture(clock, 700, 443, 0.65f);
+	app->render->DrawTexture(clock, 485, 259, 0.65f);
+	app->render->DrawTexture(clock, 485, 349, 0.65f);
+	app->render->DrawTexture(clock, 485, 443, 0.65f);
 
 	std::string quantityStrOne = std::to_string(coinQuantityOne);
-	app->render->DrawText(quantityStrOne.c_str(), 730, 255, 45, 27, 0, 0, 0, 0, true);
+	app->render->DrawTextBound(quantityStrOne.c_str(), 685, 257, 45);
 
 	std::string quantityStrTwo = std::to_string(coinQuantityTwo);
-	app->render->DrawText(quantityStrTwo.c_str(), 730, 349, 45, 27, 0, 0, 0, 0, true);
+	app->render->DrawTextBound(quantityStrTwo.c_str(), 685, 349, 45);
 
 	std::string quantityStrThree = std::to_string(coinQuantityThree);
-	app->render->DrawText(quantityStrThree.c_str(), 730, 443, 45, 27, 0, 0, 0, 0, true);
+	app->render->DrawTextBound(quantityStrThree.c_str(), 685, 443, 45);
 
 	timeOne = app->convertirTiempo(app->tiempoDeJuegoMostrarSlot1);
 	timeTwo = app->convertirTiempo(app->tiempoDeJuegoMostrarSlot2);
 	timeThree = app->convertirTiempo(app->tiempoDeJuegoMostrarSlot3);
 
-	app->render->DrawText(timeOne.c_str(), 610, 255, 90, 27, 0, 0, 0, 0, true);
-	app->render->DrawText(timeTwo.c_str(), 610, 349, 90, 27, 0, 0, 0, 0, true);
-	app->render->DrawText(timeThree.c_str(), 610, 443, 90, 27, 0, 0, 0, 0, true);
+	app->render->DrawTextBound(timeOne.c_str(), 510, 257, 90);
+	app->render->DrawTextBound(timeTwo.c_str(), 510, 349, 90);
+	app->render->DrawTextBound(timeThree.c_str(), 510, 443, 90);
+
+	titleOne = app->questManager->GetQuestTitle(1, actualQuestIndexOne);
+	app->render->DrawTextBound(titleOne.c_str(), 455, 230, 700);
+
+	titleTwo = app->questManager->GetQuestTitle(1, actualQuestIndexTwo);
+	app->render->DrawTextBound(titleTwo.c_str(), 455, 322, 700);
+
+	titleThree = app->questManager->GetQuestTitle(1, actualQuestIndexThree);
+	app->render->DrawTextBound(titleThree.c_str(), 455, 414, 700);
+
 }
+
 
 void Scene_Menu::ShowNewGames()
 {
