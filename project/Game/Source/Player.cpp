@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Player.h"
 #include "App.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -1350,6 +1351,7 @@ void Player::Dead()
 		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_gameover);
 		app->audio->playingDeathFx = false;
 		app->audio->StopFx(-1);
+		currentStats.currentHealth = currentStats.maxHealth;
 	}
 
 	if (!coinsRemoved) {
