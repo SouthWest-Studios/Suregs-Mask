@@ -915,13 +915,13 @@ bool Player::Update(float dt)
 	//}
 
 	
-	//posMask3Particle.x += position.x;
-	//posMask3Particle.y += position.y;
+	posMask3Particle.x += position.x;
+	posMask3Particle.y += position.y;
 
-	//if (mask3Active) {
-	//	mask3Particle = app->psystem->AddEmiter(posMask3Particle, EMITTER_TYPE_FIRE_MASK3);
-	//	mask3ParticleCreated = true;
-	//}
+	if (mask3Active) {
+		mask3Particle = app->psystem->AddEmiter(posMask3Particle, EMITTER_TYPE_FIRE_MASK3);
+		mask3ParticleCreated = true;
+	}
 
 
 	EfectoPociones(dt);
