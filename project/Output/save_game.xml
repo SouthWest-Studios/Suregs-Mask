@@ -5,15 +5,7 @@
 	<textures />
 	<audio />
 	<:anonymous />
-	<:anonymous>
-		<map>
-			<bosses>
-				<boss1 muerto="false" />
-				<boss2 muerto="true" />
-				<boss3 muerto="false" />
-				<boss4 muerto="false" />
-			</bosses>
-		</map>
+	<map>
 		<map>
 			<puzzles>
 				<puzzle level="0" complete="false" />
@@ -25,21 +17,19 @@
 				<puzzle level="6" complete="false" />
 				<puzzle level="7" complete="false" />
 			</puzzles>
+			<bosses>
+				<boss1 muerto="false" />
+				<boss2 muerto="true" />
+				<boss3 muerto="false" />
+				<boss4 muerto="false" />
+			</bosses>
 		</map>
-		<map>
-			<bosses />
-		</map>
-	</:anonymous>
-	<pueblo_tutorial />
+	</map>
+	<scene_mazmorra0 />
 	<entitymanager>
 		<entity_manager>
 			<doors>
-				<door sceneLevel="-10" tpID="60" />
 				<door sceneLevel="-10" tpID="0" />
-				<door sceneLevel="-10" tpID="61" />
-				<door sceneLevel="-10" tpID="23" />
-				<door sceneLevel="-10" tpID="21" />
-				<door sceneLevel="-10" tpID="22" />
 			</doors>
 		</entity_manager>
 	</entitymanager>
@@ -48,7 +38,6 @@
 	<menu />
 	<iventorymanager>
 		<inventory>
-			<inventity type="5" quantity="1" />
 			<money quantity="0" />
 			<SwordLevel quantity="0" />
 			<ArmorLevel quantity="0" />
@@ -80,9 +69,7 @@
 		<notes />
 	</notesmanager>
 	<bestiariomanager>
-		<bestiario>
-			<bestia name="musri" />
-		</bestiario>
+		<bestiario />
 	</bestiariomanager>
 	<equipo />
 	<Ascensormenu />
