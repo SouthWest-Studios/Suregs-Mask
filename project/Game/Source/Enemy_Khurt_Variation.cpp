@@ -13,30 +13,35 @@
 #include "Pathfinding.h"
 #include "ParticleSystem.h"
 #include "Map.h"
+#include "Physics.h"
 #include "Item_Hueso.h"
 #include "Item_Garra.h"
+#include "BestiarioManager.h"
 #include <Optick/include/optick.h>
 #include "Utils.cpp"
-#include "BestiarioManager.h"
 
-Enemy_Khurt_Variation::Enemy_Khurt_Variation() : Entity(EntityType::ENEMY_KHURT) {
+
+Enemy_Khurt_Variation::Enemy_Khurt_Variation() : Entity(EntityType::ENEMY_KHURT_VARIATION) {
 	name = ("khurt_variation");
-	state = EntityState_Enemy::IDLE;
-	nextState = EntityState_Enemy::IDLE;
+	state = EntityState_Khurt::IDLE;
 	currentState = state;
-	desiredState = nextState;
-	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
+	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(currentState)].next_state;
+
 }
 
-Enemy_Khurt_Variation::~Enemy_Khurt_Variation() {}
+Enemy_Khurt_Variation::~Enemy_Khurt_Variation() {
+
+}
 
 bool Enemy_Khurt_Variation::Awake() {
+
 	return true;
 }
 
 bool Enemy_Khurt_Variation::Start() {
+
 	OPTICK_EVENT();
-	// Configuración inicial...
+	//position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
 
 	TSprite = config.attribute("Tsprite").as_int();
 	SpriteX = config.attribute("sprite_x").as_int();
@@ -44,20 +49,20 @@ bool Enemy_Khurt_Variation::Start() {
 	Photowidth = config.attribute("Pwidth").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 
-	idleAnim.LoadAnim("khurt_variation", "idleAnim", spritePositions);
-	underAnim_start.LoadAnim("khurt_variation", "underAnim_start", spritePositions);
-	underAnim_process.LoadAnim("khurt_variation", "underAnim_process", spritePositions);
-	underAnim_finish.LoadAnim("khurt_variation", "underAnim_finish", spritePositions);
-	stunAnim.LoadAnim("khurt_variation", "stunAnim", spritePositions);
-	attack.LoadAnim("khurt_variation", "attack", spritePositions);
-	dieAnim.LoadAnim("khurt_variation", "dieAnim", spritePositions);
+	idleAnim.LoadAnim("khurt", "idleAnim", spritePositions);
+	chargeAnim.LoadAnim("khurt", "chargeAnim", spritePositions);
+	stunAnim.LoadAnim("khurt", "stunAnim", spritePositions);
+	/*runAnim.LoadAnim("khurt", "runAnim", spritePositions);*/
+	underAnim_start.LoadAnim("khurt", "underAnim_start", spritePositions);
+	underAnim_process.LoadAnim("khurt", "underAnim_process", spritePositions);
+	underAnim_end.LoadAnim("khurt", "underAnim_end", spritePositions);
+	dieAnim.LoadAnim("khurt", "dieAnim", spritePositions);
+
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
 	khurt_get_damage_fx = app->audio->LoadAudioFx("khurt_get_damage_fx");
 	khurt_get_damageAlt_fx = app->audio->LoadAudioFx("khurt_get_damageAlt_fx");
-
-	digTimer.Start();
 
 	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
 	pbodyFoot->entity = this;
@@ -77,76 +82,67 @@ bool Enemy_Khurt_Variation::Start() {
 	attackDamage = config.attribute("attackDamage").as_float();
 	attackDistance = config.attribute("attackDistance").as_float();
 	viewDistance = config.attribute("viewDistance").as_float();
+	chargeAttackDistance = config.attribute("chargeAttackDistance").as_float();
+
+	chargeTimer.Start();
+
+	////printf("Speed: %f", speed);
 
 	room = GetCurrentRoom();
 
 	return true;
 }
 
-bool Enemy_Khurt_Variation::Update(float dt) {
+bool Enemy_Khurt_Variation::Update(float dt)
+{
 	OPTICK_EVENT();
-	// Actualizar sensor de posición
+	//Pone el sensor del cuerpo en su posicion
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
 
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
 
-
-	if (health <= 0) {
-		nextState = EntityState_Enemy::DEAD;
-		////printf("DEAD\n");
-	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32 && !digging && !stunned) {
-		nextState = EntityState_Enemy::ATTACKING;
-		/*//printf("ATTACKING\n")*/;
-	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance * 32 && app->map->pathfinding->GetDistance(playerPos, position) >= attackDistance * 32 && !charging && !stunned) {
-		nextState = EntityState_Enemy::RUNNING;
-		////printf("RUNNING\n");
-	}
-	else if (!stunned && !digging && !charging) {
-		nextState = EntityState_Enemy::IDLE;
-		////printf("IDLE\n");
-	}
-
-
-
-	switch (nextState) {
-	case EntityState_Enemy::RUNNING:
-		Chase(dt, playerPos);
-		break;
-	case EntityState_Enemy::ATTACKING:
-		Attack(dt, playerPos);
-		break;
-	case EntityState_Enemy::DEAD:
-		Die();
-		break;
-	case EntityState_Enemy::IDLE:
-		DoNothing(dt);
-		break;
-	default:
-		break;
-	}
-
-	if (stunned)
+	if (health <= 0)
 	{
-		Stunned(dt);
+		desiredState = EntityState_Khurt::DEAD;
+	}
+	else if (app->entityManager->GetIgory()->isDead) {
+		health = 0;
+	}
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32)
+	{
+		printf("ATTACKING \n");
+		underAnim_start.Reset();
+		desiredState = EntityState_Khurt::ATTACKING;
+		isUnderground = false;
+	}
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance * 32)
+	{
+		printf("RUNNING \n");
+		underAnim_end.Reset();
+		desiredState = EntityState_Khurt::RUNNING;
+		isUnderground = true;
 
 	}
-
-	for (auto it = magicTrails.begin(); it != magicTrails.end();) {
-		if (it->durationTimer.ReadSec() >= 2.0) {
-			app->physics->DestroyBody(it->sensor);
-			it = magicTrails.erase(it);
-		}
-		else {
-			++it;
-		}
+	else
+	{
+		desiredState = EntityState_Khurt::IDLE;
+		isUnderground = false;
 	}
+	//if (charging && dist(Antposition, position) > 350 || charging && timechargingTimer.ReadSec() > 0.8)
+	//{
+	//	stunned = true;
+	//	Stunned(dt);
+	//}
 
-	// VENENO <----------
+	//if (chargeTimer.ReadSec() >= 5)
+	//{
+	//	charging = false;
+	//}
+
+	stateMachine(dt, playerPos);
+
 	CheckPoison();
-	// VENENO ---------->
 
 	currentState = nextState;
 	currentAnimation->Update();
@@ -155,25 +151,34 @@ bool Enemy_Khurt_Variation::Update(float dt) {
 
 
 bool Enemy_Khurt_Variation::PostUpdate() {
+
+	SDL_SetTextureColorMod(texture, 198, 115, 255);
+
 	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
+
 
 	if (timerRecibirDanioColor.ReadMSec() <= 100) {
 		float alpha = (100 - timerRecibirDanioColor.ReadMSec()) / 100;
 		SDL_SetTextureAlphaMod(texture, static_cast<Uint8>(255 * alpha)); // Ajusta la opacidad
+
 	}
 	else {
 		SDL_SetTextureAlphaMod(texture, 255);
 	}
 
+
+
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 25, position.y - 65, 5, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x - 25, position.y - 65, 0.5f, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 40, position.y - 65, 5, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 40, position.y - 65, 0.5f, SDL_FLIP_NONE, &rect);
 	}
 
-	for (uint i = 0; i < lastPath.Count(); ++i) {
+
+	for (uint i = 0; i < lastPath.Count(); ++i)
+	{
 		iPoint pos = app->map->MapToWorld(lastPath.At(i)->x, lastPath.At(i)->y);
 		if (app->physics->debug == true) {
 			app->render->DrawTexture(app->map->pathfinding->mouseTileTex, pos.x, pos.y, SDL_FLIP_NONE);
@@ -186,7 +191,9 @@ bool Enemy_Khurt_Variation::PostUpdate() {
 	return true;
 }
 
-bool Enemy_Khurt_Variation::CleanUp() {
+
+bool Enemy_Khurt_Variation::CleanUp()
+{
 	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 	app->physics->GetWorld()->DestroyBody(pbodySensor->body);
 	app->tex->UnLoad(texture);
@@ -200,49 +207,153 @@ bool Enemy_Khurt_Variation::CleanUp() {
 	return true;
 }
 
-void Enemy_Khurt_Variation::DoNothing(float dt) {
+void Enemy_Khurt_Variation::DoNothing(float dt)
+{
 	currentAnimation = &idleAnim;
-	/*//printf("Khurt idle\n");*/
+	////printf("Khurt idle");
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
+
 }
 
-void Enemy_Khurt_Variation::Chase(float dt, iPoint playerPos) {
-	////printf("Khurt chasing\n");
-	currentAnimation = &runAnim;
-	stunned = false;
-	chargetimer = false;
-	digtimer = false;
-
-	if (!digging && !stunned)
-	{
-		digTimer.Start();
+void Enemy_Khurt_Variation::DigUnderground()
+{
+	currentAnimation = &underAnim_start;
+	isUnderground = true;
+	if (underAnim_start.HasFinished()) {
+		desiredState = EntityState_Khurt::MOVING_UNDERGROUND;
+		printf("MOVING UNDERGROUND \n");
 	}
-	HandleDigging(dt, playerPos);
-	digging = true;
-
 }
 
-void Enemy_Khurt_Variation::Attack(float dt, iPoint playerPos) {
+void Enemy_Khurt_Variation::MoveUnderground(float dt, iPoint playerPos)
+{
+	////printf("Khurt chasing");
+	currentAnimation = &underAnim_start;
+	if (underAnim_start.HasFinished()) {
+		currentAnimation = &underAnim_process;
+		Khurtfinding(dt, playerPos);
+	}
 
-	////printf("Khurt attacking\n");
-	currentAnimation = &attack;
 
-	if (!chargetimer)
+	//if (chargeTimer.ReadSec() >= 5 && app->map->pathfinding->GetDistance(playerPos, position) <= chargeAttackDistance * 32 && app->map->pathfinding->GetDistance(playerPos, position) >= (attackDistance + 5) * 32)
+	//{
+	//	Antposition = position;
+	//	desiredState = EntityState_Khurt::DIGGING_OUT;
+	//	/*DigOut(dt, playerPos);*/
+	//}
+	//else if (!charging)
+	//{
+	//	Khurtfinding(dt, playerPos);
+	//}
+}
+
+void Enemy_Khurt_Variation::DigOut(float dt, iPoint playerPos)
+{
+	currentAnimation = &underAnim_end;
+	isUnderground = false;
+	if (underAnim_end.HasFinished()) {
+		/*Charge(dt, playerPos);*/
+		desiredState = EntityState_Khurt::ATTACKING;
+		printf("ATTACKING \n");
+	}
+}
+
+void Enemy_Khurt_Variation::Charge(float dt, iPoint playerPos)
+{
+}
+
+void Enemy_Khurt_Variation::Stunned(float dt)
+{
+	stunned = true;
+	pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
+	currentAnimation = &stunAnim;
+	if (stunAnim.HasFinished()) {
+		stunned = false;
+		desiredState = EntityState_Khurt::RUNNING;
+	}
+	/*if (stunAnim.HasFinished() && stunTimer.ReadSec() >= 2)
 	{
-		/*//printf("WWWWWWW");*/
+		pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
+		desiredState = EntityState_Khurt::IDLE;
+		stunned = false;
+		charging = false;
 		chargeTimer.Start();
+		stunAnim.Reset();
 	}
-	chargetimer = true;
-	Antposition = position;
-	if (!stunned)
-	{
-		/*//printf("NNNNNNNN");*/
-		charging = true;
-		Charge(dt, playerPos);
-	}
+	else {
+		stunned = true;
+		currentAnimation = &stunAnim;
+	}*/
 }
+
+
+void Enemy_Khurt_Variation::Attack(float dt)
+{
+	//printf("Khurt attacking");
+	currentAnimation = &underAnim_end;
+	if (underAnim_end.HasFinished()) {
+		currentAnimation = &chargeAnim;
+		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
+		//No se mueve mientras ataca
+
+		if (chargeAnim.HasFinished()) {
+			app->entityManager->GetPlayer()->TakeDamage(attackDamage);
+			desiredState = EntityState_Khurt::RUNNING;
+			printf("RUNNING \n");
+		}
+	}
+
+	//sonido ataque
+}
+
+void Enemy_Khurt_Variation::stateMachine(float dt, iPoint playerPos)
+{
+	////printf("\ncurrentState: %d, desiredState: %d", static_cast<int>(currentState), static_cast<int>(desiredState));
+	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
+	switch (nextState) {
+	case EntityState_Khurt::IDLE:
+		DoNothing(dt);
+		break;
+	case EntityState_Khurt::RUNNING:
+		if (!isUnderground) {
+			DigUnderground();
+		}
+		else {
+			MoveUnderground(dt, playerPos);
+		}
+		break;
+	case EntityState_Khurt::ATTACKING:
+		Attack(dt);
+		break;
+	case EntityState_Khurt::DEAD:
+		Die();
+		break;
+	case EntityState_Khurt::STUNNED:
+		Stunned(dt);
+		break;
+	case EntityState_Khurt::DIGGING_UNDERGROUND:
+		DigUnderground();
+		break;
+	case EntityState_Khurt::MOVING_UNDERGROUND:
+		MoveUnderground(dt, playerPos);
+		break;
+	case EntityState_Khurt::DIGGING_OUT:
+		DigOut(dt, playerPos);
+		break;
+	case EntityState_Khurt::NONE:
+		desiredState = EntityState_Khurt::IDLE;
+		break;
+
+	default:
+		break;
+	}
+	currentState = nextState;
+
+}
+
 
 void Enemy_Khurt_Variation::Die() {
+
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	currentAnimation = &dieAnim;
 
@@ -253,6 +364,7 @@ void Enemy_Khurt_Variation::Die() {
 	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 	app->physics->GetWorld()->DestroyBody(pbodySensor->body);
 	app->tex->UnLoad(texture);
+
 
 	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
 	if (parseResult) {
@@ -267,63 +379,76 @@ void Enemy_Khurt_Variation::Die() {
 		garra->position = iPoint(position.x, position.y);
 		garra->Start();
 	}
-	app->bestiarioManager->CreateItem("khurtV");
-	// Mask XP
+	app->bestiarioManager->CreateItem("khurt");
+	//Mask XP
 
-	// Mask 0
-	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0) {
+	//Mask 0
+	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
+	{
 		app->entityManager->GetPlayer()->maskZeroXP += 80;
-		// //printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
+		////printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
 	}
 
-	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK0) {
+	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK0)
+	{
 		app->entityManager->GetPlayer()->maskZeroXP += 80;
-		// //printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
+		////printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
 	}
 
-	// Mask 1
-	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK1) {
+	//Mask 1
+	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK1)
+	{
 		app->entityManager->GetPlayer()->maskOneXP += 80;
-		// //printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
+		////printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
 	}
 
-	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK1) {
+	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK1)
+	{
 		app->entityManager->GetPlayer()->maskOneXP += 80;
-		// //printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
+		////printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
 	}
 
-	// Mask 2
-	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK2) {
+	//Mask 2
+	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK2)
+	{
 		app->entityManager->GetPlayer()->maskTwoXP += 80;
-		// //printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
+		////printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
 	}
 
-	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK2) {
+	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK2)
+	{
 		app->entityManager->GetPlayer()->maskTwoXP += 80;
-		// //printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
+		////printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
 	}
 
-	// Mask 3
-	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK3) {
+	//Mask 3
+	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK3)
+	{
 		app->entityManager->GetPlayer()->maskThreeXP += 80;
-		// //printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
+		////printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
 	}
 
-	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK3) {
+	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK3)
+	{
 		app->entityManager->GetPlayer()->maskThreeXP += 80;
-		// //printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
+		////printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
+	}
+
+	if (app->entityManager->GetIgory()->playerInFight) {
+		app->map->DestroyEntity(this);
 	}
 }
 
-// L07 DONE 6: Define OnCollision function for the player.
+// L07 DONE 6: Define OnCollision function for the player. 
 void Enemy_Khurt_Variation::OnCollision(PhysBody* physA, PhysBody* physB) {
-	switch (physB->ctype) {
+	switch (physB->ctype)
+	{
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
 		break;
 	case ColliderType::PLAYER:
 		LOG("Collision PLAYER");
-		// restar vida al player
+		//restar vida al player
 		break;
 	case ColliderType::PLAYER_ATTACK:
 		LOG("Collision Player_Attack");
@@ -336,141 +461,78 @@ void Enemy_Khurt_Variation::OnCollision(PhysBody* physA, PhysBody* physB) {
 	}
 }
 
+bool Enemy_Khurt_Variation::Khurtfinding(float dt, iPoint playerPosP)
+{
+	iPoint playerPos = app->map->WorldToMap(playerPosP.x, playerPosP.y);
+	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
+
+
+	if (dist(playerPos, enemyPos) < viewDistance) {
+		app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
+		lastPath = *app->map->pathfinding->GetLastPath();
+	}
+	else {
+		if (app->entityManager->GetIgory()->playerInFight) {
+			app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
+			lastPath = *app->map->pathfinding->GetLastPath();
+		}
+		else
+		{
+			app->map->pathfinding->CreatePath(enemyPos, originalPosition); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
+			lastPath = *app->map->pathfinding->GetLastPath();
+		}
+	}
+
+
+
+
+
+	b2Vec2 velocity = b2Vec2(0, 0);
+
+	//Get the latest calculated path and draw
+
+
+	if (lastPath.Count() > 1) { // Asegate de que haya al menos una posicion en el camino
+
+		// Toma la primera posicion del camino como el objetivo al que el enemigo debe dirigirse
+		iPoint targetPos = app->map->MapToWorld(lastPath.At(1)->x, lastPath.At(1)->y);
+
+		// Calcula la direccion hacia el objetivo
+		b2Vec2 direction(targetPos.x - position.x, targetPos.y - position.y);
+		direction.Normalize();
+
+		// Calcula la velocidad del movimiento
+		velocity = b2Vec2(direction.x * speed, direction.y * speed);
+
+		// Determina si el enemigo est?mirando hacia la izquierda o hacia la derecha
+		isFacingLeft = (direction.x >= 0);
+
+
+		isAttacking = false;
+		runAnim.Reset();
+
+	}
+	/*else {
+		LOG("HA LLEGADO AL DESTINO");
+	}*/
+
+	// Aplica la velocidad al cuerpo del enemigo
+	pbodyFoot->body->SetLinearVelocity(velocity);
+
+	return true;
+}
+
 float Enemy_Khurt_Variation::GetHealth() const {
 	return health;
 }
 
 void Enemy_Khurt_Variation::TakeDamage(float damage) {
-	if (currentState != EntityState_Enemy::DEAD && invulnerabilityTimer.ReadMSec() >= 500) {
+	if (currentState != EntityState_Khurt::DEAD && invulnerabilityTimer.ReadMSec() >= 500) {
 		health -= damage;
 		invulnerabilityTimer.Start();
 		timerRecibirDanioColor.Start();
 		app->audio->PlayRandomFx(khurt_get_damage_fx, khurt_get_damageAlt_fx, NULL);
 	}
-}
-
-void Enemy_Khurt_Variation::Charge(float dt, iPoint playerPos) {
-	////printf("Charge\n");
-	currentAnimation = &attack;
-	if (!chargeimpulse)
-	{
-		b2Vec2 direction(playerPos.x - position.x, playerPos.y - position.y);
-		direction.Normalize();
-
-		b2Vec2 impulse = b2Vec2(direction.x * speed * 3, direction.y * speed * 3);
-		pbodyFoot->body->ApplyLinearImpulse(impulse, pbodyFoot->body->GetWorldCenter(), true);
-		/*//printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");*/
-	}
-	chargeimpulse = true;
-	if (charging && chargeTimer.ReadSec() >= 0.7 || app->map->pathfinding->GetDistance(playerPos, position) > 500) {
-		charging = false;
-		/*//printf("Charge ended, transitioning to STUNNED\n");*/
-		Stunned(dt);
-	}
-}
-
-void Enemy_Khurt_Variation::Stunned(float dt) {
-	if (!stunnedtimer)
-	{
-		stunTimer.Start();
-	}
-	stunnedtimer = true;
-	if (stunTimer.ReadSec() <= 1.5) {
-		stunned = true;
-		/*//printf("Stunned\n");*/
-		currentAnimation = &stunAnim;
-		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
-	}
-	else {
-		stunned = false;
-		digtimer = false;
-		digging = false;
-		chargeimpulse = false;
-		charging = false;
-		chargetimer = false;
-		stunnedtimer = false;
-		nextState = EntityState_Enemy::RUNNING;
-		/*//printf("Transition to %d after stun\n", nextState);*/
-	}
-}
-
-void Enemy_Khurt_Variation::HandleDigging(float dt, iPoint playerPos) {
-	float elapsedTime = digTimer.ReadSec();
-	if (!digtimer)
-	{
-		if (elapsedTime < 0.2f) {
-			/*//printf("Digging Phase 1\n");*/
-			// Fase de inicio de la dig
-			currentAnimation = &underAnim_start;
-		}
-		else if (elapsedTime < 2.0f) {
-			/*//printf("Digging Phase 2\n");*/
-			// Fase de desplazamiento bajo tierra
-			b2Vec2 direction(playerPos.x - position.x, playerPos.y - position.y);
-			direction.Normalize();
-			pbodyFoot->body->SetLinearVelocity(b2Vec2(direction.x * speed * 2, direction.y * speed * 2));
-
-			currentAnimation = &underAnim_process;
-			CreateAroMagica();
-		}
-		else {
-			/*//printf("Digging Phase 3\n");*/
-			// Fase de emergencia
-			digging = false;
-			digTimer.Start();
-			digtimer = true;
-			currentAnimation = &underAnim_finish;
-			if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32) {
-				nextState = EntityState_Enemy::ATTACKING;
-				/*//printf("ATTACKING despues de DIGGING fase 3\n");*/
-			}
-			else {
-				nextState = EntityState_Enemy::IDLE;
-				/*//printf("IDLE despues de DIGGING fase 3\n");*/
-			}
-			//pbodyFoot->body->SetLinearVelocity(b2Vec2_zero); // Detener el movimiento
-
-		}
-	}
-}
-
-void Enemy_Khurt_Variation::CreateAroMagica() {
-	if (stunned) {
-		ClearMagicTrails();
-		return;
-	}
-
-	iPoint AroPosition = position;
-
-	for (const auto& trail : magicTrails) {
-		if (trail.sensor != nullptr && trail.sensor->Contains(AroPosition.x, AroPosition.y)) {
-			return;
-		}
-	}
-
-	PhysBody* newMagicTrail = CreateMagicTrailSensor(AroPosition.x, AroPosition.y, 30, 30);
-	MagicTrail trail = { newMagicTrail };
-	trail.durationTimer.Start();
-	magicTrails.push_back(trail);
-
-	if (magicTrails.size() >= 20) {
-		app->physics->DestroyBody(magicTrails.front().sensor);
-		magicTrails.erase(magicTrails.begin());
-	}
-}
-
-PhysBody* Enemy_Khurt_Variation::CreateMagicTrailSensor(int x, int y, int width, int height) {
-	PhysBody* newMagicTrail = app->physics->CreateRectangleSensor(x, y, width, height, STATIC);
-	newMagicTrail->ctype = ColliderType::AROMAGICA;
-	newMagicTrail->listener = this;
-	return newMagicTrail;
-}
-
-void Enemy_Khurt_Variation::ClearMagicTrails() {
-	for (const auto& trail : magicTrails) {
-		app->physics->DestroyBody(trail.sensor);
-	}
-	magicTrails.clear();
 }
 
 
@@ -484,19 +546,21 @@ void Enemy_Khurt_Variation::ApplyPoison(int poisonDamage, float poisonDuration, 
 
 	poisonTimer.Start();
 	poisonTickTimer.Start();
+
+
 }
 
 void Enemy_Khurt_Variation::CheckPoison() {
-	float epsilon = 0.1f; // Para margen de error
+	float epsilon = 0.1f; //Para margen de error
 
 	// Aplicar el primer tick de daño inmediatamente (si no, el primer tick no se aplica en el segundo 0.0)
 	if (firstTimePoisonRecibed) {
-		if (currentState != EntityState_Enemy::DEAD) {
+		if (currentState != EntityState_Khurt::DEAD) {
 			health -= poisonDamage;
 			invulnerabilityTimer.Start();
 			timerRecibirDanioColor.Start();
 
-			/*//printf("Enemy_Khurt has received %f damage of poison\n", poisonDamage);*/
+			//printf("Enemy_Khurt has received  %f damage of poison\n", poisonDamage);
 		}
 		firstTimePoisonRecibed = false;
 	}
@@ -504,49 +568,56 @@ void Enemy_Khurt_Variation::CheckPoison() {
 	if (poisonTimer.ReadSec() <= poisonDuration + epsilon && poisoned) {
 		if (poisonTickTimer.ReadSec() >= poisonTickRate) {
 			poisonTickTimer.Start(); // Reiniciar el temporizador de ticks de veneno
-			if (currentState != EntityState_Enemy::DEAD) {
+			if (currentState != EntityState_Khurt::DEAD) {
 				health -= poisonDamage;
 				invulnerabilityTimer.Start();
 				timerRecibirDanioColor.Start();
 
-				/*//printf("Enemy_Khurt has received %f damage of poison\n", poisonDamage);*/
+				//printf("Enemy_Khurt has received  %f damage of poison\n", poisonDamage);
 			}
 		}
 	}
 }
+//VENENO ---------->
 
-// VENENO ---------->
 
-MapObject* Enemy_Khurt_Variation::GetCurrentRoom() {
-	// salas pequeñas
-	for (ListItem<MapObject*>* item = app->map->smallRoomsList.start; item != nullptr; item = item->next) {
+MapObject* Enemy_Khurt_Variation::GetCurrentRoom()
+{
+	//salas pequeñas
+	for (ListItem<MapObject*>* item = app->map->smallRoomsList.start; item != nullptr; item = item->next)
+	{
 		MapObject* room = item->data;
 
 		// el jugador está dentro de la sala
 		if (position.x >= room->x && position.x <= room->x + room->width &&
-			position.y >= room->y && position.y <= room->y + room->height) {
+			position.y >= room->y && position.y <= room->y + room->height)
+		{
 			return room;
 		}
 	}
 
-	// salas grandes
-	for (ListItem<MapObject*>* item = app->map->largeRoomsList.start; item != nullptr; item = item->next) {
+	//salas grandes
+	for (ListItem<MapObject*>* item = app->map->largeRoomsList.start; item != nullptr; item = item->next)
+	{
 		MapObject* room = item->data;
 
 		// el jugador está dentro de la sala
 		if (position.x >= room->x && position.x <= room->x + room->width &&
-			position.y >= room->y && position.y <= room->y + room->height) {
+			position.y >= room->y && position.y <= room->y + room->height)
+		{
 			return room;
 		}
 	}
 
-	// salas l
-	for (ListItem<MapObject*>* item = app->map->LRoomsList.start; item != nullptr; item = item->next) {
+	//salas l
+	for (ListItem<MapObject*>* item = app->map->LRoomsList.start; item != nullptr; item = item->next)
+	{
 		MapObject* room = item->data;
 
 		// el jugador está dentro de la sala
 		if (position.x >= room->x && position.x <= room->x + room->width &&
-			position.y >= room->y && position.y <= room->y + room->height) {
+			position.y >= room->y && position.y <= room->y + room->height)
+		{
 			return room;
 		}
 	}

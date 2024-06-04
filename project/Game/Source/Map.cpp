@@ -89,7 +89,7 @@ bool Map::Start() {
 	OPTICK_EVENT();
 	//Calls the functon to load the map, make sure that the filename is assigned
 	SString mapPath = path;
-	mapPath += name;
+	mapPath += nameMazmorra;
 	Load(mapPath);
 
 
@@ -453,22 +453,14 @@ bool Map::Load(SString mapFileName)
 	// L05: DONE 3: Implement LoadMap to load the map properties
 	// retrieve the paremeters of the <map> node and save it into map data
 	pugi::xml_document mapFileXML;
-	pugi::xml_document saveFileXML;
 	pugi::xml_parse_result result = mapFileXML.load_file(mapFileName.GetString());
-	pugi::xml_parse_result  saveResult = saveFileXML.load_file("save_game.xml");
-	pugi::xml_node bossSave = saveFileXML.child("game_state");
+
 	if (result == NULL)
 	{
 		LOG("Could not load map xml file %s. pugi error: %s", mapFileName, result.description());
 		ret = false;
 	}
 
-
-	if (saveResult == NULL)
-	{
-		LOG("Could not load map xml file %s. pugi error: %s", saveResult.description());
-		ret = false;
-	}
 
 
 	if (ret == true)
@@ -490,13 +482,13 @@ bool Map::Load(SString mapFileName)
 		ret = LoadAllObjectGroups(mapFileXML.child("map"));
 	}
 
-	LoadBoss();
+	
 	LoadObjects();
 	LoadCollisions("Collisions");
 	LoadEntities("Entities");
 	LoadTPEntities("TPLayers");
 	LoadPuzzleEntities("PuzzleLayer");
-	//LoadBoss();
+
 
 
 
@@ -1867,6 +1859,10 @@ void Map::BubbleSort(std::vector<PuzzleButtonEntity*>* entities) {
 
 bool Map::LoadState(pugi::xml_node node)
 {
+
+
+	pugi::xml_node testNode = node.child("map").child("bosses");
+
 	bool ret = true;
 	for (pugi::xml_node itemNode = node.child("map").child("puzzles").child("puzzle"); itemNode; itemNode = itemNode.next_sibling("puzzle")) {
 		if (itemNode.attribute("level").as_int(-1) != -1) {
@@ -1875,6 +1871,7 @@ bool Map::LoadState(pugi::xml_node node)
 
 	}
 
+	
 
 	boss1_defeated = node.child("map").child("bosses").child("boss1").attribute("muerto").as_bool();
 	boss2_defeated = node.child("map").child("bosses").child("boss2").attribute("muerto").as_bool();
@@ -1888,8 +1885,7 @@ bool Map::SaveState(pugi::xml_node node)
 {
 	bool ret = true;
 	pugi::xml_node mapNode = node.append_child("map");
-	pugi::xml_node mapPuzzlesNode = node.append_child("map").append_child("puzzles");
-	pugi::xml_node bossNode = node.append_child("map").append_child("bosses");
+	pugi::xml_node mapPuzzlesNode = mapNode.append_child("puzzles");
 
 	for (int i = 0; i < 8; i++) {
 		pugi::xml_node mapPuzzleNode = mapPuzzlesNode.append_child("puzzle");
@@ -1908,46 +1904,6 @@ bool Map::SaveState(pugi::xml_node node)
 
 
 	
-	return ret;
-}
-
-
-bool Map::LoadBoss()
-{
-	bool ret = true;
-	/*pugi::xml_document saveFileXML;
-	pugi::xml_parse_result saveResult = saveFileXML.load_file("save_game.xml");
-	pugi::xml_node bossLoad = saveFileXML.child("game_state").child("bosses");
-
-	boss1_defeated = bossLoad.find_child_by_attribute("boss", "number", "1").attribute("isDefeated").as_bool();
-	boss2_defeated = bossLoad.find_child_by_attribute("boss", "number", "2").attribute("isDefeated").as_bool();
-	boss3_defeated = bossLoad.find_child_by_attribute("boss", "number", "3").attribute("isDefeated").as_bool();
-	boss4_defeated = bossLoad.find_child_by_attribute("boss", "number", "4").attribute("isDefeated").as_bool();
-	printf("\nLoad boss1 %d", boss1_defeated);*/
-	
-	return ret;
-}
-
-bool Map::SaveBoss()
-{
-	bool ret = true;
-	//pugi::xml_document saveFileXML;
-	//pugi::xml_parse_result saveResult = saveFileXML.load_file("save_game.xml");
-	//pugi::xml_node bossSave = saveFileXML.child("game_state").child("bosses");
-
-	//bossSave.find_child_by_attribute("boss", "number", "1").set_value(boolToString(boss1_defeated));
-	//bossSave.find_child_by_attribute("boss", "number", "2").set_value(boolToString(boss2_defeated));
-	//bossSave.find_child_by_attribute("boss", "number", "3").set_value(boolToString(boss3_defeated));
-	//bossSave.find_child_by_attribute("boss", "number", "4").set_value(boolToString(boss4_defeated));
-
-	//if (!saveFileXML.save_file("save_game.xml")) {
-	//	std::cerr << "Failed to save XML file" << std::endl;
-	//	return 1;
-	//}
-
-	///*printf("\nSave boss %d", boss1_defeated);
-	//printf("\nLoad boss4 %d", boss4_defeated);*/
-	//printf("\nSave %s",boolToString(boss4_defeated));
 	return ret;
 }
 

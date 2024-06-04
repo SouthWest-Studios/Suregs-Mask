@@ -14,6 +14,7 @@
 				<boss4 muerto="false" />
 			</bosses>
 		</map>
+	<map>
 		<map>
 			<puzzles>
 				<puzzle level="0" complete="false" />
@@ -25,7 +26,14 @@
 				<puzzle level="6" complete="false" />
 				<puzzle level="7" complete="false" />
 			</puzzles>
+			<bosses>
+				<boss1 muerto="false" />
+				<boss2 muerto="true" />
+				<boss3 muerto="false" />
+				<boss4 muerto="false" />
+			</bosses>
 		</map>
+
 		<map>
 			<bosses />
 		</map>
@@ -34,6 +42,13 @@
 	<entitymanager>
 		<entity_manager>
 			<doors />
+	</map>
+	<scene_mazmorra0 />
+	<entitymanager>
+		<entity_manager>
+			<doors>
+				<door sceneLevel="-10" tpID="0" />
+			</doors>
 		</entity_manager>
 	</entitymanager>
 	<missionmanager />
