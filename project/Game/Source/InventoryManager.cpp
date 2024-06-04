@@ -753,6 +753,19 @@ bool InventoryManager::LoadState(pugi::xml_node node)
 	mask3_levelBranch3 = node.child("inventory").child("Mask3").attribute("Branch3").as_int();
 	mask3_levelBranch4 = node.child("inventory").child("Mask3").attribute("Branch4").as_int();
 
+
+	numMasks = node.child("inventory").child("maskNum").attribute("n").as_int();
+
+
+	app->entityManager->GetPlayer()->maskZeroPoints = node.child("inventory").child("maskPoints").child("maskPointZero").attribute("points").as_int();
+	app->entityManager->GetPlayer()->maskOnePoints = node.child("inventory").child("maskPoints").child("maskPointOne").attribute("points").as_int();
+	app->entityManager->GetPlayer()->maskTwoPoints = node.child("inventory").child("maskPoints").child("maskPointTwo").attribute("points").as_int();
+	app->entityManager->GetPlayer()->maskThreePoints = node.child("inventory").child("maskPoints").child("maskPointThree").attribute("points").as_int();
+
+	app->ascensor->mazmorra = node.child("inventory").child("elevator").attribute("mazmorra").as_int();
+	app->ascensor->mazmorraActual = node.child("inventory").child("elevator").attribute("mazmorraActual").as_int();
+
+
 	return ret;
 }
 
@@ -811,6 +824,29 @@ bool InventoryManager::SaveState(pugi::xml_node node)
 	mask3Node.append_attribute("Branch2").set_value(mask3_levelBranch2);
 	mask3Node.append_attribute("Branch3").set_value(mask3_levelBranch3);
 	mask3Node.append_attribute("Branch4").set_value(mask3_levelBranch4);
+
+	pugi::xml_node maskNumNode = inventoryNode.append_child("maskNum");
+
+	maskNumNode.append_attribute("n").set_value(numMasks);
+	maskNumNode.append_attribute("info").set_value("Esta variable son las mascaras que tienes desbloqueadas");
+
+	pugi::xml_node maskPointsNode = inventoryNode.append_child("maskPoints");
+	pugi::xml_node maskPointNode = maskPointsNode.append_child("maskPointZero");
+	maskPointNode.append_attribute("points").set_value(app->entityManager->GetPlayer()->maskZeroPoints);
+
+
+	maskPointNode = maskPointsNode.append_child("maskPointOne");
+	maskPointNode.append_attribute("points").set_value(app->entityManager->GetPlayer()->maskOnePoints);
+
+	maskPointNode = maskPointsNode.append_child("maskPointTwo");
+	maskPointNode.append_attribute("points").set_value(app->entityManager->GetPlayer()->maskTwoPoints);
+
+	maskPointNode = maskPointsNode.append_child("maskPointThree");
+	maskPointNode.append_attribute("points").set_value(app->entityManager->GetPlayer()->maskThreePoints);
+
+	pugi::xml_node elevatorNode = inventoryNode.append_child("elevator");
+	elevatorNode.append_attribute("mazmorra").set_value(app->ascensor->mazmorra);
+	elevatorNode.append_attribute("mazmorraActual").set_value(app->ascensor->mazmorraActual);
 
 
 	/*playerNode.append_attribute("x").set_value(player->position.x);

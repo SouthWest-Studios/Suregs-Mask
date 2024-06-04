@@ -655,34 +655,33 @@ bool TreeManager::LoadState(pugi::xml_node node)
 
 	arboles.Clear();
 
-	pugi::xml_document configFile;
-	pugi::xml_node entitiesDataNode;
-	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
-	entitiesDataNode = configFile.child("config").child("entities_data");
-
-	//Tree* TreeItem = app->TreeManager->CreateItem(, 0, 0, 0, 0, 0, 0);
-	//for (pugi::xml_node itemNode = node.child("Tree").child("Tree"); itemNode; itemNode = itemNode.next_sibling("Tree"))
-	//{
-
-	//	Tree* itemLoaded = nullptr;
-	//	pugi::xml_node itemConfigurationNode;
-	//	switch ((TreeType)itemNode.attribute("type").as_int())
-	//	{
-	//	case TreeType::BEST:
-	//		/*itemConfigurationNode = entitiesDataNode.child("item_garra");
-	//		itemLoaded = app->bestiarioManager->CreateItem(EntityType::ITEM_NOTA, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());*/
-	//		break;
-
-	//	case TreeType::UNKNOWN:
-	//		break;
-	//	default:
-	//		break;
-	//	}
+	pugi::xml_node treeNode = node.child("skillTree");
 
 
-	//}
+
+	for (pugi::xml_node itemNode = node.child("node"); itemNode; itemNode = itemNode.next_sibling("node"))
+	{
+
+		bool boolRaroDelAleixUseless = true;
+
+		if (((TreeType)itemNode.attribute("type").as_int()) == TreeType::BUTTON) {
+			boolRaroDelAleixUseless = false;
+		}
+
+		Tree* t = CreateItem((TreeType)itemNode.attribute("type").as_int(), itemNode.attribute("nivelArbol").as_int(), itemNode.attribute("nivelMejora").as_int(), boolRaroDelAleixUseless);
+
+		t->used1 = itemNode.attribute("used1").as_int();
+		t->used2 = itemNode.attribute("used2").as_int();
+		t->used3 = itemNode.attribute("used3").as_int();
+		t->used4 = itemNode.attribute("used4").as_int();
 
 
+		t->usable1 = itemNode.attribute("usable1").as_int();
+		t->usable2 = itemNode.attribute("usable2").as_int();
+		t->usable3 = itemNode.attribute("usable3").as_int();
+		t->usable4 = itemNode.attribute("usable4").as_int();
+
+	}
 
 
 	return ret;
@@ -701,6 +700,34 @@ bool TreeManager::SaveState(pugi::xml_node node)
 		TreeItemNode.append_attribute("type").set_value((int)TreeItem->type);
 		TreeItemNode.append_attribute("quantity").set_value(TreeItem->quantity);
 	}*/
+
+	pugi::xml_node treeNode = node.append_child("skillTree");
+
+	for (int i = 0; i < arboles.Count(); i++) {
+		pugi::xml_node treeNodeNode = treeNode.append_child("node");
+		Tree* t = arboles.At(i)->data;
+
+		treeNodeNode.append_attribute("id").set_value(t->id);
+		treeNodeNode.append_attribute("nivelArbol").set_value(t->nivelArbol);
+		treeNodeNode.append_attribute("nivelMejora").set_value(t->nivelMejora);
+		treeNodeNode.append_attribute("type").set_value((int)t->type);
+
+		treeNodeNode.append_attribute("used1").set_value(t->used1);
+		treeNodeNode.append_attribute("used2").set_value(t->used2);
+		treeNodeNode.append_attribute("used3").set_value(t->used3);
+		treeNodeNode.append_attribute("used4").set_value(t->used4);
+
+		treeNodeNode.append_attribute("usable1").set_value(t->usable1);
+		treeNodeNode.append_attribute("usable2").set_value(t->usable2);
+		treeNodeNode.append_attribute("usable3").set_value(t->usable3);
+		treeNodeNode.append_attribute("usable4").set_value(t->usable4);
+
+
+	}
+
+	
+
+	
 
 
 

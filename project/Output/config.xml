@@ -306,19 +306,19 @@
 
 		<!-- <npc_vendedor texturePath="Assets/Textures/Entidades/NPCs/general.png" Tsprite="9" Pwidth="138" sprite_x="138" sprite_y="1836"/>  -->
 		
-		<npc_vendedor texturePath="Assets/Textures/Entidades/NPCs/Idle/comerciante.png"			Tsprite="6" Pwidth="837" sprite_x="140" sprite_y="250"/>
-		<npc_pescador texturePath="Assets/Textures/Entidades/NPCs/Idle/pescador.png"			Tsprite="6" Pwidth="779" sprite_x="130" sprite_y="270"/>
-		<npc_bruja texturePath="Assets/Textures/Entidades/NPCs/Idle/bruja.png"					Tsprite="6" Pwidth="785" sprite_x="131" sprite_y="260"/>
-		<npc_bully1 texturePath="Assets/Textures/Entidades/NPCs/Idle/bully_1.png"				Tsprite="6" Pwidth="1147" sprite_x="191" sprite_y="250"/>
-		<npc_bully2 texturePath="Assets/Textures/Entidades/NPCs/Idle/bully_2.png"				Tsprite="6" Pwidth="870" sprite_x="145" sprite_y="250"/>
-		<npc_herrera texturePath="Assets/Textures/Entidades/NPCs/Idle/herrera.png"				Tsprite="6" Pwidth="907" sprite_x="151" sprite_y="250"/>
-		<npc_abuelo texturePath="Assets/Textures/Entidades/NPCs/Idle/yayo.png"					Tsprite="6" Pwidth="738" sprite_x="123" sprite_y="250"/>
-		<npc_mujer_preocupada texturePath="Assets/Textures/Entidades/NPCs/Idle/preocupada.png"	Tsprite="6" Pwidth="819" sprite_x="136" sprite_y="250"/>
-		<npc_mujer_enamorada texturePath="Assets/Textures/Entidades/NPCs/Idle/enamorada.png"	Tsprite="6" Pwidth="787" sprite_x="131" sprite_y="250"/>
-		<npc_enamorados texturePath="Assets/Textures/Entidades/NPCs/Idle/enamorados.png"		Tsprite="6" Pwidth="1383" sprite_x="230" sprite_y="250"/>
-		<npc_abuelito texturePath="Assets/Textures/Entidades/NPCs/Idle/yayo_cliente.png"		Tsprite="6" Pwidth="850" sprite_x="141" sprite_y="260"/>
-		<npc_abuela texturePath="Assets/Textures/Entidades/NPCs/Idle/vhea.png"					Tsprite="6" Pwidth="1440" sprite_x="240" sprite_y="240"/>
-		<npc_padre texturePath="Assets/Textures/Entidades/Boss/Igory/bossPapa.png"				Tsprite="128" Pwidth="4800" sprite_x="600" sprite_y="427"/>
+		<npc_vendedor texturePath="Assets/Textures/Entidades/NPCs/Idle/comerciante.png"			Tsprite="6"		Pwidth="837" sprite_x="140" sprite_y="250"/>
+		<npc_pescador texturePath="Assets/Textures/Entidades/NPCs/Idle/pescador.png"			Tsprite="6"		Pwidth="779" sprite_x="130" sprite_y="270"/>
+		<npc_bruja texturePath="Assets/Textures/Entidades/NPCs/Idle/bruja.png"					Tsprite="6"		Pwidth="785" sprite_x="131" sprite_y="260"/>
+		<npc_bully1 texturePath="Assets/Textures/Entidades/NPCs/Idle/bully_1.png"				Tsprite="6"		Pwidth="1140" sprite_x="190" sprite_y="250"/>
+		<npc_bully2 texturePath="Assets/Textures/Entidades/NPCs/Idle/bully_2.png"				Tsprite="6"		Pwidth="870" sprite_x="145" sprite_y="250"/>
+		<npc_herrera texturePath="Assets/Textures/Entidades/NPCs/Idle/herrera.png"				Tsprite="6"		Pwidth="907" sprite_x="151" sprite_y="250"/>
+		<npc_abuelo texturePath="Assets/Textures/Entidades/NPCs/Idle/yayo.png"					Tsprite="6"		Pwidth="738" sprite_x="123" sprite_y="250"/>
+		<npc_mujer_preocupada texturePath="Assets/Textures/Entidades/NPCs/Idle/preocupada.png"	Tsprite="6"		Pwidth="819" sprite_x="136" sprite_y="250"/>
+		<npc_mujer_enamorada texturePath="Assets/Textures/Entidades/NPCs/Idle/enamorada.png"	Tsprite="6"		Pwidth="787" sprite_x="131" sprite_y="250"/>
+		<npc_enamorados texturePath="Assets/Textures/Entidades/NPCs/Idle/enamorados.png"		Tsprite="6"		Pwidth="1380" sprite_x="230" sprite_y="250"/>
+		<npc_abuelito texturePath="Assets/Textures/Entidades/NPCs/Idle/yayo_cliente.png"		Tsprite="6"		Pwidth="850" sprite_x="140" sprite_y="260"/>
+		<npc_abuela texturePath="Assets/Textures/Entidades/NPCs/Idle/vhea.png"					Tsprite="6"		Pwidth="1440" sprite_x="240" sprite_y="240"/>
+		<npc_padre texturePath="Assets/Textures/Entidades/Boss/Igory/bossPapa.png"				Tsprite="128"	Pwidth="4800" sprite_x="600" sprite_y="427"/>
 		
 
 		<npc_abuelitas texturePath="Assets/Textures/Entidades/NPCs/Idle/yayas.png"				Tsprite="6" Pwidth="2317" sprite_x="386" sprite_y="250"/>
@@ -766,41 +766,27 @@
 			  slider_texture = "Assets/Textures/Interfaz/Bestiario/textura_fondo_slider.png"
 			  knob_texture="Assets/Textures/Interfaz/Bestiario/textura_knob_slider.png"
 			  pointer="Assets/Textures/Interfaz/Bestiario/bestiarioselect.png" 
-			  text_osiris ="Los esqueletos de los guerreros que han muerto luchando en las mazmorras, son revividos gracias a una magia y utilizados como enemigos para atacar.
-Vida: Media		Daño: Medio 	Tamaño: Medio 	Velocidad: Media"
-			  text_osirisV ="Estos esqueletos son más robustos y fuertes que antes, con una vida mucho mayor y un daño devastador. Además, sus huesos resplandecen con un inquietante brillo morado, marcándolos como oponentes aún más peligrosos en la batalla.
-Vida: Alta		Daño: Alto	Tamaño: Medio 	Velocidad: Media"
+			  text_osiris ="Los esqueletos de los guerreros que han muerto luchando en las mazmorras, son revividos gracias a una magia y utilizados como enemigos para atacar."
+			  text_osirisV ="Estos esqueletos son más robustos y fuertes que antes. Además, sus huesos resplandecen con un inquietante brillo morado, marcándolos como oponentes aún más peligrosos en la batalla."
 			  texture_osiris ="Assets/Textures/Interfaz/Bestiario/textura_osiris.png"
-			  text_muur ="Unos bichos carnívoros que habitan en las mazmorras oscuras en pequeños grupos. Son ciegos pero se guían por el olor y atacan a su presa en grupo para morderla y comerla.
-Vida: Muy baja 	Daño: Débil 		Tamaño: Pequeño 	Velocidad: Rápida"
-			  text_muurV ="Estos bichos son más grandes y mortales que los comunes, con un peligroso color morado que adorna sus cuerpos, destacándolos como depredadores aún más letales en las profundidades.
-Vida: Baja 	Daño: Medio		Tamaño: Pequeño 	Velocidad: Rápida"
+			  text_muur ="Unos bichos carnívoros que habitan en las mazmorras oscuras en pequeños grupos. Son ciegos pero se guían por el olor y atacan a su presa en grupo para morderla y comerla."
+			  text_muurV ="Estos bichos son más grandes y mortales que los comunes, con un peligroso color morado que adorna sus cuerpos, destacándolos como depredadores aún más letales en las profundidades."
 			  texture_muur ="Assets/Textures/Interfaz/Bestiario/textura_muura.png"
-			  text_khurt ="Viven en sus pequeños agujeros hechos en el suelo de las mazmorras. Se desplazan por debajo del suelo dejando un rastro por donde pasan y salen con gran fuerza hacia la superficie.
-Vida: Alta		Daño: Medio 	Tamaño: Medio 	Velocidad: Rápida
-"
-			   text_khurtV ="Estos seres emergen con gran fuerza desde el subsuelo, sorprendiendo a sus enemigos. Además, su rastro y cuerpos brillan, haciéndolos aún más intimidantes y peligrosos.
-Vida: Muy alta		Daño: Alto	Tamaño: Medio 	Velocidad: Rápida" 
+			  text_khurt ="Viven en sus pequeños agujeros hechos en el suelo de las mazmorras. Se desplazan por debajo del suelo dejando un rastro por donde pasan y salen con gran fuerza hacia la superficie."
+			   text_khurtV ="Estos seres emergen con gran fuerza desde el subsuelo, sorprendiendo a sus enemigos. Además, su rastro y cuerpos brillan, haciéndolos aún más intimidantes y peligrosos." 
 			  texture_khurt ="Assets/Textures/Interfaz/Bestiario/textura_khurt.png"
-			  text_boorok ="Está dormido, y golpearlo o pasar cerca de él lo despertará. Usa una gran arma con la que golpea el suelo. 
-Vida: Alta		Daño: Muy alto	Tamaño: Grande	Velocidad: Muy lenta"
-			  text_boorokV ="Su arma y su cuerpo emiten una aura morada, aumentando su ya imponente presencia y convirtiéndose en un enemigo aún más formidable. 
-Vida: Muy alta		Daño: Muy alto	Tamaño: Grande	Velocidad: Muy lenta"
+			  text_boorok ="Está dormido, y golpearlo o pasar cerca de él lo despertará. Usa una gran arma con la que golpea el suelo. "
+			  text_boorokV ="Su arma y su cuerpo emiten una aura morada, aumentando su ya imponente presencia y convirtiéndose en un enemigo aún más formidable."
 			  texture_boorok ="Assets/Textures/Interfaz/Bestiario/textura_boorok.png"
-			  text_ols ="Su saliva es tóxica y la usa para defenderse a distancia, muy débiles en las distancias cortas.
-Vida: Alta		Daño: Alto	Tamaño: Medio 	Velocidad: Lenta"
-			  text_olsV ="Siguen siendo  muy débiles en las distancias cortas pero su capacidad para atacar desde lejos con su saliva venenosa los convierte en enemigos formidables. Además, su saliva emite un resplandor morado, indicando su letalidad aumentada.
-Vida: Alta		Daño: Muy alto	Tamaño: Medio 	Velocidad: Lenta"
+			  text_ols ="Enemigo poderoso que cuenta con una saliva tóxica y la usa para defenderse a distancia, muy débiles en las distancias cortas."
+			  text_olsV ="Siguen siendo muy débiles en las distancias cortas pero su ataque a distancia los convierte en enemigos letales. Además, cuentan con un resplandor morado, indicando su letalidad aumentada."
 			  texture_ols ="Assets/Textures/Interfaz/Bestiario/textura_ols.png"
-			  text_inuit ="Espectro con espada larga, puede atacar de distintas formas y cuenta con varios ataques mágicos. 
-Vida: Muy alta	Daño: Muy alto	Tamaño: Grande	Velocidad: Media"
+			  text_inuit ="Espectro con espada larga, puede atacar de distintas formas y cuenta con varios ataques mágicos."
 			  texture_inuit ="Assets/Textures/Interfaz/Bestiario/textura_inuit.png"
 			  texture_musri ="Assets/Textures/Interfaz/Bestiario/textura_musri.png"
-			  text_musri ="Espectro pequeño que lleva un arco, muy rápido y difícil de acercarse. Cuenta con habilidades especiales. 
-Vida: Muy alta	Daño: Muy alto	Tamaño: Normal	Velocidad: Muy alta"
+			  text_musri ="Espectro pequeño que lleva un arco, muy rápido y difícil de acercarse. Cuenta con habilidades especiales."
 			  texture_surma ="Assets/Textures/Interfaz/Bestiario/textura_surma.png"
-			  text_surma ="Espectro muy grande y fuerte, lleva una gran espada con la que atacar. Puede invocar habilidades para defenderse.
-Vida: Muy alta	Daño: Muy alto	Tamaño: Muy grande Velocidad: Muy lenta"
+			  text_surma ="Espectro muy grande y fuerte, lleva una gran espada con la que atacar. Puede invocar habilidades para defenderse."
 			  texture_icono_osiris ="Assets/Textures/Interfaz/Bestiario/textura_icono_osiris.png"
 			  texture_icono_ols ="Assets/Textures/Interfaz/Bestiario/textura_icono_ols.png"
 			  texture_icono_khurt ="Assets/Textures/Interfaz/Bestiario/textura_icono_khurt.png"

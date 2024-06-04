@@ -218,7 +218,7 @@
       <Filter>Entities\Items</Filter>
     </ClCompile>
     <ClCompile Include="Source\NotesManager.cpp">
-      <Filter>Notes</Filter>
+      <Filter>Modules\Notes</Filter>
     </ClCompile>
     <ClCompile Include="Source\Enemy_Muur.cpp">
       <Filter>Entities\Enemies</Filter>
@@ -239,7 +239,7 @@
       <Filter>Entities\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Source\BestiarioManager.cpp">
-      <Filter>Bestiario</Filter>
+      <Filter>Modules\Bestiario</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene_GameOver.cpp">
       <Filter>Scenes</Filter>
@@ -661,10 +661,10 @@
       <Filter>Entities\Items</Filter>
     </ClInclude>
     <ClInclude Include="Source\NotesManager.h">
-      <Filter>Notes</Filter>
+      <Filter>Modules\Notes</Filter>
     </ClInclude>
     <ClInclude Include="Source\Note.h">
-      <Filter>Notes</Filter>
+      <Filter>Modules\Notes</Filter>
     </ClInclude>
     <ClInclude Include="Source\Enemy_Muur.h">
       <Filter>Entities\Enemies</Filter>
@@ -685,10 +685,10 @@
       <Filter>Entities\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Source\Bestiario.h">
-      <Filter>Bestiario</Filter>
+      <Filter>Modules\Bestiario</Filter>
     </ClInclude>
     <ClInclude Include="Source\BestiarioManager.h">
-      <Filter>Bestiario</Filter>
+      <Filter>Modules\Bestiario</Filter>
     </ClInclude>
     <ClInclude Include="Source\Scene_GameOver.h">
       <Filter>Scenes</Filter>
@@ -899,14 +899,8 @@
     <Filter Include="Modules\SistemaComercio">
       <UniqueIdentifier>{2334312c-c9a9-44f4-927a-81d2550c5738}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Notes">
-      <UniqueIdentifier>{cd095046-c48c-4abf-ab5f-a278e447e42c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Entities\Boss">
       <UniqueIdentifier>{02da5046-0df8-4942-bd9f-56acabcad68a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Bestiario">
-      <UniqueIdentifier>{8601526c-a76c-4528-970c-40493ea69d1f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Entities\Chest">
       <UniqueIdentifier>{cf5f6a5d-42aa-4cba-a854-d5f3e8a6d10c}</UniqueIdentifier>
@@ -940,6 +934,12 @@
     </Filter>
     <Filter Include="Modules\SistemaMisiones">
       <UniqueIdentifier>{54f3c5b6-a05c-4852-8661-ffdf5d8aa6e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Bestiario">
+      <UniqueIdentifier>{8601526c-a76c-4528-970c-40493ea69d1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Notes">
+      <UniqueIdentifier>{cd095046-c48c-4abf-ab5f-a278e447e42c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

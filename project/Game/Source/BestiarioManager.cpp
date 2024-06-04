@@ -385,31 +385,31 @@ bool BestiarioManager::LoadState(pugi::xml_node node)
 		item = item->prev;
 	}
 
+	osiris = 0;
+	osirisV = 0;
+	muur = 0;
+	muurV = 0;
+	khurt = 0;
+	khurtV = 0;
+	boorok = 0;
+	boorokV = 0;
+	ols = 0;
+	olsV = 0;
+	inuit = 0;
+	inuitV = 0;
+	musri = 0;
+	musriV = 0;
+	surma = 0;
+	surmaV = 0;
+
+
 	bestiario.Clear();
 
-	pugi::xml_document configFile;
-	pugi::xml_node entitiesDataNode;
-	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
-	entitiesDataNode = configFile.child("config").child("entities_data");
-
-	//Bestiario* BestiarioItem = app->BestiarioManager->CreateItem(, 0, 0, 0, 0, 0, 0);
-	for (pugi::xml_node itemNode = node.child("Bestiario").child("Bestiario"); itemNode; itemNode = itemNode.next_sibling("Bestiario"))
+	//CreateItem("nombre")
+	for (pugi::xml_node bestia = node.child("bestiario").child("bestia"); bestia; bestia = bestia.next_sibling("bestia"))
 	{
 
-		Bestiario* itemLoaded = nullptr;
-		pugi::xml_node itemConfigurationNode;
-		switch ((BestiarioType)itemNode.attribute("type").as_int())
-		{
-		case BestiarioType::BEST:
-			/*itemConfigurationNode = entitiesDataNode.child("item_garra");
-			itemLoaded = app->bestiarioManager->CreateItem(EntityType::ITEM_NOTA, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string());*/
-			break;
-
-		case BestiarioType::UNKNOWN:
-			break;
-		default:
-			break;
-		}
+		CreateItem((char*)bestia.attribute("name").as_string(""));
 
 
 	}
@@ -423,19 +423,15 @@ bool BestiarioManager::LoadState(pugi::xml_node node)
 bool BestiarioManager::SaveState(pugi::xml_node node)
 {
 	bool ret = true;
-	pugi::xml_node BestiarioNode = node.append_child("Bestiario");
+	pugi::xml_node bestiarioNode = node.append_child("bestiario");
 
 	for (int i = 0; i < bestiario.Count(); i++) {
 
-		Bestiario* BestiarioItem = bestiario.At(i)->data;
+		Bestiario* bestiarioItem = bestiario.At(i)->data;
 
-		pugi::xml_node BestiarioItemNode = BestiarioNode.append_child("Bestiario");
-		BestiarioItemNode.append_attribute("type").set_value((int)BestiarioItem->type);
-		BestiarioItemNode.append_attribute("quantity").set_value(BestiarioItem->quantity);
+		pugi::xml_node bestiaItemNode = bestiarioNode.append_child("bestia");
+		bestiaItemNode.append_attribute("name").set_value(bestiarioItem->name.GetString());
 	}
-
-
-
 
 	return ret;
 }

@@ -20,13 +20,24 @@
 			</puzzles>
 		</map>
 	</:anonymous>
-	<pueblo_tutorial />
+	<scene_mazmorra2 />
 	<entitymanager>
 		<entity_manager>
 			<doors>
 				<door sceneLevel="-10" tpID="0" />
-				<door sceneLevel="-10" tpID="8" />
-				<door sceneLevel="-10" tpID="1" />
+				<door sceneLevel="-10" tpID="60" />
+				<door sceneLevel="-10" tpID="6" />
+				<door sceneLevel="1" tpID="0" />
+				<door sceneLevel="1" tpID="2" />
+				<door sceneLevel="1" tpID="4" />
+				<door sceneLevel="1" tpID="1" />
+				<door sceneLevel="0" tpID="0" />
+				<door sceneLevel="0" tpID="60" />
+				<door sceneLevel="0" tpID="6" />
+				<door sceneLevel="0" tpID="15" />
+				<door sceneLevel="0" tpID="61" />
+				<door sceneLevel="1" tpID="70" />
+				<door sceneLevel="1" tpID="60" />
 			</doors>
 		</entity_manager>
 	</entitymanager>
@@ -40,11 +51,19 @@
 			<ArmorLevel quantity="0" />
 			<PrimaryMask quantity="-1" />
 			<SecondaryMask quantity="-1" />
-			<StoryLevel quantity="2" />
+			<StoryLevel quantity="1" />
 			<Mask0 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
 			<Mask1 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
 			<Mask2 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
 			<Mask3 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
+			<maskNum n="0" info="Esta variable son las mascaras que tienes desbloqueadas" />
+			<maskPoints>
+				<maskPointZero points="0" />
+				<maskPointOne points="0" />
+				<maskPointTwo points="0" />
+				<maskPointThree points="0" />
+			</maskPoints>
+			<elevator mazmorra="2" mazmorraActual="2" />
 		</inventory>
 	</iventorymanager>
 	<commercemanager />
@@ -55,14 +74,37 @@
 		</questLines>
 	</questmanager>
 	<notesmanager>
-		<Note />
+		<notes />
 	</notesmanager>
 	<bestiariomanager>
-		<Bestiario />
+		<bestiario />
 	</bestiariomanager>
 	<equipo />
 	<Ascensormenu />
-	<treemanager />
+	<treemanager>
+		<skillTree>
+			<node id="0" nivelArbol="0" nivelMejora="0" type="0" used1="false" used2="false" used3="false" used4="false" usable1="true" usable2="true" usable3="true" usable4="true" />
+			<node id="1" nivelArbol="0" nivelMejora="1" type="4" used1="false" used2="false" used3="false" used4="false" usable1="true" usable2="true" usable3="true" usable4="true" />
+			<node id="2" nivelArbol="0" nivelMejora="2" type="4" used1="false" used2="false" used3="false" used4="false" usable1="false" usable2="false" usable3="false" usable4="false" />
+			<node id="3" nivelArbol="0" nivelMejora="3" type="4" used1="false" used2="false" used3="false" used4="false" usable1="false" usable2="false" usable3="false" usable4="false" />
+			<node id="4" nivelArbol="0" nivelMejora="4" type="4" used1="false" used2="false" used3="false" used4="false" usable1="false" usable2="false" usable3="false" usable4="false" />
+			<node id="5" nivelArbol="1" nivelMejora="0" type="1" used1="false" used2="false" used3="false" used4="false" usable1="true" usable2="true" usable3="true" usable4="true" />
+			<node id="6" nivelArbol="1" nivelMejora="1" type="4" used1="false" used2="false" used3="false" used4="false" usable1="true" usable2="true" usable3="true" usable4="true" />
+			<node id="7" nivelArbol="1" nivelMejora="2" type="4" used1="false" used2="false" used3="false" used4="false" usable1="false" usable2="false" usable3="false" usable4="false" />
+			<node id="8" nivelArbol="1" nivelMejora="3" type="4" used1="false" used2="false" used3="false" used4="false" usable1="false" usable2="false" usable3="false" usable4="false" />
+			<node id="9" nivelArbol="1" nivelMejora="4" type="4" used1="false" used2="false" used3="false" used4="false" usable1="false" usable2="false" usable3="false" usable4="false" />
+			<node id="10" nivelArbol="2" nivelMejora="0" type="2" used1="false" used2="false" used3="false" used4="false" usable1="true" usable2="true" usable3="true" usable4="true" />
+			<node id="11" nivelArbol="2" nivelMejora="1" type="4" used1="false" used2="false" used3="false" used4="false" usable1="true" usable2="true" usable3="true" usable4="true" />
+			<node id="12" nivelArbol="2" nivelMejora="2" type="4" used1="false" used2="false" used3="false" used4="false" usable1="false" usable2="false" usable3="false" usable4="false" />
+			<node id="13" nivelArbol="2" nivelMejora="3" type="4" used1="false" used2="false" used3="false" used4="false" usable1="false" usable2="false" usable3="false" usable4="false" />
+			<node id="14" nivelArbol="2" nivelMejora="4" type="4" used1="false" used2="false" used3="false" used4="false" usable1="false" usable2="false" usable3="false" usable4="false" />
+			<node id="15" nivelArbol="3" nivelMejora="0" type="3" used1="false" used2="false" used3="false" used4="false" usable1="true" usable2="true" usable3="true" usable4="true" />
+			<node id="16" nivelArbol="3" nivelMejora="1" type="4" used1="false" used2="false" used3="false" used4="false" usable1="true" usable2="true" usable3="true" usable4="true" />
+			<node id="17" nivelArbol="3" nivelMejora="2" type="4" used1="false" used2="false" used3="false" used4="false" usable1="false" usable2="false" usable3="false" usable4="false" />
+			<node id="18" nivelArbol="3" nivelMejora="3" type="4" used1="false" used2="false" used3="false" used4="false" usable1="false" usable2="false" usable3="false" usable4="false" />
+			<node id="19" nivelArbol="3" nivelMejora="4" type="4" used1="false" used2="false" used3="false" used4="false" usable1="false" usable2="false" usable3="false" usable4="false" />
+		</skillTree>
+	</treemanager>
 	<guiManager />
 	<dialogmanager />
 	<fadeToBlack />
