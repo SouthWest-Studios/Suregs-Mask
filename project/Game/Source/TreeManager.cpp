@@ -653,34 +653,38 @@ bool TreeManager::LoadState(pugi::xml_node node)
 		item = item->prev;
 	}
 
-	arboles.Clear();
+	/*arboles.Clear();*/
 
 	pugi::xml_node treeNode = node.child("skillTree");
 
 
 
-	for (pugi::xml_node itemNode = node.child("node"); itemNode; itemNode = itemNode.next_sibling("node"))
+	for (pugi::xml_node itemNode = treeNode.child("node"); itemNode; itemNode = itemNode.next_sibling("node"))
 	{
 
 		bool boolRaroDelAleixUseless = true;
 
-		if (((TreeType)itemNode.attribute("type").as_int()) == TreeType::BUTTON) {
+		Tree* t = searchTreeByArbolMejora(itemNode.attribute("nivelArbol").as_int(), itemNode.attribute("nivelMejora").as_int());
+
+		t->used1 = itemNode.attribute("used1").as_bool();
+		t->used2 = itemNode.attribute("used2").as_bool();
+		t->used3 = itemNode.attribute("used3").as_bool();
+		t->used4 = itemNode.attribute("used4").as_bool();
+
+
+		t->usable1 = itemNode.attribute("usable1").as_bool();
+		t->usable2 = itemNode.attribute("usable2").as_bool();
+		t->usable3 = itemNode.attribute("usable3").as_bool();
+		t->usable4 = itemNode.attribute("usable4").as_bool();
+
+		/*if (((TreeType)itemNode.attribute("type").as_int()) == TreeType::BUTTON) {
 			boolRaroDelAleixUseless = false;
-		}
+		}*/
 
-		Tree* t = CreateItem((TreeType)itemNode.attribute("type").as_int(), itemNode.attribute("nivelArbol").as_int(), itemNode.attribute("nivelMejora").as_int(), boolRaroDelAleixUseless);
+		/*Tree* t = CreateItem((TreeType)itemNode.attribute("type").as_int(), itemNode.attribute("nivelArbol").as_int(), itemNode.attribute("nivelMejora").as_int(), boolRaroDelAleixUseless);
 
-		t->used1 = itemNode.attribute("used1").as_int();
-		t->used2 = itemNode.attribute("used2").as_int();
-		t->used3 = itemNode.attribute("used3").as_int();
-		t->used4 = itemNode.attribute("used4").as_int();
-
-
-		t->usable1 = itemNode.attribute("usable1").as_int();
-		t->usable2 = itemNode.attribute("usable2").as_int();
-		t->usable3 = itemNode.attribute("usable3").as_int();
-		t->usable4 = itemNode.attribute("usable4").as_int();
-		arboles.Add(t);
+		
+		arboles.Add(t);*/
 	}
 
 
@@ -733,6 +737,23 @@ bool TreeManager::SaveState(pugi::xml_node node)
 
 
 	return ret;
+}
+
+Tree* TreeManager::searchTreeByArbolMejora(int nivelArbol, int nivelMejora)
+{
+	
+	for (int i = 0; i < arboles.Count(); i++) {
+		Tree* t = arboles.At(i)->data;
+
+		if (t->nivelArbol == nivelArbol && t->nivelMejora == nivelMejora) {
+			return t;
+		}
+
+	}
+
+	return nullptr;
+
+
 }
 
 
