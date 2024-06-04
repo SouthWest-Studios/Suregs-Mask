@@ -89,7 +89,7 @@ bool Map::Start() {
 	OPTICK_EVENT();
 	//Calls the functon to load the map, make sure that the filename is assigned
 	SString mapPath = path;
-	mapPath += name;
+	mapPath += nameMazmorra;
 	Load(mapPath);
 
 
@@ -462,6 +462,7 @@ bool Map::Load(SString mapFileName)
 	}
 
 
+
 	if (ret == true)
 	{
 		ret = LoadMap(mapFileXML);
@@ -481,7 +482,7 @@ bool Map::Load(SString mapFileName)
 		ret = LoadAllObjectGroups(mapFileXML.child("map"));
 	}
 
-
+	
 	LoadObjects();
 	LoadCollisions("Collisions");
 	LoadEntities("Entities");
@@ -1559,7 +1560,7 @@ bool Map::LoadEntities(std::string layerName)
 					}
 
 					//NPC_PADRE
-					if (gid == tileset->firstgid + 15) {
+					if (gid == tileset->firstgid + 15 && !boss4_defeated) {
 
 
 						NPCPadre* npc = (NPCPadre*)app->entityManager->CreateEntity(EntityType::NPC_PADRE);
@@ -1711,9 +1712,9 @@ bool Map::LoadEntities(std::string layerName)
 						diamante->position = iPoint(pos.x + 16, pos.y + 16);
 						diamante->Start();
 					}
-
+					
 					//Boss_Inuit
-					if (gid == tileset->firstgid + 60) {
+					if (gid == tileset->firstgid + 60 && !boss1_defeated) {
 						Boss_Inuit* boss_Inuit = (Boss_Inuit*)app->entityManager->CreateEntity(EntityType::BOSS_INUIT);
 						boss_Inuit->config = configNode.child("entities_data").child("boss_inuit");
 						boss_Inuit->position = iPoint(pos.x + 16, pos.y + 16);
@@ -1722,7 +1723,7 @@ bool Map::LoadEntities(std::string layerName)
 
 
 					//Boss_Musri
-					if (gid == tileset->firstgid + 61) {
+					if (gid == tileset->firstgid + 61 && !boss2_defeated) {
 						Boss_Musri* boss_Musri = (Boss_Musri*)app->entityManager->CreateEntity(EntityType::BOSS_MUSRI);
 						boss_Musri->config = configNode.child("entities_data").child("boss_musri");
 						boss_Musri->position = iPoint(pos.x + 16, pos.y + 16);
@@ -1730,7 +1731,7 @@ bool Map::LoadEntities(std::string layerName)
 					}
 
 					//Boss_Surma
-					if (gid == tileset->firstgid + 62) {
+					if (gid == tileset->firstgid + 62 && !boss3_defeated) {
 						Boss_Surma* boss_Surma = (Boss_Surma*)app->entityManager->CreateEntity(EntityType::BOSS_SURMA);
 						boss_Surma->config = configNode.child("entities_data").child("boss_surma");
 						boss_Surma->position = iPoint(pos.x + 16, pos.y + 16);
@@ -1738,7 +1739,7 @@ bool Map::LoadEntities(std::string layerName)
 					}
 
 					//Boss_Igory
-					if (gid == tileset->firstgid + 63) {
+					if (gid == tileset->firstgid + 63 && !boss4_defeated) {
 						Boss_Igory* boss_Igory = (Boss_Igory*)app->entityManager->CreateEntity(EntityType::BOSS_IGORY);
 						boss_Igory->config = configNode.child("entities_data").child("boss_igory");
 						boss_Igory->position = iPoint(pos.x + 16, pos.y + 16);
@@ -1852,6 +1853,10 @@ void Map::BubbleSort(std::vector<PuzzleButtonEntity*>* entities) {
 
 bool Map::LoadState(pugi::xml_node node)
 {
+
+
+	pugi::xml_node testNode = node.child("map").child("bosses");
+
 	bool ret = true;
 	for (pugi::xml_node itemNode = node.child("map").child("puzzles").child("puzzle"); itemNode; itemNode = itemNode.next_sibling("puzzle")) {
 		if (itemNode.attribute("level").as_int(-1) != -1) {
@@ -1860,6 +1865,12 @@ bool Map::LoadState(pugi::xml_node node)
 
 	}
 
+	
+
+	boss1_defeated = node.child("map").child("bosses").child("boss1").attribute("muerto").as_bool();
+	boss2_defeated = node.child("map").child("bosses").child("boss2").attribute("muerto").as_bool();
+	boss3_defeated = node.child("map").child("bosses").child("boss3").attribute("muerto").as_bool();
+	boss4_defeated = node.child("map").child("bosses").child("boss4").attribute("muerto").as_bool();
 
 	return ret;
 }
@@ -1868,7 +1879,7 @@ bool Map::SaveState(pugi::xml_node node)
 {
 	bool ret = true;
 	pugi::xml_node mapNode = node.append_child("map");
-	pugi::xml_node mapPuzzlesNode = node.append_child("map").append_child("puzzles");
+	pugi::xml_node mapPuzzlesNode = mapNode.append_child("puzzles");
 
 	for (int i = 0; i < 8; i++) {
 		pugi::xml_node mapPuzzleNode = mapPuzzlesNode.append_child("puzzle");
@@ -1876,7 +1887,23 @@ bool Map::SaveState(pugi::xml_node node)
 		mapPuzzleNode.append_attribute("complete").set_value(puzzleComplete[i]);
 	}
 
+
+	pugi::xml_node bossesNode = mapNode.append_child("bosses");
+
+	bossesNode.append_child("boss1").append_attribute("muerto").set_value(boss1_defeated);
+	bossesNode.append_child("boss2").append_attribute("muerto").set_value(boss2_defeated);
+	bossesNode.append_child("boss3").append_attribute("muerto").set_value(boss3_defeated);
+	bossesNode.append_child("boss4").append_attribute("muerto").set_value(boss4_defeated);
+
+
+
+	
 	return ret;
+}
+
+
+const char* Map::boolToString(bool b) {
+	return b ? "true" : "false";
 }
 
 

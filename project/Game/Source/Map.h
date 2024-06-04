@@ -214,6 +214,7 @@ private:
     bool LoadObjects();
     bool LoadEntities(std::string layerName);
 
+    const char* boolToString(bool b);
     std::vector<int> GetObjectGroupPoints(const std::string& puntos);
 
     void BubbleSort(std::vector<PuzzleButtonEntity*>* entities);
@@ -224,8 +225,9 @@ private:
     bool SaveState(pugi::xml_node node);
 
 
+
 public: 
-    SString name;
+    SString nameMazmorra;
     SString path;
     SString pathTextures;
     PathFinding* pathfinding;
@@ -249,6 +251,10 @@ public:
     std::vector<Entity*> enemies;
     int maxEnemies = 0; 
 
+    bool boss1_defeated = false;
+    bool boss2_defeated = false;
+    bool boss3_defeated = false;
+    bool boss4_defeated = false;
 private:
     
 

@@ -50,7 +50,7 @@ bool Scene_Mazmorra8::Start()
 	/*player->config = config.child("player");*/
 
 	//Get the map name from the config file and assigns the value in the module
-	app->map->name = config.child("map").attribute("name").as_string();
+	app->map->nameMazmorra = config.child("map").attribute("name").as_string();
 	app->map->path = config.child("map").attribute("path").as_string();
 	app->map->pathTextures = config.child("map").attribute("pathTextures").as_string();
 

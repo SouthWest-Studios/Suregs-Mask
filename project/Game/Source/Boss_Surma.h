@@ -100,7 +100,7 @@ public:
 	float viewDistance;
 	float attackDistance;
 
-
+	bool saveXml = false;
 
 
 private:

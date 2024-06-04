@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <game_state>
 	<audio>
-		<music volume="0" />
-		<fx volume="0" />
+		<music volume="64" />
+		<fx volume="64" />
 	</audio>
 	<tiempoDeJuego>
-		<slot1 tiempo="253908" />
+		<slot1 tiempo="41725" />
 		<slot2 tiempo="0" />
 		<slot3 tiempo="0" />
 	</tiempoDeJuego>
