@@ -88,6 +88,7 @@ public:
 	float maxHealth;
 	float attackDamage;
 
+	bool saveXml = false;
 
 	float viewDistance;
 	float attackDistance;

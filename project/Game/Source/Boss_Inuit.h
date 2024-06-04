@@ -97,6 +97,7 @@ public:
 	//Revivir
 	Timer atackTimeColdDown;
 	Timer timerRecibirDanioColor;
+	bool saveXml = false;
 
 private:
 	pugi::xml_document configFile;

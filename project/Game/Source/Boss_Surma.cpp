@@ -273,6 +273,7 @@ void Boss_Surma::Attack(float dt)
 }
 
 void Boss_Surma::Die() {
+	app->map->boss3_defeated = true;
 
 	Item_Diamante* diamante = (Item_Diamante*)app->entityManager->CreateEntity(EntityType::ITEM_DIAMANTE);
 	diamante->config = configNode.child("entities_data").child("item_diamante");

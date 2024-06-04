@@ -453,11 +453,20 @@ bool Map::Load(SString mapFileName)
 	// L05: DONE 3: Implement LoadMap to load the map properties
 	// retrieve the paremeters of the <map> node and save it into map data
 	pugi::xml_document mapFileXML;
+	pugi::xml_document saveFileXML;
 	pugi::xml_parse_result result = mapFileXML.load_file(mapFileName.GetString());
-
+	pugi::xml_parse_result  saveResult = saveFileXML.load_file("save_game.xml");
+	pugi::xml_node bossSave = saveFileXML.child("game_state");
 	if (result == NULL)
 	{
 		LOG("Could not load map xml file %s. pugi error: %s", mapFileName, result.description());
+		ret = false;
+	}
+
+
+	if (saveResult == NULL)
+	{
+		LOG("Could not load map xml file %s. pugi error: %s", saveResult.description());
 		ret = false;
 	}
 
@@ -481,13 +490,13 @@ bool Map::Load(SString mapFileName)
 		ret = LoadAllObjectGroups(mapFileXML.child("map"));
 	}
 
-
+	LoadBoss();
 	LoadObjects();
 	LoadCollisions("Collisions");
 	LoadEntities("Entities");
 	LoadTPEntities("TPLayers");
 	LoadPuzzleEntities("PuzzleLayer");
-
+	//LoadBoss();
 
 
 
@@ -1559,7 +1568,7 @@ bool Map::LoadEntities(std::string layerName)
 					}
 
 					//NPC_PADRE
-					if (gid == tileset->firstgid + 15) {
+					if (gid == tileset->firstgid + 15 && !boss4_defeated) {
 
 
 						NPCPadre* npc = (NPCPadre*)app->entityManager->CreateEntity(EntityType::NPC_PADRE);
@@ -1711,9 +1720,9 @@ bool Map::LoadEntities(std::string layerName)
 						diamante->position = iPoint(pos.x + 16, pos.y + 16);
 						diamante->Start();
 					}
-
+					
 					//Boss_Inuit
-					if (gid == tileset->firstgid + 60) {
+					if (gid == tileset->firstgid + 60 && !boss1_defeated) {
 						Boss_Inuit* boss_Inuit = (Boss_Inuit*)app->entityManager->CreateEntity(EntityType::BOSS_INUIT);
 						boss_Inuit->config = configNode.child("entities_data").child("boss_inuit");
 						boss_Inuit->position = iPoint(pos.x + 16, pos.y + 16);
@@ -1722,7 +1731,7 @@ bool Map::LoadEntities(std::string layerName)
 
 
 					//Boss_Musri
-					if (gid == tileset->firstgid + 61) {
+					if (gid == tileset->firstgid + 61 && !boss2_defeated) {
 						Boss_Musri* boss_Musri = (Boss_Musri*)app->entityManager->CreateEntity(EntityType::BOSS_MUSRI);
 						boss_Musri->config = configNode.child("entities_data").child("boss_musri");
 						boss_Musri->position = iPoint(pos.x + 16, pos.y + 16);
@@ -1730,7 +1739,7 @@ bool Map::LoadEntities(std::string layerName)
 					}
 
 					//Boss_Surma
-					if (gid == tileset->firstgid + 62) {
+					if (gid == tileset->firstgid + 62 && !boss3_defeated) {
 						Boss_Surma* boss_Surma = (Boss_Surma*)app->entityManager->CreateEntity(EntityType::BOSS_SURMA);
 						boss_Surma->config = configNode.child("entities_data").child("boss_surma");
 						boss_Surma->position = iPoint(pos.x + 16, pos.y + 16);
@@ -1738,7 +1747,7 @@ bool Map::LoadEntities(std::string layerName)
 					}
 
 					//Boss_Igory
-					if (gid == tileset->firstgid + 63) {
+					if (gid == tileset->firstgid + 63 && !boss4_defeated) {
 						Boss_Igory* boss_Igory = (Boss_Igory*)app->entityManager->CreateEntity(EntityType::BOSS_IGORY);
 						boss_Igory->config = configNode.child("entities_data").child("boss_igory");
 						boss_Igory->position = iPoint(pos.x + 16, pos.y + 16);
@@ -1861,6 +1870,11 @@ bool Map::LoadState(pugi::xml_node node)
 	}
 
 
+	boss1_defeated = node.child("map").child("bosses").child("boss1").attribute("muerto").as_bool();
+	boss2_defeated = node.child("map").child("bosses").child("boss2").attribute("muerto").as_bool();
+	boss3_defeated = node.child("map").child("bosses").child("boss3").attribute("muerto").as_bool();
+	boss4_defeated = node.child("map").child("bosses").child("boss4").attribute("muerto").as_bool();
+
 	return ret;
 }
 
@@ -1869,6 +1883,7 @@ bool Map::SaveState(pugi::xml_node node)
 	bool ret = true;
 	pugi::xml_node mapNode = node.append_child("map");
 	pugi::xml_node mapPuzzlesNode = node.append_child("map").append_child("puzzles");
+	pugi::xml_node bossNode = node.append_child("map").append_child("bosses");
 
 	for (int i = 0; i < 8; i++) {
 		pugi::xml_node mapPuzzleNode = mapPuzzlesNode.append_child("puzzle");
@@ -1876,7 +1891,63 @@ bool Map::SaveState(pugi::xml_node node)
 		mapPuzzleNode.append_attribute("complete").set_value(puzzleComplete[i]);
 	}
 
+
+	pugi::xml_node bossesNode = mapNode.append_child("bosses");
+
+	bossesNode.append_child("boss1").append_attribute("muerto").set_value(boss1_defeated);
+	bossesNode.append_child("boss2").append_attribute("muerto").set_value(boss2_defeated);
+	bossesNode.append_child("boss3").append_attribute("muerto").set_value(boss3_defeated);
+	bossesNode.append_child("boss4").append_attribute("muerto").set_value(boss4_defeated);
+
+
+
+	
 	return ret;
+}
+
+
+bool Map::LoadBoss()
+{
+	bool ret = true;
+	/*pugi::xml_document saveFileXML;
+	pugi::xml_parse_result saveResult = saveFileXML.load_file("save_game.xml");
+	pugi::xml_node bossLoad = saveFileXML.child("game_state").child("bosses");
+
+	boss1_defeated = bossLoad.find_child_by_attribute("boss", "number", "1").attribute("isDefeated").as_bool();
+	boss2_defeated = bossLoad.find_child_by_attribute("boss", "number", "2").attribute("isDefeated").as_bool();
+	boss3_defeated = bossLoad.find_child_by_attribute("boss", "number", "3").attribute("isDefeated").as_bool();
+	boss4_defeated = bossLoad.find_child_by_attribute("boss", "number", "4").attribute("isDefeated").as_bool();
+	printf("\nLoad boss1 %d", boss1_defeated);*/
+	
+	return ret;
+}
+
+bool Map::SaveBoss()
+{
+	bool ret = true;
+	//pugi::xml_document saveFileXML;
+	//pugi::xml_parse_result saveResult = saveFileXML.load_file("save_game.xml");
+	//pugi::xml_node bossSave = saveFileXML.child("game_state").child("bosses");
+
+	//bossSave.find_child_by_attribute("boss", "number", "1").set_value(boolToString(boss1_defeated));
+	//bossSave.find_child_by_attribute("boss", "number", "2").set_value(boolToString(boss2_defeated));
+	//bossSave.find_child_by_attribute("boss", "number", "3").set_value(boolToString(boss3_defeated));
+	//bossSave.find_child_by_attribute("boss", "number", "4").set_value(boolToString(boss4_defeated));
+
+	//if (!saveFileXML.save_file("save_game.xml")) {
+	//	std::cerr << "Failed to save XML file" << std::endl;
+	//	return 1;
+	//}
+
+	///*printf("\nSave boss %d", boss1_defeated);
+	//printf("\nLoad boss4 %d", boss4_defeated);*/
+	//printf("\nSave %s",boolToString(boss4_defeated));
+	return ret;
+}
+
+
+const char* Map::boolToString(bool b) {
+	return b ? "true" : "false";
 }
 
 
