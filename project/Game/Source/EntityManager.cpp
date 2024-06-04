@@ -74,6 +74,8 @@
 #include "Item_Mascara_2.h"
 #include "Item_Mascara_3.h"
 #include "Estatua.h"
+#include "ElevatorMenu.h"
+#include "TreeManager.h"
 #include "Defs.h"
 #include "Log.h"
 #include <random>
@@ -658,7 +660,7 @@ bool EntityManager::Update(float dt)
 {
 	bool ret = true;
 
-	if (app->menu->menuu || vacioGameStop || app->hud->estatua) {
+	if (app->menu->menuu || vacioGameStop || app->hud->estatua || app->ascensor->abierto ||app->treeManager->mostrar) {
 		return ret;
 	}
 

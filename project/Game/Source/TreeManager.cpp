@@ -680,7 +680,7 @@ bool TreeManager::LoadState(pugi::xml_node node)
 		t->usable2 = itemNode.attribute("usable2").as_int();
 		t->usable3 = itemNode.attribute("usable3").as_int();
 		t->usable4 = itemNode.attribute("usable4").as_int();
-
+		arboles.Add(t);
 	}
 
 
@@ -1504,6 +1504,12 @@ bool TreeManager::Update(float dt)
 		/*options = true;
 		selected = { PointerPosition.x, PointerPosition.y };
 		selectedId = PointerId;*/
+		if (mostrar)
+		{
+			app->entityManager->active = true;
+			app->physics->active = true;
+			app->menu->active = true;
+		}
 		mostrar = !mostrar;
 
 	}
@@ -1512,7 +1518,7 @@ bool TreeManager::Update(float dt)
 		OnMovePointer();
 		app->entityManager->active = false;
 		app->physics->active = false;
-		if (app->input->GetButton(CONFIRM) == KEY_DOWN) {
+		if (app->input->GetButton(CONFIRM) == KEY_DOWN || app->input->GetButton(CONFIRM) == KEY_DOWN) {
 			/*options = true;
 			selected = { PointerPosition.x, PointerPosition.y };
 			selectedId = PointerId;*/
@@ -1552,7 +1558,7 @@ bool TreeManager::Update(float dt)
 
 		if (selectPrimaryMask)
 		{
-			if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+			/*if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 			{
 				if (app->inventoryManager->numMasks >= 1)
 				{
@@ -1583,11 +1589,28 @@ bool TreeManager::Update(float dt)
 					app->entityManager->GetPlayer()->primaryMask = Mask::MASK3;
 					selectPrimaryMask = false;
 				}
+			}*/
+			if (mask == 1)
+			{
+				app->entityManager->GetPlayer()->primaryMask = Mask::MASK0;
+			}
+			if (mask == 2)
+			{
+				app->entityManager->GetPlayer()->primaryMask = Mask::MASK1;
+			}
+			if (mask == 3)
+			{
+				app->entityManager->GetPlayer()->primaryMask = Mask::MASK2;
+			}
+			if (mask == 4)
+			{
+				app->entityManager->GetPlayer()->primaryMask = Mask::MASK3;
 			}
 
-			if (app->input->GetButton(APP_EXIT) == KEY_DOWN) {
+			/*if (app->input->GetButton(APP_EXIT) == KEY_DOWN) {
 				selectPrimaryMask = false;
-			}
+			}*/
+			selectPrimaryMask = false;
 		}
 
 		/*if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
@@ -1598,7 +1621,7 @@ bool TreeManager::Update(float dt)
 
 		if (selectSecondaryMask)
 		{
-			if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+			/*if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 			{
 				if (app->inventoryManager->numMasks >= 1)
 				{
@@ -1632,7 +1655,28 @@ bool TreeManager::Update(float dt)
 			}
 			if (app->input->GetButton(APP_EXIT) == KEY_DOWN) {
 				selectSecondaryMask = false;
+			}*/
+			if (mask == 1)
+			{
+				app->entityManager->GetPlayer()->secondaryMask = Mask::MASK0;
 			}
+			if (mask == 2)
+			{
+				app->entityManager->GetPlayer()->secondaryMask = Mask::MASK1;
+			}
+			if (mask == 3)
+			{
+				app->entityManager->GetPlayer()->secondaryMask = Mask::MASK2;
+			}
+			if (mask == 4)
+			{
+				app->entityManager->GetPlayer()->secondaryMask = Mask::MASK3;
+			}
+
+			/*if (app->input->GetButton(APP_EXIT) == KEY_DOWN) {
+				selectPrimaryMask = false;
+			}*/
+			selectSecondaryMask = false;
 		}
 
 		int num;
@@ -1681,10 +1725,10 @@ bool TreeManager::Update(float dt)
 				player->maskThreePoints = 0;
 			}
 		}
-		player->maskZeroPoints = 8;
+		/*player->maskZeroPoints = 8;
 		player->maskOnePoints = 8;
 		player->maskTwoPoints = 8;
-		player->maskThreePoints = 8;
+		player->maskThreePoints = 8;*/
 	}
 	
 	
@@ -2181,10 +2225,10 @@ bool TreeManager::PostUpdate()
 		
 		if (selectPrimaryMask || selectSecondaryMask)
 		{
-			app->render->DrawTextBound("1", 120, 180, 100, { 255,0,0,0 }, app->render->titleFont);
+			/*app->render->DrawTextBound("1", 120, 180, 100, { 255,0,0,0 }, app->render->titleFont);
 			app->render->DrawTextBound("2", 120, 310, 370, { 255,0,0,0 }, app->render->titleFont);
 			app->render->DrawTextBound("3", 120, 430, 370, { 255,0,0,0 }, app->render->titleFont);
-			app->render->DrawTextBound("4", 120, 550, 370, { 255,0,0,0 }, app->render->titleFont);
+			app->render->DrawTextBound("4", 120, 550, 370, { 255,0,0,0 }, app->render->titleFont);*/
 		}
 			
 		std::string texto = "Primary Mask";
@@ -2231,10 +2275,10 @@ bool TreeManager::PostUpdate()
 		//{
 		//	app->inventoryManager->numMasks = 1;
 		//}
-		if (app->inventoryManager->numMasks == 1)
+		if (setMask == false && app->inventoryManager->numMasks >= 1)
 		{
 			mask = 1;
-			/*app->inventoryManager->numMasks = 4;*/ //quitar
+			setMask = true;
 		}
 	}
 	

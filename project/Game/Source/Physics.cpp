@@ -11,6 +11,10 @@
 #include "Window.h"
 #include "Box2D/Box2D/Box2D.h"
 #include "ModuleFadeToBlack.h"
+#include "ElevatorMenu.h"
+#include "TreeManager.h"
+#include "Menu.h";
+#include "Hud.h";
 
 // Tell the compiler to reference the compiled Box2D libraries
 #ifdef _DEBUG
@@ -49,6 +53,10 @@ bool Physics::Start()
 bool Physics::PreUpdate()
 {
 	bool ret = true;
+
+	if (app->menu->menuu || app->hud->estatua || app->ascensor->abierto || app->treeManager->mostrar) {
+		return ret;
+	}
 
 	DestroyPendingBodies();
 
@@ -264,6 +272,10 @@ PhysBody* Physics::CreateChain(int x, int y, int* points, int size, bodyType typ
 bool Physics::PostLateUpdate()
 {
 	bool ret = true;
+
+	if (app->menu->menuu || app->hud->estatua || app->ascensor->abierto || app->treeManager->mostrar) {
+		return ret;
+	}
 
 	// Activate or deactivate debug mode
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
