@@ -762,8 +762,8 @@ bool InventoryManager::LoadState(pugi::xml_node node)
 	app->entityManager->GetPlayer()->maskTwoPoints = node.child("inventory").child("maskPoints").child("maskPointTwo").attribute("points").as_int();
 	app->entityManager->GetPlayer()->maskThreePoints = node.child("inventory").child("maskPoints").child("maskPointThree").attribute("points").as_int();
 
-
-
+	app->ascensor->mazmorra = node.child("inventory").child("elevator").attribute("mazmorra").as_int();
+	app->ascensor->mazmorraActual = node.child("inventory").child("elevator").attribute("mazmorraActual").as_int();
 
 
 	return ret;
@@ -843,6 +843,10 @@ bool InventoryManager::SaveState(pugi::xml_node node)
 
 	maskPointNode = maskPointsNode.append_child("maskPointThree");
 	maskPointNode.append_attribute("points").set_value(app->entityManager->GetPlayer()->maskThreePoints);
+
+	pugi::xml_node elevatorNode = inventoryNode.append_child("elevator");
+	elevatorNode.append_attribute("mazmorra").set_value(app->ascensor->mazmorra);
+	elevatorNode.append_attribute("mazmorraActual").set_value(app->ascensor->mazmorraActual);
 
 
 	/*playerNode.append_attribute("x").set_value(player->position.x);
