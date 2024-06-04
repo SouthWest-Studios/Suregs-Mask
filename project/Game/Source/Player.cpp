@@ -669,11 +669,11 @@ bool Player::Start() {
 
 		//PARA TESTEAR
 	currentStats = baseStats;
-	printf("Max Health: %f\n", currentStats.maxHealth);
-	printf("Current Health: %f\n", currentStats.currentHealth);
-	printf("Movement Speed: %f\n", currentStats.movementSpeed);
-	printf("Attack Speed: %f\n", currentStats.attackSpeed);
-	printf("Attack Damage: %f\n", currentStats.attackDamage);
+	//printf("Max Health: %f\n", currentStats.maxHealth);
+	//printf("Current Health: %f\n", currentStats.currentHealth);
+	//printf("Movement Speed: %f\n", currentStats.movementSpeed);
+	//printf("Attack Speed: %f\n", currentStats.attackSpeed);
+	//printf("Attack Damage: %f\n", currentStats.attackDamage);
 
 	maskLevels[primaryMask][Branches::Modifiers] = 0;
 	// maskLevels[primaryMask][Branches::Rama1] = 0;
@@ -687,18 +687,18 @@ bool Player::Start() {
 	// maskLevels[secondaryMask][Branches::Rama3] = 0;
 	// maskLevels[secondaryMask][Branches::Rama4] = 0;
 
-	printf("Primary mask: %d, Level Rama1: %d, Level Rama2: %d, Level Rama3: %d, Level Rama4: %d\n",
-		static_cast<int>(primaryMask) - 1,
+	//printf("Primary mask: %d, Level Rama1: %d, Level Rama2: %d, Level Rama3: %d, Level Rama4: %d\n",
+		/*static_cast<int>(primaryMask) - 1,
 		maskLevels[primaryMask][Branches::Rama1],
 		maskLevels[primaryMask][Branches::Rama2],
 		maskLevels[primaryMask][Branches::Rama3],
-		maskLevels[primaryMask][Branches::Rama4]);
-	printf("Secondary mask: %d, Level Rama1: %d, Level Rama2: %d, Level Rama3: %d, Level Rama4: %d\n",
-		static_cast<int>(secondaryMask) - 1,
+		maskLevels[primaryMask][Branches::Rama4]);*/
+	//printf("Secondary mask: %d, Level Rama1: %d, Level Rama2: %d, Level Rama3: %d, Level Rama4: %d\n",
+		/*static_cast<int>(secondaryMask) - 1,
 		maskLevels[secondaryMask][Branches::Rama1],
 		maskLevels[secondaryMask][Branches::Rama2],
 		maskLevels[secondaryMask][Branches::Rama3],
-		maskLevels[secondaryMask][Branches::Rama4]);
+		maskLevels[secondaryMask][Branches::Rama4]);*/
 
 	baseStats.maxHealth = 100 + armorPerLevel[app->inventoryManager->armorLevel];
 	baseStats.currentHealth = 100 + armorPerLevel[app->inventoryManager->armorLevel];
@@ -723,8 +723,8 @@ bool Player::Start() {
 	app->tex->GetSize(texture, texW, texH);
 
 
-	/*printf("\nPositionX: %d", position.x);
-	printf("\nPositionY: %d", position.y);*/
+	/*//printf("\nPositionX: %d", position.x);
+	//printf("\nPositionY: %d", position.y);*/
 	posInicioPlayer = b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y));
 
 	return true;
@@ -770,7 +770,7 @@ bool Player::Update(float dt)
 
 	//Animacion
 	if (inTakeDMG) {
-		//printf("\n PlayerTakeDMG");
+		////printf("\n PlayerTakeDMG");
 		currentAnimation = &takeDMG_player;
 	}
 
@@ -817,7 +817,7 @@ bool Player::Update(float dt)
 		desiredState = EntityStatePlayer::POCION;
 	}
 
-	/*printf("\nposx:%d, posy: %d",position.x, position.y);*/
+	/*//printf("\nposx:%d, posy: %d",position.x, position.y);*/
 
 	if (maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].invisibilityTimer.ReadSec() > maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].invisibilityDuration) {
 		SDL_SetTextureAlphaMod(texture, 255);
@@ -868,7 +868,7 @@ bool Player::Update(float dt)
 
 		levelUpZero = true;
 
-		printf("Has subido la mask 0 a nivel %i y su experiencia actual es %i \n", maskZeroLevel, maskZeroXP);
+		//printf("Has subido la mask 0 a nivel %i y su experiencia actual es %i \n", maskZeroLevel, maskZeroXP);
 	}
 
 	//MASK 1
@@ -880,7 +880,7 @@ bool Player::Update(float dt)
 
 		levelUpOne = true;
 
-		printf("Has subido la mask 1 a nivel %i y su experiencia actual es %i \n", maskOneLevel, maskOneXP);
+		//printf("Has subido la mask 1 a nivel %i y su experiencia actual es %i \n", maskOneLevel, maskOneXP);
 	}
 
 	//MASK 2
@@ -892,7 +892,7 @@ bool Player::Update(float dt)
 
 		levelUpTwo = true;
 
-		printf("Has subido la mask 2 a nivel %i y su experiencia actual es %i \n", maskTwoLevel, maskTwoXP);
+		//printf("Has subido la mask 2 a nivel %i y su experiencia actual es %i \n", maskTwoLevel, maskTwoXP);
 	}
 
 	//MASK 3
@@ -904,7 +904,7 @@ bool Player::Update(float dt)
 
 		levelUpThree = true;
 
-		printf("Has subido la mask 3 a nivel %i y su experiencia actual es %i \n", maskThreeLevel, maskThreeXP);
+		//printf("Has subido la mask 3 a nivel %i y su experiencia actual es %i \n", maskThreeLevel, maskThreeXP);
 	}
 
 	//if (currentState == EntityStatePlayer::DEAD && !particulaBlood) {
@@ -1134,7 +1134,7 @@ void Player::ResetAnimacion()
 		takeDMG_player.Reset();
 	}
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "maskBola_player") {
-		printf("\maskBola_player");
+		//printf("\maskBola_player");
 		inAnimation = false;
 		//desiredState = EntityStatePlayer::IDLE;
 		takeDMG_player.Reset();
@@ -1146,13 +1146,13 @@ void Player::ResetAnimacion()
 			mask1AttackSensor->body->GetWorld()->DestroyBody(mask1AttackSensor->body);
 			//app->physics->GetWorld()->DestroyBody(mask1AttackSensor->body);
 			mask1AttackSensor = nullptr;
-			printf("delete");
+			//printf("delete");
 		}
 
 	}
 
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "maskRayo_player") {
-		printf("\maskRayo_player");
+		//printf("\maskRayo_player");
 		inAnimation = false;
 		maskRayo_player.Reset();
 		desiredState = EntityStatePlayer::IDLE;
@@ -1271,7 +1271,7 @@ void Player::UsePotion() {
 
 void Player::Attack(float dt)
 {
-	//printf("attack"); 
+	////printf("attack"); 
 	atack_Anim = true;
 	inAnimation = true;
 
@@ -1284,7 +1284,7 @@ void Player::Attack(float dt)
 		attackSensor = app->physics->CreateRectangleSensor(attackX, attackY, attackWidth, attackHeight, DYNAMIC);
 		attackSensor->ctype = ColliderType::PLAYER_ATTACK;
 		attackSensor->listener = this;
-		//printf("CREATE SENSOR\n");
+		////printf("CREATE SENSOR\n");
 		hasAttacked = true;
 		atackNum++;
 		checkAtk = true;
@@ -1292,7 +1292,7 @@ void Player::Attack(float dt)
 	else if (attackSensor && hasAttacked) {
 		// Si el sensor de ataque ya existe, actualizamos su posición
 		attackSensor->body->SetTransform(b2Vec2(PIXEL_TO_METERS(attackX), PIXEL_TO_METERS(attackY)), 0);
-		//printf("TRANSFORM SENSOR\n");
+		////printf("TRANSFORM SENSOR\n");
 	}
 	pbodyFoot->body->ApplyForceToCenter(b2Vec2(lastMovementDirection.x * attackMovement, lastMovementDirection.y * attackMovement), true);
 
@@ -1344,7 +1344,7 @@ void Player::Dead()
 	}
 
 
-	//printf("dead");
+	////printf("dead");
 	currentAnimation = &dead_player;
 	if (DeadTP && PlayerTimerColdDown(2)) {
 		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_gameover);
@@ -1355,7 +1355,7 @@ void Player::Dead()
 	if (!coinsRemoved) {
 		coinsRemoved = true;
 		app->inventoryManager->monedasObtenidas *= 0.7;
-		printf("Monedas obtenidas: %d\n", app->inventoryManager->monedasObtenidas);
+		//printf("Monedas obtenidas: %d\n", app->inventoryManager->monedasObtenidas);
 	}
 
 }
@@ -1424,13 +1424,13 @@ void Player::ChangeMask() {
 
 		timerChangeMask.Start();
 
-		printf("Player primary mask after mask change: %d\n", (static_cast<int>(primaryMask) - 1));
-		printf("Player secondary mask after mask change: %d\n", (static_cast<int>(secondaryMask) - 1));
-		printf("Player stats after mask change:\n");
-		printf("Max Health: %f\n", currentStats.maxHealth);
-		printf("Movement Speed: %f\n", currentStats.movementSpeed);
-		printf("Attack Speed: %f\n", currentStats.attackSpeed);
-		printf("Attack Damage: %f\n", currentStats.attackDamage);
+		//printf("Player primary mask after mask change: %d\n", (static_cast<int>(primaryMask) - 1));
+		//printf("Player secondary mask after mask change: %d\n", (static_cast<int>(secondaryMask) - 1));
+		//printf("Player stats after mask change:\n");
+		//printf("Max Health: %f\n", currentStats.maxHealth);
+		//printf("Movement Speed: %f\n", currentStats.movementSpeed);
+		//printf("Attack Speed: %f\n", currentStats.attackSpeed);
+		//printf("Attack Damage: %f\n", currentStats.attackDamage);
 	}
 }
 
@@ -1473,7 +1473,7 @@ void Player::ApplyPoison(Entity* entity) {
 
 void Player::stateMachine(float dt)
 {
-	//printf("\ncurrentState: %d, desiredState: %d", static_cast<int>(currentState), static_cast<int>(desiredState));
+	////printf("\ncurrentState: %d, desiredState: %d", static_cast<int>(currentState), static_cast<int>(desiredState));
 	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
 	switch (nextState) {
 	case EntityStatePlayer::IDLE:
@@ -1540,9 +1540,9 @@ Entity* Player::GetEnemyWithHighestHealthWithinRadius(iPoint position, int radiu
 		int dx = position.x - enemy->position.x;
 		int dy = position.y - enemy->position.y;
 		if (dx * dx + dy * dy <= radius * radius) {
-			//printf("Considering enemy at (%d, %d) with health %f\n", enemy->position.x, enemy->position.y, enemy->GetHealth());
+			////printf("Considering enemy at (%d, %d) with health %f\n", enemy->position.x, enemy->position.y, enemy->GetHealth());
 			if (enemy->GetHealth() > highestHealth) {
-				//printf("Selected as highest health enemy so far\n");
+				////printf("Selected as highest health enemy so far\n");
 				highestHealthEnemy = enemy;
 				highestHealth = enemy->GetHealth();
 			}
@@ -1553,7 +1553,7 @@ Entity* Player::GetEnemyWithHighestHealthWithinRadius(iPoint position, int radiu
 
 void Player::CastMultipleLightnings() {
 	int numLightnings = maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].numberLightning;
-	printf("numLightnings: %d\n", numLightnings);
+	//printf("numLightnings: %d\n", numLightnings);
 	for (int i = 0; i < numLightnings; i++) {
 		CastLightning();
 	}
@@ -1563,7 +1563,7 @@ void Player::CastMultipleLightnings() {
 void Player::CastLightning() {
 	Entity* target = GetEnemyWithHighestHealthWithinRadius(position, 500);
 	if (target != nullptr) {
-		printf("Enemy hit: %p at position (%d, %d)\n", (void*)target, target->position.x, target->position.y);
+		//printf("Enemy hit: %p at position (%d, %d)\n", (void*)target, target->position.x, target->position.y);
 		target->TakeDamage(maskStats[primaryMask][Branches::Rama1][maskLevels[primaryMask][Branches::Rama1]].maskDamage);
 		target->ApplyPoison(maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].poisonDamage, maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].poisonDuration, maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].poisonTickRate);
 		//ApplyPoison(target);
@@ -1573,7 +1573,7 @@ void Player::CastLightning() {
 		app->psystem->AddEmiter(pos2, EMITTER_TYPE_EXPLOSION_RAYO);
 	}
 	else {
-		printf("No enemy alive in range to attack\n");
+		//printf("No enemy alive in range to attack\n");
 	}
 }
 
@@ -1641,7 +1641,7 @@ void Player::SetPassiveInvisible() {
 void Player::Mask3Statistics() {
 	currentStats.attackDamage = baseStats.attackDamage * (1 + maskStats[Mask::MASK3][Branches::Rama4][maskLevels[Mask::MASK3][Branches::Rama4]].maxActiveDamageModifier);
 	currentStats.maxHealth = baseStats.maxHealth * (1 + maskStats[Mask::MASK3][Branches::Rama4][maskLevels[Mask::MASK3][Branches::Rama4]].maxActiveHealthModifier);
-	printf("current stats attack damage: %f\n", currentStats.attackDamage);
+	//printf("current stats attack damage: %f\n", currentStats.attackDamage);
 	mask3Active = true;
 	/*app->psystem->AddEmiter(posMask3Particle, EMITTER_TYPE_FIRE_MASK3);*/
 	mask3Timer.Start();
@@ -1659,7 +1659,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::VACIOS:
 		if (!insideVacio) {
 			insideVacio = true;
-			//printf("Vacio\n");
+			////printf("Vacio\n");
 		}
 		break;
 	case ColliderType::FISHZONE:
@@ -1667,7 +1667,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		app->scene_pueblo->GetRod()->fishing.rodReady = !app->scene_pueblo->GetRod()->fishing.rodReady;
 		getPlayerTouch = true;
 		}
-		printf("\n fishizone: %d", app->scene_pueblo->GetRod()->fishing.rodReady);
+		//printf("\n fishizone: %d", app->scene_pueblo->GetRod()->fishing.rodReady);
 		break;
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");
@@ -1898,7 +1898,7 @@ void Player::OnEndCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::VACIOS:
 		insideVacio = false;
-		//printf("Exit_Vacio\n");
+		////printf("Exit_Vacio\n");
 		break;
 	case ColliderType::FISHZONE:
 		getPlayerTouch = false;
@@ -2091,7 +2091,7 @@ void Player::CameraMovement(float dt)
 						break;
 
 					default:
-						printf("isLargeRoom not found");
+						//printf("isLargeRoom not found");
 						break;
 					}
 				}
@@ -2103,7 +2103,7 @@ void Player::CameraMovement(float dt)
 					switch (roomType)
 					{
 					case ROOM_L_DL: //tiene salas abajo y izquierda
-						//printf("Abajo y Izquerda \n");
+						////printf("Abajo y Izquerda \n");
 						//X
 						if (position.x < currentRoom->x + app->render->camera.w / 2) //izq
 						{
@@ -2140,7 +2140,7 @@ void Player::CameraMovement(float dt)
 						break;
 
 					case ROOM_L_DR: //tiene salas abajo y derecha
-						/*printf("Abajo y Derecha \n");*/
+						/*//printf("Abajo y Derecha \n");*/
 						//X
 						if (position.x < currentRoom->x + app->render->camera.w / 2) //izq
 						{
@@ -2177,7 +2177,7 @@ void Player::CameraMovement(float dt)
 						break;
 
 					case ROOM_L_UL: //tiene salas arriba y izquierda
-						/*printf("Arriba y Izquerda \n");*/
+						/*//printf("Arriba y Izquerda \n");*/
 						//X
 						if (position.x < currentRoom->x + app->render->camera.w / 2) //izq
 						{
@@ -2215,7 +2215,7 @@ void Player::CameraMovement(float dt)
 
 
 					case ROOM_L_UR: //tiene salas arriba y derecha
-						/*printf("Arriba y Derecha \n");*/
+						/*//printf("Arriba y Derecha \n");*/
 						//X
 						if (position.x < currentRoom->x + app->render->camera.w / 2) //izq
 						{
@@ -2252,7 +2252,7 @@ void Player::CameraMovement(float dt)
 						break;
 
 					case ROOM_L_D: //sala abajo
-						/*printf("Abajo \n");*/
+						/*//printf("Abajo \n");*/
 						//X
 						if (position.x < currentRoom->x + app->render->camera.w / 2) //izq
 						{
@@ -2289,7 +2289,7 @@ void Player::CameraMovement(float dt)
 						break;
 
 					case ROOM_L_U: //sala arriba
-						/*printf("Arriba \n");*/
+						/*//printf("Arriba \n");*/
 						//X
 						if (position.x < currentRoom->x + app->render->camera.w / 2) //izq
 						{
@@ -2327,7 +2327,7 @@ void Player::CameraMovement(float dt)
 						break;
 
 					case ROOM_L_L: //sala izquierda
-						/*printf("Izquierda \n");*/
+						/*//printf("Izquierda \n");*/
 						//X
 						if (position.x < currentRoom->x + app->render->camera.w / 2) //izq
 						{
@@ -2365,7 +2365,7 @@ void Player::CameraMovement(float dt)
 						break;
 
 					case ROOM_L_R: //sala derecha
-						/*printf("Derecha \n");*/
+						/*//printf("Derecha \n");*/
 						//X
 						if (position.x < currentRoom->x + app->render->camera.w / 2) //izq
 						{
@@ -2403,7 +2403,7 @@ void Player::CameraMovement(float dt)
 						break;
 
 					default:
-						printf("isLRoom not found");
+						//printf("isLRoom not found");
 						break;
 					}
 				}
@@ -2485,55 +2485,55 @@ void Player::DetermineRoomType(MapObject* room) {
 }
 
 void Player::DetermineRoomTypel(MapObject* room) {
-	//printf("Llamada a DetermineRoomTypel\n");
+	////printf("Llamada a DetermineRoomTypel\n");
 	if (room->properties.GetProperty("lType") != NULL)
 	{
 		std::string lType = room->properties.GetProperty("lType")->value;
-		/*printf("El objeto tiene el atributo lType\n");*/
+		/*//printf("El objeto tiene el atributo lType\n");*/
 
 		if (lType == "dl")
 		{
-			/*printf("dl");*/
+			/*//printf("dl");*/
 			roomType = ROOM_L_DL;
 		}
 		else if (lType == "dr")
 		{
-			//printf("dr");
+			////printf("dr");
 			roomType = ROOM_L_DR;
 		}
 		else if (lType == "ul")
 		{
-			//printf("ul");
+			////printf("ul");
 			roomType = ROOM_L_UL;
 		}
 		else if (lType == "ur")
 		{
-			//printf("ur");
+			////printf("ur");
 			roomType = ROOM_L_UR;
 		}
 		else if (lType == "d")
 		{
-			//printf("d");
+			////printf("d");
 			roomType = ROOM_L_D;
 		}
 		else if (lType == "u")
 		{
-			//printf("u");
+			////printf("u");
 			roomType = ROOM_L_U;
 		}
 		else if (lType == "l")
 		{
-			//printf("l");
+			////printf("l");
 			roomType = ROOM_L_L;
 		}
 		else if (lType == "r")
 		{
-			//printf("r");
+			////printf("r");
 			roomType = ROOM_L_R;
 		}
 		else
 		{
-			printf("UNKNOWN L ROOM");
+			//printf("UNKNOWN L ROOM");
 			roomType = ROOM_UNKNOWN;
 		}
 	}
@@ -2602,7 +2602,7 @@ void Player::PlayerMovement(float dt)
 
 
 
-	//printf("\n%f",joystick.x);
+	////printf("\n%f",joystick.x);
 
 	//Controles antiguos
 
@@ -2690,7 +2690,7 @@ void Player::PlayerMovement(float dt)
 	if (timerAttack.ReadMSec() > cdTimerAttackMS) {
 		isAttacking = false;
 	}
-	//printf("%f\r",collisionAttackTimer.ReadMSec());
+	////printf("%f\r",collisionAttackTimer.ReadMSec());
 	//Borra colisión pasados 50 milisegundos
 	if (collisionAttackTimer.ReadMSec() > 50) {
 		if (attackSensor) {
@@ -2720,7 +2720,7 @@ void Player::PlayerMovement(float dt)
 			maskStats[primaryMask][Branches::Rama2][i].maskCoolDown = maskStats[primaryMask][Branches::Rama2][i].originalmaskCoolDown;
 		}
 	}
-	//else printf("\rmaskCooldown: %f de cooldown total: %f", maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDownTimer.ReadMSec(), maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDown);
+	//else //printf("\rmaskCooldown: %f de cooldown total: %f", maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDownTimer.ReadMSec(), maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDown);
 
 	if (!(maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDownTimer.ReadMSec() < maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDown && isAttackingMask)) {
 		isAttackingMask = false;
@@ -2807,11 +2807,11 @@ void Player::TakeDamage(float damage) {
 			inAnimation = true;
 			inTakeDMG = true;
 			if (app->audio->playingDeathFx == false) app->audio->PlayTimedFx(player_get_damage_fx, 575);
-			printf("Player has received  %f damage\n", damage);
+			//printf("Player has received  %f damage\n", damage);
 			damageTimer.Start();
 
 			if (currentStats.currentHealth <= 0) {
-				//printf("Dead");
+				////printf("Dead");
 				inAnimation = true;
 				desiredState = EntityStatePlayer::DEAD;
 			}
@@ -2854,7 +2854,7 @@ void Player::UpdateStats() {
 
 bool Player::PlayerTimerColdDown(float time)
 {
-	//printf("\nataqueTimeClodDown%: %f", ataqueTimeClodDown);
+	////printf("\nataqueTimeClodDown%: %f", ataqueTimeClodDown);
 	TimeClodDown = TimerColdDown.CountDown(time);
 	if ((float)TimeClodDown == 0) {
 		return true;
@@ -2885,7 +2885,7 @@ void Player::ResetSpeed() {
 //
 //
 //	rodar_PlayerPosition = lerp(currentPosX, rodar_PotisionX, 0.1f);
-//	printf("\nlerp: %d", rodar_PlayerPosition);
+//	//printf("\nlerp: %d", rodar_PlayerPosition);
 //	velocity.x = rodar_PlayerPosition;
 //
 //	pbodyFoot->body->SetLinearVelocity(velocity);

@@ -138,13 +138,13 @@ using std::memset;
 #	define PUGI__MSVC_CRT_VERSION 1310 // MSVC7.1
 #endif
 
-// Not all platforms have snprintf; we define a wrapper that uses snprintf if possible. This only works with buffers with a known size.
+// Not all platforms have sn//printf; we define a wrapper that uses sn//printf if possible. This only works with buffers with a known size.
 #if __cplusplus >= 201103
-#	define PUGI__SNPRINTF(buf, ...) snprintf(buf, sizeof(buf), __VA_ARGS__)
+#	define PUGI__SN//printf(buf, ...) sn//printf(buf, sizeof(buf), __VA_ARGS__)
 #elif defined(PUGI__MSVC_CRT_VERSION) && PUGI__MSVC_CRT_VERSION >= 1400
-#	define PUGI__SNPRINTF(buf, ...) _snprintf_s(buf, _countof(buf), _TRUNCATE, __VA_ARGS__)
+#	define PUGI__SN//printf(buf, ...) _sn//printf_s(buf, _countof(buf), _TRUNCATE, __VA_ARGS__)
 #else
-#	define PUGI__SNPRINTF sprintf
+#	define PUGI__SN//printf s//printf
 #endif
 
 // We put implementation details into an anonymous namespace in source mode, but have to keep it in non-anonymous namespace in header-only mode to prevent binary bloat.
@@ -4693,7 +4693,7 @@ PUGI__NS_BEGIN
 	PUGI__FN bool set_value_convert(String& dest, Header& header, uintptr_t header_mask, float value, int precision)
 	{
 		char buf[128];
-		PUGI__SNPRINTF(buf, "%.*g", precision, double(value));
+		PUGI__SN//printf(buf, "%.*g", precision, double(value));
 
 		return set_value_ascii(dest, header, header_mask, buf);
 	}
@@ -4702,7 +4702,7 @@ PUGI__NS_BEGIN
 	PUGI__FN bool set_value_convert(String& dest, Header& header, uintptr_t header_mask, double value, int precision)
 	{
 		char buf[128];
-		PUGI__SNPRINTF(buf, "%.*g", precision, value);
+		PUGI__SN//printf(buf, "%.*g", precision, value);
 
 		return set_value_ascii(dest, header, header_mask, buf);
 	}
@@ -8419,7 +8419,7 @@ PUGI__NS_BEGIN
 	PUGI__FN void convert_number_to_mantissa_exponent(double value, char (&buffer)[32], char** out_mantissa, int* out_exponent)
 	{
 		// get a scientific notation value with IEEE DBL_DIG decimals
-		PUGI__SNPRINTF(buffer, "%.*e", DBL_DIG, value);
+		PUGI__SN//printf(buffer, "%.*e", DBL_DIG, value);
 
 		// get the exponent (possibly negative)
 		char* exponent_string = strchr(buffer, 'e');
@@ -13106,7 +13106,7 @@ namespace pugi
 #undef PUGI__DMC_VOLATILE
 #undef PUGI__UNSIGNED_OVERFLOW
 #undef PUGI__MSVC_CRT_VERSION
-#undef PUGI__SNPRINTF
+#undef PUGI__SN//printf
 #undef PUGI__NS_BEGIN
 #undef PUGI__NS_END
 #undef PUGI__FN

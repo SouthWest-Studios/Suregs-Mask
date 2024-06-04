@@ -165,7 +165,7 @@ bool Boss_Inuit::Update(float dt)
 
 		break;
 	case FASE::FASE_CHANGE:
-		printf("\n FaseCAHNEG");
+		//printf("\n FaseCAHNEG");
 		currentAnimation = &changeFase_boss_inuit;
 		break;
 	case FASE::FASE_TWO:
@@ -207,7 +207,7 @@ bool Boss_Inuit::PostUpdate() {
 	/*if (isInCenter) {
 		isFacingLeft = true;
 	}*/
-	//printf("\ninCenter: %d", isInCenter);
+	////printf("\ninCenter: %d", isInCenter);
 	if (!Dead) {
 		if (isFacingLeft) {
 			app->render->DrawTexture(texture, position.x - 410, position.y - 300, SDL_FLIP_HORIZONTAL, &rect);
@@ -223,7 +223,7 @@ bool Boss_Inuit::PostUpdate() {
 
 	}*/
 	if (TimerColdDown(BMRatkSpeed) && inbmrAtack) {
-		//printf("\n bmrBack");
+		////printf("\n bmrBack");
 		bmrBack = true;
 		startBMR = false;
 	}
@@ -232,7 +232,7 @@ bool Boss_Inuit::PostUpdate() {
 			//BMRfinding(BMRposition);
 			/*fPoint returnBMR = getDirectionVector(BMRposition,position);
 			atackBMR->body->ApplyForceToCenter(b2Vec2(returnBMR.x * 80, returnBMR.y * 80), true);
-			printf("\n %d", bmrBack);*/
+			//printf("\n %d", bmrBack);*/
 			bmrSpeed = -BMRatkF;
 		}
 		else
@@ -248,7 +248,7 @@ bool Boss_Inuit::PostUpdate() {
 			atackBMR->body->SetLinearVelocity(b2Vec2(0, 0));
 			atackBMR->body->GetWorld()->DestroyBody(atackBMR->body);
 			atackBMR = nullptr;
-			printf("delete");
+			//printf("delete");
 			inuit_ranged_attack = false;
 		}
 	}
@@ -274,7 +274,7 @@ bool Boss_Inuit::PostUpdate() {
 
 	}
 
-	//printf("\n Heal: %f", health);
+	////printf("\n Heal: %f", health);
 
 	if (atkAnimation && fase != FASE::FASE_CHANGE) {
 		if (attackTime == 1) {
@@ -293,7 +293,7 @@ bool Boss_Inuit::PostUpdate() {
 
 	/*if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
 		health -= 1000;
-		printf("\nHealth: %f", health);
+		//printf("\nHealth: %f", health);
 	}*/
 
 	if (goUseUlt) {
@@ -305,7 +305,7 @@ bool Boss_Inuit::PostUpdate() {
 		}
 	}
 	if (ultDef && !inWave && !waveTimeStart) {
-		printf("2");
+		//printf("2");
 		waveTime.Start();
 		waveTimeStart = true;
 	}
@@ -315,7 +315,7 @@ bool Boss_Inuit::PostUpdate() {
 	}
 	//Wave
 	if (waveTimerColdDown(10) && !waveTimeStart && goUseWave && !Dead) {
-		//printf("\ndelete-3");
+		////printf("\ndelete-3");
 		shock_wave(originalWavePosition.x, originalWavePosition.y, 5, 520, 0);
 	}
 	return true;
@@ -356,7 +356,7 @@ bool Boss_Inuit::CleanUp()
 
 void Boss_Inuit::stateMachine(float dt, iPoint playerPos)
 {
-	//printf("\ncurrentState: %d, desiredState: %d", static_cast<int>(currentState), static_cast<int>(desiredState));
+	////printf("\ncurrentState: %d, desiredState: %d", static_cast<int>(currentState), static_cast<int>(desiredState));
 	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
 	switch (nextState) {
 	case EntityState_Boss_Inuit::IDLE:
@@ -445,7 +445,7 @@ void Boss_Inuit::shock_wave(int posX, int posY, float shockSpeed, float maxSize,
 		inWave = false;
 		if (tag == 0) {
 			if (!ultDef) {
-				printf("3");
+				//printf("3");
 				waveTime.Start();
 			}
 		}
@@ -490,7 +490,7 @@ void Boss_Inuit::ulti_Atack()
 	}
 
 	if (wave0Finishing && wave1Finishing && wave2Finishing) {
-		printf("\nUltiFishing");
+		//printf("\nUltiFishing");
 		wave0Finishing = false;
 		wave1Finishing = false;
 		wave2Finishing = false;
@@ -542,7 +542,7 @@ void Boss_Inuit::DoNothing(float dt)
 
 void Boss_Inuit::Chase(float dt, iPoint playerPos)
 {
-	////printf("Osiris chasing");
+	//////printf("Osiris chasing");
 	currentAnimation = &move_inuit;
 	Bossfinding(dt, playerPos);
 
@@ -550,7 +550,7 @@ void Boss_Inuit::Chase(float dt, iPoint playerPos)
 
 void Boss_Inuit::Attack(float dt)
 {
-	////printf("Osiris attacking");
+	//////printf("Osiris attacking");
 	//currentAnimation = &attackAnim;
 
 	if (changeNextAtk) {
@@ -565,7 +565,7 @@ void Boss_Inuit::Attack(float dt)
 		app->audio->PlayFx(inuit_melee_attack_fx);
 
 		inAtack = true;
-		printf("\nataque1");
+		//printf("\nataque1");
 		bmrBack = false;
 		if (isFacingLeft) {
 			atkDistancia = -150;
@@ -584,7 +584,7 @@ void Boss_Inuit::Attack(float dt)
 		app->audio->PlayFx(inuit_melee_attack_fx); // No funciona (por algun motivo extraño)
 		atk1_boss_inuit.Reset();
 		inAtack = true;
-		printf("\nataque2");
+		//printf("\nataque2");
 		if (isFacingLeft) {
 			atkDistancia = -150;
 		}
@@ -603,10 +603,10 @@ void Boss_Inuit::Attack(float dt)
 	case 3:
 		atk2_boss_inuit.Reset();
 		inAtack = true;
-		printf("\nataque4");
+		//printf("\nataque4");
 		playerDireccion = calculate_direction();
 		printplayerDireccion = directionToString(playerDireccion);
-		printf("\n PlayerDireccion %s", printplayerDireccion.c_str());
+		//printf("\n PlayerDireccion %s", printplayerDireccion.c_str());
 		atackBMR = app->physics->CreateCircle(position.x, position.y, 160, DYNAMIC, true);
 		atackBMR->entity = this;
 		atackBMR->listener = this;
@@ -619,7 +619,7 @@ void Boss_Inuit::Attack(float dt)
 		break;
 		/*case 4:
 			inAtack = true;
-			printf("\nataque3");
+			//printf("\nataque3");
 			atackCube = app->physics->CreateRectangleSensor(position.x, position.y, 60, 120, STATIC);
 			break;
 
@@ -736,52 +736,52 @@ void Boss_Inuit::Die() {
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
 	{
 		app->entityManager->GetPlayer()->maskZeroXP += 1000;
-		//printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
+		////printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
 	}
 
 	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK0)
 	{
 		app->entityManager->GetPlayer()->maskZeroXP += 1000;
-		//printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
+		////printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
 	}
 
 	//Mask 1
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK1)
 	{
 		app->entityManager->GetPlayer()->maskOneXP += 1000;
-		//printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
+		////printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
 	}
 
 	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK1)
 	{
 		app->entityManager->GetPlayer()->maskOneXP += 1000;
-		//printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
+		////printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
 	}
 
 	//Mask 2
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK2)
 	{
 		app->entityManager->GetPlayer()->maskTwoXP += 1000;
-		//printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
+		////printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
 	}
 
 	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK2)
 	{
 		app->entityManager->GetPlayer()->maskTwoXP += 1000;
-		//printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
+		////printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
 	}
 
 	//Mask 3
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK3)
 	{
 		app->entityManager->GetPlayer()->maskThreeXP += 1000;
-		//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
+		////printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
 	}
 
 	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK3)
 	{
 		app->entityManager->GetPlayer()->maskThreeXP += 1000;
-		//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
+		////printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
 	}
 
 }
@@ -834,8 +834,8 @@ bool Boss_Inuit::Bossfinding(float dt, iPoint playerPosP)
 	iPoint playerPos = app->map->WorldToMap(playerPosP.x, playerPosP.y);
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
 
-	//printf("\nBossArea:%f", dist(bossArea, enemyPos));
-	//printf("\nEmemyPosicion:%d", enemyPos);
+	////printf("\nBossArea:%f", dist(bossArea, enemyPos));
+	////printf("\nEmemyPosicion:%d", enemyPos);
 
 
 	if (!inbmrAtack) {
@@ -908,9 +908,9 @@ void Boss_Inuit::deleteCollision(PhysBody* phy)
 		//phy->body->GetWorld()->DestroyBody(phy->body);
 		app->physics->GetWorld()->DestroyBody(phy->body);
 		phy = nullptr;
-		//printf("delete");
+		////printf("delete");
 	}
-	//printf("\ndelete0");
+	////printf("\ndelete0");
 }
 
 float Boss_Inuit::GetHealth() const {
@@ -969,7 +969,7 @@ std::string Boss_Inuit::directionToString(BTPDirection direction) {
 
 bool Boss_Inuit::TimerColdDown(float time)
 {
-	//printf("\nataqueTimeClodDown%: %f", ataqueTimeClodDown);
+	////printf("\nataqueTimeClodDown%: %f", ataqueTimeClodDown);
 	ataqueTimeClodDown = atackTimeColdDown.CountDown(time);
 	if ((float)ataqueTimeClodDown == 0) {
 		return true;
@@ -983,7 +983,7 @@ bool Boss_Inuit::TimerColdDown(float time)
 bool Boss_Inuit::waveTimerColdDown(float time)
 {
 	waveTimeClodDown = waveTime.CountDown(time);
-	//printf("\n waveTimeClodDown%: %f", waveTimeClodDown);
+	////printf("\n waveTimeClodDown%: %f", waveTimeClodDown);
 	if ((float)waveTimeClodDown == 0) {
 
 		return true;
@@ -1013,7 +1013,7 @@ void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 		//if (physA->ctype == ColliderType::ATACKBMR) {
 		//	//checkAtackBMR = false;
 		//	//atackBMR->body->SetLinearVelocity(b2Vec2(0, 0));
-		//	printf("\nONcolibmrBack");
+		//	//printf("\nONcolibmrBack");
 		//	startBMR = true;
 		//	if (!tocaPared) {
 		//		tocaPared = true;
@@ -1025,7 +1025,7 @@ void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::BOSS_INUIT:
 		if (physA->ctype == ColliderType::ATACKBMR && bmrBack == true) {
-			printf("\n Enemyy");
+			//printf("\n Enemyy");
 			atackTimeColdDown.Start();
 			checkAtackBMR = false;
 			inbmrAtack = false;
@@ -1048,7 +1048,7 @@ void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 		}
 
 		if (physA->ctype == ColliderType::BOSSAREA) {
-			//printf("\n entraBossArea");
+			////printf("\n entraBossArea");
 			playerInBossArea = true;
 			enemyMove = true;
 		}
@@ -1060,7 +1060,7 @@ void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (fase != FASE::FASE_CHANGE && app->entityManager->GetPlayer()->checkAtk == true) {
 			health -= app->entityManager->GetPlayer()->currentStats.attackDamage;
 			timerRecibirDanioColor.Start();
-			printf("\n BossHeal %f", health);
+			//printf("\n BossHeal %f", health);
 			app->entityManager->GetPlayer()->checkAtk = false;
 			app->audio->PlayFx(inuit_get_damage_fx);
 		}
@@ -1088,7 +1088,7 @@ void Boss_Inuit::OnEndCollision(PhysBody* physA, PhysBody* physB) {
 		//if (physA->ctype == ColliderType::ATACKBMR) {
 		//	//checkAtackBMR = false;
 		//	//atackBMR->body->SetLinearVelocity(b2Vec2(0, 0));
-		//	//printf("\nENDcolibmrBack");
+		//	////printf("\nENDcolibmrBack");
 		//	startBMR = true;
 		//	if (!tocaPared) {
 		//		tocaPared = true;
@@ -1098,7 +1098,7 @@ void Boss_Inuit::OnEndCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLAYER:
 		if (physA->ctype == ColliderType::BOSSAREA) {
-			//printf("Out");
+			////printf("Out");
 			playerInBossArea = false;
 			if (inbmrAtack == false) {
 				inAtack = false;

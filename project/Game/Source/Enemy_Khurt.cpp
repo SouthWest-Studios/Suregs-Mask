@@ -89,7 +89,7 @@ bool Enemy_Khurt::Start() {
 
 	chargeTimer.Start();
 
-	//printf("Speed: %f", speed);
+	////printf("Speed: %f", speed);
 
 	room = GetCurrentRoom();
 
@@ -206,7 +206,7 @@ bool Enemy_Khurt::CleanUp()
 void Enemy_Khurt::DoNothing(float dt)
 {
 	currentAnimation = &idleAnim;
-	//printf("Khurt idle");
+	////printf("Khurt idle");
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 
 }
@@ -222,7 +222,7 @@ void Enemy_Khurt::DigUnderground()
 
 void Enemy_Khurt::MoveUnderground(float dt, iPoint playerPos)
 {
-	//printf("Khurt chasing");
+	////printf("Khurt chasing");
 	currentAnimation = &underAnim_process;
 
 	if (chargeTimer.ReadSec() >= 5 && app->map->pathfinding->GetDistance(playerPos, position) <= chargeAttackDistance * 32 && app->map->pathfinding->GetDistance(playerPos, position) >= (attackDistance + 5) * 32)
@@ -255,7 +255,7 @@ void Enemy_Khurt::Charge(float dt, iPoint playerPos)
 			DigOut(dt, playerPos);
 		}
 		else{
-			/*printf("charge");*/
+			/*//printf("charge");*/
 			currentAnimation = &chargeAnim;
 			pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
 			if (chargeAnim.HasFinished())
@@ -300,7 +300,7 @@ void Enemy_Khurt::Stunned(float dt)
 
 void Enemy_Khurt::Attack(float dt)
 {
-	//printf("Khurt attacking");
+	////printf("Khurt attacking");
 	currentAnimation = &runAnim;
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero); //No se mueve mientras ataca
 
@@ -309,7 +309,7 @@ void Enemy_Khurt::Attack(float dt)
 
 void Enemy_Khurt::stateMachine(float dt, iPoint playerPos)
 {
-	//printf("\ncurrentState: %d, desiredState: %d", static_cast<int>(currentState), static_cast<int>(desiredState));
+	////printf("\ncurrentState: %d, desiredState: %d", static_cast<int>(currentState), static_cast<int>(desiredState));
 	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
 	switch (nextState) {
 	case EntityState_Khurt::IDLE:
@@ -387,52 +387,52 @@ void Enemy_Khurt::Die() {
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0) 
 	{
 		app->entityManager->GetPlayer()->maskZeroXP += 80;
-		//printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
+		////printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
 	}
 
 	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK0)
 	{
 		app->entityManager->GetPlayer()->maskZeroXP += 80;
-		//printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
+		////printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
 	}
 	
 	//Mask 1
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK1)
 	{
 		app->entityManager->GetPlayer()->maskOneXP += 80;
-		//printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
+		////printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
 	}
 
 	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK1)
 	{
 		app->entityManager->GetPlayer()->maskOneXP += 80;
-		//printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
+		////printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
 	}
 
 	//Mask 2
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK2)
 	{
 		app->entityManager->GetPlayer()->maskTwoXP += 80;
-		//printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
+		////printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
 	}
 
 	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK2)
 	{
 		app->entityManager->GetPlayer()->maskTwoXP += 80;
-		//printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
+		////printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
 	}
 
 	//Mask 3
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK3)
 	{
 		app->entityManager->GetPlayer()->maskThreeXP += 80;
-		//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
+		////printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
 	}
 
 	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK3)
 	{
 		app->entityManager->GetPlayer()->maskThreeXP += 80;
-		//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
+		////printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
 	}
 
 	if (app->entityManager->GetIgory()->playerInFight) {
@@ -561,7 +561,7 @@ void Enemy_Khurt::CheckPoison() {
 			invulnerabilityTimer.Start();
 			timerRecibirDanioColor.Start();
 
-			printf("Enemy_Khurt has received  %f damage of poison\n", poisonDamage);
+			//printf("Enemy_Khurt has received  %f damage of poison\n", poisonDamage);
 		}
 		firstTimePoisonRecibed = false;
 	}
@@ -574,7 +574,7 @@ void Enemy_Khurt::CheckPoison() {
 				invulnerabilityTimer.Start();
 				timerRecibirDanioColor.Start();
 
-				printf("Enemy_Khurt has received  %f damage of poison\n", poisonDamage);
+				//printf("Enemy_Khurt has received  %f damage of poison\n", poisonDamage);
 			}
 		}
 	}

@@ -355,11 +355,11 @@ void App::FinishUpdate()
 
 	convertirTiempo(tiempoDeJuego);
 
-	//printf("tiempo de juego: %f\n", tiempoDeJuego);
+	////printf("tiempo de juego: %f\n", tiempoDeJuego);
 
 
 	// Shows the time measurements in the window title
-	// check sprintf formats here https://cplusplus.com/reference/cstdio/printf/
+	// check s//printf formats here https://cplusplus.com/reference/cstdio///printf/
 	static char title[256];
 	sprintf_s(title, 256, "%s: Av.FPS: %.2f Last sec frames: %i Last dt: %.3f Time since startup: %I32u Frame Count: %I64u ",
 		gameTitle.GetString(), averageFps, framesPerSecond, dt, secondsSinceStartup, frameCount);
@@ -514,7 +514,7 @@ std::string App::convertirTiempo(long long milisegundos)
 
 	return std::string(buffer);
 	// Imprimir en formato hh:mm:ss
-	//printf("%02d:%02d:%02d\n", horas, minutos, segundos);
+	////printf("%02d:%02d:%02d\n", horas, minutos, segundos);
 }
 
 // ---------------------------------------

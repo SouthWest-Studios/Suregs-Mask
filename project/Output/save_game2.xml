@@ -23,7 +23,7 @@
 		<menu />
 		<iventorymanager>
 			<inventory>
-				<money quantity="502" />
+				
 			</inventory>
 		</iventorymanager>
 		<commercemanager />

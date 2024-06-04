@@ -94,7 +94,7 @@ bool Enemy_Muur::Update(float dt)
 {
 	OPTICK_EVENT();
 
-	//printf("\nheal: %f",health);
+	////printf("\nheal: %f",health);
 	// Pone el sensor del cuerpo en su posicion
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 0.5), 0);
@@ -222,14 +222,14 @@ bool Enemy_Muur::CleanUp()
 void Enemy_Muur::DoNothing(float dt)
 {
 	currentAnimation = &idleAnim;
-	//printf("Muur idle");
+	////printf("Muur idle");
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 
 }
 
 void Enemy_Muur::Chase(float dt, iPoint playerPos)
 {
-	//printf("Muur chasing");
+	////printf("Muur chasing");
 	currentAnimation = &runAnim;
 	if(chargeTimer.ReadSec() >= 5 && app->map->pathfinding->GetDistance(playerPos, position) <= chargeattackDistance * 32 && app->map->pathfinding->GetDistance(playerPos, position) >= (attackDistance + 5) * 32)
 	{
@@ -245,7 +245,7 @@ void Enemy_Muur::Chase(float dt, iPoint playerPos)
 
 void Enemy_Muur::Attack(float dt)
 {
-	//printf("Muur attacking");
+	////printf("Muur attacking");
 	currentAnimation = &attackAnim;
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	//sonido ataque
@@ -296,52 +296,52 @@ void Enemy_Muur::Die() {
 		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
 		{
 			app->entityManager->GetPlayer()->maskZeroXP += 20;
-			//printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
+			////printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
 		}
 
 		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK0)
 		{
 			app->entityManager->GetPlayer()->maskZeroXP += 20;
-			//printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
+			////printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
 		}
 
 		//Mask 1
 		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK1)
 		{
 			app->entityManager->GetPlayer()->maskOneXP += 20;
-			//printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
+			////printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
 		}
 
 		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK1)
 		{
 			app->entityManager->GetPlayer()->maskOneXP += 20;
-			//printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
+			////printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
 		}
 
 		//Mask 2
 		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK2)
 		{
 			app->entityManager->GetPlayer()->maskTwoXP += 20;
-			//printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
+			////printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
 		}
 
 		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK2)
 		{
 			app->entityManager->GetPlayer()->maskTwoXP += 20;
-			//printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
+			////printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
 		}
 
 		//Mask 3
 		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK3)
 		{
 			app->entityManager->GetPlayer()->maskThreeXP += 20;
-			//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
+			////printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
 		}
 
 		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK3)
 		{
 			app->entityManager->GetPlayer()->maskThreeXP += 20;
-			//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
+			////printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
 		}
 		if (app->entityManager->GetIgory()->playerInFight) {
 			app->map->DestroyEntity(this);
@@ -467,7 +467,7 @@ void Enemy_Muur::CheckPoison() {
 			invulnerabilityTimer.Start();
 			timerRecibirDanioColor.Start();
 
-			printf("Enemy_Osiris has received  %f damage of poison\n", poisonDamage);
+			//printf("Enemy_Osiris has received  %f damage of poison\n", poisonDamage);
 		}
 		firstTimePoisonRecibed = false;
 	}
@@ -480,7 +480,7 @@ void Enemy_Muur::CheckPoison() {
 				invulnerabilityTimer.Start();
 				timerRecibirDanioColor.Start();
 
-				printf("Enemy_Osiris has received  %f damage of poison\n", poisonDamage);
+				//printf("Enemy_Osiris has received  %f damage of poison\n", poisonDamage);
 			}
 		}
 	}
@@ -490,7 +490,7 @@ void Enemy_Muur::CheckPoison() {
 void Enemy_Muur::Charge(float dt, iPoint playerPos) {
 	if (chargeTimer.ReadSec() >= 5)
 	{
-		/*printf("charge");*/
+		/*//printf("charge");*/
 		currentAnimation = &chargeAnim;
 		pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
 		if (chargeAnim.HasFinished())

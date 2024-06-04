@@ -37,12 +37,12 @@ public:
 		/*if (&rect != nullptr) {
 			frames[totalFrames++] = rect;
 		}*/
-		/*printf("\ntotalFrames: %d", totalFrames);
-		printf("\nrect.x: %d", rect.x);
-		printf("\nrect.y: %d", rect.y);
-		printf("\nrect.w: %d", rect.w);
-		printf("\nrect.h: %d", rect.h);
-		printf("\nframcount: %d", framcount++);*/
+		/*//printf("\ntotalFrames: %d", totalFrames);
+		//printf("\nrect.x: %d", rect.x);
+		//printf("\nrect.y: %d", rect.y);
+		//printf("\nrect.w: %d", rect.w);
+		//printf("\nrect.h: %d", rect.h);
+		//printf("\nframcount: %d", framcount++);*/
 		//frames[totalFrames++] = rect;
 	}
 
@@ -185,7 +185,7 @@ public:
 	int checkSDLRect(pugi::xml_node AniInfo, SDL_Rect* rect) {
 
 		if (rect == NULL) {
-			printf("SDL_Rect ES NULL£¡\n");
+			//printf("SDL_Rect ES NULL£¡\n");
 			return 0;
 		}
 
@@ -197,11 +197,11 @@ public:
 				check_access = rect[i].h;
 			}
 			catch (const std::exception& e) {
-				printf("Error£º%s\n", e.what());
+				//printf("Error£º%s\n", e.what());
 				return 0;
 			}
 			catch (...) {
-				printf("no pillo Error£¡\n");
+				//printf("no pillo Error£¡\n");
 				return 0;
 			}
 		}

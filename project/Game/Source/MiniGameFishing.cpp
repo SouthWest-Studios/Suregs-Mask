@@ -83,9 +83,9 @@ bool MiniGameFishing::Start() {
 	}
 	/*for (const auto& vec :  chosefishing_path) {
 		for (const auto& str : vec) {
-			printf("%s ", str);
+			//printf("%s ", str);
 		}
-		printf("\n");
+		//printf("\n");
 	}*/
 	return true;
 }
@@ -100,7 +100,7 @@ bool MiniGameFishing::Update(float dt)
 	miniGameLoop(dt);
 	miniGameEnd(dt);
 
-	//printf("\nss: %s", fishingfloat_path);
+	////printf("\nss: %s", fishingfloat_path);
 
 
 	return true;
@@ -243,7 +243,7 @@ void MiniGameFishing::playLureFishing()
 {
 	if (timeFishing.ReadMSec() >= lure_lotteryrandomNum * 1000 && lureRandomTime == true) {
 		isFishCaught_result = check_isFishCaught();
-		printf("\nResultado: %d ", isFishCaught_result);
+		//printf("\nResultado: %d ", isFishCaught_result);
 		lureRandomTime = false;
 	}//end_if, if fish is caught
 
@@ -279,14 +279,14 @@ void MiniGameFishing::playLureFishing()
 
 	if (playerGoplay == false) {
 		if (app->input->GetButton(RETURNLINE) == KEY_DOWN) {
-			printf("\nsorteo");
+			//printf("\nsorteo");
 			startFinishingLine = true;
 			lureRandomTime = true;
 			lure_lotteryrandomNum = getRandomNumber(3, 7);
 			timeFishing.Start();
 			if (floatChangeDistance == 100) {
 				fishing.isFishing = false;
-				printf("finishi");
+				//printf("finishi");
 				if (!fishing.isFishing) {
 					//Close dialogo
 					dialogoClose(0);
@@ -347,16 +347,16 @@ void MiniGameFishing::fishing_line(Direction direction, float cheke_x, float che
 void MiniGameFishing::floatCollision(Direction direction, float cheke_x, float cheke_y)
 {
 	/*if (direction == Direction::UP) {
-		printf("UP");
+		//printf("UP");
 	}
 	else if (direction == Direction::DOWN) {
-		printf("DOWN");
+		//printf("DOWN");
 	}
 	else if (direction == Direction::LEFT) {
-		printf("LEFT");
+		//printf("LEFT");
 	}
 	else if (direction == Direction::RIGHT) {
-		printf("RIGHT");
+		//printf("RIGHT");
 	}*/
 	////Confirm direction, cast the float
 	//if (direction == Direction::UP) {
@@ -431,7 +431,7 @@ void MiniGameFishing::floatCollision(Direction direction, float cheke_x, float c
 		force.y = 10.0f;
 	}
 	//else {
-	//	//printf("else");
+	//	////printf("else");
 	//	force.y = 10.0f;
 	//}
 
@@ -442,7 +442,7 @@ void MiniGameFishing::floatCollision(Direction direction, float cheke_x, float c
 		if (floatbody != nullptr) {
 			floatbody->body->GetWorld()->DestroyBody(floatbody->body);
 			floatbody = nullptr;
-			printf("delete");
+			//printf("delete");
 		}//end_if, delete collision
 		if (floatbody != nullptr) {
 			floatbody->body->SetLinearVelocity(b2Vec2(0, 0));
@@ -512,7 +512,7 @@ void MiniGameFishing::hooked(int player_click_count)
 	}
 
 	for (const auto& prize : fish) {
-		printf("\n%f", prize.second);
+		//printf("\n%f", prize.second);
 	}// print probabilities
 
 
@@ -526,7 +526,7 @@ void MiniGameFishing::GamePlaye()
 	gamePlayTimeLimit_show = gamePlayTimeLimit.CountDown(gamePlayTime);
 
 	if ((float)gamePlayTimeLimit_show == 0) {
-		printf("\nTimeStop, you get click %d times", player_click_count);
+		//printf("\nTimeStop, you get click %d times", player_click_count);
 		playerGoplay = false;
 		playerGoplay_TimeOver = true;
 		player_click_count_TimeOver = player_click_count;
@@ -661,13 +661,13 @@ bool MiniGameFishing::miniGameLoop(float dt)
 	//if (!fishing.isFishing && fishing.rodReady) {
 	//	if (app->input->GetButton(CHANGEROD) == KEY_DOWN) {
 	//		if (fishing.fishingtype == FISHINGTYPE::LUREFISHING) {
-	//			printf("\nRod:FISHING");
+	//			//printf("\nRod:FISHING");
 	//			fishing.fishingtype = FISHINGTYPE::FISHING;
 	//			lureDistanceGetRandom = false;//Disable irregular distance
 	//		}
 	//		else
 	//		{
-	//			printf("\nRod:LUREFISHING");
+	//			//printf("\nRod:LUREFISHING");
 	//			fishing.fishingtype = FISHINGTYPE::LUREFISHING;
 	//			lureDistanceGetRandom = true;// enable irregular distance
 	//		}//end_if for cheke is "LUREFISHING" o "FISHING"
@@ -713,7 +713,7 @@ bool MiniGameFishing::miniGameLoop(float dt)
 	//Animation float
 	if (fishingfloat_lineReady) {
 		ani_castingline(app->entityManager->GetPlayer()->player_Direction);//animation and collision of the float
-		//printf("%s", Direction::DOWN);
+		////printf("%s", Direction::DOWN);
 	}//end_if can fishing or not
 
 	//GamePlaye

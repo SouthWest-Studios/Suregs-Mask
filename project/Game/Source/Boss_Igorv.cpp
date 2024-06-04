@@ -234,7 +234,7 @@ bool Boss_Igory::Update(float dt)
 		if (health >= maxHealth) {
 			health = maxHealth;
 		}
-		printf("\nhealth: %f", health);
+		//printf("\nhealth: %f", health);
 		curaTimer.Start();
 		cura_boss_Igory.Reset();
 	}
@@ -248,7 +248,7 @@ bool Boss_Igory::Update(float dt)
 			if (health >= maxHealth) {
 				health = maxHealth;
 			}
-			printf("\nhealth: %f", health);
+			//printf("\nhealth: %f", health);
 			healTimer.Start();
 		}
 
@@ -376,7 +376,7 @@ bool Boss_Igory::PostUpdate() {
 
 bool Boss_Igory::CleanUp()
 {
-	printf("\n CleanUp");
+	//printf("\n CleanUp");
 	if (pbodyFoot != nullptr) {
 		app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 	}
@@ -458,7 +458,7 @@ void Boss_Igory::resetAnimation()
 		generaTimeColdDown.Start();
 		faseAni = false;
 		if (fase == FASE_Igory::FASE_TWO) {
-			printf("\nFase3");
+			//printf("\nFase3");
 			fase = FASE_Igory::FASE_THREE;
 			faseThree = true;
 			atqDashQuali = 0;
@@ -466,7 +466,7 @@ void Boss_Igory::resetAnimation()
 		}
 
 		if (fase == FASE_Igory::FASE_ONE) {
-			printf("\nFase2");
+			//printf("\nFase2");
 			fase = FASE_Igory::FASE_TWO;
 			faseTwo = true;
 			atqDashQuali = 0;
@@ -546,7 +546,7 @@ void Boss_Igory::showAnimation()
 	}
 
 	if (showSuregAni) {
-		//printf("genrasureg");
+		////printf("genrasureg");
 		currentAnimation = &geneSure_boss_Igory;
 		app->audio->PlayFx(father_generate_sureg_fx);
 	}
@@ -598,13 +598,13 @@ void Boss_Igory::showAnimation()
 bool Boss_Igory::AtqColdDown()
 {
 	if (startColdDown) {
-		//printf("\nStart");
+		////printf("\nStart");
 		atackTimeColdDown.Start();
 		startColdDown = false;
 	}
 
 	if (atackTimeColdDown.ReadMSec() >= 500) {
-		//printf("\nEnd");
+		////printf("\nEnd");
 		ataqColdDown = false;
 		checkColdDown = false;
 		startColdDown = true;
@@ -613,7 +613,7 @@ bool Boss_Igory::AtqColdDown()
 	}
 	else
 	{
-		//printf("\nColdDown");
+		////printf("\nColdDown");
 		ataqColdDown = true;
 		return false;
 	}
@@ -638,7 +638,7 @@ void Boss_Igory::takeHit()
 
 void Boss_Igory::stateMachine(float dt, iPoint playerPos)
 {
-	//printf("\ncurrentState: %d, desiredState: %d", static_cast<int>(currentState), static_cast<int>(desiredState));
+	////printf("\ncurrentState: %d, desiredState: %d", static_cast<int>(currentState), static_cast<int>(desiredState));
 	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
 	switch (nextState) {
 	case EntityState_Boss_Igory::IDLE:
@@ -648,7 +648,7 @@ void Boss_Igory::stateMachine(float dt, iPoint playerPos)
 		Chase(dt, playerPos);
 		break;
 	case EntityState_Boss_Igory::ATTACKING_BASIC:
-		//printf("\nAtaqueBasic");
+		////printf("\nAtaqueBasic");
 		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero); //No se mueve mientras ataca
 
 		if (!inAtack) {
@@ -679,7 +679,7 @@ void Boss_Igory::stateMachine(float dt, iPoint playerPos)
 	case EntityState_Boss_Igory::GENERATESUREG:
 
 		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero); //No se mueve mientras ataca
-		//printf("\ngeneraSureg");
+		////printf("\ngeneraSureg");
 		showSuregAni = true;
 		break;
 	case EntityState_Boss_Igory::HEAL:
@@ -706,14 +706,14 @@ void Boss_Igory::stateMachine(float dt, iPoint playerPos)
 void Boss_Igory::DoNothing(float dt)
 {
 	currentAnimation = &idle_boss_Igory;
-	//printf("Osiris idle");
+	////printf("Osiris idle");
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 
 }
 
 void Boss_Igory::Chase(float dt, iPoint playerPos)
 {
-	////printf("Osiris chasing");
+	//////printf("Osiris chasing");
 	currentAnimation = &walk_boss_Igory;
 	Bossfinding(dt, playerPos);
 
@@ -725,14 +725,14 @@ void Boss_Igory::Attack(float dt)
 		attackTime++;
 		atqGoNext = false;
 	}
-	printf("\nattackTime: %d", attackTime);
+	//printf("\nattackTime: %d", attackTime);
 	switch (attackTime)
 	{
 	case 1:
 		app->audio->PlayFx(father_melee_attack_fx);
 		atq3_boss_Igory.Reset();
 		inAtack = true;
-		printf("\nataque1");
+		//printf("\nataque1");
 		if (isFacingLeft) {
 			atackCube = app->physics->CreateRectangleSensor(position.x + 100, position.y - 60, 180, 180, STATIC);
 		}
@@ -745,7 +745,7 @@ void Boss_Igory::Attack(float dt)
 		app->audio->PlayFx(father_melee_attackAlt_fx);
 		atq1_boss_Igory.Reset();
 		inAtack = true;
-		printf("\nataque2");
+		//printf("\nataque2");
 		if (isFacingLeft) {
 			atackCube = app->physics->CreateRectangleSensor(position.x + 60, position.y - 50, 180, 100, STATIC);
 		}
@@ -758,7 +758,7 @@ void Boss_Igory::Attack(float dt)
 		app->audio->PlayFx(father_melee_attack_fx);
 		atq2_boss_Igory.Reset();
 		inAtack = true;
-		printf("\nataque3");
+		//printf("\nataque3");
 		if (isFacingLeft) {
 			atackCube = app->physics->CreateRectangleSensor(position.x + 60, position.y - 40, 180, 180, STATIC);
 		}
@@ -798,14 +798,14 @@ void Boss_Igory::Die() {
 	}
 
 	if (startSelecion && seleccionFinalPersonaje == 1 && !closeFinalSelecion) {
-		//printf("Matar padre");
+		////printf("Matar padre");
 		//CleanUp();
 		cankillPadre = true;
 		closeFinalSelecion = true;
 	}
 
 	if (startSelecion && seleccionFinalPersonaje == 2 && !closeFinalSelecion) {
-		//printf("Unir padre");
+		////printf("Unir padre");
 		closeFinalSelecion = true;
 		unirPadre = true;
 	}
@@ -819,52 +819,52 @@ void Boss_Igory::Die() {
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
 	{
 		app->entityManager->GetPlayer()->maskZeroXP += 1000;
-		//printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
+		////printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
 	}
 
 	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK0)
 	{
 		app->entityManager->GetPlayer()->maskZeroXP += 1000;
-		//printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
+		////printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
 	}
 
 	//Mask 1
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK1)
 	{
 		app->entityManager->GetPlayer()->maskOneXP += 1000;
-		//printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
+		////printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
 	}
 
 	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK1)
 	{
 		app->entityManager->GetPlayer()->maskOneXP += 1000;
-		//printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
+		////printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
 	}
 
 	//Mask 2
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK2)
 	{
 		app->entityManager->GetPlayer()->maskTwoXP += 1000;
-		//printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
+		////printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
 	}
 
 	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK2)
 	{
 		app->entityManager->GetPlayer()->maskTwoXP += 1000;
-		//printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
+		////printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
 	}
 
 	//Mask 3
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK3)
 	{
 		app->entityManager->GetPlayer()->maskThreeXP += 1000;
-		//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
+		////printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
 	}
 
 	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK3)
 	{
 		app->entityManager->GetPlayer()->maskThreeXP += 1000;
-		//printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
+		////printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
 	}
 
 }
@@ -933,9 +933,9 @@ void Boss_Igory::deleteCollision(PhysBody* phy)
 		//phy->body->GetWorld()->DestroyBody(phy->body);
 		app->physics->GetWorld()->DestroyBody(phy->body);
 		phy = nullptr;
-		//printf("delete");
+		////printf("delete");
 	}
-	//printf("\ndelete0");
+	////printf("\ndelete0");
 }
 
 float Boss_Igory::GetHealth() const {
@@ -952,7 +952,7 @@ void Boss_Igory::TakeDamage(float damage) {
 
 bool Boss_Igory::TimerColdDown(float time)
 {
-	//printf("\nataqueTimeClodDown%: %f", ataqueTimeClodDown);
+	////printf("\nataqueTimeClodDown%: %f", ataqueTimeClodDown);
 	ataqueTimeClodDown = atackTimeColdDown.CountDown(time);
 	if ((float)ataqueTimeClodDown == 0) {
 		return true;
@@ -966,7 +966,7 @@ bool Boss_Igory::TimerColdDown(float time)
 bool Boss_Igory::GeneraColdDown(float time)
 {
 	float fgenraTimeColdDown = generaTimeColdDown.CountDown(time);
-	//printf("\nataqueTimeClodDown%: %f", fgenraTimeColdDown);
+	////printf("\nataqueTimeClodDown%: %f", fgenraTimeColdDown);
 	if ((float)fgenraTimeColdDown == 0) {
 		return true;
 	}
@@ -1010,13 +1010,13 @@ void Boss_Igory::OnCollision(PhysBody* physA, PhysBody* physB) {
 					app->dialogManager->AddDialog(app->dialogManager->CreateDialog(itemNode, itemNode.attribute("name").as_string(), itemNode.attribute("facetexturepath").as_string()));
 					num++;
 				}
-				printf("\nnum: %d", num);
+				//printf("\nnum: %d", num);
 				dialogoMostrado = true;
 			}
 		}
 		if (physA->ctype == ColliderType::ATACK_IGORY) {
 			app->entityManager->GetPlayer()->TakeDamage(attackDamage);
-			//printf("JEFEATAKE");
+			////printf("JEFEATAKE");
 		}
 
 		if (inAtqDashi) {
@@ -1033,7 +1033,7 @@ void Boss_Igory::OnCollision(PhysBody* physA, PhysBody* physB) {
 				inTakeHit = true;
 				health -= app->entityManager->GetPlayer()->currentStats.attackDamage;
 				timerRecibirDanioColor.Start();
-				printf("\n BossHeal %f", health);
+				//printf("\n BossHeal %f", health);
 				app->entityManager->GetPlayer()->checkAtk = false;
 			}
 			else
@@ -1045,9 +1045,9 @@ void Boss_Igory::OnCollision(PhysBody* physA, PhysBody* physB) {
 				if (shield <= 0) {
 					shieldBroken = true;
 					shield = 0;
-					printf("\n shieldBroken %f");
+					//printf("\n shieldBroken %f");
 				}
-				printf("\n shield %f", shield);
+				//printf("\n shield %f", shield);
 			}
 
 		}
