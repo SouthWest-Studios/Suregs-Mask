@@ -53,6 +53,7 @@ bool Enemy_Shar::Start() {
 	dieAnim.LoadAnim("osiris", "dieAnim_osiris", spritePositions);
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
+	
 
 	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
 	pbodyFoot->entity = this;

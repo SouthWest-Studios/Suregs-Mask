@@ -58,7 +58,9 @@ bool Enemy_Boorok::Start() {
 	chargeAttackAnim.LoadAnim("boorok", "chargeAttackAnim", spritePositions);
 	dieAnim.LoadAnim("boorok", "dieAnim", spritePositions);
 
-	texture = app->tex->Load(config.attribute("texturePath").as_string());
+	//texture = app->tex->Load(config.attribute("texturePath").as_string());
+	texture = app->entityManager->textureBoorok;
+
 
 	boorok_attack_fx = app->audio->LoadAudioFx("boorok_attack_fx");
 	boorok_get_damage_fx = app->audio->LoadAudioFx("boorok_get_damage_fx");

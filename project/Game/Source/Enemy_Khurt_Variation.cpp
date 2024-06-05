@@ -59,7 +59,8 @@ bool Enemy_Khurt_Variation::Start() {
 	dieAnim.LoadAnim("khurt", "dieAnim", spritePositions);
 
 
-	texture = app->tex->Load(config.attribute("texturePath").as_string());
+	//texture = app->tex->Load(config.attribute("texturePath").as_string());
+	texture = app->entityManager->textureKhurt;
 
 	khurt_get_damage_fx = app->audio->LoadAudioFx("khurt_get_damage_fx");
 	khurt_get_damageAlt_fx = app->audio->LoadAudioFx("khurt_get_damageAlt_fx");

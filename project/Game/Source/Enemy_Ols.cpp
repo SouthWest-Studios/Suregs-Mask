@@ -58,7 +58,8 @@ bool Enemy_Ols::Start() {
 	attackAnim.LoadAnim("ols", "attackAnim_ols", spritePositions);
 	dieAnim.LoadAnim("ols", "dieAnim_ols", spritePositions);
 
-	texture = app->tex->Load(config.attribute("texturePath").as_string());
+	//texture = app->tex->Load(config.attribute("texturePath").as_string());
+	texture = app->entityManager->textureOls;
 
 	ols_attack_fx = app->audio->LoadAudioFx("ols_attack_fx");
 	ols_get_damage_fx = app->audio->LoadAudioFx("ols_get_damage_fx");

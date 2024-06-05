@@ -59,7 +59,8 @@ bool Enemy_Muur::Start() {
 	reciebeDamage.LoadAnim("muur", "reciebeDamage", spritePositions);
 	dieAnim.LoadAnim("muur", "dieAnim", spritePositions);
 
-	texture = app->tex->Load(config.attribute("texturePath").as_string());
+	//texture = app->tex->Load(config.attribute("texturePath").as_string());
+	texture = app->entityManager->textureMuur;
 
 	muur_get_damage_fx = app->audio->LoadAudioFx("muur_get_damage_fx");
 
