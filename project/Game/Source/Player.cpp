@@ -759,7 +759,7 @@ bool Player::Update(float dt)
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
 
-	if (!inAnimation) {
+	if (!inAnimation && !die) {
 		desiredState = EntityStatePlayer::IDLE;
 	}
 
@@ -793,7 +793,7 @@ bool Player::Update(float dt)
 	if (inPocionAnim) {
 		currentAnimation = &pocion_player;
 
-		if (pocion_player.HasFinished())
+		if (pocion_player.HasFinished() && !die)
 		{
 			inPocionAnim = false;
 			inAnimation = false;
@@ -2631,7 +2631,7 @@ void Player::PlayerMovement(float dt)
 
 	// Calcular la velocidad horizontal y vertical
 
-	if (die == false && desiredState != EntityStatePlayer::POCION && !app->entityManager->GetIgory()->killPadre) {
+	if (die == false && desiredState != EntityStatePlayer::POCION && !app->entityManager->GetIgory()->killPadre && !die) {
 		fPoint joystick = app->input->GetAxis(MOVE_HORIZONTAL, MOVE_VERTICAL);
 		float horizontalMovement = joystick.x;
 		float verticalMovement = joystick.y;
@@ -2658,7 +2658,7 @@ void Player::PlayerMovement(float dt)
 	}
 
 	//Si pulsas espacio
-	if (app->input->GetButton(DASH) == KEY_DOWN && timerDash.ReadMSec() > cdTimerDashMS && !app->scene_pueblo->GetRod()->fishing.rodReady) {
+	if (app->input->GetButton(DASH) == KEY_DOWN && timerDash.ReadMSec() > cdTimerDashMS && !app->scene_pueblo->GetRod()->fishing.rodReady && !die) {
 
 		velocityNormalized = velocity;
 		velocityNormalized.Normalize();
@@ -2695,7 +2695,7 @@ void Player::PlayerMovement(float dt)
 	}
 
 	//Si pulsas J para atacar
-	if (app->input->GetButton(ATAQUE) == KEY_DOWN && !isAttacking && !app->scene_pueblo->GetRod()->fishing.rodReady) {
+	if (app->input->GetButton(ATAQUE) == KEY_DOWN && !isAttacking && !app->scene_pueblo->GetRod()->fishing.rodReady && !die) {
 		hasAttacked = false;
 		isAttacking = true;
 		timerAttack.Start();
@@ -2726,7 +2726,7 @@ void Player::PlayerMovement(float dt)
 
 	if ((app->input->GetButton(ATAQUE_HABILIDAD) == KEY_DOWN || app->input->GetAxis(ATAQUE_HABILIDAD) != 0) &&
 		(maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDownTimer.ReadMSec() > maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDown ||
-			!maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].firstTimeUsed)) {
+			!maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].firstTimeUsed) && !die) {
 		maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].firstTimeUsed = true;
 		isAttackingMask = true;
 		maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDownTimer.Start();
