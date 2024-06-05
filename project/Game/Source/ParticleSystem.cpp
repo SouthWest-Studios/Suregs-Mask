@@ -72,6 +72,8 @@ bool ParticleSystem::Awake(pugi::xml_node config)
 			LoadEmitterData(emitters, EmitterType::EMITTER_TYPE_EXPLOSION_MASK1);
 		else if (emitterType.compare("ols_ataque") == 0)
 			LoadEmitterData(emitters, EmitterType::EMITTER_TYPE_OLS_ATAQUE);
+		else if (emitterType.compare("fase2_Igorv") == 0)
+			LoadEmitterData(emitters, EmitterType::EMITTER_TYPE_FASE2_IGORV);
 	}
 	return ret;
 }
