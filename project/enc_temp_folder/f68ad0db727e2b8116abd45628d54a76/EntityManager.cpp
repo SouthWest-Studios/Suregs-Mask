@@ -988,11 +988,11 @@ void EntityManager::showFinalkillPadre()
 		if (photoTransparent <= 0) {
 			photoTransparent = 0;
 
-			if (showCredi && stayTime.ReadMSec() >= 15000) {
+			if (showCredi && stayTime.ReadMSec() >= 5000) {
 				increasing = true;
 				goScene = true;
 			}
-			if (stayTime.ReadMSec() >= 15000) {
+			if (stayTime.ReadMSec() >= 5000) {
 				increasing = true;
 			}
 
