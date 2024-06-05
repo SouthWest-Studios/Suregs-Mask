@@ -940,7 +940,6 @@ void EntityManager::showFinalkillPadre()
 	if (showPhoto) {
 		if (bossIgory->seleccionFinalPersonaje == 1) {
 			app->render->DrawTexture(textureKillPadre, 0, 0, SDL_FLIP_NONE, &overlayRect, 0, 0);
-			app->audio->LoadAudioMusic("good_ending", 0.0f);
 			/*if (!goPadreCleanUp) {
 				bossIgory->CleanUp();
 				bossIgory->closeFinalSelecion = false;
@@ -949,13 +948,11 @@ void EntityManager::showFinalkillPadre()
 		}
 		else if (bossIgory->seleccionFinalPersonaje == 2) {
 			app->render->DrawTexture(textureUnirPadre, 0, 0, SDL_FLIP_NONE, &overlayRect, 0, 0);
-			app->audio->LoadAudioMusic("bad_ending", 0.0f);
 		}
 	}
 
 	if (showCredi) {
 		app->render->DrawTexture(textureCredit, 0, 0, SDL_FLIP_NONE, &overlayRect, 0, 0);
-		app->audio->LoadAudioMusic("credits", 0.0f);
 	}
 
 	if (increasing) {
@@ -977,6 +974,10 @@ void EntityManager::showFinalkillPadre()
 				{
 					showPhoto = true;
 					stayTime.Start();
+
+					if (bossIgory->seleccionFinalPersonaje == 1) app->audio->LoadAudioMusic("good_ending", 0.0f);
+
+					if (bossIgory->seleccionFinalPersonaje == 2) app->audio->LoadAudioMusic("bad_ending", 0.0f);
 				}
 
 			}
