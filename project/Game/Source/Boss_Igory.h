@@ -80,7 +80,7 @@ public:
 public:
 
 	//L02: DONE 2: Declare player parameters
-	SDL_Texture* texture = NULL;
+	SDL_Texture* texture = nullptr;
 	pugi::xml_node config;
 	uint texW, texH;
 

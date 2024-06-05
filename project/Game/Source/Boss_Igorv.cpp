@@ -423,6 +423,12 @@ bool Boss_Igory::CleanUp()
 		pbodySensor = nullptr;
 	}
 
+	if (atackCube != nullptr) {
+		app->physics->GetWorld()->DestroyBody(atackCube->body);
+		atackCube = nullptr;
+	}
+
+
 	if (texture != nullptr) {
 		app->tex->UnLoad(texture);
 		texture = nullptr;
@@ -434,12 +440,16 @@ bool Boss_Igory::CleanUp()
 	app->psystem->RemoveAllEmitters();
 	partFase2Created = false;
 	partFase3Created = false;
+
 	if (!isDead) {
 		app->entityManager->canShowFinal = false;
 	}
 	killPadre = false;
 	RELEASE(spritePositions);
 	delete spritePositions;
+
+	RELEASE(path);
+	delete path;
 
 	return true;
 }
