@@ -130,14 +130,14 @@ bool Boss_Igory::Update(float dt)
 	if (health <= 0)
 	{
 		particulaFase3 = nullptr;
-		app->psystem->RemoveEmitter(particulaFase3);
+		app->psystem->RemoveAllEmitters();
 		desiredState = EntityState_Boss_Igory::DEAD;
 	}
 	else if (playerInFight && health <= lifeLow80 && !faseTwo && !isDead && !stun) {
 
 		if (!partFase2Created) {
 			fPoint pos1((float)position.x, (float)position.y);
-			particulaFase2 = app->psystem->AddEmiter(pos1, EMITTER_TYPE_FLAME);
+			particulaFase2 = app->psystem->AddEmiter(pos1, EMITTER_TYPE_FASE2_IGORV);
 			partFase2Created = true;
 		}
 
@@ -428,6 +428,12 @@ bool Boss_Igory::CleanUp()
 		texture = nullptr;
 	}
 	lastPath.Clear();
+
+	particulaFase2 = nullptr;
+	particulaFase3 = nullptr;
+	app->psystem->RemoveAllEmitters();
+	partFase2Created = false;
+	partFase3Created = false;
 
 	//app->entityManager->canShowFinal = false;
 	killPadre = false;
