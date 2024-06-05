@@ -1773,6 +1773,7 @@ bool Map::LoadEntities(std::string layerName)
 						elev->position = iPoint(pos.x + 16, pos.y + 16);
 						elev->Start();
 						elev->final = false;
+						app->ascensor->primeraVez = true;
 
 					}
 					/*ASCENSOR FINAL*/
@@ -1782,6 +1783,7 @@ bool Map::LoadEntities(std::string layerName)
 						elev->position = iPoint(pos.x + 16, pos.y + 16);
 						elev->Start();
 						elev->final = true;
+						app->ascensor->primeraVez = true;
 
 					}
 

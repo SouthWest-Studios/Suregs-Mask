@@ -36,18 +36,16 @@ public:
 	
 	EntityType type;
 
-	PhysBody* pbody;
-	PhysBody* pbody2;
-	SDL_Texture* texture = NULL;
-	char* Menutexture = NULL;
-	char* listTexture = NULL;
-	char* PointerTexture = NULL;
+	PhysBody* pbody = nullptr;
+	char* Menutexture = nullptr;
+	char* listTexture = nullptr;
+	char* PointerTexture = nullptr;
 	
 	iPoint position;
 	iPoint PointerPosition = { 470, -130 };
 	int PointerId = 0;
 	bool final;
-
+	
 private:
 	
 	

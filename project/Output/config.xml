@@ -329,7 +329,7 @@
 		<cofre texturePath="Assets/Textures/Entidades/Cofre/textura_Cofre.png"
 			   opentexturePath ="Assets/Textures/Entidades/Cofre/textura_Cofre_Abierto.png"/>
 
-		<ascensor texturePath =" "
+		<ascensor texturePath =""
 				  menutexturePath="Assets/Textures/Interfaz/Ascensor/textura_ascensor.png"
 				  textureList ="Assets/Textures/Interfaz/Ascensor/textura_fondo_nota_lista.png"
 				  PointerPath ="Assets/Textures/Interfaz/Ascensor/textura_pointer.png"
