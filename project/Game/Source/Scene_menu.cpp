@@ -605,10 +605,17 @@ void Scene_Menu::SettingsInterface()
 				vsync->click = false;
 				vsyncActive = false;
 			}
+			if (app->menu->audio)
+			{
+				((GuiControlSlider*)music)->value = app->menu->musicNum;
+				((GuiControlSlider*)sfx)->value = app->menu->sfxNum;
+			}
+			else
+			{
+				((GuiControlSlider*)music)->value = app->audio->volumeMusic;
+				((GuiControlSlider*)sfx)->value = app->audio->volumeFx;
+			}
 
-			//Cargar la barra de audio del save_game
-			((GuiControlSlider*)music)->value = app->audio->volumeMusic;
-			((GuiControlSlider*)sfx)->value = app->audio->volumeFx;
 		}
 
 

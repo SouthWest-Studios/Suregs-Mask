@@ -121032,7 +121032,7 @@
     <property name="Type" value="isSmallRoom"/>
    </properties>
   </object>
-  <object id="106" x="2014.98" y="3605.38" width="1359.48" height="757.7">
+  <object id="106" x="2013.65" y="3612.05" width="1359.48" height="757.7">
    <properties>
     <property name="Type" value="isSmallRoom"/>
    </properties>
@@ -121093,10 +121093,10 @@
   <object id="145" x="1834" y="2521" width="44" height="262"/>
  </objectgroup>
  <objectgroup color="#55ffff" id="18" name="Vacios" class="1">
-  <object id="180" x="2256" y="3822" width="89" height="324"/>
-  <object id="181" x="3026.67" y="3822.67" width="88" height="310.667"/>
-  <object id="182" x="2158.67" y="2265.33" width="413.333" height="132"/>
-  <object id="185" x="2834.67" y="2276" width="402.667" height="122.667"/>
+  <object id="180" x="2260" y="3772" width="79.6667" height="392"/>
+  <object id="181" x="3031.34" y="3772" width="78" height="396"/>
+  <object id="182" x="2107.34" y="2194.66" width="455.333" height="194"/>
+  <object id="185" x="2831.34" y="2208.67" width="426" height="175.334"/>
  </objectgroup>
  <objectgroup color="#c8c8c8" id="12" name="Dialogos">
   <properties>
