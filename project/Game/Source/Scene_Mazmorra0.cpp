@@ -74,10 +74,10 @@ bool Scene_Mazmorra0::Start()
 
 	app->entityManager->Enable();
 
-	Item_mascara_0* mascara0 = (Item_mascara_0*)app->entityManager->CreateEntity(EntityType::ITEM_MASCARA0);
+	/*Item_mascara_0* mascara0 = (Item_mascara_0*)app->entityManager->CreateEntity(EntityType::ITEM_MASCARA0);
 	mascara0->config = configNode.child("entities_data").child("item_mascara_0");
 	mascara0->position = iPoint(2704, 1693);
-	mascara0->Start();
+	mascara0->Start();*/
 
 
 	return true;

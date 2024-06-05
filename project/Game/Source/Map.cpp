@@ -63,6 +63,7 @@
 #include "Enemy_Spawner.h"
 #include "ElevatorMenu.h"
 #include "Item_Mascara_0.h"
+#include "Arbol.h"
 
 Map::Map(App* app, bool start_enabled) : Module(app, start_enabled), mapLoaded(false)
 {
@@ -1795,6 +1796,13 @@ bool Map::LoadEntities(std::string layerName)
 						elev->Start();
 						elev->final = true;*/
 
+					}
+					if (gid == tileset->firstgid + 47) {
+						Arbol* arbol = (Arbol*)app->entityManager->CreateEntity(EntityType::ARBOL);
+						/*arbol->config = configNode.child("entities_data").child("arbol");*/
+						arbol->position = iPoint(pos.x + 16, pos.y + 16);
+						arbol->Start();
+						
 					}
 
 

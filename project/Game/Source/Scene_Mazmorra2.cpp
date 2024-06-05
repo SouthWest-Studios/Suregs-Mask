@@ -14,6 +14,7 @@
 #include "Log.h"
 #include "GuiControl.h"
 #include "GuiManager.h"
+#include "DialogManager.h"
 
 Scene_Mazmorra2::Scene_Mazmorra2(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -69,6 +70,8 @@ bool Scene_Mazmorra2::Start()
 	gcButtom = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);*/
 
 	app->entityManager->Enable();
+
+	/*app->entityManager.get*/
 
 	return true;
 }

@@ -14,6 +14,7 @@
 #include "CommerceManager.h"
 #include "TreeManager.h"
 #include "Menu.h"
+#include "ElevatorMenu.h"
 
 DialogTrigger::DialogTrigger() : Entity(EntityType::DIALOG_TRIGGER)
 {
@@ -72,9 +73,7 @@ bool DialogTrigger::Start() {
 	pbody->listener = this;
 	pbody->ctype = ColliderType::DIALOG_TRIGGER;
 
-	pbody2 = app->physics->CreateRectangleSensor(6550, 1172, 100, 100, bodyType::KINEMATIC);
-	pbody2->listener = this;
-	pbody2->ctype = ColliderType::ARBOL;
+	CreateArbol();
 
 
 	return true;
@@ -260,6 +259,11 @@ void DialogTrigger::UpdateDialog() {
 			}
 		}
 	}
+}
+
+void Entity::CreateArbol()
+{
+	
 }
 
 

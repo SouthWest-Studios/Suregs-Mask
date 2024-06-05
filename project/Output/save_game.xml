@@ -5,15 +5,7 @@
 	<textures />
 	<audio />
 	<:anonymous />
-	<:anonymous>
-		<map>
-			<bosses>
-				<boss1 muerto="false" />
-				<boss2 muerto="false" />
-				<boss3 muerto="false" />
-				<boss4 muerto="false" />
-			</bosses>
-		</map>
+	<map>
 		<map>
 			<puzzles>
 				<puzzle level="0" complete="false" />
@@ -25,16 +17,22 @@
 				<puzzle level="6" complete="false" />
 				<puzzle level="7" complete="false" />
 			</puzzles>
+			<bosses>
+				<boss1 muerto="false" />
+				<boss2 muerto="false" />
+				<boss3 muerto="false" />
+				<boss4 muerto="false" />
+			</bosses>
 		</map>
-		<map>
-			<bosses />
-		</map>
-	</:anonymous>
-	<pueblo_tutorial />
+	</map>
+	<scene_pueblo />
 	<entitymanager>
 		<entity_manager>
 			<doors>
 				<door sceneLevel="-10" tpID="0" />
+				<door sceneLevel="-10" tpID="2" />
+				<door sceneLevel="-10" tpID="4" />
+				<door sceneLevel="-10" tpID="1" />
 			</doors>
 		</entity_manager>
 	</entitymanager>
