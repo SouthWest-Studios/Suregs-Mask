@@ -55,7 +55,7 @@ bool Scene_Mazmorra6::Start()
 	app->map->pathTextures = config.child("map").attribute("pathTextures").as_string();
 	
 	//Music is commented so that you can add your own music
-	app->audio->LoadAudioMusic("dungeon", 2.0f);
+	app->audio->LoadAudioMusic("dungeon", 0.0f);
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
