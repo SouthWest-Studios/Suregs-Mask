@@ -857,7 +857,7 @@ void Boss_Igory::Die() {
 		startSelecion = true;
 	}
 
-	if (!app->dialogManager->isPlaying && startDialogo && startDialogoTimer.ReadMSec() >= 2000) {
+	if (!app->dialogManager->isPlaying && startDialogo && startDialogoTimer.ReadMSec() >= 2000 && !app->entityManager->GetPlayer()->die) {
 		if (!dialogoMostrado) {
 			int num = 0;
 			for (pugi::xml_node itemNode = dialogNode; itemNode; itemNode = itemNode.next_sibling("sentence"))
