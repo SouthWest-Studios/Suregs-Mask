@@ -111,6 +111,7 @@ enum class EntityType
 	COFRE,
 	ASCENSOR,
 	ESTATUA,
+	ARBOL,
 
 	UNKNOWN
 
@@ -305,6 +306,8 @@ public:
 		this->poisonDuration = poisonDuration;
 		this->poisonTickRate = poisonTickRate;
 	}
+
+	void CreateArbol();
 
 
 protected:

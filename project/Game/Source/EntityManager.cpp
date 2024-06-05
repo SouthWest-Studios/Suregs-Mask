@@ -77,6 +77,7 @@
 #include "Estatua.h"
 #include "ElevatorMenu.h"
 #include "TreeManager.h"
+#include "Arbol.h"
 #include "Defs.h"
 #include "Log.h"
 #include <random>
@@ -408,6 +409,9 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 		break;
 	case EntityType::ESTATUA:
 		entity = new Estatua();
+		break;
+	case EntityType::ARBOL:
+		entity = new Arbol();
 		break;
 	default:
 		break;

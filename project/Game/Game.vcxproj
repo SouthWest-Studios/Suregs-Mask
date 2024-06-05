@@ -95,6 +95,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Arbol.cpp" />
     <ClCompile Include="Source\BestiarioManager.cpp" />
     <ClCompile Include="Source\Boss_Surma.cpp" />
     <ClCompile Include="Source\Cofre.cpp" />
@@ -224,6 +225,7 @@
     <ClCompile Include="Source\Utils.cpp" />
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="Source\Animation.h" />
+    <ClInclude Include="Source\Arbol.h" />
     <ClInclude Include="Source\ArmaduraInv.h" />
     <ClInclude Include="Source\Bestiario.h" />
     <ClInclude Include="Source\BestiarioManager.h" />

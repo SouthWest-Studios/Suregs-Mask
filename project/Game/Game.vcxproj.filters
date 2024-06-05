@@ -388,6 +388,9 @@
     <ClCompile Include="Source\Scene_Arena_Tutorial.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Arbol.cpp">
+      <Filter>Entities\Arbol</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -840,6 +843,9 @@
     <ClInclude Include="Source\Scene_Arena_Tutorial.h">
       <Filter>Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Arbol.h">
+      <Filter>Entities\Arbol</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -940,6 +946,9 @@
     </Filter>
     <Filter Include="Modules\Notes">
       <UniqueIdentifier>{cd095046-c48c-4abf-ab5f-a278e447e42c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Arbol">
+      <UniqueIdentifier>{558ab667-0551-46a7-b2e9-2f480c8e3849}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

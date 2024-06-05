@@ -16,6 +16,7 @@
 #include "GuiControl.h"
 #include "GuiManager.h"
 #include "Elevator.h"
+#include "Estatua.h"
 
 Scene_Pueblo_Tutorial::Scene_Pueblo_Tutorial(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -47,6 +48,11 @@ bool Scene_Pueblo_Tutorial::Start()
 	pugi::xml_node config;
 	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
 	config = configFile.child("config").child(name.GetString());
+
+	pugi::xml_parse_result parseResult2 = configFile.load_file("config.xml");
+	if (parseResult2) {
+		configNode = configFile.child("config");
+	}
 	//L03: DONE 3b: Instantiate the player using the entity manager
 	//L04 DONE 7: Get player paremeters
 	/*player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);*/
@@ -74,6 +80,11 @@ bool Scene_Pueblo_Tutorial::Start()
 	app->entityManager->Enable();
 
 	app->SaveRequest();
+
+	Estatua* estatua = (Estatua*)app->entityManager->CreateEntity(EntityType::ESTATUA);
+	estatua->config = configNode.child("entities_data").child("estatua");
+	estatua->position = iPoint(4501, 3178);
+	estatua->Start();
 
 	return true;
 }

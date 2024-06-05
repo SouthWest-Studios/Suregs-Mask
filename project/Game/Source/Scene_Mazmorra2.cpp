@@ -14,6 +14,9 @@
 #include "Log.h"
 #include "GuiControl.h"
 #include "GuiManager.h"
+#include "QuestManager.h"
+#include "DialogManager.h"
+
 
 Scene_Mazmorra2::Scene_Mazmorra2(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -68,7 +71,13 @@ bool Scene_Mazmorra2::Start()
 	/*SDL_Rect btPos = { windowW / 2 - 60,20, 120,20};
 	gcButtom = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);*/
 
+	if (app->questManager->GetQuestLineIndex(1) <= 11) {
+		app->questManager->UpdateQuestLine(1, 12);
+	}
+
 	app->entityManager->Enable();
+
+	/*app->entityManager.get*/
 
 	return true;
 }
