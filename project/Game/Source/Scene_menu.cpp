@@ -75,6 +75,7 @@ bool Scene_Menu::Start()
 	coin = app->tex->Load(coin_tp);
 	clock = app->tex->Load(clock_tp);
 
+	app->entityManager->canShowFinal = false;
 	//SAVE 1
 	pugi::xml_node game_stateOne;
 	pugi::xml_parse_result parseResultSaveOne = saveOneFile.load_file("save_game.xml");
