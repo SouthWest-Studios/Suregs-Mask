@@ -393,25 +393,25 @@
 
 			<fishlevel>
 				<nonthings>
-					<nonthing texturepath="Assets/Textures/Fishing/nonthing.png" name = "nonthing" />
+					<nonthing texturepath="Assets/Textures/Fishing/nonthing.png" name = "nada" />
 				</nonthings>
 				<trashes>
-					<trash texturepath="Assets/Textures/Fishing/trash1.png" name = "trash1" />
-					<trash texturepath="Assets/Textures/Fishing/trash2.png" name = "trash2" />
-					<trash texturepath="Assets/Textures/Fishing/trash3.png" name = "trash3" />
-					<trash texturepath="Assets/Textures/Fishing/trash4.png" name = "trash4" />
+					<trash texturepath="Assets/Textures/Fishing/trash1.png" name = "espina de pescado" />
+					<trash texturepath="Assets/Textures/Fishing/trash2.png" name = "cáscara de plátano”" />
+					<trash texturepath="Assets/Textures/Fishing/trash3.png" name = "hueso de pollo" />
+					<trash texturepath="Assets/Textures/Fishing/trash4.png" name = "cáscara de sandía" />
 				</trashes>
 				<smalls>
-					<small texturepath="Assets/Textures/Fishing/small1.png" name = "small1" />
-					<small texturepath="Assets/Textures/Fishing/small2.png" name = "small2" />
-					<small texturepath="Assets/Textures/Fishing/small3.png" name = "small3" />
+					<small texturepath="Assets/Textures/Fishing/small1.png" name = "pez amarilla" />
+					<small texturepath="Assets/Textures/Fishing/small2.png" name = "pez globo" />
+					<small texturepath="Assets/Textures/Fishing/small3.png" name = "pez roja" />
 				</smalls>
 				<mediums>
-					<medium texturepath="Assets/Textures/Fishing/medium1.png" name = "medium1" />
-					<medium texturepath="Assets/Textures/Fishing/medium2.png" name = "medium2" />
+					<medium texturepath="Assets/Textures/Fishing/medium1.png" name = "pez espada" />
+					<medium texturepath="Assets/Textures/Fishing/medium2.png" name = "anguila" />
 				</mediums>
 				<bigs>
-					<big texturepath="Assets/Textures/Fishing/big.png" name = "Bigfishing" />
+					<big texturepath="Assets/Textures/Fishing/big.png" name = "tiburón" />
 				</bigs>
 			</fishlevel>
 		</minigamefishing>
