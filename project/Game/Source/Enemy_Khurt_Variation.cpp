@@ -197,7 +197,7 @@ bool Enemy_Khurt_Variation::CleanUp()
 {
 	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 	app->physics->GetWorld()->DestroyBody(pbodySensor->body);
-	app->tex->UnLoad(texture);
+	//app->tex->UnLoad(texture);
 	lastPath.Clear();
 
 	blood = nullptr;
@@ -364,7 +364,7 @@ void Enemy_Khurt_Variation::Die() {
 	app->entityManager->DestroyEntity(this);
 	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 	app->physics->GetWorld()->DestroyBody(pbodySensor->body);
-	app->tex->UnLoad(texture);
+	//app->tex->UnLoad(texture);
 
 
 	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");

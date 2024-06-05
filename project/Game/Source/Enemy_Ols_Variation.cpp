@@ -194,7 +194,7 @@ bool Enemy_Ols_Variation::CleanUp()
 {
 	app->entityManager->DestroyEntity(pbodyFoot->entity);
 	app->physics->DestroyBody(pbodyFoot);
-	app->tex->UnLoad(texture);
+	//app->tex->UnLoad(texture);
 
 	app->physics->DestroyBody(attackSensor); 
 	app->tex->UnLoad(projectileTexture);
@@ -278,7 +278,7 @@ void Enemy_Ols_Variation::Die() {
 
 	app->entityManager->DestroyEntity(this);
 	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
-	app->tex->UnLoad(texture);
+	//app->tex->UnLoad(texture);
 
 	//Mask 0
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)

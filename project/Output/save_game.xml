@@ -29,11 +29,12 @@
 	<entitymanager>
 		<entity_manager>
 			<doors>
-				<door sceneLevel="-10" tpID="27" />
-				<door sceneLevel="-10" tpID="4" />
-				<door sceneLevel="-10" tpID="3" />
+				<door sceneLevel="-10" tpID="0" />
 				<door sceneLevel="-10" tpID="60" />
-				<door sceneLevel="-10" tpID="28" />
+				<door sceneLevel="-10" tpID="6" />
+				<door sceneLevel="-10" tpID="2" />
+				<door sceneLevel="-10" tpID="1" />
+				<door sceneLevel="-10" tpID="3" />
 			</doors>
 		</entity_manager>
 	</entitymanager>
@@ -42,6 +43,8 @@
 	<menu />
 	<iventorymanager>
 		<inventory>
+			<inventity type="11" quantity="1" />
+			<inventity type="19" quantity="1" />
 			<money quantity="0" />
 			<SwordLevel quantity="0" />
 			<ArmorLevel quantity="0" />
@@ -65,13 +68,13 @@
 				<maskTwoXP XP="0" />
 				<maskThreeXP XP="0" />
 			</masksXP>
-			<elevator mazmorra="0" mazmorraActual="7" />
+			<elevator mazmorra="0" mazmorraActual="1" />
 		</inventory>
 	</iventorymanager>
 	<commercemanager />
 	<questmanager>
 		<questLines>
-			<questLine id="1" index="1" active="true" completed="false" />
+			<questLine id="1" index="10" active="true" completed="false" />
 			<questLine id="2" index="1" active="false" completed="false" />
 		</questLines>
 	</questmanager>
@@ -79,7 +82,11 @@
 		<notes />
 	</notesmanager>
 	<bestiariomanager>
-		<bestiario />
+		<bestiario>
+			<bestia name="osiris" />
+			<bestia name="ols" />
+			<bestia name="muur" />
+		</bestiario>
 	</bestiariomanager>
 	<equipo />
 	<Ascensormenu />
