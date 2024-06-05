@@ -826,7 +826,7 @@ bool EntityManager::PostLateUpdate()
 		if (vacioControl) {
 			vacioGameStop = false;
 			playerCantMove = false;
-			GetPlayer()->TakeDamage(10);
+			GetPlayer()->TakeDamage(30);
 			GetPlayer()->vacio = true;
 			app->physics->active = true;
 			vacioControl = false;
