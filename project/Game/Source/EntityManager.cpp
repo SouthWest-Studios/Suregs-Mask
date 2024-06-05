@@ -505,10 +505,6 @@ int EntityManager::getRandomNumber(int min, int max) {
 	return dis(gen);
 }
 
-MiniGameFishing* EntityManager::GetRod()
-{
-	return fishing;
-}
 
 std::vector<Entity*> EntityManager::GetEnemies() {
 	std::vector<Entity*> enemies;

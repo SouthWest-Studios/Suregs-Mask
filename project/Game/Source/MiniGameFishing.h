@@ -71,7 +71,7 @@ public:
 	bool startAniFloat = false;
 
 
-	Direction player_Direction;
+	Direction player_Direction = Direction::DOWN;
 	//Animacion
 	Animation* currentAnimation = nullptr;
 	SDL_Rect rect;
@@ -105,7 +105,7 @@ public:
 	bool isFishingta = false;
 	bool crearfloatbody = false;
 	PhysBody* floatbody = nullptr;
-	float floatDistance;
+	float floatDistance = 300;
 	float lureDistance;
 	float floatChangeDistance = 200;
 	bool startFinishingLine = false;
