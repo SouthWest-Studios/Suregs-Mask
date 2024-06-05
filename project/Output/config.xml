@@ -366,6 +366,7 @@
 		<controls texturepath ="Assets/Textures/Interfaz/textura_menu_controles.png"/>
 		<coin texturepath ="Assets/Textures/Interfaz/Resources/textura_moneda.png"/>
 		<clock texturepath ="Assets/Textures/Interfaz/Arbol/IconosBase/duration.png"/>
+		<messageBackground texturepath ="Assets/Textures/Interfaz/Diario/textura_NoteCloseUp.png"/>
 	</scene_menu>
 
 	<scene_gameover>

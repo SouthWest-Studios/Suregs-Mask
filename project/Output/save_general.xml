@@ -5,8 +5,8 @@
 		<fx volume="101" />
 	</audio>
 	<tiempoDeJuego>
-		<slot1 tiempo="275688" />
-		<slot2 tiempo="0" />
-		<slot3 tiempo="0" />
+		<slot1 tiempo="405705" />
+		<slot2 tiempo="399493" />
+		<slot3 tiempo="453277" />
 	</tiempoDeJuego>
 </game_state>

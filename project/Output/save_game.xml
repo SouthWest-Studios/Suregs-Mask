@@ -5,15 +5,7 @@
 	<textures />
 	<audio />
 	<:anonymous />
-	<:anonymous>
-		<map>
-			<bosses>
-				<boss1 muerto="false" />
-				<boss2 muerto="false" />
-				<boss3 muerto="false" />
-				<boss4 muerto="false" />
-			</bosses>
-		</map>
+	<map>
 		<map>
 			<puzzles>
 				<puzzle level="0" complete="false" />
@@ -25,17 +17,18 @@
 				<puzzle level="6" complete="false" />
 				<puzzle level="7" complete="false" />
 			</puzzles>
+			<bosses>
+				<boss1 muerto="false" />
+				<boss2 muerto="false" />
+				<boss3 muerto="false" />
+				<boss4 muerto="false" />
+			</bosses>
 		</map>
-		<map>
-			<bosses />
-		</map>
-	</:anonymous>
+	</map>
 	<pueblo_tutorial />
 	<entitymanager>
 		<entity_manager>
-			<doors>
-				<door sceneLevel="-10" tpID="0" />
-			</doors>
+			<doors />
 		</entity_manager>
 	</entitymanager>
 	<missionmanager />
@@ -60,6 +53,12 @@
 				<maskPointTwo points="0" />
 				<maskPointThree points="0" />
 			</maskPoints>
+			<masksXP>
+				<maskZeroXP XP="0" />
+				<maskOneXP XP="0" />
+				<maskTwoXP XP="0" />
+				<maskThreeXP XP="0" />
+			</masksXP>
 			<elevator mazmorra="0" mazmorraActual="0" />
 		</inventory>
 	</iventorymanager>
