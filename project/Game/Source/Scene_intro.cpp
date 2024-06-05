@@ -101,6 +101,12 @@ bool Scene_Intro::CleanUp()
 {
 	LOG("Freeing Scene_intro");
 	app->tex->UnLoad(texturaIntro);
+	//RELEASE(texturaIntroPath);
+
+	RELEASE(potionFlare);
+
+
+
 	/*potionFlare = nullptr;
 	app->psystem->RemoveAllEmitters();*/
 	return true;

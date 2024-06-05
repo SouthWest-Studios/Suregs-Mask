@@ -5,6 +5,8 @@
 #include "SString.h"
 #include "Input.h"
 #include "Render.h"
+#include "Textures.h"
+#include "App.h"
 
 enum class TreeType
 {
@@ -54,6 +56,22 @@ public:
 
 	virtual bool CleanUp()
 	{
+		app->tex->UnLoad(icon);
+		app->tex->UnLoad(icon0);
+		app->tex->UnLoad(icon1); 
+		app->tex->UnLoad(icon2);
+		app->tex->UnLoad(icon3);
+		app->tex->UnLoad(iconSelected0);
+		app->tex->UnLoad(iconSelected1);
+		app->tex->UnLoad(iconSelected2);
+		app->tex->UnLoad(iconSelected3);
+		app->tex->UnLoad(iconLocked0); 
+		app->tex->UnLoad(iconLocked1); 
+		app->tex->UnLoad(iconLocked2);
+		app->tex->UnLoad(iconLocked3);
+		app->tex->UnLoad(closeUpTrees);
+		RELEASE(closeUpTreesPath);
+		RELEASE(iconPath);
 		return true;
 	}
 
@@ -98,10 +116,10 @@ public:
 	SString name2 = "";
 	SString name3 = "";
 	SString name4 = "";
-	SDL_Texture* icon;
-	char* iconPath;
-	SDL_Texture* closeUpTrees;
-	char* closeUpTreesPath;
+	SDL_Texture* icon = nullptr;
+	char* iconPath = nullptr;
+	SDL_Texture* closeUpTrees = nullptr;
+	char* closeUpTreesPath = nullptr;
 	uint quantity = 1;
 	bool active;
 	bool stackable = false;

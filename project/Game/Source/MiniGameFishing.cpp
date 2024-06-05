@@ -96,7 +96,7 @@ bool MiniGameFishing::Update(float dt)
 	if (dialogoautoclose) {
 		app->dialogManager->AutoNextDiagolo(dialogoTimeCount);
 	}
-	miniGameStart(dt);
+
 	miniGameLoop(dt);
 	miniGameEnd(dt);
 
@@ -109,18 +109,10 @@ bool MiniGameFishing::Update(float dt)
 bool MiniGameFishing::PostUpdate()
 {
 	if (startAniFloat) {
-		if (startFinishingLine) {
-			fishing_line(app->entityManager->GetPlayer()->player_Direction, cheke_x, cheke_y);
-		}
-		else {
-			floatCollision(app->entityManager->GetPlayer()->player_Direction, cheke_x, cheke_y);
-		}
+		floatCollision(app->entityManager->GetPlayer()->player_Direction, cheke_x, cheke_y);
 	}
-
 	return true;
 }
-
-
 
 
 bool MiniGameFishing::CleanUp()
@@ -154,7 +146,7 @@ void MiniGameFishing::castingline(FISHINGTYPE type)
 		else {
 			fishingfloat_lineReady = false;
 			if (floatbody != nullptr) {
-				floatbody->body->GetWorld()->DestroyBody(floatbody->body);
+				app->physics->GetWorld()->DestroyBody(floatbody->body);
 				floatbody = nullptr;
 			}//end_if, delete collision
 		}//end_if, if fishing
@@ -183,8 +175,8 @@ void MiniGameFishing::ani_castingline(Direction direction)
 	if (floatbody == nullptr && crearfloatbody) {
 		floatbody = app->physics->CreateRectangleSensor(app->entityManager->GetPlayer()->position.x, app->entityManager->GetPlayer()->position.y, 20, 20, bodyType::DYNAMIC);
 		floatbody->ctype = ColliderType::FLOAT;
-		floatbody->body->SetFixedRotation(true);
 		floatbody->listener = this;
+		floatbody->entity = this;
 		crearfloatbody = false;
 	}
 
@@ -196,8 +188,9 @@ void MiniGameFishing::ani_castingline(Direction direction)
 	
 	//moving collision
 	if (floatbody != nullptr) {
-		cheke_x = (METERS_TO_PIXELS(floatbody->body->GetPosition().x) - texH / 2) - 23;
-		cheke_y = (METERS_TO_PIXELS(floatbody->body->GetPosition().y) - texH / 2) - 23;
+		b2Transform pbodyPos = floatbody->body->GetTransform();
+		cheke_x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
+		cheke_y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
 	}
 	startAniFloat = true;
 }
@@ -210,7 +203,7 @@ void MiniGameFishing::playNormalFishing()
 			//Close dialogo
 			dialogoClose(0);
 			//Crear new dialogo
-			app->dialogManager->CreateDialogSinEntity("Ostia, está picando algo!", "Jakov", nullptr);
+			app->dialogManager->CreateDialogSinEntity("Ostia, est?picando algo!", "Jakov", nullptr);
 			playerGoplay = true;//Start game play
 			gamePlayTime = getRandomNumber(3, 6);// Get play time
 			gamePlayTimeLimit.Start();// reset play time
@@ -233,186 +226,16 @@ void MiniGameFishing::playNormalFishing()
 			//Close dialogo
 			dialogoClose(0);
 			//Crear new dialogo
-			app->dialogManager->CreateDialogSinEntity("Qué lástima, el pez se ha escapado...", "Jakov", nullptr);
+			app->dialogManager->CreateDialogSinEntity("Qu?latima, el pez se ha escapado...", "Jakov", nullptr);
 			fishingOver();
 		}//end_if player no play, end fishing
 	}//end_if, if fish is caught
 }
 
-void MiniGameFishing::playLureFishing()
-{
-	if (timeFishing.ReadMSec() >= lure_lotteryrandomNum * 1000 && lureRandomTime == true) {
-		isFishCaught_result = check_isFishCaught();
-		//printf("\nResultado: %d ", isFishCaught_result);
-		lureRandomTime = false;
-	}//end_if, if fish is caught
-
-	if (isFishCaught_result) {
-		//Close dialogo
-		dialogoClose(0);
-		//Crear new dialogo
-		app->dialogManager->CreateDialogSinEntity("Ostia, está picando algo!", "Jakov", nullptr);
-		isFishCaught_result = false;
-		playerGoplay = true;
-		gamePlayTime = getRandomNumber(3, 6);
-		gamePlayTimeLimit.Start();
-	}//end_if, fish caught
-
-	if (app->input->GetButton(FISHINGPLAY) == KEY_DOWN && playerGoplay == true) {
-		player_click_count += 1;
-	}//end_if, press "K" key
-
-	if (playerGoplay == true) {
-		GamePlaye();
-	}//end_if, gameplay
-
-	//if player no play, end fishing
-	if (playerGoplay_TimeOver && player_click_count_TimeOver == 0) {
-		player_click_count_TimeOver = 0;
-		playerGoplay_TimeOver = false;
-		//Close dialogo
-		dialogoClose(0);
-		//Crear new dialogo
-		app->dialogManager->CreateDialogSinEntity("Que lastima, se me ha escapado el pez... Jolín", "Jakov", nullptr);
-		fishingOver();
-	}//end_if, player no play, end fishing
-
-	if (playerGoplay == false) {
-		if (app->input->GetButton(RETURNLINE) == KEY_DOWN) {
-			//printf("\nsorteo");
-			startFinishingLine = true;
-			lureRandomTime = true;
-			lure_lotteryrandomNum = getRandomNumber(3, 7);
-			timeFishing.Start();
-			if (floatChangeDistance == 100) {
-				fishing.isFishing = false;
-				//printf("finishi");
-				if (!fishing.isFishing) {
-					//Close dialogo
-					dialogoClose(0);
-					dialogoPlayerMoving = false;
-					fishingfloat_getPlayerPosition = true;
-					lureFinishLine = true;
-					fishingOver();
-				}//end_if, end fishing
-				castingline(fishing.fishingtype);
-			}
-			else {
-				floatChangeDistance -= 100;
-			}//end_if, end fishing or continue fishing based on distance
-		}//end_if, press "V" key
-	}//end_if, if the player catches a fish, they cannot draw another prize
-}
-
-void MiniGameFishing::fishing_line(Direction direction, float cheke_x, float cheke_y)
-{
-	////Lure fishing, confirm direction, reel in
-	//b2Vec2 force(0.0f, 0.0f);
-
-	//if (direction == Direction::UP && cheke_y <= fishingflota_position_y) {
-	//	force.y = 10.0f;
-	//}
-	//else if (direction == Direction::DOWN && cheke_y >= fishingflota_position_y) {
-	//	force.y = -10.0f;
-	//}
-	//else if (direction == Direction::LEFT && cheke_x <= fishingflota_position_x) {
-	//	force.x = 10.0f;
-	//}
-	//else if (direction == Direction::RIGHT && cheke_x >= fishingflota_position_x) {
-	//	force.x = -10.0f;
-	//}
-	//else if (direction == Direction::UNKNOWN && cheke_y >= fishingflota_position_y) {
-	//	force.y = -10.0f;
-	//}
-
-	//if (force == b2Vec2(0.0f, 0.0f)) {
-	//	floatbody->body->SetLinearVelocity(b2Vec2(0, 0));
-	//}
-	//else {
-	//	floatbody->body->ApplyForceToCenter(force, true);
-	//}
-
-	if (direction == Direction::LEFT || direction == Direction::RIGHT) {
-		app->render->DrawTexture(fishingfloat_texture, fishingflota_position_x, fishingflota_position_y - 23, 3);
-	}
-	else {
-		app->render->DrawTexture(fishingfloat_texture, fishingflota_position_x - 23, fishingflota_position_y, 3);
-	}
-
-
-
-
-}
 
 void MiniGameFishing::floatCollision(Direction direction, float cheke_x, float cheke_y)
 {
-	/*if (direction == Direction::UP) {
-		//printf("UP");
-	}
-	else if (direction == Direction::DOWN) {
-		//printf("DOWN");
-	}
-	else if (direction == Direction::LEFT) {
-		//printf("LEFT");
-	}
-	else if (direction == Direction::RIGHT) {
-		//printf("RIGHT");
-	}*/
-	////Confirm direction, cast the float
-	//if (direction == Direction::UP) {
-	//	if (cheke_y >= fishingflota_position_y) {
-	//		b2Vec2 force(0.0f, -10.0f);
-	//		floatbody->body->ApplyForceToCenter(force, true);
-	//	}
-	//	else {
-	//		floatbody->body->SetLinearVelocity(b2Vec2(0, 0));
-	//	}
-	//	app->render->DrawTexture(fishingfloat_texture, fishingflota_position_x - 23, fishingflota_position_y, 3);
-	//}
-	//else if (direction == Direction::DOWN) {
-	//	if (cheke_y <= fishingflota_position_y) {
-	//		b2Vec2 force(0.0f, 10.0f);
-	//		floatbody->body->ApplyForceToCenter(force, true);
-	//	}
-	//	else {
-	//		floatbody->body->SetLinearVelocity(b2Vec2(0, 0));
-	//	}
-
-	//	app->render->DrawTexture(fishingfloat_texture, fishingflota_position_x - 23, fishingflota_position_y, 3);
-	//}
-	//else if (direction == Direction::LEFT) {
-	//	if (cheke_x >= fishingflota_position_x) {
-	//		b2Vec2 force(-10.0f, 0.0f);
-	//		floatbody->body->ApplyForceToCenter(force, true);
-	//	}
-	//	else {
-	//		floatbody->body->SetLinearVelocity(b2Vec2(0, 0));
-	//	}
-
-	//	app->render->DrawTexture(fishingfloat_texture, fishingflota_position_x, fishingflota_position_y - 23, 3);
-	//}
-	//else if (direction == Direction::RIGHT) {
-	//	if (cheke_x <= fishingflota_position_x) {
-	//		b2Vec2 force(10.0f, 0.0f);
-	//		floatbody->body->ApplyForceToCenter(force, true);
-	//	}
-	//	else {
-	//		floatbody->body->SetLinearVelocity(b2Vec2(0, 0));
-	//	}
-
-	//	app->render->DrawTexture(fishingfloat_texture, fishingflota_position_x, fishingflota_position_y - 23, 3);
-	//}
-	//else {
-	//	if (cheke_y <= fishingflota_position_y) {
-	//		b2Vec2 force(0.0f, 10.0f);
-	//		floatbody->body->ApplyForceToCenter(force, true);
-	//	}
-	//	else {
-	//		floatbody->body->SetLinearVelocity(b2Vec2(0, 0));
-	//	}
-	//	app->render->DrawTexture(fishingfloat_texture, fishingflota_position_x - 23, fishingflota_position_y, 3);
-	//}
-
+	
 	b2Vec2 force(0.0f, 0.0f);
 
 	if (direction == Direction::UP && cheke_y >= fishingflota_position_y) {
@@ -430,11 +253,6 @@ void MiniGameFishing::floatCollision(Direction direction, float cheke_x, float c
 	else if (direction == Direction::UNKNOWN && cheke_y <= fishingflota_position_y) {
 		force.y = 10.0f;
 	}
-	//else {
-	//	////printf("else");
-	//	force.y = 10.0f;
-	//}
-
 
 
 	if (force == b2Vec2(0.0f, 0.0f)) {
@@ -442,7 +260,6 @@ void MiniGameFishing::floatCollision(Direction direction, float cheke_x, float c
 		if (floatbody != nullptr) {
 			floatbody->body->GetWorld()->DestroyBody(floatbody->body);
 			floatbody = nullptr;
-			//printf("delete");
 		}//end_if, delete collision
 		if (floatbody != nullptr) {
 			floatbody->body->SetLinearVelocity(b2Vec2(0, 0));
@@ -491,7 +308,6 @@ void MiniGameFishing::hooked(int player_click_count)
 		changeProbability(0.1, 0.25, 0.3, 0.2, 0.15);
 	}
 	else if (player_click_count > 50) {
-
 		changeProbability(0.0, 0.0, 0.0, 0.0, 1.0);
 	}//end_if, use different probabilities based on the player
 
@@ -632,10 +448,6 @@ void MiniGameFishing::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (fishing.fishingtype == FISHINGTYPE::FISHING) {
 			lotteryrandomNum = getRandomNumber(2, 4);
 		}
-		else {
-			lure_lotteryrandomNum = getRandomNumber(3, 7);
-			lureRandomTime = true;
-		}//end_if, React differently based on the different fishing rods
 		thistimehooked = true;
 		break;
 	case ColliderType::UNKNOWN:
@@ -644,63 +456,20 @@ void MiniGameFishing::OnCollision(PhysBody* physA, PhysBody* physB) {
 	}
 }
 
-bool MiniGameFishing::miniGameStart(float dt)
-{
-
-	//if (fishing.playerGetRod && !fishing.isFishing) {
-	//	if (app->input->GetButton(SAVEROD) == KEY_DOWN || app->input->GetButton(CONFIRM) == KEY_DOWN) {
-	//		fishing.rodReady = !fishing.rodReady;
-	//	}
-	//}//end_if, equip or stow the fishing rod
-	return true;
-}
 
 bool MiniGameFishing::miniGameLoop(float dt)
 {
-	//Change Rod
-	//if (!fishing.isFishing && fishing.rodReady) {
-	//	if (app->input->GetButton(CHANGEROD) == KEY_DOWN) {
-	//		if (fishing.fishingtype == FISHINGTYPE::LUREFISHING) {
-	//			//printf("\nRod:FISHING");
-	//			fishing.fishingtype = FISHINGTYPE::FISHING;
-	//			lureDistanceGetRandom = false;//Disable irregular distance
-	//		}
-	//		else
-	//		{
-	//			//printf("\nRod:LUREFISHING");
-	//			fishing.fishingtype = FISHINGTYPE::LUREFISHING;
-	//			lureDistanceGetRandom = true;// enable irregular distance
-	//		}//end_if for cheke is "LUREFISHING" o "FISHING"
-	//	}//end_if for press "C" key
-	//}//end_if for check if fishing
-
-
 	//Cast the rod and StartFishing
 	if (app->input->GetButton(STARTFISHING) == KEY_DOWN && fishing.rodReady || app->input->GetButton(DASH) == KEY_DOWN && fishing.rodReady) {
 		fishing.isFishing = !fishing.isFishing;//Start fishing o Stop fishing
 		
-		/*if (fishing.isFishing == true && fishing.startFishing == false) {
-			fishing.isFishing = true;
-		}
-		else {
-			fishing.isFishing = !fishing.isFishing;//Start fishing o Stop fishing
-		}*///can fix the bug where collision does not reach the lago area, but it's not perfect
-
 		isFishingta = fishing.isFishing;//Save data to "isFishingta"
-		if (lureDistanceGetRandom) {
-			lureDistance = getRandomNumber(3, 6);
-			floatChangeDistance = lureDistance * 100;
-		}//end_if is lurefishing and get irregular distance
-		else {
-			floatChangeDistance = 300;
-		}//normal fishing distance
-
+		floatChangeDistance = 300;
 
 		//Retrieve the rod
 		if (!fishing.isFishing) {
 			//Close dialogo
 			dialogoClose(0);
-
 			dialogoPlayerMoving = false;
 			fishingfloat_getPlayerPosition = true;//Enable acquiring player's current location
 			lureFinishLine = true;//In order to avoid repetition between the closing dialog for reeling in and the automatic dialog
@@ -713,17 +482,11 @@ bool MiniGameFishing::miniGameLoop(float dt)
 	//Animation float
 	if (fishingfloat_lineReady) {
 		ani_castingline(app->entityManager->GetPlayer()->player_Direction);//animation and collision of the float
-		////printf("%s", Direction::DOWN);
 	}//end_if can fishing or not
 
 	//GamePlaye
 	if (fishing.startFishing) {
-		if (fishing.fishingtype == FISHINGTYPE::FISHING) {
-			playNormalFishing();
-		}
-		else {
-			playLureFishing();
-		}//end_if, fishing type
+		playNormalFishing();
 	}//end_if, if start fishing
 	return true;
 }

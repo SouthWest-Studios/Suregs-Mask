@@ -125,11 +125,11 @@ bool Boss_Inuit::Update(float dt)
 	{
 		desiredState = EntityState_Boss_Inuit::DEAD;
 	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32)
+	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32 && !app->entityManager->GetPlayer()->die)
 	{
 		desiredState = EntityState_Boss_Inuit::ATTACKING_BASIC;
 	}
-	else if (enemyMove && currentState != EntityState_Boss_Inuit::ATTACKING_BASIC)
+	else if (enemyMove && currentState != EntityState_Boss_Inuit::ATTACKING_BASIC && !app->entityManager->GetPlayer()->die)
 	{
 		desiredState = EntityState_Boss_Inuit::RUNNING;
 	}
@@ -574,7 +574,7 @@ void Boss_Inuit::Attack(float dt)
 		{
 			atkDistancia = 150;
 		}
-		atackCube = app->physics->CreateRectangleSensor(position.x - atkDistancia, position.y, 200, 300, STATIC);
+		atackCube = app->physics->CreateRectangleSensor(position.x - atkDistancia, position.y, 200, 300, KINEMATIC);
 		atackCube->entity = this;
 		atackCube->listener = this;
 		atackCube->ctype = ColliderType::ATACK_INUIT;
@@ -592,7 +592,7 @@ void Boss_Inuit::Attack(float dt)
 		{
 			atkDistancia = 150;
 		}
-		atackCube = app->physics->CreateRectangleSensor(position.x - atkDistancia, position.y, 200, 300, STATIC);
+		atackCube = app->physics->CreateRectangleSensor(position.x - atkDistancia, position.y, 200, 300, KINEMATIC);
 
 		atackCube->entity = this;
 		atackCube->listener = this;

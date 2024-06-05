@@ -77,6 +77,7 @@
 #include "Estatua.h"
 #include "ElevatorMenu.h"
 #include "TreeManager.h"
+#include "Arbol.h"
 #include "Defs.h"
 #include "Log.h"
 #include <random>
@@ -409,6 +410,9 @@ Entity* EntityManager::CreateEntity(EntityType type, int id)
 	case EntityType::ESTATUA:
 		entity = new Estatua();
 		break;
+	case EntityType::ARBOL:
+		entity = new Arbol();
+		break;
 	default:
 		break;
 	}
@@ -501,10 +505,6 @@ int EntityManager::getRandomNumber(int min, int max) {
 	return dis(gen);
 }
 
-MiniGameFishing* EntityManager::GetRod()
-{
-	return fishing;
-}
 
 std::vector<Entity*> EntityManager::GetEnemies() {
 	std::vector<Entity*> enemies;
@@ -740,7 +740,7 @@ bool EntityManager::PostUpdate()
 
 bool EntityManager::PostLateUpdate()
 {
-	if (canShowFinal) {
+	if (canShowFinal && bossIgory != nullptr) {
 		if (bossIgory->deletePadre && bossIgory->isDead) {
 			showFinalkillPadre();
 		}
@@ -936,24 +936,19 @@ void EntityManager::showFinalkillPadre()
 	if (showPhoto) {
 		if (bossIgory->seleccionFinalPersonaje == 1) {
 			app->render->DrawTexture(textureKillPadre, 0, 0, SDL_FLIP_NONE, &overlayRect, 0, 0);
-			app->audio->LoadAudioMusic("good_ending", 0.0f);
 			/*if (!goPadreCleanUp) {
 				bossIgory->CleanUp();
 				bossIgory->closeFinalSelecion = false;
 				goPadreCleanUp = true;
 			}*/
-
 		}
-		else
-		{
+		else if (bossIgory->seleccionFinalPersonaje == 2) {
 			app->render->DrawTexture(textureUnirPadre, 0, 0, SDL_FLIP_NONE, &overlayRect, 0, 0);
-			app->audio->LoadAudioMusic("bad_ending", 0.0f);
 		}
 	}
 
 	if (showCredi) {
 		app->render->DrawTexture(textureCredit, 0, 0, SDL_FLIP_NONE, &overlayRect, 0, 0);
-		app->audio->LoadAudioMusic("credits", 0.0f);
 	}
 
 	if (increasing) {
@@ -975,6 +970,10 @@ void EntityManager::showFinalkillPadre()
 				{
 					showPhoto = true;
 					stayTime.Start();
+
+					if (bossIgory->seleccionFinalPersonaje == 1) app->audio->LoadAudioMusic("good_ending", 0.0f);
+
+					if (bossIgory->seleccionFinalPersonaje == 2) app->audio->LoadAudioMusic("bad_ending", 0.0f);
 				}
 
 			}
@@ -985,11 +984,11 @@ void EntityManager::showFinalkillPadre()
 		if (photoTransparent <= 0) {
 			photoTransparent = 0;
 
-			if (showCredi && stayTime.ReadMSec() >= 5000) {
+			if (showCredi && stayTime.ReadMSec() >= 15000) {
 				increasing = true;
 				goScene = true;
 			}
-			if (stayTime.ReadMSec() >= 5000) {
+			if (stayTime.ReadMSec() >= 15000) {
 				increasing = true;
 			}
 

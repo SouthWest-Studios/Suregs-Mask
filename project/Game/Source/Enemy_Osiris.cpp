@@ -128,7 +128,7 @@ bool Enemy_Osiris::Update(float dt)
 		}
 		
 	}
-	else if (app->entityManager->GetIgory()->isDead) {
+	else if (app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->isDead) {
 		health = 0;
 	}
 	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32)
@@ -375,8 +375,8 @@ void Enemy_Osiris::Die() {
 			////printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
 		}
 		
-		////printf("\n SSS: %d", app->entityManager->GetIgory()->position);
-		if (app->entityManager->GetIgory()->playerInFight) {
+		////printf("\n SSS: %d", app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->position);
+		if (app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->playerInFight) {
 			app->map->DestroyEntity(this);
 		}
 		
@@ -448,7 +448,7 @@ bool Enemy_Osiris::Osirisfinding(float dt, iPoint playerPosP)
 		lastPath = *app->map->pathfinding->GetLastPath();
 	}
 	else {
-		if (app->entityManager->GetIgory()->playerInFight) {
+		if (app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->playerInFight) {
 			app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
 			lastPath = *app->map->pathfinding->GetLastPath();
 		}

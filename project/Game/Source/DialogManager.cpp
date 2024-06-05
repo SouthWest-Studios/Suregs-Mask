@@ -386,12 +386,13 @@ bool DialogManager::PostUpdate() {
 
 			if (actualDialog->type == DialogType::QUEST_UPDATE) {
 
-				if (app->questManager->GetQuestLineIndex(actualDialog->questLine) == actualDialog->actualTargetID) {
+				if (app->questManager->GetQuestLineIndex(actualDialog->questLine) <= actualDialog->actualTargetID) {
 					app->questManager->UpdateQuestLine(actualDialog->questLine, actualDialog->nextTargetID);
 				}
 			}
 			if (actualDialog->type == DialogType::SELECT_CHOOSE) {
-				app->entityManager->GetIgory()->seleccionFinalPersonaje = actualDialog->selectChoose;
+				if(app->entityManager->GetIgory() != nullptr)
+					app->entityManager->GetIgory()->seleccionFinalPersonaje = actualDialog->selectChoose;
 			}
 
 
@@ -494,6 +495,7 @@ bool DialogManager::PostUpdate() {
 	}
 	else {
 		//Reiniciar variables mientras no este algun dialogo en marcha
+		app->menu->active = true;
 		indexText = 1;
 		optionSelected = 0;
 		actualDialogYPosition = -300;

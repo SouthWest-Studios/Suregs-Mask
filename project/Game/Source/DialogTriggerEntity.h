@@ -36,6 +36,8 @@ public:
 	uint GetDialogId() const;
 	void UpdateDialog();
 
+	
+
 private:
 
 	uint dialogId;

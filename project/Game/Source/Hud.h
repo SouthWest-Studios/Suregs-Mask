@@ -89,6 +89,7 @@ private:
 	SDL_Rect* rectFondoInventario;
 	SDL_Rect* rectFondoMonedas;
 	SDL_Rect* rectFondoObjetosConseguidos;
+	SDL_Rect* rectFondoQuest;
 
 	SDL_Rect* rectMascaraNoMask;
 	SDL_Rect* rectMascara0;

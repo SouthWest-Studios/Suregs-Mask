@@ -190,7 +190,7 @@ public:
 
 	Stats baseStats;
 
-	Stats currentStats{10,10,10,10,10};
+	Stats currentStats{ 10,10,10,10,10 };
 
 	std::map<int, PassiveStats> branchPassiveStats;
 	std::map<Branches, decltype(branchPassiveStats)> maskBranchPassiveStats;
@@ -227,7 +227,7 @@ public:
 	int maskTwoPoints;
 	int maskThreePoints;
 
-	bool levelUpZero= false;
+	bool levelUpZero = false;
 	bool levelUpOne = false;
 	bool levelUpTwo = false;
 	bool levelUpThree = false;
@@ -255,7 +255,7 @@ private:
 
 public:
 
-	
+
 	//L02: DONE 2: Declare player parameters
 	float speed = 0.2f;
 	float attackMovement = 25;
@@ -398,13 +398,13 @@ public:
 	//New//
 	bool playermove = false;
 	bool getPlayerTouch = false;
-	Direction player_Direction;
+	Direction player_Direction = Direction::DOWN;
 
 	//Player move
-	bool pressingUp;
-	bool pressingDown;
-	bool pressingLeft;
-	bool pressingRight;
+	bool pressingUp = false;
+	bool pressingDown = false;
+	bool pressingLeft = false;
+	bool pressingRight = false;
 
 	bool isFacingLeft = false;
 
@@ -448,7 +448,7 @@ private:
 
 	//Atack
 	bool atack_Anim = false;
-	
+
 	Emitter* blood = nullptr;
 	bool particulaBlood = false;
 

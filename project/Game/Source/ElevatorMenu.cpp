@@ -28,6 +28,8 @@
 #include "Scene_Mazmorra8.h"
 #include "Scene_Pueblo.h"
 #include "Menu.h"
+#include "QuestManager.h"
+#include "DialogManager.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 
 ElevatorMenu::ElevatorMenu(App* app, bool start_enabled) : Module(app, start_enabled)
@@ -172,7 +174,8 @@ bool ElevatorMenu::PostUpdate()
 // Called before quitting
 bool ElevatorMenu::CleanUp()
 {
-	
+	app->tex->UnLoad(textura_black);
+	app->tex->UnLoad(PointerTexture);
 	LOG("Freeing Scene_Intro");
 
 	return true;
@@ -270,6 +273,7 @@ void ElevatorMenu::UseElevator(int id, int mazmorraa)
 	{
 	case 0:
 	{
+		
 		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra0);
 		app->menu->active = true;
 		mazmorra = 0;
@@ -277,60 +281,117 @@ void ElevatorMenu::UseElevator(int id, int mazmorraa)
 	}
 	case 1:
 	{
-		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra1);
-		app->menu->active = true;
-		mazmorra = 1;
+		if (app->questManager->GetQuestLineIndex(1) >= 9)
+		{
+			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra1);
+			app->menu->active = true;
+			mazmorra = 1;
+		}
+		else
+		{
+			(app->dialogManager->CreateDialogSinEntity("Tengo cosas pendientes...", "Jakov", "Assets/Textures/Interfaz/Dialogos/jakovFace.png"));
+		}
 		break;
 	}
 	case 2:
 	{
-		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra2);
-		app->menu->active = true;
-		mazmorra = 2;
+		if (app->questManager->GetQuestLineIndex(1) >= 11)
+		{
+			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra2);
+			app->menu->active = true;
+			mazmorra = 2;
+		}
+		else
+		{
+			(app->dialogManager->CreateDialogSinEntity("Tengo cosas pendientes...", "Jakov", "Assets/Textures/Interfaz/Dialogos/jakovFace.png"));
+		}
+
 		break;
 	}
 	case 3:
 	{
-		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra3);
-		app->menu->active = true;
-		mazmorra = 3;
+		if (app->questManager->GetQuestLineIndex(1) >= 13)
+		{
+			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra3);
+			app->menu->active = true;
+			mazmorra = 3;
+		}
+		else
+		{
+			(app->dialogManager->CreateDialogSinEntity("Tengo cosas pendientes...", "Jakov", "Assets/Textures/Interfaz/Dialogos/jakovFace.png"));
+		}
 		break;
 	}
 	case 4:
 	{
-		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra4);
-		app->menu->active = true; 
-		mazmorra = 4;
+		if (app->questManager->GetQuestLineIndex(1) >= 16)
+		{
+			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra4);
+			app->menu->active = true;
+			mazmorra = 4;
+		}
+		else
+		{
+			(app->dialogManager->CreateDialogSinEntity("Tengo cosas pendientes...", "Jakov", "Assets/Textures/Interfaz/Dialogos/jakovFace.png"));
+		}
 		break;
 	}
 	case 5:
 	{
-		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra5);
-		app->menu->active = true;
-		mazmorra = 5;
+		if (app->questManager->GetQuestLineIndex(1) >= 18)
+		{
+			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra5);
+			app->menu->active = true;
+			mazmorra = 5;
+		}
+		else
+		{
+			(app->dialogManager->CreateDialogSinEntity("Tengo cosas pendientes...", "Jakov", "Assets/Textures/Interfaz/Dialogos/jakovFace.png"));
+		}
 		break;
 	}
 	case 6:
 	{
-		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra6);
-		app->menu->active = true;
-		mazmorra = 6; 
+		if (app->questManager->GetQuestLineIndex(1) >= 20)
+		{
+			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra6);
+			app->menu->active = true;
+			mazmorra = 6;
+		}
+		else
+		{
+			(app->dialogManager->CreateDialogSinEntity("Tengo cosas pendientes...", "Jakov", "Assets/Textures/Interfaz/Dialogos/jakovFace.png"));
+		}
 		break;
 	}
 	case 7:
 	{
-		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra7);
-		app->menu->active = true;
+		if (app->questManager->GetQuestLineIndex(1) >= 23)
+		{
+			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra7);
+			app->menu->active = true;
 
-		mazmorra = 7;
+			mazmorra = 7;
+		}
+		else
+		{
+			(app->dialogManager->CreateDialogSinEntity("Tengo cosas pendientes...", "Jakov", "Assets/Textures/Interfaz/Dialogos/jakovFace.png"));
+		}
 		break;
 	}
 	case 8:
 	{
-		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra8);
-		app->menu->active = true;
+		if (app->questManager->GetQuestLineIndex(1) >= 23)
+		{
+			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra8);
+			app->menu->active = true;
 
-		mazmorra = 8;
+			mazmorra = 8;
+		}
+		else
+		{
+			(app->dialogManager->CreateDialogSinEntity("Tengo cosas pendientes...", "Jakov", "Assets/Textures/Interfaz/Dialogos/jakovFace.png"));
+		}
 		break;
 	}
 	default:

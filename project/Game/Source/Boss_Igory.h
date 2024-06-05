@@ -80,7 +80,7 @@ public:
 public:
 
 	//L02: DONE 2: Declare player parameters
-	SDL_Texture* texture = NULL;
+	SDL_Texture* texture = nullptr;
 	pugi::xml_node config;
 	uint texW, texH;
 
@@ -112,7 +112,9 @@ public:
 	bool startDialogo = false;
 	bool startSelecion = false;
 	bool closeFinalSelecion = false;
+	bool dieDefinit = false;
 	int seleccionFinalPersonaje = -1;
+	Timer startDialogoTimer;
 
 	//Kill padre
 	bool cankillPadre = false;

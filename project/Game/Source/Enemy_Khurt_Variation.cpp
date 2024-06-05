@@ -106,7 +106,7 @@ bool Enemy_Khurt_Variation::Update(float dt)
 	{
 		desiredState = EntityState_Khurt::DEAD;
 	}
-	else if (app->entityManager->GetIgory()->isDead) {
+	else if (app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->isDead) {
 		health = 0;
 	}
 	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32)
@@ -434,7 +434,7 @@ void Enemy_Khurt_Variation::Die() {
 		////printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
 	}
 
-	if (app->entityManager->GetIgory()->playerInFight) {
+	if (app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->playerInFight) {
 		app->map->DestroyEntity(this);
 	}
 }
@@ -472,7 +472,7 @@ bool Enemy_Khurt_Variation::Khurtfinding(float dt, iPoint playerPosP)
 		lastPath = *app->map->pathfinding->GetLastPath();
 	}
 	else {
-		if (app->entityManager->GetIgory()->playerInFight) {
+		if (app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->playerInFight) {
 			app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
 			lastPath = *app->map->pathfinding->GetLastPath();
 		}
@@ -588,7 +588,7 @@ MapObject* Enemy_Khurt_Variation::GetCurrentRoom()
 	{
 		MapObject* room = item->data;
 
-		// el jugador está dentro de la sala
+		// el jugador est?dentro de la sala
 		if (position.x >= room->x && position.x <= room->x + room->width &&
 			position.y >= room->y && position.y <= room->y + room->height)
 		{
@@ -601,7 +601,7 @@ MapObject* Enemy_Khurt_Variation::GetCurrentRoom()
 	{
 		MapObject* room = item->data;
 
-		// el jugador está dentro de la sala
+		// el jugador est?dentro de la sala
 		if (position.x >= room->x && position.x <= room->x + room->width &&
 			position.y >= room->y && position.y <= room->y + room->height)
 		{
@@ -614,7 +614,7 @@ MapObject* Enemy_Khurt_Variation::GetCurrentRoom()
 	{
 		MapObject* room = item->data;
 
-		// el jugador está dentro de la sala
+		// el jugador est?dentro de la sala
 		if (position.x >= room->x && position.x <= room->x + room->width &&
 			position.y >= room->y && position.y <= room->y + room->height)
 		{

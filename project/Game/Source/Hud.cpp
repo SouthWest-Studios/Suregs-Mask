@@ -23,6 +23,7 @@
 #include "Scene_Pueblo.h"
 #include "Scene_Pueblo_Tutorial.h"
 #include "Utils.cpp"
+#include "Scene_Mazmorra0.h"
 
 Hud::Hud(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -69,6 +70,8 @@ bool Hud::Awake(pugi::xml_node config)
 	rectPocionVelocidad = new SDL_Rect{ 387,686,62,65 };
 	rectPocionOrbe = new SDL_Rect{ 456,686,62,65 };
 
+
+
 	potionRectMap[InventityType::POCION_VIDA_1] = rectPocionVida1;
 	potionRectMap[InventityType::POCION_VIDA_2] = rectPocionVida2;
 	potionRectMap[InventityType::POCION_VIDA_3] = rectPocionVida3;
@@ -83,6 +86,8 @@ bool Hud::Awake(pugi::xml_node config)
 	rectFondoInventario = new SDL_Rect{ 2,220,109,109 };
 	rectFondoMonedas = new SDL_Rect{ 0,341,96,30 };
 	rectFondoObjetosConseguidos = new SDL_Rect{ 0,422,357,41 };
+
+	rectFondoQuest = new SDL_Rect{ 0,822,357,41 };
 
 	rectMascaraNoMask = new SDL_Rect{ 0,0,1,1 };
 	rectMascara0 = new SDL_Rect{ 3,499,100,100 };
@@ -443,11 +448,11 @@ bool Hud::PostUpdate()
 
 	//Misiones
 
-	if (app->scene_pueblo->active || app->scene_pueblo_tutorial->active) {
+	if (app->scene_pueblo->active || app->scene_pueblo_tutorial->active || app->scene_mazmorra0->active) {
 
 		std::vector<Quest*> quests = app->questManager->GetActiveQuest();
 		for (int i = 0; i < quests.size(); i++) {
-			app->render->DrawTexture(hudTexture, 925, 200 + (i * 50), SDL_FLIP_NONE, rectFondoObjetosConseguidos, 0);
+			app->render->DrawTexture(hudTexture, 925, 200 + (i * 50), SDL_FLIP_NONE, rectFondoQuest, 0);
 			app->render->DrawTextBound(quests.at(i)->questTitle.c_str(), 992, 207 + (i * 50), 300, { 52, 25, 0 }, app->render->questFont);
 		}
 

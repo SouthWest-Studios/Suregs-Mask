@@ -744,7 +744,7 @@ bool Player::Update(float dt)
 	}
 
 	if (app->entityManager->canShowFinal) {
-		if (app->entityManager->GetIgory()->playerInFight && !playerTpBossPadre) {
+		if (app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->playerInFight && !playerTpBossPadre) {
 			pbodyFoot->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y - 10)), 0);
 			playerTpBossPadre = true;
 		}
@@ -759,7 +759,7 @@ bool Player::Update(float dt)
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
 
-	if (!inAnimation) {
+	if (!inAnimation && !die) {
 		desiredState = EntityStatePlayer::IDLE;
 	}
 
@@ -793,7 +793,7 @@ bool Player::Update(float dt)
 	if (inPocionAnim) {
 		currentAnimation = &pocion_player;
 
-		if (pocion_player.HasFinished())
+		if (pocion_player.HasFinished() && !die)
 		{
 			inPocionAnim = false;
 			inAnimation = false;
@@ -819,7 +819,7 @@ bool Player::Update(float dt)
 		desiredState = EntityStatePlayer::POCION;
 	}
 
-	/*//printf("\nposx:%d, posy: %d",position.x, position.y);*/
+	//printf("\nposx:%d, posy: %d",position.x, position.y);
 
 	if (maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].invisibilityTimer.ReadSec() > maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].invisibilityDuration) {
 		SDL_SetTextureAlphaMod(texture, 255);
@@ -1306,8 +1306,8 @@ void Player::Attack(float dt)
 	//Onda expansiva ataque pasivo mascara 1
 	if (secondaryMask == Mask::MASK1) {
 		if (!mask1PassiveSensor) {
-			mask1PassiveSensor = app->physics->CreateRectangleSensor(attackX, attackY, 100, 100, DYNAMIC);
-			mask1PassiveSensor->ctype = ColliderType::MASK0_PASSIVE_ATTACK;
+			mask1PassiveSensor = app->physics->CreateRectangleSensor(attackX, attackY, 120, 120, DYNAMIC);
+			mask1PassiveSensor->ctype = ColliderType::MASK1_PASSIVE_ATTACK;
 			mask1PassiveSensor->listener = this;
 		}
 		else if (mask1PassiveSensor) {
@@ -1329,7 +1329,7 @@ void Player::Attack(float dt)
 void Player::Dead()
 {
 	die = true;
-	if (app->entityManager->GetIgory()->playerInFight) {
+	if (app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->playerInFight) {
 		app->entityManager->GetIgory()->playerInFight = false;
 	}
 	if (app->audio->playingMusic == true)
@@ -2630,8 +2630,8 @@ void Player::PlayerMovement(float dt)
 
 
 	// Calcular la velocidad horizontal y vertical
-
-	if (die == false && desiredState != EntityStatePlayer::POCION && !app->entityManager->GetIgory()->killPadre) {
+	//!app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->killPadre &&
+	if (die == false && desiredState != EntityStatePlayer::POCION &&  !die) {
 		fPoint joystick = app->input->GetAxis(MOVE_HORIZONTAL, MOVE_VERTICAL);
 		float horizontalMovement = joystick.x;
 		float verticalMovement = joystick.y;
@@ -2658,7 +2658,7 @@ void Player::PlayerMovement(float dt)
 	}
 
 	//Si pulsas espacio
-	if (app->input->GetButton(DASH) == KEY_DOWN && timerDash.ReadMSec() > cdTimerDashMS && !app->scene_pueblo->GetRod()->fishing.rodReady) {
+	if (app->input->GetButton(DASH) == KEY_DOWN && timerDash.ReadMSec() > cdTimerDashMS && !app->scene_pueblo->GetRod()->fishing.rodReady && !die) {
 
 		velocityNormalized = velocity;
 		velocityNormalized.Normalize();
@@ -2695,7 +2695,7 @@ void Player::PlayerMovement(float dt)
 	}
 
 	//Si pulsas J para atacar
-	if (app->input->GetButton(ATAQUE) == KEY_DOWN && !isAttacking && !app->scene_pueblo->GetRod()->fishing.rodReady) {
+	if (app->input->GetButton(ATAQUE) == KEY_DOWN && !isAttacking && !app->scene_pueblo->GetRod()->fishing.rodReady && !die) {
 		hasAttacked = false;
 		isAttacking = true;
 		timerAttack.Start();
@@ -2726,7 +2726,7 @@ void Player::PlayerMovement(float dt)
 
 	if ((app->input->GetButton(ATAQUE_HABILIDAD) == KEY_DOWN || app->input->GetAxis(ATAQUE_HABILIDAD) != 0) &&
 		(maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDownTimer.ReadMSec() > maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDown ||
-			!maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].firstTimeUsed)) {
+			!maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].firstTimeUsed) && !die) {
 		maskStats[primaryMask][Branches::Rama3][maskLevels[primaryMask][Branches::Rama3]].firstTimeUsed = true;
 		isAttackingMask = true;
 		maskStats[primaryMask][Branches::Rama2][maskLevels[primaryMask][Branches::Rama2]].maskCoolDownTimer.Start();

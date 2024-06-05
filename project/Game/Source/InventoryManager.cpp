@@ -250,6 +250,7 @@ Inventity* InventoryManager::CreateItem(EntityType type, std::string descripcioo
 	case EntityType::ITEM_ZAFIRO:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_zafiro.png");
 		entity->type = InventityType::ZAFIRO;
+		entity->objectID;
 		break;
 	case EntityType::ITEM_ESPADA_NV2:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_espada_nv2.png");

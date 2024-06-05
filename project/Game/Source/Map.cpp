@@ -63,6 +63,7 @@
 #include "Enemy_Spawner.h"
 #include "ElevatorMenu.h"
 #include "Item_Mascara_0.h"
+#include "Arbol.h"
 
 Map::Map(App* app, bool start_enabled) : Module(app, start_enabled), mapLoaded(false)
 {
@@ -410,6 +411,11 @@ bool Map::CleanUp()
 	mapData.mapObjects.Clear();
 
 	// El clean Up de la camara, no borrar
+	for (int i = 0; i < smallRoomsList.Count(); i++) {
+		
+	}
+
+
 	smallRoomsList.Clear();
 	largeRoomsList.Clear();
 	LRoomsList.Clear();
@@ -1244,10 +1250,10 @@ bool Map::LoadObjects()
 				uint dialogId = atoi(object->properties.GetProperty("dialogID")->value.c_str());
 				dialogId += app->inventoryManager->storyLevel - 1;
 
-				Dialog* dialog = new Dialog(dialogId);
+				//Dialog* dialog = new Dialog(dialogId);
 
 				// A�adir el Dialog a la lista de di�logos
-				dialogues.Add(dialog);
+				//dialogues.Add(dialog);
 
 				//ANTIGUO 
 				//pugi::xml_node dialogNode = dialoguesNode.find_child_by_attribute("dialog", "id", object->properties.GetProperty("dialogID")->value.c_str());
@@ -1767,6 +1773,7 @@ bool Map::LoadEntities(std::string layerName)
 						elev->position = iPoint(pos.x + 16, pos.y + 16);
 						elev->Start();
 						elev->final = false;
+						app->ascensor->primeraVez = true;
 
 					}
 					/*ASCENSOR FINAL*/
@@ -1776,6 +1783,7 @@ bool Map::LoadEntities(std::string layerName)
 						elev->position = iPoint(pos.x + 16, pos.y + 16);
 						elev->Start();
 						elev->final = true;
+						app->ascensor->primeraVez = true;
 
 					}
 
@@ -1795,6 +1803,13 @@ bool Map::LoadEntities(std::string layerName)
 						elev->Start();
 						elev->final = true;*/
 
+					}
+					if (gid == tileset->firstgid + 47) {
+						Arbol* arbol = (Arbol*)app->entityManager->CreateEntity(EntityType::ARBOL);
+						/*arbol->config = configNode.child("entities_data").child("arbol");*/
+						arbol->position = iPoint(pos.x + 16, pos.y + 16);
+						arbol->Start();
+						
 					}
 
 

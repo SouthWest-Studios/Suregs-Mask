@@ -147,6 +147,6 @@ bool Scene_Logos::CleanUp()
 	RELEASE(spritePositions);
 	delete spritePositions;
 	currentAnimation->Reset();
-	//app->tex->UnLoad(logoGame);
+
 	return true;
 }

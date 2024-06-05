@@ -126,7 +126,7 @@ bool Enemy_Boorok_Variation::Update(float dt)
 	{
 		nextState = EntityState_Enemy::RUNNING;
 	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) >= viewDistance * 32 && app->entityManager->GetIgory()->playerInFight)
+	else if (app->map->pathfinding->GetDistance(playerPos, position) >= viewDistance * 32 && app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->playerInFight)
 	{
 		nextState = EntityState_Enemy::RUNNING;
 	}
@@ -332,7 +332,7 @@ void Enemy_Boorok_Variation::Die()
 			app->entityManager->GetPlayer()->maskThreeXP += 120;
 		}
 
-		if (app->entityManager->GetIgory()->playerInFight) {
+		if (app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->playerInFight) {
 			app->map->DestroyEntity(this);
 		}
 	}
@@ -372,7 +372,7 @@ bool Enemy_Boorok_Variation::Boorokfinding(float dt, iPoint playerPosP)
 		lastPath = *app->map->pathfinding->GetLastPath();
 	}
 	else {
-		if (app->entityManager->GetIgory()->playerInFight) {
+		if (app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->playerInFight) {
 			app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
 			lastPath = *app->map->pathfinding->GetLastPath();
 		}

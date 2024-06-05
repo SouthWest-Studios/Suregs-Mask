@@ -71,7 +71,7 @@ public:
 	bool startAniFloat = false;
 
 
-	Direction player_Direction;
+	Direction player_Direction = Direction::DOWN;
 	//Animacion
 	Animation* currentAnimation = nullptr;
 	SDL_Rect rect;
@@ -105,7 +105,7 @@ public:
 	bool isFishingta = false;
 	bool crearfloatbody = false;
 	PhysBody* floatbody = nullptr;
-	float floatDistance;
+	float floatDistance = 300;
 	float lureDistance;
 	float floatChangeDistance = 200;
 	bool startFinishingLine = false;
@@ -136,7 +136,7 @@ public:
 	Timer gamePlayTimeLimit;
 	uint32 gamePlayTimeLimit_show = 0;
 	bool gamePlayStart = false;
-	int player_click_count;
+	int player_click_count = 0;
 	int player_click_count_TimeOver;
 	bool dialogoautoclose = false;
 	bool dialogoPlayerMoving = false;

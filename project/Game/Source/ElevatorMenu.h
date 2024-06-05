@@ -64,7 +64,7 @@ public:
 	int plus = 0;
 	bool final;
 	int totalMazmorras = 1;
-
+	bool primeraVez = false;
 private:
 
 	int button_fx;

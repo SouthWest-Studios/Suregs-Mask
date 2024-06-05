@@ -17,6 +17,7 @@
 #include "GuiControl.h"
 #include "GuiManager.h"
 #include "Elevator.h"
+#include "QuestManager.h"
 
 Scene_Arena_Tutorial::Scene_Arena_Tutorial(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -74,6 +75,11 @@ bool Scene_Arena_Tutorial::Start()
 	app->entityManager->Enable();
 
 	app->SaveRequest();
+
+	if (app->questManager->GetQuestLineIndex(1) <= 2) {
+		app->questManager->UpdateQuestLine(1, 3);
+	}
+		
 
 	return true;
 }
