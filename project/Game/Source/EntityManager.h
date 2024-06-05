@@ -75,7 +75,7 @@ public:
 	Player* GetPlayer();
 	Boss_Igory* GetIgory();
 
-	MiniGameFishing* GetRod();
+
 	std::vector<Entity*> GetEnemies();
 
 	std::vector<Entity*> GetEnemiesOsiris();
@@ -142,7 +142,6 @@ private:
 	Cofre* cofre = nullptr;
 	Elevator* ascensor = nullptr;
 	Estatua* estatua = nullptr;
-	MiniGameFishing* fishing = new MiniGameFishing;
 
 	//pugi::xml_node config;
 	
