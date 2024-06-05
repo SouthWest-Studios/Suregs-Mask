@@ -397,7 +397,7 @@
 				</nonthings>
 				<trashes>
 					<trash texturepath="Assets/Textures/Fishing/trash1.png" name = "espina de pescado" />
-					<trash texturepath="Assets/Textures/Fishing/trash2.png" name = "cáscara de plátano”" />
+					<trash texturepath="Assets/Textures/Fishing/trash2.png" name = "cáscara de plátano" />
 					<trash texturepath="Assets/Textures/Fishing/trash3.png" name = "hueso de pollo" />
 					<trash texturepath="Assets/Textures/Fishing/trash4.png" name = "cáscara de sandía" />
 				</trashes>
