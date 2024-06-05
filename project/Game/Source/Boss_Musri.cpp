@@ -309,14 +309,43 @@ bool Boss_Musri::PostUpdate() {
 
 bool Boss_Musri::CleanUp()
 {
-	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
-	app->physics->GetWorld()->DestroyBody(pbodySensor->body);
+	app->entityManager->DestroyEntity(this);
+	app->physics->DestroyBody(pbodyFoot);
+	app->physics->DestroyBody(pbodySensor);
 	app->tex->UnLoad(texture);
 	lastPath.Clear();
-
+	app->tex->UnLoad(arrowTexture);
+	app->tex->UnLoad(arrowChargedRastroTexture);
 	RELEASE(spritePositions);
 	delete spritePositions;
 
+	RELEASE(spriteArrowPositions);
+	delete spriteArrowPositions;
+
+	// Limpiar sensores físicos de flechas lanzadas
+	for (auto& flecha : flechasLanzadas) {
+		if (flecha.pbody != nullptr) {
+			delete flecha.pbody;
+			flecha.pbody = nullptr;
+		}
+	}
+	flechasLanzadas.clear();
+
+	// Limpiar sensores físicos de flechas cargadas y sus rastros
+	for (auto& flechaCargada : flechasCargadas) {
+		if (flechaCargada.pbody != nullptr) {
+			delete flechaCargada.pbody;
+			flechaCargada.pbody = nullptr;
+		}
+		for (auto& rastro : flechaCargada.rastroGenerado) {
+			if (rastro.pbody != nullptr) {
+				delete rastro.pbody;
+				rastro.pbody = nullptr;
+			}
+		}
+		flechaCargada.rastroGenerado.clear();
+	}
+	flechasCargadas.clear();
 	return true;
 }
 
@@ -579,6 +608,7 @@ void Boss_Musri::stateMachine(float dt, iPoint playerPos)
 		break;
 	case EntityState_Boss_Musri::DEAD:
 		Die();
+		CleanUp();
 		break;
 	case EntityState_Boss_Musri::DASHI:
 		break;

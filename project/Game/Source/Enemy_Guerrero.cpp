@@ -174,8 +174,9 @@ bool Enemy_Guerrero::PostUpdate() {
 
 bool Enemy_Guerrero::CleanUp()
 {
-	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
-	app->physics->GetWorld()->DestroyBody(pbodySensor->body);
+	app->entityManager->DestroyEntity(this);
+	app->physics->DestroyBody(pbodyFoot);
+	app->physics->DestroyBody(pbodySensor);
 	app->tex->UnLoad(texture);
 	lastPath.Clear();
 
@@ -245,10 +246,6 @@ void Enemy_Guerrero::Die() {
 
 		app->audio->PlayFx(osiris_death_fx);
 
-		app->entityManager->DestroyEntity(this);
-		app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
-		app->physics->GetWorld()->DestroyBody(pbodySensor->body);
-		app->tex->UnLoad(texture);
 		//CleanUp();
 		pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
 		if (parseResult) {

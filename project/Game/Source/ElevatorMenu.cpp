@@ -176,7 +176,8 @@ bool ElevatorMenu::CleanUp()
 {
 	app->tex->UnLoad(textura_black);
 	app->tex->UnLoad(PointerTexture);
-	LOG("Freeing Scene_Intro");
+	app->tex->UnLoad(Menutexture);
+	LOG("Freezing ElevatorMenu");
 
 	return true;
 }

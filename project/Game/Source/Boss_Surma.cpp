@@ -237,13 +237,23 @@ bool Boss_Surma::PostUpdate() {
 
 bool Boss_Surma::CleanUp()
 {
-	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
-	app->physics->GetWorld()->DestroyBody(pbodySensor->body);
+	app->entityManager->DestroyEntity(this);
+	app->physics->DestroyBody(pbodyFoot);
+	app->physics->DestroyBody(pbodySensor);
 	app->tex->UnLoad(texture);
+	app->tex->UnLoad(textureExplosion);
+	app->tex->UnLoad(textureExplosion);
 	lastPath.Clear();
+
 
 	RELEASE(spritePositions);
 	delete spritePositions;
+
+	RELEASE(spritePositionsExplosion);
+	delete spritePositionsExplosion;
+
+	RELEASE(explosionActual);
+	delete explosionActual;
 
 	return true;
 }
@@ -874,9 +884,9 @@ void Boss_Surma::Fase2(float dt, iPoint playerPos)
 	if (health <= 0) {
 
 		fase = FASE_Surma::FASE_DYNIG;
-
+		
 		Die();
-
+		CleanUp();
 	}
 
 }

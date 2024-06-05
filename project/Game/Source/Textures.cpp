@@ -77,11 +77,16 @@ SDL_Texture* const Textures::Load(const char* path)
 		{
 			texturePathMap[texture] = path;  // Store the texture path
 		}
+		else
+		{
+			UnLoad(texture);
+		}
 		SDL_FreeSurface(surface);
 	}
 
 	return texture;
 }
+
 
 // Unload texture
 bool Textures::UnLoad(SDL_Texture* texture)

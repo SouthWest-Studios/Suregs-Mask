@@ -192,8 +192,9 @@ bool Enemy_Khurt::PostUpdate() {
 
 bool Enemy_Khurt::CleanUp()
 {
-	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
-	app->physics->GetWorld()->DestroyBody(pbodySensor->body);
+	app->entityManager->DestroyEntity(this);
+	app->physics->DestroyBody(pbodyFoot);
+	app->physics->DestroyBody(pbodySensor);
 	app->tex->UnLoad(texture);
 	lastPath.Clear();
 
@@ -358,10 +359,6 @@ void Enemy_Khurt::Die() {
 	fPoint pos((float)position.x, (float)position.y);
 	blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_ENEMY_BLOOD);
 
-	app->entityManager->DestroyEntity(this);
-	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
-	app->physics->GetWorld()->DestroyBody(pbodySensor->body);
-	app->tex->UnLoad(texture);
 
 
 	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
@@ -435,6 +432,8 @@ void Enemy_Khurt::Die() {
 	if (app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->playerInFight) {
 		app->map->DestroyEntity(this);
 	}
+
+	CleanUp();
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 
