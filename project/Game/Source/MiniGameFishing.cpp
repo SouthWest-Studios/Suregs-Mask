@@ -210,7 +210,7 @@ void MiniGameFishing::playNormalFishing()
 			//Close dialogo
 			dialogoClose(0);
 			//Crear new dialogo
-			app->dialogManager->CreateDialogSinEntity("Ostia, está picando algo!", "Jakov", nullptr);
+			app->dialogManager->CreateDialogSinEntity("Ostia, est?picando algo!", "Jakov", nullptr);
 			playerGoplay = true;//Start game play
 			gamePlayTime = getRandomNumber(3, 6);// Get play time
 			gamePlayTimeLimit.Start();// reset play time
@@ -233,7 +233,7 @@ void MiniGameFishing::playNormalFishing()
 			//Close dialogo
 			dialogoClose(0);
 			//Crear new dialogo
-			app->dialogManager->CreateDialogSinEntity("Qué lástima, el pez se ha escapado...", "Jakov", nullptr);
+			app->dialogManager->CreateDialogSinEntity("Qu?latima, el pez se ha escapado...", "Jakov", nullptr);
 			fishingOver();
 		}//end_if player no play, end fishing
 	}//end_if, if fish is caught
@@ -251,7 +251,7 @@ void MiniGameFishing::playLureFishing()
 		//Close dialogo
 		dialogoClose(0);
 		//Crear new dialogo
-		app->dialogManager->CreateDialogSinEntity("Ostia, está picando algo!", "Jakov", nullptr);
+		app->dialogManager->CreateDialogSinEntity("Ostia, est?picando algo!", "Jakov", nullptr);
 		isFishCaught_result = false;
 		playerGoplay = true;
 		gamePlayTime = getRandomNumber(3, 6);

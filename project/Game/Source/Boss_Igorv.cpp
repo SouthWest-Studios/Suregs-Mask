@@ -121,24 +121,26 @@ bool Boss_Igory::Update(float dt)
 
 	OPTICK_EVENT();
 	//Pone el sensor del cuerpo en su posicion
-	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
-	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
+	if (pbodyFoot != nullptr) {
+		b2Transform pbodyPos = pbodyFoot->body->GetTransform();
+		pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
+	}
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
 
 	if (health <= 0)
 	{
 		particulaFase3 = nullptr;
-		app->psystem->RemoveEmitter(particulaFase3);
+		app->psystem->RemoveAllEmitters();
 		desiredState = EntityState_Boss_Igory::DEAD;
 	}
 	else if (playerInFight && health <= lifeLow80 && !faseTwo && !isDead && !stun) {
-		
+
 		if (!partFase2Created) {
 			fPoint pos1((float)position.x, (float)position.y);
-			particulaFase2 = app->psystem->AddEmiter(pos1, EMITTER_TYPE_FLAME);
+			particulaFase2 = app->psystem->AddEmiter(pos1, EMITTER_TYPE_FASE2_IGORV);
 			partFase2Created = true;
 		}
-	
+
 		desiredState = EntityState_Boss_Igory::FASE_CHANGE;
 	}
 	else if (playerInFight && health <= lifeLow40 && !faseThree && !isDead && !stun) {
@@ -149,7 +151,7 @@ bool Boss_Igory::Update(float dt)
 			particulaFase3 = app->psystem->AddEmiter(pos2, EMITTER_TYPE_FIRE_MASK3);
 			partFase3Created = true;
 		}
-		
+
 
 		desiredState = EntityState_Boss_Igory::FASE_CHANGE;
 	}
@@ -300,7 +302,7 @@ bool Boss_Igory::Update(float dt)
 		app->map->maxEnemies = 8;
 		speed = (120 / 10) * 0.4;
 		attackDamage = 280;
-	
+
 		break;
 	case FASE_Igory::FASE_THREE:
 		atq1_boss_Igory.speed = 0.25;
@@ -309,13 +311,13 @@ bool Boss_Igory::Update(float dt)
 		app->map->maxEnemies = 10;
 		speed = (150 / 10) * 0.4;
 		attackDamage = 300;
-		
+
 		break;
 	}
 
-	
 
-	
+
+
 
 	if (particulaFase2 != nullptr) {
 		fPoint pos((float)position.x, (float)position.y);
@@ -328,7 +330,7 @@ bool Boss_Igory::Update(float dt)
 
 
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
-		health -= 1000;
+		health = 0;
 	}
 
 
@@ -359,9 +361,9 @@ bool Boss_Igory::PostUpdate() {
 		SDL_SetTextureAlphaMod(texture, padreTranparente);
 		padreTranparente -= 2;
 		if (padreTranparente <= 0 && !deletePadre) {
-			CleanUp();
 			deletePadre = true;
 			closeFinalSelecion = false;
+			CleanUp();
 		}
 	}
 
@@ -394,10 +396,11 @@ bool Boss_Igory::PostUpdate() {
 		}
 	}
 
-	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
-	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
-	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
-
+	if (pbodyFoot != nullptr) {
+		b2Transform pbodyPos = pbodyFoot->body->GetTransform();
+		position.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
+		position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
+	}
 	/*if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
 		app->map->generaSureg(fase, position);
 	}*/
@@ -425,6 +428,12 @@ bool Boss_Igory::CleanUp()
 		texture = nullptr;
 	}
 	lastPath.Clear();
+
+	particulaFase2 = nullptr;
+	particulaFase3 = nullptr;
+	app->psystem->RemoveAllEmitters();
+	partFase2Created = false;
+	partFase3Created = false;
 
 	app->entityManager->canShowFinal = false;
 	killPadre = false;
@@ -535,11 +544,11 @@ void Boss_Igory::resetAnimation()
 		inDashDashi = false;
 		inAtaqueDashi = true;
 		if (isFacingLeft) {
-			atackCube = app->physics->CreateRectangleSensor(position.x + 100, position.y - 60, 180, 180, STATIC);
+			atackCube = app->physics->CreateRectangleSensor(position.x + 100, position.y - 60, 180, 180, KINEMATIC);
 		}
 		else
 		{
-			atackCube = app->physics->CreateRectangleSensor(position.x - 80, position.y - 60, 180, 180, STATIC);
+			atackCube = app->physics->CreateRectangleSensor(position.x - 80, position.y - 60, 180, 180, KINEMATIC);
 		}
 	}
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "dash_DashiAtq_boss_Igory") {
@@ -559,9 +568,17 @@ void Boss_Igory::resetAnimation()
 	}
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "reviver_boss_Igory") {
 		if (!deletePadre) {
-			CleanUp();
 			closeFinalSelecion = false;
 			deletePadre = true;
+			/*CleanUp();*/
+			if (pbodyFoot != nullptr) {
+				app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
+				pbodyFoot = nullptr;
+			}
+			if (pbodySensor != nullptr) {
+				app->physics->GetWorld()->DestroyBody(pbodySensor->body);
+				pbodySensor = nullptr;
+			}
 
 		}
 	}
@@ -773,11 +790,11 @@ void Boss_Igory::Attack(float dt)
 		inAtack = true;
 		//printf("\nataque1");
 		if (isFacingLeft) {
-			atackCube = app->physics->CreateRectangleSensor(position.x + 100, position.y - 60, 180, 180, STATIC);
+			atackCube = app->physics->CreateRectangleSensor(position.x + 100, position.y - 60, 180, 180, KINEMATIC);
 		}
 		else
 		{
-			atackCube = app->physics->CreateRectangleSensor(position.x - 80, position.y - 60, 180, 180, STATIC);
+			atackCube = app->physics->CreateRectangleSensor(position.x - 80, position.y - 60, 180, 180, KINEMATIC);
 		}
 		break;
 	case 2:
@@ -786,11 +803,11 @@ void Boss_Igory::Attack(float dt)
 		inAtack = true;
 		//printf("\nataque2");
 		if (isFacingLeft) {
-			atackCube = app->physics->CreateRectangleSensor(position.x + 60, position.y - 50, 180, 100, STATIC);
+			atackCube = app->physics->CreateRectangleSensor(position.x + 60, position.y - 50, 180, 100, KINEMATIC);
 		}
 		else
 		{
-			atackCube = app->physics->CreateRectangleSensor(position.x - 40, position.y - 50, 180, 100, STATIC);
+			atackCube = app->physics->CreateRectangleSensor(position.x - 40, position.y - 50, 180, 100, KINEMATIC);
 		}
 		break;
 	case 3:
@@ -799,11 +816,11 @@ void Boss_Igory::Attack(float dt)
 		inAtack = true;
 		//printf("\nataque3");
 		if (isFacingLeft) {
-			atackCube = app->physics->CreateRectangleSensor(position.x + 60, position.y - 40, 180, 180, STATIC);
+			atackCube = app->physics->CreateRectangleSensor(position.x + 60, position.y - 40, 180, 180, KINEMATIC);
 		}
 		else
 		{
-			atackCube = app->physics->CreateRectangleSensor(position.x - 40, position.y - 40, 180, 180, STATIC);
+			atackCube = app->physics->CreateRectangleSensor(position.x - 40, position.y - 40, 180, 180, KINEMATIC);
 		}
 		atqDashQuali++;
 		attackTime = 0;
@@ -823,10 +840,14 @@ void Boss_Igory::Attack(float dt)
 
 void Boss_Igory::Die() {
 
-	isDead = true;
+
 	currentAnimation = &dead_boss_Igory;
-	pbodyFoot->body->SetType(b2_staticBody);
-	app->map->boss4_defeated = true;
+	if (pbodyFoot != nullptr) {
+		isDead = true;
+		pbodyFoot->body->SetType(b2_staticBody);
+		app->map->boss4_defeated = true;
+		startDialogo = true;
+	}
 
 	if (!unirPadre) {
 		currentAnimation = &dead_boss_Igory;

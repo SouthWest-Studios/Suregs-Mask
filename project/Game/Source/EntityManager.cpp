@@ -1,5 +1,6 @@
 ﻿#include "EntityManager.h"
 #include "Player.h"
+#include "Audio.h"
 #include "Enemy_Guerrero.h"
 #include "Enemy_Ols.h"
 #include "Enemy_Ols_Variation.h"
@@ -177,7 +178,10 @@ bool EntityManager::CleanUp()
 	if (textureUnirPadre != nullptr) {
 		app->tex->UnLoad(textureUnirPadre);
 	}
-
+	/*if (bossIgory != nullptr) {
+		delete bossIgory;
+		bossIgory = nullptr;
+	}*/
 	entities.Clear();
 	tpEntities.Clear();
 
@@ -664,7 +668,7 @@ bool EntityManager::Update(float dt)
 {
 	bool ret = true;
 
-	if (app->menu->menuu || vacioGameStop || app->hud->estatua || app->ascensor->abierto ||app->treeManager->mostrar) {
+	if (app->menu->menuu || vacioGameStop || app->hud->estatua || app->ascensor->abierto || app->treeManager->mostrar) {
 		return ret;
 	}
 
@@ -936,21 +940,24 @@ void EntityManager::showFinalkillPadre()
 	if (showPhoto) {
 		if (bossIgory->seleccionFinalPersonaje == 1) {
 			app->render->DrawTexture(textureKillPadre, 0, 0, SDL_FLIP_NONE, &overlayRect, 0, 0);
+			app->audio->LoadAudioMusic("good_ending", 0.0f);
 			/*if (!goPadreCleanUp) {
 				bossIgory->CleanUp();
 				bossIgory->closeFinalSelecion = false;
 				goPadreCleanUp = true;
 			}*/
-			
+
 		}
 		else
 		{
 			app->render->DrawTexture(textureUnirPadre, 0, 0, SDL_FLIP_NONE, &overlayRect, 0, 0);
+			app->audio->LoadAudioMusic("bad_ending", 0.0f);
 		}
 	}
 
 	if (showCredi) {
 		app->render->DrawTexture(textureCredit, 0, 0, SDL_FLIP_NONE, &overlayRect, 0, 0);
+		app->audio->LoadAudioMusic("credits", 0.0f);
 	}
 
 	if (increasing) {
@@ -959,6 +966,7 @@ void EntityManager::showFinalkillPadre()
 			photoTransparent = 255;
 			if (goScene) {
 				app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu);
+				canShowFinal = false;
 			}
 			else
 			{
@@ -972,7 +980,7 @@ void EntityManager::showFinalkillPadre()
 					showPhoto = true;
 					stayTime.Start();
 				}
-				
+
 			}
 		}
 	}
@@ -988,7 +996,7 @@ void EntityManager::showFinalkillPadre()
 			if (stayTime.ReadMSec() >= 5000) {
 				increasing = true;
 			}
-			
+
 		}
 	}
 

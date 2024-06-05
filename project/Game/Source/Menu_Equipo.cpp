@@ -126,51 +126,51 @@ bool Menu_Equipo::PostUpdate()
 			if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
 			{
 				app->render->DrawTextBound("Dinka", 280, 395, 200, { 52,25,0 }, app->render->titleFont);
-				app->render->DrawTextBound("Rayo Magico", 270, 450, 200, { 52,25,0 }, app->render->titleFont);
-				app->render->DrawTexture(mask0Texture, 470, 420, SDL_FLIP_NONE, 0, 0);
+				app->render->DrawTextBound("Rayo Debastador", 280, 430, 150, { 52,25,0 }, app->render->titleFont);
+				app->render->DrawTexture(mask0Texture, 450, 405, SDL_FLIP_NONE, 0, 0);
 			}
 			else if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK1)
 			{
 				app->render->DrawTextBound("Inuit", 280, 395, 200, { 52,25,0 }, app->render->titleFont);
-				app->render->DrawTextBound("Esfera Expansiva", 270, 450, 200, { 52,25,0 }, app->render->titleFont);
-				app->render->DrawTexture(mask1Texture, 470, 420, SDL_FLIP_NONE, 0, 0);
+				app->render->DrawTextBound("Esfera Expansiva", 280, 430, 150, { 52,25,0 }, app->render->titleFont);
+				app->render->DrawTexture(mask1Texture, 450, 410, SDL_FLIP_NONE, 0, 0);
 			}
 			else if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK2)
 			{
 				app->render->DrawTextBound("Musri", 280, 395, 200, { 52,25,0 }, app->render->titleFont);
-				app->render->DrawTextBound("Invulnerabilidad", 270, 450, 200, { 52,25,0 }, app->render->titleFont);
-				app->render->DrawTexture(mask2Texture, 470, 420, SDL_FLIP_NONE, 0, 0);
+				app->render->DrawTextBound("Invulnerabilidad", 270, 430, 200, { 52,25,0 }, app->render->titleFont);
+				app->render->DrawTexture(mask2Texture, 450, 395, SDL_FLIP_NONE, 0, 0);
 			}
 			else if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK3)
 			{
 				app->render->DrawTextBound("Surma", 280, 395, 200, { 52,25,0 }, app->render->titleFont);
-				app->render->DrawTextBound("Mejora Interna", 270, 450, 200, { 52,25,0 }, app->render->titleFont);
-				app->render->DrawTexture(mask3Texture, 470, 420, SDL_FLIP_NONE, 0, 0);
+				app->render->DrawTextBound("Mejora Interna", 280, 430, 150, { 52,25,0 }, app->render->titleFont);
+				app->render->DrawTexture(mask3Texture, 438, 420, SDL_FLIP_NONE, 0, 0);
 			}
 
 			if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK0)
 			{
 				app->render->DrawTextBound("Dinka", 678, 395, 200, { 52,25,0 }, app->render->titleFont);
-				app->render->DrawTextBound("Ataque Basico", 660, 450, 200, { 52,25,0 }, app->render->titleFont);
-				app->render->DrawTexture(mask0Texture, 860, 420, SDL_FLIP_NONE, 0, 0);
+				app->render->DrawTextBound("Ataque Poderoso", 678, 430, 150, { 52,25,0 }, app->render->titleFont);
+				app->render->DrawTexture(mask0Texture, 850, 405, SDL_FLIP_NONE, 0, 0);
 			}
 			else if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK1)
 			{
 				app->render->DrawTextBound("Inuit", 678, 395, 200, { 52,25,0 }, app->render->titleFont);
-				app->render->DrawTextBound("Onda Expansiva", 660, 450, 200, { 52,25,0 }, app->render->titleFont);
-				app->render->DrawTexture(mask1Texture, 860, 420, SDL_FLIP_NONE, 0, 0);
+				app->render->DrawTextBound("Onda Expansiva", 678, 430, 150, { 52,25,0 }, app->render->titleFont);
+				app->render->DrawTexture(mask1Texture, 845, 410, SDL_FLIP_NONE, 0, 0);
 			}
 			else if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK2)
 			{
 				app->render->DrawTextBound("Musri", 678, 395, 200, { 52,25,0 }, app->render->titleFont);
-				app->render->DrawTextBound("Dash Invisible", 660, 450, 200, { 52,25,0 }, app->render->titleFont);
-				app->render->DrawTexture(mask2Texture, 860, 420, SDL_FLIP_NONE, 0, 0);
+				app->render->DrawTextBound("Dash Invisible", 678, 430, 150, { 52,25,0 }, app->render->titleFont);
+				app->render->DrawTexture(mask2Texture, 850, 395, SDL_FLIP_NONE, 0, 0);
 			}
 			else if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK3)
 			{
 				app->render->DrawTextBound("Surma", 678, 395, 200, { 52,25,0 }, app->render->titleFont);
-				app->render->DrawTextBound("Ultima Vida", 660, 450, 200, { 52,25,0 }, app->render->titleFont);
-				app->render->DrawTexture(mask3Texture, 860, 420, SDL_FLIP_NONE, 0, 0);
+				app->render->DrawTextBound("Vida Mejorada", 678, 430, 150, { 52,25,0 }, app->render->titleFont);
+				app->render->DrawTexture(mask3Texture, 835, 420, SDL_FLIP_NONE, 0, 0);
 			}
 		}
 
