@@ -740,9 +740,6 @@ bool EntityManager::PostUpdate()
 bool EntityManager::PostLateUpdate()
 {
 	if (canShowFinal) {
-		if (bossIgory == nullptr) {
-			printf("bossIgory is null");
-		}
 		if (bossIgory->deletePadre && bossIgory->isDead) {
 			showFinalkillPadre();
 		}
