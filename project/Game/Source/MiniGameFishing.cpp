@@ -115,8 +115,6 @@ bool MiniGameFishing::PostUpdate()
 }
 
 
-
-
 bool MiniGameFishing::CleanUp()
 {
 	if (floatbody != nullptr) {
@@ -192,7 +190,7 @@ void MiniGameFishing::ani_castingline(Direction direction)
 	if (floatbody != nullptr) {
 		b2Transform pbodyPos = floatbody->body->GetTransform();
 		cheke_x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
-		cheke_y = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
+		cheke_y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
 	}
 	startAniFloat = true;
 }
@@ -310,7 +308,6 @@ void MiniGameFishing::hooked(int player_click_count)
 		changeProbability(0.1, 0.25, 0.3, 0.2, 0.15);
 	}
 	else if (player_click_count > 50) {
-
 		changeProbability(0.0, 0.0, 0.0, 0.0, 1.0);
 	}//end_if, use different probabilities based on the player
 

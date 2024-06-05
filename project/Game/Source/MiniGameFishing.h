@@ -136,7 +136,7 @@ public:
 	Timer gamePlayTimeLimit;
 	uint32 gamePlayTimeLimit_show = 0;
 	bool gamePlayStart = false;
-	int player_click_count;
+	int player_click_count = 0;
 	int player_click_count_TimeOver;
 	bool dialogoautoclose = false;
 	bool dialogoPlayerMoving = false;
