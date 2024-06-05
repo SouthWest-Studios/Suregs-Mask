@@ -177,7 +177,6 @@ void MiniGameFishing::ani_castingline(Direction direction)
 	if (floatbody == nullptr && crearfloatbody) {
 		floatbody = app->physics->CreateRectangleSensor(app->entityManager->GetPlayer()->position.x, app->entityManager->GetPlayer()->position.y, 20, 20, bodyType::DYNAMIC);
 		floatbody->ctype = ColliderType::FLOAT;
-		floatbody->body->SetFixedRotation(true);
 		floatbody->listener = this;
 		floatbody->entity = this;
 		crearfloatbody = false;
@@ -191,8 +190,9 @@ void MiniGameFishing::ani_castingline(Direction direction)
 	
 	//moving collision
 	if (floatbody != nullptr) {
-		cheke_x = (METERS_TO_PIXELS(floatbody->body->GetPosition().x) - texH / 2) - 23;
-		cheke_y = (METERS_TO_PIXELS(floatbody->body->GetPosition().y) - texH / 2) - 23;
+		b2Transform pbodyPos = floatbody->body->GetTransform();
+		cheke_x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
+		cheke_y = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
 	}
 	startAniFloat = true;
 }
@@ -255,11 +255,6 @@ void MiniGameFishing::floatCollision(Direction direction, float cheke_x, float c
 	else if (direction == Direction::UNKNOWN && cheke_y <= fishingflota_position_y) {
 		force.y = 10.0f;
 	}
-	//else {
-	//	////printf("else");
-	//	force.y = 10.0f;
-	//}
-
 
 
 	if (force == b2Vec2(0.0f, 0.0f)) {
@@ -267,7 +262,6 @@ void MiniGameFishing::floatCollision(Direction direction, float cheke_x, float c
 		if (floatbody != nullptr) {
 			floatbody->body->GetWorld()->DestroyBody(floatbody->body);
 			floatbody = nullptr;
-			//printf("delete");
 		}//end_if, delete collision
 		if (floatbody != nullptr) {
 			floatbody->body->SetLinearVelocity(b2Vec2(0, 0));
@@ -457,10 +451,6 @@ void MiniGameFishing::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (fishing.fishingtype == FISHINGTYPE::FISHING) {
 			lotteryrandomNum = getRandomNumber(2, 4);
 		}
-		else {
-			lure_lotteryrandomNum = getRandomNumber(3, 7);
-			lureRandomTime = true;
-		}//end_if, React differently based on the different fishing rods
 		thistimehooked = true;
 		break;
 	case ColliderType::UNKNOWN:
@@ -469,16 +459,6 @@ void MiniGameFishing::OnCollision(PhysBody* physA, PhysBody* physB) {
 	}
 }
 
-bool MiniGameFishing::miniGameStart(float dt)
-{
-
-	//if (fishing.playerGetRod && !fishing.isFishing) {
-	//	if (app->input->GetButton(SAVEROD) == KEY_DOWN || app->input->GetButton(CONFIRM) == KEY_DOWN) {
-	//		fishing.rodReady = !fishing.rodReady;
-	//	}
-	//}//end_if, equip or stow the fishing rod
-	return true;
-}
 
 bool MiniGameFishing::miniGameLoop(float dt)
 {
