@@ -50,17 +50,7 @@ private:
 	int SpriteY;
 	int Photowidth;
 	Animation* currentAnimation = nullptr;
-	//const char* logoGamePath;
-	//const char* logoUpcPath;
-	//const char* logoStudioPath;
-	//const char* backgroundPath;
 
-	//SDL_Texture* logoGame;
-	//SDL_Texture* logoUpc;
-	//SDL_Texture* logoStudio;
-	//SDL_Texture* background;
-
-	//SDL_Texture* sceneLogos;
 	Animation sceneLogos;
 	Timer timerIntro;
 

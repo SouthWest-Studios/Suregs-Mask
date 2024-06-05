@@ -36,8 +36,8 @@ public:
 	bool CleanUp();
 
 private:
-	const char* texturaIntroPath;
-	SDL_Texture* texturaIntro;
+	const char* texturaIntroPath = nullptr;
+	SDL_Texture* texturaIntro = nullptr;
 	Timer timerIntro;
 
 	Emitter* potionFlare = nullptr;
