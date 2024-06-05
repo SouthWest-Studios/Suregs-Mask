@@ -56,7 +56,8 @@ bool Enemy_Guerrero::Start() {
 	runAnim.LoadAnim("guerrero", "runAnim", spritePositions);
 	attackAnim.LoadAnim("guerrero", "attackAnim", spritePositions);
 
-	texture = app->tex->Load(config.attribute("texturePath").as_string());
+	//texture = app->tex->Load(config.attribute("texturePath").as_string());
+	texture = app->entityManager->textureGuerrero;
 
 	osiris_get_damage_fx = app->audio->LoadAudioFx("osiris_get_damage_fx");
 	osiris_death_fx = app->audio->LoadAudioFx("osiris_death_fx");
@@ -174,10 +175,12 @@ bool Enemy_Guerrero::PostUpdate() {
 
 bool Enemy_Guerrero::CleanUp()
 {
+
 	app->entityManager->DestroyEntity(this);
 	app->physics->DestroyBody(pbodyFoot);
 	app->physics->DestroyBody(pbodySensor);
-	app->tex->UnLoad(texture);
+	//app->tex->UnLoad(texture);
+
 	lastPath.Clear();
 
 	RELEASE(spritePositions);
@@ -246,12 +249,12 @@ void Enemy_Guerrero::Die() {
 
 		app->audio->PlayFx(osiris_death_fx);
 
-		//CleanUp();
+	
 		pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
 		if (parseResult) {
 			configNode = configFile.child("config");
 		}
-
+		CleanUp();
 }
 
 

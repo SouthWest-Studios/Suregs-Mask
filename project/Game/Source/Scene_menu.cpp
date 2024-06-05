@@ -64,6 +64,7 @@ bool Scene_Menu::Start()
 	controls_tp = config.child("controls").attribute("texturepath").as_string();
 	coin_tp = config.child("coin").attribute("texturepath").as_string();
 	clock_tp = config.child("clock").attribute("texturepath").as_string();
+	messageBackground_tp = config.child("messageBackground").attribute("texturepath").as_string();
 
 	menuMain = app->tex->Load(menuMain_tp);
 	menuMain2 = app->tex->Load(menuMain2_tp);
@@ -74,6 +75,7 @@ bool Scene_Menu::Start()
 	controls = app->tex->Load(controls_tp);
 	coin = app->tex->Load(coin_tp);
 	clock = app->tex->Load(clock_tp);
+	messageBackground = app->tex->Load(messageBackground_tp);
 
 	app->entityManager->canShowFinal = false;
 	//SAVE 1
@@ -292,6 +294,12 @@ bool Scene_Menu::CleanUp()
 	app->tex->UnLoad(menuMain2);
 	app->tex->UnLoad(settings);
 	app->tex->UnLoad(credits);
+	app->tex->UnLoad(savedGames);
+	app->tex->UnLoad(clock);
+	app->tex->UnLoad(coin);
+	app->tex->UnLoad(logo);
+	app->tex->UnLoad(controls);
+	app->tex->UnLoad(messageBackground);
 
 	showSettings = false;
 	showControls = false;
@@ -304,6 +312,10 @@ bool Scene_Menu::CleanUp()
 	_showCredits = false;
 	_showNewGames = false;
 	_showSavedGames = false;
+
+	partidaOnePressed = false;
+	partidaTwoPressed = false;
+	partidaThreePressed = false;
 
 	eMenu = nullptr;
 	app->psystem->RemoveAllEmitters();
@@ -321,9 +333,9 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 	case 1:
 		showNewGames = true;
 		control->selected = false;
-		app->guiManager->minId = 20;
-		app->guiManager->maxId = 23;
-		app->guiManager->pointerId = 20;
+		app->guiManager->minId = 23;
+		app->guiManager->maxId = 26;
+		app->guiManager->pointerId = 24;
 		/*app->guiManager->DestroyGuiControl(NuevaPartida);
 		app->guiManager->DestroyGuiControl(Continuar);*/
 
@@ -448,12 +460,14 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		app->guiManager->minId = 1;
 		app->guiManager->maxId = 6;
 		app->guiManager->pointerId = 1;
+		break;
 
 	case 17:
 		if (!animatingExit) {
 			animatingExit = true;
 			exitAnimationTime = 0.0f;
 		}
+		break;
 
 	case 1011:
 
@@ -476,7 +490,8 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 			((GuiCheckBox*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->click = false;
 
 		}*/
-	case 20:
+	//BOTON CONFIRMAR NUEVA PARTIDA
+	case 28:
 		if (app->fadeToBlack->currentStep == 0) {
 			app->fadeToBlack->FadeToBlack(this, app->scene_pueblo_tutorial);
 			app->menu->active = true;
@@ -486,10 +501,12 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 			app->guiManager->DestroyGuiControl(nuevaPartida1);
 			app->guiManager->DestroyGuiControl(nuevaPartida2);
 			app->guiManager->DestroyGuiControl(nuevaPartida3);
+			app->guiManager->DestroyGuiControl(nuevaPartidaAtras1);
+			app->guiManager->DestroyGuiControl(nuevaPartidaConfirmed1);
 		}
 		break;
 
-	case 21:
+	case 30:
 		if (app->fadeToBlack->currentStep == 0) {
 			app->fadeToBlack->FadeToBlack(this, app->scene_pueblo_tutorial);
 			app->menu->active = true;
@@ -499,10 +516,12 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 			app->guiManager->DestroyGuiControl(nuevaPartida1);
 			app->guiManager->DestroyGuiControl(nuevaPartida2);
 			app->guiManager->DestroyGuiControl(nuevaPartida3);
+			app->guiManager->DestroyGuiControl(nuevaPartidaAtras2);
+			app->guiManager->DestroyGuiControl(nuevaPartidaConfirmed2);
 		}
 		break;
 
-	case 22:
+	case 32:
 		if (app->fadeToBlack->currentStep == 0) {
 			app->fadeToBlack->FadeToBlack(this, app->scene_pueblo_tutorial);
 			app->menu->active = true;
@@ -512,12 +531,19 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 			app->guiManager->DestroyGuiControl(nuevaPartida1);
 			app->guiManager->DestroyGuiControl(nuevaPartida2);
 			app->guiManager->DestroyGuiControl(nuevaPartida3);
+			app->guiManager->DestroyGuiControl(nuevaPartidaAtras3);
+			app->guiManager->DestroyGuiControl(nuevaPartidaConfirmed3);
 		}
 		break;
-
+	//VOLVER MAIN MENU
 	case 23:
 		showNewGames = false;
 		_showNewGames = false;
+
+		partidaOnePressed = false;
+		partidaTwoPressed = false;
+		partidaThreePressed = false;
+
 		ListItem<GuiControl*>* controlD;
 		for (controlD = controlsScene.start; controlD != NULL; controlD = controlD->next)
 		{
@@ -527,9 +553,92 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		app->guiManager->DestroyGuiControl(nuevaPartida1);
 		app->guiManager->DestroyGuiControl(nuevaPartida2);
 		app->guiManager->DestroyGuiControl(nuevaPartida3);
+		app->guiManager->DestroyGuiControl(nuevaPartidaAtras1);
+		app->guiManager->DestroyGuiControl(nuevaPartidaConfirmed1);
+		app->guiManager->DestroyGuiControl(nuevaPartidaAtras2);
+		app->guiManager->DestroyGuiControl(nuevaPartidaConfirmed2);
+		app->guiManager->DestroyGuiControl(nuevaPartidaAtras3);
+		app->guiManager->DestroyGuiControl(nuevaPartidaConfirmed3);
 		app->guiManager->minId = 1;
 		app->guiManager->maxId = 6;
 		app->guiManager->pointerId = 1;
+		break;
+	//BOTONES NUEVA PARTIDA
+	case 24:
+		partidaOnePressed = true;
+		CreateButtonsOne();
+		nuevaPartida1->state = GuiControlState::DISABLED;
+		nuevaPartida2->state = GuiControlState::DISABLED;
+		nuevaPartida3->state = GuiControlState::DISABLED;
+		gcCloseNewGames->state = GuiControlState::DISABLED;
+		app->guiManager->minId = 27;
+		app->guiManager->maxId = 28;
+		app->guiManager->pointerId = 28;
+		break;
+
+	case 25:
+		partidaTwoPressed = true;
+		CreateButtonsTwo();
+		nuevaPartida1->state = GuiControlState::DISABLED;
+		nuevaPartida2->state = GuiControlState::DISABLED;
+		nuevaPartida3->state = GuiControlState::DISABLED;
+		gcCloseNewGames->state = GuiControlState::DISABLED;
+		app->guiManager->minId = 29;
+		app->guiManager->maxId = 30;
+		app->guiManager->pointerId = 30;
+		break;
+
+	case 26:
+		partidaThreePressed = true;
+		CreateButtonsThree();
+		nuevaPartida1->state = GuiControlState::DISABLED;
+		nuevaPartida2->state = GuiControlState::DISABLED;
+		nuevaPartida3->state = GuiControlState::DISABLED;
+		gcCloseNewGames->state = GuiControlState::DISABLED;
+		app->guiManager->minId = 31;
+		app->guiManager->maxId = 32;
+		app->guiManager->pointerId = 32;
+		break;
+
+	//BOTONES ATRAS PARTIDA CONFIRMED
+	case 27: 
+		partidaOnePressed = false;
+		nuevaPartida1->state = GuiControlState::NORMAL;
+		nuevaPartida2->state = GuiControlState::NORMAL;
+		nuevaPartida3->state = GuiControlState::NORMAL;
+		gcCloseNewGames->state = GuiControlState::NORMAL;
+		app->guiManager->minId = 23;
+		app->guiManager->maxId = 26;
+		app->guiManager->pointerId = 24;
+		app->guiManager->DestroyGuiControl(nuevaPartidaAtras1);
+		app->guiManager->DestroyGuiControl(nuevaPartidaConfirmed1);
+		break;
+
+	case 29:
+		partidaTwoPressed = false;
+		nuevaPartida1->state = GuiControlState::NORMAL;
+		nuevaPartida2->state = GuiControlState::NORMAL;
+		nuevaPartida3->state = GuiControlState::NORMAL;
+		gcCloseNewGames->state = GuiControlState::NORMAL;
+		app->guiManager->minId = 23;
+		app->guiManager->maxId = 26;
+		app->guiManager->pointerId = 25;
+		app->guiManager->DestroyGuiControl(nuevaPartidaAtras2);
+		app->guiManager->DestroyGuiControl(nuevaPartidaConfirmed2);
+		break;
+
+	case 31:
+		partidaThreePressed = false;
+		nuevaPartida1->state = GuiControlState::NORMAL;
+		nuevaPartida2->state = GuiControlState::NORMAL;
+		nuevaPartida3->state = GuiControlState::NORMAL;
+		gcCloseNewGames->state = GuiControlState::NORMAL;
+		app->guiManager->minId = 23;
+		app->guiManager->maxId = 26;
+		app->guiManager->pointerId = 26;
+		app->guiManager->DestroyGuiControl(nuevaPartidaAtras3);
+		app->guiManager->DestroyGuiControl(nuevaPartidaConfirmed3);
+		break;
 
 	default:
 		break;
@@ -938,13 +1047,32 @@ void Scene_Menu::ShowNewGames()
 		control->data->state = GuiControlState::DISABLED;
 	}
 	if (showNewGames && !_showNewGames) {
-		nuevaPartida1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 20, "NUEVA PARTIDA 1", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 485,	160,25 }, this);
-		nuevaPartida2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 21, "NUEVA PARTIDA 2", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 395,	160,25 }, this);
-		nuevaPartida3 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 22, "NUEVA PARTIDA 3", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 300,	160,25 }, this);
+		nuevaPartida1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 24, "NUEVA PARTIDA 1", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 485,	160,25 }, this);
+		nuevaPartida2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 25, "NUEVA PARTIDA 2", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 395,	160,25 }, this);
+		nuevaPartida3 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 26, "NUEVA PARTIDA 3", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 300,	160,25 }, this);
 		gcCloseNewGames = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 23, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 200,	60,25 }, this);
 		_showNewGames = true;
 	}
+
 	app->render->DrawTexture(savedGames, 0, 0);
+
+	if (partidaOnePressed)
+	{
+		app->render->DrawTexture(messageBackground, (int)windowW / 2 - 265, (int)windowH - 650);
+		app->render->DrawTextBound("Si comienzas una nueva partida perderás todo el progreso guuardado en el Slot1. ¿Deseas continuar?", (int)windowW / 2 - 200, (int)windowH - 500, 400);
+	}
+
+	if (partidaTwoPressed)
+	{
+		app->render->DrawTexture(messageBackground, (int)windowW / 2 - 265, (int)windowH - 650);
+		app->render->DrawTextBound("Si comienzas una nueva partida perderás todo el progreso guuardado en el Slot2. ¿Deseas continuar?", (int)windowW / 2 - 200, (int)windowH - 500, 400);
+	}
+
+	if (partidaThreePressed)
+	{
+		app->render->DrawTexture(messageBackground, (int)windowW / 2 - 265, (int)windowH - 650);
+		app->render->DrawTextBound("Si comienzas una nueva partida perderás todo el progreso guuardado en el Slot3. ¿Deseas continuar?", (int)windowW / 2 - 200, (int)windowH - 500, 400);
+	}
 }
 
 void Scene_Menu::ShowControls()
@@ -1058,6 +1186,24 @@ void Scene_Menu::DestroySettingsInterface()
 	}
 }
 
+void Scene_Menu::CreateButtonsOne()
+{
+	nuevaPartidaAtras1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 27, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 230,	60,25 }, this);
+	nuevaPartidaConfirmed1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 28, "CONFIRMAR", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 300,	160,25 }, this);
+}
+
+void Scene_Menu::CreateButtonsTwo()
+{
+	nuevaPartidaAtras2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 29, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 230,	60,25 }, this);
+	nuevaPartidaConfirmed2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 30, "CONFIRMAR", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 300,	160,25 }, this);
+}
+
+void Scene_Menu::CreateButtonsThree()
+{
+	nuevaPartidaAtras3 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 31, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 230,	60,25 }, this);
+	nuevaPartidaConfirmed3 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 32, "CONFIRMAR", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 300,	160,25 }, this);
+}
+
 void Scene_Menu::Fullscreen()
 {
 }
@@ -1073,3 +1219,5 @@ bool Scene_Menu::SaveState(pugi::xml_node node)
 
 	return true;
 }
+
+

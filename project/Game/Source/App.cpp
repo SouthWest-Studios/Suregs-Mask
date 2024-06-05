@@ -156,6 +156,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(render);
 	AddModule(psystem);
 	
+	srand(static_cast<unsigned int>(time(0)));
+
 	LOG("Timer App Constructor: %f", timer.ReadMSec());
 }
 

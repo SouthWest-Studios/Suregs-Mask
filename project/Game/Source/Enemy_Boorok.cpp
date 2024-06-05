@@ -58,7 +58,9 @@ bool Enemy_Boorok::Start() {
 	chargeAttackAnim.LoadAnim("boorok", "chargeAttackAnim", spritePositions);
 	dieAnim.LoadAnim("boorok", "dieAnim", spritePositions);
 
-	texture = app->tex->Load(config.attribute("texturePath").as_string());
+	//texture = app->tex->Load(config.attribute("texturePath").as_string());
+	texture = app->entityManager->textureBoorok;
+
 
 	boorok_attack_fx = app->audio->LoadAudioFx("boorok_attack_fx");
 	boorok_get_damage_fx = app->audio->LoadAudioFx("boorok_get_damage_fx");
@@ -238,7 +240,8 @@ bool Enemy_Boorok::CleanUp()
 	app->entityManager->DestroyEntity(this);
 	app->physics->DestroyBody(pbodyFoot);
 	app->physics->DestroyBody(pbodySensor);
-	app->tex->UnLoad(texture);
+	//app->tex->UnLoad(texture);
+
 	lastPath.Clear();
 
 	blood = nullptr;
@@ -294,7 +297,7 @@ void Enemy_Boorok::Die()
 
 	if (dieAnim.HasFinished())
 	{
-		
+
 
 		pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
 		if (parseResult) {

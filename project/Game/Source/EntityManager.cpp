@@ -151,6 +151,19 @@ bool EntityManager::Start() {
 	textureCredit = app->tex->Load(configNode.attribute("textureCredit").as_string());
 	////printf("\nEntyti Manager %s  ", texture);
 	//eyeAnimation.LoadAnim("boorok", "sleepAnim", spritePositions);
+
+
+	pugi::xml_node entityDataNode = configFile.child("config").child("entities_data");
+
+	textureOsiris = app->tex->Load((char* )entityDataNode.child("osiris").attribute("texturePath").as_string());
+	textureBoorok = app->tex->Load((char* )entityDataNode.child("boorok").attribute("texturePath").as_string());
+	textureGuerrero = app->tex->Load((char* )entityDataNode.child("guerrero").attribute("texturePath").as_string());
+	textureKhurt = app->tex->Load((char* )entityDataNode.child("khurt").attribute("texturePath").as_string());
+	textureMuur = app->tex->Load((char* )entityDataNode.child("muur").attribute("texturePath").as_string());
+	textureOls = app->tex->Load((char* )entityDataNode.child("ols").attribute("texturePath").as_string());
+
+
+
 	currentAnimation = &eyeIdle;
 
 	return ret;
@@ -813,7 +826,7 @@ bool EntityManager::PostLateUpdate()
 		if (vacioControl) {
 			vacioGameStop = false;
 			playerCantMove = false;
-			GetPlayer()->TakeDamage(10);
+			GetPlayer()->TakeDamage(30);
 			GetPlayer()->vacio = true;
 			app->physics->active = true;
 			vacioControl = false;

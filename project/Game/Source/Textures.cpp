@@ -87,7 +87,6 @@ SDL_Texture* const Textures::Load(const char* path)
 	return texture;
 }
 
-
 // Unload texture
 bool Textures::UnLoad(SDL_Texture* texture)
 {

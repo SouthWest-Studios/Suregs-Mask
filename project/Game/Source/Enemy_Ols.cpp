@@ -58,7 +58,8 @@ bool Enemy_Ols::Start() {
 	attackAnim.LoadAnim("ols", "attackAnim_ols", spritePositions);
 	dieAnim.LoadAnim("ols", "dieAnim_ols", spritePositions);
 
-	texture = app->tex->Load(config.attribute("texturePath").as_string());
+	//texture = app->tex->Load(config.attribute("texturePath").as_string());
+	texture = app->entityManager->textureOls;
 
 	ols_attack_fx = app->audio->LoadAudioFx("ols_attack_fx");
 	ols_get_damage_fx = app->audio->LoadAudioFx("ols_get_damage_fx");
@@ -205,7 +206,6 @@ bool Enemy_Ols::CleanUp()
 {
 	app->entityManager->DestroyEntity(pbodyFoot->entity);
 	app->physics->DestroyBody(pbodyFoot);
-	app->tex->UnLoad(texture);
 
 	app->physics->DestroyBody(attackSensor); 
 	app->tex->UnLoad(projectileTexture);
@@ -293,9 +293,10 @@ void Enemy_Ols::Die() {
 	}
 	app->bestiarioManager->CreateItem("ols");
 
-	app->entityManager->DestroyEntity(this);
+	/*app->entityManager->DestroyEntity(this);
 	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
-	app->tex->UnLoad(texture);
+	//app->tex->UnLoad(texture);*/
+	CleanUp();
 
 	//Mask 0
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
