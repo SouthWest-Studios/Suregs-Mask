@@ -434,8 +434,9 @@ bool Boss_Igory::CleanUp()
 	app->psystem->RemoveAllEmitters();
 	partFase2Created = false;
 	partFase3Created = false;
-
-	app->entityManager->canShowFinal = false;
+	if (!isDead) {
+		app->entityManager->canShowFinal = false;
+	}
 	killPadre = false;
 	RELEASE(spritePositions);
 	delete spritePositions;
@@ -842,12 +843,33 @@ void Boss_Igory::Die() {
 
 
 	currentAnimation = &dead_boss_Igory;
-	if (pbodyFoot != nullptr) {
+	if (pbodyFoot != nullptr && !dieDefinit) {
 		isDead = true;
 		pbodyFoot->body->SetType(b2_staticBody);
 		app->map->boss4_defeated = true;
 		startDialogo = true;
+		startDialogoTimer.Start();
+		dieDefinit = true;
 	}
+
+
+	if (dialogoMostrado && !app->dialogManager->isPlaying && startDialogo) {
+		startSelecion = true;
+	}
+
+	if (!app->dialogManager->isPlaying && startDialogo && startDialogoTimer.ReadMSec() >= 2000) {
+		if (!dialogoMostrado) {
+			int num = 0;
+			for (pugi::xml_node itemNode = dialogNode; itemNode; itemNode = itemNode.next_sibling("sentence"))
+			{
+				app->dialogManager->AddDialog(app->dialogManager->CreateDialog(itemNode, itemNode.attribute("name").as_string(), itemNode.attribute("facetexturepath").as_string()));
+				num++;
+			}
+			//printf("\nnum: %d", num);
+			dialogoMostrado = true;
+		}
+	}
+
 
 	if (!unirPadre) {
 		currentAnimation = &dead_boss_Igory;
@@ -1058,22 +1080,23 @@ void Boss_Igory::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::PLAYER:
 		LOG("Collision PLAYER");
 
-		if (dialogoMostrado && !app->dialogManager->isPlaying && startDialogo) {
-			startSelecion = true;
-		}
+		//if (dialogoMostrado && !app->dialogManager->isPlaying && startDialogo) {
+		//	startSelecion = true;
+		//}
 
-		if (!app->dialogManager->isPlaying && (app->input->GetButton(CONFIRM) == KEY_DOWN) && startDialogo) {
-			if (!dialogoMostrado) {
-				int num = 0;
-				for (pugi::xml_node itemNode = dialogNode; itemNode; itemNode = itemNode.next_sibling("sentence"))
-				{
-					app->dialogManager->AddDialog(app->dialogManager->CreateDialog(itemNode, itemNode.attribute("name").as_string(), itemNode.attribute("facetexturepath").as_string()));
-					num++;
-				}
-				//printf("\nnum: %d", num);
-				dialogoMostrado = true;
-			}
-		}
+		//if (!app->dialogManager->isPlaying && (app->input->GetButton(CONFIRM) == KEY_DOWN) && startDialogo) {
+		//	if (!dialogoMostrado) {
+		//		int num = 0;
+		//		for (pugi::xml_node itemNode = dialogNode; itemNode; itemNode = itemNode.next_sibling("sentence"))
+		//		{
+		//			app->dialogManager->AddDialog(app->dialogManager->CreateDialog(itemNode, itemNode.attribute("name").as_string(), itemNode.attribute("facetexturepath").as_string()));
+		//			num++;
+		//		}
+		//		//printf("\nnum: %d", num);
+		//		dialogoMostrado = true;
+		//	}
+		//}
+
 		if (physA->ctype == ColliderType::ATACK_IGORY) {
 			app->entityManager->GetPlayer()->TakeDamage(attackDamage);
 			////printf("JEFEATAKE");

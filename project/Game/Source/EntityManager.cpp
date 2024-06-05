@@ -942,10 +942,8 @@ void EntityManager::showFinalkillPadre()
 				bossIgory->closeFinalSelecion = false;
 				goPadreCleanUp = true;
 			}*/
-
 		}
-		else
-		{
+		else if (bossIgory->seleccionFinalPersonaje == 2) {
 			app->render->DrawTexture(textureUnirPadre, 0, 0, SDL_FLIP_NONE, &overlayRect, 0, 0);
 			app->audio->LoadAudioMusic("bad_ending", 0.0f);
 		}

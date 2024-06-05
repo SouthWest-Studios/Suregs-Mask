@@ -112,7 +112,9 @@ public:
 	bool startDialogo = false;
 	bool startSelecion = false;
 	bool closeFinalSelecion = false;
+	bool dieDefinit = false;
 	int seleccionFinalPersonaje = -1;
+	Timer startDialogoTimer;
 
 	//Kill padre
 	bool cankillPadre = false;
