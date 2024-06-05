@@ -27,6 +27,7 @@
 #include "DialogManager.h"
 #include "CommerceManager.h"
 #include "InventoryManager.h"
+#include "ElevatorMenu.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -110,15 +111,15 @@ bool DebugConsole::Awake(pugi::xml_node config)
 		case -3:				app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu);			app->menu->active = false;			break;
 		case -2:	case 1000:	app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_testing);		app->menu->active = true;			break;
 		case -1:	case 1001:	app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_pueblo);		app->menu->active = true;			break;
-		case 0:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra0);		app->menu->active = true; if(!app->inventoryManager->dungeon0Entered) app->inventoryManager->dungeon0Entered = true;			break;
-		case 1:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra1);		app->menu->active = true;			break;
-		case 2:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra2);		app->menu->active = true;			break;
-		case 3:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra3);		app->menu->active = true;			break;
-		case 4:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra4);		app->menu->active = true;			break;
-		case 5:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra5);		app->menu->active = true;			break;
-		case 6:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra6);		app->menu->active = true;			break;
-		case 7:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra7);		app->menu->active = true;			break;
-		case 8:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra8);		app->menu->active = true;			break;
+		case 0:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra0);		app->menu->active = true; app->ascensor->mazmorraActual = 0; if (!app->inventoryManager->dungeon0Entered) app->inventoryManager->dungeon0Entered = true;			break;
+		case 1:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra1);		app->menu->active = true;	app->ascensor->mazmorraActual = 1;		break;
+		case 2:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra2);		app->menu->active = true;	app->ascensor->mazmorraActual = 2;		break;
+		case 3:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra3);		app->menu->active = true;	app->ascensor->mazmorraActual = 3;		break;
+		case 4:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra4);		app->menu->active = true;	app->ascensor->mazmorraActual = 4;		break;
+		case 5:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra5);		app->menu->active = true;	app->ascensor->mazmorraActual = 5;		break;
+		case 6:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra6);		app->menu->active = true;	app->ascensor->mazmorraActual = 6;		break;
+		case 7:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra7);		app->menu->active = true;	app->ascensor->mazmorraActual = 7;		break;
+		case 8:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra8);		app->menu->active = true;	app->ascensor->mazmorraActual = 8;		break;
 
 		default:
 			break;

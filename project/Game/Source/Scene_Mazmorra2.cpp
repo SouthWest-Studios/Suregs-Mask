@@ -15,6 +15,8 @@
 #include "GuiControl.h"
 #include "GuiManager.h"
 #include "QuestManager.h"
+#include "DialogManager.h"
+
 
 Scene_Mazmorra2::Scene_Mazmorra2(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -74,6 +76,8 @@ bool Scene_Mazmorra2::Start()
 	}
 
 	app->entityManager->Enable();
+
+	/*app->entityManager.get*/
 
 	return true;
 }
