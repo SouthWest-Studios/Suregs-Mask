@@ -210,6 +210,8 @@ bool Enemy_Ols::CleanUp()
 	app->physics->DestroyBody(attackSensor); 
 	app->tex->UnLoad(projectileTexture);
 
+	particulaAtaque = nullptr;
+	app->psystem->RemoveAllEmitters();
 	blood = nullptr;
 
 	RELEASE(spritePositions);

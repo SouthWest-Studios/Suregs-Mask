@@ -1086,6 +1086,8 @@ bool Player::CleanUp()
 	DeadTP = false;
 	dead_player.Reset();
 	blood = nullptr;
+	mask2Particle = nullptr;
+	mask3Particle = nullptr;
 	app->psystem->RemoveAllEmitters();
 	particulaBlood = false;
 	playerTpBossPadre = false;
