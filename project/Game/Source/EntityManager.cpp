@@ -176,7 +176,10 @@ bool EntityManager::CleanUp()
 	if (textureUnirPadre != nullptr) {
 		app->tex->UnLoad(textureUnirPadre);
 	}
-
+	/*if (bossIgory != nullptr) {
+		delete bossIgory;
+		bossIgory = nullptr;
+	}*/
 	entities.Clear();
 	tpEntities.Clear();
 
@@ -660,7 +663,7 @@ bool EntityManager::Update(float dt)
 {
 	bool ret = true;
 
-	if (app->menu->menuu || vacioGameStop || app->hud->estatua || app->ascensor->abierto ||app->treeManager->mostrar) {
+	if (app->menu->menuu || vacioGameStop || app->hud->estatua || app->ascensor->abierto || app->treeManager->mostrar) {
 		return ret;
 	}
 
@@ -737,6 +740,9 @@ bool EntityManager::PostUpdate()
 bool EntityManager::PostLateUpdate()
 {
 	if (canShowFinal) {
+		if (bossIgory == nullptr) {
+			printf("bossIgory is null");
+		}
 		if (bossIgory->deletePadre && bossIgory->isDead) {
 			showFinalkillPadre();
 		}
@@ -937,7 +943,7 @@ void EntityManager::showFinalkillPadre()
 				bossIgory->closeFinalSelecion = false;
 				goPadreCleanUp = true;
 			}*/
-			
+
 		}
 		else
 		{
@@ -955,6 +961,7 @@ void EntityManager::showFinalkillPadre()
 			photoTransparent = 255;
 			if (goScene) {
 				app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu);
+				//canShowFinal = false;
 			}
 			else
 			{
@@ -968,7 +975,7 @@ void EntityManager::showFinalkillPadre()
 					showPhoto = true;
 					stayTime.Start();
 				}
-				
+
 			}
 		}
 	}
@@ -984,7 +991,7 @@ void EntityManager::showFinalkillPadre()
 			if (stayTime.ReadMSec() >= 5000) {
 				increasing = true;
 			}
-			
+
 		}
 	}
 
