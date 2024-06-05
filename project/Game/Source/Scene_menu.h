@@ -49,6 +49,10 @@ public:
 	void ShowControls();
 	void DestroySettingsInterface();
 
+	void CreateButtonsOne();
+	void CreateButtonsTwo();
+	void CreateButtonsThree();
+
 	void Fullscreen();
 
 	bool LoadState(pugi::xml_node node);
@@ -66,6 +70,7 @@ public:
 	SDL_Texture* controls = nullptr;
 	SDL_Texture* coin = nullptr;
 	SDL_Texture* clock = nullptr;
+	SDL_Texture* messageBackground = nullptr;
 
 
 	const char* menuMain_tp = nullptr;
@@ -77,6 +82,7 @@ public:
 	const char* controls_tp = nullptr;
 	const char* coin_tp = nullptr;
 	const char* clock_tp = nullptr;
+	const char* messageBackground_tp = nullptr;
 	
 	int coinQuantityOne;
 	int coinQuantityTwo;
@@ -133,7 +139,17 @@ private:
 	GuiControlButton* nuevaPartida2 = nullptr;
 	GuiControlButton* nuevaPartida3 = nullptr;
 
-	
+	GuiControlButton* nuevaPartidaConfirmed1 = nullptr;
+	GuiControlButton* nuevaPartidaConfirmed2 = nullptr;
+	GuiControlButton* nuevaPartidaConfirmed3 = nullptr;
+
+	GuiControlButton* nuevaPartidaAtras1 = nullptr;
+	GuiControlButton* nuevaPartidaAtras2 = nullptr;
+	GuiControlButton* nuevaPartidaAtras3 = nullptr;
+
+	bool partidaOnePressed = false;
+	bool partidaTwoPressed = false;
+	bool partidaThreePressed = false;
 
 	bool vsyncActive = false;
 
