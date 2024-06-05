@@ -535,11 +535,11 @@ void Boss_Igory::resetAnimation()
 		inDashDashi = false;
 		inAtaqueDashi = true;
 		if (isFacingLeft) {
-			atackCube = app->physics->CreateRectangleSensor(position.x + 100, position.y - 60, 180, 180, STATIC);
+			atackCube = app->physics->CreateRectangleSensor(position.x + 100, position.y - 60, 180, 180, KINEMATIC);
 		}
 		else
 		{
-			atackCube = app->physics->CreateRectangleSensor(position.x - 80, position.y - 60, 180, 180, STATIC);
+			atackCube = app->physics->CreateRectangleSensor(position.x - 80, position.y - 60, 180, 180, KINEMATIC);
 		}
 	}
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "dash_DashiAtq_boss_Igory") {
@@ -773,11 +773,11 @@ void Boss_Igory::Attack(float dt)
 		inAtack = true;
 		//printf("\nataque1");
 		if (isFacingLeft) {
-			atackCube = app->physics->CreateRectangleSensor(position.x + 100, position.y - 60, 180, 180, STATIC);
+			atackCube = app->physics->CreateRectangleSensor(position.x + 100, position.y - 60, 180, 180, KINEMATIC);
 		}
 		else
 		{
-			atackCube = app->physics->CreateRectangleSensor(position.x - 80, position.y - 60, 180, 180, STATIC);
+			atackCube = app->physics->CreateRectangleSensor(position.x - 80, position.y - 60, 180, 180, KINEMATIC);
 		}
 		break;
 	case 2:
@@ -786,11 +786,11 @@ void Boss_Igory::Attack(float dt)
 		inAtack = true;
 		//printf("\nataque2");
 		if (isFacingLeft) {
-			atackCube = app->physics->CreateRectangleSensor(position.x + 60, position.y - 50, 180, 100, STATIC);
+			atackCube = app->physics->CreateRectangleSensor(position.x + 60, position.y - 50, 180, 100, KINEMATIC);
 		}
 		else
 		{
-			atackCube = app->physics->CreateRectangleSensor(position.x - 40, position.y - 50, 180, 100, STATIC);
+			atackCube = app->physics->CreateRectangleSensor(position.x - 40, position.y - 50, 180, 100, KINEMATIC);
 		}
 		break;
 	case 3:
@@ -799,11 +799,11 @@ void Boss_Igory::Attack(float dt)
 		inAtack = true;
 		//printf("\nataque3");
 		if (isFacingLeft) {
-			atackCube = app->physics->CreateRectangleSensor(position.x + 60, position.y - 40, 180, 180, STATIC);
+			atackCube = app->physics->CreateRectangleSensor(position.x + 60, position.y - 40, 180, 180, KINEMATIC);
 		}
 		else
 		{
-			atackCube = app->physics->CreateRectangleSensor(position.x - 40, position.y - 40, 180, 180, STATIC);
+			atackCube = app->physics->CreateRectangleSensor(position.x - 40, position.y - 40, 180, 180, KINEMATIC);
 		}
 		atqDashQuali++;
 		attackTime = 0;
