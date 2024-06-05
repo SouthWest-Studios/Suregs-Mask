@@ -63,7 +63,8 @@ bool Enemy_Osiris_Variation::Start() {
 
 
 
-	texture = app->tex->Load(config.attribute("texturePath").as_string());
+	//texture = app->tex->Load(config.attribute("texturePath").as_string());
+	texture = app->entityManager->textureOsiris;
 
 	osiris_get_damage_fx = app->audio->LoadAudioFx("osiris_get_damage_fx");
 	osiris_death_fx = app->audio->LoadAudioFx("osiris_death_fx");

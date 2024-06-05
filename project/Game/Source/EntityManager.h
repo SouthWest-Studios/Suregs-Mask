@@ -129,9 +129,21 @@ public:
 	bool isFinishi = false;
 	bool goPadreCleanUp = false;
 	Timer stayTime;
-	SDL_Texture* textureKillPadre = NULL;
-	SDL_Texture* textureUnirPadre = NULL;
-	SDL_Texture* textureCredit = NULL;
+	SDL_Texture* textureKillPadre = nullptr;
+	SDL_Texture* textureUnirPadre = nullptr;
+	SDL_Texture* textureCredit = nullptr;
+
+
+
+	SDL_Texture* textureOsiris = nullptr;
+	SDL_Texture* textureBoorok = nullptr;
+	SDL_Texture* textureGuerrero = nullptr;
+	SDL_Texture* textureKhurt = nullptr;
+	SDL_Texture* textureMuur = nullptr;
+	SDL_Texture* textureOls = nullptr;
+
+
+
 
 private:
 
@@ -150,7 +162,7 @@ private:
 	Animation eyeAnimation;
 	Animation eyeIdle;
 	Animation eyeEndIdle;
-	SDL_Texture* texture = NULL;
+	SDL_Texture* texture = nullptr;
 	
 	SDL_Rect* spritePositions = nullptr;
 

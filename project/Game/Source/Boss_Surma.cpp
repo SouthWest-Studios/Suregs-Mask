@@ -69,8 +69,6 @@ bool Boss_Surma::Start() {
 	spritePositionsExplosion = SPositionExplosion.SpritesPos(10, 863, 600, 6904);
 	explosionAnim.LoadAnim((char*)name.c_str(), "explosionAnim", spritePositionsExplosion);
 
-	texture = app->tex->Load(config.attribute("texturePath").as_string());
-	textureExplosion  = app->tex->Load(config.attribute("texturePathExplosion").as_string());
 
 	surma_get_damage_fx = app->audio->LoadAudioFx("surma_get_damage_fx");
 
@@ -83,8 +81,8 @@ bool Boss_Surma::Start() {
 	pbodySensor->entity = this;
 	pbodySensor->listener = this;
 	pbodySensor->ctype = ColliderType::UNKNOWN;
-
-
+	texture = app->tex->Load(config.attribute("texturePath").as_string());
+	textureExplosion = app->tex->Load(config.attribute("texturePathExplosion").as_string());
 
 
 	//originalPosition = app->map->WorldToMap(position.x, position.y);
@@ -106,6 +104,7 @@ bool Boss_Surma::Start() {
 	if (parseResult2) {
 		configNode = configFile.child("config");
 	}
+
 
 	return true;
 }

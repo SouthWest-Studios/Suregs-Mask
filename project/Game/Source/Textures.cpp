@@ -64,6 +64,16 @@ bool Textures::CleanUp()
 SDL_Texture* const Textures::Load(const char* path)
 {
 	SDL_Texture* texture = NULL;
+
+	// Inicializa SDL_image con los formatos necesarios (asegúrate de hacerlo en la inicialización de tu programa)
+	int flags = IMG_INIT_PNG | IMG_INIT_JPG;
+	int initted = IMG_Init(flags);
+	if ((initted & flags) != flags) {
+		LOG("IMG_Init: Failed to init required jpg and png support! IMG_Init: %s", IMG_GetError());
+		return NULL;
+	}
+
+	// Carga la superficie de la imagen
 	SDL_Surface* surface = IMG_Load(path);
 
 	if (surface == NULL)
@@ -72,10 +82,16 @@ SDL_Texture* const Textures::Load(const char* path)
 	}
 	else
 	{
-		texture = LoadSurface(surface);
-		if (texture != NULL)
+		// Crea una textura a partir de la superficie
+		texture = SDL_CreateTextureFromSurface(app->render->renderer, surface);
+		if (texture == NULL)
 		{
-			texturePathMap[texture] = path;  // Store the texture path
+			LOG("Could not create texture from surface. SDL_CreateTextureFromSurface: %s", SDL_GetError());
+		}
+		else
+		{
+			// Almacena la ruta de la textura
+			texturePathMap[texture] = path;
 		}
 		SDL_FreeSurface(surface);
 	}
