@@ -495,6 +495,7 @@ bool DialogManager::PostUpdate() {
 	}
 	else {
 		//Reiniciar variables mientras no este algun dialogo en marcha
+		app->menu->active = true;
 		indexText = 1;
 		optionSelected = 0;
 		actualDialogYPosition = -300;

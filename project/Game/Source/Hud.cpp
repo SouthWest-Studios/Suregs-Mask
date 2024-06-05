@@ -23,6 +23,7 @@
 #include "Scene_Pueblo.h"
 #include "Scene_Pueblo_Tutorial.h"
 #include "Utils.cpp"
+#include "Scene_Mazmorra0.h"
 
 Hud::Hud(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -447,7 +448,7 @@ bool Hud::PostUpdate()
 
 	//Misiones
 
-	if (app->scene_pueblo->active || app->scene_pueblo_tutorial->active) {
+	if (app->scene_pueblo->active || app->scene_pueblo_tutorial->active || app->scene_mazmorra0->active) {
 
 		std::vector<Quest*> quests = app->questManager->GetActiveQuest();
 		for (int i = 0; i < quests.size(); i++) {

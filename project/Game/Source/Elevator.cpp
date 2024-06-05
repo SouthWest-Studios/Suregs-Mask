@@ -21,6 +21,7 @@
 #include "Item_Pocion_Vida_Max.h"
 #include "ElevatorMenu.h"
 #include "Entity.h"
+#include "DialogManager.h"
 
 Elevator::Elevator() : Entity(EntityType::ASCENSOR)
 {
@@ -42,11 +43,16 @@ bool Elevator::Start() {
 	//initilize textures
 	/*position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();*/
-	texture = app->tex->Load(config.attribute("texturePath").as_string());
-	app->ascensor->Menutexture = app->tex->Load(config.attribute("menutexturePath").as_string());
-	app->ascensor->listTexture = app->tex->Load(config.attribute("textureList").as_string());
-	app->ascensor->PointerTexture = app->tex->Load(config.attribute("PointerPath").as_string());
-	app->ascensor->textura_black = app->tex->Load(config.attribute("textura_blackPath").as_string());
+
+	if (app->ascensor->primeraVez == false)
+	{
+		
+		app->ascensor->Menutexture = app->tex->Load(config.attribute("menutexturePath").as_string());
+		app->ascensor->listTexture = app->tex->Load(config.attribute("textureList").as_string());
+		app->ascensor->PointerTexture = app->tex->Load(config.attribute("PointerPath").as_string());
+		app->ascensor->textura_black = app->tex->Load(config.attribute("textura_blackPath").as_string());
+	}
+	
 	
 
 	/*texture = app->tex->Load("Assets/Textures/Entidades/Items/item_Garra.png");*/
@@ -81,7 +87,6 @@ bool Elevator::Update(float dt)
 bool Elevator::PostUpdate()
 {
 	
-		app->render->DrawTexture(texture, position.x, position.y, 0.5f);
 	
 	
 	return true;
@@ -89,7 +94,7 @@ bool Elevator::PostUpdate()
 bool Elevator::CleanUp()
 {
     app->physics->GetWorld()->DestroyBody(pbody->body);
-    app->tex->UnLoad(texture);
+ 
     return true;
 }
 void Elevator::OnCollision(PhysBody* physA, PhysBody* physB) 
@@ -99,7 +104,7 @@ void Elevator::OnCollision(PhysBody* physA, PhysBody* physB)
       case ColliderType::PLAYER:
       {
           
-              if (app->input->GetButton(CONFIRM) == KEY_DOWN)
+              if (app->input->GetButton(CONFIRM) == KEY_DOWN && app->dialogManager->isPlaying == false)
               {
 
 				 

@@ -185,11 +185,61 @@ bool TreeManager::CleanUp()
 		item = item->prev;
 	}
 
+	delete iconoTreeTexturePath;
+	delete listTexturePath;
+	delete listTexturePathNot;
+	delete PointerPath;
+	delete PointerPath2;
+	delete PointerPath3;
+	delete CloseUpPath;
+	delete BackGroundPath;
+
+	delete alcancePath;
+	delete aumentoPath;
+	delete cooldownPath;
+	delete danoPath;
+	delete distanciaPath;
+	delete durationPath;
+	delete invisiblePath;
+	delete poisonPath;
+	delete rayoPath;
+
+	delete alcanceLockedPath;
+	delete aumentoLockedPath;
+	delete cooldownLockedPath;
+	delete danoLockedPath;
+	delete distanciaLockedPath;
+	delete durationLockedPath;
+	delete invisibleLockedPath;
+	delete poisonLockedPath;
+	delete rayoLockedPath;
+
+	delete alcanceSelectedPath;
+	delete aumentoSelectedPath;
+	delete cooldownSelectedPath;
+	delete danoSelectedPath;
+	delete distanciaSelectedPath;
+	delete durationSelectedPath;
+	delete invisibleSelectedPath;
+	delete poisonSelectedPath;
+	delete rayoSelectedPath;
+
+	delete mascara0Path;
+	delete mascara1Path;
+	delete mascara2Path;
+	delete mascara3Path;
+
+	delete mascara0SelectedPath;
+	delete mascara1SelectedPath;
+	delete mascara2SelectedPath;
+	delete mascara3SelectedPath;
 	arboles.Clear();
 	app->tex->UnLoad(PointerItemText);
 	app->tex->UnLoad(SelectedItemText);
 	app->tex->UnLoad(EquipedItemText);
 	app->tex->UnLoad(listTexture);
+	app->tex->UnLoad(BackGroundTexture);
+	app->tex->UnLoad(BackGroundTexture);
 	return ret;
 }
 int highesttttId = -1;
@@ -1522,19 +1572,19 @@ bool TreeManager::Update(float dt)
 
 	bool ret = true;
 
-	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
-		/*options = true;
-		selected = { PointerPosition.x, PointerPosition.y };
-		selectedId = PointerId;*/
-		if (mostrar)
-		{
-			app->entityManager->active = true;
-			app->physics->active = true;
-			app->menu->active = true;
-		}
-		mostrar = !mostrar;
+	//if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
+	//	/*options = true;
+	//	selected = { PointerPosition.x, PointerPosition.y };
+	//	selectedId = PointerId;*/
+	//	if (mostrar)
+	//	{
+	//		app->entityManager->active = true;
+	//		app->physics->active = true;
+	//		app->menu->active = true;
+	//	}
+	//	mostrar = !mostrar;
 
-	}
+	//}
 	if (mostrar == true)
 	{
 		OnMovePointer();
