@@ -435,7 +435,7 @@ bool Boss_Igory::CleanUp()
 	partFase2Created = false;
 	partFase3Created = false;
 
-	//app->entityManager->canShowFinal = false;
+	app->entityManager->canShowFinal = false;
 	killPadre = false;
 	RELEASE(spritePositions);
 	delete spritePositions;

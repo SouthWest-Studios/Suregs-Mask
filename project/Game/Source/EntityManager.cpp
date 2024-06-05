@@ -962,7 +962,7 @@ void EntityManager::showFinalkillPadre()
 			photoTransparent = 255;
 			if (goScene) {
 				app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu);
-				//canShowFinal = false;
+				canShowFinal = false;
 			}
 			else
 			{
