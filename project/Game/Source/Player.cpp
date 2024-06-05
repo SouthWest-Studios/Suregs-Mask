@@ -1306,8 +1306,8 @@ void Player::Attack(float dt)
 	//Onda expansiva ataque pasivo mascara 1
 	if (secondaryMask == Mask::MASK1) {
 		if (!mask1PassiveSensor) {
-			mask1PassiveSensor = app->physics->CreateRectangleSensor(attackX, attackY, 100, 100, DYNAMIC);
-			mask1PassiveSensor->ctype = ColliderType::MASK0_PASSIVE_ATTACK;
+			mask1PassiveSensor = app->physics->CreateRectangleSensor(attackX, attackY, 120, 120, DYNAMIC);
+			mask1PassiveSensor->ctype = ColliderType::MASK1_PASSIVE_ATTACK;
 			mask1PassiveSensor->listener = this;
 		}
 		else if (mask1PassiveSensor) {
