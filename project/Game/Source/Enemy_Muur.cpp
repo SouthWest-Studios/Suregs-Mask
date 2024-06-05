@@ -106,7 +106,7 @@ bool Enemy_Muur::Update(float dt)
 	{
 		nextState = EntityState_Enemy::DEAD;
 	}
-	else if (app->entityManager->GetIgory()->isDead) {
+	else if (app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->isDead) {
 		health = 0;
 	}
 	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32)
@@ -117,7 +117,7 @@ bool Enemy_Muur::Update(float dt)
 	{
 		nextState = EntityState_Enemy::RUNNING;
 	}
-	else if (app->map->pathfinding->GetDistance(playerPos, position) >= viewDistance * 32 && app->entityManager->GetIgory()->playerInFight)
+	else if (app->map->pathfinding->GetDistance(playerPos, position) >= viewDistance * 32 && app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->playerInFight)
 	{
 		nextState = EntityState_Enemy::RUNNING;
 	}
@@ -343,7 +343,7 @@ void Enemy_Muur::Die() {
 			app->entityManager->GetPlayer()->maskThreeXP += 20;
 			////printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
 		}
-		if (app->entityManager->GetIgory()->playerInFight) {
+		if (app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->playerInFight) {
 			app->map->DestroyEntity(this);
 		}
 	}
@@ -382,7 +382,7 @@ bool Enemy_Muur::Muurfinding(float dt, iPoint playerPosP)
 		lastPath = *app->map->pathfinding->GetLastPath();
 	}
 	else {
-		if (app->entityManager->GetIgory()->playerInFight) {
+		if (app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->playerInFight) {
 			app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
 			lastPath = *app->map->pathfinding->GetLastPath();
 		}

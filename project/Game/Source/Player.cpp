@@ -744,7 +744,7 @@ bool Player::Update(float dt)
 	}
 
 	if (app->entityManager->canShowFinal) {
-		if (app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->playerInFight && !playerTpBossPadre) {
+		if (app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->playerInFight && !playerTpBossPadre) {
 			pbodyFoot->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y - 10)), 0);
 			playerTpBossPadre = true;
 		}
@@ -1329,7 +1329,7 @@ void Player::Attack(float dt)
 void Player::Dead()
 {
 	die = true;
-	if (app->entityManager->GetIgory()->playerInFight) {
+	if (app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->playerInFight) {
 		app->entityManager->GetIgory()->playerInFight = false;
 	}
 	if (app->audio->playingMusic == true)
@@ -2630,7 +2630,7 @@ void Player::PlayerMovement(float dt)
 
 
 	// Calcular la velocidad horizontal y vertical
-	//!app->entityManager->GetIgory()->killPadre &&
+	//!app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->killPadre &&
 	if (die == false && desiredState != EntityStatePlayer::POCION &&  !die) {
 		fPoint joystick = app->input->GetAxis(MOVE_HORIZONTAL, MOVE_VERTICAL);
 		float horizontalMovement = joystick.x;

@@ -119,7 +119,7 @@ bool Enemy_Ols::Update(float dt)
 	{
 		desiredState = EntityState_Enemy::DEAD;
 	}
-	else if (app->entityManager->GetIgory()->isDead) {
+	else if (app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->isDead) {
 		health = 0;
 	}
 	else if (distanceToPlayer <= attackDistance * 32 && canAttack)
@@ -134,7 +134,7 @@ bool Enemy_Ols::Update(float dt)
 	 {
 	 	desiredState = EntityState_Enemy::RUNNING;
 	 }
-	 else if (app->map->pathfinding->GetDistance(playerPos, position) >= viewDistance * 32 && app->entityManager->GetIgory()->playerInFight)
+	 else if (app->map->pathfinding->GetDistance(playerPos, position) >= viewDistance * 32 && app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->playerInFight)
 	{
 		desiredState = EntityState_Enemy::RUNNING;
 	}
@@ -349,7 +349,7 @@ void Enemy_Ols::Die() {
 		////printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
 	}
 
-	if (app->entityManager->GetIgory()->playerInFight) {
+	if (app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->playerInFight) {
 		app->map->DestroyEntity(this);
 	}
 

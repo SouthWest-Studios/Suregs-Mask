@@ -76,7 +76,7 @@ bool NPCPadre::Update(float dt) {
 
 	currentAnimation->Update();
 
-	////printf("\n selecion: %d", app->entityManager->GetIgory()->seleccionFinalPersonaje);
+	////printf("\n selecion: %d", app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->seleccionFinalPersonaje);
 
 	return true;
 }
@@ -126,10 +126,13 @@ void NPCPadre::OnCollision(PhysBody* physA, PhysBody* physB) {
 		//app->dialogManager->CreateDialogSinEntity("sss","sss","sss");
 		if (dialogoMostrado && !app->dialogManager->isPlaying) {
 			////printf("\nTerminado");
-			app->entityManager->GetIgory()->playerInFight = true;
-			app->entityManager->GetIgory()->generaTimeColdDown.Start();
-			app->entityManager->GetIgory()->curaTimer.Start();
-			CleanUp();
+			if (app->entityManager->GetIgory() != nullptr) {
+				app->entityManager->GetIgory()->playerInFight = true;
+				app->entityManager->GetIgory()->generaTimeColdDown.Start();
+				app->entityManager->GetIgory()->curaTimer.Start();
+				CleanUp();
+			}
+			
 		}
 		if (!app->dialogManager->isPlaying && (app->input->GetButton(CONFIRM) == KEY_DOWN)) {
 			if (!dialogoMostrado) {

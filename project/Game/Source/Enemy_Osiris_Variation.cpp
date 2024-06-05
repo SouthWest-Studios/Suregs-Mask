@@ -369,7 +369,7 @@ void Enemy_Osiris_Variation::Die() {
 			////printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
 		}
 
-		if (app->entityManager->GetIgory()->playerInFight) {
+		if (app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->playerInFight) {
 			app->map->DestroyEntity(this);
 		}
 
