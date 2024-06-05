@@ -522,7 +522,7 @@ MapObject* Enemy_Muur_Variation::GetCurrentRoom()
 	{
 		MapObject* room = item->data;
 
-		// el jugador está dentro de la sala
+		// el jugador est?dentro de la sala
 		if (position.x >= room->x && position.x <= room->x + room->width &&
 			position.y >= room->y && position.y <= room->y + room->height)
 		{
@@ -535,7 +535,7 @@ MapObject* Enemy_Muur_Variation::GetCurrentRoom()
 	{
 		MapObject* room = item->data;
 
-		// el jugador está dentro de la sala
+		// el jugador est?dentro de la sala
 		if (position.x >= room->x && position.x <= room->x + room->width &&
 			position.y >= room->y && position.y <= room->y + room->height)
 		{
@@ -548,7 +548,7 @@ MapObject* Enemy_Muur_Variation::GetCurrentRoom()
 	{
 		MapObject* room = item->data;
 
-		// el jugador está dentro de la sala
+		// el jugador est?dentro de la sala
 		if (position.x >= room->x && position.x <= room->x + room->width &&
 			position.y >= room->y && position.y <= room->y + room->height)
 		{

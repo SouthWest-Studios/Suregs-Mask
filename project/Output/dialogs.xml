@@ -2275,7 +2275,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 
 			<sentence name="Igorv"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/igorvFace.png"
-			text="“No sé que está pasando, todo esto nunca fue mi intención, daría lo que fuera por haberte visto crecer.”"/>
+			text="No sé que está pasando, todo esto nunca fue mi intención, daría lo que fuera por haberte visto crecer."/>
 
 			<sentence name="Jakov"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"

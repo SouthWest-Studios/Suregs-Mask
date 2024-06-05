@@ -744,7 +744,7 @@ bool EntityManager::PostUpdate()
 
 bool EntityManager::PostLateUpdate()
 {
-	if (canShowFinal) {
+	if (canShowFinal && bossIgory != nullptr) {
 		if (bossIgory->deletePadre && bossIgory->isDead) {
 			showFinalkillPadre();
 		}
