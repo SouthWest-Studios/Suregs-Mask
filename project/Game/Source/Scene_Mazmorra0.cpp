@@ -15,6 +15,7 @@
 #include "GuiControl.h"
 #include "GuiManager.h"
 #include "Item_Mascara_0.h"
+#include "QuestManager.h"
 
 Scene_Mazmorra0::Scene_Mazmorra0(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -78,6 +79,10 @@ bool Scene_Mazmorra0::Start()
 	mascara0->config = configNode.child("entities_data").child("item_mascara_0");
 	mascara0->position = iPoint(2704, 1693);
 	mascara0->Start();
+
+	if (app->questManager->GetQuestLineIndex(1) <= 5) {
+		app->questManager->UpdateQuestLine(1, 6);
+	}
 
 
 	return true;

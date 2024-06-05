@@ -20,6 +20,7 @@
 #include "Item_Pocion_Vida_3.h"
 #include "Item_Pocion_Vida_Max.h"
 #include "Item_Nota.h"
+#include "QuestManager.h"
 
 #include "Entity.h"
 
@@ -106,6 +107,10 @@ void Cofre::OnCollision(PhysBody* physA, PhysBody* physB)
               {
                   if (tutorial) {
                       abierto = true;
+
+                      if (app->questManager->GetQuestLineIndex(1) <= 4) {
+                          app->questManager->UpdateQuestLine(1, 5);
+                      }
 
                       pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
                       if (parseResult) {
