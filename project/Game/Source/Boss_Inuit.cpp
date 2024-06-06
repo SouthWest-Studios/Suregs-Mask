@@ -1076,18 +1076,18 @@ void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLAYER:
 		if (physA->ctype == ColliderType::ATACK_INUIT) {
-			//app->entityManager->GetPlayer()->TakeDamage(attackDamage);
-			app->entityManager->GetPlayer()->TakeDamage(0);
+			app->entityManager->GetPlayer()->TakeDamage(attackDamage);
+			//app->entityManager->GetPlayer()->TakeDamage(0);
 		}
 		if (physA->ctype == ColliderType::WAVE) {
-			//app->entityManager->GetPlayer()->TakeDamage(200);
-			app->entityManager->GetPlayer()->TakeDamage(0);
+			app->entityManager->GetPlayer()->TakeDamage(200);
+			//app->entityManager->GetPlayer()->TakeDamage(0);
 		}
 
 		if (physA->ctype == ColliderType::ATACKBMR) {
 
-			//app->entityManager->GetPlayer()->TakeDamage(50);
-			app->entityManager->GetPlayer()->TakeDamage(0);
+			app->entityManager->GetPlayer()->TakeDamage(200);
+			//app->entityManager->GetPlayer()->TakeDamage(0);
 		}
 
 		if (physA->ctype == ColliderType::BOSSAREA) {
