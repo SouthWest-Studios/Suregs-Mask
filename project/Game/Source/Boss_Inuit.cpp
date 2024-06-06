@@ -52,7 +52,7 @@ bool Boss_Inuit::Start() {
 
 	atk2_boss_inuit.LoadAnim("boss_inuit", "atk2_boss_inuit", spritePositions);
 	atk1_boss_inuit.LoadAnim("boss_inuit", "atk1_boss_inuit", spritePositions);
-	
+
 	wave_boss_inuit.resize(11);
 	for (int i = 0; i < 11; i++)
 	{
@@ -60,15 +60,12 @@ bool Boss_Inuit::Start() {
 		wave_boss_inuit[i].LoadAnim("boss_inuit", "wave_boss_inuit", spritePositions);
 	}
 
-
-	
 	idleAnim_boss_inuit.LoadAnim("boss_inuit", "idleAnim_boss_inuit", spritePositions);
 	boomerang_boss_inuit.LoadAnim("boss_inuit", "boomerang_boss_inuit", spritePositions);
 	changeFase_boss_inuit.LoadAnim("boss_inuit", "changeFase_boss_inuit", spritePositions);
 	move_inuit.LoadAnim("boss_inuit", "move_inuit", spritePositions);
-	/*runAnim.LoadAnim("osiris", "runAnim", spritePositions);
-	attackAnim.LoadAnim("osiris", "attackAnim", spritePositions);
-	dieAnim.LoadAnim("osiris", "dieAnim", spritePositions);*/
+	idle_sin_inuit.LoadAnim("boss_inuit", "idle_sin_inuit", spritePositions);
+
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
@@ -126,13 +123,18 @@ bool Boss_Inuit::Update(float dt)
 {
 	OPTICK_EVENT();
 	//Pone el sensor del cuerpo en su posicion
-	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
-	pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
+	if (pbodyFoot != nullptr) {
+		b2Transform pbodyPos = pbodyFoot->body->GetTransform();
+		pbodySensor->body->SetTransform(b2Vec2(pbodyPos.p.x, pbodyPos.p.y - 1), 0);
+	}
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
 
 	if (health <= 0)
 	{
 		desiredState = EntityState_Boss_Inuit::DEAD;
+	}
+	else if (inbmrAtack && !app->entityManager->GetPlayer()->die) {
+		desiredState = EntityState_Boss_Inuit::IDLE;
 	}
 	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32 && !app->entityManager->GetPlayer()->die)
 	{
@@ -176,7 +178,15 @@ bool Boss_Inuit::Update(float dt)
 	case FASE::FASE_CHANGE:
 		//printf("\n FaseCAHNEG");
 		currentAnimation = &changeFase_boss_inuit;
-		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
+		if (pbodyFoot != nullptr) {
+			pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
+		}
+
+		if (atackCube != nullptr) {
+			//app->physics->GetWorld()->DestroyBody(atackCube->body);
+			app->physics->DestroyBody(atackCube);
+			atackCube = nullptr;
+		}
 		break;
 	case FASE::FASE_TWO:
 		//desiredState = EntityState_Boss_Inuit::IDLE;
@@ -272,18 +282,18 @@ bool Boss_Inuit::PostUpdate() {
 			app->render->DrawTexture(app->map->pathfinding->mouseTileTex, pos.x, pos.y, SDL_FLIP_NONE);
 		}
 	}
+	if (pbodyFoot != nullptr) {
+		b2Transform pbodyPos = pbodyFoot->body->GetTransform();
+		position.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
+		position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
 
-	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
-	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
-	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
+		if (saveOriginPos) {
+			originalWavePosition.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
+			originalWavePosition.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
+			saveOriginPos = false;
 
-	if (saveOriginPos) {
-		originalWavePosition.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
-		originalWavePosition.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
-		saveOriginPos = false;
-
+		}
 	}
-
 	////printf("\n Heal: %f", health);
 
 	if (atkAnimation && fase != FASE::FASE_CHANGE) {
@@ -379,23 +389,9 @@ void Boss_Inuit::stateMachine(float dt, iPoint playerPos)
 
 		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero); //No se mueve mientras ataca
 
-
 		if (!inAtack) {
 			Attack(dt);
 		}
-
-		/*if (TimerColdDown(1)) {
-			if (atackCube != nullptr) {
-				app->physics->GetWorld()->DestroyBody(atackCube->body);
-				atackCube = nullptr;
-			}
-		}
-
-
-		if (TimerColdDown(2) && inbmrAtack == false) {
-			inAtack = false;
-		}*/
-
 
 		break;
 	case EntityState_Boss_Inuit::ATTACKING_DISTANCE:
@@ -485,7 +481,7 @@ void Boss_Inuit::shock_wave(int posX, int posY, float shockSpeed, float maxSize,
 	}
 
 
-	
+
 }
 
 
@@ -559,7 +555,14 @@ void Boss_Inuit::resetAnimation()
 
 void Boss_Inuit::DoNothing(float dt)
 {
-	currentAnimation = &idleAnim_boss_inuit;
+	if (!inbmrAtack) {
+		currentAnimation = &idleAnim_boss_inuit;
+	}
+	else
+	{
+		currentAnimation = &idle_sin_inuit;
+		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
+	}
 	//pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 
 }
@@ -702,16 +705,16 @@ void Boss_Inuit::atackBoomerang(BTPDirection direccion)
 		app->audio->PlayFx(inuit_ranged_attack_fx);
 		inuit_ranged_attack = true;
 	}
+	if (!Dead) {
+		b2Transform pbodyPosBMR = atackBMR->body->GetTransform();
 
-	b2Transform pbodyPosBMR = atackBMR->body->GetTransform();
-
-	BMRposition.x = METERS_TO_PIXELS(pbodyPosBMR.p.x) - 16;
-	BMRposition.y = METERS_TO_PIXELS(pbodyPosBMR.p.y) - 16;
-	currentAnimation1 = &boomerang_boss_inuit;
-	SDL_Rect rect = currentAnimation1->GetCurrentFrame();
-	app->render->DrawTexture(texture, BMRposition.x - 410, BMRposition.y - 300, SDL_FLIP_HORIZONTAL, &rect);
-	currentAnimation1->Update();
-
+		BMRposition.x = METERS_TO_PIXELS(pbodyPosBMR.p.x) - 16;
+		BMRposition.y = METERS_TO_PIXELS(pbodyPosBMR.p.y) - 16;
+		currentAnimation1 = &boomerang_boss_inuit;
+		SDL_Rect rect = currentAnimation1->GetCurrentFrame();
+		app->render->DrawTexture(texture, BMRposition.x - 410, BMRposition.y - 300, SDL_FLIP_HORIZONTAL, &rect);
+		currentAnimation1->Update();
+	}
 
 }
 
@@ -720,6 +723,23 @@ void Boss_Inuit::Die() {
 	//Mask XP
 	Dead = true;
 	app->map->boss1_defeated = true;
+
+	if (pbodyFoot != nullptr) {
+		app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
+		pbodyFoot = nullptr;
+	}
+	if (pbodySensor != nullptr) {
+		app->physics->GetWorld()->DestroyBody(pbodySensor->body);
+		pbodySensor = nullptr;
+	}
+	if (areaSensor != nullptr) {
+		app->physics->GetWorld()->DestroyBody(areaSensor->body);
+		areaSensor = nullptr;
+	}
+	if (atackBMR != nullptr) {
+		app->physics->GetWorld()->DestroyBody(atackBMR->body);
+		atackBMR = nullptr;
+	}
 
 	if (count == 0)
 	{

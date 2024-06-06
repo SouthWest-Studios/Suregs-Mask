@@ -120,6 +120,7 @@ private:
 	Animation boomerang_boss_inuit;
 	Animation changeFase_boss_inuit;
 	Animation move_inuit;
+	Animation idle_sin_inuit;
 
 
 
