@@ -69,7 +69,7 @@ bool DialogTrigger::Start() {
 		faceTexture = app->tex->Load(faceTexturePath);
 	}
 
-	pbody = app->physics->CreateRectangleSensor(position.x+10, position.y, 100, 100, bodyType::KINEMATIC);
+	pbody = app->physics->CreateRectangleSensor(position.x+10, position.y, 200, 200, bodyType::KINEMATIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::DIALOG_TRIGGER;
 
