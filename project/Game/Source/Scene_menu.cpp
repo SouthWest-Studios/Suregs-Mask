@@ -1059,19 +1059,22 @@ void Scene_Menu::ShowNewGames()
 	if (partidaOnePressed)
 	{
 		app->render->DrawTexture(messageBackground, (int)windowW / 2 - 265, (int)windowH - 650);
-		app->render->DrawTextBound("Si comienzas una nueva partida perderás todo el progreso guuardado en el Slot1. ¿Deseas continuar?", (int)windowW / 2 - 200, (int)windowH - 500, 400);
+		app->render->DrawTextBound("Si comienzas una nueva partida perderás todo el progreso guardado en el Slot1.", (int)windowW / 2 - 200, (int)windowH - 500, 350);
+		app->render->DrawTextBound("¿Deseas continuar?", (int)windowW / 2 - 200, (int)windowH - 370, 350);
 	}
 
 	if (partidaTwoPressed)
 	{
 		app->render->DrawTexture(messageBackground, (int)windowW / 2 - 265, (int)windowH - 650);
-		app->render->DrawTextBound("Si comienzas una nueva partida perderás todo el progreso guuardado en el Slot2. ¿Deseas continuar?", (int)windowW / 2 - 200, (int)windowH - 500, 400);
+		app->render->DrawTextBound("Si comienzas una nueva partida perderás todo el progreso guardado en el Slot2.", (int)windowW / 2 - 200, (int)windowH - 500, 350);
+		app->render->DrawTextBound("¿Deseas continuar?", (int)windowW / 2 - 200, (int)windowH - 370, 350);
 	}
 
 	if (partidaThreePressed)
 	{
 		app->render->DrawTexture(messageBackground, (int)windowW / 2 - 265, (int)windowH - 650);
-		app->render->DrawTextBound("Si comienzas una nueva partida perderás todo el progreso guuardado en el Slot3. ¿Deseas continuar?", (int)windowW / 2 - 200, (int)windowH - 500, 400);
+		app->render->DrawTextBound("Si comienzas una nueva partida perderás todo el progreso guardado en el Slot3.", (int)windowW / 2 - 200, (int)windowH - 500, 350);
+		app->render->DrawTextBound("¿Deseas continuar?", (int)windowW / 2 - 200, (int)windowH - 370, 350);
 	}
 }
 
