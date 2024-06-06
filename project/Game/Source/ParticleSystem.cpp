@@ -114,7 +114,7 @@ bool ParticleSystem::PostUpdate()
 		for (it = emittersToDestroy.begin(); it != emittersToDestroy.end(); ++it)
 		{
 			emittersList.remove(*it);
-			//delete *it;
+			delete *it;
 
 		}
 

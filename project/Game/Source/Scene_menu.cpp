@@ -191,7 +191,7 @@ bool Scene_Menu::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN) {
 		app->input->GetMousePosition(mx, my);
 		fPoint pos((float)mx, (float)my);
-		app->psystem->AddEmiter(pos, EMITTER_TYPE_EXPLOSION_MASK2);
+		app->psystem->AddEmiter(pos, EMITTER_TYPE_FASE2_IGORV);
 	}
 
 	//if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN) {

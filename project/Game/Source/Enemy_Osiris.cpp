@@ -384,6 +384,8 @@ void Enemy_Osiris::Die() {
 		
 	}
 
+	CleanUp();
+
 }
 
 void Enemy_Osiris::Revive()
