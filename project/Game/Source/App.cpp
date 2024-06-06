@@ -353,7 +353,10 @@ void App::FinishUpdate()
 		lastSecFrameCount = 0;
 	}
 
-	tiempoDeJuego += dt;
+	if (tiempoDeJuego < 359940000)
+	{
+		tiempoDeJuego += dt;
+	}
 
 	convertirTiempo(tiempoDeJuego);
 
