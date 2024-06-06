@@ -22,6 +22,7 @@
 #include "Audio.h"
 #include "Menu.h"
 #include "Window.h"
+#include "Scene_Pueblo.h"
 
 CommerceHerreria::CommerceHerreria(uint id) : Commerce(id)
 {
@@ -312,7 +313,7 @@ bool CommerceHerreria::Update(float dt)
 		app->audio->PlayFx(button_fx);
 	}
 
-	if (app->input->GetButton(SELECT) == KEY_DOWN || app->input->GetButton(CONFIRM) == KEY_DOWN) {
+	if (app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  || app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady) {
 
 		if (pointerIndexF < actualTrades.size()) {
 			if (pointerIndexC == 0) SelectTrade(pointerIndexF);

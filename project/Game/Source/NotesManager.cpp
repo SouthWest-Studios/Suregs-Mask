@@ -20,6 +20,7 @@
 #include "Window.h"
 #include "Menu.h"
 #include "Hud.h"
+#include "Scene_Pueblo.h"
 
 NotesManager::NotesManager(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -494,7 +495,7 @@ bool NotesManager::Update(float dt)
 	{
 		OnMovePointer();
 
-		if (app->input->GetButton(SELECT) == KEY_DOWN) {
+		if (app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady ) {
 			/*options = true;
 			selected = { PointerPosition.x, PointerPosition.y };
 			selectedId = PointerId;*/
@@ -674,7 +675,7 @@ bool NotesManager::PostUpdate()
 							if (progress >= 1.0f) {
 								progress = 1.0f;
 								animatingExit = false;
-								itum->data->zoom = false; // Ocultar el menú al finalizar la animación de salida
+								itum->data->zoom = false; // Ocultar el men?al finalizar la animación de salida
 							}
 							float easedProgress = easeOutCubic(progress);
 

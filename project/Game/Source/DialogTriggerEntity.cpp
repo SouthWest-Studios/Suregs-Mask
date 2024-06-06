@@ -173,7 +173,7 @@ void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
 		case ColliderType::PLAYER:
 			if (physA->ctype == ColliderType::ARBOL)
 			{
-				if (app->input->GetButton(CONFIRM) == KEY_DOWN)
+				if (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady)
 				{
 					app->treeManager->mostrar = true;
 					app->menu->active = false;
@@ -182,7 +182,6 @@ void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
 			}
 			else if (!app->dialogManager->isPlaying && (app->input->GetButton(CONFIRM) == KEY_DOWN) && !app->scene_pueblo->GetRod()->fishing.rodReady) {
 				PlayDialog();
-
 				//printf("COLISSION TRIGGERDIALOG");
 
 				//// Manejo de la etiqueta <mission_event>

@@ -1865,7 +1865,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::ARBOL:
 		LOG("Collision ARBOL");
-		if (app->input->GetButton(CONFIRM) == KEY_DOWN)
+		if (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady)
 		{
 			app->treeManager->mostrar = true;
 

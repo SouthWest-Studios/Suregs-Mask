@@ -91,7 +91,7 @@ bool ElevatorMenu::Update(float dt)
 		OnMovePointer();
 		if (open)
 		{
-			if ((app->input->GetButton(SELECT) == KEY_DOWN && PointerId < mazmorra + plus + 1) || (app->input->GetButton(CONFIRM) == KEY_DOWN && PointerId < mazmorra + plus + 1)) {
+			if ((app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  && PointerId < mazmorra + plus + 1) || (app->input->GetButton(CONFIRM) == KEY_DOWN && PointerId < mazmorra + plus + 1) && !app->scene_pueblo->GetRod()->fishing.rodReady) {
 				app->audio->PlayFx(select_fx);
 				int num;
 				if (PointerId != mazmorraActual)

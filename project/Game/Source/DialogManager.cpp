@@ -436,7 +436,7 @@ bool DialogManager::PostUpdate() {
 
 
 		//Siguiente dialogo
-		if (dialogFinished && (app->input->GetButton(CONFIRM) == KEY_DOWN || app->input->GetButton(SELECT) == KEY_DOWN) && actualDialog->type != DialogType::CHOOSE) {
+		if (dialogFinished && (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady || app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady ) && actualDialog->type != DialogType::CHOOSE) {
 			
 			
 			indexText = 1;
@@ -460,7 +460,7 @@ bool DialogManager::PostUpdate() {
 
 		}
 		//Gestion de las opciones
-		else if (dialogFinished && (app->input->GetButton(CONFIRM) == KEY_DOWN || app->input->GetButton(SELECT) == KEY_DOWN) && optionSelected != 0 && actualDialog->type == DialogType::CHOOSE) {
+		else if (dialogFinished && (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady || app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady ) && optionSelected != 0 && actualDialog->type == DialogType::CHOOSE) {
 		
 			
 			if (optionSelected == 1) {
@@ -488,7 +488,7 @@ bool DialogManager::PostUpdate() {
 
 		}
 		//Terminar el dialogo empezado
-		else if (!dialogFinished && (app->input->GetButton(CONFIRM) == KEY_DOWN || app->input->GetButton(SELECT) == KEY_DOWN) && indexText > 2) {
+		else if (!dialogFinished && (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady || app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady ) && indexText > 2) {
 			indexText = 999;
 		}
 	

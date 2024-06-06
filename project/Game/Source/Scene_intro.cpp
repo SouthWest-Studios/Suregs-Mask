@@ -7,6 +7,7 @@
 #include "Scene_Intro.h"
 #include "Scene_Menu.h"
 #include "ModuleFadeToBlack.h"
+#include "Scene_Pueblo.h"
 #include "Optick/include/optick.h"
 
 #include "Defs.h"
@@ -81,7 +82,7 @@ bool Scene_Intro::Update(float dt)
 		app->fadeToBlack->FadeToBlack(this, app->scene_menu, 90);
 	}
 
-	if (app->input->GetButton(CONFIRM) == KEY_DOWN) {
+	if (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady) {
 		app->fadeToBlack->FadeToBlack(this, app->scene_menu, 90);
 	}
 	return true;

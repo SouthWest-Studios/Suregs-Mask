@@ -812,11 +812,11 @@ void Scene_Menu::SettingsInterface()
 		}
 
 
-		if (fullscreen->selected && (app->input->GetButton(CONFIRM) == KEY_DOWN || app->input->GetButton(SELECT) == KEY_DOWN))
+		if (fullscreen->selected && (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady || app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady ))
 		{
 			fullscreen->click = !fullscreen->click;
 		}
-		if (vsync->selected && (app->input->GetButton(CONFIRM) == KEY_DOWN || app->input->GetButton(SELECT) == KEY_DOWN))
+		if (vsync->selected && (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady || app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady ))
 		{
 			vsync->click = !vsync->click;
 		}
