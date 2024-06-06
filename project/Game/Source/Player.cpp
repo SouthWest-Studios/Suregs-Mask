@@ -738,7 +738,7 @@ bool Player::Update(float dt)
 
 
 
-	if (vacio) {
+	if (vacio && !godmode) {
 		pbodyFoot->body->SetTransform(posInicioPlayer, 0);
 		vacio = false;
 	}
@@ -749,7 +749,7 @@ bool Player::Update(float dt)
 			playerTpBossPadre = true;
 		}
 	}
-	if (insideVacio && !isDashing) {
+	if (insideVacio && !isDashing && !godmode) {
 		app->entityManager->playerVacio = true;
 		app->entityManager->vacioGameStop = true;
 		app->entityManager->playerCantMove = true;
@@ -2562,10 +2562,10 @@ void Player::GodMode(float dt)
 {
 	float speedFast;
 	if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
-		speedFast = speed * 2;
+		speedFast = speed * 4;
 	}
 	else {
-		speedFast = speed;
+		speedFast = speed * 2;
 	}
 
 
@@ -2817,7 +2817,7 @@ void Player::FishingDirecction(float verticalMovement, float horizontalMovement)
 
 void Player::TakeDamage(float damage) {
 
-	if (damageTimer.ReadSec() >= damageCooldown) {
+	if (damageTimer.ReadSec() >= damageCooldown && !godmode) {
 		if (dashCollision == nullptr && !isDashing) {
 			currentStats.currentHealth -= damage;
 			isInvisible = false;

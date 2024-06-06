@@ -65,6 +65,11 @@
 #include "Item_Mascara_0.h"
 #include "Arbol.h"
 
+#include <iostream>
+#include <filesystem>
+#include "Utils.cpp"
+
+
 Map::Map(App* app, bool start_enabled) : Module(app, start_enabled), mapLoaded(false)
 {
 	name.Create("map");
@@ -124,6 +129,60 @@ bool Map::Start() {
 	return true;
 }
 
+bool Map::PreUpdate()
+{
+	if (mapLoaded == false)
+		return true;
+
+	for (int w = 0; w < mapData.tileSetTextures.size(); w++) {
+
+		
+
+		TileSetTexture* tst = mapData.tileSetTextures.at(w);
+		iPoint cameraPos = iPoint(-app->render->camera.x + (windowW / 2), -app->render->camera.y + (windowH / 2));
+		//iPoint cameraPos = iPoint(app->entityManager->GetPlayer()->position.x, app->entityManager->GetPlayer()->position.y);
+
+		int xToTiledLeft = MAX(0, ((cameraPos.x / tst->tileSize) - tst->tilesSetWMoved) + 1 - TILESTEXTURE_TO_LOAD);
+		int xToTiledRight = MIN(tst->tileSetW, ((cameraPos.x / tst->tileSize) - tst->tilesSetWMoved) + 1 + TILESTEXTURE_TO_LOAD);
+
+		int yToTiledTop = MAX(0, ((cameraPos.y / tst->tileSize) - tst->tilesSetHMoved) - (TILESTEXTURE_TO_LOAD-1) );
+		int yToTiledDown = MIN(tst->tileSetH, ((cameraPos.y / tst->tileSize) - tst->tilesSetHMoved) + (TILESTEXTURE_TO_LOAD-1));
+
+	
+
+		for (int i = 0; i < tst->tileSetH; i++) {
+			for (int j = 0; j < tst->tileSetW; j++) {
+			
+				TileTexture* tt = tst->GetTile(j, i);
+				if (tt == nullptr) {
+					continue;
+				}
+
+				if (j >= xToTiledLeft && j < xToTiledRight && i >= yToTiledTop && i < yToTiledDown) {
+
+					
+					if (tt->texture == nullptr) {
+						tt->texture = app->tex->Load(tst->GetTileTexturePath(j,i).c_str());
+					}
+				}
+				else {
+					if (tt->texture != nullptr) {
+						app->tex->UnLoad(tt->texture);
+						tt->texture = nullptr;
+					}
+				}
+			}
+		}
+	}
+
+
+
+
+
+
+	return true;
+}
+
 bool Map::Update(float dt)
 {
 
@@ -178,79 +237,39 @@ bool Map::PostUpdate()
 	if (mapLoaded == false)
 		return false;
 
-	ListItem<MapLayer*>* mapLayer;
-	mapLayer = mapData.layers.start;
 
-	// L06: DONE 5: Prepare the loop to draw all tiles in a layer + DrawTexture()
+	for (int w = 0; w < mapData.tileSetTextures.size(); w++) {
 
-	// iterates the layers in the map
-	while (mapLayer != NULL) {
-		//Check if the property Draw exist get the value, if it's true draw the lawyer
-		if (mapLayer->data->tiles == 0) {
-			mapLayer = mapLayer->next;
-			continue;
-		}
+		TileSetTexture* tst = mapData.tileSetTextures.at(w);
 
-		if (mapLayer->data->properties.GetProperty("Draw") != NULL && mapLayer->data->properties.GetProperty("Draw")->value == "true") {
+		for (int i = 0; i < tst->tileSetH; i++) {
+			for (int j = 0; j < tst->tileSetW; j++) {
+			
+				TileTexture* tt = tst->GetTile(j, i);
 
-			//iPoint playerPos = app->entityManager->GetPlayer()->position;
-			iPoint playerPos = iPoint(-app->render->camera.x + (windowW / 2), -app->render->camera.y + (windowH / 2));
-			int xToTiledLeft = MAX((playerPos.x / 32) - TILES_TO_LOAD, 0);
-			int xToTiledRight = MIN((playerPos.x / 32) + TILES_TO_LOAD, mapLayer->data->width);
+				if (tt->texture != nullptr) {
 
-			int yToTiledTop = MAX((playerPos.y / 32) - TILES_TO_LOAD, 0);
-			int yToTiledDown = MIN((playerPos.y / 32) + TILES_TO_LOAD, mapLayer->data->height);
+				
+					//app->render->DrawTexture(tt->texture, (j-1+tst->tilesSetWMoved)*tst->tileSize + tst->tilesSetWMovedR, (i-1+tst->tilesSetHMoved)*tst->tileSize + tst->tilesSetHMovedR, 1);
 
+					int posX = (j * tst->tileSize) + (tst->tilesSetWMoved * tst->tileSize) + tst->tilesSetWMovedR;
+					int posY = (i * tst->tileSize) + (tst->tilesSetHMoved * tst->tileSize) + tst->tilesSetHMovedR;
 
-
-
-			//iterate all tiles in a layer
-			for (int x = xToTiledLeft; x < xToTiledRight; x++)
-			{
-				for (int y = yToTiledTop; y < yToTiledDown; y++)
-				{
-					//Get the gid from tile
-					unsigned int gid = mapLayer->data->Get(x, y);
-					TileSet* tileset = GetTilesetFromTileId(gid);
-					SDL_Rect r = tileset->GetRect(gid);
-					iPoint pos = MapToWorld(x, y);
-					int bits = 0;
-					SDL_RendererFlip flip = SDL_FLIP_NONE;
-					int angle = 0;
-
-					if (gid >= 100000) {
-						uint tiledID = static_cast<uint>(gid & ~0xE0000000);
-						bits = gid >> 29;
-						tileset = GetTilesetFromTileId(tiledID);
-						r = tileset->GetRect(tiledID);
-
-					}
-					//1 = hoz_flip -> True || 1 = vert_flip -> True  || 0 = anti-diag flip -> False
-					switch (bits) {
-					case 0b101: flip = SDL_FLIP_NONE;           angle = 90;         break;
-					case 0b110: flip = SDL_FLIP_NONE;           angle += 180;       break;
-					case 0b011: flip = SDL_FLIP_NONE;           angle += 270;       break;
-					case 0b100: flip = SDL_FLIP_HORIZONTAL;     angle = 0;          break;
-					case 0b111: flip = SDL_FLIP_HORIZONTAL;     angle += 90;        break;
-					case 0b010: flip = SDL_FLIP_HORIZONTAL;     angle += 180;       break;
-					case 0b001: flip = SDL_FLIP_HORIZONTAL;     angle += 270;       break;
-					}
-
-
-
-					//SDL_SetTextureColorMod(tileset->texture, 255 * mapLayer->data->opacity, 255 * mapLayer->data->opacity, 255 * mapLayerItem->data->opacity);
-
-
-					app->render->DrawTexture(tileset->texture,
-						pos.x,
-						pos.y, flip,
-						&r, 1, angle);
+					app->render->DrawTexture(tt->texture, posX, posY, 1);
 
 				}
+				else {
+					continue;
+				}
+
+
 			}
 		}
-		mapLayer = mapLayer->next;
+	
+	
 	}
+
+
 
 	return ret;
 }
@@ -448,6 +467,29 @@ bool Map::CleanUp()
 	puzzleButtonEntities.clear(); //En teoria las entidades se borrar al desactivar el entity manager.
 	recompensaPuzzle = false;
 
+
+	for (int w = 0; w < mapData.tileSetTextures.size(); w++) {
+		TileSetTexture* tst = mapData.tileSetTextures.at(w);
+
+		for (int i = 0; i < tst->tileSetH; i++) {
+			for (int j = 0; j < tst->tileSetW; j++) {
+
+				TileTexture* tt = tst->GetTile(j, i);
+				if (tt != nullptr) {
+					if (tt->texture != nullptr) {
+						app->tex->UnLoad(tt->texture);
+						tt = nullptr;
+					}
+					RELEASE(tt);
+				}
+			}
+		}
+	}
+
+	mapData.tileSetTextures.clear();
+
+
+
 	return true;
 }
 
@@ -477,6 +519,10 @@ bool Map::Load(SString mapFileName)
 	if (ret == true)
 	{
 		ret = LoadTileSet(mapFileXML);
+	}
+
+	if (ret == true) {
+		ret = LoadTileSetTexture(mapFileXML);
 	}
 
 	if (ret == true)
@@ -685,7 +731,22 @@ bool Map::LoadTileSet(pugi::xml_node mapFile)
 		//Load Tileset image
 		SString mapTex = "Assets/Textures/Mapas/";
 		mapTex += tilesetNode.child("image").attribute("source").as_string();
-		tileset->texture = app->tex->Load(mapTex.GetString());
+
+		std::string mapDividedFolder = "Assets/Textures/Mapas/";
+		mapDividedFolder += tilesetNode.child("image").attribute("source").as_string();
+		mapDividedFolder += "";
+
+		mapDividedFolder.erase(mapDividedFolder.length() - 4);
+
+		mapDividedFolder += "-divided";
+
+
+		if (!directoryExists(mapDividedFolder)) {
+			tileset->texture = app->tex->Load(mapTex.GetString());
+		}
+
+
+		
 
 		mapData.tilesets.Add(tileset);
 		ret = true;
@@ -1919,6 +1980,109 @@ bool Map::SaveState(pugi::xml_node node)
 
 
 	
+	return ret;
+}
+
+bool Map::LoadTileSetTexture(pugi::xml_node mapFile)
+{
+	bool ret = true;
+
+	for (pugi::xml_node tilesetNode = mapFile.child("map").child("tileset"); tilesetNode != NULL; tilesetNode = tilesetNode.next_sibling("tileset")) {
+
+
+		TileSetTexture* tst = new TileSetTexture();
+
+		tst->tileSize = 256;
+
+		std::string mapDividedFolder = "Assets/Textures/Mapas/";
+		mapDividedFolder += tilesetNode.child("image").attribute("source").as_string();
+		mapDividedFolder += "";
+
+		mapDividedFolder.erase(mapDividedFolder.length() - 4);
+
+		mapDividedFolder += "-divided";
+
+		tst->pathFolder = mapDividedFolder;
+
+
+		if (!directoryExists(tst->pathFolder)) {
+			RELEASE(tst);
+			continue;
+		}
+
+		tst->tileSetW = tilesetNode.child("image").attribute("width").as_int() / tst->tileSize;
+		if (tilesetNode.child("image").attribute("width").as_int() % tst->tileSize > 0) {
+			tst->tileSetW += 1;
+		}
+
+		tst->tileSetH = tilesetNode.child("image").attribute("height").as_int() / tst->tileSize;
+		if (tilesetNode.child("image").attribute("height").as_int() % tst->tileSize > 0) {
+			tst->tileSetH += 1;
+		}
+
+
+		for (int i = 0; i < tst->tileSetH; i++) {
+			for (int j = 0; j < tst->tileSetW; j++) {
+				TileTexture* tt = new TileTexture();
+				tt->x = j;
+				tt->y = i;
+				tst->tilesTextures.push_back(tt);
+
+			}
+		}
+
+
+		tst->firstGID = tilesetNode.attribute("firstgid").as_uint();
+		tst->lastGID += (tst->firstGID + tilesetNode.attribute("tilecount").as_uint());
+
+		for (pugi::xml_node layerNode = mapFile.child("map").child("layer"); layerNode != NULL; layerNode = layerNode.next_sibling("layer")) {
+
+
+			int gid = 0;
+			int moved = 0;
+			int leftmoved = 0;
+			int nearnestLeft = INT_MAX;
+			int layerW = layerNode.attribute("width").as_int();
+
+			for (pugi::xml_node tileNode = layerNode.child("data").child("tile"); tileNode != NULL; tileNode = tileNode.next_sibling("tile")) {
+				gid = tileNode.attribute("gid").as_int(-1);
+				if (gid >= tst->firstGID && gid < tst->lastGID) {
+					if (tst->tilesSetHMoved == -1) {
+						tst->tilesSetHMoved = ((moved*32) / tst->tileSize);
+						tst->tilesSetHMovedR = (moved *32) % tst->tileSize;
+
+						if (nearnestLeft > leftmoved) {
+							nearnestLeft = leftmoved;
+							tst->tilesSetWMoved = (nearnestLeft * 32) / tst->tileSize;
+							tst->tilesSetWMovedR = (nearnestLeft * 32) % tst->tileSize;
+						}
+
+					}
+					
+				}
+
+
+			
+				leftmoved++;
+
+
+				if ((leftmoved * 32) % layerW == 0) {
+					leftmoved = 0;
+					moved++;
+				}				
+			}
+		}
+		
+		mapData.tileSetTextures.push_back(tst);
+
+		ret = true;
+	}
+	return ret;
+
+
+
+
+
 	return ret;
 }
 

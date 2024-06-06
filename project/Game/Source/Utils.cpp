@@ -59,6 +59,14 @@ inline pugi::xml_node find_child_by_attribute(pugi::xml_node parent, const char*
     return pugi::xml_node();
 }
 
+inline bool directoryExists(const std::string& path) {
+    struct stat info;
+    if (stat(path.c_str(), &info) != 0) {
+        return false;
+    }
+    return (info.st_mode & S_IFDIR) != 0;
+}
+
 
 inline float easeOutBounce(float t) {
     if (t < 1 / 2.75) {
