@@ -335,7 +335,7 @@ Inventity* InventoryManager::CreateItem(EntityType type, std::string descripcioo
 	if (type == EntityType::ITEM_MASCARA0)
 	{
 		numMasks++;
-		mask = true;
+		mask = true;		
 	}
 	if (type == EntityType::ITEM_MASCARA1)
 	{

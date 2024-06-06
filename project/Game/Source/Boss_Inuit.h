@@ -114,7 +114,8 @@ private:
 	//animacion
 	Animation atk2_boss_inuit;
 	Animation atk1_boss_inuit;
-	Animation wave_boss_inuit;
+	std::vector<Animation> wave_boss_inuit;
+	Animation wave_boss_inuit_back;
 	Animation idleAnim_boss_inuit;
 	Animation boomerang_boss_inuit;
 	Animation changeFase_boss_inuit;
@@ -143,6 +144,7 @@ private:
 
 	Animation* currentAnimation = nullptr;
 	Animation* currentAnimation1 = nullptr;
+	std::vector<Animation*>  currentAnimation2;
 	EntityState_Boss_Inuit state;
 
 
