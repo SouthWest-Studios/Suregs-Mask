@@ -21,6 +21,7 @@ Audio::Audio(App* app, bool start_enabled) : Module(app, start_enabled)
 
 	// Inicializar lista de NPCs
 	NPCs = {
+		{"Jakov", 1},
 		{"Dorothy", 2},
 		{"Hely", 2},
 		{"Pathy", 2},
@@ -29,12 +30,12 @@ Audio::Audio(App* app, bool start_enabled) : Module(app, start_enabled)
 		{"Patzo", 1},
 		{"Patza", 2},
 		{"Hemyl", 3},
-		{"Huhan", 3},
+		{"Huhan", 2},
 		{"Xiby", 2},
 		{"Ferny", 3},
 		{"Lixy", 2},
 		{"Phylippa", 2},
-		{"Rapho", 1},
+		{"Rapho", 3},
 		{"Sukhy", 2},
 		{"Zupho", 1},
 		{"Zuphe", 1},
@@ -43,13 +44,14 @@ Audio::Audio(App* app, bool start_enabled) : Module(app, start_enabled)
 		{"Phoska", 2},
 		{"Phrumo", 2},
 		{"Zhyuka", 2},
-		{"Sphar", 3}
+		{"Sphar", 3},
+		{"Igorv", 3},
 	};
 
 	songs = {
 		{"menu", 2},
 		{"town", 127000},
-		{"credits", 2},
+		{"credits", 2},				 // Falta ajustar
 		{"dungeon", 2}
 	};
 }
