@@ -2562,10 +2562,10 @@ void Player::GodMode(float dt)
 {
 	float speedFast;
 	if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
-		speedFast = speed * 2;
+		speedFast = speed * 4;
 	}
 	else {
-		speedFast = speed;
+		speedFast = speed * 2;
 	}
 
 
