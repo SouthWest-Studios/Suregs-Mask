@@ -5,7 +5,7 @@
 		<fx volume="64" />
 	</audio>
 	<tiempoDeJuego>
-		<slot1 tiempo="49093" />
+		<slot1 tiempo="84241" />
 		<slot2 tiempo="0" />
 		<slot3 tiempo="0" />
 	</tiempoDeJuego>
