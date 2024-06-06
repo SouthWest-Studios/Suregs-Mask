@@ -152,7 +152,6 @@ bool Boss_Inuit::Update(float dt)
 
 	//Si jugador fuera de area, eliminar cubo de ataque
 	if (atackCube != nullptr && playerInBossArea == false) {
-		//app->physics->GetWorld()->DestroyBody(atackCube->body);
 		app->physics->DestroyBody(atackCube);
 		atackCube = nullptr;
 	}
@@ -183,7 +182,6 @@ bool Boss_Inuit::Update(float dt)
 		}
 
 		if (atackCube != nullptr) {
-			//app->physics->GetWorld()->DestroyBody(atackCube->body);
 			app->physics->DestroyBody(atackCube);
 			atackCube = nullptr;
 		}
@@ -356,16 +354,20 @@ bool Boss_Inuit::PostUpdate() {
 bool Boss_Inuit::CleanUp()
 {
 	if (pbodyFoot != nullptr) {
-		app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
+		app->physics->DestroyBody(pbodyFoot);
+		pbodyFoot = nullptr;
 	}
 	if (pbodySensor != nullptr) {
-		app->physics->GetWorld()->DestroyBody(pbodySensor->body);
+		app->physics->DestroyBody(pbodySensor);
+		pbodySensor = nullptr;
 	}
 	if (areaSensor != nullptr) {
-		app->physics->GetWorld()->DestroyBody(areaSensor->body);
+		app->physics->DestroyBody(areaSensor);
+		areaSensor = nullptr;
 	}
 	if (atackBMR != nullptr) {
-		app->physics->GetWorld()->DestroyBody(atackBMR->body);
+		app->physics->DestroyBody(atackBMR);
+		atackBMR = nullptr;
 	}
 
 	if (!shockWaves.empty()) {
@@ -537,7 +539,7 @@ void Boss_Inuit::resetAnimation()
 {
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atk1_boss_inuit") {
 		if (atackCube != nullptr) {
-			app->physics->GetWorld()->DestroyBody(atackCube->body);
+			app->physics->DestroyBody(atackCube);
 			atackCube = nullptr;
 		}
 		changeNextAtk = true;
@@ -545,7 +547,7 @@ void Boss_Inuit::resetAnimation()
 	}
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atk2_boss_inuit") {
 		if (atackCube != nullptr) {
-			app->physics->GetWorld()->DestroyBody(atackCube->body);
+			app->physics->DestroyBody(atackCube);
 			atackCube = nullptr;
 		}
 		changeNextAtk = true;
@@ -736,19 +738,19 @@ void Boss_Inuit::Die() {
 	app->map->boss1_defeated = true;
 
 	if (pbodyFoot != nullptr) {
-		app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
+		app->physics->DestroyBody(pbodyFoot);
 		pbodyFoot = nullptr;
 	}
 	if (pbodySensor != nullptr) {
-		app->physics->GetWorld()->DestroyBody(pbodySensor->body);
+		app->physics->DestroyBody(pbodySensor);
 		pbodySensor = nullptr;
 	}
 	if (areaSensor != nullptr) {
-		app->physics->GetWorld()->DestroyBody(areaSensor->body);
+		app->physics->DestroyBody(areaSensor);
 		areaSensor = nullptr;
 	}
 	if (atackBMR != nullptr) {
-		app->physics->GetWorld()->DestroyBody(atackBMR->body);
+		app->physics->DestroyBody(atackBMR);
 		atackBMR = nullptr;
 	}
 
@@ -770,23 +772,6 @@ void Boss_Inuit::Die() {
 		count++;
 	}
 
-	/*if (pbodyFoot != nullptr) {
-		pbodyFoot->body->GetWorld()->DestroyBody(pbodyFoot->body);
-	}
-	if (pbodySensor != nullptr) {
-		pbodySensor->body->GetWorld()->DestroyBody(pbodySensor->body);
-	}*/
-	//phy->body->GetWorld()->DestroyBody(phy->body);
-
-
-	/*if (atackBMR != nullptr) {
-		app->physics->GetWorld()->DestroyBody(atackBMR->body);
-	}*/
-	/*
-	if (areaSensor != nullptr) {
-		app->physics->GetWorld()->DestroyBody(areaSensor->body);
-	}
-	*/
 
 	//Mask 0
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
@@ -911,7 +896,7 @@ bool Boss_Inuit::Bossfinding(float dt, iPoint playerPosP)
 			app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
 			lastPath = *app->map->pathfinding->GetLastPath();
 			if (atackCube != nullptr) {
-				app->physics->GetWorld()->DestroyBody(atackCube->body);
+				app->physics->DestroyBody(atackCube);
 				atackCube = nullptr;
 			}
 			if (inbmrAtack == false) {
@@ -961,8 +946,7 @@ void Boss_Inuit::deleteCollision(PhysBody* phy)
 
 	if (phy != nullptr) {
 		phy->body->SetLinearVelocity(b2Vec2(0, 0));
-		//phy->body->GetWorld()->DestroyBody(phy->body);
-		app->physics->GetWorld()->DestroyBody(phy->body);
+		app->physics->DestroyBody(phy);
 		phy = nullptr;
 		////printf("delete");
 	}
