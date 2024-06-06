@@ -19,6 +19,7 @@
 #include "SString.h"
 #include "Window.h"
 #include "Menu.h"
+#include "Hud.h"
 
 NotesManager::NotesManager(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -451,6 +452,8 @@ void NotesManager::AddNote(Note* entity)
 		notes.Add(entity);
 		// Ordenar la lista por entity->id2 después de agregar el elemento
 		BubbleSortByID();
+
+		app->hud->AcquiredItemTrigger(entity->icon, entity->title.c_str());
 	}
 	
 }
