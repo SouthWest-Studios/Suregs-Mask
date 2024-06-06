@@ -163,7 +163,9 @@ private:
 	FASE fase = FASE::FASE_ONE;
 	bool faseTwo = false;
 	int faseCount;
-
+	//Dead
+	bool depareceBoss = false;
+	int deadAlpha = 255;
 
 	//ataque
 	float ataqueTimeClodDown = 0;

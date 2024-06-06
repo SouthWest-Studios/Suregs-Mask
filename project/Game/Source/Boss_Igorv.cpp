@@ -136,7 +136,7 @@ bool Boss_Igory::Update(float dt)
 	else if (playerInFight && health <= lifeLow80 && !faseTwo && !isDead && !stun) {
 
 		if (!partFase2Created) {
-			fPoint pos1((float)position.x, (float)position.y);
+			fPoint pos1((float)position.x + 20.0f, (float)position.y - 105.0f);
 			particulaFase2 = app->psystem->AddEmiter(pos1, EMITTER_TYPE_FASE2_IGORV);
 			partFase2Created = true;
 		}
@@ -320,7 +320,7 @@ bool Boss_Igory::Update(float dt)
 
 
 	if (particulaFase2 != nullptr) {
-		fPoint pos((float)position.x, (float)position.y);
+		fPoint pos((float)position.x + 20.0f, (float)position.y - 105.0f);
 		particulaFase2->MoveEmitter(pos);
 	}
 	if (particulaFase3 != nullptr) {
@@ -330,7 +330,7 @@ bool Boss_Igory::Update(float dt)
 
 
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
-		health = 0;
+		health -= 1000;
 	}
 
 

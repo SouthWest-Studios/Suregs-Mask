@@ -224,11 +224,20 @@ bool Boss_Inuit::PostUpdate() {
 	}
 
 
-	/*if (isInCenter) {
-		isFacingLeft = true;
-	}*/
-	////printf("\ninCenter: %d", isInCenter);
-	if (!Dead) {
+
+	if (Dead) {
+		SDL_SetTextureAlphaMod(texture, deadAlpha);
+		if (deadAlpha <= 0) {
+			deadAlpha = 0;
+			depareceBoss = true;
+		}
+		else
+		{
+			deadAlpha -= 3;
+		}
+	}
+
+	if (!depareceBoss) {
 		if (isFacingLeft) {
 			app->render->DrawTexture(texture, position.x - 410, position.y - 300, SDL_FLIP_HORIZONTAL, &rect);
 		}
@@ -236,6 +245,8 @@ bool Boss_Inuit::PostUpdate() {
 			app->render->DrawTexture(texture, position.x - 410, position.y - 300, SDL_FLIP_NONE, &rect);
 		}
 	}
+
+	
 
 
 	//BMR ATAQUE
