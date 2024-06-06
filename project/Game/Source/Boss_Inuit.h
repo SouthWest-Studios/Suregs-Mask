@@ -143,6 +143,7 @@ private:
 
 	Animation* currentAnimation = nullptr;
 	Animation* currentAnimation1 = nullptr;
+	Animation* currentAnimation2 = nullptr;
 	EntityState_Boss_Inuit state;
 
 

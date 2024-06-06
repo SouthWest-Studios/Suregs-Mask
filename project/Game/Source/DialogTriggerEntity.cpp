@@ -180,7 +180,7 @@ void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 				}
 			}
-			else if (!app->dialogManager->isPlaying && (app->input->GetButton(CONFIRM) == KEY_DOWN)) {
+			else if (!app->dialogManager->isPlaying && (app->input->GetButton(CONFIRM) == KEY_DOWN) && !app->scene_pueblo->GetRod()->fishing.rodReady) {
 				PlayDialog();
 
 				//printf("COLISSION TRIGGERDIALOG");

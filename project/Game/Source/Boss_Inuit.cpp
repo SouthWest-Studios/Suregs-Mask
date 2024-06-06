@@ -167,6 +167,7 @@ bool Boss_Inuit::Update(float dt)
 	case FASE::FASE_CHANGE:
 		//printf("\n FaseCAHNEG");
 		currentAnimation = &changeFase_boss_inuit;
+		pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 		break;
 	case FASE::FASE_TWO:
 		//desiredState = EntityState_Boss_Inuit::IDLE;
@@ -439,6 +440,10 @@ void Boss_Inuit::shock_wave(int posX, int posY, float shockSpeed, float maxSize,
 		newShockWave->ctype = ColliderType::WAVE;
 		shockWaves[tag] = newShockWave;
 		inWave = true;
+		currentAnimation2 = &wave_boss_inuit;
+		SDL_Rect rect = currentAnimation2->GetCurrentFrame();
+		app->render->DrawTexture(texture, posX - 850, posY - 600,2, SDL_FLIP_HORIZONTAL, &rect);
+		currentAnimation2->Update();
 	}
 	else {
 		//waveFinishi = true;
@@ -461,7 +466,11 @@ void Boss_Inuit::shock_wave(int posX, int posY, float shockSpeed, float maxSize,
 		}
 		shockSize = 0;
 		waveIsMax = false;
+		wave_boss_inuit.Reset();
 	}
+
+
+	
 }
 
 
@@ -598,7 +607,7 @@ void Boss_Inuit::Attack(float dt)
 		atackCube->listener = this;
 		atackCube->ctype = ColliderType::ATACK_INUIT;
 		atkTimeReset = false;
-		
+
 		break;
 	case 3:
 		atk2_boss_inuit.Reset();
@@ -673,7 +682,7 @@ void Boss_Inuit::atackBoomerang(BTPDirection direccion)
 		atackBMR->body->ApplyForceToCenter(force, true);
 	}
 
-	if (inuit_ranged_attack == false) 
+	if (inuit_ranged_attack == false)
 	{
 		app->audio->PlayFx(inuit_ranged_attack_fx);
 		inuit_ranged_attack = true;
@@ -714,7 +723,7 @@ void Boss_Inuit::Die() {
 
 		count++;
 	}
-	
+
 	/*if (pbodyFoot != nullptr) {
 		pbodyFoot->body->GetWorld()->DestroyBody(pbodyFoot->body);
 	}
@@ -1037,15 +1046,18 @@ void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLAYER:
 		if (physA->ctype == ColliderType::ATACK_INUIT) {
-			app->entityManager->GetPlayer()->TakeDamage(attackDamage);
+			//app->entityManager->GetPlayer()->TakeDamage(attackDamage);
+			app->entityManager->GetPlayer()->TakeDamage(0);
 		}
 		if (physA->ctype == ColliderType::WAVE) {
-			app->entityManager->GetPlayer()->TakeDamage(200);
+			//app->entityManager->GetPlayer()->TakeDamage(200);
+			app->entityManager->GetPlayer()->TakeDamage(0);
 		}
 
 		if (physA->ctype == ColliderType::ATACKBMR) {
 
-			app->entityManager->GetPlayer()->TakeDamage(50);
+			//app->entityManager->GetPlayer()->TakeDamage(50);
+			app->entityManager->GetPlayer()->TakeDamage(0);
 		}
 
 		if (physA->ctype == ColliderType::BOSSAREA) {
@@ -1070,8 +1082,8 @@ void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	case ColliderType::ATACK_INUIT:
 		LOG("Collision Player_Attack");
-		
-		
+
+
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");

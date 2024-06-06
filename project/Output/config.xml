@@ -212,7 +212,7 @@
 
 		<boss_inuit texturePath="Assets/Textures/Entidades/Boss/Inuit/Miniboss1.png" 
 					maxHealth="6500.0f" speed="100f" attackDamage="220.0f" attackDistance="4" viewDistance="20"
-					Tsprite="61" Pwidth="6904" sprite_x="863" sprite_y="600"/>
+					Tsprite="72" Pwidth="6904" sprite_x="863" sprite_y="600"/>
 
 		<boss_igory texturePath="Assets/Textures/Entidades/Boss/Igory/bossPapa.png"
 					maxHealth="25500.0f" speed="100f" attackDamage="250.0f" attackDistance="4" viewDistance="20"
@@ -489,11 +489,12 @@
 		<boss_inuit>
 			<atk2_boss_inuit start="0" end="7" speed="0.15f" loop="false"/>
 			<atk1_boss_inuit start="8" end="15" speed="0.15f" loop="false"/>
-			<wave_boss_inuit start="0" end="1" speed="0.2f" loop="false"/>
+			<wave_boss_inuit start="16" end="24" speed="0.08f" loop="false"/>
 			<idleAnim_boss_inuit start="32" end="39" speed="0.1f" loop="true"/>
 			<boomerang_boss_inuit start="40" end="46" speed="1f" loop="true"/>
 			<changeFase_boss_inuit start="48" end="53" speed="0.2f" loop="false"/>
 			<move_inuit start="56" end="59" speed="0.2f" loop="true"/>
+			<idle_sin_inuit start="64" end="72" speed="0.2f" loop="true"/>
 		</boss_inuit>
 
 		<boss_igory>
