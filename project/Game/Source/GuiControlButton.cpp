@@ -5,6 +5,7 @@
 #include "Textures.h"
 #include "GuiManager.h"
 #include "Menu.h"
+#include "Scene_Pueblo.h"
 
 GuiControlButton::GuiControlButton(uint32 id, SDL_Rect bounds, const char* text) : GuiControl(GuiControlType::BUTTON, id)
 {
@@ -48,12 +49,12 @@ bool GuiControlButton::PostUpdate()
 
 				state = GuiControlState::FOCUSED;
 
-				if ((app->input->GetButton(CONFIRM) == KEY_DOWN || app->input->GetButton(SELECT) == KEY_DOWN)) {
+				if ((app->input->GetButton(CONFIRM) == KEY_DOWN || app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady ) && !app->scene_pueblo->GetRod()->fishing.rodReady) {
 					state = GuiControlState::PRESSED;
 
 				}
 
-				if ((app->input->GetButton(CONFIRM) == KEY_DOWN || app->input->GetButton(SELECT) == KEY_DOWN)) {
+				if ((app->input->GetButton(CONFIRM) == KEY_DOWN || app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady ) && !app->scene_pueblo->GetRod()->fishing.rodReady) {
 					NotifyObserver();
 					click = true;
 

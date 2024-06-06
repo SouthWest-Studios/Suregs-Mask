@@ -22,6 +22,7 @@
 #include "Estatua.h"
 #include "Entity.h"
 #include "Hud.h"
+#include "Scene_Pueblo.h"
 
 Estatua::Estatua() : Entity(EntityType::ESTATUA)
 {
@@ -104,7 +105,7 @@ void Estatua::OnCollision(PhysBody* physA, PhysBody* physB)
       case ColliderType::PLAYER:
       {
           
-              if (app->input->GetButton(CONFIRM) == KEY_DOWN)
+              if (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady)
               {
 				  app->hud->estatua = true;
 				  app->hud->EstatuaTexture = texture;

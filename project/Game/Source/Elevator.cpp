@@ -22,6 +22,8 @@
 #include "ElevatorMenu.h"
 #include "Entity.h"
 #include "DialogManager.h"
+#include "Scene_Pueblo.h"
+
 
 Elevator::Elevator() : Entity(EntityType::ASCENSOR)
 {
@@ -104,7 +106,7 @@ void Elevator::OnCollision(PhysBody* physA, PhysBody* physB)
       case ColliderType::PLAYER:
       {
           
-              if (app->input->GetButton(CONFIRM) == KEY_DOWN && app->dialogManager->isPlaying == false)
+              if (app->input->GetButton(CONFIRM) == KEY_DOWN && app->dialogManager->isPlaying == false && !app->scene_pueblo->GetRod()->fishing.rodReady)
               {
 
 				 

@@ -16,6 +16,7 @@
 #include "ModuleFadeToBlack.h"
 #include "PugiXml\src\pugixml.hpp"
 #include "MiniGameFishing.h"
+#include "Scene_Pueblo.h"
 #include <iostream>
 
 
@@ -134,7 +135,7 @@ void NPCPadre::OnCollision(PhysBody* physA, PhysBody* physB) {
 			}
 			
 		}
-		if (!app->dialogManager->isPlaying && (app->input->GetButton(CONFIRM) == KEY_DOWN)) {
+		if (!app->dialogManager->isPlaying && (app->input->GetButton(CONFIRM) == KEY_DOWN) && !app->scene_pueblo->GetRod()->fishing.rodReady) {
 			if (!dialogoMostrado) {
 				int num = 0;
 				for (pugi::xml_node itemNode = dialogNode; itemNode; itemNode = itemNode.next_sibling("sentence"))
