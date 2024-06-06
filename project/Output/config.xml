@@ -489,7 +489,7 @@
 		<boss_inuit>
 			<atk2_boss_inuit start="0" end="7" speed="0.15f" loop="false"/>
 			<atk1_boss_inuit start="8" end="15" speed="0.15f" loop="false"/>
-			<wave_boss_inuit start="16" end="24" speed="0.08f" loop="false"/>
+			<wave_boss_inuit start="16" end="24" speed="0.16f" loop="false"/>
 			<idleAnim_boss_inuit start="32" end="39" speed="0.1f" loop="true"/>
 			<boomerang_boss_inuit start="40" end="46" speed="1f" loop="true"/>
 			<changeFase_boss_inuit start="48" end="53" speed="0.2f" loop="false"/>

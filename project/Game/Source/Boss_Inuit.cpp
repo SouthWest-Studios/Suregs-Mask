@@ -52,7 +52,16 @@ bool Boss_Inuit::Start() {
 
 	atk2_boss_inuit.LoadAnim("boss_inuit", "atk2_boss_inuit", spritePositions);
 	atk1_boss_inuit.LoadAnim("boss_inuit", "atk1_boss_inuit", spritePositions);
-	wave_boss_inuit.LoadAnim("boss_inuit", "wave_boss_inuit", spritePositions);
+	
+	wave_boss_inuit.resize(11);
+	for (int i = 0; i < 11; i++)
+	{
+
+		wave_boss_inuit[i].LoadAnim("boss_inuit", "wave_boss_inuit", spritePositions);
+	}
+
+
+	
 	idleAnim_boss_inuit.LoadAnim("boss_inuit", "idleAnim_boss_inuit", spritePositions);
 	boomerang_boss_inuit.LoadAnim("boss_inuit", "boomerang_boss_inuit", spritePositions);
 	changeFase_boss_inuit.LoadAnim("boss_inuit", "changeFase_boss_inuit", spritePositions);
@@ -317,7 +326,7 @@ bool Boss_Inuit::PostUpdate() {
 	//Wave
 	if (waveTimerColdDown(10) && !waveTimeStart && goUseWave && !Dead) {
 		////printf("\ndelete-3");
-		shock_wave(originalWavePosition.x, originalWavePosition.y, 5, 520, 0);
+		shock_wave(originalWavePosition.x, originalWavePosition.y, 10, 520, 0);
 	}
 	return true;
 }
@@ -440,10 +449,16 @@ void Boss_Inuit::shock_wave(int posX, int posY, float shockSpeed, float maxSize,
 		newShockWave->ctype = ColliderType::WAVE;
 		shockWaves[tag] = newShockWave;
 		inWave = true;
-		currentAnimation2 = &wave_boss_inuit;
-		SDL_Rect rect = currentAnimation2->GetCurrentFrame();
-		app->render->DrawTexture(texture, posX - 850, posY - 600,2, SDL_FLIP_HORIZONTAL, &rect);
-		currentAnimation2->Update();
+		if (tag >= currentAnimation2.size()) {
+			currentAnimation2.resize(tag + 1);
+		}
+		/*if (tag >= wave_boss_inuit.size()) {
+			wave_boss_inuit.resize(tag + 1);
+		}*/
+		currentAnimation2[tag] = &wave_boss_inuit[tag];
+		SDL_Rect rect = currentAnimation2[tag]->GetCurrentFrame();
+		app->render->DrawTexture(texture, posX - 850, posY - 600, 2, SDL_FLIP_HORIZONTAL, &rect);
+		currentAnimation2[tag]->Update();
 	}
 	else {
 		//waveFinishi = true;
@@ -466,7 +481,7 @@ void Boss_Inuit::shock_wave(int posX, int posY, float shockSpeed, float maxSize,
 		}
 		shockSize = 0;
 		waveIsMax = false;
-		wave_boss_inuit.Reset();
+		wave_boss_inuit[tag].Reset();
 	}
 
 
@@ -478,24 +493,24 @@ void Boss_Inuit::ulti_Atack()
 {
 	//TimerColdDown(10);
 	//TimerColdDown(5);
-
+	int wavespeed = 10;
 	if (!wave0Finishing) {
-		shock_wave(originalWavePosition.x - 1000, originalWavePosition.y - 250, 3, 400, 1);
-		shock_wave(originalWavePosition.x - 1000, originalWavePosition.y + 250, 3, 400, 2);
-		shock_wave(originalWavePosition.x + 1000, originalWavePosition.y - 250, 3, 400, 3);
-		shock_wave(originalWavePosition.x + 1000, originalWavePosition.y + 250, 3, 400, 4);
+		shock_wave(originalWavePosition.x - 1000, originalWavePosition.y - 250, wavespeed, 400, 1);
+		shock_wave(originalWavePosition.x - 1000, originalWavePosition.y + 250, wavespeed, 400, 2);
+		shock_wave(originalWavePosition.x + 1000, originalWavePosition.y - 250, wavespeed, 400, 3);
+		shock_wave(originalWavePosition.x + 1000, originalWavePosition.y + 250, wavespeed, 400, 4);
 	}
 
 	if (waveTimerColdDown(1) && !wave1Finishing) {
-		shock_wave(originalWavePosition.x - 500, originalWavePosition.y - 250, 3, 400, 5);
-		shock_wave(originalWavePosition.x - 500, originalWavePosition.y + 250, 3, 400, 6);
-		shock_wave(originalWavePosition.x + 500, originalWavePosition.y - 250, 3, 400, 7);
-		shock_wave(originalWavePosition.x + 500, originalWavePosition.y + 250, 3, 400, 8);
+		shock_wave(originalWavePosition.x - 500, originalWavePosition.y - 250, wavespeed, 400, 5);
+		shock_wave(originalWavePosition.x - 500, originalWavePosition.y + 250, wavespeed, 400, 6);
+		shock_wave(originalWavePosition.x + 500, originalWavePosition.y - 250, wavespeed, 400, 7);
+		shock_wave(originalWavePosition.x + 500, originalWavePosition.y + 250, wavespeed, 400, 8);
 	}
 
 	if (waveTimerColdDown(2) && !wave2Finishing) {
-		shock_wave(originalWavePosition.x, originalWavePosition.y - 250, 3, 400, 9);
-		shock_wave(originalWavePosition.x, originalWavePosition.y + 250, 3, 400, 10);
+		shock_wave(originalWavePosition.x, originalWavePosition.y - 250, wavespeed, 400, 9);
+		shock_wave(originalWavePosition.x, originalWavePosition.y + 250, wavespeed, 400, 10);
 	}
 
 	if (wave0Finishing && wave1Finishing && wave2Finishing) {
