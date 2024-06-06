@@ -221064,57 +221064,57 @@
   <properties>
    <property name="Dialogos" type="bool" value="true"/>
   </properties>
-  <object id="226" x="3140" y="2525" width="96" height="96">
+  <object id="226" x="3104" y="2387" width="156" height="187">
    <properties>
     <property name="dialogID" type="int" value="911"/>
    </properties>
   </object>
-  <object id="227" x="5599.82" y="2813.88" width="99.3334" height="96.6667">
+  <object id="227" x="5534.82" y="2727.88" width="174.333" height="182.667">
    <properties>
     <property name="dialogID" type="int" value="921"/>
    </properties>
   </object>
-  <object id="228" x="5762.73" y="4635.7" width="96" height="96">
+  <object id="228" x="5729.73" y="4553.7" width="160" height="178">
    <properties>
     <property name="dialogID" type="int" value="931"/>
    </properties>
   </object>
-  <object id="229" x="5152" y="5119.52" width="96" height="96">
+  <object id="229" x="5120" y="5057.52" width="159" height="158">
    <properties>
     <property name="dialogID" type="int" value="941"/>
    </properties>
   </object>
-  <object id="230" x="4258.3" y="2398.19" width="96" height="96">
+  <object id="230" x="4235.3" y="2322.19" width="256" height="143">
    <properties>
     <property name="dialogID" type="int" value="101"/>
    </properties>
   </object>
-  <object id="231" x="3423.7" y="1884.91" width="96" height="96">
+  <object id="231" x="3392.7" y="1798.91" width="226" height="182">
    <properties>
     <property name="dialogID" type="int" value="201"/>
    </properties>
   </object>
-  <object id="233" x="4972.06" y="3578.12" width="96" height="96">
+  <object id="233" x="4944.06" y="3583.12" width="162" height="263">
    <properties>
     <property name="dialogID" type="int" value="401"/>
    </properties>
   </object>
-  <object id="235" x="5184.97" y="2748.12" width="98.6667" height="99.3333">
+  <object id="235" x="5153.97" y="2658.12" width="138.667" height="173.333">
    <properties>
     <property name="dialogID" type="int" value="501"/>
    </properties>
   </object>
-  <object id="236" x="4831.09" y="3101.03" width="96" height="96">
+  <object id="236" x="4801.09" y="3007.03" width="158" height="190">
    <properties>
     <property name="dialogID" type="int" value="601"/>
    </properties>
   </object>
-  <object id="237" x="5094.61" y="1652.18" width="96" height="128">
+  <object id="237" x="5094.61" y="1585.18" width="151" height="195">
    <properties>
     <property name="dialogID" type="int" value="701"/>
    </properties>
   </object>
-  <object id="239" x="5700.94" y="862.82" width="96" height="96">
+  <object id="239" x="5641.94" y="803.82" width="234" height="177">
    <properties>
     <property name="dialogID" type="int" value="801"/>
    </properties>
@@ -221124,7 +221124,7 @@
     <property name="dialogID" type="int" value="903"/>
    </properties>
   </object>
-  <object id="358" x="3968" y="4114" width="96" height="96">
+  <object id="358" x="3953" y="4080" width="129" height="131">
    <properties>
     <property name="dialogID" type="int" value="301"/>
    </properties>
@@ -221134,7 +221134,7 @@
     <property name="dialogID" type="int" value="901"/>
    </properties>
   </object>
-  <object id="366" x="1155.5" y="4348" width="96" height="96">
+  <object id="366" x="1134.5" y="4334" width="130" height="133">
    <properties>
     <property name="dialogID" type="int" value="951"/>
    </properties>
