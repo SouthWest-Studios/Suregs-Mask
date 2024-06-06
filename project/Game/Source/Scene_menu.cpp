@@ -404,10 +404,10 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 	case 13:
 		if (app->fadeToBlack->currentStep == 0) {
 			app->savedGame = 1;
-			/*app->LoadRequest();*/
 			app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
 			app->menu->active = true;
 			app->guiManager->pointerId = 100;
+			app->LoadRequest();
 			app->guiManager->DestroyGuiControl(gcCloseSavedGames);
 			app->guiManager->DestroyGuiControl(partida1);
 			app->guiManager->DestroyGuiControl(partida2);
@@ -418,10 +418,10 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 	case 14:
 		if (app->fadeToBlack->currentStep == 0) {
 			app->savedGame = 2;
-			//app->LoadRequest();
 			app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
 			app->menu->active = true;
 			app->guiManager->pointerId = 100;
+			app->LoadRequest();
 			app->guiManager->DestroyGuiControl(gcCloseSavedGames);
 			app->guiManager->DestroyGuiControl(partida1);
 			app->guiManager->DestroyGuiControl(partida2);
@@ -433,10 +433,10 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 	case 15:
 		if (app->fadeToBlack->currentStep == 0) {
 			app->savedGame = 3;
-			//app->LoadRequest();
 			app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
 			app->menu->active = true;
 			app->guiManager->pointerId = 100;
+			app->LoadRequest();
 			app->guiManager->DestroyGuiControl(gcCloseSavedGames);
 			app->guiManager->DestroyGuiControl(partida1);
 			app->guiManager->DestroyGuiControl(partida2);
