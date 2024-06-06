@@ -503,6 +503,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 			app->guiManager->DestroyGuiControl(nuevaPartida3);
 			app->guiManager->DestroyGuiControl(nuevaPartidaAtras1);
 			app->guiManager->DestroyGuiControl(nuevaPartidaConfirmed1);
+			app->tiempoDeJuego = 0;
 		}
 		break;
 
@@ -518,6 +519,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 			app->guiManager->DestroyGuiControl(nuevaPartida3);
 			app->guiManager->DestroyGuiControl(nuevaPartidaAtras2);
 			app->guiManager->DestroyGuiControl(nuevaPartidaConfirmed2);
+			app->tiempoDeJuego = 0;
 		}
 		break;
 
@@ -533,6 +535,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 			app->guiManager->DestroyGuiControl(nuevaPartida3);
 			app->guiManager->DestroyGuiControl(nuevaPartidaAtras3);
 			app->guiManager->DestroyGuiControl(nuevaPartidaConfirmed3);
+			app->tiempoDeJuego = 0;
 		}
 		break;
 	//VOLVER MAIN MENU
