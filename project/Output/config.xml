@@ -387,7 +387,7 @@
 	</scene_logos>
 	<scene_pueblo>
 		<pathfindingTexture pathtexture="Assets/Textures/pathfinding.png"/>
-		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Pueblo/puebloTutorial.tmx"/>
+		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Pueblo/pueblo.tmx"/>
 		<minigamefishing>
 			<fishingfloat texturepath="Assets/Textures/fishingfloat.png" />
 
