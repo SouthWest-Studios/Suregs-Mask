@@ -728,7 +728,7 @@ bool InventoryManager::LoadState(pugi::xml_node node)
 
 	//inventoryMoneyNode.append_attribute("quantity").set_value(monedasObtenidas);
 
-	monedasObtenidas = node.child("inventory").child("money").attribute("quantity").as_int();
+	monedasObtenidas = node.child("inventory").child("money").attribute("quantity").as_int(0);
     swordLevel = node.child("inventory").child("swordLevel").attribute("quantity").as_int();
     armorLevel = node.child("inventory").child("armorLevel").attribute("quantity").as_int();
 	storyLevel = node.child("inventory").child("storyLevel").attribute("quantity").as_int();
