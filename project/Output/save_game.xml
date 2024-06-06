@@ -28,7 +28,31 @@
 	<scene_pueblo />
 	<entitymanager>
 		<entity_manager>
-			<doors />
+			<doors>
+				<door sceneLevel="-10" tpID="0" />
+				<door sceneLevel="0" tpID="0" />
+				<door sceneLevel="0" tpID="60" />
+				<door sceneLevel="0" tpID="6" />
+				<door sceneLevel="1" tpID="70" />
+				<door sceneLevel="1" tpID="60" />
+				<door sceneLevel="1" tpID="0" />
+				<door sceneLevel="2" tpID="12" />
+				<door sceneLevel="2" tpID="60" />
+				<door sceneLevel="2" tpID="11" />
+				<door sceneLevel="3" tpID="60" />
+				<door sceneLevel="3" tpID="0" />
+				<door sceneLevel="4" tpID="6" />
+				<door sceneLevel="4" tpID="60" />
+				<door sceneLevel="4" tpID="0" />
+				<door sceneLevel="4" tpID="2" />
+				<door sceneLevel="5" tpID="60" />
+				<door sceneLevel="5" tpID="0" />
+				<door sceneLevel="6" tpID="27" />
+				<door sceneLevel="6" tpID="4" />
+				<door sceneLevel="6" tpID="3" />
+				<door sceneLevel="6" tpID="60" />
+				<door sceneLevel="6" tpID="28" />
+			</doors>
 		</entity_manager>
 	</entitymanager>
 	<missionmanager />
@@ -59,13 +83,13 @@
 				<maskTwoXP XP="0" />
 				<maskThreeXP XP="0" />
 			</masksXP>
-			<elevator mazmorra="0" mazmorraActual="0" />
+			<elevator mazmorra="0" mazmorraActual="8" />
 		</inventory>
 	</iventorymanager>
 	<commercemanager />
 	<questmanager>
 		<questLines>
-			<questLine id="1" index="1" active="true" completed="false" />
+			<questLine id="1" index="21" active="true" completed="false" />
 			<questLine id="2" index="1" active="false" completed="false" />
 		</questLines>
 	</questmanager>
