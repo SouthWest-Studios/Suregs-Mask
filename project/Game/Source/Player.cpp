@@ -872,9 +872,9 @@ bool Player::Update(float dt)
 	}*/
 
 	//MASK 0
-	if (maskZeroXP >= XPtoLevelUpZero && maskZeroLevel < maxMaskLevel) {
-		maskZeroXP -= XPtoLevelUpZero;
-		maskZeroPoints++;
+	if (app->inventoryManager->maskZeroXP >= XPtoLevelUpZero && maskZeroLevel < maxMaskLevel) {
+		app->inventoryManager->maskZeroXP -= XPtoLevelUpZero;
+		app->inventoryManager->maskZeroPoints++;
 		maskZeroLevel++;
 		XPtoLevelUpZero += matrizLevelXP[maskZeroLevel];
 
@@ -884,9 +884,9 @@ bool Player::Update(float dt)
 	}
 
 	//MASK 1
-	if (maskOneXP >= XPtoLevelUpOne && maskOneLevel < maxMaskLevel) {
-		maskOneXP -= XPtoLevelUpOne;
-		maskOnePoints++;
+	if (app->inventoryManager->maskOneXP >= XPtoLevelUpOne && maskOneLevel < maxMaskLevel) {
+		app->inventoryManager->maskOneXP -= XPtoLevelUpOne;
+		app->inventoryManager->maskOnePoints++;
 		maskOneLevel++;
 		XPtoLevelUpOne += matrizLevelXP[maskOneLevel];
 
@@ -896,9 +896,9 @@ bool Player::Update(float dt)
 	}
 
 	//MASK 2
-	if (maskTwoXP >= XPtoLevelUpTwo && maskTwoLevel < maxMaskLevel) {
-		maskTwoXP -= XPtoLevelUpTwo;
-		maskTwoPoints++;
+	if (app->inventoryManager->maskTwoXP >= XPtoLevelUpTwo && maskTwoLevel < maxMaskLevel) {
+		app->inventoryManager->maskTwoXP -= XPtoLevelUpTwo;
+		app->inventoryManager->maskTwoPoints++;
 		maskTwoLevel++;
 		XPtoLevelUpTwo += matrizLevelXP[maskTwoLevel];
 
@@ -908,9 +908,9 @@ bool Player::Update(float dt)
 	}
 
 	//MASK 3
-	if (maskThreeXP >= XPtoLevelUpThree && maskThreeLevel < maxMaskLevel) {
-		maskThreeXP -= XPtoLevelUpThree;
-		maskThreePoints++;
+	if (app->inventoryManager->maskThreeXP >= XPtoLevelUpThree && maskThreeLevel < maxMaskLevel) {
+		app->inventoryManager->maskThreeXP -= XPtoLevelUpThree;
+		app->inventoryManager->maskThreePoints++;
 		maskThreeLevel++;
 		XPtoLevelUpThree += matrizLevelXP[maskThreeLevel];
 

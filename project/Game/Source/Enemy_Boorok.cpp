@@ -18,6 +18,7 @@
 #include "Item_Viscera.h"
 #include "Item_Diente.h"
 #include "BestiarioManager.h"
+#include "InventoryManager.h"
 #include <Optick/include/optick.h>
 #include "Utils.cpp"
 
@@ -323,28 +324,28 @@ void Enemy_Boorok::Die()
 
 		// Máscaras
 		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0) {
-			app->entityManager->GetPlayer()->maskZeroXP += 120;
+			app->inventoryManager->maskZeroXP += 120;
 		}
 		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK0) {
-			app->entityManager->GetPlayer()->maskZeroXP += 120;
+			app->inventoryManager->maskZeroXP += 120;
 		}
 		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK1) {
-			app->entityManager->GetPlayer()->maskOneXP += 120;
+			app->inventoryManager->maskOneXP += 120;
 		}
 		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK1) {
-			app->entityManager->GetPlayer()->maskOneXP += 120;
+			app->inventoryManager->maskOneXP += 120;
 		}
 		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK2) {
-			app->entityManager->GetPlayer()->maskTwoXP += 120;
+			app->inventoryManager->maskTwoXP += 120;
 		}
 		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK2) {
-			app->entityManager->GetPlayer()->maskTwoXP += 120;
+			app->inventoryManager->maskTwoXP += 120;
 		}
 		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK3) {
-			app->entityManager->GetPlayer()->maskThreeXP += 120;
+			app->inventoryManager->maskThreeXP += 120;
 		}
 		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK3) {
-			app->entityManager->GetPlayer()->maskThreeXP += 120;
+			app->inventoryManager->maskThreeXP += 120;
 		}
 
 		if (app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->playerInFight) {

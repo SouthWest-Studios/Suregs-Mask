@@ -20,6 +20,7 @@
 #include "Boss_Igory.h"
 #include "Utils.cpp"
 #include "DialogManager.h"
+#include "InventoryManager.h"
 #include "ModuleFadeToBlack.h"
 #include "Scene_menu.h"
 #include "ParticleSystem.h"
@@ -910,53 +911,53 @@ void Boss_Igory::Die() {
 	//Mask 0
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
 	{
-		app->entityManager->GetPlayer()->maskZeroXP += 1000;
-		////printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
+		app->inventoryManager->maskZeroXP += 1000;
+		////printf("Current Mask 0 XP %i \n", app->inventoryManager->maskZeroXP);
 	}
 
 	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK0)
 	{
-		app->entityManager->GetPlayer()->maskZeroXP += 1000;
-		////printf("Current Mask 0 XP %i \n", app->entityManager->GetPlayer()->maskZeroXP);
+		app->inventoryManager->maskZeroXP += 1000;
+		////printf("Current Mask 0 XP %i \n", app->inventoryManager->maskZeroXP);
 	}
 
 	//Mask 1
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK1)
 	{
-		app->entityManager->GetPlayer()->maskOneXP += 1000;
-		////printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
+		app->inventoryManager->maskOneXP += 1000;
+		////printf("Current Mask 1 XP %i \n", app->inventoryManager->maskOneXP);
 	}
 
 	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK1)
 	{
-		app->entityManager->GetPlayer()->maskOneXP += 1000;
-		////printf("Current Mask 1 XP %i \n", app->entityManager->GetPlayer()->maskOneXP);
+		app->inventoryManager->maskOneXP += 1000;
+		////printf("Current Mask 1 XP %i \n", app->inventoryManager->maskOneXP);
 	}
 
 	//Mask 2
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK2)
 	{
-		app->entityManager->GetPlayer()->maskTwoXP += 1000;
-		////printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
+		app->inventoryManager->maskTwoXP += 1000;
+		////printf("Current Mask 2 XP %i \n", app->inventoryManager->maskTwoXP);
 	}
 
 	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK2)
 	{
-		app->entityManager->GetPlayer()->maskTwoXP += 1000;
-		////printf("Current Mask 2 XP %i \n", app->entityManager->GetPlayer()->maskTwoXP);
+		app->inventoryManager->maskTwoXP += 1000;
+		////printf("Current Mask 2 XP %i \n", app->inventoryManager->maskTwoXP);
 	}
 
 	//Mask 3
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK3)
 	{
-		app->entityManager->GetPlayer()->maskThreeXP += 1000;
-		////printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
+		app->inventoryManager->maskThreeXP += 1000;
+		////printf("Current Mask 3 XP %i \n", app->inventoryManager->maskThreeXP);
 	}
 
 	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK3)
 	{
-		app->entityManager->GetPlayer()->maskThreeXP += 1000;
-		////printf("Current Mask 3 XP %i \n", app->entityManager->GetPlayer()->maskThreeXP);
+		app->inventoryManager->maskThreeXP += 1000;
+		////printf("Current Mask 3 XP %i \n", app->inventoryManager->maskThreeXP);
 	}
 
 }

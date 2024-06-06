@@ -895,40 +895,40 @@ void TreeManager::UseTreeSelected(int id)
 						case 0:
 						{
 							bool siguiente = false;
-							if (mask == 1 && numMejoras0 < 8 && player->maskZeroPoints > 0)
+							if (mask == 1 && numMejoras0 < 8 && app->inventoryManager->maskZeroPoints > 0)
 							{
 								app->entityManager->GetPlayer()->maskLevels[Mask::MASK0][Branches::Rama1] += 1;
 								item->data->used1 = true;
 								item->data->usable1 = false;
 								siguiente = true;
-								player->maskZeroPoints -= 1;
+								app->inventoryManager->maskZeroPoints -= 1;
 								numMejoras0 += 1;
 							}
-							else if (mask == 2 && numMejoras1 < 8 && player->maskOnePoints > 0)
+							else if (mask == 2 && numMejoras1 < 8 && app->inventoryManager->maskOnePoints > 0)
 							{
 								player->maskLevels[Mask::MASK1][Branches::Rama1] += 1;
 								item->data->used2 = true;
 								item->data->usable2 = false;
 								siguiente = true;
-								player->maskOnePoints -= 1;
+								app->inventoryManager->maskOnePoints -= 1;
 								numMejoras1 += 1;
 							}
-							else if (mask == 3 && player->maskTwoPoints > 0)
+							else if (mask == 3 && app->inventoryManager->maskTwoPoints > 0)
 							{
 								player->maskLevels[Mask::MASK2][Branches::Rama1] += 1;
 								item->data->used3 = true;
 								item->data->usable3 = false;
 								siguiente = true;
-								player->maskTwoPoints -= 1;
+								app->inventoryManager->maskTwoPoints -= 1;
 								numMejoras2 += 1;
 							}
-							else if (mask == 4 && numMejoras3 < 8 && player->maskThreePoints > 0)
+							else if (mask == 4 && numMejoras3 < 8 && app->inventoryManager->maskThreePoints > 0)
 							{
 								player->maskLevels[Mask::MASK3][Branches::Rama1] += 1;
 								item->data->used4 = true;
 								item->data->usable4 = false;
 								siguiente = true;
-								player->maskThreePoints -= 1;
+								app->inventoryManager->maskThreePoints -= 1;
 								numMejoras3 += 1;
 							}
 							if (siguiente == true)
@@ -972,40 +972,40 @@ void TreeManager::UseTreeSelected(int id)
 						case 1:
 						{
 							bool siguiente = false;
-							if (mask == 1 && numMejoras0 < 8 && player->maskZeroPoints > 0)
+							if (mask == 1 && numMejoras0 < 8 && app->inventoryManager->maskZeroPoints > 0)
 							{
 								player->maskLevels[Mask::MASK0][Branches::Rama2] += 1;
 								item->data->usable1 = false;
 								item->data->used1 = true;
 								siguiente = true;
-								player->maskZeroPoints -= 1;
+								app->inventoryManager->maskZeroPoints -= 1;
 								numMejoras0 += 1;
 							}
-							else if (mask == 2 && player->maskOnePoints > 0)
+							else if (mask == 2 && app->inventoryManager->maskOnePoints > 0)
 							{
 								player->maskLevels[Mask::MASK1][Branches::Rama2] += 1;
 								item->data->usable2 = false;
 								item->data->used2 = true;
 								siguiente = true;
-								player->maskOnePoints -= 1;
+								app->inventoryManager->maskOnePoints -= 1;
 								numMejoras1 += 1;
 							}
-							else if (mask == 3 && numMejoras2 < 8 && player->maskTwoPoints > 0)
+							else if (mask == 3 && numMejoras2 < 8 && app->inventoryManager->maskTwoPoints > 0)
 							{
 								player->maskLevels[Mask::MASK2][Branches::Rama2] += 1;
 								item->data->usable3 = false;
 								item->data->used3 = true;
 								siguiente = true;
-								player->maskTwoPoints -= 1;
+								app->inventoryManager->maskTwoPoints -= 1;
 								numMejoras2 += 1;
 							}
-							else if (mask == 4 && numMejoras3 < 8 && player->maskTwoPoints > 0)
+							else if (mask == 4 && numMejoras3 < 8 && app->inventoryManager->maskTwoPoints > 0)
 							{
 								player->maskLevels[Mask::MASK3][Branches::Rama2] += 1;
 								item->data->usable4 = false;
 								item->data->used4 = true;
 								siguiente = true;
-								player->maskThreePoints -= 1;
+								app->inventoryManager->maskThreePoints -= 1;
 								numMejoras3 += 1;
 							}
 							if (siguiente == true)
@@ -1049,40 +1049,40 @@ void TreeManager::UseTreeSelected(int id)
 						case 2:
 						{
 							bool siguiente = false;
-							if (mask == 1 && numMejoras0 < 8 && player->maskZeroPoints > 0)
+							if (mask == 1 && numMejoras0 < 8 && app->inventoryManager->maskZeroPoints > 0)
 							{
 								player->maskLevels[Mask::MASK0][Branches::Rama3] += 1;
 								item->data->usable1 = false;
 								item->data->used1 = true;
 								siguiente = true;
-								player->maskZeroPoints -= 1;
+								app->inventoryManager->maskZeroPoints -= 1;
 								numMejoras0 += 1;
 							}
-							else if (mask == 2 && numMejoras1 < 8 && player->maskOnePoints > 0)
+							else if (mask == 2 && numMejoras1 < 8 && app->inventoryManager->maskOnePoints > 0)
 							{
 								player->maskLevels[Mask::MASK1][Branches::Rama3] += 1;
 								item->data->usable2 = false;
 								item->data->used2 = true;
 								siguiente = true;
-								player->maskOnePoints -= 1;
+								app->inventoryManager->maskOnePoints -= 1;
 								numMejoras1 += 1;
 							}
-							else if (mask == 3 && numMejoras2 < 8 && player->maskTwoPoints > 0)
+							else if (mask == 3 && numMejoras2 < 8 && app->inventoryManager->maskTwoPoints > 0)
 							{
 								player->maskLevels[Mask::MASK2][Branches::Rama3] += 1;
 								item->data->usable3 = false;
 								item->data->used3 = true;
 								siguiente = true;
-								player->maskTwoPoints -= 1;
+								app->inventoryManager->maskTwoPoints -= 1;
 								numMejoras2 += 1;
 							}
-							else if (mask == 4 && numMejoras3 < 8 && player->maskThreePoints > 0)
+							else if (mask == 4 && numMejoras3 < 8 && app->inventoryManager->maskThreePoints > 0)
 							{
 								player->maskLevels[Mask::MASK3][Branches::Rama3] += 1;
 								item->data->usable4 = false;
 								item->data->used4 = true;
 								siguiente = true;
-								player->maskThreePoints -= 1;
+								app->inventoryManager->maskThreePoints -= 1;
 								numMejoras3 += 1;
 							}
 							if (siguiente == true)
@@ -1126,40 +1126,40 @@ void TreeManager::UseTreeSelected(int id)
 						case 3:
 						{
 							bool siguiente = false;
-							if (mask == 1 && numMejoras0 < 8 && player->maskZeroPoints > 0)
+							if (mask == 1 && numMejoras0 < 8 && app->inventoryManager->maskZeroPoints > 0)
 							{
 								player->maskLevels[Mask::MASK0][Branches::Rama4] += 1;
 								item->data->usable1 = false;
 								item->data->used1 = true;
 								siguiente = true;
-								player->maskZeroPoints -= 1;
+								app->inventoryManager->maskZeroPoints -= 1;
 								numMejoras0 += 1;
 							}
-							else if (mask == 2 && numMejoras1 < 8 && player->maskOnePoints > 0)
+							else if (mask == 2 && numMejoras1 < 8 && app->inventoryManager->maskOnePoints > 0)
 							{
 								player->maskLevels[Mask::MASK1][Branches::Rama4] += 1;
 								item->data->usable2 = false;
 								item->data->used2 = true;
-								player->maskOnePoints -= 1;
+								app->inventoryManager->maskOnePoints -= 1;
 								siguiente = true;
 								numMejoras1 += 1;
 							}
-							else if (mask == 3 && numMejoras2 < 8 && player->maskTwoPoints > 0)
+							else if (mask == 3 && numMejoras2 < 8 && app->inventoryManager->maskTwoPoints > 0)
 							{
 								player->maskLevels[Mask::MASK2][Branches::Rama4] += 1;
 								item->data->usable3 = false;
 								item->data->used3 = true;
 								siguiente = true;
-								player->maskTwoPoints -= 1;
+								app->inventoryManager->maskTwoPoints -= 1;
 								numMejoras2 += 1;
 							}
-							else if (mask == 4 && numMejoras3 < 8 && player->maskThreePoints > 0)
+							else if (mask == 4 && numMejoras3 < 8 && app->inventoryManager->maskThreePoints > 0)
 							{
 								player->maskLevels[Mask::MASK3][Branches::Rama4] += 1;
 								item->data->usable4 = false;
 								item->data->used4 = true;
 								siguiente = true;
-								player->maskThreePoints -= 1;
+								app->inventoryManager->maskThreePoints -= 1;
 								numMejoras3 += 1;
 							}
 							if (siguiente == true)
@@ -1263,7 +1263,7 @@ void TreeManager::ReembolsarTreeSelected(int id)
 							}
 							numMejoras0 -= 1;
 							puntsRembolso += 1;
-							app->entityManager->GetPlayer()->maskZeroPoints += 1;
+							app->inventoryManager->maskZeroPoints += 1;
 						}
 						else if ((mask == 2 && item->data->usable2 == false && itum->data->usable2 == true) || (mask == 2 && item->data->usable2 == false && item->data->nivelMejora + 1 == 5))
 						{
@@ -1291,7 +1291,7 @@ void TreeManager::ReembolsarTreeSelected(int id)
 							}
 							numMejoras1 -= 1;
 							puntsRembolso += 1;
-							app->entityManager->GetPlayer()->maskOnePoints += 1;
+							app->inventoryManager->maskOnePoints += 1;
 						}
 						else if ((mask == 3 && item->data->usable3 == false && itum->data->usable3 == true) || (mask == 3 && item->data->usable3 == false && item->data->nivelMejora + 1 == 5))
 						{
@@ -1319,7 +1319,7 @@ void TreeManager::ReembolsarTreeSelected(int id)
 							}
 							numMejoras2 -= 1;
 							puntsRembolso += 1;
-							app->entityManager->GetPlayer()->maskTwoPoints += 1;
+							app->inventoryManager->maskTwoPoints += 1;
 						}
 						else if ((mask == 4 && item->data->usable4 == false && itum->data->usable4 == true) || (mask == 4 && item->data->usable4 == false && item->data->nivelMejora + 1 == 5))
 						{
@@ -1347,7 +1347,7 @@ void TreeManager::ReembolsarTreeSelected(int id)
 							}
 							numMejoras3 -= 1;
 							puntsRembolso += 1;
-							app->entityManager->GetPlayer()->maskThreePoints += 1;
+							app->inventoryManager->maskThreePoints += 1;
 						}
 					}
 
@@ -1772,37 +1772,37 @@ bool TreeManager::Update(float dt)
 		Player* player = app->entityManager->GetPlayer();
 		if (player != nullptr)
 		{
-			if (player->maskZeroPoints > 8)
+			if (app->inventoryManager->maskZeroPoints > 8)
 			{
-				player->maskZeroPoints = 8;
+				app->inventoryManager->maskZeroPoints = 8;
 			}
-			if (player->maskZeroPoints < 0)
+			if (app->inventoryManager->maskZeroPoints < 0)
 			{
-				player->maskZeroPoints = 0;
+				app->inventoryManager->maskZeroPoints = 0;
 			}
-			if (player->maskOnePoints > 8)
+			if (app->inventoryManager->maskOnePoints > 8)
 			{
-				player->maskOnePoints = 8;
+				app->inventoryManager->maskOnePoints = 8;
 			}
-			if (player->maskOnePoints < 0)
+			if (app->inventoryManager->maskOnePoints < 0)
 			{
-				player->maskOnePoints = 0;
+				app->inventoryManager->maskOnePoints = 0;
 			}
-			if (player->maskTwoPoints > 8)
+			if (app->inventoryManager->maskTwoPoints > 8)
 			{
-				player->maskTwoPoints = 8;
+				app->inventoryManager->maskTwoPoints = 8;
 			}
-			if (player->maskTwoPoints < 0)
+			if (app->inventoryManager->maskTwoPoints < 0)
 			{
-				player->maskTwoPoints = 0;
+				app->inventoryManager->maskTwoPoints = 0;
 			}
-			if (player->maskThreePoints > 8)
+			if (app->inventoryManager->maskThreePoints > 8)
 			{
-				player->maskThreePoints = 8;
+				app->inventoryManager->maskThreePoints = 8;
 			}
-			if (player->maskThreePoints < 0)
+			if (app->inventoryManager->maskThreePoints < 0)
 			{
-				player->maskThreePoints = 0;
+				app->inventoryManager->maskThreePoints = 0;
 			}
 		}
 		/*player->maskZeroPoints = 8;
@@ -2269,7 +2269,7 @@ bool TreeManager::PostUpdate()
 		if (mask == 1)
 		{
 
-			std::string texto = std::to_string(app->entityManager->GetPlayer()->maskZeroPoints) + "/8 Mask Points";
+			std::string texto = std::to_string(app->inventoryManager->maskZeroPoints) + "/8 Mask Points";
 			app->render->DrawTextBound(texto.c_str(), 885, 550, 370, {0,0,0});
 			std::string texto1 = std::to_string(numMejoras0) + "/8 Mejoras";
 			app->render->DrawTextBound(texto1.c_str(), 885, 600, 370, {0,0,0});
@@ -2278,7 +2278,7 @@ bool TreeManager::PostUpdate()
 		else if (mask == 2)
 		{
 
-			std::string texto = std::to_string(app->entityManager->GetPlayer()->maskZeroPoints) + "/8 Mask Points";
+			std::string texto = std::to_string(app->inventoryManager->maskZeroPoints) + "/8 Mask Points";
 			app->render->DrawTextBound(texto.c_str(), 885, 550, 370, {0,0,0});
 			std::string texto1 = std::to_string(numMejoras0) + "/8 Mejoras";
 			app->render->DrawTextBound(texto1.c_str(), 885, 600, 370, {0,0,0});
@@ -2287,7 +2287,7 @@ bool TreeManager::PostUpdate()
 		else if (mask == 3)
 		{
 
-			std::string texto = std::to_string(app->entityManager->GetPlayer()->maskZeroPoints) + "/8 Mask Points";
+			std::string texto = std::to_string(app->inventoryManager->maskZeroPoints) + "/8 Mask Points";
 			app->render->DrawTextBound(texto.c_str(), 885, 550, 370, {0,0,0});
 			std::string texto1 = std::to_string(numMejoras0) + "/8 Mejoras";
 			app->render->DrawTextBound(texto1.c_str(), 885, 600, 370, {0,0,0});
@@ -2296,7 +2296,7 @@ bool TreeManager::PostUpdate()
 		else if (mask == 4)
 		{
 
-			std::string texto = std::to_string(app->entityManager->GetPlayer()->maskZeroPoints) + "/8 Mask Points";
+			std::string texto = std::to_string(app->inventoryManager->maskZeroPoints) + "/8 Mask Points";
 			app->render->DrawTextBound(texto.c_str(), 885, 550, 370, {0,0,0});
 			std::string texto1 = std::to_string(numMejoras0) + "/8 Mejoras";
 			app->render->DrawTextBound(texto1.c_str(), 885, 600, 370, {0,0,0});

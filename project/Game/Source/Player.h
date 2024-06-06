@@ -203,10 +203,7 @@ public:
 	std::map<Mask, std::map<Branches, int>> maskLevels;
 
 	//MasksLevel
-	int maskZeroXP;
-	int maskOneXP;
-	int maskTwoXP;
-	int maskThreeXP;
+	
 
 	int maskZeroLevel;
 	int maskOneLevel;
@@ -222,10 +219,7 @@ public:
 	int XPtoLevelUpTwo = 1000;
 	int XPtoLevelUpThree = 1000;
 
-	int maskZeroPoints;
-	int maskOnePoints;
-	int maskTwoPoints;
-	int maskThreePoints;
+
 
 	bool levelUpZero = false;
 	bool levelUpOne = false;

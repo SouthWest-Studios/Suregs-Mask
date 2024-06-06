@@ -115,6 +115,16 @@ public:
 	int mask3_levelBranch3 = 0;
 	int mask3_levelBranch4 = 0;
 
+	int maskZeroPoints = 0;
+	int maskOnePoints = 0;
+	int maskTwoPoints = 0;
+	int maskThreePoints = 0;
+
+	int maskZeroXP = 0;
+	int maskOneXP = 0;
+	int maskTwoXP = 0;
+	int maskThreeXP = 0;
+
 
 	int numMasks = 0;
 	bool mask = false;

@@ -21,6 +21,7 @@
 #include "Scene_Mazmorra7.h"
 #include "Scene_Mazmorra8.h"
 #include "Scene_Pueblo.h"
+#include "InventoryManager.h"
 #include "Optick/include/optick.h"
 #include "Menu.h"
 
@@ -69,10 +70,10 @@ bool DebugConsole::Awake(pugi::xml_node config)
 	commandList.Add(SET_GOLD);
 	
 	SET_MASK_POINTS = new DebugCommandArg<int>("set_mask_points", "Establece la cantidad de puntos de mascara(max 8) para todas las mascaras", "set_mask_points <cantidad>", [this](int amount) {
-		app->entityManager->GetPlayer()->maskZeroPoints = amount;
-		app->entityManager->GetPlayer()->maskOnePoints = amount;
-		app->entityManager->GetPlayer()->maskTwoPoints = amount;
-		app->entityManager->GetPlayer()->maskThreePoints = amount;
+		app->inventoryManager->maskZeroPoints = amount;
+		app->inventoryManager->maskOnePoints = amount;
+		app->inventoryManager->maskTwoPoints = amount;
+		app->inventoryManager->maskThreePoints = amount;
 			});
 	commandList.Add(SET_MASK_POINTS);
 
