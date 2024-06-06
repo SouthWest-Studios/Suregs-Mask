@@ -14,7 +14,7 @@
 
 #include "PugiXml\src\pugixml.hpp"
 
-// L09: DONE 2: Define a property to store the MapType and Load it from the map
+
 enum MapOrientation
 {
     ORTOGRAPHIC = 0,
@@ -25,8 +25,57 @@ enum MapObjectType {
     POLIGONO
 };
 
-// L05: DONE 2: Create a struct to hold information for a TileSet
-// Ignore Terrain Types and Tile Types for now, but we want the image!
+
+
+struct TileTexture {
+    SDL_Texture* texture = nullptr;
+    uint x;
+    uint y;
+};
+
+struct TileSetTexture {
+
+    SString name;
+    int tileSize = 256;
+
+    int tileSetW;
+    int tileSetH;
+
+    int tilesSetWMoved = -1;
+    int tilesSetWMovedR = -1;
+    int tilesSetHMoved = -1;
+    int tilesSetHMovedR = -1;
+
+    uint firstGID;
+    uint lastGID;
+
+    std::vector<TileTexture*> tilesTextures;
+
+    std::string pathFolder;
+
+
+    TileTexture* GetTile(uint x, uint y) {
+        for (int i = 0; i < tilesTextures.size(); i++) {
+            TileTexture* t = tilesTextures.at(i);
+
+            if (t->x == x && t->y == y) { 
+                return t;  
+                break; 
+            }
+        }
+        return nullptr;
+    }
+
+    std::string GetTileTexturePath(int x, int y) {
+
+        return pathFolder + "/" + "row-" + std::to_string(y+1) + "-column-" + std::to_string(x+1) + ".png";
+    }
+
+
+
+};
+
+
 struct TileSet
 {
     int firstgid;
@@ -38,9 +87,10 @@ struct TileSet
     int tilecount;
     int columns;
 
+
+
     SDL_Texture* texture;
 
-    // L06: DONE 7: Implement the method that receives the gid and returns a Rect
 
     SDL_Rect GetRect(uint gid) {
         SDL_Rect rect = { 0 };
@@ -139,6 +189,8 @@ struct MapData
     int tileheight;
     List<TileSet*> tilesets;
 
+    std::vector<TileSetTexture*> tileSetTextures;
+
     // L09: DONE 2: Define a property to store the MapType and Load it from the map
     MapOrientation orientation; 
 
@@ -162,7 +214,7 @@ public:
     
     bool Start();
 
-    
+    bool PreUpdate();
     bool Update(float dt);
     bool PostUpdate();
     bool PrintMapFront();
@@ -223,6 +275,12 @@ private:
 
     bool LoadState(pugi::xml_node node);
     bool SaveState(pugi::xml_node node);
+
+
+
+    //NEW MAP SYSTEM
+
+    bool LoadTileSetTexture(pugi::xml_node mapFile);
 
 
 
