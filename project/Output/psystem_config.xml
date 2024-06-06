@@ -37,7 +37,7 @@
 			<startColor r ="50" g="210" b="50" a="200"/>
 			<endColor r ="50" g="200" b="50" a ="0"/>
 			<blendMode mode ="blend"/>
-			<lifetime value ="-1"/>
+			<lifetime value ="2500"/>
 			<vortexSensitive state = "false"/>
 		</emitter>
 
