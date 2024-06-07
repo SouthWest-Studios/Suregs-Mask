@@ -375,6 +375,7 @@ bool Map::CleanUp()
 {
 	LOG("Unloading map");
 
+	pathTextures.Clear();
 	//Clean up pathfing class
 	pathfinding->CleanUp();
 
@@ -465,6 +466,7 @@ bool Map::CleanUp()
 	pathfinding->CleanUp();
 
 	puzzleButtonEntities.clear(); //En teoria las entidades se borrar al desactivar el entity manager.
+	puzzleButtonEntities.shrink_to_fit(); //En teoria las entidades se borrar al desactivar el entity manager.
 	recompensaPuzzle = false;
 
 
@@ -484,9 +486,12 @@ bool Map::CleanUp()
 				}
 			}
 		}
+		tst->tilesTextures.clear();
+		tst->tilesTextures.shrink_to_fit();
 	}
 
 	mapData.tileSetTextures.clear();
+	mapData.tileSetTextures.shrink_to_fit();
 
 
 
@@ -836,6 +841,9 @@ bool Map::LoadObject(pugi::xml_node& node, MapObjects* mapObjects)
 			std::vector<int> points = GetObjectGroupPoints(object.child("polygon").attribute("points").as_string());
 			mapObject->points = points;
 			mapObject->type = POLIGONO;
+			points.clear();
+			points.shrink_to_fit();
+
 		}
 		else {
 			mapObject->type = RECTANGULO;

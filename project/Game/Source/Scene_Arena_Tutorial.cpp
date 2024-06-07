@@ -136,6 +136,7 @@ bool Scene_Arena_Tutorial::PostUpdate()
 bool Scene_Arena_Tutorial::CleanUp()
 {
 	LOG("Freeing Scene_Arena_Tutorial");
+
 	return true;
 }
 

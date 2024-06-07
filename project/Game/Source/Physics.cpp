@@ -106,6 +106,7 @@ void Physics::DestroyPendingBodies()
 		}
 	}
 	bodiesToDestroy.clear();
+	bodiesToDestroy.shrink_to_fit();
 
 }
 

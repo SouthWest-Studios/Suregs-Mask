@@ -455,6 +455,8 @@ bool Hud::PostUpdate()
 			app->render->DrawTexture(hudTexture, 925, 200 + (i * 50), SDL_FLIP_NONE, rectFondoQuest, 0);
 			app->render->DrawTextBound(quests.at(i)->questTitle.c_str(), 992, 207 + (i * 50), 300, { 52, 25, 0 }, app->render->questFont);
 		}
+		quests.clear();
+		quests.shrink_to_fit();
 
 	}
 
@@ -488,6 +490,7 @@ bool Hud::CleanUp()
 	delete rectPocionVelocidad;
 	delete rectPocionOrbe;
 	potionRects.clear();
+	potionRects.shrink_to_fit();
 	potionRectMap.clear();
 
 	//delete rectFondoHabilidad1;
@@ -545,6 +548,7 @@ void Hud::Potions()
 	}
 
 	potionRects.clear();
+	potionRects.shrink_to_fit();
 
 	ListItem<Inventity*>* item;
 	int potionIndex = 0;

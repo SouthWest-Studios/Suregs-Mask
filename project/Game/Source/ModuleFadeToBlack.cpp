@@ -10,6 +10,7 @@
 #include "SDL/include/SDL_render.h"
 #include "Log.h"
 #include "Textures.h"
+#include "ParticleSystem.h"
 
 ModuleFadeToBlack::ModuleFadeToBlack(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -34,7 +35,7 @@ bool ModuleFadeToBlack::Start()
 	config = configFile.child("config").child(name.GetString());
 
 	transitionPath = config.child("transition").attribute("texturepath").as_string();
-	transition = app->tex->Load(transitionPath);
+	/*transition = app->tex->Load(transitionPath);*/
 
 	uint winW, winH;
 	app->win->GetWindowSize(winW, winH);
@@ -72,6 +73,8 @@ bool ModuleFadeToBlack::Update(float dt)
 			app->map->Disable();
 			moduleToDisable->Disable();
 			app->entityManager->Disable();
+			app->psystem->RemoveAllEmitters();
+			
 
 			pugi::xml_document configFile;
 			pugi::xml_node config;

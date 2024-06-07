@@ -67,7 +67,8 @@ bool Item_Zafiro::PostUpdate()
 
 bool Item_Zafiro::CleanUp()
 {
-	app->physics->DestroyBody(pbody);app->entityManager->DestroyEntity(this);active = false;
+	app->physics->DestroyBody(pbody);app->entityManager->DestroyEntity(this);
+	active = false;
 	app->tex->UnLoad(texture);
 	return true;
 }

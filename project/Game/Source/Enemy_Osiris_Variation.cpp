@@ -203,9 +203,11 @@ bool Enemy_Osiris_Variation::PostUpdate() {
 
 bool Enemy_Osiris_Variation::CleanUp()
 {
+	app->entityManager->DestroyEntity(this);
 	app->physics->DestroyBody(pbodyFoot);
 	app->physics->DestroyBody(pbodySensor);
 	//app->tex->UnLoad(texture);
+
 	lastPath.Clear();
 
 	blood = nullptr;

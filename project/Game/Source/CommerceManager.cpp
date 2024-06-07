@@ -107,6 +107,7 @@ bool CommerceManager::Start() {
 // Called before quitting
 bool CommerceManager::CleanUp()
 {
+
 	bool ret = true;
 	
 	return ret;

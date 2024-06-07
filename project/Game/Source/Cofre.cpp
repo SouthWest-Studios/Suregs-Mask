@@ -34,21 +34,21 @@ Cofre::~Cofre() {}
 
 bool Cofre::Awake() {
 
-	
-	 
+
+
 
 	return true;
 }
 
 bool Cofre::Start() {
-	
+
 	//initilize textures
 	/*position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();*/
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 	openTexture = app->tex->Load(config.attribute("opentexturePath").as_string());
 
-    chest_fx = app->audio->LoadAudioFx("chest_fx");
+	chest_fx = app->audio->LoadAudioFx("chest_fx");
 
 	/*texture = app->tex->Load("Assets/Textures/Entidades/Items/item_Garra.png");*/
 	// L07 DONE 4: Add a physics to an item - initialize the physics body
@@ -71,49 +71,52 @@ bool Cofre::Update(float dt)
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - 25;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 25;
 
-	
-	
+
+
 	return true;
 }
 
 bool Cofre::PostUpdate()
 {
-    if (!tutorial) {
-        if (abierto)
-        {
-            app->render->DrawTexture(openTexture, position.x, position.y, 0.5f);
-        }
-        else
-        {
-            app->render->DrawTexture(texture, position.x, position.y, 0.5f);
-        }
-    }
+	if (!tutorial) {
+		if (abierto)
+		{
+			app->render->DrawTexture(openTexture, position.x, position.y, 0.5f);
+		}
+		else
+		{
+			app->render->DrawTexture(texture, position.x, position.y, 0.5f);
+		}
+	}
 	return true;
 }
 bool Cofre::CleanUp()
 {
-    app->physics->GetWorld()->DestroyBody(pbody->body);
-    app->tex->UnLoad(texture);
-    return true;
+	app->physics->DestroyBody(pbody);
+	app->tex->UnLoad(texture);
+	app->tex->UnLoad(openTexture);
+
+	return true;
 }
-void Cofre::OnCollision(PhysBody* physA, PhysBody* physB) 
+void Cofre::OnCollision(PhysBody* physA, PhysBody* physB)
 {
-    switch (physB->ctype)
-    {
-      case ColliderType::PLAYER:
-      {
-          if (abierto == false)
-          {
-              if (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady)
-              {
-                  if (tutorial) {
-                      abierto = true;
+	switch (physB->ctype)
+	{
+	case ColliderType::PLAYER:
+	{
+		if (abierto == false)
+		{
+			if (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady)
+			{
+				if (tutorial) {
+					abierto = true;
 
-                      if (app->questManager->GetQuestLineIndex(1) <= 4) {
-                          app->questManager->UpdateQuestLine(1, 5);
-                      }
+					if (app->questManager->GetQuestLineIndex(1) <= 4) {
+						app->questManager->UpdateQuestLine(1, 5);
+					}
 
-                      pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
+                      app->audio->PlayFx(chest_fx);
+					  pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
                       if (parseResult) {
                           configNode = configFile.child("config");
                       }
@@ -148,182 +151,185 @@ void Cofre::OnCollision(PhysBody* physA, PhysBody* physB)
                   else {
                       abierto = true;
 
-                      app->audio->PlayFx(chest_fx);
 
-                      pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
-                      if (parseResult) {
-                          configNode = configFile.child("config");
-                      }
+					app->audio->PlayFx(chest_fx);
 
-                      // Lista de items posibles a soltar
-                      std::vector<EntityType> possibleItems = {
-                          EntityType::ITEM_DIAMANTE,
-                          EntityType::ITEM_RUBI,
-                          EntityType::ITEM_AMATISTA,
-                          EntityType::ITEM_CARBON
-                      };
+					pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
+					if (parseResult) {
+						configNode = configFile.child("config");
+					}
 
-                      // Suelta al menos 2 items
-                      for (int i = 0; i < 2; ++i) {
-                          int randomIndex = rand() % 101; // Elige un índice aleatorio de la lista
-                          Entity* item = nullptr;
-                          std::string nombreItem = "";
-                          // Crea la entidad correspondiente al tipo de item elegido y configúrala
+					// Lista de items posibles a soltar
+					std::vector<EntityType> possibleItems = {
+						EntityType::ITEM_DIAMANTE,
+						EntityType::ITEM_RUBI,
+						EntityType::ITEM_AMATISTA,
+						EntityType::ITEM_CARBON
+					};
 
-                          if (i == 0)
-                          {
-                              if (randomIndex < 35)
-                              {
-                                  Item_Amatista* amatista = (Item_Amatista*)app->entityManager->CreateEntity(EntityType::ITEM_AMATISTA);
-                                  amatista->config = configNode.child("entities_data").child("item_amatista");
-                                  amatista->position = iPoint(position.x + 30, position.y + 30);
-                                  amatista->Start();
+					// Suelta al menos 2 items
+					for (int i = 0; i < 2; ++i) {
+						int randomIndex = rand() % 101; // Elige un ï¿½ndice aleatorio de la lista
+						Entity* item = nullptr;
+						std::string nombreItem = "";
+						// Crea la entidad correspondiente al tipo de item elegido y configï¿½rala
 
-                              }
-                              else if (randomIndex >= 65)
-                              {
-                                  Item_Carbon* carbon = (Item_Carbon*)app->entityManager->CreateEntity(EntityType::ITEM_CARBON);
-                                  carbon->config = configNode.child("entities_data").child("item_carbon");
-                                  carbon->position = iPoint(position.x, position.y + 30);
-                                  carbon->Start();
-                              }
-                          }
-                          else
-                          {
-                              if (17 <= randomIndex && randomIndex < 32)
-                              {
-                                  Item_Pocion_Dano* pocion_dano = (Item_Pocion_Dano*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_DANO);
-                                  pocion_dano->config = configNode.child("entities_data").child("item_pocion_dano");
-                                  pocion_dano->position = iPoint(position.x, position.y + 30);
-                                  pocion_dano->Start();
+						if (i == 0)
+						{
+							if (randomIndex < 35)
+							{
+								Item_Amatista* amatista = (Item_Amatista*)app->entityManager->CreateEntity(EntityType::ITEM_AMATISTA);
+								amatista->config = configNode.child("entities_data").child("item_amatista");
+								amatista->position = iPoint(position.x + 30, position.y + 30);
+								amatista->Start();
 
-                              }
-                              else if (47 <= randomIndex && randomIndex < 63)
-                              {
-                                  Item_Pocion_Velocidad* pocion_velocidad = (Item_Pocion_Velocidad*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_VELOCIDAD);
-                                  pocion_velocidad->config = configNode.child("entities_data").child("item_pocion_velocidad");
-                                  pocion_velocidad->position = iPoint(position.x, position.y + 30);
-                                  pocion_velocidad->Start();
+							}
+							else if (randomIndex >= 65)
+							{
+								Item_Carbon* carbon = (Item_Carbon*)app->entityManager->CreateEntity(EntityType::ITEM_CARBON);
+								carbon->config = configNode.child("entities_data").child("item_carbon");
+								carbon->position = iPoint(position.x, position.y + 30);
+								carbon->Start();
+							}
+						}
+						else
+						{
+							if (17 <= randomIndex && randomIndex < 32)
+							{
+								Item_Pocion_Dano* pocion_dano = (Item_Pocion_Dano*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_DANO);
+								pocion_dano->config = configNode.child("entities_data").child("item_pocion_dano");
+								pocion_dano->position = iPoint(position.x, position.y + 30);
+								pocion_dano->Start();
 
-                              }
-                              else if (3 <= randomIndex && randomIndex < 17)
-                              {
-                                  Item_Pocion_Regeneracion* pocion_regeneracion = (Item_Pocion_Regeneracion*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_REGENERACION);
-                                  pocion_regeneracion->config = configNode.child("entities_data").child("item_pocion_regeneracion");
-                                  pocion_regeneracion->position = iPoint(position.x, position.y + 30);
-                                  pocion_regeneracion->Start();
+							}
+							else if (47 <= randomIndex && randomIndex < 63)
+							{
+								Item_Pocion_Velocidad* pocion_velocidad = (Item_Pocion_Velocidad*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_VELOCIDAD);
+								pocion_velocidad->config = configNode.child("entities_data").child("item_pocion_velocidad");
+								pocion_velocidad->position = iPoint(position.x, position.y + 30);
+								pocion_velocidad->Start();
 
-                              }
-                              else if (81 <= randomIndex && randomIndex < 100)
-                              {
-                                  Item_Pocion_Vida_1* pocion_vida_1 = (Item_Pocion_Vida_1*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_VIDA_1);
-                                  pocion_vida_1->config = configNode.child("entities_data").child("item_pocion_vida_1");
-                                  pocion_vida_1->position = iPoint(position.x, position.y + 30);
-                                  pocion_vida_1->Start();
+							}
+							else if (3 <= randomIndex && randomIndex < 17)
+							{
+								Item_Pocion_Regeneracion* pocion_regeneracion = (Item_Pocion_Regeneracion*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_REGENERACION);
+								pocion_regeneracion->config = configNode.child("entities_data").child("item_pocion_regeneracion");
+								pocion_regeneracion->position = iPoint(position.x, position.y + 30);
+								pocion_regeneracion->Start();
 
-                              }
-                              else if (63 <= randomIndex && randomIndex < 81)
-                              {
-                                  Item_Pocion_Vida_2* pocion_vida_2 = (Item_Pocion_Vida_2*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_VIDA_2);
-                                  pocion_vida_2->config = configNode.child("entities_data").child("item_pocion_vida_2");
-                                  pocion_vida_2->position = iPoint(position.x, position.y + 30);
-                                  pocion_vida_2->Start();
+							}
+							else if (81 <= randomIndex && randomIndex < 100)
+							{
+								Item_Pocion_Vida_1* pocion_vida_1 = (Item_Pocion_Vida_1*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_VIDA_1);
+								pocion_vida_1->config = configNode.child("entities_data").child("item_pocion_vida_1");
+								pocion_vida_1->position = iPoint(position.x, position.y + 30);
+								pocion_vida_1->Start();
 
-                              }
-                              else if (32 <= randomIndex && randomIndex < 47)
-                              {
-                                  Item_Pocion_Vida_3* pocion_vida_3 = (Item_Pocion_Vida_3*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_VIDA_3);
-                                  pocion_vida_3->config = configNode.child("entities_data").child("item_pocion_vida_3");
-                                  pocion_vida_3->position = iPoint(position.x, position.y + 30);
-                                  pocion_vida_3->Start();
+							}
+							else if (63 <= randomIndex && randomIndex < 81)
+							{
+								Item_Pocion_Vida_2* pocion_vida_2 = (Item_Pocion_Vida_2*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_VIDA_2);
+								pocion_vida_2->config = configNode.child("entities_data").child("item_pocion_vida_2");
+								pocion_vida_2->position = iPoint(position.x, position.y + 30);
+								pocion_vida_2->Start();
 
-                              }
-                              else if (0 <= randomIndex && randomIndex < 3)
-                              {
-                                  Item_Pocion_Vida_Max* pocion_vida_max = (Item_Pocion_Vida_Max*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_VIDA_MAX);
-                                  pocion_vida_max->config = configNode.child("entities_data").child("item_pocion_vida_max");
-                                  pocion_vida_max->position = iPoint(position.x, position.y + 30);
-                                  pocion_vida_max->Start();
+							}
+							else if (32 <= randomIndex && randomIndex < 47)
+							{
+								Item_Pocion_Vida_3* pocion_vida_3 = (Item_Pocion_Vida_3*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_VIDA_3);
+								pocion_vida_3->config = configNode.child("entities_data").child("item_pocion_vida_3");
+								pocion_vida_3->position = iPoint(position.x, position.y + 30);
+								pocion_vida_3->Start();
 
-                              }
-                          }
+							}
+							else if (0 <= randomIndex && randomIndex < 3)
+							{
+								Item_Pocion_Vida_Max* pocion_vida_max = (Item_Pocion_Vida_Max*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_VIDA_MAX);
+								pocion_vida_max->config = configNode.child("entities_data").child("item_pocion_vida_max");
+								pocion_vida_max->position = iPoint(position.x, position.y + 30);
+								pocion_vida_max->Start();
 
-                          // Con probabilidad del 15%, suelta otro item
-                          if (rand() % 100 < 15) {
-                              int randomIndex = rand() % 101;
-                              EntityType itemType = possibleItems[randomIndex];
-                              Entity* item = nullptr;
-                              std::string nombreItem = "";
+							}
+						}
 
-
-                              if (17 <= randomIndex && randomIndex < 32)
-                              {
-                                  Item_Pocion_Dano* pocion_dano = (Item_Pocion_Dano*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_DANO);
-                                  pocion_dano->config = configNode.child("entities_data").child("item_pocion_dano");
-                                  pocion_dano->position = iPoint(position.x, position.y + 30);
-                                  pocion_dano->Start();
-
-                              }
-                              else if (47 <= randomIndex && randomIndex < 63)
-                              {
-                                  Item_Pocion_Velocidad* pocion_velocidad = (Item_Pocion_Velocidad*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_VELOCIDAD);
-                                  pocion_velocidad->config = configNode.child("entities_data").child("item_pocion_velocidad");
-                                  pocion_velocidad->position = iPoint(position.x, position.y + 30);
-                                  pocion_velocidad->Start();
-
-                              }
-                              else if (3 <= randomIndex && randomIndex < 17)
-                              {
-                                  Item_Pocion_Regeneracion* pocion_regeneracion = (Item_Pocion_Regeneracion*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_REGENERACION);
-                                  pocion_regeneracion->config = configNode.child("entities_data").child("item_pocion_regeneracion");
-                                  pocion_regeneracion->position = iPoint(position.x, position.y + 30);
-                                  pocion_regeneracion->Start();
-
-                              }
-                              else if (81 <= randomIndex && randomIndex <= 100)
-                              {
-                                  Item_Pocion_Vida_1* pocion_vida_1 = (Item_Pocion_Vida_1*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_VIDA_1);
-                                  pocion_vida_1->config = configNode.child("entities_data").child("item_pocion_vida_1");
-                                  pocion_vida_1->position = iPoint(position.x, position.y + 30);
-                                  pocion_vida_1->Start();
-
-                              }
-                              else if (63 <= randomIndex && randomIndex < 81)
-                              {
-                                  Item_Pocion_Vida_2* pocion_vida_2 = (Item_Pocion_Vida_2*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_VIDA_2);
-                                  pocion_vida_2->config = configNode.child("entities_data").child("item_pocion_vida_2");
-                                  pocion_vida_2->position = iPoint(position.x, position.y + 30);
-                                  pocion_vida_2->Start();
-
-                              }
-                              else if (32 <= randomIndex && randomIndex < 47)
-                              {
-                                  Item_Pocion_Vida_3* pocion_vida_3 = (Item_Pocion_Vida_3*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_VIDA_3);
-                                  pocion_vida_3->config = configNode.child("entities_data").child("item_pocion_vida_3");
-                                  pocion_vida_3->position = iPoint(position.x, position.y + 30);
-                                  pocion_vida_3->Start();
-
-                              }
-                              else if (0 <= randomIndex && randomIndex < 3)
-                              {
-                                  Item_Pocion_Vida_Max* pocion_vida_max = (Item_Pocion_Vida_Max*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_VIDA_MAX);
-                                  pocion_vida_max->config = configNode.child("entities_data").child("item_pocion_vida_max");
-                                  pocion_vida_max->position = iPoint(position.x, position.y + 30);
-                                  pocion_vida_max->Start();
-
-                              }
-                  }
-                 
+						// Con probabilidad del 15%, suelta otro item
+						if (rand() % 100 < 15) {
+							int randomIndex = rand() % 101;
+							EntityType itemType = possibleItems[randomIndex];
+							Entity* item = nullptr;
+							std::string nombreItem = "";
 
 
-                      }
-                  }
-              }
+							if (17 <= randomIndex && randomIndex < 32)
+							{
+								Item_Pocion_Dano* pocion_dano = (Item_Pocion_Dano*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_DANO);
+								pocion_dano->config = configNode.child("entities_data").child("item_pocion_dano");
+								pocion_dano->position = iPoint(position.x, position.y + 30);
+								pocion_dano->Start();
 
-               
-          }
-      }
-    }
+							}
+							else if (47 <= randomIndex && randomIndex < 63)
+							{
+								Item_Pocion_Velocidad* pocion_velocidad = (Item_Pocion_Velocidad*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_VELOCIDAD);
+								pocion_velocidad->config = configNode.child("entities_data").child("item_pocion_velocidad");
+								pocion_velocidad->position = iPoint(position.x, position.y + 30);
+								pocion_velocidad->Start();
+
+							}
+							else if (3 <= randomIndex && randomIndex < 17)
+							{
+								Item_Pocion_Regeneracion* pocion_regeneracion = (Item_Pocion_Regeneracion*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_REGENERACION);
+								pocion_regeneracion->config = configNode.child("entities_data").child("item_pocion_regeneracion");
+								pocion_regeneracion->position = iPoint(position.x, position.y + 30);
+								pocion_regeneracion->Start();
+
+							}
+							else if (81 <= randomIndex && randomIndex <= 100)
+							{
+								Item_Pocion_Vida_1* pocion_vida_1 = (Item_Pocion_Vida_1*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_VIDA_1);
+								pocion_vida_1->config = configNode.child("entities_data").child("item_pocion_vida_1");
+								pocion_vida_1->position = iPoint(position.x, position.y + 30);
+								pocion_vida_1->Start();
+
+							}
+							else if (63 <= randomIndex && randomIndex < 81)
+							{
+								Item_Pocion_Vida_2* pocion_vida_2 = (Item_Pocion_Vida_2*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_VIDA_2);
+								pocion_vida_2->config = configNode.child("entities_data").child("item_pocion_vida_2");
+								pocion_vida_2->position = iPoint(position.x, position.y + 30);
+								pocion_vida_2->Start();
+
+							}
+							else if (32 <= randomIndex && randomIndex < 47)
+							{
+								Item_Pocion_Vida_3* pocion_vida_3 = (Item_Pocion_Vida_3*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_VIDA_3);
+								pocion_vida_3->config = configNode.child("entities_data").child("item_pocion_vida_3");
+								pocion_vida_3->position = iPoint(position.x, position.y + 30);
+								pocion_vida_3->Start();
+
+							}
+							else if (0 <= randomIndex && randomIndex < 3)
+							{
+								Item_Pocion_Vida_Max* pocion_vida_max = (Item_Pocion_Vida_Max*)app->entityManager->CreateEntity(EntityType::ITEM_POCION_VIDA_MAX);
+								pocion_vida_max->config = configNode.child("entities_data").child("item_pocion_vida_max");
+								pocion_vida_max->position = iPoint(position.x, position.y + 30);
+								pocion_vida_max->Start();
+
+							}
+						}
+
+
+
+					}
+					possibleItems.clear();
+					possibleItems.shrink_to_fit();
+				}
+			}
+
+
+		}
+	}
+	}
 }
 
 

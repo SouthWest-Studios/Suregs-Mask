@@ -315,6 +315,7 @@ bool Input::CleanUp()
 {
 	keyboardRaw = nullptr; // No hace falta borrarlo, es gestionado por SDL
 	controllers.clear(); // No deberia hacer falta borrar los punteros uno a uno, gestionado por smart pointers
+	controllers.shrink_to_fit(); // No deberia hacer falta borrar los punteros uno a uno, gestionado por smart pointers
 	LOG("Quitting SDL event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;
@@ -406,6 +407,7 @@ bool Input::SaveBindings()
 
 void Input::FindControllers() {
 	controllers.clear(); // NOTE esto puede causar problemas en juegos multijugador, pero como este es de un solo jugador no pasa nada
+	controllers.shrink_to_fit(); // NOTE esto puede causar problemas en juegos multijugador, pero como este es de un solo jugador no pasa nada
 	for (int i = 0; i < SDL_NumJoysticks(); i++) {
 		if (SDL_IsGameController(i)) {
 			AddController(i);

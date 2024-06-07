@@ -111,6 +111,11 @@ bool Scene_GameOver::CleanUp()
 
 	LOG("Freeing Scene_GameOver");
 	app->tex->UnLoad(gameOverBackground);
+	if (gameOverBackground != nullptr)
+	{
+		delete (gameOverBackground);
+		gameOverBackground = nullptr;
+	}
 	app->guiManager->DestroyGuiControl(VolverAlMenu);
 	app->guiManager->DestroyGuiControl(Continuar);
 

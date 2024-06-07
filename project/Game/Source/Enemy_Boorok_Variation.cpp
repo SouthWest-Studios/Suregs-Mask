@@ -290,7 +290,7 @@ void Enemy_Boorok_Variation::Die()
 		if (parseResult) {
 			configNode = configFile.child("config");
 		}
-		float randomValue = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+		float randomValue = (float(std::rand() % 101) / 100);
 
 		if (randomValue <= 0.35f) {
 			Item_Viscera* visceras = (Item_Viscera*)app->entityManager->CreateEntity(EntityType::ITEM_VISCERAS);
@@ -298,7 +298,7 @@ void Enemy_Boorok_Variation::Die()
 			visceras->position = iPoint(position.x, position.y);
 			visceras->Start();
 		}
-		float randomValue2 = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+		float randomValue2 = (float(std::rand() % 101) / 100);
 
 		if (randomValue2 <= 0.30f) {
 			Item_Diente* diente = (Item_Diente*)app->entityManager->CreateEntity(EntityType::ITEM_DIENTE);

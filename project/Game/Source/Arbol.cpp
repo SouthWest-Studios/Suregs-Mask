@@ -45,8 +45,6 @@ bool Arbol::Start() {
 	//initilize textures
 	/*position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();*/
-	texture = app->tex->Load(config.attribute("texturePath").as_string());
-	openTexture = app->tex->Load(config.attribute("opentexturePath").as_string());
 
     /*chest_fx = app->audio->LoadAudioFx("chest_fx");*/
 
@@ -86,7 +84,7 @@ bool Arbol::PostUpdate()
 }
 bool Arbol::CleanUp()
 {
-    app->physics->GetWorld()->DestroyBody(pbody->body);
+	app->physics->DestroyBody(pbody);
     app->tex->UnLoad(texture);
     return true;
 }

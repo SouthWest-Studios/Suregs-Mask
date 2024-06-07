@@ -276,6 +276,7 @@ bool CommerceHerreria::Update(float dt)
 
 	//actualTrades
 	actualTrades.clear();
+	actualTrades.shrink_to_fit();
 	if (app->entityManager->GetPlayer() != nullptr) {
 		for (int i = 0; i < trades.size(); i++) {
 			if (trades.at(i)->type == 0 && trades.at(i)->level == app->inventoryManager->swordLevel + 1) {

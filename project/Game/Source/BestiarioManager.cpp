@@ -162,6 +162,28 @@ bool BestiarioManager::CleanUp()
 	app->tex->UnLoad(SelectedItemText);
 	app->tex->UnLoad(EquipedItemText);
 	app->tex->UnLoad(listTexture);
+	app->tex->UnLoad(CloseUp);
+	app->tex->UnLoad(listTexture2);
+	app->tex->UnLoad(listTexture3);
+	app->tex->UnLoad(sliderTexture);
+	app->tex->UnLoad(knobTexture);
+	app->tex->UnLoad(PointerItemText);
+	app->tex->UnLoad(textureOsiris);
+	app->tex->UnLoad(textureMuur);
+	app->tex->UnLoad(textureKhurt);
+	app->tex->UnLoad(textureBoorok);
+	app->tex->UnLoad(textureOls);
+	app->tex->UnLoad(textureInuit);
+	app->tex->UnLoad(textureMusri);
+	app->tex->UnLoad(textureSurma);
+	app->tex->UnLoad(iconTextureOsiris);
+	app->tex->UnLoad(iconTextureMuur);
+	app->tex->UnLoad(iconTextureKhurt);
+	app->tex->UnLoad(iconTextureBoorok);
+	app->tex->UnLoad(iconTextureOls);
+	app->tex->UnLoad(iconTextureInuit);
+	app->tex->UnLoad(iconTextureSurma);
+	app->tex->UnLoad(iconTextureMusri);
 	return ret;
 }
 int highestttId = -1;

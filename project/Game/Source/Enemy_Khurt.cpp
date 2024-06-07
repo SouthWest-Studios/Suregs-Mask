@@ -369,7 +369,7 @@ void Enemy_Khurt::Die() {
 	if (parseResult) {
 		configNode = configFile.child("config");
 	}
-	float randomValue = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+	float randomValue = (float(std::rand() % 101) / 100);
 
 	// Determina si el item debe crearse basado en un 30% de probabilidad
 	if (randomValue <= 0.25f) {

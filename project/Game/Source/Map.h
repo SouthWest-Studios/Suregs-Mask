@@ -57,8 +57,8 @@ struct TileSetTexture {
     TileTexture* GetTile(uint x, uint y) {
         for (int i = 0; i < tilesTextures.size(); i++) {
             TileTexture* t = tilesTextures.at(i);
-
-            if (t->x == x && t->y == y) { 
+            
+            if (t != nullptr && t->x == x && t->y == y) { 
                 return t;  
                 break; 
             }

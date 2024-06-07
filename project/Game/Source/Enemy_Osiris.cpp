@@ -210,9 +210,13 @@ bool Enemy_Osiris::PostUpdate() {
 
 bool Enemy_Osiris::CleanUp()
 {
-	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
-	app->physics->GetWorld()->DestroyBody(pbodySensor->body);
+	app->entityManager->DestroyEntity(this);
+	app->physics->DestroyBody(pbodyFoot); 
+	app->physics->DestroyBody(pbodySensor);
+	if(sensor != nullptr)
+	app->physics->DestroyBody(sensor);
 	//app->tex->UnLoad(texture);
+
 	lastPath.Clear();
 
 	blood = nullptr;
@@ -304,16 +308,14 @@ void Enemy_Osiris::Die() {
 		fPoint pos((float)position.x, (float)position.y);
 		blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_ENEMY_BLOOD);
 
-		app->entityManager->DestroyEntity(this);
-		app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
-		app->physics->GetWorld()->DestroyBody(pbodySensor->body);
+		
 		//app->tex->UnLoad(texture);
 		//CleanUp();
 		pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
 		if (parseResult) {
 			configNode = configFile.child("config");
 		}
-		float randomValue = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+		float randomValue = (float(std::rand() % 101) / 100);
 
 		// Determina si el �tem debe crearse basado en un 30% de probabilidad
 		if (randomValue <= 0.25f) {

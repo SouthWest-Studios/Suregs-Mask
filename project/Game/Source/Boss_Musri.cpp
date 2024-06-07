@@ -331,6 +331,7 @@ bool Boss_Musri::CleanUp()
 		}
 	}
 	flechasLanzadas.clear();
+	flechasLanzadas.shrink_to_fit();
 
 	// Limpiar sensores físicos de flechas cargadas y sus rastros
 	for (auto& flechaCargada : flechasCargadas) {
@@ -345,8 +346,10 @@ bool Boss_Musri::CleanUp()
 			}
 		}
 		flechaCargada.rastroGenerado.clear();
+		flechaCargada.rastroGenerado.shrink_to_fit();
 	}
 	flechasCargadas.clear();
+	flechasCargadas.shrink_to_fit();
 	return true;
 }
 
@@ -903,6 +906,7 @@ void Boss_Musri::Fase2(float dt, iPoint playerPos)
 				if (flechaC->rastroGenerado.size() == 0) {
 					app->physics->GetWorld()->DestroyBody(flechaC->pbody->body);
 					flechasCargadas.clear();
+					flechasCargadas.shrink_to_fit();
 				}
 
 				break;

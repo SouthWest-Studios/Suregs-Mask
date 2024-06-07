@@ -94,8 +94,11 @@ bool Estatua::PostUpdate()
 }
 bool Estatua::CleanUp()
 {
-    app->physics->GetWorld()->DestroyBody(pbody->body);
-    app->tex->UnLoad(texture);
+	app->entityManager->DestroyEntity(this);
+	app->physics->DestroyBody(pbodyFoot);
+	app->physics->DestroyBody(pbodySensor);
+	//app->tex->UnLoad(texture);
+
     return true;
 }
 void Estatua::OnCollision(PhysBody* physA, PhysBody* physB) 

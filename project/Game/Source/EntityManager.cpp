@@ -199,6 +199,7 @@ bool EntityManager::CleanUp()
 	tpEntities.Clear();
 
 	objectsToDraw.clear();
+	objectsToDraw.shrink_to_fit();
 
 	eyeAnimation.Clear();
 	eyeIdle.Clear();

@@ -74,7 +74,8 @@ bool QuestManager::Start() {
 bool QuestManager::CleanUp()
 {
 	bool ret = true;
-
+	questLines.clear();
+	questLines.shrink_to_fit();
 
 	return ret;
 }

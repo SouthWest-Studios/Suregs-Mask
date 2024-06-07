@@ -57,7 +57,6 @@ bool Boss_Inuit::Start() {
 	wave_boss_inuit.resize(11);
 	for (int i = 0; i < 11; i++)
 	{
-
 		wave_boss_inuit[i].LoadAnim("boss_inuit", "wave_boss_inuit", spritePositions);
 	}
 
@@ -379,6 +378,10 @@ bool Boss_Inuit::CleanUp()
 	}
 	app->tex->UnLoad(texture);
 	lastPath.Clear();
+	wave_boss_inuit.clear();
+	wave_boss_inuit.shrink_to_fit();
+	currentAnimation2.clear();
+	currentAnimation2.shrink_to_fit();
 
 	RELEASE(spritePositions);
 	delete spritePositions;

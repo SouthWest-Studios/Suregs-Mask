@@ -45,8 +45,8 @@ public:
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
 
-	SDL_Texture* gameOverBackground;
-	SDL_Texture* logo;
+	SDL_Texture* gameOverBackground = nullptr;
+	SDL_Texture* logo = nullptr;
 
 	const char* gameOverBackground_tp;
 	const char* logo_tp;
