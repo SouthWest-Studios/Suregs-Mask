@@ -1599,7 +1599,7 @@ bool TreeManager::Update(float dt)
 			UseTreeSelected(PointerId);
 
 		}
-		if (app->input->GetButton(BACK) == KEY_DOWN)
+		if (app->input->GetButton(BACK) == KEY_DOWN && app->input->GetButton(CHANGEROD) == KEY_DOWN && app->input->GetButton(SECOND_BACK) == KEY_DOWN)
 		{
 			ReembolsarTreeSelected(PointerId);
 
