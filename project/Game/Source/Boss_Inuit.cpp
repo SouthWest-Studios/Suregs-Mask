@@ -275,7 +275,7 @@ bool Boss_Inuit::PostUpdate() {
 	{
 		if (atackBMR != nullptr) {
 			atackBMR->body->SetLinearVelocity(b2Vec2(0, 0));
-			atackBMR->body->GetWorld()->DestroyBody(atackBMR->body);
+			app->physics->DestroyBody(atackBMR);
 			atackBMR = nullptr;
 			//printf("delete");
 			inuit_ranged_attack = false;

@@ -278,7 +278,8 @@ void Enemy_Ols_Variation::Die() {
 	app->bestiarioManager->CreateItem("olsV");
 
 	app->entityManager->DestroyEntity(this);
-	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
+	//app->physics->GetWorld()->DestroyBody(pbodyFoot->body);LIN
+	app->physics->DestroyBody(pbodyFoot);
 	//app->tex->UnLoad(texture);
 
 	//Mask 0

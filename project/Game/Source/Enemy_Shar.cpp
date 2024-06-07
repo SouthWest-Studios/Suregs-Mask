@@ -197,7 +197,8 @@ void Enemy_Shar::Die(float dt) {
 	ojo->Start();
 
 	app->entityManager->DestroyEntity(this);
-	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
+	//app->physics->GetWorld()->DestroyBody(pbodyFoot->body);LIN
+	app->physics->DestroyBody(pbodyFoot);
 	app->tex->UnLoad(texture);
 
 	//Mask XP

@@ -204,8 +204,11 @@ bool Enemy_Muur_Variation::PostUpdate() {
 
 bool Enemy_Muur_Variation::CleanUp()
 {
-	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
-	app->physics->GetWorld()->DestroyBody(pbodySensor->body);
+	app->physics->DestroyBody(pbodyFoot);
+	app->physics->DestroyBody(pbodySensor);
+
+	/*app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
+	app->physics->GetWorld()->DestroyBody(pbodySensor->body); LIN*/
 	//app->tex->UnLoad(texture);
 	lastPath.Clear();
 
