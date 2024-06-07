@@ -459,7 +459,7 @@ bool Map::CleanUp()
 	while (collision != NULL) {
 		collision->data->body->SetActive(false);
 		//collision->data->body->SetTransform(b2Vec2(-100000, -100000), 0);
-		app->physics->GetWorld()->DestroyBody(collision->data->body);
+		/*app->physics->GetWorld()->DestroyBody(collision->data->body);*/
 		RELEASE(collision->data);
 		delete collision->data;
 

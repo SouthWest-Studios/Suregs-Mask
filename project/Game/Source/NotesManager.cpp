@@ -626,20 +626,20 @@ bool NotesManager::PostUpdate()
 	if (notes.Count() == 0 || (notes.Count() - 1) == 0 || PointerId < 0)
 	{
 		
-		knobY = 200;
+		knobY = 131;
 
 	}
 	else
 	{
-		knobY= 200 + (341 / (notes.Count() - 1)) * PointerId;
+		knobY= 131 + (401 / (notes.Count() - 1)) * PointerId;
 	}
 
 	if (mostrar == true)
 	{
 		if (app->menu->animating == false && app->menu->animatingExit2 == false && app->menu->menuu == true)
 		{
-			app->render->DrawTexture(sliderTexture, 550, 200, SDL_FLIP_NONE, 0, 0);
-			app->render->DrawTexture(knobTexture, 550, knobY, SDL_FLIP_NONE, 0, 0);
+			app->render->DrawTexture(sliderTexture, 590, 200, SDL_FLIP_NONE, 0, 0);
+			app->render->DrawTexture(knobTexture, 582, knobY, SDL_FLIP_NONE, 0, 0);
 		}
 		uint windowWidth, windowHeight;
 		app->win->GetWindowSize(windowWidth, windowHeight);

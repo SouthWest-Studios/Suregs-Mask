@@ -784,14 +784,14 @@ bool BestiarioManager::PostUpdate()
 
 	}
 	ret = true;
-	int knobY = 200;
+	int knobY = 139;
 	if (numberRows == 0)
 	{
-		knobY = 200;
+		knobY = 139;
 	}
 	else
 	{
-		knobY = 200 + (341 / numberRows) * verticalPointerId;
+		knobY = 139 + (401 / numberRows) * verticalPointerId;
 	}
 
 
@@ -800,7 +800,7 @@ bool BestiarioManager::PostUpdate()
 		if (app->menu->animating == false && app->menu->animatingExit2 == false && app->menu->menuu == true)
 		{
 			app->render->DrawTexture(sliderTexture, 960, 200, SDL_FLIP_NONE, 0, 0);
-			app->render->DrawTexture(knobTexture, 960, knobY, SDL_FLIP_NONE, 0, 0);
+			app->render->DrawTexture(knobTexture, 958, knobY, SDL_FLIP_NONE, 0, 0);
 
 			uint windowWidth, windowHeight;
 			app->win->GetWindowSize(windowWidth, windowHeight);
