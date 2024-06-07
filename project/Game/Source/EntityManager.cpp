@@ -166,6 +166,8 @@ bool EntityManager::Start() {
 
 	currentAnimation = &eyeIdle;
 
+
+
 	return ret;
 }
 
@@ -216,8 +218,13 @@ bool EntityManager::CleanUp()
 	eyeIdle.Clear();
 	eyeEndIdle.Clear();
 
+	RELEASE(spritePositions); 
+	delete spritePositions;
 
+	currentAnimation = nullptr;
 	//delete bossIgory;
+
+
 
 
 	return ret;
