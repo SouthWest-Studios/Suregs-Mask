@@ -25,14 +25,10 @@
 			</bosses>
 		</map>
 	</map>
-	<scene_pueblo />
+	<pueblo_tutorial />
 	<entitymanager>
 		<entity_manager>
-			<doors>
-				<door sceneLevel="-10" tpID="0" />
-				<door sceneLevel="0" tpID="8" />
-				<door sceneLevel="0" tpID="1" />
-			</doors>
+			<doors />
 		</entity_manager>
 	</entitymanager>
 	<missionmanager />
@@ -69,7 +65,7 @@
 	<commercemanager />
 	<questmanager>
 		<questLines>
-			<questLine id="1" index="6" active="true" completed="false" />
+			<questLine id="1" index="1" active="true" completed="false" />
 			<questLine id="2" index="1" active="false" completed="false" />
 		</questLines>
 	</questmanager>
