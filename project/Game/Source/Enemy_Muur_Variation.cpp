@@ -261,8 +261,10 @@ void Enemy_Muur_Variation::Die() {
 	if (dieAnim.HasFinished())
 	{
 		app->entityManager->DestroyEntity(this);
-		app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
-		app->physics->GetWorld()->DestroyBody(pbodySensor->body);
+		/*app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
+		app->physics->GetWorld()->DestroyBody(pbodySensor->body);LIN*/
+		app->physics->DestroyBody(pbodyFoot);
+		app->physics->DestroyBody(pbodySensor);
 		//app->tex->UnLoad(texture);
 
 
