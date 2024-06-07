@@ -537,10 +537,10 @@
 
 		<boss_surma>
 			<idleAnim start="18" end="26" speed="0.1f" loop="true"/>
-			<runAnim start="44" end="51" speed="0.1f" loop="true"/> 
+			<runAnim start="45" end="51" speed="0.1f" loop="true"/> 
 			
 			<combo1Anim start="0" end="5" speed="0.13f" loop="false"/>
-			<combo2Anim start="0" end="5" speed="0.13f" loop="false"/> <!-- tiene que ir reversed-->
+			<combo2Anim start="0" end="5" speed="0.13f" loop="false"/> <!-- tiene que ir reversed, ta hecho por codigo-->
 			<combo3Anim start="0" end="5" speed="0.13f" loop="false"/>
 			<ataqueCargadoAnim start="5" end="6" speed="0.06f" loop="false"/>
 			<ataqueCargadoEjecutarAnim start="7" end="11" speed="0.07f" loop="false"/>

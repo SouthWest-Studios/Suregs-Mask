@@ -76,7 +76,7 @@ bool Scene_Arena_Tutorial::Start()
 
 	app->SaveRequest();
 
-	if (app->questManager->GetQuestLineIndex(1) <= 2) {
+	if (app->questManager->GetQuestLineIndex(1) == 2) {
 		app->questManager->UpdateQuestLine(1, 3);
 	}
 		

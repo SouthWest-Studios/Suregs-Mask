@@ -386,7 +386,7 @@ bool DialogManager::PostUpdate() {
 
 			if (actualDialog->type == DialogType::QUEST_UPDATE) {
 
-				if (app->questManager->GetQuestLineIndex(actualDialog->questLine) <= actualDialog->actualTargetID) {
+				if (app->questManager->GetQuestLineIndex(actualDialog->questLine) == actualDialog->actualTargetID) {
 					app->questManager->UpdateQuestLine(actualDialog->questLine, actualDialog->nextTargetID);
 				}
 			}

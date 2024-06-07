@@ -9,6 +9,7 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "QuestManager.h"
 
 TPEntity::TPEntity() : Entity(EntityType::TP_ENTITY)
 {
@@ -90,12 +91,31 @@ void TPEntity::OnCollision(PhysBody* physA, PhysBody* physB) {
 				}
 
 
-				
+				if (app->questManager->GetQuestLineIndex(1) > 1) {
+					app->entityManager->GetPlayer()->pbodyFoot->body->SetTransform(b2Vec2(PIXEL_TO_METERS(targetPos.x), PIXEL_TO_METERS(targetPos.y)), 0);
+				}
+				else {
+					if (!app->dialogManager->isPlaying && !checkQuest0) {
+						app->dialogManager->CreateDialogSinEntity("Creo que tendria que hablar con Vhea antes de salir...", "Jakov", "");
+						checkQuest0 = true;
+					}
+				}
 
-				app->entityManager->GetPlayer()->pbodyFoot->body->SetTransform(b2Vec2(PIXEL_TO_METERS(targetPos.x),PIXEL_TO_METERS(targetPos.y)), 0);
+				
 				break;
 			}
 	}
+}
+
+void TPEntity::OnEndCollision(PhysBody* physA, PhysBody* physB)
+{
+	switch (physB->ctype)
+	{
+		case ColliderType::PLAYER:
+			checkQuest0 = false;
+			break;
+	}
+
 }
 
 MapObject* TPEntity::GetCurrentRoom()

@@ -72,7 +72,7 @@ bool Scene_Mazmorra3::Start()
 	app->entityManager->Enable();
 
 
-	if (app->questManager->GetQuestLineIndex(1) <= 13) {
+	if (app->questManager->GetQuestLineIndex(1) == 13) {
 		app->questManager->UpdateQuestLine(1, 14);
 	}
 

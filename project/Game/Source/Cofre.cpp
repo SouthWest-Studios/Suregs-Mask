@@ -111,7 +111,7 @@ void Cofre::OnCollision(PhysBody* physA, PhysBody* physB)
 				if (tutorial) {
 					abierto = true;
 
-					if (app->questManager->GetQuestLineIndex(1) <= 4) {
+					if (app->questManager->GetQuestLineIndex(1) == 4) {
 						app->questManager->UpdateQuestLine(1, 5);
 					}
 

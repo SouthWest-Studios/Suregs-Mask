@@ -247,7 +247,7 @@ bool Map::PostUpdate()
 			
 				TileTexture* tt = tst->GetTile(j, i);
 
-				if (tt->texture != nullptr) {
+				if (tt != nullptr && tt->texture != nullptr) {
 
 				
 					//app->render->DrawTexture(tt->texture, (j-1+tst->tilesSetWMoved)*tst->tileSize + tst->tilesSetWMovedR, (i-1+tst->tilesSetHMoved)*tst->tileSize + tst->tilesSetHMovedR, 1);
@@ -317,6 +317,9 @@ bool Map::PrintMapFront()
 					SDL_RendererFlip flip = SDL_FLIP_NONE;
 					int angle = 0;
 
+					
+
+
 					if (gid >= 100000) {
 						uint tiledID = static_cast<uint>(gid & ~0xE0000000);
 						bits = gid >> 29;
@@ -339,11 +342,13 @@ bool Map::PrintMapFront()
 
 					//SDL_SetTextureColorMod(tileset->texture, 255 * mapLayer->data->opacity, 255 * mapLayer->data->opacity, 255 * mapLayerItem->data->opacity);
 
-
-					app->render->DrawTexture(tileset->texture,
-						pos.x,
-						pos.y, flip,
-						&r, 1, angle);
+					if (tileset->texture != nullptr) {
+						app->render->DrawTexture(tileset->texture,
+							pos.x,
+							pos.y, flip,
+							&r, 1, angle);
+					}
+					
 
 				}
 			}
@@ -1479,9 +1484,19 @@ bool Map::LoadEntities(std::string layerName)
 						app->entityManager->SetPlayer((Player*)app->entityManager->CreateEntity(EntityType::PLAYER));
 						app->entityManager->GetPlayer()->config = configNode.child("entities_data").child("player");
 
-						iPoint Npos = iPoint(pos.x + 16, pos.y + 16);
-						LOG("POSX: %d, POSY: %d", pos.x, pos.y);
-						app->entityManager->GetPlayer()->position = iPoint(pos.x + 16, pos.y + 16);
+						iPoint Npos;
+						if (tpSaleMazmorra){
+							tpSaleMazmorra = false;
+							Npos = iPoint(180 * 32, 24 * 32);
+
+						}
+						else {
+							Npos = iPoint(pos.x + 16, pos.y + 16);
+						}
+
+						
+						
+						app->entityManager->GetPlayer()->position = iPoint(Npos.x + 16, Npos.y + 16);
 						app->entityManager->GetPlayer()->Start();
 
 					}

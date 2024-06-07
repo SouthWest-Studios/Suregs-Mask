@@ -215,6 +215,7 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, SDL_RendererFlip fl
 		auto it = app->tex->texturePathMap.find(texture);
 		std::string texturePath = (it != app->tex->texturePathMap.end()) ? it->second : "Unknown";
 		LOG("Cannot blit to screen. Texture path: %s, SDL_RenderCopy error: %s", texturePath.c_str(), SDL_GetError());
+		LOG("Cannot blit to screen. a las coordenadas: X: %d, Y: %d", x, y);
 		ret = false;
 	}
 

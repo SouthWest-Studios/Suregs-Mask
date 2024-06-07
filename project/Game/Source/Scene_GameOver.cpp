@@ -113,7 +113,7 @@ bool Scene_GameOver::CleanUp()
 	app->tex->UnLoad(gameOverBackground);
 	if (gameOverBackground != nullptr)
 	{
-		delete (gameOverBackground);
+		/*delete (gameOverBackground);*/
 		gameOverBackground = nullptr;
 	}
 	app->guiManager->DestroyGuiControl(VolverAlMenu);
