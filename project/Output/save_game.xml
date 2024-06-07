@@ -25,15 +25,13 @@
 			</bosses>
 		</map>
 	</map>
-	<scene_pueblo />
+	<pueblo_tutorial />
 	<entitymanager>
 		<entity_manager>
 			<doors>
-				<door sceneLevel="-10" tpID="27" />
-				<door sceneLevel="-10" tpID="4" />
-				<door sceneLevel="-10" tpID="3" />
-				<door sceneLevel="-10" tpID="60" />
-				<door sceneLevel="-10" tpID="28" />
+				<door sceneLevel="-10" tpID="0" />
+				<door sceneLevel="-10" tpID="8" />
+				<door sceneLevel="-10" tpID="1" />
 			</doors>
 		</entity_manager>
 	</entitymanager>
@@ -47,7 +45,7 @@
 			<ArmorLevel quantity="0" />
 			<PrimaryMask quantity="-1" />
 			<SecondaryMask quantity="-1" />
-			<StoryLevel quantity="1" />
+			<StoryLevel quantity="2" />
 			<Mask0 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
 			<Mask1 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
 			<Mask2 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
@@ -65,7 +63,7 @@
 				<maskTwoXP XP="0" />
 				<maskThreeXP XP="0" />
 			</masksXP>
-			<elevator mazmorra="0" mazmorraActual="7" />
+			<elevator mazmorra="0" mazmorraActual="0" />
 		</inventory>
 	</iventorymanager>
 	<commercemanager />

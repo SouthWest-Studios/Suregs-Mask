@@ -283,7 +283,7 @@
 		<item_pez_pequeno texturePath="---" description="Pez pequeño usado para crear pócimas." type ="Pez" name="Pez pequeño"/>
 		<item_pez_mediano texturePath="---" description="Pez mediano usado para crear pócimas." type ="Pez" name="Pez mediano"/>
 		<item_pez_grande texturePath="---" description="Pez grande usado para crear pócimas." type="Pez" name="Pez grande"/>
-		<item_basura texturePath="---" description="Pez grande usado para crear pócimas." type="Pez" name="Pez grande"/>
+		<item_basura texturePath="---" description="No parece que sirva para nada." type="Pez" name="Basura"/>
 		
 		<item_moneda texturePath="---" description="La moneda principal del juego, utilizada para comprar una variedad de bienes" type ="Miscelanea" name="Monedas"/>
 		

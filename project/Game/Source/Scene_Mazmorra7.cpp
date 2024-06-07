@@ -69,6 +69,7 @@ bool Scene_Mazmorra7::Start()
 	gcButtom = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);*/
 
 	app->entityManager->Enable();
+	
 
 	return true;
 }

@@ -176,7 +176,7 @@ bool Enemy_Guerrero::PostUpdate() {
 bool Enemy_Guerrero::CleanUp()
 {
 
-	app->entityManager->DestroyEntity(this);
+	
 	app->physics->DestroyBody(pbodyFoot);
 	app->physics->DestroyBody(pbodySensor);
 	//app->tex->UnLoad(texture);
@@ -185,6 +185,8 @@ bool Enemy_Guerrero::CleanUp()
 
 	RELEASE(spritePositions);
 	delete spritePositions;
+
+	app->entityManager->DestroyEntity(this);
 
 	return true;
 }

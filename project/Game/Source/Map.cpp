@@ -317,6 +317,9 @@ bool Map::PrintMapFront()
 					SDL_RendererFlip flip = SDL_FLIP_NONE;
 					int angle = 0;
 
+					
+
+
 					if (gid >= 100000) {
 						uint tiledID = static_cast<uint>(gid & ~0xE0000000);
 						bits = gid >> 29;
@@ -339,11 +342,13 @@ bool Map::PrintMapFront()
 
 					//SDL_SetTextureColorMod(tileset->texture, 255 * mapLayer->data->opacity, 255 * mapLayer->data->opacity, 255 * mapLayerItem->data->opacity);
 
-
-					app->render->DrawTexture(tileset->texture,
-						pos.x,
-						pos.y, flip,
-						&r, 1, angle);
+					if (tileset->texture != nullptr) {
+						app->render->DrawTexture(tileset->texture,
+							pos.x,
+							pos.y, flip,
+							&r, 1, angle);
+					}
+					
 
 				}
 			}

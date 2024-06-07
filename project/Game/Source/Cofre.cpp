@@ -57,7 +57,7 @@ bool Cofre::Start() {
 	pbody = app->physics->CreateRectangleSensor(position.x + 10, position.y, 100, 100, bodyType::KINEMATIC);
 	pbody->ctype = ColliderType::COFRE;
 	pbody->listener = this;
-	pbody->body->GetFixtureList()->SetSensor(true);
+	
 
 
 
