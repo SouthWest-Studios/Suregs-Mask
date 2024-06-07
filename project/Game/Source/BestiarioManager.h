@@ -61,7 +61,7 @@ public:
 	bool animating = false; // Indicador de animación
 	bool animatingExit = false; // Indicador de animación de salida
 	bool animatingExit2 = false;
-	
+	bool acabar = true;
 
 public:
 
