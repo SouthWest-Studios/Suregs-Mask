@@ -80,7 +80,7 @@ bool Scene_Mazmorra0::Start()
 	mascara0->position = iPoint(2704, 1693);
 	mascara0->Start();*/
 
-	if (app->questManager->GetQuestLineIndex(1) <= 5) {
+	if (app->questManager->GetQuestLineIndex(1) == 5) {
 		app->questManager->UpdateQuestLine(1, 6);
 	}
 

@@ -69,7 +69,7 @@ bool Scene_Mazmorra6::Start()
 	/*SDL_Rect btPos = { windowW / 2 - 60,20, 120,20};
 	gcButtom = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);*/
 
-	if (app->questManager->GetQuestLineIndex(1) <= 20) {
+	if (app->questManager->GetQuestLineIndex(1) == 20) {
 		app->questManager->UpdateQuestLine(1, 21);
 	}
 

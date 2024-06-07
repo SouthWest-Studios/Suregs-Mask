@@ -25,10 +25,16 @@
 			</bosses>
 		</map>
 	</map>
-	<pueblo_tutorial />
+	<scene_pueblo />
 	<entitymanager>
 		<entity_manager>
-			<doors />
+			<doors>
+				<door sceneLevel="-10" tpID="27" />
+				<door sceneLevel="-10" tpID="4" />
+				<door sceneLevel="-10" tpID="3" />
+				<door sceneLevel="-10" tpID="60" />
+				<door sceneLevel="-10" tpID="28" />
+			</doors>
 		</entity_manager>
 	</entitymanager>
 	<missionmanager />
@@ -59,7 +65,7 @@
 				<maskTwoXP XP="0" />
 				<maskThreeXP XP="0" />
 			</masksXP>
-			<elevator mazmorra="0" mazmorraActual="0" />
+			<elevator mazmorra="0" mazmorraActual="7" />
 		</inventory>
 	</iventorymanager>
 	<commercemanager />
