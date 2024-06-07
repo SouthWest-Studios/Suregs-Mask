@@ -317,6 +317,8 @@ bool Scene_Menu::CleanUp()
 	partidaTwoPressed = false;
 	partidaThreePressed = false;
 
+	eMenuGenerated = false;
+
 	eMenu = nullptr;
 	app->psystem->RemoveAllEmitters();
 
