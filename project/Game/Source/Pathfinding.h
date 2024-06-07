@@ -9,7 +9,7 @@
 #include "Physics.h"
 
 
-#define DEFAULT_PATH_LENGTH 50
+#define DEFAULT_PATH_LENGTH 10
 #define INVALID_WALK_CODE 255
 
 // --------------------------------------------------
