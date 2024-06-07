@@ -460,6 +460,7 @@ bool Map::CleanUp()
 		collision->data->body->SetActive(false);
 		//collision->data->body->SetTransform(b2Vec2(-100000, -100000), 0);
 		app->physics->GetWorld()->DestroyBody(collision->data->body);
+		
 		RELEASE(collision->data);
 		delete collision->data;
 
@@ -2043,6 +2044,8 @@ bool Map::LoadTileSetTexture(pugi::xml_node mapFile)
 			tst->tileSetH += 1;
 		}
 
+
+		tst->tilesTextures.reserve(tst->tileSetH * tst->tileSetW);
 
 		for (int i = 0; i < tst->tileSetH; i++) {
 			for (int j = 0; j < tst->tileSetW; j++) {

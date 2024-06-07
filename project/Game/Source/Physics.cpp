@@ -102,16 +102,33 @@ void Physics::DestroyBody(PhysBody* body)
 
 void Physics::DestroyPendingBodies()
 {
-	for (auto* bodyWrapper : bodiesToDestroy) {
-		if (bodyWrapper != nullptr && bodyWrapper->body != nullptr) {
+	for (size_t i = 0; i < bodiesToDestroy.size(); ++i) {
+		PhysBody* bodyWrapper = bodiesToDestroy[i];
 
-			world->DestroyBody(bodyWrapper->body);
-			delete bodyWrapper;
+		if (bodyWrapper == nullptr) {
+			LOG("bodyWrapper is nullptr at index %zu", i);
+			continue;
 		}
+
+		if (bodyWrapper->body != nullptr) {
+			world->DestroyBody(bodyWrapper->body);
+			LOG("Destroyed body at index %zu", i);
+		}
+		else {
+			LOG("bodyWrapper->body is nullptr at index %zu", i);
+		}
+
+		delete bodyWrapper;
+		LOG("Deleted bodyWrapper at index %zu", i);
 	}
+
 	bodiesToDestroy.clear();
 	bodiesToDestroy.shrink_to_fit();
+	bodiesToDestroy.reserve(300);
+
+	LOG("Cleared and reserved bodiesToDestroy");
 }
+
 
 b2World* Physics::GetWorld()
 {

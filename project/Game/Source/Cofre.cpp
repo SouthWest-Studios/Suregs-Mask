@@ -94,6 +94,7 @@ bool Cofre::PostUpdate()
 bool Cofre::CleanUp()
 {
 	app->physics->DestroyBody(pbody);
+	pbody = nullptr;
 	app->tex->UnLoad(texture);
 	app->tex->UnLoad(openTexture);
 

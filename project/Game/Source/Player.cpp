@@ -1085,7 +1085,10 @@ bool Player::CleanUp()
 	/*app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 	app->physics->GetWorld()->DestroyBody(pbodySensor->body);*/
 	app->physics->DestroyBody(pbodyFoot);
+	pbodyFoot = nullptr;
 	app->physics->DestroyBody(pbodySensor);
+	pbodySensor = nullptr;
+
 	/*app->tex->UnLoad(texture);*/
 	app->tex->UnLoad(texture);
 	DeadTP = false;

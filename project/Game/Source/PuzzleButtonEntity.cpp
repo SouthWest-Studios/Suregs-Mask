@@ -60,6 +60,7 @@ bool PuzzleButtonEntity::CleanUp()
 {
 	if (pbody != nullptr) {
 		app->physics->DestroyBody(pbody);
+		pbody = nullptr;
 	}
 	return true;
 }

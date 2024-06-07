@@ -207,8 +207,9 @@ bool Enemy_Ols::CleanUp()
 {
 	app->entityManager->DestroyEntity(pbodyFoot->entity);
 	app->physics->DestroyBody(pbodyFoot);
-
+	pbodyFoot = nullptr;
 	app->physics->DestroyBody(attackSensor); 
+	attackSensor = nullptr;
 	app->tex->UnLoad(projectileTexture);
 
 	app->psystem->RemoveAllEmitters();

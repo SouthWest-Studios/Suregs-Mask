@@ -209,7 +209,9 @@ bool Enemy_Muur::PostUpdate() {
 bool Enemy_Muur::CleanUp()
 {
 	app->physics->DestroyBody(pbodyFoot);
+	pbodyFoot = nullptr;
 	app->physics->DestroyBody(pbodySensor);
+	pbodySensor = nullptr;
 
 	//app->tex->UnLoad(texture);
 	lastPath.Clear();

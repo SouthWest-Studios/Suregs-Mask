@@ -96,6 +96,7 @@ bool Elevator::PostUpdate()
 bool Elevator::CleanUp()
 {
     app->physics->DestroyBody(pbody);
+	pbody = nullptr;
  
     return true;
 }

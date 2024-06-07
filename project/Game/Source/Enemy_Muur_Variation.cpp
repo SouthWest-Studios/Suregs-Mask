@@ -205,7 +205,9 @@ bool Enemy_Muur_Variation::PostUpdate() {
 bool Enemy_Muur_Variation::CleanUp()
 {
 	app->physics->DestroyBody(pbodyFoot);
+	pbodyFoot = nullptr;
 	app->physics->DestroyBody(pbodySensor);
+	pbodySensor = nullptr;
 
 	/*app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 	app->physics->GetWorld()->DestroyBody(pbodySensor->body); LIN*/
@@ -264,7 +266,9 @@ void Enemy_Muur_Variation::Die() {
 		/*app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 		app->physics->GetWorld()->DestroyBody(pbodySensor->body);LIN*/
 		app->physics->DestroyBody(pbodyFoot);
+		pbodyFoot = nullptr;
 		app->physics->DestroyBody(pbodySensor);
+		pbodySensor = nullptr;
 		//app->tex->UnLoad(texture);
 
 

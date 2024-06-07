@@ -109,6 +109,7 @@ bool NPCPadre::PostUpdate() {
 bool NPCPadre::CleanUp() {
 	//app->physics->GetWorld()->DestroyBody(pbody->body);
 	app->physics->DestroyBody(pbody);
+	pbody = nullptr;
 	app->entityManager->GetIgory()->playerInFight = true;
 	app->tex->UnLoad(texture);
 	RELEASE(spritePositions);

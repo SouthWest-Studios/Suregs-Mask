@@ -85,6 +85,7 @@ bool Arbol::PostUpdate()
 bool Arbol::CleanUp()
 {
 	app->physics->DestroyBody(pbody);
+	pbody = nullptr;
     app->tex->UnLoad(texture);
 
     return true;

@@ -116,7 +116,7 @@ bool Item_Nota::PostUpdate()
 
 bool Item_Nota::CleanUp()
 {
-	app->physics->DestroyBody(pbody);app->entityManager->DestroyEntity(this);active = false;app->entityManager->DestroyEntity(this);active = false;
+	app->physics->DestroyBody(pbody); pbody = nullptr;  app->entityManager->DestroyEntity(this);active = false;
 	
 	app->tex->UnLoad(texture);
 	return true;

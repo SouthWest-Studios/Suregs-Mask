@@ -67,7 +67,7 @@ bool Item_Pocion_Vida_1::PostUpdate()
 
 bool Item_Pocion_Vida_1::CleanUp()
 {
-	app->physics->DestroyBody(pbody);app->entityManager->DestroyEntity(this);active = false;
+	app->physics->DestroyBody(pbody); pbody = nullptr;  app->entityManager->DestroyEntity(this);active = false;
 	app->tex->UnLoad(texture);
 	return true;
 }

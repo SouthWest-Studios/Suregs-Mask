@@ -150,6 +150,7 @@ bool Enemy_Shar::CleanUp()
 {
 	app->entityManager->DestroyEntity(pbodyFoot->entity);
 	app->physics->DestroyBody(pbodyFoot);
+	pbodyFoot = nullptr;
 	app->tex->UnLoad(texture);
 
 	blood = nullptr;
@@ -199,6 +200,7 @@ void Enemy_Shar::Die(float dt) {
 	app->entityManager->DestroyEntity(this);
 	//app->physics->GetWorld()->DestroyBody(pbodyFoot->body);LIN
 	app->physics->DestroyBody(pbodyFoot);
+	pbodyFoot = nullptr;
 	app->tex->UnLoad(texture);
 
 	//Mask XP

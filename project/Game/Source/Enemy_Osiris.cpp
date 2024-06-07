@@ -212,9 +212,12 @@ bool Enemy_Osiris::CleanUp()
 {
 	app->entityManager->DestroyEntity(this);
 	app->physics->DestroyBody(pbodyFoot); 
+	pbodyFoot = nullptr;
 	app->physics->DestroyBody(pbodySensor);
+	pbodySensor = nullptr;
 	if(sensor != nullptr)
 	app->physics->DestroyBody(sensor);
+	sensor = nullptr;
 	//app->tex->UnLoad(texture);
 
 	lastPath.Clear();

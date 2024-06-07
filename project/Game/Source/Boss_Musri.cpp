@@ -312,7 +312,9 @@ bool Boss_Musri::CleanUp()
 {
 	app->entityManager->DestroyEntity(this);
 	app->physics->DestroyBody(pbodyFoot);
+	pbodyFoot = nullptr;
 	app->physics->DestroyBody(pbodySensor);
+	pbodySensor = nullptr;
 	app->tex->UnLoad(texture);
 	lastPath.Clear();
 	app->tex->UnLoad(arrowTexture);
@@ -468,6 +470,7 @@ void Boss_Musri::OnCollision(PhysBody* physA, PhysBody* physB) {
 			for (int i = 0; i < flechasLanzadas.size(); i++) {
 				if (flechasLanzadas.at(i).pbody->body->GetTransform().p == physA->body->GetTransform().p) {
 					app->physics->DestroyBody(flechasLanzadas.at(i).pbody);
+					flechasLanzadas.at(i).pbody = nullptr;
 					flechasLanzadas.erase(flechasLanzadas.begin() + i);
 					break;
 				}
@@ -486,6 +489,7 @@ void Boss_Musri::OnCollision(PhysBody* physA, PhysBody* physB) {
 			for (int i = 0; i < flechasCargadas.size(); i++) {
 				if (flechasCargadas.at(i).pbody->body->GetTransform().p == physA->body->GetTransform().p) {
 					app->physics->DestroyBody(flechasCargadas.at(i).pbody);
+					flechasCargadas.at(i).pbody = nullptr;
 					flechasCargadas.erase(flechasCargadas.begin() + i);
 					break;
 				}

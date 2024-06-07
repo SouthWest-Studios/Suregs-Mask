@@ -195,9 +195,11 @@ bool Enemy_Ols_Variation::CleanUp()
 {
 	app->entityManager->DestroyEntity(pbodyFoot->entity);
 	app->physics->DestroyBody(pbodyFoot);
+	pbodyFoot = nullptr;
 	//app->tex->UnLoad(texture);
 
 	app->physics->DestroyBody(attackSensor); 
+	attackSensor = nullptr;
 	app->tex->UnLoad(projectileTexture);
 
 	blood = nullptr;

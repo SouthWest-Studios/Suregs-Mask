@@ -205,7 +205,9 @@ bool Enemy_Osiris_Variation::CleanUp()
 {
 	app->entityManager->DestroyEntity(this);
 	app->physics->DestroyBody(pbodyFoot);
+	pbodyFoot = nullptr;
 	app->physics->DestroyBody(pbodySensor);
+	pbodySensor = nullptr;
 	//app->tex->UnLoad(texture);
 
 	lastPath.Clear();

@@ -146,6 +146,7 @@ bool Boss_Surma::Update(float dt)
 		tamañoExplosionActual += dt * 0.8f;
 
 		app->physics->DestroyBody(explosionActual->pbody);
+		explosionActual->pbody = nullptr;
 
 		explosionActual->pbody = app->physics->CreateCircle(position.x, position.y + 50, tamañoExplosionActual, bodyType::DYNAMIC);
 		explosionActual->pbody->body->GetFixtureList()->SetSensor(true);
@@ -155,8 +156,9 @@ bool Boss_Surma::Update(float dt)
 
 		if (explosionActual->lifeTime.ReadMSec() > 300) {
 			app->physics->DestroyBody(explosionActual->pbody);
-			delete explosionActual;
-			explosionActual = nullptr;
+			explosionActual->pbody = nullptr;
+			/*delete explosionActual;
+			explosionActual = nullptr;*/
 		}
 
 
@@ -239,7 +241,9 @@ bool Boss_Surma::CleanUp()
 {
 	app->entityManager->DestroyEntity(this);
 	app->physics->DestroyBody(pbodyFoot);
+	pbodyFoot = nullptr;
 	app->physics->DestroyBody(pbodySensor);
+	pbodySensor = nullptr;
 	app->tex->UnLoad(texture);
 	app->tex->UnLoad(textureExplosion);
 	app->tex->UnLoad(textureExplosion);
@@ -704,6 +708,7 @@ void Boss_Surma::FaseC(float dt, iPoint playerPos)
 	else {
 
 		app->physics->DestroyBody(pbodySensor);
+		pbodySensor = nullptr;
 		pbodySensor = app->physics->CreateRectangleSensor(position.x, position.y, 175, 160, bodyType::DYNAMIC);
 		pbodySensor->entity = this;
 		pbodySensor->listener = this;
