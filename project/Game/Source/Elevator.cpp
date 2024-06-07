@@ -95,7 +95,7 @@ bool Elevator::PostUpdate()
 }
 bool Elevator::CleanUp()
 {
-    app->physics->GetWorld()->DestroyBody(pbody->body);
+    app->physics->DestroyBody(pbody);
  
     return true;
 }

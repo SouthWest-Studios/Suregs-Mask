@@ -26,6 +26,7 @@ public:
 	bool CleanUp();
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
+	void OnEndCollision(PhysBody* physA, PhysBody* physB);
 
 	MapObject* GetCurrentRoom();
 
@@ -45,6 +46,8 @@ private:
 	//Cuerpo de fisicas, para detectar cuando el jugador esta cerca
 	//y activar el dialogo en caso de que el jugador asi lo quiera
 	PhysBody* pbody;
+
+	bool checkQuest0 = false;
 
 };
 
