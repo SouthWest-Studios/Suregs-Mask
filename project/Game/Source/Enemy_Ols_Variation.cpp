@@ -210,7 +210,9 @@ bool Enemy_Ols_Variation::CleanUp()
 
 void Enemy_Ols_Variation::DoNothing(float dt)
 {
-	currentAnimation = &idleAnim;
+	if(currentAnimation->HasFinished() && currentAnimation == &attackAnim){
+		currentAnimation = &idleAnim;
+	}
 	////printf("Osiris idle");
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 }
@@ -226,7 +228,9 @@ void Enemy_Ols_Variation::Chase(float dt, iPoint playerPos)
 	{
 		Flee(dt);
 	}
-	currentAnimation = &runAnim;
+	if(currentAnimation->HasFinished() && currentAnimation == &attackAnim){
+		currentAnimation = &idleAnim;
+	}
 }
 
 void Enemy_Ols_Variation::Attack(float dt, iPoint playerPos)
@@ -437,33 +441,42 @@ void Enemy_Ols_Variation::TakeDamage(float damage) {
 
 void Enemy_Ols_Variation::stateMachine(float dt, iPoint playerPos)
 {
-	////printf("\ncurrentState: %d, desiredState: %d", static_cast<int>(currentState), static_cast<int>(desiredState));
-	nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
-	switch (nextState) {
-	case EntityState_Enemy::IDLE:
-		DoNothing(dt);
-		break;
-	case EntityState_Enemy::RUNNING:
-		Chase(dt, playerPos);
-		break;
-	case EntityState_Enemy::ATTACKING:
-		Attack(dt, playerPos);
-		break;
-	case EntityState_Enemy::DEAD:
-		Die();
-		break;
-	case EntityState_Enemy::DASHI:
-		break;
-	case EntityState_Enemy::NONE:
-
-		desiredState = EntityState_Enemy::IDLE;
-		break;
-
-	default:
-		break;
-	}
-	currentState = nextState;
-
+    ////printf("\ncurrentState: %d, desiredState: %d", static_cast<int>(currentState), static_cast<int>(desiredState));
+    nextState = transitionTable[static_cast<int>(currentState)][static_cast<int>(desiredState)].next_state;
+    switch (nextState) {
+    case EntityState_Enemy::IDLE:
+        DoNothing(dt);
+        if (currentAnimation != &idleAnim) {
+            currentAnimation = &idleAnim;
+        }
+        break;
+    case EntityState_Enemy::RUNNING:
+        Chase(dt, playerPos);
+        if (currentAnimation != &runAnim) {
+            currentAnimation = &runAnim;
+        }
+        break;
+    case EntityState_Enemy::ATTACKING:
+        Attack(dt, playerPos);
+        if (currentAnimation != &attackAnim) {
+            currentAnimation = &attackAnim;
+        }
+        break;
+    case EntityState_Enemy::DEAD:
+        Die();
+        if (currentAnimation != &dieAnim) {
+            currentAnimation = &dieAnim;
+        }
+        break;
+    case EntityState_Enemy::DASHI:
+        break;
+    case EntityState_Enemy::NONE:
+        desiredState = EntityState_Enemy::IDLE;
+        break;
+    default:
+        break;
+    }
+    currentState = nextState;
 }
 
 //VENENO <----------
