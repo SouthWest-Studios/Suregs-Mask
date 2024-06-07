@@ -399,8 +399,6 @@ bool App::PreUpdate()
 		
 		pModule = item->data;
 
-		LOG("PREUPDATE - %s", pModule->name.GetString());
-
 		if (pModule->active == false) {
 			continue;
 		}
