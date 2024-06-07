@@ -126,7 +126,7 @@ bool Menu_Equipo::PostUpdate()
 			if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
 			{
 				app->render->DrawTextBound("Dinka", 280, 395, 200, { 52,25,0 }, app->render->titleFont);
-				app->render->DrawTextBound("Rayo Debastador", 280, 430, 150, { 52,25,0 }, app->render->titleFont);
+				app->render->DrawTextBound("Rayo Devastador", 280, 430, 150, { 52,25,0 }, app->render->titleFont);
 				app->render->DrawTexture(mask0Texture, 450, 405, SDL_FLIP_NONE, 0, 0);
 			}
 			else if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK1)
