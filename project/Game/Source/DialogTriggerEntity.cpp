@@ -15,6 +15,7 @@
 #include "TreeManager.h"
 #include "Menu.h"
 #include "ElevatorMenu.h"
+#include "Scene_Pueblo_Tutorial.h"
 
 DialogTrigger::DialogTrigger() : Entity(EntityType::DIALOG_TRIGGER)
 {
@@ -173,14 +174,14 @@ void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
 		case ColliderType::PLAYER:
 			if (physA->ctype == ColliderType::ARBOL)
 			{
-				if (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady)
+				if (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady)
 				{
 					app->treeManager->mostrar = true;
 					app->menu->active = false;
 
 				}
 			}
-			else if (!app->dialogManager->isPlaying && (app->input->GetButton(CONFIRM) == KEY_DOWN) && !app->scene_pueblo->GetRod()->fishing.rodReady) {
+			else if (!app->dialogManager->isPlaying && (app->input->GetButton(CONFIRM) == KEY_DOWN) && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady) {
 				PlayDialog();
 				//printf("COLISSION TRIGGERDIALOG");
 
@@ -204,11 +205,11 @@ void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 				/*if (parameters.attribute("id").as_int() == 941) {
 					//printf("REEL TRUE");
-					app->scene_pueblo->GetRod()->fishing.rodReady = true;
+					app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady = true;
 					app->scene_pueblo->GetRod()->fishing.playerGetRod = true;
 				}*/
 				/*if (strcmp(parameters.attribute("name").as_string(), "pescador") == 0) {
-					app->scene_pueblo->GetRod()->fishing.rodReady = true;
+					app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady = true;
 					app->scene_pueblo->GetRod()->fishing.playerGetRod = true;
 				}*/
 			}

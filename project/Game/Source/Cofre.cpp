@@ -22,6 +22,7 @@
 #include "Item_Nota.h"
 #include "QuestManager.h"
 #include "Scene_Pueblo.h"
+#include "Scene_Pueblo_Tutorial.h"
 
 #include "Entity.h"
 
@@ -106,7 +107,7 @@ void Cofre::OnCollision(PhysBody* physA, PhysBody* physB)
 	{
 		if (abierto == false)
 		{
-			if (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady)
+			if (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady)
 			{
 				if (tutorial) {
 					abierto = true;
