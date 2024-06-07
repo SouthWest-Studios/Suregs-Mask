@@ -123,7 +123,11 @@ bool MiniGameFishing::CleanUp()
 	}
 	app->tex->UnLoad(fishingfloat_texture);
 	SDL_DestroyTexture(fishingfloat_texture);
-	
+
+	delete fishing_path;
+	delete name_path;
+	delete fishingfloat_path;
+	delete Path;
 	return true;
 }
 
@@ -180,12 +184,12 @@ void MiniGameFishing::ani_castingline(Direction direction)
 		crearfloatbody = false;
 	}
 
-	
+
 	//lerp
 	float timeLerp = 0.1f;
 	fishingflota_position_x = fishingflota_position_x * (1 - timeLerp) + fishingflota_CenterX * timeLerp;
 	fishingflota_position_y = fishingflota_position_y * (1 - timeLerp) + fishingflota_CenterY * timeLerp;
-	
+
 	//moving collision
 	if (floatbody != nullptr) {
 		b2Transform pbodyPos = floatbody->body->GetTransform();
@@ -235,7 +239,7 @@ void MiniGameFishing::playNormalFishing()
 
 void MiniGameFishing::floatCollision(Direction direction, float cheke_x, float cheke_y)
 {
-	
+
 	b2Vec2 force(0.0f, 0.0f);
 
 	if (direction == Direction::UP && cheke_y >= fishingflota_position_y) {
@@ -256,7 +260,7 @@ void MiniGameFishing::floatCollision(Direction direction, float cheke_x, float c
 
 
 	if (force == b2Vec2(0.0f, 0.0f)) {
-		
+
 		if (floatbody != nullptr) {
 			app->physics->DestroyBody(floatbody);
 			floatbody = nullptr;
@@ -267,7 +271,7 @@ void MiniGameFishing::floatCollision(Direction direction, float cheke_x, float c
 	}
 	else {
 		if (floatbody != nullptr) {
-		floatbody->body->ApplyForceToCenter(force, true);
+			floatbody->body->ApplyForceToCenter(force, true);
 		}
 	}
 
@@ -439,7 +443,8 @@ void MiniGameFishing::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::LAGO:
 
 		if (fishing.startFishing == false) {
-			 app->dialogManager->CreateDialogSinEntity("A ver si pican...", "Jakov", nullptr);
+			dialogoautoclose = false;
+			app->dialogManager->CreateDialogSinEntity("A ver si pican...", "Jakov", nullptr);
 		}//end_if, if the float collides with the " LAGO"collider, display the fishing dialog
 		fishing.startFishing = true;
 		dialogoPlayerMoving = true;
@@ -462,7 +467,7 @@ bool MiniGameFishing::miniGameLoop(float dt)
 	//Cast the rod and StartFishing
 	if (app->input->GetButton(STARTFISHING) == KEY_DOWN && fishing.rodReady || app->input->GetButton(DASH) == KEY_DOWN && fishing.rodReady) {
 		fishing.isFishing = !fishing.isFishing;//Start fishing o Stop fishing
-		
+
 		isFishingta = fishing.isFishing;//Save data to "isFishingta"
 		floatChangeDistance = 300;
 
@@ -532,7 +537,7 @@ void MiniGameFishing::reward_pool(Fishlevel fishingType)
 	switch (fishingType)
 	{
 	case Fishlevel::NOTHING: fishLevel = 0; break;
-	case Fishlevel::TRASH: 
+	case Fishlevel::TRASH:
 		fishLevel = 1;
 		if (app->inventoryManager->IsFull() == false)
 		{
@@ -546,7 +551,7 @@ void MiniGameFishing::reward_pool(Fishlevel fishingType)
 		}
 		break;
 		break;
-	case Fishlevel::SMALL: 
+	case Fishlevel::SMALL:
 		fishLevel = 2;
 		if (app->inventoryManager->IsFull() == false)
 		{
@@ -560,7 +565,7 @@ void MiniGameFishing::reward_pool(Fishlevel fishingType)
 			app->inventoryManager->AddQuantity(entity);
 		}
 		break;
-	case Fishlevel::MEDIUM: 
+	case Fishlevel::MEDIUM:
 		fishLevel = 3;
 		if (app->inventoryManager->IsFull() == false)
 		{
@@ -571,10 +576,10 @@ void MiniGameFishing::reward_pool(Fishlevel fishingType)
 			Entity* entity = new Entity(EntityType::ITEM_PEZ_MEDIANO);
 			app->inventoryManager->AddQuantity(entity);
 		}
-		
+
 		break;
-	case Fishlevel::BIG: 
-		fishLevel = 4; 
+	case Fishlevel::BIG:
+		fishLevel = 4;
 		if (app->inventoryManager->IsFull() == false)
 		{
 			app->inventoryManager->CreateItem(InventityType::PEZ_GRANDE, true);
@@ -584,7 +589,7 @@ void MiniGameFishing::reward_pool(Fishlevel fishingType)
 			Entity* entity = new Entity(EntityType::ITEM_PEZ_GRANDE);
 			app->inventoryManager->AddQuantity(entity);
 		}
-		
+
 		break;
 	case Fishlevel::UNKNOWN:LOG("Collision UNKNOWN"); break;
 	}//Reaction upon knowing what is obtained

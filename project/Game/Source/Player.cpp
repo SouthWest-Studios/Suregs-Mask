@@ -730,6 +730,9 @@ bool Player::Start() {
 	//printf("\nPositionY: %d", position.y);*/
 	posInicioPlayer = b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y));
 
+	app->scene_pueblo->GetRod()->fishing.rodReady = false;
+	app->scene_pueblo_tutorial->GetRod()->fishing.rodReady = false;
+
 	return true;
 }
 
@@ -821,7 +824,7 @@ bool Player::Update(float dt)
 		desiredState = EntityStatePlayer::POCION;
 	}
 
-	printf("\nposx:%d, posy: %d",position.x, position.y);
+	//printf("\nposx:%d, posy: %d",position.x, position.y);
 
 	if (maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].invisibilityTimer.ReadSec() > maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].invisibilityDuration) {
 		SDL_SetTextureAlphaMod(texture, 255);
@@ -1152,7 +1155,7 @@ void Player::ResetAnimacion()
 
 		if (mask1AttackSensor != nullptr) {
 			mask1AttackSensor->body->SetLinearVelocity(b2Vec2(0, 0));
-			 //mask1AttackSensor->body->GetWorld()->DestroyBody(mask1AttackSensor->body);LIN
+			//mask1AttackSensor->body->GetWorld()->DestroyBody(mask1AttackSensor->body);LIN
 			app->physics->DestroyBody(mask1AttackSensor);
 			//app->physics->GetWorld()->DestroyBody(mask1AttackSensor->body);
 			mask1AttackSensor = nullptr;
@@ -1873,7 +1876,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::ARBOL:
 		LOG("Collision ARBOL");
-		if (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady)
+		if (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady)
 		{
 			app->treeManager->mostrar = true;
 
@@ -1924,11 +1927,13 @@ void Player::OnEndCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::FISHZONEIN:
 		app->scene_pueblo->GetRod()->fishing.rodReady = true;
 		app->scene_pueblo_tutorial->GetRod()->fishing.rodReady = true;
+		fixFishing = true;
 		//printf("\ngetPlayerTouch: %d", app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady);
 		break;
 	case ColliderType::FISHZONEOUT:
-		app->scene_pueblo->GetRod()->fishing.rodReady  = false;
+		app->scene_pueblo->GetRod()->fishing.rodReady = false;
 		app->scene_pueblo_tutorial->GetRod()->fishing.rodReady = false;
+		fixFishing = false;
 		//printf("\ngetPlayerTouch: %d", app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady);
 		break;
 		/*...*/
@@ -2642,7 +2647,7 @@ void Player::PlayerMovement(float dt)
 
 	// Calcular la velocidad horizontal y vertical
 	//!app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->killPadre &&
-	if (die == false && desiredState != EntityStatePlayer::POCION &&  !die) {
+	if (die == false && desiredState != EntityStatePlayer::POCION && !die) {
 		fPoint joystick = app->input->GetAxis(MOVE_HORIZONTAL, MOVE_VERTICAL);
 		float horizontalMovement = joystick.x;
 		float verticalMovement = joystick.y;
@@ -2668,8 +2673,14 @@ void Player::PlayerMovement(float dt)
 		FishingDirecction(verticalMovement, horizontalMovement);
 	}
 
+
+	if (!fixFishing) {
+		app->scene_pueblo->GetRod()->fishing.rodReady = false;
+		app->scene_pueblo_tutorial->GetRod()->fishing.rodReady = false;
+	}
+	printf("\n scene_pueblo : %d, scene_pueblo_tutorial: %d", app->scene_pueblo->GetRod()->fishing.rodReady, app->scene_pueblo_tutorial->GetRod()->fishing.rodReady);
 	//Si pulsas espacio
-	if (app->input->GetButton(DASH) == KEY_DOWN && timerDash.ReadMSec() > cdTimerDashMS && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady && !die) {
+	if (app->input->GetButton(DASH) == KEY_DOWN && timerDash.ReadMSec() > cdTimerDashMS && !app->scene_pueblo->GetRod()->fishing.rodReady && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady && !die) {
 
 		velocityNormalized = velocity;
 		velocityNormalized.Normalize();
@@ -2706,7 +2717,7 @@ void Player::PlayerMovement(float dt)
 	}
 
 	//Si pulsas J para atacar
-	if (app->input->GetButton(ATAQUE) == KEY_DOWN && !isAttacking && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady && !die) {
+	if (app->input->GetButton(ATAQUE) == KEY_DOWN && !isAttacking && !app->scene_pueblo->GetRod()->fishing.rodReady && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady && !die) {
 		hasAttacked = false;
 		isAttacking = true;
 		timerAttack.Start();
@@ -2781,74 +2792,97 @@ void Player::FishingDirecction(float verticalMovement, float horizontalMovement)
 	if (horizontalMovement == 1) {
 		// Derecha
 		player_Direction = Direction::RIGHT;
-		if (app->scene_pueblo->GetRod()->fishing.isFishing) {
-			playermove = true;
-			app->scene_pueblo->GetRod()->fishing.startFishing = false;
+		if (app->scene_pueblo->active) {
+			if (app->scene_pueblo->GetRod()->fishing.isFishing) {
+				playermove = true;
+				app->scene_pueblo->GetRod()->fishing.isFishing = false;
+			}
+			else {
+				playermove = false;
+			}
 		}
-		else {
-			playermove = false;
-		}
-		if (app->scene_pueblo_tutorial->GetRod()->fishing.isFishing) {
-			playermove = true;
-			app->scene_pueblo_tutorial->GetRod()->fishing.startFishing = false;
-		}
-		else {
-			playermove = false;
+		else
+		{
+			if (app->scene_pueblo_tutorial->GetRod()->fishing.isFishing) {
+				playermove = true;
+				app->scene_pueblo_tutorial->GetRod()->fishing.isFishing = false;
+			}
+			else {
+				playermove = false;
+			}
 		}
 	}
 	else if (horizontalMovement == -1) {
 		// izquierda
 		player_Direction = Direction::LEFT;
-		if (app->scene_pueblo->GetRod()->fishing.isFishing) {
-			playermove = true;
-			app->scene_pueblo->GetRod()->fishing.startFishing = false;
+		if (app->scene_pueblo->active) {
+			if (app->scene_pueblo->GetRod()->fishing.isFishing) {
+				playermove = true;
+				app->scene_pueblo->GetRod()->fishing.isFishing = false;
+			}
+			else {
+				playermove = false;
+			}
 		}
-		else {
-			playermove = false;
+		else
+		{
+			if (app->scene_pueblo_tutorial->GetRod()->fishing.isFishing) {
+				playermove = true;
+				app->scene_pueblo_tutorial->GetRod()->fishing.isFishing = false;
+			}
+			else {
+				playermove = false;
+			}
 		}
-		if (app->scene_pueblo_tutorial->GetRod()->fishing.isFishing) {
-			playermove = true;
-			app->scene_pueblo_tutorial->GetRod()->fishing.startFishing = false;
-		}
-		else {
-			playermove = false;
-		}
+
 	}
 	else if (verticalMovement == 1) {
 		// abajo
+
 		player_Direction = Direction::DOWN;
-		if (app->scene_pueblo->GetRod()->fishing.isFishing) {
-			playermove = true;
-			app->scene_pueblo->GetRod()->fishing.startFishing = false;
+		if (app->scene_pueblo->active) {
+			if (app->scene_pueblo->GetRod()->fishing.isFishing) {
+				playermove = true;
+				app->scene_pueblo->GetRod()->fishing.isFishing = false;
+			}
+			else {
+				playermove = false;
+			}
 		}
-		else {
-			playermove = false;
-		}
-		if (app->scene_pueblo_tutorial->GetRod()->fishing.isFishing) {
-			playermove = true;
-			app->scene_pueblo_tutorial->GetRod()->fishing.startFishing = false;
-		}
-		else {
-			playermove = false;
+		else
+		{
+			if (app->scene_pueblo_tutorial->GetRod()->fishing.isFishing) {
+				playermove = true;
+				app->scene_pueblo_tutorial->GetRod()->fishing.isFishing = false;
+			}
+			else {
+				playermove = false;
+			}
 		}
 	}
 	else if (verticalMovement == -1) {
 		// arriba
 		player_Direction = Direction::UP;
-		if (app->scene_pueblo->GetRod()->fishing.isFishing) {
-			playermove = true;
-			app->scene_pueblo->GetRod()->fishing.startFishing = false;
+		if (app->scene_pueblo->active) {
+			if (app->scene_pueblo->GetRod()->fishing.isFishing) {
+				playermove = true;
+				app->scene_pueblo->GetRod()->fishing.isFishing = false;
+			}
+			else {
+				playermove = false;
+			}
 		}
-		else {
-			playermove = false;
+		else
+		{
+			if (app->scene_pueblo_tutorial->GetRod()->fishing.isFishing) {
+				playermove = true;
+				app->scene_pueblo_tutorial->GetRod()->fishing.isFishing = false;
+			}
+			else {
+				playermove = false;
+			}
 		}
-		if (app->scene_pueblo_tutorial->GetRod()->fishing.isFishing) {
-			playermove = true;
-			app->scene_pueblo_tutorial->GetRod()->fishing.startFishing = false;
-		}
-		else {
-			playermove = false;
-		}
+
 	}
 }
 

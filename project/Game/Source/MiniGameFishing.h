@@ -63,7 +63,7 @@ public:
 public:
 
 	pugi::xml_node config;
-	uint texW, texH;
+
 
 	SString floatPath;
 	float cheke_x;

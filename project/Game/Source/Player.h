@@ -385,6 +385,8 @@ public:
 	Timer mask3Timer;
 	bool mask3Active = false;
 
+	bool fixFishing = false;
+
 	Emitter* mask2Particle = nullptr;
 	Emitter* mask3Particle = nullptr;
 
