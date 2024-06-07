@@ -396,7 +396,10 @@ bool App::PreUpdate()
 
 	for (item = modules.start; item != NULL && ret == true; item = item->next)
 	{
+		
 		pModule = item->data;
+
+		LOG("PREUPDATE - %s", pModule->name.GetString());
 
 		if (pModule->active == false) {
 			continue;

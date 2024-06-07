@@ -101,6 +101,9 @@ void Physics::DestroyPendingBodies()
 {
 	for (int i = 0; i < bodiesToDestroy.size(); i++) {
 		if (bodiesToDestroy.at(i)) {
+
+			LOG("Destruyendo body: %d", i);
+
 			world->DestroyBody(bodiesToDestroy.at(i)->body);
 			delete bodiesToDestroy.at(i);
 		}
