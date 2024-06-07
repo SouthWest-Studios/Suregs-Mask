@@ -60,7 +60,7 @@ bool Elevator::Start() {
 	/*texture = app->tex->Load("Assets/Textures/Entidades/Items/item_Garra.png");*/
 	// L07 DONE 4: Add a physics to an item - initialize the physics body
 	/*pbody = app->physics->CreateCircle(position.x, position.y, 70, bodyType::STATIC);*/
-	pbody = app->physics->CreateRectangleSensor(position.x + 10, position.y, 100, 100, bodyType::KINEMATIC);
+	pbody = app->physics->CreateRectangleSensor(position.x + 10, position.y, 200, 200, bodyType::KINEMATIC);
 	pbody->ctype = ColliderType::ASCENSOR;
 	pbody->listener = this;
 	pbody->body->GetFixtureList()->SetSensor(true);

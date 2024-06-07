@@ -482,130 +482,77 @@
 	</dialog>
 
 	<dialog id="942" texturepath="Assets/Textures/pescador.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/spharFace.png" name="Sphar">
-		<sentences>
-			<sentence type="choose" text="¿Un camarada? ¡Eres la primera persona que viene en mucho tiempo!">
+		<sentences>	
+				<sentence name="Sphar"
+				facetexturepath="Assets/Textures/Interfaz/Dialogos/spharFace.png"
+				text="¡Hola grumete! Pareces desanimado... "/>
 
-				<option1 text="¿Qué ofreces?">
-					<sentence text="Soy Sphar, el pescador. Me dedico a la compra y venta de productos marinos, también ofrezco mi puerto para pescar de manera gratuita."/>
-				</option1>
+				<sentence name="Sphar"
+				facetexturepath="Assets/Textures/Interfaz/Dialogos/spharFace.png"
+				text="Te deben haber pegado una paliza en el entreno... "/>
 
-				<option2 text="¡Adiós!">
-					<sentence text="¡Hasta la próxima grumete!"/>
-				</option2>
-			</sentence>
+				<sentence name="Sphar"
+				facetexturepath="Assets/Textures/Interfaz/Dialogos/spharFace.png"
+				text="Pero no te desanimes grumete, seguro que puedes hacerte más fuerte..."/>
 		</sentences>
 	</dialog>
 
 	<dialog id="943" texturepath="Assets/Textures/pescador.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/spharFace.png" name="Sphar">
 		<sentences>
-			<sentence type="choose" text="¿Un camarada? ¡Eres la primera persona que viene en mucho tiempo!">
-
-				<option1 text="¿Qué ofreces?">
-					<sentence text="Soy Sphar, el pescador. Me dedico a la compra y venta de productos marinos, también ofrezco mi puerto para pescar de manera gratuita."/>
-				</option1>
-
-				<option2 text="¡Adiós!">
-					<sentence text="¡Hasta la próxima grumete!"/>
-				</option2>
-			</sentence>
+			<sentence name="Sphar"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/spharFace.png"
+			text="¡Hola grumete! Sigue pescando, hoy los peces están revueltos... "/>
 		</sentences>
 	</dialog>
 
 	<dialog id="944" texturepath="Assets/Textures/pescador.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/spharFace.png" name="Sphar">
 		<sentences>
-			<sentence type="choose" text="¿Un camarada? ¡Eres la primera persona que viene en mucho tiempo!">
-
-				<option1 text="¿Qué ofreces?">
-					<sentence text="Soy Sphar, el pescador. Me dedico a la compra y venta de productos marinos, también ofrezco mi puerto para pescar de manera gratuita."/>
-					<commerce id="1"/>
-				</option1>
-
-				<option2 text="¡Adiós!">
-					<sentence text="¡Hasta la próxima grumete!"/>
-				</option2>
-			</sentence>
+			<sentence name="Sphar"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/spharFace.png"
+			text="¡Hola grumete! Me gusta que vengas a hablar con un viejo como yo, suerte en la pesca... "/>
 		</sentences>
 	</dialog>
 
 	<dialog id="945" texturepath="Assets/Textures/pescador.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/spharFace.png" name="Sphar">
 		<sentences>
-			<sentence type="choose" text="¿Un camarada? ¡Eres la primera persona que viene en mucho tiempo!">
-
-				<option1 text="¿Qué ofreces?">
-					<sentence text="Soy Sphar, el pescador. Me dedico a la compra y venta de productos marinos, también ofrezco mi puerto para pescar de manera gratuita."/>
-					<commerce id="1"/>
-				</option1>
-
-				<option2 text="¡Adiós!">
-					<sentence text="¡Hasta la próxima grumete!"/>
-				</option2>
-			</sentence>
+			<sentence name="Sphar"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/spharFace.png"
+			text="¡Hola grumete! Llevas un tiempo viniendo, espero que sigas haciéndome compañía... "/>
 		</sentences>
 	</dialog>
 
 	<dialog id="946" texturepath="Assets/Textures/pescador.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/spharFace.png" name="Sphar">
 		<sentences>
-			<sentence type="choose" text="¿Un camarada? ¡Eres la primera persona que viene en mucho tiempo!">
-
-				<option1 text="¿Qué ofreces?">
-					<sentence text="Soy Sphar, el pescador. Me dedico a la compra y venta de productos marinos, también ofrezco mi puerto para pescar de manera gratuita."/>
-					<commerce id="1"/>
-				</option1>
-
-				<option2 text="¡Adiós!">
-					<sentence text="¡Hasta la próxima grumete!"/>
-				</option2>
-			</sentence>
+			<sentence name="Sphar"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/spharFace.png"
+			text="¡Hola grumete! Hoy te veo fresco... "/>
 		</sentences>
 	</dialog>
 
 	<dialog id="947" texturepath="Assets/Textures/pescador.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/spharFace.png" name="Sphar">
 		<sentences>
-			<sentence type="choose" text="¿Un camarada? ¡Eres la primera persona que viene en mucho tiempo!">
-
-				<option1 text="¿Qué ofreces?">
-					<sentence text="Soy Sphar, el pescador. Me dedico a la compra y venta de productos marinos, también ofrezco mi puerto para pescar de manera gratuita."/>
-					<commerce id="1"/>
-				</option1>
-
-				<option2 text="¡Adiós!">
-					<sentence text="¡Hasta la próxima grumete!"/>
-				</option2>
-			</sentence>
+			<sentence name="Sphar"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/spharFace.png"
+			text="¡Hola grumete! Sigue pescando, hoy los peces están revueltos... "/>
 		</sentences>
 	</dialog>
 
 	<dialog id="948" texturepath="Assets/Textures/pescador.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/spharFace.png" name="Sphar">
 		<sentences>
-			<sentence type="choose" text="¿Un camarada? ¡Eres la primera persona que viene en mucho tiempo!">
-
-				<option1 text="¿Qué ofreces?">
-					<sentence text="Soy Sphar, el pescador. Me dedico a la compra y venta de productos marinos, también ofrezco mi puerto para pescar de manera gratuita."/>
-					<commerce id="1"/>
-				</option1>
-
-				<option2 text="¡Adiós!">
-					<sentence text="¡Hasta la próxima grumete!"/>
-				</option2>
-			</sentence>
+			<sentence name="Sphar"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/spharFace.png"
+			text="¡Hola grumete! Te veo muy animado... "/>
 		</sentences>
 	</dialog>
 
 	<dialog id="949" texturepath="Assets/Textures/pescador.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/spharFace.png" name="Sphar">
 		<sentences>
-			<sentence type="choose" text="¿Un camarada? ¡Eres la primera persona que viene en mucho tiempo!">
-
-				<option1 text="¿Qué ofreces?">
-					<sentence text="Soy Sphar, el pescador. Me dedico a la compra y venta de productos marinos, también ofrezco mi puerto para pescar de manera gratuita."/>
-					<commerce id="1"/>
-				</option1>
-
-				<option2 text="¡Adiós!">
-					<sentence text="¡Hasta la próxima grumete!"/>
-				</option2>
-			</sentence>
+			<sentence name="Sphar"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/spharFace.png"
+			text="¡Hola grumete! Termina de pescar, noto que en poco tiempo muchas cosas cambiarán... "/>
 		</sentences>
 	</dialog>
+	
 
 
 	<!--MISSIONES (1000-1400)-->
@@ -1155,8 +1102,8 @@
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/xibyFace.png"
 			text="La verdad es que es bastante triste, imaginad lo que pensaría su padre de él si lo viese..."/>
 
-			<sentence name="Ferny"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/fernyFace.png"
+			<sentence name="Huhan"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/huhanFace.png"
 			text="No digas eso, ya sabes que su padre no podrá verlo nunca más, ¡ja, ja ja...!"/>
 		</sentences>
 	</dialog>
@@ -1171,8 +1118,8 @@
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/xibyFace.png"
 			text="Esa ha sido buena, pero no creo que lo aguante siquiera..."/>
 
-			<sentence name="Ferny"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/fernyFace.png"
+			<sentence name="Huhan"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/huhanFace.png"
 			text="Es cierto, toda la familia se fué y se tuvo que quedar con el peor de todos, ¡ja, ja, ja...!"/>
 		</sentences>
 	</dialog>
@@ -1187,8 +1134,8 @@
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/xibyFace.png"
 			text="No le llames así, hombre, recuerda que es el hijo del 'Legendario Héroe de la Aldea'..."/>
 
-			<sentence name="Ferny"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/fernyFace.png"
+			<sentence name="Huhan"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/huhanFace.png"
 			text="Seguramente su padre era igual de inútil que él. ¡Ja, ja, ja...!"/>
 		</sentences>
 	</dialog>
@@ -1203,8 +1150,8 @@
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/xibyFace.png"
 			text="Es cierto, como no quiere recibir golpes, viene a recibir insultos, ¡ja, ja, ja...!"/>
 
-			<sentence name="Ferny"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/fernyFace.png"
+			<sentence name="Huhan"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/huhanFace.png"
 			text="¿Cuántos días lleva sin venir? Yo tampoco lo notaba cuando venía, ¡ja, ja, ja...!"/>
 		</sentences>
 	</dialog>
@@ -1219,8 +1166,8 @@
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/xibyFace.png"
 			text="Es cierto, Inútilakhov nunca se terminará, por mucho que vayas a entrenar al bosque..."/>
 
-			<sentence name="Ferny"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/fernyFace.png"
+			<sentence name="Huhan"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/huhanFace.png"
 			text="Por mucha fuerza que tengas seguirás sin saber dominar la espada. ¡Ja, ja, ja...!"/>
 		</sentences>
 	</dialog>
@@ -1229,14 +1176,14 @@
 		<sentences>
 			<sentence name="Huhan"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/huhanFace.png"
-			text="Mirad a quien tenemos por aquí, a Inútilakhov, dile donde le has visto, Ferny..."/>
+			text="Mirad a quien tenemos por aquí, a Inútilakhov, dile donde le has visto, Xiby..."/>
 
 			<sentence name="Xiby"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/xibyFace.png"
 			text="¡Es cierto! ¿Que pasaría si le contamos a tu pobre abuela donde estás yendo? Que pena..."/>
 
-			<sentence name="Ferny"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/fernyFace.png"
+			<sentence name="Huhan"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/huhanFace.png"
 			text="No se lo podremos decir, pobrecilla, el inútil de su hijo ya murió dentro, y ahora su nieto, ¡ja, ja, ja...!"/>
 		</sentences>
 	</dialog>
@@ -1251,8 +1198,8 @@
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/xibyFace.png"
 			text="Se lo hemos tenido que decir al viejales de tu vecino, a ver si él se lo dice a tu abuela y se pone más triste aún..."/>
 
-			<sentence name="Ferny"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/fernyFace.png"
+			<sentence name="Huhan"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/huhanFace.png"
 			text="No seas malo, ¡hombre! No puede estar más triste que ahora, ¿olvidas quién es su nieto? ¡Ja, ja, ja...!"/>
 		</sentences>
 	</dialog>
@@ -1267,8 +1214,8 @@
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/xibyFace.png"
 			text="Claro que sí, ¿dónde podría ir este pobre animal si no es a la entrada de la cueva? Dispuesto a salir por patas cuando salga un Sureg..."/>
 
-			<sentence name="Ferny"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/fernyFace.png"
+			<sentence name="Huhan"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/huhanFace.png"
 			text="¡No cantes victoria! Recuerda que su madre no pudo huir, y eso que estaba más cerca de la aldea, ¡ja, ja, ja...!"/>
 		</sentences>
 	</dialog>
@@ -1283,8 +1230,8 @@
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/xibyFace.png"
 			text="¿Cómo va a creer eso? No le hemos dado tanto en la cabeza para que esté loco. ¡Ja, ja, ja...!"/>
 
-			<sentence name="Ferny"
-			facetexturepath="Assets/Textures/Interfaz/Dialogos/fernyFace.png"
+			<sentence name="Huhan"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/huhanFace.png"
 			text="Como os pasáis, seguro que se cree invencible, como el 'Legendario Hérore de la Aldea'..."/>
 		</sentences>
 	</dialog>
@@ -1383,6 +1330,22 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 		</sentences>
 	</dialog>
 
+	<dialog id="506" texturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png">
+		<sentences>
+			<sentence name="Rapho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
+			text="..."/>
+
+			<sentence name="Rapho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
+			text=".........."/>
+
+			<sentence name="Rapho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
+			text="..................."/>
+		</sentences>
+	</dialog>
+
 	<dialog id="507" texturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png">
 		<sentences>
 			<sentence name="Rapho"
@@ -1415,14 +1378,21 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 		</sentences>
 	</dialog>
 
+	<dialog id="509" texturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png">
+		<sentences>
+			<sentence name="Rapho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
+			text="......"/>
 
+			<sentence name="Rapho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
+			text="...................."/>
 
-
-
-
-
-
-
+			<sentence name="Rapho"
+			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
+			text="........................................"/>
+		</sentences>
+	</dialog>
 
 
 	<!--DIALOGOS PREOCUPADA (601-609)-->
