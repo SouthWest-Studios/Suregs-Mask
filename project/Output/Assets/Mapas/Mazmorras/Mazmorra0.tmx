@@ -47061,7 +47061,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="37"/>
    <tile/>
    <tile/>
    <tile/>
@@ -47142,7 +47141,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="37"/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
