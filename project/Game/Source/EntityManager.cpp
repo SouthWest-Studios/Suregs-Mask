@@ -191,6 +191,14 @@ bool EntityManager::CleanUp()
 	if (textureUnirPadre != nullptr) {
 		app->tex->UnLoad(textureUnirPadre);
 	}
+	app->tex->UnLoad(texture);
+	app->tex->UnLoad(textureOsiris);
+	app->tex->UnLoad(textureBoorok);
+	app->tex->UnLoad(textureGuerrero);
+	app->tex->UnLoad(textureKhurt);
+	app->tex->UnLoad(textureMuur);
+	app->tex->UnLoad(textureOls);
+	app->tex->UnLoad(textureCredit);
 	/*if (bossIgory != nullptr) {
 		delete bossIgory;
 		bossIgory = nullptr;
