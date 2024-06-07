@@ -1895,6 +1895,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		case ColliderType::SALIDA_MAZMORRA0:
 			LOG("Collision SALIDA_MAZMORRA0");
 			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_pueblo);
+			app->map->tpSaleMazmorra = true;
 			break;
 		}
 	}

@@ -30,6 +30,8 @@
 		<entity_manager>
 			<doors>
 				<door sceneLevel="-10" tpID="0" />
+				<door sceneLevel="0" tpID="8" />
+				<door sceneLevel="0" tpID="1" />
 			</doors>
 		</entity_manager>
 	</entitymanager>

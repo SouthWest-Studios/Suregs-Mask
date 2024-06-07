@@ -58,7 +58,7 @@ struct TileSetTexture {
         for (int i = 0; i < tilesTextures.size(); i++) {
             TileTexture* t = tilesTextures.at(i);
             
-            if (t != nullptr && t->x == x && t->y == y) { 
+            if (t != nullptr && (t->x != NULL || t->x == 0) && (t->y != NULL || t->y == 0) && t->x == x && t->y == y) {
                 return t;  
                 break; 
             }
@@ -313,6 +313,10 @@ public:
     bool boss2_defeated = false;
     bool boss3_defeated = false;
     bool boss4_defeated = false;
+
+    bool tpSaleMazmorra = false;
+
+
 private:
     
 
