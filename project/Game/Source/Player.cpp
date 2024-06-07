@@ -1152,7 +1152,8 @@ void Player::ResetAnimacion()
 
 		if (mask1AttackSensor != nullptr) {
 			mask1AttackSensor->body->SetLinearVelocity(b2Vec2(0, 0));
-			mask1AttackSensor->body->GetWorld()->DestroyBody(mask1AttackSensor->body);
+			 //mask1AttackSensor->body->GetWorld()->DestroyBody(mask1AttackSensor->body);LIN
+			app->physics->DestroyBody(mask1AttackSensor);
 			//app->physics->GetWorld()->DestroyBody(mask1AttackSensor->body);
 			mask1AttackSensor = nullptr;
 			//printf("delete");

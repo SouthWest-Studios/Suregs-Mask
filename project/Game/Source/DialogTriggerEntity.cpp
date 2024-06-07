@@ -93,7 +93,9 @@ bool DialogTrigger::CleanUp()
 	app->tex->UnLoad(texture);
 	app->tex->UnLoad(faceTexture);
 	app->physics->DestroyBody(pbody);
-	app->physics->DestroyBody(pbody2); app->entityManager->DestroyEntity(this); active = false;
+	app->physics->DestroyBody(pbody2); 
+	app->entityManager->DestroyEntity(this); 
+	active = false;
 
 	ListItem<Dialog*>* item;
 	Dialog* pDialog = nullptr;
