@@ -10,6 +10,8 @@
 #include "Point.h"
 #include "Physics.h"
 #include "QuestManager.h"
+#include "Scene_Pueblo_Tutorial.h"
+#include "Scene_Pueblo.h"
 
 TPEntity::TPEntity() : Entity(EntityType::TP_ENTITY)
 {
@@ -95,8 +97,8 @@ void TPEntity::OnCollision(PhysBody* physA, PhysBody* physB) {
 					app->entityManager->GetPlayer()->pbodyFoot->body->SetTransform(b2Vec2(PIXEL_TO_METERS(targetPos.x), PIXEL_TO_METERS(targetPos.y)), 0);
 				}
 				else {
-					if (!app->dialogManager->isPlaying && !checkQuest0) {
-						app->dialogManager->CreateDialogSinEntity("Creo que tendria que hablar con Vhea antes de salir...", "Jakov", "");
+					if (!app->dialogManager->isPlaying && !checkQuest0 && (app->scene_pueblo_tutorial->active || app->scene_pueblo->active)) {
+						app->dialogManager->CreateDialogSinEntity("Creo que tendria que hablar con Vhea antes de seguir...", "Jakov", "");
 						checkQuest0 = true;
 					}
 				}
