@@ -18,6 +18,7 @@
 #include "Log.h"
 #include "SString.h"
 #include "Scene_Pueblo.h"
+#include "Scene_Pueblo_Tutorial.h"
 #include "Menu.h"
 #include "Window.h"
 
@@ -638,7 +639,7 @@ bool BestiarioManager::Update(float dt)
 		
 		if (couuuunt == 2)
 		{
-			if ((app->input->GetButton(APP_EXIT) == KEY_DOWN || app->input->GetButton(BACK) == KEY_DOWN) && zoomIn == true || app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady ) {
+			if ((app->input->GetButton(APP_EXIT) == KEY_DOWN || app->input->GetButton(BACK) == KEY_DOWN) && zoomIn == true || app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady ) {
 				ListItem<Bestiario*>* item;
 				couuuunt = 1;
 				for (item = bestiario.start; item != NULL; item = item->next)
@@ -651,7 +652,7 @@ bool BestiarioManager::Update(float dt)
 		}
 			if (couuuunt < 1)
 			{
-				if (app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady ) {
+				if (app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady ) {
 					/*options = true;
 					selected = { PointerPosition.x, PointerPosition.y };
 					selectedId = PointerId;*/

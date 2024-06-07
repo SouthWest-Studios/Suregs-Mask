@@ -42,6 +42,8 @@ public:
 	// Handles multiple Gui Event methods
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
+
+	MiniGameFishing* GetRod();
 private:
 
 	float textPosX, textPosY = 0;
@@ -67,6 +69,7 @@ private:
 
 public:
 
+	MiniGameFishing* fishing = new MiniGameFishing;
 	PhysBody* pbody;
 };
 

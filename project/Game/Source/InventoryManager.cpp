@@ -22,6 +22,7 @@
 #include "Audio.h"
 #include "Menu.h"
 #include "Scene_Pueblo.h"
+#include "Scene_Pueblo_Tutorial.h"
 
 InventoryManager::InventoryManager(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -1353,7 +1354,7 @@ bool InventoryManager::Update(float dt)
 			}
 
 		}
-		if (app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady ) {
+		if (app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady ) {
 			options = true;
 			selected = { PointerPosition.x + 8, PointerPosition.y + 9 };
 			selectedId = PointerId;

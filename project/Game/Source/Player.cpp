@@ -7,6 +7,7 @@
 #include "Render.h"
 #include "Scene_Testing.h"
 #include "Scene_Pueblo.h"
+#include "Scene_Pueblo_Tutorial.h"
 #include "Scene_GameOver.h"
 #include "Scene_Mazmorra0.h"
 #include "Log.h"
@@ -1675,10 +1676,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 		/*case ColliderType::FISHZONE:
 			if (!getPlayerTouch) {
-			app->scene_pueblo->GetRod()->fishing.rodReady = !app->scene_pueblo->GetRod()->fishing.rodReady;
+			app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady = !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady;
 			getPlayerTouch = true;
 			}*/
-			//printf("\n fishizone: %d", app->scene_pueblo->GetRod()->fishing.rodReady);
+			//printf("\n fishizone: %d", app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady);
 		break;
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");
@@ -1865,7 +1866,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::ARBOL:
 		LOG("Collision ARBOL");
-		if (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady)
+		if (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady)
 		{
 			app->treeManager->mostrar = true;
 
@@ -1915,11 +1916,13 @@ void Player::OnEndCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::FISHZONEIN:
 		app->scene_pueblo->GetRod()->fishing.rodReady = true;
-		//printf("\ngetPlayerTouch: %d", app->scene_pueblo->GetRod()->fishing.rodReady);
+		app->scene_pueblo_tutorial->GetRod()->fishing.rodReady = true;
+		//printf("\ngetPlayerTouch: %d", app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady);
 		break;
 	case ColliderType::FISHZONEOUT:
-		app->scene_pueblo->GetRod()->fishing.rodReady = false;
-		//printf("\ngetPlayerTouch: %d", app->scene_pueblo->GetRod()->fishing.rodReady);
+		app->scene_pueblo->GetRod()->fishing.rodReady  = false;
+		app->scene_pueblo_tutorial->GetRod()->fishing.rodReady = false;
+		//printf("\ngetPlayerTouch: %d", app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady);
 		break;
 		/*...*/
 	}
@@ -2659,7 +2662,7 @@ void Player::PlayerMovement(float dt)
 	}
 
 	//Si pulsas espacio
-	if (app->input->GetButton(DASH) == KEY_DOWN && timerDash.ReadMSec() > cdTimerDashMS && !app->scene_pueblo->GetRod()->fishing.rodReady && !die) {
+	if (app->input->GetButton(DASH) == KEY_DOWN && timerDash.ReadMSec() > cdTimerDashMS && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady && !die) {
 
 		velocityNormalized = velocity;
 		velocityNormalized.Normalize();
@@ -2696,7 +2699,7 @@ void Player::PlayerMovement(float dt)
 	}
 
 	//Si pulsas J para atacar
-	if (app->input->GetButton(ATAQUE) == KEY_DOWN && !isAttacking && !app->scene_pueblo->GetRod()->fishing.rodReady && !die) {
+	if (app->input->GetButton(ATAQUE) == KEY_DOWN && !isAttacking && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady && !die) {
 		hasAttacked = false;
 		isAttacking = true;
 		timerAttack.Start();
@@ -2778,6 +2781,13 @@ void Player::FishingDirecction(float verticalMovement, float horizontalMovement)
 		else {
 			playermove = false;
 		}
+		if (app->scene_pueblo_tutorial->GetRod()->fishing.isFishing) {
+			playermove = true;
+			app->scene_pueblo_tutorial->GetRod()->fishing.startFishing = false;
+		}
+		else {
+			playermove = false;
+		}
 	}
 	else if (horizontalMovement == -1) {
 		// izquierda
@@ -2785,6 +2795,13 @@ void Player::FishingDirecction(float verticalMovement, float horizontalMovement)
 		if (app->scene_pueblo->GetRod()->fishing.isFishing) {
 			playermove = true;
 			app->scene_pueblo->GetRod()->fishing.startFishing = false;
+		}
+		else {
+			playermove = false;
+		}
+		if (app->scene_pueblo_tutorial->GetRod()->fishing.isFishing) {
+			playermove = true;
+			app->scene_pueblo_tutorial->GetRod()->fishing.startFishing = false;
 		}
 		else {
 			playermove = false;
@@ -2800,6 +2817,13 @@ void Player::FishingDirecction(float verticalMovement, float horizontalMovement)
 		else {
 			playermove = false;
 		}
+		if (app->scene_pueblo_tutorial->GetRod()->fishing.isFishing) {
+			playermove = true;
+			app->scene_pueblo_tutorial->GetRod()->fishing.startFishing = false;
+		}
+		else {
+			playermove = false;
+		}
 	}
 	else if (verticalMovement == -1) {
 		// arriba
@@ -2807,6 +2831,13 @@ void Player::FishingDirecction(float verticalMovement, float horizontalMovement)
 		if (app->scene_pueblo->GetRod()->fishing.isFishing) {
 			playermove = true;
 			app->scene_pueblo->GetRod()->fishing.startFishing = false;
+		}
+		else {
+			playermove = false;
+		}
+		if (app->scene_pueblo_tutorial->GetRod()->fishing.isFishing) {
+			playermove = true;
+			app->scene_pueblo_tutorial->GetRod()->fishing.startFishing = false;
 		}
 		else {
 			playermove = false;

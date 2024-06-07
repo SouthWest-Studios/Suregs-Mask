@@ -23,6 +23,7 @@
 #include "Menu.h"
 #include "Window.h"
 #include "Scene_Pueblo.h"
+#include "Scene_Pueblo_Tutorial.h"
 
 Commerce::Commerce(uint id) : id(id)
 {
@@ -350,7 +351,7 @@ bool Commerce::Update(float dt)
 	}
 
 
-	if (app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  || app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady) {
+	if (app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady  || app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady) {
 
 		if (pointerIndexF < trades.size()) {
 			if (pointerIndexC == 0) SelectTrade(pointerIndexF);
