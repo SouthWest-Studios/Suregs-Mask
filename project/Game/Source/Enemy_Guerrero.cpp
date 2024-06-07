@@ -290,8 +290,10 @@ bool Enemy_Guerrero::Guerrerofinding(float dt, iPoint playerPosP)
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
 
 
-	if (dist(playerPos, enemyPos) < viewDistance) {
-		app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
+	int pathLength = app->map->pathfinding->CreatePath(enemyPos, playerPos);
+
+	if (dist(playerPos, enemyPos) < viewDistance && pathLength > 0 && pathLength < viewDistance) {
+
 		lastPath = *app->map->pathfinding->GetLastPath();
 	}
 	else {

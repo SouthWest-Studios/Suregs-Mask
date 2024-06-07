@@ -369,9 +369,10 @@ bool Enemy_Boorok_Variation::Boorokfinding(float dt, iPoint playerPosP)
 	iPoint playerPos = app->map->WorldToMap(playerPosP.x, playerPosP.y);
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
 
+	int pathLength = app->map->pathfinding->CreatePath(enemyPos, playerPos);
 
-	if (dist(playerPos, enemyPos) < viewDistance) {
-		app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
+	if (dist(playerPos, enemyPos) < viewDistance && pathLength > 0 && pathLength < viewDistance) {
+
 		lastPath = *app->map->pathfinding->GetLastPath();
 	}
 	else {

@@ -2120,31 +2120,48 @@ void Map::CreateNavigationMap(int& width, int& height, uchar** buffer) const
 {
 	bool ret = false;
 
-	//Sets the size of the map. The navigation map is a unidimensional array 
+	// Sets the size of the map. The navigation map is unidimensional array
 	uchar* navigationMap = new uchar[navigationLayer->width * navigationLayer->height];
-	//reserves the memory for the navigation map
+	// Reserves the memory for the navigation map
 	memset(navigationMap, 1, navigationLayer->width * navigationLayer->height);
 
 	for (int x = 0; x < mapData.width; x++)
 	{
 		for (int y = 0; y < mapData.height; y++)
 		{
-			//i is the index of x,y coordinate in a unidimensional array that represents the navigation map
+			// i is the index of x,y coordinate in a unidimensional array that represents the navigation map
 			int i = (y * navigationLayer->width) + x;
 
-			//Gets the gid of the map in the navigation layer
+			// Gets the gid of the map in the navigation layer
 			int gid = navigationLayer->Get(x, y);
 
-			//If the gid is a blockedGid is an area that I cannot navigate, so is set in the navigation map as 0, all the other areas can be navigated
-			//!!!! make sure that you assign blockedGid according to your map
-			if (gid == blockedGid) navigationMap[i] = 0;
-			else navigationMap[i] = 1;
+			TileSet* tileset = GetTilesetFromTileId(gid);
+
+			// Check if the tile is the blocked tile
+			if (tileset != nullptr)
+			{
+				int tileId = gid - tileset->firstgid;
+
+				if (tileId == 1) // Adjusted to check for the first tile
+				{
+					navigationMap[i] = 0; // Not navigable
+				}
+				else
+				{
+					navigationMap[i] = 1; // Navigable
+				}
+			}
+			else
+			{
+				navigationMap[i] = 1; // Default to navigable if no tileset or tile found
+			}
 		}
 	}
 
 	*buffer = navigationMap;
 	width = mapData.width;
 	height = mapData.height;
-
 }
+
+
 
