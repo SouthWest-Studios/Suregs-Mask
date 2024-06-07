@@ -179,7 +179,10 @@ bool EntityManager::CleanUp()
 	while (item != NULL && ret == true)
 	{
 		ret = item->data->CleanUp();
-		RELEASE(item->data);
+		if (item != nullptr && item->data != nullptr) 
+		{
+			RELEASE(item->data);
+		}
 
 		//delete item->data;
 		item = item->prev;
