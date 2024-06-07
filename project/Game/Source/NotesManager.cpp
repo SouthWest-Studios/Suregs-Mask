@@ -494,13 +494,32 @@ bool NotesManager::Update(float dt)
 		
 	if (mostrar == true)
 	{
+		if(acabar == true)
 		OnMovePointer();
 
-		if (app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady ) {
+		if (app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady && acabar == true) {
 			/*options = true;
 			selected = { PointerPosition.x, PointerPosition.y };
 			selectedId = PointerId;*/
-			UseNoteSelected(PointerId);
+			ListItem<Note*>* item;
+			if (zoomIn == true)
+			{
+				for (item = notes.start; item != NULL; item = item->next)
+				{
+					/*item->data->zoom = false;*/
+					StartExitAnimation();
+					
+				}
+				
+				zoomIn = false;
+			}
+			else
+			{
+				UseNoteSelected(PointerId);
+			}
+			
+			
+			
 
 		}
 
@@ -656,7 +675,7 @@ bool NotesManager::PostUpdate()
 					if (animating || animatingExit) {
 						if (animating) {
 							animationTime += app->dt;
-
+							
 							float progress = animationTime / 1000.0f; // Duración de la animación de 1 segundo (1000 ms)
 							if (progress >= 1.0f) {
 								progress = 1.0f;
@@ -671,12 +690,13 @@ bool NotesManager::PostUpdate()
 						}
 						else if (animatingExit) {
 							animationTime += app->dt;
-
+							acabar = false;
 							float progress = animationTime / 1000.0f; // Duración de la animación de 1 segundo (1000 ms)
 							if (progress >= 1.0f) {
 								progress = 1.0f;
 								animatingExit = false;
 								itum->data->zoom = false; // Ocultar el men?al finalizar la animación de salida
+								acabar = true;
 							}
 							float easedProgress = easeOutCubic(progress);
 

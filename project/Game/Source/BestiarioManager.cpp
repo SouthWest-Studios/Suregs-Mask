@@ -556,7 +556,7 @@ void BestiarioManager::OnMovePointer()
 
 			}
 			if (app->input->GetButton(LEFT) == KEY_DOWN) {
-				if (horitzontalPointerId - 1 < 0)
+				if (horitzontalPointerId - 1 < -1)
 				{
 					if (app->notesManager->vacio == false)
 					{
@@ -635,6 +635,7 @@ bool BestiarioManager::Update(float dt)
 
 	if (mostrar == true)
 	{
+		if(acabar == true)
 		OnMovePointer();
 		
 		if (couuuunt == 2)
@@ -832,12 +833,13 @@ bool BestiarioManager::PostUpdate()
 							}
 							else if (animatingExit) {
 								animationTime += app->dt;
-
+								acabar = false;
 								float progress = animationTime / 1000.0f; // Duración de la animación de 1 segundo (1000 ms)
 								if (progress >= 1.0f) {
 									progress = 1.0f;
 									animatingExit = false;
 									itum->data->zoom = false; // Ocultar el men?al finalizar la animación de salida
+									acabar = true;
 								}
 								float easedProgress = easeOutCubic(progress);
 

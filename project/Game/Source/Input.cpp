@@ -139,9 +139,9 @@ bool Input::Awake(pugi::xml_node config)
 		.SetPButton(SDL_CONTROLLER_BUTTON_X)
 		.SetPKey(SDL_SCANCODE_F);
 
-	/*bindings[CHANGEROD]
-		.SetPButton(SDL_CONTROLLER_BUTTON_Y)
-		.SetPKey(SDL_SCANCODE_C);*/
+	bindings[SECOND_BACK]
+		.SetPButton(SDL_CONTROLLER_BUTTON_Y);
+		
 
 
 
