@@ -384,10 +384,11 @@ void Enemy_Osiris::Die() {
 		if (app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->playerInFight) {
 			app->map->DestroyEntity(this);
 		}
+		CleanUp();
 		
 	}
 
-	CleanUp();
+	
 
 }
 

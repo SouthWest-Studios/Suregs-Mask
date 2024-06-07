@@ -93,7 +93,7 @@ public:
 
 	bool vacio = true;
 
-	
+	bool acabar = true;
 
 private:
 	pugi::xml_document configFile;

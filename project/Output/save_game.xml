@@ -25,7 +25,7 @@
 			</bosses>
 		</map>
 	</map>
-	<pueblo_tutorial />
+	<scene_pueblo />
 	<entitymanager>
 		<entity_manager>
 			<doors />

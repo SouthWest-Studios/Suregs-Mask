@@ -3,6 +3,7 @@
 #include "ParticleSystem.h"
 #include "App.h"
 #include "Textures.h"
+#include <unordered_set>
 
 
 ParticleSystem::ParticleSystem(App* app, bool start_enabled) : Module(app, start_enabled)
@@ -110,12 +111,24 @@ bool ParticleSystem::PostUpdate()
 	if (!emittersToDestroy.empty())
 	{
 		std::list<Emitter*>::const_iterator it;
+		std::unordered_set<Emitter*> deletedEmitters; // Conjunto para mantener un registro de emisores eliminados
 
 		for (it = emittersToDestroy.begin(); it != emittersToDestroy.end(); ++it)
 		{
-			emittersList.remove(*it);
-			delete *it;
-
+			if (*it != nullptr) {
+				if (deletedEmitters.find(*it) == deletedEmitters.end()) { // Verifica si el emisor ya fue eliminado
+					printf("Deleting emitter at address: %p\n", (void*)*it);
+					emittersList.remove(*it);
+					delete* it;
+					deletedEmitters.insert(*it); // Marca el emisor como eliminado
+				}
+				else {
+					printf("Skipping duplicate emitter at address: %p\n", (void*)*it);
+				}
+			}
+			else {
+				printf("Encountered a nullptr in emittersToDestroy\n");
+			}
 		}
 
 		emittersToDestroy.clear();

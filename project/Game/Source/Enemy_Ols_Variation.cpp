@@ -210,7 +210,7 @@ bool Enemy_Ols_Variation::CleanUp()
 
 void Enemy_Ols_Variation::DoNothing(float dt)
 {
-	if(currentAnimation->HasFinished() && currentAnimation == &attackAnim){
+	if((currentAnimation->HasFinished() && currentAnimation == &attackAnim) || currentAnimation == &runAnim){
 		currentAnimation = &idleAnim;
 	}
 	////printf("Osiris idle");
@@ -229,7 +229,10 @@ void Enemy_Ols_Variation::Chase(float dt, iPoint playerPos)
 		Flee(dt);
 	}
 	if(currentAnimation->HasFinished() && currentAnimation == &attackAnim){
-		currentAnimation = &idleAnim;
+		currentAnimation = &runAnim;
+	}
+	else if(currentAnimation == &idleAnim){
+		currentAnimation = &runAnim;
 	}
 }
 
@@ -281,10 +284,14 @@ void Enemy_Ols_Variation::Die() {
 	}
 	app->bestiarioManager->CreateItem("olsV");
 
-	app->entityManager->DestroyEntity(this);
+	//app->entityManager->DestroyEntity(this);
 	//app->physics->GetWorld()->DestroyBody(pbodyFoot->body);LIN
-	app->physics->DestroyBody(pbodyFoot);
+	//app->physics->DestroyBody(pbodyFoot);
 	//app->tex->UnLoad(texture);
+
+	if(currentAnimation == &dieAnim && currentAnimation->HasFinished()){
+		CleanUp();
+	}
 
 	//Mask 0
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
@@ -447,27 +454,27 @@ void Enemy_Ols_Variation::stateMachine(float dt, iPoint playerPos)
     switch (nextState) {
     case EntityState_Enemy::IDLE:
         DoNothing(dt);
-        if (currentAnimation != &idleAnim) {
-            currentAnimation = &idleAnim;
-        }
+        // if (currentAnimation != &idleAnim) {
+        //     currentAnimation = &idleAnim;
+        // }
         break;
     case EntityState_Enemy::RUNNING:
         Chase(dt, playerPos);
-        if (currentAnimation != &runAnim) {
-            currentAnimation = &runAnim;
-        }
+        // if (currentAnimation != &runAnim) {
+        //     currentAnimation = &runAnim;
+        // }
         break;
     case EntityState_Enemy::ATTACKING:
         Attack(dt, playerPos);
-        if (currentAnimation != &attackAnim) {
-            currentAnimation = &attackAnim;
-        }
+        // if (currentAnimation != &attackAnim) {
+        //     currentAnimation = &attackAnim;
+        // }
         break;
     case EntityState_Enemy::DEAD:
         Die();
-        if (currentAnimation != &dieAnim) {
-            currentAnimation = &dieAnim;
-        }
+        // if (currentAnimation != &dieAnim) {
+        //     currentAnimation = &dieAnim;
+        // }
         break;
     case EntityState_Enemy::DASHI:
         break;

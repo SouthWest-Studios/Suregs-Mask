@@ -223,7 +223,7 @@ bool Enemy_Ols::CleanUp()
 
 void Enemy_Ols::DoNothing(float dt)
 {
-	if(currentAnimation->HasFinished() && currentAnimation == &attackAnim){
+	if((currentAnimation->HasFinished() && currentAnimation == &attackAnim) || currentAnimation == &runAnim){
 		currentAnimation = &idleAnim;
 	}
 
@@ -243,6 +243,9 @@ void Enemy_Ols::Chase(float dt, iPoint playerPos)
 		Flee(dt);
 	}
 	if(currentAnimation->HasFinished() && currentAnimation == &attackAnim){
+		currentAnimation = &runAnim;
+	}
+	else if(currentAnimation == &idleAnim){
 		currentAnimation = &runAnim;
 	}
 }
@@ -302,7 +305,9 @@ void Enemy_Ols::Die() {
 	/*app->entityManager->DestroyEntity(this);
 	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 	//app->tex->UnLoad(texture);*/
-	CleanUp();
+	if(currentAnimation == &dieAnim && currentAnimation->HasFinished()){
+		CleanUp();
+	}
 
 	//Mask 0
 	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
@@ -469,21 +474,21 @@ void Enemy_Ols::stateMachine(float dt, iPoint playerPos)
     switch (nextState) {
     case EntityState_Enemy::IDLE:
         DoNothing(dt);
-        if (currentAnimation != &idleAnim) {
-            currentAnimation = &idleAnim;
-        }
+        // if (currentAnimation != &idleAnim && currentAnimation->HasFinished()) {
+        //     currentAnimation = &idleAnim;
+        // }
         break;
     case EntityState_Enemy::RUNNING:
         Chase(dt, playerPos);
-        if (currentAnimation != &runAnim) {
-            currentAnimation = &runAnim;
-        }
+        // if (currentAnimation != &runAnim && currentAnimation->HasFinished()) {
+        //     currentAnimation = &runAnim;
+        // }
         break;
     case EntityState_Enemy::ATTACKING:
         Attack(dt, playerPos);
-        if (currentAnimation != &attackAnim) {
-            currentAnimation = &attackAnim;
-        }
+        // if (currentAnimation != &attackAnim) {
+        //     currentAnimation = &attackAnim;
+        // }
         break;
     case EntityState_Enemy::DEAD:
         Die();

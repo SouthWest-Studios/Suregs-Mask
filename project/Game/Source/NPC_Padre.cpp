@@ -107,7 +107,9 @@ bool NPCPadre::PostUpdate() {
 }
 
 bool NPCPadre::CleanUp() {
-	app->physics->GetWorld()->DestroyBody(pbody->body);
+	//app->physics->GetWorld()->DestroyBody(pbody->body);
+	app->physics->DestroyBody(pbody);
+	app->entityManager->GetIgory()->playerInFight = true;
 	app->tex->UnLoad(texture);
 	RELEASE(spritePositions);
 	delete spritePositions;
@@ -129,7 +131,7 @@ void NPCPadre::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (dialogoMostrado && !app->dialogManager->isPlaying) {
 			////printf("\nTerminado");
 			if (app->entityManager->GetIgory() != nullptr) {
-				app->entityManager->GetIgory()->playerInFight = true;
+				//app->entityManager->GetIgory()->playerInFight = true;
 				app->entityManager->GetIgory()->generaTimeColdDown.Start();
 				app->entityManager->GetIgory()->curaTimer.Start();
 				CleanUp();
