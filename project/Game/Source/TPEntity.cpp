@@ -93,7 +93,7 @@ void TPEntity::OnCollision(PhysBody* physA, PhysBody* physB) {
 				}
 
 
-				if (app->questManager->GetQuestLineIndex(1) > 1) {
+				if (app->questManager->GetQuestLineIndex(1) > 1 || (!app->scene_pueblo_tutorial->active && !app->scene_pueblo->active)) {
 					app->entityManager->GetPlayer()->pbodyFoot->body->SetTransform(b2Vec2(PIXEL_TO_METERS(targetPos.x), PIXEL_TO_METERS(targetPos.y)), 0);
 				}
 				else {
