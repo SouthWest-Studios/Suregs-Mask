@@ -73,7 +73,7 @@ bool ModuleFadeToBlack::Update(float dt)
 			app->map->Disable();
 			moduleToDisable->Disable();
 			app->entityManager->Disable();
-			app->psystem->RemoveAllEmitters();
+			/*app->psystem->RemoveAllEmitters();*/
 			
 
 			pugi::xml_document configFile;
