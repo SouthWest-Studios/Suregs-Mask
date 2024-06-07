@@ -100,7 +100,7 @@ bool MiniGameFishing::Update(float dt)
 	miniGameLoop(dt);
 	miniGameEnd(dt);
 
-	printf("\nFishing: %d", fishing.rodReady);
+	//printf("\nFishing: %d", fishing.rodReady);
 
 
 	return true;
