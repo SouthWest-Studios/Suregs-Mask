@@ -10,6 +10,8 @@
 #include "Cofre.h"
 #include "ModuleFadeToBlack.h"
 #include "Optick/include/optick.h"
+#include "Fishing.h"
+#include "MiniGameFishing.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -67,6 +69,9 @@ bool Scene_Pueblo_Tutorial::Start()
 	// Stop the music from previous scenes
 	app->audio->StopMusic();
 	app->audio->LoadAudioAmbience("town_fx");
+
+	fishing = (MiniGameFishing*)app->entityManager->CreateEntity(EntityType::ROD);
+	fishing->parameters = config.child("minigamefishing");
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
@@ -151,6 +156,8 @@ bool Scene_Pueblo_Tutorial::PostUpdate()
 bool Scene_Pueblo_Tutorial::CleanUp()
 {
 	LOG("Freeing Scene_Pueblo_Tutorial");
+	app->entityManager->DestroyEntity(fishing);
+	delete fishing;
 	return true;
 }
 
@@ -162,4 +169,9 @@ bool Scene_Pueblo_Tutorial::OnGuiMouseClickEvent(GuiControl* control)
 	LOG("Press Gui Control: %d", control->id);
 
 	return true;
+}
+
+MiniGameFishing* Scene_Pueblo_Tutorial::GetRod()
+{
+	return fishing;
 }

@@ -27,7 +27,7 @@ Physics::Physics(App* app, bool start_enabled) : Module(app, start_enabled)
 {
 	// Initialise all the internal class variables, at least to NULL pointer
 	world = NULL;
-	debug = true;
+	debug = false;
 }
 
 // Destructor
@@ -94,20 +94,23 @@ void Physics::DestroyBody(PhysBody* body)
 		//world->DestroyBody(body->body);
 		//delete body;
 		bodiesToDestroy.push_back(body);
+		
+			
+		
 	}
 }
 
 void Physics::DestroyPendingBodies()
 {
-	for (int i = 0; i < bodiesToDestroy.size(); i++) {
-		if (bodiesToDestroy.at(i)) {
-			world->DestroyBody(bodiesToDestroy.at(i)->body);
-			delete bodiesToDestroy.at(i);
+	for (auto* bodyWrapper : bodiesToDestroy) {
+		if (bodyWrapper != nullptr && bodyWrapper->body != nullptr) {
+
+			world->DestroyBody(bodyWrapper->body);
+			delete bodyWrapper;
 		}
 	}
 	bodiesToDestroy.clear();
 	bodiesToDestroy.shrink_to_fit();
-
 }
 
 b2World* Physics::GetWorld()

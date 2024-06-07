@@ -203,7 +203,7 @@ bool Boss_Igory::Update(float dt)
 
 		if (inAtack) {
 			if (atackCube != nullptr) {
-				app->physics->GetWorld()->DestroyBody(atackCube->body);
+				app->physics->DestroyBody(atackCube);
 				atackCube = nullptr;
 			}
 			inAtack = false;
@@ -416,16 +416,16 @@ bool Boss_Igory::CleanUp()
 {
 	//printf("\n CleanUp");
 	if (pbodyFoot != nullptr) {
-		app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
+		app->physics->DestroyBody(pbodyFoot);
 		pbodyFoot = nullptr;
 	}
 	if (pbodySensor != nullptr) {
-		app->physics->GetWorld()->DestroyBody(pbodySensor->body);
+		app->physics->DestroyBody(pbodySensor);
 		pbodySensor = nullptr;
 	}
 
 	if (atackCube != nullptr) {
-		app->physics->GetWorld()->DestroyBody(atackCube->body);
+		app->physics->DestroyBody(atackCube);
 		atackCube = nullptr;
 	}
 
@@ -460,7 +460,7 @@ void Boss_Igory::resetAnimation()
 {
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atq1_boss_Igory") {
 		if (atackCube != nullptr) {
-			app->physics->GetWorld()->DestroyBody(atackCube->body);
+			app->physics->DestroyBody(atackCube);
 			atackCube = nullptr;
 		}
 		inAtack = false;
@@ -469,7 +469,7 @@ void Boss_Igory::resetAnimation()
 	}
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atq2_boss_Igory") {
 		if (atackCube != nullptr) {
-			app->physics->GetWorld()->DestroyBody(atackCube->body);
+			app->physics->DestroyBody(atackCube);
 			atackCube = nullptr;
 		}
 		inAtack = false;
@@ -479,7 +479,7 @@ void Boss_Igory::resetAnimation()
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "atq3_boss_Igory") {
 
 		if (atackCube != nullptr) {
-			app->physics->GetWorld()->DestroyBody(atackCube->body);
+			app->physics->DestroyBody(atackCube);
 			atackCube = nullptr;
 		}
 		inAtack = false;
@@ -490,7 +490,7 @@ void Boss_Igory::resetAnimation()
 		inTakeHit = false;
 		hit_boss_Igory.Reset();
 		if (atackCube != nullptr) {
-			app->physics->GetWorld()->DestroyBody(atackCube->body);
+			app->physics->DestroyBody(atackCube);
 			atackCube = nullptr;
 		}
 		inAtack = false;
@@ -500,7 +500,7 @@ void Boss_Igory::resetAnimation()
 
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "geneSure_boss_Igory") {
 		if (atackCube != nullptr) {
-			app->physics->GetWorld()->DestroyBody(atackCube->body);
+			app->physics->DestroyBody(atackCube);
 			atackCube = nullptr;
 		}
 		geneSure_boss_Igory.Reset();
@@ -542,7 +542,7 @@ void Boss_Igory::resetAnimation()
 
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "dash_idle_boss_Igory") {
 		if (atackCube != nullptr) {
-			app->physics->GetWorld()->DestroyBody(atackCube->body);
+			app->physics->DestroyBody(atackCube);
 			atackCube = nullptr;
 		}
 		if (!inDashDashi) {
@@ -565,7 +565,7 @@ void Boss_Igory::resetAnimation()
 	}
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "dash_DashiAtq_boss_Igory") {
 		if (atackCube != nullptr) {
-			app->physics->GetWorld()->DestroyBody(atackCube->body);
+			app->physics->DestroyBody(atackCube);
 			atackCube = nullptr;
 		}
 		dash_idle_boss_Igory.Reset();
@@ -584,11 +584,11 @@ void Boss_Igory::resetAnimation()
 			deletePadre = true;
 			/*CleanUp();*/
 			if (pbodyFoot != nullptr) {
-				app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
+				app->physics->DestroyBody(pbodyFoot);
 				pbodyFoot = nullptr;
 			}
 			if (pbodySensor != nullptr) {
-				app->physics->GetWorld()->DestroyBody(pbodySensor->body);
+				app->physics->DestroyBody(pbodySensor);
 				pbodySensor = nullptr;
 			}
 
@@ -1023,8 +1023,7 @@ void Boss_Igory::deleteCollision(PhysBody* phy)
 
 	if (phy != nullptr) {
 		phy->body->SetLinearVelocity(b2Vec2(0, 0));
-		//phy->body->GetWorld()->DestroyBody(phy->body);
-		app->physics->GetWorld()->DestroyBody(phy->body);
+		app->physics->DestroyBody(phy);
 		phy = nullptr;
 		////printf("delete");
 	}

@@ -100,7 +100,7 @@ bool MiniGameFishing::Update(float dt)
 	miniGameLoop(dt);
 	miniGameEnd(dt);
 
-	////printf("\nss: %s", fishingfloat_path);
+	//printf("\nFishing: %d", fishing.rodReady);
 
 
 	return true;
@@ -118,7 +118,7 @@ bool MiniGameFishing::PostUpdate()
 bool MiniGameFishing::CleanUp()
 {
 	if (floatbody != nullptr) {
-		floatbody->body->GetWorld()->DestroyBody(floatbody->body);
+		app->physics->DestroyBody(floatbody);
 		floatbody = nullptr;
 	}
 	app->tex->UnLoad(fishingfloat_texture);
@@ -146,7 +146,7 @@ void MiniGameFishing::castingline(FISHINGTYPE type)
 		else {
 			fishingfloat_lineReady = false;
 			if (floatbody != nullptr) {
-				app->physics->GetWorld()->DestroyBody(floatbody->body);
+				app->physics->DestroyBody(floatbody);
 				floatbody = nullptr;
 			}//end_if, delete collision
 		}//end_if, if fishing
@@ -258,7 +258,7 @@ void MiniGameFishing::floatCollision(Direction direction, float cheke_x, float c
 	if (force == b2Vec2(0.0f, 0.0f)) {
 		
 		if (floatbody != nullptr) {
-			floatbody->body->GetWorld()->DestroyBody(floatbody->body);
+			app->physics->DestroyBody(floatbody);
 			floatbody = nullptr;
 		}//end_if, delete collision
 		if (floatbody != nullptr) {

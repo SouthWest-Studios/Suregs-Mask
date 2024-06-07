@@ -396,6 +396,7 @@ bool App::PreUpdate()
 
 	for (item = modules.start; item != NULL && ret == true; item = item->next)
 	{
+		
 		pModule = item->data;
 
 		if (pModule->active == false) {

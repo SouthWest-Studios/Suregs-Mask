@@ -23,6 +23,7 @@
 #include "TreeManager.h"
 #include "menu.h"
 #include "Scene_Pueblo.h"
+#include "Scene_Pueblo_Tutorial.h"
 #include "Entity.h"
 
 Arbol::Arbol() : Entity(EntityType::COFRE)
@@ -55,7 +56,6 @@ bool Arbol::Start() {
 	pbody = app->physics->CreateRectangleSensor(position.x + 10, position.y, 300, 300, bodyType::KINEMATIC);
 	pbody->ctype = ColliderType::ARBOL;
 	pbody->listener = this;
-	pbody->body->GetFixtureList()->SetSensor(true);
 
 
 
@@ -86,6 +86,7 @@ bool Arbol::CleanUp()
 {
 	app->physics->DestroyBody(pbody);
     app->tex->UnLoad(texture);
+
     return true;
 }
 void Arbol::OnCollision(PhysBody* physA, PhysBody* physB) 
@@ -96,7 +97,7 @@ void Arbol::OnCollision(PhysBody* physA, PhysBody* physB)
       {
           if (abierto == false)
           {
-              if (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady)
+              if (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady)
               {
                   app->treeManager->mostrar = true;
                   app->menu->active = false;

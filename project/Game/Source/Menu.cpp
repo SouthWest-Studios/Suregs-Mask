@@ -21,6 +21,7 @@
 #include "ElevatorMenu.h"
 #include "Scene_Pueblo.h"
 #include "Hud.h"
+#include "Scene_Pueblo_Tutorial.h"
 
 #include "SDL_mixer/include/SDL_mixer.h"
 
@@ -124,7 +125,7 @@ bool Menu::Update(float dt)
 			ventana++;
 		}
 		
-		if (app->input->GetButton(CAMBIAR_PESTANA_RIGHT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady)
+		if (app->input->GetButton(CAMBIAR_PESTANA_RIGHT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady)
 		{
 			if (ventana == 5)
 			{
@@ -292,15 +293,15 @@ bool Menu::Update(float dt)
 
 		
 
-		if (fullScreen->selected && (app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady ))
+		if (fullScreen->selected && (app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady ))
 		{
 			fullScreen->click = !fullScreen->click;
 		}
-		if (vsync->selected && (app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady ))
+		if (vsync->selected && (app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady ))
 		{
 			vsync->click = !vsync->click;
 		}
-		if (title->selected && (app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady ))
+		if (title->selected && (app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady ))
 		{
 			title->click = true;
 		}

@@ -30,6 +30,7 @@
 #include "Menu.h"
 #include "QuestManager.h"
 #include "DialogManager.h"
+#include "Scene_Pueblo_Tutorial.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 
 ElevatorMenu::ElevatorMenu(App* app, bool start_enabled) : Module(app, start_enabled)
@@ -91,7 +92,7 @@ bool ElevatorMenu::Update(float dt)
 		OnMovePointer();
 		if (open)
 		{
-			if ((app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  && PointerId < mazmorra + plus + 1) || (app->input->GetButton(CONFIRM) == KEY_DOWN && PointerId < mazmorra + plus + 1) && !app->scene_pueblo->GetRod()->fishing.rodReady) {
+			if ((app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady  && PointerId < mazmorra + plus + 1) || (app->input->GetButton(CONFIRM) == KEY_DOWN && PointerId < mazmorra + plus + 1) && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady) {
 				app->audio->PlayFx(select_fx);
 				int num;
 				if (PointerId != mazmorraActual)

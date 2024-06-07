@@ -21,6 +21,7 @@
 #include "Menu.h"
 #include "Hud.h"
 #include "Scene_Pueblo.h"
+#include "Scene_Pueblo_Tutorial.h"
 
 NotesManager::NotesManager(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -495,7 +496,7 @@ bool NotesManager::Update(float dt)
 	{
 		OnMovePointer();
 
-		if (app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady ) {
+		if (app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady ) {
 			/*options = true;
 			selected = { PointerPosition.x, PointerPosition.y };
 			selectedId = PointerId;*/

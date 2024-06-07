@@ -17,6 +17,7 @@
 #include "InventoryManager.h"
 #include "Defs.h"
 #include "Scene_Pueblo.h"
+#include "Scene_Pueblo_Tutorial.h"
 #include "Log.h"
 #include "SString.h"
 #include "Window.h"
@@ -1591,7 +1592,7 @@ bool TreeManager::Update(float dt)
 		OnMovePointer();
 		app->entityManager->active = false;
 		app->physics->active = false;
-		if (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady || app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady ) {
+		if (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady || app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady ) {
 			/*options = true;
 			selected = { PointerPosition.x, PointerPosition.y };
 			selectedId = PointerId;*/

@@ -132587,7 +132587,7 @@
  </layer>
  <layer id="13" name="TPLayers" width="235" height="188">
   <properties>
-   <property name="Draw" type="bool" value="true"/>
+   <property name="Draw" type="bool" value="false"/>
   </properties>
   <data>
    <tile/>
