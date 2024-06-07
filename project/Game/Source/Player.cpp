@@ -20,6 +20,7 @@
 #include "DebugConsole.h"
 #include "TreeManager.h"
 #include "DialogManager.h"
+#include "QuestManager.h"
 #include "Hud.h"
 
 #include "Fishing.h"
@@ -1753,6 +1754,11 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 				pugi::xml_parse_result parseResult = configFile.load_file("dialogs.xml");
 				/*dialogNode = configFile.child("config").child("dialogues");
 				*/
+
+				if (app->questManager->GetQuestLineIndex(1) == 5) {
+					app->questManager->UpdateQuestLine(1, 6);
+				}
+
 				pugi::xml_node* dialogNodeF = nullptr;
 				pugi::xml_node dialogNode;
 				for (dialogNode = configFile.child("dialogues").child("dialog"); dialogNode; dialogNode = dialogNode.next_sibling("dialog")) {

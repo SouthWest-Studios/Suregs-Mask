@@ -604,7 +604,7 @@
 
 		<ols>
 			<idleAnim_ols start="25" end="29" speed="0.1f" loop="true"/>
-			<runAnim_ols start="0" end="8" speed="0.07f" loop="true"/>
+			<runAnim_ols start="0" end="8" speed="0.1f" loop="true"/>
 			<attackAnim_ols start="9" end="16" speed="0.2f" loop="false"/>
 			<dieAnim_ols start="17" end="23" speed="0.2f" loop="false"/>
 		</ols>
