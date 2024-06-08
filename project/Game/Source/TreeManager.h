@@ -172,6 +172,9 @@ private:
 	char* description;
 
 	bool setMask = false;
+
+	int button_fx;
+	int select_fx;
 };
 
 #endif 

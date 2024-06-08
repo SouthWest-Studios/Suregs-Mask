@@ -59,8 +59,8 @@ bool Enemy_Guerrero::Start() {
 	//texture = app->tex->Load(config.attribute("texturePath").as_string());
 	texture = app->entityManager->textureGuerrero;
 
-	osiris_get_damage_fx = app->audio->LoadAudioFx("osiris_get_damage_fx");
-	osiris_death_fx = app->audio->LoadAudioFx("osiris_death_fx");
+	//osiris_get_damage_fx = app->audio->LoadAudioFx("osiris_get_damage_fx");
+	//osiris_death_fx = app->audio->LoadAudioFx("osiris_death_fx");
 
 	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
 	pbodyFoot->entity = this;

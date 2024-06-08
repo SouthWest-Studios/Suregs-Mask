@@ -151,6 +151,7 @@ private:
 
 
 	int musri_dash_fx;
+	int musri_get_damage_fx;
 	
 	bool isFacingLeft = false;
 

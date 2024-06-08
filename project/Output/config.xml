@@ -44,7 +44,7 @@
 		<fx>
       <!--ui-->
 			<intro_fx path="Assets/Audio/Fx/UI/intro_fx.wav"/>
-		<cinematic_fx path="Assets/Audio/Fx/UI/cinematic_fx.wav"/>
+			<cinematic_fx path="Assets/Audio/Fx/UI/cinematic_fx.wav"/>
       <menu_fx path="Assets/Audio/Fx/UI/menu_fx.wav"/>
       <button_fx path="Assets/Audio/Fx/UI/button_fx.wav"/>
       <select_fx path="Assets/Audio/Fx/UI/select_fx.wav"/>
@@ -113,7 +113,7 @@
       <boorok_get_damageAlt_fx path="Assets/Audio/Fx/Enemies/boorok_get_damageAlt_fx.wav"/>
       <boorok_death_fx path=""/>  
       
-      <muur_attack_fx path=""/>
+      <muur_attack_fx path="Assets/Audio/Fx/Enemies/muur_attack_fx.wav"/>
       <muur_stun_fx path=""/>
       <muur_get_damage_fx path="Assets/Audio/Fx/Enemies/muur_get_damage_fx.wav"/>
       <muur_death_fx path=""/>

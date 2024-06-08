@@ -121,10 +121,12 @@ private:
 	Animation attackAnim;
 	Animation dieAnim;
 
+	int ols_attack_fx;
 	int ols_get_damage_fx;
 	int ols_get_damageAlt_fx;
 	int ols_get_damageAlt2_fx;
 	int ols_death_fx;
+	bool deathFx = false;
 
 	Emitter* blood;
 

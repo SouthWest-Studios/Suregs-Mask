@@ -281,12 +281,18 @@ void Enemy_Boorok_Variation::Attack(float dt, iPoint playerPos)
 
 void Enemy_Boorok_Variation::Die()
 {
+	if (deathFx == false)
+	{
+		app->audio->PlayFx(boorok_death_fx);
+		deathFx = true;
+	}
+
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
 	currentAnimation = &dieAnim;
 
 	if (dieAnim.HasFinished())
 	{
-
+		deathFx = false;
 
 		pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
 		if (parseResult) {

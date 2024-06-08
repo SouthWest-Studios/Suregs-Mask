@@ -291,10 +291,14 @@ void Enemy_Ols::Attack(float dt, iPoint playerPos)
 }
 
 void Enemy_Ols::Die() {
-	app->audio->PlayFx(ols_death_fx);
+	if (deathFx == false) {
+		app->audio->PlayFx(ols_death_fx);
+		deathFx = true;
+	}
 
 	if (dieAnim.HasFinished())
 	{
+		deathFx = false;
 		fPoint pos((float)position.x, (float)position.y);
 		blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_ENEMY_BLOOD);
 

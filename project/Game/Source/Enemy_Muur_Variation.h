@@ -92,7 +92,9 @@ private:
 	Animation reciebeDamage;
 	Animation dieAnim;
 
+	int muur_attack_fx;
 	int muur_get_damage_fx;
+	bool attackFx = false;
 
 	bool isFacingLeft = false;
 
