@@ -140,7 +140,7 @@
 
 				<option1 text="¿Qué ofreces?">
 					<sentence text="Con los materiales necesarios podré forjar mejoras para tu equipo. ¡No dudes en venir cuando quieras mejorar tus herramientas de combate!"/>
-					<sentence type="QuestUpdate" questLine="1" nextTargetID="22" actualTargetID="21" />
+					<sentence type="QuestUpdate" questLine="1" nextTargetID="23" actualTargetID="22" />
 					<commerce id="3"/>
 				</option1>
 
@@ -189,7 +189,7 @@
 
 	<dialog id="923" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/phrumoFace.png" name="Phrumo">
 		<sentences>
-			<sentence type="QuestUpdate" questLine="1" nextTargetID="7" actualTargetID="6" />
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="8" actualTargetID="7" />
 			<sentence type="choose" text="Bienvenido a la tienda de Phrumo. ¿Te ha molestado mi abuelo? Disculpas...">
 
 				<option1 text="¿Qué ofreces?">
@@ -210,9 +210,8 @@
 
 	<dialog id="924" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/phrumoFace.png" name="Phrumo">
 		<sentences>
-			<sentence type="QuestUpdate" questLine="1" nextTargetID="7" actualTargetID="6" />
 			<sentence type="choose" text="¡Qué sorpresa! Bienvenido a la tienda de Phrumo.">
-
+a
 				<option1 text="¿Qué ofreces?">
 					<sentence text="Aquí podrás vender todo tipo de materiales obtenidos al derrotar los Sureg que intenten entrar en la aldea."/>
 					<commerce id="1"/>
@@ -227,7 +226,6 @@
 
 	<dialog id="925" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/phrumoFace.png" name="Phrumo">
 		<sentences>
-			<sentence type="QuestUpdate" questLine="1" nextTargetID="7" actualTargetID="6" />
 			<sentence type="choose" text="¡Qué sorpresa! Bienvenido a la tienda de Phrumo.">
 
 				<option1 text="¿Qué ofreces?">
@@ -244,7 +242,7 @@
 
 	<dialog id="926" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/phrumoFace.png" name="Phrumo">
 		<sentences>
-			<sentence type="QuestUpdate" questLine="1" nextTargetID="7" actualTargetID="6" />
+
 			<sentence type="choose" text="¡Qué sorpresa! Bienvenido a la tienda de Phrumo.">
 
 				<option1 text="¿Qué ofreces?">
@@ -261,7 +259,6 @@
 
 	<dialog id="927" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/phrumoFace.png" name="Phrumo">
 		<sentences>
-			<sentence type="QuestUpdate" questLine="1" nextTargetID="7" actualTargetID="6" />
 			<sentence type="choose" text="¡Qué sorpresa! Bienvenido a la tienda de Phrumo.">
 
 				<option1 text="¿Qué ofreces?">
@@ -278,7 +275,6 @@
 
 	<dialog id="928" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/phrumoFace.png" name="Phrumo">
 		<sentences>
-			<sentence type="QuestUpdate" questLine="1" nextTargetID="7" actualTargetID="6" />
 			<sentence type="choose" text="¡Qué sorpresa! Bienvenido a la tienda de Phrumo.">
 
 				<option1 text="¿Qué ofreces?">
@@ -295,7 +291,6 @@
 
 	<dialog id="929" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/phrumoFace.png" name="Phrumo">
 		<sentences>
-			<sentence type="QuestUpdate" questLine="1" nextTargetID="7" actualTargetID="6" />
 			<sentence type="choose" text="¡Qué sorpresa! Bienvenido a la tienda de Phrumo.">
 
 				<option1 text="¿Qué ofreces?">
@@ -314,7 +309,6 @@
 
 	<dialog id="931" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/zhyukaFace.png" name="Zhyuka">
 		<sentences>
-			<sentence type="QuestUpdate" questLine="1" nextTargetID="8" actualTargetID="7" />
 
 			<sentence type="choose" text="¿Qué tenemos por aquí, un nuevo cliente? Jijiji…">
 
@@ -332,7 +326,6 @@
 
 	<dialog id="932" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/zhyukaFace.png" name="Zhyuka">
 		<sentences>
-			<sentence type="QuestUpdate" questLine="1" nextTargetID="8" actualTargetID="7" />
 
 			<sentence type="choose" text="¿Qué tenemos por aquí, un nuevo cliente? Jijiji…">
 
@@ -350,7 +343,7 @@
 
 	<dialog id="933" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/zhyukaFace.png" name="Zhyuka">
 		<sentences>
-			<sentence type="QuestUpdate" questLine="1" nextTargetID="8" actualTargetID="7" />
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="9" actualTargetID="8" />
 
 			<sentence type="choose" text="¿Qué tenemos por aquí, un nuevo cliente? Jijiji…">
 
@@ -371,7 +364,6 @@
 
 	<dialog id="934" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/zhyukaFace.png" name="Zhyuka">
 		<sentences>
-			<sentence type="QuestUpdate" questLine="1" nextTargetID="8" actualTargetID="7" />
 
 			<sentence type="choose" text="¿Qué tenemos por aquí, un nuevo cliente? Jijiji…">
 
@@ -389,7 +381,6 @@
 
 	<dialog id="935" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/zhyukaFace.png" name="Zhyuka">
 		<sentences>
-			<sentence type="QuestUpdate" questLine="1" nextTargetID="8" actualTargetID="7" />
 
 			<sentence type="choose" text="¿Qué tenemos por aquí, un nuevo cliente? Jijiji…">
 
@@ -412,7 +403,7 @@
 			<commerce id="2"/>
 		</sentences>
 
-		<sentence type="QuestUpdate" questLine="1" nextTargetID="15" actualTargetID="14" />
+		<sentence type="QuestUpdate" questLine="1" nextTargetID="16" actualTargetID="15" />
 
 	</dialog>
 
@@ -1964,8 +1955,8 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 
 	<dialog id="953" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFace.png" name="Vhea">
 		<sentences>
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="10" actualTargetID="9" />
 			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
-
 				<option1 text="Si, por favor.">
 					<sentence name="Vhea"
 					facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFoodFace.png"
@@ -1979,13 +1970,14 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 
 			</sentence>
 
-			<sentence type="QuestUpdate" questLine="1" nextTargetID="9" actualTargetID="8" />
+
 
 		</sentences>
 	</dialog>
 
 	<dialog id="954" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFace.png" name="Vhea">
 		<sentences>
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="12" actualTargetID="11" />
 			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
 
 				<option1 text="Si, por favor.">
@@ -2001,13 +1993,14 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 
 			</sentence>
 
-			<sentence type="QuestUpdate" questLine="1" nextTargetID="11" actualTargetID="10" />
+			
 
 		</sentences>
 	</dialog>
 
 	<dialog id="955" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFace.png" name="Vhea">
 		<sentences>
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="14" actualTargetID="13" />
 			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
 
 				<option1 text="Si, por favor.">
@@ -2023,7 +2016,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 
 			</sentence>
 
-			<sentence type="QuestUpdate" questLine="1" nextTargetID="13" actualTargetID="12" />
+			
 
 		</sentences>
 	</dialog>
@@ -2045,7 +2038,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 
 			</sentence>
 
-			<sentence type="QuestUpdate" questLine="1" nextTargetID="16" actualTargetID="15" />
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="17" actualTargetID="16" />
 
 		</sentences>
 	</dialog>
@@ -2067,7 +2060,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 
 			</sentence>
 
-			<sentence type="QuestUpdate" questLine="1" nextTargetID="18" actualTargetID="17" />
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="19" actualTargetID="18" />
 
 		</sentences>
 	</dialog>
@@ -2089,7 +2082,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 
 			</sentence>
 
-			<sentence type="QuestUpdate" questLine="1" nextTargetID="20" actualTargetID="19" />
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="21" actualTargetID="20" />
 
 		</sentences>
 	</dialog>
@@ -2111,7 +2104,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 
 			</sentence>
 
-			<sentence type="QuestUpdate" questLine="1" nextTargetID="23" actualTargetID="22" />
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="24" actualTargetID="23" />
 
 		</sentences>
 	</dialog>
