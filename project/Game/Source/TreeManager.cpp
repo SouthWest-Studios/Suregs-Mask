@@ -22,6 +22,7 @@
 #include "Log.h"
 #include "SString.h"
 #include "Window.h"
+#include "QuestManager.h"
 
 TreeManager::TreeManager(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -1597,7 +1598,7 @@ void TreeManager::AddTree(Tree* entity)
 
 bool TreeManager::Update(float dt)
 {
-
+	
 	bool ret = true;
 
 	//if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
@@ -1615,6 +1616,10 @@ bool TreeManager::Update(float dt)
 	//}
 	if (mostrar == true)
 	{
+		if (app->questManager->GetQuestLineIndex(1) == 6) {
+			app->questManager->UpdateQuestLine(1, 7);
+		}
+
 		OnMovePointer();
 		app->entityManager->active = false;
 		app->physics->active = false;
