@@ -174,6 +174,11 @@ bool Scene_Menu::Start()
 		Continuar->selected = false;
 	}*/
 
+
+	app->questManager->UpdateQuestLine(1, 1);
+	app->questManager->UpdateQuestLine(2, 1, false);
+
+
 	return true;
 }
 
