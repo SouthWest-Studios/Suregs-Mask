@@ -102,6 +102,11 @@ bool Enemy_Ols_Variation::Start() {
 
 bool Enemy_Ols_Variation::Update(float dt)
 {
+	if (dieAnim.HasFinished())
+	{
+		Die();
+		return true;
+	}
 	OPTICK_EVENT();
 
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
@@ -157,6 +162,8 @@ bool Enemy_Ols_Variation::Update(float dt)
 bool Enemy_Ols_Variation::PostUpdate() {
 
     SDL_SetTextureColorMod(texture, 198, 115, 255);
+	SDL_SetTextureColorMod(projectileTexture, 198, 115, 255);
+
 	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
@@ -272,84 +279,86 @@ void Enemy_Ols_Variation::Attack(float dt, iPoint playerPos)
 void Enemy_Ols_Variation::Die() {
 	app->audio->PlayFx(ols_death_fx, 2);
 
-	fPoint pos((float)position.x, (float)position.y);
-	blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_ENEMY_BLOOD);
+	if(dieAnim.HasFinished()){
+		fPoint pos((float)position.x, (float)position.y);
+		blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_ENEMY_BLOOD);
 
-	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
-	if (parseResult) {
-		configNode = configFile.child("config");
-	}
+		pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
+		if (parseResult) {
+			configNode = configFile.child("config");
+		}
 
-	float randomValue = (float(std::rand() % 101) / 100);
+		float randomValue = (float(std::rand() % 101) / 100);
 
-	// Determina si el item debe crearse basado en un 30% de probabilidad
-	if (randomValue <= 0.30f) {
-		Item_Saliva* saliva = (Item_Saliva*)app->entityManager->CreateEntity(EntityType::ITEM_SALIVA);
-		saliva->config = configNode.child("entities_data").child("item_saliva");
-		saliva->position = iPoint(position.x, position.y);
-		saliva->Start();
-	}
-	app->bestiarioManager->CreateItem("olsV");
+		// Determina si el item debe crearse basado en un 30% de probabilidad
+		if (randomValue <= 0.30f) {
+			Item_Saliva* saliva = (Item_Saliva*)app->entityManager->CreateEntity(EntityType::ITEM_SALIVA);
+			saliva->config = configNode.child("entities_data").child("item_saliva");
+			saliva->position = iPoint(position.x, position.y);
+			saliva->Start();
+		}
+		app->bestiarioManager->CreateItem("olsV");
 
-	//app->entityManager->DestroyEntity(this);
-	//app->physics->GetWorld()->DestroyBody(pbodyFoot->body);LIN
-	//app->physics->DestroyBody(pbodyFoot);
-	//app->tex->UnLoad(texture);
+		//app->entityManager->DestroyEntity(this);
+		//app->physics->GetWorld()->DestroyBody(pbodyFoot->body);LIN
+		//app->physics->DestroyBody(pbodyFoot);
+		//app->tex->UnLoad(texture);
 
-	if(currentAnimation == &dieAnim && currentAnimation->HasFinished()){
-		CleanUp();
-	}
+		if(currentAnimation == &dieAnim && currentAnimation->HasFinished()){
+			CleanUp();
+		}
 
-	//Mask 0
-	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
-	{
-		app->inventoryManager->maskZeroXP += 80;
-		////printf("Current Mask 0 XP %i \n", app->inventoryManager->maskZeroXP);
-	}
+		//Mask 0
+		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK0)
+		{
+			app->inventoryManager->maskZeroXP += 80;
+			////printf("Current Mask 0 XP %i \n", app->inventoryManager->maskZeroXP);
+		}
 
-	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK0)
-	{
-		app->inventoryManager->maskZeroXP += 80;
-		////printf("Current Mask 0 XP %i \n", app->inventoryManager->maskZeroXP);
-	}
+		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK0)
+		{
+			app->inventoryManager->maskZeroXP += 80;
+			////printf("Current Mask 0 XP %i \n", app->inventoryManager->maskZeroXP);
+		}
 
-	//Mask 1
-	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK1)
-	{
-		app->inventoryManager->maskOneXP += 80;
-		////printf("Current Mask 1 XP %i \n", app->inventoryManager->maskOneXP);
-	}
+		//Mask 1
+		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK1)
+		{
+			app->inventoryManager->maskOneXP += 80;
+			////printf("Current Mask 1 XP %i \n", app->inventoryManager->maskOneXP);
+		}
 
-	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK1)
-	{
-		app->inventoryManager->maskOneXP += 80;
-		////printf("Current Mask 1 XP %i \n", app->inventoryManager->maskOneXP);
-	}
+		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK1)
+		{
+			app->inventoryManager->maskOneXP += 80;
+			////printf("Current Mask 1 XP %i \n", app->inventoryManager->maskOneXP);
+		}
 
-	//Mask 2
-	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK2)
-	{
-		app->inventoryManager->maskTwoXP += 80;
-		////printf("Current Mask 2 XP %i \n", app->inventoryManager->maskTwoXP);
-	}
+		//Mask 2
+		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK2)
+		{
+			app->inventoryManager->maskTwoXP += 80;
+			////printf("Current Mask 2 XP %i \n", app->inventoryManager->maskTwoXP);
+		}
 
-	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK2)
-	{
-		app->inventoryManager->maskTwoXP += 80;
-		////printf("Current Mask 2 XP %i \n", app->inventoryManager->maskTwoXP);
-	}
+		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK2)
+		{
+			app->inventoryManager->maskTwoXP += 80;
+			////printf("Current Mask 2 XP %i \n", app->inventoryManager->maskTwoXP);
+		}
 
-	//Mask 3
-	if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK3)
-	{
-		app->inventoryManager->maskThreeXP += 80;
-		////printf("Current Mask 3 XP %i \n", app->inventoryManager->maskThreeXP);
-	}
+		//Mask 3
+		if (app->entityManager->GetPlayer()->primaryMask == Mask::MASK3)
+		{
+			app->inventoryManager->maskThreeXP += 80;
+			////printf("Current Mask 3 XP %i \n", app->inventoryManager->maskThreeXP);
+		}
 
-	if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK3)
-	{
-		app->inventoryManager->maskThreeXP += 80;
-		////printf("Current Mask 3 XP %i \n", app->inventoryManager->maskThreeXP);
+		if (app->entityManager->GetPlayer()->secondaryMask == Mask::MASK3)
+		{
+			app->inventoryManager->maskThreeXP += 80;
+			////printf("Current Mask 3 XP %i \n", app->inventoryManager->maskThreeXP);
+		}
 	}
 
 }
