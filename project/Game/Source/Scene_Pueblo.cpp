@@ -158,7 +158,7 @@ bool Scene_Pueblo::CleanUp()
 {
 	LOG("Freeing Scene_Pueblo");
 	app->entityManager->DestroyEntity(fishing);
-	delete fishing;
+	/*delete fishing;*/
 	return true;
 }
 
