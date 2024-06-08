@@ -1174,19 +1174,8 @@ void InventoryManager::UsePotionSelected(ListItem<Inventity*>* it)
 				printf("Unknown potion type: %d\n", static_cast<int>(it->data->type));
 				break;
 		}
-		printf("Before deletion:\n");
-		printf("Item ID: %d\n", it->data->id);
-
-		printf("After deletion:\n");
-		if (inventities.start != NULL)
-		{
-			printf("New start ID: %d\n", inventities.start->data->id);
-		}
-		if (inventities.end != NULL)
-		{
-			printf("New end ID: %d\n", inventities.end->data->id);
-		}	
-	}	
+		DestroyItemById(inventity->id, false);
+	}
 }
 
 

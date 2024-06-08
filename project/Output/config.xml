@@ -133,11 +133,12 @@
       <musri_dash_fx path="Assets/Audio/Fx/Bosses/musri_dash_fx.wav"/>
       <musri_get_damage_fx path=""/>
       <musri_death_fx path=""/>
-      
-      <surma_fast_melee_attack_fx path="Assets/Audio/Fx/Bosses/surma_fast_melee_attack_fx.wav"/>
-      <surma_fast_melee_attackAlt_fx path="Assets/Audio/Fx/Bosses/surma_fast_melee_attackAlt_fx.wav"/>
-      <surma_fast_melee_attackAlt2_fx path="Assets/Audio/Fx/Bosses/surma_fast_melee_attackAlt2_fx.wav"/>
-      <surma_charged_melee_attack_fx path=""/>
+
+      <surma_fast_melee_attack_fx path=""/>
+      <surma_melee_attack_fx path="Assets/Audio/Fx/Bosses/surma_melee_attack_fx.wav"/>
+      <surma_melee_attackAlt_fx path="Assets/Audio/Fx/Bosses/surma_melee_attackAlt_fx.wav"/>
+      <surma_melee_attackAlt2_fx path="Assets/Audio/Fx/Bosses/surma_melee_attackAlt2_fx.wav"/>
+      <surma_charged_melee_attack_fx path="Assets/Audio/Fx/Bosses/surma_charged_melee_attack_fx.wav"/>
       <surma_explosion_attack_fx path=""/>
       <surma_ranged_attack_fx path=""/>
       <surma_get_damage_fx path="Assets/Audio/Fx/Bosses/surma_get_damage_fx.wav"/>

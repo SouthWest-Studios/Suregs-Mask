@@ -128,9 +128,16 @@ private:
 	Animation explosionAnim;
 
 	int surma_get_damage_fx;
-	int surma_fast_melee_attack_fx;
-	int surma_fast_melee_attackAlt_fx;
-	int surma_fast_melee_attackAlt2_fx;
+	//int surma_fast_melee_attack_fx;
+	int surma_melee_attack_fx;
+	int surma_melee_attackAlt_fx;
+	int surma_melee_attackAlt2_fx;
+	int surma_charged_melee_attack_fx;
+
+	bool chargedAttackFx = false;
+	bool combo1Fx = false;
+	bool combo2Fx = false;
+	bool combo3Fx = false;
 	
 	bool isFacingLeft = false;
 

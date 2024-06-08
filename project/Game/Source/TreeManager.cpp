@@ -566,12 +566,13 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		case 1:
 		{
 			entity->name = "Veneno I";
-			entity->name2 = "Invisible I";
-			entity->name3 = "Aumento I";
+			entity->name2 = "Veneno I";
+			entity->name3 = "Invisible I";
+			entity->name4 = "Aumento I";
 			entity->desc = "Activa la capacidad de veneno al usar la habilidad principal";
-			entity->desc1 = "Aumenta el uso de la habilidad principal a 6 segundos";
-			entity->desc2 = "Aumenta la vida que otorga la habilidad principal un 5%";
-			entity->desc3 = "Activa la capacidad de veneno al usar la habilidad principal";
+			entity->desc1 = "Activa la capacidad de veneno al usar la habilidad principal";
+			entity->desc2 = "Aumenta la duración de la habilidad principal a 6 segundos";
+			entity->desc3 = "Aumenta la vida que otorga la habilidad principal un 5%";
 			entity->usable1 = true;
 			entity->usable2 = true;
 			entity->usable3 = true;
@@ -580,6 +581,10 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->icon0 = app->tex->Load(poisonPath);
 			entity->iconLocked0 = app->tex->Load(poisonLockedPath);
 			entity->iconSelected0 = app->tex->Load(poisonSelectedPath);
+
+			entity->icon1 = app->tex->Load(poisonPath);
+			entity->iconLocked1 = app->tex->Load(poisonLockedPath);
+			entity->iconSelected1 = app->tex->Load(poisonSelectedPath);
 
 			entity->icon1 = app->tex->Load(invisiblePath);
 			entity->iconLocked1 = app->tex->Load(invisibleLockedPath);
@@ -595,16 +600,21 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		case 2:
 		{
 			entity->name = "Veneno II";
-			entity->name2 = "Invisible II";
-			entity->name3 = "Aumento II";
-			entity->desc = "Aumenta el poder del veneno a 10 puntos";
-			entity->desc1 = "Aumenta el uso de la habilidad principal a 7,3 segundos";
-			entity->desc2 = "Aumenta la vida que otorga la habilidad principal un 5%";
-			entity->desc3 = "Aumenta el poder del veneno a 10 puntos";
+			entity->name2 = "Veneno II";
+			entity->name3 = "Invisible II";
+			entity->name4 = "Aumento II";
+			entity->desc = "Aumenta el poder del veneno a 20 puntos";
+			entity->desc1 = "Aumenta el poder del veneno a 10 puntos";
+			entity->desc2 = "Aumenta la duración de la habilidad principal a 7,3 segundos";
+			entity->desc3 = "Aumenta la vida que otorga la habilidad principal un 5%";
 
 			entity->icon0 = app->tex->Load(poisonPath);
 			entity->iconLocked0 = app->tex->Load(poisonLockedPath);
 			entity->iconSelected0 = app->tex->Load(poisonSelectedPath);
+
+			entity->icon1 = app->tex->Load(poisonPath);
+			entity->iconLocked1 = app->tex->Load(poisonLockedPath);
+			entity->iconSelected1 = app->tex->Load(poisonSelectedPath);
 
 			entity->icon1 = app->tex->Load(invisiblePath);
 			entity->iconLocked1 = app->tex->Load(invisibleLockedPath);
@@ -619,16 +629,21 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		case 3:
 		{
 			entity->name = "Veneno III";
-			entity->name2 = "Invisible III";
-			entity->name3 = "Aumento III";
-			entity->desc = "Aumenta la duración del veneno a 10 segundos";
-			entity->desc1 = "Aumenta el uso de la habilidad principal a 8,6 segundos";
-			entity->desc2 = "Aumenta la vida que otorga la habilidad principal un 5%";
-			entity->desc3 = "Aumenta la duración del veneno a 10 segundos";
+			entity->name2 = "Veneno III";
+			entity->name3 = "Invisible III";
+			entity->name4 = "Aumento III";
+			entity->desc = "Aumenta la duración del veneno a 9 segundos";
+			entity->desc1 = "Aumenta la duración del veneno a 10 segundos";
+			entity->desc2 = "Aumenta la duración de la habilidad principal a 8,6 segundos";
+			entity->desc3 = "Aumenta la vida que otorga la habilidad principal un 5%";
 
 			entity->icon0 = app->tex->Load(poisonPath);
 			entity->iconLocked0 = app->tex->Load(poisonLockedPath);
 			entity->iconSelected0 = app->tex->Load(poisonSelectedPath);
+
+			entity->icon1 = app->tex->Load(poisonPath);
+			entity->iconLocked1 = app->tex->Load(poisonLockedPath);
+			entity->iconSelected1 = app->tex->Load(poisonSelectedPath);
 
 			entity->icon1 = app->tex->Load(invisiblePath);
 			entity->iconLocked1 = app->tex->Load(invisibleLockedPath);
@@ -642,17 +657,22 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 		}
 		case 4:
 		{
-			entity->name = "Veneno IV";
-			entity->name2 = "Invisible IV";
-			entity->name3 = "Aumento IV";
-			entity->desc = "Aumenta el poder del veneno a 15 puntos y la duración a 15 segundos";
-			entity->desc1 = "Aumenta el uso de la habilidad principal a 10 segundos";
-			entity->desc2 = "Aumenta la vida que otorga la habilidad principal un 10%";
-			entity->desc3 = "Aumenta el poder del veneno a 15 puntos y la duración a 15 segundos";
+			entity->name = "Veneno IIII";
+			entity->name2 = "Veneno IIII";
+			entity->name3 = "Invisible IIII";
+			entity->name4 = "Aumento IIII";
+			entity->desc = "Aumenta el poder del veneno a 30 puntos y la duración a 11 segundos";
+			entity->desc1 = "Aumenta el poder del veneno a 15 puntos y la duración a 15 segundos";
+			entity->desc2 = "Aumenta la duración de la habilidad principal a 10 segundos";
+			entity->desc3 = "Aumenta la vida que otorga la habilidad principal un 10%";
 
 			entity->icon0 = app->tex->Load(poisonPath);
 			entity->iconLocked0 = app->tex->Load(poisonLockedPath);
 			entity->iconSelected0 = app->tex->Load(poisonSelectedPath);
+
+			entity->icon1 = app->tex->Load(poisonPath);
+			entity->iconLocked1 = app->tex->Load(poisonLockedPath);
+			entity->iconSelected1 = app->tex->Load(poisonSelectedPath);
 
 			entity->icon1 = app->tex->Load(invisiblePath);
 			entity->iconLocked1 = app->tex->Load(invisibleLockedPath);
@@ -732,10 +752,10 @@ bool TreeManager::LoadState(pugi::xml_node node)
 			boolRaroDelAleixUseless = false;
 		}*/
 
-		/*Tree* t = CreateItem((TreeType)itemNode.attribute("type").as_int(), itemNode.attribute("nivelArbol").as_int(), itemNode.attribute("nivelMejora").as_int(), boolRaroDelAleixUseless);
+		t = CreateItem((TreeType)itemNode.attribute("type").as_int(), itemNode.attribute("nivelArbol").as_int(), itemNode.attribute("nivelMejora").as_int(), boolRaroDelAleixUseless);
 
 		
-		arboles.Add(t);*/
+		arboles.Add(t);
 	}
 
 
