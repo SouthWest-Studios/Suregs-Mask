@@ -715,14 +715,6 @@ bool TreeManager::LoadState(pugi::xml_node node)
 {
 	bool ret = true;
 
-	ListItem<Tree*>* item;
-	item = arboles.end;
-
-	while (item != NULL && ret == true)
-	{
-		ret = item->data->CleanUp();
-		item = item->prev;
-	}
 
 	/*arboles.Clear();*/
 
@@ -752,13 +744,17 @@ bool TreeManager::LoadState(pugi::xml_node node)
 			boolRaroDelAleixUseless = false;
 		}*/
 
-		t = CreateItem((TreeType)itemNode.attribute("type").as_int(), itemNode.attribute("nivelArbol").as_int(), itemNode.attribute("nivelMejora").as_int(), boolRaroDelAleixUseless);
+		/*t = CreateItem((TreeType)itemNode.attribute("type").as_int(), itemNode.attribute("nivelArbol").as_int(), itemNode.attribute("nivelMejora").as_int(), boolRaroDelAleixUseless);*/
 
 		
-		arboles.Add(t);
+		/*arboles.Add(t);*/
 	}
 
 
+	numMejoras0 = treeNode.attribute("numMejoras0").as_int();
+	numMejoras1 = treeNode.attribute("numMejoras1").as_int();
+	numMejoras2 = treeNode.attribute("numMejoras2").as_int();
+	numMejoras3 = treeNode.attribute("numMejoras3").as_int();
 	return ret;
 }
 
@@ -797,10 +793,12 @@ bool TreeManager::SaveState(pugi::xml_node node)
 		treeNodeNode.append_attribute("usable3").set_value(t->usable3);
 		treeNodeNode.append_attribute("usable4").set_value(t->usable4);
 
-
 	}
 
-	
+	treeNode.append_attribute("numMejoras0").set_value(numMejoras0);
+	treeNode.append_attribute("numMejoras1").set_value(numMejoras1);
+	treeNode.append_attribute("numMejoras2").set_value(numMejoras2);
+	treeNode.append_attribute("numMejoras3").set_value(numMejoras3);
 
 	
 

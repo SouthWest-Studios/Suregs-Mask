@@ -401,6 +401,9 @@
 					texturepath10 ="Assets/Textures/Cinematic/cinematic10.png"
 					Tsprite="84" Pwidth="7200" sprite_x="600" sprite_y="338" />
 	</scene_cinematic>
+	<scene_outro>
+		<sceneLogos texturepath ="Assets/Textures/Outro.png" Tsprite="60" Pwidth="7680" sprite_x="1280" sprite_y="720"/>
+	</scene_outro>
 	<scene_pueblo>
 		<pathfindingTexture pathtexture="Assets/Textures/pathfinding.png"/>
 		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Pueblo/Pueblo.tmx"/>
@@ -506,7 +509,9 @@
 		<scene_logos>
 			<idleAnim start="0" end="50" speed="0.5f" loop="false"/>
 		</scene_logos>
-		
+		<scene_outro>
+			<idleAnim start="0" end="50" speed="0.5f" loop="false"/>
+		</scene_outro>
 		<entytiManager>
 			<eyeAni start="0" end="7" speed="0.5f" loop="false"/>
 			<eyeIdle start="0" end="1" speed="0.01f" loop="true"/>
@@ -753,6 +758,10 @@
 		<poinerInventory>
 			<selectAnim start="0" end="24" speed="2.0f" loop="false"/>
 		</poinerInventory>
+
+		<hud_saveIcon>
+			<saveAnim start="0" end="4" speed="0.1f" loop="true"/>
+		</hud_saveIcon>
 		
 		
 	</animations>

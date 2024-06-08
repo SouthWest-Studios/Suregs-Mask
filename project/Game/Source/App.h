@@ -98,6 +98,8 @@ public:
 	// Request to load data from XML file 
 	bool SaveRequest();
 
+	bool IsSaving();
+
 	std::string convertirTiempo(long long milisegundos);
 
 private:
@@ -234,6 +236,7 @@ private:
 	//
 	bool loadRequest = false;
 	bool saveRequest = false;
+	bool isSaving = false;
 
 };
 

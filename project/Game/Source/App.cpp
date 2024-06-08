@@ -588,6 +588,11 @@ bool App::SaveRequest() {
 	return true;
 }
 
+bool App::IsSaving()
+{
+	return isSaving;
+}
+
 
 // L03: TODO 5: Implement the method LoadFromFile() to actually load a xml file
 // then call all the modules to load themselves
@@ -651,7 +656,7 @@ bool App::SaveFromFile() {
 	//Sigue faltando la seleccion de nueva partida para saber en que slot guardar...
 
 	bool ret = true;
-
+	isSaving = true;
 
 
 	pugi::xml_document saveFile;
@@ -684,6 +689,8 @@ bool App::SaveFromFile() {
 
 	if (ret) LOG("Saved");
 	else LOG("Error saving game state");
+
+	isSaving = false;
 
 	return ret;
 

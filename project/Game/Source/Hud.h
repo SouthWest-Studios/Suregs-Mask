@@ -100,7 +100,16 @@ private:
 	SDL_Rect* rectBotonPlaceholder;
 	SDL_Rect* rectBotonTAB;
 	SDL_Rect* rectBotonQ;
-	
+
+
+	Animation* currentSaveAnim;
+
+	Animation saveAnimation;
+
+	Timer saveAnimationTimer;
+	SDL_Rect* spriteSaveAnimationPositions;
+	Animation SPosition;
+	SDL_Texture* saveIconTexture;
 
 
 	uint windowWidth, windowHeight;
@@ -128,6 +137,8 @@ public:
 	bool estatua = false;
 
 	SDL_Texture* EstatuaTexture = nullptr;
+
+	bool playSaveIcon = false;
 
 
 	//Hud subir de nivel

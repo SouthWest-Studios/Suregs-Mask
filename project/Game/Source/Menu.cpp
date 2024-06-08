@@ -198,8 +198,20 @@ bool Menu::Update(float dt)
 			SDL_Rect vSyncpos = { windowWidth / 2 -167 ,windowHeight / 2 + 133, 200, 50 };
 			vsync = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 103, "VSYNC", vSyncpos, this, { 0, 0, 20, 20 } );
 
-			SDL_Rect TitlePos = { windowWidth / 2 - 330 ,windowHeight / 2 +  170, 230,50 };
-			title = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 104, "VOLVER AL MENU", TitlePos, this, { 0,0,0,0 });
+			SDL_Rect TitlePos;
+		
+			
+			if (!app->scene_pueblo->active)
+			{
+				TitlePos = { (int)windowWidth / 2 - 330 ,(int)windowHeight / 2 + 170, 230,30 };
+
+			}
+			else
+			{
+				TitlePos = { (int)windowWidth / 2 - 330 ,(int)windowHeight / 2 + 200, 230,30 };
+			}
+			
+			title = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 104, "VOLVER AL MENU", TitlePos, this, {0,0,0,0});
 
 			if (app->win->fullscreen)
 			{
@@ -336,6 +348,12 @@ bool Menu::Update(float dt)
 		menuu = false;
 		/*app->guiManager->active = false;*/
 		/*app->scene_testing->active = false;*/
+		if (app->scene_pueblo->active)
+		{
+			app->SaveRequest();
+			app->hud->playSaveIcon = true;
+		}
+
 		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu);
 		
 		title->click = false;
@@ -480,6 +498,19 @@ bool Menu::PostUpdate()
 		}
 		if (ventana == 4) {
 			app->render->DrawTexture(fondoAjustes, windowWidth / 8 + 40, currentY+2, SDL_FLIP_NONE, 0, 0);
+			if (app->scene_pueblo->active)
+			{
+				SDL_Rect TitlePoss = { (int)windowWidth / 2 - 290 ,(int)windowHeight / 2 + 165, 140,30 };
+				if (app->guiManager->pointerId == 104)
+				{
+					app->render->DrawText("GUARDAR Y", TitlePoss.x, TitlePoss.y, TitlePoss.w, TitlePoss.h, 0, 50, 35, 130);
+				}
+				else
+				{
+					app->render->DrawText("GUARDAR Y", TitlePoss.x, TitlePoss.y, TitlePoss.w, TitlePoss.h, 0, 25, 0, 70);
+				}
+				
+			}
 		}
 		if (ventana == 5) {
 			app->render->DrawTexture(fondoAjustesMando, windowWidth / 8 + 40, currentY+2, SDL_FLIP_NONE, 0, 0);

@@ -186,7 +186,25 @@ bool ElevatorMenu::CleanUp()
 void ElevatorMenu::OnMovePointer()
 {
 	if (app->input->GetButton(DOWN) == KEY_DOWN) {
-		if (verticalPointerId + 1 < 4)
+		if (PointerId == -20)
+		{
+			PointerId = 0;
+			PointerPosition.y = 100;
+			PointerPosition.x = 400;
+			verticalPointerId = 0;
+			horitzontalPointerId = 0;
+
+			app->audio->PlayFx(button_fx);
+		}
+		else if (verticalPointerId + 1 == 4)
+		{
+			PointerId = -20;
+			PointerPosition.y = 20;
+			PointerPosition.x = 450;
+
+			app->audio->PlayFx(button_fx);
+		}
+		else if (verticalPointerId + 1 < 4)
 		{
 			PointerPosition.y += 90;
 			PointerId += 2;
@@ -194,20 +212,33 @@ void ElevatorMenu::OnMovePointer()
 
 			app->audio->PlayFx(button_fx);
 		}
-		else
-		{
-			PointerId -= 6;
-			PointerPosition.y = 100;
-			verticalPointerId = 0;
-
-			app->audio->PlayFx(button_fx);
-		}
+		
+		
 
 
 
 	}
 	if (app->input->GetButton(UP) == KEY_DOWN) {
-		if (verticalPointerId > 0)
+		if (PointerId == -20)
+		{
+
+			horitzontalPointerId = 0;
+			PointerId = 6;
+			PointerPosition.y = 100 + 90 * (3);
+			PointerPosition.x = 400;
+			verticalPointerId = 3;
+
+			app->audio->PlayFx(button_fx);
+		}
+		else if (verticalPointerId == 0)
+		{
+			PointerId = -20;
+			PointerPosition.y = 20;
+			PointerPosition.x = 450;
+
+			app->audio->PlayFx(button_fx);
+		}
+		else if (verticalPointerId > 0)
 		{
 			PointerPosition.y -= 90;
 			PointerId -= 2;
@@ -215,18 +246,10 @@ void ElevatorMenu::OnMovePointer()
 
 			app->audio->PlayFx(button_fx);
 		}
-		else
-		{
-			PointerId += 6;
-			PointerPosition.y = 100 + 90 * (3);
-			verticalPointerId = 3;
-
-			app->audio->PlayFx(button_fx);
-		}
 
 
 	}
-	if (app->input->GetButton(RIGHT) == KEY_DOWN) {
+	if (app->input->GetButton(RIGHT) == KEY_DOWN && PointerId != -20) {
 		if (horitzontalPointerId + 1 > 1)
 		{
 			horitzontalPointerId = 0;
@@ -248,7 +271,7 @@ void ElevatorMenu::OnMovePointer()
 		}
 
 	}
-	if (app->input->GetButton(LEFT) == KEY_DOWN) {
+	if (app->input->GetButton(LEFT) == KEY_DOWN && PointerId != -20) {
 		if (horitzontalPointerId - 1 < 0)
 		{
 
@@ -273,6 +296,14 @@ void ElevatorMenu::UseElevator(int id, int mazmorraa)
 {
 	switch (id)
 	{
+	case -20:
+	{
+
+		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_pueblo);
+		app->menu->active = true;
+		mazmorra = 0;
+		break;
+	}
 	case 0:
 	{
 		
