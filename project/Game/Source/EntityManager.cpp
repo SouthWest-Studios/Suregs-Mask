@@ -69,7 +69,7 @@
 #include "Menu.h";
 #include "Window.h";
 #include "Hud.h";
-#include "Scene_menu.h";
+#include "Scene_logos.h";
 #include "Item_Mascara_0.h"
 #include "Item_Mascara_1.h"
 #include "Item_Mascara_2.h"
@@ -988,7 +988,7 @@ void EntityManager::showFinalkillPadre()
 		if (photoTransparent >= 255) {
 			photoTransparent = 255;
 			if (goScene) {
-				app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu);
+				app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_logos);
 				//canShowFinal = false;
 			}
 			else
