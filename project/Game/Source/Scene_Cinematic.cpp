@@ -156,11 +156,21 @@ bool Scene_Cinematic::Update(float dt)
 	//	app->fadeToBlack->FadeToBlack(this, app->scene_intro, 90);
 
 	//}
+	if (app->input->GetButton(CONFIRM) == KEY_REPEAT ) {
+		if (timerIntro.ReadMSec() >= 5000) {
+		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo_tutorial, 90);
+		}
+	}
+	else {
+		timerIntro.Start();
+	}
 
-	//if (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady) {
-	//	app->fadeToBlack->FadeToBlack(this, app->scene_intro, 90);
 
-	//}
+	printf("\n%f", timerIntro.ReadMSec());
+	/*if (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady) {
+		app->fadeToBlack->FadeToBlack(this, app->scene_intro, 90);
+
+	}*/
 	return true;
 }
 
@@ -173,12 +183,12 @@ bool Scene_Cinematic::PostUpdate()
 
 	app->render->DrawTexture(currentFrameTexture, 0, 0, 2.15, SDL_FLIP_NONE, &rect, 0);
 
-	currentFrameIndex += 0.2;
+	currentFrameIndex += 0.16;
 	if (currentFrameIndex >= frameTextures.size()) {
 		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo_tutorial, 90);
 		currentFrameIndex = frameTextures.max_size();
 	}
-	printf("\n%f", currentFrameIndex);
+
 
 	bool ret = true;
 

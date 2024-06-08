@@ -24,6 +24,7 @@
 #include "Scene_Pueblo_Tutorial.h"
 #include "Scene_Logos.h"
 #include "Scene_intro.h"
+#include "Scene_Cinematic.h"
 
 #include "SDL_mixer/include/SDL_mixer.h"
 
@@ -82,7 +83,7 @@ bool Menu::PreUpdate()
 // Called each loop iteration
 bool Menu::Update(float dt)
 {
-	if (app->input->GetButton(PAUSE) == KEY_DOWN && !app->scene_logos->active && !app->scene_intro->active && !app->scene_menu->active )
+	if (app->input->GetButton(PAUSE) == KEY_DOWN && !app->scene_logos->active && !app->scene_intro->active && !app->scene_menu->active && !app->scene_cinematic->active)
 	{
 		app->guiManager->minId = 100;
 		app->guiManager->maxId = 104;
