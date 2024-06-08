@@ -145,7 +145,10 @@ bool Enemy_Ols_Variation::Update(float dt)
 	CheckPoison();
 	//VENENO ---------->
 
-	currentAnimation->Update();
+	if(currentAnimation != nullptr){
+		currentAnimation->Update();
+	}
+
 
 	return true;
 }
@@ -230,11 +233,13 @@ void Enemy_Ols_Variation::Chase(float dt, iPoint playerPos)
 	{
 		Flee(dt);
 	}
-	if(currentAnimation->HasFinished() && currentAnimation == &attackAnim){
-		currentAnimation = &runAnim;
-	}
-	else if(currentAnimation == &idleAnim){
-		currentAnimation = &runAnim;
+	if(currentAnimation != nullptr){
+		if(currentAnimation->HasFinished() && currentAnimation == &attackAnim){
+			currentAnimation = &runAnim;
+		}
+		else if(currentAnimation == &idleAnim){
+			currentAnimation = &runAnim;
+		}
 	}
 }
 
