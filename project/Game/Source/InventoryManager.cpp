@@ -23,7 +23,6 @@
 #include "Menu.h"
 #include "Scene_Pueblo.h"
 #include "Scene_Pueblo_Tutorial.h"
-#include "List.h"
 
 InventoryManager::InventoryManager(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -1085,14 +1084,9 @@ void InventoryManager::UsePotionSelected(ListItem<Inventity*>* it)
 	if (it != NULL)
 	{
 		Inventity* inventity = it->data;
-		printf("Using potion of type: %d\n", static_cast<int>(it->data->type));
 
-		// If the quantity is more than 0, decrement the potion quantity
-		if (inventity->quantity > 0)
-		{
-			// Delete the item from the inventory
-			DestroyItem(inventity->type, 1);
-		}
+
+		DestroyItem(it->data->type, 1);
 
 		switch (it->data->type)
 		{
@@ -1174,7 +1168,6 @@ void InventoryManager::UsePotionSelected(ListItem<Inventity*>* it)
 				printf("Unknown potion type: %d\n", static_cast<int>(it->data->type));
 				break;
 		}
-		DestroyItemById(inventity->id, false);
 	}
 }
 
@@ -1373,7 +1366,6 @@ bool InventoryManager::Update(float dt)
 			options = true;
 			selected = { PointerPosition.x + 8, PointerPosition.y + 9 };
 			selectedId = PointerId;
-			printf("Using item with ID: %d\n", selectedId);
 			UseItemSelected(selectedId);
 			selectedd = true;
 		}
