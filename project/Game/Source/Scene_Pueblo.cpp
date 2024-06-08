@@ -84,7 +84,7 @@ bool Scene_Pueblo::Start()
 
 		Estatua* estatua = (Estatua*)app->entityManager->CreateEntity(EntityType::ESTATUA);
 		estatua->config = configNode.child("entities_data").child("estatua");
-		estatua->position = iPoint(4501, 3178);
+		estatua->position = iPoint(4501, 3205);
 		estatua->Start();
 
 		/*fPoint pos(5728.0f, 416.0f);

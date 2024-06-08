@@ -360,6 +360,7 @@ public:
 	bool isOpened = false;
 	int id;
 	bool primeraMuerte = false;
+	bool isSpawner = false;
 };
 
 #endif // __ENTITY_H__
