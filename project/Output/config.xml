@@ -740,6 +740,10 @@
 		<poinerInventory>
 			<selectAnim start="0" end="24" speed="2.0f" loop="false"/>
 		</poinerInventory>
+
+		<hud_saveIcon>
+			<saveAnim start="0" end="4" speed="0.1f" loop="true"/>
+		</hud_saveIcon>
 		
 		
 	</animations>

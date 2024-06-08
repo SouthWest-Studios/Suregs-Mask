@@ -16,6 +16,7 @@
 #include "GuiManager.h"
 #include "Elevator.h"
 #include "Estatua.h"
+#include "Hud.h"
 
 Scene_Pueblo::Scene_Pueblo(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -102,6 +103,9 @@ bool Scene_Pueblo::Start()
 		app->entityManager->Enable();
 
 		app->SaveRequest();
+
+		app->hud->playSaveIcon = true;
+
 		start = 1;
 	}
 	

@@ -99,12 +99,21 @@ bool Hud::Awake(pugi::xml_node config)
 	rectBotonTAB = new SDL_Rect{ 48,619,45,45 };
 	rectBotonQ = new SDL_Rect{ 96,619,45,45 };
 
+
+	spriteSaveAnimationPositions = SPosition.SpritesPos(4, 250, 250, 1000);
+	saveAnimation.LoadAnim("hud_saveIcon", "saveAnim", spriteSaveAnimationPositions);
+
+
 	return ret;
 }
 
 // Called before the first frame
 bool Hud::Start()
 {
+
+
+	saveIconTexture = app->tex->Load("Assets/Textures/Interfaz/textura_saveIcon.png");
+
 	hudTexture = app->tex->Load(hudTexturePath);
 
 	messageTexture = app->tex->Load(messageTexturePath);
@@ -146,6 +155,23 @@ bool Hud::PreUpdate()
 // Called each loop iteration
 bool Hud::Update(float dt)
 {
+
+	if (currentSaveAnim != nullptr) {
+		currentSaveAnim->Update();
+	}
+
+	if (currentSaveAnim == nullptr && playSaveIcon) {
+		currentSaveAnim = &saveAnimation;
+		saveAnimationTimer.Start();
+		playSaveIcon = false;
+	}
+
+	if (saveAnimationTimer.ReadMSec() >= 2500 && !playSaveIcon) {
+		currentSaveAnim = nullptr;
+		saveAnimation.Reset();
+	}
+
+
 	if(app->entityManager->GetPlayer() != nullptr) 
 	{
 
@@ -458,6 +484,45 @@ bool Hud::PostUpdate()
 		quests.clear();
 		quests.shrink_to_fit();
 
+	}
+
+
+	//SaveIcon
+	if (currentSaveAnim != nullptr) {
+		SDL_Rect saveAnimRect = currentSaveAnim->GetCurrentFrame();
+
+		app->render->DrawTexture(saveIconTexture, 1145, 550, 0.5, SDL_FLIP_NONE, &saveAnimRect, 0);
+
+
+		std::string saveText;
+		switch (currentSaveAnim->GetCurretFrameNumber())
+		{
+		case 0:
+			saveText = "Saving.";
+			break;
+		case 1:
+			saveText = "Saving..";
+			break;
+		case 2:
+			saveText = "Saving...";
+			break;
+		case 3:
+			saveText = "Saving....";
+			break;
+		case 4:
+			saveText = "Saving.....";
+			break;
+		default:
+			saveText = "Saving.";
+			break;
+		}
+
+		
+		app->render->DrawTextBound(saveText.c_str(), 1170, 660, 300, {255, 255, 255}, app->render->questFont);
+		
+		
+
+		
 	}
 
 
