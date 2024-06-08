@@ -8,7 +8,7 @@
 	<map>
 		<map>
 			<puzzles>
-				<puzzle level="0" complete="true" />
+				<puzzle level="0" complete="false" />
 				<puzzle level="1" complete="false" />
 				<puzzle level="2" complete="false" />
 				<puzzle level="3" complete="false" />
@@ -28,17 +28,7 @@
 	<scene_pueblo />
 	<entitymanager>
 		<entity_manager>
-			<doors>
-				<door sceneLevel="-10" tpID="0" />
-				<door sceneLevel="-10" tpID="8" />
-				<door sceneLevel="-10" tpID="1" />
-				<door sceneLevel="-10" tpID="9" />
-				<door sceneLevel="-10" tpID="2" />
-				<door sceneLevel="-10" tpID="4" />
-				<door sceneLevel="-10" tpID="3" />
-				<door sceneLevel="0" tpID="8" />
-				<door sceneLevel="0" tpID="9" />
-			</doors>
+			<doors />
 		</entity_manager>
 	</entitymanager>
 	<missionmanager />
@@ -46,17 +36,24 @@
 	<menu />
 	<iventorymanager>
 		<inventory>
+			<inventity type="19" quantity="1" />
+			<inventity type="20" quantity="1" />
+			<inventity type="21" quantity="1" />
+			<inventity type="22" quantity="1" />
+			<inventity type="25" quantity="1" />
+			<inventity type="23" quantity="1" />
+			<inventity type="24" quantity="1" />
 			<money quantity="0" />
 			<SwordLevel quantity="0" />
 			<ArmorLevel quantity="0" />
 			<PrimaryMask quantity="-1" />
 			<SecondaryMask quantity="-1" />
-			<StoryLevel quantity="3" />
+			<StoryLevel quantity="1" />
 			<Mask0 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
 			<Mask1 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
 			<Mask2 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
 			<Mask3 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
-			<maskNum n="1" info="Esta variable son las mascaras que tienes desbloqueadas" />
+			<maskNum n="0" info="Esta variable son las mascaras que tienes desbloqueadas" />
 			<maskPoints>
 				<maskPointZero points="0" />
 				<maskPointOne points="0" />
@@ -75,20 +72,29 @@
 	<commercemanager />
 	<questmanager>
 		<questLines>
-			<questLine id="1" index="8" active="true" completed="false" />
+			<questLine id="1" index="1" active="true" completed="false" />
 			<questLine id="2" index="1" active="false" completed="false" />
 		</questLines>
 	</questmanager>
 	<notesmanager>
-		<notes>
-			<note id="0" />
-			<note id="1" />
-			<note id="2" />
-			<note id="3" />
-		</notes>
+		<notes />
 	</notesmanager>
 	<bestiariomanager>
-		<bestiario />
+		<bestiario>
+			<bestia name="osiris" />
+			<bestia name="osirisV" />
+			<bestia name="muur" />
+			<bestia name="muurV" />
+			<bestia name="khurt" />
+			<bestia name="khurtV" />
+			<bestia name="ols" />
+			<bestia name="olsV" />
+			<bestia name="boorok" />
+			<bestia name="boorokV" />
+			<bestia name="inuit" />
+			<bestia name="musri" />
+			<bestia name="surma" />
+		</bestiario>
 	</bestiariomanager>
 	<equipo />
 	<Ascensormenu />

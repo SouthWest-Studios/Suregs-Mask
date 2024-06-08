@@ -305,7 +305,6 @@ bool Scene_testing::Start()
 	mascara3->position = iPoint(1223, 2455);
 	mascara3->Start();
 
-
 	return true;
 }
 

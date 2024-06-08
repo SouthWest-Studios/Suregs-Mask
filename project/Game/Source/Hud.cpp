@@ -533,7 +533,7 @@ void Hud::Potions()
 		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN) {
 			if (selectedPotionIndex >= 0 && selectedPotionIndex < potionRects.size()) {
 				ListItem<Inventity*>* item = GetSelectedPotionItem();
-				if (item) {
+				if (item && app->inventoryManager->inventities.At(item->data->id) != NULL) {
 					app->inventoryManager->UsePotionSelected(item);
 					app->audio->PlayTimedFx(use_potion_fx, 175);
 				}
@@ -553,12 +553,24 @@ void Hud::Potions()
 	ListItem<Inventity*>* item;
 	int potionIndex = 0;
 	for (item = app->inventoryManager->inventities.start; item != NULL; item = item->next) {
-		Inventity* inventity = item->data;
-		if (IsPotion(inventity->type)) {
-			potionRects.push_back(potionRectMap[inventity->type]);
-			potionIndex++;
+		printf("Item: %p\n", item);
+		printf("Item data: %p\n", item->data);
+		if (item->data) {
+			printf("Item data id: %d\n", item->data->id);
+		}
+		if (app->inventoryManager->inventities.At(item->data->id) != NULL) {
+			Inventity* inventity = item->data;
+			if (IsPotion(inventity->type)) {
+				potionRects.push_back(potionRectMap[inventity->type]);
+				potionIndex++;
+			}
+		}
+		else {
+			break;
 		}
 	}
+
+
 	if (selectedPotionIndex >= potionIndex) {
 		selectedPotionIndex = std::max(0, potionIndex - 1);
 	}
@@ -585,8 +597,6 @@ ListItem<Inventity*>* Hud::GetSelectedPotionItem() {
 	}
 	return nullptr;
 }
-
-
 
 bool Hud::HayPocionesDisponibles() {
 	return !potionRects.empty();
