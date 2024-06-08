@@ -166,7 +166,7 @@ bool Hud::Update(float dt)
 		playSaveIcon = false;
 	}
 
-	if (saveAnimationTimer.ReadMSec() >= 2500 && !playSaveIcon) {
+	if (saveAnimationTimer.ReadMSec() >= 3000 && !playSaveIcon) {
 		currentSaveAnim = nullptr;
 		saveAnimation.Reset();
 	}

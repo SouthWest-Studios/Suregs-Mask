@@ -50,10 +50,10 @@ bool Scene_Mazmorra0::Start()
 	/*player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);*/
 	////Assigns the XML node to a member in player
 	/*player->config = config.child("player");*/
-	pugi::xml_parse_result parseResult2 = configFile.load_file("config.xml");
-	if (parseResult2) {
-		configNode = configFile.child("config");
-	}
+	
+
+	configNode = configFile.child("config");
+
 	//Get the map name from the config file and assigns the value in the module
 	app->map->nameMazmorra = config.child("map").attribute("name").as_string();
 	app->map->path = config.child("map").attribute("path").as_string();
