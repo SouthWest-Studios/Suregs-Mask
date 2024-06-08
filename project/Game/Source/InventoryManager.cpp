@@ -694,6 +694,10 @@ bool InventoryManager::LoadState(pugi::xml_node node)
 			itemConfigurationNode = entitiesDataNode.child("item_pocion_vida_3");
 			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_POCION_VIDA_3, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""));
 			break;
+		case InventityType::SALIVA:
+			itemConfigurationNode = entitiesDataNode.child("item_saliva");
+			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_SALIVA, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""));
+			break;
 		case InventityType::POCION_VIDA_MAX:
 			itemConfigurationNode = entitiesDataNode.child("item_pocion_vida_max");
 			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_POCION_VIDA_MAX, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""));
@@ -723,7 +727,7 @@ bool InventoryManager::LoadState(pugi::xml_node node)
 		default:
 			break;
 		}
-		itemLoaded->quantity = itemNode.attribute("quantity").as_int();
+		itemLoaded->quantity = itemNode.attribute("quantity").as_int(0);
 
 	}
 
