@@ -529,19 +529,24 @@ bool Audio::LoadState(pugi::xml_node node)
 
 	if (app->savedGame == 1) {
 		app->tiempoDeJuego = saveFile.child("game_state").child("tiempoDeJuego").child("slot1").attribute("tiempo").as_llong(0);
+		app->tutorialHasFinished = saveFile.child("game_state").child("tutorial").child("slot1").attribute("finished").as_bool(false);
 	}
 	else if (app->savedGame == 2) {
 		app->tiempoDeJuego = saveFile.child("game_state").child("tiempoDeJuego").child("slot2").attribute("tiempo").as_llong(0);
+		app->tutorialHasFinished = saveFile.child("game_state").child("tutorial").child("slot2").attribute("finished").as_bool(false);
 	}
 	else  if (app->savedGame == 3) {
 		app->tiempoDeJuego = saveFile.child("game_state").child("tiempoDeJuego").child("slot3").attribute("tiempo").as_llong(0);
+		app->tutorialHasFinished = saveFile.child("game_state").child("tutorial").child("slot3").attribute("finished").as_bool(false);
 	}
 
 	app->tiempoDeJuegoMostrarSlot1 = saveFile.child("game_state").child("tiempoDeJuego").child("slot1").attribute("tiempo").as_llong(0);
 	app->tiempoDeJuegoMostrarSlot2 = saveFile.child("game_state").child("tiempoDeJuego").child("slot2").attribute("tiempo").as_llong(0);
 	app->tiempoDeJuegoMostrarSlot3 = saveFile.child("game_state").child("tiempoDeJuego").child("slot3").attribute("tiempo").as_llong(0);
 
-
+	app->tutorialHasFinishedSlot1 = saveFile.child("game_state").child("tutorial").child("slot1").attribute("finished").as_bool(false);
+	app->tutorialHasFinishedSlot2 = saveFile.child("game_state").child("tutorial").child("slot2").attribute("finished").as_bool(false);
+	app->tutorialHasFinishedSlot3 = saveFile.child("game_state").child("tutorial").child("slot3").attribute("finished").as_bool(false);
 	
 
 	return true;
@@ -555,6 +560,7 @@ bool Audio::SaveState(pugi::xml_node node)
 	pugi::xml_node audio = gameState.append_child("audio");
 
 	pugi::xml_node tiempoDeJuego = gameState.append_child("tiempoDeJuego");
+	pugi::xml_node tutorial = gameState.append_child("tutorial");
 
 	audio.append_child("music").append_attribute("volume").set_value(volumeMusic);
 	audio.append_child("fx").append_attribute("volume").set_value(volumeFx);
@@ -563,16 +569,28 @@ bool Audio::SaveState(pugi::xml_node node)
 		tiempoDeJuego.append_child("slot1").append_attribute("tiempo").set_value(app->tiempoDeJuego);
 		tiempoDeJuego.append_child("slot2").append_attribute("tiempo").set_value(app->tiempoDeJuegoMostrarSlot2);
 		tiempoDeJuego.append_child("slot3").append_attribute("tiempo").set_value(app->tiempoDeJuegoMostrarSlot3);
+
+		tutorial.append_child("slot1").append_attribute("finished").set_value(app->tutorialHasFinished);
+		tutorial.append_child("slot2").append_attribute("finished").set_value(app->tutorialHasFinishedSlot2);
+		tutorial.append_child("slot3").append_attribute("finished").set_value(app->tutorialHasFinishedSlot3);
 	}
 	else if (app->savedGame == 2) {
 		tiempoDeJuego.append_child("slot1").append_attribute("tiempo").set_value(app->tiempoDeJuegoMostrarSlot1);
 		tiempoDeJuego.append_child("slot2").append_attribute("tiempo").set_value(app->tiempoDeJuego);
 		tiempoDeJuego.append_child("slot3").append_attribute("tiempo").set_value(app->tiempoDeJuegoMostrarSlot3);
+
+		tutorial.append_child("slot1").append_attribute("finished").set_value(app->tutorialHasFinishedSlot1);
+		tutorial.append_child("slot2").append_attribute("finished").set_value(app->tutorialHasFinished);
+		tutorial.append_child("slot3").append_attribute("finished").set_value(app->tutorialHasFinishedSlot3);
 	}
 	else  if (app->savedGame == 3) {
 		tiempoDeJuego.append_child("slot1").append_attribute("tiempo").set_value(app->tiempoDeJuegoMostrarSlot1);
 		tiempoDeJuego.append_child("slot2").append_attribute("tiempo").set_value(app->tiempoDeJuegoMostrarSlot2);
 		tiempoDeJuego.append_child("slot3").append_attribute("tiempo").set_value(app->tiempoDeJuego);
+
+		tutorial.append_child("slot1").append_attribute("finished").set_value(app->tutorialHasFinishedSlot1);
+		tutorial.append_child("slot2").append_attribute("finished").set_value(app->tutorialHasFinishedSlot2);
+		tutorial.append_child("slot3").append_attribute("finished").set_value(app->tutorialHasFinished);
 	}
 	
 

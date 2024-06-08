@@ -406,47 +406,54 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 
 	case 13:
-		if (app->fadeToBlack->currentStep == 0) {
-			app->savedGame = 1;
-			app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
-			app->menu->active = true;
-			app->guiManager->pointerId = 100;
-			app->LoadRequest();
-			app->guiManager->DestroyGuiControl(gcCloseSavedGames);
-			app->guiManager->DestroyGuiControl(partida1);
-			app->guiManager->DestroyGuiControl(partida2);
-			app->guiManager->DestroyGuiControl(partida3);
+		if (app->tutorialHasFinishedSlot1)
+		{
+			if (app->fadeToBlack->currentStep == 0) {
+				app->savedGame = 1;
+				app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
+				app->menu->active = true;
+				app->guiManager->pointerId = 100;
+				app->LoadRequest();
+				app->guiManager->DestroyGuiControl(gcCloseSavedGames);
+				app->guiManager->DestroyGuiControl(partida1);
+				app->guiManager->DestroyGuiControl(partida2);
+				app->guiManager->DestroyGuiControl(partida3);
+			}
 		}
 		break;
 
 	case 14:
-		if (app->fadeToBlack->currentStep == 0) {
-			app->savedGame = 2;
-			app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
-			app->menu->active = true;
-			app->guiManager->pointerId = 100;
-			app->LoadRequest();
-			app->guiManager->DestroyGuiControl(gcCloseSavedGames);
-			app->guiManager->DestroyGuiControl(partida1);
-			app->guiManager->DestroyGuiControl(partida2);
-			app->guiManager->DestroyGuiControl(partida3);
+		if (app->tutorialHasFinishedSlot2)
+		{
+			if (app->fadeToBlack->currentStep == 0) {
+				app->savedGame = 2;
+				app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
+				app->menu->active = true;
+				app->guiManager->pointerId = 100;
+				app->LoadRequest();
+				app->guiManager->DestroyGuiControl(gcCloseSavedGames);
+				app->guiManager->DestroyGuiControl(partida1);
+				app->guiManager->DestroyGuiControl(partida2);
+				app->guiManager->DestroyGuiControl(partida3);
+			}
 		}
-
 		break;
 
 	case 15:
-		if (app->fadeToBlack->currentStep == 0) {
-			app->savedGame = 3;
-			app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
-			app->menu->active = true;
-			app->guiManager->pointerId = 100;
-			app->LoadRequest();
-			app->guiManager->DestroyGuiControl(gcCloseSavedGames);
-			app->guiManager->DestroyGuiControl(partida1);
-			app->guiManager->DestroyGuiControl(partida2);
-			app->guiManager->DestroyGuiControl(partida3);
+		if (app->tutorialHasFinishedSlot3)
+		{
+			if (app->fadeToBlack->currentStep == 0) {
+				app->savedGame = 3;
+				app->fadeToBlack->FadeToBlack(this, app->scene_pueblo, 90);
+				app->menu->active = true;
+				app->guiManager->pointerId = 100;
+				app->LoadRequest();
+				app->guiManager->DestroyGuiControl(gcCloseSavedGames);
+				app->guiManager->DestroyGuiControl(partida1);
+				app->guiManager->DestroyGuiControl(partida2);
+				app->guiManager->DestroyGuiControl(partida3);
+			}
 		}
-
 		break;
 
 	case 16:
@@ -971,31 +978,46 @@ void Scene_Menu::ShowSavedGames()
 		control->data->state = GuiControlState::DISABLED;
 	}
 	if (showSavedGames && !_showSavedGames) {
+
 		partida1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 13, "PARTIDA GUARDADA 1", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 510,	180,25 }, this);
 		partida2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, "PARTIDA GUARDADA 2", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 420,	180,25 }, this);
 		partida3 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, "PARTIDA GUARDADA 3", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 325,	180,25 }, this);
+		
 		gcCloseSavedGames = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 16, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 200,	60,25 }, this);
 		_showSavedGames = true;
 	}
 
 	app->render->DrawTexture(savedGames, 0, 0);
 
+	//TUTORIAL ACABADO?
+	if (!app->tutorialHasFinishedSlot1) {
+		app->render->DrawTextBound("No hay nada guardado.", (int)windowW / 2 - 165, 230, 300);
+	}
+
+	if (!app->tutorialHasFinishedSlot2) {
+		app->render->DrawTextBound("No hay nada guardado.", (int)windowW / 2 - 165, 322, 300);
+	}
+
+	if (!app->tutorialHasFinishedSlot3) {
+		app->render->DrawTextBound("No hay nada guardado.", (int)windowW / 2 - 165, 414, 300);
+	}
+
 	//TIEMPO
-	if (app->tiempoDeJuegoMostrarSlot1 != NULL)
+	if (app->tiempoDeJuegoMostrarSlot1 != NULL && app->tutorialHasFinishedSlot1)
 	{
 		app->render->DrawTexture(clock, 485, 259, 0.65f);
 		timeOne = app->convertirTiempo(app->tiempoDeJuegoMostrarSlot1);
 		app->render->DrawTextBound(timeOne.c_str(), 510, 257, 90);
 	}
 	
-	if (app->tiempoDeJuegoMostrarSlot2 != NULL)
+	if (app->tiempoDeJuegoMostrarSlot2 != NULL && app->tutorialHasFinishedSlot2)
 	{
 		app->render->DrawTexture(clock, 485, 349, 0.65f);
 		timeTwo = app->convertirTiempo(app->tiempoDeJuegoMostrarSlot2);
 		app->render->DrawTextBound(timeTwo.c_str(), 510, 349, 90);
 	}
 	
-	if (app->tiempoDeJuegoMostrarSlot3 != NULL)
+	if (app->tiempoDeJuegoMostrarSlot3 != NULL && app->tutorialHasFinishedSlot3)
 	{
 		app->render->DrawTexture(clock, 485, 443, 0.65f);
 		timeThree = app->convertirTiempo(app->tiempoDeJuegoMostrarSlot3);
@@ -1003,14 +1025,14 @@ void Scene_Menu::ShowSavedGames()
 	}
 
 	//MONEDAS
-	if (coinQuantityOne != NULL)
+	if (coinQuantityOne != NULL && app->tutorialHasFinishedSlot1)
 	{
 		app->render->DrawTexture(coin, 655, 256, 0.35f);
 		std::string quantityStrOne = std::to_string(coinQuantityOne);
 		app->render->DrawTextBound(quantityStrOne.c_str(), 685, 257, 45);
 	}
 
-	if (coinQuantityTwo != NULL)
+	if (coinQuantityTwo != NULL && app->tutorialHasFinishedSlot2)
 	{
 		app->render->DrawTexture(coin, 655, 348, 0.35f);
 		std::string quantityStrTwo = std::to_string(coinQuantityTwo);
@@ -1018,7 +1040,7 @@ void Scene_Menu::ShowSavedGames()
 	}
 
 
-	if (coinQuantityThree != NULL)
+	if (coinQuantityThree != NULL && app->tutorialHasFinishedSlot3)
 	{
 		app->render->DrawTexture(coin, 655, 442, 0.35f);
 		std::string quantityStrThree = std::to_string(coinQuantityThree);
@@ -1026,19 +1048,19 @@ void Scene_Menu::ShowSavedGames()
 	}
 
 	//QUESTS
-	if (actualQuestIndexOne != NULL)
+	if (actualQuestIndexOne != NULL && app->tutorialHasFinishedSlot1)
 	{
 		titleOne = app->questManager->GetQuestTitle(1, actualQuestIndexOne);
 		app->render->DrawTextBound(titleOne.c_str(), 455, 230, 700);
 	}
 
-	if (actualQuestIndexTwo != NULL)
+	if (actualQuestIndexTwo != NULL && app->tutorialHasFinishedSlot2)
 	{
 		titleTwo = app->questManager->GetQuestTitle(1, actualQuestIndexTwo);
 		app->render->DrawTextBound(titleTwo.c_str(), 455, 322, 700);
 	}
 	
-	if (actualQuestIndexThree != NULL)
+	if (actualQuestIndexThree != NULL && app->tutorialHasFinishedSlot3)
 	{
 		titleThree = app->questManager->GetQuestTitle(1, actualQuestIndexThree);
 		app->render->DrawTextBound(titleThree.c_str(), 455, 414, 700);
