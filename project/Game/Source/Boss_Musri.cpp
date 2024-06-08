@@ -73,6 +73,7 @@ bool Boss_Musri::Start() {
 	arrowTexture = app->tex->Load(config.attribute("arrowTexturePath").as_string());
 
 	musri_dash_fx = app->audio->LoadAudioFx("musri_dash_fx");
+	musri_get_damage_fx = app->audio->LoadAudioFx("inuit_get_damage_fx");
 
 	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
 	pbodyFoot->entity = this;
@@ -592,6 +593,7 @@ void Boss_Musri::TakeDamage(float damage) {
 		health -= damage;
 		LOG("Musri health: %f / %f", health, maxHealth);
 		invulnerabilityTimer.Start();
+		app->audio->PlayFx(musri_get_damage_fx);
 	}
 
 
