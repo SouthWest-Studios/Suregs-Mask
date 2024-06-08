@@ -80,6 +80,7 @@
 #include "Arbol.h"
 #include "Defs.h"
 #include "Log.h"
+#include "Scene_menu.h"
 #include <random>
 
 EntityManager::EntityManager(App* app, bool start_enabled) : Module(app, start_enabled)
@@ -988,7 +989,8 @@ void EntityManager::showFinalkillPadre()
 		if (photoTransparent >= 255) {
 			photoTransparent = 255;
 			if (goScene) {
-				app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_logos);
+
+				app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu);
 				//canShowFinal = false;
 			}
 			else
