@@ -259,10 +259,9 @@
 		<item_pocion_vida_3			texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_3.png"			description="Curiosa pócima que revitaliza gran parte de la salud."			type ="Consumible"	name="Pócima"/>
 		<item_pocion_vida_max		texturePath="Assets/Textures/Entidades/Items/textura_pocion_vida_max.png"		description="Curiosa pócima que revitaliza la salud por completo."			type ="Consumible"	name="Pócima"/>
 
-		<item_pocion_regeneracion	texturePath="Assets/Textures/Entidades/Items/textura_pocion_regeneracion.png"	description="Curiosa pócima que aumenta tu regeneración de manera momentánea."	type ="Consumible"	name="Pócima"/>
+		<item_pocion_regeneracion	texturePath="Assets/Textures/Interfaz/Resources/textura_pocion_regeneracion.png"	description="Curiosa pócima que aumenta tu regeneración de manera momentánea."	type ="Consumible"	name="Pócima"/>
 		<item_pocion_dano			texturePath="Assets/Textures/Entidades/Items/textura_pocion_dano.png"			description="Curiosa pócima que aumenta tu fuerza de manera momentánea."		type ="Consumible"	name="Pócima"/>
 		<item_pocion_velocidad		texturePath="Assets/Textures/Entidades/Items/textura_pocion_velocidad.png"		description="Curiosa pócima que aumenta tu velocidad de manera momentánea."		type ="Consumible"	name="Pócima"/>
-		<item_pocion_orbe_magico	texturePath="Assets/Textures/Entidades/Items/textura_orbe_magico.png"			description="Objeto mágico con propiedades sorprendentes."						type ="Consumible"	name="Orbe Mágico"/>
 		<item_pocion_orbe_magico	texturePath="Assets/Textures/Entidades/Items/textura_orbe_magico.png"			description="Objeto mágico con propiedades sorprendentes."						type ="Consumible"	name="Orbe Mágico"/>
 		<item_zafiro				texturePath="Assets/Textures/Entidades/Items/textura_zafiro.png"				description="Mineral afilado con propiedades para el combate."					type ="Material" name="Zafiro"/>
 		<item_espada_nv2				texturePath="Assets/Textures/Entidades/Items/textura_espada_nv2.png"				description="Mejora la espada al nivel 2, otorgando 120 puntos de daño."				type ="Material" name="Nivel 2"/>

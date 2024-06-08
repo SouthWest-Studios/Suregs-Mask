@@ -252,7 +252,6 @@ Inventity* InventoryManager::CreateItem(EntityType type, std::string descripcioo
 	case EntityType::ITEM_ZAFIRO:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_zafiro.png");
 		entity->type = InventityType::ZAFIRO;
-		entity->objectID;
 		break;
 	case EntityType::ITEM_ESPADA_NV2:
 		entity->icon = app->tex->Load("Assets/Textures/Interfaz/Resources/textura_espada_nv2.png");
@@ -460,8 +459,8 @@ Inventity* InventoryManager::CreateItem(InventityType type, bool addInventory) {
 			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_POCION_VIDA_MAX, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""), addInventory);
 			break;
 		case InventityType::POCION_REGENERACION:
-			itemConfigurationNode = entitiesDataNode.child("item_pocion_regenracion");
-			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_POCION_REGENERACION, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""), addInventory);
+			itemConfigurationNode = entitiesDataNode.child("item_pocion_regeneracion");
+			inventity = app->inventoryManager->CreateItem(EntityType::ITEM_POCION_REGENERACION, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string("ahahahu"), addInventory);
 			break;
 		case InventityType::POCION_DANO:
 			itemConfigurationNode = entitiesDataNode.child("item_pocion_dano");

@@ -402,7 +402,7 @@ bool App::PreUpdate()
 		
 		pModule = item->data;
 
-		/*LOG("PREUPDATE DE: %s", pModule->name.GetString());*/
+		LOG("PREUPDATE DE: %s", pModule->name.GetString());
 
 		if (pModule->active == false) {
 			continue;
