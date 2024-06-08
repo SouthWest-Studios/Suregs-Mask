@@ -62,6 +62,7 @@ bool Enemy_Ols_Variation::Start() {
 	//texture = app->tex->Load(config.attribute("texturePath").as_string());
 	texture = app->entityManager->textureOls;
 
+	ols_attack_fx = app->audio->LoadAudioFx("ols_attack_fx");
 	ols_get_damage_fx = app->audio->LoadAudioFx("ols_get_damage_fx");
 	ols_get_damageAlt_fx = app->audio->LoadAudioFx("ols_get_damageAlt_fx");
 	ols_get_damageAlt2_fx = app->audio->LoadAudioFx("ols_get_damageAlt2_fx");
@@ -254,6 +255,7 @@ void Enemy_Ols_Variation::Attack(float dt, iPoint playerPos)
 {
     if (canAttack)
     {
+		app->audio->PlayFx(ols_attack_fx);
         attackSensor = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
         attackSensor->ctype = ColliderType::PROJECTILE;
         attackSensor->listener = this;
@@ -277,9 +279,13 @@ void Enemy_Ols_Variation::Attack(float dt, iPoint playerPos)
 }
 
 void Enemy_Ols_Variation::Die() {
-	app->audio->PlayFx(ols_death_fx, 2);
+	if (deathFx == false) {
+		app->audio->PlayFx(ols_death_fx);
+		deathFx = true;
+	}
 
 	if(dieAnim.HasFinished()){
+		deathFx = false;
 		fPoint pos((float)position.x, (float)position.y);
 		blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_ENEMY_BLOOD);
 

@@ -126,6 +126,7 @@ private:
 	int ols_get_damageAlt_fx;
 	int ols_get_damageAlt2_fx;
 	int ols_death_fx;
+	bool deathFx = false;
 
 	Emitter* blood = nullptr;
 	Emitter* particulaAtaque = nullptr;

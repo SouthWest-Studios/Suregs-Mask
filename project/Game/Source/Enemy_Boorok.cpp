@@ -300,7 +300,7 @@ void Enemy_Boorok::Die()
 
 	if (dieAnim.HasFinished())
 	{
-
+		death_fx = false;
 
 		pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
 		if (parseResult) {

@@ -100,11 +100,11 @@ private:
 	Animation chargeAttackAnim;
 	Animation dieAnim;
 
-	bool death_fx = false;
 	int boorok_attack_fx;
 	int boorok_get_damage_fx;
 	int boorok_get_damageAlt_fx;
 	int boorok_death_fx;
+	bool death_fx = false;
 
 	bool isFacingLeft = false;
 

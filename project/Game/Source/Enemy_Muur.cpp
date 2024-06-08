@@ -274,6 +274,7 @@ void Enemy_Muur::Die() {
 
 	if (dieAnim.HasFinished())
 	{
+		death_fx = false;
 		fPoint pos((float)position.x, (float)position.y);
 		blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_ENEMY_BLOOD);
 
