@@ -106,27 +106,19 @@ void Physics::DestroyPendingBodies()
 		PhysBody* bodyWrapper = bodiesToDestroy[i];
 
 		if (bodyWrapper == nullptr) {
-			LOG("bodyWrapper is nullptr at index %zu", i);
 			continue;
 		}
 
 		if (bodyWrapper->body != nullptr) {
 			world->DestroyBody(bodyWrapper->body);
-			LOG("Destroyed body at index %zu", i);
 		}
-		else {
-			LOG("bodyWrapper->body is nullptr at index %zu", i);
-		}
-
 		delete bodyWrapper;
-		LOG("Deleted bodyWrapper at index %zu", i);
+
 	}
 
 	bodiesToDestroy.clear();
 	bodiesToDestroy.shrink_to_fit();
 	bodiesToDestroy.reserve(300);
-
-	LOG("Cleared and reserved bodiesToDestroy");
 }
 
 
