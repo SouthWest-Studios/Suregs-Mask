@@ -28,7 +28,12 @@
 	<scene_pueblo />
 	<entitymanager>
 		<entity_manager>
-			<doors />
+			<doors>
+				<door sceneLevel="-10" tpID="0" />
+				<door sceneLevel="-10" tpID="2" />
+				<door sceneLevel="-10" tpID="4" />
+				<door sceneLevel="-10" tpID="1" />
+			</doors>
 		</entity_manager>
 	</entitymanager>
 	<missionmanager />
@@ -36,13 +41,6 @@
 	<menu />
 	<iventorymanager>
 		<inventory>
-			<inventity type="19" quantity="1" />
-			<inventity type="20" quantity="1" />
-			<inventity type="21" quantity="1" />
-			<inventity type="22" quantity="1" />
-			<inventity type="25" quantity="1" />
-			<inventity type="23" quantity="1" />
-			<inventity type="24" quantity="1" />
 			<money quantity="0" />
 			<SwordLevel quantity="0" />
 			<ArmorLevel quantity="0" />
@@ -80,21 +78,7 @@
 		<notes />
 	</notesmanager>
 	<bestiariomanager>
-		<bestiario>
-			<bestia name="osiris" />
-			<bestia name="osirisV" />
-			<bestia name="muur" />
-			<bestia name="muurV" />
-			<bestia name="khurt" />
-			<bestia name="khurtV" />
-			<bestia name="ols" />
-			<bestia name="olsV" />
-			<bestia name="boorok" />
-			<bestia name="boorokV" />
-			<bestia name="inuit" />
-			<bestia name="musri" />
-			<bestia name="surma" />
-		</bestiario>
+		<bestiario />
 	</bestiariomanager>
 	<equipo />
 	<Ascensormenu />
