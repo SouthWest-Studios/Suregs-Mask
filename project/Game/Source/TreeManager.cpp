@@ -2,6 +2,7 @@
 #include "TreeManager.h"
 #include "NotesManager.h"
 #include "Player.h"
+#include "Audio.h"
 #include "Item.h"
 #include "App.h"
 #include "Textures.h"
@@ -97,6 +98,9 @@ bool TreeManager::Awake(pugi::xml_node config)
 	mascara1SelectedPath = ((char*)config.child("arbol").attribute("mascaraselected1Path").as_string());
 	mascara2SelectedPath = ((char*)config.child("arbol").attribute("mascaraselected2Path").as_string());	
 	mascara3SelectedPath = ((char*)config.child("arbol").attribute("mascaraselected3Path").as_string());
+
+	select_fx = app->audio->LoadAudioFx("select_fx");
+	button_fx = app->audio->LoadAudioFx("button_fx");
 
 	return ret;
 
@@ -1386,6 +1390,7 @@ void TreeManager::OnMovePointer()
 {
 
 	if (app->input->GetButton(RIGHT) == KEY_DOWN) {
+		app->audio->PlayFx(select_fx);
 		if (PointerId == 100)
 		{
 			PointerId = 101;
@@ -1435,6 +1440,7 @@ void TreeManager::OnMovePointer()
 		selectPrimaryMask = false;
 	}
 	if (app->input->GetButton(LEFT) == KEY_DOWN) {
+		app->audio->PlayFx(select_fx);
 		if (PointerId == 100)
 		{
 			PointerId = 101;
@@ -1485,6 +1491,7 @@ void TreeManager::OnMovePointer()
 	}
 
 	if (app->input->GetButton(DOWN) == KEY_DOWN) {
+		app->audio->PlayFx(select_fx);
 		if (verticalPointerId < 3)
 		{
 			PointerId += 5;
@@ -1528,6 +1535,7 @@ void TreeManager::OnMovePointer()
 
 	}
 	if (app->input->GetButton(UP) == KEY_DOWN) {
+		app->audio->PlayFx(select_fx);
 		if (verticalPointerId - 1 > -1 && verticalPointerId < 80)
 		{
 			
@@ -1614,11 +1622,13 @@ bool TreeManager::Update(float dt)
 			/*options = true;
 			selected = { PointerPosition.x, PointerPosition.y };
 			selectedId = PointerId;*/
+			app->audio->PlayFx(button_fx);
 			UseTreeSelected(PointerId);
 
 		}
 		if (app->input->GetButton(BACK) == KEY_DOWN || app->input->GetButton(CHANGEROD) == KEY_DOWN)
 		{
+			app->audio->PlayFx(button_fx);
 			ReembolsarTreeSelected(PointerId);
 
 			if (PointerId == 100) {
