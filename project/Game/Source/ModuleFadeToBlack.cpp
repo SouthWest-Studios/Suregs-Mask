@@ -11,6 +11,7 @@
 #include "Log.h"
 #include "Textures.h"
 #include "ParticleSystem.h"
+#include "DialogManager.h"
 
 ModuleFadeToBlack::ModuleFadeToBlack(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -74,6 +75,8 @@ bool ModuleFadeToBlack::Update(float dt)
 			moduleToDisable->Disable();
 			app->entityManager->Disable();
 			/*app->psystem->RemoveAllEmitters();*/
+
+			app->dialogManager->CleanPendingDialogues();
 			
 
 			pugi::xml_document configFile;

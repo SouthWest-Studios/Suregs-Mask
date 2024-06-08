@@ -130,13 +130,13 @@ std::vector<Quest*> QuestManager::GetActiveQuest()
 	return quests;
 }
 
-void QuestManager::UpdateQuestLine(int questLineID, int newQuestTarget)
+void QuestManager::UpdateQuestLine(int questLineID, int newQuestTarget, bool setActive)
 {
 	QuestLine* questLine = FindQuestLine(questLineID);
 
 	if (questLine != nullptr) {
 		if (!questLine->active && !questLine->completed) {
-			questLine->active = true;
+			questLine->active = setActive;
 		}
 		else {
 			if (newQuestTarget == -1) {
