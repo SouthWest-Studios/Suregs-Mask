@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="308" height="122" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="203">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="308" height="122" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="207">
  <tileset firstgid="1" name="Colisiones" tilewidth="32" tileheight="32" tilecount="16" columns="4">
   <image source="../../Textures/Mapas/Metadatos/Collisions_32x32.png" width="128" height="128"/>
  </tileset>
@@ -188116,6 +188116,10 @@
   <object id="182" x="3548.97" y="2588.63" width="1134.67" height="132"/>
   <object id="201" x="5515.7" y="2606.74" width="0.478261" height="2.6087"/>
   <object id="202" x="5515.41" y="2616.22" width="0.478261" height="2.6087"/>
+  <object id="203" x="5515.67" y="2597.74" width="0.478261" height="2.6087"/>
+  <object id="204" x="5923.87" y="1844.78" width="4.95652" height="0.869565"/>
+  <object id="205" x="5943.78" y="1844.52" width="4.95652" height="0.869565"/>
+  <object id="206" x="5934.52" y="1844.87" width="3.56522" height="0.869565"/>
  </objectgroup>
  <objectgroup id="16" name="Vacios">
   <object id="183" x="1431.64" y="2363.3" width="406.667" height="546.667"/>
