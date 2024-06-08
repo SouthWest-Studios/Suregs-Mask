@@ -8,7 +8,7 @@
 	<map>
 		<map>
 			<puzzles>
-				<puzzle level="0" complete="false" />
+				<puzzle level="0" complete="true" />
 				<puzzle level="1" complete="false" />
 				<puzzle level="2" complete="false" />
 				<puzzle level="3" complete="false" />
@@ -30,9 +30,14 @@
 		<entity_manager>
 			<doors>
 				<door sceneLevel="-10" tpID="0" />
-				<door sceneLevel="-10" tpID="9" />
 				<door sceneLevel="-10" tpID="8" />
 				<door sceneLevel="-10" tpID="1" />
+				<door sceneLevel="-10" tpID="9" />
+				<door sceneLevel="-10" tpID="2" />
+				<door sceneLevel="-10" tpID="4" />
+				<door sceneLevel="-10" tpID="3" />
+				<door sceneLevel="0" tpID="8" />
+				<door sceneLevel="0" tpID="9" />
 			</doors>
 		</entity_manager>
 	</entitymanager>
@@ -46,12 +51,12 @@
 			<ArmorLevel quantity="0" />
 			<PrimaryMask quantity="-1" />
 			<SecondaryMask quantity="-1" />
-			<StoryLevel quantity="2" />
+			<StoryLevel quantity="3" />
 			<Mask0 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
 			<Mask1 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
 			<Mask2 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
 			<Mask3 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
-			<maskNum n="0" info="Esta variable son las mascaras que tienes desbloqueadas" />
+			<maskNum n="1" info="Esta variable son las mascaras que tienes desbloqueadas" />
 			<maskPoints>
 				<maskPointZero points="0" />
 				<maskPointOne points="0" />
@@ -70,7 +75,7 @@
 	<commercemanager />
 	<questmanager>
 		<questLines>
-			<questLine id="1" index="5" active="true" completed="false" />
+			<questLine id="1" index="8" active="true" completed="false" />
 			<questLine id="2" index="1" active="false" completed="false" />
 		</questLines>
 	</questmanager>

@@ -152,7 +152,7 @@ bool ModuleFadeToBlack::FadeToBlack(Module* moduleToDisable, Module* moduleToEna
 	if (currentStep == Fade_Step::NONE)
 	{
 		currentStep = Fade_Step::TO_BLACK;
-		frameCount = 0;
+		frameCount = 0; 
 		maxFadeFrames = frames;
 
 		// TODO 1: How do we keep track of the modules received in this function?

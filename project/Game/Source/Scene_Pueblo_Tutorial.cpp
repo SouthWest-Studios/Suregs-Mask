@@ -42,10 +42,11 @@ bool Scene_Pueblo_Tutorial::Awake(pugi::xml_node config)
 
 	return ret;
 }
-
+int startt = 0;
 // Called before the first frame
 bool Scene_Pueblo_Tutorial::Start()
 {
+
 	pugi::xml_document configFile;
 	pugi::xml_node config;
 	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");

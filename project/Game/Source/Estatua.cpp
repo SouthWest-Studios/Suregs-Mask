@@ -95,11 +95,10 @@ bool Estatua::PostUpdate()
 }
 bool Estatua::CleanUp()
 {
-	app->entityManager->DestroyEntity(this);
-	app->physics->DestroyBody(pbodyFoot);
+	
+	app->physics->DestroyBody(pbody);
 	pbodyFoot = nullptr;
-	app->physics->DestroyBody(pbodySensor);
-	pbodySensor = nullptr;
+	app->entityManager->DestroyEntity(this);
 	//app->tex->UnLoad(texture);
 
     return true;
