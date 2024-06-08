@@ -932,7 +932,7 @@ void EntityManager::UpdateRoomActivation() {
 		// Asegúrate de que el enemigo tiene una sala asignada
 		if (enemy->room != nullptr) {
 			// Si el enemigo está en la misma sala que el jugador, marca que hay un enemigo en la sala
-			if (enemy->room == currentRoom) {
+			if (enemy->room == currentRoom && !enemy->isSpawner) {
 				enemyInRoom = true;
 				break;
 			}
