@@ -391,6 +391,9 @@
     <ClCompile Include="Source\Arbol.cpp">
       <Filter>Entities\Arbol</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Scene_Cinematic.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -845,6 +848,9 @@
     </ClInclude>
     <ClInclude Include="Source\Arbol.h">
       <Filter>Entities\Arbol</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene_Cinematic.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

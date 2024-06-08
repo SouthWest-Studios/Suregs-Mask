@@ -36,6 +36,7 @@ class Scene_Mazmorra5;
 class Scene_Mazmorra6;
 class Scene_Mazmorra7;
 class Scene_Mazmorra8;
+class Scene_Cinematic;
 class EntityManager;
 class Map;
 //L07 DONE 2: Add Physics module
@@ -147,6 +148,7 @@ public:
 	Scene_Pueblo* scene_pueblo;
 	Scene_Pueblo_Tutorial* scene_pueblo_tutorial;
 	Scene_Arena_Tutorial* scene_arena_tutorial;
+	Scene_Cinematic* scene_cinematic;
 
 	Scene_Mazmorra0* scene_mazmorra0;
 	Scene_Mazmorra1* scene_mazmorra1;

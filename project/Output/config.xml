@@ -388,6 +388,19 @@
 	<scene_logos>
 		<sceneLogos texturepath ="Assets/Textures/newIntro.png" Tsprite="60" Pwidth="7680" sprite_x="1280" sprite_y="720"/>
 	</scene_logos>
+	<scene_cinematic>
+		<sceneLogos texturepath1 ="Assets/Textures/Cinematic/cinematic1.png"
+					texturepath2 ="Assets/Textures/Cinematic/cinematic2.png"
+					texturepath3 ="Assets/Textures/Cinematic/cinematic3.png"
+					texturepath4 ="Assets/Textures/Cinematic/cinematic4.png"
+					texturepath5 ="Assets/Textures/Cinematic/cinematic5.png"
+					texturepath6 ="Assets/Textures/Cinematic/cinematic6.png"
+					texturepath7 ="Assets/Textures/Cinematic/cinematic7.png"
+					texturepath8 ="Assets/Textures/Cinematic/cinematic8.png"
+					texturepath9 ="Assets/Textures/Cinematic/cinematic9.png"
+					texturepath10 ="Assets/Textures/Cinematic/cinematic10.png"
+					Tsprite="84" Pwidth="7200" sprite_x="600" sprite_y="338" />
+	</scene_cinematic>
 	<scene_pueblo>
 		<pathfindingTexture pathtexture="Assets/Textures/pathfinding.png"/>
 		<map path="Assets/Mapas/" pathTextures="Assets/Textures/Mapas/" name="Pueblo/Pueblo.tmx"/>

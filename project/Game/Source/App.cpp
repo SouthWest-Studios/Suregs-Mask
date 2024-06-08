@@ -22,6 +22,7 @@
 #include "Scene_Mazmorra6.h"
 #include "Scene_Mazmorra7.h"
 #include "Scene_Mazmorra8.h"
+#include "Scene_Cinematic.h"
 #include "Map.h"
 #include "Physics.h"
 #include "GuiManager.h"
@@ -78,6 +79,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	scene_arena_tutorial = new Scene_Arena_Tutorial(this, false);
 	scene_pueblo_tutorial = new Scene_Pueblo_Tutorial(this, false);
 	scene_pueblo = new Scene_Pueblo(this, false);
+	scene_cinematic= new Scene_Cinematic(this, false);
 
 	scene_mazmorra0 = new Scene_Mazmorra0(this, false);
 	scene_mazmorra1 = new Scene_Mazmorra1(this, false);
@@ -125,6 +127,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(scene_pueblo_tutorial);
 	AddModule(scene_arena_tutorial);
 	AddModule(scene_pueblo);
+	AddModule(scene_cinematic);
 	AddModule(scene_mazmorra0);
 	AddModule(scene_mazmorra1);
 	AddModule(scene_mazmorra2);
