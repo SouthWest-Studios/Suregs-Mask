@@ -1159,7 +1159,7 @@ void InventoryManager::UsePotionSelected(ListItem<Inventity*>* it)
 				}
 				break;
 		}
-		inventities.Del(it);
+		DestroyItemById(inventity->id, false);
 	}
 }
 
