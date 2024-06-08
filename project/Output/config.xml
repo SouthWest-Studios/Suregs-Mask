@@ -1045,7 +1045,7 @@
 				<quest id="4" questTitle="Abre el cofre del dormitorio." />
 				<quest id="5" questTitle="Ve a las “ruinas”." />
 				<!--MAZMORRA 0-->
-				<quest id="7" questTitle="Interactúa con el árbol mágico." />
+				<quest id="6" questTitle="Interactúa con el árbol mágico." />
 				<quest id="7" questTitle="Habla con Phrumo, el vendedor." />
 				<quest id="8" questTitle="Habla con Zhyuka, la bruja." />
 				<quest id="9" questTitle="Ve a casa y habla con Vhea." />
