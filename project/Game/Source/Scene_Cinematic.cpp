@@ -126,7 +126,8 @@ bool Scene_Cinematic::Start()
 	timerIntro.Start();
 
 	//sus = app->audio->LoadAudioFx("");
-	intro_fx = app->audio->LoadAudioFx("intro_fx");
+	app->audio->StopMusic();
+	intro_fx = app->audio->LoadAudioFx("cinematic_fx");
 	app->audio->PlayFx(intro_fx);
 
 	app->render->camera.x = 0;
@@ -148,18 +149,18 @@ bool Scene_Cinematic::Update(float dt)
 
 	OPTICK_EVENT();
 
-	if (timerIntro.ReadSec() < 90) {
+	//if (timerIntro.ReadSec() < 90) {
 
-	}
-	else {
-		app->fadeToBlack->FadeToBlack(this, app->scene_intro, 90);
+	//}
+	//else {
+	//	app->fadeToBlack->FadeToBlack(this, app->scene_intro, 90);
 
-	}
+	//}
 
-	if (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady) {
-		app->fadeToBlack->FadeToBlack(this, app->scene_intro, 90);
+	//if (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady) {
+	//	app->fadeToBlack->FadeToBlack(this, app->scene_intro, 90);
 
-	}
+	//}
 	return true;
 }
 
@@ -172,11 +173,13 @@ bool Scene_Cinematic::PostUpdate()
 
 	app->render->DrawTexture(currentFrameTexture, 0, 0, 2.15, SDL_FLIP_NONE, &rect, 0);
 
-	currentFrameIndex += 0.4;
+	currentFrameIndex += 0.2;
 	if (currentFrameIndex >= frameTextures.size()) {
-		app->fadeToBlack->FadeToBlack(this, app->scene_intro, 90);
+		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo_tutorial, 90);
 		currentFrameIndex = frameTextures.max_size();
 	}
+	printf("\n%f", currentFrameIndex);
+
 	bool ret = true;
 
 	return ret;
@@ -187,6 +190,7 @@ bool Scene_Cinematic::CleanUp()
 {
 	LOG("Freeing Scene_intro");
 	app->tex->UnLoad(sceneLogosTexture);
+	frameTextures.clear();
 	RELEASE(spritePositions);
 	delete spritePositions;
 	currentFrameIndex = 0;

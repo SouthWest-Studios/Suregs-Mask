@@ -2681,7 +2681,7 @@ void Player::PlayerMovement(float dt)
 		app->scene_pueblo->GetRod()->fishing.rodReady = false;
 		app->scene_pueblo_tutorial->GetRod()->fishing.rodReady = false;
 	}
-	printf("\n scene_pueblo : %d, scene_pueblo_tutorial: %d", app->scene_pueblo->GetRod()->fishing.rodReady, app->scene_pueblo_tutorial->GetRod()->fishing.rodReady);
+	//printf("\n scene_pueblo : %d, scene_pueblo_tutorial: %d", app->scene_pueblo->GetRod()->fishing.rodReady, app->scene_pueblo_tutorial->GetRod()->fishing.rodReady);
 	//Si pulsas espacio
 	if (app->input->GetButton(DASH) == KEY_DOWN && timerDash.ReadMSec() > cdTimerDashMS && !app->scene_pueblo->GetRod()->fishing.rodReady && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady && !die) {
 

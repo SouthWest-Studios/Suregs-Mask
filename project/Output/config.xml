@@ -44,6 +44,7 @@
 		<fx>
       <!--ui-->
 			<intro_fx path="Assets/Audio/Fx/UI/intro_fx.wav"/>
+		<cinematic_fx path="Assets/Audio/Fx/UI/cinematic_fx.wav"/>
       <menu_fx path="Assets/Audio/Fx/UI/menu_fx.wav"/>
       <button_fx path="Assets/Audio/Fx/UI/button_fx.wav"/>
       <select_fx path="Assets/Audio/Fx/UI/select_fx.wav"/>

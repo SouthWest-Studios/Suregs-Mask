@@ -9,10 +9,12 @@
 #include "Scene_Pueblo.h"
 #include "Scene_Pueblo_Tutorial.h"
 #include "ModuleFadeToBlack.h"
+#include "Scene_Cinematic.h"
 #include "Optick/include/optick.h"
 #include "Menu.h"
 #include "QuestManager.h"
 #include "SDL_mixer/include/SDL_mixer.h"
+
 
 #include "Defs.h"
 #include "Utils.cpp"
@@ -495,7 +497,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 	//BOTON CONFIRMAR NUEVA PARTIDA
 	case 28:
 		if (app->fadeToBlack->currentStep == 0) {
-			app->fadeToBlack->FadeToBlack(this, app->scene_pueblo_tutorial);
+			app->fadeToBlack->FadeToBlack(this, app->scene_cinematic);
 			app->menu->active = true;
 			app->guiManager->pointerId = 100;
 			app->savedGame = 1;
@@ -511,7 +513,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 30:
 		if (app->fadeToBlack->currentStep == 0) {
-			app->fadeToBlack->FadeToBlack(this, app->scene_pueblo_tutorial);
+			app->fadeToBlack->FadeToBlack(this, app->scene_cinematic);
 			app->menu->active = true;
 			app->guiManager->pointerId = 100;
 			app->savedGame = 2;
@@ -527,7 +529,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 32:
 		if (app->fadeToBlack->currentStep == 0) {
-			app->fadeToBlack->FadeToBlack(this, app->scene_pueblo_tutorial);
+			app->fadeToBlack->FadeToBlack(this, app->scene_cinematic);
 			app->menu->active = true;
 			app->guiManager->pointerId = 100;
 			app->savedGame = 3;
