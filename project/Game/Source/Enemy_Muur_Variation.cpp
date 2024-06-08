@@ -59,6 +59,7 @@ bool Enemy_Muur_Variation::Start() {
 	//texture = app->tex->Load(config.attribute("texturePath").as_string());
 	texture = app->entityManager->textureMuur;
 
+	muur_attack_fx = app->audio->LoadAudioFx("muur_attack_fx");
 	muur_get_damage_fx = app->audio->LoadAudioFx("muur_get_damage_fx");
 
 	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 15, bodyType::DYNAMIC);
@@ -492,11 +493,16 @@ void Enemy_Muur_Variation::Charge(float dt, iPoint playerPos) {
 		/*//printf("charge");*/
 		currentAnimation = &chargeAnim;
 		pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
+		if (attackFx == false) {
+			app->audio->PlayFx(muur_attack_fx);
+			attackFx = true;
+		}
+
 		if (chargeAnim.HasFinished())
 		{
 			timechargingTimer.Start();
 			charging = true;
-
+			attackFx = false;
 			b2Vec2 direction(playerPos.x - position.x, playerPos.y - position.y);
 			direction.Normalize();
 
