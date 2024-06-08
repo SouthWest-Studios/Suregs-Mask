@@ -39754,6 +39754,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="41"/>
    <tile/>
    <tile/>
    <tile/>
@@ -39779,6 +39780,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="41"/>
    <tile/>
    <tile/>
    <tile/>
@@ -40246,8 +40248,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile gid="63"/>
    <tile/>
    <tile/>
    <tile/>

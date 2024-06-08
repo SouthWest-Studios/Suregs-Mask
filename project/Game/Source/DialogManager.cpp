@@ -195,6 +195,18 @@ bool DialogManager::AddDialog(Dialog* dialog)
 	return true;
 }
 
+bool DialogManager::CleanPendingDialogues()
+{
+	bool ret = true;
+
+	while(dialogues.Count() > 0) {
+		dialogues.Del(dialogues.At(0));
+	}
+		
+
+	return ret;
+}
+
 bool DialogManager::ShowDialog(Dialog* dialog)
 {
 	//Mostrar fondo
@@ -454,7 +466,7 @@ bool DialogManager::PostUpdate() {
 
 			if (dialogues.At(0)->data->tutorial != -1) {
 				app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_arena_tutorial, 90);
-				app->tutorialHasStarted == true;
+				app->tutorialHasStarted = true;
 			}
 
 			dialogues.Del(dialogues.At(0));

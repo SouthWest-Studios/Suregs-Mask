@@ -84933,7 +84933,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="188"/>
    <tile/>
    <tile/>
    <tile/>
@@ -86189,7 +86188,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="187"/>
    <tile/>
    <tile/>
    <tile/>
@@ -86203,7 +86201,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="177"/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -92055,7 +92055,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="178"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>

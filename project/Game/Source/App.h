@@ -195,6 +195,9 @@ public:
 	long long tiempoDeJuegoMostrarSlot2 = 0;
 	long long tiempoDeJuegoMostrarSlot3 = 0;
 
+	bool tutorialHasFinishedSlot1 = false;
+	bool tutorialHasFinishedSlot2 = false;
+	bool tutorialHasFinishedSlot3 = false;
 
 
 	long long milisegundos;

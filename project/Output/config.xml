@@ -1038,36 +1038,37 @@
 			<!-- MAIN QUEST -->
 			<questLine id="1" defaultActive="true">
 				<quest id="1" questTitle="Habla con Vhea." />
-				<quest id="2" questTitle="Ve al campo de entrenamiento." />
+				<quest id="2" questTitle="Ve al campo de entreno." />
 				<!--ENTRENO-->
 				<quest id="3" questTitle="Ve a casa y habla con Vhea." />
-				<quest id="4" questTitle="Abre el cofre del dormitorio." />
+				<quest id="4" questTitle="Abre el baúl del dormitorio." />
 				<quest id="5" questTitle="Ve a las “ruinas”." />
 				<!--MAZMORRA 0-->
-				<quest id="6" questTitle="Habla con Phrumo, el vendedor." />
-				<quest id="7" questTitle="Habla con Zhyuka, la bruja." />
-				<quest id="8" questTitle="Ve a casa y habla con Vhea." />
-				<quest id="9" questTitle="Vuelve a las mazmorras." />
+				<quest id="6" questTitle="Ve el árbol mágico." />
+				<quest id="7" questTitle="Habla con el vendedor." />
+				<quest id="8" questTitle="Habla con Zhyuka, la bruja." />
+				<quest id="9" questTitle="Ve a casa y habla con Vhea." />
+				<quest id="10" questTitle="Vuelve a las mazmorras." />
 				<!--MAZMORRA 1-->
-				<quest id="10" questTitle="Ve a casa y habla con Vhea." />
-				<quest id="11" questTitle="Vuelve a las mazmorras." />
+				<quest id="11" questTitle="Ve a casa y habla con Vhea." />
+				<quest id="12" questTitle="Vuelve a las mazmorras." />
 				<!--MAZMORRA 2-->
-				<quest id="12" questTitle="Ve a casa y habla con Vhea." />
-				<quest id="13" questTitle="Vuelve a las mazmorras." />
+				<quest id="13" questTitle="Ve a casa y habla con Vhea." />
+				<quest id="14" questTitle="Vuelve a las mazmorras." />
 				<!--MAZMORRA 3-->
-				<quest id="14" questTitle="Dale la gema extraña a Zhyuka." />
-				<quest id="15" questTitle="Ve a casa y habla con Vhea." />
-				<quest id="16" questTitle="Vuelve a las mazmorras." />
+				<quest id="15" questTitle="Dale la gema a Zhyuka." />
+				<quest id="16" questTitle="Ve a casa y habla con Vhea." />
+				<quest id="17" questTitle="Vuelve a las mazmorras." />
 				<!--MAZMORRA 4-->
-				<quest id="17" questTitle="Ve a casa y habla con Vhea." />
-				<quest id="18" questTitle="Vuelve a las mazmorras." />
+				<quest id="18" questTitle="Ve a casa y habla con Vhea." />
+				<quest id="19" questTitle="Vuelve a las mazmorras." />
 				<!--MAZMORRA 5-->
-				<quest id="19" questTitle="Ve a casa y habla con Vhea." />
-				<quest id="20" questTitle="Vuelve a las mazmorras." />
+				<quest id="20" questTitle="Ve a casa y habla con Vhea." />
+				<quest id="21" questTitle="Vuelve a las mazmorras." />
 				<!--MAZMORRA 6-->
-				<quest id="21" questTitle="Visita todas las tiendas." />
-				<quest id="22" questTitle="Ve a casa y habla con Vhea." />
-				<quest id="23" questTitle="Vuelve a las mazmorras." />
+				<quest id="22" questTitle="Visita todas las tiendas." />
+				<quest id="23" questTitle="Ve a casa y habla con Vhea." />
+				<quest id="24" questTitle="Vuelve a las mazmorras." />
 				<!--MAZMORRA 7-8-->
 			</questLine>
 
