@@ -402,8 +402,9 @@ bool Enemy_Ols::Olsfinding(float dt)
 	iPoint playerPos = app->map->WorldToMap(app->entityManager->GetPlayer()->position.x, app->entityManager->GetPlayer()->position.y);
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
 
-	if (abs(playerPos.x - enemyPos.x) < 15 && abs(playerPos.y - enemyPos.y) < 15) {
-		app->map->pathfinding->CreatePath(enemyPos, playerPos); // Calcula el camino desde la posicion del enemigo hacia la posicion del jugador
+	int pathLength = app->map->pathfinding->CreatePath(enemyPos, playerPos);
+
+	if (abs(playerPos.x - enemyPos.x) < 15 && abs(playerPos.y - enemyPos.y) < 15 && pathLength > 0 && pathLength < viewDistance) {
 		lastPath = app->map->pathfinding->GetLastPath();
 
 		//Get the latest calculated path and draw
@@ -578,9 +579,9 @@ bool Enemy_Ols::Flee(float dt) // Huye del jugador
 	iPoint playerPos = app->map->WorldToMap(app->entityManager->GetPlayer()->position.x, app->entityManager->GetPlayer()->position.y);
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
 
-	if (abs(playerPos.x - enemyPos.x) < 15 && abs(playerPos.y - enemyPos.y) < 15) {
-		// Calcula el camino desde la posicion del jugador hacia la posicion del enemigo
-		app->map->pathfinding->CreatePath(playerPos, enemyPos); 
+	int pathLength = app->map->pathfinding->CreatePath(playerPos, enemyPos);
+
+	if (abs(playerPos.x - enemyPos.x) < 15 && abs(playerPos.y - enemyPos.y) < 15 && pathLength > 0 && pathLength < viewDistance) {
 		lastPath = app->map->pathfinding->GetLastPath();
 
 		//Get the latest calculated path and draw

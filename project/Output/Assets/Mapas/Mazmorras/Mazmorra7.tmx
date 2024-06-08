@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="199" height="142" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="187">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="199" height="142" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="191">
  <tileset firstgid="1" name="Colisiones" tilewidth="32" tileheight="32" tilecount="16" columns="4">
   <image source="../../Textures/Mapas/Metadatos/Collisions_32x32.png" width="128" height="128"/>
  </tileset>
@@ -113143,12 +113143,12 @@
     <property name="Type" value="isLargeRoom"/>
    </properties>
   </object>
-  <object id="141" x="21.9433" y="1480.25" width="1270.79" height="1466.52">
+  <object id="141" x="34.8524" y="1500.98" width="1270.79" height="1466.52">
    <properties>
     <property name="Type" value="isLargeRoom"/>
    </properties>
   </object>
-  <object id="142" x="5096.12" y="740.803" width="1270.79" height="1466.52">
+  <object id="142" x="5086.62" y="773.178" width="1270.79" height="1466.52">
    <properties>
     <property name="Type" value="isLargeRoom"/>
    </properties>
@@ -141537,6 +141537,10 @@
   <object id="181" x="113.333" y="3591.66" width="510" height="193.667"/>
   <object id="182" x="98.3333" y="3743.33" width="36" height="605"/>
   <object id="183" x="555.333" y="3631" width="202" height="116.333"/>
+  <object id="187" x="511.719" y="2217.69" width="0.84375" height="3.28125"/>
+  <object id="188" x="511.672" y="2227.67" width="0.84375" height="3.28125"/>
+  <object id="189" x="5608.79" y="1350.71" width="2.9375" height="0.71875"/>
+  <object id="190" x="5623.72" y="1350.84" width="3.96875" height="0.375"/>
  </objectgroup>
  <layer id="7" name="Navigation" width="199" height="142">
   <properties>
@@ -149480,7 +149484,7 @@
    <tile gid="2"/>
    <tile gid="2"/>
    <tile gid="2"/>
-   <tile gid="2"/>
+   <tile/>
    <tile gid="2"/>
    <tile gid="2"/>
    <tile gid="2"/>
@@ -149675,11 +149679,11 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="2"/>
    <tile gid="2"/>
    <tile gid="2"/>
    <tile gid="2"/>
    <tile gid="2"/>
+   <tile/>
    <tile gid="2"/>
    <tile gid="2"/>
    <tile gid="2"/>
@@ -149874,11 +149878,11 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="2"/>
    <tile gid="2"/>
    <tile gid="2"/>
    <tile gid="2"/>
    <tile gid="2"/>
+   <tile/>
    <tile gid="2"/>
    <tile gid="2"/>
    <tile gid="2"/>
@@ -155287,10 +155291,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="2"/>
-   <tile gid="2"/>
-   <tile gid="2"/>
-   <tile gid="2"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
