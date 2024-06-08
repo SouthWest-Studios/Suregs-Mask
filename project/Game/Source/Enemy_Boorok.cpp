@@ -286,10 +286,10 @@ void Enemy_Boorok::Attack(float dt, iPoint playerPos)
 
 void Enemy_Boorok::Die()
 {
-	if (death_fx == false)
+	if (deathFx == false)
 	{
 		app->audio->PlayFx(boorok_death_fx);
-		death_fx = true;
+		deathFx = true;
 	}
 
 	pbodyFoot->body->SetLinearVelocity(b2Vec2_zero);
@@ -300,7 +300,7 @@ void Enemy_Boorok::Die()
 
 	if (dieAnim.HasFinished())
 	{
-		death_fx = false;
+		deathFx = false;
 
 		pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
 		if (parseResult) {
