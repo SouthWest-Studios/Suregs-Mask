@@ -158,6 +158,7 @@ bool Scene_Cinematic::Update(float dt)
 	//}
 	if (app->input->GetButton(CONFIRM) == KEY_REPEAT ) {
 		if (timerIntro.ReadMSec() >= 5000) {
+			app->audio->StopFx(-1);
 		app->fadeToBlack->FadeToBlack(this, app->scene_pueblo_tutorial, 90);
 		}
 	}

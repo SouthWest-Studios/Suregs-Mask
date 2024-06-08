@@ -80,6 +80,7 @@
 #include "Arbol.h"
 #include "Defs.h"
 #include "Log.h"
+#include "Scene_menu.h"
 #include <random>
 
 EntityManager::EntityManager(App* app, bool start_enabled) : Module(app, start_enabled)
@@ -932,7 +933,7 @@ void EntityManager::UpdateRoomActivation() {
 		// Asegúrate de que el enemigo tiene una sala asignada
 		if (enemy->room != nullptr) {
 			// Si el enemigo está en la misma sala que el jugador, marca que hay un enemigo en la sala
-			if (enemy->room == currentRoom) {
+			if (enemy->room == currentRoom && !enemy->isSpawner) {
 				enemyInRoom = true;
 				break;
 			}
@@ -988,7 +989,8 @@ void EntityManager::showFinalkillPadre()
 		if (photoTransparent >= 255) {
 			photoTransparent = 255;
 			if (goScene) {
-				app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_logos);
+
+				app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu);
 				//canShowFinal = false;
 			}
 			else

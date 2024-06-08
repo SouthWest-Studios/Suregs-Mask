@@ -195,6 +195,18 @@ bool DialogManager::AddDialog(Dialog* dialog)
 	return true;
 }
 
+bool DialogManager::CleanPendingDialogues()
+{
+	bool ret = true;
+
+	while(dialogues.Count() > 0) {
+		dialogues.Del(dialogues.At(0));
+	}
+		
+
+	return ret;
+}
+
 bool DialogManager::ShowDialog(Dialog* dialog)
 {
 	//Mostrar fondo

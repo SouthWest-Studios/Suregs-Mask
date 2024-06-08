@@ -694,6 +694,10 @@ bool InventoryManager::LoadState(pugi::xml_node node)
 			itemConfigurationNode = entitiesDataNode.child("item_pocion_vida_3");
 			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_POCION_VIDA_3, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""));
 			break;
+		case InventityType::SALIVA:
+			itemConfigurationNode = entitiesDataNode.child("item_saliva");
+			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_SALIVA, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""));
+			break;
 		case InventityType::POCION_VIDA_MAX:
 			itemConfigurationNode = entitiesDataNode.child("item_pocion_vida_max");
 			itemLoaded = app->inventoryManager->CreateItem(EntityType::ITEM_POCION_VIDA_MAX, itemConfigurationNode.attribute("description").as_string(), itemConfigurationNode.attribute("type").as_string(), itemConfigurationNode.attribute("name").as_string(""));
@@ -723,7 +727,7 @@ bool InventoryManager::LoadState(pugi::xml_node node)
 		default:
 			break;
 		}
-		itemLoaded->quantity = itemNode.attribute("quantity").as_int();
+		itemLoaded->quantity = itemNode.attribute("quantity").as_int(0);
 
 	}
 
@@ -794,40 +798,40 @@ bool InventoryManager::SaveState(pugi::xml_node node)
 	pugi::xml_node inventoryMoneyNode = inventoryNode.append_child("money");
 	inventoryMoneyNode.append_attribute("quantity").set_value(monedasObtenidas);
 
-	pugi::xml_node inventorySwordNode = inventoryNode.append_child("SwordLevel");
+	pugi::xml_node inventorySwordNode = inventoryNode.append_child("swordLevel");
     inventorySwordNode.append_attribute("quantity").set_value(swordLevel);
 
-	pugi::xml_node inventoryArmorNode = inventoryNode.append_child("ArmorLevel");
+	pugi::xml_node inventoryArmorNode = inventoryNode.append_child("armorLevel");
     inventoryArmorNode.append_attribute("quantity").set_value(armorLevel);
 
-	pugi::xml_node primaryMaskNode = inventoryNode.append_child("PrimaryMask");
+	pugi::xml_node primaryMaskNode = inventoryNode.append_child("primaryMask");
     primaryMaskNode.append_attribute("quantity").set_value(primaryMaskInventoryManager);
 
-	pugi::xml_node secondaryMaskNode = inventoryNode.append_child("SecondaryMask");
+	pugi::xml_node secondaryMaskNode = inventoryNode.append_child("secondaryMask");
     secondaryMaskNode.append_attribute("quantity").set_value(secondaryMaskInventoryManager);
 
-	pugi::xml_node storyLevelNode = inventoryNode.append_child("StoryLevel");
+	pugi::xml_node storyLevelNode = inventoryNode.append_child("storyLevel");
 	storyLevelNode.append_attribute("quantity").set_value(storyLevel);
 
-	pugi::xml_node mask0Node = inventoryNode.append_child("Mask0");
+	pugi::xml_node mask0Node = inventoryNode.append_child("mask0");
 	mask0Node.append_attribute("Branch1").set_value(mask0_levelBranch1);
 	mask0Node.append_attribute("Branch2").set_value(mask0_levelBranch2);
 	mask0Node.append_attribute("Branch3").set_value(mask0_levelBranch3);
 	mask0Node.append_attribute("Branch4").set_value(mask0_levelBranch4);
 
-	pugi::xml_node mask1Node = inventoryNode.append_child("Mask1");
+	pugi::xml_node mask1Node = inventoryNode.append_child("mask1");
 	mask1Node.append_attribute("Branch1").set_value(mask1_levelBranch1);
 	mask1Node.append_attribute("Branch2").set_value(mask1_levelBranch2);
 	mask1Node.append_attribute("Branch3").set_value(mask1_levelBranch3);
 	mask1Node.append_attribute("Branch4").set_value(mask1_levelBranch4);
 
-	pugi::xml_node mask2Node = inventoryNode.append_child("Mask2");
+	pugi::xml_node mask2Node = inventoryNode.append_child("mask2");
 	mask2Node.append_attribute("Branch1").set_value(mask2_levelBranch1);
 	mask2Node.append_attribute("Branch2").set_value(mask2_levelBranch2);
 	mask2Node.append_attribute("Branch3").set_value(mask2_levelBranch3);
 	mask2Node.append_attribute("Branch4").set_value(mask2_levelBranch4);
 
-	pugi::xml_node mask3Node = inventoryNode.append_child("Mask3");
+	pugi::xml_node mask3Node = inventoryNode.append_child("mask3");
 	mask3Node.append_attribute("Branch1").set_value(mask3_levelBranch1);
 	mask3Node.append_attribute("Branch2").set_value(mask3_levelBranch2);
 	mask3Node.append_attribute("Branch3").set_value(mask3_levelBranch3);

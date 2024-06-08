@@ -36,6 +36,8 @@ public:
 	//Funcion para añadir a la lista de dialogos
 	bool AddDialog(Dialog* dialog);
 
+	bool CleanPendingDialogues();
+
 
 	//Fishing
 	void CreateDialogSinEntity(std::string Texto, std::string nombre, const char* texture);

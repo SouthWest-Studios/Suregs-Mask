@@ -79,6 +79,7 @@ bool Enemy_Spawner::Update(float dt)
 						osiris->position = iPoint(position.x + 16, position.y + 16);
 						fPoint pos((float)osiris->position.x, (float)osiris->position.y);
 						app->psystem->AddEmiter(pos, EMITTER_TYPE_SMOKE);
+						osiris->isSpawner = true;
 						osiris->Start();
 						break;}
 					case 2: {
@@ -87,6 +88,7 @@ bool Enemy_Spawner::Update(float dt)
 						ols->position = iPoint(position.x + 16, position.y + 16);
 						fPoint pos((float)ols->position.x, (float)ols->position.y);
 						app->psystem->AddEmiter(pos, EMITTER_TYPE_SMOKE);
+						ols->isSpawner = true;
 						ols->Start();
 						break;}
 					case 3: {
@@ -95,6 +97,7 @@ bool Enemy_Spawner::Update(float dt)
 						khurt->position = iPoint(position.x + 16, position.y + 16);
 						fPoint pos((float)khurt->position.x, (float)khurt->position.y);
 						app->psystem->AddEmiter(pos, EMITTER_TYPE_SMOKE);
+						khurt->isSpawner = true;
 						khurt->Start();
 						break;
 					}
@@ -105,6 +108,7 @@ bool Enemy_Spawner::Update(float dt)
 						muur->position = iPoint(position.x + 16, position.y + 16);
 						fPoint pos((float)muur->position.x, (float)muur->position.y);
 						app->psystem->AddEmiter(pos, EMITTER_TYPE_SMOKE);
+						muur->isSpawner = true;
 						muur->Start();
 						break;
 					}
@@ -114,6 +118,7 @@ bool Enemy_Spawner::Update(float dt)
 						boorok->position = iPoint(position.x + 16, position.y + 16);
 						fPoint pos((float)boorok->position.x, (float)boorok->position.y);
 						app->psystem->AddEmiter(pos, EMITTER_TYPE_SMOKE);
+						boorok->isSpawner = true;
 						boorok->Start();
 						break;
 					}
@@ -123,6 +128,7 @@ bool Enemy_Spawner::Update(float dt)
 						muur->position = iPoint(position.x + 16, position.y + 16);
 						fPoint pos((float)muur->position.x, (float)muur->position.y);
 						app->psystem->AddEmiter(pos, EMITTER_TYPE_SMOKE);
+						muur->isSpawner = true;
 						muur->Start();
 						break;
 					}

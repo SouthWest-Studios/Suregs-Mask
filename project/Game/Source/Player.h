@@ -301,8 +301,8 @@ public:
 	float speedDash = 3;
 
 	//Ataque
-	int attackWidth = 85;
-	int attackHeight = 85;
+	int attackWidth = 150;
+	int attackHeight = 150;
 	bool isAttacking = false;
 	PhysBody* attackSensor = nullptr;
 	Timer damageTimer;

@@ -150,6 +150,13 @@ bool Boss_Inuit::Update(float dt)
 	}
 	stateMachine(dt, playerPos);
 
+	if (app->entityManager->GetPlayer()->die) {
+		if (atackCube != nullptr) {
+			app->physics->DestroyBody(atackCube);
+			atackCube = nullptr;
+		}
+	}
+
 	//Si jugador fuera de area, eliminar cubo de ataque
 	if (atackCube != nullptr && playerInBossArea == false) {
 		app->physics->DestroyBody(atackCube);
