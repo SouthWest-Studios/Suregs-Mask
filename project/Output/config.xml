@@ -946,7 +946,7 @@
 			<trades>
 				<trade itemOffered="-1" quantityItemOffered="7" itemRequested="10" quantityItemRequested="1"/>
 				<trade itemOffered="-1" quantityItemOffered="10" itemRequested="8" quantityItemRequested="1"/>
-				<trade itemOffered="-1" quantityItemOffered="12" itemRequested="18" quantityItemRequested="12"/>
+				<trade itemOffered="-1" quantityItemOffered="12" itemRequested="18" quantityItemRequested="1"/>
 				<trade itemOffered="-1" quantityItemOffered="12" itemRequested="1" quantityItemRequested="1"/>
 				<trade itemOffered="-1" quantityItemOffered="16" itemRequested="4" quantityItemRequested="1"/>
 				<trade itemOffered="-1" quantityItemOffered="42" itemRequested="9" quantityItemRequested="1"/>

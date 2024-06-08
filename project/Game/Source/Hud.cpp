@@ -553,11 +553,6 @@ void Hud::Potions()
 	ListItem<Inventity*>* item;
 	int potionIndex = 0;
 	for (item = app->inventoryManager->inventities.start; item != NULL; item = item->next) {
-		printf("Item: %p\n", item);
-		printf("Item data: %p\n", item->data);
-		if (item->data) {
-			printf("Item data id: %d\n", item->data->id);
-		}
 		if (app->inventoryManager->inventities.At(item->data->id) != NULL) {
 			Inventity* inventity = item->data;
 			if (IsPotion(inventity->type)) {
