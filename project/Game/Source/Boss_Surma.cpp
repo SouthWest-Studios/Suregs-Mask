@@ -72,6 +72,9 @@ bool Boss_Surma::Start() {
 
 
 	surma_get_damage_fx = app->audio->LoadAudioFx("surma_get_damage_fx");
+	surma_fast_melee_attack_fx = app->audio->LoadAudioFx("surma_fast_melee_attack_fx");
+	surma_fast_melee_attackAlt_fx = app->audio->LoadAudioFx("surma_fast_melee_attackAlt_fx");
+	surma_fast_melee_attackAlt2_fx = app->audio->LoadAudioFx("surma_fast_melee_attackAlt2_fx");
 
 	pbodyFoot = app->physics->CreateCircle(position.x, position.y, 20, bodyType::DYNAMIC);
 	pbodyFoot->entity = this;
@@ -555,6 +558,7 @@ void Boss_Surma::Fase1(float dt, iPoint playerPos)
 
 		if (!combo1Anim.HasFinished()) {
 			currentAnimation = &combo1Anim;
+			app->audio->PlayFx(surma_fast_melee_attack_fx);
 			//PARTICULA ATAQUE FLOJO
 			if (attackSensor == nullptr && combo1Anim.GetCurretFrameNumber() >= 3) {
 				if (isFacingLeft) {
@@ -571,6 +575,7 @@ void Boss_Surma::Fase1(float dt, iPoint playerPos)
 		}
 		else if (!combo2Anim.HasFinished()) {
 			currentAnimation = &combo2Anim;
+			app->audio->PlayFx(surma_fast_melee_attackAlt_fx);
 			//PARTICULA ATAQUE FLOJO
 			if (attackSensor != nullptr) {
 				app->physics->DestroyBody(attackSensor);
@@ -592,6 +597,7 @@ void Boss_Surma::Fase1(float dt, iPoint playerPos)
 		}
 		else if (!combo3Anim.HasFinished()) {
 			currentAnimation = &combo3Anim;
+			app->audio->PlayFx(surma_fast_melee_attackAlt2_fx);
 			//PARTICULA ATAQUE FLOJO
 
 			if (attackSensor2 != nullptr) {

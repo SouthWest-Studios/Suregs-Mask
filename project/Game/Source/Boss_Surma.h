@@ -128,6 +128,9 @@ private:
 	Animation explosionAnim;
 
 	int surma_get_damage_fx;
+	int surma_fast_melee_attack_fx;
+	int surma_fast_melee_attackAlt_fx;
+	int surma_fast_melee_attackAlt2_fx;
 	
 	bool isFacingLeft = false;
 
