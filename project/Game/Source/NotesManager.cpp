@@ -657,7 +657,6 @@ bool NotesManager::PostUpdate()
 	{
 		if (app->menu->animating == false && app->menu->animatingExit2 == false && app->menu->menuu == true)
 		{
-			app->render->DrawTexture(sliderTexture, 590, 200, SDL_FLIP_NONE, 0, 0);
 			app->render->DrawTexture(knobTexture, 582, knobY, SDL_FLIP_NONE, 0, 0);
 		}
 		uint windowWidth, windowHeight;
