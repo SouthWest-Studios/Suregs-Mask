@@ -194,20 +194,6 @@ bool Scene_Menu::Update(float dt)
 {
 	OPTICK_EVENT();
 
-	int mx, my;
-
-	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN) {
-		app->input->GetMousePosition(mx, my);
-		fPoint pos((float)mx, (float)my);
-		app->psystem->AddEmiter(pos, EMITTER_TYPE_FASE2_IGORV);
-	}
-
-	//if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN) {
-	//	app->input->GetMousePosition(mx, my);
-	//	fPoint pos((float)mx, (float)my);
-	//	app->psystem->AddEmiter(pos, EMITTER_TYPE_SPARK);
-	//}
-
 	if (showSettings == false)
 	{
 		app->render->DrawTexture(menuMain, 0, 0);

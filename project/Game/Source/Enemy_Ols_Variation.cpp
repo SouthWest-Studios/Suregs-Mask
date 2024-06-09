@@ -271,7 +271,7 @@ void Enemy_Ols_Variation::Attack(float dt, iPoint playerPos)
 		projectilePosition = position;
 
 		fPoint pos((float)projectilePosition.x, (float)projectilePosition.y);
-		particulaAtaque = app->psystem->AddEmiter(pos, EMITTER_TYPE_OLS_ATAQUE);
+		particulaAtaque = app->psystem->AddEmiter(pos, EMITTER_TYPE_OLS_VARIACION);
 
         b2Vec2 direction = b2Vec2(playerPos.x - position.x, playerPos.y-position.y);  
         direction.Normalize();

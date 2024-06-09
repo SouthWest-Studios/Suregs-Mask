@@ -1393,6 +1393,11 @@ bool InventoryManager::Update(float dt)
 	{
 	 	//storyLevel = app->ascensor->totalMazmorras + 2;
 	}
+	 else if (app->tutorialHasFinished && dungeon0Entered && dungeon0Exited)
+	 {
+		if(storyLevel < 3) storyLevel = 3;
+	 }
+
 	 else if(app->tutorialHasFinished && dungeon0Entered)
 	 {
 	 	storyLevel = app->ascensor->totalMazmorras + 1;

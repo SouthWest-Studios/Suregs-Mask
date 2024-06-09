@@ -90,6 +90,7 @@ public:
 	int storyLevel = 1;
 
 	bool dungeon0Entered = false;
+	bool dungeon0Exited = false;
 
 	int currentHealthInventoryManager = NULL;
 	int primaryMaskInventoryManager = -1;
