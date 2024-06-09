@@ -85,7 +85,11 @@ bool Scene_Pueblo_Tutorial::Start()
 
 	app->entityManager->Enable();
 
-	app->SaveRequest();
+	//app->SaveRequest();
+
+
+
+
 
 	Estatua* estatua = (Estatua*)app->entityManager->CreateEntity(EntityType::ESTATUA);
 	estatua->config = configNode.child("entities_data").child("estatua");

@@ -180,6 +180,10 @@ bool Scene_Menu::Start()
 	app->questManager->UpdateQuestLine(2, 1, false);
 
 
+
+
+
+
 	return true;
 }
 
@@ -507,6 +511,9 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 			app->guiManager->DestroyGuiControl(nuevaPartidaAtras1);
 			app->guiManager->DestroyGuiControl(nuevaPartidaConfirmed1);
 			app->tiempoDeJuego = 0;
+
+			
+
 		}
 		break;
 

@@ -204,6 +204,9 @@ public:
 
 	float dt;
 
+
+	bool resetSave = false;
+
 private:
 
 	int argc;

@@ -133,6 +133,9 @@ bool Scene_Cinematic::Start()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
+	app->resetSave = true;
+	app->LoadRequest();
+
 
 	return true;
 }

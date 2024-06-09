@@ -968,5 +968,6 @@
     <Xml Include="..\Output\save_game2.xml" />
     <Xml Include="..\Output\save_game3.xml" />
     <Xml Include="..\Output\save_general.xml" />
+    <Xml Include="..\Output\save_template.xml" />
   </ItemGroup>
 </Project>

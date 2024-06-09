@@ -34,19 +34,19 @@ Estatua::~Estatua() {}
 
 bool Estatua::Awake() {
 
-	
-	 
+
+
 
 	return true;
 }
 
 bool Estatua::Start() {
-	
+
 	//initilize textures
 	/*position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();*/
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
-	
+
 	/*texture = app->tex->Load("Assets/Textures/Entidades/Items/item_Garra.png");*/
 	// L07 DONE 4: Add a physics to an item - initialize the physics body
 	/*pbody = app->physics->CreateCircle(position.x, position.y, 70, bodyType::STATIC);*/
@@ -67,7 +67,7 @@ bool Estatua::Update(float dt)
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - 25;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 25;
 
-	
+
 	/*if (mostrar)
 	{
 		app->hud->estatua = true;
@@ -76,8 +76,8 @@ bool Estatua::Update(float dt)
 	{
 		app->hud->estatua = false;
 	}*/
-	
-	
+
+
 	return true;
 }
 
@@ -87,38 +87,35 @@ bool Estatua::PostUpdate()
 	{
 		/*app->render->DrawTexture(texture, 400, 100, SDL_FLIP_NONE, 0, 0);*/
 	}
-		
-	
-	
+
+
+
 	return true;
 }
 bool Estatua::CleanUp()
 {
-	
+
 	app->physics->DestroyBody(pbody);
 	pbody = nullptr;
-	app->entityManager->DestroyEntity(this);
+	/*app->entityManager->DestroyEntity(this);*/
 	//app->tex->UnLoad(texture);
 
-    return true;
+	return true;
 }
-void Estatua::OnCollision(PhysBody* physA, PhysBody* physB) 
+void Estatua::OnCollision(PhysBody* physA, PhysBody* physB)
 {
-    switch (physB->ctype)
-    {
-      case ColliderType::PLAYER:
-      {
-          
-              if (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady)
-              {
-				  app->hud->estatua = true;
-				  app->hud->EstatuaTexture = texture;
-              }
+	switch (physB->ctype)
+	{
+	case ColliderType::PLAYER:
+	{
 
-               
-          
-      }
-    }
+		if (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady)
+		{
+			app->hud->estatua = true;
+			app->hud->EstatuaTexture = texture;
+		}
+	}
+	}
 }
 
 

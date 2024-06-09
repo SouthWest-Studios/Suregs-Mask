@@ -603,15 +603,26 @@ bool App::LoadFromFile() {
 	pugi::xml_document saveFile;
 	pugi::xml_parse_result result;
 
-	if (savedGame == 1) {
-		result = saveFile.load_file("save_game.xml");
+
+	if (resetSave) {
+
+		result = saveFile.load_file("save_template.xml");
+
+		resetSave = false;
 	}
-	if (savedGame == 2) {
-		result = saveFile.load_file("save_game2.xml");
+	else {
+		if (savedGame == 1) {
+			result = saveFile.load_file("save_game.xml");
+		}
+		if (savedGame == 2) {
+			result = saveFile.load_file("save_game2.xml");
+		}
+		if (savedGame == 3) {
+			result = saveFile.load_file("save_game3.xml");
+		}
 	}
-	if (savedGame == 3) {
-		result = saveFile.load_file("save_game3.xml");
-	}
+
+	
 
 
 	if (result)
@@ -675,6 +686,7 @@ bool App::SaveFromFile() {
 		item = item->next;
 	}
 
+	
 	if (savedGame == 1) {
 		ret = saveFile.save_file("save_game.xml");
 	}

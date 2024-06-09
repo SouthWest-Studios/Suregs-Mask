@@ -37,22 +37,21 @@
 	<iventorymanager>
 		<inventory>
 			<money quantity="0" />
-			<swordLevel quantity="0" />
-			<armorLevel quantity="0" />
-			<primaryMask quantity="-1" />
-			<secondaryMask quantity="-1" />
-			<storyLevel quantity="1" />
-			<dungeon0Entered quantity="false" />
-			<mask0 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
-			<mask1 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
-			<mask2 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
-			<mask3 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
+			<SwordLevel quantity="0" />
+			<ArmorLevel quantity="0" />
+			<PrimaryMask quantity="-1" />
+			<SecondaryMask quantity="-1" />
+			<StoryLevel quantity="1" />
+			<Mask0 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
+			<Mask1 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
+			<Mask2 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
+			<Mask3 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
 			<maskNum n="0" info="Esta variable son las mascaras que tienes desbloqueadas" />
 			<maskPoints>
-				<maskPointZero points="2" />
-				<maskPointOne points="2" />
-				<maskPointTwo points="2" />
-				<maskPointThree points="2" />
+				<maskPointZero points="0" />
+				<maskPointOne points="0" />
+				<maskPointTwo points="0" />
+				<maskPointThree points="0" />
 			</maskPoints>
 			<masksXP>
 				<maskZeroXP XP="0" />
@@ -60,25 +59,13 @@
 				<maskTwoXP XP="0" />
 				<maskThreeXP XP="0" />
 			</masksXP>
-			<masksXP>
-				<XPtoLevelUpZero XP="1200" />
-				<XPtoLevelUpOne XP="800" />
-				<XPtoLevelUpTwo XP="800" />
-				<XPtoLevelUpThree XP="800" />
-			</masksXP>
-			<masksLevel>
-				<maskLevelZero level="2" />
-				<maskLevelOne XP="1" />
-				<maskLevelTwo XP="1" />
-				<maskLevelThree XP="1" />
-			</masksLevel>
 			<elevator mazmorra="0" mazmorraActual="0" />
 		</inventory>
 	</iventorymanager>
 	<commercemanager />
 	<questmanager>
 		<questLines>
-			<questLine id="1" index="3" active="true" completed="false" />
+			<questLine id="1" index="1" active="true" completed="false" />
 			<questLine id="2" index="1" active="false" completed="false" />
 		</questLines>
 	</questmanager>
@@ -91,7 +78,7 @@
 	<equipo />
 	<Ascensormenu />
 	<treemanager>
-		<skillTree numMejoras0="0" numMejoras1="0" numMejoras2="0" numMejoras3="0">
+		<skillTree>
 			<node id="0" nivelArbol="0" nivelMejora="0" type="0" used1="false" used2="false" used3="false" used4="false" usable1="true" usable2="true" usable3="true" usable4="true" />
 			<node id="1" nivelArbol="0" nivelMejora="1" type="4" used1="false" used2="false" used3="false" used4="false" usable1="true" usable2="true" usable3="true" usable4="true" />
 			<node id="2" nivelArbol="0" nivelMejora="2" type="4" used1="false" used2="false" used3="false" used4="false" usable1="false" usable2="false" usable3="false" usable4="false" />
