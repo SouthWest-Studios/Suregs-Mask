@@ -361,8 +361,8 @@ bool Boss_Igory::PostUpdate() {
 	{
 		SDL_SetTextureAlphaMod(texture, padreTranparente);
 		padreTranparente -= 2;
-		if (padreTranparente <= 0 && !deletePadre) {
-			deletePadre = true;
+		if (padreTranparente <= 0 && !app->entityManager->deletePadre) {
+			app->entityManager->deletePadre = true;
 			closeFinalSelecion = false;
 			CleanUp();
 		}
@@ -579,9 +579,9 @@ void Boss_Igory::resetAnimation()
 		//desiredState = EntityState_Boss_Igory::RUNNING;
 	}
 	if (currentAnimation->HasFinished() && currentAnimation->getNameAnimation() == "reviver_boss_Igory") {
-		if (!deletePadre) {
+		if (!app->entityManager->deletePadre) {
 			closeFinalSelecion = false;
-			deletePadre = true;
+			app->entityManager->deletePadre = true;
 			/*CleanUp();*/
 			if (pbodyFoot != nullptr) {
 				app->physics->DestroyBody(pbodyFoot);
@@ -852,10 +852,11 @@ void Boss_Igory::Attack(float dt)
 
 void Boss_Igory::Die() {
 
-
+	
 	currentAnimation = &dead_boss_Igory;
 	if (pbodyFoot != nullptr && !dieDefinit) {
 		isDead = true;
+		app->entityManager->bossIgoryIsDead = true;
 		pbodyFoot->body->SetType(b2_staticBody);
 		app->map->boss4_defeated = true;
 		startDialogo = true;
@@ -892,14 +893,14 @@ void Boss_Igory::Die() {
 		currentAnimation = &reviver_boss_Igory;
 	}
 
-	if (startSelecion && seleccionFinalPersonaje == 1 && !closeFinalSelecion) {
+	if (startSelecion && app->entityManager->seleccionFinalPersonaje == 1 && !closeFinalSelecion) {
 		////printf("Matar padre");
 		//CleanUp();
 		cankillPadre = true;
 		closeFinalSelecion = true;
 	}
 
-	if (startSelecion && seleccionFinalPersonaje == 2 && !closeFinalSelecion) {
+	if (startSelecion && app->entityManager->seleccionFinalPersonaje == 2 && !closeFinalSelecion) {
 		////printf("Unir padre");
 		closeFinalSelecion = true;
 		unirPadre = true;

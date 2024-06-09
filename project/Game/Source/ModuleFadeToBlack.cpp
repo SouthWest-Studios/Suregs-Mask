@@ -90,7 +90,7 @@ bool ModuleFadeToBlack::Update(float dt)
 			moduleToEnable->Enable();
 			moduleToEnable->Awake(config);
 
-			if(moduleToEnable != (Module*)app->scene_intro && moduleToEnable != (Module*)app->scene_menu && moduleToEnable != (Module*)app->scene_gameover && moduleToEnable != (Module*)app->scene_cinematic){
+			if(moduleToEnable != (Module*)app->scene_intro && moduleToEnable != (Module*)app->scene_menu && moduleToEnable != (Module*)app->scene_gameover && moduleToEnable != (Module*)app->scene_cinematic && moduleToEnable != (Module*)app->scene_logos){
 				/*app->hud->Enable();*/
 				app->map->Enable();
 				//app->menu->Enable();

@@ -113,13 +113,13 @@ public:
 	bool startSelecion = false;
 	bool closeFinalSelecion = false;
 	bool dieDefinit = false;
-	int seleccionFinalPersonaje = -1;
+
 	Timer startDialogoTimer;
 
 	//Kill padre
 	bool cankillPadre = false;
 	bool killPadre = false;
-	bool deletePadre = false;
+	
 	int padreTranparente = 255;
 	//GuiControl* control = nullptr;
 	//unirPadre

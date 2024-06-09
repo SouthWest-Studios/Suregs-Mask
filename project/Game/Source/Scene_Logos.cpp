@@ -91,9 +91,6 @@ bool Scene_Logos::Update(float dt)
 
 
 	if (currentAnimation->HasFinished()) {
-		////printf("ScenaAcabado");
-		//app->render->DrawTexture(lastFrame, 0, 0);
-
 	}
 
 	if (timerIntro.ReadSec() < 10) {
@@ -147,7 +144,7 @@ bool Scene_Logos::CleanUp()
 	app->tex->UnLoad(sceneLogosTexture);
 	RELEASE(spritePositions);
 	delete spritePositions;
-	currentAnimation->Reset();
+	sceneLogos.Reset();
 
 	return true;
 }

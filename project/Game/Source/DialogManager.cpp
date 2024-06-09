@@ -408,7 +408,7 @@ bool DialogManager::PostUpdate() {
 			}
 			if (actualDialog->type == DialogType::SELECT_CHOOSE) {
 				if(app->entityManager->GetIgory() != nullptr)
-					app->entityManager->GetIgory()->seleccionFinalPersonaje = actualDialog->selectChoose;
+					app->entityManager->seleccionFinalPersonaje = actualDialog->selectChoose;
 			}
 
 

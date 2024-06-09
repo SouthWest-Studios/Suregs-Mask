@@ -74,6 +74,7 @@
 #include "Item_Mascara_1.h"
 #include "Item_Mascara_2.h"
 #include "Item_Mascara_3.h"
+#include "Scene_Mazmorra8.h"
 #include "Estatua.h"
 #include "ElevatorMenu.h"
 #include "TreeManager.h"
@@ -774,7 +775,7 @@ bool EntityManager::PostUpdate()
 bool EntityManager::PostLateUpdate()
 {
 	if (canShowFinal && bossIgory != nullptr) {
-		if (bossIgory->deletePadre && bossIgory->isDead && showFinal) {
+		if (deletePadre && bossIgoryIsDead && showFinal) {
 			showFinalkillPadre();
 		}
 	}
@@ -967,7 +968,7 @@ void EntityManager::showFinalkillPadre()
 	SDL_Rect overlayRect = { 0, 0, w , h };
 
 	if (showPhoto) {
-		if (bossIgory->seleccionFinalPersonaje == 1) {
+		if (seleccionFinalPersonaje == 1) {
 			app->render->DrawTexture(textureKillPadre, 0, 0, SDL_FLIP_NONE, &overlayRect, 0, 0);
 			/*if (!goPadreCleanUp) {
 				bossIgory->CleanUp();
@@ -975,7 +976,7 @@ void EntityManager::showFinalkillPadre()
 				goPadreCleanUp = true;
 			}*/
 		}
-		else if (bossIgory->seleccionFinalPersonaje == 2) {
+		else if (seleccionFinalPersonaje == 2) {
 			app->render->DrawTexture(textureUnirPadre, 0, 0, SDL_FLIP_NONE, &overlayRect, 0, 0);
 		}
 	}
@@ -990,7 +991,7 @@ void EntityManager::showFinalkillPadre()
 			photoTransparent = 255;
 			if (goScene) {
 
-				app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_menu);
+				app->fadeToBlack->FadeToBlack(app->scene_mazmorra8, app->scene_logos);
 				//canShowFinal = false;
 			}
 			else
@@ -1005,9 +1006,9 @@ void EntityManager::showFinalkillPadre()
 					showPhoto = true;
 					stayTime.Start();
 
-					if (bossIgory->seleccionFinalPersonaje == 1) app->audio->LoadAudioMusic("good_ending", 0.0f);
+					if (seleccionFinalPersonaje == 1) app->audio->LoadAudioMusic("good_ending", 0.0f);
 
-					if (bossIgory->seleccionFinalPersonaje == 2) app->audio->LoadAudioMusic("bad_ending", 0.0f);
+					if (seleccionFinalPersonaje == 2) app->audio->LoadAudioMusic("bad_ending", 0.0f);
 				}
 
 			}

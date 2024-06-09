@@ -130,6 +130,9 @@ public:
 	bool goPadreCleanUp = false;
 	bool playerTPboss = true;
 	bool showFinal = false;
+	bool deletePadre = false;
+	bool bossIgoryIsDead = false;
+	int seleccionFinalPersonaje = -1;
 	Timer stayTime;
 	SDL_Texture* textureKillPadre = nullptr;
 	SDL_Texture* textureUnirPadre = nullptr;
