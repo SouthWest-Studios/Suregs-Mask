@@ -179,9 +179,7 @@ bool Boss_Musri::Update(float dt)
 	stateMachine(dt, playerPos);
 
 
-	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
-		health -= 3000;
-	}
+
 
 	currentAnimation->Update();
 	return true;

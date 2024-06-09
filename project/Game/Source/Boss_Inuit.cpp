@@ -172,9 +172,7 @@ bool Boss_Inuit::Update(float dt)
 		useUlt = true;
 		goUseUlt = true;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
-		health -= 1000;
-	}
+
 
 	switch (fase)
 	{
@@ -327,10 +325,6 @@ bool Boss_Inuit::PostUpdate() {
 	}
 	resetAnimation();
 
-	/*if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
-		health -= 1000;
-		//printf("\nHealth: %f", health);
-	}*/
 
 	if (goUseUlt) {
 		ultDef = true;
