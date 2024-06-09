@@ -1101,6 +1101,13 @@ bool Map::LoadCollisions(std::string layerName)
 						collisionsList.Add(c1);
 						ret = true;
 					}
+					//Entrada mazmorra 8
+					if (gid == tileset->firstgid + 10) {
+						c1 = app->physics->CreateRectangleSensor(pos.x + 16, pos.y + 16, 32, 32, STATIC);
+						c1->ctype = ColliderType::ENTRADA_MAZMORRA8;
+						collisionsList.Add(c1);
+						ret = true;
+					}
 
 					//if (gid == tileset->firstgid + 1) {
 					//    c1 = app->physics->CreateRectangle(pos.x + 16, pos.y + 2, 32, 4, STATIC);
