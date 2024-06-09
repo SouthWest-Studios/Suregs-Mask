@@ -10,6 +10,7 @@
 #include "Scene_Pueblo_Tutorial.h"
 #include "Scene_GameOver.h"
 #include "Scene_Mazmorra0.h"
+#include "Scene_Mazmorra8.h"
 #include "Log.h"
 #include "InventoryManager.h"
 #include "NotesManager.h"
@@ -1913,6 +1914,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			app->map->tpSaleMazmorra = true;
 			if (!app->inventoryManager->dungeon0Exited)
 				app->inventoryManager->dungeon0Exited = true;
+			break;
+		case ColliderType::ENTRADA_MAZMORRA8:
+			LOG("Collision ENTRADA_MAZMORRA8");
+			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra8);
 			break;
 		}
 	}
