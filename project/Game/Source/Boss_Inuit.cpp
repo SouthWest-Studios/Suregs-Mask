@@ -204,7 +204,7 @@ bool Boss_Inuit::Update(float dt)
 		}
 		goUseWave = true;
 		speed = (120 / 10) * 0.4;
-		attackDamage = 240;
+		attackDamage = 60;
 		break;
 	}
 
@@ -1091,13 +1091,13 @@ void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 			//app->entityManager->GetPlayer()->TakeDamage(0);
 		}
 		if (physA->ctype == ColliderType::WAVE) {
-			app->entityManager->GetPlayer()->TakeDamage(200);
+			app->entityManager->GetPlayer()->TakeDamage(30);
 			//app->entityManager->GetPlayer()->TakeDamage(0);
 		}
 
 		if (physA->ctype == ColliderType::ATACKBMR) {
 
-			app->entityManager->GetPlayer()->TakeDamage(200);
+			app->entityManager->GetPlayer()->TakeDamage(30);
 			//app->entityManager->GetPlayer()->TakeDamage(0);
 		}
 
@@ -1111,7 +1111,7 @@ void Boss_Inuit::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLAYER_ATTACK:
 		LOG("Collision Player_Attack");
-		if (fase != FASE::FASE_CHANGE && app->entityManager->GetPlayer()->checkAtk == true) {
+		if (fase != FASE::FASE_CHANGE && app->entityManager->GetPlayer()->checkAtk == true && physA->ctype == ColliderType::BOSS_INUIT) {
 			health -= app->entityManager->GetPlayer()->currentStats.attackDamage;
 			timerRecibirDanioColor.Start();
 			//printf("\n BossHeal %f", health);
