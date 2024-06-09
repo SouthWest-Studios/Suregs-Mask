@@ -530,20 +530,22 @@ void Enemy_Muur::Charge(float dt, iPoint playerPos) {
 }
 
 void Enemy_Muur::Stunned(float dt) {
-	pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
-
-	if (stunAnim.HasFinished() && stunTimer.ReadSec() >= 2)
+	if (pbodyFoot != nullptr)
 	{
 		pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
-		nextState = EntityState_Enemy::IDLE;
-		isStunned = false;
-		charging = false;
-		chargeTimer.Start();
-		stunAnim.Reset();
-	}
-	else {
-		isStunned = true;
-		currentAnimation = &stunAnim;
+		if (stunAnim.HasFinished() && stunTimer.ReadSec() >= 2)
+		{
+			pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
+			nextState = EntityState_Enemy::IDLE;
+			isStunned = false;
+			charging = false;
+			chargeTimer.Start();
+			stunAnim.Reset();
+		}
+		else {
+			isStunned = true;
+			currentAnimation = &stunAnim;
+		}
 	}
 }
 
