@@ -126,6 +126,16 @@ public:
 	int maskTwoXP = 0;
 	int maskThreeXP = 0;
 
+	int XPtoLevelUpZero = 1000;
+	int XPtoLevelUpOne = 1000;
+	int XPtoLevelUpTwo = 1000;
+	int XPtoLevelUpThree = 1000;
+
+	int maskZeroLevel = 0;
+	int maskOneLevel = 0;
+	int maskTwoLevel = 0;
+	int maskThreeLevel = 0;
+
 
 	int numMasks = 0;
 	bool mask = false;

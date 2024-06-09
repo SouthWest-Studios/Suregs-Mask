@@ -774,6 +774,16 @@ bool InventoryManager::LoadState(pugi::xml_node node)
 	maskTwoXP = node.child("inventory").child("masksXP").child("maskTwoXP").attribute("XP").as_int();
 	maskThreeXP = node.child("inventory").child("masksXP").child("maskThreeXP").attribute("XP").as_int();
 
+	XPtoLevelUpZero = node.child("inventory").child("XPtoLevelUps").child("XPtoLevelUpZero").attribute("XP").as_int();
+	XPtoLevelUpOne = node.child("inventory").child("XPtoLevelUps").child("XPtoLevelUpOne").attribute("XP").as_int();
+	XPtoLevelUpTwo = node.child("inventory").child("XPtoLevelUps").child("XPtoLevelUpTwo").attribute("XP").as_int();
+	XPtoLevelUpThree = node.child("inventory").child("XPtoLevelUps").child("XPtoLevelUpThree").attribute("XP").as_int();
+
+	maskZeroLevel = node.child("inventory").child("masksLevel").child("maskLevelZero").attribute("level").as_int();
+	maskOneLevel = node.child("inventory").child("masksLevel").child("maskLevelOne").attribute("level").as_int();
+	maskTwoLevel = node.child("inventory").child("masksLevel").child("maskLevelTwo").attribute("level").as_int();
+	maskThreeLevel = node.child("inventory").child("masksLevel").child("maskLevelThree").attribute("level").as_int();
+
 	app->ascensor->mazmorra = node.child("inventory").child("elevator").attribute("mazmorra").as_int();
 	app->ascensor->mazmorraActual = node.child("inventory").child("elevator").attribute("mazmorraActual").as_int();
 
@@ -869,6 +879,33 @@ bool InventoryManager::SaveState(pugi::xml_node node)
 
 	maskXPNode = masksXPNode.append_child("maskThreeXP");
 	maskXPNode.append_attribute("XP").set_value(maskThreeXP);
+
+	pugi::xml_node XPtoLevelUpsNode = inventoryNode.append_child("masksXP");
+	pugi::xml_node XPtoLevelUpNode = XPtoLevelUpsNode.append_child("XPtoLevelUpZero");
+	XPtoLevelUpNode.append_attribute("XP").set_value(XPtoLevelUpZero);
+
+	XPtoLevelUpNode = XPtoLevelUpsNode.append_child("XPtoLevelUpOne");
+	XPtoLevelUpNode.append_attribute("XP").set_value(XPtoLevelUpOne);
+
+	XPtoLevelUpNode = XPtoLevelUpsNode.append_child("XPtoLevelUpTwo");
+	XPtoLevelUpNode.append_attribute("XP").set_value(XPtoLevelUpTwo);
+
+	XPtoLevelUpNode = XPtoLevelUpsNode.append_child("XPtoLevelUpThree");
+	XPtoLevelUpNode.append_attribute("XP").set_value(XPtoLevelUpThree);
+
+	pugi::xml_node masksLevelNode = inventoryNode.append_child("masksLevel");
+	pugi::xml_node maskLevelNode = masksLevelNode.append_child("maskLevelZero");
+	maskLevelNode.append_attribute("level").set_value(maskZeroLevel);
+
+	maskLevelNode = masksLevelNode.append_child("maskLevelOne");
+	maskLevelNode.append_attribute("XP").set_value(maskOneLevel);
+
+	maskLevelNode = masksLevelNode.append_child("maskLevelTwo");
+	maskLevelNode.append_attribute("XP").set_value(maskTwoLevel);
+
+	maskLevelNode = masksLevelNode.append_child("maskLevelThree");
+	maskLevelNode.append_attribute("XP").set_value(maskThreeLevel);
+
 
 
 	pugi::xml_node elevatorNode = inventoryNode.append_child("elevator");
