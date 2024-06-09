@@ -92,7 +92,7 @@ bool Estatua::PostUpdate()
 
 	return true;
 }
-bool Estatua::CleanUp()
+bool Estatua::CleanUp() {
 
 
 
