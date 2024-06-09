@@ -787,6 +787,8 @@ bool InventoryManager::LoadState(pugi::xml_node node)
 	app->ascensor->mazmorra = node.child("inventory").child("elevator").attribute("mazmorra").as_int();
 	app->ascensor->mazmorraActual = node.child("inventory").child("elevator").attribute("mazmorraActual").as_int();
 
+	dungeon0Entered = node.child("inventory").child("dungeon0Entered").attribute("quantity").as_bool();
+
 
 	return ret;
 }
@@ -822,6 +824,10 @@ bool InventoryManager::SaveState(pugi::xml_node node)
 
 	pugi::xml_node storyLevelNode = inventoryNode.append_child("storyLevel");
 	storyLevelNode.append_attribute("quantity").set_value(storyLevel);
+
+	pugi::xml_node dungeon0EnteredNode = inventoryNode.append_child("dungeon0Entered");
+	dungeon0EnteredNode.append_attribute("quantity").set_value(dungeon0Entered);
+	
 
 	pugi::xml_node mask0Node = inventoryNode.append_child("mask0");
 	mask0Node.append_attribute("Branch1").set_value(mask0_levelBranch1);
@@ -1451,7 +1457,7 @@ bool InventoryManager::Update(float dt)
 
 	//BORRAR LA LINEA DE ABAJO CUANDO SE HAYA IMPLEMENTADO EL TUTORIAL CON SUS BOOLS ARRIBA
 	/*storyLevel = app->ascensor->totalMazmorras;*/
-	//printf("\rstoryLevel %d", storyLevel);
+	printf("\rstoryLevel %d", storyLevel);
 	//BORRAR LA LINEA DE ARRIBA CUANDO SE HAYA IMPLEMENTADO EL TUTORIAL CON SUS BOOLS ARRIBA
 
 
