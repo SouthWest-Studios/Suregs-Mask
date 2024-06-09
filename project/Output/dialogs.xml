@@ -398,12 +398,13 @@ a
 	<!--Mision (936)-->
 	<dialog id="936" texturepath="Assets/Textures/bruja.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/zhyukaFace.png" name="Zhyuka">
 		<sentences>
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="16" actualTargetID="15" />
 			<sentence text="¡Hola de nuevo! Jijiji…"/>
 			<sentence text="¿Esta gema es para mi? ¡Con esto podré mejorar mis pociones! jijiji…"/>
 			<commerce id="2"/>
 		</sentences>
 
-		<sentence type="QuestUpdate" questLine="1" nextTargetID="16" actualTargetID="15" />
+		
 
 	</dialog>
 
