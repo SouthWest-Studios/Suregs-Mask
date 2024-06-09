@@ -2312,27 +2312,27 @@ bool TreeManager::PostUpdate()
 		else if (mask == 2)
 		{
 
-			std::string texto = std::to_string(app->inventoryManager->maskZeroPoints) + "/8 Mask Points";
+			std::string texto = std::to_string(app->inventoryManager->maskOnePoints) + "/8 Mask Points";
 			app->render->DrawTextBound(texto.c_str(), 885, 550, 370, {0,0,0});
-			std::string texto1 = std::to_string(numMejoras0) + "/8 Mejoras";
+			std::string texto1 = std::to_string(numMejoras1) + "/8 Mejoras";
 			app->render->DrawTextBound(texto1.c_str(), 885, 600, 370, {0,0,0});
 
 		}
 		else if (mask == 3)
 		{
 
-			std::string texto = std::to_string(app->inventoryManager->maskZeroPoints) + "/8 Mask Points";
+			std::string texto = std::to_string(app->inventoryManager->maskTwoPoints) + "/8 Mask Points";
 			app->render->DrawTextBound(texto.c_str(), 885, 550, 370, {0,0,0});
-			std::string texto1 = std::to_string(numMejoras0) + "/8 Mejoras";
+			std::string texto1 = std::to_string(numMejoras2) + "/8 Mejoras";
 			app->render->DrawTextBound(texto1.c_str(), 885, 600, 370, {0,0,0});
 
 		}
 		else if (mask == 4)
 		{
 
-			std::string texto = std::to_string(app->inventoryManager->maskZeroPoints) + "/8 Mask Points";
+			std::string texto = std::to_string(app->inventoryManager->maskThreePoints) + "/8 Mask Points";
 			app->render->DrawTextBound(texto.c_str(), 885, 550, 370, {0,0,0});
-			std::string texto1 = std::to_string(numMejoras0) + "/8 Mejoras";
+			std::string texto1 = std::to_string(numMejoras3) + "/8 Mejoras";
 			app->render->DrawTextBound(texto1.c_str(), 885, 600, 370, {0,0,0});
 
 		}

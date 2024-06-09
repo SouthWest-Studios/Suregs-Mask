@@ -20,6 +20,7 @@
 #include "GuiControlSlider.h"
 #include "GuiCheckBox.h"
 #include "Hud.h"
+#include "ElevatorMenu.h"
 
 
 Scene_GameOver::Scene_GameOver(App* app, bool start_enabled) : Module(app, start_enabled)
@@ -141,6 +142,7 @@ bool Scene_GameOver::OnGuiMouseClickEvent(GuiControl* control)
 			app->guiManager->pointerId = 1;
 			app->guiManager->DestroyGuiControl(VolverAlMenu);
 			app->guiManager->DestroyGuiControl(Continuar);
+			app->ascensor->mazmorraActual = 0;
 		}
 		break;
 
@@ -152,6 +154,7 @@ bool Scene_GameOver::OnGuiMouseClickEvent(GuiControl* control)
 			app->guiManager->pointerId = 100;
 			app->guiManager->DestroyGuiControl(VolverAlMenu);
 			app->guiManager->DestroyGuiControl(Continuar);
+			app->ascensor->mazmorraActual = 0;
 		}
 		break;
 

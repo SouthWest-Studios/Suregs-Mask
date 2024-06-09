@@ -118,7 +118,7 @@ void Physics::DestroyPendingBodies()
 
 	bodiesToDestroy.clear();
 	bodiesToDestroy.shrink_to_fit();
-	bodiesToDestroy.reserve(300);
+	bodiesToDestroy.reserve(800);
 }
 
 
