@@ -121,17 +121,17 @@ bool ParticleSystem::PostUpdate()
 		{
 			if (*it != nullptr) {
 				if (deletedEmitters.find(*it) == deletedEmitters.end()) { // Verifica si el emisor ya fue eliminado
-					printf("Deleting emitter at address: %p\n", (void*)*it);
+					//printf("Deleting emitter at address: %p\n", (void*)*it);
 					emittersList.remove(*it);
 					delete* it;
 					deletedEmitters.insert(*it); // Marca el emisor como eliminado
 				}
 				else {
-					printf("Skipping duplicate emitter at address: %p\n", (void*)*it);
+					//printf("Skipping duplicate emitter at address: %p\n", (void*)*it);
 				}
 			}
 			else {
-				printf("Encountered a nullptr in emittersToDestroy\n");
+				//printf("Encountered a nullptr in emittersToDestroy\n");
 			}
 		}
 

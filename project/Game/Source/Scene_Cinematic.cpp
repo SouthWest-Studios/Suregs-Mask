@@ -191,6 +191,12 @@ bool Scene_Cinematic::PostUpdate()
 	}
 
 
+	w = (1280 * timerIntro.ReadMSec() / 5000);
+
+	app->render->DrawRectangle(SDL_Rect{0,710,w,10}, 255, 255, 255, 255, true, false);
+	app->render->DrawRectangle(SDL_Rect{0,708,w,2}, 0, 0, 0, 255, true, false);
+
+
 	bool ret = true;
 
 	return ret;

@@ -60,6 +60,8 @@ private:
 
 	Timer timerIntro;
 
+	int w;
+
 	int intro_fx;
 };
 

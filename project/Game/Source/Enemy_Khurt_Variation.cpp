@@ -113,14 +113,14 @@ bool Enemy_Khurt_Variation::Update(float dt)
 	}
 	else if (app->map->pathfinding->GetDistance(playerPos, position) <= attackDistance * 32)
 	{
-		printf("ATTACKING \n");
+		//printf("ATTACKING \n");
 		underAnim_start.Reset();
 		desiredState = EntityState_Khurt::ATTACKING;
 		isUnderground = false;
 	}
 	else if (app->map->pathfinding->GetDistance(playerPos, position) <= viewDistance * 32)
 	{
-		printf("RUNNING \n");
+		//printf("RUNNING \n");
 		underAnim_end.Reset();
 		desiredState = EntityState_Khurt::RUNNING;
 		isUnderground = true;
@@ -228,7 +228,7 @@ void Enemy_Khurt_Variation::DigUnderground()
 	isUnderground = true;
 	if (underAnim_start.HasFinished()) {
 		desiredState = EntityState_Khurt::MOVING_UNDERGROUND;
-		printf("MOVING UNDERGROUND \n");
+		//printf("MOVING UNDERGROUND \n");
 	}
 }
 
@@ -261,7 +261,7 @@ void Enemy_Khurt_Variation::DigOut(float dt, iPoint playerPos)
 	if (underAnim_end.HasFinished()) {
 		/*Charge(dt, playerPos);*/
 		desiredState = EntityState_Khurt::ATTACKING;
-		printf("ATTACKING \n");
+		//printf("ATTACKING \n");
 	}
 }
 
@@ -306,7 +306,7 @@ void Enemy_Khurt_Variation::Attack(float dt)
 		if (chargeAnim.HasFinished()) {
 			app->entityManager->GetPlayer()->TakeDamage(attackDamage);
 			desiredState = EntityState_Khurt::RUNNING;
-			printf("RUNNING \n");
+			//printf("RUNNING \n");
 		}
 	}
 

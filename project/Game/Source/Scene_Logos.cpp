@@ -136,7 +136,7 @@ bool Scene_Logos::PostUpdate()
 bool Scene_Logos::CleanUp()
 {
 	LOG("Freeing Scene_intro");
-	printf("\nanular");
+	//printf("\nanular");
 	app->tex->UnLoad(sceneLogosTexture);
 	RELEASE(spritePositions);
 	delete spritePositions;

@@ -1212,7 +1212,7 @@ void InventoryManager::UsePotionSelected(ListItem<Inventity*>* it)
 			case InventityType::UNKNOWN:
 				break;
 			default:
-				printf("Unknown potion type: %d\n", static_cast<int>(it->data->type));
+				//printf("Unknown potion type: %d\n", static_cast<int>(it->data->type));
 				break;
 		}
 	}
@@ -1457,7 +1457,7 @@ bool InventoryManager::Update(float dt)
 
 	//BORRAR LA LINEA DE ABAJO CUANDO SE HAYA IMPLEMENTADO EL TUTORIAL CON SUS BOOLS ARRIBA
 	/*storyLevel = app->ascensor->totalMazmorras;*/
-	printf("\rstoryLevel %d", storyLevel);
+	//printf("\rstoryLevel %d", storyLevel);
 	//BORRAR LA LINEA DE ARRIBA CUANDO SE HAYA IMPLEMENTADO EL TUTORIAL CON SUS BOOLS ARRIBA
 
 

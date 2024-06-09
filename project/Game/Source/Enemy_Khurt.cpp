@@ -304,7 +304,7 @@ void Enemy_Khurt::Attack(float dt)
 		if (chargeAnim.HasFinished()) {
 			app->entityManager->GetPlayer()->TakeDamage(attackDamage);
 			desiredState = EntityState_Khurt::RUNNING;
-			printf("RUNNING \n");
+			//printf("RUNNING \n");
 		}
 	}
 	
