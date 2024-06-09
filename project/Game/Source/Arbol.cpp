@@ -100,6 +100,7 @@ void Arbol::OnCollision(PhysBody* physA, PhysBody* physB)
           {
               if (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady)
               {
+				  app->entityManager->GetPlayer()->currentStats.currentHealth = app->entityManager->GetPlayer()->currentStats.maxHealth;
                   app->treeManager->mostrar = true;
                   app->menu->active = false;
                   
