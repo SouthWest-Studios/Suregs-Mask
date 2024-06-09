@@ -402,7 +402,18 @@ a
 			<sentence type="QuestUpdate" questLine="1" nextTargetID="16" actualTargetID="15" />
 			<sentence text="¡Hola de nuevo! Jijiji…"/>
 			<sentence text="¿Esta gema es para mi? ¡Con esto podré mejorar mis pociones! jijiji…"/>
-			<commerce id="2"/>
+
+			<sentence type="choose" text="¿Qué tenemos por aquí, un nuevo cliente? Jijiji…">
+
+				<option1 text="¿Qué ofreces?">
+					<sentence text="Soy Zhyuka, la bruja de la aldea, si me das materiales te daré alguna poción a cambio, jijiji…"/>
+					<commerce id="2"/>
+				</option1>
+
+				<option2 text="¡Adiós!">
+					<sentence text="¡Te estaré esperando! Jijiji…"/>
+				</option2>
+			</sentence>
 		</sentences>
 
 		

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="295" height="117" tilewidth="32" tileheight="32" infinite="0" nextlayerid="18" nextobjectid="305">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="295" height="117" tilewidth="32" tileheight="32" infinite="0" nextlayerid="18" nextobjectid="307">
  <tileset firstgid="1" name="Colisiones" tilewidth="32" tileheight="32" tilecount="16" columns="4">
   <image source="../../Textures/Mapas/Metadatos/Collisions_32x32.png" width="128" height="128"/>
  </tileset>
@@ -138203,6 +138203,11 @@
    <properties>
     <property name="Type" value="isLRoom"/>
     <property name="lType" value="r"/>
+   </properties>
+  </object>
+  <object id="305" x="8138.99" y="2242.03" width="1279.6" height="740.185">
+   <properties>
+    <property name="Type" value="isSmallRoom"/>
    </properties>
   </object>
  </objectgroup>
