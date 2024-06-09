@@ -1107,6 +1107,41 @@ bool Player::CleanUp()
 	RELEASE(spritePositions);
 	delete spritePositions;
 
+	branchPassiveStats.clear();
+
+    for (auto& pair : maskBranchPassiveStats) {
+        pair.second.clear();
+    }
+    maskBranchPassiveStats.clear();
+
+    for (auto& maskPair : passiveStats) {
+        for (auto& branchPair : maskPair.second) {
+            branchPair.second.clear();
+        }
+        maskPair.second.clear();
+    }
+    passiveStats.clear();
+
+    branchLevels.clear();
+
+    for (auto& pair : maskBranches) {
+        pair.second.clear();
+    }
+    maskBranches.clear();
+
+    for (auto& maskPair : maskStats) {
+        for (auto& branchPair : maskPair.second) {
+            branchPair.second.clear();
+        }
+        maskPair.second.clear();
+    }
+    maskStats.clear();
+
+    for (auto& pair : maskLevels) {
+        pair.second.clear();
+    }
+    maskLevels.clear();
+
 	return true;
 }
 

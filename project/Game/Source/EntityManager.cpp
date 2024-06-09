@@ -782,8 +782,7 @@ bool EntityManager::PostLateUpdate()
 		}
 	}
 	//app->render->DrawTexture(texture, BMRposition.x - 410, BMRposition.y - 300, SDL_FLIP_HORIZONTAL, &rect);
-	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
-	}
+
 
 	if (playerVacio) {
 		uint w;
