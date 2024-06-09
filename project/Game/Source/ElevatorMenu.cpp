@@ -302,6 +302,7 @@ void ElevatorMenu::UseElevator(int id, int mazmorraa)
 		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_pueblo);
 		app->menu->active = true;
 		mazmorra = 0;
+		mazmorraActual = 0;
 		break;
 	}
 	case 0:
@@ -310,6 +311,7 @@ void ElevatorMenu::UseElevator(int id, int mazmorraa)
 		app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra0);
 		app->menu->active = true;
 		mazmorra = 0;
+		mazmorraActual = 0;
 		break;
 	}
 	case 1:
@@ -319,6 +321,7 @@ void ElevatorMenu::UseElevator(int id, int mazmorraa)
 			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra1);
 			app->menu->active = true;
 			mazmorra = 1;
+			mazmorraActual = 1;
 			if(app->inventoryManager->storyLevel < 4)
 			{
 				app->inventoryManager->storyLevel = 4;
@@ -337,6 +340,7 @@ void ElevatorMenu::UseElevator(int id, int mazmorraa)
 			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra2);
 			app->menu->active = true;
 			mazmorra = 2;
+			mazmorraActual = 2;
 			if(app->inventoryManager->storyLevel < 5)
 			{
 				app->inventoryManager->storyLevel = 5;
@@ -356,6 +360,7 @@ void ElevatorMenu::UseElevator(int id, int mazmorraa)
 			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra3);
 			app->menu->active = true;
 			mazmorra = 3;
+			mazmorraActual = 3;
 			if(app->inventoryManager->storyLevel < 6)
 			{
 				app->inventoryManager->storyLevel = 6;
@@ -374,6 +379,7 @@ void ElevatorMenu::UseElevator(int id, int mazmorraa)
 			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra4);
 			app->menu->active = true;
 			mazmorra = 4;
+			mazmorraActual = 4;
 			if(app->inventoryManager->storyLevel < 7)
 			{
 				app->inventoryManager->storyLevel = 7;
@@ -392,6 +398,7 @@ void ElevatorMenu::UseElevator(int id, int mazmorraa)
 			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra5);
 			app->menu->active = true;
 			mazmorra = 5;
+			mazmorraActual = 5;
 			if(app->inventoryManager->storyLevel < 8)
 			{
 				app->inventoryManager->storyLevel = 8;
@@ -410,6 +417,7 @@ void ElevatorMenu::UseElevator(int id, int mazmorraa)
 			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra6);
 			app->menu->active = true;
 			mazmorra = 6;
+			mazmorraActual = 6;
 			if(app->inventoryManager->storyLevel < 9)
 			{
 				app->inventoryManager->storyLevel = 9;
@@ -429,6 +437,7 @@ void ElevatorMenu::UseElevator(int id, int mazmorraa)
 			app->menu->active = true;
 
 			mazmorra = 7;
+			mazmorraActual = 7;
 			if(app->inventoryManager->storyLevel < 10)
 			{
 				app->inventoryManager->storyLevel = 10;
@@ -448,6 +457,7 @@ void ElevatorMenu::UseElevator(int id, int mazmorraa)
 			app->menu->active = true;
 
 			mazmorra = 8;
+			mazmorraActual = 8;
 			if(app->inventoryManager->storyLevel < 11)
 			{
 				app->inventoryManager->storyLevel = 11;
@@ -466,7 +476,7 @@ void ElevatorMenu::UseElevator(int id, int mazmorraa)
 	app->ascensor->abierto = false;
 	open = false;
 	cerrar = true;
-	mazmorraActual = mazmorra;
+	
 
 	if (mazmorra < mazmorraa)
 	{
