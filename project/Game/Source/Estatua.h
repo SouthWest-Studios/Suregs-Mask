@@ -36,8 +36,7 @@ public:
 	
 	EntityType type;
 
-	PhysBody* pbody;
-	PhysBody* pbody2;
+	PhysBody* pbody = nullptr;
 	SDL_Texture* texture = NULL;
 	char* Menutexture = NULL;
 	char* listTexture = NULL;

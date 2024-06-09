@@ -42,6 +42,7 @@ bool Scene_Pueblo::Awake(pugi::xml_node config)
 }
 int start = 0;
 // Called before the first frame
+int a = 0;
 bool Scene_Pueblo::Start()
 {
 	if (start == 0)
@@ -58,7 +59,7 @@ bool Scene_Pueblo::Start()
 
 
 
-
+		app->entityManager->Enable();
 
 
 
@@ -82,10 +83,15 @@ bool Scene_Pueblo::Start()
 		fishing = (MiniGameFishing*)app->entityManager->CreateEntity(EntityType::ROD);
 		fishing->parameters = config.child("minigamefishing");
 
-		Estatua* estatua = (Estatua*)app->entityManager->CreateEntity(EntityType::ESTATUA);
-		estatua->config = configNode.child("entities_data").child("estatua");
-		estatua->position = iPoint(4501, 3205);
-		estatua->Start();
+		if (a == 0)
+		{
+			Estatua* estatua = (Estatua*)app->entityManager->CreateEntity(EntityType::ESTATUA);
+			estatua->config = configNode.child("entities_data").child("estatua");
+			estatua->position = iPoint(4501, 3205);
+			estatua->Start();
+			a++;
+		}
+		
 
 		/*fPoint pos(5728.0f, 416.0f);
 		app->psystem->AddEmiter(pos,EMITTER_TYPE_SMOKE);*/
@@ -100,7 +106,7 @@ bool Scene_Pueblo::Start()
 		/*fPoint pos(784.0, 218.0);
 		app->psystem->AddEmiter(pos, EMITTER_TYPE_PURPLE_FLAME);*/
 
-		app->entityManager->Enable();
+		
 
 		app->SaveRequest();
 
@@ -176,6 +182,7 @@ bool Scene_Pueblo::CleanUp()
 	app->entityManager->DestroyEntity(fishing);
 	/*delete fishing;*/
 	start = 0;
+	a = 0;
 	return true;
 }
 
