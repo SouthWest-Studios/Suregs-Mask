@@ -98,10 +98,26 @@ bool DebugConsole::Awake(pugi::xml_node config)
 		});
 	commandList.Add(SET_SECONDARY_MASK);
 
+	UNLOCKED = new DebugCommandArg<int>("unlocked", "Desbloquea armadura, espada y te proporciona dinero", "unlocked <int nivelEquipo>", [this](int id) {
+
+		if (id >= 0 && id <= 9 && app->entityManager->GetPlayer() != nullptr) {
+			app->inventoryManager->armorLevel = id;
+			app->inventoryManager->swordLevel = id;
+			app->inventoryManager->monedasObtenidas = id * 1000;
+			app->entityManager->GetPlayer()->UpdateStats();
+			app->entityManager->GetPlayer()->currentStats.currentHealth = app->entityManager->GetPlayer()->currentStats.maxHealth;
+
+		}
+		});
+	commandList.Add(UNLOCKED);
+
+
+
 	PLAY_COMMERCE = new DebugCommandArg<int>("play_commerce", "Abre una tienda", "play_commerce <int commerceID>", [this](int id) {
-			app->commerceManager->PlayCommerce(id);
+		app->commerceManager->PlayCommerce(id);
 		});
 	commandList.Add(PLAY_COMMERCE);
+
 
 
 	GOTO = new DebugCommandArg<int>("goto", "Te cambia de escena por la elegida", "goto <int nivel>", [this](int nivel) {

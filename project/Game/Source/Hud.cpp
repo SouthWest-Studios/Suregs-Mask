@@ -253,7 +253,7 @@ bool Hud::Update(float dt)
 	if (monedasObtenidasHud < app->inventoryManager->monedasObtenidas) {
 		monedasObtenidasHud += 1;
 	}
-	else if (monedasObtenidasHud < app->inventoryManager->monedasObtenidas) {
+	else if (monedasObtenidasHud > app->inventoryManager->monedasObtenidas) {
 		monedasObtenidasHud -= 1;
 	}
 

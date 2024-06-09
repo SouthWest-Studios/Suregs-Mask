@@ -59,6 +59,7 @@ public:
 	DebugCommandArg<int>* SET_SECONDARY_MASK;
 	DebugCommandArg<int>* PLAY_COMMERCE;
 	DebugCommandArg<int>* GOTO;
+	DebugCommandArg<int>* UNLOCKED;
 
 	List<DebugCommandBase*> commandList;
 

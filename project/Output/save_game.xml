@@ -25,14 +25,11 @@
 			</bosses>
 		</map>
 	</map>
-	<pueblo_tutorial />
+	<scene_pueblo />
 	<entitymanager>
 		<entity_manager>
 			<doors>
 				<door sceneLevel="-10" tpID="0" />
-				<door sceneLevel="-10" tpID="8" />
-				<door sceneLevel="-10" tpID="1" />
-				<door sceneLevel="-10" tpID="9" />
 			</doors>
 		</entity_manager>
 	</entitymanager>
@@ -46,7 +43,8 @@
 			<armorLevel quantity="0" />
 			<primaryMask quantity="-1" />
 			<secondaryMask quantity="-1" />
-			<storyLevel quantity="2" />
+			<storyLevel quantity="1" />
+			<dungeon0Entered quantity="true" />
 			<mask0 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
 			<mask1 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
 			<mask2 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
@@ -64,13 +62,25 @@
 				<maskTwoXP XP="0" />
 				<maskThreeXP XP="0" />
 			</masksXP>
+			<masksXP>
+				<XPtoLevelUpZero XP="1000" />
+				<XPtoLevelUpOne XP="1000" />
+				<XPtoLevelUpTwo XP="1000" />
+				<XPtoLevelUpThree XP="1000" />
+			</masksXP>
+			<masksLevel>
+				<maskLevelZero level="0" />
+				<maskLevelOne XP="0" />
+				<maskLevelTwo XP="0" />
+				<maskLevelThree XP="0" />
+			</masksLevel>
 			<elevator mazmorra="0" mazmorraActual="0" />
 		</inventory>
 	</iventorymanager>
 	<commercemanager />
 	<questmanager>
 		<questLines>
-			<questLine id="1" index="3" active="true" completed="false" />
+			<questLine id="1" index="1" active="true" completed="false" />
 			<questLine id="2" index="1" active="false" completed="false" />
 		</questLines>
 	</questmanager>
