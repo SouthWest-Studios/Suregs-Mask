@@ -1391,7 +1391,7 @@ bool InventoryManager::Update(float dt)
 	//DESCOMENTAR CUANDO SE HAYA IMPLEMENTADO EL TUTORIAL CON SUS BOOLS
 	if(app->tutorialHasFinished && dungeon0Entered && app->questManager->GetQuestLineIndex(1) >= 10)
 	{
-	 	storyLevel = app->ascensor->totalMazmorras + 2;
+	 	//storyLevel = app->ascensor->totalMazmorras + 2;
 	}
 	 else if(app->tutorialHasFinished && dungeon0Entered)
 	 {
@@ -1409,7 +1409,7 @@ bool InventoryManager::Update(float dt)
 
 	//BORRAR LA LINEA DE ABAJO CUANDO SE HAYA IMPLEMENTADO EL TUTORIAL CON SUS BOOLS ARRIBA
 	/*storyLevel = app->ascensor->totalMazmorras;*/
-	//printf("\rstoryLevel %d", storyLevel);
+	printf("\rstoryLevel %d", storyLevel);
 	//BORRAR LA LINEA DE ARRIBA CUANDO SE HAYA IMPLEMENTADO EL TUTORIAL CON SUS BOOLS ARRIBA
 
 

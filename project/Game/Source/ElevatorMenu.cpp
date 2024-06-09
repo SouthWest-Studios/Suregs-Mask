@@ -319,6 +319,10 @@ void ElevatorMenu::UseElevator(int id, int mazmorraa)
 			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra1);
 			app->menu->active = true;
 			mazmorra = 1;
+			if(app->inventoryManager->storyLevel < 4)
+			{
+				app->inventoryManager->storyLevel = 4;
+			}
 		}
 		else
 		{
@@ -328,11 +332,15 @@ void ElevatorMenu::UseElevator(int id, int mazmorraa)
 	}
 	case 2:
 	{
-		if (app->questManager->GetQuestLineIndex(1) >= 11)
+		if (app->questManager->GetQuestLineIndex(1) >= 12)
 		{
 			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra2);
 			app->menu->active = true;
 			mazmorra = 2;
+			if(app->inventoryManager->storyLevel < 5)
+			{
+				app->inventoryManager->storyLevel = 5;
+			}
 		}
 		else
 		{
@@ -343,11 +351,15 @@ void ElevatorMenu::UseElevator(int id, int mazmorraa)
 	}
 	case 3:
 	{
-		if (app->questManager->GetQuestLineIndex(1) >= 13)
+		if (app->questManager->GetQuestLineIndex(1) >= 14)
 		{
 			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra3);
 			app->menu->active = true;
 			mazmorra = 3;
+			if(app->inventoryManager->storyLevel < 6)
+			{
+				app->inventoryManager->storyLevel = 6;
+			}
 		}
 		else
 		{
@@ -357,11 +369,15 @@ void ElevatorMenu::UseElevator(int id, int mazmorraa)
 	}
 	case 4:
 	{
-		if (app->questManager->GetQuestLineIndex(1) >= 16)
+		if (app->questManager->GetQuestLineIndex(1) >= 17)
 		{
 			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra4);
 			app->menu->active = true;
 			mazmorra = 4;
+			if(app->inventoryManager->storyLevel < 7)
+			{
+				app->inventoryManager->storyLevel = 7;
+			}
 		}
 		else
 		{
@@ -371,11 +387,15 @@ void ElevatorMenu::UseElevator(int id, int mazmorraa)
 	}
 	case 5:
 	{
-		if (app->questManager->GetQuestLineIndex(1) >= 18)
+		if (app->questManager->GetQuestLineIndex(1) >= 19)
 		{
 			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra5);
 			app->menu->active = true;
 			mazmorra = 5;
+			if(app->inventoryManager->storyLevel < 8)
+			{
+				app->inventoryManager->storyLevel = 8;
+			}
 		}
 		else
 		{
@@ -385,11 +405,15 @@ void ElevatorMenu::UseElevator(int id, int mazmorraa)
 	}
 	case 6:
 	{
-		if (app->questManager->GetQuestLineIndex(1) >= 20)
+		if (app->questManager->GetQuestLineIndex(1) >= 21)
 		{
 			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra6);
 			app->menu->active = true;
 			mazmorra = 6;
+			if(app->inventoryManager->storyLevel < 9)
+			{
+				app->inventoryManager->storyLevel = 9;
+			}
 		}
 		else
 		{
@@ -399,12 +423,16 @@ void ElevatorMenu::UseElevator(int id, int mazmorraa)
 	}
 	case 7:
 	{
-		if (app->questManager->GetQuestLineIndex(1) >= 23)
+		if (app->questManager->GetQuestLineIndex(1) >= 24)
 		{
 			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra7);
 			app->menu->active = true;
 
 			mazmorra = 7;
+			if(app->inventoryManager->storyLevel < 10)
+			{
+				app->inventoryManager->storyLevel = 10;
+			}
 		}
 		else
 		{
@@ -414,12 +442,16 @@ void ElevatorMenu::UseElevator(int id, int mazmorraa)
 	}
 	case 8:
 	{
-		if (app->questManager->GetQuestLineIndex(1) >= 23)
+		if (app->questManager->GetQuestLineIndex(1) >= 24)
 		{
 			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra8);
 			app->menu->active = true;
 
 			mazmorra = 8;
+			if(app->inventoryManager->storyLevel < 11)
+			{
+				app->inventoryManager->storyLevel = 11;
+			}
 		}
 		else
 		{
