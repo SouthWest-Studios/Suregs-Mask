@@ -336,8 +336,11 @@ bool CommerceHerreria::Update(float dt)
 		}
 	}
 	if (app->input->GetButton(BACK) == KEY_DOWN) {
-		if (pointerIndexC == 0) SelectTrade(pointerIndexF, false);
-		if (pointerIndexC == 1) SelectAllTrade(pointerIndexF, false);
+		if (pointerIndexF <= 1) {
+			if (pointerIndexC == 0) SelectTrade(pointerIndexF, false);
+			if (pointerIndexC == 1) SelectAllTrade(pointerIndexF, false);
+		}
+		
 		app->audio->PlayFx(select_fx);
 	}
 

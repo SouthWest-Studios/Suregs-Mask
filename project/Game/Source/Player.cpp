@@ -2017,7 +2017,7 @@ void Player::CameraMovement(float dt)
 	}
 
 
-	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN && app->physics->debug)
 	{
 		camaralibre = !camaralibre; // Esto alternar?el valor de camaralibre cada vez que se presione la tecla C en modo debug
 	}

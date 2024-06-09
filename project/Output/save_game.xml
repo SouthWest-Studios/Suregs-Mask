@@ -25,7 +25,7 @@
 			</bosses>
 		</map>
 	</map>
-	<pueblo_tutorial />
+	<scene_pueblo />
 	<entitymanager>
 		<entity_manager>
 			<doors />
@@ -41,7 +41,7 @@
 			<armorLevel quantity="0" />
 			<primaryMask quantity="-1" />
 			<secondaryMask quantity="-1" />
-			<storyLevel quantity="1" />
+			<storyLevel quantity="2" />
 			<dungeon0Entered quantity="false" />
 			<mask0 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
 			<mask1 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
