@@ -195,6 +195,12 @@ bool Enemy_Ols_Variation::PostUpdate() {
         app->render->DrawTexture(projectileTexture, projectilePosition.x-12, projectilePosition.y-12);
     }
 
+	if (particulaAtaque != nullptr) {
+		fPoint pos((float)projectilePosition.x, (float)projectilePosition.y);
+		particulaAtaque->MoveEmitter(pos);
+	}
+
+
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
 	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - 16;
@@ -213,6 +219,8 @@ bool Enemy_Ols_Variation::CleanUp()
 	attackSensor = nullptr;
 	app->tex->UnLoad(projectileTexture);
 
+	app->psystem->RemoveAllEmitters();
+	particulaAtaque = nullptr;
 	blood = nullptr;
 
 	RELEASE(spritePositions);
@@ -261,6 +269,9 @@ void Enemy_Ols_Variation::Attack(float dt, iPoint playerPos)
         attackSensor->listener = this;
         attackSensor->body->GetFixtureList()->SetSensor(true);
 		projectilePosition = position;
+
+		fPoint pos((float)projectilePosition.x, (float)projectilePosition.y);
+		particulaAtaque = app->psystem->AddEmiter(pos, EMITTER_TYPE_OLS_ATAQUE);
 
         b2Vec2 direction = b2Vec2(playerPos.x - position.x, playerPos.y-position.y);  
         direction.Normalize();

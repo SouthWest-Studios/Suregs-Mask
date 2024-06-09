@@ -128,7 +128,8 @@ private:
 	int ols_death_fx;
 	bool deathFx = false;
 
-	Emitter* blood;
+	Emitter* blood = nullptr;
+	Emitter* particulaAtaque = nullptr;
 
 	Item_Garra* garra;
 	pugi::xml_document configFile;
