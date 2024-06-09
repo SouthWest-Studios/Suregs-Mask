@@ -1910,6 +1910,8 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			LOG("Collision SALIDA_MAZMORRA0");
 			app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_pueblo);
 			app->map->tpSaleMazmorra = true;
+			if (!app->inventoryManager->dungeon0Exited)
+				app->inventoryManager->dungeon0Exited = true;
 			break;
 		}
 	}

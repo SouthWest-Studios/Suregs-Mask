@@ -185,7 +185,7 @@ bool Boss_Igory::Update(float dt)
 	{
 		desiredState = EntityState_Boss_Igory::GENERATESUREG;
 	}
-	else if (playerInFight && atqDashQuali >= 3 && app->map->pathfinding->GetDistance(playerPos, position) >= attackDistance * 64 && fase != FASE_Igory::FASE_ONE && !isDead && !inCurar && !inAtack && !stun) {
+	else if (playerInFight && atqDashQuali >= 2 && app->map->pathfinding->GetDistance(playerPos, position) >= attackDistance * 64 && fase != FASE_Igory::FASE_ONE && !isDead && !inCurar && !inAtack && !stun) {
 
 		desiredState = EntityState_Boss_Igory::ATTACKING_DASHI;
 	}
@@ -302,7 +302,7 @@ bool Boss_Igory::Update(float dt)
 		atq3_boss_Igory.speed = 0.15;
 		app->map->maxEnemies = 8;
 		speed = (120 / 10) * 0.4;
-		attackDamage = 280;
+		attackDamage = 80;
 
 		break;
 	case FASE_Igory::FASE_THREE:
@@ -311,7 +311,7 @@ bool Boss_Igory::Update(float dt)
 		atq3_boss_Igory.speed = 0.25;
 		app->map->maxEnemies = 10;
 		speed = (150 / 10) * 0.4;
-		attackDamage = 300;
+		attackDamage = 100;
 
 		break;
 	}
@@ -1113,7 +1113,7 @@ void Boss_Igory::OnCollision(PhysBody* physA, PhysBody* physB) {
 		}
 
 		if (inAtqDashi) {
-			app->entityManager->GetPlayer()->TakeDamage(220);
+			app->entityManager->GetPlayer()->TakeDamage(70);
 			empujaPlayer = true;
 			habilidadEmpujeTimer.Start();
 			//app->entityManager->GetPlayer()->pbodyFoot
