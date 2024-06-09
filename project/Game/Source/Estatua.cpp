@@ -94,7 +94,7 @@ bool Estatua::PostUpdate()
 }
 bool Estatua::CleanUp()
 {
-	
+	pbody->body->SetTransform(b2Vec2(-1000,-1000),0);
 	app->physics->DestroyBody(pbody);
 	pbody = nullptr;
 	app->entityManager->DestroyEntity(this);
