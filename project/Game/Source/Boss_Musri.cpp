@@ -890,11 +890,13 @@ void Boss_Musri::Fase2(float dt, iPoint playerPos)
 			RastroFlechaCargadaMusri* rastro = &flechaC->rastroGenerado.at(j);
 
 			if (rastro->lifeTimer.ReadMSec() > 3000) {
-				app->physics->GetWorld()->DestroyBody(rastro->pbody->body);
+				/*app->physics->GetWorld()->DestroyBody(rastro->pbody->body);*/
+				app->physics->DestroyBody(rastro->pbody);
 				flechaC->rastroGenerado.erase(flechaC->rastroGenerado.begin() + j);
 
 				if (flechaC->rastroGenerado.size() == 0) {
-					app->physics->GetWorld()->DestroyBody(flechaC->pbody->body);
+					/*app->physics->GetWorld()->DestroyBody(flechaC->pbody->body);*/
+					app->physics->DestroyBody(flechaC->pbody);
 					flechasCargadas.clear();
 					flechasCargadas.shrink_to_fit();
 				}
@@ -927,8 +929,10 @@ void Boss_Musri::FaseDying(float dt, iPoint playerPos)
 
 		if (muriendoseTimer.ReadMSec() >= 3000) {
 			Die();
-			app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
-			app->physics->GetWorld()->DestroyBody(pbodySensor->body);
+			/*app->physics->GetWorld()->DestroyBody(pbodyFoot->body);*/
+			app->physics->DestroyBody(pbodyFoot);
+			/*app->physics->GetWorld()->DestroyBody(pbodySensor->body);*/
+			app->physics->DestroyBody(pbodySensor);
 			app->entityManager->DestroyEntity(this);
 		}
 	}

@@ -50,7 +50,7 @@ public:
 	bool open = false;
 	bool cerrar = false;
 
-	iPoint PointerPosition = { 400, 100 };
+	iPoint PointerPosition = { 399, 99 };
 	int PointerId = 0;
 	int horitzontalPointerId = 0;
 	int verticalPointerId = 0;

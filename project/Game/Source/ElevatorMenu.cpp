@@ -144,7 +144,7 @@ bool ElevatorMenu::PostUpdate()
 			SDL_DestroyTexture(transparentTexture);
 		}
 
-		app->render->DrawTexture(Menutexture, 400, 100, SDL_FLIP_NONE, 0, 0);
+		app->render->DrawTexture(Menutexture, 399, 100, SDL_FLIP_NONE, 0, 0);
 
 		
 
@@ -152,11 +152,11 @@ bool ElevatorMenu::PostUpdate()
 		{
 			if (i % 2 == 0)
 			{
-				app->render->DrawTexture(textura_black, 400, 100 + 45 * i, SDL_FLIP_NONE, 0, 0);
+				app->render->DrawTexture(textura_black, 399, 99 + 45 * i, SDL_FLIP_NONE, 0, 0);
 			}
 			else
 			{
-				app->render->DrawTexture(textura_black, 400 + 99, 100 + 45 * (i -1), SDL_FLIP_NONE, 0, 0);
+				app->render->DrawTexture(textura_black, 399 + 99, 99 + 45 * (i -1), SDL_FLIP_NONE, 0, 0);
 			}
 			
 		}
@@ -189,8 +189,8 @@ void ElevatorMenu::OnMovePointer()
 		if (PointerId == -20)
 		{
 			PointerId = 0;
-			PointerPosition.y = 100;
-			PointerPosition.x = 400;
+			PointerPosition.y = 99;
+			PointerPosition.x = 399;
 			verticalPointerId = 0;
 			horitzontalPointerId = 0;
 
@@ -199,8 +199,8 @@ void ElevatorMenu::OnMovePointer()
 		else if (verticalPointerId + 1 == 4)
 		{
 			PointerId = -20;
-			PointerPosition.y = 20;
-			PointerPosition.x = 450;
+			PointerPosition.y = 19;
+			PointerPosition.x = 447;
 
 			app->audio->PlayFx(button_fx);
 		}
@@ -224,8 +224,8 @@ void ElevatorMenu::OnMovePointer()
 
 			horitzontalPointerId = 0;
 			PointerId = 6;
-			PointerPosition.y = 100 + 90 * (3);
-			PointerPosition.x = 400;
+			PointerPosition.y = 99 + 90 * (3);
+			PointerPosition.x = 399;
 			verticalPointerId = 3;
 
 			app->audio->PlayFx(button_fx);
@@ -233,8 +233,8 @@ void ElevatorMenu::OnMovePointer()
 		else if (verticalPointerId == 0)
 		{
 			PointerId = -20;
-			PointerPosition.y = 20;
-			PointerPosition.x = 450;
+			PointerPosition.y = 19;
+			PointerPosition.x = 447;
 
 			app->audio->PlayFx(button_fx);
 		}
@@ -253,7 +253,7 @@ void ElevatorMenu::OnMovePointer()
 		if (horitzontalPointerId + 1 > 1)
 		{
 			horitzontalPointerId = 0;
-			PointerPosition.x = 400;
+			PointerPosition.x = 399;
 			PointerId -= 1;
 
 			app->audio->PlayFx(button_fx);
@@ -263,7 +263,7 @@ void ElevatorMenu::OnMovePointer()
 			if (PointerId != -1)
 			{
 				horitzontalPointerId += 1;
-				PointerPosition.x += 99;
+				PointerPosition.x += 98;
 			}
 			PointerId += 1;
 
@@ -284,7 +284,7 @@ void ElevatorMenu::OnMovePointer()
 		else
 		{
 			horitzontalPointerId -= 1;
-			PointerPosition.x -= 99;
+			PointerPosition.x -= 98;
 			PointerId -= 1;
 
 			app->audio->PlayFx(button_fx);
@@ -470,7 +470,15 @@ void ElevatorMenu::UseElevator(int id, int mazmorraa)
 
 	if (mazmorra < mazmorraa)
 	{
-		mazmorra = mazmorraa;
+		if (final)
+		{
+			mazmorra = mazmorraa + 1;
+		}
+		else
+		{
+			mazmorra = mazmorraa;
+		}
+		
 	}
 
 }
