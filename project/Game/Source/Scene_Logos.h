@@ -40,18 +40,16 @@ public:
 
 	
 
+public:
+	Animation sceneLogos;
 private:
 	SDL_Texture* sceneLogosTexture = nullptr;
 	Animation SPosition;
 	SDL_Rect* spritePositions = nullptr;
 	pugi::xml_node config;
-	int TSprite;
-	int SpriteX;
-	int SpriteY;
-	int Photowidth;
 	Animation* currentAnimation = nullptr;
 
-	Animation sceneLogos;
+	
 	Timer timerIntro;
 
 	int intro_fx;

@@ -14,6 +14,7 @@
 #include "Log.h"
 #include "GuiControl.h"
 #include "GuiManager.h"
+#include "Scene_Logos.h"
 #include "Menu.h"
 Scene_Intro::Scene_Intro(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -67,7 +68,7 @@ bool Scene_Intro::Update(float dt)
 {
 
 	OPTICK_EVENT();
-
+	
 	/*int mx, my;
 	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN) {
 		app->input->GetMousePosition(mx, my);
@@ -79,6 +80,7 @@ bool Scene_Intro::Update(float dt)
 		/*app->render->DrawTexture(texturaIntro, 0, 0);*/
 	}
 	else {
+		
 		app->fadeToBlack->FadeToBlack(this, app->scene_menu, 90);
 	}
 

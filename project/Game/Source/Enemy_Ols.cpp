@@ -166,6 +166,7 @@ bool Enemy_Ols::Update(float dt)
 
 
 bool Enemy_Ols::PostUpdate() {
+   SDL_SetTextureColorMod(texture, 255, 255, 255);
 
 	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();

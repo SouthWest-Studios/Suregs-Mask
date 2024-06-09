@@ -20,6 +20,7 @@
 #include "Scene_Mazmorra6.h"
 #include "Scene_Mazmorra7.h"
 #include "Scene_Mazmorra8.h"
+#include "Scene_Logos.h"
 #include "Scene_Pueblo.h"
 #include "InventoryManager.h"
 #include "Optick/include/optick.h"
@@ -121,6 +122,7 @@ bool DebugConsole::Awake(pugi::xml_node config)
 		case 6:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra6);		app->menu->active = true;	app->ascensor->mazmorraActual = 6;		break;
 		case 7:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra7);		app->menu->active = true;	app->ascensor->mazmorraActual = 7;		break;
 		case 8:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_mazmorra8);		app->menu->active = true;	app->ascensor->mazmorraActual = 8;		break;
+		case 9:					app->fadeToBlack->FadeToBlack(app->fadeToBlack->activeScene, app->scene_logos);			app->menu->active = true;												break;
 
 		default:
 			break;
