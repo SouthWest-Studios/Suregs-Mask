@@ -50,10 +50,9 @@ bool Estatua::Start() {
 	/*texture = app->tex->Load("Assets/Textures/Entidades/Items/item_Garra.png");*/
 	// L07 DONE 4: Add a physics to an item - initialize the physics body
 	/*pbody = app->physics->CreateCircle(position.x, position.y, 70, bodyType::STATIC);*/
-	pbody = app->physics->CreateRectangleSensor(position.x + 10, position.y, 100, 60, bodyType::KINEMATIC);
+	pbody = app->physics->CreateRectangleSensor(position.x + 10, position.y, 100, 60, bodyType::STATIC);
 	pbody->ctype = ColliderType::ESTATUA;
 	pbody->listener = this;
-	pbody->body->GetFixtureList()->SetSensor(true);
 
 
 
@@ -97,7 +96,7 @@ bool Estatua::CleanUp()
 {
 	
 	app->physics->DestroyBody(pbody);
-	pbodyFoot = nullptr;
+	pbody = nullptr;
 	app->entityManager->DestroyEntity(this);
 	//app->tex->UnLoad(texture);
 
