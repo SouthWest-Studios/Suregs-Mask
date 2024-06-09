@@ -286,20 +286,6 @@ bool Boss_Musri::PostUpdate() {
 	}
 
 
-	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT) {
-		pivotY += 1;
-	}
-	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) {
-		pivotY -= 1;
-	}
-	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
-		pivotX -= 1;
-	}
-	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) {
-		pivotX += 1;
-	}
-	LOG("Pivotx: %d, PivotY: %d", pivotX, pivotY);
-
 	/*LIMITES SALA*/
 	//app->render->DrawRectangle(limitesSala, 255,255,255,200,true,true);
 

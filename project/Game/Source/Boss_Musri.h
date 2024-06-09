@@ -212,7 +212,7 @@ private:
 
 	int alphaTexture = 255;
 	
-	SDL_Rect limitesSala = { 9900 , 2750, 2050, 1000 };
+	SDL_Rect limitesSala = { 7743 , 2060, 2050, 1000 };
 	iPoint movePosition;
 
 	std::vector<FlechaMusri> flechasLanzadas;
