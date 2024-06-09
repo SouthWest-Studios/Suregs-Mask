@@ -36,6 +36,7 @@
 
 	<dialog id="913" texturepath="Assets/Textures/herrero.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/phoskaFace.png" name="Phoska">
 		<sentences>
+			<sentence type="QuestUpdate" questLine="1" nextTargetID="8" actualTargetID="7" />
 			<sentence type="choose" text="¡Buenos días! Bienvenido a la herrería de Phoska.">
 
 				<option1 text="¿Qué ofreces?">
@@ -189,7 +190,7 @@
 
 	<dialog id="923" texturepath="Assets/Textures/vendedor.jpg" facetexturepath="Assets/Textures/Interfaz/Dialogos/phrumoFace.png" name="Phrumo">
 		<sentences>
-			<sentence type="QuestUpdate" questLine="1" nextTargetID="8" actualTargetID="7" />
+			
 			<sentence type="choose" text="Bienvenido a la tienda de Phrumo. ¿Te ha molestado mi abuelo? Disculpas...">
 
 				<option1 text="¿Qué ofreces?">
