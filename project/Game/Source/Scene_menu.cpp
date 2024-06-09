@@ -585,6 +585,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 	//BOTONES NUEVA PARTIDA
 	case 24:
 		partidaOnePressed = true;
+		app->tutorialHasFinished = false;
 		CreateButtonsOne();
 		nuevaPartida1->state = GuiControlState::DISABLED;
 		nuevaPartida2->state = GuiControlState::DISABLED;
@@ -597,6 +598,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 25:
 		partidaTwoPressed = true;
+		app->tutorialHasFinished = false;
 		CreateButtonsTwo();
 		nuevaPartida1->state = GuiControlState::DISABLED;
 		nuevaPartida2->state = GuiControlState::DISABLED;
@@ -609,6 +611,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 26:
 		partidaThreePressed = true;
+		app->tutorialHasFinished = false;
 		CreateButtonsThree();
 		nuevaPartida1->state = GuiControlState::DISABLED;
 		nuevaPartida2->state = GuiControlState::DISABLED;
