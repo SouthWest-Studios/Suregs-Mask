@@ -906,7 +906,7 @@ void EntityManager::UpdateEnemyActivation() {
 			// Si no, desactívalo
 			else {
 				enemy->isActive = false;
-				enemy->pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
+				if(enemy->pbodyFoot != nullptr)	enemy->pbodyFoot->body->SetLinearVelocity(b2Vec2(0, 0));
 				if (enemy->type == EntityType::ENEMY_OLS)
 				{
 					Enemy_Ols* olsEnemy = static_cast<Enemy_Ols*>(enemy);
@@ -934,7 +934,7 @@ void EntityManager::UpdateRoomActivation() {
 		// Asegúrate de que el enemigo tiene una sala asignada
 		if (enemy->room != nullptr) {
 			// Si el enemigo está en la misma sala que el jugador, marca que hay un enemigo en la sala
-			if (enemy->room == currentRoom && !enemy->isSpawner) {
+			if (enemy->room == currentRoom && !enemy->isSpawner && enemy->GetHealth() > 0) {
 				enemyInRoom = true;
 				break;
 			}
