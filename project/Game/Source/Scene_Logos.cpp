@@ -16,6 +16,7 @@
 #include "GuiControl.h"
 #include "GuiManager.h"
 #include "Menu.h"
+#include "Animation.h"
 Scene_Logos::Scene_Logos(App* app, bool start_enabled) : Module(app, start_enabled)
 {
 	name = ("scene_logos");
@@ -37,30 +38,25 @@ bool Scene_Logos::Awake(pugi::xml_node config)
 // Called before the first frame
 bool Scene_Logos::Start()
 {
+	
 	pugi::xml_document configFile;
 	pugi::xml_node config;
 	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
 	config = configFile.child("config").child(name.GetString()).child("sceneLogos");
 
-	TSprite = config.attribute("Tsprite").as_int();
-	SpriteX = config.attribute("sprite_x").as_int();
-	SpriteY = config.attribute("sprite_y").as_int();
-	Photowidth = config.attribute("Pwidth").as_int();
+	int TSprite = config.attribute("Tsprite").as_int();
+	int SpriteX = config.attribute("sprite_x").as_int();
+	int SpriteY = config.attribute("sprite_y").as_int();
+	int Photowidth = config.attribute("Pwidth").as_int();
 	spritePositions = SPosition.SpritesPos(TSprite, SpriteX, SpriteY, Photowidth);
 	sceneLogosTexture = app->tex->Load(config.attribute("texturepath").as_string());
 
 	sceneLogos.LoadAnim("scene_logos", "idleAnim", spritePositions);
-	//lastFramePath = config.child("lastFrame").attribute("texturepath").as_string();
-	//logoUpcPath = config.child("logoUpc").attribute("texturepath").as_string();
-	//logoStudioPath = config.child("logoStudio").attribute("texturepath").as_string();
-	//backgroundPath = config.child("background").attribute("texturepath").as_string();
-	//lastFrame = app->tex->Load(lastFramePath);
-	//lastFrame = app->tex->Load(lastFramePath);
-	//logoStudio = app->tex->Load(logoStudioPath);
-	//background = app->tex->Load(backgroundPath);
 	timerIntro.Start();
+	app->entityManager->canShowFinal = false;
+	app->entityManager->showFinal = false;
 	
-	//sus = app->audio->LoadAudioFx("");
+	app->audio->StopMusic();
 	intro_fx = app->audio->LoadAudioFx("intro_fx");
 	app->audio->PlayFx(intro_fx);
 
@@ -68,7 +64,7 @@ bool Scene_Logos::Start()
 	app->render->camera.y = 0;
 
 	//app->render->DrawTexture(lastFrame, 0, 0);
-
+	currentAnimation = &sceneLogos;
 
 	return true;
 }
@@ -82,21 +78,20 @@ bool Scene_Logos::PreUpdate()
 // Called each loop iteration
 bool Scene_Logos::Update(float dt)
 {
-	currentAnimation = &sceneLogos;
+	
 	OPTICK_EVENT();
 	//app->fadeToBlack->FadeToBlack(this, app->scene_testing, 10); /*BORRAR AL TERMINAR*/
 	//SDL_Rect currentFrameRect = sceneLogos.GetCurrentFrame();
 	//app->render->DrawTexture(sceneLogosTexture, currentFrameRect.x, currentFrameRect.y);
 	////printf("holal");
 
-
-	if (currentAnimation->HasFinished()) {
-	}
-
+	//sceneLogos.Reset();
+	//printf("\nFinish");
 	if (timerIntro.ReadSec() < 10) {
 
 	}
 	else {
+		//sceneLogos.Reset();
 		app->fadeToBlack->FadeToBlack(this, app->scene_intro, 90);
 		
 	}
@@ -141,10 +136,10 @@ bool Scene_Logos::PostUpdate()
 bool Scene_Logos::CleanUp()
 {
 	LOG("Freeing Scene_intro");
+	printf("\nanular");
 	app->tex->UnLoad(sceneLogosTexture);
 	RELEASE(spritePositions);
 	delete spritePositions;
-	sceneLogos.Reset();
-
+	
 	return true;
 }

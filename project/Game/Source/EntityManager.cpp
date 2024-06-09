@@ -990,8 +990,8 @@ void EntityManager::showFinalkillPadre()
 		if (photoTransparent >= 255) {
 			photoTransparent = 255;
 			if (goScene) {
-
 				app->fadeToBlack->FadeToBlack(app->scene_mazmorra8, app->scene_logos);
+				app->menu->active = true;
 				//canShowFinal = false;
 			}
 			else

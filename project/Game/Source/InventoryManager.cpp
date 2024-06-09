@@ -1414,7 +1414,7 @@ bool InventoryManager::Update(float dt)
 
 	//BORRAR LA LINEA DE ABAJO CUANDO SE HAYA IMPLEMENTADO EL TUTORIAL CON SUS BOOLS ARRIBA
 	/*storyLevel = app->ascensor->totalMazmorras;*/
-	printf("\rstoryLevel %d", storyLevel);
+	//printf("\rstoryLevel %d", storyLevel);
 	//BORRAR LA LINEA DE ARRIBA CUANDO SE HAYA IMPLEMENTADO EL TUTORIAL CON SUS BOOLS ARRIBA
 
 
