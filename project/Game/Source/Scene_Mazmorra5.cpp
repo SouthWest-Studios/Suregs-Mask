@@ -70,8 +70,8 @@ bool Scene_Mazmorra5::Start()
 	gcButtom = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);*/
 
 
-	if (app->questManager->GetQuestLineIndex(1) == 18) {
-		app->questManager->UpdateQuestLine(1, 19);
+	if (app->questManager->GetQuestLineIndex(1) == 19) {
+		app->questManager->UpdateQuestLine(1, 20);
 	}
 
 	app->entityManager->Enable();

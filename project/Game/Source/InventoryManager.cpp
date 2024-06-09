@@ -23,6 +23,7 @@
 #include "Menu.h"
 #include "Scene_Pueblo.h"
 #include "Scene_Pueblo_Tutorial.h"
+#include "QuestManager.h"
 
 InventoryManager::InventoryManager(App* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -1388,11 +1389,15 @@ bool InventoryManager::Update(float dt)
 	}
 	
 	//DESCOMENTAR CUANDO SE HAYA IMPLEMENTADO EL TUTORIAL CON SUS BOOLS
-	 if(app->tutorialHasFinished && dungeon0Entered)
-	 {
+	if(app->tutorialHasFinished && dungeon0Entered && app->questManager->GetQuestLineIndex(1) >= 10)
+	{
 	 	storyLevel = app->ascensor->totalMazmorras + 2;
+	}
+	 else if(app->tutorialHasFinished && dungeon0Entered)
+	 {
+	 	storyLevel = app->ascensor->totalMazmorras + 1;
 	 }
-	 else if(app->tutorialHasFinished == true && !dungeon0Entered)
+	 else if(app->tutorialHasFinished && !dungeon0Entered)
 	 {
 	 	storyLevel = 2;
 	 }
@@ -1404,7 +1409,7 @@ bool InventoryManager::Update(float dt)
 
 	//BORRAR LA LINEA DE ABAJO CUANDO SE HAYA IMPLEMENTADO EL TUTORIAL CON SUS BOOLS ARRIBA
 	/*storyLevel = app->ascensor->totalMazmorras;*/
-	////printf("storyLevel %d\n", storyLevel);
+	//printf("\rstoryLevel %d", storyLevel);
 	//BORRAR LA LINEA DE ARRIBA CUANDO SE HAYA IMPLEMENTADO EL TUTORIAL CON SUS BOOLS ARRIBA
 
 
