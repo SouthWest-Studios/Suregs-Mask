@@ -468,7 +468,10 @@ bool Hud::PostUpdate()
 	}
 	else
 	{
-		app->physics->active = true;
+		if (couunt > 0)
+		{
+			app->physics->active = true;
+		}
 		couunt = 0;
 	}
 

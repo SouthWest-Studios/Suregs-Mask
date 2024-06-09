@@ -595,10 +595,6 @@ Elevator* EntityManager::GetAscensor()
 	return ascensor;
 }
 
-Estatua* EntityManager::GetEstatua()
-{
-	return estatua;
-}
 
 
 bool EntityManager::PreUpdate()

@@ -158,7 +158,7 @@ private:
 	Boss_Igory* bossIgory = nullptr;
 	Cofre* cofre = nullptr;
 	Elevator* ascensor = nullptr;
-	Estatua* estatua = nullptr;
+	/*Estatua* estatua = nullptr;*/
 
 	//pugi::xml_node config;
 	
