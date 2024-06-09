@@ -253,6 +253,19 @@ bool Boss_Surma::CleanUp()
 	app->tex->UnLoad(textureExplosion);
 	lastPath.Clear();
 
+	if (attackSensor != nullptr) {
+		app->physics->DestroyBody(attackSensor);
+	}
+
+	if (attackSensor2 != nullptr) {
+		app->physics->DestroyBody(attackSensor2);
+	}
+
+	if (attackBigSensor != nullptr) {
+		app->physics->DestroyBody(attackBigSensor);
+	}
+
+
 
 	RELEASE(spritePositions);
 	delete spritePositions;
