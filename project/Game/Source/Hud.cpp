@@ -323,6 +323,8 @@ bool Hud::PostUpdate()
 		app->render->DrawTexture(hudTexture, rectFondoBarraVida->x + 179, rectFondoBarraVida->y + 44, 1.0, SDL_FLIP_NONE, rectBarraVidaCalculado, 0);
 	}
 
+	delete rectBarraVidaCalculado;
+
 
 	//Monedas
 	std::string quantityStr = std::to_string(monedasObtenidasHud);

@@ -107,6 +107,23 @@ bool DebugConsole::Awake(pugi::xml_node config)
 			app->entityManager->GetPlayer()->UpdateStats();
 			app->entityManager->GetPlayer()->currentStats.currentHealth = app->entityManager->GetPlayer()->currentStats.maxHealth;
 
+			if (id == 9) {
+				app->inventoryManager->maskZeroPoints = 8;
+				app->inventoryManager->maskOnePoints = 8;
+				app->inventoryManager->maskTwoPoints = 8;
+				app->inventoryManager->maskThreePoints = 8;
+			}
+			else {
+				app->inventoryManager->maskZeroPoints = id;
+				app->inventoryManager->maskOnePoints = id;
+				app->inventoryManager->maskTwoPoints = id;
+				app->inventoryManager->maskThreePoints = id;
+			}
+
+			app->inventoryManager->numMasks = 4;
+			
+
+
 		}
 		});
 	commandList.Add(UNLOCKED);

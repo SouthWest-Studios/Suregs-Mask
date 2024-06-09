@@ -166,6 +166,8 @@ bool EntityManager::Start() {
 
 
 
+	//delete spritePositions;
+
 	currentAnimation = &eyeIdle;
 
 

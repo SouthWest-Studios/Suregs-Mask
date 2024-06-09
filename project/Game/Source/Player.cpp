@@ -543,6 +543,9 @@ Player::Player() : Entity(EntityType::PLAYER)
 	secondaryMask = Mask::NOMASK;
 
 
+
+
+
 }
 
 Player::~Player() {
