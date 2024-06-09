@@ -41,6 +41,24 @@
 			<vortexSensitive state = "false"/>
 		</emitter>
 
+		<emitter type ="ols_ataque_variacion">
+			<angleRange min ="70" max ="110"/>
+			<rotSpeed value ="0" randMin = "-1" randMax ="1"/>
+			<startSpeed value ="0.05f" randMin = "0" randMax ="1"/>
+			<endSpeed value ="0.05f" randMin = "0" randMax ="1"/>
+			<startSize value ="100" randMin ="0" randMax ="1"/>
+			<endSize value ="50" randMin ="1" randMax ="1"/>
+			<emitNumber value ="1"/>
+			<emitVariance value ="0" randMin = "0" randMax ="1"/>
+			<maxParticleLife value ="50" randMin = "0" randMax ="1"/>
+			<textureRect x="0" y="0" w="128" h="128"/>
+			<startColor r ="160" g="51" b="170" a="200"/>
+			<endColor r ="160" g="51" b="170" a ="0"/>
+			<blendMode mode ="blend"/>
+			<lifetime value ="2500"/>
+			<vortexSensitive state = "false"/>
+		</emitter>
+
 		<emitter type ="fire_purple">
 			<angleRange min ="80" max ="110"/>
 			<rotSpeed value ="0" randMin = "-1" randMax ="1"/>
