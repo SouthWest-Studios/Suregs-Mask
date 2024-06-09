@@ -861,6 +861,8 @@ void Boss_Igory::Die() {
 		startDialogo = true;
 		startDialogoTimer.Start();
 		dieDefinit = true;
+		app->entityManager->showFinal = true;
+		app->entityManager->canShowFinal = true;
 	}
 
 

@@ -65,7 +65,7 @@ bool NPCPadre::Start() {
 	pbody->ctype = ColliderType::BOSS_INUIT;
 
 
-
+	app->entityManager->playerTPboss = true;
 	pugi::xml_parse_result  parseResult = dialogoFile.load_file("dialogs.xml");
 	pugi::xml_node dialogoPadre = dialogoFile.child("dialogues");
 	dialogNode = dialogoPadre.find_child_by_attribute("dialog", "id", "2001").child("sentences").child("sentence");
@@ -137,7 +137,7 @@ void NPCPadre::OnCollision(PhysBody* physA, PhysBody* physB) {
 				app->entityManager->GetIgory()->curaTimer.Start();
 				CleanUp();
 			}
-			
+
 		}
 		if (!app->dialogManager->isPlaying && (app->input->GetButton(CONFIRM) == KEY_DOWN) && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady) {
 			if (!dialogoMostrado) {

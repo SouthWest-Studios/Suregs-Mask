@@ -80,6 +80,7 @@ bool Scene_Menu::Start()
 	messageBackground = app->tex->Load(messageBackground_tp);
 
 	app->entityManager->canShowFinal = false;
+	app->entityManager->showFinal = false;
 	//SAVE 1
 	pugi::xml_node game_stateOne;
 	pugi::xml_parse_result parseResultSaveOne = saveOneFile.load_file("save_game.xml");
@@ -506,7 +507,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 			((GuiCheckBox*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->click = false;
 
 		}*/
-	//BOTON CONFIRMAR NUEVA PARTIDA
+		//BOTON CONFIRMAR NUEVA PARTIDA
 	case 28:
 		if (app->fadeToBlack->currentStep == 0) {
 			app->fadeToBlack->FadeToBlack(this, app->scene_cinematic);
@@ -554,7 +555,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 			app->tiempoDeJuego = 0;
 		}
 		break;
-	//VOLVER MAIN MENU
+		//VOLVER MAIN MENU
 	case 23:
 		showNewGames = false;
 		_showNewGames = false;
@@ -582,7 +583,7 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		app->guiManager->maxId = 6;
 		app->guiManager->pointerId = 1;
 		break;
-	//BOTONES NUEVA PARTIDA
+		//BOTONES NUEVA PARTIDA
 	case 24:
 		partidaOnePressed = true;
 		app->tutorialHasFinished = false;
@@ -622,8 +623,8 @@ bool Scene_Menu::OnGuiMouseClickEvent(GuiControl* control)
 		app->guiManager->pointerId = 32;
 		break;
 
-	//BOTONES ATRAS PARTIDA CONFIRMED
-	case 27: 
+		//BOTONES ATRAS PARTIDA CONFIRMED
+	case 27:
 		partidaOnePressed = false;
 		nuevaPartida1->state = GuiControlState::NORMAL;
 		nuevaPartida2->state = GuiControlState::NORMAL;
@@ -831,11 +832,11 @@ void Scene_Menu::SettingsInterface()
 		}
 
 
-		if (fullscreen->selected && (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady || app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady ))
+		if (fullscreen->selected && (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady || app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady))
 		{
 			fullscreen->click = !fullscreen->click;
 		}
-		if (vsync->selected && (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady || app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady  && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady ))
+		if (vsync->selected && (app->input->GetButton(CONFIRM) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady || app->input->GetButton(SELECT) == KEY_DOWN && !app->scene_pueblo->GetRod()->fishing.rodReady && !app->scene_pueblo_tutorial->GetRod()->fishing.rodReady))
 		{
 			vsync->click = !vsync->click;
 		}
@@ -990,7 +991,7 @@ void Scene_Menu::ShowSavedGames()
 		partida1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 13, "PARTIDA GUARDADA 1", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 510,	180,25 }, this);
 		partida2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, "PARTIDA GUARDADA 2", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 420,	180,25 }, this);
 		partida3 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, "PARTIDA GUARDADA 3", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH - 325,	180,25 }, this);
-		
+
 		gcCloseSavedGames = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 16, "ATRÁS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 200,	60,25 }, this);
 		_showSavedGames = true;
 	}
@@ -1017,14 +1018,14 @@ void Scene_Menu::ShowSavedGames()
 		timeOne = app->convertirTiempo(app->tiempoDeJuegoMostrarSlot1);
 		app->render->DrawTextBound(timeOne.c_str(), 510, 257, 90);
 	}
-	
+
 	if (app->tiempoDeJuegoMostrarSlot2 != NULL && app->tutorialHasFinishedSlot2)
 	{
 		app->render->DrawTexture(clock, 485, 349, 0.65f);
 		timeTwo = app->convertirTiempo(app->tiempoDeJuegoMostrarSlot2);
 		app->render->DrawTextBound(timeTwo.c_str(), 510, 349, 90);
 	}
-	
+
 	if (app->tiempoDeJuegoMostrarSlot3 != NULL && app->tutorialHasFinishedSlot3)
 	{
 		app->render->DrawTexture(clock, 485, 443, 0.65f);
@@ -1067,7 +1068,7 @@ void Scene_Menu::ShowSavedGames()
 		titleTwo = app->questManager->GetQuestTitle(1, actualQuestIndexTwo);
 		app->render->DrawTextBound(titleTwo.c_str(), 455, 322, 700);
 	}
-	
+
 	if (actualQuestIndexThree != NULL && app->tutorialHasFinishedSlot3)
 	{
 		titleThree = app->questManager->GetQuestTitle(1, actualQuestIndexThree);

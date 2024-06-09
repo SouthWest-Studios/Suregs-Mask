@@ -322,7 +322,7 @@
     <ClCompile Include="Source\Elevator.cpp">
       <Filter>Entities\Ascensor</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Boss_Igorv.cpp">
+    <ClCompile Include="Source\Boss_Igory.cpp">
       <Filter>Entities\Boss</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene_Mazmorra8.cpp">

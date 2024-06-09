@@ -128,6 +128,8 @@ public:
 	bool canShowFinal = true;
 	bool isFinishi = false;
 	bool goPadreCleanUp = false;
+	bool playerTPboss = true;
+	bool showFinal = false;
 	Timer stayTime;
 	SDL_Texture* textureKillPadre = nullptr;
 	SDL_Texture* textureUnirPadre = nullptr;

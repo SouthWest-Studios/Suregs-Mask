@@ -131,7 +131,7 @@
     <ClCompile Include="Source\GuiControlSlider.cpp" />
     <ClCompile Include="Source\GuiManager.cpp" />
     <ClCompile Include="Source\Hud.cpp" />
-    <ClCompile Include="Source\Boss_Igorv.cpp" />
+    <ClCompile Include="Source\Boss_Igory.cpp" />
     <ClCompile Include="Source\InventoryManager.cpp" />
     <ClCompile Include="Source\Item.cpp" />
     <ClCompile Include="Source\Item_Amastita.cpp" />

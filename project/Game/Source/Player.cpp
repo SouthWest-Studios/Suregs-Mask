@@ -748,10 +748,11 @@ bool Player::Update(float dt)
 		vacio = false;
 	}
 
-	if (app->entityManager->canShowFinal) {
+	if (app->entityManager->playerTPboss) {
 		if (app->entityManager->GetIgory() != nullptr && app->entityManager->GetIgory()->playerInFight && !playerTpBossPadre) {
 			pbodyFoot->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y - 10)), 0);
 			playerTpBossPadre = true;
+			app->entityManager->playerTPboss = false;
 		}
 	}
 	if (insideVacio && !isDashing && !godmode) {
