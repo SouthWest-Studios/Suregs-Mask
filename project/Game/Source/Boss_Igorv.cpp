@@ -148,8 +148,8 @@ bool Boss_Igory::Update(float dt)
 		if (!partFase3Created) {
 			particulaFase2 = nullptr;
 			app->psystem->RemoveAllEmitters();
-			fPoint pos2((float)position.x, (float)position.y);
-			particulaFase3 = app->psystem->AddEmiter(pos2, EMITTER_TYPE_FIRE_MASK3);
+			fPoint pos2((float)position.x + 20.0f, (float)position.y - 105.0f);
+			particulaFase3 = app->psystem->AddEmiter(pos2, EMITTER_TYPE_FASE3_IGORV);
 			partFase3Created = true;
 		}
 
@@ -325,7 +325,7 @@ bool Boss_Igory::Update(float dt)
 		particulaFase2->MoveEmitter(pos);
 	}
 	if (particulaFase3 != nullptr) {
-		fPoint pos((float)position.x, (float)position.y);
+		fPoint pos((float)position.x + 20.0f, (float)position.y - 105.0f);
 		particulaFase3->MoveEmitter(pos);
 	}
 

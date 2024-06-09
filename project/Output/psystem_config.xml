@@ -305,14 +305,30 @@
 			<emitVariance value ="0" randMin = "0" randMax ="1"/>
 			<maxParticleLife value ="25" randMin = "0" randMax ="1"/>
 			<textureRect x="0" y="0" w="128" h="128"/>
-			<startColor r ="30" g="144" b="255" a="120"/>
-			<endColor r ="80" g="144" b="255" a ="20"/>
+			<startColor r ="0" g="76" b="153" a="120"/>
+			<endColor r ="0" g="76" b="153" a ="20"/>
 			<blendMode mode ="blend"/>
 			<lifetime value ="-1"/>
 			<vortexSensitive state = "false"/>
 		</emitter>
-
-
+		
+		<emitter type ="fase3_Igorv">
+			<angleRange min ="70" max ="110"/>
+			<rotSpeed value ="0" randMin = "-1" randMax ="1"/>
+			<startSpeed value ="0.05f" randMin = "0" randMax ="1"/>
+			<endSpeed value ="0.05f" randMin = "0" randMax ="1"/>
+			<startSize value ="100" randMin ="0" randMax ="1"/>
+			<endSize value ="50" randMin ="1" randMax ="1"/>
+			<emitNumber value ="1"/>
+			<emitVariance value ="0" randMin = "0" randMax ="1"/>
+			<maxParticleLife value ="25" randMin = "0" randMax ="1"/>
+			<textureRect x="0" y="0" w="128" h="128"/>
+			<startColor r ="160" g="51" b="170" a="120"/>
+			<endColor r ="160" g="51" b="170" a ="20"/>
+			<blendMode mode ="blend"/>
+			<lifetime value ="-1"/>
+			<vortexSensitive state = "false"/>
+		</emitter>
 
 	</particleAtlas>
 </emitters>
