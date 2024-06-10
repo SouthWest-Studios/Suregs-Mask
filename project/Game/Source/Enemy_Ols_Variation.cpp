@@ -295,6 +295,9 @@ void Enemy_Ols_Variation::Die() {
 		deathFx = true;
 	}
 
+	currentAnimation = &dieAnim;
+	currentAnimation->Update();
+
 	if(dieAnim.HasFinished()){
 		deathFx = false;
 		fPoint pos((float)position.x, (float)position.y);
