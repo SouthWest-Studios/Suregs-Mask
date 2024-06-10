@@ -102,11 +102,11 @@ bool Enemy_Ols::Start() {
 
 bool Enemy_Ols::Update(float dt)
 {
-	if (dieAnim.HasFinished())
+	/*if (dieAnim.HasFinished())
 	{
 		Die();
 		return true;
-	}
+	}*/
 	OPTICK_EVENT();
 
 	iPoint playerPos = app->entityManager->GetPlayer()->position;
@@ -200,7 +200,7 @@ bool Enemy_Ols::PostUpdate() {
 
 	if (particulaAtaque != nullptr) {
 		fPoint pos((float)projectilePosition.x, (float)projectilePosition.y);
-		particulaAtaque->MoveEmitter(pos);
+		/*particulaAtaque->MoveEmitter(pos);*/
 	}
 
 	b2Transform pbodyPos = pbodyFoot->body->GetTransform();
@@ -220,7 +220,7 @@ bool Enemy_Ols::CleanUp()
 	app->tex->UnLoad(projectileTexture);
 
 	app->psystem->RemoveAllEmitters();
-	particulaAtaque = nullptr;
+	/*particulaAtaque = nullptr;*/
 	blood = nullptr;
 
 	RELEASE(spritePositions);
@@ -273,7 +273,7 @@ void Enemy_Ols::Attack(float dt, iPoint playerPos)
 		projectilePosition = position;
 
 		fPoint pos((float)projectilePosition.x, (float)projectilePosition.y);
-		particulaAtaque = app->psystem->AddEmiter(pos, EMITTER_TYPE_OLS_ATAQUE);
+		/*particulaAtaque = app->psystem->AddEmiter(pos, EMITTER_TYPE_OLS_ATAQUE);*/
 
         b2Vec2 direction = b2Vec2(playerPos.x - position.x, playerPos.y-position.y);  
         direction.Normalize();
@@ -301,7 +301,7 @@ void Enemy_Ols::Die() {
 	{
 		deathFx = false;
 		fPoint pos((float)position.x, (float)position.y);
-		blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_ENEMY_BLOOD);
+		/*blood = app->psystem->AddEmiter(pos, EMITTER_TYPE_ENEMY_BLOOD);*/
 
 		pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
 		if (parseResult) {
