@@ -577,7 +577,7 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->name4 = "Aumento I";
 			entity->desc = "Activa la capacidad de veneno al usar la habilidad principal";
 			entity->desc1 = "Activa la capacidad de veneno al usar la habilidad principal";
-			entity->desc2 = "Aumenta la duración de la habilidad principal a 6 segundos";
+			entity->desc2 = "Aumenta el tiempo de la habilidad principal a 6 segundos";
 			entity->desc3 = "Aumenta la vida que otorga la habilidad principal un 5%";
 			entity->usable1 = true;
 			entity->usable2 = true;
