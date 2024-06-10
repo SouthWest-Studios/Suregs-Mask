@@ -453,6 +453,10 @@ void MiniGameFishing::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (fishing.fishingtype == FISHINGTYPE::FISHING) {
 			lotteryrandomNum = getRandomNumber(2, 4);
 		}
+		else {
+			lure_lotteryrandomNum = getRandomNumber(3, 7);
+			lureRandomTime = true;
+		}//end_if, React differently based on the different fishing rods
 		thistimehooked = true;
 		break;
 	case ColliderType::UNKNOWN:
