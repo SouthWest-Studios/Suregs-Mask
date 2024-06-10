@@ -295,6 +295,9 @@ void Enemy_Ols_Variation::Die() {
 		deathFx = true;
 	}
 
+	currentAnimation = &dieAnim;
+	currentAnimation->Update();
+
 	if(dieAnim.HasFinished()){
 		deathFx = false;
 		fPoint pos((float)position.x, (float)position.y);
@@ -320,7 +323,7 @@ void Enemy_Ols_Variation::Die() {
 		//app->physics->GetWorld()->DestroyBody(pbodyFoot->body);LIN
 		//app->physics->DestroyBody(pbodyFoot);
 		//app->tex->UnLoad(texture);
-
+		currentAnimation = &dieAnim;
 		if(currentAnimation == &dieAnim && currentAnimation->HasFinished()){
 			CleanUp();
 		}
