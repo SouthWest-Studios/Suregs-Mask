@@ -436,7 +436,6 @@ bool App::DoUpdate()
 		if (pModule->active == false) {
 			continue;
 		}
-		
 		ret = item->data->Update(dt);
 	}
 
