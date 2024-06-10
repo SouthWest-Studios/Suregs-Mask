@@ -8,7 +8,7 @@
 	<map>
 		<map>
 			<puzzles>
-				<puzzle level="0" complete="false" />
+				<puzzle level="0" complete="true" />
 				<puzzle level="1" complete="false" />
 				<puzzle level="2" complete="false" />
 				<puzzle level="3" complete="false" />
@@ -25,10 +25,18 @@
 			</bosses>
 		</map>
 	</map>
-	<pueblo_tutorial />
+	<scene_pueblo />
 	<entitymanager>
 		<entity_manager>
-			<doors />
+			<doors>
+				<door sceneLevel="-10" tpID="8" />
+				<door sceneLevel="-10" tpID="9" />
+				<door sceneLevel="-10" tpID="0" />
+				<door sceneLevel="-10" tpID="2" />
+				<door sceneLevel="-10" tpID="4" />
+				<door sceneLevel="-10" tpID="1" />
+				<door sceneLevel="-10" tpID="3" />
+			</doors>
 		</entity_manager>
 	</entitymanager>
 	<missionmanager />
@@ -42,17 +50,17 @@
 			<primaryMask quantity="-1" />
 			<secondaryMask quantity="-1" />
 			<storyLevel quantity="1" />
-			<dungeon0Entered quantity="false" />
+			<dungeon0Entered quantity="true" />
 			<mask0 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
 			<mask1 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
 			<mask2 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
 			<mask3 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
-			<maskNum n="0" info="Esta variable son las mascaras que tienes desbloqueadas" />
+			<maskNum n="1" info="Esta variable son las mascaras que tienes desbloqueadas" />
 			<maskPoints>
-				<maskPointZero points="2" />
-				<maskPointOne points="2" />
-				<maskPointTwo points="2" />
-				<maskPointThree points="2" />
+				<maskPointZero points="0" />
+				<maskPointOne points="0" />
+				<maskPointTwo points="0" />
+				<maskPointThree points="0" />
 			</maskPoints>
 			<masksXP>
 				<maskZeroXP XP="0" />
@@ -61,13 +69,13 @@
 				<maskThreeXP XP="0" />
 			</masksXP>
 			<masksXP>
-				<XPtoLevelUpZero XP="1200" />
+				<XPtoLevelUpZero XP="800" />
 				<XPtoLevelUpOne XP="800" />
 				<XPtoLevelUpTwo XP="800" />
 				<XPtoLevelUpThree XP="800" />
 			</masksXP>
 			<masksLevel>
-				<maskLevelZero level="2" />
+				<maskLevelZero level="1" />
 				<maskLevelOne XP="1" />
 				<maskLevelTwo XP="1" />
 				<maskLevelThree XP="1" />
@@ -78,7 +86,7 @@
 	<commercemanager />
 	<questmanager>
 		<questLines>
-			<questLine id="1" index="3" active="true" completed="false" />
+			<questLine id="1" index="2" active="true" completed="false" />
 			<questLine id="2" index="1" active="false" completed="false" />
 		</questLines>
 	</questmanager>

@@ -829,7 +829,7 @@ bool Player::Update(float dt)
 		desiredState = EntityStatePlayer::POCION;
 	}
 
-	printf("\nposx:%d, posy: %d",position.x, position.y);
+	//printf("\nposx:%d, posy: %d",position.x, position.y);
 
 	if (maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].invisibilityTimer.ReadSec() > maskStats[primaryMask][Branches::Rama4][maskLevels[primaryMask][Branches::Rama4]].invisibilityDuration) {
 		SDL_SetTextureAlphaMod(texture, 255);
@@ -967,7 +967,10 @@ bool Player::PostUpdate() {
 
 	if (levelUpZero == true || levelUpOne == true || levelUpTwo == true || levelUpThree == true)
 	{
-		app->render->DrawTexture(app->hud->levelUpTexture, 550, 25, 1.3f, SDL_FLIP_NONE, 0, 0);
+		if (!app->scene_pueblo_tutorial->active) {
+			app->render->DrawTexture(app->hud->levelUpTexture, 550, 25, 1.3f, SDL_FLIP_NONE, 0, 0);
+		}
+		
 	}
 
 
@@ -978,7 +981,7 @@ bool Player::PostUpdate() {
 			timerLevelUpZeroStarted = true;
 		}
 
-		if (timerLevelUpZero.ReadSec() <= 3)
+		if (timerLevelUpZero.ReadSec() <= 3 && !app->scene_pueblo_tutorial->active)
 		{
 			app->render->DrawTexture(app->hud->maskZeroTexture, 755, 25, 1.3f, SDL_FLIP_NONE, 0, 0);
 		}
@@ -997,7 +1000,7 @@ bool Player::PostUpdate() {
 			timerLevelUpOneStarted = true;
 		}
 
-		if (timerLevelUpOne.ReadSec() <= 3)
+		if (timerLevelUpOne.ReadSec() <= 3 && !app->scene_pueblo_tutorial->active)
 		{
 			app->render->DrawTexture(app->hud->maskOneTexture, 812, 25, 1.3f, SDL_FLIP_NONE, 0, 0);
 		}
@@ -1016,7 +1019,7 @@ bool Player::PostUpdate() {
 			timerLevelUpTwoStarted = true;
 		}
 
-		if (timerLevelUpTwo.ReadSec() <= 3)
+		if (timerLevelUpTwo.ReadSec() <= 3 && !app->scene_pueblo_tutorial->active)
 		{
 			app->render->DrawTexture(app->hud->maskTwoTexture, 867, 20, 1.3f, SDL_FLIP_NONE, 0, 0);
 		}
@@ -1034,7 +1037,7 @@ bool Player::PostUpdate() {
 			timerLevelUpThreeStarted = true;
 		}
 
-		if (timerLevelUpThree.ReadSec() <= 3)
+		if (timerLevelUpThree.ReadSec() <= 3 && !app->scene_pueblo_tutorial->active)
 		{
 			app->render->DrawTexture(app->hud->maskThreeTexture, 924, 25, 1.3f, SDL_FLIP_NONE, 0, 0);
 		}

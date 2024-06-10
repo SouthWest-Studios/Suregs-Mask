@@ -671,7 +671,7 @@ a
 		<sentences>
 			<sentence name="Dorothy"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/dorothyFace.png"
-			text="Hola Jakhov, ¡hay que ver cómo creces! Hace nada eras aún un niño..."/>
+			text="Hola Jakov, ¡hay que ver cómo creces! Hace nada eras aún un niño..."/>
 
 			<sentence name="Hely"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/helyFace.png"
@@ -691,7 +691,7 @@ a
 
 			<sentence name="Hely"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/helyFace.png"
-			text="¿Te encuentras bien Jakhov? Normalmente no eres tan hablador, creo que es una mala costumbre que se te pegó de tu abuela..."/>
+			text="¿Te encuentras bien Jakov? Normalmente no eres tan hablador, creo que es una mala costumbre que se te pegó de tu abuela..."/>
 
 			<sentence name="Pathy"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/pathyFace.png"
@@ -719,7 +719,7 @@ a
 		<sentences>
 			<sentence name="Dorothy"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/dorothyFace.png"
-			text="¡Hola Jakhov! Estábamos recordando viejos tiempos del pueblo, recordábamos lo apuesto que era tu padre, siempre tan servicial..."/>
+			text="¡Hola Jakov! Estábamos recordando viejos tiempos del pueblo, recordábamos lo apuesto que era tu padre, siempre tan servicial..."/>
 
 			<sentence name="Hely"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/helyFace.png"
@@ -735,7 +735,7 @@ a
 		<sentences>
 			<sentence name="Dorothy"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/dorothyFace.png"
-			text="¿Tú de nuevo? Realmente te estás volviendo muy abierto con nosotras, Jakhov..."/>
+			text="¿Tú de nuevo? Realmente te estás volviendo muy abierto con nosotras, Jakov..."/>
 
 			<sentence name="Hely"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/helyFace.png"
@@ -743,7 +743,7 @@ a
 
 			<sentence name="Pathy"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/pathyFace.png"
-			text="Cada vez pareces más confiado, Jakhov. Te debes estar esforzando mucho entrenando en el bosque, cada día vas por allí..."/>
+			text="Cada vez pareces más confiado, Jakov. Te debes estar esforzando mucho entrenando en el bosque, cada día vas por allí..."/>
 		</sentences>
 	</dialog>
 
@@ -751,7 +751,7 @@ a
 		<sentences>
 			<sentence name="Dorothy"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/dorothyFace.png"
-			text="Vaya día que llevamos Jakhov, este clima es muy malo para nosotras..."/>
+			text="Vaya día que llevamos Jakov, este clima es muy malo para nosotras..."/>
 
 			<sentence name="Hely"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/helyFace.png"
@@ -767,7 +767,7 @@ a
 		<sentences>
 			<sentence name="Dorothy"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/dorothyFace.png"
-			text="¡Que alivio! Muchas gracias Jakhov, Zhyuka nos comentó que encontraste por casualidad un objeto que potencia sus pociones..."/>
+			text="¡Que alivio! Muchas gracias Jakov, Zhyuka nos comentó que encontraste por casualidad un objeto que potencia sus pociones..."/>
 
 			<sentence name="Hely"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/helyFace.png"
@@ -775,7 +775,7 @@ a
 
 			<sentence name="Pathy"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/pathyFace.png"
-			text="Es cierto, no deberías acercarte Jakhov, puedes seguir entrenando en el bosque, como siempre haces..."/>
+			text="Es cierto, no deberías acercarte Jakov, puedes seguir entrenando en el bosque, como siempre haces..."/>
 		</sentences>
 	</dialog>
 
@@ -783,11 +783,11 @@ a
 		<sentences>
 			<sentence name="Dorothy"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/dorothyFace.png"
-			text="¿Otra vez por aquí? Como me alegra hablar con gente joven como tú, Jakhov. Además, veo mucho más fuerte últimamente..."/>
+			text="¿Otra vez por aquí? Como me alegra hablar con gente joven como tú, Jakov. Además, veo mucho más fuerte últimamente..."/>
 
 			<sentence name="Hely"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/helyFace.png"
-			text="Es cierto, te estás conviertiendo en un auténtico hombre Jakhov, cada vez te pareces más a tu padre..."/>
+			text="Es cierto, te estás conviertiendo en un auténtico hombre Jakov, cada vez te pareces más a tu padre..."/>
 
 			<sentence name="Pathy"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/pathyFace.png"
@@ -799,7 +799,7 @@ a
 		<sentences>
 			<sentence name="Dorothy"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/dorothyFace.png"
-			text="¡Jakhov! Ven aquí ahora mismo, estamos muy enfadadas contigo..."/>
+			text="¡Jakov! Ven aquí ahora mismo, estamos muy enfadadas contigo..."/>
 
 			<sentence name="Hely"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/helyFace.png"
@@ -840,7 +840,7 @@ a
 		<sentences>
 			<sentence name="Patzo"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzoFace.png"
-			text="Hombre, Jakhov, ¿tanta prisa llevas? No disfrutas de los placeres de la vida..."/>
+			text="Hombre, Jakov, ¿tanta prisa llevas? No disfrutas de los placeres de la vida..."/>
 
 			<sentence name="Patza"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzaFace.png"
@@ -864,7 +864,7 @@ a
 		<sentences>
 			<sentence name="Patzo"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzoFace.png"
-			text="¡Hola Jakhov! Estamos aquí tranquilos, ¿cómo te encuentras tú? Hoy no estás muy animado..."/>
+			text="¡Hola Jakov! Estamos aquí tranquilos, ¿cómo te encuentras tú? Hoy no estás muy animado..."/>
 
 			<sentence name="Patza"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzaFace.png"
@@ -880,7 +880,7 @@ a
 
 			<sentence name="Patza"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzaFace.png"
-			text="Sí, lo siento Jakhov, estamos hablando de cosas de pareja..."/>
+			text="Sí, lo siento Jakov, estamos hablando de cosas de pareja..."/>
 		</sentences>
 	</dialog>
 
@@ -888,7 +888,7 @@ a
 		<sentences>
 			<sentence name="Patzo"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzoFace.png"
-			text="Jakhov, ¿puedes decirle, por favor, que no tiene sentido irnos del pueblo? A mí no me hace ni caso..."/>
+			text="Jakov, ¿puedes decirle, por favor, que no tiene sentido irnos del pueblo? A mí no me hace ni caso..."/>
 
 			<sentence name="Patza"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzaFace.png"
@@ -900,7 +900,7 @@ a
 		<sentences>
 			<sentence name="Patzo"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzoFace.png"
-			text="Nada, Jakhov, no va a querer hablar contigo..."/>
+			text="Nada, Jakov, no va a querer hablar contigo..."/>
 
 			<sentence name="Patza"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzaFace.png"
@@ -912,7 +912,7 @@ a
 		<sentences>
 			<sentence name="Patzo"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzoFace.png"
-			text="¡Hombre Jakhov! Te veo más guapetón, ¿eh, chaval? Te ves bien..."/>
+			text="¡Hombre Jakov! Te veo más guapetón, ¿eh, chaval? Te ves bien..."/>
 
 			<sentence name="Patza"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzaFace.png"
@@ -924,7 +924,7 @@ a
 		<sentences>
 			<sentence name="Patzo"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzoFace.png"
-			text="¡Hola Jakhov, te tenemos que decir algo súper importante! Díselo Patza..."/>
+			text="¡Hola Jakov, te tenemos que decir algo súper importante! Díselo Patza..."/>
 
 			<sentence name="Patza"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzaFace.png"
@@ -936,7 +936,7 @@ a
 		<sentences>
 			<sentence name="Patzo"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzoFace.png"
-			text="Que feliz estoy por mi boda Jakhov, ¡espero que vengas bien guapo! Díselo también a tu abuela..."/>
+			text="Que feliz estoy por mi boda Jakov, ¡espero que vengas bien guapo! Díselo también a tu abuela..."/>
 
 			<sentence name="Patza"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/patzaFace.png"
@@ -961,7 +961,7 @@ a
 		<sentences>
 			<sentence name="Hemyl"
 					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
-					  text="¡Qué madrugón Jakhov! ¿Vas a entrenar tan pronto? Que madrugón..."/>
+					  text="¡Qué madrugón Jakov! ¿Vas a entrenar tan pronto? Que madrugón..."/>
 			<sentence name="Hemyl"
 					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
 					  text="¡Hay que ver cómo te esfuerzas! Por cierto, ¿antes de salir puedes darle esto a tu abuela? Es importante..."/>
@@ -981,7 +981,7 @@ a
 					  text="Recuerda darle recuerdos a Vhea, mañana os llevaré la compra, es una pena que desde entonces no quiera salir de casa..."/>
 			<sentence name="Hemyl"
 					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
-					  text="Cuídala mucho Jakhov, cuando te haces mayor empiezas a entender que la vida es muy corta, no te vayas de este mundo con remordimientos..."/>
+					  text="Cuídala mucho Jakov, cuando te haces mayor empiezas a entender que la vida es muy corta, no te vayas de este mundo con remordimientos..."/>
 		</sentences>
 	</dialog>
 
@@ -989,13 +989,13 @@ a
 		<sentences>
 			<sentence name="Hemyl"
 					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
-					  text="¡Jakhov! Se ha corrido la voz por todo el pueblo de que te has metido a la cueva del demonio..."/>
+					  text="¡Jakov! Se ha corrido la voz por todo el pueblo de que te has metido a la cueva del demonio..."/>
 			<sentence name="Hemyl"
 					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
 					  text="Ya sabes que yo siempre te apoyaré en lo que hagas, y si este es el camino que has escogido, no hay alternativa..."/>
 			<sentence name="Hemyl"
 					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
-					  text="Pero piensa en las consecuencias de todo Jakhov, tu padre era igual y ya viste cómo terminó todo, recuerda que no puedes dejar a tu abuela sola..."/>
+					  text="Pero piensa en las consecuencias de todo Jakov, tu padre era igual y ya viste cómo terminó todo, recuerda que no puedes dejar a tu abuela sola..."/>
 		</sentences>
 	</dialog>
 
@@ -1023,7 +1023,7 @@ a
 					  text="He pasado algunos días por el campo a la hora de siempre y no te he visto, sabes que si pasa algo me lo puedes contar..."/>
 			<sentence name="Hemyl"
 					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
-					  text="Llevo desde que eras un niño contigo Jakhov, le prometí a tu abuelo que cuidaría de Vhea y su descendencia si él no estaba..."/>
+					  text="Llevo desde que eras un niño contigo Jakov, le prometí a tu abuelo que cuidaría de Vhea y su descendencia si él no estaba..."/>
 		</sentences>
 	</dialog>
 
@@ -1031,7 +1031,7 @@ a
 		<sentences>
 			<sentence name="Hemyl"
 					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
-					  text="Hola Jakhov, ¿quieres algo? Llevas un tiempo diferente, desde luego, eres más fuerte, más amable y más hablador..."/>
+					  text="Hola Jakov, ¿quieres algo? Llevas un tiempo diferente, desde luego, eres más fuerte, más amable y más hablador..."/>
 			<sentence name="Hemyl"
 					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
 					  text="- ¿Qué relación tienes con mi abuela?"/>
@@ -1045,7 +1045,7 @@ a
 		<sentences>
 			<sentence name="Hemyl"
 					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
-					  text="¿Qué pasa con esa cara Jakhov? Tienes las mismas expresiones que tu padre, ¡ja, ja, ja! Siempre con una sonrisa y con cara de pocos amigos..."/>
+					  text="¿Qué pasa con esa cara Jakov? Tienes las mismas expresiones que tu padre, ¡ja, ja, ja! Siempre con una sonrisa y con cara de pocos amigos..."/>
 			<sentence name="Hemyl"
 					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
 					  text="Sabes que yo no digo nada, pero creo que algunas personas de la aldea han descubierto tu pequeño secreto sobre la cueva..."/>
@@ -1059,7 +1059,7 @@ a
 		<sentences>
 			<sentence name="Hemyl"
 					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
-					  text="¡Vaya cara Jakhov! De verdad cada día te veo más preocupado por algo extraño..."/>
+					  text="¡Vaya cara Jakov! De verdad cada día te veo más preocupado por algo extraño..."/>
 			<sentence name="Hemyl"
 					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
 					  text="¿Tiene algo que ver con aquella cueva? Te está pasando lo mismo que a tu padre..."/>
@@ -1073,7 +1073,7 @@ a
 		<sentences>
 			<sentence name="Hemyl"
 					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
-					  text="Jakhov, ¿realmente sabes lo que estás haciendo? Todo el pueblo se ha enterado de lo de las mazmorras..."/>
+					  text="Jakov, ¿realmente sabes lo que estás haciendo? Todo el pueblo se ha enterado de lo de las mazmorras..."/>
 			<sentence name="Hemyl"
 					  facetexturepath="Assets/Textures/Interfaz/Dialogos/hemylFace.png"
 					  text="Sabes que yo te apoyaré en tu camino, pero deberías comprar una buena armadura y espadas para enfrentarte a lo que tu padre no pudo..."/>
@@ -1261,7 +1261,7 @@ a
 
 			<sentence name="Rapho"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
-			text="¿Como estamos Jakhov? ¿Has hablado con mi nietecito? Espero que sí, si te has olvidado, está aquí a mi lado. Je, je, je..."/>
+			text="¿Como estamos Jakov? ¿Has hablado con mi nietecito? Espero que sí, si te has olvidado, está aquí a mi lado. Je, je, je..."/>
 
 			<sentence name="Rapho"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
@@ -1289,7 +1289,7 @@ a
 		<sentences>
 			<sentence name="Rapho"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
-			text="¡Hombre! Pero si es mi jovenzuelo favorito del pueblo, ¿cómo estamos Jakhov? Je, je, je..."/>
+			text="¡Hombre! Pero si es mi jovenzuelo favorito del pueblo, ¿cómo estamos Jakov? Je, je, je..."/>
 
 			<sentence name="Rapho"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/raphoFace.png"
@@ -1405,7 +1405,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 		<sentences>
 			<sentence name="Phylippa"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
-			text="Hola Jakhov, ¿vas al entreno? Mira que bien..."/>
+			text="Hola Jakov, ¿vas al entreno? Mira que bien..."/>
 
 			<sentence name="Phylippa"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
@@ -1469,7 +1469,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 		<sentences>
 			<sentence name="Phylippa"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
-			text="Hola Jakhov, parece que ves tú más a mi marido que yo misma..."/>
+			text="Hola Jakov, parece que ves tú más a mi marido que yo misma..."/>
 
 			<sentence name="Phylippa"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
@@ -1501,7 +1501,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 		<sentences>
 			<sentence name="Phylippa"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
-			text="¡Que mala cara Jakhov! Tienes una cara de cansado..."/>
+			text="¡Que mala cara Jakov! Tienes una cara de cansado..."/>
 
 			<sentence name="Phylippa"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
@@ -1533,7 +1533,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 		<sentences>
 			<sentence name="Phylippa"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
-			text="¡Hombre Jakhov! ¿Has escuchado de la boda de Patzo y Patza? Que ilusión..."/>
+			text="¡Hombre Jakov! ¿Has escuchado de la boda de Patzo y Patza? Que ilusión..."/>
 
 			<sentence name="Phylippa"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/phylippaFace.png"
@@ -1653,7 +1653,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 		<sentences>
 			<sentence name="Sukhy"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
-			text="Estoy triste Jakhov, no es justo..."/>
+			text="Estoy triste Jakov, no es justo..."/>
 
 			<sentence name="Sukhy"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
@@ -1669,7 +1669,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 		<sentences>
 			<sentence name="Sukhy"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
-			text="Hola Jakhov... Vamos de mal en peor..."/>
+			text="Hola Jakov... Vamos de mal en peor..."/>
 
 			<sentence name="Sukhy"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/sukhyFace.png"
@@ -1737,11 +1737,11 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 
 			<sentence name="Zuphe"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/zupheFace.png"
-			text="Ya sabes que por la noche no se puede cruzar Jakhov, son las normas..."/>
+			text="Ya sabes que por la noche no se puede cruzar Jakov, son las normas..."/>
 
 			<sentence name="Zuphu"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/zuphuFace.png"
-			text="Ves a casa con tu abuela Jakhov, yo ahora iré con mi maravillosa Phylippa..."/>
+			text="Ves a casa con tu abuela Jakov, yo ahora iré con mi maravillosa Phylippa..."/>
 		</sentences>
 	</dialog>
 
@@ -1776,7 +1776,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 
 			<sentence name="Zuphu"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/zuphuFace.png"
-			text="Si, tranquilo Jakhov, no hemos dicho que seguramente te marches, no queríamos herir tu honor..."/>
+			text="Si, tranquilo Jakov, no hemos dicho que seguramente te marches, no queríamos herir tu honor..."/>
 		</sentences>
 	</dialog>
 
@@ -1800,7 +1800,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 		<sentences>
 			<sentence name="Zupho"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/zuphoFace.png"
-			text="Jakhov, a ti te estaba buscando yo. ¿Podrías darle esta espada a Phoska? Por favor..."/>
+			text="Jakov, a ti te estaba buscando yo. ¿Podrías darle esta espada a Phoska? Por favor..."/>
 
 			<sentence name="Zuphe"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/zupheFace.png"
@@ -1816,7 +1816,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 		<sentences>
 			<sentence name="Zupho"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/zuphoFace.png"
-			text="¡Gracias por la ayuda el otro día Jakhov! Estoy muy agradecido..."/>
+			text="¡Gracias por la ayuda el otro día Jakov! Estoy muy agradecido..."/>
 
 			<sentence name="Zuphe"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/zupheFace.png"
@@ -1832,7 +1832,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 		<sentences>
 			<sentence name="Zupho"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/zuphoFace.png"
-			text="¿Te pasa algo Jakhov? Tienes cara de estar estrsado. Espero que el entreno haya ido bien..."/>
+			text="¿Te pasa algo Jakov? Tienes cara de estar estrsado. Espero que el entreno haya ido bien..."/>
 
 			<sentence name="Zuphe"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/zupheFace.png"
@@ -1848,7 +1848,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 		<sentences>
 			<sentence name="Zupho"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/zuphoFace.png"
-			text="Jakhov, ven aquí..."/>
+			text="Jakov, ven aquí..."/>
 
 			<sentence name="Zuphe"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/zupheFace.png"
@@ -1860,7 +1860,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 
 			<sentence name="Zupho"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/zuphoFace.png"
-			text="Se lo hemos contado al pueblo, es muy grave esto Jakhov, no podemos prohibirte ir, pero es prácticamente un suicidio..."/>
+			text="Se lo hemos contado al pueblo, es muy grave esto Jakov, no podemos prohibirte ir, pero es prácticamente un suicidio..."/>
 
 			<sentence name="Zuphe"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/zupheFace.png"
@@ -1877,7 +1877,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 			<sentence type="choose" text="Si quieres empezar el combate de entrenamiento deberías hablar con Trynmba">
 
 				<option1 text="¿Quién es Trynmba?">
-					<sentence text="¿Enserio? Jakhov, no eres el mejor guerrero, al menos podrías tener disciplina con las caras... Es el guerrero de pelo castaño y ropa verde."/>
+					<sentence text="¿Enserio? Jakov, no eres el mejor guerrero, al menos podrías tener disciplina con las caras... Es el guerrero de pelo castaño y ropa verde."/>
 				</option1>
 
 				<option2 text="¿Dónde está?">
@@ -1969,7 +1969,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 	<dialog id="953" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFace.png" name="Vhea">
 		<sentences>
 			<sentence type="QuestUpdate" questLine="1" nextTargetID="10" actualTargetID="9" />
-			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
+			<sentence type="choose" text="Que mal te ves Jakov, ¿quieres comer y reponer fuerzas?">
 				<option1 text="Si, por favor.">
 					<sentence name="Vhea"
 					facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFoodFace.png"
@@ -1991,7 +1991,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 	<dialog id="954" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFace.png" name="Vhea">
 		<sentences>
 			<sentence type="QuestUpdate" questLine="1" nextTargetID="12" actualTargetID="11" />
-			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
+			<sentence type="choose" text="Que mal te ves Jakov, ¿quieres comer y reponer fuerzas?">
 
 				<option1 text="Si, por favor.">
 					<sentence name="Vhea"
@@ -2014,7 +2014,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 	<dialog id="955" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFace.png" name="Vhea">
 		<sentences>
 			<sentence type="QuestUpdate" questLine="1" nextTargetID="14" actualTargetID="13" />
-			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
+			<sentence type="choose" text="Que mal te ves Jakov, ¿quieres comer y reponer fuerzas?">
 
 				<option1 text="Si, por favor.">
 					<sentence name="Vhea"
@@ -2036,7 +2036,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 
 	<dialog id="956" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFace.png" name="Vhea">
 		<sentences>
-			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
+			<sentence type="choose" text="Que mal te ves Jakov, ¿quieres comer y reponer fuerzas?">
 
 				<option1 text="Si, por favor.">
 					<sentence name="Vhea"
@@ -2058,7 +2058,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 
 	<dialog id="957" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFace.png" name="Vhea">
 		<sentences>
-			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
+			<sentence type="choose" text="Que mal te ves Jakov, ¿quieres comer y reponer fuerzas?">
 
 				<option1 text="Si, por favor.">
 					<sentence name="Vhea"
@@ -2080,7 +2080,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 
 	<dialog id="958" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFace.png" name="Vhea">
 		<sentences>
-			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
+			<sentence type="choose" text="Que mal te ves Jakov, ¿quieres comer y reponer fuerzas?">
 
 				<option1 text="Si, por favor.">
 					<sentence name="Vhea"
@@ -2102,7 +2102,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 
 	<dialog id="959" texturepath="Assets/Textures/abuela.png" facetexturepath="Assets/Textures/Interfaz/Dialogos/vheaFace.png" name="Vhea">
 		<sentences>
-			<sentence type="choose" text="Que mal te ves Jakhov, ¿quieres comer y reponer fuerzas?">
+			<sentence type="choose" text="Que mal te ves Jakov, ¿quieres comer y reponer fuerzas?">
 
 				<option1 text="Si, por favor.">
 					<sentence name="Vhea"
@@ -2122,7 +2122,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 		</sentences>
 	</dialog>
 
-	<dialog id="5" texturepath="Assets/Textures/Interfaz/Dialogos/Jakhov.png">
+	<dialog id="5" texturepath="Assets/Textures/Interfaz/Dialogos/Jakov.png">
 		<sentences>
 			<sentence name="Jakov"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
@@ -2138,7 +2138,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 
 
 
-	<dialog id="1101" texturepath="Assets/Textures/Interfaz/Dialogos/Jakhov.png">
+	<dialog id="1101" texturepath="Assets/Textures/Interfaz/Dialogos/Jakov.png">
 		<sentences>
 			<sentence name="Jakov"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
@@ -2154,7 +2154,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 		</sentences>
 	</dialog>
 
-	<dialog id="1102" texturepath="Assets/Textures/Interfaz/Dialogos/Jakhov.png">
+	<dialog id="1102" texturepath="Assets/Textures/Interfaz/Dialogos/Jakov.png">
 		<sentences>
 			<sentence name="Jakov"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
@@ -2170,7 +2170,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 		</sentences>
 	</dialog>
 
-	<dialog id="1103" texturepath="Assets/Textures/Interfaz/Dialogos/Jakhov.png">
+	<dialog id="1103" texturepath="Assets/Textures/Interfaz/Dialogos/Jakov.png">
 		<sentences>
 			<sentence name="Jakov"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
@@ -2186,7 +2186,7 @@ Mira el catálogo de mi nietecito antes de volver a casa, seguro que tiene algo 
 		</sentences>
 	</dialog>
 
-	<dialog id="1104" texturepath="Assets/Textures/Interfaz/Dialogos/Jakhov.png">
+	<dialog id="1104" texturepath="Assets/Textures/Interfaz/Dialogos/Jakov.png">
 		<sentences>
 			<sentence name="Jakov"
 			facetexturepath="Assets/Textures/Interfaz/Dialogos/jakovFace.png"
