@@ -320,7 +320,7 @@ void Enemy_Ols_Variation::Die() {
 		//app->physics->GetWorld()->DestroyBody(pbodyFoot->body);LIN
 		//app->physics->DestroyBody(pbodyFoot);
 		//app->tex->UnLoad(texture);
-
+		currentAnimation = &dieAnim;
 		if(currentAnimation == &dieAnim && currentAnimation->HasFinished()){
 			CleanUp();
 		}
