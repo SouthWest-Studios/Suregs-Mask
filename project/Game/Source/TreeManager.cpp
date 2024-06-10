@@ -532,6 +532,7 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->desc1 = "Aumenta el alcance de la habilidad principal un 5%";
 			entity->desc2 = "Aumenta la distancia de la habilidad principal un 5%";
 			entity->desc3 = "Aumenta el tiempo de uso a 30 segundos";
+
 			entity->icon0 = app->tex->Load(rayoPath);
 			entity->iconLocked0 = app->tex->Load(rayoLockedPath);
 			entity->iconSelected0 = app->tex->Load(rayoSelectedPath);
@@ -2217,16 +2218,18 @@ bool TreeManager::PostUpdate()
 						}
 						else
 						{
-							app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
+							
 							app->render->DrawTextBound(itum->data->desc1.c_str(), 870, 300, 150, {223,188,156,255}, app->render->primaryFont);
 						}
 					}
 					if (itum->data->name2 == "")
 					{
+						app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
 						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, {223,188,156,255}, app->render->titleFont);
 					}
 					else
 					{
+						app->render->DrawTexture(itum->data->icon1, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
 						app->render->DrawTextBound(itum->data->name2.GetString(), 870, 150, 150, {223,188,156,255}, app->render->titleFont);
 					}
 					
@@ -2247,16 +2250,18 @@ bool TreeManager::PostUpdate()
 						}
 						else
 						{
-							app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
+							
 							app->render->DrawTextBound(itum->data->desc2.c_str(), 870, 300, 150, {223,188,156,255}, app->render->primaryFont);
 						}
 					}
 					if (itum->data->name3 == "")
 					{
+						app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
 						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, {223,188,156,255}, app->render->titleFont);
 					}
 					else
 					{
+						app->render->DrawTexture(itum->data->icon2, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
 						app->render->DrawTextBound(itum->data->name3.GetString(), 870, 150, 150, {223,188,156,255}, app->render->titleFont);
 					}
 					/*app->render->DrawTextBound(itum->data->name3.GetString(), 870, 150, 150, {223,188,156,255});*/
@@ -2277,17 +2282,19 @@ bool TreeManager::PostUpdate()
 						}
 						else
 						{
-							app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
+							
 							app->render->DrawTextBound(itum->data->desc3.c_str(), 870, 300, 150, {223,188,156,255}, app->render->primaryFont);
 						}
 						
 					}
 					if (itum->data->name4 == "")
 					{
+						app->render->DrawTexture(itum->data->icon0, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
 						app->render->DrawTextBound(itum->data->name.GetString(), 870, 150, 150, {223,188,156,255}, app->render->titleFont);
 					}
 					else
 					{
+						app->render->DrawTexture(itum->data->icon3, 900, 230, 1, SDL_FLIP_NONE, 0, 0);
 						app->render->DrawTextBound(itum->data->name4.GetString(), 870, 150, 150, {223,188,156,255}, app->render->titleFont);
 					}
 					/*app->render->DrawTextBound(itum->data->name4.GetString(), 870, 150, 150, {223,188,156,255});*/
