@@ -591,13 +591,13 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->iconLocked1 = app->tex->Load(poisonLockedPath);
 			entity->iconSelected1 = app->tex->Load(poisonSelectedPath);
 
-			entity->icon1 = app->tex->Load(invisiblePath);
-			entity->iconLocked1 = app->tex->Load(invisibleLockedPath);
-			entity->iconSelected1 = app->tex->Load(invisibleSelectedPath);
+			entity->icon2 = app->tex->Load(invisiblePath);
+			entity->iconLocked2 = app->tex->Load(invisibleLockedPath);
+			entity->iconSelected2 = app->tex->Load(invisibleSelectedPath);
 
-			entity->icon2 = app->tex->Load(aumentoPath);
-			entity->iconLocked2 = app->tex->Load(aumentoLockedPath);
-			entity->iconSelected2 = app->tex->Load(aumentoSelectedPath);
+			entity->icon3 = app->tex->Load(aumentoPath);
+			entity->iconLocked3 = app->tex->Load(aumentoLockedPath);
+			entity->iconSelected3 = app->tex->Load(aumentoSelectedPath);
 
 	
 			break;
@@ -621,13 +621,13 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->iconLocked1 = app->tex->Load(poisonLockedPath);
 			entity->iconSelected1 = app->tex->Load(poisonSelectedPath);
 
-			entity->icon1 = app->tex->Load(invisiblePath);
-			entity->iconLocked1 = app->tex->Load(invisibleLockedPath);
-			entity->iconSelected1 = app->tex->Load(invisibleSelectedPath);
+			entity->icon2 = app->tex->Load(invisiblePath);
+			entity->iconLocked2 = app->tex->Load(invisibleLockedPath);
+			entity->iconSelected2 = app->tex->Load(invisibleSelectedPath);
 
-			entity->icon2 = app->tex->Load(aumentoPath);
-			entity->iconLocked2 = app->tex->Load(aumentoLockedPath);
-			entity->iconSelected2 = app->tex->Load(aumentoSelectedPath);
+			entity->icon3 = app->tex->Load(aumentoPath);
+			entity->iconLocked3 = app->tex->Load(aumentoLockedPath);
+			entity->iconSelected3 = app->tex->Load(aumentoSelectedPath);
 
 			break;
 		}
@@ -650,13 +650,13 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->iconLocked1 = app->tex->Load(poisonLockedPath);
 			entity->iconSelected1 = app->tex->Load(poisonSelectedPath);
 
-			entity->icon1 = app->tex->Load(invisiblePath);
-			entity->iconLocked1 = app->tex->Load(invisibleLockedPath);
-			entity->iconSelected1 = app->tex->Load(invisibleSelectedPath);
+			entity->icon2 = app->tex->Load(invisiblePath);
+			entity->iconLocked2 = app->tex->Load(invisibleLockedPath);
+			entity->iconSelected2 = app->tex->Load(invisibleSelectedPath);
 
-			entity->icon2 = app->tex->Load(aumentoPath);
-			entity->iconLocked2 = app->tex->Load(aumentoLockedPath);
-			entity->iconSelected2 = app->tex->Load(aumentoSelectedPath);
+			entity->icon3 = app->tex->Load(aumentoPath);
+			entity->iconLocked3 = app->tex->Load(aumentoLockedPath);
+			entity->iconSelected3 = app->tex->Load(aumentoSelectedPath);
 
 			break;
 		}
@@ -679,13 +679,13 @@ Tree* TreeManager::CreateItem(TreeType type, int nivelArbol, int nivelMejora, bo
 			entity->iconLocked1 = app->tex->Load(poisonLockedPath);
 			entity->iconSelected1 = app->tex->Load(poisonSelectedPath);
 
-			entity->icon1 = app->tex->Load(invisiblePath);
-			entity->iconLocked1 = app->tex->Load(invisibleLockedPath);
-			entity->iconSelected1 = app->tex->Load(invisibleSelectedPath);
+			entity->icon2 = app->tex->Load(invisiblePath);
+			entity->iconLocked2 = app->tex->Load(invisibleLockedPath);
+			entity->iconSelected2 = app->tex->Load(invisibleSelectedPath);
 
-			entity->icon2 = app->tex->Load(aumentoPath);
-			entity->iconLocked2 = app->tex->Load(aumentoLockedPath);
-			entity->iconSelected2 = app->tex->Load(aumentoSelectedPath);
+			entity->icon3 = app->tex->Load(aumentoPath);
+			entity->iconLocked3 = app->tex->Load(aumentoLockedPath);
+			entity->iconSelected3 = app->tex->Load(aumentoSelectedPath);
 
 			break;
 		}
@@ -1260,7 +1260,7 @@ void TreeManager::ReembolsarTreeSelected(int id)
 				{
 					if ((itum->data->nivelArbol == item->data->nivelArbol && itum->data->nivelMejora == item->data->nivelMejora + 1) || (item->data->nivelMejora + 1 == 5 && itum->data->nivelArbol == item->data->nivelArbol && itum->data->type == TreeType::BUTTON))
 					{
-						if ((mask == 1 && item->data->usable1 == false && itum->data->usable1 == true) || (mask == 1 && item->data->usable1 == false && item->data->nivelMejora + 1 == 5))
+						if ((mask == 1 && item->data->usable1 == false && itum->data->usable1 == true && item->data->used1 == true) || (mask == 1 && item->data->usable1 == false && item->data->nivelMejora + 1 == 5 && item->data->used1 == true))
 						{
 							if (item->data->nivelArbol == 0)
 							{
@@ -1289,7 +1289,7 @@ void TreeManager::ReembolsarTreeSelected(int id)
 							puntsRembolso += 1;
 							app->inventoryManager->maskZeroPoints += 1;
 						}
-						else if ((mask == 2 && item->data->usable2 == false && itum->data->usable2 == true) || (mask == 2 && item->data->usable2 == false && item->data->nivelMejora + 1 == 5))
+						else if ((mask == 2 && item->data->usable2 == false && itum->data->usable2 == true && item->data->used2 == true) || (mask == 2 && item->data->usable2 == false && item->data->nivelMejora + 1 == 5 && item->data->used2 == true))
 						{
 							if (item->data->nivelArbol == 0)
 							{
@@ -1317,7 +1317,7 @@ void TreeManager::ReembolsarTreeSelected(int id)
 							puntsRembolso += 1;
 							app->inventoryManager->maskOnePoints += 1;
 						}
-						else if ((mask == 3 && item->data->usable3 == false && itum->data->usable3 == true) || (mask == 3 && item->data->usable3 == false && item->data->nivelMejora + 1 == 5))
+						else if ((mask == 3 && item->data->usable3 == false && itum->data->usable3 == true && item->data->used3 == true) || (mask == 3 && item->data->usable3 == false && item->data->nivelMejora + 1 == 5 && item->data->used3 == true))
 						{
 							if (item->data->nivelArbol == 0)
 							{
@@ -1345,7 +1345,7 @@ void TreeManager::ReembolsarTreeSelected(int id)
 							puntsRembolso += 1;
 							app->inventoryManager->maskTwoPoints += 1;
 						}
-						else if ((mask == 4 && item->data->usable4 == false && itum->data->usable4 == true) || (mask == 4 && item->data->usable4 == false && item->data->nivelMejora + 1 == 5))
+						else if ((mask == 4 && item->data->usable4 == false && itum->data->usable4 == true && item->data->used4 == true) || (mask == 4 && item->data->usable4 == false && item->data->nivelMejora + 1 == 5 && item->data->used4 == true))
 						{
 							if (item->data->nivelArbol == 0)
 							{

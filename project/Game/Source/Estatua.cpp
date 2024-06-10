@@ -93,7 +93,7 @@ bool Estatua::PostUpdate()
 	return true;
 }
 bool Estatua::CleanUp()
-
+{
 
 
 	pbody->body->SetTransform(b2Vec2(-1000,-1000),0);
