@@ -18,6 +18,7 @@
 #include "GuiControl.h"
 #include "GuiManager.h"
 #include "Elevator.h"
+#include "InventoryManager.h"
 #include "Estatua.h"
 
 Scene_Pueblo_Tutorial::Scene_Pueblo_Tutorial(App* app, bool start_enabled) : Module(app, start_enabled)
@@ -109,6 +110,25 @@ bool Scene_Pueblo_Tutorial::PreUpdate()
 bool Scene_Pueblo_Tutorial::Update(float dt)
 {
    	OPTICK_EVENT();
+
+
+	if (app->entityManager->GetPlayer() != nullptr) {
+		if (app->entityManager->GetPlayer()->primaryMask != Mask::NOMASK) {
+			app->entityManager->GetPlayer()->primaryMask = Mask::NOMASK;
+		}
+
+		if (app->entityManager->GetPlayer()->secondaryMask != Mask::NOMASK) {
+			app->entityManager->GetPlayer()->secondaryMask = Mask::NOMASK;
+		}
+		
+		
+
+		app->inventoryManager->maskZeroPoints = 0;
+		app->inventoryManager->maskOnePoints = 0;
+		app->inventoryManager->maskTwoPoints = 0;
+		app->inventoryManager->maskThreePoints = 0;
+	}
+
 
 	//L02 DONE 3: Make the camera movement independent of framerate
 	float camSpeed = 1; 
