@@ -1,14 +1,21 @@
 # Süreg's Mask 
 
-
-
 Süreg's Mask is a project team of the subject “Project II” in CITM University: Videogames Design & Developments degree and Design, animation and digital art. *[Website](https://southwest-studios.github.io/Suregs-Mask/)
 
 <br>
 
 ## Our Game
 
-It is an RPG game in 2.5d, where you must go into the dungeon down floors to find the mysterious force that calls you, know the hidden history in the footsteps of your dead father and get resources to use them in the village to improve your equipment and skills.
+It is an RPG game in 2.5d, where you must go into the dungeon down 8 floors to find the mysterious force that calls you, know the hidden history in the footsteps of your dead father and get 4 different mask's with mysterious abilities.
+
+In Süreg's Mask you can either fight in the dungeons, Upgade your weapons in the blackmisth, sell the items from the beasts, use the money to buy potions, upgrade your mask habilities using the mystic skill tree and go fishing.
+
+Related to menus tou have an inventory to view all your current items and their information, a diary to read notes that are left behind in the dungeons and an enemy diary to view all the enemys information.
+
+We have:
+- 8 dungeons and the village.
+- 5 enemies and also their own stronger variations!
+- 25 different items and 11 notes.
 <hr>
 
 - [Game Design Document](https://southwest-studios.github.io/Suregs-Mask/files/GDD.pdf)
@@ -35,39 +42,51 @@ It is an RPG game in 2.5d, where you must go into the dungeon down floors to fin
 ### Basic controls
 - Movement: WASD / Left joystick
 - Interact: E / A
-- Open inventory: TAB / Start
+- Select: J / A
+- Go Back: K / B
+- Open inventory/Pause: TAB / Start
 - Settings navigation: J L / LB RB
-- Pause menu: ESC / Options
+- Exit: ESC / Options
 - Menu navigation: WASD + E / Left joystick + A
 
 ### Combat controls
 - Basic attack: J / B
 - Dash: SPACE / X
-- Mask ability: K / LB
-- Switch masks: Q / RB
-- Use potions: * / *
-- Switch potions: * / *
-- Fishing: F + K / **
+- Mask ability: K / RT
+- Switch masks: L / RB
+- Use potions: Q / LT
+- Switch potion Left: R / *
+- Switch potion Rught: T / LB
+- Throw Rod: F / X
+- Use Rod: F / X
 
 ## New features
-- Player update
-- Game scenes transitions
-- Dialog's system
-- Entity system through tiled
-- Combat system
-- General audio
-- Village level (with 4 locations)
-- Dungeon 0 level
-- 3 enemies
-- Fishing minigame
-- Interface (HUD, Menu)
-- Animations
+- New enemy Warrior
+- Tutorial
+- Variations
+- Level Up and Expirience System
+- Save and Load
+- Ui Animations
+- Adaptive Camaras
+- Particle System
+- Elevator
+- Void
+- Final Boss
+- End Game
+- Spawners
+- Mission System
+- Abilities Animation
+- New Dungeons
+- skill tree
+- Equipment Menu
+- New Audios(masks, cinematics,...)
+
 
 ## Improvements
-- Camera occlusion
-- Tiled optimization
-- Animations loading
-- Fixed memory leaks
+- Load map by chunks
+- New system to Load big Textures
+- New Game and Load Improved
+
 
 ## Team members
 
