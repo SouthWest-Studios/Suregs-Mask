@@ -112,7 +112,7 @@ We have:
 - Cecilia Mansilla. Rol: UI/UX & Prop Design
 - Cristina Parra. Rol: Character Design & Animator
 - Martí Sabaté. Github: [@msabate00](https://github.com/msabate00). Rol: Lead Developer
-- Raül Sánchez. Github: [@Galycon](https://github.com/Galycon)). Rol: Lead Designer & Level Design
+- Raül Sánchez. Github: [@Galycon](https://github.com/Galycon). Rol: Lead Designer & Level Design
 - Guillem Montes. Github: [@Guillem257](https://github.com/Guillem257). Rol: Tech Direction & Game Design
 - Jiajie Lin. Github: [@Linjiajie2002](https://github.com/Linjiajie2002). Rol: Gameplay Programmer
 - Aleix Botella. Github: [@Aleix3](https://github.com/Aleix3). Rol: Developer & Ui Programmer
