@@ -8,7 +8,7 @@
 	<map>
 		<map>
 			<puzzles>
-				<puzzle level="0" complete="true" />
+				<puzzle level="0" complete="false" />
 				<puzzle level="1" complete="false" />
 				<puzzle level="2" complete="false" />
 				<puzzle level="3" complete="false" />
@@ -29,13 +29,15 @@
 	<entitymanager>
 		<entity_manager>
 			<doors>
-				<door sceneLevel="-10" tpID="8" />
-				<door sceneLevel="-10" tpID="9" />
-				<door sceneLevel="-10" tpID="0" />
-				<door sceneLevel="-10" tpID="2" />
-				<door sceneLevel="-10" tpID="4" />
-				<door sceneLevel="-10" tpID="1" />
-				<door sceneLevel="-10" tpID="3" />
+				<door sceneLevel="7" tpID="27" />
+				<door sceneLevel="7" tpID="4" />
+				<door sceneLevel="7" tpID="3" />
+				<door sceneLevel="7" tpID="28" />
+				<door sceneLevel="7" tpID="0" />
+				<door sceneLevel="6" tpID="27" />
+				<door sceneLevel="6" tpID="4" />
+				<door sceneLevel="6" tpID="3" />
+				<door sceneLevel="6" tpID="28" />
 			</doors>
 		</entity_manager>
 	</entitymanager>
@@ -50,12 +52,12 @@
 			<primaryMask quantity="-1" />
 			<secondaryMask quantity="-1" />
 			<storyLevel quantity="1" />
-			<dungeon0Entered quantity="true" />
+			<dungeon0Entered quantity="false" />
 			<mask0 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
 			<mask1 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
 			<mask2 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
 			<mask3 Branch1="0" Branch2="0" Branch3="0" Branch4="0" />
-			<maskNum n="1" info="Esta variable son las mascaras que tienes desbloqueadas" />
+			<maskNum n="0" info="Esta variable son las mascaras que tienes desbloqueadas" />
 			<maskPoints>
 				<maskPointZero points="0" />
 				<maskPointOne points="0" />
@@ -80,13 +82,13 @@
 				<maskLevelTwo XP="1" />
 				<maskLevelThree XP="1" />
 			</masksLevel>
-			<elevator mazmorra="0" mazmorraActual="0" />
+			<elevator mazmorra="0" mazmorraActual="7" />
 		</inventory>
 	</iventorymanager>
 	<commercemanager />
 	<questmanager>
 		<questLines>
-			<questLine id="1" index="2" active="true" completed="false" />
+			<questLine id="1" index="1" active="true" completed="false" />
 			<questLine id="2" index="1" active="false" completed="false" />
 		</questLines>
 	</questmanager>
