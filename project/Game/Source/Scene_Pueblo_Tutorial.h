@@ -56,7 +56,7 @@ private:
 	pugi::xml_document configFile;
 	pugi::xml_node configNode;
 
-	bool chestCreated;
+	bool chestCreated = false;
 
 	int town_fx;
 	

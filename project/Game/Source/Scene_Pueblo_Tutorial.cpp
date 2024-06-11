@@ -72,8 +72,7 @@ bool Scene_Pueblo_Tutorial::Start()
 	app->audio->StopMusic();
 	app->audio->LoadAudioAmbience("town_fx");
 
-	fishing = (MiniGameFishing*)app->entityManager->CreateEntity(EntityType::ROD);
-	fishing->parameters = config.child("minigamefishing");
+
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
@@ -89,7 +88,8 @@ bool Scene_Pueblo_Tutorial::Start()
 	//app->SaveRequest();
 
 
-
+	fishing = (MiniGameFishing*)app->entityManager->CreateEntity(EntityType::ROD);
+	fishing->parameters = config.child("minigamefishing");
 
 
 	Estatua* estatua = (Estatua*)app->entityManager->CreateEntity(EntityType::ESTATUA);

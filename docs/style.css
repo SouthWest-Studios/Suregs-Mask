@@ -63,3 +63,8 @@ body {
   transform: rotate(0deg);
   margin: 0 60px;
 }
+
+.u-list-item-16, .u-list-item-17, .u-list-item-18, .u-list-item-19 {
+    margin-left: 50%;
+    margin-right: -50%;
+}
