@@ -35,9 +35,7 @@ We have:
  </tr>
 </table>
 
-<img src="https://github.com/SouthWest-Studios/Suregs-Mask/assets/71668554/4db67aee-e14d-47dc-be07-105f24dbf12c" width="600px">
 
-<img src="https://github.com/SouthWest-Studios/Suregs-Mask/assets/71668554/e08aca71-b533-48b7-bfcf-f8db3a72128f" width="600px">
 
 
 ![Ilustración_Mazmorras](https://github.com/SouthWest-Studios/Suregs-Mask/assets/125640148/bdf38668-877e-4d6b-a036-3fb194995225)
