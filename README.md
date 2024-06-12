@@ -19,10 +19,10 @@ We have:
 - 4 Bosses
 - 25 different items and 11 notes.
 <hr>
-
+- [Website](https://southwest-studios.github.io/Suregs-Mask/)
+- [Trailer](https://youtu.be/OxNXHbU0uek)
 - [Game Design Document](https://southwest-studios.github.io/Suregs-Mask/files/GDD.pdf)
 - [Technical Design Document](https://southwest-studios.github.io/Suregs-Mask/files/TDD.pdf)
-- [Website](https://southwest-studios.github.io/Suregs-Mask/)
 
 ![SheetPersonajes](https://github.com/SouthWest-Studios/Suregs-Mask/assets/125640148/f45bbf54-584b-4e27-a229-cb90556e20e8)
 
