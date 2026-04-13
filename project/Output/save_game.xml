@@ -28,17 +28,7 @@
 	<scene_pueblo />
 	<entitymanager>
 		<entity_manager>
-			<doors>
-				<door sceneLevel="7" tpID="27" />
-				<door sceneLevel="7" tpID="4" />
-				<door sceneLevel="7" tpID="3" />
-				<door sceneLevel="7" tpID="28" />
-				<door sceneLevel="7" tpID="0" />
-				<door sceneLevel="6" tpID="27" />
-				<door sceneLevel="6" tpID="4" />
-				<door sceneLevel="6" tpID="3" />
-				<door sceneLevel="6" tpID="28" />
-			</doors>
+			<doors />
 		</entity_manager>
 	</entitymanager>
 	<missionmanager />
@@ -71,18 +61,18 @@
 				<maskThreeXP XP="0" />
 			</masksXP>
 			<masksXP>
-				<XPtoLevelUpZero XP="800" />
-				<XPtoLevelUpOne XP="800" />
-				<XPtoLevelUpTwo XP="800" />
-				<XPtoLevelUpThree XP="800" />
+				<XPtoLevelUpZero XP="1000" />
+				<XPtoLevelUpOne XP="1000" />
+				<XPtoLevelUpTwo XP="1000" />
+				<XPtoLevelUpThree XP="1000" />
 			</masksXP>
 			<masksLevel>
-				<maskLevelZero level="1" />
-				<maskLevelOne XP="1" />
-				<maskLevelTwo XP="1" />
-				<maskLevelThree XP="1" />
+				<maskLevelZero level="0" />
+				<maskLevelOne XP="0" />
+				<maskLevelTwo XP="0" />
+				<maskLevelThree XP="0" />
 			</masksLevel>
-			<elevator mazmorra="0" mazmorraActual="7" />
+			<elevator mazmorra="0" mazmorraActual="0" />
 		</inventory>
 	</iventorymanager>
 	<commercemanager />
@@ -96,7 +86,21 @@
 		<notes />
 	</notesmanager>
 	<bestiariomanager>
-		<bestiario />
+		<bestiario>
+			<bestia name="osiris" />
+			<bestia name="osirisV" />
+			<bestia name="muur" />
+			<bestia name="muurV" />
+			<bestia name="khurt" />
+			<bestia name="khurtV" />
+			<bestia name="ols" />
+			<bestia name="olsV" />
+			<bestia name="boorok" />
+			<bestia name="boorokV" />
+			<bestia name="inuit" />
+			<bestia name="musri" />
+			<bestia name="surma" />
+		</bestiario>
 	</bestiariomanager>
 	<equipo />
 	<Ascensormenu />

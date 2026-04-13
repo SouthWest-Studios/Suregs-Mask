@@ -1,4 +1,4 @@
-#include "DialogTriggerEntity.h"
+Âº#include "DialogTriggerEntity.h"
 #include "DialogManager.h"
 #include "App.h"
 #include "Textures.h"
@@ -146,7 +146,7 @@ void DialogTrigger::PlayDialog()
 			pDialog = item->data;
 			app->dialogManager->AddDialog(pDialog);
 			app->audio->PlayFx(dialog_fx);
-			// Si el diálogo tiene un evento asociado, manéjalo
+			// Si el diï¿½logo tiene un evento asociado, manï¿½jalo
 			if (pDialog->event_ != nullptr) {
 				app->missionManager->HandleDialogEvent(*(pDialog->event_));
 			}
@@ -162,7 +162,7 @@ void DialogTrigger::PlayDialog()
 		{
 			pDialog = item->data;
 			app->dialogManager->AddDialog(pDialog);
-			// Si el diálogo tiene un evento asociado, manéjalo
+			// Si el diï¿½logo tiene un evento asociado, manï¿½jalo
 			if (pDialog->event_ != nullptr) {
 				app->missionManager->HandleDialogEvent(*(pDialog->event_));
 			}
@@ -223,7 +223,7 @@ void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 void DialogTrigger::SetDialogId(uint new_id) {
 	dialogId = new_id;
-	UpdateDialog(); // Actualizar el diálogo cuando cambia el id
+	UpdateDialog(); // Actualizar el diï¿½logo cuando cambia el id
 }
 
 uint DialogTrigger::GetDialogId() const {
@@ -234,14 +234,14 @@ void DialogTrigger::UpdateDialog() {
 	// Comprobar si hay alguna actividad comercial activa
 	if (app->commerceManager->AnyCommerceActive()) { return; }
 
-	// Obtener el id del diálogo
+	// Obtener el id del diï¿½logo
 	uint id = GetDialogId();
 
-	// Buscar el diálogo con el id correspondiente
+	// Buscar el diï¿½logo con el id correspondiente
 	ListItem<Dialog*>* item;
 	Dialog* pDialog = nullptr;
 
-	// Si el diálogo ha sido reproducido y no se debe repetir, o si no ha sido reproducido
+	// Si el diï¿½logo ha sido reproducido y no se debe repetir, o si no ha sido reproducido
 	if ((played && !repeatDialog) || !played) {
 		for (item = dialogues.start; item != NULL; item = item->next) {
 			if (item->data->id == id) {
@@ -253,7 +253,7 @@ void DialogTrigger::UpdateDialog() {
 		}
 		played = true;
 	}
-	// Si el diálogo ha sido reproducido y se debe repetir
+	// Si el diï¿½logo ha sido reproducido y se debe repetir
 	else if (played && repeatDialog) {
 		for (item = dialoguesRepeat.start; item != NULL; item = item->next) {
 			if (item->data->id == id) {
